@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EnableActionConfiguration struct {
-	Note *string `json:"note,omitempty"`
+    Note *string `json:"note,omitempty"`
+    
 }
+

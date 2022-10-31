@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchDetachTypedLink struct {
-	TypedLinkSpecifier TypedLinkSpecifier `json:"TypedLinkSpecifier"`
+    TypedLinkSpecifier TypedLinkSpecifier `json:"TypedLinkSpecifier"`
+    
 }
+

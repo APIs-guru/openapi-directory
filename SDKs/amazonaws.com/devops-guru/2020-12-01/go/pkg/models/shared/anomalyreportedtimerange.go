@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type AnomalyReportedTimeRange struct {
-	CloseTime *time.Time `json:"CloseTime,omitempty"`
-	OpenTime  time.Time  `json:"OpenTime"`
+    CloseTime *time.Time `json:"CloseTime,omitempty"`
+    OpenTime time.Time `json:"OpenTime"`
+    
 }
+

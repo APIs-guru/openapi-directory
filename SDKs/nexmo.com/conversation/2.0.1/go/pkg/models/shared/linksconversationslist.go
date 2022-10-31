@@ -1,9 +1,14 @@
 package shared
 
+
+
 type LinksConversationsListSelf struct {
-	Href string `json:"href"`
+    Href string `json:"href"`
+    
 }
 
 type LinksConversationsList struct {
-	Self LinksConversationsListSelf `json:"self"`
+    Self LinksConversationsListSelf `json:"self"`
+    
 }
+

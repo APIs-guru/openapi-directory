@@ -1,5 +1,9 @@
 package shared
 
+
+
 type OpenIDAuthResources struct {
-	OpenIDProviders []OpenIDProvider `json:"openIdProviders"`
+    OpenIDProviders []OpenIDProvider `json:"openIdProviders"`
+    
 }
+

@@ -227,6 +227,7 @@ func (s *SDK) ServicebrokerProjectsBrokersV2ServiceInstancesCreate(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -397,6 +398,7 @@ func (s *SDK) ServicebrokerProjectsBrokersV2ServiceInstancesPatch(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -444,6 +446,7 @@ func (s *SDK) ServicebrokerProjectsBrokersV2ServiceInstancesServiceBindingsCreat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -573,6 +576,7 @@ func (s *SDK) ServicebrokerSetIamPolicy(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -620,6 +624,7 @@ func (s *SDK) ServicebrokerTestIamPermissions(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

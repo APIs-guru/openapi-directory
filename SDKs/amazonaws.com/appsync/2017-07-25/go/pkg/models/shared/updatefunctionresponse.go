@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateFunctionResponse struct {
-	FunctionConfiguration *FunctionConfiguration `json:"functionConfiguration,omitempty"`
+    FunctionConfiguration *FunctionConfiguration `json:"functionConfiguration,omitempty"`
+    
 }
+

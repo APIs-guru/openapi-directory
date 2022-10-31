@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeCompilationJobRequest struct {
-	CompilationJobName string `json:"CompilationJobName"`
+    CompilationJobName string `json:"CompilationJobName"`
+    
 }
+

@@ -76,7 +76,10 @@ func (s *SDK) AcceptInvitation(ctx context.Context, request operations.AcceptInv
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -194,7 +197,10 @@ func (s *SDK) BatchGetCustomDataIdentifiers(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -312,7 +318,10 @@ func (s *SDK) CreateClassificationJob(ctx context.Context, request operations.Cr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -430,7 +439,10 @@ func (s *SDK) CreateCustomDataIdentifier(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -548,7 +560,10 @@ func (s *SDK) CreateFindingsFilter(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -666,7 +681,10 @@ func (s *SDK) CreateInvitations(ctx context.Context, request operations.CreateIn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -784,7 +802,10 @@ func (s *SDK) CreateMember(ctx context.Context, request operations.CreateMemberR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -902,7 +923,10 @@ func (s *SDK) CreateSampleFindings(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1020,7 +1044,10 @@ func (s *SDK) DeclineInvitations(ctx context.Context, request operations.Decline
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1131,6 +1158,8 @@ func (s *SDK) DeleteCustomDataIdentifier(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -1239,6 +1268,8 @@ func (s *SDK) DeleteFindingsFilter(ctx context.Context, request operations.Delet
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1356,7 +1387,10 @@ func (s *SDK) DeleteInvitations(ctx context.Context, request operations.DeleteIn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1466,6 +1500,8 @@ func (s *SDK) DeleteMember(ctx context.Context, request operations.DeleteMemberR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1583,7 +1619,10 @@ func (s *SDK) DescribeBuckets(ctx context.Context, request operations.DescribeBu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1696,6 +1735,8 @@ func (s *SDK) DescribeClassificationJob(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -1804,6 +1845,8 @@ func (s *SDK) DescribeOrganizationConfiguration(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1914,6 +1957,8 @@ func (s *SDK) DisableMacie(ctx context.Context, request operations.DisableMacieR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -2022,6 +2067,8 @@ func (s *SDK) DisableOrganizationAdminAccount(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2134,6 +2181,8 @@ func (s *SDK) DisassociateFromAdministratorAccount(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -2243,6 +2292,8 @@ func (s *SDK) DisassociateFromMasterAccount(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -2351,6 +2402,8 @@ func (s *SDK) DisassociateMember(ctx context.Context, request operations.Disasso
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2468,7 +2521,10 @@ func (s *SDK) EnableMacie(ctx context.Context, request operations.EnableMacieReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2586,7 +2642,10 @@ func (s *SDK) EnableOrganizationAdminAccount(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2696,6 +2755,8 @@ func (s *SDK) GetAdministratorAccount(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2813,7 +2874,10 @@ func (s *SDK) GetBucketStatistics(ctx context.Context, request operations.GetBuc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2924,6 +2988,8 @@ func (s *SDK) GetClassificationExportConfiguration(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -3032,6 +3098,8 @@ func (s *SDK) GetCustomDataIdentifier(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3149,7 +3217,10 @@ func (s *SDK) GetFindingStatistics(ctx context.Context, request operations.GetFi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3267,7 +3338,10 @@ func (s *SDK) GetFindings(ctx context.Context, request operations.GetFindingsReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3378,6 +3452,8 @@ func (s *SDK) GetFindingsFilter(ctx context.Context, request operations.GetFindi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -3486,6 +3562,8 @@ func (s *SDK) GetFindingsPublicationConfiguration(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3596,6 +3674,8 @@ func (s *SDK) GetInvitationsCount(ctx context.Context, request operations.GetInv
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -3704,6 +3784,8 @@ func (s *SDK) GetMacieSession(ctx context.Context, request operations.GetMacieSe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3814,6 +3896,8 @@ func (s *SDK) GetMasterAccount(ctx context.Context, request operations.GetMaster
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -3922,6 +4006,8 @@ func (s *SDK) GetMember(ctx context.Context, request operations.GetMemberRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -4039,7 +4125,10 @@ func (s *SDK) GetUsageStatistics(ctx context.Context, request operations.GetUsag
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4151,6 +4240,8 @@ func (s *SDK) GetUsageTotals(ctx context.Context, request operations.GetUsageTot
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4270,7 +4361,10 @@ func (s *SDK) ListClassificationJobs(ctx context.Context, request operations.Lis
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4390,7 +4484,10 @@ func (s *SDK) ListCustomDataIdentifiers(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4510,7 +4607,10 @@ func (s *SDK) ListFindings(ctx context.Context, request operations.ListFindingsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4623,6 +4723,8 @@ func (s *SDK) ListFindingsFilters(ctx context.Context, request operations.ListFi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -4733,6 +4835,8 @@ func (s *SDK) ListInvitations(ctx context.Context, request operations.ListInvita
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4852,7 +4956,10 @@ func (s *SDK) ListManagedDataIdentifiers(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -4892,6 +4999,8 @@ func (s *SDK) ListMembers(ctx context.Context, request operations.ListMembersReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5004,6 +5113,8 @@ func (s *SDK) ListOrganizationAdminAccounts(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -5115,6 +5226,8 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -5161,7 +5274,10 @@ func (s *SDK) PutClassificationExportConfiguration(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -5279,7 +5395,10 @@ func (s *SDK) PutFindingsPublicationConfiguration(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -5397,7 +5516,10 @@ func (s *SDK) SearchResources(ctx context.Context, request operations.SearchReso
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5517,7 +5639,10 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -5565,7 +5690,10 @@ func (s *SDK) TestCustomDataIdentifier(ctx context.Context, request operations.T
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -5676,6 +5804,8 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -5724,7 +5854,10 @@ func (s *SDK) UpdateClassificationJob(ctx context.Context, request operations.Up
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -5842,7 +5975,10 @@ func (s *SDK) UpdateFindingsFilter(ctx context.Context, request operations.Updat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -5960,7 +6096,10 @@ func (s *SDK) UpdateMacieSession(ctx context.Context, request operations.UpdateM
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6078,7 +6217,10 @@ func (s *SDK) UpdateMemberSession(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6196,7 +6338,10 @@ func (s *SDK) UpdateOrganizationConfiguration(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 

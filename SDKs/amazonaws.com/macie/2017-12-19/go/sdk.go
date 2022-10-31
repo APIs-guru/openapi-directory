@@ -76,7 +76,10 @@ func (s *SDK) AssociateMemberAccount(ctx context.Context, request operations.Ass
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -145,7 +148,10 @@ func (s *SDK) AssociateS3Resources(ctx context.Context, request operations.Assoc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -233,7 +239,10 @@ func (s *SDK) DisassociateMemberAccount(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -292,7 +301,10 @@ func (s *SDK) DisassociateS3Resources(ctx context.Context, request operations.Di
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -370,7 +382,10 @@ func (s *SDK) ListMemberAccounts(ctx context.Context, request operations.ListMem
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -440,7 +455,10 @@ func (s *SDK) ListS3Resources(ctx context.Context, request operations.ListS3Reso
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -520,7 +538,10 @@ func (s *SDK) UpdateS3Resources(ctx context.Context, request operations.UpdateS3
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 

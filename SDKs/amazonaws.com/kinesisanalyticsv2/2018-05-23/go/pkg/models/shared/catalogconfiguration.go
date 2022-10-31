@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CatalogConfiguration struct {
-	GlueDataCatalogConfiguration GlueDataCatalogConfiguration `json:"GlueDataCatalogConfiguration"`
+    GlueDataCatalogConfiguration GlueDataCatalogConfiguration `json:"GlueDataCatalogConfiguration"`
+    
 }
+

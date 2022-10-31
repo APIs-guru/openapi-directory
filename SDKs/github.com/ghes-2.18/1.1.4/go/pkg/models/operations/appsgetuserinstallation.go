@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type AppsGetUserInstallationPathParams struct {
-	Username string `pathParam:"style=simple,explode=false,name=username"`
+    Username string `pathParam:"style=simple,explode=false,name=username"`
+    
 }
 
 type AppsGetUserInstallationHeaders struct {
-	Accept string `header:"name=accept"`
+    Accept string `header:"style=simple,explode=false,name=accept"`
+    
 }
 
 type AppsGetUserInstallationRequest struct {
-	PathParams AppsGetUserInstallationPathParams
-	Headers    AppsGetUserInstallationHeaders
+    PathParams AppsGetUserInstallationPathParams 
+    Headers AppsGetUserInstallationHeaders 
+    
 }
 
 type AppsGetUserInstallationResponse struct {
-	ContentType       string
-	StatusCode        int64
-	InstallationGhes2 *shared.InstallationGhes2
+    ContentType string 
+    StatusCode int64 
+    InstallationGhes2 *shared.InstallationGhes2 
+    
 }
+

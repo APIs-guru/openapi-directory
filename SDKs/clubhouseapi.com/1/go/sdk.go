@@ -373,6 +373,7 @@ func (s *SDK) PostCallPhoneNumberAuth(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -440,6 +441,7 @@ func (s *SDK) PostCompletePhoneNumberAuth(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -476,6 +478,7 @@ func (s *SDK) PostCreateChannel(ctx context.Context, request operations.PostCrea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -512,6 +515,7 @@ func (s *SDK) PostFollow(ctx context.Context, request operations.PostFollowReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -548,6 +552,7 @@ func (s *SDK) PostGetClub(ctx context.Context, request operations.PostGetClubReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -584,6 +589,7 @@ func (s *SDK) PostGetClubsForTopic(ctx context.Context, request operations.PostG
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -620,6 +626,7 @@ func (s *SDK) PostGetCreateChannelTargets(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -656,6 +663,7 @@ func (s *SDK) PostGetFollowing(ctx context.Context, request operations.PostGetFo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -692,6 +700,7 @@ func (s *SDK) PostGetOnlineFriends(ctx context.Context, request operations.PostG
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -728,6 +737,7 @@ func (s *SDK) PostGetProfile(ctx context.Context, request operations.PostGetProf
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -794,6 +804,7 @@ func (s *SDK) PostGetSuggestedClubInvites(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -830,6 +841,7 @@ func (s *SDK) PostGetSuggestedFollowsFriendsOnly(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -866,6 +878,7 @@ func (s *SDK) PostGetSuggestedFollowsSimilar(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -902,6 +915,7 @@ func (s *SDK) PostGetSuggestedInvites(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -938,6 +952,7 @@ func (s *SDK) PostGetSuggestedSpeakers(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -974,6 +989,7 @@ func (s *SDK) PostGetTopic(ctx context.Context, request operations.PostGetTopicR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1010,6 +1026,7 @@ func (s *SDK) PostInviteFromWaitlist(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1046,6 +1063,7 @@ func (s *SDK) PostInviteToApp(ctx context.Context, request operations.PostInvite
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1082,6 +1100,7 @@ func (s *SDK) PostJoinChannel(ctx context.Context, request operations.PostJoinCh
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1119,6 +1138,7 @@ func (s *SDK) PostLeaveChannel(ctx context.Context, request operations.PostLeave
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1155,6 +1175,7 @@ func (s *SDK) PostMe(ctx context.Context, request operations.PostMeRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1192,6 +1213,7 @@ func (s *SDK) PostRecordActionTrails(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1228,6 +1250,7 @@ func (s *SDK) PostRefreshToken(ctx context.Context, request operations.PostRefre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1265,6 +1288,7 @@ func (s *SDK) PostResendPhoneNumberAuth(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1301,6 +1325,7 @@ func (s *SDK) PostSearchClubs(ctx context.Context, request operations.PostSearch
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1337,6 +1362,7 @@ func (s *SDK) PostSearchUsers(ctx context.Context, request operations.PostSearch
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1373,6 +1399,7 @@ func (s *SDK) PostStartPhoneNumberAuth(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1409,6 +1436,7 @@ func (s *SDK) PostUpdateNotifications(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1445,6 +1473,7 @@ func (s *SDK) PostUpdateUsername(ctx context.Context, request operations.PostUpd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

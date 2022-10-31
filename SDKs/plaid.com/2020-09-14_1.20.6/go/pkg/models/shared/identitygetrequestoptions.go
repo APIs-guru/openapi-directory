@@ -1,5 +1,9 @@
 package shared
 
+
+
 type IdentityGetRequestOptions struct {
-	AccountIds []string `json:"account_ids,omitempty"`
+    AccountIds []string `json:"account_ids,omitempty"`
+    
 }
+

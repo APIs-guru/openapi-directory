@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateModelPackageOutput struct {
-	ModelPackageArn string `json:"ModelPackageArn"`
+    ModelPackageArn string `json:"ModelPackageArn"`
+    
 }
+

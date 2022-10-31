@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetNetworkSwitchLinkAggregationsPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type GetNetworkSwitchLinkAggregationsRequest struct {
-	PathParams GetNetworkSwitchLinkAggregationsPathParams
+    PathParams GetNetworkSwitchLinkAggregationsPathParams 
+    
 }
 
 type GetNetworkSwitchLinkAggregationsResponse struct {
-	ContentType                                              string
-	StatusCode                                               int64
-	GetNetworkSwitchLinkAggregations200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetNetworkSwitchLinkAggregations200ApplicationJSONObject map[string]interface{} 
+    
 }
+

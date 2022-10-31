@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetEventsEventIDPathParams struct {
-	EventID string `pathParam:"style=simple,explode=false,name=eventId"`
+    EventID string `pathParam:"style=simple,explode=false,name=eventId"`
+    
 }
 
 type GetEventsEventIDRequest struct {
-	PathParams GetEventsEventIDPathParams
+    PathParams GetEventsEventIDPathParams 
+    
 }
 
 type GetEventsEventIDResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

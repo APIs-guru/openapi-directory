@@ -1,14 +1,20 @@
 package operations
 
+
+
 type DeleteFloatingIpsIDPathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type DeleteFloatingIpsIDRequest struct {
-	PathParams DeleteFloatingIpsIDPathParams
+    PathParams DeleteFloatingIpsIDPathParams 
+    
 }
 
 type DeleteFloatingIpsIDResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

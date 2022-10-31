@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TaskTemplateSpec struct {
-	Spec *TaskSpec `json:"spec,omitempty"`
+    Spec *TaskSpec `json:"spec,omitempty"`
+    
 }
+

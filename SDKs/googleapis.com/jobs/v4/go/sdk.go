@@ -63,6 +63,7 @@ func (s *SDK) JobsProjectsTenantsClientEventsCreate(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -110,6 +111,7 @@ func (s *SDK) JobsProjectsTenantsCompaniesCreate(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -239,6 +241,7 @@ func (s *SDK) JobsProjectsTenantsCreate(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -286,6 +289,7 @@ func (s *SDK) JobsProjectsTenantsJobsBatchCreate(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -333,6 +337,7 @@ func (s *SDK) JobsProjectsTenantsJobsBatchDelete(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -380,6 +385,7 @@ func (s *SDK) JobsProjectsTenantsJobsBatchUpdate(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -427,6 +433,7 @@ func (s *SDK) JobsProjectsTenantsJobsCreate(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -597,6 +604,7 @@ func (s *SDK) JobsProjectsTenantsJobsPatch(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -644,6 +652,7 @@ func (s *SDK) JobsProjectsTenantsJobsSearch(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -691,6 +700,7 @@ func (s *SDK) JobsProjectsTenantsJobsSearchForAlert(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

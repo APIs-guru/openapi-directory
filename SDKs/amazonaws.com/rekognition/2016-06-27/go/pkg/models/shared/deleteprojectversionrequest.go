@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteProjectVersionRequest struct {
-	ProjectVersionArn string `json:"ProjectVersionArn"`
+    ProjectVersionArn string `json:"ProjectVersionArn"`
+    
 }
+

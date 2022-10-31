@@ -70,6 +70,8 @@ func (s *SDK) GetCloneReceiptRuleSet(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -140,6 +142,8 @@ func (s *SDK) GetCreateConfigurationSet(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -212,6 +216,8 @@ func (s *SDK) GetCreateConfigurationSetTrackingOptions(ctx context.Context, requ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -282,6 +288,8 @@ func (s *SDK) GetCreateCustomVerificationEmailTemplate(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -355,6 +363,8 @@ func (s *SDK) GetCreateReceiptRuleSet(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -415,6 +425,8 @@ func (s *SDK) GetCreateTemplate(ctx context.Context, request operations.GetCreat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -487,6 +499,8 @@ func (s *SDK) GetDeleteConfigurationSet(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -537,6 +551,8 @@ func (s *SDK) GetDeleteConfigurationSetEventDestination(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -599,6 +615,8 @@ func (s *SDK) GetDeleteConfigurationSetTrackingOptions(ctx context.Context, requ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -660,6 +678,8 @@ func (s *SDK) GetDeleteCustomVerificationEmailTemplate(ctx context.Context, requ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -691,6 +711,8 @@ func (s *SDK) GetDeleteIdentity(ctx context.Context, request operations.GetDelet
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -733,6 +755,8 @@ func (s *SDK) GetDeleteIdentityPolicy(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -774,6 +798,8 @@ func (s *SDK) GetDeleteReceiptFilter(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -814,6 +840,8 @@ func (s *SDK) GetDeleteReceiptRule(ctx context.Context, request operations.GetDe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -866,6 +894,8 @@ func (s *SDK) GetDeleteReceiptRuleSet(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -917,6 +947,8 @@ func (s *SDK) GetDeleteTemplate(ctx context.Context, request operations.GetDelet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -958,6 +990,8 @@ func (s *SDK) GetDeleteVerifiedEmailAddress(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -989,6 +1023,8 @@ func (s *SDK) GetDescribeActiveReceiptRuleSet(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1030,6 +1066,8 @@ func (s *SDK) GetDescribeConfigurationSet(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1081,6 +1119,8 @@ func (s *SDK) GetDescribeReceiptRule(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1143,6 +1183,8 @@ func (s *SDK) GetDescribeReceiptRuleSet(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1194,6 +1236,8 @@ func (s *SDK) GetGetAccountSendingEnabled(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1234,6 +1278,8 @@ func (s *SDK) GetGetCustomVerificationEmailTemplate(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1286,6 +1332,8 @@ func (s *SDK) GetGetIdentityDkimAttributes(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1326,6 +1374,8 @@ func (s *SDK) GetGetIdentityMailFromDomainAttributes(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1368,6 +1418,8 @@ func (s *SDK) GetGetIdentityNotificationAttributes(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1408,6 +1460,8 @@ func (s *SDK) GetGetIdentityPolicies(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1450,6 +1504,8 @@ func (s *SDK) GetGetIdentityVerificationAttributes(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1490,6 +1546,8 @@ func (s *SDK) GetGetSendQuota(ctx context.Context, request operations.GetGetSend
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1532,6 +1590,8 @@ func (s *SDK) GetGetSendStatistics(ctx context.Context, request operations.GetGe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1572,6 +1632,8 @@ func (s *SDK) GetGetTemplate(ctx context.Context, request operations.GetGetTempl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1624,6 +1686,8 @@ func (s *SDK) GetListConfigurationSets(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1664,6 +1728,8 @@ func (s *SDK) GetListCustomVerificationEmailTemplates(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1706,6 +1772,8 @@ func (s *SDK) GetListIdentities(ctx context.Context, request operations.GetListI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1746,6 +1814,8 @@ func (s *SDK) GetListIdentityPolicies(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1788,6 +1858,8 @@ func (s *SDK) GetListReceiptFilters(ctx context.Context, request operations.GetL
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1828,6 +1900,8 @@ func (s *SDK) GetListReceiptRuleSets(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1870,6 +1944,8 @@ func (s *SDK) GetListTemplates(ctx context.Context, request operations.GetListTe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1911,6 +1987,8 @@ func (s *SDK) GetListVerifiedEmailAddresses(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1951,6 +2029,8 @@ func (s *SDK) GetPutConfigurationSetDeliveryOptions(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2013,6 +2093,8 @@ func (s *SDK) GetPutIdentityPolicy(ctx context.Context, request operations.GetPu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -2063,6 +2145,8 @@ func (s *SDK) GetReorderReceiptRuleSet(ctx context.Context, request operations.G
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2124,6 +2208,8 @@ func (s *SDK) GetSendCustomVerificationEmail(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2216,6 +2302,8 @@ func (s *SDK) GetSetActiveReceiptRuleSet(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -2267,6 +2355,8 @@ func (s *SDK) GetSetIdentityDkimEnabled(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -2307,6 +2397,8 @@ func (s *SDK) GetSetIdentityFeedbackForwardingEnabled(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2349,6 +2441,8 @@ func (s *SDK) GetSetIdentityHeadersInNotificationsEnabled(ctx context.Context, r
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -2389,6 +2483,8 @@ func (s *SDK) GetSetIdentityMailFromDomain(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2431,6 +2527,8 @@ func (s *SDK) GetSetIdentityNotificationTopic(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -2471,6 +2569,8 @@ func (s *SDK) GetSetReceiptRulePosition(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2532,6 +2632,8 @@ func (s *SDK) GetTestRenderTemplate(ctx context.Context, request operations.GetT
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2604,6 +2706,8 @@ func (s *SDK) GetUpdateAccountSendingEnabled(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -2635,6 +2739,8 @@ func (s *SDK) GetUpdateConfigurationSetReputationMetricsEnabled(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2678,6 +2784,8 @@ func (s *SDK) GetUpdateConfigurationSetSendingEnabled(ctx context.Context, reque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -2719,6 +2827,8 @@ func (s *SDK) GetUpdateConfigurationSetTrackingOptions(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2791,6 +2901,8 @@ func (s *SDK) GetUpdateCustomVerificationEmailTemplate(ctx context.Context, requ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -2853,6 +2965,8 @@ func (s *SDK) GetUpdateTemplate(ctx context.Context, request operations.GetUpdat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -2914,6 +3028,8 @@ func (s *SDK) GetVerifyDomainDkim(ctx context.Context, request operations.GetVer
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -2954,6 +3070,8 @@ func (s *SDK) GetVerifyDomainIdentity(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2996,6 +3114,8 @@ func (s *SDK) GetVerifyEmailAddress(ctx context.Context, request operations.GetV
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -3027,6 +3147,8 @@ func (s *SDK) GetVerifyEmailIdentity(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3073,7 +3195,10 @@ func (s *SDK) PostCloneReceiptRuleSet(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3150,7 +3275,10 @@ func (s *SDK) PostCreateConfigurationSet(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3227,7 +3355,10 @@ func (s *SDK) PostCreateConfigurationSetEventDestination(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3334,7 +3465,10 @@ func (s *SDK) PostCreateConfigurationSetTrackingOptions(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3411,7 +3545,10 @@ func (s *SDK) PostCreateCustomVerificationEmailTemplate(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3489,7 +3626,10 @@ func (s *SDK) PostCreateReceiptFilter(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3556,7 +3696,10 @@ func (s *SDK) PostCreateReceiptRule(ctx context.Context, request operations.Post
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3673,7 +3816,10 @@ func (s *SDK) PostCreateReceiptRuleSet(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3740,7 +3886,10 @@ func (s *SDK) PostCreateTemplate(ctx context.Context, request operations.PostCre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3817,7 +3966,10 @@ func (s *SDK) PostDeleteConfigurationSet(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3874,7 +4026,10 @@ func (s *SDK) PostDeleteConfigurationSetEventDestination(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3941,7 +4096,10 @@ func (s *SDK) PostDeleteConfigurationSetTrackingOptions(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4008,7 +4166,10 @@ func (s *SDK) PostDeleteCustomVerificationEmailTemplate(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4046,7 +4207,10 @@ func (s *SDK) PostDeleteIdentity(ctx context.Context, request operations.PostDel
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4093,7 +4257,10 @@ func (s *SDK) PostDeleteIdentityPolicy(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4140,7 +4307,10 @@ func (s *SDK) PostDeleteReceiptFilter(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4187,7 +4357,10 @@ func (s *SDK) PostDeleteReceiptRule(ctx context.Context, request operations.Post
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4244,7 +4417,10 @@ func (s *SDK) PostDeleteReceiptRuleSet(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4301,7 +4477,10 @@ func (s *SDK) PostDeleteTemplate(ctx context.Context, request operations.PostDel
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4348,7 +4527,10 @@ func (s *SDK) PostDeleteVerifiedEmailAddress(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4386,7 +4568,10 @@ func (s *SDK) PostDescribeActiveReceiptRuleSet(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4433,7 +4618,10 @@ func (s *SDK) PostDescribeConfigurationSet(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4490,7 +4678,10 @@ func (s *SDK) PostDescribeReceiptRule(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4557,7 +4748,10 @@ func (s *SDK) PostDescribeReceiptRuleSet(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4610,6 +4804,8 @@ func (s *SDK) PostGetAccountSendingEnabled(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -4655,7 +4851,10 @@ func (s *SDK) PostGetCustomVerificationEmailTemplate(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4712,7 +4911,10 @@ func (s *SDK) PostGetIdentityDkimAttributes(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4759,7 +4961,10 @@ func (s *SDK) PostGetIdentityMailFromDomainAttributes(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4806,7 +5011,10 @@ func (s *SDK) PostGetIdentityNotificationAttributes(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4853,7 +5061,10 @@ func (s *SDK) PostGetIdentityPolicies(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4900,7 +5111,10 @@ func (s *SDK) PostGetIdentityVerificationAttributes(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4943,6 +5157,8 @@ func (s *SDK) PostGetSendQuota(ctx context.Context, request operations.PostGetSe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -4983,6 +5199,8 @@ func (s *SDK) PostGetSendStatistics(ctx context.Context, request operations.Post
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5029,7 +5247,10 @@ func (s *SDK) PostGetTemplate(ctx context.Context, request operations.PostGetTem
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5086,7 +5307,10 @@ func (s *SDK) PostListConfigurationSets(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5133,7 +5357,10 @@ func (s *SDK) PostListCustomVerificationEmailTemplates(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5180,7 +5407,10 @@ func (s *SDK) PostListIdentities(ctx context.Context, request operations.PostLis
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5227,7 +5457,10 @@ func (s *SDK) PostListIdentityPolicies(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5274,7 +5507,10 @@ func (s *SDK) PostListReceiptFilters(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5321,7 +5557,10 @@ func (s *SDK) PostListReceiptRuleSets(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5368,7 +5607,10 @@ func (s *SDK) PostListTemplates(ctx context.Context, request operations.PostList
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5410,6 +5652,8 @@ func (s *SDK) PostListVerifiedEmailAddresses(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5456,7 +5700,10 @@ func (s *SDK) PostPutConfigurationSetDeliveryOptions(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5523,7 +5770,10 @@ func (s *SDK) PostPutIdentityPolicy(ctx context.Context, request operations.Post
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5580,7 +5830,10 @@ func (s *SDK) PostReorderReceiptRuleSet(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5647,7 +5900,10 @@ func (s *SDK) PostSendBounce(ctx context.Context, request operations.PostSendBou
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5704,7 +5960,10 @@ func (s *SDK) PostSendBulkTemplatedEmail(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5811,7 +6070,10 @@ func (s *SDK) PostSendCustomVerificationEmail(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5908,7 +6170,10 @@ func (s *SDK) PostSendEmail(ctx context.Context, request operations.PostSendEmai
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6005,7 +6270,10 @@ func (s *SDK) PostSendRawEmail(ctx context.Context, request operations.PostSendR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6102,7 +6370,10 @@ func (s *SDK) PostSendTemplatedEmail(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6209,7 +6480,10 @@ func (s *SDK) PostSetActiveReceiptRuleSet(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6266,7 +6540,10 @@ func (s *SDK) PostSetIdentityDkimEnabled(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6313,7 +6590,10 @@ func (s *SDK) PostSetIdentityFeedbackForwardingEnabled(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6360,7 +6640,10 @@ func (s *SDK) PostSetIdentityHeadersInNotificationsEnabled(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6407,7 +6690,10 @@ func (s *SDK) PostSetIdentityMailFromDomain(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6454,7 +6740,10 @@ func (s *SDK) PostSetIdentityNotificationTopic(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6501,7 +6790,10 @@ func (s *SDK) PostSetReceiptRulePosition(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6568,7 +6860,10 @@ func (s *SDK) PostTestRenderTemplate(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6645,7 +6940,10 @@ func (s *SDK) PostUpdateAccountSendingEnabled(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6683,7 +6981,10 @@ func (s *SDK) PostUpdateConfigurationSetEventDestination(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6780,7 +7081,10 @@ func (s *SDK) PostUpdateConfigurationSetReputationMetricsEnabled(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6828,7 +7132,10 @@ func (s *SDK) PostUpdateConfigurationSetSendingEnabled(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6876,7 +7183,10 @@ func (s *SDK) PostUpdateConfigurationSetTrackingOptions(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6953,7 +7263,10 @@ func (s *SDK) PostUpdateCustomVerificationEmailTemplate(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -7021,7 +7334,10 @@ func (s *SDK) PostUpdateReceiptRule(ctx context.Context, request operations.Post
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -7128,7 +7444,10 @@ func (s *SDK) PostUpdateTemplate(ctx context.Context, request operations.PostUpd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -7195,7 +7514,10 @@ func (s *SDK) PostVerifyDomainDkim(ctx context.Context, request operations.PostV
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -7242,7 +7564,10 @@ func (s *SDK) PostVerifyDomainIdentity(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -7289,7 +7614,10 @@ func (s *SDK) PostVerifyEmailAddress(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -7327,7 +7655,10 @@ func (s *SDK) PostVerifyEmailIdentity(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 

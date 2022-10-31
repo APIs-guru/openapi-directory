@@ -1,6 +1,10 @@
 package shared
 
+
+
 type SetTagsForResourceRequest struct {
-	ResourceArn string `json:"resourceArn"`
-	Tags        []Tag  `json:"tags,omitempty"`
+    ResourceArn string `json:"resourceArn"`
+    Tags []Tag `json:"tags,omitempty"`
+    
 }
+

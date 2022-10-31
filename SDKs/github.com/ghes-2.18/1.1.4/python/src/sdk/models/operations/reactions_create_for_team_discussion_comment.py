@@ -13,7 +13,7 @@ class ReactionsCreateForTeamDiscussionCommentPathParams:
 
 @dataclass
 class ReactionsCreateForTeamDiscussionCommentHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'accept' }})
+    accept: str = field(default=None, metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
     
 class ReactionsCreateForTeamDiscussionCommentRequestBodyContentEnum(str, Enum):
     PLUS_1 = "+1"

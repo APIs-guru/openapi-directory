@@ -19,25 +19,29 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def alimw(self, request: operations.AlimwRequest) -> operations.AlimwResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/alimw/certificate"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AlimwResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 400:
@@ -72,24 +76,25 @@ class SDK:
         return res
 
     
-    
     def alsbl(self, request: operations.AlsblRequest) -> operations.AlsblResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/alsbl/certificate"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AlsblResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 400:
@@ -124,24 +129,25 @@ class SDK:
         return res
 
     
-    
     def alsfc(self, request: operations.AlsfcRequest) -> operations.AlsfcResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/alsfc/certificate"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AlsfcResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 400:
@@ -176,24 +182,25 @@ class SDK:
         return res
 
     
-    
     def apptu(self, request: operations.ApptuRequest) -> operations.ApptuResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/apptu/certificate"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApptuResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 400:
@@ -228,24 +235,25 @@ class SDK:
         return res
 
     
-    
     def clcer(self, request: operations.ClcerRequest) -> operations.ClcerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/clcer/certificate"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ClcerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 400:
@@ -280,24 +288,25 @@ class SDK:
         return res
 
     
-    
     def noocl(self, request: operations.NooclRequest) -> operations.NooclResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/noocl/certificate"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.NooclResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 400:
@@ -332,24 +341,25 @@ class SDK:
         return res
 
     
-    
     def srcer(self, request: operations.SrcerRequest) -> operations.SrcerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/srcer/certificate"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SrcerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 400:

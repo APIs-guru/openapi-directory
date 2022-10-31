@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class UploadResumableInitHeaders:
-    x_upload_content_length: float = field(default=None, metadata={'header': { 'field_name': 'X-Upload-Content-Length' }})
-    x_upload_content_type: str = field(default=None, metadata={'header': { 'field_name': 'X-Upload-Content-Type' }})
+    x_upload_content_length: float = field(default=None, metadata={'header': { 'field_name': 'X-Upload-Content-Length', 'style': 'simple', 'explode': False }})
+    x_upload_content_type: str = field(default=None, metadata={'header': { 'field_name': 'X-Upload-Content-Type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

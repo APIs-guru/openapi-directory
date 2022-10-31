@@ -1,17 +1,23 @@
 package operations
 
+
+
 type RegistrationsFilesReadPathParams struct {
-	Path           string `pathParam:"style=simple,explode=false,name=path"`
-	Provider       string `pathParam:"style=simple,explode=false,name=provider"`
-	RegistrationID string `pathParam:"style=simple,explode=false,name=registration_id"`
+    Path string `pathParam:"style=simple,explode=false,name=path"`
+    Provider string `pathParam:"style=simple,explode=false,name=provider"`
+    RegistrationID string `pathParam:"style=simple,explode=false,name=registration_id"`
+    
 }
 
 type RegistrationsFilesReadRequest struct {
-	PathParams RegistrationsFilesReadPathParams
+    PathParams RegistrationsFilesReadPathParams 
+    
 }
 
 type RegistrationsFilesReadResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

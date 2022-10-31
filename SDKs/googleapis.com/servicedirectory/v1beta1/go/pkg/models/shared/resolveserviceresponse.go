@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ResolveServiceResponse struct {
-	Service *Service `json:"service,omitempty"`
+    Service *Service `json:"service,omitempty"`
+    
 }
+

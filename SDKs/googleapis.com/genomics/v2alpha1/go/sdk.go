@@ -64,6 +64,7 @@ func (s *SDK) GenomicsPipelinesRun(ctx context.Context, request operations.Genom
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -111,6 +112,7 @@ func (s *SDK) GenomicsProjectsOperationsCancel(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -199,6 +201,7 @@ func (s *SDK) GenomicsProjectsWorkersCheckIn(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -246,6 +249,7 @@ func (s *SDK) GenomicsWorkersCheckIn(ctx context.Context, request operations.Gen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

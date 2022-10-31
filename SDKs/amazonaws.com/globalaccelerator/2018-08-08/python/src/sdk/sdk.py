@@ -22,29 +22,34 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def add_custom_routing_endpoints(self, request: operations.AddCustomRoutingEndpointsRequest) -> operations.AddCustomRoutingEndpointsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.AddCustomRoutingEndpoints"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AddCustomRoutingEndpointsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AddCustomRoutingEndpointsResponse])
@@ -81,26 +86,28 @@ class SDK:
         return res
 
     
-    
     def advertise_byoip_cidr(self, request: operations.AdvertiseByoipCidrRequest) -> operations.AdvertiseByoipCidrResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.AdvertiseByoipCidr"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdvertiseByoipCidrResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AdvertiseByoipCidrResponse])
@@ -129,26 +136,28 @@ class SDK:
         return res
 
     
-    
     def allow_custom_routing_traffic(self, request: operations.AllowCustomRoutingTrafficRequest) -> operations.AllowCustomRoutingTrafficResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.AllowCustomRoutingTraffic"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AllowCustomRoutingTrafficResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -163,26 +172,28 @@ class SDK:
         return res
 
     
-    
     def create_accelerator(self, request: operations.CreateAcceleratorRequest) -> operations.CreateAcceleratorResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.CreateAccelerator"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAcceleratorResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateAcceleratorResponse])
@@ -203,26 +214,28 @@ class SDK:
         return res
 
     
-    
     def create_custom_routing_accelerator(self, request: operations.CreateCustomRoutingAcceleratorRequest) -> operations.CreateCustomRoutingAcceleratorResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.CreateCustomRoutingAccelerator"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCustomRoutingAcceleratorResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateCustomRoutingAcceleratorResponse])
@@ -247,26 +260,28 @@ class SDK:
         return res
 
     
-    
     def create_custom_routing_endpoint_group(self, request: operations.CreateCustomRoutingEndpointGroupRequest) -> operations.CreateCustomRoutingEndpointGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.CreateCustomRoutingEndpointGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCustomRoutingEndpointGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateCustomRoutingEndpointGroupResponse])
@@ -307,26 +322,28 @@ class SDK:
         return res
 
     
-    
     def create_custom_routing_listener(self, request: operations.CreateCustomRoutingListenerRequest) -> operations.CreateCustomRoutingListenerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.CreateCustomRoutingListener"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCustomRoutingListenerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateCustomRoutingListenerResponse])
@@ -355,26 +372,28 @@ class SDK:
         return res
 
     
-    
     def create_endpoint_group(self, request: operations.CreateEndpointGroupRequest) -> operations.CreateEndpointGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.CreateEndpointGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateEndpointGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateEndpointGroupResponse])
@@ -411,26 +430,28 @@ class SDK:
         return res
 
     
-    
     def create_listener(self, request: operations.CreateListenerRequest) -> operations.CreateListenerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.CreateListener"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateListenerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateListenerResponse])
@@ -459,26 +480,28 @@ class SDK:
         return res
 
     
-    
     def delete_accelerator(self, request: operations.DeleteAcceleratorRequest) -> operations.DeleteAcceleratorResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteAccelerator"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAcceleratorResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -504,27 +527,29 @@ class SDK:
 
         return res
 
-    
     
     def delete_custom_routing_accelerator(self, request: operations.DeleteCustomRoutingAcceleratorRequest) -> operations.DeleteCustomRoutingAcceleratorResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteCustomRoutingAccelerator"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCustomRoutingAcceleratorResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -551,26 +576,28 @@ class SDK:
         return res
 
     
-    
     def delete_custom_routing_endpoint_group(self, request: operations.DeleteCustomRoutingEndpointGroupRequest) -> operations.DeleteCustomRoutingEndpointGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteCustomRoutingEndpointGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCustomRoutingEndpointGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -588,27 +615,29 @@ class SDK:
 
         return res
 
-    
     
     def delete_custom_routing_listener(self, request: operations.DeleteCustomRoutingListenerRequest) -> operations.DeleteCustomRoutingListenerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteCustomRoutingListener"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCustomRoutingListenerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -631,26 +660,28 @@ class SDK:
         return res
 
     
-    
     def delete_endpoint_group(self, request: operations.DeleteEndpointGroupRequest) -> operations.DeleteEndpointGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteEndpointGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteEndpointGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -669,26 +700,28 @@ class SDK:
         return res
 
     
-    
     def delete_listener(self, request: operations.DeleteListenerRequest) -> operations.DeleteListenerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeleteListener"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteListenerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -711,26 +744,28 @@ class SDK:
         return res
 
     
-    
     def deny_custom_routing_traffic(self, request: operations.DenyCustomRoutingTrafficRequest) -> operations.DenyCustomRoutingTrafficResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DenyCustomRoutingTraffic"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DenyCustomRoutingTrafficResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -745,26 +780,28 @@ class SDK:
         return res
 
     
-    
     def deprovision_byoip_cidr(self, request: operations.DeprovisionByoipCidrRequest) -> operations.DeprovisionByoipCidrResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DeprovisionByoipCidr"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeprovisionByoipCidrResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeprovisionByoipCidrResponse])
@@ -793,26 +830,28 @@ class SDK:
         return res
 
     
-    
     def describe_accelerator(self, request: operations.DescribeAcceleratorRequest) -> operations.DescribeAcceleratorResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeAccelerator"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeAcceleratorResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeAcceleratorResponse])
@@ -833,26 +872,28 @@ class SDK:
         return res
 
     
-    
     def describe_accelerator_attributes(self, request: operations.DescribeAcceleratorAttributesRequest) -> operations.DescribeAcceleratorAttributesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeAcceleratorAttributes"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeAcceleratorAttributesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeAcceleratorAttributesResponse])
@@ -873,26 +914,28 @@ class SDK:
         return res
 
     
-    
     def describe_custom_routing_accelerator(self, request: operations.DescribeCustomRoutingAcceleratorRequest) -> operations.DescribeCustomRoutingAcceleratorResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeCustomRoutingAccelerator"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeCustomRoutingAcceleratorResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeCustomRoutingAcceleratorResponse])
@@ -913,26 +956,28 @@ class SDK:
         return res
 
     
-    
     def describe_custom_routing_accelerator_attributes(self, request: operations.DescribeCustomRoutingAcceleratorAttributesRequest) -> operations.DescribeCustomRoutingAcceleratorAttributesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeCustomRoutingAcceleratorAttributes"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeCustomRoutingAcceleratorAttributesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeCustomRoutingAcceleratorAttributesResponse])
@@ -953,26 +998,28 @@ class SDK:
         return res
 
     
-    
     def describe_custom_routing_endpoint_group(self, request: operations.DescribeCustomRoutingEndpointGroupRequest) -> operations.DescribeCustomRoutingEndpointGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeCustomRoutingEndpointGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeCustomRoutingEndpointGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeCustomRoutingEndpointGroupResponse])
@@ -993,26 +1040,28 @@ class SDK:
         return res
 
     
-    
     def describe_custom_routing_listener(self, request: operations.DescribeCustomRoutingListenerRequest) -> operations.DescribeCustomRoutingListenerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeCustomRoutingListener"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeCustomRoutingListenerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeCustomRoutingListenerResponse])
@@ -1033,26 +1082,28 @@ class SDK:
         return res
 
     
-    
     def describe_endpoint_group(self, request: operations.DescribeEndpointGroupRequest) -> operations.DescribeEndpointGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeEndpointGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeEndpointGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeEndpointGroupResponse])
@@ -1073,26 +1124,28 @@ class SDK:
         return res
 
     
-    
     def describe_listener(self, request: operations.DescribeListenerRequest) -> operations.DescribeListenerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.DescribeListener"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeListenerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeListenerResponse])
@@ -1113,27 +1166,30 @@ class SDK:
         return res
 
     
-    
     def list_accelerators(self, request: operations.ListAcceleratorsRequest) -> operations.ListAcceleratorsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListAccelerators"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAcceleratorsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAcceleratorsResponse])
@@ -1154,27 +1210,30 @@ class SDK:
         return res
 
     
-    
     def list_byoip_cidrs(self, request: operations.ListByoipCidrsRequest) -> operations.ListByoipCidrsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListByoipCidrs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListByoipCidrsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListByoipCidrsResponse])
@@ -1199,27 +1258,30 @@ class SDK:
         return res
 
     
-    
     def list_custom_routing_accelerators(self, request: operations.ListCustomRoutingAcceleratorsRequest) -> operations.ListCustomRoutingAcceleratorsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListCustomRoutingAccelerators"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCustomRoutingAcceleratorsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListCustomRoutingAcceleratorsResponse])
@@ -1240,27 +1302,30 @@ class SDK:
         return res
 
     
-    
     def list_custom_routing_endpoint_groups(self, request: operations.ListCustomRoutingEndpointGroupsRequest) -> operations.ListCustomRoutingEndpointGroupsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListCustomRoutingEndpointGroups"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCustomRoutingEndpointGroupsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListCustomRoutingEndpointGroupsResponse])
@@ -1285,27 +1350,30 @@ class SDK:
         return res
 
     
-    
     def list_custom_routing_listeners(self, request: operations.ListCustomRoutingListenersRequest) -> operations.ListCustomRoutingListenersResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListCustomRoutingListeners"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCustomRoutingListenersResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListCustomRoutingListenersResponse])
@@ -1330,27 +1398,30 @@ class SDK:
         return res
 
     
-    
     def list_custom_routing_port_mappings(self, request: operations.ListCustomRoutingPortMappingsRequest) -> operations.ListCustomRoutingPortMappingsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListCustomRoutingPortMappings"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCustomRoutingPortMappingsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListCustomRoutingPortMappingsResponse])
@@ -1379,27 +1450,30 @@ class SDK:
         return res
 
     
-    
     def list_custom_routing_port_mappings_by_destination(self, request: operations.ListCustomRoutingPortMappingsByDestinationRequest) -> operations.ListCustomRoutingPortMappingsByDestinationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListCustomRoutingPortMappingsByDestination"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCustomRoutingPortMappingsByDestinationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListCustomRoutingPortMappingsByDestinationResponse])
@@ -1424,27 +1498,30 @@ class SDK:
         return res
 
     
-    
     def list_endpoint_groups(self, request: operations.ListEndpointGroupsRequest) -> operations.ListEndpointGroupsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListEndpointGroups"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEndpointGroupsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListEndpointGroupsResponse])
@@ -1469,27 +1546,30 @@ class SDK:
         return res
 
     
-    
     def list_listeners(self, request: operations.ListListenersRequest) -> operations.ListListenersResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListListeners"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListListenersResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListListenersResponse])
@@ -1514,26 +1594,28 @@ class SDK:
         return res
 
     
-    
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ListTagsForResource"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTagsForResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListTagsForResourceResponse])
@@ -1554,26 +1636,28 @@ class SDK:
         return res
 
     
-    
     def provision_byoip_cidr(self, request: operations.ProvisionByoipCidrRequest) -> operations.ProvisionByoipCidrResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.ProvisionByoipCidr"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ProvisionByoipCidrResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ProvisionByoipCidrResponse])
@@ -1602,26 +1686,28 @@ class SDK:
         return res
 
     
-    
     def remove_custom_routing_endpoints(self, request: operations.RemoveCustomRoutingEndpointsRequest) -> operations.RemoveCustomRoutingEndpointsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.RemoveCustomRoutingEndpoints"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RemoveCustomRoutingEndpointsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -1652,26 +1738,28 @@ class SDK:
         return res
 
     
-    
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.TagResource"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TagResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1692,26 +1780,28 @@ class SDK:
         return res
 
     
-    
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UntagResource"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UntagResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1732,26 +1822,28 @@ class SDK:
         return res
 
     
-    
     def update_accelerator(self, request: operations.UpdateAcceleratorRequest) -> operations.UpdateAcceleratorResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateAccelerator"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateAcceleratorResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateAcceleratorResponse])
@@ -1772,26 +1864,28 @@ class SDK:
         return res
 
     
-    
     def update_accelerator_attributes(self, request: operations.UpdateAcceleratorAttributesRequest) -> operations.UpdateAcceleratorAttributesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateAcceleratorAttributes"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateAcceleratorAttributesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateAcceleratorAttributesResponse])
@@ -1816,26 +1910,28 @@ class SDK:
         return res
 
     
-    
     def update_custom_routing_accelerator(self, request: operations.UpdateCustomRoutingAcceleratorRequest) -> operations.UpdateCustomRoutingAcceleratorResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateCustomRoutingAccelerator"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateCustomRoutingAcceleratorResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateCustomRoutingAcceleratorResponse])
@@ -1856,26 +1952,28 @@ class SDK:
         return res
 
     
-    
     def update_custom_routing_accelerator_attributes(self, request: operations.UpdateCustomRoutingAcceleratorAttributesRequest) -> operations.UpdateCustomRoutingAcceleratorAttributesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateCustomRoutingAcceleratorAttributes"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateCustomRoutingAcceleratorAttributesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateCustomRoutingAcceleratorAttributesResponse])
@@ -1900,26 +1998,28 @@ class SDK:
         return res
 
     
-    
     def update_custom_routing_listener(self, request: operations.UpdateCustomRoutingListenerRequest) -> operations.UpdateCustomRoutingListenerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateCustomRoutingListener"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateCustomRoutingListenerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateCustomRoutingListenerResponse])
@@ -1948,26 +2048,28 @@ class SDK:
         return res
 
     
-    
     def update_endpoint_group(self, request: operations.UpdateEndpointGroupRequest) -> operations.UpdateEndpointGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateEndpointGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateEndpointGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateEndpointGroupResponse])
@@ -1996,26 +2098,28 @@ class SDK:
         return res
 
     
-    
     def update_listener(self, request: operations.UpdateListenerRequest) -> operations.UpdateListenerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.UpdateListener"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateListenerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateListenerResponse])
@@ -2044,26 +2148,28 @@ class SDK:
         return res
 
     
-    
     def withdraw_byoip_cidr(self, request: operations.WithdrawByoipCidrRequest) -> operations.WithdrawByoipCidrResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=GlobalAccelerator_V20180706.WithdrawByoipCidr"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.WithdrawByoipCidrResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.WithdrawByoipCidrResponse])

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LogsRequestBody struct {
-	LogType LogTypeEnum `json:"logType"`
+    LogType LogTypeEnum `json:"logType"`
+    
 }
+

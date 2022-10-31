@@ -104,6 +104,7 @@ func (s *SDK) FirebaseappcheckProjectsAppsDebugTokensCreate(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -274,6 +275,7 @@ func (s *SDK) FirebaseappcheckProjectsAppsExchangeAppAttestAssertion(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -321,6 +323,7 @@ func (s *SDK) FirebaseappcheckProjectsAppsExchangeAppAttestAttestation(ctx conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -368,6 +371,7 @@ func (s *SDK) FirebaseappcheckProjectsAppsExchangeCustomToken(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -415,6 +419,7 @@ func (s *SDK) FirebaseappcheckProjectsAppsExchangeDebugToken(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -462,6 +467,7 @@ func (s *SDK) FirebaseappcheckProjectsAppsExchangeDeviceCheckToken(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -509,6 +515,7 @@ func (s *SDK) FirebaseappcheckProjectsAppsExchangePlayIntegrityToken(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -556,6 +563,7 @@ func (s *SDK) FirebaseappcheckProjectsAppsExchangeRecaptchaEnterpriseToken(ctx c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -603,6 +611,7 @@ func (s *SDK) FirebaseappcheckProjectsAppsExchangeRecaptchaV3Token(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -650,6 +659,7 @@ func (s *SDK) FirebaseappcheckProjectsAppsExchangeSafetyNetToken(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -697,6 +707,7 @@ func (s *SDK) FirebaseappcheckProjectsAppsGenerateAppAttestChallenge(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -744,6 +755,7 @@ func (s *SDK) FirebaseappcheckProjectsAppsGeneratePlayIntegrityChallenge(ctx con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -955,6 +967,7 @@ func (s *SDK) FirebaseappcheckProjectsServicesBatchUpdate(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1084,6 +1097,7 @@ func (s *SDK) FirebaseappcheckProjectsServicesPatch(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

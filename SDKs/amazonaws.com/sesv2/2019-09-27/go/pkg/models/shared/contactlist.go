@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ContactList struct {
-	ContactListName      *string    `json:"ContactListName,omitempty"`
-	LastUpdatedTimestamp *time.Time `json:"LastUpdatedTimestamp,omitempty"`
+    ContactListName *string `json:"ContactListName,omitempty"`
+    LastUpdatedTimestamp *time.Time `json:"LastUpdatedTimestamp,omitempty"`
+    
 }
+

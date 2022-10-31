@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateVolumeResponse struct {
-	Volume *Volume `json:"Volume,omitempty"`
+    Volume *Volume `json:"Volume,omitempty"`
+    
 }
+

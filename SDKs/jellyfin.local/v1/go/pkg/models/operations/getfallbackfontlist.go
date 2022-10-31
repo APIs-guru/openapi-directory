@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetFallbackFontListSecurity struct {
-	CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type GetFallbackFontListRequest struct {
-	Security GetFallbackFontListSecurity
+    Security GetFallbackFontListSecurity 
+    
 }
 
 type GetFallbackFontListResponse struct {
-	ContentType string
-	FontFiles   []shared.FontFile
-	StatusCode  int64
+    ContentType string 
+    FontFiles []shared.FontFile 
+    StatusCode int64 
+    
 }
+

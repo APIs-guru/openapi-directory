@@ -64,6 +64,7 @@ func (s *SDK) DocsDocumentsBatchUpdate(ctx context.Context, request operations.D
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -111,6 +112,7 @@ func (s *SDK) DocsDocumentsCreate(ctx context.Context, request operations.DocsDo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

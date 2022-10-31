@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EnvironmentPropertyUpdates struct {
-	PropertyGroups []PropertyGroup `json:"PropertyGroups"`
+    PropertyGroups []PropertyGroup `json:"PropertyGroups"`
+    
 }
+

@@ -1,42 +1,47 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ContentRegionsCreatePathParams struct {
-	MerchantID string `pathParam:"style=simple,explode=false,name=merchantId"`
+    MerchantID string `pathParam:"style=simple,explode=false,name=merchantId"`
+    
 }
 
 type ContentRegionsCreateQueryParams struct {
-	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
-	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
-	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
-	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
-	Key            *string           `queryParam:"style=form,explode=true,name=key"`
-	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
-	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
-	RegionID       *string           `queryParam:"style=form,explode=true,name=regionId"`
-	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
-	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
+    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
+    Callback *string `queryParam:"style=form,explode=true,name=callback"`
+    Fields *string `queryParam:"style=form,explode=true,name=fields"`
+    Key *string `queryParam:"style=form,explode=true,name=key"`
+    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
+    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
+    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
+    RegionID *string `queryParam:"style=form,explode=true,name=regionId"`
+    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
+    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
+    
 }
 
 type ContentRegionsCreateSecurity struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type ContentRegionsCreateRequest struct {
-	PathParams  ContentRegionsCreatePathParams
-	QueryParams ContentRegionsCreateQueryParams
-	Request     *shared.Region `request:"mediaType=application/json"`
-	Security    ContentRegionsCreateSecurity
+    PathParams ContentRegionsCreatePathParams 
+    QueryParams ContentRegionsCreateQueryParams 
+    Request *shared.Region `request:"mediaType=application/json"`
+    Security ContentRegionsCreateSecurity 
+    
 }
 
 type ContentRegionsCreateResponse struct {
-	ContentType string
-	Region      *shared.Region
-	StatusCode  int64
+    ContentType string 
+    Region *shared.Region 
+    StatusCode int64 
+    
 }
+

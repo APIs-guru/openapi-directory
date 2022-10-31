@@ -1,12 +1,17 @@
 package shared
 
+
+
+
 type StorageVirtualMachineLifecycleEnum string
 
 const (
-	StorageVirtualMachineLifecycleEnumCreated       StorageVirtualMachineLifecycleEnum = "CREATED"
-	StorageVirtualMachineLifecycleEnumCreating      StorageVirtualMachineLifecycleEnum = "CREATING"
-	StorageVirtualMachineLifecycleEnumDeleting      StorageVirtualMachineLifecycleEnum = "DELETING"
-	StorageVirtualMachineLifecycleEnumFailed        StorageVirtualMachineLifecycleEnum = "FAILED"
-	StorageVirtualMachineLifecycleEnumMisconfigured StorageVirtualMachineLifecycleEnum = "MISCONFIGURED"
-	StorageVirtualMachineLifecycleEnumPending       StorageVirtualMachineLifecycleEnum = "PENDING"
+    StorageVirtualMachineLifecycleEnumCreated StorageVirtualMachineLifecycleEnum = "CREATED"
+StorageVirtualMachineLifecycleEnumCreating StorageVirtualMachineLifecycleEnum = "CREATING"
+StorageVirtualMachineLifecycleEnumDeleting StorageVirtualMachineLifecycleEnum = "DELETING"
+StorageVirtualMachineLifecycleEnumFailed StorageVirtualMachineLifecycleEnum = "FAILED"
+StorageVirtualMachineLifecycleEnumMisconfigured StorageVirtualMachineLifecycleEnum = "MISCONFIGURED"
+StorageVirtualMachineLifecycleEnumPending StorageVirtualMachineLifecycleEnum = "PENDING"
 )
+
+

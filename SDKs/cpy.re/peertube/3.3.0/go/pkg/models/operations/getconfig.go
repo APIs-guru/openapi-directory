@@ -1,7 +1,11 @@
 package operations
 
+
+
 type GetConfigResponse struct {
-	ContentType  string
-	ServerConfig *interface{}
-	StatusCode   int64
+    ContentType string 
+    ServerConfig *interface{} 
+    StatusCode int64 
+    
 }
+

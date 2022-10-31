@@ -1,14 +1,20 @@
 package operations
 
+
+
 type MarkAllConversationsReadRequestBody struct {
-	MessageID string `multipartForm:"name=message_id"`
+    MessageID string `multipartForm:"name=message_id"`
+    
 }
 
 type MarkAllConversationsReadRequest struct {
-	Request MarkAllConversationsReadRequestBody `request:"mediaType=multipart/form-data"`
+    Request MarkAllConversationsReadRequestBody `request:"mediaType=multipart/form-data"`
+    
 }
 
 type MarkAllConversationsReadResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

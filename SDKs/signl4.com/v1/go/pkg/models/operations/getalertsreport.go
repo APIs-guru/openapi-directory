@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAlertsReportQueryParams struct {
-	UserID *string `queryParam:"style=form,explode=true,name=userId"`
+    UserID *string `queryParam:"style=form,explode=true,name=userId"`
+    
 }
 
 type GetAlertsReportRequest struct {
-	QueryParams GetAlertsReportQueryParams
+    QueryParams GetAlertsReportQueryParams 
+    
 }
 
 type GetAlertsReportResponse struct {
-	AlertReport          *shared.AlertReport
-	Body                 []byte
-	ContentType          string
-	ErrorResponseContent *shared.ErrorResponseContent
-	StatusCode           int64
+    AlertReport *shared.AlertReport 
+    Body []byte 
+    ContentType string 
+    ErrorResponseContent *shared.ErrorResponseContent 
+    StatusCode int64 
+    
 }
+

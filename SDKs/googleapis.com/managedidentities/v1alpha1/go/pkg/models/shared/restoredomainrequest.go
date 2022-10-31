@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RestoreDomainRequest struct {
-	BackupID *string `json:"backupId,omitempty"`
+    BackupID *string `json:"backupId,omitempty"`
+    
 }
+

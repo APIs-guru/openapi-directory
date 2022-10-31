@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteNotebookInstanceLifecycleConfigInput struct {
-	NotebookInstanceLifecycleConfigName string `json:"NotebookInstanceLifecycleConfigName"`
+    NotebookInstanceLifecycleConfigName string `json:"NotebookInstanceLifecycleConfigName"`
+    
 }
+

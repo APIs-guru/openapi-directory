@@ -68,6 +68,7 @@ func (s *SDK) NetworkUnblock(ctx context.Context, request operations.NetworkUnbl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -156,6 +157,7 @@ func (s *SDK) VerifyCheck(ctx context.Context, request operations.VerifyCheckReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -211,6 +213,7 @@ func (s *SDK) VerifyControl(ctx context.Context, request operations.VerifyContro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -266,6 +269,7 @@ func (s *SDK) VerifyRequest(ctx context.Context, request operations.VerifyReques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -321,6 +325,7 @@ func (s *SDK) VerifyRequestWithPsd2(ctx context.Context, request operations.Veri
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

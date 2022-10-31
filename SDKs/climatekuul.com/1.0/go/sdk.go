@@ -67,7 +67,10 @@ func (s *SDK) AirtravelCoordinates(ctx context.Context, request operations.Airtr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -110,6 +113,7 @@ func (s *SDK) AirtravelMultileg(ctx context.Context, request operations.Airtrave
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -150,6 +154,7 @@ func (s *SDK) ConfirmCarbonOffset(ctx context.Context, request operations.Confir
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -190,6 +195,7 @@ func (s *SDK) ConfirmCarbonOffset1(ctx context.Context, request operations.Confi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -230,6 +236,7 @@ func (s *SDK) ConfirmCarbonOffset3(ctx context.Context, request operations.Confi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -270,6 +277,7 @@ func (s *SDK) ConfirmCarbonOffset4(ctx context.Context, request operations.Confi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -310,6 +318,7 @@ func (s *SDK) ConfirmCarbonOffset5(ctx context.Context, request operations.Confi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -350,6 +359,7 @@ func (s *SDK) ConfirmPayment(ctx context.Context, request operations.ConfirmPaym
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -390,6 +400,7 @@ func (s *SDK) ConfirmPayment1(ctx context.Context, request operations.ConfirmPay
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -430,6 +441,7 @@ func (s *SDK) ConfirmPayment3(ctx context.Context, request operations.ConfirmPay
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -470,6 +482,7 @@ func (s *SDK) ConfirmPayment4(ctx context.Context, request operations.ConfirmPay
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -510,6 +523,7 @@ func (s *SDK) ConfirmPayment5(ctx context.Context, request operations.ConfirmPay
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -550,6 +564,7 @@ func (s *SDK) ConfirmPaymentOfTransaction(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -590,6 +605,7 @@ func (s *SDK) ConfirmPaymentOfTransaction1(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -630,6 +646,7 @@ func (s *SDK) ConfirmPaymentOfTransaction3(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -670,6 +687,7 @@ func (s *SDK) ConfirmPaymentOfTransaction4(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -710,6 +728,7 @@ func (s *SDK) ConfirmPaymentOfTransaction5(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -750,6 +769,7 @@ func (s *SDK) ConfirmsPlanting(ctx context.Context, request operations.ConfirmsP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -790,6 +810,7 @@ func (s *SDK) ConfirmsPlanting2(ctx context.Context, request operations.Confirms
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -830,6 +851,7 @@ func (s *SDK) ConfirmsPlanting3(ctx context.Context, request operations.Confirms
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -870,6 +892,7 @@ func (s *SDK) ConfirmsPlanting4(ctx context.Context, request operations.Confirms
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -910,6 +933,7 @@ func (s *SDK) ConfirmsPlanting5(ctx context.Context, request operations.Confirms
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -950,7 +974,10 @@ func (s *SDK) EcommerceDelivery(ctx context.Context, request operations.Ecommerc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -990,6 +1017,7 @@ func (s *SDK) RequestAPIKey(ctx context.Context, request operations.RequestAPIKe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1030,6 +1058,7 @@ func (s *SDK) RoadDistance(ctx context.Context, request operations.RoadDistanceR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1070,6 +1099,7 @@ func (s *SDK) UrbanDelivery(ctx context.Context, request operations.UrbanDeliver
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

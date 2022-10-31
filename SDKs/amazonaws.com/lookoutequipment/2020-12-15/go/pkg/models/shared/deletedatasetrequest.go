@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteDatasetRequest struct {
-	DatasetName string `json:"DatasetName"`
+    DatasetName string `json:"DatasetName"`
+    
 }
+

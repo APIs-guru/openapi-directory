@@ -69,7 +69,10 @@ func (s *SDK) Compile(ctx context.Context, request operations.CompileRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 

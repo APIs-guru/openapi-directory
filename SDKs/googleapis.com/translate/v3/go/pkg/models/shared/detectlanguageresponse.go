@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DetectLanguageResponse struct {
-	Languages []DetectedLanguage `json:"languages,omitempty"`
+    Languages []DetectedLanguage `json:"languages,omitempty"`
+    
 }
+

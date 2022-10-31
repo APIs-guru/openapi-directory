@@ -1,15 +1,17 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ExtrasExportTemplatesCreateRequest struct {
-	Request shared.WritableExportTemplate `request:"mediaType=application/json"`
+    Request shared.WritableExportTemplate `request:"mediaType=application/json"`
+    
 }
 
 type ExtrasExportTemplatesCreateResponse struct {
-	ContentType    string
-	ExportTemplate *shared.ExportTemplate
-	StatusCode     int64
+    ContentType string 
+    ExportTemplate *shared.ExportTemplate 
+    StatusCode int64 
+    
 }
+

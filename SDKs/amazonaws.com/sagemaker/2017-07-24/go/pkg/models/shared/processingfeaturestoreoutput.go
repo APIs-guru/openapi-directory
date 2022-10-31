@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ProcessingFeatureStoreOutput struct {
-	FeatureGroupName string `json:"FeatureGroupName"`
+    FeatureGroupName string `json:"FeatureGroupName"`
+    
 }
+

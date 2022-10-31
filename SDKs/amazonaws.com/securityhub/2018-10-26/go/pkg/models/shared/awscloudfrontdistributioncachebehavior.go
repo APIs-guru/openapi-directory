@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AwsCloudFrontDistributionCacheBehavior struct {
-	ViewerProtocolPolicy *string `json:"ViewerProtocolPolicy,omitempty"`
+    ViewerProtocolPolicy *string `json:"ViewerProtocolPolicy,omitempty"`
+    
 }
+

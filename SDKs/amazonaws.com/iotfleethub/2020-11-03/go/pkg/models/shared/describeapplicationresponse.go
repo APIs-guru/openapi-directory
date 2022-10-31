@@ -1,16 +1,20 @@
 package shared
 
+
+
 type DescribeApplicationResponse struct {
-	ApplicationArn            string               `json:"applicationArn"`
-	ApplicationCreationDate   int64                `json:"applicationCreationDate"`
-	ApplicationDescription    *string              `json:"applicationDescription,omitempty"`
-	ApplicationID             string               `json:"applicationId"`
-	ApplicationLastUpdateDate int64                `json:"applicationLastUpdateDate"`
-	ApplicationName           string               `json:"applicationName"`
-	ApplicationState          ApplicationStateEnum `json:"applicationState"`
-	ApplicationURL            string               `json:"applicationUrl"`
-	ErrorMessage              *string              `json:"errorMessage,omitempty"`
-	RoleArn                   string               `json:"roleArn"`
-	SsoClientID               *string              `json:"ssoClientId,omitempty"`
-	Tags                      map[string]string    `json:"tags,omitempty"`
+    ApplicationArn string `json:"applicationArn"`
+    ApplicationCreationDate int64 `json:"applicationCreationDate"`
+    ApplicationDescription *string `json:"applicationDescription,omitempty"`
+    ApplicationID string `json:"applicationId"`
+    ApplicationLastUpdateDate int64 `json:"applicationLastUpdateDate"`
+    ApplicationName string `json:"applicationName"`
+    ApplicationState ApplicationStateEnum `json:"applicationState"`
+    ApplicationURL string `json:"applicationUrl"`
+    ErrorMessage *string `json:"errorMessage,omitempty"`
+    RoleArn string `json:"roleArn"`
+    SsoClientID *string `json:"ssoClientId,omitempty"`
+    Tags map[string]string `json:"tags,omitempty"`
+    
 }
+

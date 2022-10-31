@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeDatasetGroupRequest struct {
-	DatasetGroupArn string `json:"DatasetGroupArn"`
+    DatasetGroupArn string `json:"DatasetGroupArn"`
+    
 }
+

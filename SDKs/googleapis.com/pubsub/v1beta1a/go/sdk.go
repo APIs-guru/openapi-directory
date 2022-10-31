@@ -64,6 +64,7 @@ func (s *SDK) PubsubSubscriptionsAcknowledge(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -111,6 +112,7 @@ func (s *SDK) PubsubSubscriptionsCreate(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -281,6 +283,7 @@ func (s *SDK) PubsubSubscriptionsModifyAckDeadline(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -328,6 +331,7 @@ func (s *SDK) PubsubSubscriptionsModifyPushConfig(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -375,6 +379,7 @@ func (s *SDK) PubsubSubscriptionsPull(ctx context.Context, request operations.Pu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -422,6 +427,7 @@ func (s *SDK) PubsubSubscriptionsPullBatch(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -469,6 +475,7 @@ func (s *SDK) PubsubTopicsCreate(ctx context.Context, request operations.PubsubT
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -639,6 +646,7 @@ func (s *SDK) PubsubTopicsPublish(ctx context.Context, request operations.Pubsub
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -686,6 +694,7 @@ func (s *SDK) PubsubTopicsPublishBatch(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

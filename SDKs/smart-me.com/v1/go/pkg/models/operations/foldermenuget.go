@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type FolderMenuGetQueryParams struct {
-	Filter *string `queryParam:"style=form,explode=true,name=filter"`
+    Filter *string `queryParam:"style=form,explode=true,name=filter"`
+    
 }
 
 type FolderMenuGetRequest struct {
-	QueryParams FolderMenuGetQueryParams
+    QueryParams FolderMenuGetQueryParams 
+    
 }
 
 type FolderMenuGetResponse struct {
-	Body                    []byte
-	ContentType             string
-	FolderMenuConfiguration *shared.FolderMenuConfiguration
-	StatusCode              int64
+    Body []byte 
+    ContentType string 
+    FolderMenuConfiguration *shared.FolderMenuConfiguration 
+    StatusCode int64 
+    
 }
+

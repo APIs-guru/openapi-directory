@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAttributeSecurity struct {
-	BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
+    BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type GetAttributeRequest struct {
-	Security GetAttributeSecurity
+    Security GetAttributeSecurity 
+    
 }
 
 type GetAttributeResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -196,6 +196,7 @@ func (s *SDK) UpdatePhoneNumber(ctx context.Context, request operations.UpdatePh
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -245,6 +246,7 @@ func (s *SDK) UpdateSipDomain(ctx context.Context, request operations.UpdateSipD
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -294,6 +296,7 @@ func (s *SDK) UpdateTrunks(ctx context.Context, request operations.UpdateTrunksR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteReplicationInstanceResponse struct {
-	ReplicationInstance *ReplicationInstance `json:"ReplicationInstance,omitempty"`
+    ReplicationInstance *ReplicationInstance `json:"ReplicationInstance,omitempty"`
+    
 }
+

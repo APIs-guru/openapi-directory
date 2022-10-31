@@ -1,7 +1,11 @@
 package operations
 
+
+
 type GetSystemResponse struct {
-	ContentType                    string
-	GetSystem200ApplicationJSONAny *interface{}
-	StatusCode                     int64
+    ContentType string 
+    GetSystem200ApplicationJSONAny *interface{} 
+    StatusCode int64 
+    
 }
+

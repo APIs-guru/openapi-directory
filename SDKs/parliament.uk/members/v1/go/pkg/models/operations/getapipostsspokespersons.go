@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAPIPostsSpokespersonsQueryParams struct {
-	PartyID *int32 `queryParam:"style=form,explode=true,name=partyId"`
+    PartyID *int32 `queryParam:"style=form,explode=true,name=partyId"`
+    
 }
 
 type GetAPIPostsSpokespersonsRequest struct {
-	QueryParams GetAPIPostsSpokespersonsQueryParams
+    QueryParams GetAPIPostsSpokespersonsQueryParams 
+    
 }
 
 type GetAPIPostsSpokespersonsResponse struct {
-	Body                          []byte
-	ContentType                   string
-	GovernmentOppositionPostItems []shared.GovernmentOppositionPostItem
-	StatusCode                    int64
+    Body []byte 
+    ContentType string 
+    GovernmentOppositionPostItems []shared.GovernmentOppositionPostItem 
+    StatusCode int64 
+    
 }
+

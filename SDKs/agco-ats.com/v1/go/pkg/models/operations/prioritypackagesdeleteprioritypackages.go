@@ -1,15 +1,21 @@
 package operations
 
+
+
 type PriorityPackagesDeletePriorityPackagesPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=ID"`
+    ID string `pathParam:"style=simple,explode=false,name=ID"`
+    
 }
 
 type PriorityPackagesDeletePriorityPackagesRequest struct {
-	PathParams PriorityPackagesDeletePriorityPackagesPathParams
+    PathParams PriorityPackagesDeletePriorityPackagesPathParams 
+    
 }
 
 type PriorityPackagesDeletePriorityPackagesResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

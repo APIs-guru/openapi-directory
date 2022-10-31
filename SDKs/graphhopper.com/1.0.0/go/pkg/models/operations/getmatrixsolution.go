@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetMatrixSolutionPathParams struct {
-	JobID string `pathParam:"style=simple,explode=false,name=jobId"`
+    JobID string `pathParam:"style=simple,explode=false,name=jobId"`
+    
 }
 
 type GetMatrixSolutionRequest struct {
-	PathParams GetMatrixSolutionPathParams
+    PathParams GetMatrixSolutionPathParams 
+    
 }
 
 type GetMatrixSolutionResponse struct {
-	ContentType    string
-	GhError        *shared.GhError
-	Headers        map[string][]string
-	MatrixResponse *shared.MatrixResponse
-	StatusCode     int64
+    ContentType string 
+    GhError *shared.GhError 
+    Headers map[string][]string 
+    MatrixResponse *shared.MatrixResponse 
+    StatusCode int64 
+    
 }
+

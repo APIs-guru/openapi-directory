@@ -22,29 +22,34 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def create_application(self, request: operations.CreateApplicationRequest) -> operations.CreateApplicationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/applications"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateApplicationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateApplicationResponse])
@@ -69,20 +74,23 @@ class SDK:
         return res
 
     
-    
     def delete_application(self, request: operations.DeleteApplicationRequest) -> operations.DeleteApplicationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/applications/{applicationId}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("DELETE", url, params=query_params)
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteApplicationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -107,19 +115,21 @@ class SDK:
         return res
 
     
-    
     def describe_application(self, request: operations.DescribeApplicationRequest) -> operations.DescribeApplicationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/applications/{applicationId}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeApplicationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeApplicationResponse])
@@ -144,20 +154,23 @@ class SDK:
         return res
 
     
-    
     def list_applications(self, request: operations.ListApplicationsRequest) -> operations.ListApplicationsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/applications"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListApplicationsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListApplicationsResponse])
@@ -178,19 +191,21 @@ class SDK:
         return res
 
     
-    
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/tags/{resourceArn}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTagsForResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListTagsForResourceResponse])
@@ -211,26 +226,28 @@ class SDK:
         return res
 
     
-    
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/tags/{resourceArn}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TagResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -251,20 +268,23 @@ class SDK:
         return res
 
     
-    
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/tags/{resourceArn}#tagKeys", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("DELETE", url, params=query_params)
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UntagResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -285,26 +305,28 @@ class SDK:
         return res
 
     
-    
     def update_application(self, request: operations.UpdateApplicationRequest) -> operations.UpdateApplicationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/applications/{applicationId}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateApplicationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])

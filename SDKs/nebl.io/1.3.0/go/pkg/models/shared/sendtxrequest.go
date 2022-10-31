@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SendTxRequest struct {
-	Rawtx string `json:"rawtx"`
+    Rawtx string `json:"rawtx"`
+    
 }
+

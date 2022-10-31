@@ -63,6 +63,7 @@ func (s *SDK) FcmProjectsMessagesSend(ctx context.Context, request operations.Fc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

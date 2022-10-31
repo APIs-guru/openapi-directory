@@ -888,6 +888,7 @@ func (s *SDK) AgentStoreLreplace(ctx context.Context, request operations.AgentSt
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -976,6 +977,7 @@ func (s *SDK) AgentStoreSet(ctx context.Context, request operations.AgentStoreSe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3787,6 +3789,7 @@ func (s *SDK) MsetValue(ctx context.Context, request operations.MsetValueRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3834,6 +3837,7 @@ func (s *SDK) MunsetValue(ctx context.Context, request operations.MunsetValueReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3884,6 +3888,7 @@ func (s *SDK) New(ctx context.Context, request operations.NewRequest) (*operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10035,6 +10040,7 @@ func (s *SDK) ProtocolSyslogSend(ctx context.Context, request operations.Protoco
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12795,6 +12801,7 @@ func (s *SDK) SetLog(ctx context.Context, request operations.SetLogRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12885,6 +12892,7 @@ func (s *SDK) SetMibs(ctx context.Context, request operations.SetMibsRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13178,6 +13186,7 @@ func (s *SDK) SetProtocols(ctx context.Context, request operations.SetProtocolsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13427,6 +13436,7 @@ func (s *SDK) SetValue(ctx context.Context, request operations.SetValueRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13960,6 +13970,7 @@ func (s *SDK) StoreLreplace(ctx context.Context, request operations.StoreLreplac
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14087,6 +14098,7 @@ func (s *SDK) StoreSet(ctx context.Context, request operations.StoreSetRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

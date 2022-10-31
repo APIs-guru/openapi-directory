@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ChangePasswordPoliciesConfigHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type ChangePasswordPoliciesConfigRequest struct {
-	Headers ChangePasswordPoliciesConfigHeaders
-	Request shared.UpdatePasswordPoliciesConfig `request:"mediaType=application/json"`
+    Headers ChangePasswordPoliciesConfigHeaders 
+    Request shared.UpdatePasswordPoliciesConfig `request:"mediaType=application/json"`
+    
 }
 
 type ChangePasswordPoliciesConfigResponse struct {
-	ContentType            string
-	ErrorResponse          *shared.ErrorResponse
-	PasswordPoliciesConfig *shared.PasswordPoliciesConfig
-	StatusCode             int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    PasswordPoliciesConfig *shared.PasswordPoliciesConfig 
+    StatusCode int64 
+    
 }
+

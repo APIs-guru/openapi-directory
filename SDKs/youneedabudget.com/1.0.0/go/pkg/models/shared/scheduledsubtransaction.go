@@ -1,12 +1,16 @@
 package shared
 
+
+
 type ScheduledSubTransaction struct {
-	Amount                 int64   `json:"amount"`
-	CategoryID             *string `json:"category_id,omitempty"`
-	Deleted                bool    `json:"deleted"`
-	ID                     string  `json:"id"`
-	Memo                   *string `json:"memo,omitempty"`
-	PayeeID                *string `json:"payee_id,omitempty"`
-	ScheduledTransactionID string  `json:"scheduled_transaction_id"`
-	TransferAccountID      *string `json:"transfer_account_id,omitempty"`
+    Amount int64 `json:"amount"`
+    CategoryID *string `json:"category_id,omitempty"`
+    Deleted bool `json:"deleted"`
+    ID string `json:"id"`
+    Memo *string `json:"memo,omitempty"`
+    PayeeID *string `json:"payee_id,omitempty"`
+    ScheduledTransactionID string `json:"scheduled_transaction_id"`
+    TransferAccountID *string `json:"transfer_account_id,omitempty"`
+    
 }
+

@@ -1,7 +1,11 @@
 package shared
 
+
+
 type ListSolutionVersionsRequest struct {
-	MaxResults  *int64  `json:"maxResults,omitempty"`
-	NextToken   *string `json:"nextToken,omitempty"`
-	SolutionArn *string `json:"solutionArn,omitempty"`
+    MaxResults *int64 `json:"maxResults,omitempty"`
+    NextToken *string `json:"nextToken,omitempty"`
+    SolutionArn *string `json:"solutionArn,omitempty"`
+    
 }
+

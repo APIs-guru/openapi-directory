@@ -1,15 +1,17 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAnnotatedGenesUsingPostRequest struct {
-	Request *shared.AnnotatedGeneRequest `request:"mediaType=application/json"`
+    Request *shared.AnnotatedGeneRequest `request:"mediaType=application/json"`
+    
 }
 
 type GetAnnotatedGenesUsingPostResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

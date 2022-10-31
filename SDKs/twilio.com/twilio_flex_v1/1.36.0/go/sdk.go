@@ -68,6 +68,7 @@ func (s *SDK) CreateChannel(ctx context.Context, request operations.CreateChanne
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -117,6 +118,7 @@ func (s *SDK) CreateFlexFlow(ctx context.Context, request operations.CreateFlexF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -166,6 +168,7 @@ func (s *SDK) CreateInteraction(ctx context.Context, request operations.CreateIn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -215,6 +218,7 @@ func (s *SDK) CreateInteractionChannelInvite(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -264,6 +268,7 @@ func (s *SDK) CreateInteractionChannelParticipant(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -313,6 +318,7 @@ func (s *SDK) CreateWebChannel(ctx context.Context, request operations.CreateWeb
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -994,6 +1000,7 @@ func (s *SDK) UpdateFlexFlow(ctx context.Context, request operations.UpdateFlexF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1043,6 +1050,7 @@ func (s *SDK) UpdateInteractionChannel(ctx context.Context, request operations.U
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1092,6 +1100,7 @@ func (s *SDK) UpdateInteractionChannelParticipant(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1141,6 +1150,7 @@ func (s *SDK) UpdateWebChannel(ctx context.Context, request operations.UpdateWeb
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

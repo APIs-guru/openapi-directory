@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type LambdaFunctionMemoryMetricNameEnum string
 
 const (
-	LambdaFunctionMemoryMetricNameEnumDuration LambdaFunctionMemoryMetricNameEnum = "Duration"
+    LambdaFunctionMemoryMetricNameEnumDuration LambdaFunctionMemoryMetricNameEnum = "Duration"
 )
+
+

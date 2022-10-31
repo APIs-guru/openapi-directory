@@ -1,7 +1,11 @@
 package shared
 
+
+
 type AnomalyGroupStatistics struct {
-	EvaluationStartDate     *string               `json:"EvaluationStartDate,omitempty"`
-	ItemizedMetricStatsList []ItemizedMetricStats `json:"ItemizedMetricStatsList,omitempty"`
-	TotalCount              *int64                `json:"TotalCount,omitempty"`
+    EvaluationStartDate *string `json:"EvaluationStartDate,omitempty"`
+    ItemizedMetricStatsList []ItemizedMetricStats `json:"ItemizedMetricStatsList,omitempty"`
+    TotalCount *int64 `json:"TotalCount,omitempty"`
+    
 }
+

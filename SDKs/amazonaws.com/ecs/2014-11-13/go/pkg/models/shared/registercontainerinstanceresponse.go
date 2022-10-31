@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RegisterContainerInstanceResponse struct {
-	ContainerInstance *ContainerInstance `json:"containerInstance,omitempty"`
+    ContainerInstance *ContainerInstance `json:"containerInstance,omitempty"`
+    
 }
+

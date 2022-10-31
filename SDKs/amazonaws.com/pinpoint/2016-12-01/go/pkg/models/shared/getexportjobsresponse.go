@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetExportJobsResponse struct {
-	ExportJobsResponse ExportJobsResponse `json:"ExportJobsResponse"`
+    ExportJobsResponse ExportJobsResponse `json:"ExportJobsResponse"`
+    
 }
+

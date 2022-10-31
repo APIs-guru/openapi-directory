@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateDomainAssociationResult struct {
-	DomainAssociation DomainAssociation `json:"domainAssociation"`
+    DomainAssociation DomainAssociation `json:"domainAssociation"`
+    
 }
+

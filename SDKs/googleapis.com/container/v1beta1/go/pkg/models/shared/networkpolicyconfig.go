@@ -1,5 +1,9 @@
 package shared
 
+
+
 type NetworkPolicyConfig struct {
-	Disabled *bool `json:"disabled,omitempty"`
+    Disabled *bool `json:"disabled,omitempty"`
+    
 }
+

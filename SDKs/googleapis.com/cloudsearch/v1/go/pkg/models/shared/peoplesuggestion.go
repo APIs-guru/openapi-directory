@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PeopleSuggestion struct {
-	Person *Person `json:"person,omitempty"`
+    Person *Person `json:"person,omitempty"`
+    
 }
+

@@ -1,42 +1,47 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ChromemanagementCustomersReportsCountChromeDevicesThatNeedAttentionPathParams struct {
-	Customer string `pathParam:"style=simple,explode=false,name=customer"`
+    Customer string `pathParam:"style=simple,explode=false,name=customer"`
+    
 }
 
 type ChromemanagementCustomersReportsCountChromeDevicesThatNeedAttentionQueryParams struct {
-	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
-	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
-	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
-	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
-	Key            *string           `queryParam:"style=form,explode=true,name=key"`
-	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
-	OrgUnitID      *string           `queryParam:"style=form,explode=true,name=orgUnitId"`
-	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
-	ReadMask       *string           `queryParam:"style=form,explode=true,name=readMask"`
-	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
-	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
+    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
+    Callback *string `queryParam:"style=form,explode=true,name=callback"`
+    Fields *string `queryParam:"style=form,explode=true,name=fields"`
+    Key *string `queryParam:"style=form,explode=true,name=key"`
+    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
+    OrgUnitID *string `queryParam:"style=form,explode=true,name=orgUnitId"`
+    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
+    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
+    ReadMask *string `queryParam:"style=form,explode=true,name=readMask"`
+    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
+    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
+    
 }
 
 type ChromemanagementCustomersReportsCountChromeDevicesThatNeedAttentionSecurity struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type ChromemanagementCustomersReportsCountChromeDevicesThatNeedAttentionRequest struct {
-	PathParams  ChromemanagementCustomersReportsCountChromeDevicesThatNeedAttentionPathParams
-	QueryParams ChromemanagementCustomersReportsCountChromeDevicesThatNeedAttentionQueryParams
-	Security    ChromemanagementCustomersReportsCountChromeDevicesThatNeedAttentionSecurity
+    PathParams ChromemanagementCustomersReportsCountChromeDevicesThatNeedAttentionPathParams 
+    QueryParams ChromemanagementCustomersReportsCountChromeDevicesThatNeedAttentionQueryParams 
+    Security ChromemanagementCustomersReportsCountChromeDevicesThatNeedAttentionSecurity 
+    
 }
 
 type ChromemanagementCustomersReportsCountChromeDevicesThatNeedAttentionResponse struct {
-	ContentType                                                         string
-	GoogleChromeManagementV1CountChromeDevicesThatNeedAttentionResponse *shared.GoogleChromeManagementV1CountChromeDevicesThatNeedAttentionResponse
-	StatusCode                                                          int64
+    ContentType string 
+    GoogleChromeManagementV1CountChromeDevicesThatNeedAttentionResponse *shared.GoogleChromeManagementV1CountChromeDevicesThatNeedAttentionResponse 
+    StatusCode int64 
+    
 }
+

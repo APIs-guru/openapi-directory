@@ -64,6 +64,7 @@ func (s *SDK) AnalyticsreportingReportsBatchGet(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -111,6 +112,7 @@ func (s *SDK) AnalyticsreportingUserActivitySearch(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

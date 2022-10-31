@@ -64,6 +64,7 @@ func (s *SDK) Drvlc(ctx context.Context, request operations.DrvlcRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -179,6 +180,7 @@ func (s *SDK) Fitcer(ctx context.Context, request operations.FitcerRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -294,6 +296,7 @@ func (s *SDK) Rvcer(ctx context.Context, request operations.RvcerRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -409,6 +412,7 @@ func (s *SDK) Vhinsc(ctx context.Context, request operations.VhinscRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -515,6 +519,7 @@ func (s *SDK) Vhtax(ctx context.Context, request operations.VhtaxRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

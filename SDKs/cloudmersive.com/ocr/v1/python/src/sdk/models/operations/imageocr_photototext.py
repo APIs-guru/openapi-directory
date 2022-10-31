@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class ImageOcrPhotoToTextHeaders:
-    language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'language' }})
-    recognition_mode: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'recognitionMode' }})
+    language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'language', 'style': 'simple', 'explode': False }})
+    recognition_mode: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'recognitionMode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RegionGeoTargetArea struct {
-	GeotargetCriteriaIds []string `json:"geotargetCriteriaIds,omitempty"`
+    GeotargetCriteriaIds []string `json:"geotargetCriteriaIds,omitempty"`
+    
 }
+

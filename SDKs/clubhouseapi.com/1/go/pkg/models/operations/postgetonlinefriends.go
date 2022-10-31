@@ -1,10 +1,15 @@
 package operations
 
+
+
 type PostGetOnlineFriendsRequest struct {
-	Request map[string]interface{} `request:"mediaType=application/json"`
+    Request map[string]interface{} `request:"mediaType=application/json"`
+    
 }
 
 type PostGetOnlineFriendsResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

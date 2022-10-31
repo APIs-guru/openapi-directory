@@ -64,6 +64,7 @@ func (s *SDK) AppengineAppsAuthorizedCertificatesCreate(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -234,6 +235,7 @@ func (s *SDK) AppengineAppsAuthorizedCertificatesPatch(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -322,6 +324,7 @@ func (s *SDK) AppengineAppsCreate(ctx context.Context, request operations.Appeng
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -369,6 +372,7 @@ func (s *SDK) AppengineAppsDomainMappingsCreate(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -539,6 +543,7 @@ func (s *SDK) AppengineAppsDomainMappingsPatch(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -586,6 +591,7 @@ func (s *SDK) AppengineAppsFirewallIngressRulesBatchUpdate(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -633,6 +639,7 @@ func (s *SDK) AppengineAppsFirewallIngressRulesCreate(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -803,6 +810,7 @@ func (s *SDK) AppengineAppsFirewallIngressRulesPatch(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1055,6 +1063,7 @@ func (s *SDK) AppengineAppsPatch(ctx context.Context, request operations.Appengi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1102,6 +1111,7 @@ func (s *SDK) AppengineAppsRepair(ctx context.Context, request operations.Appeng
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1272,6 +1282,7 @@ func (s *SDK) AppengineAppsServicesPatch(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1319,6 +1330,7 @@ func (s *SDK) AppengineAppsServicesVersionsCreate(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1448,6 +1460,7 @@ func (s *SDK) AppengineAppsServicesVersionsInstancesDebug(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1659,6 +1672,7 @@ func (s *SDK) AppengineAppsServicesVersionsPatch(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

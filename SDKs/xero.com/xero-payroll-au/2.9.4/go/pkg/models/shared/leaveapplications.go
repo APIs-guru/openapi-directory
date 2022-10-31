@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LeaveApplications struct {
-	LeaveApplications []LeaveApplication `json:"LeaveApplications,omitempty"`
+    LeaveApplications []LeaveApplication `json:"LeaveApplications,omitempty"`
+    
 }
+

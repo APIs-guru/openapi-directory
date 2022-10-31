@@ -60,6 +60,8 @@ func (s *SDK) EndpointAddToQueue(ctx context.Context, request operations.Endpoin
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -106,7 +108,10 @@ func (s *SDK) EndpointAddTracksToPlaylist(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -163,7 +168,10 @@ func (s *SDK) EndpointChangePlaylistDetails(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -204,6 +212,8 @@ func (s *SDK) EndpointCheckCurrentUserFollows(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -256,6 +266,8 @@ func (s *SDK) EndpointCheckIfUserFollowsPlaylist(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -306,6 +318,8 @@ func (s *SDK) EndpointCheckUsersSavedAlbums(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -358,6 +372,8 @@ func (s *SDK) EndpointCheckUsersSavedEpisodes(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -409,6 +425,8 @@ func (s *SDK) EndpointCheckUsersSavedShows(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -459,6 +477,8 @@ func (s *SDK) EndpointCheckUsersSavedTracks(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -518,7 +538,10 @@ func (s *SDK) EndpointCreatePlaylist(ctx context.Context, request operations.End
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -586,7 +609,10 @@ func (s *SDK) EndpointFollowArtistsUsers(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -634,7 +660,10 @@ func (s *SDK) EndpointFollowPlaylist(ctx context.Context, request operations.End
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -675,6 +704,8 @@ func (s *SDK) EndpointGetACategoriesPlaylists(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -727,6 +758,8 @@ func (s *SDK) EndpointGetACategory(ctx context.Context, request operations.Endpo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -777,6 +810,8 @@ func (s *SDK) EndpointGetAListOfCurrentUsersPlaylists(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -829,6 +864,8 @@ func (s *SDK) EndpointGetAShow(ctx context.Context, request operations.EndpointG
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -879,6 +916,8 @@ func (s *SDK) EndpointGetAShowsEpisodes(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -931,6 +970,8 @@ func (s *SDK) EndpointGetAUsersAvailableDevices(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -979,6 +1020,8 @@ func (s *SDK) EndpointGetAnAlbum(ctx context.Context, request operations.Endpoin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1031,6 +1074,8 @@ func (s *SDK) EndpointGetAnAlbumsTracks(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1082,6 +1127,8 @@ func (s *SDK) EndpointGetAnArtist(ctx context.Context, request operations.Endpoi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -1130,6 +1177,8 @@ func (s *SDK) EndpointGetAnArtistsAlbums(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1182,6 +1231,8 @@ func (s *SDK) EndpointGetAnArtistsRelatedArtists(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -1230,6 +1281,8 @@ func (s *SDK) EndpointGetAnArtistsTopTracks(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1282,6 +1335,8 @@ func (s *SDK) EndpointGetAnEpisode(ctx context.Context, request operations.Endpo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1333,6 +1388,8 @@ func (s *SDK) EndpointGetAudioAnalysis(ctx context.Context, request operations.E
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -1381,6 +1438,8 @@ func (s *SDK) EndpointGetAudioFeatures(ctx context.Context, request operations.E
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1431,6 +1490,8 @@ func (s *SDK) EndpointGetAvailableMarkets(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -1479,6 +1540,8 @@ func (s *SDK) EndpointGetCategories(ctx context.Context, request operations.Endp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1531,6 +1594,8 @@ func (s *SDK) EndpointGetCurrentUsersProfile(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -1579,6 +1644,8 @@ func (s *SDK) EndpointGetFeaturedPlaylists(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1631,6 +1698,8 @@ func (s *SDK) EndpointGetFollowed(ctx context.Context, request operations.Endpoi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1681,6 +1750,8 @@ func (s *SDK) EndpointGetInformationAboutTheUsersCurrentPlayback(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1734,6 +1805,8 @@ func (s *SDK) EndpointGetListUsersPlaylists(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1784,6 +1857,8 @@ func (s *SDK) EndpointGetMultipleAlbums(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1836,6 +1911,8 @@ func (s *SDK) EndpointGetMultipleArtists(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1886,6 +1963,8 @@ func (s *SDK) EndpointGetMultipleEpisodes(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1938,6 +2017,8 @@ func (s *SDK) EndpointGetMultipleShows(ctx context.Context, request operations.E
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1988,6 +2069,8 @@ func (s *SDK) EndpointGetNewReleases(ctx context.Context, request operations.End
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2040,6 +2123,8 @@ func (s *SDK) EndpointGetPlaylist(ctx context.Context, request operations.Endpoi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2091,6 +2176,8 @@ func (s *SDK) EndpointGetPlaylistCover(ctx context.Context, request operations.E
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -2139,6 +2226,8 @@ func (s *SDK) EndpointGetPlaylistsTracks(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2190,6 +2279,8 @@ func (s *SDK) EndpointGetRecentlyPlayed(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2243,6 +2334,8 @@ func (s *SDK) EndpointGetRecommendationGenres(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -2291,6 +2384,8 @@ func (s *SDK) EndpointGetRecommendations(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2343,6 +2438,8 @@ func (s *SDK) EndpointGetSeveralAudioFeatures(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2394,6 +2491,8 @@ func (s *SDK) EndpointGetSeveralTracks(ctx context.Context, request operations.E
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2444,6 +2543,8 @@ func (s *SDK) EndpointGetTheUsersCurrentlyPlayingTrack(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2497,6 +2598,8 @@ func (s *SDK) EndpointGetTrack(ctx context.Context, request operations.EndpointG
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2548,6 +2651,8 @@ func (s *SDK) EndpointGetUsersProfile(ctx context.Context, request operations.En
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -2596,6 +2701,8 @@ func (s *SDK) EndpointGetUsersSavedAlbums(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2648,6 +2755,8 @@ func (s *SDK) EndpointGetUsersSavedEpisodes(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2698,6 +2807,8 @@ func (s *SDK) EndpointGetUsersSavedShows(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2750,6 +2861,8 @@ func (s *SDK) EndpointGetUsersSavedTracks(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2800,6 +2913,8 @@ func (s *SDK) EndpointGetUsersTopArtistsAndTracks(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2852,6 +2967,8 @@ func (s *SDK) EndpointPauseAUsersPlayback(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2898,7 +3015,10 @@ func (s *SDK) EndpointRemoveAlbumsUser(ctx context.Context, request operations.E
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2946,7 +3066,10 @@ func (s *SDK) EndpointRemoveEpisodesUser(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2994,7 +3117,10 @@ func (s *SDK) EndpointRemoveShowsUser(ctx context.Context, request operations.En
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3045,7 +3171,10 @@ func (s *SDK) EndpointRemoveTracksPlaylist(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -3100,7 +3229,10 @@ func (s *SDK) EndpointRemoveTracksUser(ctx context.Context, request operations.E
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3148,7 +3280,10 @@ func (s *SDK) EndpointReorderOrReplacePlaylistsTracks(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3215,7 +3350,10 @@ func (s *SDK) EndpointSaveAlbumsUser(ctx context.Context, request operations.End
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3263,7 +3401,10 @@ func (s *SDK) EndpointSaveEpisodesUser(ctx context.Context, request operations.E
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3311,7 +3452,10 @@ func (s *SDK) EndpointSaveShowsUser(ctx context.Context, request operations.Endp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3359,7 +3503,10 @@ func (s *SDK) EndpointSaveTracksUser(ctx context.Context, request operations.End
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3402,6 +3549,8 @@ func (s *SDK) EndpointSearch(ctx context.Context, request operations.EndpointSea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3454,6 +3603,8 @@ func (s *SDK) EndpointSeekToPositionInCurrentlyPlayingTrack(ctx context.Context,
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3495,6 +3646,8 @@ func (s *SDK) EndpointSetRepeatModeOnUsersPlayback(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3538,6 +3691,8 @@ func (s *SDK) EndpointSetVolumeForUsersPlayback(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3580,6 +3735,8 @@ func (s *SDK) EndpointSkipUsersPlaybackToNextTrack(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3621,6 +3778,8 @@ func (s *SDK) EndpointSkipUsersPlaybackToPreviousTrack(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3668,7 +3827,10 @@ func (s *SDK) EndpointStartAUsersPlayback(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3711,6 +3873,8 @@ func (s *SDK) EndpointToggleShuffleForUsersPlayback(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3761,7 +3925,10 @@ func (s *SDK) EndpointTransferAUsersPlayback(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -3807,7 +3974,10 @@ func (s *SDK) EndpointUnfollowArtistsUsers(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3850,6 +4020,8 @@ func (s *SDK) EndpointUnfollowPlaylist(ctx context.Context, request operations.E
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -3898,7 +4070,10 @@ func (s *SDK) EndpointUploadCustomPlaylistCover(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 

@@ -73,7 +73,10 @@ func (s *SDK) WebhooksAdd(ctx context.Context, request operations.WebhooksAddReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -173,6 +176,8 @@ func (s *SDK) WebhooksAll(ctx context.Context, request operations.WebhooksAllReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -274,6 +279,8 @@ func (s *SDK) WebhooksDelete(ctx context.Context, request operations.WebhooksDel
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -381,6 +388,7 @@ func (s *SDK) WebhooksExecute(ctx context.Context, request operations.WebhooksEx
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -481,6 +489,8 @@ func (s *SDK) WebhooksOne(ctx context.Context, request operations.WebhooksOneReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -588,6 +598,7 @@ func (s *SDK) WebhooksShortExecute(ctx context.Context, request operations.Webho
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -696,7 +707,10 @@ func (s *SDK) WebhooksUpdate(ctx context.Context, request operations.WebhooksUpd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 

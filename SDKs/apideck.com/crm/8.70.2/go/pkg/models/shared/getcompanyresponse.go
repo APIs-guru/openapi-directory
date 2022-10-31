@@ -1,10 +1,14 @@
 package shared
 
+
+
 type GetCompanyResponse struct {
-	Data       Company `json:"data"`
-	Operation  string  `json:"operation"`
-	Resource   string  `json:"resource"`
-	Service    string  `json:"service"`
-	Status     string  `json:"status"`
-	StatusCode int64   `json:"status_code"`
+    Data Company `json:"data"`
+    Operation string `json:"operation"`
+    Resource string `json:"resource"`
+    Service string `json:"service"`
+    Status string `json:"status"`
+    StatusCode int64 `json:"status_code"`
+    
 }
+

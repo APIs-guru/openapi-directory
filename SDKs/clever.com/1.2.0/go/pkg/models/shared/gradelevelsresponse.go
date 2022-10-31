@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GradeLevelsResponse struct {
-	Data []string `json:"data,omitempty"`
+    Data []string `json:"data,omitempty"`
+    
 }
+

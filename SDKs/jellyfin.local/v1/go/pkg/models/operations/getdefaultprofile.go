@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetDefaultProfileSecurity struct {
-	CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type GetDefaultProfileRequest struct {
-	Security GetDefaultProfileSecurity
+    Security GetDefaultProfileSecurity 
+    
 }
 
 type GetDefaultProfileResponse struct {
-	ContentType   string
-	DeviceProfile *shared.DeviceProfile
-	StatusCode    int64
+    ContentType string 
+    DeviceProfile *shared.DeviceProfile 
+    StatusCode int64 
+    
 }
+

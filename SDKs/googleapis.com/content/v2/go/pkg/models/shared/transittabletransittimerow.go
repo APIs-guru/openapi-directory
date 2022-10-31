@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TransitTableTransitTimeRow struct {
-	Values []TransitTableTransitTimeRowTransitTimeValue `json:"values,omitempty"`
+    Values []TransitTableTransitTimeRowTransitTimeValue `json:"values,omitempty"`
+    
 }
+

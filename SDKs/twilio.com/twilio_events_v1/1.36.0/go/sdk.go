@@ -68,6 +68,7 @@ func (s *SDK) CreateSink(ctx context.Context, request operations.CreateSinkReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -160,6 +161,7 @@ func (s *SDK) CreateSinkValidate(ctx context.Context, request operations.CreateS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -209,6 +211,7 @@ func (s *SDK) CreateSubscribedEvent(ctx context.Context, request operations.Crea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -258,6 +261,7 @@ func (s *SDK) CreateSubscription(ctx context.Context, request operations.CreateS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -892,6 +896,7 @@ func (s *SDK) UpdateSink(ctx context.Context, request operations.UpdateSinkReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -941,6 +946,7 @@ func (s *SDK) UpdateSubscribedEvent(ctx context.Context, request operations.Upda
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -990,6 +996,7 @@ func (s *SDK) UpdateSubscription(ctx context.Context, request operations.UpdateS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

@@ -2415,6 +2415,7 @@ func (s *SDK) PostCertificates(ctx context.Context, request operations.PostCerti
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2499,6 +2500,7 @@ func (s *SDK) PostFirewalls(ctx context.Context, request operations.PostFirewall
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2544,6 +2546,7 @@ func (s *SDK) PostFirewallsIDActionsApplyToResources(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2589,6 +2592,7 @@ func (s *SDK) PostFirewallsIDActionsRemoveFromResources(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2634,6 +2638,7 @@ func (s *SDK) PostFirewallsIDActionsSetRules(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2679,6 +2684,7 @@ func (s *SDK) PostFloatingIps(ctx context.Context, request operations.PostFloati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2724,6 +2730,7 @@ func (s *SDK) PostFloatingIpsIDActionsAssign(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2769,6 +2776,7 @@ func (s *SDK) PostFloatingIpsIDActionsChangeDNSPtr(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2814,6 +2822,7 @@ func (s *SDK) PostFloatingIpsIDActionsChangeProtection(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2898,6 +2907,7 @@ func (s *SDK) PostImagesIDActionsChangeProtection(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2943,6 +2953,7 @@ func (s *SDK) PostLoadBalancers(ctx context.Context, request operations.PostLoad
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2988,6 +2999,7 @@ func (s *SDK) PostLoadBalancersIDActionsAddService(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3033,6 +3045,7 @@ func (s *SDK) PostLoadBalancersIDActionsAddTarget(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3078,6 +3091,7 @@ func (s *SDK) PostLoadBalancersIDActionsAttachToNetwork(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3123,6 +3137,7 @@ func (s *SDK) PostLoadBalancersIDActionsChangeAlgorithm(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3168,6 +3183,7 @@ func (s *SDK) PostLoadBalancersIDActionsChangeDNSPtr(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3213,6 +3229,7 @@ func (s *SDK) PostLoadBalancersIDActionsChangeProtection(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3258,6 +3275,7 @@ func (s *SDK) PostLoadBalancersIDActionsChangeType(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3303,6 +3321,7 @@ func (s *SDK) PostLoadBalancersIDActionsDeleteService(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3348,6 +3367,7 @@ func (s *SDK) PostLoadBalancersIDActionsDetachFromNetwork(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3471,6 +3491,7 @@ func (s *SDK) PostLoadBalancersIDActionsRemoveTarget(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3516,6 +3537,7 @@ func (s *SDK) PostLoadBalancersIDActionsUpdateService(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3561,6 +3583,7 @@ func (s *SDK) PostNetworks(ctx context.Context, request operations.PostNetworksR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3606,6 +3629,7 @@ func (s *SDK) PostNetworksIDActionsAddRoute(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3651,6 +3675,7 @@ func (s *SDK) PostNetworksIDActionsAddSubnet(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3696,6 +3721,7 @@ func (s *SDK) PostNetworksIDActionsChangeIPRange(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3741,6 +3767,7 @@ func (s *SDK) PostNetworksIDActionsChangeProtection(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3786,6 +3813,7 @@ func (s *SDK) PostNetworksIDActionsDeleteRoute(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3831,6 +3859,7 @@ func (s *SDK) PostNetworksIDActionsDeleteSubnet(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3876,6 +3905,7 @@ func (s *SDK) PostPlacementGroups(ctx context.Context, request operations.PostPl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3921,6 +3951,7 @@ func (s *SDK) PostServers(ctx context.Context, request operations.PostServersReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3966,6 +3997,7 @@ func (s *SDK) PostServersIDActionsAddToPlacementGroup(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4011,6 +4043,7 @@ func (s *SDK) PostServersIDActionsAttachIso(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4056,6 +4089,7 @@ func (s *SDK) PostServersIDActionsAttachToNetwork(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4101,6 +4135,7 @@ func (s *SDK) PostServersIDActionsChangeAliasIps(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4146,6 +4181,7 @@ func (s *SDK) PostServersIDActionsChangeDNSPtr(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4191,6 +4227,7 @@ func (s *SDK) PostServersIDActionsChangeProtection(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4236,6 +4273,7 @@ func (s *SDK) PostServersIDActionsChangeType(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4281,6 +4319,7 @@ func (s *SDK) PostServersIDActionsCreateImage(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4326,6 +4365,7 @@ func (s *SDK) PostServersIDActionsDetachFromNetwork(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4527,6 +4567,7 @@ func (s *SDK) PostServersIDActionsEnableRescue(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4689,6 +4730,7 @@ func (s *SDK) PostServersIDActionsRebuild(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4929,6 +4971,7 @@ func (s *SDK) PostSSHKeys(ctx context.Context, request operations.PostSSHKeysReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4974,6 +5017,7 @@ func (s *SDK) PostVolumes(ctx context.Context, request operations.PostVolumesReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5019,6 +5063,7 @@ func (s *SDK) PostVolumesIDActionsAttach(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5064,6 +5109,7 @@ func (s *SDK) PostVolumesIDActionsChangeProtection(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5148,6 +5194,7 @@ func (s *SDK) PostVolumesIDActionsResize(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5193,6 +5240,7 @@ func (s *SDK) PutCertificatesID(ctx context.Context, request operations.PutCerti
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5238,6 +5286,7 @@ func (s *SDK) PutFirewallsID(ctx context.Context, request operations.PutFirewall
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5283,6 +5332,7 @@ func (s *SDK) PutFloatingIpsID(ctx context.Context, request operations.PutFloati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5328,6 +5378,7 @@ func (s *SDK) PutImagesID(ctx context.Context, request operations.PutImagesIDReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5373,6 +5424,7 @@ func (s *SDK) PutLoadBalancersID(ctx context.Context, request operations.PutLoad
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5418,6 +5470,7 @@ func (s *SDK) PutNetworksID(ctx context.Context, request operations.PutNetworksI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5463,6 +5516,7 @@ func (s *SDK) PutPlacementGroupsID(ctx context.Context, request operations.PutPl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5508,6 +5562,7 @@ func (s *SDK) PutServersID(ctx context.Context, request operations.PutServersIDR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5553,6 +5608,7 @@ func (s *SDK) PutSSHKeysID(ctx context.Context, request operations.PutSSHKeysIDR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5598,6 +5654,7 @@ func (s *SDK) PutVolumesID(ctx context.Context, request operations.PutVolumesIDR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

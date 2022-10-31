@@ -1,39 +1,45 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type AppsCreateInstallationAccessTokenPathParams struct {
-	InstallationID int64 `pathParam:"style=simple,explode=false,name=installation_id"`
+    InstallationID int64 `pathParam:"style=simple,explode=false,name=installation_id"`
+    
 }
 
 type AppsCreateInstallationAccessTokenHeaders struct {
-	Accept string `header:"name=accept"`
+    Accept string `header:"style=simple,explode=false,name=accept"`
+    
 }
 
 type AppsCreateInstallationAccessTokenRequestBody struct {
-	Permissions   *shared.AppPermissions `json:"permissions,omitempty"`
-	Repositories  []string               `json:"repositories,omitempty"`
-	RepositoryIds []int64                `json:"repository_ids,omitempty"`
+    Permissions *shared.AppPermissions `json:"permissions,omitempty"`
+    Repositories []string `json:"repositories,omitempty"`
+    RepositoryIds []int64 `json:"repository_ids,omitempty"`
+    
 }
 
 type AppsCreateInstallationAccessTokenRequest struct {
-	PathParams AppsCreateInstallationAccessTokenPathParams
-	Headers    AppsCreateInstallationAccessTokenHeaders
-	Request    *AppsCreateInstallationAccessTokenRequestBody `request:"mediaType=application/json"`
+    PathParams AppsCreateInstallationAccessTokenPathParams 
+    Headers AppsCreateInstallationAccessTokenHeaders 
+    Request *AppsCreateInstallationAccessTokenRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type AppsCreateInstallationAccessToken415ApplicationJSON struct {
-	DocumentationURL string `json:"documentation_url"`
-	Message          string `json:"message"`
+    DocumentationURL string `json:"documentation_url"`
+    Message string `json:"message"`
+    
 }
 
 type AppsCreateInstallationAccessTokenResponse struct {
-	ContentType                                               string
-	StatusCode                                                int64
-	AppsCreateInstallationAccessToken415ApplicationJSONObject *AppsCreateInstallationAccessToken415ApplicationJSON
-	BasicError                                                *shared.BasicError
-	InstallationToken                                         *shared.InstallationToken
-	ValidationError                                           *shared.ValidationError
+    ContentType string 
+    StatusCode int64 
+    AppsCreateInstallationAccessToken415ApplicationJSONObject *AppsCreateInstallationAccessToken415ApplicationJSON 
+    BasicError *shared.BasicError 
+    InstallationToken *shared.InstallationToken 
+    ValidationError *shared.ValidationError 
+    
 }
+

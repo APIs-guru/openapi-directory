@@ -63,6 +63,7 @@ func (s *SDK) Alsfc(ctx context.Context, request operations.AlsfcRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -169,6 +170,7 @@ func (s *SDK) Clcer(ctx context.Context, request operations.ClcerRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -275,6 +277,7 @@ func (s *SDK) Srcer(ctx context.Context, request operations.SrcerRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

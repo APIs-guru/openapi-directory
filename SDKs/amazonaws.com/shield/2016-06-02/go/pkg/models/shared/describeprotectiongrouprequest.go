@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeProtectionGroupRequest struct {
-	ProtectionGroupID string `json:"ProtectionGroupId"`
+    ProtectionGroupID string `json:"ProtectionGroupId"`
+    
 }
+

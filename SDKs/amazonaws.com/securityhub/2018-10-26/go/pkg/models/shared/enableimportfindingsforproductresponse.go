@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EnableImportFindingsForProductResponse struct {
-	ProductSubscriptionArn *string `json:"ProductSubscriptionArn,omitempty"`
+    ProductSubscriptionArn *string `json:"ProductSubscriptionArn,omitempty"`
+    
 }
+

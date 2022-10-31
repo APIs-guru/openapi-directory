@@ -63,6 +63,7 @@ func (s *SDK) Incer(ctx context.Context, request operations.IncerRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -169,6 +170,7 @@ func (s *SDK) Rmcer(ctx context.Context, request operations.RmcerRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -275,6 +277,7 @@ func (s *SDK) Rscer(ctx context.Context, request operations.RscerRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -381,6 +384,7 @@ func (s *SDK) Sicrd(ctx context.Context, request operations.SicrdRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

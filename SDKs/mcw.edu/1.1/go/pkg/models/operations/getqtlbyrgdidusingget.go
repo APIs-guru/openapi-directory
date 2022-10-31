@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetQtlByRgdIDUsingGetPathParams struct {
-	RgdID int32 `pathParam:"style=simple,explode=false,name=rgdId"`
+    RgdID int32 `pathParam:"style=simple,explode=false,name=rgdId"`
+    
 }
 
 type GetQtlByRgdIDUsingGetRequest struct {
-	PathParams GetQtlByRgdIDUsingGetPathParams
+    PathParams GetQtlByRgdIDUsingGetPathParams 
+    
 }
 
 type GetQtlByRgdIDUsingGetResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

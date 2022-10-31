@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type SavedEpisodeObject struct {
-	AddedAt *time.Time     `json:"added_at,omitempty"`
-	Episode *EpisodeObject `json:"episode,omitempty"`
+    AddedAt *time.Time `json:"added_at,omitempty"`
+    Episode *EpisodeObject `json:"episode,omitempty"`
+    
 }
+

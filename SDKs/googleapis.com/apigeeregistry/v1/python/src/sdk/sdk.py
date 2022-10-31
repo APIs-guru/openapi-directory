@@ -19,26 +19,31 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def apigeeregistry_projects_locations_apis_create(self, request: operations.ApigeeregistryProjectsLocationsApisCreateRequest) -> operations.ApigeeregistryProjectsLocationsApisCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/apis", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsApisCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.API])
@@ -47,25 +52,27 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_apis_deployments_create(self, request: operations.ApigeeregistryProjectsLocationsApisDeploymentsCreateRequest) -> operations.ApigeeregistryProjectsLocationsApisDeploymentsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/deployments", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsApisDeploymentsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIDeployment])
@@ -74,21 +81,21 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_apis_deployments_list(self, request: operations.ApigeeregistryProjectsLocationsApisDeploymentsListRequest) -> operations.ApigeeregistryProjectsLocationsApisDeploymentsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/deployments", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsApisDeploymentsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAPIDeploymentsResponse])
@@ -97,21 +104,21 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_apis_list(self, request: operations.ApigeeregistryProjectsLocationsApisListRequest) -> operations.ApigeeregistryProjectsLocationsApisListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/apis", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsApisListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListApisResponse])
@@ -120,25 +127,27 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_apis_versions_create(self, request: operations.ApigeeregistryProjectsLocationsApisVersionsCreateRequest) -> operations.ApigeeregistryProjectsLocationsApisVersionsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/versions", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsApisVersionsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIVersion])
@@ -147,21 +156,21 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_apis_versions_list(self, request: operations.ApigeeregistryProjectsLocationsApisVersionsListRequest) -> operations.ApigeeregistryProjectsLocationsApisVersionsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/versions", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsApisVersionsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAPIVersionsResponse])
@@ -170,25 +179,27 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_apis_versions_specs_create(self, request: operations.ApigeeregistryProjectsLocationsApisVersionsSpecsCreateRequest) -> operations.ApigeeregistryProjectsLocationsApisVersionsSpecsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/specs", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsApisVersionsSpecsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APISpec])
@@ -196,22 +207,22 @@ class SDK:
 
         return res
 
-    
     
     def apigeeregistry_projects_locations_apis_versions_specs_delete_revision(self, request: operations.ApigeeregistryProjectsLocationsApisVersionsSpecsDeleteRevisionRequest) -> operations.ApigeeregistryProjectsLocationsApisVersionsSpecsDeleteRevisionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:deleteRevision", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsApisVersionsSpecsDeleteRevisionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APISpec])
@@ -220,21 +231,21 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_apis_versions_specs_list(self, request: operations.ApigeeregistryProjectsLocationsApisVersionsSpecsListRequest) -> operations.ApigeeregistryProjectsLocationsApisVersionsSpecsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/specs", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsApisVersionsSpecsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAPISpecsResponse])
@@ -243,21 +254,21 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_apis_versions_specs_list_revisions(self, request: operations.ApigeeregistryProjectsLocationsApisVersionsSpecsListRevisionsRequest) -> operations.ApigeeregistryProjectsLocationsApisVersionsSpecsListRevisionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:listRevisions", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsApisVersionsSpecsListRevisionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAPISpecRevisionsResponse])
@@ -266,25 +277,27 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_apis_versions_specs_patch(self, request: operations.ApigeeregistryProjectsLocationsApisVersionsSpecsPatchRequest) -> operations.ApigeeregistryProjectsLocationsApisVersionsSpecsPatchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsApisVersionsSpecsPatchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APISpec])
@@ -292,26 +305,28 @@ class SDK:
 
         return res
 
-    
     
     def apigeeregistry_projects_locations_apis_versions_specs_rollback(self, request: operations.ApigeeregistryProjectsLocationsApisVersionsSpecsRollbackRequest) -> operations.ApigeeregistryProjectsLocationsApisVersionsSpecsRollbackResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:rollback", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsApisVersionsSpecsRollbackResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APISpec])
@@ -319,26 +334,28 @@ class SDK:
 
         return res
 
-    
     
     def apigeeregistry_projects_locations_apis_versions_specs_tag_revision(self, request: operations.ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionRequest) -> operations.ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:tagRevision", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsApisVersionsSpecsTagRevisionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APISpec])
@@ -347,25 +364,27 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_artifacts_create(self, request: operations.ApigeeregistryProjectsLocationsArtifactsCreateRequest) -> operations.ApigeeregistryProjectsLocationsArtifactsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/artifacts", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsArtifactsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Artifact])
@@ -374,21 +393,21 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_artifacts_get_contents(self, request: operations.ApigeeregistryProjectsLocationsArtifactsGetContentsRequest) -> operations.ApigeeregistryProjectsLocationsArtifactsGetContentsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:getContents", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsArtifactsGetContentsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -397,21 +416,21 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_artifacts_list(self, request: operations.ApigeeregistryProjectsLocationsArtifactsListRequest) -> operations.ApigeeregistryProjectsLocationsArtifactsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/artifacts", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsArtifactsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListArtifactsResponse])
@@ -420,25 +439,27 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_artifacts_replace_artifact(self, request: operations.ApigeeregistryProjectsLocationsArtifactsReplaceArtifactRequest) -> operations.ApigeeregistryProjectsLocationsArtifactsReplaceArtifactResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsArtifactsReplaceArtifactResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Artifact])
@@ -447,25 +468,27 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_instances_create(self, request: operations.ApigeeregistryProjectsLocationsInstancesCreateRequest) -> operations.ApigeeregistryProjectsLocationsInstancesCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/instances", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsInstancesCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Operation])
@@ -474,21 +497,21 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_list(self, request: operations.ApigeeregistryProjectsLocationsListRequest) -> operations.ApigeeregistryProjectsLocationsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}/locations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListLocationsResponse])
@@ -497,25 +520,27 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_operations_cancel(self, request: operations.ApigeeregistryProjectsLocationsOperationsCancelRequest) -> operations.ApigeeregistryProjectsLocationsOperationsCancelResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:cancel", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsOperationsCancelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -523,22 +548,22 @@ class SDK:
 
         return res
 
-    
     
     def apigeeregistry_projects_locations_operations_delete(self, request: operations.ApigeeregistryProjectsLocationsOperationsDeleteRequest) -> operations.ApigeeregistryProjectsLocationsOperationsDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsOperationsDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -547,21 +572,21 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_operations_get(self, request: operations.ApigeeregistryProjectsLocationsOperationsGetRequest) -> operations.ApigeeregistryProjectsLocationsOperationsGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsOperationsGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Operation])
@@ -570,21 +595,21 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_operations_list(self, request: operations.ApigeeregistryProjectsLocationsOperationsListRequest) -> operations.ApigeeregistryProjectsLocationsOperationsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}/operations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsOperationsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListOperationsResponse])
@@ -593,21 +618,21 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_runtime_get_iam_policy(self, request: operations.ApigeeregistryProjectsLocationsRuntimeGetIamPolicyRequest) -> operations.ApigeeregistryProjectsLocationsRuntimeGetIamPolicyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{resource}:getIamPolicy", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsRuntimeGetIamPolicyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Policy])
@@ -615,26 +640,28 @@ class SDK:
 
         return res
 
-    
     
     def apigeeregistry_projects_locations_runtime_set_iam_policy(self, request: operations.ApigeeregistryProjectsLocationsRuntimeSetIamPolicyRequest) -> operations.ApigeeregistryProjectsLocationsRuntimeSetIamPolicyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{resource}:setIamPolicy", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsRuntimeSetIamPolicyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Policy])
@@ -643,25 +670,27 @@ class SDK:
         return res
 
     
-    
     def apigeeregistry_projects_locations_runtime_test_iam_permissions(self, request: operations.ApigeeregistryProjectsLocationsRuntimeTestIamPermissionsRequest) -> operations.ApigeeregistryProjectsLocationsRuntimeTestIamPermissionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{resource}:testIamPermissions", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApigeeregistryProjectsLocationsRuntimeTestIamPermissionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TestIamPermissionsResponse])

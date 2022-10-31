@@ -1,20 +1,26 @@
 package shared
 
+
+
+
 type GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum string
 
 const (
-	GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumNotificationCategoryUnspecified GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "NOTIFICATION_CATEGORY_UNSPECIFIED"
-	GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumAll                             GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "ALL"
-	GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumSuspension                      GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "SUSPENSION"
-	GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumSecurity                        GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "SECURITY"
-	GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumTechnical                       GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "TECHNICAL"
-	GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumBilling                         GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "BILLING"
-	GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumLegal                           GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "LEGAL"
-	GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumProductUpdates                  GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "PRODUCT_UPDATES"
-	GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumTechnicalIncidents              GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "TECHNICAL_INCIDENTS"
+    GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumNotificationCategoryUnspecified GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "NOTIFICATION_CATEGORY_UNSPECIFIED"
+GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumAll GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "ALL"
+GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumSuspension GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "SUSPENSION"
+GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumSecurity GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "SECURITY"
+GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumTechnical GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "TECHNICAL"
+GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumBilling GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "BILLING"
+GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumLegal GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "LEGAL"
+GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumProductUpdates GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "PRODUCT_UPDATES"
+GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnumTechnicalIncidents GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum = "TECHNICAL_INCIDENTS"
 )
 
+
 type GoogleCloudEssentialcontactsV1SendTestMessageRequest struct {
-	Contacts             []string                                                                      `json:"contacts,omitempty"`
-	NotificationCategory *GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum `json:"notificationCategory,omitempty"`
+    Contacts []string `json:"contacts,omitempty"`
+    NotificationCategory *GoogleCloudEssentialcontactsV1SendTestMessageRequestNotificationCategoryEnum `json:"notificationCategory,omitempty"`
+    
 }
+

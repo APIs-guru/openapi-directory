@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAssetByRenderIDPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetAssetByRenderIDSecurity struct {
-	DeveloperKey shared.SchemeDeveloperKey `security:"scheme,type=apiKey,subtype=header"`
+    DeveloperKey shared.SchemeDeveloperKey `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type GetAssetByRenderIDRequest struct {
-	PathParams GetAssetByRenderIDPathParams
-	Security   GetAssetByRenderIDSecurity
+    PathParams GetAssetByRenderIDPathParams 
+    Security GetAssetByRenderIDSecurity 
+    
 }
 
 type GetAssetByRenderIDResponse struct {
-	AssetRenderResponse *shared.AssetRenderResponse
-	ContentType         string
-	StatusCode          int64
+    AssetRenderResponse *shared.AssetRenderResponse 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

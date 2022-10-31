@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetChangeTokenStatusRequest struct {
-	ChangeToken string `json:"ChangeToken"`
+    ChangeToken string `json:"ChangeToken"`
+    
 }
+

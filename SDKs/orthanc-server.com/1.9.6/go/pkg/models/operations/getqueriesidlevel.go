@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetQueriesIDLevelPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetQueriesIDLevelRequest struct {
-	PathParams GetQueriesIDLevelPathParams
+    PathParams GetQueriesIDLevelPathParams 
+    
 }
 
 type GetQueriesIDLevelResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -76,7 +76,10 @@ func (s *SDK) AcceptMatch(ctx context.Context, request operations.AcceptMatchReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -164,7 +167,10 @@ func (s *SDK) ClaimGameServer(ctx context.Context, request operations.ClaimGameS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -272,7 +278,10 @@ func (s *SDK) CreateAlias(ctx context.Context, request operations.CreateAliasReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -380,7 +389,10 @@ func (s *SDK) CreateBuild(ctx context.Context, request operations.CreateBuildReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -478,7 +490,10 @@ func (s *SDK) CreateFleet(ctx context.Context, request operations.CreateFleetReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -596,7 +611,10 @@ func (s *SDK) CreateFleetLocations(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -694,7 +712,10 @@ func (s *SDK) CreateGameServerGroup(ctx context.Context, request operations.Crea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -792,7 +813,10 @@ func (s *SDK) CreateGameSession(ctx context.Context, request operations.CreateGa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -940,7 +964,10 @@ func (s *SDK) CreateGameSessionQueue(ctx context.Context, request operations.Cre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1048,7 +1075,10 @@ func (s *SDK) CreateMatchmakingConfiguration(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1156,7 +1186,10 @@ func (s *SDK) CreateMatchmakingRuleSet(ctx context.Context, request operations.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1244,7 +1277,10 @@ func (s *SDK) CreatePlayerSession(ctx context.Context, request operations.Create
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1362,7 +1398,10 @@ func (s *SDK) CreatePlayerSessions(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1480,7 +1519,10 @@ func (s *SDK) CreateScript(ctx context.Context, request operations.CreateScriptR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1578,7 +1620,10 @@ func (s *SDK) CreateVpcPeeringAuthorization(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1666,7 +1711,10 @@ func (s *SDK) CreateVpcPeeringConnection(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1754,7 +1802,10 @@ func (s *SDK) DeleteAlias(ctx context.Context, request operations.DeleteAliasReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1843,7 +1894,10 @@ func (s *SDK) DeleteBuild(ctx context.Context, request operations.DeleteBuildReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1932,7 +1986,10 @@ func (s *SDK) DeleteFleet(ctx context.Context, request operations.DeleteFleetReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2031,7 +2088,10 @@ func (s *SDK) DeleteFleetLocations(ctx context.Context, request operations.Delet
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2119,7 +2179,10 @@ func (s *SDK) DeleteGameServerGroup(ctx context.Context, request operations.Dele
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2207,7 +2270,10 @@ func (s *SDK) DeleteGameSessionQueue(ctx context.Context, request operations.Del
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2305,7 +2371,10 @@ func (s *SDK) DeleteMatchmakingConfiguration(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2403,7 +2472,10 @@ func (s *SDK) DeleteMatchmakingRuleSet(ctx context.Context, request operations.D
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2501,7 +2573,10 @@ func (s *SDK) DeleteScalingPolicy(ctx context.Context, request operations.Delete
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2580,7 +2655,10 @@ func (s *SDK) DeleteScript(ctx context.Context, request operations.DeleteScriptR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2669,7 +2747,10 @@ func (s *SDK) DeleteVpcPeeringAuthorization(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2757,7 +2838,10 @@ func (s *SDK) DeleteVpcPeeringConnection(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2845,7 +2929,10 @@ func (s *SDK) DeregisterGameServer(ctx context.Context, request operations.Dereg
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2924,7 +3011,10 @@ func (s *SDK) DescribeAlias(ctx context.Context, request operations.DescribeAlia
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3012,7 +3102,10 @@ func (s *SDK) DescribeBuild(ctx context.Context, request operations.DescribeBuil
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3100,7 +3193,10 @@ func (s *SDK) DescribeEc2InstanceLimits(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3178,7 +3274,10 @@ func (s *SDK) DescribeFleetAttributes(ctx context.Context, request operations.De
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3268,7 +3367,10 @@ func (s *SDK) DescribeFleetCapacity(ctx context.Context, request operations.Desc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3358,7 +3460,10 @@ func (s *SDK) DescribeFleetEvents(ctx context.Context, request operations.Descri
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3448,7 +3553,10 @@ func (s *SDK) DescribeFleetLocationAttributes(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3538,7 +3646,10 @@ func (s *SDK) DescribeFleetLocationCapacity(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3626,7 +3737,10 @@ func (s *SDK) DescribeFleetLocationUtilization(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3714,7 +3828,10 @@ func (s *SDK) DescribeFleetPortSettings(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3802,7 +3919,10 @@ func (s *SDK) DescribeFleetUtilization(ctx context.Context, request operations.D
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3892,7 +4012,10 @@ func (s *SDK) DescribeGameServer(ctx context.Context, request operations.Describ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3980,7 +4103,10 @@ func (s *SDK) DescribeGameServerGroup(ctx context.Context, request operations.De
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -4068,7 +4194,10 @@ func (s *SDK) DescribeGameServerInstances(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4158,7 +4287,10 @@ func (s *SDK) DescribeGameSessionDetails(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4258,7 +4390,10 @@ func (s *SDK) DescribeGameSessionPlacement(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -4346,7 +4481,10 @@ func (s *SDK) DescribeGameSessionQueues(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4436,7 +4574,10 @@ func (s *SDK) DescribeGameSessions(ctx context.Context, request operations.Descr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4536,7 +4677,10 @@ func (s *SDK) DescribeInstances(ctx context.Context, request operations.Describe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4626,7 +4770,10 @@ func (s *SDK) DescribeMatchmaking(ctx context.Context, request operations.Descri
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -4704,7 +4851,10 @@ func (s *SDK) DescribeMatchmakingConfigurations(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4784,7 +4934,10 @@ func (s *SDK) DescribeMatchmakingRuleSets(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4874,7 +5027,10 @@ func (s *SDK) DescribePlayerSessions(ctx context.Context, request operations.Des
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4964,7 +5120,10 @@ func (s *SDK) DescribeRuntimeConfiguration(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -5052,7 +5211,10 @@ func (s *SDK) DescribeScalingPolicies(ctx context.Context, request operations.De
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5142,7 +5304,10 @@ func (s *SDK) DescribeScript(ctx context.Context, request operations.DescribeScr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -5230,7 +5395,10 @@ func (s *SDK) DescribeVpcPeeringAuthorizations(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -5308,7 +5476,10 @@ func (s *SDK) DescribeVpcPeeringConnections(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -5396,7 +5567,10 @@ func (s *SDK) GetGameSessionLogURL(ctx context.Context, request operations.GetGa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -5484,7 +5658,10 @@ func (s *SDK) GetInstanceAccess(ctx context.Context, request operations.GetInsta
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -5572,7 +5749,10 @@ func (s *SDK) ListAliases(ctx context.Context, request operations.ListAliasesReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5652,7 +5832,10 @@ func (s *SDK) ListBuilds(ctx context.Context, request operations.ListBuildsReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5732,7 +5915,10 @@ func (s *SDK) ListFleets(ctx context.Context, request operations.ListFleetsReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5822,7 +6008,10 @@ func (s *SDK) ListGameServerGroups(ctx context.Context, request operations.ListG
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5902,7 +6091,10 @@ func (s *SDK) ListGameServers(ctx context.Context, request operations.ListGameSe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -5982,7 +6174,10 @@ func (s *SDK) ListScripts(ctx context.Context, request operations.ListScriptsReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6062,7 +6257,10 @@ func (s *SDK) ListTagsForResource(ctx context.Context, request operations.ListTa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6150,7 +6348,10 @@ func (s *SDK) PutScalingPolicy(ctx context.Context, request operations.PutScalin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6238,7 +6439,10 @@ func (s *SDK) RegisterGameServer(ctx context.Context, request operations.Registe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6336,7 +6540,10 @@ func (s *SDK) RequestUploadCredentials(ctx context.Context, request operations.R
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6424,7 +6631,10 @@ func (s *SDK) ResolveAlias(ctx context.Context, request operations.ResolveAliasR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6522,7 +6732,10 @@ func (s *SDK) ResumeGameServerGroup(ctx context.Context, request operations.Resu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6610,7 +6823,10 @@ func (s *SDK) SearchGameSessions(ctx context.Context, request operations.SearchG
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6710,7 +6926,10 @@ func (s *SDK) StartFleetActions(ctx context.Context, request operations.StartFle
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6798,7 +7017,10 @@ func (s *SDK) StartGameSessionPlacement(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6886,7 +7108,10 @@ func (s *SDK) StartMatchBackfill(ctx context.Context, request operations.StartMa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6974,7 +7199,10 @@ func (s *SDK) StartMatchmaking(ctx context.Context, request operations.StartMatc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -7062,7 +7290,10 @@ func (s *SDK) StopFleetActions(ctx context.Context, request operations.StopFleet
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -7150,7 +7381,10 @@ func (s *SDK) StopGameSessionPlacement(ctx context.Context, request operations.S
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -7238,7 +7472,10 @@ func (s *SDK) StopMatchmaking(ctx context.Context, request operations.StopMatchm
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -7326,7 +7563,10 @@ func (s *SDK) SuspendGameServerGroup(ctx context.Context, request operations.Sus
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -7414,7 +7654,10 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -7502,7 +7745,10 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -7590,7 +7836,10 @@ func (s *SDK) UpdateAlias(ctx context.Context, request operations.UpdateAliasReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -7678,7 +7927,10 @@ func (s *SDK) UpdateBuild(ctx context.Context, request operations.UpdateBuildReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -7766,7 +8018,10 @@ func (s *SDK) UpdateFleetAttributes(ctx context.Context, request operations.Upda
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -7884,7 +8139,10 @@ func (s *SDK) UpdateFleetCapacity(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -8002,7 +8260,10 @@ func (s *SDK) UpdateFleetPortSettings(ctx context.Context, request operations.Up
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -8120,7 +8381,10 @@ func (s *SDK) UpdateGameServer(ctx context.Context, request operations.UpdateGam
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -8208,7 +8472,10 @@ func (s *SDK) UpdateGameServerGroup(ctx context.Context, request operations.Upda
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -8296,7 +8563,10 @@ func (s *SDK) UpdateGameSession(ctx context.Context, request operations.UpdateGa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -8404,7 +8674,10 @@ func (s *SDK) UpdateGameSessionQueue(ctx context.Context, request operations.Upd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -8492,7 +8765,10 @@ func (s *SDK) UpdateMatchmakingConfiguration(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -8580,7 +8856,10 @@ func (s *SDK) UpdateRuntimeConfiguration(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -8678,7 +8957,10 @@ func (s *SDK) UpdateScript(ctx context.Context, request operations.UpdateScriptR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -8766,7 +9048,10 @@ func (s *SDK) ValidateMatchmakingRuleSet(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 

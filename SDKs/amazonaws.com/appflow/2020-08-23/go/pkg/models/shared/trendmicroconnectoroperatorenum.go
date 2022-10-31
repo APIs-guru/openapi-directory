@@ -1,20 +1,25 @@
 package shared
 
+
+
+
 type TrendmicroConnectorOperatorEnum string
 
 const (
-	TrendmicroConnectorOperatorEnumProjection          TrendmicroConnectorOperatorEnum = "PROJECTION"
-	TrendmicroConnectorOperatorEnumEqualTo             TrendmicroConnectorOperatorEnum = "EQUAL_TO"
-	TrendmicroConnectorOperatorEnumAddition            TrendmicroConnectorOperatorEnum = "ADDITION"
-	TrendmicroConnectorOperatorEnumMultiplication      TrendmicroConnectorOperatorEnum = "MULTIPLICATION"
-	TrendmicroConnectorOperatorEnumDivision            TrendmicroConnectorOperatorEnum = "DIVISION"
-	TrendmicroConnectorOperatorEnumSubtraction         TrendmicroConnectorOperatorEnum = "SUBTRACTION"
-	TrendmicroConnectorOperatorEnumMaskAll             TrendmicroConnectorOperatorEnum = "MASK_ALL"
-	TrendmicroConnectorOperatorEnumMaskFirstN          TrendmicroConnectorOperatorEnum = "MASK_FIRST_N"
-	TrendmicroConnectorOperatorEnumMaskLastN           TrendmicroConnectorOperatorEnum = "MASK_LAST_N"
-	TrendmicroConnectorOperatorEnumValidateNonNull     TrendmicroConnectorOperatorEnum = "VALIDATE_NON_NULL"
-	TrendmicroConnectorOperatorEnumValidateNonZero     TrendmicroConnectorOperatorEnum = "VALIDATE_NON_ZERO"
-	TrendmicroConnectorOperatorEnumValidateNonNegative TrendmicroConnectorOperatorEnum = "VALIDATE_NON_NEGATIVE"
-	TrendmicroConnectorOperatorEnumValidateNumeric     TrendmicroConnectorOperatorEnum = "VALIDATE_NUMERIC"
-	TrendmicroConnectorOperatorEnumNoOp                TrendmicroConnectorOperatorEnum = "NO_OP"
+    TrendmicroConnectorOperatorEnumProjection TrendmicroConnectorOperatorEnum = "PROJECTION"
+TrendmicroConnectorOperatorEnumEqualTo TrendmicroConnectorOperatorEnum = "EQUAL_TO"
+TrendmicroConnectorOperatorEnumAddition TrendmicroConnectorOperatorEnum = "ADDITION"
+TrendmicroConnectorOperatorEnumMultiplication TrendmicroConnectorOperatorEnum = "MULTIPLICATION"
+TrendmicroConnectorOperatorEnumDivision TrendmicroConnectorOperatorEnum = "DIVISION"
+TrendmicroConnectorOperatorEnumSubtraction TrendmicroConnectorOperatorEnum = "SUBTRACTION"
+TrendmicroConnectorOperatorEnumMaskAll TrendmicroConnectorOperatorEnum = "MASK_ALL"
+TrendmicroConnectorOperatorEnumMaskFirstN TrendmicroConnectorOperatorEnum = "MASK_FIRST_N"
+TrendmicroConnectorOperatorEnumMaskLastN TrendmicroConnectorOperatorEnum = "MASK_LAST_N"
+TrendmicroConnectorOperatorEnumValidateNonNull TrendmicroConnectorOperatorEnum = "VALIDATE_NON_NULL"
+TrendmicroConnectorOperatorEnumValidateNonZero TrendmicroConnectorOperatorEnum = "VALIDATE_NON_ZERO"
+TrendmicroConnectorOperatorEnumValidateNonNegative TrendmicroConnectorOperatorEnum = "VALIDATE_NON_NEGATIVE"
+TrendmicroConnectorOperatorEnumValidateNumeric TrendmicroConnectorOperatorEnum = "VALIDATE_NUMERIC"
+TrendmicroConnectorOperatorEnumNoOp TrendmicroConnectorOperatorEnum = "NO_OP"
 )
+
+

@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetPeersQueryParams struct {
-	Expand *string `queryParam:"style=form,explode=true,name=expand"`
+    Expand *string `queryParam:"style=form,explode=true,name=expand"`
+    
 }
 
 type GetPeersRequest struct {
-	QueryParams GetPeersQueryParams
+    QueryParams GetPeersQueryParams 
+    
 }
 
 type GetPeersResponse struct {
-	ContentType                   string
-	GetPeers200ApplicationJSONAny *interface{}
-	StatusCode                    int64
+    ContentType string 
+    GetPeers200ApplicationJSONAny *interface{} 
+    StatusCode int64 
+    
 }
+

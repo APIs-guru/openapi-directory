@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GatewayRouteTarget struct {
-	VirtualService GatewayRouteVirtualService `json:"virtualService"`
+    VirtualService GatewayRouteVirtualService `json:"virtualService"`
+    
 }
+

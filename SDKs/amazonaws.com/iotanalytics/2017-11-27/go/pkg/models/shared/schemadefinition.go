@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SchemaDefinition struct {
-	Columns []Column `json:"columns,omitempty"`
+    Columns []Column `json:"columns,omitempty"`
+    
 }
+

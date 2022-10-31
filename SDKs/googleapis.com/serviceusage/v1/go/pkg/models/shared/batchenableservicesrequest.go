@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchEnableServicesRequest struct {
-	ServiceIds []string `json:"serviceIds,omitempty"`
+    ServiceIds []string `json:"serviceIds,omitempty"`
+    
 }
+

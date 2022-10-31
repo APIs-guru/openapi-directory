@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ParentHyperParameterTuningJob struct {
-	HyperParameterTuningJobName *string `json:"HyperParameterTuningJobName,omitempty"`
+    HyperParameterTuningJobName *string `json:"HyperParameterTuningJobName,omitempty"`
+    
 }
+

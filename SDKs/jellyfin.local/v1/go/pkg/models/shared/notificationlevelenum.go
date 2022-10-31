@@ -1,9 +1,14 @@
 package shared
 
+
+
+
 type NotificationLevelEnum string
 
 const (
-	NotificationLevelEnumNormal  NotificationLevelEnum = "Normal"
-	NotificationLevelEnumWarning NotificationLevelEnum = "Warning"
-	NotificationLevelEnumError   NotificationLevelEnum = "Error"
+    NotificationLevelEnumNormal NotificationLevelEnum = "Normal"
+NotificationLevelEnumWarning NotificationLevelEnum = "Warning"
+NotificationLevelEnumError NotificationLevelEnum = "Error"
 )
+
+

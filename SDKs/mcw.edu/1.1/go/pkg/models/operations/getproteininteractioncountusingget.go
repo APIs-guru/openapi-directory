@@ -1,16 +1,22 @@
 package operations
 
+
+
 type GetProteinInteractionCountUsingGetPathParams struct {
-	DateYyyymmdd   string `pathParam:"style=simple,explode=false,name=dateYYYYMMDD"`
-	SpeciesTypeKey int32  `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
+    DateYyyymmdd string `pathParam:"style=simple,explode=false,name=dateYYYYMMDD"`
+    SpeciesTypeKey int32 `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
+    
 }
 
 type GetProteinInteractionCountUsingGetRequest struct {
-	PathParams GetProteinInteractionCountUsingGetPathParams
+    PathParams GetProteinInteractionCountUsingGetPathParams 
+    
 }
 
 type GetProteinInteractionCountUsingGetResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -12,7 +12,7 @@ class GetAPITextPasswordQueryParams:
 
 @dataclass
 class GetAPITextPasswordHeaders:
-    x_api_key: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Api-Key' }})
+    x_api_key: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Api-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

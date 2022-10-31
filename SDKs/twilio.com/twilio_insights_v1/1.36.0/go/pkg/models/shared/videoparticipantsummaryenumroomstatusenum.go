@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type VideoParticipantSummaryEnumRoomStatusEnum string
 
 const (
-	VideoParticipantSummaryEnumRoomStatusEnumInProgress VideoParticipantSummaryEnumRoomStatusEnum = "in_progress"
-	VideoParticipantSummaryEnumRoomStatusEnumCompleted  VideoParticipantSummaryEnumRoomStatusEnum = "completed"
+    VideoParticipantSummaryEnumRoomStatusEnumInProgress VideoParticipantSummaryEnumRoomStatusEnum = "in_progress"
+VideoParticipantSummaryEnumRoomStatusEnumCompleted VideoParticipantSummaryEnumRoomStatusEnum = "completed"
 )
+
+

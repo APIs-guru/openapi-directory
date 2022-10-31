@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SearchContentMatch struct {
-	Lines []SearchLine `json:"lines,omitempty"`
+    Lines []SearchLine `json:"lines,omitempty"`
+    
 }
+

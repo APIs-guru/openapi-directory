@@ -1,8 +1,12 @@
 package shared
 
+
+
 type CreatePolicyVersionResponse struct {
-	IsDefaultVersion *bool   `json:"isDefaultVersion,omitempty"`
-	PolicyArn        *string `json:"policyArn,omitempty"`
-	PolicyDocument   *string `json:"policyDocument,omitempty"`
-	PolicyVersionID  *string `json:"policyVersionId,omitempty"`
+    IsDefaultVersion *bool `json:"isDefaultVersion,omitempty"`
+    PolicyArn *string `json:"policyArn,omitempty"`
+    PolicyDocument *string `json:"policyDocument,omitempty"`
+    PolicyVersionID *string `json:"policyVersionId,omitempty"`
+    
 }
+

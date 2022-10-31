@@ -1,6 +1,10 @@
 package shared
 
+
+
 type GoogleIamV1SetIamPolicyRequest struct {
-	Policy     *GoogleIamV1Policy `json:"policy,omitempty"`
-	UpdateMask *string            `json:"updateMask,omitempty"`
+    Policy *GoogleIamV1Policy `json:"policy,omitempty"`
+    UpdateMask *string `json:"updateMask,omitempty"`
+    
 }
+

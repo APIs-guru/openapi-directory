@@ -1,27 +1,31 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DeleteVolumePathParams struct {
-	VolumeID string `pathParam:"style=simple,explode=false,name=volume_id"`
+    VolumeID string `pathParam:"style=simple,explode=false,name=volume_id"`
+    
 }
 
 type DeleteVolumeRequest struct {
-	PathParams DeleteVolumePathParams
+    PathParams DeleteVolumePathParams 
+    
 }
 
 type DeleteVolume401ApplicationJSON struct {
-	ID        string  `json:"id"`
-	Message   string  `json:"message"`
-	RequestID *string `json:"request_id,omitempty"`
+    ID string `json:"id"`
+    Message string `json:"message"`
+    RequestID *string `json:"request_id,omitempty"`
+    
 }
 
 type DeleteVolumeResponse struct {
-	ContentType                                               string
-	Headers                                                   map[string][]string
-	StatusCode                                                int64
-	DeleteVolume401ApplicationJSONObject                      *DeleteVolume401ApplicationJSON
-	Onev211ClicksGetResponses401ContentApplication1jsonSchema *shared.Onev211ClicksGetResponses401ContentApplication1jsonSchema
+    ContentType string 
+    Headers map[string][]string 
+    StatusCode int64 
+    DeleteVolume401ApplicationJSONObject *DeleteVolume401ApplicationJSON 
+    Onev211ClicksGetResponses401ContentApplication1jsonSchema *shared.Onev211ClicksGetResponses401ContentApplication1jsonSchema 
+    
 }
+

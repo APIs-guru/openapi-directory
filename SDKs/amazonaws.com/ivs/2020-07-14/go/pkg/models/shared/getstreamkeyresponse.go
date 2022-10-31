@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetStreamKeyResponse struct {
-	StreamKey *StreamKey `json:"streamKey,omitempty"`
+    StreamKey *StreamKey `json:"streamKey,omitempty"`
+    
 }
+

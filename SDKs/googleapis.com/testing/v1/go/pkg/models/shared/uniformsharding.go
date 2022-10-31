@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UniformSharding struct {
-	NumShards *int32 `json:"numShards,omitempty"`
+    NumShards *int32 `json:"numShards,omitempty"`
+    
 }
+

@@ -127,6 +127,7 @@ func (s *SDK) KeyBind(ctx context.Context, request operations.KeyBindRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -205,6 +206,7 @@ func (s *SDK) KeyRegister(ctx context.Context, request operations.KeyRegisterReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -494,6 +496,7 @@ func (s *SDK) KeyUpdate(ctx context.Context, request operations.KeyUpdateRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -562,6 +565,7 @@ func (s *SDK) PushLoginRequest(ctx context.Context, request operations.PushLogin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -770,6 +774,7 @@ func (s *SDK) SignRequest(ctx context.Context, request operations.SignRequestReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

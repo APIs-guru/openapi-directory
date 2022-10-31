@@ -22,29 +22,34 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def add_association(self, request: operations.AddAssociationRequest) -> operations.AddAssociationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.AddAssociation"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AddAssociationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AddAssociationResponse])
@@ -61,26 +66,28 @@ class SDK:
         return res
 
     
-    
     def add_tags(self, request: operations.AddTagsRequest) -> operations.AddTagsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.AddTags"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AddTagsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AddTagsOutput])
@@ -89,26 +96,28 @@ class SDK:
         return res
 
     
-    
     def associate_trial_component(self, request: operations.AssociateTrialComponentRequest) -> operations.AssociateTrialComponentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.AssociateTrialComponent"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AssociateTrialComponentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AssociateTrialComponentResponse])
@@ -125,26 +134,28 @@ class SDK:
         return res
 
     
-    
     def create_action(self, request: operations.CreateActionRequest) -> operations.CreateActionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateAction"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateActionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateActionResponse])
@@ -157,26 +168,28 @@ class SDK:
         return res
 
     
-    
     def create_algorithm(self, request: operations.CreateAlgorithmRequest) -> operations.CreateAlgorithmResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateAlgorithm"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAlgorithmResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateAlgorithmOutput])
@@ -185,26 +198,28 @@ class SDK:
         return res
 
     
-    
     def create_app(self, request: operations.CreateAppRequest) -> operations.CreateAppResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateApp"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAppResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateAppResponse])
@@ -221,26 +236,28 @@ class SDK:
         return res
 
     
-    
     def create_app_image_config(self, request: operations.CreateAppImageConfigRequest) -> operations.CreateAppImageConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateAppImageConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAppImageConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateAppImageConfigResponse])
@@ -253,26 +270,28 @@ class SDK:
         return res
 
     
-    
     def create_artifact(self, request: operations.CreateArtifactRequest) -> operations.CreateArtifactResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateArtifact"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateArtifactResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateArtifactResponse])
@@ -285,26 +304,28 @@ class SDK:
         return res
 
     
-    
     def create_auto_ml_job(self, request: operations.CreateAutoMlJobRequest) -> operations.CreateAutoMlJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateAutoMLJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAutoMlJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateAutoMlJobResponse])
@@ -321,26 +342,28 @@ class SDK:
         return res
 
     
-    
     def create_code_repository(self, request: operations.CreateCodeRepositoryRequest) -> operations.CreateCodeRepositoryResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateCodeRepository"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCodeRepositoryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateCodeRepositoryOutput])
@@ -349,26 +372,28 @@ class SDK:
         return res
 
     
-    
     def create_compilation_job(self, request: operations.CreateCompilationJobRequest) -> operations.CreateCompilationJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateCompilationJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCompilationJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateCompilationJobResponse])
@@ -385,26 +410,28 @@ class SDK:
         return res
 
     
-    
     def create_context(self, request: operations.CreateContextRequest) -> operations.CreateContextResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateContext"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateContextResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateContextResponse])
@@ -417,26 +444,28 @@ class SDK:
         return res
 
     
-    
     def create_data_quality_job_definition(self, request: operations.CreateDataQualityJobDefinitionRequest) -> operations.CreateDataQualityJobDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateDataQualityJobDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateDataQualityJobDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateDataQualityJobDefinitionResponse])
@@ -453,26 +482,28 @@ class SDK:
         return res
 
     
-    
     def create_device_fleet(self, request: operations.CreateDeviceFleetRequest) -> operations.CreateDeviceFleetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateDeviceFleet"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateDeviceFleetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -487,26 +518,28 @@ class SDK:
         return res
 
     
-    
     def create_domain(self, request: operations.CreateDomainRequest) -> operations.CreateDomainResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateDomain"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateDomainResponse])
@@ -523,26 +556,28 @@ class SDK:
         return res
 
     
-    
     def create_edge_packaging_job(self, request: operations.CreateEdgePackagingJobRequest) -> operations.CreateEdgePackagingJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateEdgePackagingJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateEdgePackagingJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -553,26 +588,28 @@ class SDK:
         return res
 
     
-    
     def create_endpoint(self, request: operations.CreateEndpointRequest) -> operations.CreateEndpointResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateEndpoint"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateEndpointResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateEndpointOutput])
@@ -585,26 +622,28 @@ class SDK:
         return res
 
     
-    
     def create_endpoint_config(self, request: operations.CreateEndpointConfigRequest) -> operations.CreateEndpointConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateEndpointConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateEndpointConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateEndpointConfigOutput])
@@ -617,26 +656,28 @@ class SDK:
         return res
 
     
-    
     def create_experiment(self, request: operations.CreateExperimentRequest) -> operations.CreateExperimentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateExperiment"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateExperimentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateExperimentResponse])
@@ -649,26 +690,28 @@ class SDK:
         return res
 
     
-    
     def create_feature_group(self, request: operations.CreateFeatureGroupRequest) -> operations.CreateFeatureGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateFeatureGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateFeatureGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateFeatureGroupResponse])
@@ -685,26 +728,28 @@ class SDK:
         return res
 
     
-    
     def create_flow_definition(self, request: operations.CreateFlowDefinitionRequest) -> operations.CreateFlowDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateFlowDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateFlowDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateFlowDefinitionResponse])
@@ -721,26 +766,28 @@ class SDK:
         return res
 
     
-    
     def create_human_task_ui(self, request: operations.CreateHumanTaskUIRequest) -> operations.CreateHumanTaskUIResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateHumanTaskUi"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateHumanTaskUIResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateHumanTaskUIResponse])
@@ -757,26 +804,28 @@ class SDK:
         return res
 
     
-    
     def create_hyper_parameter_tuning_job(self, request: operations.CreateHyperParameterTuningJobRequest) -> operations.CreateHyperParameterTuningJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateHyperParameterTuningJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateHyperParameterTuningJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateHyperParameterTuningJobResponse])
@@ -793,26 +842,28 @@ class SDK:
         return res
 
     
-    
     def create_image(self, request: operations.CreateImageRequest) -> operations.CreateImageResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateImage"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateImageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateImageResponse])
@@ -829,26 +880,28 @@ class SDK:
         return res
 
     
-    
     def create_image_version(self, request: operations.CreateImageVersionRequest) -> operations.CreateImageVersionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateImageVersion"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateImageVersionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateImageVersionResponse])
@@ -869,26 +922,28 @@ class SDK:
         return res
 
     
-    
     def create_labeling_job(self, request: operations.CreateLabelingJobRequest) -> operations.CreateLabelingJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateLabelingJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateLabelingJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateLabelingJobResponse])
@@ -905,26 +960,28 @@ class SDK:
         return res
 
     
-    
     def create_model(self, request: operations.CreateModelRequest) -> operations.CreateModelResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateModel"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateModelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateModelOutput])
@@ -937,26 +994,28 @@ class SDK:
         return res
 
     
-    
     def create_model_bias_job_definition(self, request: operations.CreateModelBiasJobDefinitionRequest) -> operations.CreateModelBiasJobDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateModelBiasJobDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateModelBiasJobDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateModelBiasJobDefinitionResponse])
@@ -973,26 +1032,28 @@ class SDK:
         return res
 
     
-    
     def create_model_explainability_job_definition(self, request: operations.CreateModelExplainabilityJobDefinitionRequest) -> operations.CreateModelExplainabilityJobDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateModelExplainabilityJobDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateModelExplainabilityJobDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateModelExplainabilityJobDefinitionResponse])
@@ -1009,26 +1070,28 @@ class SDK:
         return res
 
     
-    
     def create_model_package(self, request: operations.CreateModelPackageRequest) -> operations.CreateModelPackageResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateModelPackage"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateModelPackageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateModelPackageOutput])
@@ -1045,26 +1108,28 @@ class SDK:
         return res
 
     
-    
     def create_model_package_group(self, request: operations.CreateModelPackageGroupRequest) -> operations.CreateModelPackageGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateModelPackageGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateModelPackageGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateModelPackageGroupOutput])
@@ -1077,26 +1142,28 @@ class SDK:
         return res
 
     
-    
     def create_model_quality_job_definition(self, request: operations.CreateModelQualityJobDefinitionRequest) -> operations.CreateModelQualityJobDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateModelQualityJobDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateModelQualityJobDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateModelQualityJobDefinitionResponse])
@@ -1113,26 +1180,28 @@ class SDK:
         return res
 
     
-    
     def create_monitoring_schedule(self, request: operations.CreateMonitoringScheduleRequest) -> operations.CreateMonitoringScheduleResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateMonitoringSchedule"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateMonitoringScheduleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateMonitoringScheduleResponse])
@@ -1149,26 +1218,28 @@ class SDK:
         return res
 
     
-    
     def create_notebook_instance(self, request: operations.CreateNotebookInstanceRequest) -> operations.CreateNotebookInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateNotebookInstance"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateNotebookInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateNotebookInstanceOutput])
@@ -1181,26 +1252,28 @@ class SDK:
         return res
 
     
-    
     def create_notebook_instance_lifecycle_config(self, request: operations.CreateNotebookInstanceLifecycleConfigRequest) -> operations.CreateNotebookInstanceLifecycleConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateNotebookInstanceLifecycleConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateNotebookInstanceLifecycleConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateNotebookInstanceLifecycleConfigOutput])
@@ -1213,26 +1286,28 @@ class SDK:
         return res
 
     
-    
     def create_pipeline(self, request: operations.CreatePipelineRequest) -> operations.CreatePipelineResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreatePipeline"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePipelineResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreatePipelineResponse])
@@ -1249,26 +1324,28 @@ class SDK:
         return res
 
     
-    
     def create_presigned_domain_url(self, request: operations.CreatePresignedDomainURLRequest) -> operations.CreatePresignedDomainURLResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreatePresignedDomainUrl"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePresignedDomainURLResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreatePresignedDomainURLResponse])
@@ -1281,26 +1358,28 @@ class SDK:
         return res
 
     
-    
     def create_presigned_notebook_instance_url(self, request: operations.CreatePresignedNotebookInstanceURLRequest) -> operations.CreatePresignedNotebookInstanceURLResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreatePresignedNotebookInstanceUrl"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePresignedNotebookInstanceURLResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreatePresignedNotebookInstanceURLOutput])
@@ -1309,26 +1388,28 @@ class SDK:
         return res
 
     
-    
     def create_processing_job(self, request: operations.CreateProcessingJobRequest) -> operations.CreateProcessingJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateProcessingJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateProcessingJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateProcessingJobResponse])
@@ -1349,26 +1430,28 @@ class SDK:
         return res
 
     
-    
     def create_project(self, request: operations.CreateProjectRequest) -> operations.CreateProjectResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateProject"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateProjectResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateProjectOutput])
@@ -1381,26 +1464,28 @@ class SDK:
         return res
 
     
-    
     def create_studio_lifecycle_config(self, request: operations.CreateStudioLifecycleConfigRequest) -> operations.CreateStudioLifecycleConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateStudioLifecycleConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateStudioLifecycleConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateStudioLifecycleConfigResponse])
@@ -1413,26 +1498,28 @@ class SDK:
         return res
 
     
-    
     def create_training_job(self, request: operations.CreateTrainingJobRequest) -> operations.CreateTrainingJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateTrainingJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTrainingJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateTrainingJobResponse])
@@ -1453,26 +1540,28 @@ class SDK:
         return res
 
     
-    
     def create_transform_job(self, request: operations.CreateTransformJobRequest) -> operations.CreateTransformJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateTransformJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTransformJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateTransformJobResponse])
@@ -1493,26 +1582,28 @@ class SDK:
         return res
 
     
-    
     def create_trial(self, request: operations.CreateTrialRequest) -> operations.CreateTrialResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateTrial"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTrialResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateTrialResponse])
@@ -1529,26 +1620,28 @@ class SDK:
         return res
 
     
-    
     def create_trial_component(self, request: operations.CreateTrialComponentRequest) -> operations.CreateTrialComponentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateTrialComponent"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTrialComponentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateTrialComponentResponse])
@@ -1561,26 +1654,28 @@ class SDK:
         return res
 
     
-    
     def create_user_profile(self, request: operations.CreateUserProfileRequest) -> operations.CreateUserProfileResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateUserProfile"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateUserProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateUserProfileResponse])
@@ -1597,26 +1692,28 @@ class SDK:
         return res
 
     
-    
     def create_workforce(self, request: operations.CreateWorkforceRequest) -> operations.CreateWorkforceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateWorkforce"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateWorkforceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateWorkforceResponse])
@@ -1625,26 +1722,28 @@ class SDK:
         return res
 
     
-    
     def create_workteam(self, request: operations.CreateWorkteamRequest) -> operations.CreateWorkteamResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.CreateWorkteam"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateWorkteamResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateWorkteamResponse])
@@ -1661,26 +1760,28 @@ class SDK:
         return res
 
     
-    
     def delete_action(self, request: operations.DeleteActionRequest) -> operations.DeleteActionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteAction"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteActionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteActionResponse])
@@ -1693,52 +1794,56 @@ class SDK:
         return res
 
     
-    
     def delete_algorithm(self, request: operations.DeleteAlgorithmRequest) -> operations.DeleteAlgorithmResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteAlgorithm"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAlgorithmResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 
         return res
 
     
-    
     def delete_app(self, request: operations.DeleteAppRequest) -> operations.DeleteAppResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteApp"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAppResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -1753,26 +1858,28 @@ class SDK:
         return res
 
     
-    
     def delete_app_image_config(self, request: operations.DeleteAppImageConfigRequest) -> operations.DeleteAppImageConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteAppImageConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAppImageConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -1783,26 +1890,28 @@ class SDK:
         return res
 
     
-    
     def delete_artifact(self, request: operations.DeleteArtifactRequest) -> operations.DeleteArtifactResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteArtifact"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteArtifactResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteArtifactResponse])
@@ -1815,26 +1924,28 @@ class SDK:
         return res
 
     
-    
     def delete_association(self, request: operations.DeleteAssociationRequest) -> operations.DeleteAssociationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteAssociation"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAssociationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteAssociationResponse])
@@ -1847,52 +1958,56 @@ class SDK:
         return res
 
     
-    
     def delete_code_repository(self, request: operations.DeleteCodeRepositoryRequest) -> operations.DeleteCodeRepositoryResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteCodeRepository"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCodeRepositoryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 
         return res
 
     
-    
     def delete_context(self, request: operations.DeleteContextRequest) -> operations.DeleteContextResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteContext"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteContextResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteContextResponse])
@@ -1905,26 +2020,28 @@ class SDK:
         return res
 
     
-    
     def delete_data_quality_job_definition(self, request: operations.DeleteDataQualityJobDefinitionRequest) -> operations.DeleteDataQualityJobDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteDataQualityJobDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDataQualityJobDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -1935,26 +2052,28 @@ class SDK:
         return res
 
     
-    
     def delete_device_fleet(self, request: operations.DeleteDeviceFleetRequest) -> operations.DeleteDeviceFleetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteDeviceFleet"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDeviceFleetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -1965,26 +2084,28 @@ class SDK:
         return res
 
     
-    
     def delete_domain(self, request: operations.DeleteDomainRequest) -> operations.DeleteDomainResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteDomain"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -1999,78 +2120,84 @@ class SDK:
         return res
 
     
-    
     def delete_endpoint(self, request: operations.DeleteEndpointRequest) -> operations.DeleteEndpointResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteEndpoint"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteEndpointResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 
         return res
 
-    
     
     def delete_endpoint_config(self, request: operations.DeleteEndpointConfigRequest) -> operations.DeleteEndpointConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteEndpointConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteEndpointConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 
         return res
 
     
-    
     def delete_experiment(self, request: operations.DeleteExperimentRequest) -> operations.DeleteExperimentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteExperiment"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteExperimentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteExperimentResponse])
@@ -2083,26 +2210,28 @@ class SDK:
         return res
 
     
-    
     def delete_feature_group(self, request: operations.DeleteFeatureGroupRequest) -> operations.DeleteFeatureGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteFeatureGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFeatureGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2113,26 +2242,28 @@ class SDK:
         return res
 
     
-    
     def delete_flow_definition(self, request: operations.DeleteFlowDefinitionRequest) -> operations.DeleteFlowDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteFlowDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFlowDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2149,26 +2280,28 @@ class SDK:
         return res
 
     
-    
     def delete_human_task_ui(self, request: operations.DeleteHumanTaskUIRequest) -> operations.DeleteHumanTaskUIResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteHumanTaskUi"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteHumanTaskUIResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2181,26 +2314,28 @@ class SDK:
         return res
 
     
-    
     def delete_image(self, request: operations.DeleteImageRequest) -> operations.DeleteImageResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteImage"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteImageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2217,26 +2352,28 @@ class SDK:
         return res
 
     
-    
     def delete_image_version(self, request: operations.DeleteImageVersionRequest) -> operations.DeleteImageVersionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteImageVersion"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteImageVersionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2253,52 +2390,56 @@ class SDK:
         return res
 
     
-    
     def delete_model(self, request: operations.DeleteModelRequest) -> operations.DeleteModelResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteModel"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteModelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 
         return res
 
-    
     
     def delete_model_bias_job_definition(self, request: operations.DeleteModelBiasJobDefinitionRequest) -> operations.DeleteModelBiasJobDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteModelBiasJobDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteModelBiasJobDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2308,27 +2449,29 @@ class SDK:
 
         return res
 
-    
     
     def delete_model_explainability_job_definition(self, request: operations.DeleteModelExplainabilityJobDefinitionRequest) -> operations.DeleteModelExplainabilityJobDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteModelExplainabilityJobDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteModelExplainabilityJobDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2338,27 +2481,29 @@ class SDK:
 
         return res
 
-    
     
     def delete_model_package(self, request: operations.DeleteModelPackageRequest) -> operations.DeleteModelPackageResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteModelPackage"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteModelPackageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2368,27 +2513,29 @@ class SDK:
 
         return res
 
-    
     
     def delete_model_package_group(self, request: operations.DeleteModelPackageGroupRequest) -> operations.DeleteModelPackageGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteModelPackageGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteModelPackageGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2399,52 +2546,56 @@ class SDK:
         return res
 
     
-    
     def delete_model_package_group_policy(self, request: operations.DeleteModelPackageGroupPolicyRequest) -> operations.DeleteModelPackageGroupPolicyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteModelPackageGroupPolicy"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteModelPackageGroupPolicyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 
         return res
 
-    
     
     def delete_model_quality_job_definition(self, request: operations.DeleteModelQualityJobDefinitionRequest) -> operations.DeleteModelQualityJobDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteModelQualityJobDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteModelQualityJobDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2454,27 +2605,29 @@ class SDK:
 
         return res
 
-    
     
     def delete_monitoring_schedule(self, request: operations.DeleteMonitoringScheduleRequest) -> operations.DeleteMonitoringScheduleResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteMonitoringSchedule"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteMonitoringScheduleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2485,78 +2638,84 @@ class SDK:
         return res
 
     
-    
     def delete_notebook_instance(self, request: operations.DeleteNotebookInstanceRequest) -> operations.DeleteNotebookInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteNotebookInstance"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteNotebookInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 
         return res
 
-    
     
     def delete_notebook_instance_lifecycle_config(self, request: operations.DeleteNotebookInstanceLifecycleConfigRequest) -> operations.DeleteNotebookInstanceLifecycleConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteNotebookInstanceLifecycleConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteNotebookInstanceLifecycleConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 
         return res
 
     
-    
     def delete_pipeline(self, request: operations.DeletePipelineRequest) -> operations.DeletePipelineResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeletePipeline"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeletePipelineResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeletePipelineResponse])
@@ -2569,26 +2728,28 @@ class SDK:
         return res
 
     
-    
     def delete_project(self, request: operations.DeleteProjectRequest) -> operations.DeleteProjectResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteProject"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteProjectResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2599,26 +2760,28 @@ class SDK:
         return res
 
     
-    
     def delete_studio_lifecycle_config(self, request: operations.DeleteStudioLifecycleConfigRequest) -> operations.DeleteStudioLifecycleConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteStudioLifecycleConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteStudioLifecycleConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2633,26 +2796,28 @@ class SDK:
         return res
 
     
-    
     def delete_tags(self, request: operations.DeleteTagsRequest) -> operations.DeleteTagsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteTags"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteTagsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2661,26 +2826,28 @@ class SDK:
         return res
 
     
-    
     def delete_trial(self, request: operations.DeleteTrialRequest) -> operations.DeleteTrialResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteTrial"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteTrialResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteTrialResponse])
@@ -2693,26 +2860,28 @@ class SDK:
         return res
 
     
-    
     def delete_trial_component(self, request: operations.DeleteTrialComponentRequest) -> operations.DeleteTrialComponentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteTrialComponent"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteTrialComponentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteTrialComponentResponse])
@@ -2725,26 +2894,28 @@ class SDK:
         return res
 
     
-    
     def delete_user_profile(self, request: operations.DeleteUserProfileRequest) -> operations.DeleteUserProfileResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteUserProfile"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteUserProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2759,26 +2930,28 @@ class SDK:
         return res
 
     
-    
     def delete_workforce(self, request: operations.DeleteWorkforceRequest) -> operations.DeleteWorkforceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteWorkforce"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteWorkforceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2787,26 +2960,28 @@ class SDK:
         return res
 
     
-    
     def delete_workteam(self, request: operations.DeleteWorkteamRequest) -> operations.DeleteWorkteamResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeleteWorkteam"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteWorkteamResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteWorkteamResponse])
@@ -2819,52 +2994,56 @@ class SDK:
         return res
 
     
-    
     def deregister_devices(self, request: operations.DeregisterDevicesRequest) -> operations.DeregisterDevicesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DeregisterDevices"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeregisterDevicesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 
         return res
 
     
-    
     def describe_action(self, request: operations.DescribeActionRequest) -> operations.DescribeActionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeAction"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeActionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeActionResponse])
@@ -2877,26 +3056,28 @@ class SDK:
         return res
 
     
-    
     def describe_algorithm(self, request: operations.DescribeAlgorithmRequest) -> operations.DescribeAlgorithmResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeAlgorithm"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeAlgorithmResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeAlgorithmOutput])
@@ -2905,26 +3086,28 @@ class SDK:
         return res
 
     
-    
     def describe_app(self, request: operations.DescribeAppRequest) -> operations.DescribeAppResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeApp"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeAppResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeAppResponse])
@@ -2937,26 +3120,28 @@ class SDK:
         return res
 
     
-    
     def describe_app_image_config(self, request: operations.DescribeAppImageConfigRequest) -> operations.DescribeAppImageConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeAppImageConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeAppImageConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeAppImageConfigResponse])
@@ -2969,26 +3154,28 @@ class SDK:
         return res
 
     
-    
     def describe_artifact(self, request: operations.DescribeArtifactRequest) -> operations.DescribeArtifactResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeArtifact"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeArtifactResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeArtifactResponse])
@@ -3001,26 +3188,28 @@ class SDK:
         return res
 
     
-    
     def describe_auto_ml_job(self, request: operations.DescribeAutoMlJobRequest) -> operations.DescribeAutoMlJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeAutoMLJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeAutoMlJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeAutoMlJobResponse])
@@ -3033,26 +3222,28 @@ class SDK:
         return res
 
     
-    
     def describe_code_repository(self, request: operations.DescribeCodeRepositoryRequest) -> operations.DescribeCodeRepositoryResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeCodeRepository"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeCodeRepositoryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeCodeRepositoryOutput])
@@ -3061,26 +3252,28 @@ class SDK:
         return res
 
     
-    
     def describe_compilation_job(self, request: operations.DescribeCompilationJobRequest) -> operations.DescribeCompilationJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeCompilationJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeCompilationJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeCompilationJobResponse])
@@ -3093,26 +3286,28 @@ class SDK:
         return res
 
     
-    
     def describe_context(self, request: operations.DescribeContextRequest) -> operations.DescribeContextResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeContext"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeContextResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeContextResponse])
@@ -3125,26 +3320,28 @@ class SDK:
         return res
 
     
-    
     def describe_data_quality_job_definition(self, request: operations.DescribeDataQualityJobDefinitionRequest) -> operations.DescribeDataQualityJobDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeDataQualityJobDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeDataQualityJobDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeDataQualityJobDefinitionResponse])
@@ -3157,26 +3354,28 @@ class SDK:
         return res
 
     
-    
     def describe_device(self, request: operations.DescribeDeviceRequest) -> operations.DescribeDeviceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeDevice"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeDeviceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeDeviceResponse])
@@ -3189,26 +3388,28 @@ class SDK:
         return res
 
     
-    
     def describe_device_fleet(self, request: operations.DescribeDeviceFleetRequest) -> operations.DescribeDeviceFleetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeDeviceFleet"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeDeviceFleetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeDeviceFleetResponse])
@@ -3221,26 +3422,28 @@ class SDK:
         return res
 
     
-    
     def describe_domain(self, request: operations.DescribeDomainRequest) -> operations.DescribeDomainResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeDomain"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeDomainResponse])
@@ -3253,26 +3456,28 @@ class SDK:
         return res
 
     
-    
     def describe_edge_packaging_job(self, request: operations.DescribeEdgePackagingJobRequest) -> operations.DescribeEdgePackagingJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeEdgePackagingJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeEdgePackagingJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeEdgePackagingJobResponse])
@@ -3285,26 +3490,28 @@ class SDK:
         return res
 
     
-    
     def describe_endpoint(self, request: operations.DescribeEndpointRequest) -> operations.DescribeEndpointResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeEndpoint"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeEndpointResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeEndpointOutput])
@@ -3313,26 +3520,28 @@ class SDK:
         return res
 
     
-    
     def describe_endpoint_config(self, request: operations.DescribeEndpointConfigRequest) -> operations.DescribeEndpointConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeEndpointConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeEndpointConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeEndpointConfigOutput])
@@ -3341,26 +3550,28 @@ class SDK:
         return res
 
     
-    
     def describe_experiment(self, request: operations.DescribeExperimentRequest) -> operations.DescribeExperimentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeExperiment"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeExperimentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeExperimentResponse])
@@ -3373,26 +3584,28 @@ class SDK:
         return res
 
     
-    
     def describe_feature_group(self, request: operations.DescribeFeatureGroupRequest) -> operations.DescribeFeatureGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeFeatureGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeFeatureGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeFeatureGroupResponse])
@@ -3405,26 +3618,28 @@ class SDK:
         return res
 
     
-    
     def describe_flow_definition(self, request: operations.DescribeFlowDefinitionRequest) -> operations.DescribeFlowDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeFlowDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeFlowDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeFlowDefinitionResponse])
@@ -3437,26 +3652,28 @@ class SDK:
         return res
 
     
-    
     def describe_human_task_ui(self, request: operations.DescribeHumanTaskUIRequest) -> operations.DescribeHumanTaskUIResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeHumanTaskUi"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeHumanTaskUIResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeHumanTaskUIResponse])
@@ -3469,26 +3686,28 @@ class SDK:
         return res
 
     
-    
     def describe_hyper_parameter_tuning_job(self, request: operations.DescribeHyperParameterTuningJobRequest) -> operations.DescribeHyperParameterTuningJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeHyperParameterTuningJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeHyperParameterTuningJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeHyperParameterTuningJobResponse])
@@ -3501,26 +3720,28 @@ class SDK:
         return res
 
     
-    
     def describe_image(self, request: operations.DescribeImageRequest) -> operations.DescribeImageResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeImage"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeImageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeImageResponse])
@@ -3533,26 +3754,28 @@ class SDK:
         return res
 
     
-    
     def describe_image_version(self, request: operations.DescribeImageVersionRequest) -> operations.DescribeImageVersionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeImageVersion"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeImageVersionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeImageVersionResponse])
@@ -3565,26 +3788,28 @@ class SDK:
         return res
 
     
-    
     def describe_labeling_job(self, request: operations.DescribeLabelingJobRequest) -> operations.DescribeLabelingJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeLabelingJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeLabelingJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeLabelingJobResponse])
@@ -3597,26 +3822,28 @@ class SDK:
         return res
 
     
-    
     def describe_model(self, request: operations.DescribeModelRequest) -> operations.DescribeModelResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeModel"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeModelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeModelOutput])
@@ -3625,26 +3852,28 @@ class SDK:
         return res
 
     
-    
     def describe_model_bias_job_definition(self, request: operations.DescribeModelBiasJobDefinitionRequest) -> operations.DescribeModelBiasJobDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeModelBiasJobDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeModelBiasJobDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeModelBiasJobDefinitionResponse])
@@ -3657,26 +3886,28 @@ class SDK:
         return res
 
     
-    
     def describe_model_explainability_job_definition(self, request: operations.DescribeModelExplainabilityJobDefinitionRequest) -> operations.DescribeModelExplainabilityJobDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeModelExplainabilityJobDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeModelExplainabilityJobDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeModelExplainabilityJobDefinitionResponse])
@@ -3689,26 +3920,28 @@ class SDK:
         return res
 
     
-    
     def describe_model_package(self, request: operations.DescribeModelPackageRequest) -> operations.DescribeModelPackageResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeModelPackage"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeModelPackageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeModelPackageOutput])
@@ -3717,26 +3950,28 @@ class SDK:
         return res
 
     
-    
     def describe_model_package_group(self, request: operations.DescribeModelPackageGroupRequest) -> operations.DescribeModelPackageGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeModelPackageGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeModelPackageGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeModelPackageGroupOutput])
@@ -3745,26 +3980,28 @@ class SDK:
         return res
 
     
-    
     def describe_model_quality_job_definition(self, request: operations.DescribeModelQualityJobDefinitionRequest) -> operations.DescribeModelQualityJobDefinitionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeModelQualityJobDefinition"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeModelQualityJobDefinitionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeModelQualityJobDefinitionResponse])
@@ -3777,26 +4014,28 @@ class SDK:
         return res
 
     
-    
     def describe_monitoring_schedule(self, request: operations.DescribeMonitoringScheduleRequest) -> operations.DescribeMonitoringScheduleResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeMonitoringSchedule"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeMonitoringScheduleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeMonitoringScheduleResponse])
@@ -3809,26 +4048,28 @@ class SDK:
         return res
 
     
-    
     def describe_notebook_instance(self, request: operations.DescribeNotebookInstanceRequest) -> operations.DescribeNotebookInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeNotebookInstance"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeNotebookInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeNotebookInstanceOutput])
@@ -3837,26 +4078,28 @@ class SDK:
         return res
 
     
-    
     def describe_notebook_instance_lifecycle_config(self, request: operations.DescribeNotebookInstanceLifecycleConfigRequest) -> operations.DescribeNotebookInstanceLifecycleConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeNotebookInstanceLifecycleConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeNotebookInstanceLifecycleConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeNotebookInstanceLifecycleConfigOutput])
@@ -3865,26 +4108,28 @@ class SDK:
         return res
 
     
-    
     def describe_pipeline(self, request: operations.DescribePipelineRequest) -> operations.DescribePipelineResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribePipeline"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribePipelineResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribePipelineResponse])
@@ -3897,26 +4142,28 @@ class SDK:
         return res
 
     
-    
     def describe_pipeline_definition_for_execution(self, request: operations.DescribePipelineDefinitionForExecutionRequest) -> operations.DescribePipelineDefinitionForExecutionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribePipelineDefinitionForExecution"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribePipelineDefinitionForExecutionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribePipelineDefinitionForExecutionResponse])
@@ -3929,26 +4176,28 @@ class SDK:
         return res
 
     
-    
     def describe_pipeline_execution(self, request: operations.DescribePipelineExecutionRequest) -> operations.DescribePipelineExecutionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribePipelineExecution"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribePipelineExecutionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribePipelineExecutionResponse])
@@ -3961,26 +4210,28 @@ class SDK:
         return res
 
     
-    
     def describe_processing_job(self, request: operations.DescribeProcessingJobRequest) -> operations.DescribeProcessingJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeProcessingJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeProcessingJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeProcessingJobResponse])
@@ -3993,26 +4244,28 @@ class SDK:
         return res
 
     
-    
     def describe_project(self, request: operations.DescribeProjectRequest) -> operations.DescribeProjectResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeProject"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeProjectResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeProjectOutput])
@@ -4021,26 +4274,28 @@ class SDK:
         return res
 
     
-    
     def describe_studio_lifecycle_config(self, request: operations.DescribeStudioLifecycleConfigRequest) -> operations.DescribeStudioLifecycleConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeStudioLifecycleConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeStudioLifecycleConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeStudioLifecycleConfigResponse])
@@ -4053,26 +4308,28 @@ class SDK:
         return res
 
     
-    
     def describe_subscribed_workteam(self, request: operations.DescribeSubscribedWorkteamRequest) -> operations.DescribeSubscribedWorkteamResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeSubscribedWorkteam"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeSubscribedWorkteamResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeSubscribedWorkteamResponse])
@@ -4081,26 +4338,28 @@ class SDK:
         return res
 
     
-    
     def describe_training_job(self, request: operations.DescribeTrainingJobRequest) -> operations.DescribeTrainingJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeTrainingJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeTrainingJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeTrainingJobResponse])
@@ -4113,26 +4372,28 @@ class SDK:
         return res
 
     
-    
     def describe_transform_job(self, request: operations.DescribeTransformJobRequest) -> operations.DescribeTransformJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeTransformJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeTransformJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeTransformJobResponse])
@@ -4145,26 +4406,28 @@ class SDK:
         return res
 
     
-    
     def describe_trial(self, request: operations.DescribeTrialRequest) -> operations.DescribeTrialResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeTrial"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeTrialResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeTrialResponse])
@@ -4177,26 +4440,28 @@ class SDK:
         return res
 
     
-    
     def describe_trial_component(self, request: operations.DescribeTrialComponentRequest) -> operations.DescribeTrialComponentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeTrialComponent"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeTrialComponentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeTrialComponentResponse])
@@ -4209,26 +4474,28 @@ class SDK:
         return res
 
     
-    
     def describe_user_profile(self, request: operations.DescribeUserProfileRequest) -> operations.DescribeUserProfileResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeUserProfile"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeUserProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeUserProfileResponse])
@@ -4241,26 +4508,28 @@ class SDK:
         return res
 
     
-    
     def describe_workforce(self, request: operations.DescribeWorkforceRequest) -> operations.DescribeWorkforceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeWorkforce"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeWorkforceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeWorkforceResponse])
@@ -4269,26 +4538,28 @@ class SDK:
         return res
 
     
-    
     def describe_workteam(self, request: operations.DescribeWorkteamRequest) -> operations.DescribeWorkteamResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DescribeWorkteam"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeWorkteamResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeWorkteamResponse])
@@ -4297,26 +4568,28 @@ class SDK:
         return res
 
     
-    
     def disable_sagemaker_servicecatalog_portfolio(self, request: operations.DisableSagemakerServicecatalogPortfolioRequest) -> operations.DisableSagemakerServicecatalogPortfolioResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DisableSagemakerServicecatalogPortfolio"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DisableSagemakerServicecatalogPortfolioResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -4325,26 +4598,28 @@ class SDK:
         return res
 
     
-    
     def disassociate_trial_component(self, request: operations.DisassociateTrialComponentRequest) -> operations.DisassociateTrialComponentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.DisassociateTrialComponent"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DisassociateTrialComponentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DisassociateTrialComponentResponse])
@@ -4357,26 +4632,28 @@ class SDK:
         return res
 
     
-    
     def enable_sagemaker_servicecatalog_portfolio(self, request: operations.EnableSagemakerServicecatalogPortfolioRequest) -> operations.EnableSagemakerServicecatalogPortfolioResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.EnableSagemakerServicecatalogPortfolio"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EnableSagemakerServicecatalogPortfolioResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -4385,26 +4662,28 @@ class SDK:
         return res
 
     
-    
     def get_device_fleet_report(self, request: operations.GetDeviceFleetReportRequest) -> operations.GetDeviceFleetReportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.GetDeviceFleetReport"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDeviceFleetReportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetDeviceFleetReportResponse])
@@ -4413,26 +4692,28 @@ class SDK:
         return res
 
     
-    
     def get_model_package_group_policy(self, request: operations.GetModelPackageGroupPolicyRequest) -> operations.GetModelPackageGroupPolicyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.GetModelPackageGroupPolicy"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetModelPackageGroupPolicyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetModelPackageGroupPolicyOutput])
@@ -4441,26 +4722,28 @@ class SDK:
         return res
 
     
-    
     def get_sagemaker_servicecatalog_portfolio_status(self, request: operations.GetSagemakerServicecatalogPortfolioStatusRequest) -> operations.GetSagemakerServicecatalogPortfolioStatusResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.GetSagemakerServicecatalogPortfolioStatus"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSagemakerServicecatalogPortfolioStatusResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetSagemakerServicecatalogPortfolioStatusOutput])
@@ -4469,26 +4752,28 @@ class SDK:
         return res
 
     
-    
     def get_search_suggestions(self, request: operations.GetSearchSuggestionsRequest) -> operations.GetSearchSuggestionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.GetSearchSuggestions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSearchSuggestionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetSearchSuggestionsResponse])
@@ -4497,27 +4782,30 @@ class SDK:
         return res
 
     
-    
     def list_actions(self, request: operations.ListActionsRequest) -> operations.ListActionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListActions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListActionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListActionsResponse])
@@ -4530,27 +4818,30 @@ class SDK:
         return res
 
     
-    
     def list_algorithms(self, request: operations.ListAlgorithmsRequest) -> operations.ListAlgorithmsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListAlgorithms"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAlgorithmsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAlgorithmsOutput])
@@ -4559,27 +4850,30 @@ class SDK:
         return res
 
     
-    
     def list_app_image_configs(self, request: operations.ListAppImageConfigsRequest) -> operations.ListAppImageConfigsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListAppImageConfigs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAppImageConfigsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAppImageConfigsResponse])
@@ -4588,27 +4882,30 @@ class SDK:
         return res
 
     
-    
     def list_apps(self, request: operations.ListAppsRequest) -> operations.ListAppsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListApps"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAppsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAppsResponse])
@@ -4617,27 +4914,30 @@ class SDK:
         return res
 
     
-    
     def list_artifacts(self, request: operations.ListArtifactsRequest) -> operations.ListArtifactsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListArtifacts"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListArtifactsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListArtifactsResponse])
@@ -4650,27 +4950,30 @@ class SDK:
         return res
 
     
-    
     def list_associations(self, request: operations.ListAssociationsRequest) -> operations.ListAssociationsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListAssociations"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAssociationsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAssociationsResponse])
@@ -4683,27 +4986,30 @@ class SDK:
         return res
 
     
-    
     def list_auto_ml_jobs(self, request: operations.ListAutoMlJobsRequest) -> operations.ListAutoMlJobsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListAutoMLJobs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAutoMlJobsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAutoMlJobsResponse])
@@ -4712,27 +5018,30 @@ class SDK:
         return res
 
     
-    
     def list_candidates_for_auto_ml_job(self, request: operations.ListCandidatesForAutoMlJobRequest) -> operations.ListCandidatesForAutoMlJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListCandidatesForAutoMLJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCandidatesForAutoMlJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListCandidatesForAutoMlJobResponse])
@@ -4745,27 +5054,30 @@ class SDK:
         return res
 
     
-    
     def list_code_repositories(self, request: operations.ListCodeRepositoriesRequest) -> operations.ListCodeRepositoriesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListCodeRepositories"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCodeRepositoriesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListCodeRepositoriesOutput])
@@ -4774,27 +5086,30 @@ class SDK:
         return res
 
     
-    
     def list_compilation_jobs(self, request: operations.ListCompilationJobsRequest) -> operations.ListCompilationJobsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListCompilationJobs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCompilationJobsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListCompilationJobsResponse])
@@ -4803,27 +5118,30 @@ class SDK:
         return res
 
     
-    
     def list_contexts(self, request: operations.ListContextsRequest) -> operations.ListContextsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListContexts"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListContextsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListContextsResponse])
@@ -4836,27 +5154,30 @@ class SDK:
         return res
 
     
-    
     def list_data_quality_job_definitions(self, request: operations.ListDataQualityJobDefinitionsRequest) -> operations.ListDataQualityJobDefinitionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListDataQualityJobDefinitions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListDataQualityJobDefinitionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListDataQualityJobDefinitionsResponse])
@@ -4865,27 +5186,30 @@ class SDK:
         return res
 
     
-    
     def list_device_fleets(self, request: operations.ListDeviceFleetsRequest) -> operations.ListDeviceFleetsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListDeviceFleets"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListDeviceFleetsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListDeviceFleetsResponse])
@@ -4894,27 +5218,30 @@ class SDK:
         return res
 
     
-    
     def list_devices(self, request: operations.ListDevicesRequest) -> operations.ListDevicesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListDevices"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListDevicesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListDevicesResponse])
@@ -4923,27 +5250,30 @@ class SDK:
         return res
 
     
-    
     def list_domains(self, request: operations.ListDomainsRequest) -> operations.ListDomainsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListDomains"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListDomainsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListDomainsResponse])
@@ -4952,27 +5282,30 @@ class SDK:
         return res
 
     
-    
     def list_edge_packaging_jobs(self, request: operations.ListEdgePackagingJobsRequest) -> operations.ListEdgePackagingJobsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListEdgePackagingJobs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEdgePackagingJobsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListEdgePackagingJobsResponse])
@@ -4981,27 +5314,30 @@ class SDK:
         return res
 
     
-    
     def list_endpoint_configs(self, request: operations.ListEndpointConfigsRequest) -> operations.ListEndpointConfigsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListEndpointConfigs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEndpointConfigsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListEndpointConfigsOutput])
@@ -5010,27 +5346,30 @@ class SDK:
         return res
 
     
-    
     def list_endpoints(self, request: operations.ListEndpointsRequest) -> operations.ListEndpointsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListEndpoints"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEndpointsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListEndpointsOutput])
@@ -5039,27 +5378,30 @@ class SDK:
         return res
 
     
-    
     def list_experiments(self, request: operations.ListExperimentsRequest) -> operations.ListExperimentsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListExperiments"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListExperimentsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListExperimentsResponse])
@@ -5068,27 +5410,30 @@ class SDK:
         return res
 
     
-    
     def list_feature_groups(self, request: operations.ListFeatureGroupsRequest) -> operations.ListFeatureGroupsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListFeatureGroups"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListFeatureGroupsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListFeatureGroupsResponse])
@@ -5097,27 +5442,30 @@ class SDK:
         return res
 
     
-    
     def list_flow_definitions(self, request: operations.ListFlowDefinitionsRequest) -> operations.ListFlowDefinitionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListFlowDefinitions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListFlowDefinitionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListFlowDefinitionsResponse])
@@ -5126,27 +5474,30 @@ class SDK:
         return res
 
     
-    
     def list_human_task_uis(self, request: operations.ListHumanTaskUisRequest) -> operations.ListHumanTaskUisResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListHumanTaskUis"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListHumanTaskUisResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListHumanTaskUisResponse])
@@ -5155,27 +5506,30 @@ class SDK:
         return res
 
     
-    
     def list_hyper_parameter_tuning_jobs(self, request: operations.ListHyperParameterTuningJobsRequest) -> operations.ListHyperParameterTuningJobsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListHyperParameterTuningJobs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListHyperParameterTuningJobsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListHyperParameterTuningJobsResponse])
@@ -5184,27 +5538,30 @@ class SDK:
         return res
 
     
-    
     def list_image_versions(self, request: operations.ListImageVersionsRequest) -> operations.ListImageVersionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListImageVersions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListImageVersionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListImageVersionsResponse])
@@ -5217,27 +5574,30 @@ class SDK:
         return res
 
     
-    
     def list_images(self, request: operations.ListImagesRequest) -> operations.ListImagesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListImages"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListImagesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListImagesResponse])
@@ -5246,27 +5606,30 @@ class SDK:
         return res
 
     
-    
     def list_labeling_jobs(self, request: operations.ListLabelingJobsRequest) -> operations.ListLabelingJobsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListLabelingJobs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListLabelingJobsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListLabelingJobsResponse])
@@ -5275,27 +5638,30 @@ class SDK:
         return res
 
     
-    
     def list_labeling_jobs_for_workteam(self, request: operations.ListLabelingJobsForWorkteamRequest) -> operations.ListLabelingJobsForWorkteamResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListLabelingJobsForWorkteam"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListLabelingJobsForWorkteamResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListLabelingJobsForWorkteamResponse])
@@ -5308,27 +5674,30 @@ class SDK:
         return res
 
     
-    
     def list_model_bias_job_definitions(self, request: operations.ListModelBiasJobDefinitionsRequest) -> operations.ListModelBiasJobDefinitionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListModelBiasJobDefinitions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListModelBiasJobDefinitionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListModelBiasJobDefinitionsResponse])
@@ -5337,27 +5706,30 @@ class SDK:
         return res
 
     
-    
     def list_model_explainability_job_definitions(self, request: operations.ListModelExplainabilityJobDefinitionsRequest) -> operations.ListModelExplainabilityJobDefinitionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListModelExplainabilityJobDefinitions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListModelExplainabilityJobDefinitionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListModelExplainabilityJobDefinitionsResponse])
@@ -5366,27 +5738,30 @@ class SDK:
         return res
 
     
-    
     def list_model_package_groups(self, request: operations.ListModelPackageGroupsRequest) -> operations.ListModelPackageGroupsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListModelPackageGroups"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListModelPackageGroupsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListModelPackageGroupsOutput])
@@ -5395,27 +5770,30 @@ class SDK:
         return res
 
     
-    
     def list_model_packages(self, request: operations.ListModelPackagesRequest) -> operations.ListModelPackagesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListModelPackages"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListModelPackagesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListModelPackagesOutput])
@@ -5424,27 +5802,30 @@ class SDK:
         return res
 
     
-    
     def list_model_quality_job_definitions(self, request: operations.ListModelQualityJobDefinitionsRequest) -> operations.ListModelQualityJobDefinitionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListModelQualityJobDefinitions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListModelQualityJobDefinitionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListModelQualityJobDefinitionsResponse])
@@ -5453,27 +5834,30 @@ class SDK:
         return res
 
     
-    
     def list_models(self, request: operations.ListModelsRequest) -> operations.ListModelsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListModels"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListModelsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListModelsOutput])
@@ -5482,27 +5866,30 @@ class SDK:
         return res
 
     
-    
     def list_monitoring_executions(self, request: operations.ListMonitoringExecutionsRequest) -> operations.ListMonitoringExecutionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListMonitoringExecutions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListMonitoringExecutionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListMonitoringExecutionsResponse])
@@ -5511,27 +5898,30 @@ class SDK:
         return res
 
     
-    
     def list_monitoring_schedules(self, request: operations.ListMonitoringSchedulesRequest) -> operations.ListMonitoringSchedulesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListMonitoringSchedules"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListMonitoringSchedulesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListMonitoringSchedulesResponse])
@@ -5540,27 +5930,30 @@ class SDK:
         return res
 
     
-    
     def list_notebook_instance_lifecycle_configs(self, request: operations.ListNotebookInstanceLifecycleConfigsRequest) -> operations.ListNotebookInstanceLifecycleConfigsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListNotebookInstanceLifecycleConfigs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListNotebookInstanceLifecycleConfigsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListNotebookInstanceLifecycleConfigsOutput])
@@ -5569,27 +5962,30 @@ class SDK:
         return res
 
     
-    
     def list_notebook_instances(self, request: operations.ListNotebookInstancesRequest) -> operations.ListNotebookInstancesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListNotebookInstances"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListNotebookInstancesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListNotebookInstancesOutput])
@@ -5598,27 +5994,30 @@ class SDK:
         return res
 
     
-    
     def list_pipeline_execution_steps(self, request: operations.ListPipelineExecutionStepsRequest) -> operations.ListPipelineExecutionStepsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListPipelineExecutionSteps"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListPipelineExecutionStepsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListPipelineExecutionStepsResponse])
@@ -5631,27 +6030,30 @@ class SDK:
         return res
 
     
-    
     def list_pipeline_executions(self, request: operations.ListPipelineExecutionsRequest) -> operations.ListPipelineExecutionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListPipelineExecutions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListPipelineExecutionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListPipelineExecutionsResponse])
@@ -5664,27 +6066,30 @@ class SDK:
         return res
 
     
-    
     def list_pipeline_parameters_for_execution(self, request: operations.ListPipelineParametersForExecutionRequest) -> operations.ListPipelineParametersForExecutionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListPipelineParametersForExecution"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListPipelineParametersForExecutionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListPipelineParametersForExecutionResponse])
@@ -5697,27 +6102,30 @@ class SDK:
         return res
 
     
-    
     def list_pipelines(self, request: operations.ListPipelinesRequest) -> operations.ListPipelinesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListPipelines"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListPipelinesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListPipelinesResponse])
@@ -5726,27 +6134,30 @@ class SDK:
         return res
 
     
-    
     def list_processing_jobs(self, request: operations.ListProcessingJobsRequest) -> operations.ListProcessingJobsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListProcessingJobs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListProcessingJobsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListProcessingJobsResponse])
@@ -5755,27 +6166,30 @@ class SDK:
         return res
 
     
-    
     def list_projects(self, request: operations.ListProjectsRequest) -> operations.ListProjectsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListProjects"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListProjectsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListProjectsOutput])
@@ -5784,27 +6198,30 @@ class SDK:
         return res
 
     
-    
     def list_studio_lifecycle_configs(self, request: operations.ListStudioLifecycleConfigsRequest) -> operations.ListStudioLifecycleConfigsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListStudioLifecycleConfigs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListStudioLifecycleConfigsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListStudioLifecycleConfigsResponse])
@@ -5817,27 +6234,30 @@ class SDK:
         return res
 
     
-    
     def list_subscribed_workteams(self, request: operations.ListSubscribedWorkteamsRequest) -> operations.ListSubscribedWorkteamsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListSubscribedWorkteams"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSubscribedWorkteamsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListSubscribedWorkteamsResponse])
@@ -5846,27 +6266,30 @@ class SDK:
         return res
 
     
-    
     def list_tags(self, request: operations.ListTagsRequest) -> operations.ListTagsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListTags"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTagsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListTagsOutput])
@@ -5875,27 +6298,30 @@ class SDK:
         return res
 
     
-    
     def list_training_jobs(self, request: operations.ListTrainingJobsRequest) -> operations.ListTrainingJobsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListTrainingJobs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTrainingJobsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListTrainingJobsResponse])
@@ -5904,27 +6330,30 @@ class SDK:
         return res
 
     
-    
     def list_training_jobs_for_hyper_parameter_tuning_job(self, request: operations.ListTrainingJobsForHyperParameterTuningJobRequest) -> operations.ListTrainingJobsForHyperParameterTuningJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListTrainingJobsForHyperParameterTuningJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTrainingJobsForHyperParameterTuningJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListTrainingJobsForHyperParameterTuningJobResponse])
@@ -5937,27 +6366,30 @@ class SDK:
         return res
 
     
-    
     def list_transform_jobs(self, request: operations.ListTransformJobsRequest) -> operations.ListTransformJobsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListTransformJobs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTransformJobsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListTransformJobsResponse])
@@ -5966,27 +6398,30 @@ class SDK:
         return res
 
     
-    
     def list_trial_components(self, request: operations.ListTrialComponentsRequest) -> operations.ListTrialComponentsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListTrialComponents"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTrialComponentsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListTrialComponentsResponse])
@@ -5999,27 +6434,30 @@ class SDK:
         return res
 
     
-    
     def list_trials(self, request: operations.ListTrialsRequest) -> operations.ListTrialsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListTrials"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTrialsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListTrialsResponse])
@@ -6032,27 +6470,30 @@ class SDK:
         return res
 
     
-    
     def list_user_profiles(self, request: operations.ListUserProfilesRequest) -> operations.ListUserProfilesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListUserProfiles"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUserProfilesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListUserProfilesResponse])
@@ -6061,27 +6502,30 @@ class SDK:
         return res
 
     
-    
     def list_workforces(self, request: operations.ListWorkforcesRequest) -> operations.ListWorkforcesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListWorkforces"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListWorkforcesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListWorkforcesResponse])
@@ -6090,27 +6534,30 @@ class SDK:
         return res
 
     
-    
     def list_workteams(self, request: operations.ListWorkteamsRequest) -> operations.ListWorkteamsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.ListWorkteams"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListWorkteamsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListWorkteamsResponse])
@@ -6119,26 +6566,28 @@ class SDK:
         return res
 
     
-    
     def put_model_package_group_policy(self, request: operations.PutModelPackageGroupPolicyRequest) -> operations.PutModelPackageGroupPolicyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.PutModelPackageGroupPolicy"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutModelPackageGroupPolicyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PutModelPackageGroupPolicyOutput])
@@ -6147,26 +6596,28 @@ class SDK:
         return res
 
     
-    
     def register_devices(self, request: operations.RegisterDevicesRequest) -> operations.RegisterDevicesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.RegisterDevices"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RegisterDevicesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -6177,26 +6628,28 @@ class SDK:
         return res
 
     
-    
     def render_ui_template(self, request: operations.RenderUITemplateRequest) -> operations.RenderUITemplateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.RenderUiTemplate"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RenderUITemplateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.RenderUITemplateResponse])
@@ -6209,26 +6662,28 @@ class SDK:
         return res
 
     
-    
     def retry_pipeline_execution(self, request: operations.RetryPipelineExecutionRequest) -> operations.RetryPipelineExecutionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.RetryPipelineExecution"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RetryPipelineExecutionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.RetryPipelineExecutionResponse])
@@ -6249,27 +6704,30 @@ class SDK:
         return res
 
     
-    
     def search(self, request: operations.SearchRequest) -> operations.SearchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.Search"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SearchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SearchResponse])
@@ -6278,26 +6736,28 @@ class SDK:
         return res
 
     
-    
     def send_pipeline_execution_step_failure(self, request: operations.SendPipelineExecutionStepFailureRequest) -> operations.SendPipelineExecutionStepFailureResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.SendPipelineExecutionStepFailure"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SendPipelineExecutionStepFailureResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SendPipelineExecutionStepFailureResponse])
@@ -6314,26 +6774,28 @@ class SDK:
         return res
 
     
-    
     def send_pipeline_execution_step_success(self, request: operations.SendPipelineExecutionStepSuccessRequest) -> operations.SendPipelineExecutionStepSuccessResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.SendPipelineExecutionStepSuccess"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SendPipelineExecutionStepSuccessResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SendPipelineExecutionStepSuccessResponse])
@@ -6350,26 +6812,28 @@ class SDK:
         return res
 
     
-    
     def start_monitoring_schedule(self, request: operations.StartMonitoringScheduleRequest) -> operations.StartMonitoringScheduleResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StartMonitoringSchedule"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StartMonitoringScheduleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -6380,26 +6844,28 @@ class SDK:
         return res
 
     
-    
     def start_notebook_instance(self, request: operations.StartNotebookInstanceRequest) -> operations.StartNotebookInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StartNotebookInstance"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StartNotebookInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -6410,26 +6876,28 @@ class SDK:
         return res
 
     
-    
     def start_pipeline_execution(self, request: operations.StartPipelineExecutionRequest) -> operations.StartPipelineExecutionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StartPipelineExecution"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StartPipelineExecutionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.StartPipelineExecutionResponse])
@@ -6446,26 +6914,28 @@ class SDK:
         return res
 
     
-    
     def stop_auto_ml_job(self, request: operations.StopAutoMlJobRequest) -> operations.StopAutoMlJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StopAutoMLJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StopAutoMlJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -6475,27 +6945,29 @@ class SDK:
 
         return res
 
-    
     
     def stop_compilation_job(self, request: operations.StopCompilationJobRequest) -> operations.StopCompilationJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StopCompilationJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StopCompilationJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -6505,53 +6977,57 @@ class SDK:
 
         return res
 
-    
     
     def stop_edge_packaging_job(self, request: operations.StopEdgePackagingJobRequest) -> operations.StopEdgePackagingJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StopEdgePackagingJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StopEdgePackagingJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 
         return res
 
-    
     
     def stop_hyper_parameter_tuning_job(self, request: operations.StopHyperParameterTuningJobRequest) -> operations.StopHyperParameterTuningJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StopHyperParameterTuningJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StopHyperParameterTuningJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -6561,27 +7037,29 @@ class SDK:
 
         return res
 
-    
     
     def stop_labeling_job(self, request: operations.StopLabelingJobRequest) -> operations.StopLabelingJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StopLabelingJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StopLabelingJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -6591,27 +7069,29 @@ class SDK:
 
         return res
 
-    
     
     def stop_monitoring_schedule(self, request: operations.StopMonitoringScheduleRequest) -> operations.StopMonitoringScheduleResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StopMonitoringSchedule"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StopMonitoringScheduleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -6622,52 +7102,56 @@ class SDK:
         return res
 
     
-    
     def stop_notebook_instance(self, request: operations.StopNotebookInstanceRequest) -> operations.StopNotebookInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StopNotebookInstance"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StopNotebookInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 
         return res
 
     
-    
     def stop_pipeline_execution(self, request: operations.StopPipelineExecutionRequest) -> operations.StopPipelineExecutionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StopPipelineExecution"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StopPipelineExecutionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.StopPipelineExecutionResponse])
@@ -6680,26 +7164,28 @@ class SDK:
         return res
 
     
-    
     def stop_processing_job(self, request: operations.StopProcessingJobRequest) -> operations.StopProcessingJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StopProcessingJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StopProcessingJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -6709,27 +7195,29 @@ class SDK:
 
         return res
 
-    
     
     def stop_training_job(self, request: operations.StopTrainingJobRequest) -> operations.StopTrainingJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StopTrainingJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StopTrainingJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -6739,27 +7227,29 @@ class SDK:
 
         return res
 
-    
     
     def stop_transform_job(self, request: operations.StopTransformJobRequest) -> operations.StopTransformJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.StopTransformJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StopTransformJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -6770,26 +7260,28 @@ class SDK:
         return res
 
     
-    
     def update_action(self, request: operations.UpdateActionRequest) -> operations.UpdateActionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateAction"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateActionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateActionResponse])
@@ -6806,26 +7298,28 @@ class SDK:
         return res
 
     
-    
     def update_app_image_config(self, request: operations.UpdateAppImageConfigRequest) -> operations.UpdateAppImageConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateAppImageConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateAppImageConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateAppImageConfigResponse])
@@ -6838,26 +7332,28 @@ class SDK:
         return res
 
     
-    
     def update_artifact(self, request: operations.UpdateArtifactRequest) -> operations.UpdateArtifactResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateArtifact"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateArtifactResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateArtifactResponse])
@@ -6874,26 +7370,28 @@ class SDK:
         return res
 
     
-    
     def update_code_repository(self, request: operations.UpdateCodeRepositoryRequest) -> operations.UpdateCodeRepositoryResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateCodeRepository"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateCodeRepositoryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateCodeRepositoryOutput])
@@ -6902,26 +7400,28 @@ class SDK:
         return res
 
     
-    
     def update_context(self, request: operations.UpdateContextRequest) -> operations.UpdateContextResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateContext"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateContextResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateContextResponse])
@@ -6938,26 +7438,28 @@ class SDK:
         return res
 
     
-    
     def update_device_fleet(self, request: operations.UpdateDeviceFleetRequest) -> operations.UpdateDeviceFleetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateDeviceFleet"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateDeviceFleetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -6968,52 +7470,56 @@ class SDK:
         return res
 
     
-    
     def update_devices(self, request: operations.UpdateDevicesRequest) -> operations.UpdateDevicesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateDevices"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateDevicesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 
         return res
 
     
-    
     def update_domain(self, request: operations.UpdateDomainRequest) -> operations.UpdateDomainResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateDomain"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateDomainResponse])
@@ -7034,26 +7540,28 @@ class SDK:
         return res
 
     
-    
     def update_endpoint(self, request: operations.UpdateEndpointRequest) -> operations.UpdateEndpointResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateEndpoint"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateEndpointResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateEndpointOutput])
@@ -7066,26 +7574,28 @@ class SDK:
         return res
 
     
-    
     def update_endpoint_weights_and_capacities(self, request: operations.UpdateEndpointWeightsAndCapacitiesRequest) -> operations.UpdateEndpointWeightsAndCapacitiesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateEndpointWeightsAndCapacities"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateEndpointWeightsAndCapacitiesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateEndpointWeightsAndCapacitiesOutput])
@@ -7098,26 +7608,28 @@ class SDK:
         return res
 
     
-    
     def update_experiment(self, request: operations.UpdateExperimentRequest) -> operations.UpdateExperimentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateExperiment"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateExperimentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateExperimentResponse])
@@ -7134,26 +7646,28 @@ class SDK:
         return res
 
     
-    
     def update_image(self, request: operations.UpdateImageRequest) -> operations.UpdateImageResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateImage"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateImageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateImageResponse])
@@ -7170,26 +7684,28 @@ class SDK:
         return res
 
     
-    
     def update_model_package(self, request: operations.UpdateModelPackageRequest) -> operations.UpdateModelPackageResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateModelPackage"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateModelPackageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateModelPackageOutput])
@@ -7198,26 +7714,28 @@ class SDK:
         return res
 
     
-    
     def update_monitoring_schedule(self, request: operations.UpdateMonitoringScheduleRequest) -> operations.UpdateMonitoringScheduleResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateMonitoringSchedule"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateMonitoringScheduleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateMonitoringScheduleResponse])
@@ -7234,26 +7752,28 @@ class SDK:
         return res
 
     
-    
     def update_notebook_instance(self, request: operations.UpdateNotebookInstanceRequest) -> operations.UpdateNotebookInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateNotebookInstance"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateNotebookInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -7266,26 +7786,28 @@ class SDK:
         return res
 
     
-    
     def update_notebook_instance_lifecycle_config(self, request: operations.UpdateNotebookInstanceLifecycleConfigRequest) -> operations.UpdateNotebookInstanceLifecycleConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateNotebookInstanceLifecycleConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateNotebookInstanceLifecycleConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -7298,26 +7820,28 @@ class SDK:
         return res
 
     
-    
     def update_pipeline(self, request: operations.UpdatePipelineRequest) -> operations.UpdatePipelineResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdatePipeline"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdatePipelineResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdatePipelineResponse])
@@ -7330,26 +7854,28 @@ class SDK:
         return res
 
     
-    
     def update_pipeline_execution(self, request: operations.UpdatePipelineExecutionRequest) -> operations.UpdatePipelineExecutionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdatePipelineExecution"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdatePipelineExecutionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdatePipelineExecutionResponse])
@@ -7362,26 +7888,28 @@ class SDK:
         return res
 
     
-    
     def update_training_job(self, request: operations.UpdateTrainingJobRequest) -> operations.UpdateTrainingJobResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateTrainingJob"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateTrainingJobResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateTrainingJobResponse])
@@ -7394,26 +7922,28 @@ class SDK:
         return res
 
     
-    
     def update_trial(self, request: operations.UpdateTrialRequest) -> operations.UpdateTrialResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateTrial"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateTrialResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateTrialResponse])
@@ -7430,26 +7960,28 @@ class SDK:
         return res
 
     
-    
     def update_trial_component(self, request: operations.UpdateTrialComponentRequest) -> operations.UpdateTrialComponentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateTrialComponent"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateTrialComponentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateTrialComponentResponse])
@@ -7466,26 +7998,28 @@ class SDK:
         return res
 
     
-    
     def update_user_profile(self, request: operations.UpdateUserProfileRequest) -> operations.UpdateUserProfileResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateUserProfile"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateUserProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateUserProfileResponse])
@@ -7506,26 +8040,28 @@ class SDK:
         return res
 
     
-    
     def update_workforce(self, request: operations.UpdateWorkforceRequest) -> operations.UpdateWorkforceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateWorkforce"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateWorkforceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateWorkforceResponse])
@@ -7534,26 +8070,28 @@ class SDK:
         return res
 
     
-    
     def update_workteam(self, request: operations.UpdateWorkteamRequest) -> operations.UpdateWorkteamResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=SageMaker.UpdateWorkteam"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateWorkteamResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateWorkteamResponse])

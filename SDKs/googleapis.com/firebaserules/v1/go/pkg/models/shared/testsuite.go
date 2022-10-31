@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TestSuite struct {
-	TestCases []TestCase `json:"testCases,omitempty"`
+    TestCases []TestCase `json:"testCases,omitempty"`
+    
 }
+

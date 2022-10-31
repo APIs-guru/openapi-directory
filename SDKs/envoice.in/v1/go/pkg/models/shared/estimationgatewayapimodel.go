@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EstimationGatewayAPIModel struct {
-	Name *string `json:"Name,omitempty"`
+    Name *string `json:"Name,omitempty"`
+    
 }
+

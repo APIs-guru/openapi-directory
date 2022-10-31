@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateRecommenderConfigurationResponse struct {
-	RecommenderConfigurationResponse RecommenderConfigurationResponse `json:"RecommenderConfigurationResponse"`
+    RecommenderConfigurationResponse RecommenderConfigurationResponse `json:"RecommenderConfigurationResponse"`
+    
 }
+

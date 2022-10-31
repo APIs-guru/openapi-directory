@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AnalyticsDataimportDeleteUploadDataRequest struct {
-	CustomDataImportUids []string `json:"customDataImportUids,omitempty"`
+    CustomDataImportUids []string `json:"customDataImportUids,omitempty"`
+    
 }
+

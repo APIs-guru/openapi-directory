@@ -22,29 +22,34 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def add_tags_to_on_premises_instances(self, request: operations.AddTagsToOnPremisesInstancesRequest) -> operations.AddTagsToOnPremisesInstancesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.AddTagsToOnPremisesInstances"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AddTagsToOnPremisesInstancesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -79,26 +84,28 @@ class SDK:
         return res
 
     
-    
     def batch_get_application_revisions(self, request: operations.BatchGetApplicationRevisionsRequest) -> operations.BatchGetApplicationRevisionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetApplicationRevisions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.BatchGetApplicationRevisionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.BatchGetApplicationRevisionsOutput])
@@ -131,26 +138,28 @@ class SDK:
         return res
 
     
-    
     def batch_get_applications(self, request: operations.BatchGetApplicationsRequest) -> operations.BatchGetApplicationsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetApplications"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.BatchGetApplicationsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.BatchGetApplicationsOutput])
@@ -175,26 +184,28 @@ class SDK:
         return res
 
     
-    
     def batch_get_deployment_groups(self, request: operations.BatchGetDeploymentGroupsRequest) -> operations.BatchGetDeploymentGroupsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetDeploymentGroups"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.BatchGetDeploymentGroupsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.BatchGetDeploymentGroupsOutput])
@@ -231,26 +242,28 @@ class SDK:
         return res
 
     
-    
     def batch_get_deployment_instances(self, request: operations.BatchGetDeploymentInstancesRequest) -> operations.BatchGetDeploymentInstancesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetDeploymentInstances"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.BatchGetDeploymentInstancesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.BatchGetDeploymentInstancesOutput])
@@ -287,26 +300,28 @@ class SDK:
         return res
 
     
-    
     def batch_get_deployment_targets(self, request: operations.BatchGetDeploymentTargetsRequest) -> operations.BatchGetDeploymentTargetsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetDeploymentTargets"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.BatchGetDeploymentTargetsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.BatchGetDeploymentTargetsOutput])
@@ -351,26 +366,28 @@ class SDK:
         return res
 
     
-    
     def batch_get_deployments(self, request: operations.BatchGetDeploymentsRequest) -> operations.BatchGetDeploymentsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetDeployments"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.BatchGetDeploymentsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.BatchGetDeploymentsOutput])
@@ -391,26 +408,28 @@ class SDK:
         return res
 
     
-    
     def batch_get_on_premises_instances(self, request: operations.BatchGetOnPremisesInstancesRequest) -> operations.BatchGetOnPremisesInstancesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.BatchGetOnPremisesInstances"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.BatchGetOnPremisesInstancesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.BatchGetOnPremisesInstancesOutput])
@@ -431,26 +450,28 @@ class SDK:
         return res
 
     
-    
     def continue_deployment(self, request: operations.ContinueDeploymentRequest) -> operations.ContinueDeploymentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.ContinueDeployment"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ContinueDeploymentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -489,26 +510,28 @@ class SDK:
         return res
 
     
-    
     def create_application(self, request: operations.CreateApplicationRequest) -> operations.CreateApplicationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.CreateApplication"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateApplicationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateApplicationOutput])
@@ -541,26 +564,28 @@ class SDK:
         return res
 
     
-    
     def create_deployment(self, request: operations.CreateDeploymentRequest) -> operations.CreateDeploymentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.CreateDeployment"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateDeploymentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateDeploymentOutput])
@@ -665,26 +690,28 @@ class SDK:
         return res
 
     
-    
     def create_deployment_config(self, request: operations.CreateDeploymentConfigRequest) -> operations.CreateDeploymentConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.CreateDeploymentConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateDeploymentConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateDeploymentConfigOutput])
@@ -721,26 +748,28 @@ class SDK:
         return res
 
     
-    
     def create_deployment_group(self, request: operations.CreateDeploymentGroupRequest) -> operations.CreateDeploymentGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.CreateDeploymentGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateDeploymentGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateDeploymentGroupOutput])
@@ -881,26 +910,28 @@ class SDK:
         return res
 
     
-    
     def delete_application(self, request: operations.DeleteApplicationRequest) -> operations.DeleteApplicationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.DeleteApplication"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteApplicationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -919,26 +950,28 @@ class SDK:
         return res
 
     
-    
     def delete_deployment_config(self, request: operations.DeleteDeploymentConfigRequest) -> operations.DeleteDeploymentConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.DeleteDeploymentConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDeploymentConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -961,26 +994,28 @@ class SDK:
         return res
 
     
-    
     def delete_deployment_group(self, request: operations.DeleteDeploymentGroupRequest) -> operations.DeleteDeploymentGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.DeleteDeploymentGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDeploymentGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteDeploymentGroupOutput])
@@ -1009,26 +1044,28 @@ class SDK:
         return res
 
     
-    
     def delete_git_hub_account_token(self, request: operations.DeleteGitHubAccountTokenRequest) -> operations.DeleteGitHubAccountTokenResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.DeleteGitHubAccountToken"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteGitHubAccountTokenResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteGitHubAccountTokenOutput])
@@ -1057,26 +1094,28 @@ class SDK:
         return res
 
     
-    
     def delete_resources_by_external_id(self, request: operations.DeleteResourcesByExternalIDRequest) -> operations.DeleteResourcesByExternalIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.DeleteResourcesByExternalId"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteResourcesByExternalIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1085,26 +1124,28 @@ class SDK:
         return res
 
     
-    
     def deregister_on_premises_instance(self, request: operations.DeregisterOnPremisesInstanceRequest) -> operations.DeregisterOnPremisesInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.DeregisterOnPremisesInstance"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeregisterOnPremisesInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -1119,26 +1160,28 @@ class SDK:
         return res
 
     
-    
     def get_application(self, request: operations.GetApplicationRequest) -> operations.GetApplicationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.GetApplication"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetApplicationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetApplicationOutput])
@@ -1159,26 +1202,28 @@ class SDK:
         return res
 
     
-    
     def get_application_revision(self, request: operations.GetApplicationRevisionRequest) -> operations.GetApplicationRevisionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.GetApplicationRevision"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetApplicationRevisionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetApplicationRevisionOutput])
@@ -1211,26 +1256,28 @@ class SDK:
         return res
 
     
-    
     def get_deployment(self, request: operations.GetDeploymentRequest) -> operations.GetDeploymentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.GetDeployment"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDeploymentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetDeploymentOutput])
@@ -1251,26 +1298,28 @@ class SDK:
         return res
 
     
-    
     def get_deployment_config(self, request: operations.GetDeploymentConfigRequest) -> operations.GetDeploymentConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.GetDeploymentConfig"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDeploymentConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetDeploymentConfigOutput])
@@ -1295,26 +1344,28 @@ class SDK:
         return res
 
     
-    
     def get_deployment_group(self, request: operations.GetDeploymentGroupRequest) -> operations.GetDeploymentGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.GetDeploymentGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDeploymentGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetDeploymentGroupOutput])
@@ -1351,26 +1402,28 @@ class SDK:
         return res
 
     
-    
     def get_deployment_instance(self, request: operations.GetDeploymentInstanceRequest) -> operations.GetDeploymentInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.GetDeploymentInstance"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDeploymentInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetDeploymentInstanceOutput])
@@ -1407,26 +1460,28 @@ class SDK:
         return res
 
     
-    
     def get_deployment_target(self, request: operations.GetDeploymentTargetRequest) -> operations.GetDeploymentTargetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.GetDeploymentTarget"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDeploymentTargetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetDeploymentTargetOutput])
@@ -1467,26 +1522,28 @@ class SDK:
         return res
 
     
-    
     def get_on_premises_instance(self, request: operations.GetOnPremisesInstanceRequest) -> operations.GetOnPremisesInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.GetOnPremisesInstance"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetOnPremisesInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetOnPremisesInstanceOutput])
@@ -1507,27 +1564,30 @@ class SDK:
         return res
 
     
-    
     def list_application_revisions(self, request: operations.ListApplicationRevisionsRequest) -> operations.ListApplicationRevisionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.ListApplicationRevisions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListApplicationRevisionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListApplicationRevisionsOutput])
@@ -1576,27 +1636,30 @@ class SDK:
         return res
 
     
-    
     def list_applications(self, request: operations.ListApplicationsRequest) -> operations.ListApplicationsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.ListApplications"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListApplicationsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListApplicationsOutput])
@@ -1609,27 +1672,30 @@ class SDK:
         return res
 
     
-    
     def list_deployment_configs(self, request: operations.ListDeploymentConfigsRequest) -> operations.ListDeploymentConfigsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.ListDeploymentConfigs"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListDeploymentConfigsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListDeploymentConfigsOutput])
@@ -1642,27 +1708,30 @@ class SDK:
         return res
 
     
-    
     def list_deployment_groups(self, request: operations.ListDeploymentGroupsRequest) -> operations.ListDeploymentGroupsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.ListDeploymentGroups"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListDeploymentGroupsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListDeploymentGroupsOutput])
@@ -1687,27 +1756,30 @@ class SDK:
         return res
 
     
-    
     def list_deployment_instances(self, request: operations.ListDeploymentInstancesRequest) -> operations.ListDeploymentInstancesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.ListDeploymentInstances"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListDeploymentInstancesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListDeploymentInstancesOutput])
@@ -1756,26 +1828,28 @@ class SDK:
         return res
 
     
-    
     def list_deployment_targets(self, request: operations.ListDeploymentTargetsRequest) -> operations.ListDeploymentTargetsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.ListDeploymentTargets"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListDeploymentTargetsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListDeploymentTargetsOutput])
@@ -1816,27 +1890,30 @@ class SDK:
         return res
 
     
-    
     def list_deployments(self, request: operations.ListDeploymentsRequest) -> operations.ListDeploymentsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.ListDeployments"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListDeploymentsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListDeploymentsOutput])
@@ -1889,26 +1966,28 @@ class SDK:
         return res
 
     
-    
     def list_git_hub_account_token_names(self, request: operations.ListGitHubAccountTokenNamesRequest) -> operations.ListGitHubAccountTokenNamesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.ListGitHubAccountTokenNames"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListGitHubAccountTokenNamesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListGitHubAccountTokenNamesOutput])
@@ -1929,26 +2008,28 @@ class SDK:
         return res
 
     
-    
     def list_on_premises_instances(self, request: operations.ListOnPremisesInstancesRequest) -> operations.ListOnPremisesInstancesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.ListOnPremisesInstances"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListOnPremisesInstancesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListOnPremisesInstancesOutput])
@@ -1969,26 +2050,28 @@ class SDK:
         return res
 
     
-    
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.ListTagsForResource"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTagsForResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListTagsForResourceOutput])
@@ -2009,26 +2092,28 @@ class SDK:
         return res
 
     
-    
     def put_lifecycle_event_hook_execution_status(self, request: operations.PutLifecycleEventHookExecutionStatusRequest) -> operations.PutLifecycleEventHookExecutionStatusResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.PutLifecycleEventHookExecutionStatus"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutLifecycleEventHookExecutionStatusResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PutLifecycleEventHookExecutionStatusOutput])
@@ -2065,26 +2150,28 @@ class SDK:
         return res
 
     
-    
     def register_application_revision(self, request: operations.RegisterApplicationRevisionRequest) -> operations.RegisterApplicationRevisionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.RegisterApplicationRevision"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RegisterApplicationRevisionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2115,26 +2202,28 @@ class SDK:
         return res
 
     
-    
     def register_on_premises_instance(self, request: operations.RegisterOnPremisesInstanceRequest) -> operations.RegisterOnPremisesInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.RegisterOnPremisesInstance"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RegisterOnPremisesInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2181,26 +2270,28 @@ class SDK:
         return res
 
     
-    
     def remove_tags_from_on_premises_instances(self, request: operations.RemoveTagsFromOnPremisesInstancesRequest) -> operations.RemoveTagsFromOnPremisesInstancesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.RemoveTagsFromOnPremisesInstances"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RemoveTagsFromOnPremisesInstancesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2235,26 +2326,28 @@ class SDK:
         return res
 
     
-    
     def skip_wait_time_for_instance_termination(self, request: operations.SkipWaitTimeForInstanceTerminationRequest) -> operations.SkipWaitTimeForInstanceTerminationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.SkipWaitTimeForInstanceTermination"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SkipWaitTimeForInstanceTerminationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2285,26 +2378,28 @@ class SDK:
         return res
 
     
-    
     def stop_deployment(self, request: operations.StopDeploymentRequest) -> operations.StopDeploymentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.StopDeployment"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.StopDeploymentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.StopDeploymentOutput])
@@ -2337,26 +2432,28 @@ class SDK:
         return res
 
     
-    
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.TagResource"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TagResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2397,26 +2494,28 @@ class SDK:
         return res
 
     
-    
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.UntagResource"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UntagResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2457,26 +2556,28 @@ class SDK:
         return res
 
     
-    
     def update_application(self, request: operations.UpdateApplicationRequest) -> operations.UpdateApplicationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.UpdateApplication"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateApplicationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 480:
@@ -2499,26 +2600,28 @@ class SDK:
         return res
 
     
-    
     def update_deployment_group(self, request: operations.UpdateDeploymentGroupRequest) -> operations.UpdateDeploymentGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/#X-Amz-Target=CodeDeploy_20141006.UpdateDeploymentGroup"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateDeploymentGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateDeploymentGroupOutput])

@@ -1,7 +1,11 @@
 package operations
 
+
+
 type CitationsStylesListResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

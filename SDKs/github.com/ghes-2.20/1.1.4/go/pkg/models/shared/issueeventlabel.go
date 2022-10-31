@@ -1,6 +1,10 @@
 package shared
 
+
+
 type IssueEventLabel struct {
-	Color string `json:"color"`
-	Name  string `json:"name"`
+    Color string `json:"color"`
+    Name string `json:"name"`
+    
 }
+

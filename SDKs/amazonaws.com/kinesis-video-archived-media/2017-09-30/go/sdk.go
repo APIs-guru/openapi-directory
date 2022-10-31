@@ -76,7 +76,10 @@ func (s *SDK) GetClip(ctx context.Context, request operations.GetClipRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -214,7 +217,10 @@ func (s *SDK) GetDashStreamingSessionURL(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -342,7 +348,10 @@ func (s *SDK) GetHlsStreamingSessionURL(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -470,7 +479,10 @@ func (s *SDK) GetMediaForFragmentList(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -558,7 +570,10 @@ func (s *SDK) ListFragments(ctx context.Context, request operations.ListFragment
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 

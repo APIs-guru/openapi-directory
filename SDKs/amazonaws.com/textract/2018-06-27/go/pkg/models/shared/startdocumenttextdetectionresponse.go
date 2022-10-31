@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StartDocumentTextDetectionResponse struct {
-	JobID *string `json:"JobId,omitempty"`
+    JobID *string `json:"JobId,omitempty"`
+    
 }
+

@@ -63,6 +63,7 @@ func (s *SDK) Delcs(ctx context.Context, request operations.DelcsRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -169,6 +170,7 @@ func (s *SDK) Malcs(ctx context.Context, request operations.MalcsRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -275,6 +277,7 @@ func (s *SDK) Palcs(ctx context.Context, request operations.PalcsRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -381,6 +384,7 @@ func (s *SDK) Relcs(ctx context.Context, request operations.RelcsRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

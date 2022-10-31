@@ -1,16 +1,22 @@
 package operations
 
+
+
 type GetGeneTypeCountUsingGetPathParams struct {
-	DateYyyymmdd   string `pathParam:"style=simple,explode=false,name=dateYYYYMMDD"`
-	SpeciesTypeKey int32  `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
+    DateYyyymmdd string `pathParam:"style=simple,explode=false,name=dateYYYYMMDD"`
+    SpeciesTypeKey int32 `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
+    
 }
 
 type GetGeneTypeCountUsingGetRequest struct {
-	PathParams GetGeneTypeCountUsingGetPathParams
+    PathParams GetGeneTypeCountUsingGetPathParams 
+    
 }
 
 type GetGeneTypeCountUsingGetResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

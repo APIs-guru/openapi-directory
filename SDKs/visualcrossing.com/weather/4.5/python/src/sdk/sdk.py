@@ -18,7 +18,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def get_visual_crossing_web_services_rest_services_weatherdata_forecast(self, request: operations.GetVisualCrossingWebServicesRestServicesWeatherdataForecastRequest) -> operations.GetVisualCrossingWebServicesRestServicesWeatherdataForecastResponse:
         warnings.simplefilter("ignore")
@@ -27,20 +29,21 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/VisualCrossingWebServices/rest/services/weatherdata/forecast"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetVisualCrossingWebServicesRestServicesWeatherdataForecastResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 
         return res
 
-    
     
     def get_visual_crossing_web_services_rest_services_weatherdata_history(self, request: operations.GetVisualCrossingWebServicesRestServicesWeatherdataHistoryRequest) -> operations.GetVisualCrossingWebServicesRestServicesWeatherdataHistoryResponse:
         warnings.simplefilter("ignore")
@@ -49,14 +52,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/VisualCrossingWebServices/rest/services/weatherdata/history"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetVisualCrossingWebServicesRestServicesWeatherdataHistoryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
 

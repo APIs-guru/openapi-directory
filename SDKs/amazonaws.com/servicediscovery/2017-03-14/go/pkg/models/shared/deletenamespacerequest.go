@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteNamespaceRequest struct {
-	ID string `json:"Id"`
+    ID string `json:"Id"`
+    
 }
+

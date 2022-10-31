@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ResourceProperties struct {
-	ExcludesDescendants *bool `json:"excludesDescendants,omitempty"`
+    ExcludesDescendants *bool `json:"excludesDescendants,omitempty"`
+    
 }
+

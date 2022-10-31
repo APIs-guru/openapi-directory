@@ -1,9 +1,10 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type Snapshot struct {
-	SnapshotTime *time.Time `json:"SnapshotTime,omitempty"`
+    SnapshotTime *time.Time `json:"SnapshotTime,omitempty"`
+    
 }
+

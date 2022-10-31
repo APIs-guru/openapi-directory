@@ -1,60 +1,70 @@
 package shared
 
+
+
+
 type PartnerCostCostTypeEnum string
 
 const (
-	PartnerCostCostTypeEnumPartnerCostTypeUnspecified             PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_UNSPECIFIED"
-	PartnerCostCostTypeEnumPartnerCostTypeAdloox                  PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_ADLOOX"
-	PartnerCostCostTypeEnumPartnerCostTypeAdlooxPrebid            PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_ADLOOX_PREBID"
-	PartnerCostCostTypeEnumPartnerCostTypeAdsafe                  PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_ADSAFE"
-	PartnerCostCostTypeEnumPartnerCostTypeAdxpose                 PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_ADXPOSE"
-	PartnerCostCostTypeEnumPartnerCostTypeAggregateKnowledge      PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_AGGREGATE_KNOWLEDGE"
-	PartnerCostCostTypeEnumPartnerCostTypeAgencyTradingDesk       PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_AGENCY_TRADING_DESK"
-	PartnerCostCostTypeEnumPartnerCostTypeDv360Fee                PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_DV360_FEE"
-	PartnerCostCostTypeEnumPartnerCostTypeComscoreVce             PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_COMSCORE_VCE"
-	PartnerCostCostTypeEnumPartnerCostTypeDataManagementPlatform  PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_DATA_MANAGEMENT_PLATFORM"
-	PartnerCostCostTypeEnumPartnerCostTypeDefault                 PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_DEFAULT"
-	PartnerCostCostTypeEnumPartnerCostTypeDoubleVerify            PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_DOUBLE_VERIFY"
-	PartnerCostCostTypeEnumPartnerCostTypeDoubleVerifyPrebid      PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_DOUBLE_VERIFY_PREBID"
-	PartnerCostCostTypeEnumPartnerCostTypeEvidon                  PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_EVIDON"
-	PartnerCostCostTypeEnumPartnerCostTypeIntegralAdScienceVideo  PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_INTEGRAL_AD_SCIENCE_VIDEO"
-	PartnerCostCostTypeEnumPartnerCostTypeIntegralAdSciencePrebid PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_INTEGRAL_AD_SCIENCE_PREBID"
-	PartnerCostCostTypeEnumPartnerCostTypeMediaCostData           PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_MEDIA_COST_DATA"
-	PartnerCostCostTypeEnumPartnerCostTypeMoatVideo               PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_MOAT_VIDEO"
-	PartnerCostCostTypeEnumPartnerCostTypeNielsenDar              PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_NIELSEN_DAR"
-	PartnerCostCostTypeEnumPartnerCostTypeShopLocal               PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_SHOP_LOCAL"
-	PartnerCostCostTypeEnumPartnerCostTypeTeracent                PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_TERACENT"
-	PartnerCostCostTypeEnumPartnerCostTypeThirdPartyAdServer      PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_THIRD_PARTY_AD_SERVER"
-	PartnerCostCostTypeEnumPartnerCostTypeTrustMetrics            PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_TRUST_METRICS"
-	PartnerCostCostTypeEnumPartnerCostTypeVizu                    PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_VIZU"
-	PartnerCostCostTypeEnumPartnerCostTypeAdlingoFee              PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_ADLINGO_FEE"
-	PartnerCostCostTypeEnumPartnerCostTypeCustomFee1              PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_CUSTOM_FEE_1"
-	PartnerCostCostTypeEnumPartnerCostTypeCustomFee2              PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_CUSTOM_FEE_2"
-	PartnerCostCostTypeEnumPartnerCostTypeCustomFee3              PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_CUSTOM_FEE_3"
-	PartnerCostCostTypeEnumPartnerCostTypeCustomFee4              PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_CUSTOM_FEE_4"
-	PartnerCostCostTypeEnumPartnerCostTypeCustomFee5              PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_CUSTOM_FEE_5"
+    PartnerCostCostTypeEnumPartnerCostTypeUnspecified PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_UNSPECIFIED"
+PartnerCostCostTypeEnumPartnerCostTypeAdloox PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_ADLOOX"
+PartnerCostCostTypeEnumPartnerCostTypeAdlooxPrebid PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_ADLOOX_PREBID"
+PartnerCostCostTypeEnumPartnerCostTypeAdsafe PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_ADSAFE"
+PartnerCostCostTypeEnumPartnerCostTypeAdxpose PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_ADXPOSE"
+PartnerCostCostTypeEnumPartnerCostTypeAggregateKnowledge PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_AGGREGATE_KNOWLEDGE"
+PartnerCostCostTypeEnumPartnerCostTypeAgencyTradingDesk PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_AGENCY_TRADING_DESK"
+PartnerCostCostTypeEnumPartnerCostTypeDv360Fee PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_DV360_FEE"
+PartnerCostCostTypeEnumPartnerCostTypeComscoreVce PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_COMSCORE_VCE"
+PartnerCostCostTypeEnumPartnerCostTypeDataManagementPlatform PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_DATA_MANAGEMENT_PLATFORM"
+PartnerCostCostTypeEnumPartnerCostTypeDefault PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_DEFAULT"
+PartnerCostCostTypeEnumPartnerCostTypeDoubleVerify PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_DOUBLE_VERIFY"
+PartnerCostCostTypeEnumPartnerCostTypeDoubleVerifyPrebid PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_DOUBLE_VERIFY_PREBID"
+PartnerCostCostTypeEnumPartnerCostTypeEvidon PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_EVIDON"
+PartnerCostCostTypeEnumPartnerCostTypeIntegralAdScienceVideo PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_INTEGRAL_AD_SCIENCE_VIDEO"
+PartnerCostCostTypeEnumPartnerCostTypeIntegralAdSciencePrebid PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_INTEGRAL_AD_SCIENCE_PREBID"
+PartnerCostCostTypeEnumPartnerCostTypeMediaCostData PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_MEDIA_COST_DATA"
+PartnerCostCostTypeEnumPartnerCostTypeMoatVideo PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_MOAT_VIDEO"
+PartnerCostCostTypeEnumPartnerCostTypeNielsenDar PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_NIELSEN_DAR"
+PartnerCostCostTypeEnumPartnerCostTypeShopLocal PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_SHOP_LOCAL"
+PartnerCostCostTypeEnumPartnerCostTypeTeracent PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_TERACENT"
+PartnerCostCostTypeEnumPartnerCostTypeThirdPartyAdServer PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_THIRD_PARTY_AD_SERVER"
+PartnerCostCostTypeEnumPartnerCostTypeTrustMetrics PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_TRUST_METRICS"
+PartnerCostCostTypeEnumPartnerCostTypeVizu PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_VIZU"
+PartnerCostCostTypeEnumPartnerCostTypeAdlingoFee PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_ADLINGO_FEE"
+PartnerCostCostTypeEnumPartnerCostTypeCustomFee1 PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_CUSTOM_FEE_1"
+PartnerCostCostTypeEnumPartnerCostTypeCustomFee2 PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_CUSTOM_FEE_2"
+PartnerCostCostTypeEnumPartnerCostTypeCustomFee3 PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_CUSTOM_FEE_3"
+PartnerCostCostTypeEnumPartnerCostTypeCustomFee4 PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_CUSTOM_FEE_4"
+PartnerCostCostTypeEnumPartnerCostTypeCustomFee5 PartnerCostCostTypeEnum = "PARTNER_COST_TYPE_CUSTOM_FEE_5"
 )
+
+
 
 type PartnerCostFeeTypeEnum string
 
 const (
-	PartnerCostFeeTypeEnumPartnerCostFeeTypeUnspecified PartnerCostFeeTypeEnum = "PARTNER_COST_FEE_TYPE_UNSPECIFIED"
-	PartnerCostFeeTypeEnumPartnerCostFeeTypeCpmFee      PartnerCostFeeTypeEnum = "PARTNER_COST_FEE_TYPE_CPM_FEE"
-	PartnerCostFeeTypeEnumPartnerCostFeeTypeMediaFee    PartnerCostFeeTypeEnum = "PARTNER_COST_FEE_TYPE_MEDIA_FEE"
+    PartnerCostFeeTypeEnumPartnerCostFeeTypeUnspecified PartnerCostFeeTypeEnum = "PARTNER_COST_FEE_TYPE_UNSPECIFIED"
+PartnerCostFeeTypeEnumPartnerCostFeeTypeCpmFee PartnerCostFeeTypeEnum = "PARTNER_COST_FEE_TYPE_CPM_FEE"
+PartnerCostFeeTypeEnumPartnerCostFeeTypeMediaFee PartnerCostFeeTypeEnum = "PARTNER_COST_FEE_TYPE_MEDIA_FEE"
 )
+
+
 
 type PartnerCostInvoiceTypeEnum string
 
 const (
-	PartnerCostInvoiceTypeEnumPartnerCostInvoiceTypeUnspecified PartnerCostInvoiceTypeEnum = "PARTNER_COST_INVOICE_TYPE_UNSPECIFIED"
-	PartnerCostInvoiceTypeEnumPartnerCostInvoiceTypeDv360       PartnerCostInvoiceTypeEnum = "PARTNER_COST_INVOICE_TYPE_DV360"
-	PartnerCostInvoiceTypeEnumPartnerCostInvoiceTypePartner     PartnerCostInvoiceTypeEnum = "PARTNER_COST_INVOICE_TYPE_PARTNER"
+    PartnerCostInvoiceTypeEnumPartnerCostInvoiceTypeUnspecified PartnerCostInvoiceTypeEnum = "PARTNER_COST_INVOICE_TYPE_UNSPECIFIED"
+PartnerCostInvoiceTypeEnumPartnerCostInvoiceTypeDv360 PartnerCostInvoiceTypeEnum = "PARTNER_COST_INVOICE_TYPE_DV360"
+PartnerCostInvoiceTypeEnumPartnerCostInvoiceTypePartner PartnerCostInvoiceTypeEnum = "PARTNER_COST_INVOICE_TYPE_PARTNER"
 )
 
+
 type PartnerCost struct {
-	CostType            *PartnerCostCostTypeEnum    `json:"costType,omitempty"`
-	FeeAmount           *string                     `json:"feeAmount,omitempty"`
-	FeePercentageMillis *string                     `json:"feePercentageMillis,omitempty"`
-	FeeType             *PartnerCostFeeTypeEnum     `json:"feeType,omitempty"`
-	InvoiceType         *PartnerCostInvoiceTypeEnum `json:"invoiceType,omitempty"`
+    CostType *PartnerCostCostTypeEnum `json:"costType,omitempty"`
+    FeeAmount *string `json:"feeAmount,omitempty"`
+    FeePercentageMillis *string `json:"feePercentageMillis,omitempty"`
+    FeeType *PartnerCostFeeTypeEnum `json:"feeType,omitempty"`
+    InvoiceType *PartnerCostInvoiceTypeEnum `json:"invoiceType,omitempty"`
+    
 }
+

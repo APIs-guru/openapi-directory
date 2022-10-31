@@ -1,22 +1,30 @@
 package operations
 
+
+
+
 type GetEsGlossaryPageNameMediaTypeExtensionMediaTypeExtensionEnum string
 
 const (
-	GetEsGlossaryPageNameMediaTypeExtensionMediaTypeExtensionEnumDotJSON GetEsGlossaryPageNameMediaTypeExtensionMediaTypeExtensionEnum = ".json"
+    GetEsGlossaryPageNameMediaTypeExtensionMediaTypeExtensionEnumDotJSON GetEsGlossaryPageNameMediaTypeExtensionMediaTypeExtensionEnum = ".json"
 )
 
+
 type GetEsGlossaryPageNameMediaTypeExtensionPathParams struct {
-	MediaTypeExtension GetEsGlossaryPageNameMediaTypeExtensionMediaTypeExtensionEnum `pathParam:"style=simple,explode=false,name=mediaTypeExtension"`
-	PageName           string                                                        `pathParam:"style=simple,explode=false,name=pageName"`
+    MediaTypeExtension GetEsGlossaryPageNameMediaTypeExtensionMediaTypeExtensionEnum `pathParam:"style=simple,explode=false,name=mediaTypeExtension"`
+    PageName string `pathParam:"style=simple,explode=false,name=pageName"`
+    
 }
 
 type GetEsGlossaryPageNameMediaTypeExtensionRequest struct {
-	PathParams GetEsGlossaryPageNameMediaTypeExtensionPathParams
+    PathParams GetEsGlossaryPageNameMediaTypeExtensionPathParams 
+    
 }
 
 type GetEsGlossaryPageNameMediaTypeExtensionResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

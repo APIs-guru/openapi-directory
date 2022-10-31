@@ -620,6 +620,7 @@ func (s *SDK) PostProjectUsernameProject(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -743,6 +744,7 @@ func (s *SDK) PostProjectUsernameProjectCheckoutKey(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -830,7 +832,10 @@ func (s *SDK) PostProjectUsernameProjectSSHKey(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -875,6 +880,7 @@ func (s *SDK) PostProjectUsernameProjectTreeBranch(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

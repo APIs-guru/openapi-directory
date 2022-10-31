@@ -76,7 +76,10 @@ func (s *SDK) CreateCloudFrontOriginAccessIdentity20171030(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -174,7 +177,10 @@ func (s *SDK) CreateDistribution20171030(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -652,7 +658,10 @@ func (s *SDK) CreateDistributionWithTags20171030(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1142,7 +1151,10 @@ func (s *SDK) CreateFieldLevelEncryptionConfig20171030(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1270,7 +1282,10 @@ func (s *SDK) CreateFieldLevelEncryptionProfile20171030(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1398,7 +1413,10 @@ func (s *SDK) CreateInvalidation20171030(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1516,7 +1534,10 @@ func (s *SDK) CreatePublicKey20171030(ctx context.Context, request operations.Cr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1594,7 +1615,10 @@ func (s *SDK) CreateStreamingDistribution20171030(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1762,7 +1786,10 @@ func (s *SDK) CreateStreamingDistributionWithTags20171030(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1935,6 +1962,8 @@ func (s *SDK) DeleteCloudFrontOriginAccessIdentity20171030(ctx context.Context, 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -2014,6 +2043,8 @@ func (s *SDK) DeleteDistribution20171030(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2095,6 +2126,8 @@ func (s *SDK) DeleteFieldLevelEncryptionConfig20171030(ctx context.Context, requ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -2174,6 +2207,8 @@ func (s *SDK) DeleteFieldLevelEncryptionProfile20171030(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2255,6 +2290,8 @@ func (s *SDK) DeletePublicKey20171030(ctx context.Context, request operations.De
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -2334,6 +2371,8 @@ func (s *SDK) DeleteStreamingDistribution20171030(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2415,6 +2454,8 @@ func (s *SDK) GetCloudFrontOriginAccessIdentity20171030(ctx context.Context, req
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -2473,6 +2514,8 @@ func (s *SDK) GetCloudFrontOriginAccessIdentityConfig20171030(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2533,6 +2576,8 @@ func (s *SDK) GetDistribution20171030(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -2591,6 +2636,8 @@ func (s *SDK) GetDistributionConfig20171030(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2651,6 +2698,8 @@ func (s *SDK) GetFieldLevelEncryption20171030(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -2709,6 +2758,8 @@ func (s *SDK) GetFieldLevelEncryptionConfig20171030(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2769,6 +2820,8 @@ func (s *SDK) GetFieldLevelEncryptionProfile20171030(ctx context.Context, reques
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -2828,6 +2881,8 @@ func (s *SDK) GetFieldLevelEncryptionProfileConfig20171030(ctx context.Context, 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -2886,6 +2941,8 @@ func (s *SDK) GetInvalidation20171030(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2956,6 +3013,8 @@ func (s *SDK) GetPublicKey20171030(ctx context.Context, request operations.GetPu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -3014,6 +3073,8 @@ func (s *SDK) GetPublicKeyConfig20171030(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3074,6 +3135,8 @@ func (s *SDK) GetStreamingDistribution20171030(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -3132,6 +3195,8 @@ func (s *SDK) GetStreamingDistributionConfig20171030(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -3192,6 +3257,8 @@ func (s *SDK) ListCloudFrontOriginAccessIdentities20171030(ctx context.Context, 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -3243,6 +3310,8 @@ func (s *SDK) ListDistributions20171030(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -3293,6 +3362,8 @@ func (s *SDK) ListDistributionsByWebACLId20171030(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3355,6 +3426,8 @@ func (s *SDK) ListFieldLevelEncryptionConfigs20171030(ctx context.Context, reque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -3406,6 +3479,8 @@ func (s *SDK) ListFieldLevelEncryptionProfiles20171030(ctx context.Context, requ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -3456,6 +3531,8 @@ func (s *SDK) ListInvalidations20171030(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3528,6 +3605,8 @@ func (s *SDK) ListPublicKeys20171030(ctx context.Context, request operations.Lis
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -3579,6 +3658,8 @@ func (s *SDK) ListStreamingDistributions20171030(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -3629,6 +3710,8 @@ func (s *SDK) ListTagsForResource20171030(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3718,7 +3801,10 @@ func (s *SDK) TagResource20171030(ctx context.Context, request operations.TagRes
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3799,7 +3885,10 @@ func (s *SDK) UntagResource20171030(ctx context.Context, request operations.Unta
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3880,7 +3969,10 @@ func (s *SDK) UpdateCloudFrontOriginAccessIdentity20171030(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -4008,7 +4100,10 @@ func (s *SDK) UpdateDistribution20171030(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -4486,7 +4581,10 @@ func (s *SDK) UpdateFieldLevelEncryptionConfig20171030(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -4644,7 +4742,10 @@ func (s *SDK) UpdateFieldLevelEncryptionProfile20171030(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -4812,7 +4913,10 @@ func (s *SDK) UpdatePublicKey20171030(ctx context.Context, request operations.Up
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -4930,7 +5034,10 @@ func (s *SDK) UpdateStreamingDistribution20171030(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 

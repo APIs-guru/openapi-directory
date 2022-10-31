@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteRealtimeEndpointInput struct {
-	MlModelID string `json:"MLModelId"`
+    MlModelID string `json:"MLModelId"`
+    
 }
+

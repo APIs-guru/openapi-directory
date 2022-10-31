@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type VirtualizationClustersUpdatePathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type VirtualizationClustersUpdateRequest struct {
-	PathParams VirtualizationClustersUpdatePathParams
-	Request    shared.WritableCluster `request:"mediaType=application/json"`
+    PathParams VirtualizationClustersUpdatePathParams 
+    Request shared.WritableCluster `request:"mediaType=application/json"`
+    
 }
 
 type VirtualizationClustersUpdateResponse struct {
-	Cluster     *shared.Cluster
-	ContentType string
-	StatusCode  int64
+    Cluster *shared.Cluster 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

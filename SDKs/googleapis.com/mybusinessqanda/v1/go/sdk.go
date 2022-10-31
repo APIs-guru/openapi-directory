@@ -145,6 +145,7 @@ func (s *SDK) MybusinessqandaLocationsQuestionsAnswersUpsert(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -192,6 +193,7 @@ func (s *SDK) MybusinessqandaLocationsQuestionsCreate(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -321,6 +323,7 @@ func (s *SDK) MybusinessqandaLocationsQuestionsPatch(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

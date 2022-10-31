@@ -1,35 +1,43 @@
 package shared
 
+
+
+
 type GoogleCloudDataplexV1StorageFormatCompressionFormatEnum string
 
 const (
-	GoogleCloudDataplexV1StorageFormatCompressionFormatEnumCompressionFormatUnspecified GoogleCloudDataplexV1StorageFormatCompressionFormatEnum = "COMPRESSION_FORMAT_UNSPECIFIED"
-	GoogleCloudDataplexV1StorageFormatCompressionFormatEnumGzip                         GoogleCloudDataplexV1StorageFormatCompressionFormatEnum = "GZIP"
-	GoogleCloudDataplexV1StorageFormatCompressionFormatEnumBzip2                        GoogleCloudDataplexV1StorageFormatCompressionFormatEnum = "BZIP2"
+    GoogleCloudDataplexV1StorageFormatCompressionFormatEnumCompressionFormatUnspecified GoogleCloudDataplexV1StorageFormatCompressionFormatEnum = "COMPRESSION_FORMAT_UNSPECIFIED"
+GoogleCloudDataplexV1StorageFormatCompressionFormatEnumGzip GoogleCloudDataplexV1StorageFormatCompressionFormatEnum = "GZIP"
+GoogleCloudDataplexV1StorageFormatCompressionFormatEnumBzip2 GoogleCloudDataplexV1StorageFormatCompressionFormatEnum = "BZIP2"
 )
+
+
 
 type GoogleCloudDataplexV1StorageFormatFormatEnum string
 
 const (
-	GoogleCloudDataplexV1StorageFormatFormatEnumFormatUnspecified GoogleCloudDataplexV1StorageFormatFormatEnum = "FORMAT_UNSPECIFIED"
-	GoogleCloudDataplexV1StorageFormatFormatEnumParquet           GoogleCloudDataplexV1StorageFormatFormatEnum = "PARQUET"
-	GoogleCloudDataplexV1StorageFormatFormatEnumAvro              GoogleCloudDataplexV1StorageFormatFormatEnum = "AVRO"
-	GoogleCloudDataplexV1StorageFormatFormatEnumOrc               GoogleCloudDataplexV1StorageFormatFormatEnum = "ORC"
-	GoogleCloudDataplexV1StorageFormatFormatEnumCsv               GoogleCloudDataplexV1StorageFormatFormatEnum = "CSV"
-	GoogleCloudDataplexV1StorageFormatFormatEnumJSON              GoogleCloudDataplexV1StorageFormatFormatEnum = "JSON"
-	GoogleCloudDataplexV1StorageFormatFormatEnumImage             GoogleCloudDataplexV1StorageFormatFormatEnum = "IMAGE"
-	GoogleCloudDataplexV1StorageFormatFormatEnumAudio             GoogleCloudDataplexV1StorageFormatFormatEnum = "AUDIO"
-	GoogleCloudDataplexV1StorageFormatFormatEnumVideo             GoogleCloudDataplexV1StorageFormatFormatEnum = "VIDEO"
-	GoogleCloudDataplexV1StorageFormatFormatEnumText              GoogleCloudDataplexV1StorageFormatFormatEnum = "TEXT"
-	GoogleCloudDataplexV1StorageFormatFormatEnumTfrecord          GoogleCloudDataplexV1StorageFormatFormatEnum = "TFRECORD"
-	GoogleCloudDataplexV1StorageFormatFormatEnumOther             GoogleCloudDataplexV1StorageFormatFormatEnum = "OTHER"
-	GoogleCloudDataplexV1StorageFormatFormatEnumUnknown           GoogleCloudDataplexV1StorageFormatFormatEnum = "UNKNOWN"
+    GoogleCloudDataplexV1StorageFormatFormatEnumFormatUnspecified GoogleCloudDataplexV1StorageFormatFormatEnum = "FORMAT_UNSPECIFIED"
+GoogleCloudDataplexV1StorageFormatFormatEnumParquet GoogleCloudDataplexV1StorageFormatFormatEnum = "PARQUET"
+GoogleCloudDataplexV1StorageFormatFormatEnumAvro GoogleCloudDataplexV1StorageFormatFormatEnum = "AVRO"
+GoogleCloudDataplexV1StorageFormatFormatEnumOrc GoogleCloudDataplexV1StorageFormatFormatEnum = "ORC"
+GoogleCloudDataplexV1StorageFormatFormatEnumCsv GoogleCloudDataplexV1StorageFormatFormatEnum = "CSV"
+GoogleCloudDataplexV1StorageFormatFormatEnumJSON GoogleCloudDataplexV1StorageFormatFormatEnum = "JSON"
+GoogleCloudDataplexV1StorageFormatFormatEnumImage GoogleCloudDataplexV1StorageFormatFormatEnum = "IMAGE"
+GoogleCloudDataplexV1StorageFormatFormatEnumAudio GoogleCloudDataplexV1StorageFormatFormatEnum = "AUDIO"
+GoogleCloudDataplexV1StorageFormatFormatEnumVideo GoogleCloudDataplexV1StorageFormatFormatEnum = "VIDEO"
+GoogleCloudDataplexV1StorageFormatFormatEnumText GoogleCloudDataplexV1StorageFormatFormatEnum = "TEXT"
+GoogleCloudDataplexV1StorageFormatFormatEnumTfrecord GoogleCloudDataplexV1StorageFormatFormatEnum = "TFRECORD"
+GoogleCloudDataplexV1StorageFormatFormatEnumOther GoogleCloudDataplexV1StorageFormatFormatEnum = "OTHER"
+GoogleCloudDataplexV1StorageFormatFormatEnumUnknown GoogleCloudDataplexV1StorageFormatFormatEnum = "UNKNOWN"
 )
 
+
 type GoogleCloudDataplexV1StorageFormat struct {
-	CompressionFormat *GoogleCloudDataplexV1StorageFormatCompressionFormatEnum `json:"compressionFormat,omitempty"`
-	Csv               *GoogleCloudDataplexV1StorageFormatCsvOptions            `json:"csv,omitempty"`
-	Format            *GoogleCloudDataplexV1StorageFormatFormatEnum            `json:"format,omitempty"`
-	JSON              *GoogleCloudDataplexV1StorageFormatJSONOptions           `json:"json,omitempty"`
-	MimeType          *string                                                  `json:"mimeType,omitempty"`
+    CompressionFormat *GoogleCloudDataplexV1StorageFormatCompressionFormatEnum `json:"compressionFormat,omitempty"`
+    Csv *GoogleCloudDataplexV1StorageFormatCsvOptions `json:"csv,omitempty"`
+    Format *GoogleCloudDataplexV1StorageFormatFormatEnum `json:"format,omitempty"`
+    JSON *GoogleCloudDataplexV1StorageFormatJSONOptions `json:"json,omitempty"`
+    MimeType *string `json:"mimeType,omitempty"`
+    
 }
+

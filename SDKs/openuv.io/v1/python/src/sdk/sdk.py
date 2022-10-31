@@ -19,21 +19,27 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def get_forecast(self, request: operations.GetForecastRequest) -> operations.GetForecastResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/forecast"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetForecastResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[List[List[shared.Forecast]]])
@@ -42,20 +48,23 @@ class SDK:
         return res
 
     
-    
     def get_protection(self, request: operations.GetProtectionRequest) -> operations.GetProtectionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/protection"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetProtectionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ProtectionResult])
@@ -64,20 +73,23 @@ class SDK:
         return res
 
     
-    
     def get_uv(self, request: operations.GetUvRequest) -> operations.GetUvResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/uv"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetUvResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UvIndexResult])

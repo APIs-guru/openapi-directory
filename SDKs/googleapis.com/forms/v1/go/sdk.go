@@ -64,6 +64,7 @@ func (s *SDK) FormsFormsBatchUpdate(ctx context.Context, request operations.Form
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -111,6 +112,7 @@ func (s *SDK) FormsFormsCreate(ctx context.Context, request operations.FormsForm
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -281,6 +283,7 @@ func (s *SDK) FormsFormsWatchesCreate(ctx context.Context, request operations.Fo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -410,6 +413,7 @@ func (s *SDK) FormsFormsWatchesRenew(ctx context.Context, request operations.For
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

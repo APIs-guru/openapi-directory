@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DocumentMetadataResponseInfo struct {
-	ReviewerResponse []DocumentReviewerResponseSource `json:"ReviewerResponse,omitempty"`
+    ReviewerResponse []DocumentReviewerResponseSource `json:"ReviewerResponse,omitempty"`
+    
 }
+

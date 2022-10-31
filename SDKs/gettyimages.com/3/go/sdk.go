@@ -239,6 +239,8 @@ func (s *SDK) GetV3AffiliatesSearchImages(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -279,6 +281,8 @@ func (s *SDK) GetV3AffiliatesSearchVideos(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -321,6 +325,8 @@ func (s *SDK) GetV3ArtistsImages(ctx context.Context, request operations.GetV3Ar
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -354,6 +360,8 @@ func (s *SDK) GetV3ArtistsVideos(ctx context.Context, request operations.GetV3Ar
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -557,6 +565,8 @@ func (s *SDK) GetV3Collections(ctx context.Context, request operations.GetV3Coll
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -597,6 +607,8 @@ func (s *SDK) GetV3Countries(ctx context.Context, request operations.GetV3Countr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -636,6 +648,8 @@ func (s *SDK) GetV3CustomersCurrent(ctx context.Context, request operations.GetV
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -678,6 +692,8 @@ func (s *SDK) GetV3Downloads(ctx context.Context, request operations.GetV3Downlo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -723,6 +739,8 @@ func (s *SDK) GetV3Events(ctx context.Context, request operations.GetV3EventsReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -758,6 +776,8 @@ func (s *SDK) GetV3EventsID(ctx context.Context, request operations.GetV3EventsI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -792,6 +812,8 @@ func (s *SDK) GetV3Images(ctx context.Context, request operations.GetV3ImagesReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -839,6 +861,8 @@ func (s *SDK) GetV3ImagesID(ctx context.Context, request operations.GetV3ImagesI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -884,6 +908,8 @@ func (s *SDK) GetV3ImagesIDDownloadhistory(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -931,6 +957,8 @@ func (s *SDK) GetV3ImagesIDSameSeries(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -976,6 +1004,8 @@ func (s *SDK) GetV3ImagesIDSimilar(ctx context.Context, request operations.GetV3
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1023,6 +1053,8 @@ func (s *SDK) GetV3OrdersID(ctx context.Context, request operations.GetV3OrdersI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -1064,6 +1096,8 @@ func (s *SDK) GetV3Products(ctx context.Context, request operations.GetV3Product
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1109,6 +1143,8 @@ func (s *SDK) GetV3PurchasedAssets(ctx context.Context, request operations.GetV3
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1152,6 +1188,8 @@ func (s *SDK) GetV3SearchEvents(ctx context.Context, request operations.GetV3Sea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1197,6 +1235,8 @@ func (s *SDK) GetV3SearchImages(ctx context.Context, request operations.GetV3Sea
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1240,6 +1280,8 @@ func (s *SDK) GetV3SearchImagesCreative(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1285,6 +1327,8 @@ func (s *SDK) GetV3SearchImagesCreativeByImage(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1332,6 +1376,8 @@ func (s *SDK) GetV3SearchImagesEditorial(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1375,6 +1421,8 @@ func (s *SDK) GetV3SearchVideosCreative(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1420,6 +1468,8 @@ func (s *SDK) GetV3SearchVideosCreativeByImage(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1467,6 +1517,8 @@ func (s *SDK) GetV3SearchVideosEditorial(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1511,6 +1563,8 @@ func (s *SDK) GetV3Videos(ctx context.Context, request operations.GetV3VideosReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1548,6 +1602,8 @@ func (s *SDK) GetV3VideosID(ctx context.Context, request operations.GetV3VideosI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1584,6 +1640,8 @@ func (s *SDK) GetV3VideosIDDownloadhistory(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1631,6 +1689,8 @@ func (s *SDK) GetV3VideosIDSameSeries(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1667,6 +1727,8 @@ func (s *SDK) GetV3VideosIDSimilar(ctx context.Context, request operations.GetV3
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1709,7 +1771,10 @@ func (s *SDK) PostV3AssetLicensingAssetID(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1758,6 +1823,7 @@ func (s *SDK) PostV3Boards(ctx context.Context, request operations.PostV3BoardsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1805,6 +1871,7 @@ func (s *SDK) PostV3BoardsBoardIDComments(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1854,7 +1921,10 @@ func (s *SDK) PostV3DownloadsImagesID(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1896,7 +1966,10 @@ func (s *SDK) PostV3DownloadsVideosID(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1992,6 +2065,7 @@ func (s *SDK) PutV3BoardsBoardID(ctx context.Context, request operations.PutV3Bo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2033,6 +2107,7 @@ func (s *SDK) PutV3BoardsBoardIDAssets(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2116,6 +2191,7 @@ func (s *SDK) PutV3UsageBatchesID(ctx context.Context, request operations.PutV3U
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

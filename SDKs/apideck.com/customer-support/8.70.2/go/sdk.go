@@ -73,7 +73,10 @@ func (s *SDK) CustomersAdd(ctx context.Context, request operations.CustomersAddR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -176,6 +179,8 @@ func (s *SDK) CustomersAll(ctx context.Context, request operations.CustomersAllR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -277,6 +282,8 @@ func (s *SDK) CustomersDelete(ctx context.Context, request operations.CustomersD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -377,6 +384,8 @@ func (s *SDK) CustomersOne(ctx context.Context, request operations.CustomersOneR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -486,7 +495,10 @@ func (s *SDK) CustomersUpdate(ctx context.Context, request operations.CustomersU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 

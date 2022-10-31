@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type CertificateAuthorityTypeEnum string
 
 const (
-	CertificateAuthorityTypeEnumRoot        CertificateAuthorityTypeEnum = "ROOT"
-	CertificateAuthorityTypeEnumSubordinate CertificateAuthorityTypeEnum = "SUBORDINATE"
+    CertificateAuthorityTypeEnumRoot CertificateAuthorityTypeEnum = "ROOT"
+CertificateAuthorityTypeEnumSubordinate CertificateAuthorityTypeEnum = "SUBORDINATE"
 )
+
+

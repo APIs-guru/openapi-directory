@@ -314,6 +314,7 @@ func (s *SDK) MeteringPost(ctx context.Context, request operations.MeteringPostR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -518,6 +519,7 @@ func (s *SDK) PrepareTransaction(ctx context.Context, request operations.Prepare
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -554,6 +556,7 @@ func (s *SDK) QuittungComit(ctx context.Context, request operations.QuittungComi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -603,6 +606,7 @@ func (s *SDK) QuittungCreate(ctx context.Context, request operations.QuittungCre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -649,6 +653,7 @@ func (s *SDK) QuittungPrepare(ctx context.Context, request operations.QuittungPr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -917,6 +922,7 @@ func (s *SDK) StromkontoLogin(ctx context.Context, request operations.Stromkonto
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -965,6 +971,7 @@ func (s *SDK) StromkontoRegister(ctx context.Context, request operations.Stromko
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

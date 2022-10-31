@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RestoreCertificateAuthorityRequest struct {
-	CertificateAuthorityArn string `json:"CertificateAuthorityArn"`
+    CertificateAuthorityArn string `json:"CertificateAuthorityArn"`
+    
 }
+

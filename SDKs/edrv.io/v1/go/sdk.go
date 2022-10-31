@@ -73,6 +73,7 @@ func (s *SDK) Cancelreservation(ctx context.Context, request operations.Cancelre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -273,6 +274,7 @@ func (s *SDK) Deletechargingschedule(ctx context.Context, request operations.Del
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -772,6 +774,8 @@ func (s *SDK) GetRealtime(ctx context.Context, request operations.GetRealtimeReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1278,6 +1282,7 @@ func (s *SDK) PatchChargeStation(ctx context.Context, request operations.PatchCh
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1327,6 +1332,7 @@ func (s *SDK) PatchChargeStationVariable(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1376,6 +1382,7 @@ func (s *SDK) PatchConnector(ctx context.Context, request operations.PatchConnec
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1425,6 +1432,7 @@ func (s *SDK) PatchDriver(ctx context.Context, request operations.PatchDriverReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1474,6 +1482,7 @@ func (s *SDK) PatchLocation(ctx context.Context, request operations.PatchLocatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1523,6 +1532,7 @@ func (s *SDK) PatchOrganization(ctx context.Context, request operations.PatchOrg
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1563,6 +1573,7 @@ func (s *SDK) PatchToken(ctx context.Context, request operations.PatchTokenReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1612,6 +1623,7 @@ func (s *SDK) PostCharge(ctx context.Context, request operations.PostChargeReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1661,6 +1673,7 @@ func (s *SDK) PostChargeStations(ctx context.Context, request operations.PostCha
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1710,6 +1723,7 @@ func (s *SDK) PostConfigurations(ctx context.Context, request operations.PostCon
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1759,6 +1773,7 @@ func (s *SDK) PostConnectors(ctx context.Context, request operations.PostConnect
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1808,6 +1823,7 @@ func (s *SDK) PostDrivers(ctx context.Context, request operations.PostDriversReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1857,6 +1873,7 @@ func (s *SDK) PostLocations(ctx context.Context, request operations.PostLocation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1906,6 +1923,7 @@ func (s *SDK) PostTokens(ctx context.Context, request operations.PostTokensReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1955,6 +1973,7 @@ func (s *SDK) Remotestart(ctx context.Context, request operations.RemotestartReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2004,6 +2023,7 @@ func (s *SDK) Remotestop(ctx context.Context, request operations.RemotestopReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2044,6 +2064,7 @@ func (s *SDK) Reserve(ctx context.Context, request operations.ReserveRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2093,6 +2114,7 @@ func (s *SDK) Reset(ctx context.Context, request operations.ResetRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2142,6 +2164,7 @@ func (s *SDK) Setchargingschedule(ctx context.Context, request operations.Setcha
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2191,6 +2214,7 @@ func (s *SDK) Unlockconnector(ctx context.Context, request operations.Unlockconn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2240,6 +2264,7 @@ func (s *SDK) Updatereservation(ctx context.Context, request operations.Updatere
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

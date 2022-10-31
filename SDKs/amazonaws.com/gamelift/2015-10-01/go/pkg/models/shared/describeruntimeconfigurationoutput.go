@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeRuntimeConfigurationOutput struct {
-	RuntimeConfiguration *RuntimeConfiguration `json:"RuntimeConfiguration,omitempty"`
+    RuntimeConfiguration *RuntimeConfiguration `json:"RuntimeConfiguration,omitempty"`
+    
 }
+

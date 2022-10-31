@@ -68,6 +68,8 @@ func (s *SDK) DeleteSession(ctx context.Context, request operations.DeleteSessio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -167,6 +169,8 @@ func (s *SDK) GetSession(ctx context.Context, request operations.GetSessionReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -263,7 +267,10 @@ func (s *SDK) PutSession(ctx context.Context, request operations.PutSessionReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -391,7 +398,10 @@ func (s *SDK) RecognizeText(ctx context.Context, request operations.RecognizeTex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -519,7 +529,10 @@ func (s *SDK) RecognizeUtterance(ctx context.Context, request operations.Recogni
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 

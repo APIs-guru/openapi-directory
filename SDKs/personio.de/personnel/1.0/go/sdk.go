@@ -445,6 +445,7 @@ func (s *SDK) PatchCompanyAttendancesID(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -503,6 +504,7 @@ func (s *SDK) PostCompanyAttendances(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -561,6 +563,7 @@ func (s *SDK) PostCompanyEmployees(ctx context.Context, request operations.PostC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -609,6 +612,7 @@ func (s *SDK) PostCompanyTimeOffs(ctx context.Context, request operations.PostCo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

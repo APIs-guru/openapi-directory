@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PutWebhookOutput struct {
-	Webhook *ListWebhookItem `json:"webhook,omitempty"`
+    Webhook *ListWebhookItem `json:"webhook,omitempty"`
+    
 }
+

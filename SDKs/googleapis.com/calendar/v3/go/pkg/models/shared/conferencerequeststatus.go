@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ConferenceRequestStatus struct {
-	StatusCode *string `json:"statusCode,omitempty"`
+    StatusCode *string `json:"statusCode,omitempty"`
+    
 }
+

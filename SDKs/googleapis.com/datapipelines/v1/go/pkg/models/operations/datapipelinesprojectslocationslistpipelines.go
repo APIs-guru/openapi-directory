@@ -1,43 +1,48 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DatapipelinesProjectsLocationsListPipelinesPathParams struct {
-	Parent string `pathParam:"style=simple,explode=false,name=parent"`
+    Parent string `pathParam:"style=simple,explode=false,name=parent"`
+    
 }
 
 type DatapipelinesProjectsLocationsListPipelinesQueryParams struct {
-	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
-	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
-	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
-	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
-	Filter         *string           `queryParam:"style=form,explode=true,name=filter"`
-	Key            *string           `queryParam:"style=form,explode=true,name=key"`
-	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
-	PageSize       *int64            `queryParam:"style=form,explode=true,name=pageSize"`
-	PageToken      *string           `queryParam:"style=form,explode=true,name=pageToken"`
-	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
-	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
-	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
+    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
+    Callback *string `queryParam:"style=form,explode=true,name=callback"`
+    Fields *string `queryParam:"style=form,explode=true,name=fields"`
+    Filter *string `queryParam:"style=form,explode=true,name=filter"`
+    Key *string `queryParam:"style=form,explode=true,name=key"`
+    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
+    PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
+    PageToken *string `queryParam:"style=form,explode=true,name=pageToken"`
+    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
+    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
+    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
+    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
+    
 }
 
 type DatapipelinesProjectsLocationsListPipelinesSecurity struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type DatapipelinesProjectsLocationsListPipelinesRequest struct {
-	PathParams  DatapipelinesProjectsLocationsListPipelinesPathParams
-	QueryParams DatapipelinesProjectsLocationsListPipelinesQueryParams
-	Security    DatapipelinesProjectsLocationsListPipelinesSecurity
+    PathParams DatapipelinesProjectsLocationsListPipelinesPathParams 
+    QueryParams DatapipelinesProjectsLocationsListPipelinesQueryParams 
+    Security DatapipelinesProjectsLocationsListPipelinesSecurity 
+    
 }
 
 type DatapipelinesProjectsLocationsListPipelinesResponse struct {
-	ContentType                                     string
-	GoogleCloudDatapipelinesV1ListPipelinesResponse *shared.GoogleCloudDatapipelinesV1ListPipelinesResponse
-	StatusCode                                      int64
+    ContentType string 
+    GoogleCloudDatapipelinesV1ListPipelinesResponse *shared.GoogleCloudDatapipelinesV1ListPipelinesResponse 
+    StatusCode int64 
+    
 }
+

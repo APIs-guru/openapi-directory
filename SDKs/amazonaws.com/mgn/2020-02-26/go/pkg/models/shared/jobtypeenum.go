@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type JobTypeEnum string
 
 const (
-	JobTypeEnumLaunch    JobTypeEnum = "LAUNCH"
-	JobTypeEnumTerminate JobTypeEnum = "TERMINATE"
+    JobTypeEnumLaunch JobTypeEnum = "LAUNCH"
+JobTypeEnumTerminate JobTypeEnum = "TERMINATE"
 )
+
+

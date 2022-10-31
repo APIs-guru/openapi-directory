@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteBranchResult struct {
-	Branch Branch `json:"branch"`
+    Branch Branch `json:"branch"`
+    
 }
+

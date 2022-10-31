@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DataQualityJobInput struct {
-	EndpointInput EndpointInput `json:"EndpointInput"`
+    EndpointInput EndpointInput `json:"EndpointInput"`
+    
 }
+

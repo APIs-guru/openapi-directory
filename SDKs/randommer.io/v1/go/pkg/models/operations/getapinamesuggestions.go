@@ -1,19 +1,26 @@
 package operations
 
+
+
 type GetAPINameSuggestionsQueryParams struct {
-	StartingWords string `queryParam:"style=form,explode=true,name=startingWords"`
+    StartingWords string `queryParam:"style=form,explode=true,name=startingWords"`
+    
 }
 
 type GetAPINameSuggestionsHeaders struct {
-	XAPIKey *string `header:"name=X-Api-Key"`
+    XAPIKey *string `header:"style=simple,explode=false,name=X-Api-Key"`
+    
 }
 
 type GetAPINameSuggestionsRequest struct {
-	QueryParams GetAPINameSuggestionsQueryParams
-	Headers     GetAPINameSuggestionsHeaders
+    QueryParams GetAPINameSuggestionsQueryParams 
+    Headers GetAPINameSuggestionsHeaders 
+    
 }
 
 type GetAPINameSuggestionsResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

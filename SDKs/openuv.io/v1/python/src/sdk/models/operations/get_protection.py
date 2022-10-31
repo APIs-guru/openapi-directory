@@ -15,7 +15,7 @@ class GetProtectionQueryParams:
 
 @dataclass
 class GetProtectionHeaders:
-    x_access_token: str = field(default=None, metadata={'header': { 'field_name': 'x-access-token' }})
+    x_access_token: str = field(default=None, metadata={'header': { 'field_name': 'x-access-token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

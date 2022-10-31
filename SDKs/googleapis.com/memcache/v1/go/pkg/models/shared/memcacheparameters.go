@@ -1,6 +1,10 @@
 package shared
 
+
+
 type MemcacheParameters struct {
-	ID     *string           `json:"id,omitempty"`
-	Params map[string]string `json:"params,omitempty"`
+    ID *string `json:"id,omitempty"`
+    Params map[string]string `json:"params,omitempty"`
+    
 }
+

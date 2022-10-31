@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Deployable struct {
-	ResourceURI []string `json:"resourceUri,omitempty"`
+    ResourceURI []string `json:"resourceUri,omitempty"`
+    
 }
+

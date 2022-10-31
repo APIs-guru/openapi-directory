@@ -1,5 +1,9 @@
 package shared
 
+
+
 type OrdersCancelTestOrderByCustomerResponse struct {
-	Kind *string `json:"kind,omitempty"`
+    Kind *string `json:"kind,omitempty"`
+    
 }
+

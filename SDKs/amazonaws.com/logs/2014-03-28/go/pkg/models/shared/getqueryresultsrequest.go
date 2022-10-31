@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetQueryResultsRequest struct {
-	QueryID string `json:"queryId"`
+    QueryID string `json:"queryId"`
+    
 }
+

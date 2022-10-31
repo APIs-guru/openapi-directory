@@ -64,6 +64,7 @@ func (s *SDK) AccesscontextmanagerAccessPoliciesAccessLevelsCreate(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -152,6 +153,7 @@ func (s *SDK) AccesscontextmanagerAccessPoliciesCreate(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -240,6 +242,7 @@ func (s *SDK) AccesscontextmanagerAccessPoliciesServicePerimetersCreate(ctx cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -369,6 +372,7 @@ func (s *SDK) AccesscontextmanagerAccessPoliciesServicePerimetersPatch(ctx conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

@@ -14,7 +14,7 @@ class JurisdictionListJurisdictionsGetQueryParams:
 
 @dataclass
 class JurisdictionListJurisdictionsGetHeaders:
-    x_api_key: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-api-key' }})
+    x_api_key: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-api-key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

@@ -1,23 +1,29 @@
 package shared
 
+
+
+
 type SetInstanceAcceleratorRequestTypeEnum string
 
 const (
-	SetInstanceAcceleratorRequestTypeEnumAcceleratorTypeUnspecified SetInstanceAcceleratorRequestTypeEnum = "ACCELERATOR_TYPE_UNSPECIFIED"
-	SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaK80             SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_K80"
-	SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaP100            SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_P100"
-	SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaV100            SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_V100"
-	SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaP4              SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_P4"
-	SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaT4              SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_T4"
-	SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaA100            SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_A100"
-	SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaT4Vws           SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_T4_VWS"
-	SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaP100Vws         SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_P100_VWS"
-	SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaP4Vws           SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_P4_VWS"
-	SetInstanceAcceleratorRequestTypeEnumTpuV2                      SetInstanceAcceleratorRequestTypeEnum = "TPU_V2"
-	SetInstanceAcceleratorRequestTypeEnumTpuV3                      SetInstanceAcceleratorRequestTypeEnum = "TPU_V3"
+    SetInstanceAcceleratorRequestTypeEnumAcceleratorTypeUnspecified SetInstanceAcceleratorRequestTypeEnum = "ACCELERATOR_TYPE_UNSPECIFIED"
+SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaK80 SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_K80"
+SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaP100 SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_P100"
+SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaV100 SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_V100"
+SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaP4 SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_P4"
+SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaT4 SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_T4"
+SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaA100 SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_A100"
+SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaT4Vws SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_T4_VWS"
+SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaP100Vws SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_P100_VWS"
+SetInstanceAcceleratorRequestTypeEnumNvidiaTeslaP4Vws SetInstanceAcceleratorRequestTypeEnum = "NVIDIA_TESLA_P4_VWS"
+SetInstanceAcceleratorRequestTypeEnumTpuV2 SetInstanceAcceleratorRequestTypeEnum = "TPU_V2"
+SetInstanceAcceleratorRequestTypeEnumTpuV3 SetInstanceAcceleratorRequestTypeEnum = "TPU_V3"
 )
 
+
 type SetInstanceAcceleratorRequest struct {
-	CoreCount *string                                `json:"coreCount,omitempty"`
-	Type      *SetInstanceAcceleratorRequestTypeEnum `json:"type,omitempty"`
+    CoreCount *string `json:"coreCount,omitempty"`
+    Type *SetInstanceAcceleratorRequestTypeEnum `json:"type,omitempty"`
+    
 }
+

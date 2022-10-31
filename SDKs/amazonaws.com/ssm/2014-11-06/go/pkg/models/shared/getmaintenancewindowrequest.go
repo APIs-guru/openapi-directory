@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetMaintenanceWindowRequest struct {
-	WindowID string `json:"WindowId"`
+    WindowID string `json:"WindowId"`
+    
 }
+

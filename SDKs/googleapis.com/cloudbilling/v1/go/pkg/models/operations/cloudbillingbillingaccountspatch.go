@@ -1,52 +1,59 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type CloudbillingBillingAccountsPatchPathParams struct {
-	Name string `pathParam:"style=simple,explode=false,name=name"`
+    Name string `pathParam:"style=simple,explode=false,name=name"`
+    
 }
 
 type CloudbillingBillingAccountsPatchQueryParams struct {
-	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
-	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
-	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
-	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
-	Key            *string           `queryParam:"style=form,explode=true,name=key"`
-	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
-	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
-	UpdateMask     *string           `queryParam:"style=form,explode=true,name=updateMask"`
-	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
-	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
+    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
+    Callback *string `queryParam:"style=form,explode=true,name=callback"`
+    Fields *string `queryParam:"style=form,explode=true,name=fields"`
+    Key *string `queryParam:"style=form,explode=true,name=key"`
+    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
+    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
+    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
+    UpdateMask *string `queryParam:"style=form,explode=true,name=updateMask"`
+    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
+    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
+    
 }
 
 type CloudbillingBillingAccountsPatchSecurityOption1 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type CloudbillingBillingAccountsPatchSecurityOption2 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type CloudbillingBillingAccountsPatchSecurity struct {
-	Option1 *CloudbillingBillingAccountsPatchSecurityOption1 `security:"option"`
-	Option2 *CloudbillingBillingAccountsPatchSecurityOption2 `security:"option"`
+    Option1 *CloudbillingBillingAccountsPatchSecurityOption1 `security:"option"`
+    Option2 *CloudbillingBillingAccountsPatchSecurityOption2 `security:"option"`
+    
 }
 
 type CloudbillingBillingAccountsPatchRequest struct {
-	PathParams  CloudbillingBillingAccountsPatchPathParams
-	QueryParams CloudbillingBillingAccountsPatchQueryParams
-	Request     *shared.BillingAccount `request:"mediaType=application/json"`
-	Security    CloudbillingBillingAccountsPatchSecurity
+    PathParams CloudbillingBillingAccountsPatchPathParams 
+    QueryParams CloudbillingBillingAccountsPatchQueryParams 
+    Request *shared.BillingAccount `request:"mediaType=application/json"`
+    Security CloudbillingBillingAccountsPatchSecurity 
+    
 }
 
 type CloudbillingBillingAccountsPatchResponse struct {
-	BillingAccount *shared.BillingAccount
-	ContentType    string
-	StatusCode     int64
+    BillingAccount *shared.BillingAccount 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

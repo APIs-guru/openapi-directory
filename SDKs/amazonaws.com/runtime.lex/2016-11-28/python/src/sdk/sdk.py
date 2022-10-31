@@ -22,22 +22,27 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def delete_session(self, request: operations.DeleteSessionRequest) -> operations.DeleteSessionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/bot/{botName}/alias/{botAlias}/user/{userId}/session", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSessionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteSessionResponse])
@@ -66,20 +71,23 @@ class SDK:
         return res
 
     
-    
     def get_session(self, request: operations.GetSessionRequest) -> operations.GetSessionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/bot/{botName}/alias/{botAlias}/user/{userId}/session/", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSessionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetSessionResponse])
@@ -104,26 +112,28 @@ class SDK:
         return res
 
     
-    
     def post_content(self, request: operations.PostContentRequest) -> operations.PostContentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/bot/{botName}/alias/{botAlias}/user/{userId}/content#Content-Type", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostContentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PostContentResponse])
@@ -176,26 +186,28 @@ class SDK:
         return res
 
     
-    
     def post_text(self, request: operations.PostTextRequest) -> operations.PostTextResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/bot/{botName}/alias/{botAlias}/user/{userId}/text", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostTextResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PostTextResponse])
@@ -236,26 +248,28 @@ class SDK:
         return res
 
     
-    
     def put_session(self, request: operations.PutSessionRequest) -> operations.PutSessionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/bot/{botName}/alias/{botAlias}/user/{userId}/session", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutSessionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PutSessionResponse])

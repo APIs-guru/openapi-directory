@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PostWorkspaceIDActivitiesPathParams struct {
-	WorkspaceID string `pathParam:"style=simple,explode=false,name=workspace_id"`
+    WorkspaceID string `pathParam:"style=simple,explode=false,name=workspace_id"`
+    
 }
 
 type PostWorkspaceIDActivitiesSecurity struct {
-	Bearer shared.SchemeBearer `security:"scheme,type=apiKey,subtype=header"`
+    Bearer shared.SchemeBearer `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type PostWorkspaceIDActivitiesRequest struct {
-	PathParams PostWorkspaceIDActivitiesPathParams
-	Request    *shared.ActivityAndIdentity `request:"mediaType=application/json"`
-	Security   PostWorkspaceIDActivitiesSecurity
+    PathParams PostWorkspaceIDActivitiesPathParams 
+    Request *shared.ActivityAndIdentity `request:"mediaType=application/json"`
+    Security PostWorkspaceIDActivitiesSecurity 
+    
 }
 
 type PostWorkspaceIDActivitiesResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

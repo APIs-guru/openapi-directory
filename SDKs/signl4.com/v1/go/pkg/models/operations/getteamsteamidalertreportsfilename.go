@@ -1,24 +1,27 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetTeamsTeamIDAlertReportsFileNamePathParams struct {
-	FileName string `pathParam:"style=simple,explode=false,name=fileName"`
-	TeamID   string `pathParam:"style=simple,explode=false,name=teamId"`
+    FileName string `pathParam:"style=simple,explode=false,name=fileName"`
+    TeamID string `pathParam:"style=simple,explode=false,name=teamId"`
+    
 }
 
 type GetTeamsTeamIDAlertReportsFileNameRequest struct {
-	PathParams GetTeamsTeamIDAlertReportsFileNamePathParams
+    PathParams GetTeamsTeamIDAlertReportsFileNamePathParams 
+    
 }
 
 type GetTeamsTeamIDAlertReportsFileNameResponse struct {
-	Body                                                             []byte
-	ContentType                                                      string
-	ErrorResponseContent                                             *shared.ErrorResponseContent
-	GetTeamsTeamIDAlertReportsFileName200ApplicationJSONBinaryString []byte
-	GetTeamsTeamIDAlertReportsFileName200TextJSONBinaryString        []byte
-	GetTeamsTeamIDAlertReportsFileName200TextPlainBinaryString       []byte
-	StatusCode                                                       int64
+    Body []byte 
+    ContentType string 
+    ErrorResponseContent *shared.ErrorResponseContent 
+    GetTeamsTeamIDAlertReportsFileName200ApplicationJSONBinaryString []byte 
+    GetTeamsTeamIDAlertReportsFileName200TextJSONBinaryString []byte 
+    GetTeamsTeamIDAlertReportsFileName200TextPlainBinaryString []byte 
+    StatusCode int64 
+    
 }
+

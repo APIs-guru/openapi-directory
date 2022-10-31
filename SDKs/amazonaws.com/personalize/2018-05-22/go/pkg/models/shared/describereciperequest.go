@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeRecipeRequest struct {
-	RecipeArn string `json:"recipeArn"`
+    RecipeArn string `json:"recipeArn"`
+    
 }
+

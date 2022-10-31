@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class ValidateAccessTokenHeaders:
-    authorization: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
+    authorization: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

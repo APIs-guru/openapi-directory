@@ -19,21 +19,25 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def app_api_wmm_endpoints_wmm_magnetic_field(self, request: operations.AppAPIWmmEndpointsWmmMagneticFieldRequest) -> operations.AppAPIWmmEndpointsWmmMagneticFieldResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/magnetic_field"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AppAPIWmmEndpointsWmmMagneticFieldResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.AppAPIWmmEndpointsWmmMagneticField200ApplicationJSON])

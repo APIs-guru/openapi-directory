@@ -1,6 +1,10 @@
 package shared
 
+
+
 type CreateContainerVersionRequestVersionOptions struct {
-	Name  *string `json:"name,omitempty"`
-	Notes *string `json:"notes,omitempty"`
+    Name *string `json:"name,omitempty"`
+    Notes *string `json:"notes,omitempty"`
+    
 }
+

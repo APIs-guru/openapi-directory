@@ -1,14 +1,20 @@
 package operations
 
+
+
 type DeleteOrganizationPathParams struct {
-	OrganizationID string `pathParam:"style=simple,explode=false,name=organizationId"`
+    OrganizationID string `pathParam:"style=simple,explode=false,name=organizationId"`
+    
 }
 
 type DeleteOrganizationRequest struct {
-	PathParams DeleteOrganizationPathParams
+    PathParams DeleteOrganizationPathParams 
+    
 }
 
 type DeleteOrganizationResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

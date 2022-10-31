@@ -1,15 +1,20 @@
 package shared
 
+
+
+
 type ReportGroupTrendFieldTypeEnum string
 
 const (
-	ReportGroupTrendFieldTypeEnumPassRate        ReportGroupTrendFieldTypeEnum = "PASS_RATE"
-	ReportGroupTrendFieldTypeEnumDuration        ReportGroupTrendFieldTypeEnum = "DURATION"
-	ReportGroupTrendFieldTypeEnumTotal           ReportGroupTrendFieldTypeEnum = "TOTAL"
-	ReportGroupTrendFieldTypeEnumLineCoverage    ReportGroupTrendFieldTypeEnum = "LINE_COVERAGE"
-	ReportGroupTrendFieldTypeEnumLinesCovered    ReportGroupTrendFieldTypeEnum = "LINES_COVERED"
-	ReportGroupTrendFieldTypeEnumLinesMissed     ReportGroupTrendFieldTypeEnum = "LINES_MISSED"
-	ReportGroupTrendFieldTypeEnumBranchCoverage  ReportGroupTrendFieldTypeEnum = "BRANCH_COVERAGE"
-	ReportGroupTrendFieldTypeEnumBranchesCovered ReportGroupTrendFieldTypeEnum = "BRANCHES_COVERED"
-	ReportGroupTrendFieldTypeEnumBranchesMissed  ReportGroupTrendFieldTypeEnum = "BRANCHES_MISSED"
+    ReportGroupTrendFieldTypeEnumPassRate ReportGroupTrendFieldTypeEnum = "PASS_RATE"
+ReportGroupTrendFieldTypeEnumDuration ReportGroupTrendFieldTypeEnum = "DURATION"
+ReportGroupTrendFieldTypeEnumTotal ReportGroupTrendFieldTypeEnum = "TOTAL"
+ReportGroupTrendFieldTypeEnumLineCoverage ReportGroupTrendFieldTypeEnum = "LINE_COVERAGE"
+ReportGroupTrendFieldTypeEnumLinesCovered ReportGroupTrendFieldTypeEnum = "LINES_COVERED"
+ReportGroupTrendFieldTypeEnumLinesMissed ReportGroupTrendFieldTypeEnum = "LINES_MISSED"
+ReportGroupTrendFieldTypeEnumBranchCoverage ReportGroupTrendFieldTypeEnum = "BRANCH_COVERAGE"
+ReportGroupTrendFieldTypeEnumBranchesCovered ReportGroupTrendFieldTypeEnum = "BRANCHES_COVERED"
+ReportGroupTrendFieldTypeEnumBranchesMissed ReportGroupTrendFieldTypeEnum = "BRANCHES_MISSED"
 )
+
+

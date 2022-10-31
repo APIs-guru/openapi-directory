@@ -73,6 +73,7 @@ func (s *SDK) AddCustomFieldSettingForPortfolio(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -173,6 +174,7 @@ func (s *SDK) AddCustomFieldSettingForProject(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -273,6 +275,7 @@ func (s *SDK) AddDependenciesForTask(ctx context.Context, request operations.Add
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -383,6 +386,7 @@ func (s *SDK) AddDependentsForTask(ctx context.Context, request operations.AddDe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -493,6 +497,7 @@ func (s *SDK) AddFollowers(ctx context.Context, request operations.AddFollowersR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -603,6 +608,7 @@ func (s *SDK) AddFollowersForProject(ctx context.Context, request operations.Add
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -703,6 +709,7 @@ func (s *SDK) AddFollowersForTask(ctx context.Context, request operations.AddFol
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -803,6 +810,7 @@ func (s *SDK) AddItemForPortfolio(ctx context.Context, request operations.AddIte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -903,6 +911,7 @@ func (s *SDK) AddMembersForPortfolio(ctx context.Context, request operations.Add
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1003,6 +1012,7 @@ func (s *SDK) AddMembersForProject(ctx context.Context, request operations.AddMe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1103,6 +1113,7 @@ func (s *SDK) AddProjectForTask(ctx context.Context, request operations.AddProje
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1203,6 +1214,7 @@ func (s *SDK) AddSubgoal(ctx context.Context, request operations.AddSubgoalReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1313,6 +1325,7 @@ func (s *SDK) AddSupportingWorkForGoal(ctx context.Context, request operations.A
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1423,6 +1436,7 @@ func (s *SDK) AddTagForTask(ctx context.Context, request operations.AddTagForTas
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1523,6 +1537,7 @@ func (s *SDK) AddTaskForSection(ctx context.Context, request operations.AddTaskF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1623,6 +1638,7 @@ func (s *SDK) AddUserForTeam(ctx context.Context, request operations.AddUserForT
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1723,6 +1739,7 @@ func (s *SDK) AddUserForWorkspace(ctx context.Context, request operations.AddUse
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1823,6 +1840,7 @@ func (s *SDK) CreateAttachmentForTask(ctx context.Context, request operations.Cr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1923,6 +1941,7 @@ func (s *SDK) CreateBatchRequest(ctx context.Context, request operations.CreateB
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2020,6 +2039,7 @@ func (s *SDK) CreateCustomField(ctx context.Context, request operations.CreateCu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2117,6 +2137,7 @@ func (s *SDK) CreateEnumOptionForCustomField(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2217,6 +2238,7 @@ func (s *SDK) CreateGoal(ctx context.Context, request operations.CreateGoalReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2327,6 +2349,7 @@ func (s *SDK) CreateGoalMetric(ctx context.Context, request operations.CreateGoa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2437,6 +2460,7 @@ func (s *SDK) CreateOrganizationExport(ctx context.Context, request operations.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2537,6 +2561,7 @@ func (s *SDK) CreatePortfolio(ctx context.Context, request operations.CreatePort
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2637,6 +2662,7 @@ func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjec
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2737,6 +2763,7 @@ func (s *SDK) CreateProjectForTeam(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2837,6 +2864,7 @@ func (s *SDK) CreateProjectForWorkspace(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2937,6 +2965,7 @@ func (s *SDK) CreateProjectStatusForProject(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3037,6 +3066,7 @@ func (s *SDK) CreateSectionForProject(ctx context.Context, request operations.Cr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3137,6 +3167,7 @@ func (s *SDK) CreateStoryForTask(ctx context.Context, request operations.CreateS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3237,6 +3268,7 @@ func (s *SDK) CreateSubtaskForTask(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3337,6 +3369,7 @@ func (s *SDK) CreateTag(ctx context.Context, request operations.CreateTagRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3437,6 +3470,7 @@ func (s *SDK) CreateTagForWorkspace(ctx context.Context, request operations.Crea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3537,6 +3571,7 @@ func (s *SDK) CreateTask(ctx context.Context, request operations.CreateTaskReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3637,6 +3672,7 @@ func (s *SDK) CreateTeam(ctx context.Context, request operations.CreateTeamReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3737,6 +3773,7 @@ func (s *SDK) CreateWebhook(ctx context.Context, request operations.CreateWebhoo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -4845,6 +4882,7 @@ func (s *SDK) DuplicateProject(ctx context.Context, request operations.Duplicate
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -4945,6 +4983,7 @@ func (s *SDK) DuplicateTask(ctx context.Context, request operations.DuplicateTas
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11381,6 +11420,7 @@ func (s *SDK) InsertEnumOptionForCustomField(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11481,6 +11521,7 @@ func (s *SDK) InsertSectionForProject(ctx context.Context, request operations.In
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11581,6 +11622,7 @@ func (s *SDK) RemoveCustomFieldSettingForPortfolio(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11681,6 +11723,7 @@ func (s *SDK) RemoveCustomFieldSettingForProject(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11781,6 +11824,7 @@ func (s *SDK) RemoveDependenciesForTask(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11891,6 +11935,7 @@ func (s *SDK) RemoveDependentsForTask(ctx context.Context, request operations.Re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -12001,6 +12046,7 @@ func (s *SDK) RemoveFollowerForTask(ctx context.Context, request operations.Remo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -12101,6 +12147,7 @@ func (s *SDK) RemoveFollowers(ctx context.Context, request operations.RemoveFoll
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -12211,6 +12258,7 @@ func (s *SDK) RemoveFollowersForProject(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -12311,6 +12359,7 @@ func (s *SDK) RemoveItemForPortfolio(ctx context.Context, request operations.Rem
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -12411,6 +12460,7 @@ func (s *SDK) RemoveMembersForPortfolio(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -12511,6 +12561,7 @@ func (s *SDK) RemoveMembersForProject(ctx context.Context, request operations.Re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -12611,6 +12662,7 @@ func (s *SDK) RemoveProjectForTask(ctx context.Context, request operations.Remov
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -12711,6 +12763,7 @@ func (s *SDK) RemoveSubgoal(ctx context.Context, request operations.RemoveSubgoa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -12821,6 +12874,7 @@ func (s *SDK) RemoveSupportingWorkForGoal(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -12931,6 +12985,7 @@ func (s *SDK) RemoveTagForTask(ctx context.Context, request operations.RemoveTag
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -13031,6 +13086,7 @@ func (s *SDK) RemoveUserForTeam(ctx context.Context, request operations.RemoveUs
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -13131,6 +13187,7 @@ func (s *SDK) RemoveUserForWorkspace(ctx context.Context, request operations.Rem
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -13322,6 +13379,7 @@ func (s *SDK) SetParentForTask(ctx context.Context, request operations.SetParent
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -13611,6 +13669,7 @@ func (s *SDK) UpdateCustomField(ctx context.Context, request operations.UpdateCu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -13708,6 +13767,7 @@ func (s *SDK) UpdateEnumOption(ctx context.Context, request operations.UpdateEnu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -13808,6 +13868,7 @@ func (s *SDK) UpdateGoal(ctx context.Context, request operations.UpdateGoalReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -13908,6 +13969,7 @@ func (s *SDK) UpdateGoalMetric(ctx context.Context, request operations.UpdateGoa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -14018,6 +14080,7 @@ func (s *SDK) UpdatePortfolio(ctx context.Context, request operations.UpdatePort
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -14118,6 +14181,7 @@ func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjec
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -14218,6 +14282,7 @@ func (s *SDK) UpdateSection(ctx context.Context, request operations.UpdateSectio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -14318,6 +14383,7 @@ func (s *SDK) UpdateStory(ctx context.Context, request operations.UpdateStoryReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -14509,6 +14575,7 @@ func (s *SDK) UpdateTask(ctx context.Context, request operations.UpdateTaskReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -14609,6 +14676,7 @@ func (s *SDK) UpdateWorkspace(ctx context.Context, request operations.UpdateWork
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

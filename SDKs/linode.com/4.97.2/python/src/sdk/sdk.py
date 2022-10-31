@@ -20,21 +20,23 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def get_nodebalancers_node_balancer_id_stats(self, request: operations.GetNodebalancersNodeBalancerIDStatsRequest) -> operations.GetNodebalancersNodeBalancerIDStatsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}/stats", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetNodebalancersNodeBalancerIDStatsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NodeBalancerStats])
@@ -47,7 +49,6 @@ class SDK:
         return res
 
     
-    
     def post_images_upload(self, request: operations.PostImagesUploadRequest) -> operations.PostImagesUploadResponse:
         warnings.simplefilter("ignore")
 
@@ -55,18 +56,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/images/upload"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostImagesUploadResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostImagesUpload200ApplicationJSON])
@@ -79,20 +82,19 @@ class SDK:
         return res
 
     
-    
     def accept_entity_transfer(self, request: operations.AcceptEntityTransferRequest) -> operations.AcceptEntityTransferResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/entity-transfers/{token}/accept", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AcceptEntityTransferResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -105,20 +107,19 @@ class SDK:
         return res
 
     
-    
     def accept_service_transfer(self, request: operations.AcceptServiceTransferRequest) -> operations.AcceptServiceTransferResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/service-transfers/{token}/accept", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AcceptServiceTransferResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -131,27 +132,28 @@ class SDK:
         return res
 
     
-    
     def add_linode_config(self, request: operations.AddLinodeConfigRequest) -> operations.AddLinodeConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/configs", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AddLinodeConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LinodeConfig])
@@ -164,27 +166,28 @@ class SDK:
         return res
 
     
-    
     def add_linode_disk(self, request: operations.AddLinodeDiskRequest) -> operations.AddLinodeDiskResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/disks", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AddLinodeDiskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Disk])
@@ -197,27 +200,28 @@ class SDK:
         return res
 
     
-    
     def add_linode_ip(self, request: operations.AddLinodeIPRequest) -> operations.AddLinodeIPResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/ips", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AddLinodeIPResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.IPAddress])
@@ -230,24 +234,25 @@ class SDK:
         return res
 
     
-    
     def add_ssh_key(self, request: operations.AddSSHKeyRequest) -> operations.AddSSHKeyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile/sshkeys"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AddSSHKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SSHKey])
@@ -260,27 +265,28 @@ class SDK:
         return res
 
     
-    
     def add_stack_script(self, request: operations.AddStackScriptRequest) -> operations.AddStackScriptResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/linode/stackscripts"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AddStackScriptResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.StackScript])
@@ -293,27 +299,28 @@ class SDK:
         return res
 
     
-    
     def allocate_ip(self, request: operations.AllocateIPRequest) -> operations.AllocateIPResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/networking/ips"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AllocateIPResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.IPAddress])
@@ -326,27 +333,28 @@ class SDK:
         return res
 
     
-    
     def assign_i_ps(self, request: operations.AssignIPsRequest) -> operations.AssignIPsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/networking/ipv4/assign"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AssignIPsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -359,27 +367,28 @@ class SDK:
         return res
 
     
-    
     def attach_volume(self, request: operations.AttachVolumeRequest) -> operations.AttachVolumeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/volumes/{volumeId}/attach", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AttachVolumeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Volume])
@@ -392,24 +401,25 @@ class SDK:
         return res
 
     
-    
     def boot_linode_instance(self, request: operations.BootLinodeInstanceRequest) -> operations.BootLinodeInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/boot", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.BootLinodeInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -422,27 +432,28 @@ class SDK:
         return res
 
     
-    
     def cancel_account(self, request: operations.CancelAccountRequest) -> operations.CancelAccountResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/cancel"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CancelAccountResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CancelAccount200ApplicationJSON])
@@ -459,20 +470,19 @@ class SDK:
         return res
 
     
-    
     def cancel_backups(self, request: operations.CancelBackupsRequest) -> operations.CancelBackupsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/backups/cancel", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CancelBackupsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -485,7 +495,6 @@ class SDK:
         return res
 
     
-    
     def cancel_object_storage(self, request: operations.CancelObjectStorageRequest) -> operations.CancelObjectStorageResponse:
         warnings.simplefilter("ignore")
 
@@ -493,14 +502,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/object-storage/cancel"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CancelObjectStorageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -513,27 +522,28 @@ class SDK:
         return res
 
     
-    
     def clone_domain(self, request: operations.CloneDomainRequest) -> operations.CloneDomainResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/domains/{domainId}/clone", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CloneDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Domain])
@@ -546,20 +556,19 @@ class SDK:
         return res
 
     
-    
     def clone_linode_disk(self, request: operations.CloneLinodeDiskRequest) -> operations.CloneLinodeDiskResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/disks/{diskId}/clone", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CloneLinodeDiskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Disk])
@@ -572,27 +581,28 @@ class SDK:
         return res
 
     
-    
     def clone_linode_instance(self, request: operations.CloneLinodeInstanceRequest) -> operations.CloneLinodeInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/clone", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CloneLinodeInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Linode])
@@ -605,27 +615,28 @@ class SDK:
         return res
 
     
-    
     def clone_volume(self, request: operations.CloneVolumeRequest) -> operations.CloneVolumeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/volumes/{volumeId}/clone", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CloneVolumeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Volume])
@@ -638,20 +649,19 @@ class SDK:
         return res
 
     
-    
     def close_ticket(self, request: operations.CloseTicketRequest) -> operations.CloseTicketResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/support/tickets/{ticketId}/close", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CloseTicketResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -664,24 +674,25 @@ class SDK:
         return res
 
     
-    
     def create_client(self, request: operations.CreateClientRequest) -> operations.CreateClientResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/oauth-clients"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateClientResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.OAuthClient])
@@ -694,27 +705,28 @@ class SDK:
         return res
 
     
-    
     def create_credit_card(self, request: operations.CreateCreditCardRequest) -> operations.CreateCreditCardResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/credit-card"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCreditCardResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -727,27 +739,28 @@ class SDK:
         return res
 
     
-    
     def create_domain(self, request: operations.CreateDomainRequest) -> operations.CreateDomainResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/domains"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Domain])
@@ -760,27 +773,28 @@ class SDK:
         return res
 
     
-    
     def create_domain_record(self, request: operations.CreateDomainRecordRequest) -> operations.CreateDomainRecordResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/domains/{domainId}/records", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateDomainRecordResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DomainRecord])
@@ -793,24 +807,25 @@ class SDK:
         return res
 
     
-    
     def create_entity_transfer(self, request: operations.CreateEntityTransferRequest) -> operations.CreateEntityTransferResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/entity-transfers"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateEntityTransferResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EntityTransfer])
@@ -823,7 +838,6 @@ class SDK:
         return res
 
     
-    
     def create_firewall_device(self, request: operations.CreateFirewallDeviceRequest) -> operations.CreateFirewallDeviceResponse:
         warnings.simplefilter("ignore")
 
@@ -831,18 +845,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/networking/firewalls/{firewallId}/devices", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateFirewallDeviceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FirewallDevices])
@@ -855,7 +871,6 @@ class SDK:
         return res
 
     
-    
     def create_firewalls(self, request: operations.CreateFirewallsRequest) -> operations.CreateFirewallsResponse:
         warnings.simplefilter("ignore")
 
@@ -863,18 +878,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/networking/firewalls"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateFirewallsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Firewall])
@@ -887,24 +904,25 @@ class SDK:
         return res
 
     
-    
     def create_image(self, request: operations.CreateImageRequest) -> operations.CreateImageResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/images"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateImageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ImagePrivate])
@@ -917,24 +935,25 @@ class SDK:
         return res
 
     
-    
     def create_lke_cluster(self, request: operations.CreateLkeClusterRequest) -> operations.CreateLkeClusterResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/lke/clusters"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateLkeClusterResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LkeCluster])
@@ -947,27 +966,28 @@ class SDK:
         return res
 
     
-    
     def create_linode_instance(self, request: operations.CreateLinodeInstanceRequest) -> operations.CreateLinodeInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/linode/instances"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateLinodeInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Linode])
@@ -980,27 +1000,28 @@ class SDK:
         return res
 
     
-    
     def create_longview_client(self, request: operations.CreateLongviewClientRequest) -> operations.CreateLongviewClientResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/longview/clients"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateLongviewClientResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LongviewClient])
@@ -1013,24 +1034,25 @@ class SDK:
         return res
 
     
-    
     def create_managed_contact(self, request: operations.CreateManagedContactRequest) -> operations.CreateManagedContactResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/managed/contacts"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateManagedContactResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedContact])
@@ -1043,24 +1065,25 @@ class SDK:
         return res
 
     
-    
     def create_managed_credential(self, request: operations.CreateManagedCredentialRequest) -> operations.CreateManagedCredentialResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/managed/credentials"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateManagedCredentialResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedCredential])
@@ -1073,24 +1096,25 @@ class SDK:
         return res
 
     
-    
     def create_managed_service(self, request: operations.CreateManagedServiceRequest) -> operations.CreateManagedServiceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/managed/services"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateManagedServiceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedService])
@@ -1103,27 +1127,28 @@ class SDK:
         return res
 
     
-    
     def create_node_balancer(self, request: operations.CreateNodeBalancerRequest) -> operations.CreateNodeBalancerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/nodebalancers"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateNodeBalancerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NodeBalancer])
@@ -1136,24 +1161,25 @@ class SDK:
         return res
 
     
-    
     def create_node_balancer_config(self, request: operations.CreateNodeBalancerConfigRequest) -> operations.CreateNodeBalancerConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}/configs", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateNodeBalancerConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NodeBalancerConfig])
@@ -1166,27 +1192,28 @@ class SDK:
         return res
 
     
-    
     def create_node_balancer_node(self, request: operations.CreateNodeBalancerNodeRequest) -> operations.CreateNodeBalancerNodeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateNodeBalancerNodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NodeBalancerNode])
@@ -1199,7 +1226,6 @@ class SDK:
         return res
 
     
-    
     def create_object_storage_bucket(self, request: operations.CreateObjectStorageBucketRequest) -> operations.CreateObjectStorageBucketResponse:
         warnings.simplefilter("ignore")
 
@@ -1207,18 +1233,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/object-storage/buckets"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateObjectStorageBucketResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ObjectStorageBucket])
@@ -1231,7 +1259,6 @@ class SDK:
         return res
 
     
-    
     def create_object_storage_keys(self, request: operations.CreateObjectStorageKeysRequest) -> operations.CreateObjectStorageKeysResponse:
         warnings.simplefilter("ignore")
 
@@ -1239,18 +1266,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/object-storage/keys"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateObjectStorageKeysResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ObjectStorageKey])
@@ -1263,7 +1292,6 @@ class SDK:
         return res
 
     
-    
     def create_object_storage_object_url(self, request: operations.CreateObjectStorageObjectURLRequest) -> operations.CreateObjectStorageObjectURLResponse:
         warnings.simplefilter("ignore")
 
@@ -1271,18 +1299,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/buckets/{clusterId}/{bucket}/object-url", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateObjectStorageObjectURLResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -1295,7 +1325,6 @@ class SDK:
         return res
 
     
-    
     def create_object_storage_ssl(self, request: operations.CreateObjectStorageSslRequest) -> operations.CreateObjectStorageSslResponse:
         warnings.simplefilter("ignore")
 
@@ -1303,18 +1332,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/buckets/{clusterId}/{bucket}/ssl", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateObjectStorageSslResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ObjectStorageSslResponse])
@@ -1327,27 +1358,28 @@ class SDK:
         return res
 
     
-    
     def create_pay_pal_payment(self, request: operations.CreatePayPalPaymentRequest) -> operations.CreatePayPalPaymentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/payments/paypal"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePayPalPaymentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreatePayPalPayment200ApplicationJSON])
@@ -1360,27 +1392,28 @@ class SDK:
         return res
 
     
-    
     def create_payment(self, request: operations.CreatePaymentRequest) -> operations.CreatePaymentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/payments"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePaymentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Payment])
@@ -1393,7 +1426,6 @@ class SDK:
         return res
 
     
-    
     def create_payment_method(self, request: operations.CreatePaymentMethodRequest) -> operations.CreatePaymentMethodResponse:
         warnings.simplefilter("ignore")
 
@@ -1401,21 +1433,23 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/account/payment-methods"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePaymentMethodResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1428,27 +1462,28 @@ class SDK:
         return res
 
     
-    
     def create_personal_access_token(self, request: operations.CreatePersonalAccessTokenRequest) -> operations.CreatePersonalAccessTokenResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile/tokens"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePersonalAccessTokenResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PersonalAccessToken])
@@ -1461,24 +1496,25 @@ class SDK:
         return res
 
     
-    
     def create_promo_credit(self, request: operations.CreatePromoCreditRequest) -> operations.CreatePromoCreditResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/promo-codes"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePromoCreditResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Promotion])
@@ -1491,24 +1527,25 @@ class SDK:
         return res
 
     
-    
     def create_service_transfer(self, request: operations.CreateServiceTransferRequest) -> operations.CreateServiceTransferResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/service-transfers"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateServiceTransferResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ServiceTransfer])
@@ -1521,27 +1558,28 @@ class SDK:
         return res
 
     
-    
     def create_snapshot(self, request: operations.CreateSnapshotRequest) -> operations.CreateSnapshotResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/backups", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSnapshotResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Backup])
@@ -1554,24 +1592,25 @@ class SDK:
         return res
 
     
-    
     def create_tag(self, request: operations.CreateTagRequest) -> operations.CreateTagResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/tags"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTagResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Tag])
@@ -1584,24 +1623,25 @@ class SDK:
         return res
 
     
-    
     def create_ticket(self, request: operations.CreateTicketRequest) -> operations.CreateTicketResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/support/tickets"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTicketResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupportTicket])
@@ -1614,27 +1654,28 @@ class SDK:
         return res
 
     
-    
     def create_ticket_attachment(self, request: operations.CreateTicketAttachmentRequest) -> operations.CreateTicketAttachmentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/support/tickets/{ticketId}/attachments", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTicketAttachmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1647,27 +1688,28 @@ class SDK:
         return res
 
     
-    
     def create_ticket_reply(self, request: operations.CreateTicketReplyRequest) -> operations.CreateTicketReplyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/support/tickets/{ticketId}/replies", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTicketReplyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupportTicketReply])
@@ -1680,24 +1722,25 @@ class SDK:
         return res
 
     
-    
     def create_user(self, request: operations.CreateUserRequest) -> operations.CreateUserResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/users"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.User])
@@ -1710,27 +1753,28 @@ class SDK:
         return res
 
     
-    
     def create_volume(self, request: operations.CreateVolumeRequest) -> operations.CreateVolumeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/volumes"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateVolumeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Volume])
@@ -1743,20 +1787,19 @@ class SDK:
         return res
 
     
-    
     def delete_client(self, request: operations.DeleteClientRequest) -> operations.DeleteClientResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/oauth-clients/{clientId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteClientResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1769,20 +1812,19 @@ class SDK:
         return res
 
     
-    
     def delete_disk(self, request: operations.DeleteDiskRequest) -> operations.DeleteDiskResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/disks/{diskId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDiskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1795,20 +1837,19 @@ class SDK:
         return res
 
     
-    
     def delete_domain(self, request: operations.DeleteDomainRequest) -> operations.DeleteDomainResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/domains/{domainId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1821,20 +1862,19 @@ class SDK:
         return res
 
     
-    
     def delete_domain_record(self, request: operations.DeleteDomainRecordRequest) -> operations.DeleteDomainRecordResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/domains/{domainId}/records/{recordId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDomainRecordResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1847,20 +1887,19 @@ class SDK:
         return res
 
     
-    
     def delete_entity_transfer(self, request: operations.DeleteEntityTransferRequest) -> operations.DeleteEntityTransferResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/entity-transfers/{token}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteEntityTransferResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1873,7 +1912,6 @@ class SDK:
         return res
 
     
-    
     def delete_firewall(self, request: operations.DeleteFirewallRequest) -> operations.DeleteFirewallResponse:
         warnings.simplefilter("ignore")
 
@@ -1881,14 +1919,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/networking/firewalls/{firewallId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFirewallResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1901,7 +1939,6 @@ class SDK:
         return res
 
     
-    
     def delete_firewall_device(self, request: operations.DeleteFirewallDeviceRequest) -> operations.DeleteFirewallDeviceResponse:
         warnings.simplefilter("ignore")
 
@@ -1909,14 +1946,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/networking/firewalls/{firewallId}/devices/{deviceId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFirewallDeviceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1929,20 +1966,19 @@ class SDK:
         return res
 
     
-    
     def delete_image(self, request: operations.DeleteImageRequest) -> operations.DeleteImageResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/images/{imageId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteImageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1955,20 +1991,19 @@ class SDK:
         return res
 
     
-    
     def delete_lke_cluster(self, request: operations.DeleteLkeClusterRequest) -> operations.DeleteLkeClusterResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteLkeClusterResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1981,20 +2016,19 @@ class SDK:
         return res
 
     
-    
     def delete_lke_cluster_node(self, request: operations.DeleteLkeClusterNodeRequest) -> operations.DeleteLkeClusterNodeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}/nodes/{nodeId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteLkeClusterNodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2007,20 +2041,19 @@ class SDK:
         return res
 
     
-    
     def delete_lke_node_pool(self, request: operations.DeleteLkeNodePoolRequest) -> operations.DeleteLkeNodePoolResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}/pools/{poolId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteLkeNodePoolResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2033,20 +2066,19 @@ class SDK:
         return res
 
     
-    
     def delete_linode_config(self, request: operations.DeleteLinodeConfigRequest) -> operations.DeleteLinodeConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/configs/{configId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteLinodeConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2059,20 +2091,19 @@ class SDK:
         return res
 
     
-    
     def delete_linode_instance(self, request: operations.DeleteLinodeInstanceRequest) -> operations.DeleteLinodeInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteLinodeInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2085,20 +2116,19 @@ class SDK:
         return res
 
     
-    
     def delete_longview_client(self, request: operations.DeleteLongviewClientRequest) -> operations.DeleteLongviewClientResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/longview/clients/{clientId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteLongviewClientResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2111,20 +2141,19 @@ class SDK:
         return res
 
     
-    
     def delete_managed_contact(self, request: operations.DeleteManagedContactRequest) -> operations.DeleteManagedContactResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/contacts/{contactId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteManagedContactResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2137,20 +2166,19 @@ class SDK:
         return res
 
     
-    
     def delete_managed_credential(self, request: operations.DeleteManagedCredentialRequest) -> operations.DeleteManagedCredentialResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/credentials/{credentialId}/revoke", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteManagedCredentialResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2163,20 +2191,19 @@ class SDK:
         return res
 
     
-    
     def delete_managed_service(self, request: operations.DeleteManagedServiceRequest) -> operations.DeleteManagedServiceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/services/{serviceId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteManagedServiceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2189,20 +2216,19 @@ class SDK:
         return res
 
     
-    
     def delete_node_balancer(self, request: operations.DeleteNodeBalancerRequest) -> operations.DeleteNodeBalancerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteNodeBalancerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2215,20 +2241,19 @@ class SDK:
         return res
 
     
-    
     def delete_node_balancer_config(self, request: operations.DeleteNodeBalancerConfigRequest) -> operations.DeleteNodeBalancerConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}/configs/{configId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteNodeBalancerConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2241,20 +2266,19 @@ class SDK:
         return res
 
     
-    
     def delete_node_balancer_config_node(self, request: operations.DeleteNodeBalancerConfigNodeRequest) -> operations.DeleteNodeBalancerConfigNodeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes/{nodeId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteNodeBalancerConfigNodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2267,7 +2291,6 @@ class SDK:
         return res
 
     
-    
     def delete_object_storage_bucket(self, request: operations.DeleteObjectStorageBucketRequest) -> operations.DeleteObjectStorageBucketResponse:
         warnings.simplefilter("ignore")
 
@@ -2275,14 +2298,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/buckets/{clusterId}/{bucket}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteObjectStorageBucketResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2295,7 +2318,6 @@ class SDK:
         return res
 
     
-    
     def delete_object_storage_key(self, request: operations.DeleteObjectStorageKeyRequest) -> operations.DeleteObjectStorageKeyResponse:
         warnings.simplefilter("ignore")
 
@@ -2303,14 +2325,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/keys/{keyId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteObjectStorageKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2323,7 +2345,6 @@ class SDK:
         return res
 
     
-    
     def delete_object_storage_ssl(self, request: operations.DeleteObjectStorageSslRequest) -> operations.DeleteObjectStorageSslResponse:
         warnings.simplefilter("ignore")
 
@@ -2331,14 +2352,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/buckets/{clusterId}/{bucket}/ssl", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteObjectStorageSslResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2351,20 +2372,19 @@ class SDK:
         return res
 
     
-    
     def delete_personal_access_token(self, request: operations.DeletePersonalAccessTokenRequest) -> operations.DeletePersonalAccessTokenResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/profile/tokens/{tokenId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeletePersonalAccessTokenResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2377,20 +2397,19 @@ class SDK:
         return res
 
     
-    
     def delete_profile_app(self, request: operations.DeleteProfileAppRequest) -> operations.DeleteProfileAppResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/profile/apps/{appId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteProfileAppResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2403,20 +2422,19 @@ class SDK:
         return res
 
     
-    
     def delete_ssh_key(self, request: operations.DeleteSSHKeyRequest) -> operations.DeleteSSHKeyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/profile/sshkeys/{sshKeyId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSSHKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2429,20 +2447,19 @@ class SDK:
         return res
 
     
-    
     def delete_service_transfer(self, request: operations.DeleteServiceTransferRequest) -> operations.DeleteServiceTransferResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/service-transfers/{token}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteServiceTransferResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2455,20 +2472,19 @@ class SDK:
         return res
 
     
-    
     def delete_stack_script(self, request: operations.DeleteStackScriptRequest) -> operations.DeleteStackScriptResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/stackscripts/{stackscriptId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteStackScriptResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2481,20 +2497,19 @@ class SDK:
         return res
 
     
-    
     def delete_tag(self, request: operations.DeleteTagRequest) -> operations.DeleteTagResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/tags/{label}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteTagResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2507,20 +2522,19 @@ class SDK:
         return res
 
     
-    
     def delete_user(self, request: operations.DeleteUserRequest) -> operations.DeleteUserResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/users/{username}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2533,20 +2547,19 @@ class SDK:
         return res
 
     
-    
     def delete_volume(self, request: operations.DeleteVolumeRequest) -> operations.DeleteVolumeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/volumes/{volumeId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteVolumeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2559,20 +2572,19 @@ class SDK:
         return res
 
     
-    
     def detach_volume(self, request: operations.DetachVolumeRequest) -> operations.DetachVolumeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/volumes/{volumeId}/detach", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DetachVolumeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2585,20 +2597,19 @@ class SDK:
         return res
 
     
-    
     def disable_managed_service(self, request: operations.DisableManagedServiceRequest) -> operations.DisableManagedServiceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/services/{serviceId}/disable", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DisableManagedServiceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedService])
@@ -2611,20 +2622,19 @@ class SDK:
         return res
 
     
-    
     def enable_account_manged(self, request: operations.EnableAccountMangedRequest) -> operations.EnableAccountMangedResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/settings/managed-enable"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EnableAccountMangedResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2637,20 +2647,19 @@ class SDK:
         return res
 
     
-    
     def enable_backups(self, request: operations.EnableBackupsRequest) -> operations.EnableBackupsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/backups/enable", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EnableBackupsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2663,20 +2672,19 @@ class SDK:
         return res
 
     
-    
     def enable_managed_service(self, request: operations.EnableManagedServiceRequest) -> operations.EnableManagedServiceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/services/{serviceId}/enable", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EnableManagedServiceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedService])
@@ -2689,20 +2697,19 @@ class SDK:
         return res
 
     
-    
     def event_read(self, request: operations.EventReadRequest) -> operations.EventReadResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/events/{eventId}/read", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EventReadResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2715,20 +2722,19 @@ class SDK:
         return res
 
     
-    
     def event_seen(self, request: operations.EventSeenRequest) -> operations.EventSeenResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/events/{eventId}/seen", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EventSeenResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2741,27 +2747,28 @@ class SDK:
         return res
 
     
-    
     def execute_pay_pal_payment(self, request: operations.ExecutePayPalPaymentRequest) -> operations.ExecutePayPalPaymentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/payments/paypal/execute"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ExecutePayPalPaymentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2774,20 +2781,19 @@ class SDK:
         return res
 
     
-    
     def get_account(self, request: operations.GetAccountRequest) -> operations.GetAccountResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAccountResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Account])
@@ -2800,20 +2806,19 @@ class SDK:
         return res
 
     
-    
     def get_account_login(self, request: operations.GetAccountLoginRequest) -> operations.GetAccountLoginResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/logins/{loginId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAccountLoginResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Login])
@@ -2826,20 +2831,19 @@ class SDK:
         return res
 
     
-    
     def get_account_logins(self, request: operations.GetAccountLoginsRequest) -> operations.GetAccountLoginsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/logins"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAccountLoginsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAccountLogins200ApplicationJSON])
@@ -2852,20 +2856,19 @@ class SDK:
         return res
 
     
-    
     def get_account_settings(self, request: operations.GetAccountSettingsRequest) -> operations.GetAccountSettingsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/settings"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAccountSettingsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AccountSettings])
@@ -2878,20 +2881,19 @@ class SDK:
         return res
 
     
-    
     def get_backup(self, request: operations.GetBackupRequest) -> operations.GetBackupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/backups/{backupId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetBackupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Backup])
@@ -2904,20 +2906,19 @@ class SDK:
         return res
 
     
-    
     def get_backups(self, request: operations.GetBackupsRequest) -> operations.GetBackupsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/backups", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetBackupsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetBackups200ApplicationJSON])
@@ -2930,20 +2931,19 @@ class SDK:
         return res
 
     
-    
     def get_client(self, request: operations.GetClientRequest) -> operations.GetClientResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/oauth-clients/{clientId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetClientResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.OAuthClient])
@@ -2956,19 +2956,19 @@ class SDK:
         return res
 
     
-    
     def get_client_thumbnail(self, request: operations.GetClientThumbnailRequest) -> operations.GetClientThumbnailResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/oauth-clients/{clientId}/thumbnail", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetClientThumbnailResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "image/png"):
                 res.get_client_thumbnail_200_image_png_binary_string = r.content
@@ -2980,21 +2980,21 @@ class SDK:
         return res
 
     
-    
     def get_clients(self, request: operations.GetClientsRequest) -> operations.GetClientsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/oauth-clients"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetClientsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetClients200ApplicationJSON])
@@ -3007,20 +3007,19 @@ class SDK:
         return res
 
     
-    
     def get_devices(self, request: operations.GetDevicesRequest) -> operations.GetDevicesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile/devices"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDevicesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDevices200ApplicationJSON])
@@ -3033,20 +3032,19 @@ class SDK:
         return res
 
     
-    
     def get_domain(self, request: operations.GetDomainRequest) -> operations.GetDomainResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/domains/{domainId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Domain])
@@ -3059,20 +3057,19 @@ class SDK:
         return res
 
     
-    
     def get_domain_record(self, request: operations.GetDomainRecordRequest) -> operations.GetDomainRecordResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/domains/{domainId}/records/{recordId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDomainRecordResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DomainRecord])
@@ -3085,21 +3082,21 @@ class SDK:
         return res
 
     
-    
     def get_domain_records(self, request: operations.GetDomainRecordsRequest) -> operations.GetDomainRecordsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/domains/{domainId}/records", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDomainRecordsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDomainRecords200ApplicationJSON])
@@ -3108,20 +3105,19 @@ class SDK:
         return res
 
     
-    
     def get_domain_zone(self, request: operations.GetDomainZoneRequest) -> operations.GetDomainZoneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/domains/{domainId}/zone-file", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDomainZoneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -3134,21 +3130,21 @@ class SDK:
         return res
 
     
-    
     def get_domains(self, request: operations.GetDomainsRequest) -> operations.GetDomainsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/domains"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDomainsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDomains200ApplicationJSON])
@@ -3161,20 +3157,19 @@ class SDK:
         return res
 
     
-    
     def get_entity_transfer(self, request: operations.GetEntityTransferRequest) -> operations.GetEntityTransferResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/entity-transfers/{token}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetEntityTransferResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EntityTransfer])
@@ -3187,21 +3182,21 @@ class SDK:
         return res
 
     
-    
     def get_entity_transfers(self, request: operations.GetEntityTransfersRequest) -> operations.GetEntityTransfersResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/entity-transfers"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetEntityTransfersResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetEntityTransfers200ApplicationJSON])
@@ -3214,20 +3209,19 @@ class SDK:
         return res
 
     
-    
     def get_event(self, request: operations.GetEventRequest) -> operations.GetEventResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/events/{eventId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetEventResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Event])
@@ -3240,21 +3234,21 @@ class SDK:
         return res
 
     
-    
     def get_events(self, request: operations.GetEventsRequest) -> operations.GetEventsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/events"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetEventsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetEvents200ApplicationJSON])
@@ -3267,7 +3261,6 @@ class SDK:
         return res
 
     
-    
     def get_firewall(self, request: operations.GetFirewallRequest) -> operations.GetFirewallResponse:
         warnings.simplefilter("ignore")
 
@@ -3275,14 +3268,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/networking/firewalls/{firewallId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFirewallResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Firewall])
@@ -3295,7 +3288,6 @@ class SDK:
         return res
 
     
-    
     def get_firewall_device(self, request: operations.GetFirewallDeviceRequest) -> operations.GetFirewallDeviceResponse:
         warnings.simplefilter("ignore")
 
@@ -3303,14 +3295,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/networking/firewalls/{firewallId}/devices/{deviceId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFirewallDeviceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FirewallDevices])
@@ -3323,7 +3315,6 @@ class SDK:
         return res
 
     
-    
     def get_firewall_devices(self, request: operations.GetFirewallDevicesRequest) -> operations.GetFirewallDevicesResponse:
         warnings.simplefilter("ignore")
 
@@ -3331,15 +3322,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/networking/firewalls/{firewallId}/devices", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFirewallDevicesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetFirewallDevices200ApplicationJSON])
@@ -3352,7 +3344,6 @@ class SDK:
         return res
 
     
-    
     def get_firewall_rules(self, request: operations.GetFirewallRulesRequest) -> operations.GetFirewallRulesResponse:
         warnings.simplefilter("ignore")
 
@@ -3360,14 +3351,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/networking/firewalls/{firewallId}/rules", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFirewallRulesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Rules])
@@ -3380,7 +3371,6 @@ class SDK:
         return res
 
     
-    
     def get_firewalls(self, request: operations.GetFirewallsRequest) -> operations.GetFirewallsResponse:
         warnings.simplefilter("ignore")
 
@@ -3388,15 +3378,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/networking/firewalls"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFirewallsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetFirewalls200ApplicationJSON])
@@ -3409,20 +3400,19 @@ class SDK:
         return res
 
     
-    
     def get_ip(self, request: operations.GetIPRequest) -> operations.GetIPResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/networking/ips/{address}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetIPResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.IPAddress])
@@ -3435,20 +3425,19 @@ class SDK:
         return res
 
     
-    
     def get_i_ps(self, request: operations.GetIPsRequest) -> operations.GetIPsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/networking/ips"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetIPsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetIPs200ApplicationJSON])
@@ -3461,21 +3450,21 @@ class SDK:
         return res
 
     
-    
     def get_i_pv6_pools(self, request: operations.GetIPv6PoolsRequest) -> operations.GetIPv6PoolsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/networking/ipv6/pools"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetIPv6PoolsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetIPv6Pools200ApplicationJSON])
@@ -3488,21 +3477,21 @@ class SDK:
         return res
 
     
-    
     def get_i_pv6_ranges(self, request: operations.GetIPv6RangesRequest) -> operations.GetIPv6RangesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/networking/ipv6/ranges"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetIPv6RangesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetIPv6Ranges200ApplicationJSON])
@@ -3515,19 +3504,19 @@ class SDK:
         return res
 
     
-    
     def get_image(self, request: operations.GetImageRequest) -> operations.GetImageResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/images/{imageId}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetImageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ImagePrivate])
@@ -3540,20 +3529,21 @@ class SDK:
         return res
 
     
-    
     def get_images(self, request: operations.GetImagesRequest) -> operations.GetImagesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/images"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetImagesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetImages200ApplicationJSON])
@@ -3566,20 +3556,19 @@ class SDK:
         return res
 
     
-    
     def get_invoice(self, request: operations.GetInvoiceRequest) -> operations.GetInvoiceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/invoices/{invoiceId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetInvoiceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Invoice])
@@ -3592,21 +3581,21 @@ class SDK:
         return res
 
     
-    
     def get_invoice_items(self, request: operations.GetInvoiceItemsRequest) -> operations.GetInvoiceItemsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/invoices/{invoiceId}/items", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetInvoiceItemsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetInvoiceItems200ApplicationJSON])
@@ -3619,21 +3608,21 @@ class SDK:
         return res
 
     
-    
     def get_invoices(self, request: operations.GetInvoicesRequest) -> operations.GetInvoicesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/invoices"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetInvoicesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetInvoices200ApplicationJSON])
@@ -3646,19 +3635,19 @@ class SDK:
         return res
 
     
-    
     def get_kernel(self, request: operations.GetKernelRequest) -> operations.GetKernelResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/kernels/{kernelId}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetKernelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Kernel])
@@ -3671,20 +3660,21 @@ class SDK:
         return res
 
     
-    
     def get_kernels(self, request: operations.GetKernelsRequest) -> operations.GetKernelsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/linode/kernels"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetKernelsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetKernels200ApplicationJSON])
@@ -3697,20 +3687,19 @@ class SDK:
         return res
 
     
-    
     def get_lke_cluster(self, request: operations.GetLkeClusterRequest) -> operations.GetLkeClusterResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLkeClusterResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LkeCluster])
@@ -3723,20 +3712,19 @@ class SDK:
         return res
 
     
-    
     def get_lke_cluster_api_endpoints(self, request: operations.GetLkeClusterAPIEndpointsRequest) -> operations.GetLkeClusterAPIEndpointsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}/api-endpoints", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLkeClusterAPIEndpointsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLkeClusterAPIEndpoints200ApplicationJSON])
@@ -3749,20 +3737,19 @@ class SDK:
         return res
 
     
-    
     def get_lke_cluster_kubeconfig(self, request: operations.GetLkeClusterKubeconfigRequest) -> operations.GetLkeClusterKubeconfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}/kubeconfig", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLkeClusterKubeconfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLkeClusterKubeconfig200ApplicationJSON])
@@ -3775,20 +3762,19 @@ class SDK:
         return res
 
     
-    
     def get_lke_cluster_node(self, request: operations.GetLkeClusterNodeRequest) -> operations.GetLkeClusterNodeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}/nodes/{nodeId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLkeClusterNodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLkeClusterNode200ApplicationJSON])
@@ -3801,20 +3787,19 @@ class SDK:
         return res
 
     
-    
     def get_lke_cluster_pools(self, request: operations.GetLkeClusterPoolsRequest) -> operations.GetLkeClusterPoolsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}/pools", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLkeClusterPoolsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLkeClusterPools200ApplicationJSON])
@@ -3827,20 +3812,19 @@ class SDK:
         return res
 
     
-    
     def get_lke_clusters(self, request: operations.GetLkeClustersRequest) -> operations.GetLkeClustersResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/lke/clusters"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLkeClustersResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLkeClusters200ApplicationJSON])
@@ -3853,20 +3837,19 @@ class SDK:
         return res
 
     
-    
     def get_lke_node_pool(self, request: operations.GetLkeNodePoolRequest) -> operations.GetLkeNodePoolResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}/pools/{poolId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLkeNodePoolResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LkeNodePool])
@@ -3875,20 +3858,19 @@ class SDK:
         return res
 
     
-    
     def get_lke_version(self, request: operations.GetLkeVersionRequest) -> operations.GetLkeVersionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/versions/{version}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLkeVersionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LkeVersion])
@@ -3901,20 +3883,19 @@ class SDK:
         return res
 
     
-    
     def get_lke_versions(self, request: operations.GetLkeVersionsRequest) -> operations.GetLkeVersionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/lke/versions"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLkeVersionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLkeVersions200ApplicationJSON])
@@ -3927,20 +3908,19 @@ class SDK:
         return res
 
     
-    
     def get_linode_config(self, request: operations.GetLinodeConfigRequest) -> operations.GetLinodeConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/configs/{configId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LinodeConfig])
@@ -3953,21 +3933,21 @@ class SDK:
         return res
 
     
-    
     def get_linode_configs(self, request: operations.GetLinodeConfigsRequest) -> operations.GetLinodeConfigsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/configs", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeConfigsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLinodeConfigs200ApplicationJSON])
@@ -3976,20 +3956,19 @@ class SDK:
         return res
 
     
-    
     def get_linode_disk(self, request: operations.GetLinodeDiskRequest) -> operations.GetLinodeDiskResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/disks/{diskId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeDiskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Disk])
@@ -4002,21 +3981,21 @@ class SDK:
         return res
 
     
-    
     def get_linode_disks(self, request: operations.GetLinodeDisksRequest) -> operations.GetLinodeDisksResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/disks", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeDisksResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLinodeDisks200ApplicationJSON])
@@ -4029,21 +4008,21 @@ class SDK:
         return res
 
     
-    
     def get_linode_firewalls(self, request: operations.GetLinodeFirewallsRequest) -> operations.GetLinodeFirewallsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/firewalls", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeFirewallsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLinodeFirewalls200ApplicationJSON])
@@ -4056,20 +4035,19 @@ class SDK:
         return res
 
     
-    
     def get_linode_ip(self, request: operations.GetLinodeIPRequest) -> operations.GetLinodeIPResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/ips/{address}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeIPResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.IPAddress])
@@ -4082,20 +4060,19 @@ class SDK:
         return res
 
     
-    
     def get_linode_i_ps(self, request: operations.GetLinodeIPsRequest) -> operations.GetLinodeIPsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/ips", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeIPsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -4108,20 +4085,19 @@ class SDK:
         return res
 
     
-    
     def get_linode_instance(self, request: operations.GetLinodeInstanceRequest) -> operations.GetLinodeInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Linode])
@@ -4134,21 +4110,21 @@ class SDK:
         return res
 
     
-    
     def get_linode_instances(self, request: operations.GetLinodeInstancesRequest) -> operations.GetLinodeInstancesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/linode/instances"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeInstancesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLinodeInstances200ApplicationJSON])
@@ -4161,20 +4137,19 @@ class SDK:
         return res
 
     
-    
     def get_linode_stats(self, request: operations.GetLinodeStatsRequest) -> operations.GetLinodeStatsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/stats", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeStatsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LinodeStats])
@@ -4187,20 +4162,19 @@ class SDK:
         return res
 
     
-    
     def get_linode_stats_by_year_month(self, request: operations.GetLinodeStatsByYearMonthRequest) -> operations.GetLinodeStatsByYearMonthResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/stats/{year}/{month}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeStatsByYearMonthResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LinodeStats])
@@ -4213,20 +4187,19 @@ class SDK:
         return res
 
     
-    
     def get_linode_transfer(self, request: operations.GetLinodeTransferRequest) -> operations.GetLinodeTransferResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/transfer", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeTransferResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -4239,20 +4212,19 @@ class SDK:
         return res
 
     
-    
     def get_linode_transfer_by_year_month(self, request: operations.GetLinodeTransferByYearMonthRequest) -> operations.GetLinodeTransferByYearMonthResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/transfer/{year}/{month}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeTransferByYearMonthResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -4265,19 +4237,19 @@ class SDK:
         return res
 
     
-    
     def get_linode_type(self, request: operations.GetLinodeTypeRequest) -> operations.GetLinodeTypeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/types/{typeId}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LinodeType])
@@ -4290,19 +4262,19 @@ class SDK:
         return res
 
     
-    
     def get_linode_types(self) -> operations.GetLinodeTypesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/linode/types"
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeTypesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLinodeTypes200ApplicationJSON])
@@ -4315,21 +4287,21 @@ class SDK:
         return res
 
     
-    
     def get_linode_volumes(self, request: operations.GetLinodeVolumesRequest) -> operations.GetLinodeVolumesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/volumes", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLinodeVolumesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLinodeVolumes200ApplicationJSON])
@@ -4342,20 +4314,19 @@ class SDK:
         return res
 
     
-    
     def get_longview_client(self, request: operations.GetLongviewClientRequest) -> operations.GetLongviewClientResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/longview/clients/{clientId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLongviewClientResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LongviewClient])
@@ -4368,21 +4339,21 @@ class SDK:
         return res
 
     
-    
     def get_longview_clients(self, request: operations.GetLongviewClientsRequest) -> operations.GetLongviewClientsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/longview/clients"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLongviewClientsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLongviewClients200ApplicationJSON])
@@ -4395,20 +4366,19 @@ class SDK:
         return res
 
     
-    
     def get_longview_plan(self, request: operations.GetLongviewPlanRequest) -> operations.GetLongviewPlanResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/longview/plan"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLongviewPlanResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LongviewSubscription])
@@ -4421,19 +4391,19 @@ class SDK:
         return res
 
     
-    
     def get_longview_subscription(self, request: operations.GetLongviewSubscriptionRequest) -> operations.GetLongviewSubscriptionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/longview/subscriptions/{subscriptionId}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLongviewSubscriptionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LongviewSubscription])
@@ -4446,20 +4416,21 @@ class SDK:
         return res
 
     
-    
     def get_longview_subscriptions(self, request: operations.GetLongviewSubscriptionsRequest) -> operations.GetLongviewSubscriptionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/longview/subscriptions"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLongviewSubscriptionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLongviewSubscriptions200ApplicationJSON])
@@ -4472,7 +4443,6 @@ class SDK:
         return res
 
     
-    
     def get_maintenance(self, request: operations.GetMaintenanceRequest) -> operations.GetMaintenanceResponse:
         warnings.simplefilter("ignore")
 
@@ -4480,14 +4450,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/account/maintenance"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetMaintenanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetMaintenance200ApplicationJSON])
@@ -4500,20 +4470,19 @@ class SDK:
         return res
 
     
-    
     def get_managed_contact(self, request: operations.GetManagedContactRequest) -> operations.GetManagedContactResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/contacts/{contactId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetManagedContactResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedContact])
@@ -4526,21 +4495,21 @@ class SDK:
         return res
 
     
-    
     def get_managed_contacts(self, request: operations.GetManagedContactsRequest) -> operations.GetManagedContactsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/managed/contacts"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetManagedContactsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetManagedContacts200ApplicationJSON])
@@ -4553,20 +4522,19 @@ class SDK:
         return res
 
     
-    
     def get_managed_credential(self, request: operations.GetManagedCredentialRequest) -> operations.GetManagedCredentialResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/credentials/{credentialId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetManagedCredentialResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedCredential])
@@ -4579,21 +4547,21 @@ class SDK:
         return res
 
     
-    
     def get_managed_credentials(self, request: operations.GetManagedCredentialsRequest) -> operations.GetManagedCredentialsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/managed/credentials"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetManagedCredentialsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetManagedCredentials200ApplicationJSON])
@@ -4606,20 +4574,19 @@ class SDK:
         return res
 
     
-    
     def get_managed_issue(self, request: operations.GetManagedIssueRequest) -> operations.GetManagedIssueResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/issues/{issueId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetManagedIssueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedIssue])
@@ -4632,21 +4599,21 @@ class SDK:
         return res
 
     
-    
     def get_managed_issues(self, request: operations.GetManagedIssuesRequest) -> operations.GetManagedIssuesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/managed/issues"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetManagedIssuesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetManagedIssues200ApplicationJSON])
@@ -4659,20 +4626,19 @@ class SDK:
         return res
 
     
-    
     def get_managed_linode_setting(self, request: operations.GetManagedLinodeSettingRequest) -> operations.GetManagedLinodeSettingResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/linode-settings/{linodeId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetManagedLinodeSettingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedLinodeSettings])
@@ -4685,21 +4651,21 @@ class SDK:
         return res
 
     
-    
     def get_managed_linode_settings(self, request: operations.GetManagedLinodeSettingsRequest) -> operations.GetManagedLinodeSettingsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/managed/linode-settings"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetManagedLinodeSettingsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetManagedLinodeSettings200ApplicationJSON])
@@ -4712,20 +4678,19 @@ class SDK:
         return res
 
     
-    
     def get_managed_service(self, request: operations.GetManagedServiceRequest) -> operations.GetManagedServiceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/services/{serviceId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetManagedServiceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedService])
@@ -4738,20 +4703,19 @@ class SDK:
         return res
 
     
-    
     def get_managed_services(self, request: operations.GetManagedServicesRequest) -> operations.GetManagedServicesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/managed/services"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetManagedServicesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetManagedServices200ApplicationJSON])
@@ -4764,20 +4728,19 @@ class SDK:
         return res
 
     
-    
     def get_managed_stats(self, request: operations.GetManagedStatsRequest) -> operations.GetManagedStatsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/managed/stats"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetManagedStatsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetManagedStats200ApplicationJSON])
@@ -4790,20 +4753,19 @@ class SDK:
         return res
 
     
-    
     def get_node_balancer(self, request: operations.GetNodeBalancerRequest) -> operations.GetNodeBalancerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetNodeBalancerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NodeBalancer])
@@ -4816,20 +4778,19 @@ class SDK:
         return res
 
     
-    
     def get_node_balancer_config(self, request: operations.GetNodeBalancerConfigRequest) -> operations.GetNodeBalancerConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}/configs/{configId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetNodeBalancerConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NodeBalancerConfig])
@@ -4842,21 +4803,21 @@ class SDK:
         return res
 
     
-    
     def get_node_balancer_config_nodes(self, request: operations.GetNodeBalancerConfigNodesRequest) -> operations.GetNodeBalancerConfigNodesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetNodeBalancerConfigNodesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetNodeBalancerConfigNodes200ApplicationJSON])
@@ -4869,21 +4830,21 @@ class SDK:
         return res
 
     
-    
     def get_node_balancer_configs(self, request: operations.GetNodeBalancerConfigsRequest) -> operations.GetNodeBalancerConfigsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}/configs", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetNodeBalancerConfigsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetNodeBalancerConfigs200ApplicationJSON])
@@ -4896,20 +4857,19 @@ class SDK:
         return res
 
     
-    
     def get_node_balancer_node(self, request: operations.GetNodeBalancerNodeRequest) -> operations.GetNodeBalancerNodeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes/{nodeId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetNodeBalancerNodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NodeBalancerNode])
@@ -4922,21 +4882,21 @@ class SDK:
         return res
 
     
-    
     def get_node_balancers(self, request: operations.GetNodeBalancersRequest) -> operations.GetNodeBalancersResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/nodebalancers"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetNodeBalancersResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetNodeBalancers200ApplicationJSON])
@@ -4949,20 +4909,19 @@ class SDK:
         return res
 
     
-    
     def get_notifications(self, request: operations.GetNotificationsRequest) -> operations.GetNotificationsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/notifications"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetNotificationsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetNotifications200ApplicationJSON])
@@ -4975,7 +4934,6 @@ class SDK:
         return res
 
     
-    
     def get_object_storage_bucket(self, request: operations.GetObjectStorageBucketRequest) -> operations.GetObjectStorageBucketResponse:
         warnings.simplefilter("ignore")
 
@@ -4983,14 +4941,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/buckets/{clusterId}/{bucket}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetObjectStorageBucketResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ObjectStorageBucket])
@@ -5003,7 +4961,6 @@ class SDK:
         return res
 
     
-    
     def get_object_storage_bucket_content(self, request: operations.GetObjectStorageBucketContentRequest) -> operations.GetObjectStorageBucketContentResponse:
         warnings.simplefilter("ignore")
 
@@ -5011,15 +4968,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/buckets/{clusterId}/{bucket}/object-list", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetObjectStorageBucketContentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -5032,7 +4990,6 @@ class SDK:
         return res
 
     
-    
     def get_object_storage_bucketin_cluster(self, request: operations.GetObjectStorageBucketinClusterRequest) -> operations.GetObjectStorageBucketinClusterResponse:
         warnings.simplefilter("ignore")
 
@@ -5040,14 +4997,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/buckets/{clusterId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetObjectStorageBucketinClusterResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetObjectStorageBucketinCluster200ApplicationJSON])
@@ -5060,7 +5017,6 @@ class SDK:
         return res
 
     
-    
     def get_object_storage_buckets(self, request: operations.GetObjectStorageBucketsRequest) -> operations.GetObjectStorageBucketsResponse:
         warnings.simplefilter("ignore")
 
@@ -5068,14 +5024,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/object-storage/buckets"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetObjectStorageBucketsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetObjectStorageBuckets200ApplicationJSON])
@@ -5088,7 +5044,6 @@ class SDK:
         return res
 
     
-    
     def get_object_storage_cluster(self, request: operations.GetObjectStorageClusterRequest) -> operations.GetObjectStorageClusterResponse:
         warnings.simplefilter("ignore")
 
@@ -5096,13 +5051,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/clusters/{clusterId}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetObjectStorageClusterResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ObjectStorageCluster])
@@ -5115,7 +5071,6 @@ class SDK:
         return res
 
     
-    
     def get_object_storage_clusters(self, request: operations.GetObjectStorageClustersRequest) -> operations.GetObjectStorageClustersResponse:
         warnings.simplefilter("ignore")
 
@@ -5123,13 +5078,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/object-storage/clusters"
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetObjectStorageClustersResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetObjectStorageClusters200ApplicationJSON])
@@ -5142,7 +5098,6 @@ class SDK:
         return res
 
     
-    
     def get_object_storage_key(self, request: operations.GetObjectStorageKeyRequest) -> operations.GetObjectStorageKeyResponse:
         warnings.simplefilter("ignore")
 
@@ -5150,14 +5105,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/keys/{keyId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetObjectStorageKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ObjectStorageKey])
@@ -5170,7 +5125,6 @@ class SDK:
         return res
 
     
-    
     def get_object_storage_keys(self, request: operations.GetObjectStorageKeysRequest) -> operations.GetObjectStorageKeysResponse:
         warnings.simplefilter("ignore")
 
@@ -5178,14 +5132,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/object-storage/keys"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetObjectStorageKeysResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetObjectStorageKeys200ApplicationJSON])
@@ -5198,7 +5152,6 @@ class SDK:
         return res
 
     
-    
     def get_object_storage_ssl(self, request: operations.GetObjectStorageSslRequest) -> operations.GetObjectStorageSslResponse:
         warnings.simplefilter("ignore")
 
@@ -5206,14 +5159,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/buckets/{clusterId}/{bucket}/ssl", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetObjectStorageSslResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ObjectStorageSslResponse])
@@ -5226,7 +5179,6 @@ class SDK:
         return res
 
     
-    
     def get_object_storage_transfer(self, request: operations.GetObjectStorageTransferRequest) -> operations.GetObjectStorageTransferResponse:
         warnings.simplefilter("ignore")
 
@@ -5234,14 +5186,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/object-storage/transfer"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetObjectStorageTransferResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -5254,20 +5206,19 @@ class SDK:
         return res
 
     
-    
     def get_payment(self, request: operations.GetPaymentRequest) -> operations.GetPaymentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/payments/{paymentId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetPaymentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Payment])
@@ -5280,7 +5231,6 @@ class SDK:
         return res
 
     
-    
     def get_payment_methods(self, request: operations.GetPaymentMethodsRequest) -> operations.GetPaymentMethodsResponse:
         warnings.simplefilter("ignore")
 
@@ -5288,15 +5238,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/account/payment-methods"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetPaymentMethodsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetPaymentMethods200ApplicationJSON])
@@ -5309,21 +5260,21 @@ class SDK:
         return res
 
     
-    
     def get_payments(self, request: operations.GetPaymentsRequest) -> operations.GetPaymentsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/payments"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetPaymentsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetPayments200ApplicationJSON])
@@ -5336,20 +5287,19 @@ class SDK:
         return res
 
     
-    
     def get_personal_access_token(self, request: operations.GetPersonalAccessTokenRequest) -> operations.GetPersonalAccessTokenResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/profile/tokens/{tokenId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetPersonalAccessTokenResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PersonalAccessToken])
@@ -5362,20 +5312,19 @@ class SDK:
         return res
 
     
-    
     def get_personal_access_tokens(self, request: operations.GetPersonalAccessTokensRequest) -> operations.GetPersonalAccessTokensResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile/tokens"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetPersonalAccessTokensResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetPersonalAccessTokens200ApplicationJSON])
@@ -5388,20 +5337,19 @@ class SDK:
         return res
 
     
-    
     def get_profile(self, request: operations.GetProfileRequest) -> operations.GetProfileResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Profile])
@@ -5414,20 +5362,19 @@ class SDK:
         return res
 
     
-    
     def get_profile_app(self, request: operations.GetProfileAppRequest) -> operations.GetProfileAppResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/profile/apps/{appId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetProfileAppResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AuthorizedApp])
@@ -5440,21 +5387,21 @@ class SDK:
         return res
 
     
-    
     def get_profile_apps(self, request: operations.GetProfileAppsRequest) -> operations.GetProfileAppsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile/apps"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetProfileAppsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetProfileApps200ApplicationJSON])
@@ -5467,20 +5414,19 @@ class SDK:
         return res
 
     
-    
     def get_profile_grants(self, request: operations.GetProfileGrantsRequest) -> operations.GetProfileGrantsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile/grants"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetProfileGrantsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GrantsResponse])
@@ -5495,20 +5441,19 @@ class SDK:
         return res
 
     
-    
     def get_profile_login(self, request: operations.GetProfileLoginRequest) -> operations.GetProfileLoginResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/profile/logins/{loginId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetProfileLoginResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Login])
@@ -5521,20 +5466,19 @@ class SDK:
         return res
 
     
-    
     def get_profile_logins(self, request: operations.GetProfileLoginsRequest) -> operations.GetProfileLoginsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile/logins"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetProfileLoginsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetProfileLogins200ApplicationJSON])
@@ -5547,19 +5491,19 @@ class SDK:
         return res
 
     
-    
     def get_region(self, request: operations.GetRegionRequest) -> operations.GetRegionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/regions/{regionId}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetRegionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Region])
@@ -5572,19 +5516,19 @@ class SDK:
         return res
 
     
-    
     def get_regions(self) -> operations.GetRegionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/regions"
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetRegionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetRegions200ApplicationJSON])
@@ -5597,20 +5541,19 @@ class SDK:
         return res
 
     
-    
     def get_ssh_key(self, request: operations.GetSSHKeyRequest) -> operations.GetSSHKeyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/profile/sshkeys/{sshKeyId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSSHKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SSHKey])
@@ -5623,21 +5566,21 @@ class SDK:
         return res
 
     
-    
     def get_ssh_keys(self, request: operations.GetSSHKeysRequest) -> operations.GetSSHKeysResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile/sshkeys"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSSHKeysResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetSSHKeys200ApplicationJSON])
@@ -5650,20 +5593,19 @@ class SDK:
         return res
 
     
-    
     def get_service_transfer(self, request: operations.GetServiceTransferRequest) -> operations.GetServiceTransferResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/service-transfers/{token}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetServiceTransferResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ServiceTransfer])
@@ -5676,21 +5618,21 @@ class SDK:
         return res
 
     
-    
     def get_service_transfers(self, request: operations.GetServiceTransfersRequest) -> operations.GetServiceTransfersResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/service-transfers"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetServiceTransfersResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetServiceTransfers200ApplicationJSON])
@@ -5703,20 +5645,19 @@ class SDK:
         return res
 
     
-    
     def get_stack_script(self, request: operations.GetStackScriptRequest) -> operations.GetStackScriptResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/stackscripts/{stackscriptId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetStackScriptResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.StackScript])
@@ -5729,21 +5670,21 @@ class SDK:
         return res
 
     
-    
     def get_stack_scripts(self, request: operations.GetStackScriptsRequest) -> operations.GetStackScriptsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/linode/stackscripts"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetStackScriptsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetStackScripts200ApplicationJSON])
@@ -5756,21 +5697,21 @@ class SDK:
         return res
 
     
-    
     def get_tagged_objects(self, request: operations.GetTaggedObjectsRequest) -> operations.GetTaggedObjectsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/tags/{label}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetTaggedObjectsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -5783,21 +5724,21 @@ class SDK:
         return res
 
     
-    
     def get_tags(self, request: operations.GetTagsRequest) -> operations.GetTagsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/tags"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetTagsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetTags200ApplicationJSON])
@@ -5810,20 +5751,19 @@ class SDK:
         return res
 
     
-    
     def get_ticket(self, request: operations.GetTicketRequest) -> operations.GetTicketResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/support/tickets/{ticketId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetTicketResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupportTicket])
@@ -5836,21 +5776,21 @@ class SDK:
         return res
 
     
-    
     def get_ticket_replies(self, request: operations.GetTicketRepliesRequest) -> operations.GetTicketRepliesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/support/tickets/{ticketId}/replies", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetTicketRepliesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetTicketReplies200ApplicationJSON])
@@ -5863,21 +5803,21 @@ class SDK:
         return res
 
     
-    
     def get_tickets(self, request: operations.GetTicketsRequest) -> operations.GetTicketsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/support/tickets"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetTicketsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetTickets200ApplicationJSON])
@@ -5890,20 +5830,19 @@ class SDK:
         return res
 
     
-    
     def get_transfer(self, request: operations.GetTransferRequest) -> operations.GetTransferResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/transfer"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetTransferResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Transfer])
@@ -5916,20 +5855,19 @@ class SDK:
         return res
 
     
-    
     def get_trusted_device(self, request: operations.GetTrustedDeviceRequest) -> operations.GetTrustedDeviceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/profile/devices/{deviceId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetTrustedDeviceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrustedDevice])
@@ -5942,20 +5880,19 @@ class SDK:
         return res
 
     
-    
     def get_user(self, request: operations.GetUserRequest) -> operations.GetUserResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/users/{username}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.User])
@@ -5968,20 +5905,19 @@ class SDK:
         return res
 
     
-    
     def get_user_grants(self, request: operations.GetUserGrantsRequest) -> operations.GetUserGrantsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/users/{username}/grants", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetUserGrantsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GrantsResponse])
@@ -5996,20 +5932,19 @@ class SDK:
         return res
 
     
-    
     def get_user_preferences(self, request: operations.GetUserPreferencesRequest) -> operations.GetUserPreferencesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile/preferences"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetUserPreferencesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6022,21 +5957,21 @@ class SDK:
         return res
 
     
-    
     def get_users(self, request: operations.GetUsersRequest) -> operations.GetUsersResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/users"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetUsersResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetUsers200ApplicationJSON])
@@ -6049,7 +5984,6 @@ class SDK:
         return res
 
     
-    
     def get_vla_ns(self, request: operations.GetVlaNsRequest) -> operations.GetVlaNsResponse:
         warnings.simplefilter("ignore")
 
@@ -6057,15 +5991,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/networking/vlans"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetVlaNsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetVlaNs200ApplicationJSON])
@@ -6078,21 +6013,21 @@ class SDK:
         return res
 
     
-    
     def get_volume(self, request: operations.GetVolumeRequest) -> operations.GetVolumeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/volumes/{volumeId}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetVolumeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Volume])
@@ -6105,21 +6040,21 @@ class SDK:
         return res
 
     
-    
     def get_volumes(self, request: operations.GetVolumesRequest) -> operations.GetVolumesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/volumes"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetVolumesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetVolumes200ApplicationJSON])
@@ -6132,24 +6067,25 @@ class SDK:
         return res
 
     
-    
     def import_domain(self, request: operations.ImportDomainRequest) -> operations.ImportDomainResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/domains/import"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ImportDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Domain])
@@ -6162,24 +6098,25 @@ class SDK:
         return res
 
     
-    
     def migrate_linode_instance(self, request: operations.MigrateLinodeInstanceRequest) -> operations.MigrateLinodeInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/migrate", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.MigrateLinodeInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6192,7 +6129,6 @@ class SDK:
         return res
 
     
-    
     def modify_object_storage_bucket_access(self, request: operations.ModifyObjectStorageBucketAccessRequest) -> operations.ModifyObjectStorageBucketAccessResponse:
         warnings.simplefilter("ignore")
 
@@ -6200,18 +6136,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/buckets/{clusterId}/{bucket}/access", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ModifyObjectStorageBucketAccessResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6224,24 +6162,25 @@ class SDK:
         return res
 
     
-    
     def mutate_linode_instance(self, request: operations.MutateLinodeInstanceRequest) -> operations.MutateLinodeInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/mutate", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.MutateLinodeInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6254,20 +6193,19 @@ class SDK:
         return res
 
     
-    
     def post_lke_cluster_node_recycle(self, request: operations.PostLkeClusterNodeRecycleRequest) -> operations.PostLkeClusterNodeRecycleResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}/nodes/{nodeId}/recycle", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostLkeClusterNodeRecycleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6280,20 +6218,19 @@ class SDK:
         return res
 
     
-    
     def post_lke_cluster_pool_recycle(self, request: operations.PostLkeClusterPoolRecycleRequest) -> operations.PostLkeClusterPoolRecycleResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}/pools/{poolId}/recycle", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostLkeClusterPoolRecycleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6306,27 +6243,28 @@ class SDK:
         return res
 
     
-    
     def post_lke_cluster_pools(self, request: operations.PostLkeClusterPoolsRequest) -> operations.PostLkeClusterPoolsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}/pools", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostLkeClusterPoolsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LkeNodePool])
@@ -6339,20 +6277,19 @@ class SDK:
         return res
 
     
-    
     def post_lke_cluster_recycle(self, request: operations.PostLkeClusterRecycleRequest) -> operations.PostLkeClusterRecycleResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}/recycle", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostLkeClusterRecycleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6365,24 +6302,25 @@ class SDK:
         return res
 
     
-    
     def put_lke_cluster(self, request: operations.PutLkeClusterRequest) -> operations.PutLkeClusterResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutLkeClusterResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -6391,24 +6329,25 @@ class SDK:
         return res
 
     
-    
     def put_lke_node_pool(self, request: operations.PutLkeNodePoolRequest) -> operations.PutLkeNodePoolResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/lke/clusters/{clusterId}/pools/{poolId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutLkeNodePoolResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LkeNodePool])
@@ -6417,24 +6356,25 @@ class SDK:
         return res
 
     
-    
     def reboot_linode_instance(self, request: operations.RebootLinodeInstanceRequest) -> operations.RebootLinodeInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/reboot", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RebootLinodeInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6447,27 +6387,28 @@ class SDK:
         return res
 
     
-    
     def rebuild_linode_instance(self, request: operations.RebuildLinodeInstanceRequest) -> operations.RebuildLinodeInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/rebuild", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RebuildLinodeInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Linode])
@@ -6480,27 +6421,28 @@ class SDK:
         return res
 
     
-    
     def rebuild_node_balancer_config(self, request: operations.RebuildNodeBalancerConfigRequest) -> operations.RebuildNodeBalancerConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}/configs/{configId}/rebuild", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RebuildNodeBalancerConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NodeBalancer])
@@ -6513,20 +6455,19 @@ class SDK:
         return res
 
     
-    
     def remove_linode_ip(self, request: operations.RemoveLinodeIPRequest) -> operations.RemoveLinodeIPResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/ips/{address}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RemoveLinodeIPResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6539,24 +6480,25 @@ class SDK:
         return res
 
     
-    
     def rescue_linode_instance(self, request: operations.RescueLinodeInstanceRequest) -> operations.RescueLinodeInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/rescue", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RescueLinodeInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6569,20 +6511,19 @@ class SDK:
         return res
 
     
-    
     def reset_client_secret(self, request: operations.ResetClientSecretRequest) -> operations.ResetClientSecretResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/oauth-clients/{clientId}/reset-secret", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ResetClientSecretResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.OAuthClient])
@@ -6595,27 +6536,28 @@ class SDK:
         return res
 
     
-    
     def reset_disk_password(self, request: operations.ResetDiskPasswordRequest) -> operations.ResetDiskPasswordResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/disks/{diskId}/password", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ResetDiskPasswordResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6628,24 +6570,25 @@ class SDK:
         return res
 
     
-    
     def reset_linode_password(self, request: operations.ResetLinodePasswordRequest) -> operations.ResetLinodePasswordResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/password", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ResetLinodePasswordResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6658,27 +6601,28 @@ class SDK:
         return res
 
     
-    
     def resize_disk(self, request: operations.ResizeDiskRequest) -> operations.ResizeDiskResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/disks/{diskId}/resize", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ResizeDiskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6691,27 +6635,28 @@ class SDK:
         return res
 
     
-    
     def resize_linode_instance(self, request: operations.ResizeLinodeInstanceRequest) -> operations.ResizeLinodeInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/resize", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ResizeLinodeInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6724,27 +6669,28 @@ class SDK:
         return res
 
     
-    
     def resize_volume(self, request: operations.ResizeVolumeRequest) -> operations.ResizeVolumeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/volumes/{volumeId}/resize", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ResizeVolumeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6757,27 +6703,28 @@ class SDK:
         return res
 
     
-    
     def restore_backup(self, request: operations.RestoreBackupRequest) -> operations.RestoreBackupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/backups/{backupId}/restore", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RestoreBackupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6790,20 +6737,19 @@ class SDK:
         return res
 
     
-    
     def revoke_trusted_device(self, request: operations.RevokeTrustedDeviceRequest) -> operations.RevokeTrustedDeviceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/profile/devices/{deviceId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RevokeTrustedDeviceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6816,27 +6762,28 @@ class SDK:
         return res
 
     
-    
     def set_client_thumbnail(self, request: operations.SetClientThumbnailRequest) -> operations.SetClientThumbnailResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/oauth-clients/{clientId}/thumbnail", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SetClientThumbnailResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6849,27 +6796,28 @@ class SDK:
         return res
 
     
-    
     def share_i_ps(self, request: operations.ShareIPsRequest) -> operations.ShareIPsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/networking/ipv4/share"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ShareIPsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6882,20 +6830,19 @@ class SDK:
         return res
 
     
-    
     def shutdown_linode_instance(self, request: operations.ShutdownLinodeInstanceRequest) -> operations.ShutdownLinodeInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/shutdown", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ShutdownLinodeInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6908,27 +6855,28 @@ class SDK:
         return res
 
     
-    
     def tfa_confirm(self, request: operations.TfaConfirmRequest) -> operations.TfaConfirmResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile/tfa-enable-confirm"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TfaConfirmResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -6941,20 +6889,19 @@ class SDK:
         return res
 
     
-    
     def tfa_disable(self, request: operations.TfaDisableRequest) -> operations.TfaDisableResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile/tfa-disable"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TfaDisableResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -6967,20 +6914,19 @@ class SDK:
         return res
 
     
-    
     def tfa_enable(self, request: operations.TfaEnableRequest) -> operations.TfaEnableResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile/tfa-enable"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TfaEnableResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -6993,27 +6939,28 @@ class SDK:
         return res
 
     
-    
     def update_account(self, request: operations.UpdateAccountRequest) -> operations.UpdateAccountResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateAccountResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Account])
@@ -7026,27 +6973,28 @@ class SDK:
         return res
 
     
-    
     def update_account_settings(self, request: operations.UpdateAccountSettingsRequest) -> operations.UpdateAccountSettingsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/account/settings"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateAccountSettingsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AccountSettings])
@@ -7059,24 +7007,25 @@ class SDK:
         return res
 
     
-    
     def update_client(self, request: operations.UpdateClientRequest) -> operations.UpdateClientResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/oauth-clients/{clientId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateClientResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.OAuthClient])
@@ -7089,27 +7038,28 @@ class SDK:
         return res
 
     
-    
     def update_disk(self, request: operations.UpdateDiskRequest) -> operations.UpdateDiskResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/disks/{diskId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateDiskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Disk])
@@ -7122,27 +7072,28 @@ class SDK:
         return res
 
     
-    
     def update_domain(self, request: operations.UpdateDomainRequest) -> operations.UpdateDomainResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/domains/{domainId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Domain])
@@ -7155,27 +7106,28 @@ class SDK:
         return res
 
     
-    
     def update_domain_record(self, request: operations.UpdateDomainRecordRequest) -> operations.UpdateDomainRecordResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/domains/{domainId}/records/{recordId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateDomainRecordResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DomainRecord])
@@ -7188,7 +7140,6 @@ class SDK:
         return res
 
     
-    
     def update_firewall(self, request: operations.UpdateFirewallRequest) -> operations.UpdateFirewallResponse:
         warnings.simplefilter("ignore")
 
@@ -7196,18 +7147,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/networking/firewalls/{firewallId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateFirewallResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Firewall])
@@ -7220,7 +7173,6 @@ class SDK:
         return res
 
     
-    
     def update_firewall_rules(self, request: operations.UpdateFirewallRulesRequest) -> operations.UpdateFirewallRulesResponse:
         warnings.simplefilter("ignore")
 
@@ -7228,18 +7180,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/networking/firewalls/{firewallId}/rules", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateFirewallRulesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Rules])
@@ -7252,27 +7206,28 @@ class SDK:
         return res
 
     
-    
     def update_ip(self, request: operations.UpdateIPRequest) -> operations.UpdateIPResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/networking/ips/{address}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateIPResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.IPAddress])
@@ -7285,27 +7240,28 @@ class SDK:
         return res
 
     
-    
     def update_image(self, request: operations.UpdateImageRequest) -> operations.UpdateImageResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/images/{imageId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateImageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ImagePrivate])
@@ -7318,27 +7274,28 @@ class SDK:
         return res
 
     
-    
     def update_linode_config(self, request: operations.UpdateLinodeConfigRequest) -> operations.UpdateLinodeConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/configs/{configId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateLinodeConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LinodeConfig])
@@ -7351,24 +7308,25 @@ class SDK:
         return res
 
     
-    
     def update_linode_ip(self, request: operations.UpdateLinodeIPRequest) -> operations.UpdateLinodeIPResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}/ips/{address}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateLinodeIPResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.IPAddress])
@@ -7381,27 +7339,28 @@ class SDK:
         return res
 
     
-    
     def update_linode_instance(self, request: operations.UpdateLinodeInstanceRequest) -> operations.UpdateLinodeInstanceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/instances/{linodeId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateLinodeInstanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Linode])
@@ -7414,27 +7373,28 @@ class SDK:
         return res
 
     
-    
     def update_longview_client(self, request: operations.UpdateLongviewClientRequest) -> operations.UpdateLongviewClientResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/longview/clients/{clientId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateLongviewClientResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LongviewClient])
@@ -7447,27 +7407,28 @@ class SDK:
         return res
 
     
-    
     def update_longview_plan(self, request: operations.UpdateLongviewPlanRequest) -> operations.UpdateLongviewPlanResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/longview/plan"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateLongviewPlanResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.LongviewSubscription])
@@ -7480,27 +7441,28 @@ class SDK:
         return res
 
     
-    
     def update_managed_contact(self, request: operations.UpdateManagedContactRequest) -> operations.UpdateManagedContactResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/contacts/{contactId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateManagedContactResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedContact])
@@ -7513,27 +7475,28 @@ class SDK:
         return res
 
     
-    
     def update_managed_credential(self, request: operations.UpdateManagedCredentialRequest) -> operations.UpdateManagedCredentialResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/credentials/{credentialId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateManagedCredentialResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedCredential])
@@ -7546,24 +7509,25 @@ class SDK:
         return res
 
     
-    
     def update_managed_credential_username_password(self, request: operations.UpdateManagedCredentialUsernamePasswordRequest) -> operations.UpdateManagedCredentialUsernamePasswordResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/credentials/{credentialId}/update", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateManagedCredentialUsernamePasswordResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -7576,27 +7540,28 @@ class SDK:
         return res
 
     
-    
     def update_managed_linode_setting(self, request: operations.UpdateManagedLinodeSettingRequest) -> operations.UpdateManagedLinodeSettingResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/linode-settings/{linodeId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateManagedLinodeSettingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedLinodeSettings])
@@ -7609,27 +7574,28 @@ class SDK:
         return res
 
     
-    
     def update_managed_service(self, request: operations.UpdateManagedServiceRequest) -> operations.UpdateManagedServiceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/managed/services/{serviceId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateManagedServiceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ManagedService])
@@ -7642,27 +7608,28 @@ class SDK:
         return res
 
     
-    
     def update_node_balancer(self, request: operations.UpdateNodeBalancerRequest) -> operations.UpdateNodeBalancerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateNodeBalancerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NodeBalancer])
@@ -7675,27 +7642,28 @@ class SDK:
         return res
 
     
-    
     def update_node_balancer_config(self, request: operations.UpdateNodeBalancerConfigRequest) -> operations.UpdateNodeBalancerConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}/configs/{configId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateNodeBalancerConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NodeBalancerConfig])
@@ -7708,27 +7676,28 @@ class SDK:
         return res
 
     
-    
     def update_node_balancer_node(self, request: operations.UpdateNodeBalancerNodeRequest) -> operations.UpdateNodeBalancerNodeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/nodebalancers/{nodeBalancerId}/configs/{configId}/nodes/{nodeId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateNodeBalancerNodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NodeBalancerNode])
@@ -7741,7 +7710,6 @@ class SDK:
         return res
 
     
-    
     def update_object_storage_bucket_acl(self, request: operations.UpdateObjectStorageBucketACLRequest) -> operations.UpdateObjectStorageBucketACLResponse:
         warnings.simplefilter("ignore")
 
@@ -7749,18 +7717,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/buckets/{clusterId}/{bucket}/object-acl", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateObjectStorageBucketACLResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.UpdateObjectStorageBucketACL200ApplicationJSON])
@@ -7773,7 +7743,6 @@ class SDK:
         return res
 
     
-    
     def update_object_storage_bucket_access(self, request: operations.UpdateObjectStorageBucketAccessRequest) -> operations.UpdateObjectStorageBucketAccessResponse:
         warnings.simplefilter("ignore")
 
@@ -7781,18 +7750,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/buckets/{clusterId}/{bucket}/access", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateObjectStorageBucketAccessResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -7805,7 +7776,6 @@ class SDK:
         return res
 
     
-    
     def update_object_storage_key(self, request: operations.UpdateObjectStorageKeyRequest) -> operations.UpdateObjectStorageKeyResponse:
         warnings.simplefilter("ignore")
 
@@ -7813,18 +7783,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/keys/{keyId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateObjectStorageKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ObjectStorageKey])
@@ -7837,27 +7809,28 @@ class SDK:
         return res
 
     
-    
     def update_personal_access_token(self, request: operations.UpdatePersonalAccessTokenRequest) -> operations.UpdatePersonalAccessTokenResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/profile/tokens/{tokenId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdatePersonalAccessTokenResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PersonalAccessToken])
@@ -7870,27 +7843,28 @@ class SDK:
         return res
 
     
-    
     def update_profile(self, request: operations.UpdateProfileRequest) -> operations.UpdateProfileResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Profile])
@@ -7903,27 +7877,28 @@ class SDK:
         return res
 
     
-    
     def update_ssh_key(self, request: operations.UpdateSSHKeyRequest) -> operations.UpdateSSHKeyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/profile/sshkeys/{sshKeyId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSSHKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SSHKey])
@@ -7936,24 +7911,25 @@ class SDK:
         return res
 
     
-    
     def update_stack_script(self, request: operations.UpdateStackScriptRequest) -> operations.UpdateStackScriptResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/linode/stackscripts/{stackscriptId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateStackScriptResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.StackScript])
@@ -7966,24 +7942,25 @@ class SDK:
         return res
 
     
-    
     def update_user(self, request: operations.UpdateUserRequest) -> operations.UpdateUserResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/users/{username}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.User])
@@ -7996,27 +7973,28 @@ class SDK:
         return res
 
     
-    
     def update_user_grants(self, request: operations.UpdateUserGrantsRequest) -> operations.UpdateUserGrantsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/account/users/{username}/grants", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateUserGrantsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GrantsResponse])
@@ -8029,27 +8007,28 @@ class SDK:
         return res
 
     
-    
     def update_user_preferences(self, request: operations.UpdateUserPreferencesRequest) -> operations.UpdateUserPreferencesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/profile/preferences"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateUserPreferencesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -8062,27 +8041,28 @@ class SDK:
         return res
 
     
-    
     def update_volume(self, request: operations.UpdateVolumeRequest) -> operations.UpdateVolumeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/volumes/{volumeId}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateVolumeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Volume])
@@ -8095,20 +8075,19 @@ class SDK:
         return res
 
     
-    
     def view_managed_ssh_key(self, request: operations.ViewManagedSSHKeyRequest) -> operations.ViewManagedSSHKeyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/managed/credentials/sshkey"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ViewManagedSSHKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ViewManagedSSHKey200ApplicationJSON])
@@ -8121,7 +8100,6 @@ class SDK:
         return res
 
     
-    
     def view_object_storage_bucket_acl(self, request: operations.ViewObjectStorageBucketACLRequest) -> operations.ViewObjectStorageBucketACLResponse:
         warnings.simplefilter("ignore")
 
@@ -8129,15 +8107,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/object-storage/buckets/{clusterId}/{bucket}/object-acl", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ViewObjectStorageBucketACLResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ViewObjectStorageBucketACL200ApplicationJSON])

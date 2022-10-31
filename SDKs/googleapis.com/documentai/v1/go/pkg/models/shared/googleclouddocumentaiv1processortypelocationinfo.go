@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudDocumentaiV1ProcessorTypeLocationInfo struct {
-	LocationID *string `json:"locationId,omitempty"`
+    LocationID *string `json:"locationId,omitempty"`
+    
 }
+

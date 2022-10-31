@@ -620,6 +620,7 @@ func (s *SDK) BloggerPagesInsert(ctx context.Context, request operations.Blogger
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -708,6 +709,7 @@ func (s *SDK) BloggerPagesPatch(ctx context.Context, request operations.BloggerP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -837,6 +839,7 @@ func (s *SDK) BloggerPagesUpdate(ctx context.Context, request operations.Blogger
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1080,6 +1083,7 @@ func (s *SDK) BloggerPostsInsert(ctx context.Context, request operations.Blogger
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1168,6 +1172,7 @@ func (s *SDK) BloggerPostsPatch(ctx context.Context, request operations.BloggerP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1338,6 +1343,7 @@ func (s *SDK) BloggerPostsUpdate(ctx context.Context, request operations.Blogger
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

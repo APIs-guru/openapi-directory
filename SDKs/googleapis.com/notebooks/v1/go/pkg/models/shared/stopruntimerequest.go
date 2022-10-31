@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StopRuntimeRequest struct {
-	RequestID *string `json:"requestId,omitempty"`
+    RequestID *string `json:"requestId,omitempty"`
+    
 }
+

@@ -1,18 +1,21 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetErrorsSecurity struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=http,subtype=basic"`
+    APIKey shared.SchemeAPIKey `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type GetErrorsRequest struct {
-	Security GetErrorsSecurity
+    Security GetErrorsSecurity 
+    
 }
 
 type GetErrorsResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

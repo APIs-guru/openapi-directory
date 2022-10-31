@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateAddressRequest struct {
-	Address Address `json:"Address"`
+    Address Address `json:"Address"`
+    
 }
+

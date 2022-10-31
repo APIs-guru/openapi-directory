@@ -1,29 +1,32 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var FetchRoomRecordingRuleServers = []string{
 	"https://video.twilio.com",
 }
 
 type FetchRoomRecordingRulePathParams struct {
-	RoomSid string `pathParam:"style=simple,explode=false,name=RoomSid"`
+    RoomSid string `pathParam:"style=simple,explode=false,name=RoomSid"`
+    
 }
 
 type FetchRoomRecordingRuleSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type FetchRoomRecordingRuleRequest struct {
-	ServerURL  *string
-	PathParams FetchRoomRecordingRulePathParams
-	Security   FetchRoomRecordingRuleSecurity
+    ServerURL *string 
+    PathParams FetchRoomRecordingRulePathParams 
+    Security FetchRoomRecordingRuleSecurity 
+    
 }
 
 type FetchRoomRecordingRuleResponse struct {
-	ContentType                  string
-	StatusCode                   int64
-	VideoV1RoomRoomRecordingRule *shared.VideoV1RoomRoomRecordingRule
+    ContentType string 
+    StatusCode int64 
+    VideoV1RoomRoomRecordingRule *shared.VideoV1RoomRoomRecordingRule 
+    
 }
+

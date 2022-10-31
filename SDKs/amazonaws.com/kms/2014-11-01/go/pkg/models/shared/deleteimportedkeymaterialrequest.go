@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteImportedKeyMaterialRequest struct {
-	KeyID string `json:"KeyId"`
+    KeyID string `json:"KeyId"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetHostInput struct {
-	HostArn string `json:"HostArn"`
+    HostArn string `json:"HostArn"`
+    
 }
+

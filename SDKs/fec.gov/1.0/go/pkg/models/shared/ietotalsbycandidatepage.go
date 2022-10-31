@@ -1,6 +1,10 @@
 package shared
 
+
+
 type IeTotalsByCandidatePage struct {
-	Pagination *OffsetInfo           `json:"pagination,omitempty"`
-	Results    []IeTotalsByCandidate `json:"results,omitempty"`
+    Pagination *OffsetInfo `json:"pagination,omitempty"`
+    Results []IeTotalsByCandidate `json:"results,omitempty"`
+    
 }
+

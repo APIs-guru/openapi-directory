@@ -105,6 +105,7 @@ func (s *SDK) MonitoringLocationsGlobalMetricsScopesProjectsCreate(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -152,6 +153,7 @@ func (s *SDK) MonitoringProjectsDashboardsCreate(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -322,6 +324,7 @@ func (s *SDK) MonitoringProjectsDashboardsPatch(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -410,6 +413,7 @@ func (s *SDK) MonitoringProjectsLocationPrometheusAPIV1Labels(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -539,6 +543,7 @@ func (s *SDK) MonitoringProjectsLocationPrometheusAPIV1Query(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -586,6 +591,7 @@ func (s *SDK) MonitoringProjectsLocationPrometheusAPIV1QueryRange(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -633,6 +639,7 @@ func (s *SDK) MonitoringProjectsLocationPrometheusAPIV1Series(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

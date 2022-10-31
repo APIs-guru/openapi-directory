@@ -76,7 +76,10 @@ func (s *SDK) PutEvents(ctx context.Context, request operations.PutEventsRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 

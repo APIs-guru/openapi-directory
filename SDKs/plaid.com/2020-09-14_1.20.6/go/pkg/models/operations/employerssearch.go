@@ -1,15 +1,17 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type EmployersSearchRequest struct {
-	Request shared.EmployersSearchRequest `request:"mediaType=application/json"`
+    Request shared.EmployersSearchRequest `request:"mediaType=application/json"`
+    
 }
 
 type EmployersSearchResponse struct {
-	ContentType             string
-	EmployersSearchResponse map[string]interface{}
-	StatusCode              int64
+    ContentType string 
+    EmployersSearchResponse map[string]interface{} 
+    StatusCode int64 
+    
 }
+

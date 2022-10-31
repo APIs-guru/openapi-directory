@@ -1,6 +1,10 @@
 package shared
 
+
+
 type RespondActivityTaskCompletedInput struct {
-	Result    *string `json:"result,omitempty"`
-	TaskToken string  `json:"taskToken"`
+    Result *string `json:"result,omitempty"`
+    TaskToken string `json:"taskToken"`
+    
 }
+

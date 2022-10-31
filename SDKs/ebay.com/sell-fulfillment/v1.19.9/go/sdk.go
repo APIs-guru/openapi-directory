@@ -70,6 +70,7 @@ func (s *SDK) AcceptPaymentDispute(ctx context.Context, request operations.Accep
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -114,6 +115,7 @@ func (s *SDK) AddEvidence(ctx context.Context, request operations.AddEvidenceReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -167,6 +169,7 @@ func (s *SDK) ContestPaymentDispute(ctx context.Context, request operations.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -210,6 +213,7 @@ func (s *SDK) CreateShippingFulfillment(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -616,6 +620,7 @@ func (s *SDK) IssueRefund(ctx context.Context, request operations.IssueRefundReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -670,6 +675,7 @@ func (s *SDK) UpdateEvidence(ctx context.Context, request operations.UpdateEvide
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

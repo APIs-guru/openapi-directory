@@ -1,14 +1,20 @@
 package operations
 
+
+
 type GetCategoriesUUIDPathParams struct {
-	UUID string `pathParam:"style=simple,explode=false,name=uuid"`
+    UUID string `pathParam:"style=simple,explode=false,name=uuid"`
+    
 }
 
 type GetCategoriesUUIDRequest struct {
-	PathParams GetCategoriesUUIDPathParams
+    PathParams GetCategoriesUUIDPathParams 
+    
 }
 
 type GetCategoriesUUIDResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

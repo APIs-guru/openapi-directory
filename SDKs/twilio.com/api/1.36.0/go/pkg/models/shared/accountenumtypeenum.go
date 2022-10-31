@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type AccountEnumTypeEnum string
 
 const (
-	AccountEnumTypeEnumTrial AccountEnumTypeEnum = "Trial"
-	AccountEnumTypeEnumFull  AccountEnumTypeEnum = "Full"
+    AccountEnumTypeEnumTrial AccountEnumTypeEnum = "Trial"
+AccountEnumTypeEnumFull AccountEnumTypeEnum = "Full"
 )
+
+

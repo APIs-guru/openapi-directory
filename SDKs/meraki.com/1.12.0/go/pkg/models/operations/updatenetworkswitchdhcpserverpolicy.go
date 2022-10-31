@@ -1,29 +1,38 @@
 package operations
 
+
+
 type UpdateNetworkSwitchDhcpServerPolicyPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
+
 
 type UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnum string
 
 const (
-	UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnumAllow UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnum = "allow"
-	UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnumBlock UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnum = "block"
+    UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnumAllow UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnum = "allow"
+UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnumBlock UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnum = "block"
 )
 
+
 type UpdateNetworkSwitchDhcpServerPolicyRequestBody struct {
-	AllowedServers []string                                                         `json:"allowedServers,omitempty"`
-	BlockedServers []string                                                         `json:"blockedServers,omitempty"`
-	DefaultPolicy  *UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnum `json:"defaultPolicy,omitempty"`
+    AllowedServers []string `json:"allowedServers,omitempty"`
+    BlockedServers []string `json:"blockedServers,omitempty"`
+    DefaultPolicy *UpdateNetworkSwitchDhcpServerPolicyRequestBodyDefaultPolicyEnum `json:"defaultPolicy,omitempty"`
+    
 }
 
 type UpdateNetworkSwitchDhcpServerPolicyRequest struct {
-	PathParams UpdateNetworkSwitchDhcpServerPolicyPathParams
-	Request    *UpdateNetworkSwitchDhcpServerPolicyRequestBody `request:"mediaType=application/json"`
+    PathParams UpdateNetworkSwitchDhcpServerPolicyPathParams 
+    Request *UpdateNetworkSwitchDhcpServerPolicyRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type UpdateNetworkSwitchDhcpServerPolicyResponse struct {
-	ContentType                                                 string
-	StatusCode                                                  int64
-	UpdateNetworkSwitchDhcpServerPolicy200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    UpdateNetworkSwitchDhcpServerPolicy200ApplicationJSONObject map[string]interface{} 
+    
 }
+

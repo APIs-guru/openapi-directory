@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ZoneChildContainer struct {
-	Nickname *string `json:"nickname,omitempty"`
-	PublicID *string `json:"publicId,omitempty"`
+    Nickname *string `json:"nickname,omitempty"`
+    PublicID *string `json:"publicId,omitempty"`
+    
 }
+

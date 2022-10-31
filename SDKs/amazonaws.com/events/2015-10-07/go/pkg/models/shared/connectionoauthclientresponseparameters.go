@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ConnectionOAuthClientResponseParameters struct {
-	ClientID *string `json:"ClientID,omitempty"`
+    ClientID *string `json:"ClientID,omitempty"`
+    
 }
+

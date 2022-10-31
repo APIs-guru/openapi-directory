@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetFirewallRuleGroupRequest struct {
-	FirewallRuleGroupID string `json:"FirewallRuleGroupId"`
+    FirewallRuleGroupID string `json:"FirewallRuleGroupId"`
+    
 }
+

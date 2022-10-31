@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DeleteInstitutionsIDPathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type DeleteInstitutionsIDRequest struct {
-	PathParams DeleteInstitutionsIDPathParams
+    PathParams DeleteInstitutionsIDPathParams 
+    
 }
 
 type DeleteInstitutionsIDResponse struct {
-	ContentType string
-	Error       *shared.Error
-	StatusCode  int64
+    ContentType string 
+    Error *shared.Error 
+    StatusCode int64 
+    
 }
+

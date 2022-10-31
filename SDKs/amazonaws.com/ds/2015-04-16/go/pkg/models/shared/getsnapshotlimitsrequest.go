@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetSnapshotLimitsRequest struct {
-	DirectoryID string `json:"DirectoryId"`
+    DirectoryID string `json:"DirectoryId"`
+    
 }
+

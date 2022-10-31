@@ -1,6 +1,10 @@
 package shared
 
+
+
 type APIPagedResponseDealerDbModelsDealer struct {
-	Entities []DealerDbModelsDealer   `json:"Entities"`
-	Metadata APIPagedResponseMetadata `json:"Metadata"`
+    Entities []DealerDbModelsDealer `json:"Entities"`
+    Metadata APIPagedResponseMetadata `json:"Metadata"`
+    
 }
+

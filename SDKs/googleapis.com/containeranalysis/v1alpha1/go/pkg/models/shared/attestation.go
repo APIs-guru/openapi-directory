@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Attestation struct {
-	PgpSignedAttestation *PgpSignedAttestation `json:"pgpSignedAttestation,omitempty"`
+    PgpSignedAttestation *PgpSignedAttestation `json:"pgpSignedAttestation,omitempty"`
+    
 }
+

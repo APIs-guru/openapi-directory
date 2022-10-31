@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateAssessmentTargetResponse struct {
-	AssessmentTargetArn string `json:"assessmentTargetArn"`
+    AssessmentTargetArn string `json:"assessmentTargetArn"`
+    
 }
+

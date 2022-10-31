@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ByoipCidrEvent struct {
-	Message   *string    `json:"Message,omitempty"`
-	Timestamp *time.Time `json:"Timestamp,omitempty"`
+    Message *string `json:"Message,omitempty"`
+    Timestamp *time.Time `json:"Timestamp,omitempty"`
+    
 }
+

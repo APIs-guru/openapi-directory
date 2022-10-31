@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AwsCloudFrontDistributionOriginGroups struct {
-	Items []AwsCloudFrontDistributionOriginGroup `json:"Items,omitempty"`
+    Items []AwsCloudFrontDistributionOriginGroup `json:"Items,omitempty"`
+    
 }
+

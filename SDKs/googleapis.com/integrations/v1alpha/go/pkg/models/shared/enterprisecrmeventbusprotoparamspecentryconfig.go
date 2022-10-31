@@ -1,31 +1,39 @@
 package shared
 
+
+
+
 type EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnum string
 
 const (
-	EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnumDefault         EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnum = "DEFAULT"
-	EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnumStringMultiLine EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnum = "STRING_MULTI_LINE"
-	EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnumNumberSlider    EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnum = "NUMBER_SLIDER"
-	EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnumBooleanToggle   EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnum = "BOOLEAN_TOGGLE"
+    EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnumDefault EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnum = "DEFAULT"
+EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnumStringMultiLine EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnum = "STRING_MULTI_LINE"
+EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnumNumberSlider EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnum = "NUMBER_SLIDER"
+EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnumBooleanToggle EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnum = "BOOLEAN_TOGGLE"
 )
+
+
 
 type EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnum string
 
 const (
-	EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnumDefaultNotParameterName EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnum = "DEFAULT_NOT_PARAMETER_NAME"
-	EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnumIsParameterName         EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnum = "IS_PARAMETER_NAME"
-	EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnumKeyIsParameterName      EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnum = "KEY_IS_PARAMETER_NAME"
-	EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnumValueIsParameterName    EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnum = "VALUE_IS_PARAMETER_NAME"
+    EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnumDefaultNotParameterName EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnum = "DEFAULT_NOT_PARAMETER_NAME"
+EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnumIsParameterName EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnum = "IS_PARAMETER_NAME"
+EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnumKeyIsParameterName EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnum = "KEY_IS_PARAMETER_NAME"
+EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnumValueIsParameterName EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnum = "VALUE_IS_PARAMETER_NAME"
 )
 
+
 type EnterpriseCrmEventbusProtoParamSpecEntryConfig struct {
-	DescriptivePhrase   *string                                                                `json:"descriptivePhrase,omitempty"`
-	HelpText            *string                                                                `json:"helpText,omitempty"`
-	HideDefaultValue    *bool                                                                  `json:"hideDefaultValue,omitempty"`
-	InputDisplayOption  *EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnum  `json:"inputDisplayOption,omitempty"`
-	IsHidden            *bool                                                                  `json:"isHidden,omitempty"`
-	Label               *string                                                                `json:"label,omitempty"`
-	ParameterNameOption *EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnum `json:"parameterNameOption,omitempty"`
-	SubSectionLabel     *string                                                                `json:"subSectionLabel,omitempty"`
-	UIPlaceholderText   *string                                                                `json:"uiPlaceholderText,omitempty"`
+    DescriptivePhrase *string `json:"descriptivePhrase,omitempty"`
+    HelpText *string `json:"helpText,omitempty"`
+    HideDefaultValue *bool `json:"hideDefaultValue,omitempty"`
+    InputDisplayOption *EnterpriseCrmEventbusProtoParamSpecEntryConfigInputDisplayOptionEnum `json:"inputDisplayOption,omitempty"`
+    IsHidden *bool `json:"isHidden,omitempty"`
+    Label *string `json:"label,omitempty"`
+    ParameterNameOption *EnterpriseCrmEventbusProtoParamSpecEntryConfigParameterNameOptionEnum `json:"parameterNameOption,omitempty"`
+    SubSectionLabel *string `json:"subSectionLabel,omitempty"`
+    UIPlaceholderText *string `json:"uiPlaceholderText,omitempty"`
+    
 }
+

@@ -1,62 +1,70 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type CloudsearchStatsSessionSearchapplicationsGetPathParams struct {
-	Name string `pathParam:"style=simple,explode=false,name=name"`
+    Name string `pathParam:"style=simple,explode=false,name=name"`
+    
 }
 
 type CloudsearchStatsSessionSearchapplicationsGetQueryParams struct {
-	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
-	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
-	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
-	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
-	FromDateDay    *int64            `queryParam:"style=form,explode=true,name=fromDate.day"`
-	FromDateMonth  *int64            `queryParam:"style=form,explode=true,name=fromDate.month"`
-	FromDateYear   *int64            `queryParam:"style=form,explode=true,name=fromDate.year"`
-	Key            *string           `queryParam:"style=form,explode=true,name=key"`
-	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
-	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
-	ToDateDay      *int64            `queryParam:"style=form,explode=true,name=toDate.day"`
-	ToDateMonth    *int64            `queryParam:"style=form,explode=true,name=toDate.month"`
-	ToDateYear     *int64            `queryParam:"style=form,explode=true,name=toDate.year"`
-	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
-	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
+    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
+    Callback *string `queryParam:"style=form,explode=true,name=callback"`
+    Fields *string `queryParam:"style=form,explode=true,name=fields"`
+    FromDateDay *int64 `queryParam:"style=form,explode=true,name=fromDate.day"`
+    FromDateMonth *int64 `queryParam:"style=form,explode=true,name=fromDate.month"`
+    FromDateYear *int64 `queryParam:"style=form,explode=true,name=fromDate.year"`
+    Key *string `queryParam:"style=form,explode=true,name=key"`
+    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
+    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
+    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
+    ToDateDay *int64 `queryParam:"style=form,explode=true,name=toDate.day"`
+    ToDateMonth *int64 `queryParam:"style=form,explode=true,name=toDate.month"`
+    ToDateYear *int64 `queryParam:"style=form,explode=true,name=toDate.year"`
+    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
+    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
+    
 }
 
 type CloudsearchStatsSessionSearchapplicationsGetSecurityOption1 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type CloudsearchStatsSessionSearchapplicationsGetSecurityOption2 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type CloudsearchStatsSessionSearchapplicationsGetSecurityOption3 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type CloudsearchStatsSessionSearchapplicationsGetSecurity struct {
-	Option1 *CloudsearchStatsSessionSearchapplicationsGetSecurityOption1 `security:"option"`
-	Option2 *CloudsearchStatsSessionSearchapplicationsGetSecurityOption2 `security:"option"`
-	Option3 *CloudsearchStatsSessionSearchapplicationsGetSecurityOption3 `security:"option"`
+    Option1 *CloudsearchStatsSessionSearchapplicationsGetSecurityOption1 `security:"option"`
+    Option2 *CloudsearchStatsSessionSearchapplicationsGetSecurityOption2 `security:"option"`
+    Option3 *CloudsearchStatsSessionSearchapplicationsGetSecurityOption3 `security:"option"`
+    
 }
 
 type CloudsearchStatsSessionSearchapplicationsGetRequest struct {
-	PathParams  CloudsearchStatsSessionSearchapplicationsGetPathParams
-	QueryParams CloudsearchStatsSessionSearchapplicationsGetQueryParams
-	Security    CloudsearchStatsSessionSearchapplicationsGetSecurity
+    PathParams CloudsearchStatsSessionSearchapplicationsGetPathParams 
+    QueryParams CloudsearchStatsSessionSearchapplicationsGetQueryParams 
+    Security CloudsearchStatsSessionSearchapplicationsGetSecurity 
+    
 }
 
 type CloudsearchStatsSessionSearchapplicationsGetResponse struct {
-	ContentType                              string
-	GetSearchApplicationSessionStatsResponse *shared.GetSearchApplicationSessionStatsResponse
-	StatusCode                               int64
+    ContentType string 
+    GetSearchApplicationSessionStatsResponse *shared.GetSearchApplicationSessionStatsResponse 
+    StatusCode int64 
+    
 }
+

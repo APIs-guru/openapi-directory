@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ImportAddressHeaders struct {
-	Authorization string `header:"style=simple,explode=true,name=Authorization"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type ImportAddressRequest struct {
-	Headers ImportAddressHeaders
-	Request shared.ImportAddressRequest `request:"mediaType=application/json"`
+    Headers ImportAddressHeaders 
+    Request shared.ImportAddressRequest `request:"mediaType=application/json"`
+    
 }
 
 type ImportAddressResponse struct {
-	ContentType   string
-	StatusCode    int64
-	ImportAddress *shared.ImportAddress
+    ContentType string 
+    StatusCode int64 
+    ImportAddress *shared.ImportAddress 
+    
 }
+

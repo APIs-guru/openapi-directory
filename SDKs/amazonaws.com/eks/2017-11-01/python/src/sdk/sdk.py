@@ -22,29 +22,34 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def associate_encryption_config(self, request: operations.AssociateEncryptionConfigRequest) -> operations.AssociateEncryptionConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/encryption-config/associate", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AssociateEncryptionConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AssociateEncryptionConfigResponse])
@@ -77,26 +82,28 @@ class SDK:
         return res
 
     
-    
     def associate_identity_provider_config(self, request: operations.AssociateIdentityProviderConfigRequest) -> operations.AssociateIdentityProviderConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/identity-provider-configs/associate", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AssociateIdentityProviderConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AssociateIdentityProviderConfigResponse])
@@ -129,26 +136,28 @@ class SDK:
         return res
 
     
-    
     def create_addon(self, request: operations.CreateAddonRequest) -> operations.CreateAddonResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/addons", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAddonResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateAddonResponse])
@@ -181,26 +190,28 @@ class SDK:
         return res
 
     
-    
     def create_cluster(self, request: operations.CreateClusterRequest) -> operations.CreateClusterResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/clusters"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateClusterResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateClusterResponse])
@@ -237,26 +248,28 @@ class SDK:
         return res
 
     
-    
     def create_fargate_profile(self, request: operations.CreateFargateProfileRequest) -> operations.CreateFargateProfileResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/fargate-profiles", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateFargateProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateFargateProfileResponse])
@@ -289,26 +302,28 @@ class SDK:
         return res
 
     
-    
     def create_nodegroup(self, request: operations.CreateNodegroupRequest) -> operations.CreateNodegroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/node-groups", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateNodegroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateNodegroupResponse])
@@ -345,20 +360,23 @@ class SDK:
         return res
 
     
-    
     def delete_addon(self, request: operations.DeleteAddonRequest) -> operations.DeleteAddonResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/addons/{addonName}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("DELETE", url, params=query_params)
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAddonResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteAddonResponse])
@@ -387,19 +405,21 @@ class SDK:
         return res
 
     
-    
     def delete_cluster(self, request: operations.DeleteClusterRequest) -> operations.DeleteClusterResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteClusterResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteClusterResponse])
@@ -428,19 +448,21 @@ class SDK:
         return res
 
     
-    
     def delete_fargate_profile(self, request: operations.DeleteFargateProfileRequest) -> operations.DeleteFargateProfileResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/fargate-profiles/{fargateProfileName}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFargateProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteFargateProfileResponse])
@@ -465,19 +487,21 @@ class SDK:
         return res
 
     
-    
     def delete_nodegroup(self, request: operations.DeleteNodegroupRequest) -> operations.DeleteNodegroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/node-groups/{nodegroupName}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteNodegroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteNodegroupResponse])
@@ -510,19 +534,21 @@ class SDK:
         return res
 
     
-    
     def deregister_cluster(self, request: operations.DeregisterClusterRequest) -> operations.DeregisterClusterResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/cluster-registrations/{name}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeregisterClusterResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeregisterClusterResponse])
@@ -551,19 +577,21 @@ class SDK:
         return res
 
     
-    
     def describe_addon(self, request: operations.DescribeAddonRequest) -> operations.DescribeAddonResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/addons/{addonName}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeAddonResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeAddonResponse])
@@ -592,20 +620,23 @@ class SDK:
         return res
 
     
-    
     def describe_addon_versions(self, request: operations.DescribeAddonVersionsRequest) -> operations.DescribeAddonVersionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/addons/supported-versions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeAddonVersionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeAddonVersionsResponse])
@@ -626,19 +657,21 @@ class SDK:
         return res
 
     
-    
     def describe_cluster(self, request: operations.DescribeClusterRequest) -> operations.DescribeClusterResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeClusterResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeClusterResponse])
@@ -663,19 +696,21 @@ class SDK:
         return res
 
     
-    
     def describe_fargate_profile(self, request: operations.DescribeFargateProfileRequest) -> operations.DescribeFargateProfileResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/fargate-profiles/{fargateProfileName}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeFargateProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeFargateProfileResponse])
@@ -700,26 +735,28 @@ class SDK:
         return res
 
     
-    
     def describe_identity_provider_config(self, request: operations.DescribeIdentityProviderConfigRequest) -> operations.DescribeIdentityProviderConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/identity-provider-configs/describe", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeIdentityProviderConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeIdentityProviderConfigResponse])
@@ -748,19 +785,21 @@ class SDK:
         return res
 
     
-    
     def describe_nodegroup(self, request: operations.DescribeNodegroupRequest) -> operations.DescribeNodegroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/node-groups/{nodegroupName}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeNodegroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeNodegroupResponse])
@@ -789,20 +828,23 @@ class SDK:
         return res
 
     
-    
     def describe_update(self, request: operations.DescribeUpdateRequest) -> operations.DescribeUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/updates/{updateId}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DescribeUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DescribeUpdateResponse])
@@ -827,26 +869,28 @@ class SDK:
         return res
 
     
-    
     def disassociate_identity_provider_config(self, request: operations.DisassociateIdentityProviderConfigRequest) -> operations.DisassociateIdentityProviderConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/identity-provider-configs/disassociate", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DisassociateIdentityProviderConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DisassociateIdentityProviderConfigResponse])
@@ -879,20 +923,23 @@ class SDK:
         return res
 
     
-    
     def list_addons(self, request: operations.ListAddonsRequest) -> operations.ListAddonsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/addons", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAddonsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAddonsResponse])
@@ -921,20 +968,23 @@ class SDK:
         return res
 
     
-    
     def list_clusters(self, request: operations.ListClustersRequest) -> operations.ListClustersResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/clusters"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListClustersResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListClustersResponse])
@@ -959,20 +1009,23 @@ class SDK:
         return res
 
     
-    
     def list_fargate_profiles(self, request: operations.ListFargateProfilesRequest) -> operations.ListFargateProfilesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/fargate-profiles", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListFargateProfilesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListFargateProfilesResponse])
@@ -997,20 +1050,23 @@ class SDK:
         return res
 
     
-    
     def list_identity_provider_configs(self, request: operations.ListIdentityProviderConfigsRequest) -> operations.ListIdentityProviderConfigsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/identity-provider-configs", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListIdentityProviderConfigsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListIdentityProviderConfigsResponse])
@@ -1039,20 +1095,23 @@ class SDK:
         return res
 
     
-    
     def list_nodegroups(self, request: operations.ListNodegroupsRequest) -> operations.ListNodegroupsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/node-groups", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListNodegroupsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListNodegroupsResponse])
@@ -1081,19 +1140,21 @@ class SDK:
         return res
 
     
-    
     def list_tags_for_resource(self, request: operations.ListTagsForResourceRequest) -> operations.ListTagsForResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/tags/{resourceArn}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTagsForResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListTagsForResourceResponse])
@@ -1110,20 +1171,23 @@ class SDK:
         return res
 
     
-    
     def list_updates(self, request: operations.ListUpdatesRequest) -> operations.ListUpdatesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/updates", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUpdatesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListUpdatesResponse])
@@ -1148,26 +1212,28 @@ class SDK:
         return res
 
     
-    
     def register_cluster(self, request: operations.RegisterClusterRequest) -> operations.RegisterClusterResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/cluster-registrations"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RegisterClusterResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.RegisterClusterResponse])
@@ -1196,26 +1262,28 @@ class SDK:
         return res
 
     
-    
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/tags/{resourceArn}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TagResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1232,20 +1300,23 @@ class SDK:
         return res
 
     
-    
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/tags/{resourceArn}#tagKeys", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("DELETE", url, params=query_params)
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UntagResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1262,26 +1333,28 @@ class SDK:
         return res
 
     
-    
     def update_addon(self, request: operations.UpdateAddonRequest) -> operations.UpdateAddonResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/addons/{addonName}/update", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateAddonResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateAddonResponse])
@@ -1314,26 +1387,28 @@ class SDK:
         return res
 
     
-    
     def update_cluster_config(self, request: operations.UpdateClusterConfigRequest) -> operations.UpdateClusterConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/update-config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateClusterConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateClusterConfigResponse])
@@ -1366,26 +1441,28 @@ class SDK:
         return res
 
     
-    
     def update_cluster_version(self, request: operations.UpdateClusterVersionRequest) -> operations.UpdateClusterVersionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/updates", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateClusterVersionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateClusterVersionResponse])
@@ -1418,26 +1495,28 @@ class SDK:
         return res
 
     
-    
     def update_nodegroup_config(self, request: operations.UpdateNodegroupConfigRequest) -> operations.UpdateNodegroupConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/node-groups/{nodegroupName}/update-config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateNodegroupConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateNodegroupConfigResponse])
@@ -1470,26 +1549,28 @@ class SDK:
         return res
 
     
-    
     def update_nodegroup_version(self, request: operations.UpdateNodegroupVersionRequest) -> operations.UpdateNodegroupVersionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/clusters/{name}/node-groups/{nodegroupName}/update-version", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateNodegroupVersionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateNodegroupVersionResponse])

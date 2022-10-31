@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ProductSetPurgeConfig struct {
-	ProductSetID *string `json:"productSetId,omitempty"`
+    ProductSetID *string `json:"productSetId,omitempty"`
+    
 }
+

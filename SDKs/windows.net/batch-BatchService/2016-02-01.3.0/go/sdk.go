@@ -59,6 +59,8 @@ func (s *SDK) AccountListNodeAgentSkus(ctx context.Context, request operations.A
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -112,6 +114,8 @@ func (s *SDK) ApplicationGet(ctx context.Context, request operations.Application
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -164,6 +168,8 @@ func (s *SDK) ApplicationList(ctx context.Context, request operations.Applicatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -225,7 +231,10 @@ func (s *SDK) CertificateAdd(ctx context.Context, request operations.Certificate
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -271,6 +280,8 @@ func (s *SDK) CertificateCancelDeletion(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -315,6 +326,8 @@ func (s *SDK) CertificateDelete(ctx context.Context, request operations.Certific
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -358,6 +371,8 @@ func (s *SDK) CertificateGet(ctx context.Context, request operations.Certificate
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -411,6 +426,8 @@ func (s *SDK) CertificateList(ctx context.Context, request operations.Certificat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -472,7 +489,10 @@ func (s *SDK) ComputeNodeAddUser(ctx context.Context, request operations.Compute
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -517,6 +537,8 @@ func (s *SDK) ComputeNodeDeleteUser(ctx context.Context, request operations.Comp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -566,7 +588,10 @@ func (s *SDK) ComputeNodeDisableScheduling(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -612,6 +637,8 @@ func (s *SDK) ComputeNodeEnableScheduling(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -655,6 +682,8 @@ func (s *SDK) ComputeNodeGet(ctx context.Context, request operations.ComputeNode
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -709,6 +738,8 @@ func (s *SDK) ComputeNodeGetRemoteDesktop(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -762,6 +793,8 @@ func (s *SDK) ComputeNodeGetRemoteLoginSettings(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -814,6 +847,8 @@ func (s *SDK) ComputeNodeList(ctx context.Context, request operations.ComputeNod
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -872,7 +907,10 @@ func (s *SDK) ComputeNodeReboot(ctx context.Context, request operations.ComputeN
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -922,7 +960,10 @@ func (s *SDK) ComputeNodeReimage(ctx context.Context, request operations.Compute
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -975,7 +1016,10 @@ func (s *SDK) ComputeNodeUpdateUser(ctx context.Context, request operations.Comp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1021,6 +1065,8 @@ func (s *SDK) FileDeleteFromComputeNode(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -1065,6 +1111,8 @@ func (s *SDK) FileDeleteFromTask(ctx context.Context, request operations.FileDel
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -1108,6 +1156,8 @@ func (s *SDK) FileGetFromComputeNode(ctx context.Context, request operations.Fil
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1162,6 +1212,8 @@ func (s *SDK) FileGetFromTask(ctx context.Context, request operations.FileGetFro
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -1215,6 +1267,8 @@ func (s *SDK) FileGetNodeFilePropertiesFromComputeNode(ctx context.Context, requ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -1259,6 +1313,8 @@ func (s *SDK) FileGetNodeFilePropertiesFromTask(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -1302,6 +1358,8 @@ func (s *SDK) FileListFromComputeNode(ctx context.Context, request operations.Fi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1355,6 +1413,8 @@ func (s *SDK) FileListFromTask(ctx context.Context, request operations.FileListF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1416,7 +1476,10 @@ func (s *SDK) JobScheduleAdd(ctx context.Context, request operations.JobSchedule
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1462,6 +1525,8 @@ func (s *SDK) JobScheduleDelete(ctx context.Context, request operations.JobSched
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -1505,6 +1570,8 @@ func (s *SDK) JobScheduleDisable(ctx context.Context, request operations.JobSche
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1550,6 +1617,8 @@ func (s *SDK) JobScheduleEnable(ctx context.Context, request operations.JobSched
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -1593,6 +1662,8 @@ func (s *SDK) JobScheduleExists(ctx context.Context, request operations.JobSched
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1638,6 +1709,8 @@ func (s *SDK) JobScheduleGet(ctx context.Context, request operations.JobSchedule
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1691,6 +1764,8 @@ func (s *SDK) JobScheduleList(ctx context.Context, request operations.JobSchedul
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1752,7 +1827,10 @@ func (s *SDK) JobSchedulePatch(ctx context.Context, request operations.JobSchedu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1797,6 +1875,8 @@ func (s *SDK) JobScheduleTerminate(ctx context.Context, request operations.JobSc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1849,7 +1929,10 @@ func (s *SDK) JobScheduleUpdate(ctx context.Context, request operations.JobSched
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1902,7 +1985,10 @@ func (s *SDK) JobAdd(ctx context.Context, request operations.JobAddRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1947,6 +2033,8 @@ func (s *SDK) JobDelete(ctx context.Context, request operations.JobDeleteRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1999,7 +2087,10 @@ func (s *SDK) JobDisable(ctx context.Context, request operations.JobDisableReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2045,6 +2136,8 @@ func (s *SDK) JobEnable(ctx context.Context, request operations.JobEnableRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -2088,6 +2181,8 @@ func (s *SDK) JobGet(ctx context.Context, request operations.JobGetRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2142,6 +2237,8 @@ func (s *SDK) JobGetAllJobsLifetimeStatistics(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -2194,6 +2291,8 @@ func (s *SDK) JobList(ctx context.Context, request operations.JobListRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2248,6 +2347,8 @@ func (s *SDK) JobListFromJobSchedule(ctx context.Context, request operations.Job
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -2300,6 +2401,8 @@ func (s *SDK) JobListPreparationAndReleaseTaskStatus(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2361,7 +2464,10 @@ func (s *SDK) JobPatch(ctx context.Context, request operations.JobPatchRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2411,7 +2517,10 @@ func (s *SDK) JobTerminate(ctx context.Context, request operations.JobTerminateR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2464,7 +2573,10 @@ func (s *SDK) JobUpdate(ctx context.Context, request operations.JobUpdateRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2517,7 +2629,10 @@ func (s *SDK) PoolAdd(ctx context.Context, request operations.PoolAddRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2563,6 +2678,8 @@ func (s *SDK) PoolDelete(ctx context.Context, request operations.PoolDeleteReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -2606,6 +2723,8 @@ func (s *SDK) PoolDisableAutoScale(ctx context.Context, request operations.PoolD
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2658,7 +2777,10 @@ func (s *SDK) PoolEnableAutoScale(ctx context.Context, request operations.PoolEn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2711,7 +2833,10 @@ func (s *SDK) PoolEvaluateAutoScale(ctx context.Context, request operations.Pool
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2766,6 +2891,8 @@ func (s *SDK) PoolExists(ctx context.Context, request operations.PoolExistsReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -2810,6 +2937,8 @@ func (s *SDK) PoolGet(ctx context.Context, request operations.PoolGetRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2864,6 +2993,8 @@ func (s *SDK) PoolGetAllPoolsLifetimeStatistics(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -2917,6 +3048,8 @@ func (s *SDK) PoolList(ctx context.Context, request operations.PoolListRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -2969,6 +3102,8 @@ func (s *SDK) PoolListPoolUsageMetrics(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3030,7 +3165,10 @@ func (s *SDK) PoolPatch(ctx context.Context, request operations.PoolPatchRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3083,7 +3221,10 @@ func (s *SDK) PoolRemoveNodes(ctx context.Context, request operations.PoolRemove
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3136,7 +3277,10 @@ func (s *SDK) PoolResize(ctx context.Context, request operations.PoolResizeReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3181,6 +3325,8 @@ func (s *SDK) PoolStopResize(ctx context.Context, request operations.PoolStopRes
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3233,7 +3379,10 @@ func (s *SDK) PoolUpdateProperties(ctx context.Context, request operations.PoolU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3286,7 +3435,10 @@ func (s *SDK) PoolUpgradeOs(ctx context.Context, request operations.PoolUpgradeO
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3339,7 +3491,10 @@ func (s *SDK) TaskAdd(ctx context.Context, request operations.TaskAddRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3392,7 +3547,10 @@ func (s *SDK) TaskAddCollection(ctx context.Context, request operations.TaskAddC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3447,6 +3605,8 @@ func (s *SDK) TaskDelete(ctx context.Context, request operations.TaskDeleteReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -3490,6 +3650,8 @@ func (s *SDK) TaskGet(ctx context.Context, request operations.TaskGetRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3544,6 +3706,8 @@ func (s *SDK) TaskList(ctx context.Context, request operations.TaskListRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -3596,6 +3760,8 @@ func (s *SDK) TaskListSubtasks(ctx context.Context, request operations.TaskListS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3650,6 +3816,8 @@ func (s *SDK) TaskTerminate(ctx context.Context, request operations.TaskTerminat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -3701,7 +3869,10 @@ func (s *SDK) TaskUpdate(ctx context.Context, request operations.TaskUpdateReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 

@@ -1,6 +1,10 @@
 package shared
 
+
+
 type CustomerSearchApplicationStats struct {
-	Count *string `json:"count,omitempty"`
-	Date  *Date   `json:"date,omitempty"`
+    Count *string `json:"count,omitempty"`
+    Date *Date `json:"date,omitempty"`
+    
 }
+

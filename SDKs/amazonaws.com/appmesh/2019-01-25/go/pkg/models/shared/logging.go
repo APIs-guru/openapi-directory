@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Logging struct {
-	AccessLog *AccessLog `json:"accessLog,omitempty"`
+    AccessLog *AccessLog `json:"accessLog,omitempty"`
+    
 }
+

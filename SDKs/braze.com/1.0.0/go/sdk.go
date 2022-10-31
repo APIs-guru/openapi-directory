@@ -831,6 +831,7 @@ func (s *SDK) ScheduleAPITriggeredCanvases(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

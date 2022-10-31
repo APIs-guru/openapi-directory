@@ -1,17 +1,23 @@
 package operations
 
+
+
 type GetQuoteStateListPathParams struct {
-	WorkgroupID string `pathParam:"style=simple,explode=false,name=workgroup_id"`
+    WorkgroupID string `pathParam:"style=simple,explode=false,name=workgroup_id"`
+    
 }
 
 type GetQuoteStateListRequest struct {
-	PathParams GetQuoteStateListPathParams
+    PathParams GetQuoteStateListPathParams 
+    
 }
 
 type GetQuoteStateListResponse struct {
-	Body              []byte
-	ContentType       string
-	HTTPStatusVo      *interface{}
-	ObjectStateListVo *interface{}
-	StatusCode        int64
+    Body []byte 
+    ContentType string 
+    HTTPStatusVo *interface{} 
+    ObjectStateListVo *interface{} 
+    StatusCode int64 
+    
 }
+

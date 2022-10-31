@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateServerEngineAttributesResponse struct {
-	Server *Server `json:"Server,omitempty"`
+    Server *Server `json:"Server,omitempty"`
+    
 }
+

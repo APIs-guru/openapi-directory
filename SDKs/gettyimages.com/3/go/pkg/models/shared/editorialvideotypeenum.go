@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type EditorialVideoTypeEnum string
 
 const (
-	EditorialVideoTypeEnumRaw      EditorialVideoTypeEnum = "raw"
-	EditorialVideoTypeEnumProduced EditorialVideoTypeEnum = "produced"
+    EditorialVideoTypeEnumRaw EditorialVideoTypeEnum = "raw"
+EditorialVideoTypeEnumProduced EditorialVideoTypeEnum = "produced"
 )
+
+

@@ -1,15 +1,21 @@
 package shared
 
+
+
+
 type GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnum string
 
 const (
-	GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnumEntityOverrideModeUnspecified GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnum = "ENTITY_OVERRIDE_MODE_UNSPECIFIED"
-	GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnumEntityOverrideModeOverride    GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnum = "ENTITY_OVERRIDE_MODE_OVERRIDE"
-	GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnumEntityOverrideModeSupplement  GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnum = "ENTITY_OVERRIDE_MODE_SUPPLEMENT"
+    GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnumEntityOverrideModeUnspecified GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnum = "ENTITY_OVERRIDE_MODE_UNSPECIFIED"
+GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnumEntityOverrideModeOverride GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnum = "ENTITY_OVERRIDE_MODE_OVERRIDE"
+GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnumEntityOverrideModeSupplement GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnum = "ENTITY_OVERRIDE_MODE_SUPPLEMENT"
 )
 
+
 type GoogleCloudDialogflowCxV3SessionEntityType struct {
-	Entities           []GoogleCloudDialogflowCxV3EntityTypeEntity                       `json:"entities,omitempty"`
-	EntityOverrideMode *GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnum `json:"entityOverrideMode,omitempty"`
-	Name               *string                                                           `json:"name,omitempty"`
+    Entities []GoogleCloudDialogflowCxV3EntityTypeEntity `json:"entities,omitempty"`
+    EntityOverrideMode *GoogleCloudDialogflowCxV3SessionEntityTypeEntityOverrideModeEnum `json:"entityOverrideMode,omitempty"`
+    Name *string `json:"name,omitempty"`
+    
 }
+

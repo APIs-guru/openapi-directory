@@ -1,5 +1,9 @@
 package shared
 
+
+
 type HTTPURLDestinationConfiguration struct {
-	ConfirmationURL string `json:"confirmationUrl"`
+    ConfirmationURL string `json:"confirmationUrl"`
+    
 }
+

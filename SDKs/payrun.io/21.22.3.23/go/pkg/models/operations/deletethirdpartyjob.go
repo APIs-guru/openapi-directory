@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DeleteThirdPartyJobPathParams struct {
-	JobID string `pathParam:"style=simple,explode=false,name=JobId"`
+    JobID string `pathParam:"style=simple,explode=false,name=JobId"`
+    
 }
 
 type DeleteThirdPartyJobHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type DeleteThirdPartyJobRequest struct {
-	PathParams DeleteThirdPartyJobPathParams
-	Headers    DeleteThirdPartyJobHeaders
+    PathParams DeleteThirdPartyJobPathParams 
+    Headers DeleteThirdPartyJobHeaders 
+    
 }
 
 type DeleteThirdPartyJobResponse struct {
-	ContentType string
-	ErrorModel  *shared.ErrorModel
-	StatusCode  int64
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    StatusCode int64 
+    
 }
+

@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RequestS3TagsInfoHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type RequestS3TagsInfoRequest struct {
-	Headers RequestS3TagsInfoHeaders
+    Headers RequestS3TagsInfoHeaders 
+    
 }
 
 type RequestS3TagsInfoResponse struct {
-	ContentType   string
-	ErrorResponse *shared.ErrorResponse
-	S3TagList     *shared.S3TagList
-	StatusCode    int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    S3TagList *shared.S3TagList 
+    StatusCode int64 
+    
 }
+

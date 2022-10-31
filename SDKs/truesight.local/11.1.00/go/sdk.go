@@ -1070,6 +1070,7 @@ func (s *SDK) Reinitialize(ctx context.Context, request operations.ReinitializeR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1318,6 +1319,7 @@ func (s *SDK) UpdateEnergyCost(ctx context.Context, request operations.UpdateEne
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

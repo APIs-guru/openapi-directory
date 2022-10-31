@@ -5,7 +5,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass
 class BookingAvailabilityTourgradesPricingmatrixHeaders:
-    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json

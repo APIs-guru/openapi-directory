@@ -1,15 +1,17 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetHgncMappingUsingPostRequest struct {
-	Request *shared.RgdidListRequest `request:"mediaType=application/json"`
+    Request *shared.RgdidListRequest `request:"mediaType=application/json"`
+    
 }
 
 type GetHgncMappingUsingPostResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

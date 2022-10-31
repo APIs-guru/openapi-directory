@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type UpdateEventlogConfigHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type UpdateEventlogConfigRequest struct {
-	Headers UpdateEventlogConfigHeaders
-	Request shared.UpdateEventlogConfig `request:"mediaType=application/json"`
+    Headers UpdateEventlogConfigHeaders 
+    Request shared.UpdateEventlogConfig `request:"mediaType=application/json"`
+    
 }
 
 type UpdateEventlogConfigResponse struct {
-	ContentType    string
-	ErrorResponse  *shared.ErrorResponse
-	EventlogConfig *shared.EventlogConfig
-	StatusCode     int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    EventlogConfig *shared.EventlogConfig 
+    StatusCode int64 
+    
 }
+

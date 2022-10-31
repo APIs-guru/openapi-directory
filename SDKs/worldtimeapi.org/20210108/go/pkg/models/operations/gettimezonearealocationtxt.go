@@ -1,17 +1,23 @@
 package operations
 
+
+
 type GetTimezoneAreaLocationTxtPathParams struct {
-	Area     string `pathParam:"style=simple,explode=false,name=area"`
-	Location string `pathParam:"style=simple,explode=false,name=location"`
+    Area string `pathParam:"style=simple,explode=false,name=area"`
+    Location string `pathParam:"style=simple,explode=false,name=location"`
+    
 }
 
 type GetTimezoneAreaLocationTxtRequest struct {
-	PathParams GetTimezoneAreaLocationTxtPathParams
+    PathParams GetTimezoneAreaLocationTxtPathParams 
+    
 }
 
 type GetTimezoneAreaLocationTxtResponse struct {
-	ContentType          string
-	DateTimeTextResponse *string
-	ErrorTextResponse    *string
-	StatusCode           int64
+    ContentType string 
+    DateTimeTextResponse *string 
+    ErrorTextResponse *string 
+    StatusCode int64 
+    
 }
+

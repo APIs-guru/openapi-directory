@@ -72,6 +72,7 @@ func (s *SDK) ApplicationsAddOwner(ctx context.Context, request operations.Appli
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -130,6 +131,7 @@ func (s *SDK) ApplicationsCreate(ctx context.Context, request operations.Applica
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -643,6 +645,7 @@ func (s *SDK) ApplicationsPatch(ctx context.Context, request operations.Applicat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -750,6 +753,7 @@ func (s *SDK) ApplicationsUpdateKeyCredentials(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -808,6 +812,7 @@ func (s *SDK) ApplicationsUpdatePasswordCredentials(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1141,6 +1146,7 @@ func (s *SDK) GroupsAddMember(ctx context.Context, request operations.GroupsAddM
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1199,6 +1205,7 @@ func (s *SDK) GroupsAddOwner(ctx context.Context, request operations.GroupsAddOw
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1257,6 +1264,7 @@ func (s *SDK) GroupsCreate(ctx context.Context, request operations.GroupsCreateR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1510,6 +1518,7 @@ func (s *SDK) GroupsGetMemberGroups(ctx context.Context, request operations.Grou
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1584,6 +1593,7 @@ func (s *SDK) GroupsIsMemberOf(ctx context.Context, request operations.GroupsIsM
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1883,6 +1893,7 @@ func (s *SDK) OAuth2PermissionGrantCreate(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2023,6 +2034,7 @@ func (s *SDK) ObjectsGetObjectsByObjectIds(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2080,6 +2092,7 @@ func (s *SDK) ServicePrincipalsAddOwner(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2138,6 +2151,7 @@ func (s *SDK) ServicePrincipalsCreate(ctx context.Context, request operations.Se
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2765,6 +2779,7 @@ func (s *SDK) ServicePrincipalsUpdate(ctx context.Context, request operations.Se
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2823,6 +2838,7 @@ func (s *SDK) ServicePrincipalsUpdateKeyCredentials(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2881,6 +2897,7 @@ func (s *SDK) ServicePrincipalsUpdatePasswordCredentials(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3069,6 +3086,7 @@ func (s *SDK) UsersCreate(ctx context.Context, request operations.UsersCreateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3257,6 +3275,7 @@ func (s *SDK) UsersGetMemberGroups(ctx context.Context, request operations.Users
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3396,6 +3415,7 @@ func (s *SDK) UsersUpdate(ctx context.Context, request operations.UsersUpdateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

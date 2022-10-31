@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeVpcPeeringConnectionsOutput struct {
-	VpcPeeringConnections []VpcPeeringConnection `json:"VpcPeeringConnections,omitempty"`
+    VpcPeeringConnections []VpcPeeringConnection `json:"VpcPeeringConnections,omitempty"`
+    
 }
+

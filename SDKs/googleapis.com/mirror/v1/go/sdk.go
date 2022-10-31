@@ -64,6 +64,7 @@ func (s *SDK) MirrorAccountsInsert(ctx context.Context, request operations.Mirro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -184,6 +185,7 @@ func (s *SDK) MirrorContactsInsert(ctx context.Context, request operations.Mirro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -272,6 +274,7 @@ func (s *SDK) MirrorContactsPatch(ctx context.Context, request operations.Mirror
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -319,6 +322,7 @@ func (s *SDK) MirrorContactsUpdate(ctx context.Context, request operations.Mirro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -521,6 +525,7 @@ func (s *SDK) MirrorSubscriptionsInsert(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -609,6 +614,7 @@ func (s *SDK) MirrorSubscriptionsUpdate(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -884,6 +890,7 @@ func (s *SDK) MirrorTimelineInsert(ctx context.Context, request operations.Mirro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -972,6 +979,7 @@ func (s *SDK) MirrorTimelinePatch(ctx context.Context, request operations.Mirror
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1019,6 +1027,7 @@ func (s *SDK) MirrorTimelineUpdate(ctx context.Context, request operations.Mirro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

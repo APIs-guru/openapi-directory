@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type IpamPrefixesAvailableIpsReadPathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type IpamPrefixesAvailableIpsReadRequest struct {
-	PathParams IpamPrefixesAvailableIpsReadPathParams
+    PathParams IpamPrefixesAvailableIpsReadPathParams 
+    
 }
 
 type IpamPrefixesAvailableIpsReadResponse struct {
-	ContentType string
-	Prefix      *shared.Prefix
-	StatusCode  int64
+    ContentType string 
+    Prefix *shared.Prefix 
+    StatusCode int64 
+    
 }
+

@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type AuthorizationProviderTypeEnum string
 
 const (
-	AuthorizationProviderTypeEnumSaml AuthorizationProviderTypeEnum = "SAML"
+    AuthorizationProviderTypeEnumSaml AuthorizationProviderTypeEnum = "SAML"
 )
+
+

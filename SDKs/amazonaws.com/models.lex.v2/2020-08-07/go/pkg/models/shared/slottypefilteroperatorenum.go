@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type SlotTypeFilterOperatorEnum string
 
 const (
-	SlotTypeFilterOperatorEnumCo SlotTypeFilterOperatorEnum = "CO"
-	SlotTypeFilterOperatorEnumEq SlotTypeFilterOperatorEnum = "EQ"
+    SlotTypeFilterOperatorEnumCo SlotTypeFilterOperatorEnum = "CO"
+SlotTypeFilterOperatorEnumEq SlotTypeFilterOperatorEnum = "EQ"
 )
+
+

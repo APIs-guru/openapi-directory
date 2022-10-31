@@ -73,6 +73,7 @@ func (s *SDK) CreateApplication(ctx context.Context, request operations.CreateAp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -401,6 +402,7 @@ func (s *SDK) UpdateApplication(ctx context.Context, request operations.UpdateAp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

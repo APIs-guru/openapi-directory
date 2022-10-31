@@ -1,14 +1,20 @@
 package operations
 
+
+
 type PostRealmClearKeysCachePathParams struct {
-	Realm string `pathParam:"style=simple,explode=false,name=realm"`
+    Realm string `pathParam:"style=simple,explode=false,name=realm"`
+    
 }
 
 type PostRealmClearKeysCacheRequest struct {
-	PathParams PostRealmClearKeysCachePathParams
+    PathParams PostRealmClearKeysCachePathParams 
+    
 }
 
 type PostRealmClearKeysCacheResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

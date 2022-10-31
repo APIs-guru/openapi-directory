@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type CreateTrackerResponse struct {
-	CreateTime  time.Time `json:"CreateTime"`
-	TrackerArn  string    `json:"TrackerArn"`
-	TrackerName string    `json:"TrackerName"`
+    CreateTime time.Time `json:"CreateTime"`
+    TrackerArn string `json:"TrackerArn"`
+    TrackerName string `json:"TrackerName"`
+    
 }
+

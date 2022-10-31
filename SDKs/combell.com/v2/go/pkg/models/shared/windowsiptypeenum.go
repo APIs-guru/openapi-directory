@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type WindowsIPTypeEnum string
 
 const (
-	WindowsIPTypeEnumDedicated WindowsIPTypeEnum = "dedicated"
-	WindowsIPTypeEnumShared    WindowsIPTypeEnum = "shared"
+    WindowsIPTypeEnumDedicated WindowsIPTypeEnum = "dedicated"
+WindowsIPTypeEnumShared WindowsIPTypeEnum = "shared"
 )
+
+

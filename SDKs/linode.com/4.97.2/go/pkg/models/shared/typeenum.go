@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type TypeEnum string
 
 const (
-	TypeEnumCreditCard TypeEnum = "credit_card"
+    TypeEnumCreditCard TypeEnum = "credit_card"
 )
+
+

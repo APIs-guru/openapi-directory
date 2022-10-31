@@ -19,31 +19,36 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def applicants_add(self, request: operations.ApplicantsAddRequest) -> operations.ApplicantsAddResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/ats/applicants"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApplicantsAddResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateApplicantResponse])
@@ -76,21 +81,23 @@ class SDK:
         return res
 
     
-    
     def applicants_all(self, request: operations.ApplicantsAllRequest) -> operations.ApplicantsAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/ats/applicants"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApplicantsAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetApplicantsResponse])
@@ -123,21 +130,23 @@ class SDK:
         return res
 
     
-    
     def applicants_one(self, request: operations.ApplicantsOneRequest) -> operations.ApplicantsOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/ats/applicants/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApplicantsOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetApplicantResponse])
@@ -170,21 +179,23 @@ class SDK:
         return res
 
     
-    
     def jobs_all(self, request: operations.JobsAllRequest) -> operations.JobsAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/ats/jobs"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.JobsAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetJobsResponse])
@@ -217,21 +228,23 @@ class SDK:
         return res
 
     
-    
     def jobs_one(self, request: operations.JobsOneRequest) -> operations.JobsOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/ats/jobs/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.JobsOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetJobResponse])

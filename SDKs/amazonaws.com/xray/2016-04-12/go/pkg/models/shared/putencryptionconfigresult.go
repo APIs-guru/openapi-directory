@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PutEncryptionConfigResult struct {
-	EncryptionConfig *EncryptionConfig `json:"EncryptionConfig,omitempty"`
+    EncryptionConfig *EncryptionConfig `json:"EncryptionConfig,omitempty"`
+    
 }
+

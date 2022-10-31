@@ -1,6 +1,10 @@
 package shared
 
+
+
 type NotifyAppValidationOutputRequest struct {
-	AppID               string               `json:"appId"`
-	NotificationContext *NotificationContext `json:"notificationContext,omitempty"`
+    AppID string `json:"appId"`
+    NotificationContext *NotificationContext `json:"notificationContext,omitempty"`
+    
 }
+

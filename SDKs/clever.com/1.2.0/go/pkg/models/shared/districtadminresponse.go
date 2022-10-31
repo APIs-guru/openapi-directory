@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DistrictAdminResponse struct {
-	Data *DistrictAdmin `json:"data,omitempty"`
+    Data *DistrictAdmin `json:"data,omitempty"`
+    
 }
+

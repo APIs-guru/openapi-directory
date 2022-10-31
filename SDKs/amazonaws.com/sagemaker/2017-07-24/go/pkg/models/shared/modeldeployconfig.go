@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ModelDeployConfig struct {
-	AutoGenerateEndpointName *bool   `json:"AutoGenerateEndpointName,omitempty"`
-	EndpointName             *string `json:"EndpointName,omitempty"`
+    AutoGenerateEndpointName *bool `json:"AutoGenerateEndpointName,omitempty"`
+    EndpointName *string `json:"EndpointName,omitempty"`
+    
 }
+

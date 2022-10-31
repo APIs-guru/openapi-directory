@@ -114,7 +114,10 @@ func (s *SDK) PostV05CareContextsOnDiscover(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -197,7 +200,10 @@ func (s *SDK) PostV05ConsentRequestsInit(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -287,7 +293,10 @@ func (s *SDK) PostV05ConsentRequestsStatus(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -377,7 +386,10 @@ func (s *SDK) PostV05ConsentsFetch(ctx context.Context, request operations.PostV
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -467,7 +479,10 @@ func (s *SDK) PostV05ConsentsHipOnNotify(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -540,7 +555,10 @@ func (s *SDK) PostV05ConsentsHiuOnNotify(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -613,7 +631,10 @@ func (s *SDK) PostV05HealthInformationNotify(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -703,7 +724,10 @@ func (s *SDK) PostV05HealthInformationOnRequest(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -793,7 +817,10 @@ func (s *SDK) PostV05HealthInformationRequest(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -883,7 +910,10 @@ func (s *SDK) PostV05LinksLinkAddContexts(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -973,7 +1003,10 @@ func (s *SDK) PostV05LinksLinkOnConfirm(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1063,7 +1096,10 @@ func (s *SDK) PostV05LinksLinkOnInit(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1146,7 +1182,10 @@ func (s *SDK) PostV05PatientsFind(ctx context.Context, request operations.PostV0
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1229,7 +1268,10 @@ func (s *SDK) PostV05PatientsProfileOnShare(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1312,7 +1354,10 @@ func (s *SDK) PostV05SubscriptionRequestsCmInit(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1402,7 +1447,10 @@ func (s *SDK) PostV05SubscriptionRequestsHiuOnNotify(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1475,7 +1523,10 @@ func (s *SDK) PostV05SubscriptionsHiuOnNotify(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1548,7 +1599,10 @@ func (s *SDK) PostV05UsersAuthConfirm(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1638,7 +1692,10 @@ func (s *SDK) PostV05UsersAuthFetchModes(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1721,7 +1778,10 @@ func (s *SDK) PostV05UsersAuthInit(ctx context.Context, request operations.PostV
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1811,7 +1871,10 @@ func (s *SDK) PostV05UsersAuthOnNotify(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 

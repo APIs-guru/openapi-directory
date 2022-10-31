@@ -2986,6 +2986,7 @@ func (s *SDK) PostAttributeNamespaceAttributeNameMeta(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3064,6 +3065,7 @@ func (s *SDK) PostAttributeNamespaceMeta(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3210,6 +3212,7 @@ func (s *SDK) PostDistributions(ctx context.Context, request operations.PostDist
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3339,6 +3342,7 @@ func (s *SDK) PostIssueTrackers(ctx context.Context, request operations.PostIssu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3407,6 +3411,7 @@ func (s *SDK) PostPerson(ctx context.Context, request operations.PostPersonReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3464,6 +3469,7 @@ func (s *SDK) PostPersonLogin(ctx context.Context, request operations.PostPerson
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3615,6 +3621,7 @@ func (s *SDK) PostPersonRegister(ctx context.Context, request operations.PostPer
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3683,6 +3690,7 @@ func (s *SDK) PostRequest(ctx context.Context, request operations.PostRequestReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3903,6 +3911,7 @@ func (s *SDK) PostWorkerCmdEqualCheckconstraints(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3983,6 +3992,7 @@ func (s *SDK) PutAttributeNamespaceAttributeNameMeta(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4061,6 +4071,7 @@ func (s *SDK) PutAttributeNamespaceMeta(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4136,6 +4147,7 @@ func (s *SDK) PutConfiguration(ctx context.Context, request operations.PutConfig
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4201,6 +4213,7 @@ func (s *SDK) PutDistributionsBulkReplace(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4266,6 +4279,7 @@ func (s *SDK) PutDistributionsDistributionID(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4325,6 +4339,7 @@ func (s *SDK) PutGroupGroupTitle(ctx context.Context, request operations.PutGrou
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4393,6 +4408,7 @@ func (s *SDK) PutIssueTrackersIssueTrackerName(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4461,6 +4477,7 @@ func (s *SDK) PutPersonLogin(ctx context.Context, request operations.PutPersonLo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4549,6 +4566,7 @@ func (s *SDK) PutRequestID(ctx context.Context, request operations.PutRequestIDR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

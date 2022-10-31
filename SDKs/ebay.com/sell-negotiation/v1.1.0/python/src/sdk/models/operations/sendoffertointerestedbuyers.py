@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class SendOfferToInterestedBuyersHeaders:
-    x_ebay_c_marketplace_id: str = field(default=None, metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID' }})
+    x_ebay_c_marketplace_id: str = field(default=None, metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

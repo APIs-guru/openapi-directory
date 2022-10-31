@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PutReportDefinitionResult struct {
-	ReportID *string `json:"reportId,omitempty"`
+    ReportID *string `json:"reportId,omitempty"`
+    
 }
+

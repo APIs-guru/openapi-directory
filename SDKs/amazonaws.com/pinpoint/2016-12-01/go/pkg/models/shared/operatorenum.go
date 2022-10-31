@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type OperatorEnum string
 
 const (
-	OperatorEnumAll OperatorEnum = "ALL"
-	OperatorEnumAny OperatorEnum = "ANY"
+    OperatorEnumAll OperatorEnum = "ALL"
+OperatorEnumAny OperatorEnum = "ANY"
 )
+
+

@@ -1,32 +1,38 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type StopPointRoutePathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
+
 
 type StopPointRouteServiceTypesEnum string
 
 const (
-	StopPointRouteServiceTypesEnumRegular StopPointRouteServiceTypesEnum = "Regular"
-	StopPointRouteServiceTypesEnumNight   StopPointRouteServiceTypesEnum = "Night"
+    StopPointRouteServiceTypesEnumRegular StopPointRouteServiceTypesEnum = "Regular"
+StopPointRouteServiceTypesEnumNight StopPointRouteServiceTypesEnum = "Night"
 )
 
+
 type StopPointRouteQueryParams struct {
-	ServiceTypes []StopPointRouteServiceTypesEnum `queryParam:"style=form,explode=true,name=serviceTypes"`
+    ServiceTypes []StopPointRouteServiceTypesEnum `queryParam:"style=form,explode=true,name=serviceTypes"`
+    
 }
 
 type StopPointRouteRequest struct {
-	PathParams  StopPointRoutePathParams
-	QueryParams StopPointRouteQueryParams
+    PathParams StopPointRoutePathParams 
+    QueryParams StopPointRouteQueryParams 
+    
 }
 
 type StopPointRouteResponse struct {
-	Body                                             []byte
-	ContentType                                      string
-	StatusCode                                       int64
-	TflAPIPresentationEntitiesStopPointRouteSections []shared.TflAPIPresentationEntitiesStopPointRouteSection
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    TflAPIPresentationEntitiesStopPointRouteSections []shared.TflAPIPresentationEntitiesStopPointRouteSection 
+    
 }
+

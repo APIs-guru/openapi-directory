@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeletePatchBaselineResult struct {
-	BaselineID *string `json:"BaselineId,omitempty"`
+    BaselineID *string `json:"BaselineId,omitempty"`
+    
 }
+

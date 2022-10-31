@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PutReplicationConfigurationRequest struct {
-	ReplicationConfiguration ReplicationConfiguration `json:"replicationConfiguration"`
+    ReplicationConfiguration ReplicationConfiguration `json:"replicationConfiguration"`
+    
 }
+

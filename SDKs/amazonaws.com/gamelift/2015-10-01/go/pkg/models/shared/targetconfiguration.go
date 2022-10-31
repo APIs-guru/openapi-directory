@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TargetConfiguration struct {
-	TargetValue float64 `json:"TargetValue"`
+    TargetValue float64 `json:"TargetValue"`
+    
 }
+

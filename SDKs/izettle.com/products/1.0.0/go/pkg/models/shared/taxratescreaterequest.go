@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TaxRatesCreateRequest struct {
-	TaxRates []TaxRate `json:"taxRates"`
+    TaxRates []TaxRate `json:"taxRates"`
+    
 }
+

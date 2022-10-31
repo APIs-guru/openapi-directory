@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ExtrasTopologyMapsUpdatePathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type ExtrasTopologyMapsUpdateRequest struct {
-	PathParams ExtrasTopologyMapsUpdatePathParams
-	Request    shared.WritableTopologyMap `request:"mediaType=application/json"`
+    PathParams ExtrasTopologyMapsUpdatePathParams 
+    Request shared.WritableTopologyMap `request:"mediaType=application/json"`
+    
 }
 
 type ExtrasTopologyMapsUpdateResponse struct {
-	ContentType string
-	StatusCode  int64
-	TopologyMap *shared.TopologyMap
+    ContentType string 
+    StatusCode int64 
+    TopologyMap *shared.TopologyMap 
+    
 }
+

@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type TunnelStatusEnum string
 
 const (
-	TunnelStatusEnumOpen   TunnelStatusEnum = "OPEN"
-	TunnelStatusEnumClosed TunnelStatusEnum = "CLOSED"
+    TunnelStatusEnumOpen TunnelStatusEnum = "OPEN"
+TunnelStatusEnumClosed TunnelStatusEnum = "CLOSED"
 )
+
+

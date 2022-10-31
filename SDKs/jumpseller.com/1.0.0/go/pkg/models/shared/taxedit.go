@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TaxEdit struct {
-	Tax *TaxEditFields `json:"tax,omitempty"`
+    Tax *TaxEditFields `json:"tax,omitempty"`
+    
 }
+

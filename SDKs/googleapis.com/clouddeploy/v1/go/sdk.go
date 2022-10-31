@@ -63,6 +63,7 @@ func (s *SDK) ClouddeployProjectsLocationsDeliveryPipelinesCreate(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -151,6 +152,7 @@ func (s *SDK) ClouddeployProjectsLocationsDeliveryPipelinesReleasesAbandon(ctx c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -198,6 +200,7 @@ func (s *SDK) ClouddeployProjectsLocationsDeliveryPipelinesReleasesCreate(ctx co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -286,6 +289,7 @@ func (s *SDK) ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsAppro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -333,6 +337,7 @@ func (s *SDK) ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsCreat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -462,6 +467,7 @@ func (s *SDK) ClouddeployProjectsLocationsDeliveryPipelinesReleasesRolloutsRetry
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -550,6 +556,7 @@ func (s *SDK) ClouddeployProjectsLocationsOperationsCancel(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -638,6 +645,7 @@ func (s *SDK) ClouddeployProjectsLocationsTargetsCreate(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -849,6 +857,7 @@ func (s *SDK) ClouddeployProjectsLocationsTargetsPatch(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -896,6 +905,7 @@ func (s *SDK) ClouddeployProjectsLocationsTargetsSetIamPolicy(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -943,6 +953,7 @@ func (s *SDK) ClouddeployProjectsLocationsTargetsTestIamPermissions(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

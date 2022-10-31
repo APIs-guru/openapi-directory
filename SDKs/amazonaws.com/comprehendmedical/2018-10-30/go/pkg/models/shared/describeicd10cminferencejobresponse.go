@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeIcd10CmInferenceJobResponse struct {
-	ComprehendMedicalAsyncJobProperties *ComprehendMedicalAsyncJobProperties `json:"ComprehendMedicalAsyncJobProperties,omitempty"`
+    ComprehendMedicalAsyncJobProperties *ComprehendMedicalAsyncJobProperties `json:"ComprehendMedicalAsyncJobProperties,omitempty"`
+    
 }
+

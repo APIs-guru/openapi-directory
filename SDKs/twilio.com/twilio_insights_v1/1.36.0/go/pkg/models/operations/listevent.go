@@ -1,50 +1,56 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var ListEventServers = []string{
 	"https://insights.twilio.com",
 }
 
 type ListEventPathParams struct {
-	CallSid string `pathParam:"style=simple,explode=false,name=CallSid"`
+    CallSid string `pathParam:"style=simple,explode=false,name=CallSid"`
+    
 }
 
 type ListEventQueryParams struct {
-	Edge     *shared.EventEnumTwilioEdgeEnum `queryParam:"style=form,explode=true,name=Edge"`
-	PageSize *int64                          `queryParam:"style=form,explode=true,name=PageSize"`
+    Edge *shared.EventEnumTwilioEdgeEnum `queryParam:"style=form,explode=true,name=Edge"`
+    PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
+    
 }
 
 type ListEventSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type ListEventRequest struct {
-	ServerURL   *string
-	PathParams  ListEventPathParams
-	QueryParams ListEventQueryParams
-	Security    ListEventSecurity
+    ServerURL *string 
+    PathParams ListEventPathParams 
+    QueryParams ListEventQueryParams 
+    Security ListEventSecurity 
+    
 }
 
 type ListEventListEventResponseMeta struct {
-	FirstPageURL    *string `json:"first_page_url,omitempty"`
-	Key             *string `json:"key,omitempty"`
-	NextPageURL     *string `json:"next_page_url,omitempty"`
-	Page            *int64  `json:"page,omitempty"`
-	PageSize        *int64  `json:"page_size,omitempty"`
-	PreviousPageURL *string `json:"previous_page_url,omitempty"`
-	URL             *string `json:"url,omitempty"`
+    FirstPageURL *string `json:"first_page_url,omitempty"`
+    Key *string `json:"key,omitempty"`
+    NextPageURL *string `json:"next_page_url,omitempty"`
+    Page *int64 `json:"page,omitempty"`
+    PageSize *int64 `json:"page_size,omitempty"`
+    PreviousPageURL *string `json:"previous_page_url,omitempty"`
+    URL *string `json:"url,omitempty"`
+    
 }
 
 type ListEventListEventResponse struct {
-	Events []shared.InsightsV1CallEvent    `json:"events,omitempty"`
-	Meta   *ListEventListEventResponseMeta `json:"meta,omitempty"`
+    Events []shared.InsightsV1CallEvent `json:"events,omitempty"`
+    Meta *ListEventListEventResponseMeta `json:"meta,omitempty"`
+    
 }
 
 type ListEventResponse struct {
-	ContentType       string
-	ListEventResponse *ListEventListEventResponse
-	StatusCode        int64
+    ContentType string 
+    ListEventResponse *ListEventListEventResponse 
+    StatusCode int64 
+    
 }
+

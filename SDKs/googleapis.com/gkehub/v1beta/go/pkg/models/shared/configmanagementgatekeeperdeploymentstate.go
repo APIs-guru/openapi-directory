@@ -1,34 +1,44 @@
 package shared
 
+
+
+
 type ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum string
 
 const (
-	ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnumDeploymentStateUnspecified ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum = "DEPLOYMENT_STATE_UNSPECIFIED"
-	ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnumNotInstalled               ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum = "NOT_INSTALLED"
-	ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnumInstalled                  ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum = "INSTALLED"
-	ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnumError                      ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum = "ERROR"
+    ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnumDeploymentStateUnspecified ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum = "DEPLOYMENT_STATE_UNSPECIFIED"
+ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnumNotInstalled ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum = "NOT_INSTALLED"
+ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnumInstalled ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum = "INSTALLED"
+ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnumError ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum = "ERROR"
 )
+
+
 
 type ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum string
 
 const (
-	ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnumDeploymentStateUnspecified ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum = "DEPLOYMENT_STATE_UNSPECIFIED"
-	ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnumNotInstalled               ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum = "NOT_INSTALLED"
-	ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnumInstalled                  ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum = "INSTALLED"
-	ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnumError                      ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum = "ERROR"
+    ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnumDeploymentStateUnspecified ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum = "DEPLOYMENT_STATE_UNSPECIFIED"
+ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnumNotInstalled ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum = "NOT_INSTALLED"
+ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnumInstalled ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum = "INSTALLED"
+ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnumError ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum = "ERROR"
 )
+
+
 
 type ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum string
 
 const (
-	ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnumDeploymentStateUnspecified ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum = "DEPLOYMENT_STATE_UNSPECIFIED"
-	ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnumNotInstalled               ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum = "NOT_INSTALLED"
-	ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnumInstalled                  ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum = "INSTALLED"
-	ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnumError                      ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum = "ERROR"
+    ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnumDeploymentStateUnspecified ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum = "DEPLOYMENT_STATE_UNSPECIFIED"
+ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnumNotInstalled ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum = "NOT_INSTALLED"
+ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnumInstalled ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum = "INSTALLED"
+ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnumError ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum = "ERROR"
 )
 
+
 type ConfigManagementGatekeeperDeploymentState struct {
-	GatekeeperAudit                  *ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum                  `json:"gatekeeperAudit,omitempty"`
-	GatekeeperControllerManagerState *ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum `json:"gatekeeperControllerManagerState,omitempty"`
-	GatekeeperMutation               *ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum               `json:"gatekeeperMutation,omitempty"`
+    GatekeeperAudit *ConfigManagementGatekeeperDeploymentStateGatekeeperAuditEnum `json:"gatekeeperAudit,omitempty"`
+    GatekeeperControllerManagerState *ConfigManagementGatekeeperDeploymentStateGatekeeperControllerManagerStateEnum `json:"gatekeeperControllerManagerState,omitempty"`
+    GatekeeperMutation *ConfigManagementGatekeeperDeploymentStateGatekeeperMutationEnum `json:"gatekeeperMutation,omitempty"`
+    
 }
+

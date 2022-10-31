@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchFirstLastNamePhoneNumberGeoIn struct {
-	PersonalNamesWithPhoneNumbers []FirstLastNamePhoneNumberGeoIn `json:"personalNamesWithPhoneNumbers,omitempty"`
+    PersonalNamesWithPhoneNumbers []FirstLastNamePhoneNumberGeoIn `json:"personalNamesWithPhoneNumbers,omitempty"`
+    
 }
+

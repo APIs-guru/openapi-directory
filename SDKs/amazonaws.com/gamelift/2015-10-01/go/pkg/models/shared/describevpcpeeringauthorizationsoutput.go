@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeVpcPeeringAuthorizationsOutput struct {
-	VpcPeeringAuthorizations []VpcPeeringAuthorization `json:"VpcPeeringAuthorizations,omitempty"`
+    VpcPeeringAuthorizations []VpcPeeringAuthorization `json:"VpcPeeringAuthorizations,omitempty"`
+    
 }
+

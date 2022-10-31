@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type MBusData struct {
-	Date     *time.Time `json:"Date,omitempty" form:"name=Date"`
-	Telegram *string    `json:"Telegram,omitempty" form:"name=Telegram"`
+    Date *time.Time `json:"Date,omitempty" form:"name=Date"`
+    Telegram *string `json:"Telegram,omitempty" form:"name=Telegram"`
+    
 }
+

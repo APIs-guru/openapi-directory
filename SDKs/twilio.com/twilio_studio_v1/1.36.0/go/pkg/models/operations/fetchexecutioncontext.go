@@ -1,30 +1,33 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var FetchExecutionContextServers = []string{
 	"https://studio.twilio.com",
 }
 
 type FetchExecutionContextPathParams struct {
-	ExecutionSid string `pathParam:"style=simple,explode=false,name=ExecutionSid"`
-	FlowSid      string `pathParam:"style=simple,explode=false,name=FlowSid"`
+    ExecutionSid string `pathParam:"style=simple,explode=false,name=ExecutionSid"`
+    FlowSid string `pathParam:"style=simple,explode=false,name=FlowSid"`
+    
 }
 
 type FetchExecutionContextSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type FetchExecutionContextRequest struct {
-	ServerURL  *string
-	PathParams FetchExecutionContextPathParams
-	Security   FetchExecutionContextSecurity
+    ServerURL *string 
+    PathParams FetchExecutionContextPathParams 
+    Security FetchExecutionContextSecurity 
+    
 }
 
 type FetchExecutionContextResponse struct {
-	ContentType                           string
-	StatusCode                            int64
-	StudioV1FlowExecutionExecutionContext *shared.StudioV1FlowExecutionExecutionContext
+    ContentType string 
+    StatusCode int64 
+    StudioV1FlowExecutionExecutionContext *shared.StudioV1FlowExecutionExecutionContext 
+    
 }
+

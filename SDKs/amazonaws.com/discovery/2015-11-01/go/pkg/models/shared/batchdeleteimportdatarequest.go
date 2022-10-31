@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchDeleteImportDataRequest struct {
-	ImportTaskIds []string `json:"importTaskIds"`
+    ImportTaskIds []string `json:"importTaskIds"`
+    
 }
+

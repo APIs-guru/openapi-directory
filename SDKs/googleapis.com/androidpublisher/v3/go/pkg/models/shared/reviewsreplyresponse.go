@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ReviewsReplyResponse struct {
-	Result *ReviewReplyResult `json:"result,omitempty"`
+    Result *ReviewReplyResult `json:"result,omitempty"`
+    
 }
+

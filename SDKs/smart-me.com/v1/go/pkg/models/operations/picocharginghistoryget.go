@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PicoChargingHistoryGetPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type PicoChargingHistoryGetRequest struct {
-	PathParams PicoChargingHistoryGetPathParams
+    PathParams PicoChargingHistoryGetPathParams 
+    
 }
 
 type PicoChargingHistoryGetResponse struct {
-	Body                    []byte
-	ContentType             string
-	PicoChargingHistoryData []shared.PicoChargingHistoryData
-	StatusCode              int64
+    Body []byte 
+    ContentType string 
+    PicoChargingHistoryData []shared.PicoChargingHistoryData 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Union struct {
-	Rules []GcRule `json:"rules,omitempty"`
+    Rules []GcRule `json:"rules,omitempty"`
+    
 }
+

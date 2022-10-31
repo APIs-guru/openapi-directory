@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateAccountSettingsOutput struct {
-	AccountSettings AccountSettings `json:"accountSettings"`
+    AccountSettings AccountSettings `json:"accountSettings"`
+    
 }
+

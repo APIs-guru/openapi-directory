@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GeneralAPICountriesHeaders:
-    x_auth_key: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-key' }})
-    x_auth_secret: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-secret' }})
+    x_auth_key: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-key', 'style': 'simple', 'explode': False }})
+    x_auth_secret: str = field(default=None, metadata={'header': { 'field_name': 'x-auth-secret', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

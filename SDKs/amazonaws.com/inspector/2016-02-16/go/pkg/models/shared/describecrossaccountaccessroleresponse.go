@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type DescribeCrossAccountAccessRoleResponse struct {
-	RegisteredAt time.Time `json:"registeredAt"`
-	RoleArn      string    `json:"roleArn"`
-	Valid        bool      `json:"valid"`
+    RegisteredAt time.Time `json:"registeredAt"`
+    RoleArn string `json:"roleArn"`
+    Valid bool `json:"valid"`
+    
 }
+

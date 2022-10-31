@@ -744,6 +744,7 @@ func (s *SDK) PostAssociationFilter(ctx context.Context, request operations.Post
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -783,6 +784,7 @@ func (s *SDK) PostBestHitSearch(ctx context.Context, request operations.PostBest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -822,6 +824,7 @@ func (s *SDK) PostDiseaseByID(ctx context.Context, request operations.PostDiseas
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -861,6 +864,7 @@ func (s *SDK) PostEnrichmentTarget(ctx context.Context, request operations.PostE
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -900,6 +904,7 @@ func (s *SDK) PostEvidenceByID(ctx context.Context, request operations.PostEvide
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -939,6 +944,7 @@ func (s *SDK) PostEvidenceFilter(ctx context.Context, request operations.PostEvi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -978,6 +984,7 @@ func (s *SDK) PostRelation(ctx context.Context, request operations.PostRelationR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1017,6 +1024,7 @@ func (s *SDK) PostTargetByEnsgid(ctx context.Context, request operations.PostTar
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1056,6 +1064,7 @@ func (s *SDK) PostTargetExpressionByEnsgid(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

@@ -63,6 +63,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsAttributesConfigAddCatalogAttribute
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -110,6 +111,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsAttributesConfigRemoveCatalogAttrib
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -157,6 +159,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsAttributesConfigReplaceCatalogAttri
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -204,6 +207,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsBranchesProductsAddFulfillmentPlace
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -251,6 +255,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsBranchesProductsAddLocalInventories
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -298,6 +303,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsBranchesProductsCreate(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -345,6 +351,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsBranchesProductsImport(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -433,6 +440,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsBranchesProductsRemoveFulfillmentPl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -480,6 +488,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsBranchesProductsRemoveLocalInventor
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -527,6 +536,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsBranchesProductsSetInventory(ctx co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -615,6 +625,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsCompletionDataImport(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -662,6 +673,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsControlsCreate(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -832,6 +844,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsServingConfigsAddControl(ctx contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -879,6 +892,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsServingConfigsCreate(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1008,6 +1022,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsServingConfigsPatch(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1055,6 +1070,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsServingConfigsPredict(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1102,6 +1118,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsServingConfigsRemoveControl(ctx con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1149,6 +1166,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsServingConfigsSearch(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1196,6 +1214,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsSetDefaultBranch(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1284,6 +1303,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsUserEventsImport(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1331,6 +1351,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsUserEventsPurge(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1378,6 +1399,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsUserEventsRejoin(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1425,6 +1447,7 @@ func (s *SDK) RetailProjectsLocationsCatalogsUserEventsWrite(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

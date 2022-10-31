@@ -1,25 +1,33 @@
 package operations
 
+
+
 type PostContainersNameOrIDRenamePathParams struct {
-	NameOrID string `pathParam:"style=simple,explode=false,name=name_or_id"`
+    NameOrID string `pathParam:"style=simple,explode=false,name=name_or_id"`
+    
 }
 
 type PostContainersNameOrIDRenameQueryParams struct {
-	Name string `queryParam:"style=form,explode=true,name=name"`
+    Name string `queryParam:"style=form,explode=true,name=name"`
+    
 }
 
 type PostContainersNameOrIDRenameHeaders struct {
-	XAuthProjectID string `header:"name=X-Auth-Project-Id"`
-	XAuthToken     string `header:"name=X-Auth-Token"`
+    XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
+    XAuthToken string `header:"style=simple,explode=false,name=X-Auth-Token"`
+    
 }
 
 type PostContainersNameOrIDRenameRequest struct {
-	PathParams  PostContainersNameOrIDRenamePathParams
-	QueryParams PostContainersNameOrIDRenameQueryParams
-	Headers     PostContainersNameOrIDRenameHeaders
+    PathParams PostContainersNameOrIDRenamePathParams 
+    QueryParams PostContainersNameOrIDRenameQueryParams 
+    Headers PostContainersNameOrIDRenameHeaders 
+    
 }
 
 type PostContainersNameOrIDRenameResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

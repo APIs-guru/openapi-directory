@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeModelPackageGroupInput struct {
-	ModelPackageGroupName string `json:"ModelPackageGroupName"`
+    ModelPackageGroupName string `json:"ModelPackageGroupName"`
+    
 }
+

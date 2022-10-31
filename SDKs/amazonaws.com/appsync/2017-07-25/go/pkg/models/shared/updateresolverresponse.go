@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateResolverResponse struct {
-	Resolver *Resolver `json:"resolver,omitempty"`
+    Resolver *Resolver `json:"resolver,omitempty"`
+    
 }
+

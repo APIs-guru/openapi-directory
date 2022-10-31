@@ -1,40 +1,51 @@
 package operations
 
+
+
+
 type PostDescribeSpotFleetRequestHistoryActionEnum string
 
 const (
-	PostDescribeSpotFleetRequestHistoryActionEnumDescribeSpotFleetRequestHistory PostDescribeSpotFleetRequestHistoryActionEnum = "DescribeSpotFleetRequestHistory"
+    PostDescribeSpotFleetRequestHistoryActionEnumDescribeSpotFleetRequestHistory PostDescribeSpotFleetRequestHistoryActionEnum = "DescribeSpotFleetRequestHistory"
 )
+
+
 
 type PostDescribeSpotFleetRequestHistoryVersionEnum string
 
 const (
-	PostDescribeSpotFleetRequestHistoryVersionEnumTwoThousandAndSixteen1115 PostDescribeSpotFleetRequestHistoryVersionEnum = "2016-11-15"
+    PostDescribeSpotFleetRequestHistoryVersionEnumTwoThousandAndSixteen1115 PostDescribeSpotFleetRequestHistoryVersionEnum = "2016-11-15"
 )
 
+
 type PostDescribeSpotFleetRequestHistoryQueryParams struct {
-	Action  PostDescribeSpotFleetRequestHistoryActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	Version PostDescribeSpotFleetRequestHistoryVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action PostDescribeSpotFleetRequestHistoryActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    Version PostDescribeSpotFleetRequestHistoryVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type PostDescribeSpotFleetRequestHistoryHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type PostDescribeSpotFleetRequestHistoryRequest struct {
-	QueryParams PostDescribeSpotFleetRequestHistoryQueryParams
-	Headers     PostDescribeSpotFleetRequestHistoryHeaders
-	Request     []byte `request:"mediaType=text/xml"`
+    QueryParams PostDescribeSpotFleetRequestHistoryQueryParams 
+    Headers PostDescribeSpotFleetRequestHistoryHeaders 
+    Request []byte `request:"mediaType=text/xml"`
+    
 }
 
 type PostDescribeSpotFleetRequestHistoryResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

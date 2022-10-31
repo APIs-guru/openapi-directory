@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SpellResult struct {
-	SuggestedQuery *string `json:"suggestedQuery,omitempty"`
+    SuggestedQuery *string `json:"suggestedQuery,omitempty"`
+    
 }
+

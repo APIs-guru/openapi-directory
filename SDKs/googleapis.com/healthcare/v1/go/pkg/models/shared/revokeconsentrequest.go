@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RevokeConsentRequest struct {
-	ConsentArtifact *string `json:"consentArtifact,omitempty"`
+    ConsentArtifact *string `json:"consentArtifact,omitempty"`
+    
 }
+

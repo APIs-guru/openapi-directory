@@ -1,14 +1,20 @@
 package operations
 
+
+
 type FastSendDeviceValuesGetPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type FastSendDeviceValuesGetRequest struct {
-	PathParams FastSendDeviceValuesGetPathParams
+    PathParams FastSendDeviceValuesGetPathParams 
+    
 }
 
 type FastSendDeviceValuesGetResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

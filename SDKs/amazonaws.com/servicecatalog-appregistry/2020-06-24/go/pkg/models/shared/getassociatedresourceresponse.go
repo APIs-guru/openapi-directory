@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetAssociatedResourceResponse struct {
-	Resource *Resource `json:"resource,omitempty"`
+    Resource *Resource `json:"resource,omitempty"`
+    
 }
+

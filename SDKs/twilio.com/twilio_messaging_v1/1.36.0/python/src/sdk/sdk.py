@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def create_alpha_sender(self, request: operations.CreateAlphaSenderRequest) -> operations.CreateAlphaSenderResponse:
         warnings.simplefilter("ignore")
@@ -28,18 +30,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{ServiceSid}/AlphaSenders", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAlphaSenderResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1ServiceAlphaSender])
@@ -47,7 +51,6 @@ class SDK:
 
         return res
 
-    
     
     def create_brand_registrations(self, request: operations.CreateBrandRegistrationsRequest) -> operations.CreateBrandRegistrationsResponse:
         warnings.simplefilter("ignore")
@@ -56,18 +59,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/a2p/BrandRegistrations"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateBrandRegistrationsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1BrandRegistrations])
@@ -75,7 +80,6 @@ class SDK:
 
         return res
 
-    
     
     def create_brand_vetting(self, request: operations.CreateBrandVettingRequest) -> operations.CreateBrandVettingResponse:
         warnings.simplefilter("ignore")
@@ -84,18 +88,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/a2p/BrandRegistrations/{BrandSid}/Vettings", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateBrandVettingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1BrandRegistrationsBrandVetting])
@@ -103,7 +109,6 @@ class SDK:
 
         return res
 
-    
     
     def create_external_campaign(self, request: operations.CreateExternalCampaignRequest) -> operations.CreateExternalCampaignResponse:
         warnings.simplefilter("ignore")
@@ -112,18 +117,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Services/PreregisteredUsa2p"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateExternalCampaignResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1ExternalCampaign])
@@ -132,7 +139,6 @@ class SDK:
         return res
 
     
-    
     def create_phone_number(self, request: operations.CreatePhoneNumberRequest) -> operations.CreatePhoneNumberResponse:
         warnings.simplefilter("ignore")
 
@@ -140,18 +146,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{ServiceSid}/PhoneNumbers", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePhoneNumberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1ServicePhoneNumber])
@@ -159,7 +167,6 @@ class SDK:
 
         return res
 
-    
     
     def create_service(self, request: operations.CreateServiceRequest) -> operations.CreateServiceResponse:
         warnings.simplefilter("ignore")
@@ -168,18 +175,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Services"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateServiceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1Service])
@@ -187,7 +196,6 @@ class SDK:
 
         return res
 
-    
     
     def create_short_code(self, request: operations.CreateShortCodeRequest) -> operations.CreateShortCodeResponse:
         warnings.simplefilter("ignore")
@@ -196,18 +204,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{ServiceSid}/ShortCodes", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateShortCodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1ServiceShortCode])
@@ -215,7 +225,6 @@ class SDK:
 
         return res
 
-    
     
     def create_tollfree_verification(self, request: operations.CreateTollfreeVerificationRequest) -> operations.CreateTollfreeVerificationResponse:
         warnings.simplefilter("ignore")
@@ -224,18 +233,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Tollfree/Verifications"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTollfreeVerificationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1TollfreeVerification])
@@ -243,7 +254,6 @@ class SDK:
 
         return res
 
-    
     
     def create_us_app_to_person(self, request: operations.CreateUsAppToPersonRequest) -> operations.CreateUsAppToPersonResponse:
         warnings.simplefilter("ignore")
@@ -252,18 +262,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateUsAppToPersonResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1ServiceUsAppToPerson])
@@ -272,7 +284,6 @@ class SDK:
         return res
 
     
-    
     def delete_alpha_sender(self, request: operations.DeleteAlphaSenderRequest) -> operations.DeleteAlphaSenderResponse:
         warnings.simplefilter("ignore")
 
@@ -280,20 +291,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{ServiceSid}/AlphaSenders/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAlphaSenderResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_phone_number(self, request: operations.DeletePhoneNumberRequest) -> operations.DeletePhoneNumberResponse:
         warnings.simplefilter("ignore")
@@ -302,20 +312,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{ServiceSid}/PhoneNumbers/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeletePhoneNumberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_service(self, request: operations.DeleteServiceRequest) -> operations.DeleteServiceResponse:
         warnings.simplefilter("ignore")
@@ -324,20 +333,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteServiceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_short_code(self, request: operations.DeleteShortCodeRequest) -> operations.DeleteShortCodeResponse:
         warnings.simplefilter("ignore")
@@ -346,20 +354,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{ServiceSid}/ShortCodes/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteShortCodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_us_app_to_person(self, request: operations.DeleteUsAppToPersonRequest) -> operations.DeleteUsAppToPersonResponse:
         warnings.simplefilter("ignore")
@@ -368,20 +375,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteUsAppToPersonResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def fetch_alpha_sender(self, request: operations.FetchAlphaSenderRequest) -> operations.FetchAlphaSenderResponse:
         warnings.simplefilter("ignore")
@@ -390,14 +396,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{ServiceSid}/AlphaSenders/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchAlphaSenderResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1ServiceAlphaSender])
@@ -406,7 +412,6 @@ class SDK:
         return res
 
     
-    
     def fetch_brand_registrations(self, request: operations.FetchBrandRegistrationsRequest) -> operations.FetchBrandRegistrationsResponse:
         warnings.simplefilter("ignore")
 
@@ -414,14 +419,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/a2p/BrandRegistrations/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchBrandRegistrationsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1BrandRegistrations])
@@ -429,7 +434,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_brand_vetting(self, request: operations.FetchBrandVettingRequest) -> operations.FetchBrandVettingResponse:
         warnings.simplefilter("ignore")
@@ -438,14 +442,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/a2p/BrandRegistrations/{BrandSid}/Vettings/{BrandVettingSid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchBrandVettingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1BrandRegistrationsBrandVetting])
@@ -454,7 +458,6 @@ class SDK:
         return res
 
     
-    
     def fetch_deactivation(self, request: operations.FetchDeactivationRequest) -> operations.FetchDeactivationResponse:
         warnings.simplefilter("ignore")
 
@@ -462,15 +465,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Deactivations"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchDeactivationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 307:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1Deactivation])
@@ -479,7 +483,6 @@ class SDK:
         return res
 
     
-    
     def fetch_phone_number(self, request: operations.FetchPhoneNumberRequest) -> operations.FetchPhoneNumberResponse:
         warnings.simplefilter("ignore")
 
@@ -487,14 +490,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{ServiceSid}/PhoneNumbers/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchPhoneNumberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1ServicePhoneNumber])
@@ -503,7 +506,6 @@ class SDK:
         return res
 
     
-    
     def fetch_service(self, request: operations.FetchServiceRequest) -> operations.FetchServiceResponse:
         warnings.simplefilter("ignore")
 
@@ -511,14 +513,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchServiceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1Service])
@@ -527,7 +529,6 @@ class SDK:
         return res
 
     
-    
     def fetch_short_code(self, request: operations.FetchShortCodeRequest) -> operations.FetchShortCodeResponse:
         warnings.simplefilter("ignore")
 
@@ -535,14 +536,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{ServiceSid}/ShortCodes/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchShortCodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1ServiceShortCode])
@@ -551,7 +552,6 @@ class SDK:
         return res
 
     
-    
     def fetch_tollfree_verification(self, request: operations.FetchTollfreeVerificationRequest) -> operations.FetchTollfreeVerificationResponse:
         warnings.simplefilter("ignore")
 
@@ -559,14 +559,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Tollfree/Verifications/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTollfreeVerificationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1TollfreeVerification])
@@ -575,7 +575,6 @@ class SDK:
         return res
 
     
-    
     def fetch_us_app_to_person(self, request: operations.FetchUsAppToPersonRequest) -> operations.FetchUsAppToPersonResponse:
         warnings.simplefilter("ignore")
 
@@ -583,14 +582,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchUsAppToPersonResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1ServiceUsAppToPerson])
@@ -599,7 +598,6 @@ class SDK:
         return res
 
     
-    
     def fetch_us_app_to_person_usecase(self, request: operations.FetchUsAppToPersonUsecaseRequest) -> operations.FetchUsAppToPersonUsecaseResponse:
         warnings.simplefilter("ignore")
 
@@ -607,15 +605,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p/Usecases", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchUsAppToPersonUsecaseResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1ServiceUsAppToPersonUsecase])
@@ -624,7 +623,6 @@ class SDK:
         return res
 
     
-    
     def fetch_usecase(self, request: operations.FetchUsecaseRequest) -> operations.FetchUsecaseResponse:
         warnings.simplefilter("ignore")
 
@@ -632,14 +630,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Services/Usecases"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchUsecaseResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1Usecase])
@@ -648,7 +646,6 @@ class SDK:
         return res
 
     
-    
     def list_alpha_sender(self, request: operations.ListAlphaSenderRequest) -> operations.ListAlphaSenderResponse:
         warnings.simplefilter("ignore")
 
@@ -656,15 +653,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{ServiceSid}/AlphaSenders", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAlphaSenderResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAlphaSenderListAlphaSenderResponse])
@@ -673,7 +671,6 @@ class SDK:
         return res
 
     
-    
     def list_brand_registrations(self, request: operations.ListBrandRegistrationsRequest) -> operations.ListBrandRegistrationsResponse:
         warnings.simplefilter("ignore")
 
@@ -681,15 +678,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/a2p/BrandRegistrations"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListBrandRegistrationsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListBrandRegistrationsListBrandRegistrationsResponse])
@@ -698,7 +696,6 @@ class SDK:
         return res
 
     
-    
     def list_brand_vetting(self, request: operations.ListBrandVettingRequest) -> operations.ListBrandVettingResponse:
         warnings.simplefilter("ignore")
 
@@ -706,15 +703,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/a2p/BrandRegistrations/{BrandSid}/Vettings", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListBrandVettingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListBrandVettingListBrandVettingResponse])
@@ -723,7 +721,6 @@ class SDK:
         return res
 
     
-    
     def list_phone_number(self, request: operations.ListPhoneNumberRequest) -> operations.ListPhoneNumberResponse:
         warnings.simplefilter("ignore")
 
@@ -731,15 +728,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{ServiceSid}/PhoneNumbers", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListPhoneNumberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListPhoneNumberListPhoneNumberResponse])
@@ -748,7 +746,6 @@ class SDK:
         return res
 
     
-    
     def list_service(self, request: operations.ListServiceRequest) -> operations.ListServiceResponse:
         warnings.simplefilter("ignore")
 
@@ -756,15 +753,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Services"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListServiceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListServiceListServiceResponse])
@@ -773,7 +771,6 @@ class SDK:
         return res
 
     
-    
     def list_short_code(self, request: operations.ListShortCodeRequest) -> operations.ListShortCodeResponse:
         warnings.simplefilter("ignore")
 
@@ -781,15 +778,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{ServiceSid}/ShortCodes", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListShortCodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListShortCodeListShortCodeResponse])
@@ -798,7 +796,6 @@ class SDK:
         return res
 
     
-    
     def list_tollfree_verification(self, request: operations.ListTollfreeVerificationRequest) -> operations.ListTollfreeVerificationResponse:
         warnings.simplefilter("ignore")
 
@@ -806,15 +803,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Tollfree/Verifications"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTollfreeVerificationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListTollfreeVerificationListTollfreeVerificationResponse])
@@ -823,7 +821,6 @@ class SDK:
         return res
 
     
-    
     def list_us_app_to_person(self, request: operations.ListUsAppToPersonRequest) -> operations.ListUsAppToPersonResponse:
         warnings.simplefilter("ignore")
 
@@ -831,15 +828,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{MessagingServiceSid}/Compliance/Usa2p", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUsAppToPersonResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListUsAppToPersonListUsAppToPersonResponse])
@@ -848,7 +846,6 @@ class SDK:
         return res
 
     
-    
     def update_brand_registrations(self, request: operations.UpdateBrandRegistrationsRequest) -> operations.UpdateBrandRegistrationsResponse:
         warnings.simplefilter("ignore")
 
@@ -856,14 +853,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/a2p/BrandRegistrations/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateBrandRegistrationsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1BrandRegistrations])
@@ -872,7 +869,6 @@ class SDK:
         return res
 
     
-    
     def update_service(self, request: operations.UpdateServiceRequest) -> operations.UpdateServiceResponse:
         warnings.simplefilter("ignore")
 
@@ -880,18 +876,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Services/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateServiceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagingV1Service])

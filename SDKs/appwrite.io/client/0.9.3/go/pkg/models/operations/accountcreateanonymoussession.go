@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type AccountCreateAnonymousSessionSecurity struct {
-	Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
+    Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type AccountCreateAnonymousSessionRequest struct {
-	Security AccountCreateAnonymousSessionSecurity
+    Security AccountCreateAnonymousSessionSecurity 
+    
 }
 
 type AccountCreateAnonymousSessionResponse struct {
-	ContentType string
-	StatusCode  int64
-	Session     *shared.Session
+    ContentType string 
+    StatusCode int64 
+    Session *shared.Session 
+    
 }
+

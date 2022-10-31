@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ExecuteSQLResponse struct {
-	SQLStatementResults []SQLStatementResult `json:"sqlStatementResults,omitempty"`
+    SQLStatementResults []SQLStatementResult `json:"sqlStatementResults,omitempty"`
+    
 }
+

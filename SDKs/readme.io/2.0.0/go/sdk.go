@@ -66,6 +66,7 @@ func (s *SDK) CreateChangelog(ctx context.Context, request operations.CreateChan
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -106,6 +107,7 @@ func (s *SDK) CreateCustomPage(ctx context.Context, request operations.CreateCus
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -146,7 +148,10 @@ func (s *SDK) CreateDoc(ctx context.Context, request operations.CreateDocRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -186,6 +191,7 @@ func (s *SDK) CreateVersion(ctx context.Context, request operations.CreateVersio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -313,6 +319,8 @@ func (s *SDK) DeleteDoc(ctx context.Context, request operations.DeleteDocRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -407,6 +415,8 @@ func (s *SDK) GetAPISpecification(ctx context.Context, request operations.GetAPI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -440,6 +450,8 @@ func (s *SDK) GetCategory(ctx context.Context, request operations.GetCategoryReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -470,6 +482,8 @@ func (s *SDK) GetCategoryDocs(ctx context.Context, request operations.GetCategor
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -630,6 +644,8 @@ func (s *SDK) GetDoc(ctx context.Context, request operations.GetDocRequest) (*op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -782,6 +798,8 @@ func (s *SDK) SearchDocs(ctx context.Context, request operations.SearchDocsReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -822,6 +840,7 @@ func (s *SDK) UpdateAPISpecification(ctx context.Context, request operations.Upd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -863,6 +882,7 @@ func (s *SDK) UpdateChangelog(ctx context.Context, request operations.UpdateChan
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -904,6 +924,7 @@ func (s *SDK) UpdateCustomPage(ctx context.Context, request operations.UpdateCus
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -945,7 +966,10 @@ func (s *SDK) UpdateDoc(ctx context.Context, request operations.UpdateDocRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -986,6 +1010,7 @@ func (s *SDK) UpdateSwagger(ctx context.Context, request operations.UpdateSwagge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1027,6 +1052,7 @@ func (s *SDK) UpdateVersion(ctx context.Context, request operations.UpdateVersio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1068,7 +1094,10 @@ func (s *SDK) UploadAPISpecification(ctx context.Context, request operations.Upl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1108,6 +1137,7 @@ func (s *SDK) UploadSwagger(ctx context.Context, request operations.UploadSwagge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

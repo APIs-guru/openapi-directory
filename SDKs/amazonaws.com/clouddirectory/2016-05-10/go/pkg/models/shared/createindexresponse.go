@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateIndexResponse struct {
-	ObjectIdentifier *string `json:"ObjectIdentifier,omitempty"`
+    ObjectIdentifier *string `json:"ObjectIdentifier,omitempty"`
+    
 }
+

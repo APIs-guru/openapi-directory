@@ -1,5 +1,9 @@
 package shared
 
+
+
 type VerifyPhoneNumberResponse struct {
-	VerifiedPhoneNumber *string `json:"verifiedPhoneNumber,omitempty"`
+    VerifiedPhoneNumber *string `json:"verifiedPhoneNumber,omitempty"`
+    
 }
+

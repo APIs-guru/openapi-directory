@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleAppsDriveLabelsV2betaDeltaUpdateLabelRequestCreateFieldRequest struct {
-	Field *GoogleAppsDriveLabelsV2betaField `json:"field,omitempty"`
+    Field *GoogleAppsDriveLabelsV2betaField `json:"field,omitempty"`
+    
 }
+

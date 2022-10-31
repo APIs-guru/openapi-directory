@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type ReplicationConfigurationDataPlaneRoutingEnum string
 
 const (
-	ReplicationConfigurationDataPlaneRoutingEnumPrivateIP ReplicationConfigurationDataPlaneRoutingEnum = "PRIVATE_IP"
-	ReplicationConfigurationDataPlaneRoutingEnumPublicIP  ReplicationConfigurationDataPlaneRoutingEnum = "PUBLIC_IP"
+    ReplicationConfigurationDataPlaneRoutingEnumPrivateIP ReplicationConfigurationDataPlaneRoutingEnum = "PRIVATE_IP"
+ReplicationConfigurationDataPlaneRoutingEnumPublicIP ReplicationConfigurationDataPlaneRoutingEnum = "PUBLIC_IP"
 )
+
+

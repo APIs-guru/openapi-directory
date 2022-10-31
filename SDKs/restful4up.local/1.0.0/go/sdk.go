@@ -68,6 +68,7 @@ func (s *SDK) ApplyYaraRules(ctx context.Context, request operations.ApplyYaraRu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -176,6 +177,7 @@ func (s *SDK) EmulationOutput(ctx context.Context, request operations.EmulationO
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -244,6 +246,7 @@ func (s *SDK) GeneratePartialYaraRule(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -312,6 +315,7 @@ func (s *SDK) Unpack(ctx context.Context, request operations.UnpackRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

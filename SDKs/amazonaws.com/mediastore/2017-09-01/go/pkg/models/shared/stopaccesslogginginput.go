@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StopAccessLoggingInput struct {
-	ContainerName string `json:"ContainerName"`
+    ContainerName string `json:"ContainerName"`
+    
 }
+

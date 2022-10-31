@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetRealmIdentityProviderInstancesAliasPathParams struct {
-	Alias string `pathParam:"style=simple,explode=false,name=alias"`
-	Realm string `pathParam:"style=simple,explode=false,name=realm"`
+    Alias string `pathParam:"style=simple,explode=false,name=alias"`
+    Realm string `pathParam:"style=simple,explode=false,name=realm"`
+    
 }
 
 type GetRealmIdentityProviderInstancesAliasRequest struct {
-	PathParams GetRealmIdentityProviderInstancesAliasPathParams
+    PathParams GetRealmIdentityProviderInstancesAliasPathParams 
+    
 }
 
 type GetRealmIdentityProviderInstancesAliasResponse struct {
-	ContentType                    string
-	IdentityProviderRepresentation *shared.IdentityProviderRepresentation
-	StatusCode                     int64
+    ContentType string 
+    IdentityProviderRepresentation *shared.IdentityProviderRepresentation 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CheckTransitiveMembershipResponse struct {
-	HasMembership *bool `json:"hasMembership,omitempty"`
+    HasMembership *bool `json:"hasMembership,omitempty"`
+    
 }
+

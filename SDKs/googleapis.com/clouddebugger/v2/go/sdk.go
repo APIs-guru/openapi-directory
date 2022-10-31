@@ -105,6 +105,7 @@ func (s *SDK) ClouddebuggerControllerDebuggeesBreakpointsUpdate(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -152,6 +153,7 @@ func (s *SDK) ClouddebuggerControllerDebuggeesRegister(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -322,6 +324,7 @@ func (s *SDK) ClouddebuggerDebuggerDebuggeesBreakpointsSet(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

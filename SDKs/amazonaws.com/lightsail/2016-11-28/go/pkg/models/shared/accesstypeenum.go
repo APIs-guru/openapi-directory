@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type AccessTypeEnum string
 
 const (
-	AccessTypeEnumPublic  AccessTypeEnum = "public"
-	AccessTypeEnumPrivate AccessTypeEnum = "private"
+    AccessTypeEnumPublic AccessTypeEnum = "public"
+AccessTypeEnumPrivate AccessTypeEnum = "private"
 )
+
+

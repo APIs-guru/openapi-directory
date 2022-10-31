@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateTimeSeriesRequest struct {
-	TimeSeries []TimeSeries `json:"timeSeries,omitempty"`
+    TimeSeries []TimeSeries `json:"timeSeries,omitempty"`
+    
 }
+

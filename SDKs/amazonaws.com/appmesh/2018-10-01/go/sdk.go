@@ -76,7 +76,10 @@ func (s *SDK) CreateMesh(ctx context.Context, request operations.CreateMeshReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -204,7 +207,10 @@ func (s *SDK) CreateRoute(ctx context.Context, request operations.CreateRouteReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -332,7 +338,10 @@ func (s *SDK) CreateVirtualNode(ctx context.Context, request operations.CreateVi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -460,7 +469,10 @@ func (s *SDK) CreateVirtualRouter(ctx context.Context, request operations.Create
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -581,6 +593,8 @@ func (s *SDK) DeleteMesh(ctx context.Context, request operations.DeleteMeshReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -689,6 +703,8 @@ func (s *SDK) DeleteRoute(ctx context.Context, request operations.DeleteRouteReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -799,6 +815,8 @@ func (s *SDK) DeleteVirtualNode(ctx context.Context, request operations.DeleteVi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -907,6 +925,8 @@ func (s *SDK) DeleteVirtualRouter(ctx context.Context, request operations.Delete
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1017,6 +1037,8 @@ func (s *SDK) DescribeMesh(ctx context.Context, request operations.DescribeMeshR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -1115,6 +1137,8 @@ func (s *SDK) DescribeRoute(ctx context.Context, request operations.DescribeRout
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1215,6 +1239,8 @@ func (s *SDK) DescribeVirtualNode(ctx context.Context, request operations.Descri
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -1314,6 +1340,8 @@ func (s *SDK) DescribeVirtualRouter(ctx context.Context, request operations.Desc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -1412,6 +1440,8 @@ func (s *SDK) ListMeshes(ctx context.Context, request operations.ListMeshesReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1514,6 +1544,8 @@ func (s *SDK) ListRoutes(ctx context.Context, request operations.ListRoutesReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1615,6 +1647,8 @@ func (s *SDK) ListVirtualNodes(ctx context.Context, request operations.ListVirtu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -1715,6 +1749,8 @@ func (s *SDK) ListVirtualRouters(ctx context.Context, request operations.ListVir
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1824,7 +1860,10 @@ func (s *SDK) UpdateRoute(ctx context.Context, request operations.UpdateRouteReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1952,7 +1991,10 @@ func (s *SDK) UpdateVirtualNode(ctx context.Context, request operations.UpdateVi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -2080,7 +2122,10 @@ func (s *SDK) UpdateVirtualRouter(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 

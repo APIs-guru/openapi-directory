@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ProtocolDetails struct {
-	PassiveIP *string `json:"PassiveIp,omitempty"`
+    PassiveIP *string `json:"PassiveIp,omitempty"`
+    
 }
+

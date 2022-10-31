@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateCertificateAuthorityResponse struct {
-	CertificateAuthorityArn *string `json:"CertificateAuthorityArn,omitempty"`
+    CertificateAuthorityArn *string `json:"CertificateAuthorityArn,omitempty"`
+    
 }
+

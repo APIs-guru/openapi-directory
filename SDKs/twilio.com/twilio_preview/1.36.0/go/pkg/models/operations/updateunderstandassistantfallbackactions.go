@@ -1,34 +1,38 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var UpdateUnderstandAssistantFallbackActionsServers = []string{
 	"https://preview.twilio.com",
 }
 
 type UpdateUnderstandAssistantFallbackActionsPathParams struct {
-	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
+    AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
+    
 }
 
 type UpdateUnderstandAssistantFallbackActionsUpdateUnderstandAssistantFallbackActionsRequest struct {
-	FallbackActions *interface{} `form:"name=FallbackActions"`
+    FallbackActions *interface{} `form:"name=FallbackActions"`
+    
 }
 
 type UpdateUnderstandAssistantFallbackActionsSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type UpdateUnderstandAssistantFallbackActionsRequest struct {
-	ServerURL  *string
-	PathParams UpdateUnderstandAssistantFallbackActionsPathParams
-	Request    *UpdateUnderstandAssistantFallbackActionsUpdateUnderstandAssistantFallbackActionsRequest `request:"mediaType=application/x-www-form-urlencoded"`
-	Security   UpdateUnderstandAssistantFallbackActionsSecurity
+    ServerURL *string 
+    PathParams UpdateUnderstandAssistantFallbackActionsPathParams 
+    Request *UpdateUnderstandAssistantFallbackActionsUpdateUnderstandAssistantFallbackActionsRequest `request:"mediaType=application/x-www-form-urlencoded"`
+    Security UpdateUnderstandAssistantFallbackActionsSecurity 
+    
 }
 
 type UpdateUnderstandAssistantFallbackActionsResponse struct {
-	ContentType                                        string
-	StatusCode                                         int64
-	PreviewUnderstandAssistantAssistantFallbackActions *shared.PreviewUnderstandAssistantAssistantFallbackActions
+    ContentType string 
+    StatusCode int64 
+    PreviewUnderstandAssistantAssistantFallbackActions *shared.PreviewUnderstandAssistantAssistantFallbackActions 
+    
 }
+

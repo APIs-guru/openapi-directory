@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ChromeOsMoveDevicesToOu struct {
-	DeviceIds []string `json:"deviceIds,omitempty"`
+    DeviceIds []string `json:"deviceIds,omitempty"`
+    
 }
+

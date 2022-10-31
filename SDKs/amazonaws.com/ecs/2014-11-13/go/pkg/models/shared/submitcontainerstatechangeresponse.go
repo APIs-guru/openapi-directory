@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SubmitContainerStateChangeResponse struct {
-	Acknowledgment *string `json:"acknowledgment,omitempty"`
+    Acknowledgment *string `json:"acknowledgment,omitempty"`
+    
 }
+

@@ -227,6 +227,7 @@ func (s *SDK) OsconfigProjectsLocationsOsPolicyAssignmentsCreate(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -397,6 +398,7 @@ func (s *SDK) OsconfigProjectsLocationsOsPolicyAssignmentsOperationsCancel(ctx c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -485,6 +487,7 @@ func (s *SDK) OsconfigProjectsLocationsOsPolicyAssignmentsPatch(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

@@ -69,7 +69,10 @@ func (s *SDK) CreateDomesticPaymentConsents(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -226,7 +229,10 @@ func (s *SDK) CreateDomesticPayments(ctx context.Context, request operations.Cre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -383,7 +389,10 @@ func (s *SDK) CreateDomesticScheduledPaymentConsents(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -543,7 +552,10 @@ func (s *SDK) CreateDomesticScheduledPayments(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -703,7 +715,10 @@ func (s *SDK) CreateDomesticStandingOrderConsents(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -863,7 +878,10 @@ func (s *SDK) CreateDomesticStandingOrders(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1023,7 +1041,10 @@ func (s *SDK) CreateFilePaymentConsents(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1183,7 +1204,10 @@ func (s *SDK) CreateFilePaymentConsentsConsentIDFile(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1320,7 +1344,10 @@ func (s *SDK) CreateFilePayments(ctx context.Context, request operations.CreateF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1480,7 +1507,10 @@ func (s *SDK) CreateInternationalPaymentConsents(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1640,7 +1670,10 @@ func (s *SDK) CreateInternationalPayments(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1800,7 +1833,10 @@ func (s *SDK) CreateInternationalScheduledPaymentConsents(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1960,7 +1996,10 @@ func (s *SDK) CreateInternationalScheduledPayments(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -2120,7 +2159,10 @@ func (s *SDK) CreateInternationalStandingOrderConsents(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -2280,7 +2322,10 @@ func (s *SDK) CreateInternationalStandingOrders(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -2433,6 +2478,8 @@ func (s *SDK) GetDomesticPaymentConsentsConsentID(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -2577,6 +2624,8 @@ func (s *SDK) GetDomesticPaymentConsentsConsentIDFundsConfirmation(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -2723,6 +2772,8 @@ func (s *SDK) GetDomesticPaymentsDomesticPaymentID(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -2867,6 +2918,8 @@ func (s *SDK) GetDomesticPaymentsDomesticPaymentIDPaymentDetails(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -3016,6 +3069,8 @@ func (s *SDK) GetDomesticScheduledPaymentConsentsConsentID(ctx context.Context, 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -3163,6 +3218,8 @@ func (s *SDK) GetDomesticScheduledPaymentsDomesticScheduledPaymentID(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -3312,6 +3369,8 @@ func (s *SDK) GetDomesticScheduledPaymentsDomesticScheduledPaymentIDPaymentDetai
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -3459,6 +3518,8 @@ func (s *SDK) GetDomesticStandingOrderConsentsConsentID(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -3608,6 +3669,8 @@ func (s *SDK) GetDomesticStandingOrdersDomesticStandingOrderID(ctx context.Conte
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -3755,6 +3818,8 @@ func (s *SDK) GetDomesticStandingOrdersDomesticStandingOrderIDPaymentDetails(ctx
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -3904,6 +3969,8 @@ func (s *SDK) GetFilePaymentConsentsConsentID(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -4051,6 +4118,8 @@ func (s *SDK) GetFilePaymentConsentsConsentIDFile(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -4200,6 +4269,8 @@ func (s *SDK) GetFilePaymentsFilePaymentID(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -4347,6 +4418,8 @@ func (s *SDK) GetFilePaymentsFilePaymentIDPaymentDetails(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -4496,6 +4569,8 @@ func (s *SDK) GetFilePaymentsFilePaymentIDReportFile(ctx context.Context, reques
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -4643,6 +4718,8 @@ func (s *SDK) GetInternationalPaymentConsentsConsentID(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -4792,6 +4869,8 @@ func (s *SDK) GetInternationalPaymentConsentsConsentIDFundsConfirmation(ctx cont
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -4939,6 +5018,8 @@ func (s *SDK) GetInternationalPaymentsInternationalPaymentID(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -5088,6 +5169,8 @@ func (s *SDK) GetInternationalPaymentsInternationalPaymentIDPaymentDetails(ctx c
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -5235,6 +5318,8 @@ func (s *SDK) GetInternationalScheduledPaymentConsentsConsentID(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -5384,6 +5469,8 @@ func (s *SDK) GetInternationalScheduledPaymentConsentsConsentIDFundsConfirmation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -5531,6 +5618,8 @@ func (s *SDK) GetInternationalScheduledPaymentsInternationalScheduledPaymentID(c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -5680,6 +5769,8 @@ func (s *SDK) GetInternationalScheduledPaymentsInternationalScheduledPaymentIDPa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -5827,6 +5918,8 @@ func (s *SDK) GetInternationalStandingOrderConsentsConsentID(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -5976,6 +6069,8 @@ func (s *SDK) GetInternationalStandingOrdersInternationalStandingOrderPaymentID(
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -6123,6 +6218,8 @@ func (s *SDK) GetInternationalStandingOrdersInternationalStandingOrderPaymentIDP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 

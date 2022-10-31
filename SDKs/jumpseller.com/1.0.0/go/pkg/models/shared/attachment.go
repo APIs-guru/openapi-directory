@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Attachment struct {
-	Attachment *AttachmentFields `json:"attachment,omitempty"`
+    Attachment *AttachmentFields `json:"attachment,omitempty"`
+    
 }
+

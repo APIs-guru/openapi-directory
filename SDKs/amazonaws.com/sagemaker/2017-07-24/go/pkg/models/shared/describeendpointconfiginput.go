@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeEndpointConfigInput struct {
-	EndpointConfigName string `json:"EndpointConfigName"`
+    EndpointConfigName string `json:"EndpointConfigName"`
+    
 }
+

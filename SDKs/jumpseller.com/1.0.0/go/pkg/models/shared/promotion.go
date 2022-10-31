@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Promotion struct {
-	Promotion *PromotionFields `json:"promotion,omitempty"`
+    Promotion *PromotionFields `json:"promotion,omitempty"`
+    
 }
+

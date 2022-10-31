@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetEffectiveOrgPolicyRequest struct {
-	Constraint *string `json:"constraint,omitempty"`
+    Constraint *string `json:"constraint,omitempty"`
+    
 }
+

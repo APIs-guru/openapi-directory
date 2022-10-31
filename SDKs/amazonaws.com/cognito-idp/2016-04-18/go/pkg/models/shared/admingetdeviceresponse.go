@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AdminGetDeviceResponse struct {
-	Device DeviceType `json:"Device"`
+    Device DeviceType `json:"Device"`
+    
 }
+

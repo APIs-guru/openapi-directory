@@ -639,6 +639,7 @@ func (s *SDK) DeleteRepositoriesWorkspaceRepoSlugIssuesIssueIDCommentsCommentID(
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8373,6 +8374,7 @@ func (s *SDK) PostRepositoriesWorkspaceRepoSlug(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8441,6 +8443,7 @@ func (s *SDK) PostRepositoriesWorkspaceRepoSlugBranchRestrictions(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8568,6 +8571,7 @@ func (s *SDK) PostRepositoriesWorkspaceRepoSlugCommitCommitComments(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8608,6 +8612,7 @@ func (s *SDK) PostRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuild(ctx con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8852,6 +8857,7 @@ func (s *SDK) PostRepositoriesWorkspaceRepoSlugForks(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8963,6 +8969,7 @@ func (s *SDK) PostRepositoriesWorkspaceRepoSlugIssues(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9040,6 +9047,7 @@ func (s *SDK) PostRepositoriesWorkspaceRepoSlugIssuesExport(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9232,6 +9240,7 @@ func (s *SDK) PostRepositoriesWorkspaceRepoSlugIssuesIssueIDChanges(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9312,6 +9321,7 @@ func (s *SDK) PostRepositoriesWorkspaceRepoSlugIssuesIssueIDComments(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9360,6 +9370,7 @@ func (s *SDK) PostRepositoriesWorkspaceRepoSlugPullrequests(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9489,6 +9500,7 @@ func (s *SDK) PostRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDComments
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9605,6 +9617,7 @@ func (s *SDK) PostRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDMerge(ct
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -9784,6 +9797,7 @@ func (s *SDK) PostRepositoriesWorkspaceRepoSlugRefsTags(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9894,6 +9908,7 @@ func (s *SDK) PostSnippets(ctx context.Context, request operations.PostSnippetsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9954,6 +9969,7 @@ func (s *SDK) PostSnippetsWorkspace(ctx context.Context, request operations.Post
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -10024,6 +10040,7 @@ func (s *SDK) PostSnippetsWorkspaceEncodedIDComments(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -10155,6 +10172,7 @@ func (s *SDK) PostTeamsUsernameProjects(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -10283,6 +10301,7 @@ func (s *SDK) PostUsersSelectedUserSSHKeys(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -10413,6 +10432,7 @@ func (s *SDK) PostWorkspacesWorkspaceProjects(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -10600,6 +10620,7 @@ func (s *SDK) PutRepositoriesWorkspaceRepoSlug(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -10682,6 +10703,7 @@ func (s *SDK) PutRepositoriesWorkspaceRepoSlugBranchRestrictionsID(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -10836,6 +10858,7 @@ func (s *SDK) PutRepositoriesWorkspaceRepoSlugCommitCommitStatusesBuildKey(ctx c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -11112,6 +11135,7 @@ func (s *SDK) PutRepositoriesWorkspaceRepoSlugIssuesIssueIDCommentsCommentID(ctx
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -11285,6 +11309,7 @@ func (s *SDK) PutRepositoriesWorkspaceRepoSlugPullrequestsPullRequestID(ctx cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -11363,6 +11388,7 @@ func (s *SDK) PutRepositoriesWorkspaceRepoSlugPullrequestsPullRequestIDCommentsC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -11873,6 +11899,7 @@ func (s *SDK) PutTeamsUsernameProjectsProjectKey(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -12011,6 +12038,7 @@ func (s *SDK) PutUsersSelectedUserSSHKeysKeyID(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -12139,6 +12167,7 @@ func (s *SDK) PutWorkspacesWorkspaceProjectsProjectKey(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -12221,6 +12250,7 @@ func (s *SDK) BulkCreateOrUpdateAnnotations(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12269,6 +12299,7 @@ func (s *SDK) CreateDeploymentVariable(ctx context.Context, request operations.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -12341,6 +12372,7 @@ func (s *SDK) CreateEnvironment(ctx context.Context, request operations.CreateEn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12411,6 +12443,7 @@ func (s *SDK) CreateOrUpdateAnnotation(ctx context.Context, request operations.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12469,6 +12502,7 @@ func (s *SDK) CreateOrUpdateReport(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12527,6 +12561,7 @@ func (s *SDK) CreatePipelineForRepository(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12594,6 +12629,7 @@ func (s *SDK) CreatePipelineVariableForTeam(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -12663,6 +12699,7 @@ func (s *SDK) CreatePipelineVariableForUser(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12730,6 +12767,7 @@ func (s *SDK) CreatePipelineVariableForWorkspace(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12800,6 +12838,7 @@ func (s *SDK) CreateRepositoryPipelineKnownHost(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12870,6 +12909,7 @@ func (s *SDK) CreateRepositoryPipelineSchedule(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12948,6 +12988,7 @@ func (s *SDK) CreateRepositoryPipelineVariable(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15332,6 +15373,7 @@ func (s *SDK) UpdateDeploymentVariable(ctx context.Context, request operations.U
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15430,6 +15472,7 @@ func (s *SDK) UpdatePipelineVariableForTeam(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15488,6 +15531,7 @@ func (s *SDK) UpdatePipelineVariableForUser(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15546,6 +15590,7 @@ func (s *SDK) UpdatePipelineVariableForWorkspace(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15634,6 +15679,7 @@ func (s *SDK) UpdateRepositoryBuildNumber(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15732,6 +15778,7 @@ func (s *SDK) UpdateRepositoryPipelineConfig(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15780,6 +15827,7 @@ func (s *SDK) UpdateRepositoryPipelineKeyPair(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15838,6 +15886,7 @@ func (s *SDK) UpdateRepositoryPipelineKnownHost(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15896,6 +15945,7 @@ func (s *SDK) UpdateRepositoryPipelineSchedule(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15954,6 +16004,7 @@ func (s *SDK) UpdateRepositoryPipelineVariable(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

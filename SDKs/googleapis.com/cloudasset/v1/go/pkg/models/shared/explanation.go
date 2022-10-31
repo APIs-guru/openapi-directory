@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Explanation struct {
-	MatchedPermissions map[string]Permissions `json:"matchedPermissions,omitempty"`
+    MatchedPermissions map[string]Permissions `json:"matchedPermissions,omitempty"`
+    
 }
+

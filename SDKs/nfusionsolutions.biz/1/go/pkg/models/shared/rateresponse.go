@@ -1,10 +1,14 @@
 package shared
 
+
+
 type RateResponse struct {
-	Data                   *Rate   `json:"data,omitempty"`
-	Error                  *string `json:"error,omitempty"`
-	RequestedCurrency      *string `json:"requestedCurrency,omitempty"`
-	RequestedSymbol        *string `json:"requestedSymbol,omitempty"`
-	RequestedUnitOfMeasure *string `json:"requestedUnitOfMeasure,omitempty"`
-	Success                *bool   `json:"success,omitempty"`
+    Data *Rate `json:"data,omitempty"`
+    Error *string `json:"error,omitempty"`
+    RequestedCurrency *string `json:"requestedCurrency,omitempty"`
+    RequestedSymbol *string `json:"requestedSymbol,omitempty"`
+    RequestedUnitOfMeasure *string `json:"requestedUnitOfMeasure,omitempty"`
+    Success *bool `json:"success,omitempty"`
+    
 }
+

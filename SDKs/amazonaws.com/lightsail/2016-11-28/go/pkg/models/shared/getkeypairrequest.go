@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetKeyPairRequest struct {
-	KeyPairName string `json:"keyPairName"`
+    KeyPairName string `json:"keyPairName"`
+    
 }
+

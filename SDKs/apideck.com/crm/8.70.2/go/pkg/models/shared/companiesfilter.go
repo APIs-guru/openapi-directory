@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CompaniesFilter struct {
-	Name *string `queryParam:"name=name"`
+    Name *string `queryParam:"name=name"`
+    
 }
+

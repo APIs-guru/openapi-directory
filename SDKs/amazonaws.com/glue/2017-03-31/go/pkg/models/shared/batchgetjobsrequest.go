@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchGetJobsRequest struct {
-	JobNames []string `json:"JobNames"`
+    JobNames []string `json:"JobNames"`
+    
 }
+

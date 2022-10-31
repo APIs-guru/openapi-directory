@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PhoneNumberValidateResponse struct {
-	NumberValidateResponse NumberValidateResponse `json:"NumberValidateResponse"`
+    NumberValidateResponse NumberValidateResponse `json:"NumberValidateResponse"`
+    
 }
+

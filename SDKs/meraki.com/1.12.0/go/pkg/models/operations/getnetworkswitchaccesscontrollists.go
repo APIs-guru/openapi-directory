@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetNetworkSwitchAccessControlListsPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type GetNetworkSwitchAccessControlListsRequest struct {
-	PathParams GetNetworkSwitchAccessControlListsPathParams
+    PathParams GetNetworkSwitchAccessControlListsPathParams 
+    
 }
 
 type GetNetworkSwitchAccessControlListsResponse struct {
-	ContentType                                                string
-	StatusCode                                                 int64
-	GetNetworkSwitchAccessControlLists200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetNetworkSwitchAccessControlLists200ApplicationJSONObject map[string]interface{} 
+    
 }
+

@@ -63,7 +63,10 @@ func (s *SDK) PostAddressAutocomplete(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -99,7 +102,10 @@ func (s *SDK) PostContactEnrich(ctx context.Context, request operations.PostCont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -135,7 +141,10 @@ func (s *SDK) PostEmailEnrich(ctx context.Context, request operations.PostEmailE
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -171,7 +180,10 @@ func (s *SDK) PostPhoneEnrich(ctx context.Context, request operations.PostPhoneE
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -207,7 +219,10 @@ func (s *SDK) Search(ctx context.Context, request operations.SearchRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 

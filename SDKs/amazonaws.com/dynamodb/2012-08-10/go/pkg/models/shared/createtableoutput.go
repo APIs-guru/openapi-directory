@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateTableOutput struct {
-	TableDescription *TableDescription `json:"TableDescription,omitempty"`
+    TableDescription *TableDescription `json:"TableDescription,omitempty"`
+    
 }
+

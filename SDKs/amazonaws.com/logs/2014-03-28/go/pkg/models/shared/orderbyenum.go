@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type OrderByEnum string
 
 const (
-	OrderByEnumLogStreamName OrderByEnum = "LogStreamName"
-	OrderByEnumLastEventTime OrderByEnum = "LastEventTime"
+    OrderByEnumLogStreamName OrderByEnum = "LogStreamName"
+OrderByEnumLastEventTime OrderByEnum = "LastEventTime"
 )
+
+

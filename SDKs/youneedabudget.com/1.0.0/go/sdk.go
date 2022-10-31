@@ -73,6 +73,7 @@ func (s *SDK) BulkCreateTransactions(ctx context.Context, request operations.Bul
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -131,6 +132,7 @@ func (s *SDK) CreateAccount(ctx context.Context, request operations.CreateAccoun
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -189,6 +191,7 @@ func (s *SDK) CreateTransaction(ctx context.Context, request operations.CreateTr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1685,6 +1688,7 @@ func (s *SDK) UpdateMonthCategory(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1743,6 +1747,7 @@ func (s *SDK) UpdateTransaction(ctx context.Context, request operations.UpdateTr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1801,6 +1806,7 @@ func (s *SDK) UpdateTransactions(ctx context.Context, request operations.UpdateT
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

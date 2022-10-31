@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateArtifactResponse struct {
-	ArtifactArn *string `json:"ArtifactArn,omitempty"`
+    ArtifactArn *string `json:"ArtifactArn,omitempty"`
+    
 }
+

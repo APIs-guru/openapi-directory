@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TriggerProperties struct {
-	Scheduled *ScheduledTriggerProperties `json:"Scheduled,omitempty"`
+    Scheduled *ScheduledTriggerProperties `json:"Scheduled,omitempty"`
+    
 }
+

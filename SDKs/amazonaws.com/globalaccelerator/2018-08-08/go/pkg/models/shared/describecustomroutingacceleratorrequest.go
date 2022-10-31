@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeCustomRoutingAcceleratorRequest struct {
-	AcceleratorArn string `json:"AcceleratorArn"`
+    AcceleratorArn string `json:"AcceleratorArn"`
+    
 }
+

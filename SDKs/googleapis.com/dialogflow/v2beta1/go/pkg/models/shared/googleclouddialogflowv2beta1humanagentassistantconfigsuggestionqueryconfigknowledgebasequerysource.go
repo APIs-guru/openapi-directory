@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudDialogflowV2beta1HumanAgentAssistantConfigSuggestionQueryConfigKnowledgeBaseQuerySource struct {
-	KnowledgeBases []string `json:"knowledgeBases,omitempty"`
+    KnowledgeBases []string `json:"knowledgeBases,omitempty"`
+    
 }
+

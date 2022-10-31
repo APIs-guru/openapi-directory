@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetNetworkApplianceTrafficShapingRulesPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type GetNetworkApplianceTrafficShapingRulesRequest struct {
-	PathParams GetNetworkApplianceTrafficShapingRulesPathParams
+    PathParams GetNetworkApplianceTrafficShapingRulesPathParams 
+    
 }
 
 type GetNetworkApplianceTrafficShapingRulesResponse struct {
-	ContentType                                                    string
-	StatusCode                                                     int64
-	GetNetworkApplianceTrafficShapingRules200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetNetworkApplianceTrafficShapingRules200ApplicationJSONObject map[string]interface{} 
+    
 }
+

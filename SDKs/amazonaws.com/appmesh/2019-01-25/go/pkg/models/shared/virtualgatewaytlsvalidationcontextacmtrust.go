@@ -1,5 +1,9 @@
 package shared
 
+
+
 type VirtualGatewayTLSValidationContextAcmTrust struct {
-	CertificateAuthorityArns []string `json:"certificateAuthorityArns"`
+    CertificateAuthorityArns []string `json:"certificateAuthorityArns"`
+    
 }
+

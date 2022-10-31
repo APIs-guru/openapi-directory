@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Integrations struct {
-	ResourceGroup *ResourceGroup `json:"resourceGroup,omitempty"`
+    ResourceGroup *ResourceGroup `json:"resourceGroup,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudApigeeV1ComputeEnvironmentScoresRequestFilter struct {
-	ScorePath *string `json:"scorePath,omitempty"`
+    ScorePath *string `json:"scorePath,omitempty"`
+    
 }
+

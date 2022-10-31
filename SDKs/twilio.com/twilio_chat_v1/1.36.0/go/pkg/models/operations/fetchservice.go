@@ -1,29 +1,32 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var FetchServiceServers = []string{
 	"https://chat.twilio.com",
 }
 
 type FetchServicePathParams struct {
-	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    
 }
 
 type FetchServiceSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type FetchServiceRequest struct {
-	ServerURL  *string
-	PathParams FetchServicePathParams
-	Security   FetchServiceSecurity
+    ServerURL *string 
+    PathParams FetchServicePathParams 
+    Security FetchServiceSecurity 
+    
 }
 
 type FetchServiceResponse struct {
-	ContentType   string
-	StatusCode    int64
-	ChatV1Service *shared.ChatV1Service
+    ContentType string 
+    StatusCode int64 
+    ChatV1Service *shared.ChatV1Service 
+    
 }
+

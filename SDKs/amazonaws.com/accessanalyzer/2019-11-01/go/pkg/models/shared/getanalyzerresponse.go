@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetAnalyzerResponse struct {
-	Analyzer AnalyzerSummary `json:"analyzer"`
+    Analyzer AnalyzerSummary `json:"analyzer"`
+    
 }
+

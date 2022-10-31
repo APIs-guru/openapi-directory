@@ -1,27 +1,31 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetJournalInstructionFromEmployerPathParams struct {
-	EmployerID           string `pathParam:"style=simple,explode=false,name=EmployerId"`
-	JournalInstructionID string `pathParam:"style=simple,explode=false,name=JournalInstructionId"`
+    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    JournalInstructionID string `pathParam:"style=simple,explode=false,name=JournalInstructionId"`
+    
 }
 
 type GetJournalInstructionFromEmployerHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type GetJournalInstructionFromEmployerRequest struct {
-	PathParams GetJournalInstructionFromEmployerPathParams
-	Headers    GetJournalInstructionFromEmployerHeaders
+    PathParams GetJournalInstructionFromEmployerPathParams 
+    Headers GetJournalInstructionFromEmployerHeaders 
+    
 }
 
 type GetJournalInstructionFromEmployerResponse struct {
-	ContentType        string
-	ErrorModel         *shared.ErrorModel
-	JournalInstruction *shared.JournalInstruction
-	StatusCode         int64
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    JournalInstruction *shared.JournalInstruction 
+    StatusCode int64 
+    
 }
+

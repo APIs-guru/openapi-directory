@@ -68,6 +68,7 @@ func (s *SDK) CreateMessageInteraction(ctx context.Context, request operations.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -117,6 +118,7 @@ func (s *SDK) CreateParticipant(ctx context.Context, request operations.CreatePa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -166,6 +168,7 @@ func (s *SDK) CreatePhoneNumber(ctx context.Context, request operations.CreatePh
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -215,6 +218,7 @@ func (s *SDK) CreateService(ctx context.Context, request operations.CreateServic
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -264,6 +268,7 @@ func (s *SDK) CreateSession(ctx context.Context, request operations.CreateSessio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -313,6 +318,7 @@ func (s *SDK) CreateShortCode(ctx context.Context, request operations.CreateShor
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1182,6 +1188,7 @@ func (s *SDK) UpdatePhoneNumber(ctx context.Context, request operations.UpdatePh
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1231,6 +1238,7 @@ func (s *SDK) UpdateService(ctx context.Context, request operations.UpdateServic
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1280,6 +1288,7 @@ func (s *SDK) UpdateSession(ctx context.Context, request operations.UpdateSessio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1329,6 +1338,7 @@ func (s *SDK) UpdateShortCode(ctx context.Context, request operations.UpdateShor
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

@@ -1,6 +1,10 @@
 package shared
 
+
+
 type BlockPublicAccessConfiguration struct {
-	BlockPublicSecurityGroupRules          bool        `json:"BlockPublicSecurityGroupRules"`
-	PermittedPublicSecurityGroupRuleRanges []PortRange `json:"PermittedPublicSecurityGroupRuleRanges,omitempty"`
+    BlockPublicSecurityGroupRules bool `json:"BlockPublicSecurityGroupRules"`
+    PermittedPublicSecurityGroupRuleRanges []PortRange `json:"PermittedPublicSecurityGroupRuleRanges,omitempty"`
+    
 }
+

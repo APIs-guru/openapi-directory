@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type PatchStatus struct {
-	ApprovalDate     *time.Time                 `json:"ApprovalDate,omitempty"`
-	ComplianceLevel  *PatchComplianceLevelEnum  `json:"ComplianceLevel,omitempty"`
-	DeploymentStatus *PatchDeploymentStatusEnum `json:"DeploymentStatus,omitempty"`
+    ApprovalDate *time.Time `json:"ApprovalDate,omitempty"`
+    ComplianceLevel *PatchComplianceLevelEnum `json:"ComplianceLevel,omitempty"`
+    DeploymentStatus *PatchDeploymentStatusEnum `json:"DeploymentStatus,omitempty"`
+    
 }
+

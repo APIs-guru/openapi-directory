@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SdkResponse struct {
-	Body *string `json:"body,omitempty"`
+    Body *string `json:"body,omitempty"`
+    
 }
+

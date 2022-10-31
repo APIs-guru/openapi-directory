@@ -1,5 +1,9 @@
 package shared
 
+
+
 type IapCredential struct {
-	IapTestServiceAccountInfo *IapTestServiceAccountInfo `json:"iapTestServiceAccountInfo,omitempty"`
+    IapTestServiceAccountInfo *IapTestServiceAccountInfo `json:"iapTestServiceAccountInfo,omitempty"`
+    
 }
+

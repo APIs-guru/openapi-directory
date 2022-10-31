@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type StartExecutionOutput struct {
-	ExecutionArn string    `json:"executionArn"`
-	StartDate    time.Time `json:"startDate"`
+    ExecutionArn string `json:"executionArn"`
+    StartDate time.Time `json:"startDate"`
+    
 }
+

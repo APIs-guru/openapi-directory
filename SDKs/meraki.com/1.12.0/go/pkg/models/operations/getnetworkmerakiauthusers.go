@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetNetworkMerakiAuthUsersPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type GetNetworkMerakiAuthUsersRequest struct {
-	PathParams GetNetworkMerakiAuthUsersPathParams
+    PathParams GetNetworkMerakiAuthUsersPathParams 
+    
 }
 
 type GetNetworkMerakiAuthUsersResponse struct {
-	ContentType                                       string
-	StatusCode                                        int64
-	GetNetworkMerakiAuthUsers200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetNetworkMerakiAuthUsers200ApplicationJSONObject map[string]interface{} 
+    
 }
+

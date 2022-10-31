@@ -1,22 +1,25 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type AppsCreateFromManifestPathParams struct {
-	Code string `pathParam:"style=simple,explode=false,name=code"`
+    Code string `pathParam:"style=simple,explode=false,name=code"`
+    
 }
 
 type AppsCreateFromManifestRequest struct {
-	PathParams AppsCreateFromManifestPathParams
-	Request    map[string]interface{} `request:"mediaType=application/json"`
+    PathParams AppsCreateFromManifestPathParams 
+    Request map[string]interface{} `request:"mediaType=application/json"`
+    
 }
 
 type AppsCreateFromManifestResponse struct {
-	ContentType           string
-	GitHubApp             map[string]interface{}
-	StatusCode            int64
-	BasicError            *shared.BasicError
-	ValidationErrorSimple *shared.ValidationErrorSimple
+    ContentType string 
+    GitHubApp map[string]interface{} 
+    StatusCode int64 
+    BasicError *shared.BasicError 
+    ValidationErrorSimple *shared.ValidationErrorSimple 
+    
 }
+

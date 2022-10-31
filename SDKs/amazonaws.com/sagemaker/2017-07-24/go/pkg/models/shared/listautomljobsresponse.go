@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListAutoMlJobsResponse struct {
-	AutoMlJobSummaries []AutoMlJobSummary `json:"AutoMLJobSummaries"`
-	NextToken          *string            `json:"NextToken,omitempty"`
+    AutoMlJobSummaries []AutoMlJobSummary `json:"AutoMLJobSummaries"`
+    NextToken *string `json:"NextToken,omitempty"`
+    
 }
+

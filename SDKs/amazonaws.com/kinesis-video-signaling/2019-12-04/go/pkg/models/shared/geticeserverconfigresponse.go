@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetIceServerConfigResponse struct {
-	IceServerList []IceServer `json:"IceServerList,omitempty"`
+    IceServerList []IceServer `json:"IceServerList,omitempty"`
+    
 }
+

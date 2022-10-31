@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetNetworkTrafficAnalysisPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type GetNetworkTrafficAnalysisRequest struct {
-	PathParams GetNetworkTrafficAnalysisPathParams
+    PathParams GetNetworkTrafficAnalysisPathParams 
+    
 }
 
 type GetNetworkTrafficAnalysisResponse struct {
-	ContentType                                       string
-	StatusCode                                        int64
-	GetNetworkTrafficAnalysis200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetNetworkTrafficAnalysis200ApplicationJSONObject map[string]interface{} 
+    
 }
+

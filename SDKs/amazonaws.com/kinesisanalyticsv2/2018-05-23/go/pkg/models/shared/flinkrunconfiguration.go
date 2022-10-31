@@ -1,5 +1,9 @@
 package shared
 
+
+
 type FlinkRunConfiguration struct {
-	AllowNonRestoredState *bool `json:"AllowNonRestoredState,omitempty"`
+    AllowNonRestoredState *bool `json:"AllowNonRestoredState,omitempty"`
+    
 }
+

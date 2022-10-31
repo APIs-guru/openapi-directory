@@ -1,32 +1,37 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ReplaceConversationPathParams struct {
-	ConversationID string `pathParam:"style=simple,explode=false,name=conversation_id"`
+    ConversationID string `pathParam:"style=simple,explode=false,name=conversation_id"`
+    
 }
 
 type ReplaceConversationRequestBody struct {
-	DisplayName *string                        `json:"display_name,omitempty"`
-	ImageURL    *string                        `json:"image_url,omitempty"`
-	Name        *string                        `json:"name,omitempty"`
-	Properties  *shared.ConversationProperties `json:"properties,omitempty"`
+    DisplayName *string `json:"display_name,omitempty"`
+    ImageURL *string `json:"image_url,omitempty"`
+    Name *string `json:"name,omitempty"`
+    Properties *shared.ConversationProperties `json:"properties,omitempty"`
+    
 }
 
 type ReplaceConversationRequest struct {
-	PathParams ReplaceConversationPathParams
-	Request    *ReplaceConversationRequestBody `request:"mediaType=application/json"`
+    PathParams ReplaceConversationPathParams 
+    Request *ReplaceConversationRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type ReplaceConversation200ApplicationJSON struct {
-	Href string `json:"href"`
-	ID   string `json:"id"`
+    Href string `json:"href"`
+    ID string `json:"id"`
+    
 }
 
 type ReplaceConversationResponse struct {
-	ContentType                                 string
-	StatusCode                                  int64
-	ReplaceConversation200ApplicationJSONObject *ReplaceConversation200ApplicationJSON
+    ContentType string 
+    StatusCode int64 
+    ReplaceConversation200ApplicationJSONObject *ReplaceConversation200ApplicationJSON 
+    
 }
+

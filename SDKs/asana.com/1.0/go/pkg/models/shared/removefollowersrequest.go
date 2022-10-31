@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RemoveFollowersRequest struct {
-	Followers string `json:"followers"`
+    Followers string `json:"followers"`
+    
 }
+

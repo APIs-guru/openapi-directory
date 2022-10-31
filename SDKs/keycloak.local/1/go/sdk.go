@@ -374,6 +374,7 @@ func (s *SDK) DeleteRealmClientScopesIDScopeMappingsClientsClient(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -413,6 +414,7 @@ func (s *SDK) DeleteRealmClientScopesIDScopeMappingsRealm(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -632,6 +634,7 @@ func (s *SDK) DeleteRealmClientsIDRolesRoleNameComposites(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -671,6 +674,7 @@ func (s *SDK) DeleteRealmClientsIDScopeMappingsClientsClient(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -710,6 +714,7 @@ func (s *SDK) DeleteRealmClientsIDScopeMappingsRealm(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -959,6 +964,7 @@ func (s *SDK) DeleteRealmGroupsIDRoleMappingsClientsClient(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -998,6 +1004,7 @@ func (s *SDK) DeleteRealmGroupsIDRoleMappingsRealm(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1127,6 +1134,7 @@ func (s *SDK) DeleteRealmRolesByIDRoleIDComposites(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1196,6 +1204,7 @@ func (s *SDK) DeleteRealmRolesRoleNameComposites(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1415,6 +1424,7 @@ func (s *SDK) DeleteRealmUsersIDRoleMappingsClientsClient(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1454,6 +1464,7 @@ func (s *SDK) DeleteRealmUsersIDRoleMappingsRealm(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6715,6 +6726,7 @@ func (s *SDK) Post(ctx context.Context, request operations.PostRequest) (*operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6754,6 +6766,7 @@ func (s *SDK) PostRealmAuthenticationExecutions(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6793,6 +6806,7 @@ func (s *SDK) PostRealmAuthenticationExecutionsExecutionIDConfig(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6892,6 +6906,7 @@ func (s *SDK) PostRealmAuthenticationFlows(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6931,6 +6946,7 @@ func (s *SDK) PostRealmAuthenticationFlowsFlowAliasCopy(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6970,6 +6986,7 @@ func (s *SDK) PostRealmAuthenticationFlowsFlowAliasExecutionsExecution(ctx conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7009,6 +7026,7 @@ func (s *SDK) PostRealmAuthenticationFlowsFlowAliasExecutionsFlow(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7048,6 +7066,7 @@ func (s *SDK) PostRealmAuthenticationRegisterRequiredAction(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7237,6 +7256,7 @@ func (s *SDK) PostRealmClientDescriptionConverter(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7285,6 +7305,7 @@ func (s *SDK) PostRealmClientScopes(ctx context.Context, request operations.Post
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7324,6 +7345,7 @@ func (s *SDK) PostRealmClientScopesIDProtocolMappersAddModels(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7363,6 +7385,7 @@ func (s *SDK) PostRealmClientScopesIDProtocolMappersModels(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7402,6 +7425,7 @@ func (s *SDK) PostRealmClientScopesIDScopeMappingsClientsClient(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7441,6 +7465,7 @@ func (s *SDK) PostRealmClientScopesIDScopeMappingsRealm(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7480,6 +7505,7 @@ func (s *SDK) PostRealmClients(ctx context.Context, request operations.PostRealm
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7519,6 +7545,7 @@ func (s *SDK) PostRealmClientsIDCertificatesAttrDownload(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7607,6 +7634,7 @@ func (s *SDK) PostRealmClientsIDCertificatesAttrGenerateAndDownload(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7773,6 +7801,7 @@ func (s *SDK) PostRealmClientsIDNodes(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7812,6 +7841,7 @@ func (s *SDK) PostRealmClientsIDProtocolMappersAddModels(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7851,6 +7881,7 @@ func (s *SDK) PostRealmClientsIDProtocolMappersModels(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7968,6 +7999,7 @@ func (s *SDK) PostRealmClientsIDRoles(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8007,6 +8039,7 @@ func (s *SDK) PostRealmClientsIDRolesRoleNameComposites(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8046,6 +8079,7 @@ func (s *SDK) PostRealmClientsIDScopeMappingsClientsClient(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8085,6 +8119,7 @@ func (s *SDK) PostRealmClientsIDScopeMappingsRealm(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8124,6 +8159,7 @@ func (s *SDK) PostRealmClientsInitialAccess(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8172,6 +8208,7 @@ func (s *SDK) PostRealmComponents(ctx context.Context, request operations.PostRe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8211,6 +8248,7 @@ func (s *SDK) PostRealmGroups(ctx context.Context, request operations.PostRealmG
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8250,6 +8288,7 @@ func (s *SDK) PostRealmGroupsIDChildren(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8289,6 +8328,7 @@ func (s *SDK) PostRealmGroupsIDRoleMappingsClientsClient(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8328,6 +8368,7 @@ func (s *SDK) PostRealmGroupsIDRoleMappingsRealm(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8406,6 +8447,7 @@ func (s *SDK) PostRealmIdentityProviderInstances(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8445,6 +8487,7 @@ func (s *SDK) PostRealmIdentityProviderInstancesAliasMappers(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8514,6 +8557,7 @@ func (s *SDK) PostRealmPartialImport(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8624,6 +8668,7 @@ func (s *SDK) PostRealmRoles(ctx context.Context, request operations.PostRealmRo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8663,6 +8708,7 @@ func (s *SDK) PostRealmRolesByIDRoleIDComposites(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8702,6 +8748,7 @@ func (s *SDK) PostRealmRolesRoleNameComposites(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8741,6 +8788,7 @@ func (s *SDK) PostRealmTestLdapConnection(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8780,6 +8828,7 @@ func (s *SDK) PostRealmTestSMTPConnection(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8961,6 +9010,7 @@ func (s *SDK) PostRealmUsers(ctx context.Context, request operations.PostRealmUs
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9060,6 +9110,7 @@ func (s *SDK) PostRealmUsersIDFederatedIdentityProvider(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9168,6 +9219,7 @@ func (s *SDK) PostRealmUsersIDRoleMappingsClientsClient(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9207,6 +9259,7 @@ func (s *SDK) PostRealmUsersIDRoleMappingsRealm(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9246,6 +9299,7 @@ func (s *SDK) PutRealm(ctx context.Context, request operations.PutRealmRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9285,6 +9339,7 @@ func (s *SDK) PutRealmAuthenticationConfigID(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9324,6 +9379,7 @@ func (s *SDK) PutRealmAuthenticationFlowsFlowAliasExecutions(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9363,6 +9419,7 @@ func (s *SDK) PutRealmAuthenticationFlowsID(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9402,6 +9459,7 @@ func (s *SDK) PutRealmAuthenticationRequiredActionsAlias(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9441,6 +9499,7 @@ func (s *SDK) PutRealmClientScopesId1ProtocolMappersModelsId2(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9480,6 +9539,7 @@ func (s *SDK) PutRealmClientScopesID(ctx context.Context, request operations.Put
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9519,6 +9579,7 @@ func (s *SDK) PutRealmClientsId1ProtocolMappersModelsId2(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9558,6 +9619,7 @@ func (s *SDK) PutRealmClientsID(ctx context.Context, request operations.PutRealm
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9627,6 +9689,7 @@ func (s *SDK) PutRealmClientsIDManagementPermissions(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9705,6 +9768,7 @@ func (s *SDK) PutRealmClientsIDRolesRoleName(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9744,6 +9808,7 @@ func (s *SDK) PutRealmClientsIDRolesRoleNameManagementPermissions(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9792,6 +9857,7 @@ func (s *SDK) PutRealmComponentsID(ctx context.Context, request operations.PutRe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9921,6 +9987,7 @@ func (s *SDK) PutRealmEventsConfig(ctx context.Context, request operations.PutRe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9960,6 +10027,7 @@ func (s *SDK) PutRealmGroupsID(ctx context.Context, request operations.PutRealmG
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9999,6 +10067,7 @@ func (s *SDK) PutRealmGroupsIDManagementPermissions(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10047,6 +10116,7 @@ func (s *SDK) PutRealmIdentityProviderInstancesAlias(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10086,6 +10156,7 @@ func (s *SDK) PutRealmIdentityProviderInstancesAliasManagementPermissions(ctx co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10134,6 +10205,7 @@ func (s *SDK) PutRealmIdentityProviderInstancesAliasMappersID(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10173,6 +10245,7 @@ func (s *SDK) PutRealmRolesByIDRoleID(ctx context.Context, request operations.Pu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10212,6 +10285,7 @@ func (s *SDK) PutRealmRolesByIDRoleIDManagementPermissions(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10260,6 +10334,7 @@ func (s *SDK) PutRealmRolesRoleName(ctx context.Context, request operations.PutR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10299,6 +10374,7 @@ func (s *SDK) PutRealmRolesRoleNameManagementPermissions(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10347,6 +10423,7 @@ func (s *SDK) PutRealmUsersID(ctx context.Context, request operations.PutRealmUs
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10386,6 +10463,7 @@ func (s *SDK) PutRealmUsersIDCredentialsCredentialIDUserLabel(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10425,6 +10503,7 @@ func (s *SDK) PutRealmUsersIDDisableCredentialTypes(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10464,6 +10543,7 @@ func (s *SDK) PutRealmUsersIDExecuteActionsEmail(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -10535,6 +10615,7 @@ func (s *SDK) PutRealmUsersIDResetPassword(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10606,6 +10687,7 @@ func (s *SDK) PutRealmUsersManagementPermissions(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

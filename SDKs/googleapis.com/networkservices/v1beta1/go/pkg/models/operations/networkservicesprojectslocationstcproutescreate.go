@@ -1,42 +1,47 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type NetworkservicesProjectsLocationsTCPRoutesCreatePathParams struct {
-	Parent string `pathParam:"style=simple,explode=false,name=parent"`
+    Parent string `pathParam:"style=simple,explode=false,name=parent"`
+    
 }
 
 type NetworkservicesProjectsLocationsTCPRoutesCreateQueryParams struct {
-	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
-	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
-	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
-	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
-	Key            *string           `queryParam:"style=form,explode=true,name=key"`
-	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
-	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
-	TCPRouteID     *string           `queryParam:"style=form,explode=true,name=tcpRouteId"`
-	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
-	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
+    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
+    Callback *string `queryParam:"style=form,explode=true,name=callback"`
+    Fields *string `queryParam:"style=form,explode=true,name=fields"`
+    Key *string `queryParam:"style=form,explode=true,name=key"`
+    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
+    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
+    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
+    TCPRouteID *string `queryParam:"style=form,explode=true,name=tcpRouteId"`
+    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
+    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
+    
 }
 
 type NetworkservicesProjectsLocationsTCPRoutesCreateSecurity struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type NetworkservicesProjectsLocationsTCPRoutesCreateRequest struct {
-	PathParams  NetworkservicesProjectsLocationsTCPRoutesCreatePathParams
-	QueryParams NetworkservicesProjectsLocationsTCPRoutesCreateQueryParams
-	Request     *shared.TCPRoute `request:"mediaType=application/json"`
-	Security    NetworkservicesProjectsLocationsTCPRoutesCreateSecurity
+    PathParams NetworkservicesProjectsLocationsTCPRoutesCreatePathParams 
+    QueryParams NetworkservicesProjectsLocationsTCPRoutesCreateQueryParams 
+    Request *shared.TCPRoute `request:"mediaType=application/json"`
+    Security NetworkservicesProjectsLocationsTCPRoutesCreateSecurity 
+    
 }
 
 type NetworkservicesProjectsLocationsTCPRoutesCreateResponse struct {
-	ContentType string
-	Operation   *shared.Operation
-	StatusCode  int64
+    ContentType string 
+    Operation *shared.Operation 
+    StatusCode int64 
+    
 }
+

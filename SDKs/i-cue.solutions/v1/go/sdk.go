@@ -61,6 +61,8 @@ func (s *SDK) DeleteAdministrationEntityID(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -90,6 +92,8 @@ func (s *SDK) DeleteAdministrationPlanningLevel(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -121,6 +125,8 @@ func (s *SDK) DeleteAdministrationUserEntityIDID(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -150,6 +156,8 @@ func (s *SDK) GetAdministrationEntity(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -204,6 +212,8 @@ func (s *SDK) GetAdministrationPlanningLevels(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -257,6 +267,8 @@ func (s *SDK) GetAdministrationUserEntityID(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -286,6 +298,8 @@ func (s *SDK) GetForecastResultJobID(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -317,6 +331,8 @@ func (s *SDK) GetForecastStatusJobID(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -346,6 +362,8 @@ func (s *SDK) GetHyperparameter(ctx context.Context, request operations.GetHyper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -400,6 +418,8 @@ func (s *SDK) GetReportPerformancePlanningLevelID(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -429,6 +449,8 @@ func (s *SDK) GetReportPerformanceSkuRationalizationPlanningLevelID(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -483,6 +505,8 @@ func (s *SDK) GetReportPlanningLevelOrganization(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -513,6 +537,8 @@ func (s *SDK) GetReportPlanningLevelUser(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -542,6 +568,8 @@ func (s *SDK) GetReportUser(ctx context.Context, request operations.GetReportUse
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -577,7 +605,10 @@ func (s *SDK) PostAdministrationEntity(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -635,6 +666,8 @@ func (s *SDK) PostAdministrationPlanningLevelLock(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -669,7 +702,10 @@ func (s *SDK) PostAdministrationToken(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -731,7 +767,10 @@ func (s *SDK) PostAdministrationUser(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -793,7 +832,10 @@ func (s *SDK) PostForecast(ctx context.Context, request operations.PostForecastR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -852,7 +894,10 @@ func (s *SDK) PostForecastAi(ctx context.Context, request operations.PostForecas
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -911,7 +956,10 @@ func (s *SDK) PostForecastAiHistoryAndForecast(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -970,7 +1018,10 @@ func (s *SDK) PostForecastForecastBottomUp(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1029,7 +1080,10 @@ func (s *SDK) PostForecastForecastTopDown(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1065,7 +1119,10 @@ func (s *SDK) PostForecastFullDetail(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1124,7 +1181,10 @@ func (s *SDK) PostForecastHistoryAndForecast(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1183,7 +1243,10 @@ func (s *SDK) PostForecastOptimalParameter(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1242,7 +1305,10 @@ func (s *SDK) PostForecastRerun(ctx context.Context, request operations.PostFore
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1301,7 +1367,10 @@ func (s *SDK) PostHyperparameter(ctx context.Context, request operations.PostHyp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1333,6 +1402,8 @@ func (s *SDK) PostInventoryAmazonIpi(ctx context.Context, request operations.Pos
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1362,6 +1433,8 @@ func (s *SDK) PostInventoryCaryyingCost(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1393,6 +1466,8 @@ func (s *SDK) PostInventoryEoq(ctx context.Context, request operations.PostInven
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1422,6 +1497,8 @@ func (s *SDK) PostInventoryFillRate(ctx context.Context, request operations.Post
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1453,6 +1530,8 @@ func (s *SDK) PostInventoryFinancialImapctForecastAccuracy(ctx context.Context, 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1482,6 +1561,8 @@ func (s *SDK) PostInventoryInventoryTurnover(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1513,6 +1594,8 @@ func (s *SDK) PostInventoryLtd(ctx context.Context, request operations.PostInven
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1542,6 +1625,8 @@ func (s *SDK) PostInventoryMoq(ctx context.Context, request operations.PostInven
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1573,6 +1658,8 @@ func (s *SDK) PostInventoryOptimalServiceLevel(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1602,6 +1689,8 @@ func (s *SDK) PostInventoryReorderPoint(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1633,6 +1722,8 @@ func (s *SDK) PostInventorySafetyStock(ctx context.Context, request operations.P
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1663,6 +1754,8 @@ func (s *SDK) PostInventoryServiceLevel(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1692,6 +1785,8 @@ func (s *SDK) PostInventoryTurns(ctx context.Context, request operations.PostInv
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1727,7 +1822,10 @@ func (s *SDK) PostLifecycleManyToOne(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1786,7 +1884,10 @@ func (s *SDK) PostLifecycleOneToOne(ctx context.Context, request operations.Post
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1845,7 +1946,10 @@ func (s *SDK) PostOutlier(ctx context.Context, request operations.PostOutlierReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1904,7 +2008,10 @@ func (s *SDK) PostPortfolio(ctx context.Context, request operations.PostPortfoli
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1963,7 +2070,10 @@ func (s *SDK) PostPortfolioAbc(ctx context.Context, request operations.PostPortf
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2022,7 +2132,10 @@ func (s *SDK) PostPortfolioForecastPerformanceRewind(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2081,7 +2194,10 @@ func (s *SDK) PostPortfolioXyz(ctx context.Context, request operations.PostPortf
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2136,6 +2252,8 @@ func (s *SDK) PostPricingBundlePricing(ctx context.Context, request operations.P
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2165,6 +2283,8 @@ func (s *SDK) PostPricingCompetitivePricing(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2196,6 +2316,8 @@ func (s *SDK) PostPricingCostPlusPricing(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2225,6 +2347,8 @@ func (s *SDK) PostPricingDecoyPricing(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2256,6 +2380,8 @@ func (s *SDK) PostPricingOddPricing(ctx context.Context, request operations.Post
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2286,6 +2412,8 @@ func (s *SDK) PostPricingPenetrationPricing(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2315,6 +2443,8 @@ func (s *SDK) PostPricingPriceElasticityOfDemand(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2350,7 +2480,10 @@ func (s *SDK) PutAdministrationEntity(ctx context.Context, request operations.Pu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2381,6 +2514,8 @@ func (s *SDK) PutAdministrationUser(ctx context.Context, request operations.PutA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2416,7 +2551,10 @@ func (s *SDK) PutAdministrationUserLock(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 

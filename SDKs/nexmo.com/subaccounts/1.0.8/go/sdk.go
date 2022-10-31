@@ -66,6 +66,7 @@ func (s *SDK) CreateSubAccount(ctx context.Context, request operations.CreateSub
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -154,6 +155,7 @@ func (s *SDK) ModifySubaccount(ctx context.Context, request operations.ModifySub
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -522,6 +524,7 @@ func (s *SDK) TransferBalance(ctx context.Context, request operations.TransferBa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -610,6 +613,7 @@ func (s *SDK) TransferCredit(ctx context.Context, request operations.TransferCre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -698,6 +702,7 @@ func (s *SDK) TransferNumber(ctx context.Context, request operations.TransferNum
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

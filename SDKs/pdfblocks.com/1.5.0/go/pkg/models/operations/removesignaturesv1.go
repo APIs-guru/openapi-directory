@@ -1,28 +1,36 @@
 package operations
 
+
+
 type RemoveSignaturesV1RequestBodyFile struct {
-	Content []byte `multipartForm:"content"`
-	File    string `multipartForm:"name=file"`
+    Content []byte `multipartForm:"content"`
+    File string `multipartForm:"name=file"`
+    
 }
 
 type RemoveSignaturesV1RequestBody struct {
-	File RemoveSignaturesV1RequestBodyFile `multipartForm:"file"`
+    File RemoveSignaturesV1RequestBodyFile `multipartForm:"file"`
+    
 }
 
 type RemoveSignaturesV1Request struct {
-	Request RemoveSignaturesV1RequestBody `request:"mediaType=multipart/form-data"`
+    Request RemoveSignaturesV1RequestBody `request:"mediaType=multipart/form-data"`
+    
 }
 
 type RemoveSignaturesV14XxApplicationProblemPlusJSON struct {
-	Errors map[string]interface{} `json:"errors,omitempty"`
-	Status *int64                 `json:"status,omitempty"`
-	Title  *string                `json:"title,omitempty"`
-	Type   *string                `json:"type,omitempty"`
+    Errors map[string]interface{} `json:"errors,omitempty"`
+    Status *int64 `json:"status,omitempty"`
+    Title *string `json:"title,omitempty"`
+    Type *string `json:"type,omitempty"`
+    
 }
 
 type RemoveSignaturesV1Response struct {
-	ContentType                                           string
-	StatusCode                                            int64
-	RemoveSignaturesV1200ApplicationPdfBinaryString       []byte
-	RemoveSignaturesV14XxApplicationProblemPlusJSONObject *RemoveSignaturesV14XxApplicationProblemPlusJSON
+    ContentType string 
+    StatusCode int64 
+    RemoveSignaturesV1200ApplicationPdfBinaryString []byte 
+    RemoveSignaturesV14XxApplicationProblemPlusJSONObject *RemoveSignaturesV14XxApplicationProblemPlusJSON 
+    
 }
+

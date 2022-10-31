@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GooglePrivacyDlpV2InspectContentResponse struct {
-	Result *GooglePrivacyDlpV2InspectResult `json:"result,omitempty"`
+    Result *GooglePrivacyDlpV2InspectResult `json:"result,omitempty"`
+    
 }
+

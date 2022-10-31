@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CancelEnvironmentDeploymentInput struct {
-	EnvironmentName string `json:"environmentName"`
+    EnvironmentName string `json:"environmentName"`
+    
 }
+

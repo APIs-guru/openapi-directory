@@ -1,26 +1,30 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetExportsPathParams struct {
-	IterationID string `pathParam:"style=simple,explode=false,name=iterationId"`
-	ProjectID   string `pathParam:"style=simple,explode=false,name=projectId"`
+    IterationID string `pathParam:"style=simple,explode=false,name=iterationId"`
+    ProjectID string `pathParam:"style=simple,explode=false,name=projectId"`
+    
 }
 
 type GetExportsHeaders struct {
-	TrainingKey string `header:"name=Training-Key"`
+    TrainingKey string `header:"style=simple,explode=false,name=Training-Key"`
+    
 }
 
 type GetExportsRequest struct {
-	PathParams GetExportsPathParams
-	Headers    GetExportsHeaders
+    PathParams GetExportsPathParams 
+    Headers GetExportsHeaders 
+    
 }
 
 type GetExportsResponse struct {
-	Body        []byte
-	ContentType string
-	Exports     []shared.Export
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    Exports []shared.Export 
+    StatusCode int64 
+    
 }
+

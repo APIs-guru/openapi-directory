@@ -1,6 +1,10 @@
 package shared
 
+
+
 type LambdaFunctionStartFailedEventDetails struct {
-	Cause *string `json:"cause,omitempty"`
-	Error *string `json:"error,omitempty"`
+    Cause *string `json:"cause,omitempty"`
+    Error *string `json:"error,omitempty"`
+    
 }
+

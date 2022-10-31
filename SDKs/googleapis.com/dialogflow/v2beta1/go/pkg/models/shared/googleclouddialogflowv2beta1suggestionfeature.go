@@ -1,15 +1,21 @@
 package shared
 
+
+
+
 type GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum string
 
 const (
-	GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnumTypeUnspecified           GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum = "TYPE_UNSPECIFIED"
-	GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnumArticleSuggestion         GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum = "ARTICLE_SUGGESTION"
-	GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnumFaq                       GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum = "FAQ"
-	GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnumSmartReply                GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum = "SMART_REPLY"
-	GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnumConversationSummarization GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum = "CONVERSATION_SUMMARIZATION"
+    GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnumTypeUnspecified GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum = "TYPE_UNSPECIFIED"
+GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnumArticleSuggestion GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum = "ARTICLE_SUGGESTION"
+GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnumFaq GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum = "FAQ"
+GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnumSmartReply GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum = "SMART_REPLY"
+GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnumConversationSummarization GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum = "CONVERSATION_SUMMARIZATION"
 )
 
+
 type GoogleCloudDialogflowV2beta1SuggestionFeature struct {
-	Type *GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum `json:"type,omitempty"`
+    Type *GoogleCloudDialogflowV2beta1SuggestionFeatureTypeEnum `json:"type,omitempty"`
+    
 }
+

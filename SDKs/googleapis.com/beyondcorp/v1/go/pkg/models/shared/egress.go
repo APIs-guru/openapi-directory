@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Egress struct {
-	PeeredVpc *PeeredVpc `json:"peeredVpc,omitempty"`
+    PeeredVpc *PeeredVpc `json:"peeredVpc,omitempty"`
+    
 }
+

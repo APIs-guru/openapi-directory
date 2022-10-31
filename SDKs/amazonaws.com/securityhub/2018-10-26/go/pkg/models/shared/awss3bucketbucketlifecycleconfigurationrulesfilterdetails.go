@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails struct {
-	Predicate *AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails `json:"Predicate,omitempty"`
+    Predicate *AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails `json:"Predicate,omitempty"`
+    
 }
+

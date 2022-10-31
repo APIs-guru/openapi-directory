@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ClientPolicy struct {
-	TLS *ClientPolicyTLS `json:"tls,omitempty"`
+    TLS *ClientPolicyTLS `json:"tls,omitempty"`
+    
 }
+

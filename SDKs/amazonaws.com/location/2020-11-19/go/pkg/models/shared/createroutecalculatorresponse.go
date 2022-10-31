@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type CreateRouteCalculatorResponse struct {
-	CalculatorArn  string    `json:"CalculatorArn"`
-	CalculatorName string    `json:"CalculatorName"`
-	CreateTime     time.Time `json:"CreateTime"`
+    CalculatorArn string `json:"CalculatorArn"`
+    CalculatorName string `json:"CalculatorName"`
+    CreateTime time.Time `json:"CreateTime"`
+    
 }
+

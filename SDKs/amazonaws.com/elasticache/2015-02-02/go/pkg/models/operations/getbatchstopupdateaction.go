@@ -1,42 +1,53 @@
 package operations
 
+
+
+
 type GetBatchStopUpdateActionActionEnum string
 
 const (
-	GetBatchStopUpdateActionActionEnumBatchStopUpdateAction GetBatchStopUpdateActionActionEnum = "BatchStopUpdateAction"
+    GetBatchStopUpdateActionActionEnumBatchStopUpdateAction GetBatchStopUpdateActionActionEnum = "BatchStopUpdateAction"
 )
+
+
 
 type GetBatchStopUpdateActionVersionEnum string
 
 const (
-	GetBatchStopUpdateActionVersionEnumTwoThousandAndFifteen0202 GetBatchStopUpdateActionVersionEnum = "2015-02-02"
+    GetBatchStopUpdateActionVersionEnumTwoThousandAndFifteen0202 GetBatchStopUpdateActionVersionEnum = "2015-02-02"
 )
 
+
 type GetBatchStopUpdateActionQueryParams struct {
-	Action              GetBatchStopUpdateActionActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	CacheClusterIds     []string                            `queryParam:"style=form,explode=true,name=CacheClusterIds"`
-	ReplicationGroupIds []string                            `queryParam:"style=form,explode=true,name=ReplicationGroupIds"`
-	ServiceUpdateName   string                              `queryParam:"style=form,explode=true,name=ServiceUpdateName"`
-	Version             GetBatchStopUpdateActionVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action GetBatchStopUpdateActionActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    CacheClusterIds []string `queryParam:"style=form,explode=true,name=CacheClusterIds"`
+    ReplicationGroupIds []string `queryParam:"style=form,explode=true,name=ReplicationGroupIds"`
+    ServiceUpdateName string `queryParam:"style=form,explode=true,name=ServiceUpdateName"`
+    Version GetBatchStopUpdateActionVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type GetBatchStopUpdateActionHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type GetBatchStopUpdateActionRequest struct {
-	QueryParams GetBatchStopUpdateActionQueryParams
-	Headers     GetBatchStopUpdateActionHeaders
+    QueryParams GetBatchStopUpdateActionQueryParams 
+    Headers GetBatchStopUpdateActionHeaders 
+    
 }
 
 type GetBatchStopUpdateActionResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

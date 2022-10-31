@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GiftCardActivityImportReversal struct {
-	AmountMoney Money `json:"amount_money"`
+    AmountMoney Money `json:"amount_money"`
+    
 }
+

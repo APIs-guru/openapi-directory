@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchGetObjectAttributesResponse struct {
-	Attributes []AttributeKeyAndValue `json:"Attributes,omitempty"`
+    Attributes []AttributeKeyAndValue `json:"Attributes,omitempty"`
+    
 }
+

@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type SavedTrackObject struct {
-	AddedAt *time.Time   `json:"added_at,omitempty"`
-	Track   *TrackObject `json:"track,omitempty"`
+    AddedAt *time.Time `json:"added_at,omitempty"`
+    Track *TrackObject `json:"track,omitempty"`
+    
 }
+

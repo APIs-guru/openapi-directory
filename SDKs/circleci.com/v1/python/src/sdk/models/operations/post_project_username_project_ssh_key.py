@@ -14,7 +14,7 @@ class PostProjectUsernameProjectSSHKeyContentTypeEnum(str, Enum):
 
 @dataclass
 class PostProjectUsernameProjectSSHKeyHeaders:
-    content_type: PostProjectUsernameProjectSSHKeyContentTypeEnum = field(default=None, metadata={'header': { 'field_name': 'Content-Type' }})
+    content_type: PostProjectUsernameProjectSSHKeyContentTypeEnum = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json

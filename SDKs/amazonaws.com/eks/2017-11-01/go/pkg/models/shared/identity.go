@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Identity struct {
-	Oidc *Oidc `json:"oidc,omitempty"`
+    Oidc *Oidc `json:"oidc,omitempty"`
+    
 }
+

@@ -1,15 +1,21 @@
 package operations
 
+
+
 type ContentReleaseDeleteContentReleaseVersionnPathParams struct {
-	ContentReleaseID int32 `pathParam:"style=simple,explode=false,name=ContentReleaseId"`
+    ContentReleaseID int32 `pathParam:"style=simple,explode=false,name=ContentReleaseId"`
+    
 }
 
 type ContentReleaseDeleteContentReleaseVersionnRequest struct {
-	PathParams ContentReleaseDeleteContentReleaseVersionnPathParams
+    PathParams ContentReleaseDeleteContentReleaseVersionnPathParams 
+    
 }
 
 type ContentReleaseDeleteContentReleaseVersionnResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

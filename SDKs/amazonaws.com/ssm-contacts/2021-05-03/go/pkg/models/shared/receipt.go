@@ -1,12 +1,13 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type Receipt struct {
-	ContactChannelArn *string         `json:"ContactChannelArn,omitempty"`
-	ReceiptInfo       *string         `json:"ReceiptInfo,omitempty"`
-	ReceiptTime       time.Time       `json:"ReceiptTime"`
-	ReceiptType       ReceiptTypeEnum `json:"ReceiptType"`
+    ContactChannelArn *string `json:"ContactChannelArn,omitempty"`
+    ReceiptInfo *string `json:"ReceiptInfo,omitempty"`
+    ReceiptTime time.Time `json:"ReceiptTime"`
+    ReceiptType ReceiptTypeEnum `json:"ReceiptType"`
+    
 }
+

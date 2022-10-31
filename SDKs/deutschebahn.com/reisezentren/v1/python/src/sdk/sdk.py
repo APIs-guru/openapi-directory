@@ -20,21 +20,25 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def get_reisezentren(self, request: operations.GetReisezentrenRequest) -> operations.GetReisezentrenResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/reisezentren"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetReisezentrenResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[List[shared.TravelCenter]])
@@ -51,19 +55,19 @@ class SDK:
         return res
 
     
-    
     def get_reisezentren_id_(self, request: operations.GetReisezentrenIDRequest) -> operations.GetReisezentrenIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/reisezentren/{id}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetReisezentrenIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "*/*"):
                 res.body = r.content
@@ -74,19 +78,19 @@ class SDK:
         return res
 
     
-    
     def get_reisezentren_loc_lat_lon_(self, request: operations.GetReisezentrenLocLatLonRequest) -> operations.GetReisezentrenLocLatLonResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/reisezentren/loc/{lat}/{lon}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetReisezentrenLocLatLonResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TravelCenter])
@@ -95,19 +99,19 @@ class SDK:
         return res
 
     
-    
     def get_reisezentren_loc_lat_lon_dist_(self, request: operations.GetReisezentrenLocLatLonDistRequest) -> operations.GetReisezentrenLocLatLonDistResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/reisezentren/loc/{lat}/{lon}/{dist}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetReisezentrenLocLatLonDistResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TravelCenter])

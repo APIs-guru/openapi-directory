@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ListNetworkUsageResponse struct {
-	Networks []NetworkUsage `json:"networks,omitempty"`
+    Networks []NetworkUsage `json:"networks,omitempty"`
+    
 }
+

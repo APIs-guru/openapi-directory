@@ -342,6 +342,7 @@ func (s *SDK) ChineseNameCandidatesBatch(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -389,6 +390,7 @@ func (s *SDK) ChineseNameCandidatesGenderBatch(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -518,6 +520,7 @@ func (s *SDK) ChineseNameMatchBatch(ctx context.Context, request operations.Chin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -606,6 +609,7 @@ func (s *SDK) CorridorBatch(ctx context.Context, request operations.CorridorBatc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -694,6 +698,7 @@ func (s *SDK) CountryBatch(ctx context.Context, request operations.CountryBatchR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -782,6 +787,7 @@ func (s *SDK) DiasporaBatch(ctx context.Context, request operations.DiasporaBatc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -901,6 +907,7 @@ func (s *SDK) GenderBatch(ctx context.Context, request operations.GenderBatchReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -989,6 +996,7 @@ func (s *SDK) GenderChineseNameBatch(ctx context.Context, request operations.Gen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1077,6 +1085,7 @@ func (s *SDK) GenderChineseNamePinyinBatch(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1165,6 +1174,7 @@ func (s *SDK) GenderFullBatch(ctx context.Context, request operations.GenderFull
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1253,6 +1263,7 @@ func (s *SDK) GenderFullGeoBatch(ctx context.Context, request operations.GenderF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1341,6 +1352,7 @@ func (s *SDK) GenderGeoBatch(ctx context.Context, request operations.GenderGeoBa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1429,6 +1441,7 @@ func (s *SDK) GenderJapaneseNameFullBatch(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1517,6 +1530,7 @@ func (s *SDK) GenderJapaneseNamePinyinBatch(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1564,6 +1578,7 @@ func (s *SDK) JapaneseNameGenderKanjiCandidatesBatch(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1652,6 +1667,7 @@ func (s *SDK) JapaneseNameKanjiCandidatesBatch(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1781,6 +1797,7 @@ func (s *SDK) JapaneseNameLatinCandidatesBatch(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1869,6 +1886,7 @@ func (s *SDK) JapaneseNameMatchBatch(ctx context.Context, request operations.Jap
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2029,6 +2047,7 @@ func (s *SDK) NameTypeBatch(ctx context.Context, request operations.NameTypeBatc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2117,6 +2136,7 @@ func (s *SDK) NameTypeGeoBatch(ctx context.Context, request operations.NameTypeG
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2205,6 +2225,7 @@ func (s *SDK) OriginBatch(ctx context.Context, request operations.OriginBatchReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2293,6 +2314,7 @@ func (s *SDK) ParseChineseNameBatch(ctx context.Context, request operations.Pars
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2381,6 +2403,7 @@ func (s *SDK) ParseJapaneseNameBatch(ctx context.Context, request operations.Par
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2469,6 +2492,7 @@ func (s *SDK) ParseNameBatch(ctx context.Context, request operations.ParseNameBa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2557,6 +2581,7 @@ func (s *SDK) ParseNameGeoBatch(ctx context.Context, request operations.ParseNam
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2645,6 +2670,7 @@ func (s *SDK) PhoneCodeBatch(ctx context.Context, request operations.PhoneCodeBa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2733,6 +2759,7 @@ func (s *SDK) PhoneCodeGeoBatch(ctx context.Context, request operations.PhoneCod
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2862,6 +2889,7 @@ func (s *SDK) PinyinChineseNameBatch(ctx context.Context, request operations.Pin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3030,6 +3058,7 @@ func (s *SDK) UsRaceEthnicityBatch(ctx context.Context, request operations.UsRac
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3118,6 +3147,7 @@ func (s *SDK) UsZipRaceEthnicityBatch(ctx context.Context, request operations.Us
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

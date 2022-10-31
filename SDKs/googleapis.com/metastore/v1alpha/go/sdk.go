@@ -63,6 +63,7 @@ func (s *SDK) MetastoreProjectsLocationsFederationsCreate(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -233,6 +234,7 @@ func (s *SDK) MetastoreProjectsLocationsServicesBackupsCreate(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -362,6 +364,7 @@ func (s *SDK) MetastoreProjectsLocationsServicesCreate(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -450,6 +453,7 @@ func (s *SDK) MetastoreProjectsLocationsServicesDatabasesTablesSetIamPolicy(ctx 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -497,6 +501,7 @@ func (s *SDK) MetastoreProjectsLocationsServicesDatabasesTablesTestIamPermission
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -544,6 +549,7 @@ func (s *SDK) MetastoreProjectsLocationsServicesExportMetadata(ctx context.Conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -632,6 +638,7 @@ func (s *SDK) MetastoreProjectsLocationsServicesMetadataImportsCreate(ctx contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -761,6 +768,7 @@ func (s *SDK) MetastoreProjectsLocationsServicesMetadataImportsPatch(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -808,6 +816,7 @@ func (s *SDK) MetastoreProjectsLocationsServicesRemoveIamPolicy(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -855,6 +864,7 @@ func (s *SDK) MetastoreProjectsLocationsServicesRestore(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

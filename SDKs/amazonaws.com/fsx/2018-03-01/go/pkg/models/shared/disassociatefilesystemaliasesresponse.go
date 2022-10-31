@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DisassociateFileSystemAliasesResponse struct {
-	Aliases []Alias `json:"Aliases,omitempty"`
+    Aliases []Alias `json:"Aliases,omitempty"`
+    
 }
+

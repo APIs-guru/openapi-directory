@@ -1,27 +1,31 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PostV05UsersAuthConfirmHeaders struct {
-	Authorization string `header:"name=Authorization"`
-	XCmID         string `header:"name=X-CM-ID"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    XCmID string `header:"style=simple,explode=false,name=X-CM-ID"`
+    
 }
 
 type PostV05UsersAuthConfirmRequests struct {
-	ApplicationXML            []byte                            `request:"mediaType=application/xml"`
-	PatientAuthConfirmRequest *shared.PatientAuthConfirmRequest `request:"mediaType=application/json"`
+    ApplicationXML []byte `request:"mediaType=application/xml"`
+    PatientAuthConfirmRequest *shared.PatientAuthConfirmRequest `request:"mediaType=application/json"`
+    
 }
 
 type PostV05UsersAuthConfirmRequest struct {
-	Headers PostV05UsersAuthConfirmHeaders
-	Request PostV05UsersAuthConfirmRequests
+    Headers PostV05UsersAuthConfirmHeaders 
+    Request PostV05UsersAuthConfirmRequests 
+    
 }
 
 type PostV05UsersAuthConfirmResponse struct {
-	Body          []byte
-	ContentType   string
-	ErrorResponse *shared.ErrorResponse
-	StatusCode    int64
+    Body []byte 
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    
 }
+

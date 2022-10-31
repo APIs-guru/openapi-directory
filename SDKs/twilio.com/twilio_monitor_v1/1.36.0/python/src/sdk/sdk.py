@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def fetch_alert(self, request: operations.FetchAlertRequest) -> operations.FetchAlertResponse:
         warnings.simplefilter("ignore")
@@ -28,14 +30,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Alerts/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchAlertResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MonitorV1AlertInstance])
@@ -44,7 +46,6 @@ class SDK:
         return res
 
     
-    
     def fetch_event(self, request: operations.FetchEventRequest) -> operations.FetchEventResponse:
         warnings.simplefilter("ignore")
 
@@ -52,14 +53,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Events/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchEventResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MonitorV1Event])
@@ -68,7 +69,6 @@ class SDK:
         return res
 
     
-    
     def list_alert(self, request: operations.ListAlertRequest) -> operations.ListAlertResponse:
         warnings.simplefilter("ignore")
 
@@ -76,15 +76,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Alerts"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAlertResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAlertListAlertResponse])
@@ -93,7 +94,6 @@ class SDK:
         return res
 
     
-    
     def list_event(self, request: operations.ListEventRequest) -> operations.ListEventResponse:
         warnings.simplefilter("ignore")
 
@@ -101,15 +101,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Events"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEventResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListEventListEventResponse])

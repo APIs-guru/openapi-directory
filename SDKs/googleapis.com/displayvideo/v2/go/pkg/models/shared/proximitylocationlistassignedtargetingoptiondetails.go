@@ -1,15 +1,21 @@
 package shared
 
+
+
+
 type ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnum string
 
 const (
-	ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnumProximityRadiusUnitUnspecified ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnum = "PROXIMITY_RADIUS_UNIT_UNSPECIFIED"
-	ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnumProximityRadiusUnitMiles       ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnum = "PROXIMITY_RADIUS_UNIT_MILES"
-	ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnumProximityRadiusUnitKilometers  ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnum = "PROXIMITY_RADIUS_UNIT_KILOMETERS"
+    ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnumProximityRadiusUnitUnspecified ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnum = "PROXIMITY_RADIUS_UNIT_UNSPECIFIED"
+ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnumProximityRadiusUnitMiles ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnum = "PROXIMITY_RADIUS_UNIT_MILES"
+ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnumProximityRadiusUnitKilometers ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnum = "PROXIMITY_RADIUS_UNIT_KILOMETERS"
 )
 
+
 type ProximityLocationListAssignedTargetingOptionDetails struct {
-	ProximityLocationListID *string                                                                     `json:"proximityLocationListId,omitempty"`
-	ProximityRadius         *float64                                                                    `json:"proximityRadius,omitempty"`
-	ProximityRadiusUnit     *ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnum `json:"proximityRadiusUnit,omitempty"`
+    ProximityLocationListID *string `json:"proximityLocationListId,omitempty"`
+    ProximityRadius *float64 `json:"proximityRadius,omitempty"`
+    ProximityRadiusUnit *ProximityLocationListAssignedTargetingOptionDetailsProximityRadiusUnitEnum `json:"proximityRadiusUnit,omitempty"`
+    
 }
+

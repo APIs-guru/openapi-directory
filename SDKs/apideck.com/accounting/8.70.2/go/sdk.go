@@ -66,6 +66,8 @@ func (s *SDK) BalanceSheetOne(ctx context.Context, request operations.BalanceShe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -174,7 +176,10 @@ func (s *SDK) BillsAdd(ctx context.Context, request operations.BillsAddRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -277,6 +282,8 @@ func (s *SDK) BillsAll(ctx context.Context, request operations.BillsAllRequest) 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -378,6 +385,8 @@ func (s *SDK) BillsDelete(ctx context.Context, request operations.BillsDeleteReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -478,6 +487,8 @@ func (s *SDK) BillsOne(ctx context.Context, request operations.BillsOneRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -587,7 +598,10 @@ func (s *SDK) BillsUpdate(ctx context.Context, request operations.BillsUpdateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -689,6 +703,8 @@ func (s *SDK) CompanyInfoOne(ctx context.Context, request operations.CompanyInfo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -798,7 +814,10 @@ func (s *SDK) CreditNotesAdd(ctx context.Context, request operations.CreditNotes
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -901,6 +920,8 @@ func (s *SDK) CreditNotesAll(ctx context.Context, request operations.CreditNotes
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1002,6 +1023,8 @@ func (s *SDK) CreditNotesDelete(ctx context.Context, request operations.CreditNo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1102,6 +1125,8 @@ func (s *SDK) CreditNotesOne(ctx context.Context, request operations.CreditNotes
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1211,7 +1236,10 @@ func (s *SDK) CreditNotesUpdate(ctx context.Context, request operations.CreditNo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1321,7 +1349,10 @@ func (s *SDK) CustomersAdd(ctx context.Context, request operations.CustomersAddR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1424,6 +1455,8 @@ func (s *SDK) CustomersAll(ctx context.Context, request operations.CustomersAllR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1525,6 +1558,8 @@ func (s *SDK) CustomersDelete(ctx context.Context, request operations.CustomersD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1625,6 +1660,8 @@ func (s *SDK) CustomersOne(ctx context.Context, request operations.CustomersOneR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1734,7 +1771,10 @@ func (s *SDK) CustomersUpdate(ctx context.Context, request operations.CustomersU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1844,7 +1884,10 @@ func (s *SDK) InvoiceItemsAdd(ctx context.Context, request operations.InvoiceIte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1947,6 +1990,8 @@ func (s *SDK) InvoiceItemsAll(ctx context.Context, request operations.InvoiceIte
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2048,6 +2093,8 @@ func (s *SDK) InvoiceItemsDelete(ctx context.Context, request operations.Invoice
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2148,6 +2195,8 @@ func (s *SDK) InvoiceItemsOne(ctx context.Context, request operations.InvoiceIte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2257,7 +2306,10 @@ func (s *SDK) InvoiceItemsUpdate(ctx context.Context, request operations.Invoice
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2367,7 +2419,10 @@ func (s *SDK) InvoicesAdd(ctx context.Context, request operations.InvoicesAddReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2470,6 +2525,8 @@ func (s *SDK) InvoicesAll(ctx context.Context, request operations.InvoicesAllReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2571,6 +2628,8 @@ func (s *SDK) InvoicesDelete(ctx context.Context, request operations.InvoicesDel
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2671,6 +2730,8 @@ func (s *SDK) InvoicesOne(ctx context.Context, request operations.InvoicesOneReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2780,7 +2841,10 @@ func (s *SDK) InvoicesUpdate(ctx context.Context, request operations.InvoicesUpd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2890,7 +2954,10 @@ func (s *SDK) LedgerAccountsAdd(ctx context.Context, request operations.LedgerAc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2993,6 +3060,8 @@ func (s *SDK) LedgerAccountsAll(ctx context.Context, request operations.LedgerAc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3094,6 +3163,8 @@ func (s *SDK) LedgerAccountsDelete(ctx context.Context, request operations.Ledge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3194,6 +3265,8 @@ func (s *SDK) LedgerAccountsOne(ctx context.Context, request operations.LedgerAc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3303,7 +3376,10 @@ func (s *SDK) LedgerAccountsUpdate(ctx context.Context, request operations.Ledge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3413,7 +3489,10 @@ func (s *SDK) PaymentsAdd(ctx context.Context, request operations.PaymentsAddReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3516,6 +3595,8 @@ func (s *SDK) PaymentsAll(ctx context.Context, request operations.PaymentsAllReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3617,6 +3698,8 @@ func (s *SDK) PaymentsDelete(ctx context.Context, request operations.PaymentsDel
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3717,6 +3800,8 @@ func (s *SDK) PaymentsOne(ctx context.Context, request operations.PaymentsOneReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3826,7 +3911,10 @@ func (s *SDK) PaymentsUpdate(ctx context.Context, request operations.PaymentsUpd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3928,6 +4016,8 @@ func (s *SDK) ProfitAndLossOne(ctx context.Context, request operations.ProfitAnd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4037,7 +4127,10 @@ func (s *SDK) SuppliersAdd(ctx context.Context, request operations.SuppliersAddR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4140,6 +4233,8 @@ func (s *SDK) SuppliersAll(ctx context.Context, request operations.SuppliersAllR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4241,6 +4336,8 @@ func (s *SDK) SuppliersDelete(ctx context.Context, request operations.SuppliersD
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4341,6 +4438,8 @@ func (s *SDK) SuppliersOne(ctx context.Context, request operations.SuppliersOneR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4450,7 +4549,10 @@ func (s *SDK) SuppliersUpdate(ctx context.Context, request operations.SuppliersU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4560,7 +4662,10 @@ func (s *SDK) TaxRatesAdd(ctx context.Context, request operations.TaxRatesAddReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4663,6 +4768,8 @@ func (s *SDK) TaxRatesAll(ctx context.Context, request operations.TaxRatesAllReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4764,6 +4871,8 @@ func (s *SDK) TaxRatesDelete(ctx context.Context, request operations.TaxRatesDel
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4864,6 +4973,8 @@ func (s *SDK) TaxRatesOne(ctx context.Context, request operations.TaxRatesOneReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4973,7 +5084,10 @@ func (s *SDK) TaxRatesUpdate(ctx context.Context, request operations.TaxRatesUpd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 

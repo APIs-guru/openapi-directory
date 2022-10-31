@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteCustomerGroupResponse struct {
-	Errors []Error `json:"errors,omitempty"`
+    Errors []Error `json:"errors,omitempty"`
+    
 }
+

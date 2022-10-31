@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SeekRequestDto struct {
-	PositionTicks *int64 `json:"PositionTicks,omitempty"`
+    PositionTicks *int64 `json:"PositionTicks,omitempty"`
+    
 }
+

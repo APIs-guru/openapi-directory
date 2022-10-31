@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeliverConfigSnapshotRequest struct {
-	DeliveryChannelName string `json:"deliveryChannelName"`
+    DeliveryChannelName string `json:"deliveryChannelName"`
+    
 }
+

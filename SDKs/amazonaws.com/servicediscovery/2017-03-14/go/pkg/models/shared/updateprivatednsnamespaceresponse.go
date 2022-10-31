@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdatePrivateDNSNamespaceResponse struct {
-	OperationID *string `json:"OperationId,omitempty"`
+    OperationID *string `json:"OperationId,omitempty"`
+    
 }
+

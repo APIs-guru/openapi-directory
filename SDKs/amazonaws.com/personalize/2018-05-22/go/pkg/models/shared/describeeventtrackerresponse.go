@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeEventTrackerResponse struct {
-	EventTracker *EventTracker `json:"eventTracker,omitempty"`
+    EventTracker *EventTracker `json:"eventTracker,omitempty"`
+    
 }
+

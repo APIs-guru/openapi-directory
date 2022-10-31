@@ -17,8 +17,8 @@ class EndpointAddTracksToPlaylistQueryParams:
 
 @dataclass
 class EndpointAddTracksToPlaylistHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
-    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type' }})
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json

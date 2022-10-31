@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetRelationalDatabaseBlueprintsRequest struct {
-	PageToken *string `json:"pageToken,omitempty"`
+    PageToken *string `json:"pageToken,omitempty"`
+    
 }
+

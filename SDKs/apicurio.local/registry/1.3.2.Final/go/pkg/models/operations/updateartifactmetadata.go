@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type UpdateArtifactMetaDataPathParams struct {
-	ArtifactID string `pathParam:"style=simple,explode=false,name=artifactId"`
+    ArtifactID string `pathParam:"style=simple,explode=false,name=artifactId"`
+    
 }
 
 type UpdateArtifactMetaDataRequest struct {
-	PathParams UpdateArtifactMetaDataPathParams
-	Request    []byte `request:"mediaType=*/*"`
+    PathParams UpdateArtifactMetaDataPathParams 
+    Request []byte `request:"mediaType=*/*"`
+    
 }
 
 type UpdateArtifactMetaDataResponse struct {
-	ContentType string
-	Error       *shared.Error
-	StatusCode  int64
+    ContentType string 
+    Error *shared.Error 
+    StatusCode int64 
+    
 }
+

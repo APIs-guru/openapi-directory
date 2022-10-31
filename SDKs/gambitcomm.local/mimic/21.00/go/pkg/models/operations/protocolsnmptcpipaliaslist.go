@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ProtocolSnmptcpIpaliasListPathParams struct {
-	AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
+    AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
+    
 }
 
 type ProtocolSnmptcpIpaliasListRequest struct {
-	PathParams ProtocolSnmptcpIpaliasListPathParams
+    PathParams ProtocolSnmptcpIpaliasListPathParams 
+    
 }
 
 type ProtocolSnmptcpIpaliasListResponse struct {
-	ContentType string
-	IPAliases   []shared.IPAlias
-	StatusCode  int64
+    ContentType string 
+    IPAliases []shared.IPAlias 
+    StatusCode int64 
+    
 }
+

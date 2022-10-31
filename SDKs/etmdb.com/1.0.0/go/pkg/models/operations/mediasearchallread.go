@@ -1,14 +1,20 @@
 package operations
 
+
+
 type MediaSearchallReadPathParams struct {
-	User string `pathParam:"style=simple,explode=false,name=user"`
+    User string `pathParam:"style=simple,explode=false,name=user"`
+    
 }
 
 type MediaSearchallReadRequest struct {
-	PathParams MediaSearchallReadPathParams
+    PathParams MediaSearchallReadPathParams 
+    
 }
 
 type MediaSearchallReadResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

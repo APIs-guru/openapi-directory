@@ -1,14 +1,15 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type StartReplayRequest struct {
-	Description    *string           `json:"Description,omitempty"`
-	Destination    ReplayDestination `json:"Destination"`
-	EventEndTime   time.Time         `json:"EventEndTime"`
-	EventSourceArn string            `json:"EventSourceArn"`
-	EventStartTime time.Time         `json:"EventStartTime"`
-	ReplayName     string            `json:"ReplayName"`
+    Description *string `json:"Description,omitempty"`
+    Destination ReplayDestination `json:"Destination"`
+    EventEndTime time.Time `json:"EventEndTime"`
+    EventSourceArn string `json:"EventSourceArn"`
+    EventStartTime time.Time `json:"EventStartTime"`
+    ReplayName string `json:"ReplayName"`
+    
 }
+

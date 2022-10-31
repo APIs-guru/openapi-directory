@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AppPkgSubscriptionInfoLinks struct {
-	Self LinkType `json:"self"`
+    Self LinkType `json:"self"`
+    
 }
+

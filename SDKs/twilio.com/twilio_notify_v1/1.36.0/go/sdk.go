@@ -68,6 +68,7 @@ func (s *SDK) CreateBinding(ctx context.Context, request operations.CreateBindin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -117,6 +118,7 @@ func (s *SDK) CreateCredential(ctx context.Context, request operations.CreateCre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -166,6 +168,7 @@ func (s *SDK) CreateNotification(ctx context.Context, request operations.CreateN
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -215,6 +218,7 @@ func (s *SDK) CreateService(ctx context.Context, request operations.CreateServic
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -630,6 +634,7 @@ func (s *SDK) UpdateCredential(ctx context.Context, request operations.UpdateCre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -679,6 +684,7 @@ func (s *SDK) UpdateService(ctx context.Context, request operations.UpdateServic
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

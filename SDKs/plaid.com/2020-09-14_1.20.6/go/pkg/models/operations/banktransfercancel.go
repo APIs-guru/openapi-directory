@@ -1,16 +1,18 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type BankTransferCancelRequest struct {
-	Request shared.BankTransferCancelRequest `request:"mediaType=application/json"`
+    Request shared.BankTransferCancelRequest `request:"mediaType=application/json"`
+    
 }
 
 type BankTransferCancelResponse struct {
-	BankTransferCancelResponse map[string]interface{}
-	ContentType                string
-	Error                      map[string]interface{}
-	StatusCode                 int64
+    BankTransferCancelResponse map[string]interface{} 
+    ContentType string 
+    Error map[string]interface{} 
+    StatusCode int64 
+    
 }
+

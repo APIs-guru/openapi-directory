@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetSegmentImportJobsResponse struct {
-	ImportJobsResponse ImportJobsResponse `json:"ImportJobsResponse"`
+    ImportJobsResponse ImportJobsResponse `json:"ImportJobsResponse"`
+    
 }
+

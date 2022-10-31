@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteStudioComponentResponse struct {
-	StudioComponent *StudioComponent `json:"studioComponent,omitempty"`
+    StudioComponent *StudioComponent `json:"studioComponent,omitempty"`
+    
 }
+

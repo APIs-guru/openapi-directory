@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteDestinationRequest struct {
-	DestinationName string `json:"destinationName"`
+    DestinationName string `json:"destinationName"`
+    
 }
+

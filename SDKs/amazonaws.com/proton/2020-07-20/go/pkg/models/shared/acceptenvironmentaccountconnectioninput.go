@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AcceptEnvironmentAccountConnectionInput struct {
-	ID string `json:"id"`
+    ID string `json:"id"`
+    
 }
+

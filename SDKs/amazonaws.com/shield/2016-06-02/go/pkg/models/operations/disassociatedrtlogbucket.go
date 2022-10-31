@@ -1,39 +1,44 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
+
 
 type DisassociateDrtLogBucketXAmzTargetEnum string
 
 const (
-	DisassociateDrtLogBucketXAmzTargetEnumAwsShield20160616DisassociateDrtLogBucket DisassociateDrtLogBucketXAmzTargetEnum = "AWSShield_20160616.DisassociateDRTLogBucket"
+    DisassociateDrtLogBucketXAmzTargetEnumAwsShield20160616DisassociateDrtLogBucket DisassociateDrtLogBucketXAmzTargetEnum = "AWSShield_20160616.DisassociateDRTLogBucket"
 )
 
+
 type DisassociateDrtLogBucketHeaders struct {
-	XAmzAlgorithm     *string                                `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string                                `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string                                `header:"name=X-Amz-Credential"`
-	XAmzDate          *string                                `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string                                `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string                                `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string                                `header:"name=X-Amz-SignedHeaders"`
-	XAmzTarget        DisassociateDrtLogBucketXAmzTargetEnum `header:"name=X-Amz-Target"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    XAmzTarget DisassociateDrtLogBucketXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
+    
 }
 
 type DisassociateDrtLogBucketRequest struct {
-	Headers DisassociateDrtLogBucketHeaders
-	Request shared.DisassociateDrtLogBucketRequest `request:"mediaType=application/json"`
+    Headers DisassociateDrtLogBucketHeaders 
+    Request shared.DisassociateDrtLogBucketRequest `request:"mediaType=application/json"`
+    
 }
 
 type DisassociateDrtLogBucketResponse struct {
-	AccessDeniedForDependencyException *interface{}
-	ContentType                        string
-	DisassociateDrtLogBucketResponse   map[string]interface{}
-	InternalErrorException             *interface{}
-	InvalidOperationException          *interface{}
-	NoAssociatedRoleException          *interface{}
-	OptimisticLockException            *interface{}
-	ResourceNotFoundException          *interface{}
-	StatusCode                         int64
+    AccessDeniedForDependencyException *interface{} 
+    ContentType string 
+    DisassociateDrtLogBucketResponse map[string]interface{} 
+    InternalErrorException *interface{} 
+    InvalidOperationException *interface{} 
+    NoAssociatedRoleException *interface{} 
+    OptimisticLockException *interface{} 
+    ResourceNotFoundException *interface{} 
+    StatusCode int64 
+    
 }
+

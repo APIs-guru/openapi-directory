@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DatabaseFunctionNamesResponse struct {
-	FunctionNames []string `json:"function_names,omitempty"`
+    FunctionNames []string `json:"function_names,omitempty"`
+    
 }
+

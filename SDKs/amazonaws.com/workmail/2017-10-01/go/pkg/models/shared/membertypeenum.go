@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type MemberTypeEnum string
 
 const (
-	MemberTypeEnumGroup MemberTypeEnum = "GROUP"
-	MemberTypeEnumUser  MemberTypeEnum = "USER"
+    MemberTypeEnumGroup MemberTypeEnum = "GROUP"
+MemberTypeEnumUser MemberTypeEnum = "USER"
 )
+
+

@@ -74,6 +74,7 @@ func (s *SDK) CreateGroupCategory(ctx context.Context, request operations.Create
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -122,6 +123,7 @@ func (s *SDK) CreateRuleCategory(ctx context.Context, request operations.CreateR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -560,6 +562,7 @@ func (s *SDK) UpdateGroupCategory(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -608,6 +611,7 @@ func (s *SDK) UpdateRuleCategory(ctx context.Context, request operations.UpdateR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -656,6 +660,7 @@ func (s *SDK) AcceptChangeRequest(ctx context.Context, request operations.Accept
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -704,6 +709,7 @@ func (s *SDK) AddUser(ctx context.Context, request operations.AddUserRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -945,6 +951,7 @@ func (s *SDK) ChangePendingNodeStatus(ctx context.Context, request operations.Ch
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1071,6 +1078,7 @@ func (s *SDK) CheckDirective(ctx context.Context, request operations.CheckDirect
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1155,6 +1163,7 @@ func (s *SDK) CreateDataSource(ctx context.Context, request operations.CreateDat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1200,6 +1209,7 @@ func (s *SDK) CreateDirective(ctx context.Context, request operations.CreateDire
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1245,6 +1255,7 @@ func (s *SDK) CreateGroup(ctx context.Context, request operations.CreateGroupReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1334,6 +1345,7 @@ func (s *SDK) CreateParameter(ctx context.Context, request operations.CreatePara
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1379,6 +1391,7 @@ func (s *SDK) CreateRule(ctx context.Context, request operations.CreateRuleReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2138,6 +2151,7 @@ func (s *SDK) GetCveList(ctx context.Context, request operations.GetCveListReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3292,6 +3306,7 @@ func (s *SDK) ModifyAllowedNetworks(ctx context.Context, request operations.Modi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3340,6 +3355,7 @@ func (s *SDK) ModifySetting(ctx context.Context, request operations.ModifySettin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4053,6 +4069,7 @@ func (s *SDK) SaveWorkflowUser(ctx context.Context, request operations.SaveWorkf
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4101,6 +4118,7 @@ func (s *SDK) SetAllowedNetworks(ctx context.Context, request operations.SetAllo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4149,6 +4167,7 @@ func (s *SDK) UpdateBRandingConf(ctx context.Context, request operations.UpdateB
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4194,6 +4213,7 @@ func (s *SDK) UpdateCve(ctx context.Context, request operations.UpdateCveRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4239,6 +4259,7 @@ func (s *SDK) UpdateCveCheckConfiguration(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4287,6 +4308,7 @@ func (s *SDK) UpdateChangeRequest(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4332,6 +4354,7 @@ func (s *SDK) UpdateDataSource(ctx context.Context, request operations.UpdateDat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4380,6 +4403,7 @@ func (s *SDK) UpdateDirective(ctx context.Context, request operations.UpdateDire
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4428,6 +4452,7 @@ func (s *SDK) UpdateGroup(ctx context.Context, request operations.UpdateGroupReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4473,6 +4498,7 @@ func (s *SDK) UpdateNode(ctx context.Context, request operations.UpdateNodeReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4599,6 +4625,7 @@ func (s *SDK) UpdateRule(ctx context.Context, request operations.UpdateRuleReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4647,6 +4674,7 @@ func (s *SDK) UpdateUser(ctx context.Context, request operations.UpdateUserReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4692,6 +4720,7 @@ func (s *SDK) UploadInventory(ctx context.Context, request operations.UploadInve
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

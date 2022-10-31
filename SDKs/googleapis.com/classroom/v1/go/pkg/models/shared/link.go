@@ -1,7 +1,11 @@
 package shared
 
+
+
 type Link struct {
-	ThumbnailURL *string `json:"thumbnailUrl,omitempty"`
-	Title        *string `json:"title,omitempty"`
-	URL          *string `json:"url,omitempty"`
+    ThumbnailURL *string `json:"thumbnailUrl,omitempty"`
+    Title *string `json:"title,omitempty"`
+    URL *string `json:"url,omitempty"`
+    
 }
+

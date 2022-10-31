@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EnableDomainTransferLockRequest struct {
-	DomainName string `json:"DomainName"`
+    DomainName string `json:"DomainName"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RoomUsersDeleteBatchRequest struct {
-	Ids []int64 `json:"ids"`
+    Ids []int64 `json:"ids"`
+    
 }
+

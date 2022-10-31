@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type LegStateEnum string
 
 const (
-	LegStateEnumTerminated LegStateEnum = "terminated"
+    LegStateEnumTerminated LegStateEnum = "terminated"
 )
+
+

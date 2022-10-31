@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DisassociateServiceRoleFromAccountResponse struct {
-	DisassociatedAt *string `json:"DisassociatedAt,omitempty"`
+    DisassociatedAt *string `json:"DisassociatedAt,omitempty"`
+    
 }
+

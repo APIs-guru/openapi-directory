@@ -1,23 +1,31 @@
 package shared
 
+
+
+
 type DisallowedResourceProblemResourceTypeEnum string
 
 const (
-	DisallowedResourceProblemResourceTypeEnumTweet DisallowedResourceProblemResourceTypeEnum = "tweet"
+    DisallowedResourceProblemResourceTypeEnumTweet DisallowedResourceProblemResourceTypeEnum = "tweet"
 )
+
+
 
 type DisallowedResourceProblemSectionEnum string
 
 const (
-	DisallowedResourceProblemSectionEnumData     DisallowedResourceProblemSectionEnum = "data"
-	DisallowedResourceProblemSectionEnumIncludes DisallowedResourceProblemSectionEnum = "includes"
+    DisallowedResourceProblemSectionEnumData DisallowedResourceProblemSectionEnum = "data"
+DisallowedResourceProblemSectionEnumIncludes DisallowedResourceProblemSectionEnum = "includes"
 )
 
+
 type DisallowedResourceProblem struct {
-	Detail       string                                    `json:"detail"`
-	ResourceID   string                                    `json:"resource_id"`
-	ResourceType DisallowedResourceProblemResourceTypeEnum `json:"resource_type"`
-	Section      DisallowedResourceProblemSectionEnum      `json:"section"`
-	Title        string                                    `json:"title"`
-	Type         string                                    `json:"type"`
+    Detail string `json:"detail"`
+    ResourceID string `json:"resource_id"`
+    ResourceType DisallowedResourceProblemResourceTypeEnum `json:"resource_type"`
+    Section DisallowedResourceProblemSectionEnum `json:"section"`
+    Title string `json:"title"`
+    Type string `json:"type"`
+    
 }
+

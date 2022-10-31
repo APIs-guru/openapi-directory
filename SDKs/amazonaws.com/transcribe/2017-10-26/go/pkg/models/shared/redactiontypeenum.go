@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type RedactionTypeEnum string
 
 const (
-	RedactionTypeEnumPii RedactionTypeEnum = "PII"
+    RedactionTypeEnumPii RedactionTypeEnum = "PII"
 )
+
+

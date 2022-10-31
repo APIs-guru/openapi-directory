@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CustomerListConfigurationsResponse struct {
-	Configurations []Configuration `json:"configurations,omitempty"`
+    Configurations []Configuration `json:"configurations,omitempty"`
+    
 }
+

@@ -10,7 +10,7 @@ class GetV3ProductsQueryParams:
 
 @dataclass
 class GetV3ProductsHeaders:
-    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

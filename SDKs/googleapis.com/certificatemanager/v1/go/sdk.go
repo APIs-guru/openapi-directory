@@ -63,6 +63,7 @@ func (s *SDK) CertificatemanagerProjectsLocationsCertificateIssuanceConfigsCreat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -151,6 +152,7 @@ func (s *SDK) CertificatemanagerProjectsLocationsCertificateMapsCertificateMapEn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -239,6 +241,7 @@ func (s *SDK) CertificatemanagerProjectsLocationsCertificateMapsCreate(ctx conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -327,6 +330,7 @@ func (s *SDK) CertificatemanagerProjectsLocationsCertificatesCreate(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -415,6 +419,7 @@ func (s *SDK) CertificatemanagerProjectsLocationsDNSAuthorizationsCreate(ctx con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -503,6 +508,7 @@ func (s *SDK) CertificatemanagerProjectsLocationsDNSAuthorizationsPatch(ctx cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -591,6 +597,7 @@ func (s *SDK) CertificatemanagerProjectsLocationsOperationsCancel(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

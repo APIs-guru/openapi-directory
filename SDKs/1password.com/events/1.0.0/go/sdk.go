@@ -126,6 +126,7 @@ func (s *SDK) GetItemUsages(ctx context.Context, request operations.GetItemUsage
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -191,6 +192,7 @@ func (s *SDK) GetSignInAttempts(ctx context.Context, request operations.GetSignI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

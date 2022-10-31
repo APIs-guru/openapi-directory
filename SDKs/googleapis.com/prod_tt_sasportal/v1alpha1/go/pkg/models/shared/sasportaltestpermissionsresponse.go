@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SasPortalTestPermissionsResponse struct {
-	Permissions []string `json:"permissions,omitempty"`
+    Permissions []string `json:"permissions,omitempty"`
+    
 }
+

@@ -65,7 +65,10 @@ func (s *SDK) CreateFileAssociation(ctx context.Context, request operations.Crea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -111,7 +114,10 @@ func (s *SDK) CreateFolder(ctx context.Context, request operations.CreateFolderR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -153,6 +159,8 @@ func (s *SDK) DeleteFile(ctx context.Context, request operations.DeleteFileReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -182,6 +190,8 @@ func (s *SDK) DeleteFileAssociation(ctx context.Context, request operations.Dele
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -213,6 +223,8 @@ func (s *SDK) DeleteFolder(ctx context.Context, request operations.DeleteFolderR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -242,6 +254,8 @@ func (s *SDK) GetAssociationsByObject(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -282,6 +296,8 @@ func (s *SDK) GetFile(ctx context.Context, request operations.GetFileRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -320,6 +336,8 @@ func (s *SDK) GetFileAssociations(ctx context.Context, request operations.GetFil
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -360,6 +378,8 @@ func (s *SDK) GetFileContent(ctx context.Context, request operations.GetFileCont
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -398,6 +418,8 @@ func (s *SDK) GetFiles(ctx context.Context, request operations.GetFilesRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -440,6 +462,8 @@ func (s *SDK) GetFolder(ctx context.Context, request operations.GetFolderRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -478,6 +502,8 @@ func (s *SDK) GetFolders(ctx context.Context, request operations.GetFoldersReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -519,6 +545,8 @@ func (s *SDK) GetInbox(ctx context.Context, request operations.GetInboxRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -563,7 +591,10 @@ func (s *SDK) UpdateFile(ctx context.Context, request operations.UpdateFileReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -612,7 +643,10 @@ func (s *SDK) UpdateFolder(ctx context.Context, request operations.UpdateFolderR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -658,7 +692,10 @@ func (s *SDK) UploadFile(ctx context.Context, request operations.UploadFileReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 

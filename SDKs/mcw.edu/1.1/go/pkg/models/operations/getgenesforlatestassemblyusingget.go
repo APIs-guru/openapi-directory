@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetGenesForLatestAssemblyUsingGetPathParams struct {
-	TaxonID string `pathParam:"style=simple,explode=false,name=taxonId"`
+    TaxonID string `pathParam:"style=simple,explode=false,name=taxonId"`
+    
 }
 
 type GetGenesForLatestAssemblyUsingGetRequest struct {
-	PathParams GetGenesForLatestAssemblyUsingGetPathParams
+    PathParams GetGenesForLatestAssemblyUsingGetPathParams 
+    
 }
 
 type GetGenesForLatestAssemblyUsingGetResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

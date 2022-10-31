@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetSurveysSurveyIDMetadataPathParams struct {
-	SurveyID string `pathParam:"style=simple,explode=false,name=surveyId"`
+    SurveyID string `pathParam:"style=simple,explode=false,name=surveyId"`
+    
 }
 
 type GetSurveysSurveyIDMetadataRequest struct {
-	PathParams GetSurveysSurveyIDMetadataPathParams
+    PathParams GetSurveysSurveyIDMetadataPathParams 
+    
 }
 
 type GetSurveysSurveyIDMetadataResponse struct {
-	Body           []byte
-	ContentType    string
-	StatusCode     int64
-	SurveyMetadata *shared.SurveyMetadata
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    SurveyMetadata *shared.SurveyMetadata 
+    
 }
+

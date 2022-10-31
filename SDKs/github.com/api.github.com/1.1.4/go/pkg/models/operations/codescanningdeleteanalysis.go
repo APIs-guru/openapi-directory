@@ -1,35 +1,40 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type CodeScanningDeleteAnalysisPathParams struct {
-	AnalysisID int64  `pathParam:"style=simple,explode=false,name=analysis_id"`
-	Owner      string `pathParam:"style=simple,explode=false,name=owner"`
-	Repo       string `pathParam:"style=simple,explode=false,name=repo"`
+    AnalysisID int64 `pathParam:"style=simple,explode=false,name=analysis_id"`
+    Owner string `pathParam:"style=simple,explode=false,name=owner"`
+    Repo string `pathParam:"style=simple,explode=false,name=repo"`
+    
 }
 
 type CodeScanningDeleteAnalysisQueryParams struct {
-	ConfirmDelete *string `queryParam:"style=form,explode=true,name=confirm_delete"`
+    ConfirmDelete *string `queryParam:"style=form,explode=true,name=confirm_delete"`
+    
 }
 
 type CodeScanningDeleteAnalysisRequest struct {
-	PathParams  CodeScanningDeleteAnalysisPathParams
-	QueryParams CodeScanningDeleteAnalysisQueryParams
+    PathParams CodeScanningDeleteAnalysisPathParams 
+    QueryParams CodeScanningDeleteAnalysisQueryParams 
+    
 }
 
 type CodeScanningDeleteAnalysis503ApplicationJSON struct {
-	Code             *string `json:"code,omitempty"`
-	DocumentationURL *string `json:"documentation_url,omitempty"`
-	Message          *string `json:"message,omitempty"`
+    Code *string `json:"code,omitempty"`
+    DocumentationURL *string `json:"documentation_url,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type CodeScanningDeleteAnalysisResponse struct {
-	ContentType                                        string
-	StatusCode                                         int64
-	BasicError                                         *shared.BasicError
-	CodeScanningAnalysisDeletion                       *shared.CodeScanningAnalysisDeletion
-	CodeScanningDeleteAnalysis503ApplicationJSONObject *CodeScanningDeleteAnalysis503ApplicationJSON
-	ScimError                                          *shared.ScimError
+    ContentType string 
+    StatusCode int64 
+    BasicError *shared.BasicError 
+    CodeScanningAnalysisDeletion *shared.CodeScanningAnalysisDeletion 
+    CodeScanningDeleteAnalysis503ApplicationJSONObject *CodeScanningDeleteAnalysis503ApplicationJSON 
+    ScimError *shared.ScimError 
+    
 }
+

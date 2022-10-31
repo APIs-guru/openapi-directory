@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AcknowledgeRequest struct {
-	AckIds []string `json:"ackIds,omitempty"`
+    AckIds []string `json:"ackIds,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetLanguagesResponse struct {
-	Languages []string `json:"languages"`
+    Languages []string `json:"languages"`
+    
 }
+

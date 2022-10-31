@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DatePropertyOptions struct {
-	OperatorOptions *DateOperatorOptions `json:"operatorOptions,omitempty"`
+    OperatorOptions *DateOperatorOptions `json:"operatorOptions,omitempty"`
+    
 }
+

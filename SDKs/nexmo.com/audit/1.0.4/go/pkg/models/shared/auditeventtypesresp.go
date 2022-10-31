@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AuditEventTypesResp struct {
-	EventTypes []AuditEventType `json:"eventTypes,omitempty"`
+    EventTypes []AuditEventType `json:"eventTypes,omitempty"`
+    
 }
+

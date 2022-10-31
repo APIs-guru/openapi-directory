@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AssetTags struct {
-	Tags map[string]string `json:"tags"`
+    Tags map[string]string `json:"tags"`
+    
 }
+

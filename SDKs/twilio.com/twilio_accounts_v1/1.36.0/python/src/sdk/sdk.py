@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def create_credential_aws(self, request: operations.CreateCredentialAwsRequest) -> operations.CreateCredentialAwsResponse:
         warnings.simplefilter("ignore")
@@ -28,18 +30,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Credentials/AWS"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCredentialAwsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AccountsV1CredentialCredentialAws])
@@ -47,7 +51,6 @@ class SDK:
 
         return res
 
-    
     
     def create_credential_public_key(self, request: operations.CreateCredentialPublicKeyRequest) -> operations.CreateCredentialPublicKeyResponse:
         warnings.simplefilter("ignore")
@@ -56,18 +59,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Credentials/PublicKeys"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCredentialPublicKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AccountsV1CredentialCredentialPublicKey])
@@ -75,7 +80,6 @@ class SDK:
 
         return res
 
-    
     
     def create_secondary_auth_token(self, request: operations.CreateSecondaryAuthTokenRequest) -> operations.CreateSecondaryAuthTokenResponse:
         warnings.simplefilter("ignore")
@@ -84,14 +88,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/AuthTokens/Secondary"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSecondaryAuthTokenResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AccountsV1SecondaryAuthToken])
@@ -100,7 +104,6 @@ class SDK:
         return res
 
     
-    
     def delete_credential_aws(self, request: operations.DeleteCredentialAwsRequest) -> operations.DeleteCredentialAwsResponse:
         warnings.simplefilter("ignore")
 
@@ -108,20 +111,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Credentials/AWS/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCredentialAwsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_credential_public_key(self, request: operations.DeleteCredentialPublicKeyRequest) -> operations.DeleteCredentialPublicKeyResponse:
         warnings.simplefilter("ignore")
@@ -130,20 +132,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Credentials/PublicKeys/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCredentialPublicKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_secondary_auth_token(self, request: operations.DeleteSecondaryAuthTokenRequest) -> operations.DeleteSecondaryAuthTokenResponse:
         warnings.simplefilter("ignore")
@@ -152,20 +153,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/AuthTokens/Secondary"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSecondaryAuthTokenResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def fetch_credential_aws(self, request: operations.FetchCredentialAwsRequest) -> operations.FetchCredentialAwsResponse:
         warnings.simplefilter("ignore")
@@ -174,14 +174,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Credentials/AWS/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCredentialAwsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AccountsV1CredentialCredentialAws])
@@ -189,7 +189,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_credential_public_key(self, request: operations.FetchCredentialPublicKeyRequest) -> operations.FetchCredentialPublicKeyResponse:
         warnings.simplefilter("ignore")
@@ -198,14 +197,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Credentials/PublicKeys/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCredentialPublicKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AccountsV1CredentialCredentialPublicKey])
@@ -214,7 +213,6 @@ class SDK:
         return res
 
     
-    
     def list_credential_aws(self, request: operations.ListCredentialAwsRequest) -> operations.ListCredentialAwsResponse:
         warnings.simplefilter("ignore")
 
@@ -222,15 +220,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Credentials/AWS"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCredentialAwsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListCredentialAwsListCredentialAwsResponse])
@@ -239,7 +238,6 @@ class SDK:
         return res
 
     
-    
     def list_credential_public_key(self, request: operations.ListCredentialPublicKeyRequest) -> operations.ListCredentialPublicKeyResponse:
         warnings.simplefilter("ignore")
 
@@ -247,15 +245,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Credentials/PublicKeys"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCredentialPublicKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListCredentialPublicKeyListCredentialPublicKeyResponse])
@@ -264,7 +263,6 @@ class SDK:
         return res
 
     
-    
     def update_auth_token_promotion(self, request: operations.UpdateAuthTokenPromotionRequest) -> operations.UpdateAuthTokenPromotionResponse:
         warnings.simplefilter("ignore")
 
@@ -272,14 +270,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/AuthTokens/Promote"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateAuthTokenPromotionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AccountsV1AuthTokenPromotion])
@@ -288,7 +286,6 @@ class SDK:
         return res
 
     
-    
     def update_credential_aws(self, request: operations.UpdateCredentialAwsRequest) -> operations.UpdateCredentialAwsResponse:
         warnings.simplefilter("ignore")
 
@@ -296,18 +293,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Credentials/AWS/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateCredentialAwsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AccountsV1CredentialCredentialAws])
@@ -316,7 +315,6 @@ class SDK:
         return res
 
     
-    
     def update_credential_public_key(self, request: operations.UpdateCredentialPublicKeyRequest) -> operations.UpdateCredentialPublicKeyResponse:
         warnings.simplefilter("ignore")
 
@@ -324,18 +322,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Credentials/PublicKeys/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateCredentialPublicKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AccountsV1CredentialCredentialPublicKey])

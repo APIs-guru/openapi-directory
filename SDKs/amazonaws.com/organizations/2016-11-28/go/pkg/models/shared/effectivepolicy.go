@@ -1,12 +1,13 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type EffectivePolicy struct {
-	LastUpdatedTimestamp *time.Time               `json:"LastUpdatedTimestamp,omitempty"`
-	PolicyContent        *string                  `json:"PolicyContent,omitempty"`
-	PolicyType           *EffectivePolicyTypeEnum `json:"PolicyType,omitempty"`
-	TargetID             *string                  `json:"TargetId,omitempty"`
+    LastUpdatedTimestamp *time.Time `json:"LastUpdatedTimestamp,omitempty"`
+    PolicyContent *string `json:"PolicyContent,omitempty"`
+    PolicyType *EffectivePolicyTypeEnum `json:"PolicyType,omitempty"`
+    TargetID *string `json:"TargetId,omitempty"`
+    
 }
+

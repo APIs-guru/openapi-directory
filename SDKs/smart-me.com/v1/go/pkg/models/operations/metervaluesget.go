@@ -1,26 +1,30 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-	"time"
-)
+"time"
+"openapi/pkg/models/shared")
 
 type MeterValuesGetPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type MeterValuesGetQueryParams struct {
-	Date time.Time `queryParam:"style=form,explode=true,name=date"`
+    Date time.Time `queryParam:"style=form,explode=true,name=date"`
+    
 }
 
 type MeterValuesGetRequest struct {
-	PathParams  MeterValuesGetPathParams
-	QueryParams MeterValuesGetQueryParams
+    PathParams MeterValuesGetPathParams 
+    QueryParams MeterValuesGetQueryParams 
+    
 }
 
 type MeterValuesGetResponse struct {
-	Body         []byte
-	ContentType  string
-	DeviceInPast *shared.DeviceInPast
-	StatusCode   int64
+    Body []byte 
+    ContentType string 
+    DeviceInPast *shared.DeviceInPast 
+    StatusCode int64 
+    
 }
+

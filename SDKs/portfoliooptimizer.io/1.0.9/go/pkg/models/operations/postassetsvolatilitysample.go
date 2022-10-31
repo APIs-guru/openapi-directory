@@ -1,27 +1,36 @@
 package operations
 
+
+
 type PostAssetsVolatilitySampleRequestBodyAssets struct {
-	AssetReturns []float64 `json:"assetReturns"`
+    AssetReturns []float64 `json:"assetReturns"`
+    
 }
 
 type PostAssetsVolatilitySampleRequestBody struct {
-	Assets []PostAssetsVolatilitySampleRequestBodyAssets `json:"assets"`
+    Assets []PostAssetsVolatilitySampleRequestBodyAssets `json:"assets"`
+    
 }
 
 type PostAssetsVolatilitySampleRequest struct {
-	Request PostAssetsVolatilitySampleRequestBody `request:"mediaType=application/json"`
+    Request PostAssetsVolatilitySampleRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type PostAssetsVolatilitySample200ApplicationJSONAssets struct {
-	AssetVolatility float64 `json:"assetVolatility"`
+    AssetVolatility float64 `json:"assetVolatility"`
+    
 }
 
 type PostAssetsVolatilitySample200ApplicationJSON struct {
-	Assets []PostAssetsVolatilitySample200ApplicationJSONAssets `json:"assets"`
+    Assets []PostAssetsVolatilitySample200ApplicationJSONAssets `json:"assets"`
+    
 }
 
 type PostAssetsVolatilitySampleResponse struct {
-	ContentType                                        string
-	PostAssetsVolatilitySample200ApplicationJSONObject *PostAssetsVolatilitySample200ApplicationJSON
-	StatusCode                                         int64
+    ContentType string 
+    PostAssetsVolatilitySample200ApplicationJSONObject *PostAssetsVolatilitySample200ApplicationJSON 
+    StatusCode int64 
+    
 }
+

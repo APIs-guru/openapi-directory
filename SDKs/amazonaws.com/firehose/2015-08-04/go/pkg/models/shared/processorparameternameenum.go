@@ -1,15 +1,20 @@
 package shared
 
+
+
+
 type ProcessorParameterNameEnum string
 
 const (
-	ProcessorParameterNameEnumLambdaArn               ProcessorParameterNameEnum = "LambdaArn"
-	ProcessorParameterNameEnumNumberOfRetries         ProcessorParameterNameEnum = "NumberOfRetries"
-	ProcessorParameterNameEnumMetadataExtractionQuery ProcessorParameterNameEnum = "MetadataExtractionQuery"
-	ProcessorParameterNameEnumJSONParsingEngine       ProcessorParameterNameEnum = "JsonParsingEngine"
-	ProcessorParameterNameEnumRoleArn                 ProcessorParameterNameEnum = "RoleArn"
-	ProcessorParameterNameEnumBufferSizeInMBs         ProcessorParameterNameEnum = "BufferSizeInMBs"
-	ProcessorParameterNameEnumBufferIntervalInSeconds ProcessorParameterNameEnum = "BufferIntervalInSeconds"
-	ProcessorParameterNameEnumSubRecordType           ProcessorParameterNameEnum = "SubRecordType"
-	ProcessorParameterNameEnumDelimiter               ProcessorParameterNameEnum = "Delimiter"
+    ProcessorParameterNameEnumLambdaArn ProcessorParameterNameEnum = "LambdaArn"
+ProcessorParameterNameEnumNumberOfRetries ProcessorParameterNameEnum = "NumberOfRetries"
+ProcessorParameterNameEnumMetadataExtractionQuery ProcessorParameterNameEnum = "MetadataExtractionQuery"
+ProcessorParameterNameEnumJSONParsingEngine ProcessorParameterNameEnum = "JsonParsingEngine"
+ProcessorParameterNameEnumRoleArn ProcessorParameterNameEnum = "RoleArn"
+ProcessorParameterNameEnumBufferSizeInMBs ProcessorParameterNameEnum = "BufferSizeInMBs"
+ProcessorParameterNameEnumBufferIntervalInSeconds ProcessorParameterNameEnum = "BufferIntervalInSeconds"
+ProcessorParameterNameEnumSubRecordType ProcessorParameterNameEnum = "SubRecordType"
+ProcessorParameterNameEnumDelimiter ProcessorParameterNameEnum = "Delimiter"
 )
+
+

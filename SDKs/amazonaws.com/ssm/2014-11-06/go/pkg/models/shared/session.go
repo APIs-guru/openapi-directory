@@ -1,17 +1,18 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type Session struct {
-	Details      *string                  `json:"Details,omitempty"`
-	DocumentName *string                  `json:"DocumentName,omitempty"`
-	EndDate      *time.Time               `json:"EndDate,omitempty"`
-	OutputURL    *SessionManagerOutputURL `json:"OutputUrl,omitempty"`
-	Owner        *string                  `json:"Owner,omitempty"`
-	SessionID    *string                  `json:"SessionId,omitempty"`
-	StartDate    *time.Time               `json:"StartDate,omitempty"`
-	Status       *SessionStatusEnum       `json:"Status,omitempty"`
-	Target       *string                  `json:"Target,omitempty"`
+    Details *string `json:"Details,omitempty"`
+    DocumentName *string `json:"DocumentName,omitempty"`
+    EndDate *time.Time `json:"EndDate,omitempty"`
+    OutputURL *SessionManagerOutputURL `json:"OutputUrl,omitempty"`
+    Owner *string `json:"Owner,omitempty"`
+    SessionID *string `json:"SessionId,omitempty"`
+    StartDate *time.Time `json:"StartDate,omitempty"`
+    Status *SessionStatusEnum `json:"Status,omitempty"`
+    Target *string `json:"Target,omitempty"`
+    
 }
+

@@ -1,6 +1,10 @@
 package shared
 
+
+
 type GetDiskSnapshotsResult struct {
-	DiskSnapshots []DiskSnapshot `json:"diskSnapshots,omitempty"`
-	NextPageToken *string        `json:"nextPageToken,omitempty"`
+    DiskSnapshots []DiskSnapshot `json:"diskSnapshots,omitempty"`
+    NextPageToken *string `json:"nextPageToken,omitempty"`
+    
 }
+

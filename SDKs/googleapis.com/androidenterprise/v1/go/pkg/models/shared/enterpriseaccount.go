@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EnterpriseAccount struct {
-	AccountEmail *string `json:"accountEmail,omitempty"`
+    AccountEmail *string `json:"accountEmail,omitempty"`
+    
 }
+

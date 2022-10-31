@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StartBuildBatchOutput struct {
-	BuildBatch *BuildBatch `json:"buildBatch,omitempty"`
+    BuildBatch *BuildBatch `json:"buildBatch,omitempty"`
+    
 }
+

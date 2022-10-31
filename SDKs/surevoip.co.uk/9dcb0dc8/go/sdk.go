@@ -967,6 +967,7 @@ func (s *SDK) PostAnnouncements(ctx context.Context, request operations.PostAnno
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1045,6 +1046,7 @@ func (s *SDK) PostCalls(ctx context.Context, request operations.PostCallsRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

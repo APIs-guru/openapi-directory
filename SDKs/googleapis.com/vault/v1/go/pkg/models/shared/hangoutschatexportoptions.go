@@ -1,13 +1,19 @@
 package shared
 
+
+
+
 type HangoutsChatExportOptionsExportFormatEnum string
 
 const (
-	HangoutsChatExportOptionsExportFormatEnumExportFormatUnspecified HangoutsChatExportOptionsExportFormatEnum = "EXPORT_FORMAT_UNSPECIFIED"
-	HangoutsChatExportOptionsExportFormatEnumMbox                    HangoutsChatExportOptionsExportFormatEnum = "MBOX"
-	HangoutsChatExportOptionsExportFormatEnumPst                     HangoutsChatExportOptionsExportFormatEnum = "PST"
+    HangoutsChatExportOptionsExportFormatEnumExportFormatUnspecified HangoutsChatExportOptionsExportFormatEnum = "EXPORT_FORMAT_UNSPECIFIED"
+HangoutsChatExportOptionsExportFormatEnumMbox HangoutsChatExportOptionsExportFormatEnum = "MBOX"
+HangoutsChatExportOptionsExportFormatEnumPst HangoutsChatExportOptionsExportFormatEnum = "PST"
 )
 
+
 type HangoutsChatExportOptions struct {
-	ExportFormat *HangoutsChatExportOptionsExportFormatEnum `json:"exportFormat,omitempty"`
+    ExportFormat *HangoutsChatExportOptionsExportFormatEnum `json:"exportFormat,omitempty"`
+    
 }
+

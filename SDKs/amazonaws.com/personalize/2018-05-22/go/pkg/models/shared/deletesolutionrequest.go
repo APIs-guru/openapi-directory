@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteSolutionRequest struct {
-	SolutionArn string `json:"solutionArn"`
+    SolutionArn string `json:"solutionArn"`
+    
 }
+

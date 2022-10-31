@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type PaymentsEnumStatusEnum string
 
 const (
-	PaymentsEnumStatusEnumComplete PaymentsEnumStatusEnum = "complete"
-	PaymentsEnumStatusEnumCancel   PaymentsEnumStatusEnum = "cancel"
+    PaymentsEnumStatusEnumComplete PaymentsEnumStatusEnum = "complete"
+PaymentsEnumStatusEnumCancel PaymentsEnumStatusEnum = "cancel"
 )
+
+

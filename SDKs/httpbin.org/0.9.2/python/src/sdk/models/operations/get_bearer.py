@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetBearerHeaders:
-    authorization: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
+    authorization: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

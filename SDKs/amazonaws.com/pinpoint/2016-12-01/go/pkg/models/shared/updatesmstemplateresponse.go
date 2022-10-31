@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateSmsTemplateResponse struct {
-	MessageBody MessageBody `json:"MessageBody"`
+    MessageBody MessageBody `json:"MessageBody"`
+    
 }
+

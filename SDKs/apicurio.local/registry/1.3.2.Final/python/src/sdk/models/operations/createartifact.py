@@ -29,8 +29,8 @@ class CreateArtifactXRegistryArtifactTypeEnum(str, Enum):
 
 @dataclass
 class CreateArtifactHeaders:
-    x_registry_artifact_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Registry-ArtifactId' }})
-    x_registry_artifact_type: Optional[CreateArtifactXRegistryArtifactTypeEnum] = field(default=None, metadata={'header': { 'field_name': 'X-Registry-ArtifactType' }})
+    x_registry_artifact_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Registry-ArtifactId', 'style': 'simple', 'explode': False }})
+    x_registry_artifact_type: Optional[CreateArtifactXRegistryArtifactTypeEnum] = field(default=None, metadata={'header': { 'field_name': 'X-Registry-ArtifactType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

@@ -1,7 +1,11 @@
 package shared
 
+
+
 type DisassociatePrincipalFromPortfolioInput struct {
-	AcceptLanguage *string `json:"AcceptLanguage,omitempty"`
-	PortfolioID    string  `json:"PortfolioId"`
-	PrincipalArn   string  `json:"PrincipalARN"`
+    AcceptLanguage *string `json:"AcceptLanguage,omitempty"`
+    PortfolioID string `json:"PortfolioId"`
+    PrincipalArn string `json:"PrincipalARN"`
+    
 }
+

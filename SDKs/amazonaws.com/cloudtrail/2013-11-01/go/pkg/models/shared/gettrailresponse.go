@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetTrailResponse struct {
-	Trail *Trail `json:"Trail,omitempty"`
+    Trail *Trail `json:"Trail,omitempty"`
+    
 }
+

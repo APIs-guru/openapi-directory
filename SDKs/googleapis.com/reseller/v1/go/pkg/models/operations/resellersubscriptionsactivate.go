@@ -1,41 +1,46 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ResellerSubscriptionsActivatePathParams struct {
-	CustomerID     string `pathParam:"style=simple,explode=false,name=customerId"`
-	SubscriptionID string `pathParam:"style=simple,explode=false,name=subscriptionId"`
+    CustomerID string `pathParam:"style=simple,explode=false,name=customerId"`
+    SubscriptionID string `pathParam:"style=simple,explode=false,name=subscriptionId"`
+    
 }
 
 type ResellerSubscriptionsActivateQueryParams struct {
-	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
-	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
-	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
-	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
-	Key            *string           `queryParam:"style=form,explode=true,name=key"`
-	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
-	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
-	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
-	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
+    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
+    Callback *string `queryParam:"style=form,explode=true,name=callback"`
+    Fields *string `queryParam:"style=form,explode=true,name=fields"`
+    Key *string `queryParam:"style=form,explode=true,name=key"`
+    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
+    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
+    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
+    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
+    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
+    
 }
 
 type ResellerSubscriptionsActivateSecurity struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type ResellerSubscriptionsActivateRequest struct {
-	PathParams  ResellerSubscriptionsActivatePathParams
-	QueryParams ResellerSubscriptionsActivateQueryParams
-	Security    ResellerSubscriptionsActivateSecurity
+    PathParams ResellerSubscriptionsActivatePathParams 
+    QueryParams ResellerSubscriptionsActivateQueryParams 
+    Security ResellerSubscriptionsActivateSecurity 
+    
 }
 
 type ResellerSubscriptionsActivateResponse struct {
-	ContentType  string
-	StatusCode   int64
-	Subscription *shared.Subscription
+    ContentType string 
+    StatusCode int64 
+    Subscription *shared.Subscription 
+    
 }
+

@@ -1,16 +1,22 @@
 package shared
 
+
+
+
 type GoogleAppsCardV1ImageCropStyleTypeEnum string
 
 const (
-	GoogleAppsCardV1ImageCropStyleTypeEnumImageCropTypeUnspecified GoogleAppsCardV1ImageCropStyleTypeEnum = "IMAGE_CROP_TYPE_UNSPECIFIED"
-	GoogleAppsCardV1ImageCropStyleTypeEnumSquare                   GoogleAppsCardV1ImageCropStyleTypeEnum = "SQUARE"
-	GoogleAppsCardV1ImageCropStyleTypeEnumCircle                   GoogleAppsCardV1ImageCropStyleTypeEnum = "CIRCLE"
-	GoogleAppsCardV1ImageCropStyleTypeEnumRectangleCustom          GoogleAppsCardV1ImageCropStyleTypeEnum = "RECTANGLE_CUSTOM"
-	GoogleAppsCardV1ImageCropStyleTypeEnumRectangle43              GoogleAppsCardV1ImageCropStyleTypeEnum = "RECTANGLE_4_3"
+    GoogleAppsCardV1ImageCropStyleTypeEnumImageCropTypeUnspecified GoogleAppsCardV1ImageCropStyleTypeEnum = "IMAGE_CROP_TYPE_UNSPECIFIED"
+GoogleAppsCardV1ImageCropStyleTypeEnumSquare GoogleAppsCardV1ImageCropStyleTypeEnum = "SQUARE"
+GoogleAppsCardV1ImageCropStyleTypeEnumCircle GoogleAppsCardV1ImageCropStyleTypeEnum = "CIRCLE"
+GoogleAppsCardV1ImageCropStyleTypeEnumRectangleCustom GoogleAppsCardV1ImageCropStyleTypeEnum = "RECTANGLE_CUSTOM"
+GoogleAppsCardV1ImageCropStyleTypeEnumRectangle43 GoogleAppsCardV1ImageCropStyleTypeEnum = "RECTANGLE_4_3"
 )
 
+
 type GoogleAppsCardV1ImageCropStyle struct {
-	AspectRatio *float64                                `json:"aspectRatio,omitempty"`
-	Type        *GoogleAppsCardV1ImageCropStyleTypeEnum `json:"type,omitempty"`
+    AspectRatio *float64 `json:"aspectRatio,omitempty"`
+    Type *GoogleAppsCardV1ImageCropStyleTypeEnum `json:"type,omitempty"`
+    
 }
+

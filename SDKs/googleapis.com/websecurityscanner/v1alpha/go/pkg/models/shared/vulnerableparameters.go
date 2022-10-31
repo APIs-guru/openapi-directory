@@ -1,5 +1,9 @@
 package shared
 
+
+
 type VulnerableParameters struct {
-	ParameterNames []string `json:"parameterNames,omitempty"`
+    ParameterNames []string `json:"parameterNames,omitempty"`
+    
 }
+

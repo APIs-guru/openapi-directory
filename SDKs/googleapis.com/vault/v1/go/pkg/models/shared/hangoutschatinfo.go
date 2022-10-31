@@ -1,5 +1,9 @@
 package shared
 
+
+
 type HangoutsChatInfo struct {
-	RoomID []string `json:"roomId,omitempty"`
+    RoomID []string `json:"roomId,omitempty"`
+    
 }
+

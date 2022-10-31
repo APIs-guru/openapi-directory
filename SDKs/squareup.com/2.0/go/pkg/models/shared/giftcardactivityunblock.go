@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GiftCardActivityUnblock struct {
-	Reason interface{} `json:"reason"`
+    Reason interface{} `json:"reason"`
+    
 }
+

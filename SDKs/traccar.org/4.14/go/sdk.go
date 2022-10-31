@@ -348,6 +348,7 @@ func (s *SDK) DeletePermissions(ctx context.Context, request operations.DeletePe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1438,6 +1439,7 @@ func (s *SDK) PostAttributesComputed(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1486,6 +1488,7 @@ func (s *SDK) PostCalendars(ctx context.Context, request operations.PostCalendar
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1534,6 +1537,7 @@ func (s *SDK) PostCommands(ctx context.Context, request operations.PostCommandsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1582,6 +1586,7 @@ func (s *SDK) PostCommandsSend(ctx context.Context, request operations.PostComma
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1641,6 +1646,7 @@ func (s *SDK) PostDevices(ctx context.Context, request operations.PostDevicesReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1689,6 +1695,7 @@ func (s *SDK) PostDrivers(ctx context.Context, request operations.PostDriversReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1737,6 +1744,7 @@ func (s *SDK) PostGeofences(ctx context.Context, request operations.PostGeofence
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1785,6 +1793,7 @@ func (s *SDK) PostGroups(ctx context.Context, request operations.PostGroupsReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1834,6 +1843,7 @@ func (s *SDK) PostMaintenance(ctx context.Context, request operations.PostMainte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1882,6 +1892,7 @@ func (s *SDK) PostNotifications(ctx context.Context, request operations.PostNoti
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1961,6 +1972,7 @@ func (s *SDK) PostPermissions(ctx context.Context, request operations.PostPermis
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2010,6 +2022,7 @@ func (s *SDK) PostSession(ctx context.Context, request operations.PostSessionReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2059,6 +2072,7 @@ func (s *SDK) PostUsers(ctx context.Context, request operations.PostUsersRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2107,6 +2121,7 @@ func (s *SDK) PutAttributesComputedID(ctx context.Context, request operations.Pu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2155,6 +2170,7 @@ func (s *SDK) PutCalendarsID(ctx context.Context, request operations.PutCalendar
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2203,6 +2219,7 @@ func (s *SDK) PutCommandsID(ctx context.Context, request operations.PutCommandsI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2251,6 +2268,7 @@ func (s *SDK) PutDevicesID(ctx context.Context, request operations.PutDevicesIDR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2299,6 +2317,7 @@ func (s *SDK) PutDevicesIDAccumulators(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2338,6 +2357,7 @@ func (s *SDK) PutDriversID(ctx context.Context, request operations.PutDriversIDR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2386,6 +2406,7 @@ func (s *SDK) PutGeofencesID(ctx context.Context, request operations.PutGeofence
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2434,6 +2455,7 @@ func (s *SDK) PutGroupsID(ctx context.Context, request operations.PutGroupsIDReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2482,6 +2504,7 @@ func (s *SDK) PutMaintenanceID(ctx context.Context, request operations.PutMainte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2530,6 +2553,7 @@ func (s *SDK) PutNotificationsID(ctx context.Context, request operations.PutNoti
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2578,6 +2602,7 @@ func (s *SDK) PutServer(ctx context.Context, request operations.PutServerRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2626,6 +2651,7 @@ func (s *SDK) PutUsersID(ctx context.Context, request operations.PutUsersIDReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

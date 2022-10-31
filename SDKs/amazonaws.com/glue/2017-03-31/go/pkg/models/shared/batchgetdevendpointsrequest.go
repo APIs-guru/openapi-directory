@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchGetDevEndpointsRequest struct {
-	DevEndpointNames []string `json:"DevEndpointNames"`
+    DevEndpointNames []string `json:"DevEndpointNames"`
+    
 }
+

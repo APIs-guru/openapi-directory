@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetVodGenresByOndemandIDPathParams struct {
-	OndemandID float64 `pathParam:"style=simple,explode=false,name=ondemand_id"`
+    OndemandID float64 `pathParam:"style=simple,explode=false,name=ondemand_id"`
+    
 }
 
 type GetVodGenresByOndemandIDRequest struct {
-	PathParams GetVodGenresByOndemandIDPathParams
+    PathParams GetVodGenresByOndemandIDPathParams 
+    
 }
 
 type GetVodGenresByOndemandIDResponse struct {
-	ContentType    string
-	StatusCode     int64
-	LegacyError    *shared.LegacyError
-	OnDemandGenres []shared.OnDemandGenre
+    ContentType string 
+    StatusCode int64 
+    LegacyError *shared.LegacyError 
+    OnDemandGenres []shared.OnDemandGenre 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StartAssociationsOnceRequest struct {
-	AssociationIds []string `json:"AssociationIds"`
+    AssociationIds []string `json:"AssociationIds"`
+    
 }
+

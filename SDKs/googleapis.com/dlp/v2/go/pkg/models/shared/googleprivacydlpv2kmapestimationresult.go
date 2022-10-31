@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GooglePrivacyDlpV2KMapEstimationResult struct {
-	KMapEstimationHistogram []GooglePrivacyDlpV2KMapEstimationHistogramBucket `json:"kMapEstimationHistogram,omitempty"`
+    KMapEstimationHistogram []GooglePrivacyDlpV2KMapEstimationHistogramBucket `json:"kMapEstimationHistogram,omitempty"`
+    
 }
+

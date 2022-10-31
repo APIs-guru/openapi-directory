@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CompanyDerivedInfo struct {
-	HeadquartersLocation *Location `json:"headquartersLocation,omitempty"`
+    HeadquartersLocation *Location `json:"headquartersLocation,omitempty"`
+    
 }
+

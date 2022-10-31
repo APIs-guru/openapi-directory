@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type StudioComponentInitializationScriptRunContextEnum string
 
 const (
-	StudioComponentInitializationScriptRunContextEnumSystemInitialization StudioComponentInitializationScriptRunContextEnum = "SYSTEM_INITIALIZATION"
-	StudioComponentInitializationScriptRunContextEnumUserInitialization   StudioComponentInitializationScriptRunContextEnum = "USER_INITIALIZATION"
+    StudioComponentInitializationScriptRunContextEnumSystemInitialization StudioComponentInitializationScriptRunContextEnum = "SYSTEM_INITIALIZATION"
+StudioComponentInitializationScriptRunContextEnumUserInitialization StudioComponentInitializationScriptRunContextEnum = "USER_INITIALIZATION"
 )
+
+

@@ -1,35 +1,40 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type AdexchangebuyerProposalsSetupcompletePathParams struct {
-	ProposalID string `pathParam:"style=simple,explode=false,name=proposalId"`
+    ProposalID string `pathParam:"style=simple,explode=false,name=proposalId"`
+    
 }
 
 type AdexchangebuyerProposalsSetupcompleteQueryParams struct {
-	Alt         *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
-	Fields      *string         `queryParam:"style=form,explode=true,name=fields"`
-	Key         *string         `queryParam:"style=form,explode=true,name=key"`
-	OauthToken  *string         `queryParam:"style=form,explode=true,name=oauth_token"`
-	PrettyPrint *bool           `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser   *string         `queryParam:"style=form,explode=true,name=quotaUser"`
-	UserIP      *string         `queryParam:"style=form,explode=true,name=userIp"`
+    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
+    Fields *string `queryParam:"style=form,explode=true,name=fields"`
+    Key *string `queryParam:"style=form,explode=true,name=key"`
+    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
+    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
+    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
+    UserIP *string `queryParam:"style=form,explode=true,name=userIp"`
+    
 }
 
 type AdexchangebuyerProposalsSetupcompleteSecurity struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type AdexchangebuyerProposalsSetupcompleteRequest struct {
-	PathParams  AdexchangebuyerProposalsSetupcompletePathParams
-	QueryParams AdexchangebuyerProposalsSetupcompleteQueryParams
-	Security    AdexchangebuyerProposalsSetupcompleteSecurity
+    PathParams AdexchangebuyerProposalsSetupcompletePathParams 
+    QueryParams AdexchangebuyerProposalsSetupcompleteQueryParams 
+    Security AdexchangebuyerProposalsSetupcompleteSecurity 
+    
 }
 
 type AdexchangebuyerProposalsSetupcompleteResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

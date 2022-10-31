@@ -60,6 +60,8 @@ func (s *SDK) Cashin(ctx context.Context, request operations.CashinRequest) (*op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -121,6 +123,8 @@ func (s *SDK) GetBetHistory(ctx context.Context, request operations.GetBetHistor
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -172,6 +176,8 @@ func (s *SDK) GetFreeBets(ctx context.Context, request operations.GetFreeBetsReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -221,7 +227,10 @@ func (s *SDK) PlaceComplexBet(ctx context.Context, request operations.PlaceCompl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -291,7 +300,10 @@ func (s *SDK) PlaceSingleBet(ctx context.Context, request operations.PlaceSingle
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -361,7 +373,10 @@ func (s *SDK) ValidateBetslip(ctx context.Context, request operations.ValidateBe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 

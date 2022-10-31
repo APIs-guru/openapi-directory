@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BeginTransactionResponse struct {
-	TransactionID *string `json:"transactionId,omitempty"`
+    TransactionID *string `json:"transactionId,omitempty"`
+    
 }
+

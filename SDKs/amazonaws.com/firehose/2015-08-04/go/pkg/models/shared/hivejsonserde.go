@@ -1,5 +1,9 @@
 package shared
 
+
+
 type HiveJSONSerDe struct {
-	TimestampFormats []string `json:"TimestampFormats,omitempty"`
+    TimestampFormats []string `json:"TimestampFormats,omitempty"`
+    
 }
+

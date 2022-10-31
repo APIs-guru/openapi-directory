@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def fetch_messaging_country(self, request: operations.FetchMessagingCountryRequest) -> operations.FetchMessagingCountryResponse:
         warnings.simplefilter("ignore")
@@ -28,14 +30,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Messaging/Countries/{IsoCountry}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchMessagingCountryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PricingV1MessagingMessagingCountryInstance])
@@ -44,7 +46,6 @@ class SDK:
         return res
 
     
-    
     def fetch_phone_number_country(self, request: operations.FetchPhoneNumberCountryRequest) -> operations.FetchPhoneNumberCountryResponse:
         warnings.simplefilter("ignore")
 
@@ -52,14 +53,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/PhoneNumbers/Countries/{IsoCountry}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchPhoneNumberCountryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PricingV1PhoneNumberPhoneNumberCountryInstance])
@@ -68,7 +69,6 @@ class SDK:
         return res
 
     
-    
     def fetch_voice_country(self, request: operations.FetchVoiceCountryRequest) -> operations.FetchVoiceCountryResponse:
         warnings.simplefilter("ignore")
 
@@ -76,14 +76,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Voice/Countries/{IsoCountry}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchVoiceCountryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PricingV1VoiceVoiceCountryInstance])
@@ -92,7 +92,6 @@ class SDK:
         return res
 
     
-    
     def fetch_voice_number(self, request: operations.FetchVoiceNumberRequest) -> operations.FetchVoiceNumberResponse:
         warnings.simplefilter("ignore")
 
@@ -100,14 +99,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Voice/Numbers/{Number}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchVoiceNumberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PricingV1VoiceVoiceNumber])
@@ -116,7 +115,6 @@ class SDK:
         return res
 
     
-    
     def list_messaging_country(self, request: operations.ListMessagingCountryRequest) -> operations.ListMessagingCountryResponse:
         warnings.simplefilter("ignore")
 
@@ -124,15 +122,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Messaging/Countries"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListMessagingCountryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListMessagingCountryListMessagingCountryResponse])
@@ -141,7 +140,6 @@ class SDK:
         return res
 
     
-    
     def list_phone_number_country(self, request: operations.ListPhoneNumberCountryRequest) -> operations.ListPhoneNumberCountryResponse:
         warnings.simplefilter("ignore")
 
@@ -149,15 +147,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/PhoneNumbers/Countries"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListPhoneNumberCountryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListPhoneNumberCountryListPhoneNumberCountryResponse])
@@ -166,7 +165,6 @@ class SDK:
         return res
 
     
-    
     def list_voice_country(self, request: operations.ListVoiceCountryRequest) -> operations.ListVoiceCountryResponse:
         warnings.simplefilter("ignore")
 
@@ -174,15 +172,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Voice/Countries"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListVoiceCountryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListVoiceCountryListVoiceCountryResponse])

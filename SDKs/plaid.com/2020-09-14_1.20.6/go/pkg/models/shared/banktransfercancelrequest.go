@@ -1,7 +1,11 @@
 package shared
 
+
+
 type BankTransferCancelRequest struct {
-	BankTransferID string  `json:"bank_transfer_id"`
-	ClientID       *string `json:"client_id,omitempty"`
-	Secret         *string `json:"secret,omitempty"`
+    BankTransferID string `json:"bank_transfer_id"`
+    ClientID *string `json:"client_id,omitempty"`
+    Secret *string `json:"secret,omitempty"`
+    
 }
+

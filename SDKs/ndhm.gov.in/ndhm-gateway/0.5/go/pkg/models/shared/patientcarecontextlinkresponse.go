@@ -1,23 +1,27 @@
 package shared
 
 import (
-	"time"
-)
+"time")
+
 
 type PatientCareContextLinkResponseAcknowledgementStatusEnum string
 
 const (
-	PatientCareContextLinkResponseAcknowledgementStatusEnumSuccess PatientCareContextLinkResponseAcknowledgementStatusEnum = "SUCCESS"
+    PatientCareContextLinkResponseAcknowledgementStatusEnumSuccess PatientCareContextLinkResponseAcknowledgementStatusEnum = "SUCCESS"
 )
 
+
 type PatientCareContextLinkResponseAcknowledgement struct {
-	Status PatientCareContextLinkResponseAcknowledgementStatusEnum `json:"status"`
+    Status PatientCareContextLinkResponseAcknowledgementStatusEnum `json:"status"`
+    
 }
 
 type PatientCareContextLinkResponse struct {
-	Acknowledgement *PatientCareContextLinkResponseAcknowledgement `json:"acknowledgement,omitempty"`
-	Error           *Error                                         `json:"error,omitempty"`
-	RequestID       string                                         `json:"requestId"`
-	Resp            RequestReference                               `json:"resp"`
-	Timestamp       time.Time                                      `json:"timestamp"`
+    Acknowledgement *PatientCareContextLinkResponseAcknowledgement `json:"acknowledgement,omitempty"`
+    Error *Error `json:"error,omitempty"`
+    RequestID string `json:"requestId"`
+    Resp RequestReference `json:"resp"`
+    Timestamp time.Time `json:"timestamp"`
+    
 }
+

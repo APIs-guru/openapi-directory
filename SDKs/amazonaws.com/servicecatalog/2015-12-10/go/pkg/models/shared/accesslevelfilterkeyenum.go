@@ -1,9 +1,14 @@
 package shared
 
+
+
+
 type AccessLevelFilterKeyEnum string
 
 const (
-	AccessLevelFilterKeyEnumAccount AccessLevelFilterKeyEnum = "Account"
-	AccessLevelFilterKeyEnumRole    AccessLevelFilterKeyEnum = "Role"
-	AccessLevelFilterKeyEnumUser    AccessLevelFilterKeyEnum = "User"
+    AccessLevelFilterKeyEnumAccount AccessLevelFilterKeyEnum = "Account"
+AccessLevelFilterKeyEnumRole AccessLevelFilterKeyEnum = "Role"
+AccessLevelFilterKeyEnumUser AccessLevelFilterKeyEnum = "User"
 )
+
+

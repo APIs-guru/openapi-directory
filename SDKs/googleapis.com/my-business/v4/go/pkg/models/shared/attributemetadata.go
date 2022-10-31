@@ -1,21 +1,27 @@
 package shared
 
+
+
+
 type AttributeMetadataValueTypeEnum string
 
 const (
-	AttributeMetadataValueTypeEnumAttributeValueTypeUnspecified AttributeMetadataValueTypeEnum = "ATTRIBUTE_VALUE_TYPE_UNSPECIFIED"
-	AttributeMetadataValueTypeEnumBool                          AttributeMetadataValueTypeEnum = "BOOL"
-	AttributeMetadataValueTypeEnumEnum                          AttributeMetadataValueTypeEnum = "ENUM"
-	AttributeMetadataValueTypeEnumURL                           AttributeMetadataValueTypeEnum = "URL"
-	AttributeMetadataValueTypeEnumRepeatedEnum                  AttributeMetadataValueTypeEnum = "REPEATED_ENUM"
+    AttributeMetadataValueTypeEnumAttributeValueTypeUnspecified AttributeMetadataValueTypeEnum = "ATTRIBUTE_VALUE_TYPE_UNSPECIFIED"
+AttributeMetadataValueTypeEnumBool AttributeMetadataValueTypeEnum = "BOOL"
+AttributeMetadataValueTypeEnumEnum AttributeMetadataValueTypeEnum = "ENUM"
+AttributeMetadataValueTypeEnumURL AttributeMetadataValueTypeEnum = "URL"
+AttributeMetadataValueTypeEnumRepeatedEnum AttributeMetadataValueTypeEnum = "REPEATED_ENUM"
 )
 
+
 type AttributeMetadata struct {
-	AttributeID      *string                         `json:"attributeId,omitempty"`
-	DisplayName      *string                         `json:"displayName,omitempty"`
-	GroupDisplayName *string                         `json:"groupDisplayName,omitempty"`
-	IsDeprecated     *bool                           `json:"isDeprecated,omitempty"`
-	IsRepeatable     *bool                           `json:"isRepeatable,omitempty"`
-	ValueMetadata    []AttributeValueMetadata        `json:"valueMetadata,omitempty"`
-	ValueType        *AttributeMetadataValueTypeEnum `json:"valueType,omitempty"`
+    AttributeID *string `json:"attributeId,omitempty"`
+    DisplayName *string `json:"displayName,omitempty"`
+    GroupDisplayName *string `json:"groupDisplayName,omitempty"`
+    IsDeprecated *bool `json:"isDeprecated,omitempty"`
+    IsRepeatable *bool `json:"isRepeatable,omitempty"`
+    ValueMetadata []AttributeValueMetadata `json:"valueMetadata,omitempty"`
+    ValueType *AttributeMetadataValueTypeEnum `json:"valueType,omitempty"`
+    
 }
+

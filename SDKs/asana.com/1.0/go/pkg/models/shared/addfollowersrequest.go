@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AddFollowersRequest struct {
-	Followers string `json:"followers"`
+    Followers string `json:"followers"`
+    
 }
+

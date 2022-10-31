@@ -1,7 +1,11 @@
 package operations
 
+
+
 type GetCustomPagesHomepageInstanceResponse struct {
-	ContentType    string
-	CustomHomepage *interface{}
-	StatusCode     int64
+    ContentType string 
+    CustomHomepage *interface{} 
+    StatusCode int64 
+    
 }
+

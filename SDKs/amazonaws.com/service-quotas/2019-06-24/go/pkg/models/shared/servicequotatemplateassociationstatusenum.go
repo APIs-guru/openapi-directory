@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type ServiceQuotaTemplateAssociationStatusEnum string
 
 const (
-	ServiceQuotaTemplateAssociationStatusEnumAssociated    ServiceQuotaTemplateAssociationStatusEnum = "ASSOCIATED"
-	ServiceQuotaTemplateAssociationStatusEnumDisassociated ServiceQuotaTemplateAssociationStatusEnum = "DISASSOCIATED"
+    ServiceQuotaTemplateAssociationStatusEnumAssociated ServiceQuotaTemplateAssociationStatusEnum = "ASSOCIATED"
+ServiceQuotaTemplateAssociationStatusEnumDisassociated ServiceQuotaTemplateAssociationStatusEnum = "DISASSOCIATED"
 )
+
+

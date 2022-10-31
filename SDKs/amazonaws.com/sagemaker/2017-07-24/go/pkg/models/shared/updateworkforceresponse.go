@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateWorkforceResponse struct {
-	Workforce Workforce `json:"Workforce"`
+    Workforce Workforce `json:"Workforce"`
+    
 }
+

@@ -1,14 +1,20 @@
 package operations
 
+
+
 type VirtualizationInterfacesDeletePathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type VirtualizationInterfacesDeleteRequest struct {
-	PathParams VirtualizationInterfacesDeletePathParams
+    PathParams VirtualizationInterfacesDeletePathParams 
+    
 }
 
 type VirtualizationInterfacesDeleteResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

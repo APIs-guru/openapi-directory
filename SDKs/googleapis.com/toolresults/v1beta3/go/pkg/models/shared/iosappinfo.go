@@ -1,5 +1,9 @@
 package shared
 
+
+
 type IosAppInfo struct {
-	Name *string `json:"name,omitempty"`
+    Name *string `json:"name,omitempty"`
+    
 }
+

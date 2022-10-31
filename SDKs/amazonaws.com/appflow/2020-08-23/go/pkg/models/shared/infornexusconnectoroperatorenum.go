@@ -1,21 +1,26 @@
 package shared
 
+
+
+
 type InforNexusConnectorOperatorEnum string
 
 const (
-	InforNexusConnectorOperatorEnumProjection          InforNexusConnectorOperatorEnum = "PROJECTION"
-	InforNexusConnectorOperatorEnumBetween             InforNexusConnectorOperatorEnum = "BETWEEN"
-	InforNexusConnectorOperatorEnumEqualTo             InforNexusConnectorOperatorEnum = "EQUAL_TO"
-	InforNexusConnectorOperatorEnumAddition            InforNexusConnectorOperatorEnum = "ADDITION"
-	InforNexusConnectorOperatorEnumMultiplication      InforNexusConnectorOperatorEnum = "MULTIPLICATION"
-	InforNexusConnectorOperatorEnumDivision            InforNexusConnectorOperatorEnum = "DIVISION"
-	InforNexusConnectorOperatorEnumSubtraction         InforNexusConnectorOperatorEnum = "SUBTRACTION"
-	InforNexusConnectorOperatorEnumMaskAll             InforNexusConnectorOperatorEnum = "MASK_ALL"
-	InforNexusConnectorOperatorEnumMaskFirstN          InforNexusConnectorOperatorEnum = "MASK_FIRST_N"
-	InforNexusConnectorOperatorEnumMaskLastN           InforNexusConnectorOperatorEnum = "MASK_LAST_N"
-	InforNexusConnectorOperatorEnumValidateNonNull     InforNexusConnectorOperatorEnum = "VALIDATE_NON_NULL"
-	InforNexusConnectorOperatorEnumValidateNonZero     InforNexusConnectorOperatorEnum = "VALIDATE_NON_ZERO"
-	InforNexusConnectorOperatorEnumValidateNonNegative InforNexusConnectorOperatorEnum = "VALIDATE_NON_NEGATIVE"
-	InforNexusConnectorOperatorEnumValidateNumeric     InforNexusConnectorOperatorEnum = "VALIDATE_NUMERIC"
-	InforNexusConnectorOperatorEnumNoOp                InforNexusConnectorOperatorEnum = "NO_OP"
+    InforNexusConnectorOperatorEnumProjection InforNexusConnectorOperatorEnum = "PROJECTION"
+InforNexusConnectorOperatorEnumBetween InforNexusConnectorOperatorEnum = "BETWEEN"
+InforNexusConnectorOperatorEnumEqualTo InforNexusConnectorOperatorEnum = "EQUAL_TO"
+InforNexusConnectorOperatorEnumAddition InforNexusConnectorOperatorEnum = "ADDITION"
+InforNexusConnectorOperatorEnumMultiplication InforNexusConnectorOperatorEnum = "MULTIPLICATION"
+InforNexusConnectorOperatorEnumDivision InforNexusConnectorOperatorEnum = "DIVISION"
+InforNexusConnectorOperatorEnumSubtraction InforNexusConnectorOperatorEnum = "SUBTRACTION"
+InforNexusConnectorOperatorEnumMaskAll InforNexusConnectorOperatorEnum = "MASK_ALL"
+InforNexusConnectorOperatorEnumMaskFirstN InforNexusConnectorOperatorEnum = "MASK_FIRST_N"
+InforNexusConnectorOperatorEnumMaskLastN InforNexusConnectorOperatorEnum = "MASK_LAST_N"
+InforNexusConnectorOperatorEnumValidateNonNull InforNexusConnectorOperatorEnum = "VALIDATE_NON_NULL"
+InforNexusConnectorOperatorEnumValidateNonZero InforNexusConnectorOperatorEnum = "VALIDATE_NON_ZERO"
+InforNexusConnectorOperatorEnumValidateNonNegative InforNexusConnectorOperatorEnum = "VALIDATE_NON_NEGATIVE"
+InforNexusConnectorOperatorEnumValidateNumeric InforNexusConnectorOperatorEnum = "VALIDATE_NUMERIC"
+InforNexusConnectorOperatorEnumNoOp InforNexusConnectorOperatorEnum = "NO_OP"
 )
+
+

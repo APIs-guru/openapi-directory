@@ -10,7 +10,7 @@ class GetEventTeamsStatusesPathParams:
 
 @dataclass
 class GetEventTeamsStatusesHeaders:
-    if_modified_since: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-Modified-Since' }})
+    if_modified_since: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-Modified-Since', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

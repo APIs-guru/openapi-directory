@@ -18,9 +18,9 @@ class GetBetHistoryQueryParams:
 
 @dataclass
 class GetBetHistoryHeaders:
-    api_key: str = field(default=None, metadata={'header': { 'field_name': 'apiKey' }})
-    api_secret: str = field(default=None, metadata={'header': { 'field_name': 'apiSecret' }})
-    api_ticket: str = field(default=None, metadata={'header': { 'field_name': 'apiTicket' }})
+    api_key: str = field(default=None, metadata={'header': { 'field_name': 'apiKey', 'style': 'simple', 'explode': False }})
+    api_secret: str = field(default=None, metadata={'header': { 'field_name': 'apiSecret', 'style': 'simple', 'explode': False }})
+    api_ticket: str = field(default=None, metadata={'header': { 'field_name': 'apiTicket', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

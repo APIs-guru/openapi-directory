@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetArtifactMetaDataPathParams struct {
-	ArtifactID string `pathParam:"style=simple,explode=false,name=artifactId"`
+    ArtifactID string `pathParam:"style=simple,explode=false,name=artifactId"`
+    
 }
 
 type GetArtifactMetaDataRequest struct {
-	PathParams GetArtifactMetaDataPathParams
+    PathParams GetArtifactMetaDataPathParams 
+    
 }
 
 type GetArtifactMetaDataResponse struct {
-	ArtifactMetaData *shared.ArtifactMetaData
-	ContentType      string
-	Error            *shared.Error
-	StatusCode       int64
+    ArtifactMetaData *shared.ArtifactMetaData 
+    ContentType string 
+    Error *shared.Error 
+    StatusCode int64 
+    
 }
+

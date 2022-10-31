@@ -1,5 +1,9 @@
 package shared
 
+
+
 type MonitoringResources struct {
-	ClusterConfig MonitoringClusterConfig `json:"ClusterConfig"`
+    ClusterConfig MonitoringClusterConfig `json:"ClusterConfig"`
+    
 }
+

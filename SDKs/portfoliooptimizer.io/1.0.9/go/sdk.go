@@ -74,6 +74,7 @@ func (s *SDK) PostAssetsCorrelationMatrix(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -122,6 +123,7 @@ func (s *SDK) PostAssetsCorrelationMatrixNearest(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -170,6 +172,7 @@ func (s *SDK) PostAssetsCorrelationMatrixShrinkage(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -218,6 +221,7 @@ func (s *SDK) PostAssetsCorrelationMatrixValidation(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -266,6 +270,7 @@ func (s *SDK) PostAssetsCovarianceMatrix(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -314,6 +319,7 @@ func (s *SDK) PostAssetsCovarianceMatrixSample(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -362,6 +368,7 @@ func (s *SDK) PostAssetsCovarianceMatrixValidation(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -410,6 +417,7 @@ func (s *SDK) PostAssetsReturns(ctx context.Context, request operations.PostAsse
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -458,6 +466,7 @@ func (s *SDK) PostAssetsReturnsAverage(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -506,6 +515,7 @@ func (s *SDK) PostAssetsVariance(ctx context.Context, request operations.PostAss
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -554,6 +564,7 @@ func (s *SDK) PostAssetsVarianceSample(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -602,6 +613,7 @@ func (s *SDK) PostAssetsVolatility(ctx context.Context, request operations.PostA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -650,6 +662,7 @@ func (s *SDK) PostAssetsVolatilitySample(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -698,6 +711,7 @@ func (s *SDK) PostFactorsResidualization(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -746,6 +760,7 @@ func (s *SDK) PostPortfolioAnalysisAlpha(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -794,6 +809,7 @@ func (s *SDK) PostPortfolioAnalysisBeta(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -842,6 +858,7 @@ func (s *SDK) PostPortfolioAnalysisContributionsReturn(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -890,6 +907,7 @@ func (s *SDK) PostPortfolioAnalysisContributionsRisk(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -938,6 +956,7 @@ func (s *SDK) PostPortfolioAnalysisDiversificationRatio(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -986,6 +1005,7 @@ func (s *SDK) PostPortfolioAnalysisDrawdowns(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1034,6 +1054,7 @@ func (s *SDK) PostPortfolioAnalysisFactorExposures(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1082,6 +1103,7 @@ func (s *SDK) PostPortfolioAnalysisMeanVarianceEfficientFrontier(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1130,6 +1152,7 @@ func (s *SDK) PostPortfolioAnalysisMeanVarianceMinimumVarianceFrontier(ctx conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1178,6 +1201,7 @@ func (s *SDK) PostPortfolioAnalysisReturn(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1226,6 +1250,7 @@ func (s *SDK) PostPortfolioAnalysisReturnsAverage(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1274,6 +1299,7 @@ func (s *SDK) PostPortfolioAnalysisSharpeRatio(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1322,6 +1348,7 @@ func (s *SDK) PostPortfolioAnalysisTrackingError(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1370,6 +1397,7 @@ func (s *SDK) PostPortfolioAnalysisVolatility(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1418,6 +1446,7 @@ func (s *SDK) PostPortfolioConstructionInvestable(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1466,6 +1495,7 @@ func (s *SDK) PostPortfolioConstructionMimicking(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1514,6 +1544,7 @@ func (s *SDK) PostPortfolioConstructionRandom(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1562,6 +1593,7 @@ func (s *SDK) PostPortfolioOptimizationEqualRiskContributions(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1610,6 +1642,7 @@ func (s *SDK) PostPortfolioOptimizationEqualSharpeRatioContributions(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1658,6 +1691,7 @@ func (s *SDK) PostPortfolioOptimizationEqualWeighted(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1706,6 +1740,7 @@ func (s *SDK) PostPortfolioOptimizationInverseVarianceWeighted(ctx context.Conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1754,6 +1789,7 @@ func (s *SDK) PostPortfolioOptimizationInverseVolatilityWeighted(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1802,6 +1838,7 @@ func (s *SDK) PostPortfolioOptimizationMarketCapitalizationWeighted(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1850,6 +1887,7 @@ func (s *SDK) PostPortfolioOptimizationMaximumDecorrelation(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1898,6 +1936,7 @@ func (s *SDK) PostPortfolioOptimizationMaximumReturn(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1946,6 +1985,7 @@ func (s *SDK) PostPortfolioOptimizationMaximumSharpeRatio(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1994,6 +2034,7 @@ func (s *SDK) PostPortfolioOptimizationMeanVarianceEfficient(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2042,6 +2083,7 @@ func (s *SDK) PostPortfolioOptimizationMinimumCorrelation(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2090,6 +2132,7 @@ func (s *SDK) PostPortfolioOptimizationMinimumVariance(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2138,6 +2181,7 @@ func (s *SDK) PostPortfolioOptimizationMostDiversified(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2186,6 +2230,7 @@ func (s *SDK) PostPortfolioSimulationRebalancingDriftWeight(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2234,6 +2279,7 @@ func (s *SDK) PostPortfolioSimulationRebalancingFixedWeight(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2282,6 +2328,7 @@ func (s *SDK) PostPortfolioSimulationRebalancingRandomWeight(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

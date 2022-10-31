@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ListHpovManagersSecurity struct {
-	APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
+    APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type ListHpovManagersRequest struct {
-	Security ListHpovManagersSecurity
+    Security ListHpovManagersSecurity 
+    
 }
 
 type ListHpovManagersResponse struct {
-	ContentType            string
-	DataSourceListResponse *shared.DataSourceListResponse
-	StatusCode             int64
+    ContentType string 
+    DataSourceListResponse *shared.DataSourceListResponse 
+    StatusCode int64 
+    
 }
+

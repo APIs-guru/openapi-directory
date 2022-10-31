@@ -61,6 +61,8 @@ func (s *SDK) ClientAPIAll(ctx context.Context, request operations.ClientAPIAllR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -127,6 +129,8 @@ func (s *SDK) ClientAPICanDelete(ctx context.Context, request operations.ClientA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -204,7 +208,10 @@ func (s *SDK) ClientAPIDelete(ctx context.Context, request operations.ClientAPID
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -272,6 +279,8 @@ func (s *SDK) ClientAPIDetails(ctx context.Context, request operations.ClientAPI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -341,6 +350,8 @@ func (s *SDK) EstimationAPIAll(ctx context.Context, request operations.Estimatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -418,7 +429,10 @@ func (s *SDK) EstimationAPIChangeStatus(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -494,7 +508,10 @@ func (s *SDK) EstimationAPIDelete(ctx context.Context, request operations.Estima
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -562,6 +579,8 @@ func (s *SDK) EstimationAPIDetails(ctx context.Context, request operations.Estim
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -639,7 +658,10 @@ func (s *SDK) EstimationAPISendToClient(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -707,6 +729,8 @@ func (s *SDK) EstimationAPIStatus(ctx context.Context, request operations.Estima
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -777,6 +801,8 @@ func (s *SDK) EstimationAPIURI(ctx context.Context, request operations.Estimatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -845,6 +871,8 @@ func (s *SDK) GetAPIInvoiceAllcategories(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -915,6 +943,8 @@ func (s *SDK) GeneralAPICountries(ctx context.Context, request operations.Genera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -981,6 +1011,8 @@ func (s *SDK) GeneralAPICurrencies(ctx context.Context, request operations.Gener
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1049,6 +1081,8 @@ func (s *SDK) GeneralAPIDateFormats(ctx context.Context, request operations.Gene
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1116,6 +1150,8 @@ func (s *SDK) GeneralAPIUILanguages(ctx context.Context, request operations.Gene
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1182,6 +1218,8 @@ func (s *SDK) InvoiceAPIAll(ctx context.Context, request operations.InvoiceAPIAl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1259,7 +1297,10 @@ func (s *SDK) InvoiceAPIChangeStatus(ctx context.Context, request operations.Inv
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1335,7 +1376,10 @@ func (s *SDK) InvoiceAPIDelete(ctx context.Context, request operations.InvoiceAP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1403,6 +1447,8 @@ func (s *SDK) InvoiceAPIDetails(ctx context.Context, request operations.InvoiceA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1480,7 +1526,10 @@ func (s *SDK) InvoiceAPISendToAccountant(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1556,7 +1605,10 @@ func (s *SDK) InvoiceAPISendToClient(ctx context.Context, request operations.Inv
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1624,6 +1676,8 @@ func (s *SDK) InvoiceAPIStatus(ctx context.Context, request operations.InvoiceAP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1694,6 +1748,8 @@ func (s *SDK) InvoiceAPIURI(ctx context.Context, request operations.InvoiceAPIUR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -1762,6 +1818,8 @@ func (s *SDK) OrderAPIAll(ctx context.Context, request operations.OrderAPIAllReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1839,7 +1897,10 @@ func (s *SDK) OrderAPIChangeShippingDetails(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1880,7 +1941,10 @@ func (s *SDK) OrderAPIChangeStatus(ctx context.Context, request operations.Order
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1919,7 +1983,10 @@ func (s *SDK) OrderAPIDelete(ctx context.Context, request operations.OrderAPIDel
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1987,6 +2054,8 @@ func (s *SDK) OrderAPIDetails(ctx context.Context, request operations.OrderAPIDe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2064,7 +2133,10 @@ func (s *SDK) PostAPIInvoiceDeletecategory(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2140,7 +2212,10 @@ func (s *SDK) PostAPIInvoiceNewcategory(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2216,7 +2291,10 @@ func (s *SDK) PostAPIInvoiceUpdatecategory(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2285,6 +2363,8 @@ func (s *SDK) PaymentAPISupported(ctx context.Context, request operations.Paymen
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2351,6 +2431,8 @@ func (s *SDK) PaymentLinkAPIAll(ctx context.Context, request operations.PaymentL
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2421,6 +2503,8 @@ func (s *SDK) PaymentLinkAPIURI(ctx context.Context, request operations.PaymentL
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -2489,6 +2573,8 @@ func (s *SDK) ProductAPIAll(ctx context.Context, request operations.ProductAPIAl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2566,7 +2652,10 @@ func (s *SDK) ProductAPIDelete(ctx context.Context, request operations.ProductAP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2634,6 +2723,8 @@ func (s *SDK) ProductAPIDetails(ctx context.Context, request operations.ProductA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2703,6 +2794,8 @@ func (s *SDK) TaxAPIAll(ctx context.Context, request operations.TaxAPIAllRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2778,7 +2871,10 @@ func (s *SDK) TaxAPIDelete(ctx context.Context, request operations.TaxAPIDeleteR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2854,7 +2950,10 @@ func (s *SDK) TaxAPINew(ctx context.Context, request operations.TaxAPINewRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2930,7 +3029,10 @@ func (s *SDK) TaxAPIUpdate(ctx context.Context, request operations.TaxAPIUpdateR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2961,6 +3063,8 @@ func (s *SDK) WorkTypeAPIAll(ctx context.Context, request operations.WorkTypeAPI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -3036,7 +3140,10 @@ func (s *SDK) WorkTypeAPIDelete(ctx context.Context, request operations.WorkType
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -3104,6 +3211,8 @@ func (s *SDK) WorkTypeAPIDetails(ctx context.Context, request operations.WorkTyp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3181,7 +3290,10 @@ func (s *SDK) WorkTypeAPINew(ctx context.Context, request operations.WorkTypeAPI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -3249,6 +3361,8 @@ func (s *SDK) WorkTypeAPISearch(ctx context.Context, request operations.WorkType
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -3326,7 +3440,10 @@ func (s *SDK) WorkTypeAPIUpdate(ctx context.Context, request operations.WorkType
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 

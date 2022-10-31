@@ -1,48 +1,58 @@
 package shared
 
+
+
+
 type CertificateAuthorityStateEnum string
 
 const (
-	CertificateAuthorityStateEnumStateUnspecified       CertificateAuthorityStateEnum = "STATE_UNSPECIFIED"
-	CertificateAuthorityStateEnumEnabled                CertificateAuthorityStateEnum = "ENABLED"
-	CertificateAuthorityStateEnumDisabled               CertificateAuthorityStateEnum = "DISABLED"
-	CertificateAuthorityStateEnumStaged                 CertificateAuthorityStateEnum = "STAGED"
-	CertificateAuthorityStateEnumAwaitingUserActivation CertificateAuthorityStateEnum = "AWAITING_USER_ACTIVATION"
-	CertificateAuthorityStateEnumDeleted                CertificateAuthorityStateEnum = "DELETED"
+    CertificateAuthorityStateEnumStateUnspecified CertificateAuthorityStateEnum = "STATE_UNSPECIFIED"
+CertificateAuthorityStateEnumEnabled CertificateAuthorityStateEnum = "ENABLED"
+CertificateAuthorityStateEnumDisabled CertificateAuthorityStateEnum = "DISABLED"
+CertificateAuthorityStateEnumStaged CertificateAuthorityStateEnum = "STAGED"
+CertificateAuthorityStateEnumAwaitingUserActivation CertificateAuthorityStateEnum = "AWAITING_USER_ACTIVATION"
+CertificateAuthorityStateEnumDeleted CertificateAuthorityStateEnum = "DELETED"
 )
+
+
 
 type CertificateAuthorityTierEnum string
 
 const (
-	CertificateAuthorityTierEnumTierUnspecified CertificateAuthorityTierEnum = "TIER_UNSPECIFIED"
-	CertificateAuthorityTierEnumEnterprise      CertificateAuthorityTierEnum = "ENTERPRISE"
-	CertificateAuthorityTierEnumDevops          CertificateAuthorityTierEnum = "DEVOPS"
+    CertificateAuthorityTierEnumTierUnspecified CertificateAuthorityTierEnum = "TIER_UNSPECIFIED"
+CertificateAuthorityTierEnumEnterprise CertificateAuthorityTierEnum = "ENTERPRISE"
+CertificateAuthorityTierEnumDevops CertificateAuthorityTierEnum = "DEVOPS"
 )
+
+
 
 type CertificateAuthorityTypeEnum string
 
 const (
-	CertificateAuthorityTypeEnumTypeUnspecified CertificateAuthorityTypeEnum = "TYPE_UNSPECIFIED"
-	CertificateAuthorityTypeEnumSelfSigned      CertificateAuthorityTypeEnum = "SELF_SIGNED"
-	CertificateAuthorityTypeEnumSubordinate     CertificateAuthorityTypeEnum = "SUBORDINATE"
+    CertificateAuthorityTypeEnumTypeUnspecified CertificateAuthorityTypeEnum = "TYPE_UNSPECIFIED"
+CertificateAuthorityTypeEnumSelfSigned CertificateAuthorityTypeEnum = "SELF_SIGNED"
+CertificateAuthorityTypeEnumSubordinate CertificateAuthorityTypeEnum = "SUBORDINATE"
 )
 
+
 type CertificateAuthority struct {
-	AccessUrls                *AccessUrls                    `json:"accessUrls,omitempty"`
-	CaCertificateDescriptions []CertificateDescription       `json:"caCertificateDescriptions,omitempty"`
-	Config                    *CertificateConfig             `json:"config,omitempty"`
-	CreateTime                *string                        `json:"createTime,omitempty"`
-	DeleteTime                *string                        `json:"deleteTime,omitempty"`
-	ExpireTime                *string                        `json:"expireTime,omitempty"`
-	GcsBucket                 *string                        `json:"gcsBucket,omitempty"`
-	KeySpec                   *KeyVersionSpec                `json:"keySpec,omitempty"`
-	Labels                    map[string]string              `json:"labels,omitempty"`
-	Lifetime                  *string                        `json:"lifetime,omitempty"`
-	Name                      *string                        `json:"name,omitempty"`
-	PemCaCertificates         []string                       `json:"pemCaCertificates,omitempty"`
-	State                     *CertificateAuthorityStateEnum `json:"state,omitempty"`
-	SubordinateConfig         *SubordinateConfig             `json:"subordinateConfig,omitempty"`
-	Tier                      *CertificateAuthorityTierEnum  `json:"tier,omitempty"`
-	Type                      *CertificateAuthorityTypeEnum  `json:"type,omitempty"`
-	UpdateTime                *string                        `json:"updateTime,omitempty"`
+    AccessUrls *AccessUrls `json:"accessUrls,omitempty"`
+    CaCertificateDescriptions []CertificateDescription `json:"caCertificateDescriptions,omitempty"`
+    Config *CertificateConfig `json:"config,omitempty"`
+    CreateTime *string `json:"createTime,omitempty"`
+    DeleteTime *string `json:"deleteTime,omitempty"`
+    ExpireTime *string `json:"expireTime,omitempty"`
+    GcsBucket *string `json:"gcsBucket,omitempty"`
+    KeySpec *KeyVersionSpec `json:"keySpec,omitempty"`
+    Labels map[string]string `json:"labels,omitempty"`
+    Lifetime *string `json:"lifetime,omitempty"`
+    Name *string `json:"name,omitempty"`
+    PemCaCertificates []string `json:"pemCaCertificates,omitempty"`
+    State *CertificateAuthorityStateEnum `json:"state,omitempty"`
+    SubordinateConfig *SubordinateConfig `json:"subordinateConfig,omitempty"`
+    Tier *CertificateAuthorityTierEnum `json:"tier,omitempty"`
+    Type *CertificateAuthorityTypeEnum `json:"type,omitempty"`
+    UpdateTime *string `json:"updateTime,omitempty"`
+    
 }
+

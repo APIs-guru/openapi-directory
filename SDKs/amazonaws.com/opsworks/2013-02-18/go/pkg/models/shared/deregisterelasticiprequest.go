@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeregisterElasticIPRequest struct {
-	ElasticIP string `json:"ElasticIp"`
+    ElasticIP string `json:"ElasticIp"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AppDeviceIDRequest struct {
-	AppID string `json:"app_id"`
+    AppID string `json:"app_id"`
+    
 }
+

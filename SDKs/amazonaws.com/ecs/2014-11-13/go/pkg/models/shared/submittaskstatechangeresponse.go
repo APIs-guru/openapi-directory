@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SubmitTaskStateChangeResponse struct {
-	Acknowledgment *string `json:"acknowledgment,omitempty"`
+    Acknowledgment *string `json:"acknowledgment,omitempty"`
+    
 }
+

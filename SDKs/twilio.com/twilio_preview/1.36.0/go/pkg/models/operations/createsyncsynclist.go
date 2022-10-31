@@ -1,34 +1,38 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var CreateSyncSyncListServers = []string{
 	"https://preview.twilio.com",
 }
 
 type CreateSyncSyncListPathParams struct {
-	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
+    ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
+    
 }
 
 type CreateSyncSyncListCreateSyncSyncListRequest struct {
-	UniqueName *string `form:"name=UniqueName"`
+    UniqueName *string `form:"name=UniqueName"`
+    
 }
 
 type CreateSyncSyncListSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type CreateSyncSyncListRequest struct {
-	ServerURL  *string
-	PathParams CreateSyncSyncListPathParams
-	Request    *CreateSyncSyncListCreateSyncSyncListRequest `request:"mediaType=application/x-www-form-urlencoded"`
-	Security   CreateSyncSyncListSecurity
+    ServerURL *string 
+    PathParams CreateSyncSyncListPathParams 
+    Request *CreateSyncSyncListCreateSyncSyncListRequest `request:"mediaType=application/x-www-form-urlencoded"`
+    Security CreateSyncSyncListSecurity 
+    
 }
 
 type CreateSyncSyncListResponse struct {
-	ContentType                string
-	StatusCode                 int64
-	PreviewSyncServiceSyncList *shared.PreviewSyncServiceSyncList
+    ContentType string 
+    StatusCode int64 
+    PreviewSyncServiceSyncList *shared.PreviewSyncServiceSyncList 
+    
 }
+

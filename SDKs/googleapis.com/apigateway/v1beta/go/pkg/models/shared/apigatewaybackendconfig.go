@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ApigatewayBackendConfig struct {
-	GoogleServiceAccount *string `json:"googleServiceAccount,omitempty"`
+    GoogleServiceAccount *string `json:"googleServiceAccount,omitempty"`
+    
 }
+

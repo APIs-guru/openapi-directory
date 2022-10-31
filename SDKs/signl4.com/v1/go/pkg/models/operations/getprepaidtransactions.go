@@ -1,13 +1,14 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetPrepaidTransactionsResponse struct {
-	Body                    []byte
-	ContentType             string
-	ErrorResponseContent    *shared.ErrorResponseContent
-	PrepaidTransactionInfos []shared.PrepaidTransactionInfo
-	StatusCode              int64
+    Body []byte 
+    ContentType string 
+    ErrorResponseContent *shared.ErrorResponseContent 
+    PrepaidTransactionInfos []shared.PrepaidTransactionInfo 
+    StatusCode int64 
+    
 }
+

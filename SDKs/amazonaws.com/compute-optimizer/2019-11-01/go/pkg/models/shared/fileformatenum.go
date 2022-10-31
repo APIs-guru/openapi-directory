@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type FileFormatEnum string
 
 const (
-	FileFormatEnumCsv FileFormatEnum = "Csv"
+    FileFormatEnumCsv FileFormatEnum = "Csv"
 )
+
+

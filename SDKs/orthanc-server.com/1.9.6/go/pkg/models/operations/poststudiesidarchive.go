@@ -1,17 +1,23 @@
 package operations
 
+
+
 type PostStudiesIDArchivePathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type PostStudiesIDArchiveRequest struct {
-	PathParams PostStudiesIDArchivePathParams
-	Request    *interface{} `request:"mediaType=application/json"`
+    PathParams PostStudiesIDArchivePathParams 
+    Request *interface{} `request:"mediaType=application/json"`
+    
 }
 
 type PostStudiesIDArchiveResponse struct {
-	Body                                      []byte
-	ContentType                               string
-	PostStudiesIDArchive200ApplicationJSONAny *interface{}
-	StatusCode                                int64
+    Body []byte 
+    ContentType string 
+    PostStudiesIDArchive200ApplicationJSONAny *interface{} 
+    StatusCode int64 
+    
 }
+

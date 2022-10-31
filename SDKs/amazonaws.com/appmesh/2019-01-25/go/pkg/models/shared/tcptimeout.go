@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TCPTimeout struct {
-	Idle *Duration `json:"idle,omitempty"`
+    Idle *Duration `json:"idle,omitempty"`
+    
 }
+

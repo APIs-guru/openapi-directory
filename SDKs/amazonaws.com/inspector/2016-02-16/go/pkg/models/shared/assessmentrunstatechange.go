@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type AssessmentRunStateChange struct {
-	State          AssessmentRunStateEnum `json:"state"`
-	StateChangedAt time.Time              `json:"stateChangedAt"`
+    State AssessmentRunStateEnum `json:"state"`
+    StateChangedAt time.Time `json:"stateChangedAt"`
+    
 }
+

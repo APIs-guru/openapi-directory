@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ServerValidationOutput struct {
-	Server *Server `json:"server,omitempty"`
+    Server *Server `json:"server,omitempty"`
+    
 }
+

@@ -1,6 +1,10 @@
 package shared
 
+
+
 type Promoter struct {
-	OrganisationName *string `json:"organisationName,omitempty"`
-	OrganisationURL  *string `json:"organisationUrl,omitempty"`
+    OrganisationName *string `json:"organisationName,omitempty"`
+    OrganisationURL *string `json:"organisationUrl,omitempty"`
+    
 }
+

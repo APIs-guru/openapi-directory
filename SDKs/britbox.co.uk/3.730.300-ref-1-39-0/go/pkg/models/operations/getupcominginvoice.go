@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetUpcomingInvoiceQueryParams struct {
-	Lang *string `queryParam:"style=form,explode=true,name=lang"`
+    Lang *string `queryParam:"style=form,explode=true,name=lang"`
+    
 }
 
 type GetUpcomingInvoiceSecurity struct {
-	AccountAuth shared.SchemeAccountAuth `security:"scheme,type=oauth2"`
+    AccountAuth shared.SchemeAccountAuth `security:"scheme,type=oauth2"`
+    
 }
 
 type GetUpcomingInvoiceRequest struct {
-	QueryParams GetUpcomingInvoiceQueryParams
-	Security    GetUpcomingInvoiceSecurity
+    QueryParams GetUpcomingInvoiceQueryParams 
+    Security GetUpcomingInvoiceSecurity 
+    
 }
 
 type GetUpcomingInvoiceResponse struct {
-	ContentType            string
-	ItvGetDiscountResponse *shared.ItvGetDiscountResponse
-	ServiceError           *shared.ServiceError
-	StatusCode             int64
+    ContentType string 
+    ItvGetDiscountResponse *shared.ItvGetDiscountResponse 
+    ServiceError *shared.ServiceError 
+    StatusCode int64 
+    
 }
+

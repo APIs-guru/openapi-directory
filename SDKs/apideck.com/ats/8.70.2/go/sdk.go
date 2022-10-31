@@ -73,7 +73,10 @@ func (s *SDK) ApplicantsAdd(ctx context.Context, request operations.ApplicantsAd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -176,6 +179,8 @@ func (s *SDK) ApplicantsAll(ctx context.Context, request operations.ApplicantsAl
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -276,6 +281,8 @@ func (s *SDK) ApplicantsOne(ctx context.Context, request operations.ApplicantsOn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -378,6 +385,8 @@ func (s *SDK) JobsAll(ctx context.Context, request operations.JobsAllRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -478,6 +487,8 @@ func (s *SDK) JobsOne(ctx context.Context, request operations.JobsOneRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 

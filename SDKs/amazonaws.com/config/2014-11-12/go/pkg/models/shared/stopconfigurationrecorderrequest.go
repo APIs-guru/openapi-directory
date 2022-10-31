@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StopConfigurationRecorderRequest struct {
-	ConfigurationRecorderName string `json:"ConfigurationRecorderName"`
+    ConfigurationRecorderName string `json:"ConfigurationRecorderName"`
+    
 }
+

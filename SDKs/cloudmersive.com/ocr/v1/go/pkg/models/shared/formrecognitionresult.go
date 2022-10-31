@@ -1,9 +1,13 @@
 package shared
 
+
+
 type FormRecognitionResult struct {
-	BestMatchFormSettingName    *string       `json:"BestMatchFormSettingName,omitempty"`
-	Diagnostics                 []string      `json:"Diagnostics,omitempty"`
-	FieldValueExtractionResult  []FieldResult `json:"FieldValueExtractionResult,omitempty"`
-	Successful                  *bool         `json:"Successful,omitempty"`
-	TableValueExtractionResults []TableResult `json:"TableValueExtractionResults,omitempty"`
+    BestMatchFormSettingName *string `json:"BestMatchFormSettingName,omitempty"`
+    Diagnostics []string `json:"Diagnostics,omitempty"`
+    FieldValueExtractionResult []FieldResult `json:"FieldValueExtractionResult,omitempty"`
+    Successful *bool `json:"Successful,omitempty"`
+    TableValueExtractionResults []TableResult `json:"TableValueExtractionResults,omitempty"`
+    
 }
+

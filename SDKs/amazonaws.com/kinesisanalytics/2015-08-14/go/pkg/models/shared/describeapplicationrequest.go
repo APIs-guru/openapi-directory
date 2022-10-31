@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeApplicationRequest struct {
-	ApplicationName string `json:"ApplicationName"`
+    ApplicationName string `json:"ApplicationName"`
+    
 }
+

@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type GetDistributionLatestCacheResetResult struct {
-	CreateTime *time.Time `json:"createTime,omitempty"`
-	Status     *string    `json:"status,omitempty"`
+    CreateTime *time.Time `json:"createTime,omitempty"`
+    Status *string `json:"status,omitempty"`
+    
 }
+

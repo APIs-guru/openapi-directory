@@ -1,38 +1,43 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
+
 
 type StartTopicsDetectionJobXAmzTargetEnum string
 
 const (
-	StartTopicsDetectionJobXAmzTargetEnumComprehend20171127StartTopicsDetectionJob StartTopicsDetectionJobXAmzTargetEnum = "Comprehend_20171127.StartTopicsDetectionJob"
+    StartTopicsDetectionJobXAmzTargetEnumComprehend20171127StartTopicsDetectionJob StartTopicsDetectionJobXAmzTargetEnum = "Comprehend_20171127.StartTopicsDetectionJob"
 )
 
+
 type StartTopicsDetectionJobHeaders struct {
-	XAmzAlgorithm     *string                               `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string                               `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string                               `header:"name=X-Amz-Credential"`
-	XAmzDate          *string                               `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string                               `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string                               `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string                               `header:"name=X-Amz-SignedHeaders"`
-	XAmzTarget        StartTopicsDetectionJobXAmzTargetEnum `header:"name=X-Amz-Target"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    XAmzTarget StartTopicsDetectionJobXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
+    
 }
 
 type StartTopicsDetectionJobRequest struct {
-	Headers StartTopicsDetectionJobHeaders
-	Request shared.StartTopicsDetectionJobRequest `request:"mediaType=application/json"`
+    Headers StartTopicsDetectionJobHeaders 
+    Request shared.StartTopicsDetectionJobRequest `request:"mediaType=application/json"`
+    
 }
 
 type StartTopicsDetectionJobResponse struct {
-	ContentType                     string
-	InternalServerException         *interface{}
-	InvalidRequestException         *interface{}
-	KmsKeyValidationException       *interface{}
-	StartTopicsDetectionJobResponse *shared.StartTopicsDetectionJobResponse
-	StatusCode                      int64
-	TooManyRequestsException        *interface{}
-	TooManyTagsException            *interface{}
+    ContentType string 
+    InternalServerException *interface{} 
+    InvalidRequestException *interface{} 
+    KmsKeyValidationException *interface{} 
+    StartTopicsDetectionJobResponse *shared.StartTopicsDetectionJobResponse 
+    StatusCode int64 
+    TooManyRequestsException *interface{} 
+    TooManyTagsException *interface{} 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LicenseServiceConfiguration struct {
-	Endpoint *string `json:"endpoint,omitempty"`
+    Endpoint *string `json:"endpoint,omitempty"`
+    
 }
+

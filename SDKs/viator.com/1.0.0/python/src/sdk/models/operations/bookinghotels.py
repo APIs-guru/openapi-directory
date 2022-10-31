@@ -11,7 +11,7 @@ class BookingHotelsQueryParams:
 
 @dataclass
 class BookingHotelsHeaders:
-    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

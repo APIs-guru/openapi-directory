@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteMedicalTranscriptionJobRequest struct {
-	MedicalTranscriptionJobName string `json:"MedicalTranscriptionJobName"`
+    MedicalTranscriptionJobName string `json:"MedicalTranscriptionJobName"`
+    
 }
+

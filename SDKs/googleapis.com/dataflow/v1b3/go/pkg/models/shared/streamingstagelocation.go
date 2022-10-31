@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StreamingStageLocation struct {
-	StreamID *string `json:"streamId,omitempty"`
+    StreamID *string `json:"streamId,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PlaylistPlayer struct {
-	EmbedHTML *string `json:"embedHtml,omitempty"`
+    EmbedHTML *string `json:"embedHtml,omitempty"`
+    
 }
+

@@ -1,11 +1,15 @@
 package shared
 
+
+
 type GoogleCloudDialogflowCxV3FormParameter struct {
-	DefaultValue *interface{}                                        `json:"defaultValue,omitempty"`
-	DisplayName  *string                                             `json:"displayName,omitempty"`
-	EntityType   *string                                             `json:"entityType,omitempty"`
-	FillBehavior *GoogleCloudDialogflowCxV3FormParameterFillBehavior `json:"fillBehavior,omitempty"`
-	IsList       *bool                                               `json:"isList,omitempty"`
-	Redact       *bool                                               `json:"redact,omitempty"`
-	Required     *bool                                               `json:"required,omitempty"`
+    DefaultValue *interface{} `json:"defaultValue,omitempty"`
+    DisplayName *string `json:"displayName,omitempty"`
+    EntityType *string `json:"entityType,omitempty"`
+    FillBehavior *GoogleCloudDialogflowCxV3FormParameterFillBehavior `json:"fillBehavior,omitempty"`
+    IsList *bool `json:"isList,omitempty"`
+    Redact *bool `json:"redact,omitempty"`
+    Required *bool `json:"required,omitempty"`
+    
 }
+

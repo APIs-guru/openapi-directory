@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InsufficientGpsFailureDetails struct {
-	GpsPointsFound *int32 `json:"gpsPointsFound,omitempty"`
+    GpsPointsFound *int32 `json:"gpsPointsFound,omitempty"`
+    
 }
+

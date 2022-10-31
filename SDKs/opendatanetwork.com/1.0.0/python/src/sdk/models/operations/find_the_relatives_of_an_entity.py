@@ -23,7 +23,7 @@ class FindTheRelativesOfAnEntityQueryParams:
 
 @dataclass
 class FindTheRelativesOfAnEntityHeaders:
-    x_app_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-App-Token' }})
+    x_app_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-App-Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

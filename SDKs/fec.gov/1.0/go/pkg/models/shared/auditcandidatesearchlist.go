@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AuditCandidateSearchList struct {
-	Results []AuditCandidateSearch `json:"results,omitempty"`
+    Results []AuditCandidateSearch `json:"results,omitempty"`
+    
 }
+

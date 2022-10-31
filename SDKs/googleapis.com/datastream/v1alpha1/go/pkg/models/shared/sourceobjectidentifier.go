@@ -1,6 +1,10 @@
 package shared
 
+
+
 type SourceObjectIdentifier struct {
-	MysqlIdentifier  *MysqlObjectIdentifier  `json:"mysqlIdentifier,omitempty"`
-	OracleIdentifier *OracleObjectIdentifier `json:"oracleIdentifier,omitempty"`
+    MysqlIdentifier *MysqlObjectIdentifier `json:"mysqlIdentifier,omitempty"`
+    OracleIdentifier *OracleObjectIdentifier `json:"oracleIdentifier,omitempty"`
+    
 }
+

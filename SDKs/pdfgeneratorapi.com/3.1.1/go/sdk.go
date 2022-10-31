@@ -164,6 +164,7 @@ func (s *SDK) CreateTemplate(ctx context.Context, request operations.CreateTempl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -444,6 +445,7 @@ func (s *SDK) GetEditorURL(ctx context.Context, request operations.GetEditorURLR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -815,6 +817,7 @@ func (s *SDK) MergeTemplate(ctx context.Context, request operations.MergeTemplat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -915,6 +918,7 @@ func (s *SDK) MergeTemplates(ctx context.Context, request operations.MergeTempla
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1015,6 +1019,7 @@ func (s *SDK) UpdateTemplate(ctx context.Context, request operations.UpdateTempl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

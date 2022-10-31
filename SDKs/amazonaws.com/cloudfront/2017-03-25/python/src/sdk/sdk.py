@@ -21,29 +21,34 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def create_cloud_front_origin_access_identity2017_03_25(self, request: operations.CreateCloudFrontOriginAccessIdentity20170325Request) -> operations.CreateCloudFrontOriginAccessIdentity20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2017-03-25/origin-access-identity/cloudfront"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCloudFrontOriginAccessIdentity20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -66,26 +71,28 @@ class SDK:
         return res
 
     
-    
     def create_distribution2017_03_25(self, request: operations.CreateDistribution20170325Request) -> operations.CreateDistribution20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2017-03-25/distribution"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateDistribution20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -213,27 +220,30 @@ class SDK:
         return res
 
     
-    
     def create_distribution_with_tags2017_03_25(self, request: operations.CreateDistributionWithTags20170325Request) -> operations.CreateDistributionWithTags20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2017-03-25/distribution#WithTags"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateDistributionWithTags20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -364,26 +374,28 @@ class SDK:
         return res
 
     
-    
     def create_invalidation2017_03_25(self, request: operations.CreateInvalidation20170325Request) -> operations.CreateInvalidation20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/distribution/{DistributionId}/invalidation", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateInvalidation20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -412,26 +424,28 @@ class SDK:
         return res
 
     
-    
     def create_streaming_distribution2017_03_25(self, request: operations.CreateStreamingDistribution20170325Request) -> operations.CreateStreamingDistribution20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2017-03-25/streaming-distribution"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateStreamingDistribution20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -475,27 +489,30 @@ class SDK:
         return res
 
     
-    
     def create_streaming_distribution_with_tags2017_03_25(self, request: operations.CreateStreamingDistributionWithTags20170325Request) -> operations.CreateStreamingDistributionWithTags20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2017-03-25/streaming-distribution#WithTags"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateStreamingDistributionWithTags20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -542,19 +559,21 @@ class SDK:
         return res
 
     
-    
     def delete_cloud_front_origin_access_identity2017_03_25(self, request: operations.DeleteCloudFrontOriginAccessIdentity20170325Request) -> operations.DeleteCloudFrontOriginAccessIdentity20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/origin-access-identity/cloudfront/{Id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCloudFrontOriginAccessIdentity20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -575,20 +594,22 @@ class SDK:
 
         return res
 
-    
     
     def delete_distribution2017_03_25(self, request: operations.DeleteDistribution20170325Request) -> operations.DeleteDistribution20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/distribution/{Id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDistribution20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -609,20 +630,22 @@ class SDK:
 
         return res
 
-    
     
     def delete_service_linked_role2017_03_25(self, request: operations.DeleteServiceLinkedRole20170325Request) -> operations.DeleteServiceLinkedRole20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/service-linked-role/{RoleName}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteServiceLinkedRole20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -641,19 +664,21 @@ class SDK:
         return res
 
     
-    
     def delete_streaming_distribution2017_03_25(self, request: operations.DeleteStreamingDistribution20170325Request) -> operations.DeleteStreamingDistribution20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/streaming-distribution/{Id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteStreamingDistribution20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -675,19 +700,21 @@ class SDK:
         return res
 
     
-    
     def get_cloud_front_origin_access_identity2017_03_25(self, request: operations.GetCloudFrontOriginAccessIdentity20170325Request) -> operations.GetCloudFrontOriginAccessIdentity20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/origin-access-identity/cloudfront/{Id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetCloudFrontOriginAccessIdentity20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -700,20 +727,22 @@ class SDK:
 
         return res
 
-    
     
     def get_cloud_front_origin_access_identity_config2017_03_25(self, request: operations.GetCloudFrontOriginAccessIdentityConfig20170325Request) -> operations.GetCloudFrontOriginAccessIdentityConfig20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/origin-access-identity/cloudfront/{Id}/config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetCloudFrontOriginAccessIdentityConfig20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -726,20 +755,22 @@ class SDK:
 
         return res
 
-    
     
     def get_distribution2017_03_25(self, request: operations.GetDistribution20170325Request) -> operations.GetDistribution20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/distribution/{Id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDistribution20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -752,20 +783,22 @@ class SDK:
 
         return res
 
-    
     
     def get_distribution_config2017_03_25(self, request: operations.GetDistributionConfig20170325Request) -> operations.GetDistributionConfig20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/distribution/{Id}/config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDistributionConfig20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -778,20 +811,22 @@ class SDK:
 
         return res
 
-    
     
     def get_invalidation2017_03_25(self, request: operations.GetInvalidation20170325Request) -> operations.GetInvalidation20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/distribution/{DistributionId}/invalidation/{Id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetInvalidation20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -807,20 +842,22 @@ class SDK:
 
         return res
 
-    
     
     def get_streaming_distribution2017_03_25(self, request: operations.GetStreamingDistribution20170325Request) -> operations.GetStreamingDistribution20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/streaming-distribution/{Id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetStreamingDistribution20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -833,20 +870,22 @@ class SDK:
 
         return res
 
-    
     
     def get_streaming_distribution_config2017_03_25(self, request: operations.GetStreamingDistributionConfig20170325Request) -> operations.GetStreamingDistributionConfig20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/streaming-distribution/{Id}/config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetStreamingDistributionConfig20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -859,21 +898,24 @@ class SDK:
 
         return res
 
-    
     
     def list_cloud_front_origin_access_identities2017_03_25(self, request: operations.ListCloudFrontOriginAccessIdentities20170325Request) -> operations.ListCloudFrontOriginAccessIdentities20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2017-03-25/origin-access-identity/cloudfront"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCloudFrontOriginAccessIdentities20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -883,21 +925,24 @@ class SDK:
 
         return res
 
-    
     
     def list_distributions2017_03_25(self, request: operations.ListDistributions20170325Request) -> operations.ListDistributions20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2017-03-25/distribution"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListDistributions20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -907,21 +952,24 @@ class SDK:
 
         return res
 
-    
     
     def list_distributions_by_web_acl_id2017_03_25(self, request: operations.ListDistributionsByWebACLId20170325Request) -> operations.ListDistributionsByWebACLId20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/distributionsByWebACLId/{WebACLId}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListDistributionsByWebACLId20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -934,21 +982,24 @@ class SDK:
 
         return res
 
-    
     
     def list_invalidations2017_03_25(self, request: operations.ListInvalidations20170325Request) -> operations.ListInvalidations20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/distribution/{DistributionId}/invalidation", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListInvalidations20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -964,21 +1015,24 @@ class SDK:
 
         return res
 
-    
     
     def list_streaming_distributions2017_03_25(self, request: operations.ListStreamingDistributions20170325Request) -> operations.ListStreamingDistributions20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2017-03-25/streaming-distribution"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListStreamingDistributions20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -988,21 +1042,24 @@ class SDK:
 
         return res
 
-    
     
     def list_tags_for_resource2017_03_25(self, request: operations.ListTagsForResource20170325Request) -> operations.ListTagsForResource20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2017-03-25/tagging#Resource"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTagsForResource20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -1022,27 +1079,30 @@ class SDK:
         return res
 
     
-    
     def tag_resource2017_03_25(self, request: operations.TagResource20170325Request) -> operations.TagResource20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2017-03-25/tagging#Operation=Tag&Resource"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TagResource20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -1060,28 +1120,31 @@ class SDK:
 
         return res
 
-    
     
     def untag_resource2017_03_25(self, request: operations.UntagResource20170325Request) -> operations.UntagResource20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2017-03-25/tagging#Operation=Untag&Resource"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UntagResource20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -1100,26 +1163,28 @@ class SDK:
         return res
 
     
-    
     def update_cloud_front_origin_access_identity2017_03_25(self, request: operations.UpdateCloudFrontOriginAccessIdentity20170325Request) -> operations.UpdateCloudFrontOriginAccessIdentity20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/origin-access-identity/cloudfront/{Id}/config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateCloudFrontOriginAccessIdentity20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -1151,26 +1216,28 @@ class SDK:
         return res
 
     
-    
     def update_distribution2017_03_25(self, request: operations.UpdateDistribution20170325Request) -> operations.UpdateDistribution20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/distribution/{Id}/config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateDistribution20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content
@@ -1298,26 +1365,28 @@ class SDK:
         return res
 
     
-    
     def update_streaming_distribution2017_03_25(self, request: operations.UpdateStreamingDistribution20170325Request) -> operations.UpdateStreamingDistribution20170325Response:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-25/streaming-distribution/{Id}/config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateStreamingDistribution20170325Response(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/xml"):
                 res.body = r.content

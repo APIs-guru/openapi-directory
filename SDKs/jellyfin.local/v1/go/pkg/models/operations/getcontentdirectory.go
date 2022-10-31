@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetContentDirectoryPathParams struct {
-	ServerID string `pathParam:"style=simple,explode=false,name=serverId"`
+    ServerID string `pathParam:"style=simple,explode=false,name=serverId"`
+    
 }
 
 type GetContentDirectoryRequest struct {
-	PathParams GetContentDirectoryPathParams
+    PathParams GetContentDirectoryPathParams 
+    
 }
 
 type GetContentDirectoryResponse struct {
-	ContentType                               string
-	GetContentDirectory200TextXMLBinaryString []byte
-	StatusCode                                int64
+    ContentType string 
+    GetContentDirectory200TextXMLBinaryString []byte 
+    StatusCode int64 
+    
 }
+

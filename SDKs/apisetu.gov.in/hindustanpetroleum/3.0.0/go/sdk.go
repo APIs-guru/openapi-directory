@@ -63,6 +63,7 @@ func (s *SDK) Lpgsv(ctx context.Context, request operations.LpgsvRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

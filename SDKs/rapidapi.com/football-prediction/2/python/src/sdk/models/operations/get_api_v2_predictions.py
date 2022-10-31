@@ -5,7 +5,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass
 class GetAPIV2PredictionsHeaders:
-    x_rapid_api_key: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-RapidApi-Key' }})
+    x_rapid_api_key: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-RapidApi-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

@@ -1,21 +1,26 @@
 package shared
 
+
+
+
 type MessageCode401PiisEnum string
 
 const (
-	MessageCode401PiisEnumCertificateInvalid    MessageCode401PiisEnum = "CERTIFICATE_INVALID"
-	MessageCode401PiisEnumRoleInvalid           MessageCode401PiisEnum = "ROLE_INVALID"
-	MessageCode401PiisEnumCertificateExpired    MessageCode401PiisEnum = "CERTIFICATE_EXPIRED"
-	MessageCode401PiisEnumCertificateBlocked    MessageCode401PiisEnum = "CERTIFICATE_BLOCKED"
-	MessageCode401PiisEnumCertificateRevoke     MessageCode401PiisEnum = "CERTIFICATE_REVOKE"
-	MessageCode401PiisEnumCertificateMissing    MessageCode401PiisEnum = "CERTIFICATE_MISSING"
-	MessageCode401PiisEnumSignatureInvalid      MessageCode401PiisEnum = "SIGNATURE_INVALID"
-	MessageCode401PiisEnumSignatureMissing      MessageCode401PiisEnum = "SIGNATURE_MISSING"
-	MessageCode401PiisEnumCorporateIDInvalid    MessageCode401PiisEnum = "CORPORATE_ID_INVALID"
-	MessageCode401PiisEnumPsuCredentialsInvalid MessageCode401PiisEnum = "PSU_CREDENTIALS_INVALID"
-	MessageCode401PiisEnumConsentInvalid        MessageCode401PiisEnum = "CONSENT_INVALID"
-	MessageCode401PiisEnumConsentExpired        MessageCode401PiisEnum = "CONSENT_EXPIRED"
-	MessageCode401PiisEnumTokenUnknown          MessageCode401PiisEnum = "TOKEN_UNKNOWN"
-	MessageCode401PiisEnumTokenInvalid          MessageCode401PiisEnum = "TOKEN_INVALID"
-	MessageCode401PiisEnumTokenExpired          MessageCode401PiisEnum = "TOKEN_EXPIRED"
+    MessageCode401PiisEnumCertificateInvalid MessageCode401PiisEnum = "CERTIFICATE_INVALID"
+MessageCode401PiisEnumRoleInvalid MessageCode401PiisEnum = "ROLE_INVALID"
+MessageCode401PiisEnumCertificateExpired MessageCode401PiisEnum = "CERTIFICATE_EXPIRED"
+MessageCode401PiisEnumCertificateBlocked MessageCode401PiisEnum = "CERTIFICATE_BLOCKED"
+MessageCode401PiisEnumCertificateRevoke MessageCode401PiisEnum = "CERTIFICATE_REVOKE"
+MessageCode401PiisEnumCertificateMissing MessageCode401PiisEnum = "CERTIFICATE_MISSING"
+MessageCode401PiisEnumSignatureInvalid MessageCode401PiisEnum = "SIGNATURE_INVALID"
+MessageCode401PiisEnumSignatureMissing MessageCode401PiisEnum = "SIGNATURE_MISSING"
+MessageCode401PiisEnumCorporateIDInvalid MessageCode401PiisEnum = "CORPORATE_ID_INVALID"
+MessageCode401PiisEnumPsuCredentialsInvalid MessageCode401PiisEnum = "PSU_CREDENTIALS_INVALID"
+MessageCode401PiisEnumConsentInvalid MessageCode401PiisEnum = "CONSENT_INVALID"
+MessageCode401PiisEnumConsentExpired MessageCode401PiisEnum = "CONSENT_EXPIRED"
+MessageCode401PiisEnumTokenUnknown MessageCode401PiisEnum = "TOKEN_UNKNOWN"
+MessageCode401PiisEnumTokenInvalid MessageCode401PiisEnum = "TOKEN_INVALID"
+MessageCode401PiisEnumTokenExpired MessageCode401PiisEnum = "TOKEN_EXPIRED"
 )
+
+

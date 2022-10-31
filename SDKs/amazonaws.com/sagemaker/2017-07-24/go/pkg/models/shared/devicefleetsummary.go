@@ -1,12 +1,13 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type DeviceFleetSummary struct {
-	CreationTime     *time.Time `json:"CreationTime,omitempty"`
-	DeviceFleetArn   string     `json:"DeviceFleetArn"`
-	DeviceFleetName  string     `json:"DeviceFleetName"`
-	LastModifiedTime *time.Time `json:"LastModifiedTime,omitempty"`
+    CreationTime *time.Time `json:"CreationTime,omitempty"`
+    DeviceFleetArn string `json:"DeviceFleetArn"`
+    DeviceFleetName string `json:"DeviceFleetName"`
+    LastModifiedTime *time.Time `json:"LastModifiedTime,omitempty"`
+    
 }
+

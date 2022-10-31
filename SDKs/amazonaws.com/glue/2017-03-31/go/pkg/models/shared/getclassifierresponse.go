@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetClassifierResponse struct {
-	Classifier *Classifier `json:"Classifier,omitempty"`
+    Classifier *Classifier `json:"Classifier,omitempty"`
+    
 }
+

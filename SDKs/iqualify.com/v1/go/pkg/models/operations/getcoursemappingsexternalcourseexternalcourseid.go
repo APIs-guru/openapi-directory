@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetCourseMappingsExternalcourseExternalCourseIDPathParams struct {
-	ExternalCourseID string `pathParam:"style=simple,explode=false,name=externalCourseId"`
+    ExternalCourseID string `pathParam:"style=simple,explode=false,name=externalCourseId"`
+    
 }
 
 type GetCourseMappingsExternalcourseExternalCourseIDRequest struct {
-	PathParams GetCourseMappingsExternalcourseExternalCourseIDPathParams
+    PathParams GetCourseMappingsExternalcourseExternalCourseIDPathParams 
+    
 }
 
 type GetCourseMappingsExternalcourseExternalCourseIDResponse struct {
-	ContentType                                                              string
-	Error                                                                    *shared.Error
-	GetCourseMappingsExternalcourseExternalCourseID200ApplicationJSONStrings []string
-	StatusCode                                                               int64
+    ContentType string 
+    Error *shared.Error 
+    GetCourseMappingsExternalcourseExternalCourseID200ApplicationJSONStrings []string 
+    StatusCode int64 
+    
 }
+

@@ -1,67 +1,76 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ListObjectAttributesQueryParams struct {
-	MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
-	NextToken  *string `queryParam:"style=form,explode=true,name=NextToken"`
+    MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
+    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
+    
 }
+
 
 type ListObjectAttributesXAmzConsistencyLevelEnum string
 
 const (
-	ListObjectAttributesXAmzConsistencyLevelEnumSerializable ListObjectAttributesXAmzConsistencyLevelEnum = "SERIALIZABLE"
-	ListObjectAttributesXAmzConsistencyLevelEnumEventual     ListObjectAttributesXAmzConsistencyLevelEnum = "EVENTUAL"
+    ListObjectAttributesXAmzConsistencyLevelEnumSerializable ListObjectAttributesXAmzConsistencyLevelEnum = "SERIALIZABLE"
+ListObjectAttributesXAmzConsistencyLevelEnumEventual ListObjectAttributesXAmzConsistencyLevelEnum = "EVENTUAL"
 )
 
+
 type ListObjectAttributesHeaders struct {
-	XAmzAlgorithm        *string                                       `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256    *string                                       `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential       *string                                       `header:"name=X-Amz-Credential"`
-	XAmzDate             *string                                       `header:"name=X-Amz-Date"`
-	XAmzSecurityToken    *string                                       `header:"name=X-Amz-Security-Token"`
-	XAmzSignature        *string                                       `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders    *string                                       `header:"name=X-Amz-SignedHeaders"`
-	XAmzConsistencyLevel *ListObjectAttributesXAmzConsistencyLevelEnum `header:"name=x-amz-consistency-level"`
-	XAmzDataPartition    string                                        `header:"name=x-amz-data-partition"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    XAmzConsistencyLevel *ListObjectAttributesXAmzConsistencyLevelEnum `header:"style=simple,explode=false,name=x-amz-consistency-level"`
+    XAmzDataPartition string `header:"style=simple,explode=false,name=x-amz-data-partition"`
+    
 }
 
 type ListObjectAttributesRequestBodyFacetFilter struct {
-	FacetName *string `json:"FacetName,omitempty"`
-	SchemaArn *string `json:"SchemaArn,omitempty"`
+    FacetName *string `json:"FacetName,omitempty"`
+    SchemaArn *string `json:"SchemaArn,omitempty"`
+    
 }
 
 type ListObjectAttributesRequestBodyObjectReference struct {
-	Selector *string `json:"Selector,omitempty"`
+    Selector *string `json:"Selector,omitempty"`
+    
 }
 
 type ListObjectAttributesRequestBody struct {
-	FacetFilter     *ListObjectAttributesRequestBodyFacetFilter    `json:"FacetFilter,omitempty"`
-	MaxResults      *int64                                         `json:"MaxResults,omitempty"`
-	NextToken       *string                                        `json:"NextToken,omitempty"`
-	ObjectReference ListObjectAttributesRequestBodyObjectReference `json:"ObjectReference"`
+    FacetFilter *ListObjectAttributesRequestBodyFacetFilter `json:"FacetFilter,omitempty"`
+    MaxResults *int64 `json:"MaxResults,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    ObjectReference ListObjectAttributesRequestBodyObjectReference `json:"ObjectReference"`
+    
 }
 
 type ListObjectAttributesRequest struct {
-	QueryParams ListObjectAttributesQueryParams
-	Headers     ListObjectAttributesHeaders
-	Request     ListObjectAttributesRequestBody `request:"mediaType=application/json"`
+    QueryParams ListObjectAttributesQueryParams 
+    Headers ListObjectAttributesHeaders 
+    Request ListObjectAttributesRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type ListObjectAttributesResponse struct {
-	AccessDeniedException        *interface{}
-	ContentType                  string
-	DirectoryNotEnabledException *interface{}
-	FacetValidationException     *interface{}
-	InternalServiceException     *interface{}
-	InvalidArnException          *interface{}
-	InvalidNextTokenException    *interface{}
-	LimitExceededException       *interface{}
-	ListObjectAttributesResponse *shared.ListObjectAttributesResponse
-	ResourceNotFoundException    *interface{}
-	RetryableConflictException   *interface{}
-	StatusCode                   int64
-	ValidationException          *interface{}
+    AccessDeniedException *interface{} 
+    ContentType string 
+    DirectoryNotEnabledException *interface{} 
+    FacetValidationException *interface{} 
+    InternalServiceException *interface{} 
+    InvalidArnException *interface{} 
+    InvalidNextTokenException *interface{} 
+    LimitExceededException *interface{} 
+    ListObjectAttributesResponse *shared.ListObjectAttributesResponse 
+    ResourceNotFoundException *interface{} 
+    RetryableConflictException *interface{} 
+    StatusCode int64 
+    ValidationException *interface{} 
+    
 }
+

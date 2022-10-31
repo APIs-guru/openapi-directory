@@ -10,7 +10,7 @@ class GetAllFacilitiesAcceptEnum(str, Enum):
 
 @dataclass
 class GetAllFacilitiesHeaders:
-    accept: GetAllFacilitiesAcceptEnum = field(default=None, metadata={'header': { 'field_name': 'Accept' }})
+    accept: GetAllFacilitiesAcceptEnum = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

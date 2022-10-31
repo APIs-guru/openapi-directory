@@ -1,18 +1,24 @@
 package shared
 
+
+
+
 type PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnum string
 
 const (
-	PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnumDistanceUnitUnspecified PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnum = "DISTANCE_UNIT_UNSPECIFIED"
-	PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnumDistanceUnitMiles       PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnum = "DISTANCE_UNIT_MILES"
-	PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnumDistanceUnitKilometers  PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnum = "DISTANCE_UNIT_KILOMETERS"
+    PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnumDistanceUnitUnspecified PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnum = "DISTANCE_UNIT_UNSPECIFIED"
+PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnumDistanceUnitMiles PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnum = "DISTANCE_UNIT_MILES"
+PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnumDistanceUnitKilometers PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnum = "DISTANCE_UNIT_KILOMETERS"
 )
 
+
 type PoiAssignedTargetingOptionDetails struct {
-	DisplayName           *string                                                   `json:"displayName,omitempty"`
-	Latitude              *float64                                                  `json:"latitude,omitempty"`
-	Longitude             *float64                                                  `json:"longitude,omitempty"`
-	ProximityRadiusAmount *float64                                                  `json:"proximityRadiusAmount,omitempty"`
-	ProximityRadiusUnit   *PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnum `json:"proximityRadiusUnit,omitempty"`
-	TargetingOptionID     *string                                                   `json:"targetingOptionId,omitempty"`
+    DisplayName *string `json:"displayName,omitempty"`
+    Latitude *float64 `json:"latitude,omitempty"`
+    Longitude *float64 `json:"longitude,omitempty"`
+    ProximityRadiusAmount *float64 `json:"proximityRadiusAmount,omitempty"`
+    ProximityRadiusUnit *PoiAssignedTargetingOptionDetailsProximityRadiusUnitEnum `json:"proximityRadiusUnit,omitempty"`
+    TargetingOptionID *string `json:"targetingOptionId,omitempty"`
+    
 }
+

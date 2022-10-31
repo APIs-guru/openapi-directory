@@ -1,16 +1,22 @@
 package operations
 
+
+
 type GetPostClientJavascriptQueryParams struct {
-	AccessToken string  `queryParam:"style=form,explode=true,name=access_token"`
-	Callback    *string `queryParam:"style=form,explode=true,name=callback"`
-	GroupIds    string  `queryParam:"style=form,explode=true,name=group_ids"`
+    AccessToken string `queryParam:"style=form,explode=true,name=access_token"`
+    Callback *string `queryParam:"style=form,explode=true,name=callback"`
+    GroupIds string `queryParam:"style=form,explode=true,name=group_ids"`
+    
 }
 
 type GetPostClientJavascriptRequest struct {
-	QueryParams GetPostClientJavascriptQueryParams
+    QueryParams GetPostClientJavascriptQueryParams 
+    
 }
 
 type GetPostClientJavascriptResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

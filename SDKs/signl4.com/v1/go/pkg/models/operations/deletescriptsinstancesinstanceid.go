@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DeleteScriptsInstancesInstanceIDPathParams struct {
-	InstanceID string `pathParam:"style=simple,explode=false,name=instanceId"`
+    InstanceID string `pathParam:"style=simple,explode=false,name=instanceId"`
+    
 }
 
 type DeleteScriptsInstancesInstanceIDRequest struct {
-	PathParams DeleteScriptsInstancesInstanceIDPathParams
+    PathParams DeleteScriptsInstancesInstanceIDPathParams 
+    
 }
 
 type DeleteScriptsInstancesInstanceIDResponse struct {
-	Body                 []byte
-	ContentType          string
-	ErrorResponseContent *shared.ErrorResponseContent
-	StatusCode           int64
+    Body []byte 
+    ContentType string 
+    ErrorResponseContent *shared.ErrorResponseContent 
+    StatusCode int64 
+    
 }
+

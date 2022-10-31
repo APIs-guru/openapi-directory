@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeModelExplainabilityJobDefinitionRequest struct {
-	JobDefinitionName string `json:"JobDefinitionName"`
+    JobDefinitionName string `json:"JobDefinitionName"`
+    
 }
+

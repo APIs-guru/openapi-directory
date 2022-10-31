@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SlotTypeConfiguration struct {
-	RegexConfiguration *SlotTypeRegexConfiguration `json:"regexConfiguration,omitempty"`
+    RegexConfiguration *SlotTypeRegexConfiguration `json:"regexConfiguration,omitempty"`
+    
 }
+

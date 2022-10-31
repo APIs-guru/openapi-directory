@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PostCompanyTimeOffsRequest struct {
-	Request shared.CreateTimeOffPeriodRequest `request:"mediaType=application/json"`
+    Request shared.CreateTimeOffPeriodRequest `request:"mediaType=application/json"`
+    
 }
 
 type PostCompanyTimeOffs201ApplicationJSON struct {
-	Data *shared.CreateTimeOffPeriodResponse `json:"data,omitempty"`
+    Data *shared.CreateTimeOffPeriodResponse `json:"data,omitempty"`
+    
 }
 
 type PostCompanyTimeOffsResponse struct {
-	ContentType                                 string
-	ErrorResponse                               *shared.ErrorResponse
-	PostCompanyTimeOffs201ApplicationJSONObject *PostCompanyTimeOffs201ApplicationJSON
-	StatusCode                                  int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    PostCompanyTimeOffs201ApplicationJSONObject *PostCompanyTimeOffs201ApplicationJSON 
+    StatusCode int64 
+    
 }
+

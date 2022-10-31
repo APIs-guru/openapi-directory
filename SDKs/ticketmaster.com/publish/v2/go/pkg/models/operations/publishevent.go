@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PublishEventHeaders struct {
-	TmpsCorrelationID string `header:"name=TMPS-Correlation-Id"`
+    TmpsCorrelationID string `header:"style=simple,explode=false,name=TMPS-Correlation-Id"`
+    
 }
 
 type PublishEventRequest struct {
-	Headers PublishEventHeaders
-	Request shared.Event `request:"mediaType=application/json"`
+    Headers PublishEventHeaders 
+    Request shared.Event `request:"mediaType=application/json"`
+    
 }
 
 type PublishEventResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

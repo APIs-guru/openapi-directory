@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type BrandVettingEnumVettingProviderEnum string
 
 const (
-	BrandVettingEnumVettingProviderEnumCampaignVerify BrandVettingEnumVettingProviderEnum = "campaign-verify"
+    BrandVettingEnumVettingProviderEnumCampaignVerify BrandVettingEnumVettingProviderEnum = "campaign-verify"
 )
+
+

@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ActivityRunsGetActivityRunStatusPathParams struct {
-	ActivityRunID int32 `pathParam:"style=simple,explode=false,name=activityRunID"`
+    ActivityRunID int32 `pathParam:"style=simple,explode=false,name=activityRunID"`
+    
 }
 
 type ActivityRunsGetActivityRunStatusRequest struct {
-	PathParams ActivityRunsGetActivityRunStatusPathParams
+    PathParams ActivityRunsGetActivityRunStatusPathParams 
+    
 }
 
 type ActivityRunsGetActivityRunStatusResponse struct {
-	APIModelsAPIError                     *shared.APIModelsAPIError
-	Body                                  []byte
-	BuildSystemSharedDtoActivityRunStatus *shared.BuildSystemSharedDtoActivityRunStatus
-	ContentType                           string
-	StatusCode                            int64
+    APIModelsAPIError *shared.APIModelsAPIError 
+    Body []byte 
+    BuildSystemSharedDtoActivityRunStatus *shared.BuildSystemSharedDtoActivityRunStatus 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

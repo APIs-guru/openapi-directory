@@ -1,6 +1,10 @@
 package shared
 
+
+
 type GoogleCloudDialogflowV2beta1MessageAnnotation struct {
-	ContainEntities *bool                                              `json:"containEntities,omitempty"`
-	Parts           []GoogleCloudDialogflowV2beta1AnnotatedMessagePart `json:"parts,omitempty"`
+    ContainEntities *bool `json:"containEntities,omitempty"`
+    Parts []GoogleCloudDialogflowV2beta1AnnotatedMessagePart `json:"parts,omitempty"`
+    
 }
+

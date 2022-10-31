@@ -11,8 +11,8 @@ class UploadFileAsMultipartPublic1PathParams:
 
 @dataclass
 class UploadFileAsMultipartPublic1Headers:
-    content_range: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-Range' }})
-    x_sds_date_format: Optional[Any] = field(default=None, metadata={'header': { 'field_name': 'X-Sds-Date-Format' }})
+    content_range: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-Range', 'style': 'simple', 'explode': False }})
+    x_sds_date_format: Optional[Any] = field(default=None, metadata={'header': { 'field_name': 'X-Sds-Date-Format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

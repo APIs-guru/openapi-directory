@@ -1,42 +1,48 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ListOperationsQueryParams struct {
-	MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
-	NextToken  *string `queryParam:"style=form,explode=true,name=NextToken"`
+    MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
+    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
+    
 }
+
 
 type ListOperationsXAmzTargetEnum string
 
 const (
-	ListOperationsXAmzTargetEnumAppRunnerListOperations ListOperationsXAmzTargetEnum = "AppRunner.ListOperations"
+    ListOperationsXAmzTargetEnumAppRunnerListOperations ListOperationsXAmzTargetEnum = "AppRunner.ListOperations"
 )
 
+
 type ListOperationsHeaders struct {
-	XAmzAlgorithm     *string                      `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string                      `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string                      `header:"name=X-Amz-Credential"`
-	XAmzDate          *string                      `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string                      `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string                      `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string                      `header:"name=X-Amz-SignedHeaders"`
-	XAmzTarget        ListOperationsXAmzTargetEnum `header:"name=X-Amz-Target"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    XAmzTarget ListOperationsXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
+    
 }
 
 type ListOperationsRequest struct {
-	QueryParams ListOperationsQueryParams
-	Headers     ListOperationsHeaders
-	Request     shared.ListOperationsRequest `request:"mediaType=application/json"`
+    QueryParams ListOperationsQueryParams 
+    Headers ListOperationsHeaders 
+    Request shared.ListOperationsRequest `request:"mediaType=application/json"`
+    
 }
 
 type ListOperationsResponse struct {
-	ContentType                   string
-	InternalServiceErrorException *interface{}
-	InvalidRequestException       *interface{}
-	ListOperationsResponse        *shared.ListOperationsResponse
-	ResourceNotFoundException     *interface{}
-	StatusCode                    int64
+    ContentType string 
+    InternalServiceErrorException *interface{} 
+    InvalidRequestException *interface{} 
+    ListOperationsResponse *shared.ListOperationsResponse 
+    ResourceNotFoundException *interface{} 
+    StatusCode int64 
+    
 }
+

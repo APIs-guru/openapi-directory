@@ -16,7 +16,7 @@ class ReferencesCitiesByCityCodeGetQueryParams:
 
 @dataclass
 class ReferencesCitiesByCityCodeGetHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept' }})
+    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

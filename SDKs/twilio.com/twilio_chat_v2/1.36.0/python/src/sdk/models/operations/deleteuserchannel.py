@@ -15,7 +15,7 @@ class DeleteUserChannelPathParams:
 
 @dataclass
 class DeleteUserChannelHeaders:
-    x_twilio_webhook_enabled: Optional[shared.UserChannelEnumWebhookEnabledTypeEnum] = field(default=None, metadata={'header': { 'field_name': 'X-Twilio-Webhook-Enabled' }})
+    x_twilio_webhook_enabled: Optional[shared.UserChannelEnumWebhookEnabledTypeEnum] = field(default=None, metadata={'header': { 'field_name': 'X-Twilio-Webhook-Enabled', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

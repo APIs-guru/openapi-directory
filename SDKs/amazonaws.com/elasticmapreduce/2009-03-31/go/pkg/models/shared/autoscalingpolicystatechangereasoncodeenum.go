@@ -1,9 +1,14 @@
 package shared
 
+
+
+
 type AutoScalingPolicyStateChangeReasonCodeEnum string
 
 const (
-	AutoScalingPolicyStateChangeReasonCodeEnumUserRequest      AutoScalingPolicyStateChangeReasonCodeEnum = "USER_REQUEST"
-	AutoScalingPolicyStateChangeReasonCodeEnumProvisionFailure AutoScalingPolicyStateChangeReasonCodeEnum = "PROVISION_FAILURE"
-	AutoScalingPolicyStateChangeReasonCodeEnumCleanupFailure   AutoScalingPolicyStateChangeReasonCodeEnum = "CLEANUP_FAILURE"
+    AutoScalingPolicyStateChangeReasonCodeEnumUserRequest AutoScalingPolicyStateChangeReasonCodeEnum = "USER_REQUEST"
+AutoScalingPolicyStateChangeReasonCodeEnumProvisionFailure AutoScalingPolicyStateChangeReasonCodeEnum = "PROVISION_FAILURE"
+AutoScalingPolicyStateChangeReasonCodeEnumCleanupFailure AutoScalingPolicyStateChangeReasonCodeEnum = "CLEANUP_FAILURE"
 )
+
+

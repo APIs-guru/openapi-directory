@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetTypeResponse struct {
-	Type *Type `json:"type,omitempty"`
+    Type *Type `json:"type,omitempty"`
+    
 }
+

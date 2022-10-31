@@ -1,14 +1,20 @@
 package operations
 
+
+
 type GetReportPlanningLevelUserHeaders struct {
-	Token *string `header:"name=Token"`
+    Token *string `header:"style=simple,explode=false,name=Token"`
+    
 }
 
 type GetReportPlanningLevelUserRequest struct {
-	Headers GetReportPlanningLevelUserHeaders
+    Headers GetReportPlanningLevelUserHeaders 
+    
 }
 
 type GetReportPlanningLevelUserResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

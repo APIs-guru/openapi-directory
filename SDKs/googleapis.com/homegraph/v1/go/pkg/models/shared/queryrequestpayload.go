@@ -1,5 +1,9 @@
 package shared
 
+
+
 type QueryRequestPayload struct {
-	Devices []AgentDeviceID `json:"devices,omitempty"`
+    Devices []AgentDeviceID `json:"devices,omitempty"`
+    
 }
+

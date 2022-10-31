@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetEnsemblGeneMappingUsingGetPathParams struct {
-	RgdID int32 `pathParam:"style=simple,explode=false,name=rgdId"`
+    RgdID int32 `pathParam:"style=simple,explode=false,name=rgdId"`
+    
 }
 
 type GetEnsemblGeneMappingUsingGetRequest struct {
-	PathParams GetEnsemblGeneMappingUsingGetPathParams
+    PathParams GetEnsemblGeneMappingUsingGetPathParams 
+    
 }
 
 type GetEnsemblGeneMappingUsingGetResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

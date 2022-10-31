@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudDialogflowV2GcsSources struct {
-	Uris []string `json:"uris,omitempty"`
+    Uris []string `json:"uris,omitempty"`
+    
 }
+

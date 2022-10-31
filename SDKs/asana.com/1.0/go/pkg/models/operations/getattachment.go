@@ -1,30 +1,35 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAttachmentPathParams struct {
-	AttachmentGid string `pathParam:"style=simple,explode=false,name=attachment_gid"`
+    AttachmentGid string `pathParam:"style=simple,explode=false,name=attachment_gid"`
+    
 }
 
 type GetAttachmentQueryParams struct {
-	OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
-	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
+    OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
+    OptPretty *bool `queryParam:"style=form,explode=true,name=opt_pretty"`
+    
 }
 
 type GetAttachmentRequest struct {
-	PathParams  GetAttachmentPathParams
-	QueryParams GetAttachmentQueryParams
+    PathParams GetAttachmentPathParams 
+    QueryParams GetAttachmentQueryParams 
+    
 }
 
 type GetAttachment200ApplicationJSON struct {
-	Data *shared.AttachmentResponse `json:"data,omitempty"`
+    Data *shared.AttachmentResponse `json:"data,omitempty"`
+    
 }
 
 type GetAttachmentResponse struct {
-	ContentType                           string
-	ErrorResponse                         *shared.ErrorResponse
-	StatusCode                            int64
-	GetAttachment200ApplicationJSONObject *GetAttachment200ApplicationJSON
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    GetAttachment200ApplicationJSONObject *GetAttachment200ApplicationJSON 
+    
 }
+

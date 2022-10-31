@@ -19,22 +19,25 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def get_surveys(self) -> operations.GetSurveysResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/Surveys"
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSurveysResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[List[shared.SurveyDetail]])
@@ -47,21 +50,22 @@ class SDK:
 
         return res
 
-    
     
     def get_surveys_survey_id_interviews(self, request: operations.GetSurveysSurveyIDInterviewsRequest) -> operations.GetSurveysSurveyIDInterviewsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/Surveys/{surveyId}/Interviews", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSurveysSurveyIDInterviewsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[List[shared.Interview]])
@@ -75,19 +79,19 @@ class SDK:
         return res
 
     
-    
     def get_surveys_survey_id_metadata(self, request: operations.GetSurveysSurveyIDMetadataRequest) -> operations.GetSurveysSurveyIDMetadataResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/Surveys/{surveyId}/Metadata", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSurveysSurveyIDMetadataResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SurveyMetadata])

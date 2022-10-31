@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchGetAssetsHistoryResponse struct {
-	Assets []TemporalAsset `json:"assets,omitempty"`
+    Assets []TemporalAsset `json:"assets,omitempty"`
+    
 }
+

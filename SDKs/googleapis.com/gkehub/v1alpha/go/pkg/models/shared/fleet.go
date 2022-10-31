@@ -1,11 +1,15 @@
 package shared
 
+
+
 type Fleet struct {
-	CreateTime  *string              `json:"createTime,omitempty"`
-	DeleteTime  *string              `json:"deleteTime,omitempty"`
-	DisplayName *string              `json:"displayName,omitempty"`
-	Name        *string              `json:"name,omitempty"`
-	State       *FleetLifecycleState `json:"state,omitempty"`
-	UID         *string              `json:"uid,omitempty"`
-	UpdateTime  *string              `json:"updateTime,omitempty"`
+    CreateTime *string `json:"createTime,omitempty"`
+    DeleteTime *string `json:"deleteTime,omitempty"`
+    DisplayName *string `json:"displayName,omitempty"`
+    Name *string `json:"name,omitempty"`
+    State *FleetLifecycleState `json:"state,omitempty"`
+    UID *string `json:"uid,omitempty"`
+    UpdateTime *string `json:"updateTime,omitempty"`
+    
 }
+

@@ -1,15 +1,21 @@
 package operations
 
+
+
 type InteractionsRemoveRestrictionsForRepoPathParams struct {
-	Owner string `pathParam:"style=simple,explode=false,name=owner"`
-	Repo  string `pathParam:"style=simple,explode=false,name=repo"`
+    Owner string `pathParam:"style=simple,explode=false,name=owner"`
+    Repo string `pathParam:"style=simple,explode=false,name=repo"`
+    
 }
 
 type InteractionsRemoveRestrictionsForRepoRequest struct {
-	PathParams InteractionsRemoveRestrictionsForRepoPathParams
+    PathParams InteractionsRemoveRestrictionsForRepoPathParams 
+    
 }
 
 type InteractionsRemoveRestrictionsForRepoResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

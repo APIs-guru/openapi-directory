@@ -1,24 +1,32 @@
 package operations
 
+
+
+
 type BoxScoresByDateDeltaFormatEnum string
 
 const (
-	BoxScoresByDateDeltaFormatEnumXML  BoxScoresByDateDeltaFormatEnum = "xml"
-	BoxScoresByDateDeltaFormatEnumJSON BoxScoresByDateDeltaFormatEnum = "json"
+    BoxScoresByDateDeltaFormatEnumXML BoxScoresByDateDeltaFormatEnum = "xml"
+BoxScoresByDateDeltaFormatEnumJSON BoxScoresByDateDeltaFormatEnum = "json"
 )
 
+
 type BoxScoresByDateDeltaPathParams struct {
-	Date    string                         `pathParam:"style=simple,explode=false,name=date"`
-	Format  BoxScoresByDateDeltaFormatEnum `pathParam:"style=simple,explode=false,name=format"`
-	Minutes string                         `pathParam:"style=simple,explode=false,name=minutes"`
+    Date string `pathParam:"style=simple,explode=false,name=date"`
+    Format BoxScoresByDateDeltaFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    Minutes string `pathParam:"style=simple,explode=false,name=minutes"`
+    
 }
 
 type BoxScoresByDateDeltaRequest struct {
-	PathParams BoxScoresByDateDeltaPathParams
+    PathParams BoxScoresByDateDeltaPathParams 
+    
 }
 
 type BoxScoresByDateDeltaResponse struct {
-	BoxScores   []interface{}
-	ContentType string
-	StatusCode  int64
+    BoxScores []interface{} 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

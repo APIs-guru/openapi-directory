@@ -266,6 +266,7 @@ func (s *SDK) AppDIDPut(ctx context.Context, request operations.AppDIDPutRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -572,6 +573,7 @@ func (s *SDK) AppPkgPut(ctx context.Context, request operations.AppPkgPutRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -870,6 +872,7 @@ func (s *SDK) AppPackagePatch(ctx context.Context, request operations.AppPackage
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1089,6 +1092,7 @@ func (s *SDK) AppPackagesPost(ctx context.Context, request operations.AppPackage
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1197,6 +1201,7 @@ func (s *SDK) AppPkgNotificationPost(ctx context.Context, request operations.App
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

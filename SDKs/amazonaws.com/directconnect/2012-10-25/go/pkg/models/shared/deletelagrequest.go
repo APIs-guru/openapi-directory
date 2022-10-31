@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteLagRequest struct {
-	LagID string `json:"lagId"`
+    LagID string `json:"lagId"`
+    
 }
+

@@ -19,24 +19,29 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def auth_token(self, request: operations.AuthTokenRequest) -> operations.AuthTokenResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/oauth2/token"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AuthTokenResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TokenResponse])
@@ -45,24 +50,25 @@ class SDK:
         return res
 
     
-    
     def campaigns_create(self, request: operations.CampaignsCreateRequest) -> operations.CampaignsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/campaigns", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CampaignsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CampaignResponse])
@@ -71,20 +77,19 @@ class SDK:
         return res
 
     
-    
     def campaigns_fetch(self, request: operations.CampaignsFetchRequest) -> operations.CampaignsFetchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/campaigns/{campaignId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CampaignsFetchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CampaignResponse])
@@ -93,21 +98,21 @@ class SDK:
         return res
 
     
-    
     def campaigns_fetch_all(self, request: operations.CampaignsFetchAllRequest) -> operations.CampaignsFetchAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/campaigns", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CampaignsFetchAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CampaignsResponse])
@@ -124,20 +129,19 @@ class SDK:
         return res
 
     
-    
     def campaigns_remove(self, request: operations.CampaignsRemoveRequest) -> operations.CampaignsRemoveResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/campaigns/{campaignId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CampaignsRemoveResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CampaignsRemove200ApplicationJSON])
@@ -146,20 +150,19 @@ class SDK:
         return res
 
     
-    
     def campaigns_update(self, request: operations.CampaignsUpdateRequest) -> operations.CampaignsUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/campaigns/{campaignId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CampaignsUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CampaignResponse])
@@ -168,25 +171,27 @@ class SDK:
         return res
 
     
-    
     def contacts_create(self, request: operations.ContactsCreateRequest) -> operations.ContactsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/contacts", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ContactsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -195,20 +200,19 @@ class SDK:
         return res
 
     
-    
     def contacts_fetch(self, request: operations.ContactsFetchRequest) -> operations.ContactsFetchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/contacts/{contactId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ContactsFetchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ContactResponse])
@@ -217,21 +221,21 @@ class SDK:
         return res
 
     
-    
     def contacts_fetch_all(self, request: operations.ContactsFetchAllRequest) -> operations.ContactsFetchAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/contacts", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ContactsFetchAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ContactsResponse])
@@ -248,20 +252,19 @@ class SDK:
         return res
 
     
-    
     def contacts_remove(self, request: operations.ContactsRemoveRequest) -> operations.ContactsRemoveResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/contacts/{contactId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ContactsRemoveResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ContactsRemove200ApplicationJSON])
@@ -270,20 +273,19 @@ class SDK:
         return res
 
     
-    
     def contacts_update(self, request: operations.ContactsUpdateRequest) -> operations.ContactsUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/contacts/{contactId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ContactsUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ContactResponse])
@@ -292,20 +294,19 @@ class SDK:
         return res
 
     
-    
     def conversations_close(self, request: operations.ConversationsCloseRequest) -> operations.ConversationsCloseResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/conversations/{conversationId}/close", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ConversationsCloseResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ConversationResponse])
@@ -313,21 +314,20 @@ class SDK:
 
         return res
 
-    
     
     def conversations_fetch(self, request: operations.ConversationsFetchRequest) -> operations.ConversationsFetchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/conversations/{conversationId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ConversationsFetchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ConversationResponse])
@@ -336,21 +336,21 @@ class SDK:
         return res
 
     
-    
     def conversations_fetch_all(self, request: operations.ConversationsFetchAllRequest) -> operations.ConversationsFetchAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/conversations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ConversationsFetchAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ConversationsResponse])
@@ -367,20 +367,19 @@ class SDK:
         return res
 
     
-    
     def messages_fetch(self, request: operations.MessagesFetchRequest) -> operations.MessagesFetchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/messages/{messageId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.MessagesFetchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessageResponse])
@@ -389,21 +388,21 @@ class SDK:
         return res
 
     
-    
     def messages_fetch_all(self, request: operations.MessagesFetchAllRequest) -> operations.MessagesFetchAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/messages", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.MessagesFetchAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MessagesResponse])
@@ -412,24 +411,25 @@ class SDK:
         return res
 
     
-    
     def messages_send(self, request: operations.MessagesSendRequest) -> operations.MessagesSendResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/messages", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.MessagesSendResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SendMessagesResponse])
@@ -438,24 +438,25 @@ class SDK:
         return res
 
     
-    
     def templates_create(self, request: operations.TemplatesCreateRequest) -> operations.TemplatesCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/templates", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TemplatesCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TemplatesResponse])
@@ -464,20 +465,19 @@ class SDK:
         return res
 
     
-    
     def templates_fetch(self, request: operations.TemplatesFetchRequest) -> operations.TemplatesFetchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/templates/{templateId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TemplatesFetchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TemplateResponse])
@@ -486,21 +486,21 @@ class SDK:
         return res
 
     
-    
     def templates_fetch_all(self, request: operations.TemplatesFetchAllRequest) -> operations.TemplatesFetchAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/templates", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TemplatesFetchAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TemplatesResponse])
@@ -517,20 +517,19 @@ class SDK:
         return res
 
     
-    
     def templates_remove(self, request: operations.TemplatesRemoveRequest) -> operations.TemplatesRemoveResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/templates/{templateId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TemplatesRemoveResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.TemplatesRemove200ApplicationJSON])
@@ -539,20 +538,19 @@ class SDK:
         return res
 
     
-    
     def templates_update(self, request: operations.TemplatesUpdateRequest) -> operations.TemplatesUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/templates/{templateId}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TemplatesUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TemplateResponse])
@@ -561,27 +559,28 @@ class SDK:
         return res
 
     
-    
     def tools_share_file(self, request: operations.ToolsShareFileRequest) -> operations.ToolsShareFileResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/tools/sharefile"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ToolsShareFileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ShareFileResponse])
@@ -598,20 +597,19 @@ class SDK:
         return res
 
     
-    
     def webhooks_fetch_all(self, request: operations.WebhooksFetchAllRequest) -> operations.WebhooksFetchAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/webhooks", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.WebhooksFetchAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.WebhooksResponse])
@@ -620,27 +618,28 @@ class SDK:
         return res
 
     
-    
     def webhooks_subscribe(self, request: operations.WebhooksSubscribeRequest) -> operations.WebhooksSubscribeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/accounts/{accountId}/webhooks", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.WebhooksSubscribeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.WebhookResponse])

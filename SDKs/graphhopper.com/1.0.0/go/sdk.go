@@ -112,6 +112,7 @@ func (s *SDK) AsyncClusteringProblem(ctx context.Context, request operations.Asy
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -182,6 +183,7 @@ func (s *SDK) AsyncVrp(ctx context.Context, request operations.AsyncVrpRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -249,6 +251,7 @@ func (s *SDK) CalculateMatrix(ctx context.Context, request operations.CalculateM
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -794,6 +797,7 @@ func (s *SDK) PostMatrix(ctx context.Context, request operations.PostMatrixReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -851,6 +855,7 @@ func (s *SDK) PostRoute(ctx context.Context, request operations.PostRouteRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -961,6 +966,7 @@ func (s *SDK) SolveClusteringProblem(ctx context.Context, request operations.Sol
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1031,6 +1037,7 @@ func (s *SDK) SolveVrp(ctx context.Context, request operations.SolveVrpRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

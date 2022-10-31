@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetEmailChannelResponse struct {
-	EmailChannelResponse EmailChannelResponse `json:"EmailChannelResponse"`
+    EmailChannelResponse EmailChannelResponse `json:"EmailChannelResponse"`
+    
 }
+

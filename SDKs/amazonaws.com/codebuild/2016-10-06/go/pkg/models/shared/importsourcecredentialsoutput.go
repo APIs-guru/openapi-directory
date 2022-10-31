@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ImportSourceCredentialsOutput struct {
-	Arn *string `json:"arn,omitempty"`
+    Arn *string `json:"arn,omitempty"`
+    
 }
+

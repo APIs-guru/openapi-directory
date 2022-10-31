@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type PutGeofenceResponse struct {
-	CreateTime time.Time `json:"CreateTime"`
-	GeofenceID string    `json:"GeofenceId"`
-	UpdateTime time.Time `json:"UpdateTime"`
+    CreateTime time.Time `json:"CreateTime"`
+    GeofenceID string `json:"GeofenceId"`
+    UpdateTime time.Time `json:"UpdateTime"`
+    
 }
+

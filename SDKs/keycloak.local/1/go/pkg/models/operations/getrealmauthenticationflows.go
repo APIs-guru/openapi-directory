@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetRealmAuthenticationFlowsPathParams struct {
-	Realm string `pathParam:"style=simple,explode=false,name=realm"`
+    Realm string `pathParam:"style=simple,explode=false,name=realm"`
+    
 }
 
 type GetRealmAuthenticationFlowsRequest struct {
-	PathParams GetRealmAuthenticationFlowsPathParams
+    PathParams GetRealmAuthenticationFlowsPathParams 
+    
 }
 
 type GetRealmAuthenticationFlowsResponse struct {
-	AuthenticationFlowRepresentations []shared.AuthenticationFlowRepresentation
-	ContentType                       string
-	StatusCode                        int64
+    AuthenticationFlowRepresentations []shared.AuthenticationFlowRepresentation 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

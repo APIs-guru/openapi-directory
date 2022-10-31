@@ -1,6 +1,10 @@
 package shared
 
+
+
 type DescribeUserRequest struct {
-	ServerID string `json:"ServerId"`
-	UserName string `json:"UserName"`
+    ServerID string `json:"ServerId"`
+    UserName string `json:"UserName"`
+    
 }
+

@@ -63,6 +63,7 @@ func (s *SDK) GkebackupProjectsLocationsBackupPlansBackupsCreate(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -192,6 +193,7 @@ func (s *SDK) GkebackupProjectsLocationsBackupPlansCreate(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -362,6 +364,7 @@ func (s *SDK) GkebackupProjectsLocationsOperationsCancel(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -450,6 +453,7 @@ func (s *SDK) GkebackupProjectsLocationsRestorePlansCreate(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -538,6 +542,7 @@ func (s *SDK) GkebackupProjectsLocationsRestorePlansRestoresCreate(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -667,6 +672,7 @@ func (s *SDK) GkebackupProjectsLocationsRestorePlansRestoresPatch(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -837,6 +843,7 @@ func (s *SDK) GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresSetIam
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -884,6 +891,7 @@ func (s *SDK) GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresTestIa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateCloudFormationStackRequest struct {
-	Instances []InstanceEntry `json:"instances"`
+    Instances []InstanceEntry `json:"instances"`
+    
 }
+

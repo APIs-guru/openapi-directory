@@ -1,6 +1,10 @@
 package shared
 
+
+
 type CreateGlobalTableInput struct {
-	GlobalTableName  string    `json:"GlobalTableName"`
-	ReplicationGroup []Replica `json:"ReplicationGroup"`
+    GlobalTableName string `json:"GlobalTableName"`
+    ReplicationGroup []Replica `json:"ReplicationGroup"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetStudioSessionMappingOutput struct {
-	SessionMapping *SessionMappingDetail `json:"SessionMapping,omitempty"`
+    SessionMapping *SessionMappingDetail `json:"SessionMapping,omitempty"`
+    
 }
+

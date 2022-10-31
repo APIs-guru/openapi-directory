@@ -8,8 +8,8 @@ POST_V0_5_CONSENTS_ON_FETCH_SERVERS = [
 
 @dataclass
 class PostV05ConsentsOnFetchHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
-    x_hiu_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIU-ID' }})
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    x_hiu_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIU-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

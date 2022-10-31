@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type InitiateAPIKeySecurity struct {
-	OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
+    OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type InitiateAPIKeyRequest struct {
-	Security InitiateAPIKeySecurity
+    Security InitiateAPIKeySecurity 
+    
 }
 
 type InitiateAPIKeyResponse struct {
-	APIKey      *shared.APIKey
-	ContentType string
-	StatusCode  int64
+    APIKey *shared.APIKey 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

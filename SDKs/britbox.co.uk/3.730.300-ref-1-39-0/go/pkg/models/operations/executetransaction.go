@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ExecuteTransactionPathParams struct {
-	Transactionid string `pathParam:"style=simple,explode=false,name=transactionid"`
+    Transactionid string `pathParam:"style=simple,explode=false,name=transactionid"`
+    
 }
 
 type ExecuteTransactionQueryParams struct {
-	Lang *string `queryParam:"style=form,explode=true,name=lang"`
+    Lang *string `queryParam:"style=form,explode=true,name=lang"`
+    
 }
 
 type ExecuteTransactionRequest struct {
-	PathParams  ExecuteTransactionPathParams
-	QueryParams ExecuteTransactionQueryParams
-	Request     shared.ItvRokuTransactionRequest `request:"mediaType=application/json"`
+    PathParams ExecuteTransactionPathParams 
+    QueryParams ExecuteTransactionQueryParams 
+    Request shared.ItvRokuTransactionRequest `request:"mediaType=application/json"`
+    
 }
 
 type ExecuteTransactionResponse struct {
-	ContentType  string
-	ServiceError *shared.ServiceError
-	StatusCode   int64
+    ContentType string 
+    ServiceError *shared.ServiceError 
+    StatusCode int64 
+    
 }
+

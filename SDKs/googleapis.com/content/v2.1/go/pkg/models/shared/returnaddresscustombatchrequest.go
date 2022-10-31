@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ReturnaddressCustomBatchRequest struct {
-	Entries []ReturnaddressCustomBatchRequestEntry `json:"entries,omitempty"`
+    Entries []ReturnaddressCustomBatchRequestEntry `json:"entries,omitempty"`
+    
 }
+

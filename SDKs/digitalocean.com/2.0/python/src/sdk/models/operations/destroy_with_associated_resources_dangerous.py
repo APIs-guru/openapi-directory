@@ -11,7 +11,7 @@ class DestroyWithAssociatedResourcesDangerousPathParams:
 
 @dataclass
 class DestroyWithAssociatedResourcesDangerousHeaders:
-    x_dangerous: bool = field(default=None, metadata={'header': { 'field_name': 'X-Dangerous' }})
+    x_dangerous: bool = field(default=None, metadata={'header': { 'field_name': 'X-Dangerous', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

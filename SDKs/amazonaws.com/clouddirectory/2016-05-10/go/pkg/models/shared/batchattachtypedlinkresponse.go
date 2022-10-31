@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchAttachTypedLinkResponse struct {
-	TypedLinkSpecifier *TypedLinkSpecifier `json:"TypedLinkSpecifier,omitempty"`
+    TypedLinkSpecifier *TypedLinkSpecifier `json:"TypedLinkSpecifier,omitempty"`
+    
 }
+

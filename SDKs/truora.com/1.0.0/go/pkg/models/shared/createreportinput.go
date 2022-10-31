@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateReportInput struct {
-	Name string `form:"name=name"`
+    Name string `form:"name=name"`
+    
 }
+

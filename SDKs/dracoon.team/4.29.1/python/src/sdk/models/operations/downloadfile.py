@@ -15,8 +15,8 @@ class DownloadFileQueryParams:
 
 @dataclass
 class DownloadFileHeaders:
-    range: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Range' }})
-    x_sds_auth_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Sds-Auth-Token' }})
+    range: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Range', 'style': 'simple', 'explode': False }})
+    x_sds_auth_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Sds-Auth-Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

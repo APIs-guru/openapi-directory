@@ -4,7 +4,7 @@ from sdk.models import shared
 
 @dataclass
 class CreateCustomerServiceMetricTaskHeaders:
-    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'accept-language' }})
+    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'accept-language', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

@@ -68,6 +68,7 @@ func (s *SDK) SrcSearchlyAPIV1ControllersSimilarityByContent(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

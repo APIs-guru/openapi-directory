@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ApplicationReportingSettings struct {
-	IncludeRemovedApps *bool `json:"includeRemovedApps,omitempty"`
+    IncludeRemovedApps *bool `json:"includeRemovedApps,omitempty"`
+    
 }
+

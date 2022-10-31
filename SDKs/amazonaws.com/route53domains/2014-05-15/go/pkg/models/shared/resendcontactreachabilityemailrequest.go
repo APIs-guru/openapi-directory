@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ResendContactReachabilityEmailRequest struct {
-	DomainName *string `json:"domainName,omitempty"`
+    DomainName *string `json:"domainName,omitempty"`
+    
 }
+

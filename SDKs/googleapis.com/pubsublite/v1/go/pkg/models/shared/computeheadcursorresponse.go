@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ComputeHeadCursorResponse struct {
-	HeadCursor *Cursor `json:"headCursor,omitempty"`
+    HeadCursor *Cursor `json:"headCursor,omitempty"`
+    
 }
+

@@ -7294,6 +7294,7 @@ func (s *SDK) PostAnnotationLayer(ctx context.Context, request operations.PostAn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7382,6 +7383,7 @@ func (s *SDK) PostAnnotationLayerPkAnnotation(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7470,6 +7472,7 @@ func (s *SDK) PostCachekeyInvalidate(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7529,6 +7532,7 @@ func (s *SDK) PostChart(ctx context.Context, request operations.PostChartRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7617,6 +7621,7 @@ func (s *SDK) PostChartData(ctx context.Context, request operations.PostChartDat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7705,6 +7710,7 @@ func (s *SDK) PostChartImport(ctx context.Context, request operations.PostChartI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7793,6 +7799,7 @@ func (s *SDK) PostCSSTemplate(ctx context.Context, request operations.PostCSSTem
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7881,6 +7888,7 @@ func (s *SDK) PostDashboard(ctx context.Context, request operations.PostDashboar
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7970,6 +7978,7 @@ func (s *SDK) PostDashboardImport(ctx context.Context, request operations.PostDa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8058,6 +8067,7 @@ func (s *SDK) PostDatabase(ctx context.Context, request operations.PostDatabaseR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8147,6 +8157,7 @@ func (s *SDK) PostDatabaseImport(ctx context.Context, request operations.PostDat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8235,6 +8246,7 @@ func (s *SDK) PostDatabaseTestConnection(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8313,6 +8325,7 @@ func (s *SDK) PostDatabaseValidateParameters(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8391,6 +8404,7 @@ func (s *SDK) PostDataset(ctx context.Context, request operations.PostDatasetReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8479,6 +8493,7 @@ func (s *SDK) PostDatasetImport(ctx context.Context, request operations.PostData
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8567,6 +8582,7 @@ func (s *SDK) PostLog(ctx context.Context, request operations.PostLogRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8655,6 +8671,7 @@ func (s *SDK) PostReport(ctx context.Context, request operations.PostReportReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8743,6 +8760,7 @@ func (s *SDK) PostSavedQuery(ctx context.Context, request operations.PostSavedQu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8831,6 +8849,7 @@ func (s *SDK) PostSavedQueryImport(ctx context.Context, request operations.PostS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8919,6 +8938,7 @@ func (s *SDK) PostSecurityLogin(ctx context.Context, request operations.PostSecu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9056,6 +9076,7 @@ func (s *SDK) PutAnnotationLayerPk(ctx context.Context, request operations.PutAn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9144,6 +9165,7 @@ func (s *SDK) PutAnnotationLayerPkAnnotationAnnotationID(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9232,6 +9254,7 @@ func (s *SDK) PutChartPk(ctx context.Context, request operations.PutChartPkReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9340,6 +9363,7 @@ func (s *SDK) PutCSSTemplatePk(ctx context.Context, request operations.PutCSSTem
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9438,6 +9462,7 @@ func (s *SDK) PutDashboardPk(ctx context.Context, request operations.PutDashboar
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9546,6 +9571,7 @@ func (s *SDK) PutDatabasePk(ctx context.Context, request operations.PutDatabaseP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9654,6 +9680,7 @@ func (s *SDK) PutDatasetPk(ctx context.Context, request operations.PutDatasetPkR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -9853,6 +9880,7 @@ func (s *SDK) PutReportPk(ctx context.Context, request operations.PutReportPkReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9951,6 +9979,7 @@ func (s *SDK) PutSavedQueryPk(ctx context.Context, request operations.PutSavedQu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetAssessmentFrameworkResponse struct {
-	Framework *Framework `json:"framework,omitempty"`
+    Framework *Framework `json:"framework,omitempty"`
+    
 }
+

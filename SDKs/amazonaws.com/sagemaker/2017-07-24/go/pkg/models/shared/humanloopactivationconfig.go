@@ -1,5 +1,9 @@
 package shared
 
+
+
 type HumanLoopActivationConfig struct {
-	HumanLoopActivationConditionsConfig HumanLoopActivationConditionsConfig `json:"HumanLoopActivationConditionsConfig"`
+    HumanLoopActivationConditionsConfig HumanLoopActivationConditionsConfig `json:"HumanLoopActivationConditionsConfig"`
+    
 }
+

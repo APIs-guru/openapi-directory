@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ApplyPendingMaintenanceActionResponse struct {
-	ResourcePendingMaintenanceActions *ResourcePendingMaintenanceActions `json:"ResourcePendingMaintenanceActions,omitempty"`
+    ResourcePendingMaintenanceActions *ResourcePendingMaintenanceActions `json:"ResourcePendingMaintenanceActions,omitempty"`
+    
 }
+

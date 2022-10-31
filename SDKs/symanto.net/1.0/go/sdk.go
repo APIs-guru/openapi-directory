@@ -70,6 +70,7 @@ func (s *SDK) Communication(ctx context.Context, request operations.Communicatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -127,6 +128,7 @@ func (s *SDK) EkmanEmotion(ctx context.Context, request operations.EkmanEmotionR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -184,6 +186,7 @@ func (s *SDK) Emotion(ctx context.Context, request operations.EmotionRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -241,6 +244,7 @@ func (s *SDK) LanguageDetection(ctx context.Context, request operations.Language
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -296,6 +300,7 @@ func (s *SDK) Personality(ctx context.Context, request operations.PersonalityReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -353,6 +358,7 @@ func (s *SDK) Sentiment(ctx context.Context, request operations.SentimentRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -410,6 +416,7 @@ func (s *SDK) TopicSentiment(ctx context.Context, request operations.TopicSentim
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DeleteIssueTrackersIssueTrackerNamePathParams struct {
-	IssueTrackerName string `pathParam:"style=simple,explode=false,name=issue_tracker_name"`
+    IssueTrackerName string `pathParam:"style=simple,explode=false,name=issue_tracker_name"`
+    
 }
 
 type DeleteIssueTrackersIssueTrackerNameSecurity struct {
-	BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
+    BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type DeleteIssueTrackersIssueTrackerNameRequest struct {
-	PathParams DeleteIssueTrackersIssueTrackerNamePathParams
-	Security   DeleteIssueTrackersIssueTrackerNameSecurity
+    PathParams DeleteIssueTrackersIssueTrackerNamePathParams 
+    Security DeleteIssueTrackersIssueTrackerNameSecurity 
+    
 }
 
 type DeleteIssueTrackersIssueTrackerNameResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

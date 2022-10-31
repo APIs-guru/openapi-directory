@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TestingDetails struct {
-	IsTestingResponse *bool `json:"isTestingResponse,omitempty"`
+    IsTestingResponse *bool `json:"isTestingResponse,omitempty"`
+    
 }
+

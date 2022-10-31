@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AntennaDownlinkConfig struct {
-	SpectrumConfig SpectrumConfig `json:"spectrumConfig"`
+    SpectrumConfig SpectrumConfig `json:"spectrumConfig"`
+    
 }
+

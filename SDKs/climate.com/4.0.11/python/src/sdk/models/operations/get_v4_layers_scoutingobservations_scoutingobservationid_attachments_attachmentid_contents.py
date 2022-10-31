@@ -11,8 +11,8 @@ class GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsAttachmentI
 
 @dataclass
 class GetV4LayersScoutingObservationsScoutingObservationIDAttachmentsAttachmentIDContentsHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept' }})
-    range: str = field(default=None, metadata={'header': { 'field_name': 'Range' }})
+    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    range: str = field(default=None, metadata={'header': { 'field_name': 'Range', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

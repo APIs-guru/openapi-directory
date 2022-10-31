@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetDeviceResult struct {
-	Device *Device `json:"device,omitempty"`
+    Device *Device `json:"device,omitempty"`
+    
 }
+

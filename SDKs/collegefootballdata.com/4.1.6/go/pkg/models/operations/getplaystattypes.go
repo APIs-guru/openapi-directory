@@ -1,11 +1,12 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetPlayStatTypesResponse struct {
-	ContentType   string
-	PlayStatTypes []shared.PlayStatType
-	StatusCode    int64
+    ContentType string 
+    PlayStatTypes []shared.PlayStatType 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleAppsScriptTypeFunctionSet struct {
-	Values []GoogleAppsScriptTypeFunction `json:"values,omitempty"`
+    Values []GoogleAppsScriptTypeFunction `json:"values,omitempty"`
+    
 }
+

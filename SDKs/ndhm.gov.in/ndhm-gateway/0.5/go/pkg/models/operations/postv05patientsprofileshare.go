@@ -1,32 +1,35 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var PostV05PatientsProfileShareServers = []string{
 	"https://your-hrp-server.com",
 }
 
 type PostV05PatientsProfileShareHeaders struct {
-	Authorization string `header:"name=Authorization"`
-	XHipID        string `header:"name=X-HIP-ID"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    XHipID string `header:"style=simple,explode=false,name=X-HIP-ID"`
+    
 }
 
 type PostV05PatientsProfileShareRequests struct {
-	ApplicationXML      []byte                      `request:"mediaType=application/xml"`
-	ShareProfileRequest *shared.ShareProfileRequest `request:"mediaType=application/json"`
+    ApplicationXML []byte `request:"mediaType=application/xml"`
+    ShareProfileRequest *shared.ShareProfileRequest `request:"mediaType=application/json"`
+    
 }
 
 type PostV05PatientsProfileShareRequest struct {
-	ServerURL *string
-	Headers   PostV05PatientsProfileShareHeaders
-	Request   PostV05PatientsProfileShareRequests
+    ServerURL *string 
+    Headers PostV05PatientsProfileShareHeaders 
+    Request PostV05PatientsProfileShareRequests 
+    
 }
 
 type PostV05PatientsProfileShareResponse struct {
-	Body          []byte
-	ContentType   string
-	ErrorResponse *shared.ErrorResponse
-	StatusCode    int64
+    Body []byte 
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    
 }
+

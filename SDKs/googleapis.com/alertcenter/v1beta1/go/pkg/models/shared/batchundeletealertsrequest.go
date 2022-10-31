@@ -1,6 +1,10 @@
 package shared
 
+
+
 type BatchUndeleteAlertsRequest struct {
-	AlertID    []string `json:"alertId,omitempty"`
-	CustomerID *string  `json:"customerId,omitempty"`
+    AlertID []string `json:"alertId,omitempty"`
+    CustomerID *string `json:"customerId,omitempty"`
+    
 }
+

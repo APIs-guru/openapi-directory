@@ -1,14 +1,20 @@
 package operations
 
+
+
 type CinemaScheduleSearchallReadPathParams struct {
-	Param string `pathParam:"style=simple,explode=false,name=param"`
+    Param string `pathParam:"style=simple,explode=false,name=param"`
+    
 }
 
 type CinemaScheduleSearchallReadRequest struct {
-	PathParams CinemaScheduleSearchallReadPathParams
+    PathParams CinemaScheduleSearchallReadPathParams 
+    
 }
 
 type CinemaScheduleSearchallReadResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

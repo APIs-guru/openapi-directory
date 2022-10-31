@@ -1,25 +1,31 @@
 package shared
 
+
+
+
 type GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum string
 
 const (
-	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumTaskExecutionStateUnspecified GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "TASK_EXECUTION_STATE_UNSPECIFIED"
-	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumPendingExecution              GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "PENDING_EXECUTION"
-	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumInProcess                     GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "IN_PROCESS"
-	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumSucceed                       GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "SUCCEED"
-	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumFailed                        GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "FAILED"
-	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumFatal                         GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "FATAL"
-	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumRetryOnHold                   GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "RETRY_ON_HOLD"
-	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumSkipped                       GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "SKIPPED"
-	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumCancelled                     GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "CANCELLED"
-	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumPendingRollback               GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "PENDING_ROLLBACK"
-	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumRollbackInProcess             GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "ROLLBACK_IN_PROCESS"
-	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumRolledback                    GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "ROLLEDBACK"
-	GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumSuspended                     GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "SUSPENDED"
+    GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumTaskExecutionStateUnspecified GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "TASK_EXECUTION_STATE_UNSPECIFIED"
+GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumPendingExecution GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "PENDING_EXECUTION"
+GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumInProcess GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "IN_PROCESS"
+GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumSucceed GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "SUCCEED"
+GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumFailed GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "FAILED"
+GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumFatal GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "FATAL"
+GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumRetryOnHold GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "RETRY_ON_HOLD"
+GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumSkipped GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "SKIPPED"
+GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumCancelled GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "CANCELLED"
+GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumPendingRollback GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "PENDING_ROLLBACK"
+GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumRollbackInProcess GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "ROLLBACK_IN_PROCESS"
+GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumRolledback GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "ROLLEDBACK"
+GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnumSuspended GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum = "SUSPENDED"
 )
 
+
 type GoogleCloudIntegrationsV1alphaTaskExecutionDetails struct {
-	TaskAttemptStats   []GoogleCloudIntegrationsV1alphaAttemptStats                              `json:"taskAttemptStats,omitempty"`
-	TaskExecutionState *GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum `json:"taskExecutionState,omitempty"`
-	TaskNumber         *string                                                                   `json:"taskNumber,omitempty"`
+    TaskAttemptStats []GoogleCloudIntegrationsV1alphaAttemptStats `json:"taskAttemptStats,omitempty"`
+    TaskExecutionState *GoogleCloudIntegrationsV1alphaTaskExecutionDetailsTaskExecutionStateEnum `json:"taskExecutionState,omitempty"`
+    TaskNumber *string `json:"taskNumber,omitempty"`
+    
 }
+

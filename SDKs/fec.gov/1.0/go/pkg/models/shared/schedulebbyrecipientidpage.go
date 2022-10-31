@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ScheduleBByRecipientIDPage struct {
-	Pagination *OffsetInfo              `json:"pagination,omitempty"`
-	Results    []ScheduleBByRecipientID `json:"results,omitempty"`
+    Pagination *OffsetInfo `json:"pagination,omitempty"`
+    Results []ScheduleBByRecipientID `json:"results,omitempty"`
+    
 }
+

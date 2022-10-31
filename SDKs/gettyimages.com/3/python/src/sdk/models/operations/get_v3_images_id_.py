@@ -15,7 +15,7 @@ class GetV3ImagesIDQueryParams:
 
 @dataclass
 class GetV3ImagesIDHeaders:
-    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

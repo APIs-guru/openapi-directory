@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateHeaderResponse struct {
-	HeaderID *string `json:"headerId,omitempty"`
+    HeaderID *string `json:"headerId,omitempty"`
+    
 }
+

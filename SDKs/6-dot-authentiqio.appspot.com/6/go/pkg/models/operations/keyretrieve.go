@@ -1,27 +1,31 @@
 package operations
 
 import (
-	"time"
-)
+"time")
 
 type KeyRetrievePathParams struct {
-	Pk string `pathParam:"style=simple,explode=false,name=PK"`
+    Pk string `pathParam:"style=simple,explode=false,name=PK"`
+    
 }
 
 type KeyRetrieveRequest struct {
-	PathParams KeyRetrievePathParams
+    PathParams KeyRetrievePathParams 
+    
 }
 
 type KeyRetrieveJwt struct {
-	Since  *time.Time `json:"since,omitempty"`
-	Status *string    `json:"status,omitempty"`
-	Sub    *string    `json:"sub,omitempty"`
+    Since *time.Time `json:"since,omitempty"`
+    Status *string `json:"status,omitempty"`
+    Sub *string `json:"sub,omitempty"`
+    
 }
 
 type KeyRetrieveResponse struct {
-	Body        []byte
-	ContentType string
-	Error       *interface{}
-	Jwt         *KeyRetrieveJwt
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    Error *interface{} 
+    Jwt *KeyRetrieveJwt 
+    StatusCode int64 
+    
 }
+

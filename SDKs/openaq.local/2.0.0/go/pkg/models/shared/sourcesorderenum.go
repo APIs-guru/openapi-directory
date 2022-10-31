@@ -1,9 +1,14 @@
 package shared
 
+
+
+
 type SourcesOrderEnum string
 
 const (
-	SourcesOrderEnumSourceName   SourcesOrderEnum = "sourceName"
-	SourcesOrderEnumFirstUpdated SourcesOrderEnum = "firstUpdated"
-	SourcesOrderEnumLastUpdated  SourcesOrderEnum = "lastUpdated"
+    SourcesOrderEnumSourceName SourcesOrderEnum = "sourceName"
+SourcesOrderEnumFirstUpdated SourcesOrderEnum = "firstUpdated"
+SourcesOrderEnumLastUpdated SourcesOrderEnum = "lastUpdated"
 )
+
+

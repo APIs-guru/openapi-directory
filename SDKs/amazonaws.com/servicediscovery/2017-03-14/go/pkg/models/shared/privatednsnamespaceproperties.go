@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PrivateDNSNamespaceProperties struct {
-	DNSProperties PrivateDNSPropertiesMutable `json:"DnsProperties"`
+    DNSProperties PrivateDNSPropertiesMutable `json:"DnsProperties"`
+    
 }
+

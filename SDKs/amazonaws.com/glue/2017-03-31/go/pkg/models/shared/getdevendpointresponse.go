@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetDevEndpointResponse struct {
-	DevEndpoint *DevEndpoint `json:"DevEndpoint,omitempty"`
+    DevEndpoint *DevEndpoint `json:"DevEndpoint,omitempty"`
+    
 }
+

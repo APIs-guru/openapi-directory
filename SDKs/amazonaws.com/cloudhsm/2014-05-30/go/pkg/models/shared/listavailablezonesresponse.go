@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ListAvailableZonesResponse struct {
-	AzList []string `json:"AZList,omitempty"`
+    AzList []string `json:"AZList,omitempty"`
+    
 }
+

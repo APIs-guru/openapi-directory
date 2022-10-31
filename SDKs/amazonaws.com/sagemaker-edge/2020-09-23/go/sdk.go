@@ -76,7 +76,10 @@ func (s *SDK) GetDeviceRegistration(ctx context.Context, request operations.GetD
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -134,7 +137,10 @@ func (s *SDK) SendHeartbeat(ctx context.Context, request operations.SendHeartbea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 

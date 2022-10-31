@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type TranslationKeysGetTranslationKeyPathParams struct {
-	ID int32 `pathParam:"style=simple,explode=false,name=ID"`
+    ID int32 `pathParam:"style=simple,explode=false,name=ID"`
+    
 }
 
 type TranslationKeysGetTranslationKeyRequest struct {
-	PathParams TranslationKeysGetTranslationKeyPathParams
+    PathParams TranslationKeysGetTranslationKeyPathParams 
+    
 }
 
 type TranslationKeysGetTranslationKeyResponse struct {
-	APIModelsAPIError                    *shared.APIModelsAPIError
-	Body                                 []byte
-	ContentType                          string
-	OasSupportSharedModelsTranslationKey *shared.OasSupportSharedModelsTranslationKey
-	StatusCode                           int64
+    APIModelsAPIError *shared.APIModelsAPIError 
+    Body []byte 
+    ContentType string 
+    OasSupportSharedModelsTranslationKey *shared.OasSupportSharedModelsTranslationKey 
+    StatusCode int64 
+    
 }
+

@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetHyperparameterHeaders struct {
-	Token *string `header:"name=Token"`
+    Token *string `header:"style=simple,explode=false,name=Token"`
+    
 }
 
 type GetHyperparameterRequest struct {
-	Headers GetHyperparameterHeaders
+    Headers GetHyperparameterHeaders 
+    
 }
 
 type GetHyperparameterResponse struct {
-	Body                []byte
-	ContentType         string
-	HyperparameterModel *shared.HyperparameterModel
-	StatusCode          int64
+    Body []byte 
+    ContentType string 
+    HyperparameterModel *shared.HyperparameterModel 
+    StatusCode int64 
+    
 }
+

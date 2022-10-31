@@ -1,23 +1,27 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RemoveAgentPathParams struct {
-	AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
+    AgentID string `pathParam:"style=simple,explode=false,name=agent_id"`
+    
 }
 
 type RemoveAgentSecurity struct {
-	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    
 }
 
 type RemoveAgentRequest struct {
-	PathParams RemoveAgentPathParams
-	Security   RemoveAgentSecurity
+    PathParams RemoveAgentPathParams 
+    Security RemoveAgentSecurity 
+    
 }
 
 type RemoveAgentResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

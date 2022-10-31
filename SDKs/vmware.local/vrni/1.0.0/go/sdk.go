@@ -69,6 +69,7 @@ func (s *SDK) AddApplication(ctx context.Context, request operations.AddApplicat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -126,6 +127,7 @@ func (s *SDK) AddAristaSwitch(ctx context.Context, request operations.AddAristaS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -184,6 +186,7 @@ func (s *SDK) AddBrocadeSwitch(ctx context.Context, request operations.AddBrocad
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -242,6 +245,7 @@ func (s *SDK) AddCheckpointFirewall(ctx context.Context, request operations.AddC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -300,6 +304,7 @@ func (s *SDK) AddCiscoSwitch(ctx context.Context, request operations.AddCiscoSwi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -358,6 +363,7 @@ func (s *SDK) AddDellSwitch(ctx context.Context, request operations.AddDellSwitc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -416,6 +422,7 @@ func (s *SDK) AddHpovManager(ctx context.Context, request operations.AddHpovMana
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -474,6 +481,7 @@ func (s *SDK) AddHpvcManager(ctx context.Context, request operations.AddHpvcMana
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -532,6 +540,7 @@ func (s *SDK) AddJuniperSwitch(ctx context.Context, request operations.AddJunipe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -590,6 +599,7 @@ func (s *SDK) AddNsxvManagerDatasource(ctx context.Context, request operations.A
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -648,6 +658,7 @@ func (s *SDK) AddPanoramaFirewall(ctx context.Context, request operations.AddPan
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -709,6 +720,7 @@ func (s *SDK) AddTier(ctx context.Context, request operations.AddTierRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -768,6 +780,7 @@ func (s *SDK) AddUcsManager(ctx context.Context, request operations.AddUcsManage
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -829,6 +842,7 @@ func (s *SDK) AddVcenterDatasource(ctx context.Context, request operations.AddVc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -890,6 +904,7 @@ func (s *SDK) Create(ctx context.Context, request operations.CreateRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2255,6 +2270,7 @@ func (s *SDK) ExportNsxRecommendedRules(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3755,6 +3771,7 @@ func (s *SDK) GetNames(ctx context.Context, request operations.GetNamesRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4239,6 +4256,8 @@ func (s *SDK) GetTier(ctx context.Context, request operations.GetTierRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -5907,6 +5926,7 @@ func (s *SDK) ListRecommendedRules(ctx context.Context, request operations.ListR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6472,6 +6492,7 @@ func (s *SDK) SearchEntities(ctx context.Context, request operations.SearchEntit
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6529,6 +6550,7 @@ func (s *SDK) UpdateAristaSwitch(ctx context.Context, request operations.UpdateA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6588,6 +6610,7 @@ func (s *SDK) UpdateAristaSwitchSnmpConfig(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6647,6 +6670,7 @@ func (s *SDK) UpdateBrocadeSwitch(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6706,6 +6730,7 @@ func (s *SDK) UpdateBrocadeSwitchSnmpConfig(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6765,6 +6790,7 @@ func (s *SDK) UpdateCheckpointFirewall(ctx context.Context, request operations.U
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6824,6 +6850,7 @@ func (s *SDK) UpdateCiscoSwitch(ctx context.Context, request operations.UpdateCi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6883,6 +6910,7 @@ func (s *SDK) UpdateCiscoSwitchSnmpConfig(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6942,6 +6970,7 @@ func (s *SDK) UpdateDellSwitch(ctx context.Context, request operations.UpdateDel
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7001,6 +7030,7 @@ func (s *SDK) UpdateDellSwitchSnmpConfig(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7060,6 +7090,7 @@ func (s *SDK) UpdateHpovManager(ctx context.Context, request operations.UpdateHp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7119,6 +7150,7 @@ func (s *SDK) UpdateHpvcManager(ctx context.Context, request operations.UpdateHp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7178,6 +7210,7 @@ func (s *SDK) UpdateJuniperSwitch(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7237,6 +7270,7 @@ func (s *SDK) UpdateJuniperSwitchSnmpConfig(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7296,6 +7330,7 @@ func (s *SDK) UpdateNsxvControllerCluster(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7355,6 +7390,7 @@ func (s *SDK) UpdateNsxvManager(ctx context.Context, request operations.UpdateNs
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7404,6 +7440,7 @@ func (s *SDK) UpdatePanoramaFirewall(ctx context.Context, request operations.Upd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7463,6 +7500,7 @@ func (s *SDK) UpdateUcsManager(ctx context.Context, request operations.UpdateUcs
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7522,6 +7560,7 @@ func (s *SDK) UpdateUcsSnmpConfig(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7581,6 +7620,7 @@ func (s *SDK) UpdateVcenter(ctx context.Context, request operations.UpdateVcente
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

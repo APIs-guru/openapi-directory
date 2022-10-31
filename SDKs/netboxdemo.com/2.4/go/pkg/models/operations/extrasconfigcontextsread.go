@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ExtrasConfigContextsReadPathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type ExtrasConfigContextsReadRequest struct {
-	PathParams ExtrasConfigContextsReadPathParams
+    PathParams ExtrasConfigContextsReadPathParams 
+    
 }
 
 type ExtrasConfigContextsReadResponse struct {
-	ConfigContext *shared.ConfigContext
-	ContentType   string
-	StatusCode    int64
+    ConfigContext *shared.ConfigContext 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

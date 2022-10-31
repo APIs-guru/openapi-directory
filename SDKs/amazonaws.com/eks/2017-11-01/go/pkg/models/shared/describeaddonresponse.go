@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeAddonResponse struct {
-	Addon *Addon `json:"addon,omitempty"`
+    Addon *Addon `json:"addon,omitempty"`
+    
 }
+

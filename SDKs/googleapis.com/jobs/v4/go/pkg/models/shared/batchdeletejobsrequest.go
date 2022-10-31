@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchDeleteJobsRequest struct {
-	Names []string `json:"names,omitempty"`
+    Names []string `json:"names,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteDiskSnapshotRequest struct {
-	DiskSnapshotName string `json:"diskSnapshotName"`
+    DiskSnapshotName string `json:"diskSnapshotName"`
+    
 }
+

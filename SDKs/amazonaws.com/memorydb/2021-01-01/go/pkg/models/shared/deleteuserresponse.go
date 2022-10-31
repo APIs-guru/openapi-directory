@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteUserResponse struct {
-	User *User `json:"User,omitempty"`
+    User *User `json:"User,omitempty"`
+    
 }
+

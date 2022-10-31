@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class CreateItemDraftHeaders:
-    content_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-Language' }})
-    x_ebay_c_marketplace_id: str = field(default=None, metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID' }})
+    content_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-Language', 'style': 'simple', 'explode': False }})
+    x_ebay_c_marketplace_id: str = field(default=None, metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

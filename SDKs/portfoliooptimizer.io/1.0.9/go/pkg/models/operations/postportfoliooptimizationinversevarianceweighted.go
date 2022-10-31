@@ -1,20 +1,27 @@
 package operations
 
+
+
 type PostPortfolioOptimizationInverseVarianceWeightedRequestBody struct {
-	Assets          int64     `json:"assets"`
-	AssetsVariances []float64 `json:"assetsVariances"`
+    Assets int64 `json:"assets"`
+    AssetsVariances []float64 `json:"assetsVariances"`
+    
 }
 
 type PostPortfolioOptimizationInverseVarianceWeightedRequest struct {
-	Request PostPortfolioOptimizationInverseVarianceWeightedRequestBody `request:"mediaType=application/json"`
+    Request PostPortfolioOptimizationInverseVarianceWeightedRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type PostPortfolioOptimizationInverseVarianceWeighted200ApplicationJSON struct {
-	AssetsWeights []float64 `json:"assetsWeights"`
+    AssetsWeights []float64 `json:"assetsWeights"`
+    
 }
 
 type PostPortfolioOptimizationInverseVarianceWeightedResponse struct {
-	ContentType                                                              string
-	PostPortfolioOptimizationInverseVarianceWeighted200ApplicationJSONObject *PostPortfolioOptimizationInverseVarianceWeighted200ApplicationJSON
-	StatusCode                                                               int64
+    ContentType string 
+    PostPortfolioOptimizationInverseVarianceWeighted200ApplicationJSONObject *PostPortfolioOptimizationInverseVarianceWeighted200ApplicationJSON 
+    StatusCode int64 
+    
 }
+

@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type LandlordMaintenanceJobNoteModel struct {
-	CreatedAt    *time.Time `json:"CreatedAt,omitempty"`
-	NoteContents *string    `json:"NoteContents,omitempty"`
-	Oid          *string    `json:"OID,omitempty"`
+    CreatedAt *time.Time `json:"CreatedAt,omitempty"`
+    NoteContents *string `json:"NoteContents,omitempty"`
+    Oid *string `json:"OID,omitempty"`
+    
 }
+

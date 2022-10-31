@@ -1,6 +1,10 @@
 package shared
 
+
+
 type CreateProjectOutput struct {
-	ProjectArn string `json:"ProjectArn"`
-	ProjectID  string `json:"ProjectId"`
+    ProjectArn string `json:"ProjectArn"`
+    ProjectID string `json:"ProjectId"`
+    
 }
+

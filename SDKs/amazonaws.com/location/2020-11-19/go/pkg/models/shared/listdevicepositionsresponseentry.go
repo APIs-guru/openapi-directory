@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ListDevicePositionsResponseEntry struct {
-	DeviceID   string    `json:"DeviceId"`
-	Position   []float64 `json:"Position"`
-	SampleTime time.Time `json:"SampleTime"`
+    DeviceID string `json:"DeviceId"`
+    Position []float64 `json:"Position"`
+    SampleTime time.Time `json:"SampleTime"`
+    
 }
+

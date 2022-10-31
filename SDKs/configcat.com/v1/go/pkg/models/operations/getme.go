@@ -1,11 +1,12 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetMeResponse struct {
-	ContentType string
-	MeModel     *shared.MeModel
-	StatusCode  int64
+    ContentType string 
+    MeModel *shared.MeModel 
+    StatusCode int64 
+    
 }
+

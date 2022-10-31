@@ -1,5 +1,9 @@
 package shared
 
+
+
 type VMSelectionConfig struct {
-	VMZone *string `json:"vmZone,omitempty"`
+    VMZone *string `json:"vmZone,omitempty"`
+    
 }
+

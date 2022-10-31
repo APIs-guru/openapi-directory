@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetDataLakeSettingsRequest struct {
-	CatalogID *string `json:"CatalogId,omitempty"`
+    CatalogID *string `json:"CatalogId,omitempty"`
+    
 }
+

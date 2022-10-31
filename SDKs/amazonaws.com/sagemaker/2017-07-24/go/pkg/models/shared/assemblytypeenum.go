@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type AssemblyTypeEnum string
 
 const (
-	AssemblyTypeEnumNone AssemblyTypeEnum = "None"
-	AssemblyTypeEnumLine AssemblyTypeEnum = "Line"
+    AssemblyTypeEnumNone AssemblyTypeEnum = "None"
+AssemblyTypeEnumLine AssemblyTypeEnum = "Line"
 )
+
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AttachObjectResponse struct {
-	AttachedObjectIdentifier *string `json:"AttachedObjectIdentifier,omitempty"`
+    AttachedObjectIdentifier *string `json:"AttachedObjectIdentifier,omitempty"`
+    
 }
+

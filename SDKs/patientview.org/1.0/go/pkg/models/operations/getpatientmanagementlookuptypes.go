@@ -1,11 +1,12 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetPatientManagementLookupTypesResponse struct {
-	ContentType string
-	LookupTypes []shared.LookupType
-	StatusCode  int64
+    ContentType string 
+    LookupTypes []shared.LookupType 
+    StatusCode int64 
+    
 }
+

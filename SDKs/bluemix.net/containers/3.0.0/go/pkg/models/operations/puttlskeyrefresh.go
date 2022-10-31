@@ -1,16 +1,22 @@
 package operations
 
+
+
 type PutTlskeyRefreshHeaders struct {
-	XAuthProjectID string `header:"name=X-Auth-Project-Id"`
-	XAuthToken     string `header:"name=X-Auth-Token"`
+    XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
+    XAuthToken string `header:"style=simple,explode=false,name=X-Auth-Token"`
+    
 }
 
 type PutTlskeyRefreshRequest struct {
-	Headers PutTlskeyRefreshHeaders
+    Headers PutTlskeyRefreshHeaders 
+    
 }
 
 type PutTlskeyRefreshResponse struct {
-	CertificateRefresh *interface{}
-	ContentType        string
-	StatusCode         int64
+    CertificateRefresh *interface{} 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -23,7 +23,7 @@ class TestUpdateArtifactXRegistryArtifactTypeEnum(str, Enum):
 
 @dataclass
 class TestUpdateArtifactHeaders:
-    x_registry_artifact_type: Optional[TestUpdateArtifactXRegistryArtifactTypeEnum] = field(default=None, metadata={'header': { 'field_name': 'X-Registry-ArtifactType' }})
+    x_registry_artifact_type: Optional[TestUpdateArtifactXRegistryArtifactTypeEnum] = field(default=None, metadata={'header': { 'field_name': 'X-Registry-ArtifactType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

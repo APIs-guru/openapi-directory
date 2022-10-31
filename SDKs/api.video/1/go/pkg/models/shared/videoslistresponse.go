@@ -1,6 +1,10 @@
 package shared
 
+
+
 type VideosListResponse struct {
-	Data       []Video    `json:"data"`
-	Pagination Pagination `json:"pagination"`
+    Data []Video `json:"data"`
+    Pagination Pagination `json:"pagination"`
+    
 }
+

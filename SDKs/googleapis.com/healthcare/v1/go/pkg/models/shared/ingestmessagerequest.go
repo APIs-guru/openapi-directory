@@ -1,5 +1,9 @@
 package shared
 
+
+
 type IngestMessageRequest struct {
-	Message *Message `json:"message,omitempty"`
+    Message *Message `json:"message,omitempty"`
+    
 }
+

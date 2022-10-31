@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetProjectUsernameProjectEnvvarNamePathParams struct {
-	Name     string `pathParam:"style=simple,explode=false,name=name"`
-	Project  string `pathParam:"style=simple,explode=false,name=project"`
-	Username string `pathParam:"style=simple,explode=false,name=username"`
+    Name string `pathParam:"style=simple,explode=false,name=name"`
+    Project string `pathParam:"style=simple,explode=false,name=project"`
+    Username string `pathParam:"style=simple,explode=false,name=username"`
+    
 }
 
 type GetProjectUsernameProjectEnvvarNameRequest struct {
-	PathParams GetProjectUsernameProjectEnvvarNamePathParams
+    PathParams GetProjectUsernameProjectEnvvarNamePathParams 
+    
 }
 
 type GetProjectUsernameProjectEnvvarNameResponse struct {
-	ContentType string
-	Envvar      *shared.Envvar
-	StatusCode  int64
+    ContentType string 
+    Envvar *shared.Envvar 
+    StatusCode int64 
+    
 }
+

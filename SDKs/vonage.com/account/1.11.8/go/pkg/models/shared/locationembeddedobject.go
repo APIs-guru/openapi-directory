@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LocationEmbeddedObject struct {
-	Data *Location `json:"data,omitempty"`
+    Data *Location `json:"data,omitempty"`
+    
 }
+

@@ -1,15 +1,16 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type AnnotationRestAPIGet struct {
-	EndDttm      *time.Time `json:"end_dttm,omitempty"`
-	ID           *int32     `json:"id,omitempty"`
-	JSONMetadata *string    `json:"json_metadata,omitempty"`
-	Layer        Meta2      `json:"layer"`
-	LongDescr    *string    `json:"long_descr,omitempty"`
-	ShortDescr   *string    `json:"short_descr,omitempty"`
-	StartDttm    *time.Time `json:"start_dttm,omitempty"`
+    EndDttm *time.Time `json:"end_dttm,omitempty"`
+    ID *int32 `json:"id,omitempty"`
+    JSONMetadata *string `json:"json_metadata,omitempty"`
+    Layer Meta2 `json:"layer"`
+    LongDescr *string `json:"long_descr,omitempty"`
+    ShortDescr *string `json:"short_descr,omitempty"`
+    StartDttm *time.Time `json:"start_dttm,omitempty"`
+    
 }
+

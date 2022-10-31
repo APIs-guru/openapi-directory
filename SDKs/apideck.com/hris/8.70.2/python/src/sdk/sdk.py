@@ -19,31 +19,36 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def companies_add(self, request: operations.CompaniesAddRequest) -> operations.CompaniesAddResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/hris/companies"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CompaniesAddResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateHrisCompanyResponse])
@@ -76,21 +81,23 @@ class SDK:
         return res
 
     
-    
     def companies_all(self, request: operations.CompaniesAllRequest) -> operations.CompaniesAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/hris/companies"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CompaniesAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetHrisCompaniesResponse])
@@ -123,21 +130,23 @@ class SDK:
         return res
 
     
-    
     def companies_delete(self, request: operations.CompaniesDeleteRequest) -> operations.CompaniesDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/companies/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CompaniesDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteHrisCompanyResponse])
@@ -170,21 +179,23 @@ class SDK:
         return res
 
     
-    
     def companies_one(self, request: operations.CompaniesOneRequest) -> operations.CompaniesOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/companies/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CompaniesOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetHrisCompanyResponse])
@@ -217,28 +228,30 @@ class SDK:
         return res
 
     
-    
     def companies_update(self, request: operations.CompaniesUpdateRequest) -> operations.CompaniesUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/companies/{id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CompaniesUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateHrisCompanyResponse])
@@ -271,28 +284,30 @@ class SDK:
         return res
 
     
-    
     def departments_add(self, request: operations.DepartmentsAddRequest) -> operations.DepartmentsAddResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/hris/departments"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DepartmentsAddResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateDepartmentResponse])
@@ -325,21 +340,23 @@ class SDK:
         return res
 
     
-    
     def departments_all(self, request: operations.DepartmentsAllRequest) -> operations.DepartmentsAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/hris/departments"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DepartmentsAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetDepartmentsResponse])
@@ -372,21 +389,23 @@ class SDK:
         return res
 
     
-    
     def departments_delete(self, request: operations.DepartmentsDeleteRequest) -> operations.DepartmentsDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/departments/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DepartmentsDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteDepartmentResponse])
@@ -419,21 +438,23 @@ class SDK:
         return res
 
     
-    
     def departments_one(self, request: operations.DepartmentsOneRequest) -> operations.DepartmentsOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/departments/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DepartmentsOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetDepartmentResponse])
@@ -466,28 +487,30 @@ class SDK:
         return res
 
     
-    
     def departments_update(self, request: operations.DepartmentsUpdateRequest) -> operations.DepartmentsUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/departments/{id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DepartmentsUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateDepartmentResponse])
@@ -520,21 +543,23 @@ class SDK:
         return res
 
     
-    
     def employee_payrolls_all(self, request: operations.EmployeePayrollsAllRequest) -> operations.EmployeePayrollsAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/payrolls/employees/{employee_id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EmployeePayrollsAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetEmployeePayrollsResponse])
@@ -567,21 +592,23 @@ class SDK:
         return res
 
     
-    
     def employee_payrolls_one(self, request: operations.EmployeePayrollsOneRequest) -> operations.EmployeePayrollsOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/payrolls/employees/{employee_id}/payrolls/{payroll_id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EmployeePayrollsOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetEmployeePayrollResponse])
@@ -614,21 +641,23 @@ class SDK:
         return res
 
     
-    
     def employee_schedules_all(self, request: operations.EmployeeSchedulesAllRequest) -> operations.EmployeeSchedulesAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/schedules/employees/{employee_id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EmployeeSchedulesAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetEmployeeSchedulesResponse])
@@ -661,28 +690,30 @@ class SDK:
         return res
 
     
-    
     def employees_add(self, request: operations.EmployeesAddRequest) -> operations.EmployeesAddResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/hris/employees"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EmployeesAddResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateEmployeeResponse])
@@ -715,21 +746,23 @@ class SDK:
         return res
 
     
-    
     def employees_all(self, request: operations.EmployeesAllRequest) -> operations.EmployeesAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/hris/employees"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EmployeesAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetEmployeesResponse])
@@ -762,21 +795,23 @@ class SDK:
         return res
 
     
-    
     def employees_delete(self, request: operations.EmployeesDeleteRequest) -> operations.EmployeesDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/employees/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EmployeesDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteEmployeeResponse])
@@ -809,21 +844,23 @@ class SDK:
         return res
 
     
-    
     def employees_one(self, request: operations.EmployeesOneRequest) -> operations.EmployeesOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/employees/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EmployeesOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetEmployeeResponse])
@@ -856,28 +893,30 @@ class SDK:
         return res
 
     
-    
     def employees_update(self, request: operations.EmployeesUpdateRequest) -> operations.EmployeesUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/employees/{id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.EmployeesUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateEmployeeResponse])
@@ -910,21 +949,23 @@ class SDK:
         return res
 
     
-    
     def jobs_all(self, request: operations.JobsAllRequest) -> operations.JobsAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/jobs/employees/{employee_id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.JobsAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetHrisJobsResponse])
@@ -957,21 +998,23 @@ class SDK:
         return res
 
     
-    
     def jobs_one(self, request: operations.JobsOneRequest) -> operations.JobsOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/jobs/employees/{employee_id}/jobs/{job_id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.JobsOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetHrisJobResponse])
@@ -1004,21 +1047,23 @@ class SDK:
         return res
 
     
-    
     def payrolls_all(self, request: operations.PayrollsAllRequest) -> operations.PayrollsAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/hris/payrolls"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PayrollsAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetPayrollsResponse])
@@ -1051,21 +1096,23 @@ class SDK:
         return res
 
     
-    
     def payrolls_one(self, request: operations.PayrollsOneRequest) -> operations.PayrollsOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/payrolls/{payroll_id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PayrollsOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetPayrollResponse])
@@ -1098,28 +1145,30 @@ class SDK:
         return res
 
     
-    
     def time_off_requests_add(self, request: operations.TimeOffRequestsAddRequest) -> operations.TimeOffRequestsAddResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/hris/time-off-requests"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TimeOffRequestsAddResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateTimeOffRequestResponse])
@@ -1152,21 +1201,23 @@ class SDK:
         return res
 
     
-    
     def time_off_requests_all(self, request: operations.TimeOffRequestsAllRequest) -> operations.TimeOffRequestsAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/hris/time-off-requests"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TimeOffRequestsAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetTimeOffRequestsResponse])
@@ -1199,21 +1250,23 @@ class SDK:
         return res
 
     
-    
     def time_off_requests_delete(self, request: operations.TimeOffRequestsDeleteRequest) -> operations.TimeOffRequestsDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/time-off-requests/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TimeOffRequestsDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteTimeOffRequestResponse])
@@ -1246,21 +1299,23 @@ class SDK:
         return res
 
     
-    
     def time_off_requests_one(self, request: operations.TimeOffRequestsOneRequest) -> operations.TimeOffRequestsOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/time-off-requests/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TimeOffRequestsOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetTimeOffRequestResponse])
@@ -1293,28 +1348,30 @@ class SDK:
         return res
 
     
-    
     def time_off_requests_update(self, request: operations.TimeOffRequestsUpdateRequest) -> operations.TimeOffRequestsUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/hris/time-off-requests/{id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TimeOffRequestsUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateTimeOffRequestResponse])

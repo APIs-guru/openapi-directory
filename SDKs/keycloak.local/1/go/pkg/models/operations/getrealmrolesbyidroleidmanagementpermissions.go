@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetRealmRolesByIDRoleIDManagementPermissionsPathParams struct {
-	Realm  string `pathParam:"style=simple,explode=false,name=realm"`
-	RoleID string `pathParam:"style=simple,explode=false,name=role-id"`
+    Realm string `pathParam:"style=simple,explode=false,name=realm"`
+    RoleID string `pathParam:"style=simple,explode=false,name=role-id"`
+    
 }
 
 type GetRealmRolesByIDRoleIDManagementPermissionsRequest struct {
-	PathParams GetRealmRolesByIDRoleIDManagementPermissionsPathParams
+    PathParams GetRealmRolesByIDRoleIDManagementPermissionsPathParams 
+    
 }
 
 type GetRealmRolesByIDRoleIDManagementPermissionsResponse struct {
-	ContentType                   string
-	ManagementPermissionReference *shared.ManagementPermissionReference
-	StatusCode                    int64
+    ContentType string 
+    ManagementPermissionReference *shared.ManagementPermissionReference 
+    StatusCode int64 
+    
 }
+

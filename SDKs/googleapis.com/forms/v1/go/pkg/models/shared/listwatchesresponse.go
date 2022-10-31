@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ListWatchesResponse struct {
-	Watches []Watch `json:"watches,omitempty"`
+    Watches []Watch `json:"watches,omitempty"`
+    
 }
+

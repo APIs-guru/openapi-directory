@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PutEventsResponse struct {
-	EventsResponse EventsResponse `json:"EventsResponse"`
+    EventsResponse EventsResponse `json:"EventsResponse"`
+    
 }
+

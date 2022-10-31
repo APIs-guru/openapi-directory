@@ -1,35 +1,41 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type EndpointFollowPlaylistPathParams struct {
-	PlaylistID string `pathParam:"style=simple,explode=false,name=playlist_id"`
+    PlaylistID string `pathParam:"style=simple,explode=false,name=playlist_id"`
+    
 }
 
 type EndpointFollowPlaylistHeaders struct {
-	Authorization string `header:"name=Authorization"`
-	ContentType   string `header:"name=Content-Type"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    ContentType string `header:"style=simple,explode=false,name=Content-Type"`
+    
 }
 
 type EndpointFollowPlaylistRequestBody struct {
-	Public *bool `json:"public,omitempty"`
+    Public *bool `json:"public,omitempty"`
+    
 }
 
 type EndpointFollowPlaylistSecurity struct {
-	SpotifyAuth shared.SchemeSpotifyAuth `security:"scheme,type=oauth2"`
+    SpotifyAuth shared.SchemeSpotifyAuth `security:"scheme,type=oauth2"`
+    
 }
 
 type EndpointFollowPlaylistRequest struct {
-	PathParams EndpointFollowPlaylistPathParams
-	Headers    EndpointFollowPlaylistHeaders
-	Request    *EndpointFollowPlaylistRequestBody `request:"mediaType=application/json"`
-	Security   EndpointFollowPlaylistSecurity
+    PathParams EndpointFollowPlaylistPathParams 
+    Headers EndpointFollowPlaylistHeaders 
+    Request *EndpointFollowPlaylistRequestBody `request:"mediaType=application/json"`
+    Security EndpointFollowPlaylistSecurity 
+    
 }
 
 type EndpointFollowPlaylistResponse struct {
-	ContentType         string
-	ErrorResponseObject *shared.ErrorResponseObject
-	StatusCode          int64
+    ContentType string 
+    ErrorResponseObject *shared.ErrorResponseObject 
+    StatusCode int64 
+    
 }
+

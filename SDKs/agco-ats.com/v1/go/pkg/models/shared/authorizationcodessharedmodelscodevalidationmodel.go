@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type AuthorizationCodesSharedModelsCodeValidationModel struct {
-	ExpirationDate *time.Time `json:"ExpirationDate,omitempty"`
-	IsValid        *bool      `json:"IsValid,omitempty"`
+    ExpirationDate *time.Time `json:"ExpirationDate,omitempty"`
+    IsValid *bool `json:"IsValid,omitempty"`
+    
 }
+

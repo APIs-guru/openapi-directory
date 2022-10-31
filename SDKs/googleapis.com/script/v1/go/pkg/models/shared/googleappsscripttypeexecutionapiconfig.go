@@ -1,15 +1,21 @@
 package shared
 
+
+
+
 type GoogleAppsScriptTypeExecutionAPIConfigAccessEnum string
 
 const (
-	GoogleAppsScriptTypeExecutionAPIConfigAccessEnumUnknownAccess   GoogleAppsScriptTypeExecutionAPIConfigAccessEnum = "UNKNOWN_ACCESS"
-	GoogleAppsScriptTypeExecutionAPIConfigAccessEnumMyself          GoogleAppsScriptTypeExecutionAPIConfigAccessEnum = "MYSELF"
-	GoogleAppsScriptTypeExecutionAPIConfigAccessEnumDomain          GoogleAppsScriptTypeExecutionAPIConfigAccessEnum = "DOMAIN"
-	GoogleAppsScriptTypeExecutionAPIConfigAccessEnumAnyone          GoogleAppsScriptTypeExecutionAPIConfigAccessEnum = "ANYONE"
-	GoogleAppsScriptTypeExecutionAPIConfigAccessEnumAnyoneAnonymous GoogleAppsScriptTypeExecutionAPIConfigAccessEnum = "ANYONE_ANONYMOUS"
+    GoogleAppsScriptTypeExecutionAPIConfigAccessEnumUnknownAccess GoogleAppsScriptTypeExecutionAPIConfigAccessEnum = "UNKNOWN_ACCESS"
+GoogleAppsScriptTypeExecutionAPIConfigAccessEnumMyself GoogleAppsScriptTypeExecutionAPIConfigAccessEnum = "MYSELF"
+GoogleAppsScriptTypeExecutionAPIConfigAccessEnumDomain GoogleAppsScriptTypeExecutionAPIConfigAccessEnum = "DOMAIN"
+GoogleAppsScriptTypeExecutionAPIConfigAccessEnumAnyone GoogleAppsScriptTypeExecutionAPIConfigAccessEnum = "ANYONE"
+GoogleAppsScriptTypeExecutionAPIConfigAccessEnumAnyoneAnonymous GoogleAppsScriptTypeExecutionAPIConfigAccessEnum = "ANYONE_ANONYMOUS"
 )
 
+
 type GoogleAppsScriptTypeExecutionAPIConfig struct {
-	Access *GoogleAppsScriptTypeExecutionAPIConfigAccessEnum `json:"access,omitempty"`
+    Access *GoogleAppsScriptTypeExecutionAPIConfigAccessEnum `json:"access,omitempty"`
+    
 }
+

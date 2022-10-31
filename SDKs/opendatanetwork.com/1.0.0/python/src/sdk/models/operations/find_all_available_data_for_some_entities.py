@@ -10,7 +10,7 @@ class FindAllAvailableDataForSomeEntitiesQueryParams:
 
 @dataclass
 class FindAllAvailableDataForSomeEntitiesHeaders:
-    x_app_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-App-Token' }})
+    x_app_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-App-Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

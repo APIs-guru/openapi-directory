@@ -1,10 +1,15 @@
 package shared
 
+
+
+
 type DatastoreStatusEnum string
 
 const (
-	DatastoreStatusEnumCreating DatastoreStatusEnum = "CREATING"
-	DatastoreStatusEnumActive   DatastoreStatusEnum = "ACTIVE"
-	DatastoreStatusEnumDeleting DatastoreStatusEnum = "DELETING"
-	DatastoreStatusEnumDeleted  DatastoreStatusEnum = "DELETED"
+    DatastoreStatusEnumCreating DatastoreStatusEnum = "CREATING"
+DatastoreStatusEnumActive DatastoreStatusEnum = "ACTIVE"
+DatastoreStatusEnumDeleting DatastoreStatusEnum = "DELETING"
+DatastoreStatusEnumDeleted DatastoreStatusEnum = "DELETED"
 )
+
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateEmergencyContactSettingsRequest struct {
-	EmergencyContactList []EmergencyContact `json:"EmergencyContactList,omitempty"`
+    EmergencyContactList []EmergencyContact `json:"EmergencyContactList,omitempty"`
+    
 }
+

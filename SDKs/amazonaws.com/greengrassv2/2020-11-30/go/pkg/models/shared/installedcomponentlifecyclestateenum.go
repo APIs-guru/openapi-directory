@@ -1,14 +1,19 @@
 package shared
 
+
+
+
 type InstalledComponentLifecycleStateEnum string
 
 const (
-	InstalledComponentLifecycleStateEnumNew       InstalledComponentLifecycleStateEnum = "NEW"
-	InstalledComponentLifecycleStateEnumInstalled InstalledComponentLifecycleStateEnum = "INSTALLED"
-	InstalledComponentLifecycleStateEnumStarting  InstalledComponentLifecycleStateEnum = "STARTING"
-	InstalledComponentLifecycleStateEnumRunning   InstalledComponentLifecycleStateEnum = "RUNNING"
-	InstalledComponentLifecycleStateEnumStopping  InstalledComponentLifecycleStateEnum = "STOPPING"
-	InstalledComponentLifecycleStateEnumErrored   InstalledComponentLifecycleStateEnum = "ERRORED"
-	InstalledComponentLifecycleStateEnumBroken    InstalledComponentLifecycleStateEnum = "BROKEN"
-	InstalledComponentLifecycleStateEnumFinished  InstalledComponentLifecycleStateEnum = "FINISHED"
+    InstalledComponentLifecycleStateEnumNew InstalledComponentLifecycleStateEnum = "NEW"
+InstalledComponentLifecycleStateEnumInstalled InstalledComponentLifecycleStateEnum = "INSTALLED"
+InstalledComponentLifecycleStateEnumStarting InstalledComponentLifecycleStateEnum = "STARTING"
+InstalledComponentLifecycleStateEnumRunning InstalledComponentLifecycleStateEnum = "RUNNING"
+InstalledComponentLifecycleStateEnumStopping InstalledComponentLifecycleStateEnum = "STOPPING"
+InstalledComponentLifecycleStateEnumErrored InstalledComponentLifecycleStateEnum = "ERRORED"
+InstalledComponentLifecycleStateEnumBroken InstalledComponentLifecycleStateEnum = "BROKEN"
+InstalledComponentLifecycleStateEnumFinished InstalledComponentLifecycleStateEnum = "FINISHED"
 )
+
+

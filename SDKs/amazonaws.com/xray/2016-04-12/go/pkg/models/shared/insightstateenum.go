@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type InsightStateEnum string
 
 const (
-	InsightStateEnumActive InsightStateEnum = "ACTIVE"
-	InsightStateEnumClosed InsightStateEnum = "CLOSED"
+    InsightStateEnumActive InsightStateEnum = "ACTIVE"
+InsightStateEnumClosed InsightStateEnum = "CLOSED"
 )
+
+

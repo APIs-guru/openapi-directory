@@ -1,15 +1,21 @@
 package operations
 
+
+
 type NodesRegistrationsListPathParams struct {
-	NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
+    NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
+    
 }
 
 type NodesRegistrationsListRequest struct {
-	PathParams NodesRegistrationsListPathParams
+    PathParams NodesRegistrationsListPathParams 
+    
 }
 
 type NodesRegistrationsListResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

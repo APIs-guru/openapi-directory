@@ -1,6 +1,10 @@
 package operations
 
+
+
 type TenancyChoicesListResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

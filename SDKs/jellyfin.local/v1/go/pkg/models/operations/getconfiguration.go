@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetConfigurationSecurity struct {
-	CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type GetConfigurationRequest struct {
-	Security GetConfigurationSecurity
+    Security GetConfigurationSecurity 
+    
 }
 
 type GetConfigurationResponse struct {
-	ContentType         string
-	ServerConfiguration *shared.ServerConfiguration
-	StatusCode          int64
+    ContentType string 
+    ServerConfiguration *shared.ServerConfiguration 
+    StatusCode int64 
+    
 }
+

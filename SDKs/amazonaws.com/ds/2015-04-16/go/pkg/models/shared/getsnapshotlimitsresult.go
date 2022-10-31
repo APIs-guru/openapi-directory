@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetSnapshotLimitsResult struct {
-	SnapshotLimits *SnapshotLimits `json:"SnapshotLimits,omitempty"`
+    SnapshotLimits *SnapshotLimits `json:"SnapshotLimits,omitempty"`
+    
 }
+

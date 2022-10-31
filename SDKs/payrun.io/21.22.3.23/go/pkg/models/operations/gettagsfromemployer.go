@@ -1,26 +1,30 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetTagsFromEmployerPathParams struct {
-	EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    
 }
 
 type GetTagsFromEmployerHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type GetTagsFromEmployerRequest struct {
-	PathParams GetTagsFromEmployerPathParams
-	Headers    GetTagsFromEmployerHeaders
+    PathParams GetTagsFromEmployerPathParams 
+    Headers GetTagsFromEmployerHeaders 
+    
 }
 
 type GetTagsFromEmployerResponse struct {
-	ContentType    string
-	ErrorModel     *shared.ErrorModel
-	LinkCollection *shared.LinkCollection
-	StatusCode     int64
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    LinkCollection *shared.LinkCollection 
+    StatusCode int64 
+    
 }
+

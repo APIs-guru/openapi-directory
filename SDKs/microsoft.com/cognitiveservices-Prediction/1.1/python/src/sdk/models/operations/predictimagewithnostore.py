@@ -16,7 +16,7 @@ class PredictImageWithNoStoreQueryParams:
 
 @dataclass
 class PredictImageWithNoStoreHeaders:
-    prediction_key: str = field(default=None, metadata={'header': { 'field_name': 'Prediction-Key' }})
+    prediction_key: str = field(default=None, metadata={'header': { 'field_name': 'Prediction-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

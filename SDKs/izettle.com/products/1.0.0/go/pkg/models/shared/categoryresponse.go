@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CategoryResponse struct {
-	Categories []CategoryDto `json:"categories"`
+    Categories []CategoryDto `json:"categories"`
+    
 }
+

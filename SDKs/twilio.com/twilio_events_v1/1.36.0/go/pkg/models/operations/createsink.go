@@ -1,31 +1,34 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var CreateSinkServers = []string{
 	"https://events.twilio.com",
 }
 
 type CreateSinkCreateSinkRequest struct {
-	Description       string                      `form:"name=Description"`
-	SinkConfiguration interface{}                 `form:"name=SinkConfiguration"`
-	SinkType          shared.SinkEnumSinkTypeEnum `form:"name=SinkType"`
+    Description string `form:"name=Description"`
+    SinkConfiguration interface{} `form:"name=SinkConfiguration"`
+    SinkType shared.SinkEnumSinkTypeEnum `form:"name=SinkType"`
+    
 }
 
 type CreateSinkSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type CreateSinkRequest struct {
-	ServerURL *string
-	Request   *CreateSinkCreateSinkRequest `request:"mediaType=application/x-www-form-urlencoded"`
-	Security  CreateSinkSecurity
+    ServerURL *string 
+    Request *CreateSinkCreateSinkRequest `request:"mediaType=application/x-www-form-urlencoded"`
+    Security CreateSinkSecurity 
+    
 }
 
 type CreateSinkResponse struct {
-	ContentType  string
-	StatusCode   int64
-	EventsV1Sink *shared.EventsV1Sink
+    ContentType string 
+    StatusCode int64 
+    EventsV1Sink *shared.EventsV1Sink 
+    
 }
+

@@ -68,6 +68,7 @@ func (s *SDK) DeleteItvPurchasePlatform(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -703,6 +704,7 @@ func (s *SDK) ActivateSaveOffer(ctx context.Context, request operations.Activate
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -747,6 +749,7 @@ func (s *SDK) AddPaymentMethod(ctx context.Context, request operations.AddPaymen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -867,6 +870,7 @@ func (s *SDK) AssignMsisdn(ctx context.Context, request operations.AssignMsisdnR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -919,6 +923,7 @@ func (s *SDK) AssignToken(ctx context.Context, request operations.AssignTokenReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -971,6 +976,7 @@ func (s *SDK) AuthorizeDevice(ctx context.Context, request operations.AuthorizeD
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1275,6 +1281,7 @@ func (s *SDK) ChangeCardDetails(ctx context.Context, request operations.ChangeCa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1366,6 +1373,7 @@ func (s *SDK) ChangeEmail(ctx context.Context, request operations.ChangeEmailReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1457,6 +1465,7 @@ func (s *SDK) ChangeMarketing(ctx context.Context, request operations.ChangeMark
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1548,6 +1557,7 @@ func (s *SDK) ChangePassword(ctx context.Context, request operations.ChangePassw
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1659,6 +1669,7 @@ func (s *SDK) ChangePin(ctx context.Context, request operations.ChangePinRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1985,6 +1996,7 @@ func (s *SDK) CheckVoucher(ctx context.Context, request operations.CheckVoucherR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2085,6 +2097,7 @@ func (s *SDK) ConfirmPurchase(ctx context.Context, request operations.ConfirmPur
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2185,6 +2198,7 @@ func (s *SDK) ConfirmPurchaseStrong(ctx context.Context, request operations.Conf
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2285,6 +2299,7 @@ func (s *SDK) ConfirmPurchaseWithOffer(ctx context.Context, request operations.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2385,6 +2400,7 @@ func (s *SDK) CreatePinRequest(ctx context.Context, request operations.CreatePin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2485,6 +2501,7 @@ func (s *SDK) CreateProfile(ctx context.Context, request operations.CreateProfil
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2694,6 +2711,7 @@ func (s *SDK) DeleteAccount(ctx context.Context, request operations.DeleteAccoun
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3193,6 +3211,7 @@ func (s *SDK) ExecuteTransaction(ctx context.Context, request operations.Execute
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3284,6 +3303,7 @@ func (s *SDK) ForgotPassword(ctx context.Context, request operations.ForgotPassw
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3395,6 +3415,7 @@ func (s *SDK) GenerateDeviceAuthorizationCode(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3717,6 +3738,7 @@ func (s *SDK) GetAccountToken(ctx context.Context, request operations.GetAccount
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3837,6 +3859,7 @@ func (s *SDK) GetAccountTokenByCode(ctx context.Context, request operations.GetA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3957,6 +3980,7 @@ func (s *SDK) GetAccountTokenWithPin(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -4239,6 +4263,7 @@ func (s *SDK) GetBillingHistory(ctx context.Context, request operations.GetBilli
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -4561,6 +4586,7 @@ func (s *SDK) GetCardDetails(ctx context.Context, request operations.GetCardDeta
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -5176,6 +5202,7 @@ func (s *SDK) GetEligibleOffers(ctx context.Context, request operations.GetEligi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -5903,6 +5930,7 @@ func (s *SDK) GetItemDownloadables(ctx context.Context, request operations.GetIt
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -6538,6 +6566,7 @@ func (s *SDK) GetItemsMediaClipFiles(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -6730,6 +6759,7 @@ func (s *SDK) GetItvProfileToken(ctx context.Context, request operations.GetItvP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -7821,6 +7851,7 @@ func (s *SDK) GetProfileToken(ctx context.Context, request operations.GetProfile
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -9483,6 +9514,7 @@ func (s *SDK) GooglePaySubscription(ctx context.Context, request operations.Goog
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -9529,6 +9561,7 @@ func (s *SDK) MakePurchase(ctx context.Context, request operations.MakePurchaseR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -9760,6 +9793,7 @@ func (s *SDK) RefreshToken(ctx context.Context, request operations.RefreshTokenR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -9880,6 +9914,7 @@ func (s *SDK) Register(ctx context.Context, request operations.RegisterRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -10000,6 +10035,7 @@ func (s *SDK) RegisterDevice(ctx context.Context, request operations.RegisterDev
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -10436,6 +10472,7 @@ func (s *SDK) ResetPassword(ctx context.Context, request operations.ResetPasswor
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -10878,6 +10915,7 @@ func (s *SDK) SingleSignOn(ctx context.Context, request operations.SingleSignOnR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -10978,6 +11016,7 @@ func (s *SDK) UpdateAccount(ctx context.Context, request operations.UpdateAccoun
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11089,6 +11128,7 @@ func (s *SDK) UpdatePaymentIntentStrong(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11189,6 +11229,7 @@ func (s *SDK) UpdatePaymentMethodStrong(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11280,6 +11321,7 @@ func (s *SDK) UpdateProfile(ctx context.Context, request operations.UpdateProfil
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11371,6 +11413,7 @@ func (s *SDK) UpdateProfileWithID(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11584,6 +11627,7 @@ func (s *SDK) UpgradePlan(ctx context.Context, request operations.UpgradePlanReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11675,6 +11719,7 @@ func (s *SDK) ValidatePinRequest(ctx context.Context, request operations.Validat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

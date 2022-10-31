@@ -1,5 +1,9 @@
 package shared
 
+
+
 type VaccineStatusRequest struct {
-	PatientID string `json:"patientId"`
+    PatientID string `json:"patientId"`
+    
 }
+

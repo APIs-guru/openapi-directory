@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PutClassificationExportConfigurationResponse struct {
-	Configuration *ClassificationExportConfiguration `json:"configuration,omitempty"`
+    Configuration *ClassificationExportConfiguration `json:"configuration,omitempty"`
+    
 }
+

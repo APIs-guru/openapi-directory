@@ -1,11 +1,16 @@
 package shared
 
+
+
+
 type DataReplicationInitiationStepStatusEnum string
 
 const (
-	DataReplicationInitiationStepStatusEnumNotStarted DataReplicationInitiationStepStatusEnum = "NOT_STARTED"
-	DataReplicationInitiationStepStatusEnumInProgress DataReplicationInitiationStepStatusEnum = "IN_PROGRESS"
-	DataReplicationInitiationStepStatusEnumSucceeded  DataReplicationInitiationStepStatusEnum = "SUCCEEDED"
-	DataReplicationInitiationStepStatusEnumFailed     DataReplicationInitiationStepStatusEnum = "FAILED"
-	DataReplicationInitiationStepStatusEnumSkipped    DataReplicationInitiationStepStatusEnum = "SKIPPED"
+    DataReplicationInitiationStepStatusEnumNotStarted DataReplicationInitiationStepStatusEnum = "NOT_STARTED"
+DataReplicationInitiationStepStatusEnumInProgress DataReplicationInitiationStepStatusEnum = "IN_PROGRESS"
+DataReplicationInitiationStepStatusEnumSucceeded DataReplicationInitiationStepStatusEnum = "SUCCEEDED"
+DataReplicationInitiationStepStatusEnumFailed DataReplicationInitiationStepStatusEnum = "FAILED"
+DataReplicationInitiationStepStatusEnumSkipped DataReplicationInitiationStepStatusEnum = "SKIPPED"
 )
+
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EligibleItem struct {
-	ListingID *string `json:"listingId,omitempty"`
+    ListingID *string `json:"listingId,omitempty"`
+    
 }
+

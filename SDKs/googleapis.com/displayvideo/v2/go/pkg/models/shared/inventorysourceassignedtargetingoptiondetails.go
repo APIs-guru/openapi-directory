@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InventorySourceAssignedTargetingOptionDetails struct {
-	InventorySourceID *string `json:"inventorySourceId,omitempty"`
+    InventorySourceID *string `json:"inventorySourceId,omitempty"`
+    
 }
+

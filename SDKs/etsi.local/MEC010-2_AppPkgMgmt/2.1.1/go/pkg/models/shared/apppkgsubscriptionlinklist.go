@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AppPkgSubscriptionLinkList struct {
-	Links AppPkgSubscriptionLinkListLinks `json:"_links"`
+    Links AppPkgSubscriptionLinkListLinks `json:"_links"`
+    
 }
+

@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type StartTimeRange struct {
-	FromTime *time.Time `json:"FromTime,omitempty"`
-	ToTime   *time.Time `json:"ToTime,omitempty"`
+    FromTime *time.Time `json:"FromTime,omitempty"`
+    ToTime *time.Time `json:"ToTime,omitempty"`
+    
 }
+

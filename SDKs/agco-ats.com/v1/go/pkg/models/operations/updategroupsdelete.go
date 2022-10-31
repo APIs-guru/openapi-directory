@@ -1,15 +1,21 @@
 package operations
 
+
+
 type UpdateGroupsDeletePathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=ID"`
+    ID string `pathParam:"style=simple,explode=false,name=ID"`
+    
 }
 
 type UpdateGroupsDeleteRequest struct {
-	PathParams UpdateGroupsDeletePathParams
+    PathParams UpdateGroupsDeletePathParams 
+    
 }
 
 type UpdateGroupsDeleteResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateApplicationResponse struct {
-	Application *Application `json:"application,omitempty"`
+    Application *Application `json:"application,omitempty"`
+    
 }
+

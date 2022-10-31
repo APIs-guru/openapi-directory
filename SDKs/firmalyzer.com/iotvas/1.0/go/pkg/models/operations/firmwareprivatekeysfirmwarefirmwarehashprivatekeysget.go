@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGetPathParams struct {
-	FirmwareHash string `pathParam:"style=simple,explode=false,name=firmware_hash"`
+    FirmwareHash string `pathParam:"style=simple,explode=false,name=firmware_hash"`
+    
 }
 
 type FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGetSecurity struct {
-	APIKeyHeader shared.SchemeAPIKeyHeader `security:"scheme,type=apiKey,subtype=header"`
+    APIKeyHeader shared.SchemeAPIKeyHeader `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGetRequest struct {
-	PathParams FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGetPathParams
-	Security   FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGetSecurity
+    PathParams FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGetPathParams 
+    Security FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGetSecurity 
+    
 }
 
 type FirmwarePrivateKeysFirmwareFirmwareHashPrivateKeysGetResponse struct {
-	ContentType         string
-	CryptoKeys          []shared.CryptoKey
-	HTTPValidationError *shared.HTTPValidationError
-	StatusCode          int64
+    ContentType string 
+    CryptoKeys []shared.CryptoKey 
+    HTTPValidationError *shared.HTTPValidationError 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CharacterMaskConfig struct {
-	MaskingCharacter *string `json:"maskingCharacter,omitempty"`
+    MaskingCharacter *string `json:"maskingCharacter,omitempty"`
+    
 }
+

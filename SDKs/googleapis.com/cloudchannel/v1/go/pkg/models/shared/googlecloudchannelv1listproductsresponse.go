@@ -1,6 +1,10 @@
 package shared
 
+
+
 type GoogleCloudChannelV1ListProductsResponse struct {
-	NextPageToken *string                       `json:"nextPageToken,omitempty"`
-	Products      []GoogleCloudChannelV1Product `json:"products,omitempty"`
+    NextPageToken *string `json:"nextPageToken,omitempty"`
+    Products []GoogleCloudChannelV1Product `json:"products,omitempty"`
+    
 }
+

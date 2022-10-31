@@ -153,6 +153,7 @@ func (s *SDK) APIKeyUpdateCurrent(ctx context.Context, request operations.APIKey
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1385,6 +1386,7 @@ func (s *SDK) FileActionBeginUpload(ctx context.Context, request operations.File
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1443,6 +1445,7 @@ func (s *SDK) FileActionCopy(ctx context.Context, request operations.FileActionC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1552,6 +1555,7 @@ func (s *SDK) FileActionMove(ctx context.Context, request operations.FileActionM
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6447,6 +6451,7 @@ func (s *SDK) PatchAPIKeysID(ctx context.Context, request operations.PatchAPIKey
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6505,6 +6510,7 @@ func (s *SDK) PatchAs2KeysID(ctx context.Context, request operations.PatchAs2Key
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6563,6 +6569,7 @@ func (s *SDK) PatchAutomationsID(ctx context.Context, request operations.PatchAu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6618,6 +6625,7 @@ func (s *SDK) PatchBehaviorsID(ctx context.Context, request operations.PatchBeha
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6673,6 +6681,7 @@ func (s *SDK) PatchBundlesID(ctx context.Context, request operations.PatchBundle
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6728,6 +6737,7 @@ func (s *SDK) PatchClickwrapsID(ctx context.Context, request operations.PatchCli
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6786,6 +6796,7 @@ func (s *SDK) PatchFileCommentsID(ctx context.Context, request operations.PatchF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6841,6 +6852,7 @@ func (s *SDK) PatchFilesPath(ctx context.Context, request operations.PatchFilesP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6899,6 +6911,7 @@ func (s *SDK) PatchGroupUsersID(ctx context.Context, request operations.PatchGro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6954,6 +6967,7 @@ func (s *SDK) PatchGroupsGroupIDMembershipsUserID(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7009,6 +7023,7 @@ func (s *SDK) PatchGroupsID(ctx context.Context, request operations.PatchGroupsI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7067,6 +7082,7 @@ func (s *SDK) PatchMessageCommentsID(ctx context.Context, request operations.Pat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7125,6 +7141,7 @@ func (s *SDK) PatchMessagesID(ctx context.Context, request operations.PatchMessa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7180,6 +7197,7 @@ func (s *SDK) PatchNotificationsID(ctx context.Context, request operations.Patch
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7238,6 +7256,7 @@ func (s *SDK) PatchProjectsID(ctx context.Context, request operations.PatchProje
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7296,6 +7315,7 @@ func (s *SDK) PatchPublicKeysID(ctx context.Context, request operations.PatchPub
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7351,6 +7371,7 @@ func (s *SDK) PatchRemoteServersID(ctx context.Context, request operations.Patch
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7406,6 +7427,7 @@ func (s *SDK) PatchSite(ctx context.Context, request operations.PatchSiteRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7464,6 +7486,7 @@ func (s *SDK) PatchStylesPath(ctx context.Context, request operations.PatchStyle
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7519,6 +7542,7 @@ func (s *SDK) PatchUser(ctx context.Context, request operations.PatchUserRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7574,6 +7598,7 @@ func (s *SDK) PatchUsersID(ctx context.Context, request operations.PatchUsersIDR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7629,6 +7654,7 @@ func (s *SDK) PostActionNotificationExports(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7724,6 +7750,7 @@ func (s *SDK) PostAPIKeys(ctx context.Context, request operations.PostAPIKeysReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7779,6 +7806,7 @@ func (s *SDK) PostAs2Keys(ctx context.Context, request operations.PostAs2KeysReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7837,6 +7865,7 @@ func (s *SDK) PostAutomations(ctx context.Context, request operations.PostAutoma
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7892,6 +7921,7 @@ func (s *SDK) PostBehaviors(ctx context.Context, request operations.PostBehavior
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7950,6 +7980,7 @@ func (s *SDK) PostBehaviorsWebhookTest(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8005,6 +8036,7 @@ func (s *SDK) PostBundleRecipients(ctx context.Context, request operations.PostB
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8060,6 +8092,7 @@ func (s *SDK) PostBundles(ctx context.Context, request operations.PostBundlesReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8115,6 +8148,7 @@ func (s *SDK) PostBundlesIDShare(ctx context.Context, request operations.PostBun
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8161,6 +8195,7 @@ func (s *SDK) PostClickwraps(ctx context.Context, request operations.PostClickwr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8219,6 +8254,7 @@ func (s *SDK) PostExternalEvents(ctx context.Context, request operations.PostExt
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8274,6 +8310,7 @@ func (s *SDK) PostFileCommentReactions(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8332,6 +8369,7 @@ func (s *SDK) PostFileComments(ctx context.Context, request operations.PostFileC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8387,6 +8425,7 @@ func (s *SDK) PostFilesPath(ctx context.Context, request operations.PostFilesPat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8494,6 +8533,7 @@ func (s *SDK) PostGroupUsers(ctx context.Context, request operations.PostGroupUs
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8549,6 +8589,7 @@ func (s *SDK) PostGroups(ctx context.Context, request operations.PostGroupsReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8604,6 +8645,7 @@ func (s *SDK) PostGroupsGroupIDUsers(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8659,6 +8701,7 @@ func (s *SDK) PostHistoryExports(ctx context.Context, request operations.PostHis
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8714,6 +8757,7 @@ func (s *SDK) PostInboxRecipients(ctx context.Context, request operations.PostIn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8769,6 +8813,7 @@ func (s *SDK) PostLocksPath(ctx context.Context, request operations.PostLocksPat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8824,6 +8869,7 @@ func (s *SDK) PostMessageCommentReactions(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8879,6 +8925,7 @@ func (s *SDK) PostMessageComments(ctx context.Context, request operations.PostMe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8934,6 +8981,7 @@ func (s *SDK) PostMessageReactions(ctx context.Context, request operations.PostM
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -8989,6 +9037,7 @@ func (s *SDK) PostMessages(ctx context.Context, request operations.PostMessagesR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9044,6 +9093,7 @@ func (s *SDK) PostNotifications(ctx context.Context, request operations.PostNoti
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9099,6 +9149,7 @@ func (s *SDK) PostPermissions(ctx context.Context, request operations.PostPermis
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9157,6 +9208,7 @@ func (s *SDK) PostProjects(ctx context.Context, request operations.PostProjectsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9212,6 +9264,7 @@ func (s *SDK) PostPublicKeys(ctx context.Context, request operations.PostPublicK
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9267,6 +9320,7 @@ func (s *SDK) PostRemoteServers(ctx context.Context, request operations.PostRemo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9325,6 +9379,7 @@ func (s *SDK) PostRequests(ctx context.Context, request operations.PostRequestsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9380,6 +9435,7 @@ func (s *SDK) PostSessions(ctx context.Context, request operations.PostSessionsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9435,6 +9491,7 @@ func (s *SDK) PostSiteAPIKeys(ctx context.Context, request operations.PostSiteAP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9493,6 +9550,7 @@ func (s *SDK) PostSiteTestWebhook(ctx context.Context, request operations.PostSi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9548,6 +9606,7 @@ func (s *SDK) PostUserAPIKeys(ctx context.Context, request operations.PostUserAP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9603,6 +9662,7 @@ func (s *SDK) PostUserAs2Keys(ctx context.Context, request operations.PostUserAs
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9658,6 +9718,7 @@ func (s *SDK) PostUserPublicKeys(ctx context.Context, request operations.PostUse
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9716,6 +9777,7 @@ func (s *SDK) PostUserRequests(ctx context.Context, request operations.PostUserR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9771,6 +9833,7 @@ func (s *SDK) PostUsers(ctx context.Context, request operations.PostUsersRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9946,6 +10009,7 @@ func (s *SDK) PostUsersUserIDAPIKeys(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -10004,6 +10068,7 @@ func (s *SDK) PostUsersUserIDAs2Keys(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -10062,6 +10127,7 @@ func (s *SDK) PostUsersUserIDPublicKeys(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -10120,6 +10186,7 @@ func (s *SDK) PostWebhookTests(ctx context.Context, request operations.PostWebho
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

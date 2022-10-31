@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetCallAnalyticsJobResponse struct {
-	CallAnalyticsJob *CallAnalyticsJob `json:"CallAnalyticsJob,omitempty"`
+    CallAnalyticsJob *CallAnalyticsJob `json:"CallAnalyticsJob,omitempty"`
+    
 }
+

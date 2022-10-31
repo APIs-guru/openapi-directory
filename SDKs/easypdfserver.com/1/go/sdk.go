@@ -67,6 +67,7 @@ func (s *SDK) PostMakePdf(ctx context.Context, request operations.PostMakePdfReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

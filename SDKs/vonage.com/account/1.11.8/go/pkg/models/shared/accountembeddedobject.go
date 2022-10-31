@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AccountEmbeddedObject struct {
-	Data *Account `json:"data,omitempty"`
+    Data *Account `json:"data,omitempty"`
+    
 }
+

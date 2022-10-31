@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetRelationalDatabaseLogStreamsResult struct {
-	LogStreams []string `json:"logStreams,omitempty"`
+    LogStreams []string `json:"logStreams,omitempty"`
+    
 }
+

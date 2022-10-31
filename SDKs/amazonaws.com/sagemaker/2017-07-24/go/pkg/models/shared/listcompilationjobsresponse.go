@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListCompilationJobsResponse struct {
-	CompilationJobSummaries []CompilationJobSummary `json:"CompilationJobSummaries"`
-	NextToken               *string                 `json:"NextToken,omitempty"`
+    CompilationJobSummaries []CompilationJobSummary `json:"CompilationJobSummaries"`
+    NextToken *string `json:"NextToken,omitempty"`
+    
 }
+

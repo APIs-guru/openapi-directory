@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DomainTransferability struct {
-	Transferable *TransferableEnum `json:"Transferable,omitempty"`
+    Transferable *TransferableEnum `json:"Transferable,omitempty"`
+    
 }
+

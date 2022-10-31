@@ -1,15 +1,21 @@
 package operations
 
+
+
 type ProtocolSflowReloadPathParams struct {
-	AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
+    AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
+    
 }
 
 type ProtocolSflowReloadRequest struct {
-	PathParams ProtocolSflowReloadPathParams
+    PathParams ProtocolSflowReloadPathParams 
+    
 }
 
 type ProtocolSflowReloadResponse struct {
-	ContentType                                 string
-	StatusCode                                  int64
-	ProtocolSflowReload200ApplicationJSONString *string
+    ContentType string 
+    StatusCode int64 
+    ProtocolSflowReload200ApplicationJSONString *string 
+    
 }
+

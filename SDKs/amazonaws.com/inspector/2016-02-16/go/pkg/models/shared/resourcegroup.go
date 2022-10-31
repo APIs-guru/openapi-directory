@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ResourceGroup struct {
-	Arn       string             `json:"arn"`
-	CreatedAt time.Time          `json:"createdAt"`
-	Tags      []ResourceGroupTag `json:"tags"`
+    Arn string `json:"arn"`
+    CreatedAt time.Time `json:"createdAt"`
+    Tags []ResourceGroupTag `json:"tags"`
+    
 }
+

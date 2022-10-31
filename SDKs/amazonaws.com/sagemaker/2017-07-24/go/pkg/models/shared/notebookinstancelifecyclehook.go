@@ -1,5 +1,9 @@
 package shared
 
+
+
 type NotebookInstanceLifecycleHook struct {
-	Content *string `json:"Content,omitempty"`
+    Content *string `json:"Content,omitempty"`
+    
 }
+

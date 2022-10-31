@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type BillingGetGithubActionsBillingOrgPathParams struct {
-	Org string `pathParam:"style=simple,explode=false,name=org"`
+    Org string `pathParam:"style=simple,explode=false,name=org"`
+    
 }
 
 type BillingGetGithubActionsBillingOrgRequest struct {
-	PathParams BillingGetGithubActionsBillingOrgPathParams
+    PathParams BillingGetGithubActionsBillingOrgPathParams 
+    
 }
 
 type BillingGetGithubActionsBillingOrgResponse struct {
-	ContentType         string
-	StatusCode          int64
-	ActionsBillingUsage *shared.ActionsBillingUsage
+    ContentType string 
+    StatusCode int64 
+    ActionsBillingUsage *shared.ActionsBillingUsage 
+    
 }
+

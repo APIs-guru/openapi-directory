@@ -1,30 +1,35 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetProjectPathParams struct {
-	ProjectGid string `pathParam:"style=simple,explode=false,name=project_gid"`
+    ProjectGid string `pathParam:"style=simple,explode=false,name=project_gid"`
+    
 }
 
 type GetProjectQueryParams struct {
-	OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
-	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
+    OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
+    OptPretty *bool `queryParam:"style=form,explode=true,name=opt_pretty"`
+    
 }
 
 type GetProjectRequest struct {
-	PathParams  GetProjectPathParams
-	QueryParams GetProjectQueryParams
+    PathParams GetProjectPathParams 
+    QueryParams GetProjectQueryParams 
+    
 }
 
 type GetProject200ApplicationJSON struct {
-	Data *shared.ProjectResponse `json:"data,omitempty"`
+    Data *shared.ProjectResponse `json:"data,omitempty"`
+    
 }
 
 type GetProjectResponse struct {
-	ContentType                        string
-	ErrorResponse                      *shared.ErrorResponse
-	StatusCode                         int64
-	GetProject200ApplicationJSONObject *GetProject200ApplicationJSON
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    GetProject200ApplicationJSONObject *GetProject200ApplicationJSON 
+    
 }
+

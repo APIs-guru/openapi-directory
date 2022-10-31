@@ -1,88 +1,108 @@
 package operations
 
+
+
 type PostFirewallsIDActionsRemoveFromResourcesPathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesLabelSelector struct {
-	Selector string `json:"selector"`
+    Selector string `json:"selector"`
+    
 }
 
 type PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesServer struct {
-	ID int64 `json:"id"`
+    ID int64 `json:"id"`
+    
 }
+
 
 type PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesTypeEnum string
 
 const (
-	PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesTypeEnumServer        PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesTypeEnum = "server"
-	PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesTypeEnumLabelSelector PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesTypeEnum = "label_selector"
+    PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesTypeEnumServer PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesTypeEnum = "server"
+PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesTypeEnumLabelSelector PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesTypeEnum = "label_selector"
 )
 
+
 type PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResources struct {
-	LabelSelector *PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesLabelSelector `json:"label_selector,omitempty"`
-	Server        *PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesServer        `json:"server,omitempty"`
-	Type          *PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesTypeEnum      `json:"type,omitempty"`
+    LabelSelector *PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesLabelSelector `json:"label_selector,omitempty"`
+    Server *PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesServer `json:"server,omitempty"`
+    Type *PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResourcesTypeEnum `json:"type,omitempty"`
+    
 }
 
 type PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequest struct {
-	RemoveFrom []PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResources `json:"remove_from"`
+    RemoveFrom []PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequestFirewallRemoveFromResources `json:"remove_from"`
+    
 }
 
 type PostFirewallsIDActionsRemoveFromResourcesRequest struct {
-	PathParams PostFirewallsIDActionsRemoveFromResourcesPathParams
-	Request    *PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequest `request:"mediaType=application/json"`
+    PathParams PostFirewallsIDActionsRemoveFromResourcesPathParams 
+    Request *PostFirewallsIDActionsRemoveFromResourcesRemoveFromResourcesRequest `request:"mediaType=application/json"`
+    
 }
 
 type PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionError struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
+    Code string `json:"code"`
+    Message string `json:"message"`
+    
 }
 
 type PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionResources struct {
-	ID   int64  `json:"id"`
-	Type string `json:"type"`
+    ID int64 `json:"id"`
+    Type string `json:"type"`
+    
 }
+
 
 type PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnum string
 
 const (
-	PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnumSuccess PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnum = "success"
-	PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnumRunning PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnum = "running"
-	PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnumError   PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnum = "error"
+    PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnumSuccess PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnum = "success"
+PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnumRunning PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnum = "running"
+PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnumError PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnum = "error"
 )
 
+
 type PostFirewallsIDActionsRemoveFromResourcesActionsResponseAction struct {
-	Command   string                                                                    `json:"command"`
-	Error     PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionError       `json:"error"`
-	Finished  string                                                                    `json:"finished"`
-	ID        int64                                                                     `json:"id"`
-	Progress  float64                                                                   `json:"progress"`
-	Resources []PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionResources `json:"resources"`
-	Started   string                                                                    `json:"started"`
-	Status    PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnum  `json:"status"`
+    Command string `json:"command"`
+    Error PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionError `json:"error"`
+    Finished string `json:"finished"`
+    ID int64 `json:"id"`
+    Progress float64 `json:"progress"`
+    Resources []PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionResources `json:"resources"`
+    Started string `json:"started"`
+    Status PostFirewallsIDActionsRemoveFromResourcesActionsResponseActionStatusEnum `json:"status"`
+    
 }
 
 type PostFirewallsIDActionsRemoveFromResourcesActionsResponseMetaPagination struct {
-	LastPage     float64 `json:"last_page"`
-	NextPage     float64 `json:"next_page"`
-	Page         float64 `json:"page"`
-	PerPage      float64 `json:"per_page"`
-	PreviousPage float64 `json:"previous_page"`
-	TotalEntries float64 `json:"total_entries"`
+    LastPage float64 `json:"last_page"`
+    NextPage float64 `json:"next_page"`
+    Page float64 `json:"page"`
+    PerPage float64 `json:"per_page"`
+    PreviousPage float64 `json:"previous_page"`
+    TotalEntries float64 `json:"total_entries"`
+    
 }
 
 type PostFirewallsIDActionsRemoveFromResourcesActionsResponseMeta struct {
-	Pagination PostFirewallsIDActionsRemoveFromResourcesActionsResponseMetaPagination `json:"pagination"`
+    Pagination PostFirewallsIDActionsRemoveFromResourcesActionsResponseMetaPagination `json:"pagination"`
+    
 }
 
 type PostFirewallsIDActionsRemoveFromResourcesActionsResponse struct {
-	Actions []PostFirewallsIDActionsRemoveFromResourcesActionsResponseAction `json:"actions"`
-	Meta    *PostFirewallsIDActionsRemoveFromResourcesActionsResponseMeta    `json:"meta,omitempty"`
+    Actions []PostFirewallsIDActionsRemoveFromResourcesActionsResponseAction `json:"actions"`
+    Meta *PostFirewallsIDActionsRemoveFromResourcesActionsResponseMeta `json:"meta,omitempty"`
+    
 }
 
 type PostFirewallsIDActionsRemoveFromResourcesResponse struct {
-	ActionsResponse *PostFirewallsIDActionsRemoveFromResourcesActionsResponse
-	ContentType     string
-	StatusCode      int64
+    ActionsResponse *PostFirewallsIDActionsRemoveFromResourcesActionsResponse 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

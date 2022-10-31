@@ -63,6 +63,7 @@ func (s *SDK) ConnectorsProjectsLocationsConnectionsActionsExecute(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -151,6 +152,7 @@ func (s *SDK) ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesCreate(ct
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -362,6 +364,7 @@ func (s *SDK) ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesPatch(ctx
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -409,6 +412,7 @@ func (s *SDK) ConnectorsProjectsLocationsConnectionsEntityTypesEntitiesUpdateEnt
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -497,6 +501,7 @@ func (s *SDK) ConnectorsProjectsLocationsConnectionsExecuteSQLQuery(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

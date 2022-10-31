@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateDirectConnectGatewayAssociationResult struct {
-	DirectConnectGatewayAssociation *DirectConnectGatewayAssociation `json:"directConnectGatewayAssociation,omitempty"`
+    DirectConnectGatewayAssociation *DirectConnectGatewayAssociation `json:"directConnectGatewayAssociation,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudBeyondcorpAppconnectorsV1alphaNotificationConfig struct {
-	PubsubNotification *GoogleCloudBeyondcorpAppconnectorsV1alphaNotificationConfigCloudPubSubNotificationConfig `json:"pubsubNotification,omitempty"`
+    PubsubNotification *GoogleCloudBeyondcorpAppconnectorsV1alphaNotificationConfigCloudPubSubNotificationConfig `json:"pubsubNotification,omitempty"`
+    
 }
+

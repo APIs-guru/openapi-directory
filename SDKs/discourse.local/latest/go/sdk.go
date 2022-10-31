@@ -133,6 +133,7 @@ func (s *SDK) DeleteAdminUsersIDJSON(ctx context.Context, request operations.Del
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -178,6 +179,7 @@ func (s *SDK) DeleteGroupsIDMembersJSON(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -218,6 +220,8 @@ func (s *SDK) DeleteTIDJSON(ctx context.Context, request operations.DeleteTIDJSO
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -714,6 +718,8 @@ func (s *SDK) GetLatestJSON(ctx context.Context, request operations.GetLatestJSO
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -794,6 +800,8 @@ func (s *SDK) GetPostsIDJSON(ctx context.Context, request operations.GetPostsIDJ
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -832,6 +840,8 @@ func (s *SDK) GetPostsJSON(ctx context.Context, request operations.GetPostsJSONR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -876,6 +886,7 @@ func (s *SDK) GetSearchJSON(ctx context.Context, request operations.GetSearchJSO
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -916,6 +927,8 @@ func (s *SDK) GetTIDJSON(ctx context.Context, request operations.GetTIDJSONReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -960,7 +973,10 @@ func (s *SDK) GetTIDPostsJSON(ctx context.Context, request operations.GetTIDPost
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1157,6 +1173,8 @@ func (s *SDK) GetTopJSON(ctx context.Context, request operations.GetTopJSONReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1195,6 +1213,8 @@ func (s *SDK) GetTopJSONPeriodEqualFlag(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1313,6 +1333,8 @@ func (s *SDK) GetUByExternalExternalIDJSON(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1352,6 +1374,8 @@ func (s *SDK) GetUByExternalProviderExternalIDJSON(ctx context.Context, request 
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1390,6 +1414,8 @@ func (s *SDK) GetUUsernameJSON(ctx context.Context, request operations.GetUUsern
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1514,6 +1540,7 @@ func (s *SDK) PostAdminBackupsJSON(ctx context.Context, request operations.PostA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1559,6 +1586,7 @@ func (s *SDK) PostAdminBadgesJSON(ctx context.Context, request operations.PostAd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1604,6 +1632,7 @@ func (s *SDK) PostAdminGroupsJSON(ctx context.Context, request operations.PostAd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1688,6 +1717,7 @@ func (s *SDK) PostCategoriesJSON(ctx context.Context, request operations.PostCat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1733,7 +1763,10 @@ func (s *SDK) PostInvitesJSON(ctx context.Context, request operations.PostInvite
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1778,7 +1811,10 @@ func (s *SDK) PostPostActionsJSON(ctx context.Context, request operations.PostPo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1823,6 +1859,7 @@ func (s *SDK) PostPostsJSON(ctx context.Context, request operations.PostPostsJSO
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1868,6 +1905,7 @@ func (s *SDK) PostSessionForgotPasswordJSON(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1913,7 +1951,10 @@ func (s *SDK) PostTIDInviteJSON(ctx context.Context, request operations.PostTIDI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1958,7 +1999,10 @@ func (s *SDK) PostTIDNotificationsJSON(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2003,7 +2047,10 @@ func (s *SDK) PostTIDTimerJSON(ctx context.Context, request operations.PostTIDTi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2048,6 +2095,7 @@ func (s *SDK) PostTagGroupsJSON(ctx context.Context, request operations.PostTagG
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2093,6 +2141,7 @@ func (s *SDK) PostUploadsJSON(ctx context.Context, request operations.PostUpload
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2177,7 +2226,10 @@ func (s *SDK) PostUsersJSON(ctx context.Context, request operations.PostUsersJSO
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2252,6 +2304,7 @@ func (s *SDK) PutAdminBadgesIDJSON(ctx context.Context, request operations.PutAd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2336,6 +2389,7 @@ func (s *SDK) PutAdminUsersIDSuspendJSON(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2381,6 +2435,7 @@ func (s *SDK) PutCategoriesIDJSON(ctx context.Context, request operations.PutCat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2426,6 +2481,7 @@ func (s *SDK) PutGroupsIDJSON(ctx context.Context, request operations.PutGroupsI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2471,6 +2527,7 @@ func (s *SDK) PutGroupsIDMembersJSON(ctx context.Context, request operations.Put
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2516,6 +2573,7 @@ func (s *SDK) PutNotificationsMarkReadJSON(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2561,7 +2619,10 @@ func (s *SDK) PutPostsIDJSON(ctx context.Context, request operations.PutPostsIDJ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2606,7 +2667,10 @@ func (s *SDK) PutPostsIDLockedJSON(ctx context.Context, request operations.PutPo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2647,6 +2711,8 @@ func (s *SDK) PutTIDBookmarkJSON(ctx context.Context, request operations.PutTIDB
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2681,7 +2747,10 @@ func (s *SDK) PutTIDChangeTimestampJSON(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2726,7 +2795,10 @@ func (s *SDK) PutTIDJSON(ctx context.Context, request operations.PutTIDJSONReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2771,7 +2843,10 @@ func (s *SDK) PutTIDStatusJSON(ctx context.Context, request operations.PutTIDSta
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2816,6 +2891,7 @@ func (s *SDK) PutTagGroupsIDJSON(ctx context.Context, request operations.PutTagG
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2861,6 +2937,7 @@ func (s *SDK) PutUUsernamePreferencesAvatarPickJSON(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2906,6 +2983,7 @@ func (s *SDK) PutUUsernamePreferencesEmailJSON(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2942,6 +3020,7 @@ func (s *SDK) PutUsersPasswordResetTokenJSON(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

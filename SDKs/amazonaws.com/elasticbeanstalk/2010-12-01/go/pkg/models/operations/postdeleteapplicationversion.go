@@ -1,40 +1,51 @@
 package operations
 
+
+
+
 type PostDeleteApplicationVersionActionEnum string
 
 const (
-	PostDeleteApplicationVersionActionEnumDeleteApplicationVersion PostDeleteApplicationVersionActionEnum = "DeleteApplicationVersion"
+    PostDeleteApplicationVersionActionEnumDeleteApplicationVersion PostDeleteApplicationVersionActionEnum = "DeleteApplicationVersion"
 )
+
+
 
 type PostDeleteApplicationVersionVersionEnum string
 
 const (
-	PostDeleteApplicationVersionVersionEnumTwoThousandAndTen1201 PostDeleteApplicationVersionVersionEnum = "2010-12-01"
+    PostDeleteApplicationVersionVersionEnumTwoThousandAndTen1201 PostDeleteApplicationVersionVersionEnum = "2010-12-01"
 )
 
+
 type PostDeleteApplicationVersionQueryParams struct {
-	Action  PostDeleteApplicationVersionActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	Version PostDeleteApplicationVersionVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action PostDeleteApplicationVersionActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    Version PostDeleteApplicationVersionVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type PostDeleteApplicationVersionHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type PostDeleteApplicationVersionRequest struct {
-	QueryParams PostDeleteApplicationVersionQueryParams
-	Headers     PostDeleteApplicationVersionHeaders
-	Request     []byte `request:"mediaType=text/xml"`
+    QueryParams PostDeleteApplicationVersionQueryParams 
+    Headers PostDeleteApplicationVersionHeaders 
+    Request []byte `request:"mediaType=text/xml"`
+    
 }
 
 type PostDeleteApplicationVersionResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

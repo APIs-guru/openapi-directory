@@ -1,15 +1,21 @@
 package shared
 
+
+
+
 type ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnum string
 
 const (
-	ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnumParentalStatusUnspecified ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnum = "PARENTAL_STATUS_UNSPECIFIED"
-	ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnumParentalStatusParent      ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnum = "PARENTAL_STATUS_PARENT"
-	ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnumParentalStatusNotAParent  ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnum = "PARENTAL_STATUS_NOT_A_PARENT"
-	ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnumParentalStatusUnknown     ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnum = "PARENTAL_STATUS_UNKNOWN"
+    ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnumParentalStatusUnspecified ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnum = "PARENTAL_STATUS_UNSPECIFIED"
+ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnumParentalStatusParent ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnum = "PARENTAL_STATUS_PARENT"
+ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnumParentalStatusNotAParent ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnum = "PARENTAL_STATUS_NOT_A_PARENT"
+ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnumParentalStatusUnknown ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnum = "PARENTAL_STATUS_UNKNOWN"
 )
 
+
 type ParentalStatusAssignedTargetingOptionDetails struct {
-	ParentalStatus    *ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnum `json:"parentalStatus,omitempty"`
-	TargetingOptionID *string                                                         `json:"targetingOptionId,omitempty"`
+    ParentalStatus *ParentalStatusAssignedTargetingOptionDetailsParentalStatusEnum `json:"parentalStatus,omitempty"`
+    TargetingOptionID *string `json:"targetingOptionId,omitempty"`
+    
 }
+

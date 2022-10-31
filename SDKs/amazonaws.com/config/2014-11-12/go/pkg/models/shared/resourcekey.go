@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ResourceKey struct {
-	ResourceID   string           `json:"resourceId"`
-	ResourceType ResourceTypeEnum `json:"resourceType"`
+    ResourceID string `json:"resourceId"`
+    ResourceType ResourceTypeEnum `json:"resourceType"`
+    
 }
+

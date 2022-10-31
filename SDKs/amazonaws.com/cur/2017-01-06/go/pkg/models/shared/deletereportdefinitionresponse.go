@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteReportDefinitionResponse struct {
-	ResponseMessage *string `json:"ResponseMessage,omitempty"`
+    ResponseMessage *string `json:"ResponseMessage,omitempty"`
+    
 }
+

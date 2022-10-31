@@ -14,7 +14,7 @@ class GetFoldersQueryParams:
 
 @dataclass
 class GetFoldersHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'xero-tenant-id' }})
+    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'xero-tenant-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

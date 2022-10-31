@@ -1,25 +1,31 @@
 package shared
 
+
+
+
 type EnvironmentTypeEnum string
 
 const (
-	EnvironmentTypeEnumUser   EnvironmentTypeEnum = "user"
-	EnvironmentTypeEnumLive   EnvironmentTypeEnum = "live"
-	EnvironmentTypeEnumLatest EnvironmentTypeEnum = "latest"
-	EnvironmentTypeEnumDraft  EnvironmentTypeEnum = "draft"
+    EnvironmentTypeEnumUser EnvironmentTypeEnum = "user"
+EnvironmentTypeEnumLive EnvironmentTypeEnum = "live"
+EnvironmentTypeEnumLatest EnvironmentTypeEnum = "latest"
+EnvironmentTypeEnumDraft EnvironmentTypeEnum = "draft"
 )
 
+
 type Environment struct {
-	AccountID                *string              `json:"accountId,omitempty"`
-	AuthorizationCode        *string              `json:"authorizationCode,omitempty"`
-	AuthorizationTimestampMs *string              `json:"authorizationTimestampMs,omitempty"`
-	ContainerID              *string              `json:"containerId,omitempty"`
-	ContainerVersionID       *string              `json:"containerVersionId,omitempty"`
-	Description              *string              `json:"description,omitempty"`
-	EnableDebug              *bool                `json:"enableDebug,omitempty"`
-	EnvironmentID            *string              `json:"environmentId,omitempty"`
-	Fingerprint              *string              `json:"fingerprint,omitempty"`
-	Name                     *string              `json:"name,omitempty"`
-	Type                     *EnvironmentTypeEnum `json:"type,omitempty"`
-	URL                      *string              `json:"url,omitempty"`
+    AccountID *string `json:"accountId,omitempty"`
+    AuthorizationCode *string `json:"authorizationCode,omitempty"`
+    AuthorizationTimestampMs *string `json:"authorizationTimestampMs,omitempty"`
+    ContainerID *string `json:"containerId,omitempty"`
+    ContainerVersionID *string `json:"containerVersionId,omitempty"`
+    Description *string `json:"description,omitempty"`
+    EnableDebug *bool `json:"enableDebug,omitempty"`
+    EnvironmentID *string `json:"environmentId,omitempty"`
+    Fingerprint *string `json:"fingerprint,omitempty"`
+    Name *string `json:"name,omitempty"`
+    Type *EnvironmentTypeEnum `json:"type,omitempty"`
+    URL *string `json:"url,omitempty"`
+    
 }
+

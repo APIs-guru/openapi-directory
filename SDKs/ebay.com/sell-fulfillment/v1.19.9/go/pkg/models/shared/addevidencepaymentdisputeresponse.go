@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AddEvidencePaymentDisputeResponse struct {
-	EvidenceID *string `json:"evidenceId,omitempty"`
+    EvidenceID *string `json:"evidenceId,omitempty"`
+    
 }
+

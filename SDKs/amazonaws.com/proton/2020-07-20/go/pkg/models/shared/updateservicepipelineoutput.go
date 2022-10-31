@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateServicePipelineOutput struct {
-	Pipeline ServicePipeline `json:"pipeline"`
+    Pipeline ServicePipeline `json:"pipeline"`
+    
 }
+

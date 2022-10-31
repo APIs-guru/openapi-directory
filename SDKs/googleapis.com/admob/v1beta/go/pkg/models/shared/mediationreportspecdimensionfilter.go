@@ -1,27 +1,33 @@
 package shared
 
+
+
+
 type MediationReportSpecDimensionFilterDimensionEnum string
 
 const (
-	MediationReportSpecDimensionFilterDimensionEnumDimensionUnspecified MediationReportSpecDimensionFilterDimensionEnum = "DIMENSION_UNSPECIFIED"
-	MediationReportSpecDimensionFilterDimensionEnumDate                 MediationReportSpecDimensionFilterDimensionEnum = "DATE"
-	MediationReportSpecDimensionFilterDimensionEnumMonth                MediationReportSpecDimensionFilterDimensionEnum = "MONTH"
-	MediationReportSpecDimensionFilterDimensionEnumWeek                 MediationReportSpecDimensionFilterDimensionEnum = "WEEK"
-	MediationReportSpecDimensionFilterDimensionEnumAdSource             MediationReportSpecDimensionFilterDimensionEnum = "AD_SOURCE"
-	MediationReportSpecDimensionFilterDimensionEnumAdSourceInstance     MediationReportSpecDimensionFilterDimensionEnum = "AD_SOURCE_INSTANCE"
-	MediationReportSpecDimensionFilterDimensionEnumAdUnit               MediationReportSpecDimensionFilterDimensionEnum = "AD_UNIT"
-	MediationReportSpecDimensionFilterDimensionEnumApp                  MediationReportSpecDimensionFilterDimensionEnum = "APP"
-	MediationReportSpecDimensionFilterDimensionEnumMediationGroup       MediationReportSpecDimensionFilterDimensionEnum = "MEDIATION_GROUP"
-	MediationReportSpecDimensionFilterDimensionEnumCountry              MediationReportSpecDimensionFilterDimensionEnum = "COUNTRY"
-	MediationReportSpecDimensionFilterDimensionEnumFormat               MediationReportSpecDimensionFilterDimensionEnum = "FORMAT"
-	MediationReportSpecDimensionFilterDimensionEnumPlatform             MediationReportSpecDimensionFilterDimensionEnum = "PLATFORM"
-	MediationReportSpecDimensionFilterDimensionEnumMobileOsVersion      MediationReportSpecDimensionFilterDimensionEnum = "MOBILE_OS_VERSION"
-	MediationReportSpecDimensionFilterDimensionEnumGmaSdkVersion        MediationReportSpecDimensionFilterDimensionEnum = "GMA_SDK_VERSION"
-	MediationReportSpecDimensionFilterDimensionEnumAppVersionName       MediationReportSpecDimensionFilterDimensionEnum = "APP_VERSION_NAME"
-	MediationReportSpecDimensionFilterDimensionEnumServingRestriction   MediationReportSpecDimensionFilterDimensionEnum = "SERVING_RESTRICTION"
+    MediationReportSpecDimensionFilterDimensionEnumDimensionUnspecified MediationReportSpecDimensionFilterDimensionEnum = "DIMENSION_UNSPECIFIED"
+MediationReportSpecDimensionFilterDimensionEnumDate MediationReportSpecDimensionFilterDimensionEnum = "DATE"
+MediationReportSpecDimensionFilterDimensionEnumMonth MediationReportSpecDimensionFilterDimensionEnum = "MONTH"
+MediationReportSpecDimensionFilterDimensionEnumWeek MediationReportSpecDimensionFilterDimensionEnum = "WEEK"
+MediationReportSpecDimensionFilterDimensionEnumAdSource MediationReportSpecDimensionFilterDimensionEnum = "AD_SOURCE"
+MediationReportSpecDimensionFilterDimensionEnumAdSourceInstance MediationReportSpecDimensionFilterDimensionEnum = "AD_SOURCE_INSTANCE"
+MediationReportSpecDimensionFilterDimensionEnumAdUnit MediationReportSpecDimensionFilterDimensionEnum = "AD_UNIT"
+MediationReportSpecDimensionFilterDimensionEnumApp MediationReportSpecDimensionFilterDimensionEnum = "APP"
+MediationReportSpecDimensionFilterDimensionEnumMediationGroup MediationReportSpecDimensionFilterDimensionEnum = "MEDIATION_GROUP"
+MediationReportSpecDimensionFilterDimensionEnumCountry MediationReportSpecDimensionFilterDimensionEnum = "COUNTRY"
+MediationReportSpecDimensionFilterDimensionEnumFormat MediationReportSpecDimensionFilterDimensionEnum = "FORMAT"
+MediationReportSpecDimensionFilterDimensionEnumPlatform MediationReportSpecDimensionFilterDimensionEnum = "PLATFORM"
+MediationReportSpecDimensionFilterDimensionEnumMobileOsVersion MediationReportSpecDimensionFilterDimensionEnum = "MOBILE_OS_VERSION"
+MediationReportSpecDimensionFilterDimensionEnumGmaSdkVersion MediationReportSpecDimensionFilterDimensionEnum = "GMA_SDK_VERSION"
+MediationReportSpecDimensionFilterDimensionEnumAppVersionName MediationReportSpecDimensionFilterDimensionEnum = "APP_VERSION_NAME"
+MediationReportSpecDimensionFilterDimensionEnumServingRestriction MediationReportSpecDimensionFilterDimensionEnum = "SERVING_RESTRICTION"
 )
 
+
 type MediationReportSpecDimensionFilter struct {
-	Dimension  *MediationReportSpecDimensionFilterDimensionEnum `json:"dimension,omitempty"`
-	MatchesAny *StringList                                      `json:"matchesAny,omitempty"`
+    Dimension *MediationReportSpecDimensionFilterDimensionEnum `json:"dimension,omitempty"`
+    MatchesAny *StringList `json:"matchesAny,omitempty"`
+    
 }
+

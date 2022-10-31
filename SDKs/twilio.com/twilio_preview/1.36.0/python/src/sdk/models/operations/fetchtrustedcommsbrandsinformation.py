@@ -8,7 +8,7 @@ FETCH_TRUSTED_COMMS_BRANDS_INFORMATION_SERVERS = [
 
 @dataclass
 class FetchTrustedCommsBrandsInformationHeaders:
-    if_none_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-None-Match' }})
+    if_none_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-None-Match', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

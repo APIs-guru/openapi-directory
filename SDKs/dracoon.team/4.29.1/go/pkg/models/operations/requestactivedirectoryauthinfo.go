@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RequestActiveDirectoryAuthInfoQueryParams struct {
-	IsGlobalAvailable *bool `queryParam:"style=form,explode=true,name=is_global_available"`
+    IsGlobalAvailable *bool `queryParam:"style=form,explode=true,name=is_global_available"`
+    
 }
 
 type RequestActiveDirectoryAuthInfoRequest struct {
-	QueryParams RequestActiveDirectoryAuthInfoQueryParams
+    QueryParams RequestActiveDirectoryAuthInfoQueryParams 
+    
 }
 
 type RequestActiveDirectoryAuthInfoResponse struct {
-	ActiveDirectoryAuthInfo *shared.ActiveDirectoryAuthInfo
-	ContentType             string
-	ErrorResponse           *shared.ErrorResponse
-	StatusCode              int64
+    ActiveDirectoryAuthInfo *shared.ActiveDirectoryAuthInfo 
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    
 }
+

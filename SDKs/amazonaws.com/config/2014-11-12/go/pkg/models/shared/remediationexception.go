@@ -1,13 +1,14 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type RemediationException struct {
-	ConfigRuleName string     `json:"ConfigRuleName"`
-	ExpirationTime *time.Time `json:"ExpirationTime,omitempty"`
-	Message        *string    `json:"Message,omitempty"`
-	ResourceID     string     `json:"ResourceId"`
-	ResourceType   string     `json:"ResourceType"`
+    ConfigRuleName string `json:"ConfigRuleName"`
+    ExpirationTime *time.Time `json:"ExpirationTime,omitempty"`
+    Message *string `json:"Message,omitempty"`
+    ResourceID string `json:"ResourceId"`
+    ResourceType string `json:"ResourceType"`
+    
 }
+

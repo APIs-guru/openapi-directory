@@ -1,24 +1,26 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var UpdateAuthTokenPromotionServers = []string{
 	"https://accounts.twilio.com",
 }
 
 type UpdateAuthTokenPromotionSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type UpdateAuthTokenPromotionRequest struct {
-	ServerURL *string
-	Security  UpdateAuthTokenPromotionSecurity
+    ServerURL *string 
+    Security UpdateAuthTokenPromotionSecurity 
+    
 }
 
 type UpdateAuthTokenPromotionResponse struct {
-	ContentType                  string
-	StatusCode                   int64
-	AccountsV1AuthTokenPromotion *shared.AccountsV1AuthTokenPromotion
+    ContentType string 
+    StatusCode int64 
+    AccountsV1AuthTokenPromotion *shared.AccountsV1AuthTokenPromotion 
+    
 }
+

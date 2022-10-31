@@ -1,31 +1,36 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type FunctionsCreateTagPathParams struct {
-	FunctionID string `pathParam:"style=simple,explode=false,name=functionId"`
+    FunctionID string `pathParam:"style=simple,explode=false,name=functionId"`
+    
 }
 
 type FunctionsCreateTagRequestBody struct {
-	Code    string `multipartForm:"name=code"`
-	Command string `multipartForm:"name=command"`
+    Code string `multipartForm:"name=code"`
+    Command string `multipartForm:"name=command"`
+    
 }
 
 type FunctionsCreateTagSecurity struct {
-	Key     shared.SchemeKey     `security:"scheme,type=apiKey,subtype=header"`
-	Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
+    Key shared.SchemeKey `security:"scheme,type=apiKey,subtype=header"`
+    Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type FunctionsCreateTagRequest struct {
-	PathParams FunctionsCreateTagPathParams
-	Request    *FunctionsCreateTagRequestBody `request:"mediaType=multipart/form-data"`
-	Security   FunctionsCreateTagSecurity
+    PathParams FunctionsCreateTagPathParams 
+    Request *FunctionsCreateTagRequestBody `request:"mediaType=multipart/form-data"`
+    Security FunctionsCreateTagSecurity 
+    
 }
 
 type FunctionsCreateTagResponse struct {
-	ContentType string
-	StatusCode  int64
-	Tag         *shared.Tag
+    ContentType string 
+    StatusCode int64 
+    Tag *shared.Tag 
+    
 }
+

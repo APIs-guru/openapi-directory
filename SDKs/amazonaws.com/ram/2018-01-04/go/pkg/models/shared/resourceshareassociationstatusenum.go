@@ -1,11 +1,16 @@
 package shared
 
+
+
+
 type ResourceShareAssociationStatusEnum string
 
 const (
-	ResourceShareAssociationStatusEnumAssociating    ResourceShareAssociationStatusEnum = "ASSOCIATING"
-	ResourceShareAssociationStatusEnumAssociated     ResourceShareAssociationStatusEnum = "ASSOCIATED"
-	ResourceShareAssociationStatusEnumFailed         ResourceShareAssociationStatusEnum = "FAILED"
-	ResourceShareAssociationStatusEnumDisassociating ResourceShareAssociationStatusEnum = "DISASSOCIATING"
-	ResourceShareAssociationStatusEnumDisassociated  ResourceShareAssociationStatusEnum = "DISASSOCIATED"
+    ResourceShareAssociationStatusEnumAssociating ResourceShareAssociationStatusEnum = "ASSOCIATING"
+ResourceShareAssociationStatusEnumAssociated ResourceShareAssociationStatusEnum = "ASSOCIATED"
+ResourceShareAssociationStatusEnumFailed ResourceShareAssociationStatusEnum = "FAILED"
+ResourceShareAssociationStatusEnumDisassociating ResourceShareAssociationStatusEnum = "DISASSOCIATING"
+ResourceShareAssociationStatusEnumDisassociated ResourceShareAssociationStatusEnum = "DISASSOCIATED"
 )
+
+

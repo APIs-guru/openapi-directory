@@ -1,15 +1,21 @@
 package operations
 
+
+
 type LanguagesDeleteLanguagePathParams struct {
-	LocaleID int32 `pathParam:"style=simple,explode=false,name=LocaleID"`
+    LocaleID int32 `pathParam:"style=simple,explode=false,name=LocaleID"`
+    
 }
 
 type LanguagesDeleteLanguageRequest struct {
-	PathParams LanguagesDeleteLanguagePathParams
+    PathParams LanguagesDeleteLanguagePathParams 
+    
 }
 
 type LanguagesDeleteLanguageResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

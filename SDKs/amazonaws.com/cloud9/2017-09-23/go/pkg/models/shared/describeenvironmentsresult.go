@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeEnvironmentsResult struct {
-	Environments []Environment `json:"environments,omitempty"`
+    Environments []Environment `json:"environments,omitempty"`
+    
 }
+

@@ -1,6 +1,10 @@
 package shared
 
+
+
 type BatchGetDeploymentInstancesInput struct {
-	DeploymentID string   `json:"deploymentId"`
-	InstanceIds  []string `json:"instanceIds"`
+    DeploymentID string `json:"deploymentId"`
+    InstanceIds []string `json:"instanceIds"`
+    
 }
+

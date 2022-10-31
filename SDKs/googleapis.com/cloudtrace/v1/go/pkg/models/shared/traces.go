@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Traces struct {
-	Traces []Trace `json:"traces,omitempty"`
+    Traces []Trace `json:"traces,omitempty"`
+    
 }
+

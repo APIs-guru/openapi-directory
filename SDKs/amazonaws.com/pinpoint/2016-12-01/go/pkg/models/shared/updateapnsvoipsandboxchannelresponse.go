@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateApnsVoipSandboxChannelResponse struct {
-	ApnsVoipSandboxChannelResponse ApnsVoipSandboxChannelResponse `json:"APNSVoipSandboxChannelResponse"`
+    ApnsVoipSandboxChannelResponse ApnsVoipSandboxChannelResponse `json:"APNSVoipSandboxChannelResponse"`
+    
 }
+

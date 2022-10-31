@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeArchiveRequest struct {
-	ArchiveName string `json:"ArchiveName"`
+    ArchiveName string `json:"ArchiveName"`
+    
 }
+

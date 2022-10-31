@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class WebhooksAddHeaders:
-    x_apideck_app_id: str = field(default=None, metadata={'header': { 'field_name': 'x-apideck-app-id' }})
+    x_apideck_app_id: str = field(default=None, metadata={'header': { 'field_name': 'x-apideck-app-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

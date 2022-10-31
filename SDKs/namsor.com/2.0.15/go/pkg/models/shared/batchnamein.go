@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchNameIn struct {
-	ProperNouns []NameIn `json:"properNouns,omitempty"`
+    ProperNouns []NameIn `json:"properNouns,omitempty"`
+    
 }
+

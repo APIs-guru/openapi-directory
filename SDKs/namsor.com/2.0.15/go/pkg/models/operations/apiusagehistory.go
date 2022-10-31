@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type APIUsageHistorySecurity struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
+    APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type APIUsageHistoryRequest struct {
-	Security APIUsageHistorySecurity
+    Security APIUsageHistorySecurity 
+    
 }
 
 type APIUsageHistoryResponse struct {
-	APIUsageHistoryOut *shared.APIUsageHistoryOut
-	ContentType        string
-	StatusCode         int64
+    APIUsageHistoryOut *shared.APIUsageHistoryOut 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -19,20 +19,23 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def delete_bin_id_(self, request: operations.DeleteBinIDRequest) -> operations.DeleteBinIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/bin/{id}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteBinIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -53,19 +56,19 @@ class SDK:
         return res
 
     
-    
     def get_bin_id_(self, request: operations.GetBinIDRequest) -> operations.GetBinIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/bin/{id}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetBinIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -82,19 +85,19 @@ class SDK:
         return res
 
     
-    
     def patch_bin_id_(self, request: operations.PatchBinIDRequest) -> operations.PatchBinIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/bin/{id}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("PATCH", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PatchBinIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -119,19 +122,19 @@ class SDK:
         return res
 
     
-    
     def post_bin(self) -> operations.PostBinResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/bin"
-        
+
         client = self.client
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostBinResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -148,19 +151,19 @@ class SDK:
         return res
 
     
-    
     def put_bin_id_(self, request: operations.PutBinIDRequest) -> operations.PutBinIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/bin/{id}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutBinIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])

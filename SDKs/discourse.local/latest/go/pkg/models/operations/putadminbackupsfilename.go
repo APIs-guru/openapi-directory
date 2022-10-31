@@ -1,14 +1,20 @@
 package operations
 
+
+
 type PutAdminBackupsFilenamePathParams struct {
-	Filename string `pathParam:"style=simple,explode=false,name=filename"`
+    Filename string `pathParam:"style=simple,explode=false,name=filename"`
+    
 }
 
 type PutAdminBackupsFilenameRequest struct {
-	PathParams PutAdminBackupsFilenamePathParams
+    PathParams PutAdminBackupsFilenamePathParams 
+    
 }
 
 type PutAdminBackupsFilenameResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

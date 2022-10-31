@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeEdgePackagingJobRequest struct {
-	EdgePackagingJobName string `json:"EdgePackagingJobName"`
+    EdgePackagingJobName string `json:"EdgePackagingJobName"`
+    
 }
+

@@ -1,55 +1,60 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type CreateImageRecipeHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type CreateImageRecipeRequestBodyAdditionalInstanceConfiguration struct {
-	SystemsManagerAgent *shared.SystemsManagerAgent `json:"systemsManagerAgent,omitempty"`
-	UserDataOverride    *string                     `json:"userDataOverride,omitempty"`
+    SystemsManagerAgent *shared.SystemsManagerAgent `json:"systemsManagerAgent,omitempty"`
+    UserDataOverride *string `json:"userDataOverride,omitempty"`
+    
 }
 
 type CreateImageRecipeRequestBody struct {
-	AdditionalInstanceConfiguration *CreateImageRecipeRequestBodyAdditionalInstanceConfiguration `json:"additionalInstanceConfiguration,omitempty"`
-	BlockDeviceMappings             []shared.InstanceBlockDeviceMapping                          `json:"blockDeviceMappings,omitempty"`
-	ClientToken                     string                                                       `json:"clientToken"`
-	Components                      []shared.ComponentConfiguration                              `json:"components"`
-	Description                     *string                                                      `json:"description,omitempty"`
-	Name                            string                                                       `json:"name"`
-	ParentImage                     string                                                       `json:"parentImage"`
-	SemanticVersion                 string                                                       `json:"semanticVersion"`
-	Tags                            map[string]string                                            `json:"tags,omitempty"`
-	WorkingDirectory                *string                                                      `json:"workingDirectory,omitempty"`
+    AdditionalInstanceConfiguration *CreateImageRecipeRequestBodyAdditionalInstanceConfiguration `json:"additionalInstanceConfiguration,omitempty"`
+    BlockDeviceMappings []shared.InstanceBlockDeviceMapping `json:"blockDeviceMappings,omitempty"`
+    ClientToken string `json:"clientToken"`
+    Components []shared.ComponentConfiguration `json:"components"`
+    Description *string `json:"description,omitempty"`
+    Name string `json:"name"`
+    ParentImage string `json:"parentImage"`
+    SemanticVersion string `json:"semanticVersion"`
+    Tags map[string]string `json:"tags,omitempty"`
+    WorkingDirectory *string `json:"workingDirectory,omitempty"`
+    
 }
 
 type CreateImageRecipeRequest struct {
-	Headers CreateImageRecipeHeaders
-	Request CreateImageRecipeRequestBody `request:"mediaType=application/json"`
+    Headers CreateImageRecipeHeaders 
+    Request CreateImageRecipeRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type CreateImageRecipeResponse struct {
-	CallRateLimitExceededException       *interface{}
-	ClientException                      *interface{}
-	ContentType                          string
-	CreateImageRecipeResponse            *shared.CreateImageRecipeResponse
-	ForbiddenException                   *interface{}
-	IdempotentParameterMismatchException *interface{}
-	InvalidRequestException              *interface{}
-	InvalidVersionNumberException        *interface{}
-	ResourceAlreadyExistsException       *interface{}
-	ResourceInUseException               *interface{}
-	ServiceException                     *interface{}
-	ServiceQuotaExceededException        *interface{}
-	ServiceUnavailableException          *interface{}
-	StatusCode                           int64
+    CallRateLimitExceededException *interface{} 
+    ClientException *interface{} 
+    ContentType string 
+    CreateImageRecipeResponse *shared.CreateImageRecipeResponse 
+    ForbiddenException *interface{} 
+    IdempotentParameterMismatchException *interface{} 
+    InvalidRequestException *interface{} 
+    InvalidVersionNumberException *interface{} 
+    ResourceAlreadyExistsException *interface{} 
+    ResourceInUseException *interface{} 
+    ServiceException *interface{} 
+    ServiceQuotaExceededException *interface{} 
+    ServiceUnavailableException *interface{} 
+    StatusCode int64 
+    
 }
+

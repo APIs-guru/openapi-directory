@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class SnsPostSnsPostHeaders:
-    authorization: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'authorization' }})
+    authorization: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

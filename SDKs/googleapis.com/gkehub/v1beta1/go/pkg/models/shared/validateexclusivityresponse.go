@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ValidateExclusivityResponse struct {
-	Status *GoogleRPCStatus `json:"status,omitempty"`
+    Status *GoogleRPCStatus `json:"status,omitempty"`
+    
 }
+

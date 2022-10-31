@@ -10,7 +10,7 @@ class AppsGetUserInstallationPathParams:
 
 @dataclass
 class AppsGetUserInstallationHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'accept' }})
+    accept: str = field(default=None, metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

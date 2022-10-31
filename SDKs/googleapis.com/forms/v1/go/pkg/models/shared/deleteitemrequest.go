@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteItemRequest struct {
-	Location *Location `json:"location,omitempty"`
+    Location *Location `json:"location,omitempty"`
+    
 }
+

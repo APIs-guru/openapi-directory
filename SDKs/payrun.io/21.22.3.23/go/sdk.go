@@ -60,6 +60,8 @@ func (s *SDK) DeleteAeAssessment(ctx context.Context, request operations.DeleteA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -129,6 +131,8 @@ func (s *SDK) DeleteBatchJob(ctx context.Context, request operations.DeleteBatch
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -200,6 +204,8 @@ func (s *SDK) DeleteCisInstruction(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -269,6 +275,8 @@ func (s *SDK) DeleteCisInstructionTag(ctx context.Context, request operations.De
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -340,6 +348,8 @@ func (s *SDK) DeleteCisJob(ctx context.Context, request operations.DeleteCisJobR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -409,6 +419,8 @@ func (s *SDK) DeleteCisLine(ctx context.Context, request operations.DeleteCisLin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -480,6 +492,8 @@ func (s *SDK) DeleteCisLineTag(ctx context.Context, request operations.DeleteCis
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -549,6 +563,8 @@ func (s *SDK) DeleteCisLineType(ctx context.Context, request operations.DeleteCi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -620,6 +636,8 @@ func (s *SDK) DeleteCisLineTypeTag(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -689,6 +707,8 @@ func (s *SDK) DeleteCisTransaction(ctx context.Context, request operations.Delet
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -760,6 +780,8 @@ func (s *SDK) DeleteDpsJob(ctx context.Context, request operations.DeleteDpsJobR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -829,6 +851,8 @@ func (s *SDK) DeleteDpsMessage(ctx context.Context, request operations.DeleteDps
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -900,6 +924,8 @@ func (s *SDK) DeleteEmployee(ctx context.Context, request operations.DeleteEmplo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -969,6 +995,8 @@ func (s *SDK) DeleteEmployeeRevision(ctx context.Context, request operations.Del
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1040,6 +1068,8 @@ func (s *SDK) DeleteEmployeeRevisionByNumber(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1109,6 +1139,8 @@ func (s *SDK) DeleteEmployeeSecret(ctx context.Context, request operations.Delet
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1180,6 +1212,8 @@ func (s *SDK) DeleteEmployeeTag(ctx context.Context, request operations.DeleteEm
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1249,6 +1283,8 @@ func (s *SDK) DeleteEmployer(ctx context.Context, request operations.DeleteEmplo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1320,6 +1356,8 @@ func (s *SDK) DeleteEmployerRevision(ctx context.Context, request operations.Del
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1389,6 +1427,8 @@ func (s *SDK) DeleteEmployerRevisionByNumber(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1460,6 +1500,8 @@ func (s *SDK) DeleteEmployerSecret(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1529,6 +1571,8 @@ func (s *SDK) DeleteEmployerTag(ctx context.Context, request operations.DeleteEm
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1600,6 +1644,8 @@ func (s *SDK) DeleteHolidayScheme(ctx context.Context, request operations.Delete
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1669,6 +1715,8 @@ func (s *SDK) DeleteHolidaySchemeRevision(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1740,6 +1788,8 @@ func (s *SDK) DeleteHolidaySchemeRevisionByNumber(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1809,6 +1859,8 @@ func (s *SDK) DeleteHolidaySchemeTag(ctx context.Context, request operations.Del
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1880,6 +1932,8 @@ func (s *SDK) DeleteJournalInstruction(ctx context.Context, request operations.D
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1949,6 +2003,8 @@ func (s *SDK) DeleteJournalInstructionTemplate(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2020,6 +2076,8 @@ func (s *SDK) DeleteJournalLineTag(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2089,6 +2147,8 @@ func (s *SDK) DeleteNominalCode(ctx context.Context, request operations.DeleteNo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2160,6 +2220,8 @@ func (s *SDK) DeletePayCode(ctx context.Context, request operations.DeletePayCod
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2229,6 +2291,8 @@ func (s *SDK) DeletePayCodeRevision(ctx context.Context, request operations.Dele
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2300,6 +2364,8 @@ func (s *SDK) DeletePayCodeRevisionByNumber(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2369,6 +2435,8 @@ func (s *SDK) DeletePayCodeTag(ctx context.Context, request operations.DeletePay
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2440,6 +2508,8 @@ func (s *SDK) DeletePayInstruction(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2509,6 +2579,8 @@ func (s *SDK) DeletePayInstructionTag(ctx context.Context, request operations.De
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2580,6 +2652,8 @@ func (s *SDK) DeletePayLineTag(ctx context.Context, request operations.DeletePay
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2649,6 +2723,8 @@ func (s *SDK) DeletePayRun(ctx context.Context, request operations.DeletePayRunR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2720,6 +2796,8 @@ func (s *SDK) DeletePayRunEmployee(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2789,6 +2867,8 @@ func (s *SDK) DeletePayRunJob(ctx context.Context, request operations.DeletePayR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2860,6 +2940,8 @@ func (s *SDK) DeletePayRunTag(ctx context.Context, request operations.DeletePayR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2929,6 +3011,8 @@ func (s *SDK) DeletePaySchedule(ctx context.Context, request operations.DeletePa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -3000,6 +3084,8 @@ func (s *SDK) DeletePayScheduleTag(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -3069,6 +3155,8 @@ func (s *SDK) DeletePension(ctx context.Context, request operations.DeletePensio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -3140,6 +3228,8 @@ func (s *SDK) DeletePensionRevision(ctx context.Context, request operations.Dele
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -3209,6 +3299,8 @@ func (s *SDK) DeletePensionRevisionByNumber(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -3280,6 +3372,8 @@ func (s *SDK) DeletePermission(ctx context.Context, request operations.DeletePer
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -3349,6 +3443,8 @@ func (s *SDK) DeleteReportDefinition(ctx context.Context, request operations.Del
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -3420,6 +3516,8 @@ func (s *SDK) DeleteReportingInstruction(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -3489,6 +3587,8 @@ func (s *SDK) DeleteRtiJob(ctx context.Context, request operations.DeleteRtiJobR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -3560,6 +3660,8 @@ func (s *SDK) DeleteRtiTransaction(ctx context.Context, request operations.Delet
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -3629,6 +3731,8 @@ func (s *SDK) DeleteRtiTransactionTag(ctx context.Context, request operations.De
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -3700,6 +3804,8 @@ func (s *SDK) DeleteSubContractor(ctx context.Context, request operations.Delete
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -3769,6 +3875,8 @@ func (s *SDK) DeleteSubContractorRevision(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -3840,6 +3948,8 @@ func (s *SDK) DeleteSubContractorRevisionByNumber(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -3909,6 +4019,8 @@ func (s *SDK) DeleteSubContractorTag(ctx context.Context, request operations.Del
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -3980,6 +4092,8 @@ func (s *SDK) DeleteThirdPartyJob(ctx context.Context, request operations.Delete
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -4049,6 +4163,8 @@ func (s *SDK) DeleteThirdPartyTransaction(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -4120,6 +4236,8 @@ func (s *SDK) DeleteThirdPartyTransactionTag(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -4189,6 +4307,8 @@ func (s *SDK) DeleteTransformDefinition(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -4260,6 +4380,8 @@ func (s *SDK) DeleteUser(ctx context.Context, request operations.DeleteUserReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -4330,6 +4452,8 @@ func (s *SDK) DeleteUserTag(ctx context.Context, request operations.DeleteUserTa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -4399,6 +4523,8 @@ func (s *SDK) GetAeAssessmentFromEmployee(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -4479,6 +4605,8 @@ func (s *SDK) GetAeAssessmentsFromEmployee(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -4558,6 +4686,8 @@ func (s *SDK) GetAeAssessmentsFromPayRun(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -4636,6 +4766,8 @@ func (s *SDK) GetActivePayInstructionsReportOutput(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -4718,6 +4850,8 @@ func (s *SDK) GetAllCisInstructionTags(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -4796,6 +4930,8 @@ func (s *SDK) GetAllCisLineTags(ctx context.Context, request operations.GetAllCi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -4876,6 +5012,8 @@ func (s *SDK) GetAllCisLineTypeTags(ctx context.Context, request operations.GetA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -4954,6 +5092,8 @@ func (s *SDK) GetAllEmployeeTags(ctx context.Context, request operations.GetAllE
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -5034,6 +5174,8 @@ func (s *SDK) GetAllEmployerTags(ctx context.Context, request operations.GetAllE
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -5112,6 +5254,8 @@ func (s *SDK) GetAllHolidaySchemeTags(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -5192,6 +5336,8 @@ func (s *SDK) GetAllJournalLineTags(ctx context.Context, request operations.GetA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -5270,6 +5416,8 @@ func (s *SDK) GetAllJournalLinesWithTag(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -5350,6 +5498,8 @@ func (s *SDK) GetAllPayCodeTags(ctx context.Context, request operations.GetAllPa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -5428,6 +5578,8 @@ func (s *SDK) GetAllPayInstructionTags(ctx context.Context, request operations.G
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -5508,6 +5660,8 @@ func (s *SDK) GetAllPayLineTags(ctx context.Context, request operations.GetAllPa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -5586,6 +5740,8 @@ func (s *SDK) GetAllPayRunTags(ctx context.Context, request operations.GetAllPay
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -5666,6 +5822,8 @@ func (s *SDK) GetAllPayScheduleTags(ctx context.Context, request operations.GetA
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -5744,6 +5902,8 @@ func (s *SDK) GetAllRtiTransactionTags(ctx context.Context, request operations.G
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -5824,6 +5984,8 @@ func (s *SDK) GetAllSubContractorTags(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -5902,6 +6064,8 @@ func (s *SDK) GetAllThirdPartyTransactionTags(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -5982,6 +6146,8 @@ func (s *SDK) GetAllThirdPartyTransactionsWithTag(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -6060,6 +6226,8 @@ func (s *SDK) GetAllUserTags(ctx context.Context, request operations.GetAllUserT
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -6140,6 +6308,8 @@ func (s *SDK) GetAllUsersWithTag(ctx context.Context, request operations.GetAllU
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -6218,6 +6388,8 @@ func (s *SDK) GetAoeLiabilityReportOuput(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -6300,6 +6472,8 @@ func (s *SDK) GetBatchJobInfo(ctx context.Context, request operations.GetBatchJo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -6379,6 +6553,8 @@ func (s *SDK) GetBatchJobProgress(ctx context.Context, request operations.GetBat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -6449,6 +6625,8 @@ func (s *SDK) GetBatchJobStatus(ctx context.Context, request operations.GetBatch
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -6518,6 +6696,8 @@ func (s *SDK) GetBatchJobs(ctx context.Context, request operations.GetBatchJobsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -6598,6 +6778,8 @@ func (s *SDK) GetCisInstructionFromSubContractor(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -6676,6 +6858,8 @@ func (s *SDK) GetCisInstructionsFromSubContractor(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -6756,6 +6940,8 @@ func (s *SDK) GetCisInstructionsWithTag(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -6834,6 +7020,8 @@ func (s *SDK) GetCisJobInfo(ctx context.Context, request operations.GetCisJobInf
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -6914,6 +7102,8 @@ func (s *SDK) GetCisJobProgress(ctx context.Context, request operations.GetCisJo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -6984,6 +7174,8 @@ func (s *SDK) GetCisJobStatus(ctx context.Context, request operations.GetCisJobS
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -7053,6 +7245,8 @@ func (s *SDK) GetCisJobs(ctx context.Context, request operations.GetCisJobsReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -7133,6 +7327,8 @@ func (s *SDK) GetCisLineFromSubContractor(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -7211,6 +7407,8 @@ func (s *SDK) GetCisLineTypeFromEmployer(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -7291,6 +7489,8 @@ func (s *SDK) GetCisLineTypesFromEmployer(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -7369,6 +7569,8 @@ func (s *SDK) GetCisLineTypesWithTag(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -7449,6 +7651,8 @@ func (s *SDK) GetCisLinesFromSubContractor(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -7527,6 +7731,8 @@ func (s *SDK) GetCisLinesWithTag(ctx context.Context, request operations.GetCisL
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -7607,6 +7813,8 @@ func (s *SDK) GetCisTransactionFromEmployer(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -7685,6 +7893,8 @@ func (s *SDK) GetCisTransactionsFromEmployer(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -7765,6 +7975,8 @@ func (s *SDK) GetCommentariesFromEmployee(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -7843,6 +8055,8 @@ func (s *SDK) GetCommentariesFromPayRun(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -7923,6 +8137,8 @@ func (s *SDK) GetCommentaryFromEmployee(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -8001,6 +8217,8 @@ func (s *SDK) GetCommentaryFromPayRunByEmployee(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -8081,6 +8299,8 @@ func (s *SDK) GetDpsJobInfo(ctx context.Context, request operations.GetDpsJobInf
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -8160,6 +8380,8 @@ func (s *SDK) GetDpsJobProgress(ctx context.Context, request operations.GetDpsJo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -8230,6 +8452,8 @@ func (s *SDK) GetDpsJobStatus(ctx context.Context, request operations.GetDpsJobS
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -8299,6 +8523,8 @@ func (s *SDK) GetDpsJobs(ctx context.Context, request operations.GetDpsJobsReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -8379,6 +8605,8 @@ func (s *SDK) GetDpsMessageFromEmployer(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -8457,6 +8685,8 @@ func (s *SDK) GetDpsMessageReportOutput(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -8539,6 +8769,8 @@ func (s *SDK) GetDpsMessagesFromEmployer(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -8617,6 +8849,8 @@ func (s *SDK) GetEmployeeByEffectiveDate(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -8697,6 +8931,8 @@ func (s *SDK) GetEmployeeFromEmployer(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -8775,6 +9011,8 @@ func (s *SDK) GetEmployeeRevisionByNumber(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -8855,6 +9093,8 @@ func (s *SDK) GetEmployeeRevisions(ctx context.Context, request operations.GetEm
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -8933,6 +9173,8 @@ func (s *SDK) GetEmployeeSecret(ctx context.Context, request operations.GetEmplo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -9013,6 +9255,8 @@ func (s *SDK) GetEmployeeSecrets(ctx context.Context, request operations.GetEmpl
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -9091,6 +9335,8 @@ func (s *SDK) GetEmployeesByEffectiveDate(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -9171,6 +9417,8 @@ func (s *SDK) GetEmployeesFromEmployer(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -9249,6 +9497,8 @@ func (s *SDK) GetEmployeesFromPayRun(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -9329,6 +9579,8 @@ func (s *SDK) GetEmployeesFromPaySchedule(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -9407,6 +9659,8 @@ func (s *SDK) GetEmployeesFromPayScheduleOnEffectiveDate(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -9487,6 +9741,8 @@ func (s *SDK) GetEmployeesWithTag(ctx context.Context, request operations.GetEmp
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -9565,6 +9821,8 @@ func (s *SDK) GetEmployer(ctx context.Context, request operations.GetEmployerReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -9645,6 +9903,8 @@ func (s *SDK) GetEmployerByEffectiveDate(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -9723,6 +9983,8 @@ func (s *SDK) GetEmployerJobs(ctx context.Context, request operations.GetEmploye
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -9803,6 +10065,8 @@ func (s *SDK) GetEmployerRevisionByNumber(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -9881,6 +10145,8 @@ func (s *SDK) GetEmployerRevisions(ctx context.Context, request operations.GetEm
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -9961,6 +10227,8 @@ func (s *SDK) GetEmployerSecret(ctx context.Context, request operations.GetEmplo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -10040,6 +10308,8 @@ func (s *SDK) GetEmployerSecrets(ctx context.Context, request operations.GetEmpl
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -10118,6 +10388,8 @@ func (s *SDK) GetEmployerSummaryReportOuput(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -10200,6 +10472,8 @@ func (s *SDK) GetEmployers(ctx context.Context, request operations.GetEmployersR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -10278,6 +10552,8 @@ func (s *SDK) GetEmployersByEffectiveDate(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -10358,6 +10634,8 @@ func (s *SDK) GetEmployersWithTag(ctx context.Context, request operations.GetEmp
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -10436,6 +10714,8 @@ func (s *SDK) GetGrossToNetReportOutput(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -10597,6 +10877,8 @@ func (s *SDK) GetHolidayBalanceReportOutput(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -10678,6 +10960,8 @@ func (s *SDK) GetHolidaySchemeByEffectiveDate(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -10756,6 +11040,8 @@ func (s *SDK) GetHolidaySchemeFromEmployer(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -10836,6 +11122,8 @@ func (s *SDK) GetHolidaySchemeRevisionByNumber(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -10914,6 +11202,8 @@ func (s *SDK) GetHolidaySchemeRevisions(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -10994,6 +11284,8 @@ func (s *SDK) GetHolidaySchemesByEffectiveDate(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -11072,6 +11364,8 @@ func (s *SDK) GetHolidaySchemesFromEmployer(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -11152,6 +11446,8 @@ func (s *SDK) GetHolidaySchemesWithTag(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -11230,6 +11526,8 @@ func (s *SDK) GetJournalExpressionSchema(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -11310,6 +11608,8 @@ func (s *SDK) GetJournalInstructionFromEmployer(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -11388,6 +11688,8 @@ func (s *SDK) GetJournalInstructionTemplate(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -11468,6 +11770,8 @@ func (s *SDK) GetJournalInstructionTemplates(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -11546,6 +11850,8 @@ func (s *SDK) GetJournalInstructionsFromEmployer(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -11626,6 +11932,8 @@ func (s *SDK) GetJournalLineFromEmployer(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -11704,6 +12012,8 @@ func (s *SDK) GetJournalLinesFromEmployee(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -11784,6 +12094,8 @@ func (s *SDK) GetJournalLinesFromEmployer(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -11862,6 +12174,8 @@ func (s *SDK) GetJournalLinesFromPayRun(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -11942,6 +12256,8 @@ func (s *SDK) GetJournalLinesFromSubContractor(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -12020,6 +12336,8 @@ func (s *SDK) GetJournalReportOuput(ctx context.Context, request operations.GetJ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -12102,6 +12420,8 @@ func (s *SDK) GetLastPayDateReportOuput(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -12182,6 +12502,8 @@ func (s *SDK) GetNetPayReportOutput(ctx context.Context, request operations.GetN
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -12264,6 +12586,8 @@ func (s *SDK) GetNextPayPeriodDatesReportOutput(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -12345,6 +12669,8 @@ func (s *SDK) GetNominalCodeFromEmployer(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -12424,6 +12750,8 @@ func (s *SDK) GetNominalCodesFromEmployer(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -12502,6 +12830,8 @@ func (s *SDK) GetP11SummaryReportOutput(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -12584,6 +12914,8 @@ func (s *SDK) GetP32NetReportOutput(ctx context.Context, request operations.GetP
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -12664,6 +12996,8 @@ func (s *SDK) GetP32SummaryNetReportOutput(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -12746,6 +13080,8 @@ func (s *SDK) GetP45ReportOutput(ctx context.Context, request operations.GetP45R
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -12826,6 +13162,8 @@ func (s *SDK) GetP60ReportOutput(ctx context.Context, request operations.GetP60R
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -12908,6 +13246,8 @@ func (s *SDK) GetPapdisReportOuput(ctx context.Context, request operations.GetPa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -12988,6 +13328,8 @@ func (s *SDK) GetPassReportOuput(ctx context.Context, request operations.GetPass
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -13070,6 +13412,8 @@ func (s *SDK) GetPayCodeByEffectiveDate(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -13148,6 +13492,8 @@ func (s *SDK) GetPayCodeFromEmployer(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -13228,6 +13574,8 @@ func (s *SDK) GetPayCodeRevisionByNumber(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -13306,6 +13654,8 @@ func (s *SDK) GetPayCodeRevisions(ctx context.Context, request operations.GetPay
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -13386,6 +13736,8 @@ func (s *SDK) GetPayCodesByEffectiveDate(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -13464,6 +13816,8 @@ func (s *SDK) GetPayCodesFromEmployer(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -13544,6 +13898,8 @@ func (s *SDK) GetPayCodesFromNominalCode(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -13623,6 +13979,8 @@ func (s *SDK) GetPayCodesWithTag(ctx context.Context, request operations.GetPayC
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -13701,6 +14059,8 @@ func (s *SDK) GetPayDashboardPayslipReportOuput(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -13783,6 +14143,8 @@ func (s *SDK) GetPayInstructionFromEmployee(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -13861,6 +14223,8 @@ func (s *SDK) GetPayInstructionsFromEmployee(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -13941,6 +14305,8 @@ func (s *SDK) GetPayInstructionsWithTag(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -14019,6 +14385,8 @@ func (s *SDK) GetPayLineFromEmployee(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -14099,6 +14467,8 @@ func (s *SDK) GetPayLinesFromEmployee(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -14177,6 +14547,8 @@ func (s *SDK) GetPayLinesWithTag(ctx context.Context, request operations.GetPayL
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -14257,6 +14629,8 @@ func (s *SDK) GetPayRunFromPaySchedule(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -14335,6 +14709,8 @@ func (s *SDK) GetPayRunJobInfo(ctx context.Context, request operations.GetPayRun
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -14415,6 +14791,8 @@ func (s *SDK) GetPayRunJobProgress(ctx context.Context, request operations.GetPa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -14485,6 +14863,8 @@ func (s *SDK) GetPayRunJobStatus(ctx context.Context, request operations.GetPayR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -14554,6 +14934,8 @@ func (s *SDK) GetPayRunJobs(ctx context.Context, request operations.GetPayRunJob
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -14634,6 +15016,8 @@ func (s *SDK) GetPayRunsFromEmployee(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -14712,6 +15096,8 @@ func (s *SDK) GetPayRunsFromPaySchedule(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -14792,6 +15178,8 @@ func (s *SDK) GetPayRunsWithTag(ctx context.Context, request operations.GetPayRu
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -14870,6 +15258,8 @@ func (s *SDK) GetPayScheduleFromEmployer(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -14950,6 +15340,8 @@ func (s *SDK) GetPaySchedulesFromEmployer(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -15029,6 +15421,8 @@ func (s *SDK) GetPaySchedulesWithTag(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -15107,6 +15501,8 @@ func (s *SDK) GetPayslip3ReportOutput(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -15189,6 +15585,8 @@ func (s *SDK) GetPensionByEffectiveDate(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -15268,6 +15666,8 @@ func (s *SDK) GetPensionFromEmployer(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -15346,6 +15746,8 @@ func (s *SDK) GetPensionLiabilityReportOutput(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -15428,6 +15830,8 @@ func (s *SDK) GetPensionRevisionByNumber(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -15506,6 +15910,8 @@ func (s *SDK) GetPensionRevisions(ctx context.Context, request operations.GetPen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -15586,6 +15992,8 @@ func (s *SDK) GetPensionsByEffectiveDate(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -15664,6 +16072,8 @@ func (s *SDK) GetPensionsFromEmployer(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -15744,6 +16154,8 @@ func (s *SDK) GetPermission(ctx context.Context, request operations.GetPermissio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -15822,6 +16234,8 @@ func (s *SDK) GetPermissions(ctx context.Context, request operations.GetPermissi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -15909,7 +16323,10 @@ func (s *SDK) GetQueryResponse(ctx context.Context, request operations.GetQueryR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -15990,6 +16407,8 @@ func (s *SDK) GetReportDefinitionFromApplication(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -16068,6 +16487,8 @@ func (s *SDK) GetReportDefinitionsFromApplication(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -16148,6 +16569,8 @@ func (s *SDK) GetReportLineFromEmployer(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -16226,6 +16649,8 @@ func (s *SDK) GetReportLinesFromEmployer(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -16306,6 +16731,8 @@ func (s *SDK) GetReportLinesFromPayRun(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -16384,6 +16811,8 @@ func (s *SDK) GetReportOutput(ctx context.Context, request operations.GetReportO
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -16464,6 +16893,8 @@ func (s *SDK) GetReportingInstructionFromEmployer(ctx context.Context, request o
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -16542,6 +16973,8 @@ func (s *SDK) GetReportingInstructionsFromEmployer(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -16622,6 +17055,8 @@ func (s *SDK) GetRtiJobInfo(ctx context.Context, request operations.GetRtiJobInf
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -16701,6 +17136,8 @@ func (s *SDK) GetRtiJobProgress(ctx context.Context, request operations.GetRtiJo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -16771,6 +17208,8 @@ func (s *SDK) GetRtiJobStatus(ctx context.Context, request operations.GetRtiJobS
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -16840,6 +17279,8 @@ func (s *SDK) GetRtiJobs(ctx context.Context, request operations.GetRtiJobsReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -16920,6 +17361,8 @@ func (s *SDK) GetRtiTransactionFromEmployer(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -16998,6 +17441,8 @@ func (s *SDK) GetRtiTransactionsFromEmployer(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -17078,6 +17523,8 @@ func (s *SDK) GetRtiTransactionsWithTag(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -17156,6 +17603,8 @@ func (s *SDK) GetSchema(ctx context.Context, request operations.GetSchemaRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -17236,6 +17685,8 @@ func (s *SDK) GetSchemas(ctx context.Context, request operations.GetSchemasReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -17314,6 +17765,8 @@ func (s *SDK) GetSubContractorByEffectiveDate(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -17394,6 +17847,8 @@ func (s *SDK) GetSubContractorFromEmployer(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -17472,6 +17927,8 @@ func (s *SDK) GetSubContractorRevisionByNumber(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -17552,6 +18009,8 @@ func (s *SDK) GetSubContractorRevisions(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -17630,6 +18089,8 @@ func (s *SDK) GetSubContractorsByEffectiveDate(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -17710,6 +18171,8 @@ func (s *SDK) GetSubContractorsFromEmployer(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -17788,6 +18251,8 @@ func (s *SDK) GetSubContractorsWithTag(ctx context.Context, request operations.G
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -17868,6 +18333,8 @@ func (s *SDK) GetTagFromCisInstruction(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -17946,6 +18413,8 @@ func (s *SDK) GetTagFromCisLine(ctx context.Context, request operations.GetTagFr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -18026,6 +18495,8 @@ func (s *SDK) GetTagFromCisLineType(ctx context.Context, request operations.GetT
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -18104,6 +18575,8 @@ func (s *SDK) GetTagFromEmployee(ctx context.Context, request operations.GetTagF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -18184,6 +18657,8 @@ func (s *SDK) GetTagFromEmployeeRevision(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -18262,6 +18737,8 @@ func (s *SDK) GetTagFromEmployer(ctx context.Context, request operations.GetTagF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -18342,6 +18819,8 @@ func (s *SDK) GetTagFromEmployerRevision(ctx context.Context, request operations
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -18420,6 +18899,8 @@ func (s *SDK) GetTagFromHolidayScheme(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -18500,6 +18981,8 @@ func (s *SDK) GetTagFromHolidaySchemeRevision(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -18578,6 +19061,8 @@ func (s *SDK) GetTagFromJournalLine(ctx context.Context, request operations.GetT
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -18658,6 +19143,8 @@ func (s *SDK) GetTagFromPayCode(ctx context.Context, request operations.GetTagFr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -18736,6 +19223,8 @@ func (s *SDK) GetTagFromPayInstruction(ctx context.Context, request operations.G
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -18816,6 +19305,8 @@ func (s *SDK) GetTagFromPayLine(ctx context.Context, request operations.GetTagFr
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -18894,6 +19385,8 @@ func (s *SDK) GetTagFromPayRun(ctx context.Context, request operations.GetTagFro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -18974,6 +19467,8 @@ func (s *SDK) GetTagFromPaySchedule(ctx context.Context, request operations.GetT
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -19052,6 +19547,8 @@ func (s *SDK) GetTagFromRtiTransaction(ctx context.Context, request operations.G
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -19132,6 +19629,8 @@ func (s *SDK) GetTagFromSubContractor(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -19210,6 +19709,8 @@ func (s *SDK) GetTagFromSubContractorRevision(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -19290,6 +19791,8 @@ func (s *SDK) GetTagFromThirdPartyTransaction(ctx context.Context, request opera
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -19368,6 +19871,8 @@ func (s *SDK) GetTagFromUser(ctx context.Context, request operations.GetTagFromU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -19448,6 +19953,8 @@ func (s *SDK) GetTagsFromCisInstruction(ctx context.Context, request operations.
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -19526,6 +20033,8 @@ func (s *SDK) GetTagsFromCisLine(ctx context.Context, request operations.GetTags
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -19606,6 +20115,8 @@ func (s *SDK) GetTagsFromCisLineType(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -19684,6 +20195,8 @@ func (s *SDK) GetTagsFromEmployee(ctx context.Context, request operations.GetTag
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -19764,6 +20277,8 @@ func (s *SDK) GetTagsFromEmployeeRevision(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -19842,6 +20357,8 @@ func (s *SDK) GetTagsFromEmployer(ctx context.Context, request operations.GetTag
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -19922,6 +20439,8 @@ func (s *SDK) GetTagsFromEmployerRevision(ctx context.Context, request operation
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -20000,6 +20519,8 @@ func (s *SDK) GetTagsFromHolidayScheme(ctx context.Context, request operations.G
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -20080,6 +20601,8 @@ func (s *SDK) GetTagsFromHolidaySchemeRevision(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -20158,6 +20681,8 @@ func (s *SDK) GetTagsFromJournalLine(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -20238,6 +20763,8 @@ func (s *SDK) GetTagsFromPayCode(ctx context.Context, request operations.GetTags
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -20316,6 +20843,8 @@ func (s *SDK) GetTagsFromPayInstruction(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -20396,6 +20925,8 @@ func (s *SDK) GetTagsFromPayLine(ctx context.Context, request operations.GetTags
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -20474,6 +21005,8 @@ func (s *SDK) GetTagsFromPayRun(ctx context.Context, request operations.GetTagsF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -20554,6 +21087,8 @@ func (s *SDK) GetTagsFromPaySchedule(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -20632,6 +21167,8 @@ func (s *SDK) GetTagsFromRtiTransaction(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -20712,6 +21249,8 @@ func (s *SDK) GetTagsFromSubContractor(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -20790,6 +21329,8 @@ func (s *SDK) GetTagsFromSubContractorRevision(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -20870,6 +21411,8 @@ func (s *SDK) GetTagsFromThirdPartyTransaction(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -20948,6 +21491,8 @@ func (s *SDK) GetTagsFromUser(ctx context.Context, request operations.GetTagsFro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -21028,6 +21573,8 @@ func (s *SDK) GetTemplateModel(ctx context.Context, request operations.GetTempla
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -21106,6 +21653,8 @@ func (s *SDK) GetTemplates(ctx context.Context, request operations.GetTemplatesR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -21186,6 +21735,8 @@ func (s *SDK) GetThirdPartyJobInfo(ctx context.Context, request operations.GetTh
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -21265,6 +21816,8 @@ func (s *SDK) GetThirdPartyJobProgress(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -21335,6 +21888,8 @@ func (s *SDK) GetThirdPartyJobStatus(ctx context.Context, request operations.Get
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -21404,6 +21959,8 @@ func (s *SDK) GetThirdPartyJobs(ctx context.Context, request operations.GetThird
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -21484,6 +22041,8 @@ func (s *SDK) GetThirdPartyTransaction(ctx context.Context, request operations.G
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -21562,6 +22121,8 @@ func (s *SDK) GetThirdPartyTransactions(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -21642,6 +22203,8 @@ func (s *SDK) GetTransformDefinitionFromApplication(ctx context.Context, request
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -21720,6 +22283,8 @@ func (s *SDK) GetTransformDefinitionsFromApplication(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -21800,6 +22365,8 @@ func (s *SDK) GetUser(ctx context.Context, request operations.GetUserRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -21878,6 +22445,8 @@ func (s *SDK) GetUsers(ctx context.Context, request operations.GetUsersRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -21958,6 +22527,8 @@ func (s *SDK) PatchCisInstruction(ctx context.Context, request operations.PatchC
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -22036,6 +22607,8 @@ func (s *SDK) PatchDpsMessage(ctx context.Context, request operations.PatchDpsMe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -22123,7 +22696,10 @@ func (s *SDK) PatchEmployee(ctx context.Context, request operations.PatchEmploye
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -22211,7 +22787,10 @@ func (s *SDK) PatchEmployer(ctx context.Context, request operations.PatchEmploye
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -22299,7 +22878,10 @@ func (s *SDK) PatchHolidayScheme(ctx context.Context, request operations.PatchHo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -22387,7 +22969,10 @@ func (s *SDK) PatchPayCode(ctx context.Context, request operations.PatchPayCodeR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -22475,7 +23060,10 @@ func (s *SDK) PatchPayInstruction(ctx context.Context, request operations.PatchP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -22563,7 +23151,10 @@ func (s *SDK) PatchPension(ctx context.Context, request operations.PatchPensionR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -22643,6 +23234,8 @@ func (s *SDK) PatchPermission(ctx context.Context, request operations.PatchPermi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -22730,7 +23323,10 @@ func (s *SDK) PatchSubContractor(ctx context.Context, request operations.PatchSu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -22810,6 +23406,8 @@ func (s *SDK) PatchUser(ctx context.Context, request operations.PatchUserRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -22897,7 +23495,10 @@ func (s *SDK) PostCisInstructionIntoSubContractor(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -22985,7 +23586,10 @@ func (s *SDK) PostCisLineTypeIntoEmployer(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -23065,6 +23669,8 @@ func (s *SDK) PostDpsMessage(ctx context.Context, request operations.PostDpsMess
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -23152,7 +23758,10 @@ func (s *SDK) PostEmployeeIntoEmployer(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -23232,6 +23841,8 @@ func (s *SDK) PostEmployeeSecret(ctx context.Context, request operations.PostEmp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -23319,7 +23930,10 @@ func (s *SDK) PostEmployer(ctx context.Context, request operations.PostEmployerR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -23399,6 +24013,8 @@ func (s *SDK) PostEmployerSecret(ctx context.Context, request operations.PostEmp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -23486,7 +24102,10 @@ func (s *SDK) PostHolidaySchemeIntoEmployer(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -23567,6 +24186,8 @@ func (s *SDK) PostJournalInstruction(ctx context.Context, request operations.Pos
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -23645,6 +24266,8 @@ func (s *SDK) PostJournalInstructionTemplate(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -23732,7 +24355,10 @@ func (s *SDK) PostNewAeAssessment(ctx context.Context, request operations.PostNe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -23820,7 +24446,10 @@ func (s *SDK) PostNewBatchJob(ctx context.Context, request operations.PostNewBat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -23908,7 +24537,10 @@ func (s *SDK) PostNewCisJob(ctx context.Context, request operations.PostNewCisJo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -23996,7 +24628,10 @@ func (s *SDK) PostNewDpsJob(ctx context.Context, request operations.PostNewDpsJo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -24084,7 +24719,10 @@ func (s *SDK) PostNewPayRunJob(ctx context.Context, request operations.PostNewPa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -24172,7 +24810,10 @@ func (s *SDK) PostNewRtiJob(ctx context.Context, request operations.PostNewRtiJo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -24260,7 +24901,10 @@ func (s *SDK) PostNewThirdPartyJob(ctx context.Context, request operations.PostN
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -24348,7 +24992,10 @@ func (s *SDK) PostNominalCode(ctx context.Context, request operations.PostNomina
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -24436,7 +25083,10 @@ func (s *SDK) PostPayCode(ctx context.Context, request operations.PostPayCodeReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -24524,7 +25174,10 @@ func (s *SDK) PostPayInstruction(ctx context.Context, request operations.PostPay
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -24612,7 +25265,10 @@ func (s *SDK) PostPaySchedule(ctx context.Context, request operations.PostPaySch
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -24700,7 +25356,10 @@ func (s *SDK) PostPensionIntoEmployer(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -24780,6 +25439,8 @@ func (s *SDK) PostPermission(ctx context.Context, request operations.PostPermiss
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -24867,7 +25528,10 @@ func (s *SDK) PostReportDefinition(ctx context.Context, request operations.PostR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -24955,7 +25619,10 @@ func (s *SDK) PostReportingInstruction(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -25043,7 +25710,10 @@ func (s *SDK) PostSubContractorIntoEmployer(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -25131,7 +25801,10 @@ func (s *SDK) PostTransformDefinition(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -25211,6 +25884,8 @@ func (s *SDK) PostUser(ctx context.Context, request operations.PostUserRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -25298,7 +25973,10 @@ func (s *SDK) PutCisInstructionIntoSubContractor(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -25379,6 +26057,8 @@ func (s *SDK) PutCisInstructionTag(ctx context.Context, request operations.PutCi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -25457,6 +26137,8 @@ func (s *SDK) PutCisLineTag(ctx context.Context, request operations.PutCisLineTa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -25544,7 +26226,10 @@ func (s *SDK) PutCisLineTypeIntoEmployer(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -25625,6 +26310,8 @@ func (s *SDK) PutCisLineTypeTag(ctx context.Context, request operations.PutCisLi
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -25703,6 +26390,8 @@ func (s *SDK) PutDpsMessage(ctx context.Context, request operations.PutDpsMessag
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -25790,7 +26479,10 @@ func (s *SDK) PutEmployeeIntoEmployer(ctx context.Context, request operations.Pu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -25871,6 +26563,8 @@ func (s *SDK) PutEmployeeSecret(ctx context.Context, request operations.PutEmplo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -25949,6 +26643,8 @@ func (s *SDK) PutEmployeeTag(ctx context.Context, request operations.PutEmployee
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -26036,7 +26732,10 @@ func (s *SDK) PutEmployer(ctx context.Context, request operations.PutEmployerReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -26117,6 +26816,8 @@ func (s *SDK) PutEmployerSecret(ctx context.Context, request operations.PutEmplo
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -26195,6 +26896,8 @@ func (s *SDK) PutEmployerTag(ctx context.Context, request operations.PutEmployer
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -26282,7 +26985,10 @@ func (s *SDK) PutHolidaySchemeIntoEmployer(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -26363,6 +27069,8 @@ func (s *SDK) PutHolidaySchemeTag(ctx context.Context, request operations.PutHol
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -26441,6 +27149,8 @@ func (s *SDK) PutJournalInstruction(ctx context.Context, request operations.PutJ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -26521,6 +27231,8 @@ func (s *SDK) PutJournalInstructionTemplate(ctx context.Context, request operati
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -26599,6 +27311,8 @@ func (s *SDK) PutJournalLineTag(ctx context.Context, request operations.PutJourn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -26686,7 +27400,10 @@ func (s *SDK) PutNewAeAssessment(ctx context.Context, request operations.PutNewA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -26774,7 +27491,10 @@ func (s *SDK) PutNominalCode(ctx context.Context, request operations.PutNominalC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -26862,7 +27582,10 @@ func (s *SDK) PutPayCode(ctx context.Context, request operations.PutPayCodeReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -26942,6 +27665,8 @@ func (s *SDK) PutPayCodeTag(ctx context.Context, request operations.PutPayCodeTa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -27029,7 +27754,10 @@ func (s *SDK) PutPayInstruction(ctx context.Context, request operations.PutPayIn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -27110,6 +27838,8 @@ func (s *SDK) PutPayInstructionTag(ctx context.Context, request operations.PutPa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -27189,6 +27919,8 @@ func (s *SDK) PutPayLineTag(ctx context.Context, request operations.PutPayLineTa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -27267,6 +27999,8 @@ func (s *SDK) PutPayRunTag(ctx context.Context, request operations.PutPayRunTagR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -27354,7 +28088,10 @@ func (s *SDK) PutPaySchedule(ctx context.Context, request operations.PutPaySched
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -27434,6 +28171,8 @@ func (s *SDK) PutPayScheduleTag(ctx context.Context, request operations.PutPaySc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -27521,7 +28260,10 @@ func (s *SDK) PutPensionIntoEmployer(ctx context.Context, request operations.Put
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -27601,6 +28343,8 @@ func (s *SDK) PutPermission(ctx context.Context, request operations.PutPermissio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -27688,7 +28432,10 @@ func (s *SDK) PutReportDefinition(ctx context.Context, request operations.PutRep
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -27776,7 +28523,10 @@ func (s *SDK) PutReportingInstruction(ctx context.Context, request operations.Pu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -27856,6 +28606,8 @@ func (s *SDK) PutRtiTransactionTag(ctx context.Context, request operations.PutRt
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -27943,7 +28695,10 @@ func (s *SDK) PutSubContractorIntoEmployer(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -28024,6 +28779,8 @@ func (s *SDK) PutSubContractorTag(ctx context.Context, request operations.PutSub
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -28102,6 +28859,8 @@ func (s *SDK) PutThirdPartyTransactionTag(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -28189,7 +28948,10 @@ func (s *SDK) PutTransformDefinition(ctx context.Context, request operations.Put
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -28270,6 +29032,8 @@ func (s *SDK) PutUser(ctx context.Context, request operations.PutUserRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -28348,6 +29112,8 @@ func (s *SDK) PutUserTag(ctx context.Context, request operations.PutUserTagReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 

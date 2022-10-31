@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteStudioLifecycleConfigRequest struct {
-	StudioLifecycleConfigName string `json:"StudioLifecycleConfigName"`
+    StudioLifecycleConfigName string `json:"StudioLifecycleConfigName"`
+    
 }
+

@@ -1,40 +1,51 @@
 package operations
 
+
+
+
 type GetDeleteSnapshotScheduleActionEnum string
 
 const (
-	GetDeleteSnapshotScheduleActionEnumDeleteSnapshotSchedule GetDeleteSnapshotScheduleActionEnum = "DeleteSnapshotSchedule"
+    GetDeleteSnapshotScheduleActionEnumDeleteSnapshotSchedule GetDeleteSnapshotScheduleActionEnum = "DeleteSnapshotSchedule"
 )
+
+
 
 type GetDeleteSnapshotScheduleVersionEnum string
 
 const (
-	GetDeleteSnapshotScheduleVersionEnumTwoThousandAndTwelve1201 GetDeleteSnapshotScheduleVersionEnum = "2012-12-01"
+    GetDeleteSnapshotScheduleVersionEnumTwoThousandAndTwelve1201 GetDeleteSnapshotScheduleVersionEnum = "2012-12-01"
 )
 
+
 type GetDeleteSnapshotScheduleQueryParams struct {
-	Action             GetDeleteSnapshotScheduleActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	ScheduleIdentifier string                               `queryParam:"style=form,explode=true,name=ScheduleIdentifier"`
-	Version            GetDeleteSnapshotScheduleVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action GetDeleteSnapshotScheduleActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    ScheduleIdentifier string `queryParam:"style=form,explode=true,name=ScheduleIdentifier"`
+    Version GetDeleteSnapshotScheduleVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type GetDeleteSnapshotScheduleHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type GetDeleteSnapshotScheduleRequest struct {
-	QueryParams GetDeleteSnapshotScheduleQueryParams
-	Headers     GetDeleteSnapshotScheduleHeaders
+    QueryParams GetDeleteSnapshotScheduleQueryParams 
+    Headers GetDeleteSnapshotScheduleHeaders 
+    
 }
 
 type GetDeleteSnapshotScheduleResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

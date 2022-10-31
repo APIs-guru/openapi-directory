@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LinkTokenCreateRequestPaymentInitiation struct {
-	PaymentID string `json:"payment_id"`
+    PaymentID string `json:"payment_id"`
+    
 }
+

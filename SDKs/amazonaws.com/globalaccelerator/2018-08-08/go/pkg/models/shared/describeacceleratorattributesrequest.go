@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeAcceleratorAttributesRequest struct {
-	AcceleratorArn string `json:"AcceleratorArn"`
+    AcceleratorArn string `json:"AcceleratorArn"`
+    
 }
+

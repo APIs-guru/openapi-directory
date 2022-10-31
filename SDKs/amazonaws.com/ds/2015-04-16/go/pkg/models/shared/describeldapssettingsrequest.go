@@ -1,8 +1,12 @@
 package shared
 
+
+
 type DescribeLdapsSettingsRequest struct {
-	DirectoryID string         `json:"DirectoryId"`
-	Limit       *int64         `json:"Limit,omitempty"`
-	NextToken   *string        `json:"NextToken,omitempty"`
-	Type        *LdapsTypeEnum `json:"Type,omitempty"`
+    DirectoryID string `json:"DirectoryId"`
+    Limit *int64 `json:"Limit,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    Type *LdapsTypeEnum `json:"Type,omitempty"`
+    
 }
+

@@ -1,6 +1,10 @@
 package shared
 
+
+
 type S3Configuration struct {
-	BucketArn string `json:"BucketARN"`
-	FileKey   string `json:"FileKey"`
+    BucketArn string `json:"BucketARN"`
+    FileKey string `json:"FileKey"`
+    
 }
+

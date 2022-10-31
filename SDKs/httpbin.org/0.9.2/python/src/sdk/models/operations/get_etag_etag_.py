@@ -9,8 +9,8 @@ class GetEtagEtagPathParams:
 
 @dataclass
 class GetEtagEtagHeaders:
-    if_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-Match' }})
-    if_none_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-None-Match' }})
+    if_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-Match', 'style': 'simple', 'explode': False }})
+    if_none_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-None-Match', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

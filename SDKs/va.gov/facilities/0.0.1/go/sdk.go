@@ -62,6 +62,8 @@ func (s *SDK) GetAllFacilities(ctx context.Context, request operations.GetAllFac
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)

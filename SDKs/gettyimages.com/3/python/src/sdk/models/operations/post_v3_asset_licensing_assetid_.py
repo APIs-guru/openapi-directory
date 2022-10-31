@@ -10,7 +10,7 @@ class PostV3AssetLicensingAssetIDPathParams:
 
 @dataclass
 class PostV3AssetLicensingAssetIDHeaders:
-    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

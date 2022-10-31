@@ -1,5 +1,9 @@
 package shared
 
+
+
 type VirtualRouterServiceProvider struct {
-	VirtualRouterName string `json:"virtualRouterName"`
+    VirtualRouterName string `json:"virtualRouterName"`
+    
 }
+

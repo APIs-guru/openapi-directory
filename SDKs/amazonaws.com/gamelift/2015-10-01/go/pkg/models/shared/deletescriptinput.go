@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteScriptInput struct {
-	ScriptID string `json:"ScriptId"`
+    ScriptID string `json:"ScriptId"`
+    
 }
+

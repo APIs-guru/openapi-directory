@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetVoiceChannelResponse struct {
-	VoiceChannelResponse VoiceChannelResponse `json:"VoiceChannelResponse"`
+    VoiceChannelResponse VoiceChannelResponse `json:"VoiceChannelResponse"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type WirelessConnection struct {
-	IsWifiEnabled *bool `json:"IsWifiEnabled,omitempty"`
+    IsWifiEnabled *bool `json:"IsWifiEnabled,omitempty"`
+    
 }
+

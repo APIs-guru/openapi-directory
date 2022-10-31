@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StopGameSessionPlacementInput struct {
-	PlacementID string `json:"PlacementId"`
+    PlacementID string `json:"PlacementId"`
+    
 }
+

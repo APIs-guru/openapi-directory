@@ -16,7 +16,7 @@ class TopicTopicTopicNameGetQueryParams:
 
 @dataclass
 class TopicTopicTopicNameGetHeaders:
-    authorization: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'authorization' }})
+    authorization: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

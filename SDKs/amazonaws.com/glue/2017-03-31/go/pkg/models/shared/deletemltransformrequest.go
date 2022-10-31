@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteMlTransformRequest struct {
-	TransformID string `json:"TransformId"`
+    TransformID string `json:"TransformId"`
+    
 }
+

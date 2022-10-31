@@ -75,6 +75,7 @@ func (s *SDK) AddImageWatermarkV1(ctx context.Context, request operations.AddIma
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -133,6 +134,7 @@ func (s *SDK) AddPasswordV1(ctx context.Context, request operations.AddPasswordV
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -191,6 +193,7 @@ func (s *SDK) AddRestrictionsV1(ctx context.Context, request operations.AddRestr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -249,6 +252,7 @@ func (s *SDK) AddTextWatermarkV1(ctx context.Context, request operations.AddText
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -307,6 +311,7 @@ func (s *SDK) ExtractPagesV1(ctx context.Context, request operations.ExtractPage
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -365,6 +370,7 @@ func (s *SDK) MergeDocumentsV1(ctx context.Context, request operations.MergeDocu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -423,6 +429,7 @@ func (s *SDK) RemovePagesV1(ctx context.Context, request operations.RemovePagesV
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -481,6 +488,7 @@ func (s *SDK) RemovePasswordV1(ctx context.Context, request operations.RemovePas
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -539,6 +547,7 @@ func (s *SDK) RemoveRestrictionsV1(ctx context.Context, request operations.Remov
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -597,6 +606,7 @@ func (s *SDK) RemoveSignaturesV1(ctx context.Context, request operations.RemoveS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -655,6 +665,7 @@ func (s *SDK) ReversePagesV1(ctx context.Context, request operations.ReversePage
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -713,6 +724,7 @@ func (s *SDK) RotatePagesV1(ctx context.Context, request operations.RotatePagesV
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

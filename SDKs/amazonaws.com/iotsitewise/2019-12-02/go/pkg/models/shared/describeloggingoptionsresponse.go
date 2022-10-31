@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeLoggingOptionsResponse struct {
-	LoggingOptions LoggingOptions `json:"loggingOptions"`
+    LoggingOptions LoggingOptions `json:"loggingOptions"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DetectorStateSummary struct {
-	StateName *string `json:"stateName,omitempty"`
+    StateName *string `json:"stateName,omitempty"`
+    
 }
+

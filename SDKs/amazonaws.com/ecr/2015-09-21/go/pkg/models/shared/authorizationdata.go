@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type AuthorizationData struct {
-	AuthorizationToken *string    `json:"authorizationToken,omitempty"`
-	ExpiresAt          *time.Time `json:"expiresAt,omitempty"`
-	ProxyEndpoint      *string    `json:"proxyEndpoint,omitempty"`
+    AuthorizationToken *string `json:"authorizationToken,omitempty"`
+    ExpiresAt *time.Time `json:"expiresAt,omitempty"`
+    ProxyEndpoint *string `json:"proxyEndpoint,omitempty"`
+    
 }
+

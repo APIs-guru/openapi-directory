@@ -1,15 +1,21 @@
 package operations
 
+
+
 type PostPatientsIDAttachmentsNameCompressPathParams struct {
-	ID   string `pathParam:"style=simple,explode=false,name=id"`
-	Name string `pathParam:"style=simple,explode=false,name=name"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    Name string `pathParam:"style=simple,explode=false,name=name"`
+    
 }
 
 type PostPatientsIDAttachmentsNameCompressRequest struct {
-	PathParams PostPatientsIDAttachmentsNameCompressPathParams
+    PathParams PostPatientsIDAttachmentsNameCompressPathParams 
+    
 }
 
 type PostPatientsIDAttachmentsNameCompressResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

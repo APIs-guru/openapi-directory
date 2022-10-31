@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetTokenHoldersPathParams struct {
-	Tokenid string `pathParam:"style=simple,explode=false,name=tokenid"`
+    Tokenid string `pathParam:"style=simple,explode=false,name=tokenid"`
+    
 }
 
 type GetTokenHoldersRequest struct {
-	PathParams GetTokenHoldersPathParams
+    PathParams GetTokenHoldersPathParams 
+    
 }
 
 type GetTokenHoldersResponse struct {
-	ContentType             string
-	Error                   *shared.Error
-	StatusCode              int64
-	GetTokenHoldersResponse *shared.GetTokenHoldersResponse
+    ContentType string 
+    Error *shared.Error 
+    StatusCode int64 
+    GetTokenHoldersResponse *shared.GetTokenHoldersResponse 
+    
 }
+

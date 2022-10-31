@@ -1,42 +1,53 @@
 package operations
 
+
+
+
 type PostDescribeClientVpnEndpointsActionEnum string
 
 const (
-	PostDescribeClientVpnEndpointsActionEnumDescribeClientVpnEndpoints PostDescribeClientVpnEndpointsActionEnum = "DescribeClientVpnEndpoints"
+    PostDescribeClientVpnEndpointsActionEnumDescribeClientVpnEndpoints PostDescribeClientVpnEndpointsActionEnum = "DescribeClientVpnEndpoints"
 )
+
+
 
 type PostDescribeClientVpnEndpointsVersionEnum string
 
 const (
-	PostDescribeClientVpnEndpointsVersionEnumTwoThousandAndSixteen1115 PostDescribeClientVpnEndpointsVersionEnum = "2016-11-15"
+    PostDescribeClientVpnEndpointsVersionEnumTwoThousandAndSixteen1115 PostDescribeClientVpnEndpointsVersionEnum = "2016-11-15"
 )
 
+
 type PostDescribeClientVpnEndpointsQueryParams struct {
-	Action     PostDescribeClientVpnEndpointsActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	MaxResults *string                                   `queryParam:"style=form,explode=true,name=MaxResults"`
-	NextToken  *string                                   `queryParam:"style=form,explode=true,name=NextToken"`
-	Version    PostDescribeClientVpnEndpointsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action PostDescribeClientVpnEndpointsActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
+    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
+    Version PostDescribeClientVpnEndpointsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type PostDescribeClientVpnEndpointsHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type PostDescribeClientVpnEndpointsRequest struct {
-	QueryParams PostDescribeClientVpnEndpointsQueryParams
-	Headers     PostDescribeClientVpnEndpointsHeaders
-	Request     []byte `request:"mediaType=text/xml"`
+    QueryParams PostDescribeClientVpnEndpointsQueryParams 
+    Headers PostDescribeClientVpnEndpointsHeaders 
+    Request []byte `request:"mediaType=text/xml"`
+    
 }
 
 type PostDescribeClientVpnEndpointsResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

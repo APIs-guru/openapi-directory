@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type SecurityConfiguration struct {
-	CreatedTimeStamp        *time.Time               `json:"CreatedTimeStamp,omitempty"`
-	EncryptionConfiguration *EncryptionConfiguration `json:"EncryptionConfiguration,omitempty"`
-	Name                    *string                  `json:"Name,omitempty"`
+    CreatedTimeStamp *time.Time `json:"CreatedTimeStamp,omitempty"`
+    EncryptionConfiguration *EncryptionConfiguration `json:"EncryptionConfiguration,omitempty"`
+    Name *string `json:"Name,omitempty"`
+    
 }
+

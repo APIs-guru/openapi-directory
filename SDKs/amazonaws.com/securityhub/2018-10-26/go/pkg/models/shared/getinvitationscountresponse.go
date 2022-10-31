@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetInvitationsCountResponse struct {
-	InvitationsCount *int64 `json:"InvitationsCount,omitempty"`
+    InvitationsCount *int64 `json:"InvitationsCount,omitempty"`
+    
 }
+

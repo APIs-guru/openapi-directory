@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudRecaptchaenterpriseV1RelatedAccountGroup struct {
-	Name *string `json:"name,omitempty"`
+    Name *string `json:"name,omitempty"`
+    
 }
+

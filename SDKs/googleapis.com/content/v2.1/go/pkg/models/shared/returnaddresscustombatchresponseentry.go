@@ -1,8 +1,12 @@
 package shared
 
+
+
 type ReturnaddressCustomBatchResponseEntry struct {
-	BatchID       *int64         `json:"batchId,omitempty"`
-	Errors        *Errors        `json:"errors,omitempty"`
-	Kind          *string        `json:"kind,omitempty"`
-	ReturnAddress *ReturnAddress `json:"returnAddress,omitempty"`
+    BatchID *int64 `json:"batchId,omitempty"`
+    Errors *Errors `json:"errors,omitempty"`
+    Kind *string `json:"kind,omitempty"`
+    ReturnAddress *ReturnAddress `json:"returnAddress,omitempty"`
+    
 }
+

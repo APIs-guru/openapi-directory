@@ -137,6 +137,7 @@ func (s *SDK) TasksTasklistsInsert(ctx context.Context, request operations.Tasks
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -225,6 +226,7 @@ func (s *SDK) TasksTasklistsPatch(ctx context.Context, request operations.TasksT
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -272,6 +274,7 @@ func (s *SDK) TasksTasklistsUpdate(ctx context.Context, request operations.Tasks
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -424,6 +427,7 @@ func (s *SDK) TasksTasksInsert(ctx context.Context, request operations.TasksTask
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -553,6 +557,7 @@ func (s *SDK) TasksTasksPatch(ctx context.Context, request operations.TasksTasks
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -600,6 +605,7 @@ func (s *SDK) TasksTasksUpdate(ctx context.Context, request operations.TasksTask
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

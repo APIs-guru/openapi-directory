@@ -249,6 +249,7 @@ func (s *SDK) GetDocumentWithPath(ctx context.Context, request operations.GetDoc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -319,6 +320,7 @@ func (s *SDK) GetDocumentWithWebHook(ctx context.Context, request operations.Get
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -605,6 +607,7 @@ func (s *SDK) PatchDocument(ctx context.Context, request operations.PatchDocumen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -671,6 +674,7 @@ func (s *SDK) PostCompile(ctx context.Context, request operations.PostCompileReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -741,6 +745,7 @@ func (s *SDK) PostQuery(ctx context.Context, request operations.PostQueryRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -812,6 +817,7 @@ func (s *SDK) PostSimpleQuery(ctx context.Context, request operations.PostSimple
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -875,6 +881,8 @@ func (s *SDK) PutDocument(ctx context.Context, request operations.PutDocumentReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -944,6 +952,7 @@ func (s *SDK) PutPolicyModule(ctx context.Context, request operations.PutPolicyM
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

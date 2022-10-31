@@ -1,12 +1,18 @@
 package shared
 
+
+
+
 type TaxSettingsUpdateRequestTaxationModeEnum string
 
 const (
-	TaxSettingsUpdateRequestTaxationModeEnumExclusive TaxSettingsUpdateRequestTaxationModeEnum = "EXCLUSIVE"
-	TaxSettingsUpdateRequestTaxationModeEnumInclusive TaxSettingsUpdateRequestTaxationModeEnum = "INCLUSIVE"
+    TaxSettingsUpdateRequestTaxationModeEnumExclusive TaxSettingsUpdateRequestTaxationModeEnum = "EXCLUSIVE"
+TaxSettingsUpdateRequestTaxationModeEnumInclusive TaxSettingsUpdateRequestTaxationModeEnum = "INCLUSIVE"
 )
 
+
 type TaxSettingsUpdateRequest struct {
-	TaxationMode TaxSettingsUpdateRequestTaxationModeEnum `json:"taxationMode"`
+    TaxationMode TaxSettingsUpdateRequestTaxationModeEnum `json:"taxationMode"`
+    
 }
+

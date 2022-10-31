@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DestinationIDRequestBody struct {
-	DestinationID string `json:"destinationId"`
+    DestinationID string `json:"destinationId"`
+    
 }
+

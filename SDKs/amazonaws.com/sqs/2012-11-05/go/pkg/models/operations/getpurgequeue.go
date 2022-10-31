@@ -1,45 +1,57 @@
 package operations
 
+
+
 type GetPurgeQueuePathParams struct {
-	AccountNumber int64  `pathParam:"style=simple,explode=false,name=AccountNumber"`
-	QueueName     string `pathParam:"style=simple,explode=false,name=QueueName"`
+    AccountNumber int64 `pathParam:"style=simple,explode=false,name=AccountNumber"`
+    QueueName string `pathParam:"style=simple,explode=false,name=QueueName"`
+    
 }
+
 
 type GetPurgeQueueActionEnum string
 
 const (
-	GetPurgeQueueActionEnumPurgeQueue GetPurgeQueueActionEnum = "PurgeQueue"
+    GetPurgeQueueActionEnumPurgeQueue GetPurgeQueueActionEnum = "PurgeQueue"
 )
+
+
 
 type GetPurgeQueueVersionEnum string
 
 const (
-	GetPurgeQueueVersionEnumTwoThousandAndTwelve1105 GetPurgeQueueVersionEnum = "2012-11-05"
+    GetPurgeQueueVersionEnumTwoThousandAndTwelve1105 GetPurgeQueueVersionEnum = "2012-11-05"
 )
 
+
 type GetPurgeQueueQueryParams struct {
-	Action  GetPurgeQueueActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	Version GetPurgeQueueVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action GetPurgeQueueActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    Version GetPurgeQueueVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type GetPurgeQueueHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type GetPurgeQueueRequest struct {
-	PathParams  GetPurgeQueuePathParams
-	QueryParams GetPurgeQueueQueryParams
-	Headers     GetPurgeQueueHeaders
+    PathParams GetPurgeQueuePathParams 
+    QueryParams GetPurgeQueueQueryParams 
+    Headers GetPurgeQueueHeaders 
+    
 }
 
 type GetPurgeQueueResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

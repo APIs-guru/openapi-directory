@@ -1,27 +1,31 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PostHolidaySchemeIntoEmployerPathParams struct {
-	EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    
 }
 
 type PostHolidaySchemeIntoEmployerHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type PostHolidaySchemeIntoEmployerRequest struct {
-	PathParams PostHolidaySchemeIntoEmployerPathParams
-	Headers    PostHolidaySchemeIntoEmployerHeaders
-	Request    shared.HolidayScheme `request:"mediaType=application/json"`
+    PathParams PostHolidaySchemeIntoEmployerPathParams 
+    Headers PostHolidaySchemeIntoEmployerHeaders 
+    Request shared.HolidayScheme `request:"mediaType=application/json"`
+    
 }
 
 type PostHolidaySchemeIntoEmployerResponse struct {
-	ContentType string
-	ErrorModel  *shared.ErrorModel
-	Link        *shared.Link
-	StatusCode  int64
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    Link *shared.Link 
+    StatusCode int64 
+    
 }
+

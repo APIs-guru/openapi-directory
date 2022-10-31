@@ -19,26 +19,31 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def securitycenter_organizations_assets_run_discovery(self, request: operations.SecuritycenterOrganizationsAssetsRunDiscoveryRequest) -> operations.SecuritycenterOrganizationsAssetsRunDiscoveryResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/assets:runDiscovery", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterOrganizationsAssetsRunDiscoveryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Operation])
@@ -47,21 +52,21 @@ class SDK:
         return res
 
     
-    
     def securitycenter_organizations_operations_cancel(self, request: operations.SecuritycenterOrganizationsOperationsCancelRequest) -> operations.SecuritycenterOrganizationsOperationsCancelResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:cancel", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterOrganizationsOperationsCancelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -70,25 +75,27 @@ class SDK:
         return res
 
     
-    
     def securitycenter_organizations_sources_create(self, request: operations.SecuritycenterOrganizationsSourcesCreateRequest) -> operations.SecuritycenterOrganizationsSourcesCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/sources", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterOrganizationsSourcesCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Source])
@@ -97,25 +104,27 @@ class SDK:
         return res
 
     
-    
     def securitycenter_organizations_sources_findings_create(self, request: operations.SecuritycenterOrganizationsSourcesFindingsCreateRequest) -> operations.SecuritycenterOrganizationsSourcesFindingsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/findings", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterOrganizationsSourcesFindingsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Finding])
@@ -124,25 +133,27 @@ class SDK:
         return res
 
     
-    
     def securitycenter_organizations_sources_get_iam_policy(self, request: operations.SecuritycenterOrganizationsSourcesGetIamPolicyRequest) -> operations.SecuritycenterOrganizationsSourcesGetIamPolicyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{resource}:getIamPolicy", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterOrganizationsSourcesGetIamPolicyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Policy])
@@ -150,26 +161,28 @@ class SDK:
 
         return res
 
-    
     
     def securitycenter_organizations_sources_set_iam_policy(self, request: operations.SecuritycenterOrganizationsSourcesSetIamPolicyRequest) -> operations.SecuritycenterOrganizationsSourcesSetIamPolicyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{resource}:setIamPolicy", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterOrganizationsSourcesSetIamPolicyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Policy])
@@ -178,25 +191,27 @@ class SDK:
         return res
 
     
-    
     def securitycenter_organizations_sources_test_iam_permissions(self, request: operations.SecuritycenterOrganizationsSourcesTestIamPermissionsRequest) -> operations.SecuritycenterOrganizationsSourcesTestIamPermissionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{resource}:testIamPermissions", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterOrganizationsSourcesTestIamPermissionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TestIamPermissionsResponse])
@@ -205,25 +220,27 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_assets_group(self, request: operations.SecuritycenterProjectsAssetsGroupRequest) -> operations.SecuritycenterProjectsAssetsGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/assets:group", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsAssetsGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GroupAssetsResponse])
@@ -232,21 +249,21 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_assets_list(self, request: operations.SecuritycenterProjectsAssetsListRequest) -> operations.SecuritycenterProjectsAssetsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/assets", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsAssetsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAssetsResponse])
@@ -255,25 +272,27 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_big_query_exports_create(self, request: operations.SecuritycenterProjectsBigQueryExportsCreateRequest) -> operations.SecuritycenterProjectsBigQueryExportsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/bigQueryExports", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsBigQueryExportsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudSecuritycenterV1BigQueryExport])
@@ -282,21 +301,21 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_big_query_exports_list(self, request: operations.SecuritycenterProjectsBigQueryExportsListRequest) -> operations.SecuritycenterProjectsBigQueryExportsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/bigQueryExports", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsBigQueryExportsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListBigQueryExportsResponse])
@@ -305,25 +324,27 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_findings_bulk_mute(self, request: operations.SecuritycenterProjectsFindingsBulkMuteRequest) -> operations.SecuritycenterProjectsFindingsBulkMuteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/findings:bulkMute", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsFindingsBulkMuteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Operation])
@@ -332,25 +353,27 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_mute_configs_create(self, request: operations.SecuritycenterProjectsMuteConfigsCreateRequest) -> operations.SecuritycenterProjectsMuteConfigsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/muteConfigs", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsMuteConfigsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudSecuritycenterV1MuteConfig])
@@ -359,21 +382,21 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_mute_configs_list(self, request: operations.SecuritycenterProjectsMuteConfigsListRequest) -> operations.SecuritycenterProjectsMuteConfigsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/muteConfigs", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsMuteConfigsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListMuteConfigsResponse])
@@ -382,25 +405,27 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_notification_configs_create(self, request: operations.SecuritycenterProjectsNotificationConfigsCreateRequest) -> operations.SecuritycenterProjectsNotificationConfigsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/notificationConfigs", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsNotificationConfigsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NotificationConfig])
@@ -409,21 +434,21 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_notification_configs_delete(self, request: operations.SecuritycenterProjectsNotificationConfigsDeleteRequest) -> operations.SecuritycenterProjectsNotificationConfigsDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsNotificationConfigsDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -432,21 +457,21 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_notification_configs_get(self, request: operations.SecuritycenterProjectsNotificationConfigsGetRequest) -> operations.SecuritycenterProjectsNotificationConfigsGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsNotificationConfigsGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NotificationConfig])
@@ -455,21 +480,21 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_notification_configs_list(self, request: operations.SecuritycenterProjectsNotificationConfigsListRequest) -> operations.SecuritycenterProjectsNotificationConfigsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/notificationConfigs", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsNotificationConfigsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListNotificationConfigsResponse])
@@ -478,25 +503,27 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_sources_findings_external_systems_patch(self, request: operations.SecuritycenterProjectsSourcesFindingsExternalSystemsPatchRequest) -> operations.SecuritycenterProjectsSourcesFindingsExternalSystemsPatchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsSourcesFindingsExternalSystemsPatchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudSecuritycenterV1ExternalSystem])
@@ -505,25 +532,27 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_sources_findings_group(self, request: operations.SecuritycenterProjectsSourcesFindingsGroupRequest) -> operations.SecuritycenterProjectsSourcesFindingsGroupResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/findings:group", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsSourcesFindingsGroupResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GroupFindingsResponse])
@@ -532,21 +561,21 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_sources_findings_list(self, request: operations.SecuritycenterProjectsSourcesFindingsListRequest) -> operations.SecuritycenterProjectsSourcesFindingsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/findings", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsSourcesFindingsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListFindingsResponse])
@@ -555,25 +584,27 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_sources_findings_set_mute(self, request: operations.SecuritycenterProjectsSourcesFindingsSetMuteRequest) -> operations.SecuritycenterProjectsSourcesFindingsSetMuteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:setMute", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsSourcesFindingsSetMuteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Finding])
@@ -581,26 +612,28 @@ class SDK:
 
         return res
 
-    
     
     def securitycenter_projects_sources_findings_set_state(self, request: operations.SecuritycenterProjectsSourcesFindingsSetStateRequest) -> operations.SecuritycenterProjectsSourcesFindingsSetStateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:setState", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsSourcesFindingsSetStateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Finding])
@@ -609,21 +642,21 @@ class SDK:
         return res
 
     
-    
     def securitycenter_projects_sources_list(self, request: operations.SecuritycenterProjectsSourcesListRequest) -> operations.SecuritycenterProjectsSourcesListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/sources", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SecuritycenterProjectsSourcesListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListSourcesResponse])

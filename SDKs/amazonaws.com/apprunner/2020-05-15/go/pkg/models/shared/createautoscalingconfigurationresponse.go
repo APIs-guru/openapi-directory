@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateAutoScalingConfigurationResponse struct {
-	AutoScalingConfiguration AutoScalingConfiguration `json:"AutoScalingConfiguration"`
+    AutoScalingConfiguration AutoScalingConfiguration `json:"AutoScalingConfiguration"`
+    
 }
+

@@ -1,31 +1,36 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type AccountDetailAPIIDSecurity struct {
-	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    
 }
 
 type AccountDetailAPIIDRequest struct {
-	Security AccountDetailAPIIDSecurity
+    Security AccountDetailAPIIDSecurity 
+    
 }
 
 type AccountDetailAPIID401ApplicationJSON struct {
-	Error            *string `json:"error,omitempty"`
-	ErrorDescription *string `json:"error_description,omitempty"`
+    Error *string `json:"error,omitempty"`
+    ErrorDescription *string `json:"error_description,omitempty"`
+    
 }
 
 type AccountDetailAPIID500ApplicationJSON struct {
-	Error            *string `json:"error,omitempty"`
-	ErrorDescription *string `json:"error_description,omitempty"`
+    Error *string `json:"error,omitempty"`
+    ErrorDescription *string `json:"error_description,omitempty"`
+    
 }
 
 type AccountDetailAPIIDResponse struct {
-	AccountDetailAPIID401ApplicationJSONObject *AccountDetailAPIID401ApplicationJSON
-	AccountDetailAPIID500ApplicationJSONObject *AccountDetailAPIID500ApplicationJSON
-	ContentType                                string
-	Sample                                     *interface{}
-	StatusCode                                 int64
+    AccountDetailAPIID401ApplicationJSONObject *AccountDetailAPIID401ApplicationJSON 
+    AccountDetailAPIID500ApplicationJSONObject *AccountDetailAPIID500ApplicationJSON 
+    ContentType string 
+    Sample *interface{} 
+    StatusCode int64 
+    
 }
+

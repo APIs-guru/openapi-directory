@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetApprovalRuleTemplateOutput struct {
-	ApprovalRuleTemplate ApprovalRuleTemplate `json:"approvalRuleTemplate"`
+    ApprovalRuleTemplate ApprovalRuleTemplate `json:"approvalRuleTemplate"`
+    
 }
+

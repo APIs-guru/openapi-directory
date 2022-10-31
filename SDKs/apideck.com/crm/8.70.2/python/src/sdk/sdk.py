@@ -19,31 +19,36 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def activities_add(self, request: operations.ActivitiesAddRequest) -> operations.ActivitiesAddResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/activities"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ActivitiesAddResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateActivityResponse])
@@ -76,21 +81,23 @@ class SDK:
         return res
 
     
-    
     def activities_all(self, request: operations.ActivitiesAllRequest) -> operations.ActivitiesAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/activities"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ActivitiesAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetActivitiesResponse])
@@ -123,21 +130,23 @@ class SDK:
         return res
 
     
-    
     def activities_delete(self, request: operations.ActivitiesDeleteRequest) -> operations.ActivitiesDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/activities/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ActivitiesDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteActivityResponse])
@@ -170,21 +179,23 @@ class SDK:
         return res
 
     
-    
     def activities_one(self, request: operations.ActivitiesOneRequest) -> operations.ActivitiesOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/activities/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ActivitiesOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetActivityResponse])
@@ -217,28 +228,30 @@ class SDK:
         return res
 
     
-    
     def activities_update(self, request: operations.ActivitiesUpdateRequest) -> operations.ActivitiesUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/activities/{id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ActivitiesUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateActivityResponse])
@@ -271,28 +284,30 @@ class SDK:
         return res
 
     
-    
     def companies_add(self, request: operations.CompaniesAddRequest) -> operations.CompaniesAddResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/companies"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CompaniesAddResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateCompanyResponse])
@@ -325,21 +340,23 @@ class SDK:
         return res
 
     
-    
     def companies_all(self, request: operations.CompaniesAllRequest) -> operations.CompaniesAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/companies"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CompaniesAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetCompaniesResponse])
@@ -372,21 +389,23 @@ class SDK:
         return res
 
     
-    
     def companies_delete(self, request: operations.CompaniesDeleteRequest) -> operations.CompaniesDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/companies/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CompaniesDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteCompanyResponse])
@@ -419,21 +438,23 @@ class SDK:
         return res
 
     
-    
     def companies_one(self, request: operations.CompaniesOneRequest) -> operations.CompaniesOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/companies/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CompaniesOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetCompanyResponse])
@@ -466,28 +487,30 @@ class SDK:
         return res
 
     
-    
     def companies_update(self, request: operations.CompaniesUpdateRequest) -> operations.CompaniesUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/companies/{id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CompaniesUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateCompanyResponse])
@@ -520,28 +543,30 @@ class SDK:
         return res
 
     
-    
     def contacts_add(self, request: operations.ContactsAddRequest) -> operations.ContactsAddResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/contacts"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ContactsAddResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateContactResponse])
@@ -574,21 +599,23 @@ class SDK:
         return res
 
     
-    
     def contacts_all(self, request: operations.ContactsAllRequest) -> operations.ContactsAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/contacts"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ContactsAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetContactsResponse])
@@ -621,21 +648,23 @@ class SDK:
         return res
 
     
-    
     def contacts_delete(self, request: operations.ContactsDeleteRequest) -> operations.ContactsDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/contacts/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ContactsDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteContactResponse])
@@ -668,21 +697,23 @@ class SDK:
         return res
 
     
-    
     def contacts_one(self, request: operations.ContactsOneRequest) -> operations.ContactsOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/contacts/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ContactsOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetContactResponse])
@@ -715,28 +746,30 @@ class SDK:
         return res
 
     
-    
     def contacts_update(self, request: operations.ContactsUpdateRequest) -> operations.ContactsUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/contacts/{id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ContactsUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateContactResponse])
@@ -769,28 +802,30 @@ class SDK:
         return res
 
     
-    
     def leads_add(self, request: operations.LeadsAddRequest) -> operations.LeadsAddResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/leads"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.LeadsAddResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateLeadResponse])
@@ -823,21 +858,23 @@ class SDK:
         return res
 
     
-    
     def leads_all(self, request: operations.LeadsAllRequest) -> operations.LeadsAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/leads"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.LeadsAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetLeadsResponse])
@@ -870,21 +907,23 @@ class SDK:
         return res
 
     
-    
     def leads_delete(self, request: operations.LeadsDeleteRequest) -> operations.LeadsDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/leads/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.LeadsDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteLeadResponse])
@@ -917,21 +956,23 @@ class SDK:
         return res
 
     
-    
     def leads_one(self, request: operations.LeadsOneRequest) -> operations.LeadsOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/leads/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.LeadsOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetLeadResponse])
@@ -964,28 +1005,30 @@ class SDK:
         return res
 
     
-    
     def leads_update(self, request: operations.LeadsUpdateRequest) -> operations.LeadsUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/leads/{id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.LeadsUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateLeadResponse])
@@ -1018,28 +1061,30 @@ class SDK:
         return res
 
     
-    
     def notes_add(self, request: operations.NotesAddRequest) -> operations.NotesAddResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/notes"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.NotesAddResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateNoteResponse])
@@ -1072,21 +1117,23 @@ class SDK:
         return res
 
     
-    
     def notes_all(self, request: operations.NotesAllRequest) -> operations.NotesAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/notes"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.NotesAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetNotesResponse])
@@ -1119,21 +1166,23 @@ class SDK:
         return res
 
     
-    
     def notes_delete(self, request: operations.NotesDeleteRequest) -> operations.NotesDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/notes/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.NotesDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteNoteResponse])
@@ -1166,21 +1215,23 @@ class SDK:
         return res
 
     
-    
     def notes_one(self, request: operations.NotesOneRequest) -> operations.NotesOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/notes/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.NotesOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetNoteResponse])
@@ -1213,28 +1264,30 @@ class SDK:
         return res
 
     
-    
     def notes_update(self, request: operations.NotesUpdateRequest) -> operations.NotesUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/notes/{id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.NotesUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateNoteResponse])
@@ -1267,28 +1320,30 @@ class SDK:
         return res
 
     
-    
     def opportunities_add(self, request: operations.OpportunitiesAddRequest) -> operations.OpportunitiesAddResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/opportunities"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.OpportunitiesAddResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateOpportunityResponse])
@@ -1321,21 +1376,23 @@ class SDK:
         return res
 
     
-    
     def opportunities_all(self, request: operations.OpportunitiesAllRequest) -> operations.OpportunitiesAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/opportunities"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.OpportunitiesAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetOpportunitiesResponse])
@@ -1368,21 +1425,23 @@ class SDK:
         return res
 
     
-    
     def opportunities_delete(self, request: operations.OpportunitiesDeleteRequest) -> operations.OpportunitiesDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/opportunities/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.OpportunitiesDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteOpportunityResponse])
@@ -1415,21 +1474,23 @@ class SDK:
         return res
 
     
-    
     def opportunities_one(self, request: operations.OpportunitiesOneRequest) -> operations.OpportunitiesOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/opportunities/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.OpportunitiesOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetOpportunityResponse])
@@ -1462,28 +1523,30 @@ class SDK:
         return res
 
     
-    
     def opportunities_update(self, request: operations.OpportunitiesUpdateRequest) -> operations.OpportunitiesUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/opportunities/{id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.OpportunitiesUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateOpportunityResponse])
@@ -1516,28 +1579,30 @@ class SDK:
         return res
 
     
-    
     def pipelines_add(self, request: operations.PipelinesAddRequest) -> operations.PipelinesAddResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/pipelines"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PipelinesAddResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreatePipelineResponse])
@@ -1570,21 +1635,23 @@ class SDK:
         return res
 
     
-    
     def pipelines_all(self, request: operations.PipelinesAllRequest) -> operations.PipelinesAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/pipelines"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PipelinesAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetPipelinesResponse])
@@ -1617,21 +1684,23 @@ class SDK:
         return res
 
     
-    
     def pipelines_delete(self, request: operations.PipelinesDeleteRequest) -> operations.PipelinesDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/pipelines/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PipelinesDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeletePipelineResponse])
@@ -1664,21 +1733,23 @@ class SDK:
         return res
 
     
-    
     def pipelines_one(self, request: operations.PipelinesOneRequest) -> operations.PipelinesOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/pipelines/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PipelinesOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetPipelineResponse])
@@ -1711,28 +1782,30 @@ class SDK:
         return res
 
     
-    
     def pipelines_update(self, request: operations.PipelinesUpdateRequest) -> operations.PipelinesUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/pipelines/{id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PipelinesUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdatePipelineResponse])
@@ -1765,28 +1838,30 @@ class SDK:
         return res
 
     
-    
     def users_add(self, request: operations.UsersAddRequest) -> operations.UsersAddResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/users"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UsersAddResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateUserResponse])
@@ -1819,21 +1894,23 @@ class SDK:
         return res
 
     
-    
     def users_all(self, request: operations.UsersAllRequest) -> operations.UsersAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/crm/users"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UsersAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetUsersResponse])
@@ -1866,21 +1943,23 @@ class SDK:
         return res
 
     
-    
     def users_delete(self, request: operations.UsersDeleteRequest) -> operations.UsersDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/users/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UsersDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DeleteUserResponse])
@@ -1913,21 +1992,23 @@ class SDK:
         return res
 
     
-    
     def users_one(self, request: operations.UsersOneRequest) -> operations.UsersOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/users/{id}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UsersOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetUserResponse])
@@ -1960,28 +2041,30 @@ class SDK:
         return res
 
     
-    
     def users_update(self, request: operations.UsersUpdateRequest) -> operations.UsersUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/crm/users/{id}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UsersUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateUserResponse])

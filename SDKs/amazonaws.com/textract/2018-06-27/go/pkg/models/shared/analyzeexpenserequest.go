@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AnalyzeExpenseRequest struct {
-	Document Document `json:"Document"`
+    Document Document `json:"Document"`
+    
 }
+

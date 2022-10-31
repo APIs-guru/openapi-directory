@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListTrainingJobsResponse struct {
-	NextToken            *string              `json:"NextToken,omitempty"`
-	TrainingJobSummaries []TrainingJobSummary `json:"TrainingJobSummaries"`
+    NextToken *string `json:"NextToken,omitempty"`
+    TrainingJobSummaries []TrainingJobSummary `json:"TrainingJobSummaries"`
+    
 }
+

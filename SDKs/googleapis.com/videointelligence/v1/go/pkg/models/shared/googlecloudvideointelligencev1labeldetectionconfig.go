@@ -1,18 +1,24 @@
 package shared
 
+
+
+
 type GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum string
 
 const (
-	GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnumLabelDetectionModeUnspecified GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum = "LABEL_DETECTION_MODE_UNSPECIFIED"
-	GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnumShotMode                      GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum = "SHOT_MODE"
-	GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnumFrameMode                     GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum = "FRAME_MODE"
-	GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnumShotAndFrameMode              GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum = "SHOT_AND_FRAME_MODE"
+    GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnumLabelDetectionModeUnspecified GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum = "LABEL_DETECTION_MODE_UNSPECIFIED"
+GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnumShotMode GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum = "SHOT_MODE"
+GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnumFrameMode GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum = "FRAME_MODE"
+GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnumShotAndFrameMode GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum = "SHOT_AND_FRAME_MODE"
 )
 
+
 type GoogleCloudVideointelligenceV1LabelDetectionConfig struct {
-	FrameConfidenceThreshold *float32                                                                  `json:"frameConfidenceThreshold,omitempty"`
-	LabelDetectionMode       *GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum `json:"labelDetectionMode,omitempty"`
-	Model                    *string                                                                   `json:"model,omitempty"`
-	StationaryCamera         *bool                                                                     `json:"stationaryCamera,omitempty"`
-	VideoConfidenceThreshold *float32                                                                  `json:"videoConfidenceThreshold,omitempty"`
+    FrameConfidenceThreshold *float32 `json:"frameConfidenceThreshold,omitempty"`
+    LabelDetectionMode *GoogleCloudVideointelligenceV1LabelDetectionConfigLabelDetectionModeEnum `json:"labelDetectionMode,omitempty"`
+    Model *string `json:"model,omitempty"`
+    StationaryCamera *bool `json:"stationaryCamera,omitempty"`
+    VideoConfidenceThreshold *float32 `json:"videoConfidenceThreshold,omitempty"`
+    
 }
+

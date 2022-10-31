@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SignJwtRequest struct {
-	Payload *string `json:"payload,omitempty"`
+    Payload *string `json:"payload,omitempty"`
+    
 }
+

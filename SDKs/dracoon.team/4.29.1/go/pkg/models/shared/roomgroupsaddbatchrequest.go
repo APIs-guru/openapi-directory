@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RoomGroupsAddBatchRequest struct {
-	Items []RoomGroupsAddBatchRequestItem `json:"items"`
+    Items []RoomGroupsAddBatchRequestItem `json:"items"`
+    
 }
+

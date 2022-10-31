@@ -20,20 +20,23 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def get(self, request: operations.GetRequest) -> operations.GetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/mbus/get/{device}/{baudrate}/{address}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/xml"):
                 res.mbus_data = r.content
@@ -46,20 +49,20 @@ class SDK:
 
         return res
 
-    
     
     def get_multi(self, request: operations.GetMultiRequest) -> operations.GetMultiResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/mbus/getMulti/{device}/{baudrate}/{address}/{maxframes}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetMultiResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/xml"):
                 res.mbus_data = r.content
@@ -73,19 +76,19 @@ class SDK:
         return res
 
     
-    
     def hat(self) -> operations.HatResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/mbus/hat"
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HatResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -97,19 +100,19 @@ class SDK:
         return res
 
     
-    
     def hat_off(self) -> operations.HatOffResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/mbus/hat/off"
-        
+
         client = self.client
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HatOffResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 404:
@@ -118,20 +121,20 @@ class SDK:
 
         return res
 
-    
     
     def hat_on(self) -> operations.HatOnResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/mbus/hat/on"
-        
+
         client = self.client
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HatOnResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 404:
@@ -141,19 +144,19 @@ class SDK:
         return res
 
     
-    
     def mbus_api(self) -> operations.MbusAPIResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/mbus/api"
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.MbusAPIResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/x-yaml"):
                 res.yaml = r.content
@@ -164,19 +167,19 @@ class SDK:
         return res
 
     
-    
     def scan(self, request: operations.ScanRequest) -> operations.ScanResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/mbus/scan/{device}/{baudrate}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ScanResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
                 res.slaves = r.content

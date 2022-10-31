@@ -7,7 +7,7 @@ AIRTRAVEL_COORDINATES_SERVERS = [
 
 @dataclass
 class AirtravelCoordinatesHeaders:
-    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': True }})
+    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

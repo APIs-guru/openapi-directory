@@ -66,6 +66,7 @@ func (s *SDK) CreateVaultItem(ctx context.Context, request operations.CreateVaul
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -858,6 +859,7 @@ func (s *SDK) PatchVaultItem(ctx context.Context, request operations.PatchVaultI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -933,6 +935,7 @@ func (s *SDK) UpdateVaultItem(ctx context.Context, request operations.UpdateVaul
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

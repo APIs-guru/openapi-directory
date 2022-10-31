@@ -1,16 +1,22 @@
 package operations
 
+
+
 type RegistrationsCitationReadPathParams struct {
-	CitationID     string `pathParam:"style=simple,explode=false,name=citation_id"`
-	RegistrationID string `pathParam:"style=simple,explode=false,name=registration_id"`
+    CitationID string `pathParam:"style=simple,explode=false,name=citation_id"`
+    RegistrationID string `pathParam:"style=simple,explode=false,name=registration_id"`
+    
 }
 
 type RegistrationsCitationReadRequest struct {
-	PathParams RegistrationsCitationReadPathParams
+    PathParams RegistrationsCitationReadPathParams 
+    
 }
 
 type RegistrationsCitationReadResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

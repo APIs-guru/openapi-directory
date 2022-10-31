@@ -22,30 +22,36 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def add_layer_version_permission(self, request: operations.AddLayerVersionPermissionRequest) -> operations.AddLayerVersionPermissionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AddLayerVersionPermissionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AddLayerVersionPermissionResponse])
@@ -82,27 +88,30 @@ class SDK:
         return res
 
     
-    
     def add_permission(self, request: operations.AddPermissionRequest) -> operations.AddPermissionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/policy", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AddPermissionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AddPermissionResponse])
@@ -139,26 +148,28 @@ class SDK:
         return res
 
     
-    
     def create_alias(self, request: operations.CreateAliasRequest) -> operations.CreateAliasResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/aliases", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAliasResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AliasConfiguration])
@@ -187,26 +198,28 @@ class SDK:
         return res
 
     
-    
     def create_code_signing_config(self, request: operations.CreateCodeSigningConfigRequest) -> operations.CreateCodeSigningConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2020-04-22/code-signing-configs/"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCodeSigningConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CreateCodeSigningConfigResponse])
@@ -223,26 +236,28 @@ class SDK:
         return res
 
     
-    
     def create_event_source_mapping(self, request: operations.CreateEventSourceMappingRequest) -> operations.CreateEventSourceMappingResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2015-03-31/event-source-mappings/"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateEventSourceMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventSourceMappingConfiguration])
@@ -271,26 +286,28 @@ class SDK:
         return res
 
     
-    
     def create_function(self, request: operations.CreateFunctionRequest) -> operations.CreateFunctionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2015-03-31/functions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateFunctionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FunctionConfiguration])
@@ -335,19 +352,21 @@ class SDK:
         return res
 
     
-    
     def delete_alias(self, request: operations.DeleteAliasRequest) -> operations.DeleteAliasResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/aliases/{Name}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAliasResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -370,19 +389,21 @@ class SDK:
         return res
 
     
-    
     def delete_code_signing_config(self, request: operations.DeleteCodeSigningConfigRequest) -> operations.DeleteCodeSigningConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCodeSigningConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -407,19 +428,21 @@ class SDK:
         return res
 
     
-    
     def delete_event_source_mapping(self, request: operations.DeleteEventSourceMappingRequest) -> operations.DeleteEventSourceMappingResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/event-source-mappings/{UUID}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteEventSourceMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventSourceMappingConfiguration])
@@ -448,20 +471,23 @@ class SDK:
         return res
 
     
-    
     def delete_function(self, request: operations.DeleteFunctionRequest) -> operations.DeleteFunctionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("DELETE", url, params=query_params)
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFunctionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -488,19 +514,21 @@ class SDK:
         return res
 
     
-    
     def delete_function_code_signing_config(self, request: operations.DeleteFunctionCodeSigningConfigRequest) -> operations.DeleteFunctionCodeSigningConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2020-06-30/functions/{FunctionName}/code-signing-config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFunctionCodeSigningConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -531,19 +559,21 @@ class SDK:
         return res
 
     
-    
     def delete_function_concurrency(self, request: operations.DeleteFunctionConcurrencyRequest) -> operations.DeleteFunctionConcurrencyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-10-31/functions/{FunctionName}/concurrency", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFunctionConcurrencyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -569,21 +599,24 @@ class SDK:
 
         return res
 
-    
     
     def delete_function_event_invoke_config(self, request: operations.DeleteFunctionEventInvokeConfigRequest) -> operations.DeleteFunctionEventInvokeConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2019-09-25/functions/{FunctionName}/event-invoke-config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("DELETE", url, params=query_params)
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFunctionEventInvokeConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -609,20 +642,22 @@ class SDK:
 
         return res
 
-    
     
     def delete_layer_version(self, request: operations.DeleteLayerVersionRequest) -> operations.DeleteLayerVersionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("DELETE", url)
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteLayerVersionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -637,20 +672,23 @@ class SDK:
         return res
 
     
-    
     def delete_provisioned_concurrency_config(self, request: operations.DeleteProvisionedConcurrencyConfigRequest) -> operations.DeleteProvisionedConcurrencyConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2019-09-30/functions/{FunctionName}/provisioned-concurrency#Qualifier", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("DELETE", url, params=query_params)
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteProvisionedConcurrencyConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -677,19 +715,21 @@ class SDK:
         return res
 
     
-    
     def get_account_settings(self, request: operations.GetAccountSettingsRequest) -> operations.GetAccountSettingsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2016-08-19/account-settings/"
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAccountSettingsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetAccountSettingsResponse])
@@ -706,19 +746,21 @@ class SDK:
         return res
 
     
-    
     def get_alias(self, request: operations.GetAliasRequest) -> operations.GetAliasResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/aliases/{Name}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAliasResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AliasConfiguration])
@@ -743,19 +785,21 @@ class SDK:
         return res
 
     
-    
     def get_code_signing_config(self, request: operations.GetCodeSigningConfigRequest) -> operations.GetCodeSigningConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetCodeSigningConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetCodeSigningConfigResponse])
@@ -776,19 +820,21 @@ class SDK:
         return res
 
     
-    
     def get_event_source_mapping(self, request: operations.GetEventSourceMappingRequest) -> operations.GetEventSourceMappingResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/event-source-mappings/{UUID}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetEventSourceMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventSourceMappingConfiguration])
@@ -813,20 +859,23 @@ class SDK:
         return res
 
     
-    
     def get_function(self, request: operations.GetFunctionRequest) -> operations.GetFunctionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFunctionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetFunctionResponse])
@@ -851,19 +900,21 @@ class SDK:
         return res
 
     
-    
     def get_function_code_signing_config(self, request: operations.GetFunctionCodeSigningConfigRequest) -> operations.GetFunctionCodeSigningConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2020-06-30/functions/{FunctionName}/code-signing-config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFunctionCodeSigningConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetFunctionCodeSigningConfigResponse])
@@ -888,19 +939,21 @@ class SDK:
         return res
 
     
-    
     def get_function_concurrency(self, request: operations.GetFunctionConcurrencyRequest) -> operations.GetFunctionConcurrencyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2019-09-30/functions/{FunctionName}/concurrency", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFunctionConcurrencyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetFunctionConcurrencyResponse])
@@ -925,20 +978,23 @@ class SDK:
         return res
 
     
-    
     def get_function_configuration(self, request: operations.GetFunctionConfigurationRequest) -> operations.GetFunctionConfigurationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/configuration", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFunctionConfigurationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FunctionConfiguration])
@@ -963,20 +1019,23 @@ class SDK:
         return res
 
     
-    
     def get_function_event_invoke_config(self, request: operations.GetFunctionEventInvokeConfigRequest) -> operations.GetFunctionEventInvokeConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2019-09-25/functions/{FunctionName}/event-invoke-config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFunctionEventInvokeConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FunctionEventInvokeConfig])
@@ -1001,19 +1060,21 @@ class SDK:
         return res
 
     
-    
     def get_layer_version(self, request: operations.GetLayerVersionRequest) -> operations.GetLayerVersionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLayerVersionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetLayerVersionResponse])
@@ -1037,21 +1098,24 @@ class SDK:
 
         return res
 
-    
     
     def get_layer_version_by_arn(self, request: operations.GetLayerVersionByArnRequest) -> operations.GetLayerVersionByArnResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2018-10-31/layers#find=LayerVersion&Arn"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLayerVersionByArnResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetLayerVersionResponse])
@@ -1076,19 +1140,21 @@ class SDK:
         return res
 
     
-    
     def get_layer_version_policy(self, request: operations.GetLayerVersionPolicyRequest) -> operations.GetLayerVersionPolicyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLayerVersionPolicyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetLayerVersionPolicyResponse])
@@ -1113,20 +1179,23 @@ class SDK:
         return res
 
     
-    
     def get_policy(self, request: operations.GetPolicyRequest) -> operations.GetPolicyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/policy", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetPolicyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetPolicyResponse])
@@ -1151,20 +1220,23 @@ class SDK:
         return res
 
     
-    
     def get_provisioned_concurrency_config(self, request: operations.GetProvisionedConcurrencyConfigRequest) -> operations.GetProvisionedConcurrencyConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2019-09-30/functions/{FunctionName}/provisioned-concurrency#Qualifier", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetProvisionedConcurrencyConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetProvisionedConcurrencyConfigResponse])
@@ -1193,27 +1265,30 @@ class SDK:
         return res
 
     
-    
     def invoke(self, request: operations.InvokeRequest) -> operations.InvokeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/invocations", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.InvokeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.InvocationResponse])
@@ -1326,26 +1401,28 @@ class SDK:
         return res
 
     
-    
     def invoke_async(self, request: operations.InvokeAsyncRequest) -> operations.InvokeAsyncResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2014-11-13/functions/{FunctionName}/invoke-async/", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.InvokeAsyncResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.InvokeAsyncResponse])
@@ -1374,20 +1451,23 @@ class SDK:
         return res
 
     
-    
     def list_aliases(self, request: operations.ListAliasesRequest) -> operations.ListAliasesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/aliases", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAliasesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAliasesResponse])
@@ -1412,20 +1492,23 @@ class SDK:
         return res
 
     
-    
     def list_code_signing_configs(self, request: operations.ListCodeSigningConfigsRequest) -> operations.ListCodeSigningConfigsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2020-04-22/code-signing-configs/"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCodeSigningConfigsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListCodeSigningConfigsResponse])
@@ -1442,20 +1525,23 @@ class SDK:
         return res
 
     
-    
     def list_event_source_mappings(self, request: operations.ListEventSourceMappingsRequest) -> operations.ListEventSourceMappingsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2015-03-31/event-source-mappings/"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEventSourceMappingsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListEventSourceMappingsResponse])
@@ -1480,20 +1566,23 @@ class SDK:
         return res
 
     
-    
     def list_function_event_invoke_configs(self, request: operations.ListFunctionEventInvokeConfigsRequest) -> operations.ListFunctionEventInvokeConfigsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2019-09-25/functions/{FunctionName}/event-invoke-config/list", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListFunctionEventInvokeConfigsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListFunctionEventInvokeConfigsResponse])
@@ -1518,20 +1607,23 @@ class SDK:
         return res
 
     
-    
     def list_functions(self, request: operations.ListFunctionsRequest) -> operations.ListFunctionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2015-03-31/functions/"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListFunctionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListFunctionsResponse])
@@ -1552,20 +1644,23 @@ class SDK:
         return res
 
     
-    
     def list_functions_by_code_signing_config(self, request: operations.ListFunctionsByCodeSigningConfigRequest) -> operations.ListFunctionsByCodeSigningConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}/functions", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListFunctionsByCodeSigningConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListFunctionsByCodeSigningConfigResponse])
@@ -1586,20 +1681,23 @@ class SDK:
         return res
 
     
-    
     def list_layer_versions(self, request: operations.ListLayerVersionsRequest) -> operations.ListLayerVersionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2018-10-31/layers/{LayerName}/versions", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListLayerVersionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListLayerVersionsResponse])
@@ -1624,20 +1722,23 @@ class SDK:
         return res
 
     
-    
     def list_layers(self, request: operations.ListLayersRequest) -> operations.ListLayersResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/2018-10-31/layers"
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListLayersResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListLayersResponse])
@@ -1658,20 +1759,23 @@ class SDK:
         return res
 
     
-    
     def list_provisioned_concurrency_configs(self, request: operations.ListProvisionedConcurrencyConfigsRequest) -> operations.ListProvisionedConcurrencyConfigsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2019-09-30/functions/{FunctionName}/provisioned-concurrency#List=ALL", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListProvisionedConcurrencyConfigsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListProvisionedConcurrencyConfigsResponse])
@@ -1696,19 +1800,21 @@ class SDK:
         return res
 
     
-    
     def list_tags(self, request: operations.ListTagsRequest) -> operations.ListTagsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-31/tags/{ARN}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTagsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListTagsResponse])
@@ -1733,20 +1839,23 @@ class SDK:
         return res
 
     
-    
     def list_versions_by_function(self, request: operations.ListVersionsByFunctionRequest) -> operations.ListVersionsByFunctionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/versions", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("GET", url, params=query_params)
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListVersionsByFunctionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListVersionsByFunctionResponse])
@@ -1771,26 +1880,28 @@ class SDK:
         return res
 
     
-    
     def publish_layer_version(self, request: operations.PublishLayerVersionRequest) -> operations.PublishLayerVersionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2018-10-31/layers/{LayerName}/versions", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PublishLayerVersionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PublishLayerVersionResponse])
@@ -1819,26 +1930,28 @@ class SDK:
         return res
 
     
-    
     def publish_version(self, request: operations.PublishVersionRequest) -> operations.PublishVersionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/versions", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PublishVersionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FunctionConfiguration])
@@ -1875,26 +1988,28 @@ class SDK:
         return res
 
     
-    
     def put_function_code_signing_config(self, request: operations.PutFunctionCodeSigningConfigRequest) -> operations.PutFunctionCodeSigningConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2020-06-30/functions/{FunctionName}/code-signing-config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutFunctionCodeSigningConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PutFunctionCodeSigningConfigResponse])
@@ -1927,26 +2042,28 @@ class SDK:
         return res
 
     
-    
     def put_function_concurrency(self, request: operations.PutFunctionConcurrencyRequest) -> operations.PutFunctionConcurrencyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-10-31/functions/{FunctionName}/concurrency", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutFunctionConcurrencyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Concurrency])
@@ -1975,27 +2092,30 @@ class SDK:
         return res
 
     
-    
     def put_function_event_invoke_config(self, request: operations.PutFunctionEventInvokeConfigRequest) -> operations.PutFunctionEventInvokeConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2019-09-25/functions/{FunctionName}/event-invoke-config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutFunctionEventInvokeConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FunctionEventInvokeConfig])
@@ -2024,27 +2144,30 @@ class SDK:
         return res
 
     
-    
     def put_provisioned_concurrency_config(self, request: operations.PutProvisionedConcurrencyConfigRequest) -> operations.PutProvisionedConcurrencyConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2019-09-30/functions/{FunctionName}/provisioned-concurrency#Qualifier", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutProvisionedConcurrencyConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PutProvisionedConcurrencyConfigResponse])
@@ -2073,20 +2196,23 @@ class SDK:
         return res
 
     
-    
     def remove_layer_version_permission(self, request: operations.RemoveLayerVersionPermissionRequest) -> operations.RemoveLayerVersionPermissionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2018-10-31/layers/{LayerName}/versions/{VersionNumber}/policy/{StatementId}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("DELETE", url, params=query_params)
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RemoveLayerVersionPermissionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -2112,21 +2238,24 @@ class SDK:
 
         return res
 
-    
     
     def remove_permission(self, request: operations.RemovePermissionRequest) -> operations.RemovePermissionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/policy/{StatementId}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("DELETE", url, params=query_params)
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RemovePermissionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -2153,26 +2282,28 @@ class SDK:
         return res
 
     
-    
     def tag_resource(self, request: operations.TagResourceRequest) -> operations.TagResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-31/tags/{ARN}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TagResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -2198,21 +2329,24 @@ class SDK:
 
         return res
 
-    
     
     def untag_resource(self, request: operations.UntagResourceRequest) -> operations.UntagResourceResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2017-03-31/tags/{ARN}#tagKeys", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
-        r = client.request("DELETE", url, params=query_params)
+        r = client.request("DELETE", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UntagResourceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
         elif r.status_code == 480:
@@ -2239,26 +2373,28 @@ class SDK:
         return res
 
     
-    
     def update_alias(self, request: operations.UpdateAliasRequest) -> operations.UpdateAliasResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/aliases/{Name}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateAliasResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AliasConfiguration])
@@ -2291,26 +2427,28 @@ class SDK:
         return res
 
     
-    
     def update_code_signing_config(self, request: operations.UpdateCodeSigningConfigRequest) -> operations.UpdateCodeSigningConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2020-04-22/code-signing-configs/{CodeSigningConfigArn}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateCodeSigningConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateCodeSigningConfigResponse])
@@ -2331,26 +2469,28 @@ class SDK:
         return res
 
     
-    
     def update_event_source_mapping(self, request: operations.UpdateEventSourceMappingRequest) -> operations.UpdateEventSourceMappingResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/event-source-mappings/{UUID}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateEventSourceMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventSourceMappingConfiguration])
@@ -2383,26 +2523,28 @@ class SDK:
         return res
 
     
-    
     def update_function_code(self, request: operations.UpdateFunctionCodeRequest) -> operations.UpdateFunctionCodeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/code", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateFunctionCodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FunctionConfiguration])
@@ -2451,26 +2593,28 @@ class SDK:
         return res
 
     
-    
     def update_function_configuration(self, request: operations.UpdateFunctionConfigurationRequest) -> operations.UpdateFunctionConfigurationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2015-03-31/functions/{FunctionName}/configuration", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateFunctionConfigurationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FunctionConfiguration])
@@ -2515,27 +2659,30 @@ class SDK:
         return res
 
     
-    
     def update_function_event_invoke_config(self, request: operations.UpdateFunctionEventInvokeConfigRequest) -> operations.UpdateFunctionEventInvokeConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/2019-09-25/functions/{FunctionName}/event-invoke-config", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateFunctionEventInvokeConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FunctionEventInvokeConfig])

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeregisterEcsClusterRequest struct {
-	EcsClusterArn string `json:"EcsClusterArn"`
+    EcsClusterArn string `json:"EcsClusterArn"`
+    
 }
+

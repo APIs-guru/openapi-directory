@@ -1,15 +1,21 @@
 package operations
 
+
+
 type ProtocolTelnetServerGetUserdbPathParams struct {
-	AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
+    AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
+    
 }
 
 type ProtocolTelnetServerGetUserdbRequest struct {
-	PathParams ProtocolTelnetServerGetUserdbPathParams
+    PathParams ProtocolTelnetServerGetUserdbPathParams 
+    
 }
 
 type ProtocolTelnetServerGetUserdbResponse struct {
-	ContentType                                            string
-	StatusCode                                             int64
-	ProtocolTelnetServerGetUserdb200ApplicationJSONStrings []string
+    ContentType string 
+    StatusCode int64 
+    ProtocolTelnetServerGetUserdb200ApplicationJSONStrings []string 
+    
 }
+

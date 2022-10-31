@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetDeveloperAccountsDeveloperAccountIDPathParams struct {
-	DeveloperAccountID string `pathParam:"style=simple,explode=false,name=developerAccountId"`
+    DeveloperAccountID string `pathParam:"style=simple,explode=false,name=developerAccountId"`
+    
 }
 
 type GetDeveloperAccountsDeveloperAccountIDRequest struct {
-	PathParams GetDeveloperAccountsDeveloperAccountIDPathParams
+    PathParams GetDeveloperAccountsDeveloperAccountIDPathParams 
+    
 }
 
 type GetDeveloperAccountsDeveloperAccountIDResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

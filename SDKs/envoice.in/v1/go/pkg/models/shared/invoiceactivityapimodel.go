@@ -1,62 +1,68 @@
 package shared
 
+
+
+
 type InvoiceActivityAPIModelTypeEnum string
 
 const (
-	InvoiceActivityAPIModelTypeEnumCreated                    InvoiceActivityAPIModelTypeEnum = "Created"
-	InvoiceActivityAPIModelTypeEnumDraft                      InvoiceActivityAPIModelTypeEnum = "Draft"
-	InvoiceActivityAPIModelTypeEnumCloned                     InvoiceActivityAPIModelTypeEnum = "Cloned"
-	InvoiceActivityAPIModelTypeEnumSentViaEmail               InvoiceActivityAPIModelTypeEnum = "SentViaEmail"
-	InvoiceActivityAPIModelTypeEnumSentViaSms                 InvoiceActivityAPIModelTypeEnum = "SentViaSms"
-	InvoiceActivityAPIModelTypeEnumSentReminderViaEmail       InvoiceActivityAPIModelTypeEnum = "SentReminderViaEmail"
-	InvoiceActivityAPIModelTypeEnumSentReminderViaSms         InvoiceActivityAPIModelTypeEnum = "SentReminderViaSms"
-	InvoiceActivityAPIModelTypeEnumOpened                     InvoiceActivityAPIModelTypeEnum = "Opened"
-	InvoiceActivityAPIModelTypeEnumViewed                     InvoiceActivityAPIModelTypeEnum = "Viewed"
-	InvoiceActivityAPIModelTypeEnumRejected                   InvoiceActivityAPIModelTypeEnum = "Rejected"
-	InvoiceActivityAPIModelTypeEnumUpdated                    InvoiceActivityAPIModelTypeEnum = "Updated"
-	InvoiceActivityAPIModelTypeEnumPaid                       InvoiceActivityAPIModelTypeEnum = "Paid"
-	InvoiceActivityAPIModelTypeEnumUnpaid                     InvoiceActivityAPIModelTypeEnum = "Unpaid"
-	InvoiceActivityAPIModelTypeEnumOverdue                    InvoiceActivityAPIModelTypeEnum = "Overdue"
-	InvoiceActivityAPIModelTypeEnumNewManualPayment           InvoiceActivityAPIModelTypeEnum = "NewManualPayment"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithPaypal       InvoiceActivityAPIModelTypeEnum = "NewPaymentWithPaypal"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithStripe       InvoiceActivityAPIModelTypeEnum = "NewPaymentWithStripe"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithPayoneer     InvoiceActivityAPIModelTypeEnum = "NewPaymentWithPayoneer"
-	InvoiceActivityAPIModelTypeEnumSentToAccountant           InvoiceActivityAPIModelTypeEnum = "SentToAccountant"
-	InvoiceActivityAPIModelTypeEnumDownloadedAsPdf            InvoiceActivityAPIModelTypeEnum = "DownloadedAsPdf"
-	InvoiceActivityAPIModelTypeEnumMarkAsPaidByTheClient      InvoiceActivityAPIModelTypeEnum = "MarkAsPaidByTheClient"
-	InvoiceActivityAPIModelTypeEnumOpenedAttachment           InvoiceActivityAPIModelTypeEnum = "OpenedAttachment"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithSquare       InvoiceActivityAPIModelTypeEnum = "NewPaymentWithSquare"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithKlikAndPay   InvoiceActivityAPIModelTypeEnum = "NewPaymentWithKlikAndPay"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithRazorpay     InvoiceActivityAPIModelTypeEnum = "NewPaymentWithRazorpay"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithWepay        InvoiceActivityAPIModelTypeEnum = "NewPaymentWithWepay"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithHalkbank     InvoiceActivityAPIModelTypeEnum = "NewPaymentWithHalkbank"
-	InvoiceActivityAPIModelTypeEnumChangeStatus               InvoiceActivityAPIModelTypeEnum = "ChangeStatus"
-	InvoiceActivityAPIModelTypeEnumOrderUpdated               InvoiceActivityAPIModelTypeEnum = "OrderUpdated"
-	InvoiceActivityAPIModelTypeEnumOrderCreated               InvoiceActivityAPIModelTypeEnum = "OrderCreated"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithTwoCheckout  InvoiceActivityAPIModelTypeEnum = "NewPaymentWithTwoCheckout"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithPaymentWall  InvoiceActivityAPIModelTypeEnum = "NewPaymentWithPaymentWall"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithBamboraEu    InvoiceActivityAPIModelTypeEnum = "NewPaymentWithBamboraEU"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithBamboraNa    InvoiceActivityAPIModelTypeEnum = "NewPaymentWithBamboraNA"
-	InvoiceActivityAPIModelTypeEnumVoid                       InvoiceActivityAPIModelTypeEnum = "Void"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithNlb          InvoiceActivityAPIModelTypeEnum = "NewPaymentWithNlb"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithAuthorizeNet InvoiceActivityAPIModelTypeEnum = "NewPaymentWithAuthorizeNet"
-	InvoiceActivityAPIModelTypeEnumNewPaymentWithBraintree    InvoiceActivityAPIModelTypeEnum = "NewPaymentWithBraintree"
-	InvoiceActivityAPIModelTypeEnumEstimationCreated          InvoiceActivityAPIModelTypeEnum = "EstimationCreated"
-	InvoiceActivityAPIModelTypeEnumEstimationDraft            InvoiceActivityAPIModelTypeEnum = "EstimationDraft"
-	InvoiceActivityAPIModelTypeEnumEstimationCloned           InvoiceActivityAPIModelTypeEnum = "EstimationCloned"
-	InvoiceActivityAPIModelTypeEnumEstimationSentViaEmail     InvoiceActivityAPIModelTypeEnum = "EstimationSentViaEmail"
-	InvoiceActivityAPIModelTypeEnumEstimationOpened           InvoiceActivityAPIModelTypeEnum = "EstimationOpened"
-	InvoiceActivityAPIModelTypeEnumEstimationViewed           InvoiceActivityAPIModelTypeEnum = "EstimationViewed"
-	InvoiceActivityAPIModelTypeEnumEstimationAccepted         InvoiceActivityAPIModelTypeEnum = "EstimationAccepted"
-	InvoiceActivityAPIModelTypeEnumEstimationRejected         InvoiceActivityAPIModelTypeEnum = "EstimationRejected"
-	InvoiceActivityAPIModelTypeEnumEstimationUpdated          InvoiceActivityAPIModelTypeEnum = "EstimationUpdated"
-	InvoiceActivityAPIModelTypeEnumEstimationDownloadedAsPdf  InvoiceActivityAPIModelTypeEnum = "EstimationDownloadedAsPdf"
+    InvoiceActivityAPIModelTypeEnumCreated InvoiceActivityAPIModelTypeEnum = "Created"
+InvoiceActivityAPIModelTypeEnumDraft InvoiceActivityAPIModelTypeEnum = "Draft"
+InvoiceActivityAPIModelTypeEnumCloned InvoiceActivityAPIModelTypeEnum = "Cloned"
+InvoiceActivityAPIModelTypeEnumSentViaEmail InvoiceActivityAPIModelTypeEnum = "SentViaEmail"
+InvoiceActivityAPIModelTypeEnumSentViaSms InvoiceActivityAPIModelTypeEnum = "SentViaSms"
+InvoiceActivityAPIModelTypeEnumSentReminderViaEmail InvoiceActivityAPIModelTypeEnum = "SentReminderViaEmail"
+InvoiceActivityAPIModelTypeEnumSentReminderViaSms InvoiceActivityAPIModelTypeEnum = "SentReminderViaSms"
+InvoiceActivityAPIModelTypeEnumOpened InvoiceActivityAPIModelTypeEnum = "Opened"
+InvoiceActivityAPIModelTypeEnumViewed InvoiceActivityAPIModelTypeEnum = "Viewed"
+InvoiceActivityAPIModelTypeEnumRejected InvoiceActivityAPIModelTypeEnum = "Rejected"
+InvoiceActivityAPIModelTypeEnumUpdated InvoiceActivityAPIModelTypeEnum = "Updated"
+InvoiceActivityAPIModelTypeEnumPaid InvoiceActivityAPIModelTypeEnum = "Paid"
+InvoiceActivityAPIModelTypeEnumUnpaid InvoiceActivityAPIModelTypeEnum = "Unpaid"
+InvoiceActivityAPIModelTypeEnumOverdue InvoiceActivityAPIModelTypeEnum = "Overdue"
+InvoiceActivityAPIModelTypeEnumNewManualPayment InvoiceActivityAPIModelTypeEnum = "NewManualPayment"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithPaypal InvoiceActivityAPIModelTypeEnum = "NewPaymentWithPaypal"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithStripe InvoiceActivityAPIModelTypeEnum = "NewPaymentWithStripe"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithPayoneer InvoiceActivityAPIModelTypeEnum = "NewPaymentWithPayoneer"
+InvoiceActivityAPIModelTypeEnumSentToAccountant InvoiceActivityAPIModelTypeEnum = "SentToAccountant"
+InvoiceActivityAPIModelTypeEnumDownloadedAsPdf InvoiceActivityAPIModelTypeEnum = "DownloadedAsPdf"
+InvoiceActivityAPIModelTypeEnumMarkAsPaidByTheClient InvoiceActivityAPIModelTypeEnum = "MarkAsPaidByTheClient"
+InvoiceActivityAPIModelTypeEnumOpenedAttachment InvoiceActivityAPIModelTypeEnum = "OpenedAttachment"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithSquare InvoiceActivityAPIModelTypeEnum = "NewPaymentWithSquare"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithKlikAndPay InvoiceActivityAPIModelTypeEnum = "NewPaymentWithKlikAndPay"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithRazorpay InvoiceActivityAPIModelTypeEnum = "NewPaymentWithRazorpay"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithWepay InvoiceActivityAPIModelTypeEnum = "NewPaymentWithWepay"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithHalkbank InvoiceActivityAPIModelTypeEnum = "NewPaymentWithHalkbank"
+InvoiceActivityAPIModelTypeEnumChangeStatus InvoiceActivityAPIModelTypeEnum = "ChangeStatus"
+InvoiceActivityAPIModelTypeEnumOrderUpdated InvoiceActivityAPIModelTypeEnum = "OrderUpdated"
+InvoiceActivityAPIModelTypeEnumOrderCreated InvoiceActivityAPIModelTypeEnum = "OrderCreated"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithTwoCheckout InvoiceActivityAPIModelTypeEnum = "NewPaymentWithTwoCheckout"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithPaymentWall InvoiceActivityAPIModelTypeEnum = "NewPaymentWithPaymentWall"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithBamboraEu InvoiceActivityAPIModelTypeEnum = "NewPaymentWithBamboraEU"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithBamboraNa InvoiceActivityAPIModelTypeEnum = "NewPaymentWithBamboraNA"
+InvoiceActivityAPIModelTypeEnumVoid InvoiceActivityAPIModelTypeEnum = "Void"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithNlb InvoiceActivityAPIModelTypeEnum = "NewPaymentWithNlb"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithAuthorizeNet InvoiceActivityAPIModelTypeEnum = "NewPaymentWithAuthorizeNet"
+InvoiceActivityAPIModelTypeEnumNewPaymentWithBraintree InvoiceActivityAPIModelTypeEnum = "NewPaymentWithBraintree"
+InvoiceActivityAPIModelTypeEnumEstimationCreated InvoiceActivityAPIModelTypeEnum = "EstimationCreated"
+InvoiceActivityAPIModelTypeEnumEstimationDraft InvoiceActivityAPIModelTypeEnum = "EstimationDraft"
+InvoiceActivityAPIModelTypeEnumEstimationCloned InvoiceActivityAPIModelTypeEnum = "EstimationCloned"
+InvoiceActivityAPIModelTypeEnumEstimationSentViaEmail InvoiceActivityAPIModelTypeEnum = "EstimationSentViaEmail"
+InvoiceActivityAPIModelTypeEnumEstimationOpened InvoiceActivityAPIModelTypeEnum = "EstimationOpened"
+InvoiceActivityAPIModelTypeEnumEstimationViewed InvoiceActivityAPIModelTypeEnum = "EstimationViewed"
+InvoiceActivityAPIModelTypeEnumEstimationAccepted InvoiceActivityAPIModelTypeEnum = "EstimationAccepted"
+InvoiceActivityAPIModelTypeEnumEstimationRejected InvoiceActivityAPIModelTypeEnum = "EstimationRejected"
+InvoiceActivityAPIModelTypeEnumEstimationUpdated InvoiceActivityAPIModelTypeEnum = "EstimationUpdated"
+InvoiceActivityAPIModelTypeEnumEstimationDownloadedAsPdf InvoiceActivityAPIModelTypeEnum = "EstimationDownloadedAsPdf"
 )
 
+
 type InvoiceActivityAPIModel struct {
-	ID            *int32                           `json:"Id,omitempty"`
-	InvoiceNumber *string                          `json:"InvoiceNumber,omitempty"`
-	Link          *string                          `json:"Link,omitempty"`
-	Message       *string                          `json:"Message,omitempty"`
-	Type          *InvoiceActivityAPIModelTypeEnum `json:"Type,omitempty"`
+    ID *int32 `json:"Id,omitempty"`
+    InvoiceNumber *string `json:"InvoiceNumber,omitempty"`
+    Link *string `json:"Link,omitempty"`
+    Message *string `json:"Message,omitempty"`
+    Type *InvoiceActivityAPIModelTypeEnum `json:"Type,omitempty"`
+    
 }
+

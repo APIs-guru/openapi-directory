@@ -1,36 +1,42 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type FetchFarmOrganizationByTypeAndIDPathParams struct {
-	FarmOrganizationID   string                          `pathParam:"style=simple,explode=false,name=farmOrganizationId"`
-	FarmOrganizationType shared.FarmOrganizationTypeEnum `pathParam:"style=simple,explode=false,name=farmOrganizationType"`
+    FarmOrganizationID string `pathParam:"style=simple,explode=false,name=farmOrganizationId"`
+    FarmOrganizationType shared.FarmOrganizationTypeEnum `pathParam:"style=simple,explode=false,name=farmOrganizationType"`
+    
 }
 
 type FetchFarmOrganizationByTypeAndIDSecurityOption1 struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
+    APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type FetchFarmOrganizationByTypeAndIDSecurityOption2 struct {
-	Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
+    Oauth2AuthorizationCode shared.SchemeOauth2AuthorizationCode `security:"scheme,type=oauth2"`
+    
 }
 
 type FetchFarmOrganizationByTypeAndIDSecurity struct {
-	Option1 *FetchFarmOrganizationByTypeAndIDSecurityOption1 `security:"option"`
-	Option2 *FetchFarmOrganizationByTypeAndIDSecurityOption2 `security:"option"`
+    Option1 *FetchFarmOrganizationByTypeAndIDSecurityOption1 `security:"option"`
+    Option2 *FetchFarmOrganizationByTypeAndIDSecurityOption2 `security:"option"`
+    
 }
 
 type FetchFarmOrganizationByTypeAndIDRequest struct {
-	PathParams FetchFarmOrganizationByTypeAndIDPathParams
-	Security   FetchFarmOrganizationByTypeAndIDSecurity
+    PathParams FetchFarmOrganizationByTypeAndIDPathParams 
+    Security FetchFarmOrganizationByTypeAndIDSecurity 
+    
 }
 
 type FetchFarmOrganizationByTypeAndIDResponse struct {
-	ContentType      string
-	Error            *shared.Error
-	FarmOrganization *interface{}
-	Headers          map[string][]string
-	StatusCode       int64
+    ContentType string 
+    Error *shared.Error 
+    FarmOrganization *interface{} 
+    Headers map[string][]string 
+    StatusCode int64 
+    
 }
+

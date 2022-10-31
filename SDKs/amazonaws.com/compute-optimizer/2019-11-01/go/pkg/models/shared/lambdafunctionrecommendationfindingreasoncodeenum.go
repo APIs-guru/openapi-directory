@@ -1,10 +1,15 @@
 package shared
 
+
+
+
 type LambdaFunctionRecommendationFindingReasonCodeEnum string
 
 const (
-	LambdaFunctionRecommendationFindingReasonCodeEnumMemoryOverprovisioned  LambdaFunctionRecommendationFindingReasonCodeEnum = "MemoryOverprovisioned"
-	LambdaFunctionRecommendationFindingReasonCodeEnumMemoryUnderprovisioned LambdaFunctionRecommendationFindingReasonCodeEnum = "MemoryUnderprovisioned"
-	LambdaFunctionRecommendationFindingReasonCodeEnumInsufficientData       LambdaFunctionRecommendationFindingReasonCodeEnum = "InsufficientData"
-	LambdaFunctionRecommendationFindingReasonCodeEnumInconclusive           LambdaFunctionRecommendationFindingReasonCodeEnum = "Inconclusive"
+    LambdaFunctionRecommendationFindingReasonCodeEnumMemoryOverprovisioned LambdaFunctionRecommendationFindingReasonCodeEnum = "MemoryOverprovisioned"
+LambdaFunctionRecommendationFindingReasonCodeEnumMemoryUnderprovisioned LambdaFunctionRecommendationFindingReasonCodeEnum = "MemoryUnderprovisioned"
+LambdaFunctionRecommendationFindingReasonCodeEnumInsufficientData LambdaFunctionRecommendationFindingReasonCodeEnum = "InsufficientData"
+LambdaFunctionRecommendationFindingReasonCodeEnumInconclusive LambdaFunctionRecommendationFindingReasonCodeEnum = "Inconclusive"
 )
+
+

@@ -68,7 +68,10 @@ func (s *SDK) CreateImagesFromData(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -132,6 +135,8 @@ func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjec
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -193,6 +198,8 @@ func (s *SDK) CreateTag(ctx context.Context, request operations.CreateTagRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -256,6 +263,8 @@ func (s *SDK) DeleteImageRegions(ctx context.Context, request operations.DeleteI
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -287,6 +296,8 @@ func (s *SDK) DeleteImageTags(ctx context.Context, request operations.DeleteImag
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -320,6 +331,8 @@ func (s *SDK) DeleteImages(ctx context.Context, request operations.DeleteImagesR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -352,6 +365,8 @@ func (s *SDK) DeleteIteration(ctx context.Context, request operations.DeleteIter
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -381,6 +396,8 @@ func (s *SDK) DeletePrediction(ctx context.Context, request operations.DeletePre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -414,6 +431,8 @@ func (s *SDK) DeleteProject(ctx context.Context, request operations.DeleteProjec
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -444,6 +463,8 @@ func (s *SDK) DeleteTag(ctx context.Context, request operations.DeleteTagRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -473,6 +494,8 @@ func (s *SDK) ExportIteration(ctx context.Context, request operations.ExportIter
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -536,6 +559,8 @@ func (s *SDK) GetDomain(ctx context.Context, request operations.GetDomainRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -595,6 +620,8 @@ func (s *SDK) GetDomains(ctx context.Context, request operations.GetDomainsReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -656,6 +683,8 @@ func (s *SDK) GetExports(ctx context.Context, request operations.GetExportsReque
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -715,6 +744,8 @@ func (s *SDK) GetImagePerformanceCount(ctx context.Context, request operations.G
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -778,6 +809,8 @@ func (s *SDK) GetImagePerformances(ctx context.Context, request operations.GetIm
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -840,6 +873,8 @@ func (s *SDK) GetImageRegionProposals(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -885,6 +920,8 @@ func (s *SDK) GetImagesByIds(ctx context.Context, request operations.GetImagesBy
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -948,6 +985,8 @@ func (s *SDK) GetIteration(ctx context.Context, request operations.GetIterationR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1007,6 +1046,8 @@ func (s *SDK) GetIterationPerformance(ctx context.Context, request operations.Ge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1070,6 +1111,8 @@ func (s *SDK) GetIterations(ctx context.Context, request operations.GetIteration
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1129,6 +1172,8 @@ func (s *SDK) GetProject(ctx context.Context, request operations.GetProjectReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1190,6 +1235,8 @@ func (s *SDK) GetProjects(ctx context.Context, request operations.GetProjectsReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -1249,6 +1296,8 @@ func (s *SDK) GetTag(ctx context.Context, request operations.GetTagRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1312,6 +1361,8 @@ func (s *SDK) GetTaggedImageCount(ctx context.Context, request operations.GetTag
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -1373,6 +1424,8 @@ func (s *SDK) GetTaggedImages(ctx context.Context, request operations.GetTaggedI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1436,6 +1489,8 @@ func (s *SDK) GetTags(ctx context.Context, request operations.GetTagsRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -1498,6 +1553,8 @@ func (s *SDK) GetUntaggedImageCount(ctx context.Context, request operations.GetU
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -1559,6 +1616,8 @@ func (s *SDK) GetUntaggedImages(ctx context.Context, request operations.GetUntag
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1629,7 +1688,10 @@ func (s *SDK) QuickTestImage(ctx context.Context, request operations.QuickTestIm
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1700,7 +1762,10 @@ func (s *SDK) QuickTestImageURL(ctx context.Context, request operations.QuickTes
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1763,6 +1828,8 @@ func (s *SDK) TrainProject(ctx context.Context, request operations.TrainProjectR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1831,7 +1898,10 @@ func (s *SDK) UpdateIteration(ctx context.Context, request operations.UpdateIter
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1900,7 +1970,10 @@ func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjec
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1969,7 +2042,10 @@ func (s *SDK) UpdateTag(ctx context.Context, request operations.UpdateTagRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 

@@ -15,7 +15,7 @@ class DownloadFileViaTokenQueryParams:
 
 @dataclass
 class DownloadFileViaTokenHeaders:
-    range: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Range' }})
+    range: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Range', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

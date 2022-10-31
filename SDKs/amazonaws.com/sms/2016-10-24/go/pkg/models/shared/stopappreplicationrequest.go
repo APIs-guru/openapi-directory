@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StopAppReplicationRequest struct {
-	AppID *string `json:"appId,omitempty"`
+    AppID *string `json:"appId,omitempty"`
+    
 }
+

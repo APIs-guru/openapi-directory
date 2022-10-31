@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListAlertsResponse struct {
-	AlertSummaryList []AlertSummary `json:"AlertSummaryList,omitempty"`
-	NextToken        *string        `json:"NextToken,omitempty"`
+    AlertSummaryList []AlertSummary `json:"AlertSummaryList,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    
 }
+

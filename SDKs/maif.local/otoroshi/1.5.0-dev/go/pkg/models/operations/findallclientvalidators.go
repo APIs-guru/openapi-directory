@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type FindAllClientValidatorsSecurity struct {
-	OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
+    OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type FindAllClientValidatorsRequest struct {
-	Security FindAllClientValidatorsSecurity
+    Security FindAllClientValidatorsSecurity 
+    
 }
 
 type FindAllClientValidatorsResponse struct {
-	ContentType           string
-	StatusCode            int64
-	ValidationAuthorities []shared.ValidationAuthority
+    ContentType string 
+    StatusCode int64 
+    ValidationAuthorities []shared.ValidationAuthority 
+    
 }
+

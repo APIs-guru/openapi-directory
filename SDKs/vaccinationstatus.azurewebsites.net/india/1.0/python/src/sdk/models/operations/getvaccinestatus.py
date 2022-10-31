@@ -5,10 +5,10 @@ from sdk.models import shared
 
 @dataclass
 class GetVaccineStatusHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept' }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
-    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type' }})
-    cowin_api_key: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'cowinApiKey' }})
+    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
+    cowin_api_key: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'cowinApiKey', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

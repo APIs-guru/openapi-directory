@@ -1,40 +1,51 @@
 package operations
 
+
+
+
 type PostDeleteCacheClusterActionEnum string
 
 const (
-	PostDeleteCacheClusterActionEnumDeleteCacheCluster PostDeleteCacheClusterActionEnum = "DeleteCacheCluster"
+    PostDeleteCacheClusterActionEnumDeleteCacheCluster PostDeleteCacheClusterActionEnum = "DeleteCacheCluster"
 )
+
+
 
 type PostDeleteCacheClusterVersionEnum string
 
 const (
-	PostDeleteCacheClusterVersionEnumTwoThousandAndFifteen0202 PostDeleteCacheClusterVersionEnum = "2015-02-02"
+    PostDeleteCacheClusterVersionEnumTwoThousandAndFifteen0202 PostDeleteCacheClusterVersionEnum = "2015-02-02"
 )
 
+
 type PostDeleteCacheClusterQueryParams struct {
-	Action  PostDeleteCacheClusterActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	Version PostDeleteCacheClusterVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action PostDeleteCacheClusterActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    Version PostDeleteCacheClusterVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type PostDeleteCacheClusterHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type PostDeleteCacheClusterRequest struct {
-	QueryParams PostDeleteCacheClusterQueryParams
-	Headers     PostDeleteCacheClusterHeaders
-	Request     []byte `request:"mediaType=text/xml"`
+    QueryParams PostDeleteCacheClusterQueryParams 
+    Headers PostDeleteCacheClusterHeaders 
+    Request []byte `request:"mediaType=text/xml"`
+    
 }
 
 type PostDeleteCacheClusterResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

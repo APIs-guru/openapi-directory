@@ -5,7 +5,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass
 class PutBenefitsDocumentUploadHeaders:
-    content_md5: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-MD5' }})
+    content_md5: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-MD5', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

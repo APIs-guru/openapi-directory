@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PluginDescription struct {
-	CustomPlugin *CustomPluginDescription `json:"customPlugin,omitempty"`
+    CustomPlugin *CustomPluginDescription `json:"customPlugin,omitempty"`
+    
 }
+

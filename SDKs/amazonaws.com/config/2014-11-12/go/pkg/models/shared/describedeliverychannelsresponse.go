@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeDeliveryChannelsResponse struct {
-	DeliveryChannels []DeliveryChannel `json:"DeliveryChannels,omitempty"`
+    DeliveryChannels []DeliveryChannel `json:"DeliveryChannels,omitempty"`
+    
 }
+

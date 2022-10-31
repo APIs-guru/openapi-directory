@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Embedded struct {
-	Applications []Application `json:"applications,omitempty"`
+    Applications []Application `json:"applications,omitempty"`
+    
 }
+

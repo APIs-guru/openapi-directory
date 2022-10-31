@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetRecipeReviewReviewIDPathParams struct {
-	ReviewID string `pathParam:"style=simple,explode=false,name=reviewId"`
+    ReviewID string `pathParam:"style=simple,explode=false,name=reviewId"`
+    
 }
 
 type GetRecipeReviewReviewIDRequest struct {
-	PathParams GetRecipeReviewReviewIDPathParams
+    PathParams GetRecipeReviewReviewIDPathParams 
+    
 }
 
 type GetRecipeReviewReviewIDResponse struct {
-	BigOvenModelAPIReview *shared.BigOvenModelAPIReview
-	Body                  []byte
-	ContentType           string
-	StatusCode            int64
+    BigOvenModelAPIReview *shared.BigOvenModelAPIReview 
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

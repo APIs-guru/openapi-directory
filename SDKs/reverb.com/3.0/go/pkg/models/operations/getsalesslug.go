@@ -1,14 +1,20 @@
 package operations
 
+
+
 type GetSalesSlugPathParams struct {
-	Slug string `pathParam:"style=simple,explode=false,name=slug"`
+    Slug string `pathParam:"style=simple,explode=false,name=slug"`
+    
 }
 
 type GetSalesSlugRequest struct {
-	PathParams GetSalesSlugPathParams
+    PathParams GetSalesSlugPathParams 
+    
 }
 
 type GetSalesSlugResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,7 +1,11 @@
 package shared
 
+
+
 type GoogleCloudVisionV1p2beta1InputConfig struct {
-	Content   *string                              `json:"content,omitempty"`
-	GcsSource *GoogleCloudVisionV1p2beta1GcsSource `json:"gcsSource,omitempty"`
-	MimeType  *string                              `json:"mimeType,omitempty"`
+    Content *string `json:"content,omitempty"`
+    GcsSource *GoogleCloudVisionV1p2beta1GcsSource `json:"gcsSource,omitempty"`
+    MimeType *string `json:"mimeType,omitempty"`
+    
 }
+

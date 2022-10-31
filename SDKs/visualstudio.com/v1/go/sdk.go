@@ -3349,6 +3349,7 @@ func (s *SDK) PatchAPIV1EnvironmentsEnvironmentID(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3528,6 +3529,7 @@ func (s *SDK) PatchAPIV1EnvironmentsEnvironmentIDFolder(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3785,6 +3787,7 @@ func (s *SDK) PatchAPIV1TenantTenantIDPoolGroupPoolGroupName(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3895,6 +3898,7 @@ func (s *SDK) PatchAPIV1TenantTenantIDPoolPoolName(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4028,6 +4032,7 @@ func (s *SDK) PostAPIV1AgentTelemetry(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4088,6 +4093,7 @@ func (s *SDK) PostAPIV1Environments(ctx context.Context, request operations.Post
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -4870,6 +4876,7 @@ func (s *SDK) PostAPIV1GenevaActionsBillingEnvironmentIDStateChanges(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4956,6 +4963,7 @@ func (s *SDK) PostAPIV1GenevaActionsConfigurationTarget(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5042,6 +5050,7 @@ func (s *SDK) PostAPIV1GenevaActionsPrivacyRefreshProfileTelemetryProperties(ctx
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5125,6 +5134,7 @@ func (s *SDK) PostAPIV1HeartBeat(ctx context.Context, request operations.PostAPI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5185,6 +5195,7 @@ func (s *SDK) PostAPIV1PrebuildsPoolsPoolIDInstances(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5269,6 +5280,7 @@ func (s *SDK) PostAPIV1PrebuildsTemplates(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5376,6 +5388,7 @@ func (s *SDK) PostAPIV1Secrets(ctx context.Context, request operations.PostAPIV1
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -5485,6 +5498,7 @@ func (s *SDK) PostAPIV1SubscriptionsSubscriptionIDProvidersProviderNamespaceReso
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5739,6 +5753,7 @@ func (s *SDK) PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupPro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5805,7 +5820,10 @@ func (s *SDK) PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupPro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -5841,6 +5859,7 @@ func (s *SDK) PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupPro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5877,6 +5896,7 @@ func (s *SDK) PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupPro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5945,6 +5965,7 @@ func (s *SDK) PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupPro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6013,6 +6034,7 @@ func (s *SDK) PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupPro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6289,6 +6311,7 @@ func (s *SDK) PutAPIV1EnvironmentsEnvironmentIDPortsPort(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6575,6 +6598,7 @@ func (s *SDK) PutAPIV1PrebuildsPoolsPoolIDInstances(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6659,6 +6683,7 @@ func (s *SDK) PutAPIV1SecretsSecretID(ctx context.Context, request operations.Pu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -6768,6 +6793,7 @@ func (s *SDK) PutAPIV1SubscriptionsSubscriptionIDProvidersProviderNamespaceResou
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6804,7 +6830,10 @@ func (s *SDK) PutAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupProv
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6920,6 +6949,7 @@ func (s *SDK) PutAPIV1TenantTenantIDPoolGroupPoolGroupName(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7006,6 +7036,7 @@ func (s *SDK) PutAPIV1TenantTenantIDPoolPoolName(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7139,6 +7170,7 @@ func (s *SDK) PutAPIV1TenantTenantIDPoolPoolNameVMVMName(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7272,6 +7304,7 @@ func (s *SDK) UpdateEnvironmentRoute(ctx context.Context, request operations.Upd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

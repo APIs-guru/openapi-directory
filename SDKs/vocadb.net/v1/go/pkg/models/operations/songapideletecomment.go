@@ -1,14 +1,20 @@
 package operations
 
+
+
 type SongAPIDeleteCommentPathParams struct {
-	CommentID int32 `pathParam:"style=simple,explode=false,name=commentId"`
+    CommentID int32 `pathParam:"style=simple,explode=false,name=commentId"`
+    
 }
 
 type SongAPIDeleteCommentRequest struct {
-	PathParams SongAPIDeleteCommentPathParams
+    PathParams SongAPIDeleteCommentPathParams 
+    
 }
 
 type SongAPIDeleteCommentResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

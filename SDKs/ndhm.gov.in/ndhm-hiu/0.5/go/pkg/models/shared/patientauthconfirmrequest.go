@@ -1,17 +1,19 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type PatientAuthConfirmRequestCredential struct {
-	AuthCode    *string             `json:"authCode,omitempty"`
-	Demographic *PatientDemographic `json:"demographic,omitempty"`
+    AuthCode *string `json:"authCode,omitempty"`
+    Demographic *PatientDemographic `json:"demographic,omitempty"`
+    
 }
 
 type PatientAuthConfirmRequest struct {
-	Credential    PatientAuthConfirmRequestCredential `json:"credential"`
-	RequestID     string                              `json:"requestId"`
-	Timestamp     time.Time                           `json:"timestamp"`
-	TransactionID string                              `json:"transactionId"`
+    Credential PatientAuthConfirmRequestCredential `json:"credential"`
+    RequestID string `json:"requestId"`
+    Timestamp time.Time `json:"timestamp"`
+    TransactionID string `json:"transactionId"`
+    
 }
+

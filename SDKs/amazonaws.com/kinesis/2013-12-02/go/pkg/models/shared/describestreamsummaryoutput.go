@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeStreamSummaryOutput struct {
-	StreamDescriptionSummary StreamDescriptionSummary `json:"StreamDescriptionSummary"`
+    StreamDescriptionSummary StreamDescriptionSummary `json:"StreamDescriptionSummary"`
+    
 }
+

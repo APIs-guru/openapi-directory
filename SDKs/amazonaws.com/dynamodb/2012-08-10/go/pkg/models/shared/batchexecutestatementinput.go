@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchExecuteStatementInput struct {
-	Statements []BatchStatementRequest `json:"Statements"`
+    Statements []BatchStatementRequest `json:"Statements"`
+    
 }
+

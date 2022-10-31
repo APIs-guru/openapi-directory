@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetFilesByIDOrURLQueryParams struct {
-	FileIDOrURL string `queryParam:"style=form,explode=true,name=fileIdOrUrl"`
+    FileIDOrURL string `queryParam:"style=form,explode=true,name=fileIdOrUrl"`
+    
 }
 
 type GetFilesByIDOrURLRequest struct {
-	QueryParams GetFilesByIDOrURLQueryParams
+    QueryParams GetFilesByIDOrURLQueryParams 
+    
 }
 
 type GetFilesByIDOrURLResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

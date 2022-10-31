@@ -1,27 +1,31 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetBuildProjectRepositoryArchPackageBuildinfoPathParams struct {
-	ArchitectureName string `pathParam:"style=simple,explode=false,name=architecture_name"`
-	PackageName      string `pathParam:"style=simple,explode=false,name=package_name"`
-	ProjectName      string `pathParam:"style=simple,explode=false,name=project_name"`
-	RepositoryName   string `pathParam:"style=simple,explode=false,name=repository_name"`
+    ArchitectureName string `pathParam:"style=simple,explode=false,name=architecture_name"`
+    PackageName string `pathParam:"style=simple,explode=false,name=package_name"`
+    ProjectName string `pathParam:"style=simple,explode=false,name=project_name"`
+    RepositoryName string `pathParam:"style=simple,explode=false,name=repository_name"`
+    
 }
 
 type GetBuildProjectRepositoryArchPackageBuildinfoSecurity struct {
-	BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
+    BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type GetBuildProjectRepositoryArchPackageBuildinfoRequest struct {
-	PathParams GetBuildProjectRepositoryArchPackageBuildinfoPathParams
-	Security   GetBuildProjectRepositoryArchPackageBuildinfoSecurity
+    PathParams GetBuildProjectRepositoryArchPackageBuildinfoPathParams 
+    Security GetBuildProjectRepositoryArchPackageBuildinfoSecurity 
+    
 }
 
 type GetBuildProjectRepositoryArchPackageBuildinfoResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

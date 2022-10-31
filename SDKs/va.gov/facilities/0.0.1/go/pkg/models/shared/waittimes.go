@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type WaitTimes struct {
-	EffectiveDate *time.Time        `json:"effective_date,omitempty"`
-	Health        []PatientWaitTime `json:"health,omitempty"`
+    EffectiveDate *time.Time `json:"effective_date,omitempty"`
+    Health []PatientWaitTime `json:"health,omitempty"`
+    
 }
+

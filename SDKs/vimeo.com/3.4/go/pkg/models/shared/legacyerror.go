@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LegacyError struct {
-	Error string `json:"error"`
+    Error string `json:"error"`
+    
 }
+

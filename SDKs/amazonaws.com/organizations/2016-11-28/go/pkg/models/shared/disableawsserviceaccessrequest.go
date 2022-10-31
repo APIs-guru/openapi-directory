@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DisableAwsServiceAccessRequest struct {
-	ServicePrincipal string `json:"ServicePrincipal"`
+    ServicePrincipal string `json:"ServicePrincipal"`
+    
 }
+

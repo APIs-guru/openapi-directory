@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CompanyDomainInputModel struct {
-	Domain *string `json:"domain,omitempty"`
+    Domain *string `json:"domain,omitempty"`
+    
 }
+

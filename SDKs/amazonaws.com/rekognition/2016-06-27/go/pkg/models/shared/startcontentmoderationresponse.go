@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StartContentModerationResponse struct {
-	JobID *string `json:"JobId,omitempty"`
+    JobID *string `json:"JobId,omitempty"`
+    
 }
+

@@ -14,17 +14,17 @@ class RecognizeUtterancePathParams:
 
 @dataclass
 class RecognizeUtteranceHeaders:
-    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type' }})
-    response_content_type: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Response-Content-Type' }})
-    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
-    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
-    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
-    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
-    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
-    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
-    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
-    x_amz_lex_request_attributes: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-amz-lex-request-attributes' }})
-    x_amz_lex_session_state: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-amz-lex-session-state' }})
+    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
+    response_content_type: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Response-Content-Type', 'style': 'simple', 'explode': False }})
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date', 'style': 'simple', 'explode': False }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
+    x_amz_lex_request_attributes: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-amz-lex-request-attributes', 'style': 'simple', 'explode': False }})
+    x_amz_lex_session_state: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-amz-lex-session-state', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json

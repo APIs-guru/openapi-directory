@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetComplianceDetailResponse struct {
-	PolicyComplianceDetail *PolicyComplianceDetail `json:"PolicyComplianceDetail,omitempty"`
+    PolicyComplianceDetail *PolicyComplianceDetail `json:"PolicyComplianceDetail,omitempty"`
+    
 }
+

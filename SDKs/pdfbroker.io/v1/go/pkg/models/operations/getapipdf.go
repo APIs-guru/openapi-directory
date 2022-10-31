@@ -1,11 +1,12 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAPIPdfResponse struct {
-	ContentType      string
-	ErrorResponseDto *shared.ErrorResponseDto
-	StatusCode       int64
+    ContentType string 
+    ErrorResponseDto *shared.ErrorResponseDto 
+    StatusCode int64 
+    
 }
+

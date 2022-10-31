@@ -1,6 +1,10 @@
 package shared
 
+
+
 type Account struct {
-	AccountID    string `json:"AccountId"`
-	EmailAddress string `json:"EmailAddress"`
+    AccountID string `json:"AccountId"`
+    EmailAddress string `json:"EmailAddress"`
+    
 }
+

@@ -1,14 +1,20 @@
 package operations
 
+
+
 type GetCookiesSetQueryParams struct {
-	Freeform *string `queryParam:"style=form,explode=true,name=freeform"`
+    Freeform *string `queryParam:"style=form,explode=true,name=freeform"`
+    
 }
 
 type GetCookiesSetRequest struct {
-	QueryParams GetCookiesSetQueryParams
+    QueryParams GetCookiesSetQueryParams 
+    
 }
 
 type GetCookiesSetResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

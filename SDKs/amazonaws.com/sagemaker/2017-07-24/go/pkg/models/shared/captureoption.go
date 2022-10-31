@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CaptureOption struct {
-	CaptureMode CaptureModeEnum `json:"CaptureMode"`
+    CaptureMode CaptureModeEnum `json:"CaptureMode"`
+    
 }
+

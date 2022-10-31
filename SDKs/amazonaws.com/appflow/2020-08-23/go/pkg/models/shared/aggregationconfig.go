@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AggregationConfig struct {
-	AggregationType *AggregationTypeEnum `json:"aggregationType,omitempty"`
+    AggregationType *AggregationTypeEnum `json:"aggregationType,omitempty"`
+    
 }
+

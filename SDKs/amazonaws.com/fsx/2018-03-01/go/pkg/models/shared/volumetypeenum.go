@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type VolumeTypeEnum string
 
 const (
-	VolumeTypeEnumOntap VolumeTypeEnum = "ONTAP"
+    VolumeTypeEnumOntap VolumeTypeEnum = "ONTAP"
 )
+
+

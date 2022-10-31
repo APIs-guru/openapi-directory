@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchRequest struct {
-	Actions []BatchRequestAction `json:"actions,omitempty"`
+    Actions []BatchRequestAction `json:"actions,omitempty"`
+    
 }
+

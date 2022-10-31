@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ZeppelinMonitoringConfigurationUpdate struct {
-	LogLevelUpdate LogLevelEnum `json:"LogLevelUpdate"`
+    LogLevelUpdate LogLevelEnum `json:"LogLevelUpdate"`
+    
 }
+

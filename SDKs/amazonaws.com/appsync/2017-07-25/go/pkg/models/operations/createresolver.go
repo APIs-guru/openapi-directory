@@ -1,69 +1,79 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type CreateResolverPathParams struct {
-	APIID    string `pathParam:"style=simple,explode=false,name=apiId"`
-	TypeName string `pathParam:"style=simple,explode=false,name=typeName"`
+    APIID string `pathParam:"style=simple,explode=false,name=apiId"`
+    TypeName string `pathParam:"style=simple,explode=false,name=typeName"`
+    
 }
 
 type CreateResolverHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type CreateResolverRequestBodyCachingConfig struct {
-	CachingKeys []string `json:"cachingKeys,omitempty"`
-	TTL         *int64   `json:"ttl,omitempty"`
+    CachingKeys []string `json:"cachingKeys,omitempty"`
+    TTL *int64 `json:"ttl,omitempty"`
+    
 }
+
 
 type CreateResolverRequestBodyKindEnum string
 
 const (
-	CreateResolverRequestBodyKindEnumUnit     CreateResolverRequestBodyKindEnum = "UNIT"
-	CreateResolverRequestBodyKindEnumPipeline CreateResolverRequestBodyKindEnum = "PIPELINE"
+    CreateResolverRequestBodyKindEnumUnit CreateResolverRequestBodyKindEnum = "UNIT"
+CreateResolverRequestBodyKindEnumPipeline CreateResolverRequestBodyKindEnum = "PIPELINE"
 )
 
+
 type CreateResolverRequestBodyPipelineConfig struct {
-	Functions []string `json:"functions,omitempty"`
+    Functions []string `json:"functions,omitempty"`
+    
 }
 
 type CreateResolverRequestBodySyncConfig struct {
-	ConflictDetection           *shared.ConflictDetectionTypeEnum   `json:"conflictDetection,omitempty"`
-	ConflictHandler             *shared.ConflictHandlerTypeEnum     `json:"conflictHandler,omitempty"`
-	LambdaConflictHandlerConfig *shared.LambdaConflictHandlerConfig `json:"lambdaConflictHandlerConfig,omitempty"`
+    ConflictDetection *shared.ConflictDetectionTypeEnum `json:"conflictDetection,omitempty"`
+    ConflictHandler *shared.ConflictHandlerTypeEnum `json:"conflictHandler,omitempty"`
+    LambdaConflictHandlerConfig *shared.LambdaConflictHandlerConfig `json:"lambdaConflictHandlerConfig,omitempty"`
+    
 }
 
 type CreateResolverRequestBody struct {
-	CachingConfig           *CreateResolverRequestBodyCachingConfig  `json:"cachingConfig,omitempty"`
-	DataSourceName          *string                                  `json:"dataSourceName,omitempty"`
-	FieldName               string                                   `json:"fieldName"`
-	Kind                    *CreateResolverRequestBodyKindEnum       `json:"kind,omitempty"`
-	PipelineConfig          *CreateResolverRequestBodyPipelineConfig `json:"pipelineConfig,omitempty"`
-	RequestMappingTemplate  *string                                  `json:"requestMappingTemplate,omitempty"`
-	ResponseMappingTemplate *string                                  `json:"responseMappingTemplate,omitempty"`
-	SyncConfig              *CreateResolverRequestBodySyncConfig     `json:"syncConfig,omitempty"`
+    CachingConfig *CreateResolverRequestBodyCachingConfig `json:"cachingConfig,omitempty"`
+    DataSourceName *string `json:"dataSourceName,omitempty"`
+    FieldName string `json:"fieldName"`
+    Kind *CreateResolverRequestBodyKindEnum `json:"kind,omitempty"`
+    PipelineConfig *CreateResolverRequestBodyPipelineConfig `json:"pipelineConfig,omitempty"`
+    RequestMappingTemplate *string `json:"requestMappingTemplate,omitempty"`
+    ResponseMappingTemplate *string `json:"responseMappingTemplate,omitempty"`
+    SyncConfig *CreateResolverRequestBodySyncConfig `json:"syncConfig,omitempty"`
+    
 }
 
 type CreateResolverRequest struct {
-	PathParams CreateResolverPathParams
-	Headers    CreateResolverHeaders
-	Request    CreateResolverRequestBody `request:"mediaType=application/json"`
+    PathParams CreateResolverPathParams 
+    Headers CreateResolverHeaders 
+    Request CreateResolverRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type CreateResolverResponse struct {
-	ConcurrentModificationException *interface{}
-	ContentType                     string
-	CreateResolverResponse          *shared.CreateResolverResponse
-	InternalFailureException        *interface{}
-	NotFoundException               *interface{}
-	StatusCode                      int64
-	UnauthorizedException           *interface{}
+    ConcurrentModificationException *interface{} 
+    ContentType string 
+    CreateResolverResponse *shared.CreateResolverResponse 
+    InternalFailureException *interface{} 
+    NotFoundException *interface{} 
+    StatusCode int64 
+    UnauthorizedException *interface{} 
+    
 }
+

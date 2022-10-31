@@ -1,6 +1,10 @@
 package shared
 
+
+
 type RegexPatternSetSummary struct {
-	Name              string `json:"Name"`
-	RegexPatternSetID string `json:"RegexPatternSetId"`
+    Name string `json:"Name"`
+    RegexPatternSetID string `json:"RegexPatternSetId"`
+    
 }
+

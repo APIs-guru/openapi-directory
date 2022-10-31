@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetEthereumBalanceRequest struct {
-	Ethereumaddress string `json:"ethereumaddress"`
+    Ethereumaddress string `json:"ethereumaddress"`
+    
 }
+

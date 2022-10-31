@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateControlPanelResponse struct {
-	ControlPanel *ControlPanel `json:"ControlPanel,omitempty"`
+    ControlPanel *ControlPanel `json:"ControlPanel,omitempty"`
+    
 }
+

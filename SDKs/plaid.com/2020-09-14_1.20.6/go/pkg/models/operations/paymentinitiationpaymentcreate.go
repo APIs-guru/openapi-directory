@@ -1,15 +1,17 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PaymentInitiationPaymentCreateRequest struct {
-	Request shared.PaymentInitiationPaymentCreateRequest `request:"mediaType=application/json"`
+    Request shared.PaymentInitiationPaymentCreateRequest `request:"mediaType=application/json"`
+    
 }
 
 type PaymentInitiationPaymentCreateResponse struct {
-	ContentType                            string
-	PaymentInitiationPaymentCreateResponse map[string]interface{}
-	StatusCode                             int64
+    ContentType string 
+    PaymentInitiationPaymentCreateResponse map[string]interface{} 
+    StatusCode int64 
+    
 }
+

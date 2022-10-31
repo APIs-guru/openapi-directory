@@ -1,14 +1,20 @@
 package operations
 
+
+
 type PostInventoryCaryyingCostHeaders struct {
-	Token *string `header:"name=Token"`
+    Token *string `header:"style=simple,explode=false,name=Token"`
+    
 }
 
 type PostInventoryCaryyingCostRequest struct {
-	Headers PostInventoryCaryyingCostHeaders
+    Headers PostInventoryCaryyingCostHeaders 
+    
 }
 
 type PostInventoryCaryyingCostResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

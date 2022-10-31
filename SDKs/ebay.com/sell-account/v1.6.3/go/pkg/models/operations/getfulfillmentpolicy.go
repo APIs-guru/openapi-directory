@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetFulfillmentPolicyPathParams struct {
-	FulfillmentPolicyID string `pathParam:"style=simple,explode=false,name=fulfillmentPolicyId"`
+    FulfillmentPolicyID string `pathParam:"style=simple,explode=false,name=fulfillmentPolicyId"`
+    
 }
 
 type GetFulfillmentPolicySecurity struct {
-	APIAuth shared.SchemeAPIAuth `security:"scheme,type=oauth2"`
+    APIAuth shared.SchemeAPIAuth `security:"scheme,type=oauth2"`
+    
 }
 
 type GetFulfillmentPolicyRequest struct {
-	PathParams GetFulfillmentPolicyPathParams
-	Security   GetFulfillmentPolicySecurity
+    PathParams GetFulfillmentPolicyPathParams 
+    Security GetFulfillmentPolicySecurity 
+    
 }
 
 type GetFulfillmentPolicyResponse struct {
-	ContentType       string
-	FulfillmentPolicy *shared.FulfillmentPolicy
-	StatusCode        int64
+    ContentType string 
+    FulfillmentPolicy *shared.FulfillmentPolicy 
+    StatusCode int64 
+    
 }
+

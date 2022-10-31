@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AdIds struct {
-	AdIds []string `json:"adIds,omitempty"`
+    AdIds []string `json:"adIds,omitempty"`
+    
 }
+

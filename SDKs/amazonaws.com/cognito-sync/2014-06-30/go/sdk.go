@@ -69,6 +69,8 @@ func (s *SDK) BulkPublish(ctx context.Context, request operations.BulkPublishReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -167,6 +169,8 @@ func (s *SDK) DeleteDataset(ctx context.Context, request operations.DeleteDatase
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -267,6 +271,8 @@ func (s *SDK) DescribeDataset(ctx context.Context, request operations.DescribeDa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -355,6 +361,8 @@ func (s *SDK) DescribeIdentityPoolUsage(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -445,6 +453,8 @@ func (s *SDK) DescribeIdentityUsage(ctx context.Context, request operations.Desc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -534,6 +544,8 @@ func (s *SDK) GetBulkPublishDetails(ctx context.Context, request operations.GetB
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -612,6 +624,8 @@ func (s *SDK) GetCognitoEvents(ctx context.Context, request operations.GetCognit
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -702,6 +716,8 @@ func (s *SDK) GetIdentityPoolConfiguration(ctx context.Context, request operatio
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -791,6 +807,8 @@ func (s *SDK) ListDatasets(ctx context.Context, request operations.ListDatasetsR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -872,6 +890,8 @@ func (s *SDK) ListIdentityPoolUsage(ctx context.Context, request operations.List
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -952,6 +972,8 @@ func (s *SDK) ListRecords(ctx context.Context, request operations.ListRecordsReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -1041,7 +1063,10 @@ func (s *SDK) RegisterDevice(ctx context.Context, request operations.RegisterDev
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1149,7 +1174,10 @@ func (s *SDK) SetCognitoEvents(ctx context.Context, request operations.SetCognit
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1238,7 +1266,10 @@ func (s *SDK) SetIdentityPoolConfiguration(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1339,6 +1370,8 @@ func (s *SDK) SubscribeToDataset(ctx context.Context, request operations.Subscri
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -1437,6 +1470,8 @@ func (s *SDK) UnsubscribeFromDataset(ctx context.Context, request operations.Uns
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -1544,7 +1579,10 @@ func (s *SDK) UpdateRecords(ctx context.Context, request operations.UpdateRecord
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 

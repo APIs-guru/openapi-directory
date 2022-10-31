@@ -1,6 +1,10 @@
 package shared
 
+
+
 type Filter struct {
-	AttributePath  string `json:"AttributePath"`
-	AttributeValue string `json:"AttributeValue"`
+    AttributePath string `json:"AttributePath"`
+    AttributeValue string `json:"AttributeValue"`
+    
 }
+

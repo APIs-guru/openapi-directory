@@ -1,7 +1,11 @@
 package shared
 
+
+
 type ListCompaniesResponse struct {
-	Companies     []Company         `json:"companies,omitempty"`
-	Metadata      *ResponseMetadata `json:"metadata,omitempty"`
-	NextPageToken *string           `json:"nextPageToken,omitempty"`
+    Companies []Company `json:"companies,omitempty"`
+    Metadata *ResponseMetadata `json:"metadata,omitempty"`
+    NextPageToken *string `json:"nextPageToken,omitempty"`
+    
 }
+

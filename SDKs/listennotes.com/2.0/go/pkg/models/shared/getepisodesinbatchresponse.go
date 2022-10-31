@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetEpisodesInBatchResponse struct {
-	Episodes []EpisodeSimple `json:"episodes"`
+    Episodes []EpisodeSimple `json:"episodes"`
+    
 }
+

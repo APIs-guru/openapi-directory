@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeInferenceSchedulerRequest struct {
-	InferenceSchedulerName string `json:"InferenceSchedulerName"`
+    InferenceSchedulerName string `json:"InferenceSchedulerName"`
+    
 }
+

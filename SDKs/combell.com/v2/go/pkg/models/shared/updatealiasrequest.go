@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateAliasRequest struct {
-	Destinations []string `json:"destinations,omitempty"`
+    Destinations []string `json:"destinations,omitempty"`
+    
 }
+

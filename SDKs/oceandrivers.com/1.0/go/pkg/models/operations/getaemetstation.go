@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetAemetStationPathParams struct {
-	Period      string `pathParam:"style=simple,explode=false,name=period"`
-	StationName string `pathParam:"style=simple,explode=false,name=stationName"`
+    Period string `pathParam:"style=simple,explode=false,name=period"`
+    StationName string `pathParam:"style=simple,explode=false,name=stationName"`
+    
 }
 
 type GetAemetStationRequest struct {
-	PathParams GetAemetStationPathParams
+    PathParams GetAemetStationPathParams 
+    
 }
 
 type GetAemetStationResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

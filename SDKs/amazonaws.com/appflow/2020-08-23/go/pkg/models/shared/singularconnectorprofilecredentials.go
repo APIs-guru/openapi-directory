@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SingularConnectorProfileCredentials struct {
-	APIKey string `json:"apiKey"`
+    APIKey string `json:"apiKey"`
+    
 }
+

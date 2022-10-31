@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetJobManifestResult struct {
-	ManifestURI *string `json:"ManifestURI,omitempty"`
+    ManifestURI *string `json:"ManifestURI,omitempty"`
+    
 }
+

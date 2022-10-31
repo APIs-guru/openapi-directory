@@ -1,35 +1,40 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
+
 
 type UpdateActionTypeXAmzTargetEnum string
 
 const (
-	UpdateActionTypeXAmzTargetEnumCodePipeline20150709UpdateActionType UpdateActionTypeXAmzTargetEnum = "CodePipeline_20150709.UpdateActionType"
+    UpdateActionTypeXAmzTargetEnumCodePipeline20150709UpdateActionType UpdateActionTypeXAmzTargetEnum = "CodePipeline_20150709.UpdateActionType"
 )
 
+
 type UpdateActionTypeHeaders struct {
-	XAmzAlgorithm     *string                        `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string                        `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string                        `header:"name=X-Amz-Credential"`
-	XAmzDate          *string                        `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string                        `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string                        `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string                        `header:"name=X-Amz-SignedHeaders"`
-	XAmzTarget        UpdateActionTypeXAmzTargetEnum `header:"name=X-Amz-Target"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    XAmzTarget UpdateActionTypeXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
+    
 }
 
 type UpdateActionTypeRequest struct {
-	Headers UpdateActionTypeHeaders
-	Request shared.UpdateActionTypeInput `request:"mediaType=application/json"`
+    Headers UpdateActionTypeHeaders 
+    Request shared.UpdateActionTypeInput `request:"mediaType=application/json"`
+    
 }
 
 type UpdateActionTypeResponse struct {
-	ActionTypeNotFoundException *interface{}
-	ContentType                 string
-	RequestFailedException      *interface{}
-	StatusCode                  int64
-	ValidationException         *interface{}
+    ActionTypeNotFoundException *interface{} 
+    ContentType string 
+    RequestFailedException *interface{} 
+    StatusCode int64 
+    ValidationException *interface{} 
+    
 }
+

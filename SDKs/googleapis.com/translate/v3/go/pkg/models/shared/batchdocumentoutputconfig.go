@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchDocumentOutputConfig struct {
-	GcsDestination *GcsDestination `json:"gcsDestination,omitempty"`
+    GcsDestination *GcsDestination `json:"gcsDestination,omitempty"`
+    
 }
+

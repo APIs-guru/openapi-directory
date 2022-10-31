@@ -1,5 +1,9 @@
 package shared
 
+
+
 type FileAccessLog struct {
-	Path string `json:"path"`
+    Path string `json:"path"`
+    
 }
+

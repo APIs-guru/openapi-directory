@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LogDestination struct {
-	CloudWatchLogsLogGroup *CloudWatchLogsLogGroup `json:"cloudWatchLogsLogGroup,omitempty"`
+    CloudWatchLogsLogGroup *CloudWatchLogsLogGroup `json:"cloudWatchLogsLogGroup,omitempty"`
+    
 }
+

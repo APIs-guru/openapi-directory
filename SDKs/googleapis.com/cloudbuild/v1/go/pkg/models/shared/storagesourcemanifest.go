@@ -1,7 +1,11 @@
 package shared
 
+
+
 type StorageSourceManifest struct {
-	Bucket     *string `json:"bucket,omitempty"`
-	Generation *string `json:"generation,omitempty"`
-	Object     *string `json:"object,omitempty"`
+    Bucket *string `json:"bucket,omitempty"`
+    Generation *string `json:"generation,omitempty"`
+    Object *string `json:"object,omitempty"`
+    
 }
+

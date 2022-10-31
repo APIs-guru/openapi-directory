@@ -1,14 +1,20 @@
 package operations
 
+
+
 type DeleteWebhooksIDPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type DeleteWebhooksIDRequest struct {
-	PathParams DeleteWebhooksIDPathParams
+    PathParams DeleteWebhooksIDPathParams 
+    
 }
 
 type DeleteWebhooksIDResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

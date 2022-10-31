@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PathFilter struct {
-	Regexes []string `json:"regexes,omitempty"`
+    Regexes []string `json:"regexes,omitempty"`
+    
 }
+

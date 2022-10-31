@@ -1,16 +1,22 @@
 package operations
 
+
+
 type DeleteStripeGatewayUserUserIDCardsCardIDPathParams struct {
-	CardID string `pathParam:"style=simple,explode=false,name=cardId"`
-	UserID string `pathParam:"style=simple,explode=false,name=userId"`
+    CardID string `pathParam:"style=simple,explode=false,name=cardId"`
+    UserID string `pathParam:"style=simple,explode=false,name=userId"`
+    
 }
 
 type DeleteStripeGatewayUserUserIDCardsCardIDRequest struct {
-	PathParams DeleteStripeGatewayUserUserIDCardsCardIDPathParams
+    PathParams DeleteStripeGatewayUserUserIDCardsCardIDPathParams 
+    
 }
 
 type DeleteStripeGatewayUserUserIDCardsCardIDResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

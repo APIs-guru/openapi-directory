@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type GroupedQuestion struct {
-	DateTabled  *time.Time `json:"dateTabled,omitempty"`
-	QuestionUin *string    `json:"questionUin,omitempty"`
+    DateTabled *time.Time `json:"dateTabled,omitempty"`
+    QuestionUin *string `json:"questionUin,omitempty"`
+    
 }
+

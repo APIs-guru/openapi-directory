@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ProductEdit struct {
-	Product *ProductEditFields `json:"product,omitempty"`
+    Product *ProductEditFields `json:"product,omitempty"`
+    
 }
+

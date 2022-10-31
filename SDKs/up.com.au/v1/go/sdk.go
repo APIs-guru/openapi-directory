@@ -70,6 +70,7 @@ func (s *SDK) DeleteTransactionsTransactionIDRelationshipsTags(ctx context.Conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -628,6 +629,7 @@ func (s *SDK) PostTransactionsTransactionIDRelationshipsTags(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

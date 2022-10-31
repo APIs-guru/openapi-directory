@@ -1,30 +1,33 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var FetchTaskServers = []string{
 	"https://autopilot.twilio.com",
 }
 
 type FetchTaskPathParams struct {
-	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
-	Sid          string `pathParam:"style=simple,explode=false,name=Sid"`
+    AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
+    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    
 }
 
 type FetchTaskSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type FetchTaskRequest struct {
-	ServerURL  *string
-	PathParams FetchTaskPathParams
-	Security   FetchTaskSecurity
+    ServerURL *string 
+    PathParams FetchTaskPathParams 
+    Security FetchTaskSecurity 
+    
 }
 
 type FetchTaskResponse struct {
-	ContentType              string
-	StatusCode               int64
-	AutopilotV1AssistantTask *shared.AutopilotV1AssistantTask
+    ContentType string 
+    StatusCode int64 
+    AutopilotV1AssistantTask *shared.AutopilotV1AssistantTask 
+    
 }
+

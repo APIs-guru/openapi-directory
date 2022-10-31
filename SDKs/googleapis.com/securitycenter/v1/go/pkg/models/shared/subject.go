@@ -1,16 +1,22 @@
 package shared
 
+
+
+
 type SubjectKindEnum string
 
 const (
-	SubjectKindEnumAuthTypeUnspecified SubjectKindEnum = "AUTH_TYPE_UNSPECIFIED"
-	SubjectKindEnumUser                SubjectKindEnum = "USER"
-	SubjectKindEnumServiceaccount      SubjectKindEnum = "SERVICEACCOUNT"
-	SubjectKindEnumGroup               SubjectKindEnum = "GROUP"
+    SubjectKindEnumAuthTypeUnspecified SubjectKindEnum = "AUTH_TYPE_UNSPECIFIED"
+SubjectKindEnumUser SubjectKindEnum = "USER"
+SubjectKindEnumServiceaccount SubjectKindEnum = "SERVICEACCOUNT"
+SubjectKindEnumGroup SubjectKindEnum = "GROUP"
 )
 
+
 type Subject struct {
-	Kind *SubjectKindEnum `json:"kind,omitempty"`
-	Name *string          `json:"name,omitempty"`
-	Ns   *string          `json:"ns,omitempty"`
+    Kind *SubjectKindEnum `json:"kind,omitempty"`
+    Name *string `json:"name,omitempty"`
+    Ns *string `json:"ns,omitempty"`
+    
 }
+

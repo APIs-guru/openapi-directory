@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateNamedQueryOutput struct {
-	NamedQueryID *string `json:"NamedQueryId,omitempty"`
+    NamedQueryID *string `json:"NamedQueryId,omitempty"`
+    
 }
+

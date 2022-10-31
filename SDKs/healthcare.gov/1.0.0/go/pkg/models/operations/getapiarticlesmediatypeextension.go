@@ -1,21 +1,29 @@
 package operations
 
+
+
+
 type GetAPIArticlesMediaTypeExtensionMediaTypeExtensionEnum string
 
 const (
-	GetAPIArticlesMediaTypeExtensionMediaTypeExtensionEnumDotJSON GetAPIArticlesMediaTypeExtensionMediaTypeExtensionEnum = ".json"
+    GetAPIArticlesMediaTypeExtensionMediaTypeExtensionEnumDotJSON GetAPIArticlesMediaTypeExtensionMediaTypeExtensionEnum = ".json"
 )
 
+
 type GetAPIArticlesMediaTypeExtensionPathParams struct {
-	MediaTypeExtension GetAPIArticlesMediaTypeExtensionMediaTypeExtensionEnum `pathParam:"style=simple,explode=false,name=mediaTypeExtension"`
+    MediaTypeExtension GetAPIArticlesMediaTypeExtensionMediaTypeExtensionEnum `pathParam:"style=simple,explode=false,name=mediaTypeExtension"`
+    
 }
 
 type GetAPIArticlesMediaTypeExtensionRequest struct {
-	PathParams GetAPIArticlesMediaTypeExtensionPathParams
+    PathParams GetAPIArticlesMediaTypeExtensionPathParams 
+    
 }
 
 type GetAPIArticlesMediaTypeExtensionResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

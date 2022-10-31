@@ -15,7 +15,7 @@ class UpdateSyncSyncMapItemPathParams:
 
 @dataclass
 class UpdateSyncSyncMapItemHeaders:
-    if_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-Match' }})
+    if_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-Match', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

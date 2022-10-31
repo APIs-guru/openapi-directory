@@ -10,7 +10,7 @@ class GetListingViolationsSummaryQueryParams:
 
 @dataclass
 class GetListingViolationsSummaryHeaders:
-    x_ebay_c_marketplace_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID' }})
+    x_ebay_c_marketplace_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-EBAY-C-MARKETPLACE-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

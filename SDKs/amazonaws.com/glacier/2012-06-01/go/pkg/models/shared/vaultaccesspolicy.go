@@ -1,5 +1,9 @@
 package shared
 
+
+
 type VaultAccessPolicy struct {
-	Policy *string `json:"Policy,omitempty"`
+    Policy *string `json:"Policy,omitempty"`
+    
 }
+

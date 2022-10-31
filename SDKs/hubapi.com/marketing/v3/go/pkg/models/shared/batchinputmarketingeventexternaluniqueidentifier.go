@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchInputMarketingEventExternalUniqueIdentifier struct {
-	Inputs []MarketingEventExternalUniqueIdentifier `json:"inputs"`
+    Inputs []MarketingEventExternalUniqueIdentifier `json:"inputs"`
+    
 }
+

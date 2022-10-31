@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateInstancesFromSnapshotResult struct {
-	Operations []Operation `json:"operations,omitempty"`
+    Operations []Operation `json:"operations,omitempty"`
+    
 }
+

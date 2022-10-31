@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ProtectionGroupPatternTypeLimits struct {
-	ArbitraryPatternLimits ProtectionGroupArbitraryPatternLimits `json:"ArbitraryPatternLimits"`
+    ArbitraryPatternLimits ProtectionGroupArbitraryPatternLimits `json:"ArbitraryPatternLimits"`
+    
 }
+

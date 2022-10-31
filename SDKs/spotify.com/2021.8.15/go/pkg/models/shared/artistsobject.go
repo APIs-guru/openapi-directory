@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ArtistsObject struct {
-	Artists []ArtistObject `json:"artists,omitempty"`
+    Artists []ArtistObject `json:"artists,omitempty"`
+    
 }
+

@@ -1,11 +1,12 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type CompanySetupConfigGetCompanyOptionsResponse struct {
-	CompanyOptionDto *shared.CompanyOptionDto
-	ContentType      string
-	StatusCode       int64
+    CompanyOptionDto *shared.CompanyOptionDto 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

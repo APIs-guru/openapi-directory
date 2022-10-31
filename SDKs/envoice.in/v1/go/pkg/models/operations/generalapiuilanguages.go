@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GeneralAPIUILanguagesHeaders struct {
-	XAuthKey    string `header:"name=x-auth-key"`
-	XAuthSecret string `header:"name=x-auth-secret"`
+    XAuthKey string `header:"style=simple,explode=false,name=x-auth-key"`
+    XAuthSecret string `header:"style=simple,explode=false,name=x-auth-secret"`
+    
 }
 
 type GeneralAPIUILanguagesRequest struct {
-	Headers GeneralAPIUILanguagesHeaders
+    Headers GeneralAPIUILanguagesHeaders 
+    
 }
 
 type GeneralAPIUILanguagesResponse struct {
-	Body                       []byte
-	ContentType                string
-	StatusCode                 int64
-	UILanguageDetailsAPIModels []shared.UILanguageDetailsAPIModel
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    UILanguageDetailsAPIModels []shared.UILanguageDetailsAPIModel 
+    
 }
+

@@ -1,46 +1,51 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var ListTollfreeVerificationServers = []string{
 	"https://messaging.twilio.com",
 }
 
 type ListTollfreeVerificationQueryParams struct {
-	PageSize               *int64                                     `queryParam:"style=form,explode=true,name=PageSize"`
-	Status                 *shared.TollfreeVerificationEnumStatusEnum `queryParam:"style=form,explode=true,name=Status"`
-	TollfreePhoneNumberSid *string                                    `queryParam:"style=form,explode=true,name=TollfreePhoneNumberSid"`
+    PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
+    Status *shared.TollfreeVerificationEnumStatusEnum `queryParam:"style=form,explode=true,name=Status"`
+    TollfreePhoneNumberSid *string `queryParam:"style=form,explode=true,name=TollfreePhoneNumberSid"`
+    
 }
 
 type ListTollfreeVerificationSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type ListTollfreeVerificationRequest struct {
-	ServerURL   *string
-	QueryParams ListTollfreeVerificationQueryParams
-	Security    ListTollfreeVerificationSecurity
+    ServerURL *string 
+    QueryParams ListTollfreeVerificationQueryParams 
+    Security ListTollfreeVerificationSecurity 
+    
 }
 
 type ListTollfreeVerificationListTollfreeVerificationResponseMeta struct {
-	FirstPageURL    *string `json:"first_page_url,omitempty"`
-	Key             *string `json:"key,omitempty"`
-	NextPageURL     *string `json:"next_page_url,omitempty"`
-	Page            *int64  `json:"page,omitempty"`
-	PageSize        *int64  `json:"page_size,omitempty"`
-	PreviousPageURL *string `json:"previous_page_url,omitempty"`
-	URL             *string `json:"url,omitempty"`
+    FirstPageURL *string `json:"first_page_url,omitempty"`
+    Key *string `json:"key,omitempty"`
+    NextPageURL *string `json:"next_page_url,omitempty"`
+    Page *int64 `json:"page,omitempty"`
+    PageSize *int64 `json:"page_size,omitempty"`
+    PreviousPageURL *string `json:"previous_page_url,omitempty"`
+    URL *string `json:"url,omitempty"`
+    
 }
 
 type ListTollfreeVerificationListTollfreeVerificationResponse struct {
-	Meta          *ListTollfreeVerificationListTollfreeVerificationResponseMeta `json:"meta,omitempty"`
-	Verifications []shared.MessagingV1TollfreeVerification                      `json:"verifications,omitempty"`
+    Meta *ListTollfreeVerificationListTollfreeVerificationResponseMeta `json:"meta,omitempty"`
+    Verifications []shared.MessagingV1TollfreeVerification `json:"verifications,omitempty"`
+    
 }
 
 type ListTollfreeVerificationResponse struct {
-	ContentType                      string
-	ListTollfreeVerificationResponse *ListTollfreeVerificationListTollfreeVerificationResponse
-	StatusCode                       int64
+    ContentType string 
+    ListTollfreeVerificationResponse *ListTollfreeVerificationListTollfreeVerificationResponse 
+    StatusCode int64 
+    
 }
+

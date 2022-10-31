@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetSoftwareUpdatesResult struct {
-	UpdatesURI *string `json:"UpdatesURI,omitempty"`
+    UpdatesURI *string `json:"UpdatesURI,omitempty"`
+    
 }
+

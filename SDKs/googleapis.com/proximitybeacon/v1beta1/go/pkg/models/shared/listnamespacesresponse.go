@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ListNamespacesResponse struct {
-	Namespaces []Namespace `json:"namespaces,omitempty"`
+    Namespaces []Namespace `json:"namespaces,omitempty"`
+    
 }
+

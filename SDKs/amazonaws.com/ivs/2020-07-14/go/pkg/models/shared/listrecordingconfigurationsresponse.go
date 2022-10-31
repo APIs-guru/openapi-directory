@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListRecordingConfigurationsResponse struct {
-	NextToken               *string                         `json:"nextToken,omitempty"`
-	RecordingConfigurations []RecordingConfigurationSummary `json:"recordingConfigurations"`
+    NextToken *string `json:"nextToken,omitempty"`
+    RecordingConfigurations []RecordingConfigurationSummary `json:"recordingConfigurations"`
+    
 }
+

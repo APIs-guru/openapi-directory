@@ -1,8 +1,12 @@
 package shared
 
+
+
 type SandboxCard struct {
-	Info         *SandboxCardInfo     `json:"info,omitempty"`
-	Party        *SandboxParty        `json:"party,omitempty"`
-	Statements   []SandboxStatement   `json:"statements,omitempty"`
-	Transactions []SandboxTransaction `json:"transactions,omitempty"`
+    Info *SandboxCardInfo `json:"info,omitempty"`
+    Party *SandboxParty `json:"party,omitempty"`
+    Statements []SandboxStatement `json:"statements,omitempty"`
+    Transactions []SandboxTransaction `json:"transactions,omitempty"`
+    
 }
+

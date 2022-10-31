@@ -63,6 +63,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsAnnotationStoresAnnotationsCrea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -151,6 +152,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsAnnotationStoresCreate(ctx cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -198,6 +200,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsAnnotationStoresEvaluate(ctx co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -286,6 +289,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -374,6 +378,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsConsentStoresCheckDataAccess(ct
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -421,6 +426,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -509,6 +515,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsConsentStoresConsentsActivate(c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -556,6 +563,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsConsentStoresConsentsCreate(ctx
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -726,6 +734,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsConsentStoresConsentsReject(ctx
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -773,6 +782,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsConsentStoresConsentsRevoke(ctx
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -820,6 +830,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsConsentStoresCreate(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -867,6 +878,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -955,6 +967,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsConsentStoresQueryAccessibleDat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1002,6 +1015,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsAr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1049,6 +1063,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1137,6 +1152,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsCreate(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1184,6 +1200,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsDeidentify(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1231,6 +1248,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsDicomStoresCreate(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1401,6 +1419,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstance
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1448,6 +1467,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsFhirStoresConfigureSearch(ctx c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1495,6 +1515,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsFhirStoresCreate(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1542,6 +1563,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsFhirStoresDeidentify(ctx contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1794,6 +1816,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidate(
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1923,6 +1946,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalPatch(
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1970,6 +1994,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsFhirStoresFhirConditionalUpdate
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2017,6 +2042,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsFhirStoresFhirCreate(ctx contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2064,6 +2090,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsFhirStoresFhirExecuteBundle(ctx
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2152,6 +2179,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsFhirStoresFhirSearch(ctx contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2199,6 +2227,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsFhirStoresFhirSearchType(ctx co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2246,6 +2275,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdate(ctx contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2334,6 +2364,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsHl7V2StoresCreate(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2381,6 +2412,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsHl7V2StoresExport(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2469,6 +2501,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsHl7V2StoresImport(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2598,6 +2631,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesCreate(ctx c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2686,6 +2720,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngest(ctx c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2774,6 +2809,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatch(ctx co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2821,6 +2857,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsHl7V2StoresSetIamPolicy(ctx con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2868,6 +2905,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsHl7V2StoresTestIamPermissions(c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2956,6 +2994,7 @@ func (s *SDK) HealthcareProjectsLocationsDatasetsOperationsCancel(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -3126,6 +3165,7 @@ func (s *SDK) HealthcareProjectsLocationsServicesNlpAnalyzeEntities(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

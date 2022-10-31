@@ -1,23 +1,31 @@
 package shared
 
+
+
+
 type GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnum string
 
 const (
-	GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnumModelTrainingModeUnspecified GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnum = "MODEL_TRAINING_MODE_UNSPECIFIED"
-	GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnumModelTrainingModeAutomatic   GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnum = "MODEL_TRAINING_MODE_AUTOMATIC"
-	GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnumModelTrainingModeManual      GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnum = "MODEL_TRAINING_MODE_MANUAL"
+    GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnumModelTrainingModeUnspecified GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnum = "MODEL_TRAINING_MODE_UNSPECIFIED"
+GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnumModelTrainingModeAutomatic GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnum = "MODEL_TRAINING_MODE_AUTOMATIC"
+GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnumModelTrainingModeManual GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnum = "MODEL_TRAINING_MODE_MANUAL"
 )
+
+
 
 type GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnum string
 
 const (
-	GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnumModelTypeUnspecified GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnum = "MODEL_TYPE_UNSPECIFIED"
-	GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnumModelTypeStandard    GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnum = "MODEL_TYPE_STANDARD"
-	GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnumModelTypeAdvanced    GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnum = "MODEL_TYPE_ADVANCED"
+    GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnumModelTypeUnspecified GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnum = "MODEL_TYPE_UNSPECIFIED"
+GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnumModelTypeStandard GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnum = "MODEL_TYPE_STANDARD"
+GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnumModelTypeAdvanced GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnum = "MODEL_TYPE_ADVANCED"
 )
 
+
 type GoogleCloudDialogflowCxV3beta1NluSettings struct {
-	ClassificationThreshold *float32                                                        `json:"classificationThreshold,omitempty"`
-	ModelTrainingMode       *GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnum `json:"modelTrainingMode,omitempty"`
-	ModelType               *GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnum         `json:"modelType,omitempty"`
+    ClassificationThreshold *float32 `json:"classificationThreshold,omitempty"`
+    ModelTrainingMode *GoogleCloudDialogflowCxV3beta1NluSettingsModelTrainingModeEnum `json:"modelTrainingMode,omitempty"`
+    ModelType *GoogleCloudDialogflowCxV3beta1NluSettingsModelTypeEnum `json:"modelType,omitempty"`
+    
 }
+

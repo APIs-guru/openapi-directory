@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetRelationalDatabaseSnapshotRequest struct {
-	RelationalDatabaseSnapshotName string `json:"relationalDatabaseSnapshotName"`
+    RelationalDatabaseSnapshotName string `json:"relationalDatabaseSnapshotName"`
+    
 }
+

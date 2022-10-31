@@ -1,15 +1,21 @@
 package operations
 
+
+
 type ProtocolTelnetServerGetStatePathParams struct {
-	AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
+    AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
+    
 }
 
 type ProtocolTelnetServerGetStateRequest struct {
-	PathParams ProtocolTelnetServerGetStatePathParams
+    PathParams ProtocolTelnetServerGetStatePathParams 
+    
 }
 
 type ProtocolTelnetServerGetStateResponse struct {
-	ContentType                                                 string
-	StatusCode                                                  int64
-	ProtocolTelnetServerGetState200ApplicationJSONInt32Integers []int32
+    ContentType string 
+    StatusCode int64 
+    ProtocolTelnetServerGetState200ApplicationJSONInt32Integers []int32 
+    
 }
+

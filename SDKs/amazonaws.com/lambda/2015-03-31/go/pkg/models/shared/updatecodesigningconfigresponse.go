@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateCodeSigningConfigResponse struct {
-	CodeSigningConfig CodeSigningConfig `json:"CodeSigningConfig"`
+    CodeSigningConfig CodeSigningConfig `json:"CodeSigningConfig"`
+    
 }
+

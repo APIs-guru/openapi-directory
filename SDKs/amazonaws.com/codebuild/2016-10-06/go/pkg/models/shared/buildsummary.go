@@ -1,13 +1,14 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type BuildSummary struct {
-	Arn                *string            `json:"arn,omitempty"`
-	BuildStatus        *StatusTypeEnum    `json:"buildStatus,omitempty"`
-	PrimaryArtifact    *ResolvedArtifact  `json:"primaryArtifact,omitempty"`
-	RequestedOn        *time.Time         `json:"requestedOn,omitempty"`
-	SecondaryArtifacts []ResolvedArtifact `json:"secondaryArtifacts,omitempty"`
+    Arn *string `json:"arn,omitempty"`
+    BuildStatus *StatusTypeEnum `json:"buildStatus,omitempty"`
+    PrimaryArtifact *ResolvedArtifact `json:"primaryArtifact,omitempty"`
+    RequestedOn *time.Time `json:"requestedOn,omitempty"`
+    SecondaryArtifacts []ResolvedArtifact `json:"secondaryArtifacts,omitempty"`
+    
 }
+

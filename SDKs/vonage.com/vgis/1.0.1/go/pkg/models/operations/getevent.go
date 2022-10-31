@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetEventPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetEventRequest struct {
-	PathParams GetEventPathParams
+    PathParams GetEventPathParams 
+    
 }
 
 type GetEventResponse struct {
-	ContentType   string
-	ErrorResponse *shared.ErrorResponse
-	Events        []shared.Event
-	StatusCode    int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    Events []shared.Event 
+    StatusCode int64 
+    
 }
+

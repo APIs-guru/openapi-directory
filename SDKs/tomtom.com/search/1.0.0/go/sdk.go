@@ -630,6 +630,7 @@ func (s *SDK) PostSearchVersionNumberGeometryFilterExt(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -671,6 +672,7 @@ func (s *SDK) PostSearchVersionNumberGeometrySearchQueryExt(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -714,6 +716,7 @@ func (s *SDK) PostSearchVersionNumberRoutedFilterPositionHeadingExt(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -757,6 +760,7 @@ func (s *SDK) PostSearchVersionNumberSearchAlongRouteQueryExt(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

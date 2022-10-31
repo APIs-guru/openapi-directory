@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudIntegrationsV1alphaLinkAppsScriptProjectRequest struct {
-	ScriptID *string `json:"scriptId,omitempty"`
+    ScriptID *string `json:"scriptId,omitempty"`
+    
 }
+

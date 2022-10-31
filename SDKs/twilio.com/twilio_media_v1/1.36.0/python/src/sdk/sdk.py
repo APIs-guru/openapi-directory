@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def create_media_processor(self, request: operations.CreateMediaProcessorRequest) -> operations.CreateMediaProcessorResponse:
         warnings.simplefilter("ignore")
@@ -28,18 +30,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/MediaProcessors"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateMediaProcessorResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MediaV1MediaProcessor])
@@ -47,7 +51,6 @@ class SDK:
 
         return res
 
-    
     
     def create_player_streamer(self, request: operations.CreatePlayerStreamerRequest) -> operations.CreatePlayerStreamerResponse:
         warnings.simplefilter("ignore")
@@ -56,18 +59,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/PlayerStreamers"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePlayerStreamerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MediaV1PlayerStreamer])
@@ -75,7 +80,6 @@ class SDK:
 
         return res
 
-    
     
     def create_player_streamer_playback_grant(self, request: operations.CreatePlayerStreamerPlaybackGrantRequest) -> operations.CreatePlayerStreamerPlaybackGrantResponse:
         warnings.simplefilter("ignore")
@@ -84,18 +88,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/PlayerStreamers/{Sid}/PlaybackGrant", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePlayerStreamerPlaybackGrantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MediaV1PlayerStreamerPlayerStreamerPlaybackGrant])
@@ -104,7 +110,6 @@ class SDK:
         return res
 
     
-    
     def delete_media_recording(self, request: operations.DeleteMediaRecordingRequest) -> operations.DeleteMediaRecordingResponse:
         warnings.simplefilter("ignore")
 
@@ -112,20 +117,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/MediaRecordings/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteMediaRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def fetch_media_processor(self, request: operations.FetchMediaProcessorRequest) -> operations.FetchMediaProcessorResponse:
         warnings.simplefilter("ignore")
@@ -134,14 +138,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/MediaProcessors/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchMediaProcessorResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MediaV1MediaProcessor])
@@ -149,7 +153,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_media_recording(self, request: operations.FetchMediaRecordingRequest) -> operations.FetchMediaRecordingResponse:
         warnings.simplefilter("ignore")
@@ -158,14 +161,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/MediaRecordings/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchMediaRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MediaV1MediaRecording])
@@ -174,7 +177,6 @@ class SDK:
         return res
 
     
-    
     def fetch_player_streamer(self, request: operations.FetchPlayerStreamerRequest) -> operations.FetchPlayerStreamerResponse:
         warnings.simplefilter("ignore")
 
@@ -182,14 +184,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/PlayerStreamers/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchPlayerStreamerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MediaV1PlayerStreamer])
@@ -198,7 +200,6 @@ class SDK:
         return res
 
     
-    
     def fetch_player_streamer_playback_grant(self, request: operations.FetchPlayerStreamerPlaybackGrantRequest) -> operations.FetchPlayerStreamerPlaybackGrantResponse:
         warnings.simplefilter("ignore")
 
@@ -206,14 +207,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/PlayerStreamers/{Sid}/PlaybackGrant", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchPlayerStreamerPlaybackGrantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MediaV1PlayerStreamerPlayerStreamerPlaybackGrant])
@@ -222,7 +223,6 @@ class SDK:
         return res
 
     
-    
     def list_media_processor(self, request: operations.ListMediaProcessorRequest) -> operations.ListMediaProcessorResponse:
         warnings.simplefilter("ignore")
 
@@ -230,15 +230,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/MediaProcessors"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListMediaProcessorResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListMediaProcessorListMediaProcessorResponse])
@@ -247,7 +248,6 @@ class SDK:
         return res
 
     
-    
     def list_media_recording(self, request: operations.ListMediaRecordingRequest) -> operations.ListMediaRecordingResponse:
         warnings.simplefilter("ignore")
 
@@ -255,15 +255,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/MediaRecordings"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListMediaRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListMediaRecordingListMediaRecordingResponse])
@@ -272,7 +273,6 @@ class SDK:
         return res
 
     
-    
     def list_player_streamer(self, request: operations.ListPlayerStreamerRequest) -> operations.ListPlayerStreamerResponse:
         warnings.simplefilter("ignore")
 
@@ -280,15 +280,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/PlayerStreamers"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListPlayerStreamerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListPlayerStreamerListPlayerStreamerResponse])
@@ -297,7 +298,6 @@ class SDK:
         return res
 
     
-    
     def update_media_processor(self, request: operations.UpdateMediaProcessorRequest) -> operations.UpdateMediaProcessorResponse:
         warnings.simplefilter("ignore")
 
@@ -305,18 +305,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/MediaProcessors/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateMediaProcessorResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MediaV1MediaProcessor])
@@ -325,7 +327,6 @@ class SDK:
         return res
 
     
-    
     def update_player_streamer(self, request: operations.UpdatePlayerStreamerRequest) -> operations.UpdatePlayerStreamerResponse:
         warnings.simplefilter("ignore")
 
@@ -333,18 +334,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/PlayerStreamers/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdatePlayerStreamerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.MediaV1PlayerStreamer])

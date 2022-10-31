@@ -1,18 +1,21 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetNumbersNodSecurity struct {
-	XMathtoolsAPISecret shared.SchemeXMathtoolsAPISecret `security:"scheme,type=apiKey,subtype=header"`
+    XMathtoolsAPISecret shared.SchemeXMathtoolsAPISecret `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type GetNumbersNodRequest struct {
-	Security GetNumbersNodSecurity
+    Security GetNumbersNodSecurity 
+    
 }
 
 type GetNumbersNodResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

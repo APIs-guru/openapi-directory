@@ -1,29 +1,33 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-	"time"
-)
+"time"
+"openapi/pkg/models/shared")
 
 type GetTagFromEmployerRevisionPathParams struct {
-	EffectiveDate time.Time `pathParam:"style=simple,explode=false,name=EffectiveDate"`
-	EmployerID    string    `pathParam:"style=simple,explode=false,name=EmployerId"`
-	TagID         string    `pathParam:"style=simple,explode=false,name=TagId"`
+    EffectiveDate time.Time `pathParam:"style=simple,explode=false,name=EffectiveDate"`
+    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    TagID string `pathParam:"style=simple,explode=false,name=TagId"`
+    
 }
 
 type GetTagFromEmployerRevisionHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type GetTagFromEmployerRevisionRequest struct {
-	PathParams GetTagFromEmployerRevisionPathParams
-	Headers    GetTagFromEmployerRevisionHeaders
+    PathParams GetTagFromEmployerRevisionPathParams 
+    Headers GetTagFromEmployerRevisionHeaders 
+    
 }
 
 type GetTagFromEmployerRevisionResponse struct {
-	ContentType string
-	ErrorModel  *shared.ErrorModel
-	StatusCode  int64
-	Tag         *shared.Tag
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    StatusCode int64 
+    Tag *shared.Tag 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteAliasInput struct {
-	AliasID string `json:"AliasId"`
+    AliasID string `json:"AliasId"`
+    
 }
+

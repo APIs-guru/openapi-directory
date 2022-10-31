@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteTokenRequest struct {
-	TokenID string `json:"TokenId"`
+    TokenID string `json:"TokenId"`
+    
 }
+

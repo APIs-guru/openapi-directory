@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateEnvironmentTemplateVersionOutput struct {
-	EnvironmentTemplateVersion EnvironmentTemplateVersion `json:"environmentTemplateVersion"`
+    EnvironmentTemplateVersion EnvironmentTemplateVersion `json:"environmentTemplateVersion"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AttackVectorDescription struct {
-	VectorType string `json:"VectorType"`
+    VectorType string `json:"VectorType"`
+    
 }
+

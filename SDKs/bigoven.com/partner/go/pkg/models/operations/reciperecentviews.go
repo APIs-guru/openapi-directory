@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RecipeRecentViewsQueryParams struct {
-	Pg  *int32 `queryParam:"style=form,explode=true,name=pg"`
-	Rpp *int32 `queryParam:"style=form,explode=true,name=rpp"`
+    Pg *int32 `queryParam:"style=form,explode=true,name=pg"`
+    Rpp *int32 `queryParam:"style=form,explode=true,name=rpp"`
+    
 }
 
 type RecipeRecentViewsRequest struct {
-	QueryParams RecipeRecentViewsQueryParams
+    QueryParams RecipeRecentViewsQueryParams 
+    
 }
 
 type RecipeRecentViewsResponse struct {
-	BigOvenModelRecipeInfoDateTuple2s []shared.BigOvenModelRecipeInfoDateTuple2
-	Body                              []byte
-	ContentType                       string
-	StatusCode                        int64
+    BigOvenModelRecipeInfoDateTuple2s []shared.BigOvenModelRecipeInfoDateTuple2 
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

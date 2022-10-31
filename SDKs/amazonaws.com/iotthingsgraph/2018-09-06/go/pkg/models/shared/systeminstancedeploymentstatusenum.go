@@ -1,14 +1,19 @@
 package shared
 
+
+
+
 type SystemInstanceDeploymentStatusEnum string
 
 const (
-	SystemInstanceDeploymentStatusEnumNotDeployed        SystemInstanceDeploymentStatusEnum = "NOT_DEPLOYED"
-	SystemInstanceDeploymentStatusEnumBootstrap          SystemInstanceDeploymentStatusEnum = "BOOTSTRAP"
-	SystemInstanceDeploymentStatusEnumDeployInProgress   SystemInstanceDeploymentStatusEnum = "DEPLOY_IN_PROGRESS"
-	SystemInstanceDeploymentStatusEnumDeployedInTarget   SystemInstanceDeploymentStatusEnum = "DEPLOYED_IN_TARGET"
-	SystemInstanceDeploymentStatusEnumUndeployInProgress SystemInstanceDeploymentStatusEnum = "UNDEPLOY_IN_PROGRESS"
-	SystemInstanceDeploymentStatusEnumFailed             SystemInstanceDeploymentStatusEnum = "FAILED"
-	SystemInstanceDeploymentStatusEnumPendingDelete      SystemInstanceDeploymentStatusEnum = "PENDING_DELETE"
-	SystemInstanceDeploymentStatusEnumDeletedInTarget    SystemInstanceDeploymentStatusEnum = "DELETED_IN_TARGET"
+    SystemInstanceDeploymentStatusEnumNotDeployed SystemInstanceDeploymentStatusEnum = "NOT_DEPLOYED"
+SystemInstanceDeploymentStatusEnumBootstrap SystemInstanceDeploymentStatusEnum = "BOOTSTRAP"
+SystemInstanceDeploymentStatusEnumDeployInProgress SystemInstanceDeploymentStatusEnum = "DEPLOY_IN_PROGRESS"
+SystemInstanceDeploymentStatusEnumDeployedInTarget SystemInstanceDeploymentStatusEnum = "DEPLOYED_IN_TARGET"
+SystemInstanceDeploymentStatusEnumUndeployInProgress SystemInstanceDeploymentStatusEnum = "UNDEPLOY_IN_PROGRESS"
+SystemInstanceDeploymentStatusEnumFailed SystemInstanceDeploymentStatusEnum = "FAILED"
+SystemInstanceDeploymentStatusEnumPendingDelete SystemInstanceDeploymentStatusEnum = "PENDING_DELETE"
+SystemInstanceDeploymentStatusEnumDeletedInTarget SystemInstanceDeploymentStatusEnum = "DELETED_IN_TARGET"
 )
+
+

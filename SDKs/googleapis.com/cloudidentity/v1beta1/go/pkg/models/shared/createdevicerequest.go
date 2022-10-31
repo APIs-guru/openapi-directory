@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateDeviceRequest struct {
-	Device *Device `json:"device,omitempty"`
+    Device *Device `json:"device,omitempty"`
+    
 }
+

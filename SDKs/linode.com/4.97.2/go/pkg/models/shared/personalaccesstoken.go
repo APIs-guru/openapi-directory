@@ -1,14 +1,15 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type PersonalAccessToken struct {
-	Created *time.Time `json:"created,omitempty"`
-	Expiry  *time.Time `json:"expiry,omitempty"`
-	ID      *int64     `json:"id,omitempty"`
-	Label   *string    `json:"label,omitempty"`
-	Scopes  *string    `json:"scopes,omitempty"`
-	Token   *string    `json:"token,omitempty"`
+    Created *time.Time `json:"created,omitempty"`
+    Expiry *time.Time `json:"expiry,omitempty"`
+    ID *int64 `json:"id,omitempty"`
+    Label *string `json:"label,omitempty"`
+    Scopes *string `json:"scopes,omitempty"`
+    Token *string `json:"token,omitempty"`
+    
 }
+

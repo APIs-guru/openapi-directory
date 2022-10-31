@@ -1,21 +1,29 @@
 package operations
 
+
+
+
 type GetFeatureCategoriesOutputFormatEnum string
 
 const (
-	GetFeatureCategoriesOutputFormatEnumJSON GetFeatureCategoriesOutputFormatEnum = "json"
-	GetFeatureCategoriesOutputFormatEnumXML  GetFeatureCategoriesOutputFormatEnum = "xml"
+    GetFeatureCategoriesOutputFormatEnumJSON GetFeatureCategoriesOutputFormatEnum = "json"
+GetFeatureCategoriesOutputFormatEnumXML GetFeatureCategoriesOutputFormatEnum = "xml"
 )
 
+
 type GetFeatureCategoriesQueryParams struct {
-	OutputFormat GetFeatureCategoriesOutputFormatEnum `queryParam:"style=form,explode=true,name=outputFormat"`
+    OutputFormat GetFeatureCategoriesOutputFormatEnum `queryParam:"style=form,explode=true,name=outputFormat"`
+    
 }
 
 type GetFeatureCategoriesRequest struct {
-	QueryParams GetFeatureCategoriesQueryParams
+    QueryParams GetFeatureCategoriesQueryParams 
+    
 }
 
 type GetFeatureCategoriesResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type EirpUnitsEnum string
 
 const (
-	EirpUnitsEnumDBw EirpUnitsEnum = "dBW"
+    EirpUnitsEnumDBw EirpUnitsEnum = "dBW"
 )
+
+

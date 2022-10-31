@@ -1,6 +1,10 @@
 package shared
 
+
+
 type CreateFleetLocationsInput struct {
-	FleetID   string                  `json:"FleetId"`
-	Locations []LocationConfiguration `json:"Locations"`
+    FleetID string `json:"FleetId"`
+    Locations []LocationConfiguration `json:"Locations"`
+    
 }
+

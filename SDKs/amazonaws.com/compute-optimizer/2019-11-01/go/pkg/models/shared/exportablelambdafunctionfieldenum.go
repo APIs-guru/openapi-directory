@@ -1,28 +1,33 @@
 package shared
 
+
+
+
 type ExportableLambdaFunctionFieldEnum string
 
 const (
-	ExportableLambdaFunctionFieldEnumAccountID                                                          ExportableLambdaFunctionFieldEnum = "AccountId"
-	ExportableLambdaFunctionFieldEnumFunctionArn                                                        ExportableLambdaFunctionFieldEnum = "FunctionArn"
-	ExportableLambdaFunctionFieldEnumFunctionVersion                                                    ExportableLambdaFunctionFieldEnum = "FunctionVersion"
-	ExportableLambdaFunctionFieldEnumFinding                                                            ExportableLambdaFunctionFieldEnum = "Finding"
-	ExportableLambdaFunctionFieldEnumFindingReasonCodes                                                 ExportableLambdaFunctionFieldEnum = "FindingReasonCodes"
-	ExportableLambdaFunctionFieldEnumNumberOfInvocations                                                ExportableLambdaFunctionFieldEnum = "NumberOfInvocations"
-	ExportableLambdaFunctionFieldEnumUtilizationMetricsDurationMaximum                                  ExportableLambdaFunctionFieldEnum = "UtilizationMetricsDurationMaximum"
-	ExportableLambdaFunctionFieldEnumUtilizationMetricsDurationAverage                                  ExportableLambdaFunctionFieldEnum = "UtilizationMetricsDurationAverage"
-	ExportableLambdaFunctionFieldEnumUtilizationMetricsMemoryMaximum                                    ExportableLambdaFunctionFieldEnum = "UtilizationMetricsMemoryMaximum"
-	ExportableLambdaFunctionFieldEnumUtilizationMetricsMemoryAverage                                    ExportableLambdaFunctionFieldEnum = "UtilizationMetricsMemoryAverage"
-	ExportableLambdaFunctionFieldEnumLookbackPeriodInDays                                               ExportableLambdaFunctionFieldEnum = "LookbackPeriodInDays"
-	ExportableLambdaFunctionFieldEnumCurrentConfigurationMemorySize                                     ExportableLambdaFunctionFieldEnum = "CurrentConfigurationMemorySize"
-	ExportableLambdaFunctionFieldEnumCurrentConfigurationTimeout                                        ExportableLambdaFunctionFieldEnum = "CurrentConfigurationTimeout"
-	ExportableLambdaFunctionFieldEnumCurrentCostTotal                                                   ExportableLambdaFunctionFieldEnum = "CurrentCostTotal"
-	ExportableLambdaFunctionFieldEnumCurrentCostAverage                                                 ExportableLambdaFunctionFieldEnum = "CurrentCostAverage"
-	ExportableLambdaFunctionFieldEnumRecommendationOptionsConfigurationMemorySize                       ExportableLambdaFunctionFieldEnum = "RecommendationOptionsConfigurationMemorySize"
-	ExportableLambdaFunctionFieldEnumRecommendationOptionsCostLow                                       ExportableLambdaFunctionFieldEnum = "RecommendationOptionsCostLow"
-	ExportableLambdaFunctionFieldEnumRecommendationOptionsCostHigh                                      ExportableLambdaFunctionFieldEnum = "RecommendationOptionsCostHigh"
-	ExportableLambdaFunctionFieldEnumRecommendationOptionsProjectedUtilizationMetricsDurationLowerBound ExportableLambdaFunctionFieldEnum = "RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"
-	ExportableLambdaFunctionFieldEnumRecommendationOptionsProjectedUtilizationMetricsDurationUpperBound ExportableLambdaFunctionFieldEnum = "RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"
-	ExportableLambdaFunctionFieldEnumRecommendationOptionsProjectedUtilizationMetricsDurationExpected   ExportableLambdaFunctionFieldEnum = "RecommendationOptionsProjectedUtilizationMetricsDurationExpected"
-	ExportableLambdaFunctionFieldEnumLastRefreshTimestamp                                               ExportableLambdaFunctionFieldEnum = "LastRefreshTimestamp"
+    ExportableLambdaFunctionFieldEnumAccountID ExportableLambdaFunctionFieldEnum = "AccountId"
+ExportableLambdaFunctionFieldEnumFunctionArn ExportableLambdaFunctionFieldEnum = "FunctionArn"
+ExportableLambdaFunctionFieldEnumFunctionVersion ExportableLambdaFunctionFieldEnum = "FunctionVersion"
+ExportableLambdaFunctionFieldEnumFinding ExportableLambdaFunctionFieldEnum = "Finding"
+ExportableLambdaFunctionFieldEnumFindingReasonCodes ExportableLambdaFunctionFieldEnum = "FindingReasonCodes"
+ExportableLambdaFunctionFieldEnumNumberOfInvocations ExportableLambdaFunctionFieldEnum = "NumberOfInvocations"
+ExportableLambdaFunctionFieldEnumUtilizationMetricsDurationMaximum ExportableLambdaFunctionFieldEnum = "UtilizationMetricsDurationMaximum"
+ExportableLambdaFunctionFieldEnumUtilizationMetricsDurationAverage ExportableLambdaFunctionFieldEnum = "UtilizationMetricsDurationAverage"
+ExportableLambdaFunctionFieldEnumUtilizationMetricsMemoryMaximum ExportableLambdaFunctionFieldEnum = "UtilizationMetricsMemoryMaximum"
+ExportableLambdaFunctionFieldEnumUtilizationMetricsMemoryAverage ExportableLambdaFunctionFieldEnum = "UtilizationMetricsMemoryAverage"
+ExportableLambdaFunctionFieldEnumLookbackPeriodInDays ExportableLambdaFunctionFieldEnum = "LookbackPeriodInDays"
+ExportableLambdaFunctionFieldEnumCurrentConfigurationMemorySize ExportableLambdaFunctionFieldEnum = "CurrentConfigurationMemorySize"
+ExportableLambdaFunctionFieldEnumCurrentConfigurationTimeout ExportableLambdaFunctionFieldEnum = "CurrentConfigurationTimeout"
+ExportableLambdaFunctionFieldEnumCurrentCostTotal ExportableLambdaFunctionFieldEnum = "CurrentCostTotal"
+ExportableLambdaFunctionFieldEnumCurrentCostAverage ExportableLambdaFunctionFieldEnum = "CurrentCostAverage"
+ExportableLambdaFunctionFieldEnumRecommendationOptionsConfigurationMemorySize ExportableLambdaFunctionFieldEnum = "RecommendationOptionsConfigurationMemorySize"
+ExportableLambdaFunctionFieldEnumRecommendationOptionsCostLow ExportableLambdaFunctionFieldEnum = "RecommendationOptionsCostLow"
+ExportableLambdaFunctionFieldEnumRecommendationOptionsCostHigh ExportableLambdaFunctionFieldEnum = "RecommendationOptionsCostHigh"
+ExportableLambdaFunctionFieldEnumRecommendationOptionsProjectedUtilizationMetricsDurationLowerBound ExportableLambdaFunctionFieldEnum = "RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"
+ExportableLambdaFunctionFieldEnumRecommendationOptionsProjectedUtilizationMetricsDurationUpperBound ExportableLambdaFunctionFieldEnum = "RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"
+ExportableLambdaFunctionFieldEnumRecommendationOptionsProjectedUtilizationMetricsDurationExpected ExportableLambdaFunctionFieldEnum = "RecommendationOptionsProjectedUtilizationMetricsDurationExpected"
+ExportableLambdaFunctionFieldEnumLastRefreshTimestamp ExportableLambdaFunctionFieldEnum = "LastRefreshTimestamp"
 )
+
+

@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type TransferModeEnum string
 
 const (
-	TransferModeEnumChanged TransferModeEnum = "CHANGED"
-	TransferModeEnumAll     TransferModeEnum = "ALL"
+    TransferModeEnumChanged TransferModeEnum = "CHANGED"
+TransferModeEnumAll TransferModeEnum = "ALL"
 )
+
+

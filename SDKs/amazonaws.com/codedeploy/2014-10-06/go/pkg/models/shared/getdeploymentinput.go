@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetDeploymentInput struct {
-	DeploymentID string `json:"deploymentId"`
+    DeploymentID string `json:"deploymentId"`
+    
 }
+

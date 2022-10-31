@@ -1,10 +1,15 @@
 package shared
 
+
+
+
 type InstanceGroupStateChangeReasonCodeEnum string
 
 const (
-	InstanceGroupStateChangeReasonCodeEnumInternalError     InstanceGroupStateChangeReasonCodeEnum = "INTERNAL_ERROR"
-	InstanceGroupStateChangeReasonCodeEnumValidationError   InstanceGroupStateChangeReasonCodeEnum = "VALIDATION_ERROR"
-	InstanceGroupStateChangeReasonCodeEnumInstanceFailure   InstanceGroupStateChangeReasonCodeEnum = "INSTANCE_FAILURE"
-	InstanceGroupStateChangeReasonCodeEnumClusterTerminated InstanceGroupStateChangeReasonCodeEnum = "CLUSTER_TERMINATED"
+    InstanceGroupStateChangeReasonCodeEnumInternalError InstanceGroupStateChangeReasonCodeEnum = "INTERNAL_ERROR"
+InstanceGroupStateChangeReasonCodeEnumValidationError InstanceGroupStateChangeReasonCodeEnum = "VALIDATION_ERROR"
+InstanceGroupStateChangeReasonCodeEnumInstanceFailure InstanceGroupStateChangeReasonCodeEnum = "INSTANCE_FAILURE"
+InstanceGroupStateChangeReasonCodeEnumClusterTerminated InstanceGroupStateChangeReasonCodeEnum = "CLUSTER_TERMINATED"
 )
+
+

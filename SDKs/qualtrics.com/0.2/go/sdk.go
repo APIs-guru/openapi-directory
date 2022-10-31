@@ -67,6 +67,7 @@ func (s *SDK) CreateContactInMailinglist(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -106,6 +107,7 @@ func (s *SDK) GenerateDistributionLinks(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -306,6 +308,7 @@ func (s *SDK) WebhookDelete(ctx context.Context, request operations.WebhookDelet
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -354,6 +357,7 @@ func (s *SDK) WhenAResponseIsReceived(ctx context.Context, request operations.Wh
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeApplicationStateRequest struct {
-	ApplicationID string `json:"ApplicationId"`
+    ApplicationID string `json:"ApplicationId"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type WorkspaceRemoveUserRequest struct {
-	User *string `json:"user,omitempty"`
+    User *string `json:"user,omitempty"`
+    
 }
+

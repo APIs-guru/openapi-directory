@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateGameServerGroupOutput struct {
-	GameServerGroup *GameServerGroup `json:"GameServerGroup,omitempty"`
+    GameServerGroup *GameServerGroup `json:"GameServerGroup,omitempty"`
+    
 }
+

@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RemoveProfileAttributePathParams struct {
-	Key string `pathParam:"style=simple,explode=false,name=key"`
+    Key string `pathParam:"style=simple,explode=false,name=key"`
+    
 }
 
 type RemoveProfileAttributeHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type RemoveProfileAttributeRequest struct {
-	PathParams RemoveProfileAttributePathParams
-	Headers    RemoveProfileAttributeHeaders
+    PathParams RemoveProfileAttributePathParams 
+    Headers RemoveProfileAttributeHeaders 
+    
 }
 
 type RemoveProfileAttributeResponse struct {
-	ContentType   string
-	ErrorResponse *shared.ErrorResponse
-	StatusCode    int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    
 }
+

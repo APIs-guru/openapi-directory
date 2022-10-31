@@ -14,7 +14,7 @@ class PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupProvidersPr
 
 @dataclass
 class PostAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameResourcePatchCompletedHeaders:
-    headers: Optional[shared.PlanResourceHeaders] = field(default=None, metadata={'header': { 'field_name': 'headers' }})
+    headers: Optional[shared.PlanResourceHeaders] = field(default=None, metadata={'header': { 'field_name': 'headers', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

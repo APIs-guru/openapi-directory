@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetApplicationInput struct {
-	ApplicationName string `json:"applicationName"`
+    ApplicationName string `json:"applicationName"`
+    
 }
+

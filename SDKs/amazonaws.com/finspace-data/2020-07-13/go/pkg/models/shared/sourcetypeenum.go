@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type SourceTypeEnum string
 
 const (
-	SourceTypeEnumS3 SourceTypeEnum = "S3"
+    SourceTypeEnumS3 SourceTypeEnum = "S3"
 )
+
+

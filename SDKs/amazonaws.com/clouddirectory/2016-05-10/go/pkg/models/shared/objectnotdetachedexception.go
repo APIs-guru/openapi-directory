@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ObjectNotDetachedException struct {
-	Message *string `json:"Message,omitempty"`
+    Message *string `json:"Message,omitempty"`
+    
 }
+

@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ClearAddressHeaders struct {
-	Authorization string `header:"style=simple,explode=true,name=Authorization"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type ClearAddressRequest struct {
-	Headers ClearAddressHeaders
-	Request shared.ClearAddressRequest `request:"mediaType=application/json"`
+    Headers ClearAddressHeaders 
+    Request shared.ClearAddressRequest `request:"mediaType=application/json"`
+    
 }
 
 type ClearAddressResponse struct {
-	ContentType  string
-	StatusCode   int64
-	ClearAddress *shared.ClearAddress
+    ContentType string 
+    StatusCode int64 
+    ClearAddress *shared.ClearAddress 
+    
 }
+

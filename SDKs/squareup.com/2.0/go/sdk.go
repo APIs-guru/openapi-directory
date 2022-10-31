@@ -106,6 +106,7 @@ func (s *SDK) AccumulateLoyaltyPoints(ctx context.Context, request operations.Ac
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -193,6 +194,7 @@ func (s *SDK) AdjustLoyaltyPoints(ctx context.Context, request operations.Adjust
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -241,6 +243,7 @@ func (s *SDK) BatchChangeInventory(ctx context.Context, request operations.Batch
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -289,6 +292,7 @@ func (s *SDK) BatchDeleteCatalogObjects(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -337,6 +341,7 @@ func (s *SDK) BatchRetrieveCatalogObjects(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -385,6 +390,7 @@ func (s *SDK) BatchRetrieveInventoryChanges(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -433,6 +439,7 @@ func (s *SDK) BatchRetrieveInventoryCounts(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -481,6 +488,7 @@ func (s *SDK) BatchRetrieveOrders(ctx context.Context, request operations.BatchR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -529,6 +537,7 @@ func (s *SDK) BatchUpsertCatalogObjects(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -577,6 +586,7 @@ func (s *SDK) BulkCreateTeamMembers(ctx context.Context, request operations.Bulk
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -625,6 +635,7 @@ func (s *SDK) BulkUpdateTeamMembers(ctx context.Context, request operations.Bulk
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -673,6 +684,7 @@ func (s *SDK) CalculateLoyaltyPoints(ctx context.Context, request operations.Cal
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -721,6 +733,7 @@ func (s *SDK) CalculateOrder(ctx context.Context, request operations.CalculateOr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -769,6 +782,7 @@ func (s *SDK) CancelBooking(ctx context.Context, request operations.CancelBookin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -817,6 +831,7 @@ func (s *SDK) CancelInvoice(ctx context.Context, request operations.CancelInvoic
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -904,6 +919,7 @@ func (s *SDK) CancelPaymentByIdempotencyKey(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1147,6 +1163,7 @@ func (s *SDK) Charge(ctx context.Context, request operations.ChargeRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1234,6 +1251,7 @@ func (s *SDK) CreateBooking(ctx context.Context, request operations.CreateBookin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1282,6 +1300,7 @@ func (s *SDK) CreateBreakType(ctx context.Context, request operations.CreateBrea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1330,6 +1349,7 @@ func (s *SDK) CreateCard(ctx context.Context, request operations.CreateCardReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1378,6 +1398,7 @@ func (s *SDK) CreateCheckout(ctx context.Context, request operations.CreateCheck
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1426,6 +1447,7 @@ func (s *SDK) CreateCustomer(ctx context.Context, request operations.CreateCusto
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1474,6 +1496,7 @@ func (s *SDK) CreateCustomerCard(ctx context.Context, request operations.CreateC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1522,6 +1545,7 @@ func (s *SDK) CreateCustomerGroup(ctx context.Context, request operations.Create
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1570,6 +1594,7 @@ func (s *SDK) CreateDeviceCode(ctx context.Context, request operations.CreateDev
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1618,6 +1643,7 @@ func (s *SDK) CreateDisputeEvidenceText(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1666,6 +1692,7 @@ func (s *SDK) CreateEmployee(ctx context.Context, request operations.CreateEmplo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1714,6 +1741,7 @@ func (s *SDK) CreateEmployeeRole(ctx context.Context, request operations.CreateE
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1762,6 +1790,7 @@ func (s *SDK) CreateGiftCard(ctx context.Context, request operations.CreateGiftC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1810,6 +1839,7 @@ func (s *SDK) CreateGiftCardActivity(ctx context.Context, request operations.Cre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1858,6 +1888,7 @@ func (s *SDK) CreateInvoice(ctx context.Context, request operations.CreateInvoic
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1906,6 +1937,7 @@ func (s *SDK) CreateLocation(ctx context.Context, request operations.CreateLocat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1954,6 +1986,7 @@ func (s *SDK) CreateLoyaltyAccount(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2002,6 +2035,7 @@ func (s *SDK) CreateLoyaltyReward(ctx context.Context, request operations.Create
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2050,6 +2084,7 @@ func (s *SDK) CreateMobileAuthorizationCode(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2098,6 +2133,7 @@ func (s *SDK) CreateOrder(ctx context.Context, request operations.CreateOrderReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2146,6 +2182,7 @@ func (s *SDK) CreatePayment(ctx context.Context, request operations.CreatePaymen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2194,6 +2231,7 @@ func (s *SDK) CreateRefund(ctx context.Context, request operations.CreateRefundR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2242,6 +2280,7 @@ func (s *SDK) CreateShift(ctx context.Context, request operations.CreateShiftReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2290,6 +2329,7 @@ func (s *SDK) CreateSubscription(ctx context.Context, request operations.CreateS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2338,6 +2378,7 @@ func (s *SDK) CreateTeamMember(ctx context.Context, request operations.CreateTea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2386,6 +2427,7 @@ func (s *SDK) CreateTerminalCheckout(ctx context.Context, request operations.Cre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2434,6 +2476,7 @@ func (s *SDK) CreateTerminalRefund(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2876,6 +2919,7 @@ func (s *SDK) DeprecatedBatchChangeInventory(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2924,6 +2968,7 @@ func (s *SDK) DeprecatedBatchRetrieveInventoryChanges(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2972,6 +3017,7 @@ func (s *SDK) DeprecatedBatchRetrieveInventoryCounts(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3806,6 +3852,7 @@ func (s *SDK) LinkCustomerToGiftCard(ctx context.Context, request operations.Lin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5160,6 +5207,7 @@ func (s *SDK) ObtainToken(ctx context.Context, request operations.ObtainTokenReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5208,6 +5256,7 @@ func (s *SDK) PostV2LocationsLocationIDTransactionsTransactionIDRefund(ctx conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5256,6 +5305,7 @@ func (s *SDK) PutV2OrdersOrderID(ctx context.Context, request operations.PutV2Or
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5304,6 +5354,7 @@ func (s *SDK) PayOrder(ctx context.Context, request operations.PayOrderRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5352,6 +5403,7 @@ func (s *SDK) PublishInvoice(ctx context.Context, request operations.PublishInvo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5400,6 +5452,7 @@ func (s *SDK) RedeemLoyaltyReward(ctx context.Context, request operations.Redeem
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5448,6 +5501,7 @@ func (s *SDK) RefundPayment(ctx context.Context, request operations.RefundPaymen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5496,6 +5550,7 @@ func (s *SDK) RegisterDomain(ctx context.Context, request operations.RegisterDom
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5583,6 +5638,7 @@ func (s *SDK) RenewToken(ctx context.Context, request operations.RenewTokenReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6181,6 +6237,7 @@ func (s *SDK) RetrieveGiftCardFromGan(ctx context.Context, request operations.Re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6229,6 +6286,7 @@ func (s *SDK) RetrieveGiftCardFromNonce(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7022,6 +7080,7 @@ func (s *SDK) RevokeToken(ctx context.Context, request operations.RevokeTokenReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7070,6 +7129,7 @@ func (s *SDK) SearchAvailability(ctx context.Context, request operations.SearchA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7118,6 +7178,7 @@ func (s *SDK) SearchCatalogItems(ctx context.Context, request operations.SearchC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7166,6 +7227,7 @@ func (s *SDK) SearchCatalogObjects(ctx context.Context, request operations.Searc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7214,6 +7276,7 @@ func (s *SDK) SearchCustomers(ctx context.Context, request operations.SearchCust
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7262,6 +7325,7 @@ func (s *SDK) SearchInvoices(ctx context.Context, request operations.SearchInvoi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7310,6 +7374,7 @@ func (s *SDK) SearchLoyaltyAccounts(ctx context.Context, request operations.Sear
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7358,6 +7423,7 @@ func (s *SDK) SearchLoyaltyEvents(ctx context.Context, request operations.Search
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7406,6 +7472,7 @@ func (s *SDK) SearchLoyaltyRewards(ctx context.Context, request operations.Searc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7454,6 +7521,7 @@ func (s *SDK) SearchOrders(ctx context.Context, request operations.SearchOrdersR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7502,6 +7570,7 @@ func (s *SDK) SearchShifts(ctx context.Context, request operations.SearchShiftsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7550,6 +7619,7 @@ func (s *SDK) SearchSubscriptions(ctx context.Context, request operations.Search
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7598,6 +7668,7 @@ func (s *SDK) SearchTeamMembers(ctx context.Context, request operations.SearchTe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7646,6 +7717,7 @@ func (s *SDK) SearchTerminalCheckouts(ctx context.Context, request operations.Se
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7694,6 +7766,7 @@ func (s *SDK) SearchTerminalRefunds(ctx context.Context, request operations.Sear
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7781,6 +7854,7 @@ func (s *SDK) UnlinkCustomerFromGiftCard(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7829,6 +7903,7 @@ func (s *SDK) UpdateBooking(ctx context.Context, request operations.UpdateBookin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7877,6 +7952,7 @@ func (s *SDK) UpdateBreakType(ctx context.Context, request operations.UpdateBrea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7925,6 +8001,7 @@ func (s *SDK) UpdateCustomer(ctx context.Context, request operations.UpdateCusto
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7973,6 +8050,7 @@ func (s *SDK) UpdateCustomerGroup(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8021,6 +8099,7 @@ func (s *SDK) UpdateEmployee(ctx context.Context, request operations.UpdateEmplo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8069,6 +8148,7 @@ func (s *SDK) UpdateEmployeeRole(ctx context.Context, request operations.UpdateE
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8117,6 +8197,7 @@ func (s *SDK) UpdateInvoice(ctx context.Context, request operations.UpdateInvoic
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8165,6 +8246,7 @@ func (s *SDK) UpdateItemModifierLists(ctx context.Context, request operations.Up
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8213,6 +8295,7 @@ func (s *SDK) UpdateItemTaxes(ctx context.Context, request operations.UpdateItem
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8261,6 +8344,7 @@ func (s *SDK) UpdateLocation(ctx context.Context, request operations.UpdateLocat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8309,6 +8393,7 @@ func (s *SDK) UpdateOrder(ctx context.Context, request operations.UpdateOrderReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8357,6 +8442,7 @@ func (s *SDK) UpdatePayment(ctx context.Context, request operations.UpdatePaymen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8405,6 +8491,7 @@ func (s *SDK) UpdateShift(ctx context.Context, request operations.UpdateShiftReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8453,6 +8540,7 @@ func (s *SDK) UpdateSubscription(ctx context.Context, request operations.UpdateS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8501,6 +8589,7 @@ func (s *SDK) UpdateTeamMember(ctx context.Context, request operations.UpdateTea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8549,6 +8638,7 @@ func (s *SDK) UpdateWageSetting(ctx context.Context, request operations.UpdateWa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8597,6 +8687,7 @@ func (s *SDK) UpdateWorkweekConfig(ctx context.Context, request operations.Updat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8645,6 +8736,7 @@ func (s *SDK) UpsertCatalogObject(ctx context.Context, request operations.Upsert
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -8693,6 +8785,7 @@ func (s *SDK) UpsertSnippet(ctx context.Context, request operations.UpsertSnippe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

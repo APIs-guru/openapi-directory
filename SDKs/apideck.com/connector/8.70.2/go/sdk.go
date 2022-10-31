@@ -67,6 +67,8 @@ func (s *SDK) APIResourceCoverageOne(ctx context.Context, request operations.API
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -146,6 +148,8 @@ func (s *SDK) APIResourcesOne(ctx context.Context, request operations.APIResourc
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -224,6 +228,8 @@ func (s *SDK) ApisAll(ctx context.Context, request operations.ApisAllRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -306,6 +312,8 @@ func (s *SDK) ApisOne(ctx context.Context, request operations.ApisOneRequest) (*
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -384,6 +392,8 @@ func (s *SDK) ConnectorDocsOne(ctx context.Context, request operations.Connector
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -465,6 +475,8 @@ func (s *SDK) ConnectorResourcesOne(ctx context.Context, request operations.Conn
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -543,6 +555,8 @@ func (s *SDK) ConnectorsAll(ctx context.Context, request operations.ConnectorsAl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -624,6 +638,8 @@ func (s *SDK) ConnectorsOne(ctx context.Context, request operations.ConnectorsOn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 

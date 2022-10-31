@@ -1,23 +1,31 @@
 package operations
 
+
+
+
 type PlayerSeasonAwayStatsFormatEnum string
 
 const (
-	PlayerSeasonAwayStatsFormatEnumXML  PlayerSeasonAwayStatsFormatEnum = "XML"
-	PlayerSeasonAwayStatsFormatEnumJSON PlayerSeasonAwayStatsFormatEnum = "JSON"
+    PlayerSeasonAwayStatsFormatEnumXML PlayerSeasonAwayStatsFormatEnum = "XML"
+PlayerSeasonAwayStatsFormatEnumJSON PlayerSeasonAwayStatsFormatEnum = "JSON"
 )
 
+
 type PlayerSeasonAwayStatsPathParams struct {
-	Format PlayerSeasonAwayStatsFormatEnum `pathParam:"style=simple,explode=false,name=format"`
-	Season string                          `pathParam:"style=simple,explode=false,name=season"`
+    Format PlayerSeasonAwayStatsFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    Season string `pathParam:"style=simple,explode=false,name=season"`
+    
 }
 
 type PlayerSeasonAwayStatsRequest struct {
-	PathParams PlayerSeasonAwayStatsPathParams
+    PathParams PlayerSeasonAwayStatsPathParams 
+    
 }
 
 type PlayerSeasonAwayStatsResponse struct {
-	ContentType   string
-	PlayerSeasons []interface{}
-	StatusCode    int64
+    ContentType string 
+    PlayerSeasons []interface{} 
+    StatusCode int64 
+    
 }
+

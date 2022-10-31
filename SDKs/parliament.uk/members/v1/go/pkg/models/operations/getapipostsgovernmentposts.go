@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAPIPostsGovernmentPostsQueryParams struct {
-	DepartmentID *int32 `queryParam:"style=form,explode=true,name=departmentId"`
+    DepartmentID *int32 `queryParam:"style=form,explode=true,name=departmentId"`
+    
 }
 
 type GetAPIPostsGovernmentPostsRequest struct {
-	QueryParams GetAPIPostsGovernmentPostsQueryParams
+    QueryParams GetAPIPostsGovernmentPostsQueryParams 
+    
 }
 
 type GetAPIPostsGovernmentPostsResponse struct {
-	Body                          []byte
-	ContentType                   string
-	GovernmentOppositionPostItems []shared.GovernmentOppositionPostItem
-	StatusCode                    int64
+    Body []byte 
+    ContentType string 
+    GovernmentOppositionPostItems []shared.GovernmentOppositionPostItem 
+    StatusCode int64 
+    
 }
+

@@ -1,13 +1,18 @@
 package shared
 
+
+
+
 type CustomDomainAssociationStatusEnum string
 
 const (
-	CustomDomainAssociationStatusEnumCreating                        CustomDomainAssociationStatusEnum = "CREATING"
-	CustomDomainAssociationStatusEnumCreateFailed                    CustomDomainAssociationStatusEnum = "CREATE_FAILED"
-	CustomDomainAssociationStatusEnumActive                          CustomDomainAssociationStatusEnum = "ACTIVE"
-	CustomDomainAssociationStatusEnumDeleting                        CustomDomainAssociationStatusEnum = "DELETING"
-	CustomDomainAssociationStatusEnumDeleteFailed                    CustomDomainAssociationStatusEnum = "DELETE_FAILED"
-	CustomDomainAssociationStatusEnumPendingCertificateDNSValidation CustomDomainAssociationStatusEnum = "PENDING_CERTIFICATE_DNS_VALIDATION"
-	CustomDomainAssociationStatusEnumBindingCertificate              CustomDomainAssociationStatusEnum = "BINDING_CERTIFICATE"
+    CustomDomainAssociationStatusEnumCreating CustomDomainAssociationStatusEnum = "CREATING"
+CustomDomainAssociationStatusEnumCreateFailed CustomDomainAssociationStatusEnum = "CREATE_FAILED"
+CustomDomainAssociationStatusEnumActive CustomDomainAssociationStatusEnum = "ACTIVE"
+CustomDomainAssociationStatusEnumDeleting CustomDomainAssociationStatusEnum = "DELETING"
+CustomDomainAssociationStatusEnumDeleteFailed CustomDomainAssociationStatusEnum = "DELETE_FAILED"
+CustomDomainAssociationStatusEnumPendingCertificateDNSValidation CustomDomainAssociationStatusEnum = "PENDING_CERTIFICATE_DNS_VALIDATION"
+CustomDomainAssociationStatusEnumBindingCertificate CustomDomainAssociationStatusEnum = "BINDING_CERTIFICATE"
 )
+
+

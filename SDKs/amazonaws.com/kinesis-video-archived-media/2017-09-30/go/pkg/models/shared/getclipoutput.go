@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetClipOutput struct {
-	Payload *string `json:"Payload,omitempty"`
+    Payload *string `json:"Payload,omitempty"`
+    
 }
+

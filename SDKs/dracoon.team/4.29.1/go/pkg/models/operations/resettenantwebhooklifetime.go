@@ -1,26 +1,30 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ResetTenantWebhookLifetimePathParams struct {
-	WebhookID int64 `pathParam:"style=simple,explode=false,name=webhook_id"`
+    WebhookID int64 `pathParam:"style=simple,explode=false,name=webhook_id"`
+    
 }
 
 type ResetTenantWebhookLifetimeHeaders struct {
-	XSdsDateFormat   *interface{} `header:"name=X-Sds-Date-Format"`
-	XSdsServiceToken *string      `header:"name=X-Sds-Service-Token"`
+    XSdsDateFormat *interface{} `header:"style=simple,explode=false,name=X-Sds-Date-Format"`
+    XSdsServiceToken *string `header:"style=simple,explode=false,name=X-Sds-Service-Token"`
+    
 }
 
 type ResetTenantWebhookLifetimeRequest struct {
-	PathParams ResetTenantWebhookLifetimePathParams
-	Headers    ResetTenantWebhookLifetimeHeaders
+    PathParams ResetTenantWebhookLifetimePathParams 
+    Headers ResetTenantWebhookLifetimeHeaders 
+    
 }
 
 type ResetTenantWebhookLifetimeResponse struct {
-	ContentType   string
-	ErrorResponse *shared.ErrorResponse
-	StatusCode    int64
-	Webhook       *shared.Webhook
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    Webhook *shared.Webhook 
+    
 }
+

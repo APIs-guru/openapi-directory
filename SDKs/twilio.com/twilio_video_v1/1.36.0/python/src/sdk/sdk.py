@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def create_composition(self, request: operations.CreateCompositionRequest) -> operations.CreateCompositionResponse:
         warnings.simplefilter("ignore")
@@ -28,18 +30,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Compositions"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCompositionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1Composition])
@@ -47,7 +51,6 @@ class SDK:
 
         return res
 
-    
     
     def create_composition_hook(self, request: operations.CreateCompositionHookRequest) -> operations.CreateCompositionHookResponse:
         warnings.simplefilter("ignore")
@@ -56,18 +59,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/CompositionHooks"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCompositionHookResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1CompositionHook])
@@ -75,7 +80,6 @@ class SDK:
 
         return res
 
-    
     
     def create_composition_settings(self, request: operations.CreateCompositionSettingsRequest) -> operations.CreateCompositionSettingsResponse:
         warnings.simplefilter("ignore")
@@ -84,18 +88,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/CompositionSettings/Default"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCompositionSettingsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1CompositionSettings])
@@ -103,7 +109,6 @@ class SDK:
 
         return res
 
-    
     
     def create_recording_settings(self, request: operations.CreateRecordingSettingsRequest) -> operations.CreateRecordingSettingsResponse:
         warnings.simplefilter("ignore")
@@ -112,18 +117,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/RecordingSettings/Default"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateRecordingSettingsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1RecordingSettings])
@@ -131,7 +138,6 @@ class SDK:
 
         return res
 
-    
     
     def create_room(self, request: operations.CreateRoomRequest) -> operations.CreateRoomResponse:
         warnings.simplefilter("ignore")
@@ -140,18 +146,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Rooms"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateRoomResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1Room])
@@ -160,7 +168,6 @@ class SDK:
         return res
 
     
-    
     def delete_composition(self, request: operations.DeleteCompositionRequest) -> operations.DeleteCompositionResponse:
         warnings.simplefilter("ignore")
 
@@ -168,20 +175,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Compositions/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCompositionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_composition_hook(self, request: operations.DeleteCompositionHookRequest) -> operations.DeleteCompositionHookResponse:
         warnings.simplefilter("ignore")
@@ -190,20 +196,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CompositionHooks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCompositionHookResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_recording(self, request: operations.DeleteRecordingRequest) -> operations.DeleteRecordingResponse:
         warnings.simplefilter("ignore")
@@ -212,20 +217,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Recordings/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_room_recording(self, request: operations.DeleteRoomRecordingRequest) -> operations.DeleteRoomRecordingResponse:
         warnings.simplefilter("ignore")
@@ -234,20 +238,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/Recordings/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteRoomRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def fetch_composition(self, request: operations.FetchCompositionRequest) -> operations.FetchCompositionResponse:
         warnings.simplefilter("ignore")
@@ -256,14 +259,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Compositions/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCompositionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1Composition])
@@ -272,7 +275,6 @@ class SDK:
         return res
 
     
-    
     def fetch_composition_hook(self, request: operations.FetchCompositionHookRequest) -> operations.FetchCompositionHookResponse:
         warnings.simplefilter("ignore")
 
@@ -280,14 +282,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CompositionHooks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCompositionHookResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1CompositionHook])
@@ -295,7 +297,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_composition_settings(self, request: operations.FetchCompositionSettingsRequest) -> operations.FetchCompositionSettingsResponse:
         warnings.simplefilter("ignore")
@@ -304,14 +305,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/CompositionSettings/Default"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCompositionSettingsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1CompositionSettings])
@@ -320,7 +321,6 @@ class SDK:
         return res
 
     
-    
     def fetch_recording(self, request: operations.FetchRecordingRequest) -> operations.FetchRecordingResponse:
         warnings.simplefilter("ignore")
 
@@ -328,14 +328,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Recordings/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1Recording])
@@ -344,7 +344,6 @@ class SDK:
         return res
 
     
-    
     def fetch_recording_settings(self, request: operations.FetchRecordingSettingsRequest) -> operations.FetchRecordingSettingsResponse:
         warnings.simplefilter("ignore")
 
@@ -352,14 +351,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/RecordingSettings/Default"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRecordingSettingsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1RecordingSettings])
@@ -368,7 +367,6 @@ class SDK:
         return res
 
     
-    
     def fetch_room(self, request: operations.FetchRoomRequest) -> operations.FetchRoomResponse:
         warnings.simplefilter("ignore")
 
@@ -376,14 +374,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRoomResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1Room])
@@ -391,7 +389,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_room_participant(self, request: operations.FetchRoomParticipantRequest) -> operations.FetchRoomParticipantResponse:
         warnings.simplefilter("ignore")
@@ -400,14 +397,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/Participants/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRoomParticipantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1RoomRoomParticipant])
@@ -415,7 +412,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_room_participant_published_track(self, request: operations.FetchRoomParticipantPublishedTrackRequest) -> operations.FetchRoomParticipantPublishedTrackResponse:
         warnings.simplefilter("ignore")
@@ -424,14 +420,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRoomParticipantPublishedTrackResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1RoomRoomParticipantRoomParticipantPublishedTrack])
@@ -440,7 +436,6 @@ class SDK:
         return res
 
     
-    
     def fetch_room_participant_subscribe_rule(self, request: operations.FetchRoomParticipantSubscribeRuleRequest) -> operations.FetchRoomParticipantSubscribeRuleResponse:
         warnings.simplefilter("ignore")
 
@@ -448,14 +443,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/SubscribeRules", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRoomParticipantSubscribeRuleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1RoomRoomParticipantRoomParticipantSubscribeRule])
@@ -463,7 +458,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_room_participant_subscribed_track(self, request: operations.FetchRoomParticipantSubscribedTrackRequest) -> operations.FetchRoomParticipantSubscribedTrackResponse:
         warnings.simplefilter("ignore")
@@ -472,14 +466,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/SubscribedTracks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRoomParticipantSubscribedTrackResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1RoomRoomParticipantRoomParticipantSubscribedTrack])
@@ -488,7 +482,6 @@ class SDK:
         return res
 
     
-    
     def fetch_room_recording(self, request: operations.FetchRoomRecordingRequest) -> operations.FetchRoomRecordingResponse:
         warnings.simplefilter("ignore")
 
@@ -496,14 +489,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/Recordings/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRoomRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1RoomRoomRecording])
@@ -512,7 +505,6 @@ class SDK:
         return res
 
     
-    
     def fetch_room_recording_rule(self, request: operations.FetchRoomRecordingRuleRequest) -> operations.FetchRoomRecordingRuleResponse:
         warnings.simplefilter("ignore")
 
@@ -520,14 +512,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/RecordingRules", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRoomRecordingRuleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1RoomRoomRecordingRule])
@@ -536,7 +528,6 @@ class SDK:
         return res
 
     
-    
     def list_composition(self, request: operations.ListCompositionRequest) -> operations.ListCompositionResponse:
         warnings.simplefilter("ignore")
 
@@ -544,15 +535,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Compositions"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCompositionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListCompositionListCompositionResponse])
@@ -561,7 +553,6 @@ class SDK:
         return res
 
     
-    
     def list_composition_hook(self, request: operations.ListCompositionHookRequest) -> operations.ListCompositionHookResponse:
         warnings.simplefilter("ignore")
 
@@ -569,15 +560,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/CompositionHooks"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCompositionHookResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListCompositionHookListCompositionHookResponse])
@@ -586,7 +578,6 @@ class SDK:
         return res
 
     
-    
     def list_recording(self, request: operations.ListRecordingRequest) -> operations.ListRecordingResponse:
         warnings.simplefilter("ignore")
 
@@ -594,15 +585,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Recordings"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListRecordingListRecordingResponse])
@@ -611,7 +603,6 @@ class SDK:
         return res
 
     
-    
     def list_room(self, request: operations.ListRoomRequest) -> operations.ListRoomResponse:
         warnings.simplefilter("ignore")
 
@@ -619,15 +610,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Rooms"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListRoomResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListRoomListRoomResponse])
@@ -636,7 +628,6 @@ class SDK:
         return res
 
     
-    
     def list_room_participant(self, request: operations.ListRoomParticipantRequest) -> operations.ListRoomParticipantResponse:
         warnings.simplefilter("ignore")
 
@@ -644,15 +635,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/Participants", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListRoomParticipantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListRoomParticipantListRoomParticipantResponse])
@@ -661,7 +653,6 @@ class SDK:
         return res
 
     
-    
     def list_room_participant_published_track(self, request: operations.ListRoomParticipantPublishedTrackRequest) -> operations.ListRoomParticipantPublishedTrackResponse:
         warnings.simplefilter("ignore")
 
@@ -669,15 +660,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/PublishedTracks", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListRoomParticipantPublishedTrackResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListRoomParticipantPublishedTrackListRoomParticipantPublishedTrackResponse])
@@ -686,7 +678,6 @@ class SDK:
         return res
 
     
-    
     def list_room_participant_subscribed_track(self, request: operations.ListRoomParticipantSubscribedTrackRequest) -> operations.ListRoomParticipantSubscribedTrackResponse:
         warnings.simplefilter("ignore")
 
@@ -694,15 +685,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/SubscribedTracks", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListRoomParticipantSubscribedTrackResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListRoomParticipantSubscribedTrackListRoomParticipantSubscribedTrackResponse])
@@ -711,7 +703,6 @@ class SDK:
         return res
 
     
-    
     def list_room_recording(self, request: operations.ListRoomRecordingRequest) -> operations.ListRoomRecordingResponse:
         warnings.simplefilter("ignore")
 
@@ -719,15 +710,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/Recordings", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListRoomRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListRoomRecordingListRoomRecordingResponse])
@@ -736,7 +728,6 @@ class SDK:
         return res
 
     
-    
     def update_composition_hook(self, request: operations.UpdateCompositionHookRequest) -> operations.UpdateCompositionHookResponse:
         warnings.simplefilter("ignore")
 
@@ -744,18 +735,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CompositionHooks/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateCompositionHookResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1CompositionHook])
@@ -764,7 +757,6 @@ class SDK:
         return res
 
     
-    
     def update_room(self, request: operations.UpdateRoomRequest) -> operations.UpdateRoomResponse:
         warnings.simplefilter("ignore")
 
@@ -772,18 +764,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateRoomResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1Room])
@@ -792,7 +786,6 @@ class SDK:
         return res
 
     
-    
     def update_room_participant(self, request: operations.UpdateRoomParticipantRequest) -> operations.UpdateRoomParticipantResponse:
         warnings.simplefilter("ignore")
 
@@ -800,18 +793,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/Participants/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateRoomParticipantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1RoomRoomParticipant])
@@ -820,7 +815,6 @@ class SDK:
         return res
 
     
-    
     def update_room_participant_anonymize(self, request: operations.UpdateRoomParticipantAnonymizeRequest) -> operations.UpdateRoomParticipantAnonymizeResponse:
         warnings.simplefilter("ignore")
 
@@ -828,14 +822,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/Participants/{Sid}/Anonymize", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateRoomParticipantAnonymizeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1RoomRoomParticipantRoomParticipantAnonymize])
@@ -844,7 +838,6 @@ class SDK:
         return res
 
     
-    
     def update_room_participant_subscribe_rule(self, request: operations.UpdateRoomParticipantSubscribeRuleRequest) -> operations.UpdateRoomParticipantSubscribeRuleResponse:
         warnings.simplefilter("ignore")
 
@@ -852,18 +845,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/Participants/{ParticipantSid}/SubscribeRules", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateRoomParticipantSubscribeRuleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1RoomRoomParticipantRoomParticipantSubscribeRule])
@@ -872,7 +867,6 @@ class SDK:
         return res
 
     
-    
     def update_room_recording_rule(self, request: operations.UpdateRoomRecordingRuleRequest) -> operations.UpdateRoomRecordingRuleResponse:
         warnings.simplefilter("ignore")
 
@@ -880,18 +874,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Rooms/{RoomSid}/RecordingRules", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateRoomRecordingRuleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VideoV1RoomRoomRecordingRule])

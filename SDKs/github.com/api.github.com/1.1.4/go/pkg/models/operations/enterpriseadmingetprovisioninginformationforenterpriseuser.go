@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type EnterpriseAdminGetProvisioningInformationForEnterpriseUserPathParams struct {
-	Enterprise string `pathParam:"style=simple,explode=false,name=enterprise"`
-	ScimUserID string `pathParam:"style=simple,explode=false,name=scim_user_id"`
+    Enterprise string `pathParam:"style=simple,explode=false,name=enterprise"`
+    ScimUserID string `pathParam:"style=simple,explode=false,name=scim_user_id"`
+    
 }
 
 type EnterpriseAdminGetProvisioningInformationForEnterpriseUserRequest struct {
-	PathParams EnterpriseAdminGetProvisioningInformationForEnterpriseUserPathParams
+    PathParams EnterpriseAdminGetProvisioningInformationForEnterpriseUserPathParams 
+    
 }
 
 type EnterpriseAdminGetProvisioningInformationForEnterpriseUserResponse struct {
-	ContentType        string
-	StatusCode         int64
-	ScimEnterpriseUser *shared.ScimEnterpriseUser
+    ContentType string 
+    StatusCode int64 
+    ScimEnterpriseUser *shared.ScimEnterpriseUser 
+    
 }
+

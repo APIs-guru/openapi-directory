@@ -1,14 +1,20 @@
 package operations
 
+
+
 type PostUsersIDUnlockPathParams struct {
-	ID int32 `pathParam:"style=simple,explode=false,name=id"`
+    ID int32 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type PostUsersIDUnlockRequest struct {
-	PathParams PostUsersIDUnlockPathParams
+    PathParams PostUsersIDUnlockPathParams 
+    
 }
 
 type PostUsersIDUnlockResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

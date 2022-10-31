@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeLocationSmbRequest struct {
-	LocationArn string `json:"LocationArn"`
+    LocationArn string `json:"LocationArn"`
+    
 }
+

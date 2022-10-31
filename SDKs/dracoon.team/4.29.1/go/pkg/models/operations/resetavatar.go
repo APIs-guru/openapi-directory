@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ResetAvatarHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type ResetAvatarRequest struct {
-	Headers ResetAvatarHeaders
+    Headers ResetAvatarHeaders 
+    
 }
 
 type ResetAvatarResponse struct {
-	Avatar        *shared.Avatar
-	ContentType   string
-	ErrorResponse *shared.ErrorResponse
-	StatusCode    int64
+    Avatar *shared.Avatar 
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    
 }
+

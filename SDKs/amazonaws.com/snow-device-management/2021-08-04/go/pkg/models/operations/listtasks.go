@@ -1,44 +1,50 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
+
 
 type ListTasksStateEnum string
 
 const (
-	ListTasksStateEnumInProgress ListTasksStateEnum = "IN_PROGRESS"
-	ListTasksStateEnumCanceled   ListTasksStateEnum = "CANCELED"
-	ListTasksStateEnumCompleted  ListTasksStateEnum = "COMPLETED"
+    ListTasksStateEnumInProgress ListTasksStateEnum = "IN_PROGRESS"
+ListTasksStateEnumCanceled ListTasksStateEnum = "CANCELED"
+ListTasksStateEnumCompleted ListTasksStateEnum = "COMPLETED"
 )
 
+
 type ListTasksQueryParams struct {
-	MaxResults *int64              `queryParam:"style=form,explode=true,name=maxResults"`
-	NextToken  *string             `queryParam:"style=form,explode=true,name=nextToken"`
-	State      *ListTasksStateEnum `queryParam:"style=form,explode=true,name=state"`
+    MaxResults *int64 `queryParam:"style=form,explode=true,name=maxResults"`
+    NextToken *string `queryParam:"style=form,explode=true,name=nextToken"`
+    State *ListTasksStateEnum `queryParam:"style=form,explode=true,name=state"`
+    
 }
 
 type ListTasksHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type ListTasksRequest struct {
-	QueryParams ListTasksQueryParams
-	Headers     ListTasksHeaders
+    QueryParams ListTasksQueryParams 
+    Headers ListTasksHeaders 
+    
 }
 
 type ListTasksResponse struct {
-	AccessDeniedException   *interface{}
-	ContentType             string
-	InternalServerException *interface{}
-	ListTasksOutput         *shared.ListTasksOutput
-	StatusCode              int64
-	ThrottlingException     *interface{}
-	ValidationException     *interface{}
+    AccessDeniedException *interface{} 
+    ContentType string 
+    InternalServerException *interface{} 
+    ListTasksOutput *shared.ListTasksOutput 
+    StatusCode int64 
+    ThrottlingException *interface{} 
+    ValidationException *interface{} 
+    
 }
+

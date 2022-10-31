@@ -1,23 +1,31 @@
 package operations
 
+
+
+
 type RotoballerArticlesByPlayerFormatEnum string
 
 const (
-	RotoballerArticlesByPlayerFormatEnumXML  RotoballerArticlesByPlayerFormatEnum = "xml"
-	RotoballerArticlesByPlayerFormatEnumJSON RotoballerArticlesByPlayerFormatEnum = "json"
+    RotoballerArticlesByPlayerFormatEnumXML RotoballerArticlesByPlayerFormatEnum = "xml"
+RotoballerArticlesByPlayerFormatEnumJSON RotoballerArticlesByPlayerFormatEnum = "json"
 )
 
+
 type RotoballerArticlesByPlayerPathParams struct {
-	Format   RotoballerArticlesByPlayerFormatEnum `pathParam:"style=simple,explode=false,name=format"`
-	Playerid string                               `pathParam:"style=simple,explode=false,name=playerid"`
+    Format RotoballerArticlesByPlayerFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    Playerid string `pathParam:"style=simple,explode=false,name=playerid"`
+    
 }
 
 type RotoballerArticlesByPlayerRequest struct {
-	PathParams RotoballerArticlesByPlayerPathParams
+    PathParams RotoballerArticlesByPlayerPathParams 
+    
 }
 
 type RotoballerArticlesByPlayerResponse struct {
-	Articles    []interface{}
-	ContentType string
-	StatusCode  int64
+    Articles []interface{} 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetEvidenceFolderResponse struct {
-	EvidenceFolder *AssessmentEvidenceFolder `json:"evidenceFolder,omitempty"`
+    EvidenceFolder *AssessmentEvidenceFolder `json:"evidenceFolder,omitempty"`
+    
 }
+

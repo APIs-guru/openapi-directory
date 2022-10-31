@@ -1,13 +1,19 @@
 package shared
 
+
+
+
 type NetworkPolicyProviderEnum string
 
 const (
-	NetworkPolicyProviderEnumProviderUnspecified NetworkPolicyProviderEnum = "PROVIDER_UNSPECIFIED"
-	NetworkPolicyProviderEnumCalico              NetworkPolicyProviderEnum = "CALICO"
+    NetworkPolicyProviderEnumProviderUnspecified NetworkPolicyProviderEnum = "PROVIDER_UNSPECIFIED"
+NetworkPolicyProviderEnumCalico NetworkPolicyProviderEnum = "CALICO"
 )
 
+
 type NetworkPolicy struct {
-	Enabled  *bool                      `json:"enabled,omitempty"`
-	Provider *NetworkPolicyProviderEnum `json:"provider,omitempty"`
+    Enabled *bool `json:"enabled,omitempty"`
+    Provider *NetworkPolicyProviderEnum `json:"provider,omitempty"`
+    
 }
+

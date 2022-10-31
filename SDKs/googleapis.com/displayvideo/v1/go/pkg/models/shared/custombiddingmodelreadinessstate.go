@@ -1,16 +1,22 @@
 package shared
 
+
+
+
 type CustomBiddingModelReadinessStateReadinessStateEnum string
 
 const (
-	CustomBiddingModelReadinessStateReadinessStateEnumReadinessStateUnspecified      CustomBiddingModelReadinessStateReadinessStateEnum = "READINESS_STATE_UNSPECIFIED"
-	CustomBiddingModelReadinessStateReadinessStateEnumReadinessStateActive           CustomBiddingModelReadinessStateReadinessStateEnum = "READINESS_STATE_ACTIVE"
-	CustomBiddingModelReadinessStateReadinessStateEnumReadinessStateInsufficientData CustomBiddingModelReadinessStateReadinessStateEnum = "READINESS_STATE_INSUFFICIENT_DATA"
-	CustomBiddingModelReadinessStateReadinessStateEnumReadinessStateTraining         CustomBiddingModelReadinessStateReadinessStateEnum = "READINESS_STATE_TRAINING"
-	CustomBiddingModelReadinessStateReadinessStateEnumReadinessStateNoValidScript    CustomBiddingModelReadinessStateReadinessStateEnum = "READINESS_STATE_NO_VALID_SCRIPT"
+    CustomBiddingModelReadinessStateReadinessStateEnumReadinessStateUnspecified CustomBiddingModelReadinessStateReadinessStateEnum = "READINESS_STATE_UNSPECIFIED"
+CustomBiddingModelReadinessStateReadinessStateEnumReadinessStateActive CustomBiddingModelReadinessStateReadinessStateEnum = "READINESS_STATE_ACTIVE"
+CustomBiddingModelReadinessStateReadinessStateEnumReadinessStateInsufficientData CustomBiddingModelReadinessStateReadinessStateEnum = "READINESS_STATE_INSUFFICIENT_DATA"
+CustomBiddingModelReadinessStateReadinessStateEnumReadinessStateTraining CustomBiddingModelReadinessStateReadinessStateEnum = "READINESS_STATE_TRAINING"
+CustomBiddingModelReadinessStateReadinessStateEnumReadinessStateNoValidScript CustomBiddingModelReadinessStateReadinessStateEnum = "READINESS_STATE_NO_VALID_SCRIPT"
 )
 
+
 type CustomBiddingModelReadinessState struct {
-	AdvertiserID   *string                                             `json:"advertiserId,omitempty"`
-	ReadinessState *CustomBiddingModelReadinessStateReadinessStateEnum `json:"readinessState,omitempty"`
+    AdvertiserID *string `json:"advertiserId,omitempty"`
+    ReadinessState *CustomBiddingModelReadinessStateReadinessStateEnum `json:"readinessState,omitempty"`
+    
 }
+

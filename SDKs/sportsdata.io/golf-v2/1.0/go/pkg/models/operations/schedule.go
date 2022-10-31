@@ -1,22 +1,30 @@
 package operations
 
+
+
+
 type ScheduleFormatEnum string
 
 const (
-	ScheduleFormatEnumXML  ScheduleFormatEnum = "XML"
-	ScheduleFormatEnumJSON ScheduleFormatEnum = "JSON"
+    ScheduleFormatEnumXML ScheduleFormatEnum = "XML"
+ScheduleFormatEnumJSON ScheduleFormatEnum = "JSON"
 )
 
+
 type SchedulePathParams struct {
-	Format ScheduleFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    Format ScheduleFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    
 }
 
 type ScheduleRequest struct {
-	PathParams SchedulePathParams
+    PathParams SchedulePathParams 
+    
 }
 
 type ScheduleResponse struct {
-	ContentType string
-	StatusCode  int64
-	Tournaments []interface{}
+    ContentType string 
+    StatusCode int64 
+    Tournaments []interface{} 
+    
 }
+

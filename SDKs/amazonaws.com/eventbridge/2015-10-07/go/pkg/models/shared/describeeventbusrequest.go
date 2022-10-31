@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeEventBusRequest struct {
-	Name *string `json:"Name,omitempty"`
+    Name *string `json:"Name,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ErrorResponse struct {
-	Errors []ErrorObject `json:"errors"`
+    Errors []ErrorObject `json:"errors"`
+    
 }
+

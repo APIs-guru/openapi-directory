@@ -101,6 +101,7 @@ func (s *SDK) AddLabel(ctx context.Context, request operations.AddLabelRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -159,6 +160,7 @@ func (s *SDK) AddModerators(ctx context.Context, request operations.AddModerator
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -202,6 +204,7 @@ func (s *SDK) AddParticipantCommunity(ctx context.Context, request operations.Ad
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -261,6 +264,7 @@ func (s *SDK) AddParticipantGroup(ctx context.Context, request operations.AddPar
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -320,6 +324,7 @@ func (s *SDK) AddParticipantsToSpace(ctx context.Context, request operations.Add
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -378,6 +383,7 @@ func (s *SDK) AddPresenceWebHook(ctx context.Context, request operations.AddPres
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -438,6 +444,7 @@ func (s *SDK) AddRecentSpaceSearch(ctx context.Context, request operations.AddRe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -477,6 +484,7 @@ func (s *SDK) AddTextItem(ctx context.Context, request operations.AddTextItemReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -533,6 +541,7 @@ func (s *SDK) AddTextItemWithParent(ctx context.Context, request operations.AddT
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -592,6 +601,7 @@ func (s *SDK) AddWebHook(ctx context.Context, request operations.AddWebHookReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -686,6 +696,7 @@ func (s *SDK) AssignLabel(ctx context.Context, request operations.AssignLabelReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -745,6 +756,7 @@ func (s *SDK) AssignLabels(ctx context.Context, request operations.AssignLabelsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -833,6 +845,7 @@ func (s *SDK) CreateCommunityConversation(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -892,6 +905,7 @@ func (s *SDK) CreateDirectConversation(ctx context.Context, request operations.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -968,6 +982,7 @@ func (s *SDK) CreateGroupConversation(ctx context.Context, request operations.Cr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1076,6 +1091,7 @@ func (s *SDK) CreateReply(ctx context.Context, request operations.CreateReplyReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1135,6 +1151,7 @@ func (s *SDK) CreateSpace(ctx context.Context, request operations.CreateSpaceReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1193,6 +1210,7 @@ func (s *SDK) CreateSpaceTopic(ctx context.Context, request operations.CreateSpa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1434,6 +1452,7 @@ func (s *SDK) DenySpaceAcces(ctx context.Context, request operations.DenySpaceAc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1507,6 +1526,7 @@ func (s *SDK) FlagItem(ctx context.Context, request operations.FlagItemRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3821,6 +3841,7 @@ func (s *SDK) PinTopic(ctx context.Context, request operations.PinTopicRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3863,6 +3884,7 @@ func (s *SDK) PostWebhookAsSlackMessage(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3956,6 +3978,7 @@ func (s *SDK) RemoveModerators(ctx context.Context, request operations.RemoveMod
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4168,6 +4191,7 @@ func (s *SDK) RequestSpaceAcces(ctx context.Context, request operations.RequestS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4524,6 +4548,7 @@ func (s *SDK) SetUserPresence(ctx context.Context, request operations.SetUserPre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4819,6 +4844,7 @@ func (s *SDK) UnassignLabels(ctx context.Context, request operations.UnassignLab
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5075,6 +5101,7 @@ func (s *SDK) UpdateConversationCommunity(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5131,6 +5158,7 @@ func (s *SDK) UpdateConversationGroup(ctx context.Context, request operations.Up
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5190,6 +5218,7 @@ func (s *SDK) UpdateParticipantInSpace(ctx context.Context, request operations.U
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5229,6 +5258,7 @@ func (s *SDK) UpdatePresenceWebHook(ctx context.Context, request operations.Upda
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5287,6 +5317,7 @@ func (s *SDK) UpdateProfile(ctx context.Context, request operations.UpdateProfil
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5346,6 +5377,7 @@ func (s *SDK) UpdateReadTimestamp(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5385,6 +5417,7 @@ func (s *SDK) UpdateSpace(ctx context.Context, request operations.UpdateSpaceReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5440,6 +5473,7 @@ func (s *SDK) UpdateSpaceReply(ctx context.Context, request operations.UpdateSpa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5496,6 +5530,7 @@ func (s *SDK) UpdateSpaceTopic(ctx context.Context, request operations.UpdateSpa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5552,6 +5587,7 @@ func (s *SDK) UpdateTextItem(ctx context.Context, request operations.UpdateTextI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5611,6 +5647,7 @@ func (s *SDK) UpdateTopicTags(ctx context.Context, request operations.UpdateTopi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5666,6 +5703,7 @@ func (s *SDK) UpdateWebHook(ctx context.Context, request operations.UpdateWebHoo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5852,6 +5890,7 @@ func (s *SDK) V2RemoveParticipantsFromSpace(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5891,6 +5930,7 @@ func (s *SDK) V2UpdateWelcomeBoxContent(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

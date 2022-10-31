@@ -1,5 +1,9 @@
 package shared
 
+
+
 type JobNodeDetails struct {
-	JobRuns []JobRun `json:"JobRuns,omitempty"`
+    JobRuns []JobRun `json:"JobRuns,omitempty"`
+    
 }
+

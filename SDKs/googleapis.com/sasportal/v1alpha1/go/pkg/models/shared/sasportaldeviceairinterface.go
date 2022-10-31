@@ -1,20 +1,26 @@
 package shared
 
+
+
+
 type SasPortalDeviceAirInterfaceRadioTechnologyEnum string
 
 const (
-	SasPortalDeviceAirInterfaceRadioTechnologyEnumRadioTechnologyUnspecified SasPortalDeviceAirInterfaceRadioTechnologyEnum = "RADIO_TECHNOLOGY_UNSPECIFIED"
-	SasPortalDeviceAirInterfaceRadioTechnologyEnumEUtra                      SasPortalDeviceAirInterfaceRadioTechnologyEnum = "E_UTRA"
-	SasPortalDeviceAirInterfaceRadioTechnologyEnumCambiumNetworks            SasPortalDeviceAirInterfaceRadioTechnologyEnum = "CAMBIUM_NETWORKS"
-	SasPortalDeviceAirInterfaceRadioTechnologyEnumFourGBbwSaa1               SasPortalDeviceAirInterfaceRadioTechnologyEnum = "FOUR_G_BBW_SAA_1"
-	SasPortalDeviceAirInterfaceRadioTechnologyEnumNr                         SasPortalDeviceAirInterfaceRadioTechnologyEnum = "NR"
-	SasPortalDeviceAirInterfaceRadioTechnologyEnumDoodleCbrs                 SasPortalDeviceAirInterfaceRadioTechnologyEnum = "DOODLE_CBRS"
-	SasPortalDeviceAirInterfaceRadioTechnologyEnumCw                         SasPortalDeviceAirInterfaceRadioTechnologyEnum = "CW"
-	SasPortalDeviceAirInterfaceRadioTechnologyEnumRedline                    SasPortalDeviceAirInterfaceRadioTechnologyEnum = "REDLINE"
-	SasPortalDeviceAirInterfaceRadioTechnologyEnumTaranaWireless             SasPortalDeviceAirInterfaceRadioTechnologyEnum = "TARANA_WIRELESS"
+    SasPortalDeviceAirInterfaceRadioTechnologyEnumRadioTechnologyUnspecified SasPortalDeviceAirInterfaceRadioTechnologyEnum = "RADIO_TECHNOLOGY_UNSPECIFIED"
+SasPortalDeviceAirInterfaceRadioTechnologyEnumEUtra SasPortalDeviceAirInterfaceRadioTechnologyEnum = "E_UTRA"
+SasPortalDeviceAirInterfaceRadioTechnologyEnumCambiumNetworks SasPortalDeviceAirInterfaceRadioTechnologyEnum = "CAMBIUM_NETWORKS"
+SasPortalDeviceAirInterfaceRadioTechnologyEnumFourGBbwSaa1 SasPortalDeviceAirInterfaceRadioTechnologyEnum = "FOUR_G_BBW_SAA_1"
+SasPortalDeviceAirInterfaceRadioTechnologyEnumNr SasPortalDeviceAirInterfaceRadioTechnologyEnum = "NR"
+SasPortalDeviceAirInterfaceRadioTechnologyEnumDoodleCbrs SasPortalDeviceAirInterfaceRadioTechnologyEnum = "DOODLE_CBRS"
+SasPortalDeviceAirInterfaceRadioTechnologyEnumCw SasPortalDeviceAirInterfaceRadioTechnologyEnum = "CW"
+SasPortalDeviceAirInterfaceRadioTechnologyEnumRedline SasPortalDeviceAirInterfaceRadioTechnologyEnum = "REDLINE"
+SasPortalDeviceAirInterfaceRadioTechnologyEnumTaranaWireless SasPortalDeviceAirInterfaceRadioTechnologyEnum = "TARANA_WIRELESS"
 )
 
+
 type SasPortalDeviceAirInterface struct {
-	RadioTechnology *SasPortalDeviceAirInterfaceRadioTechnologyEnum `json:"radioTechnology,omitempty"`
-	SupportedSpec   *string                                         `json:"supportedSpec,omitempty"`
+    RadioTechnology *SasPortalDeviceAirInterfaceRadioTechnologyEnum `json:"radioTechnology,omitempty"`
+    SupportedSpec *string `json:"supportedSpec,omitempty"`
+    
 }
+

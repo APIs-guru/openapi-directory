@@ -1,7 +1,11 @@
 package shared
 
+
+
 type Source struct {
-	Description *string `json:"description,omitempty"`
-	DisplayName *string `json:"displayName,omitempty"`
-	Name        *string `json:"name,omitempty"`
+    Description *string `json:"description,omitempty"`
+    DisplayName *string `json:"displayName,omitempty"`
+    Name *string `json:"name,omitempty"`
+    
 }
+

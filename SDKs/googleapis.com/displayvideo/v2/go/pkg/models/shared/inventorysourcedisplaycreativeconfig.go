@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InventorySourceDisplayCreativeConfig struct {
-	CreativeSize *Dimensions `json:"creativeSize,omitempty"`
+    CreativeSize *Dimensions `json:"creativeSize,omitempty"`
+    
 }
+

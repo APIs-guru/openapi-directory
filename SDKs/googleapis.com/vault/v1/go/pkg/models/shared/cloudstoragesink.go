@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CloudStorageSink struct {
-	Files []CloudStorageFile `json:"files,omitempty"`
+    Files []CloudStorageFile `json:"files,omitempty"`
+    
 }
+

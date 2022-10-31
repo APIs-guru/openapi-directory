@@ -273,6 +273,7 @@ func (s *SDK) PostGeomarksNew(ctx context.Context, request operations.PostGeomar
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

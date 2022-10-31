@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdatePullRequestDescriptionOutput struct {
-	PullRequest PullRequest `json:"pullRequest"`
+    PullRequest PullRequest `json:"pullRequest"`
+    
 }
+

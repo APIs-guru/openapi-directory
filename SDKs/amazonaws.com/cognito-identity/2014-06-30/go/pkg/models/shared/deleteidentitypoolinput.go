@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteIdentityPoolInput struct {
-	IdentityPoolID string `json:"IdentityPoolId"`
+    IdentityPoolID string `json:"IdentityPoolId"`
+    
 }
+

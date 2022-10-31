@@ -1,32 +1,36 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type WebhooksShortExecutePathParams struct {
-	ID        string `pathParam:"style=simple,explode=false,name=id"`
-	ServiceID string `pathParam:"style=simple,explode=false,name=serviceId"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    ServiceID string `pathParam:"style=simple,explode=false,name=serviceId"`
+    
 }
 
 type WebhooksShortExecuteSecurity struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
+    APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type WebhooksShortExecuteRequest struct {
-	PathParams WebhooksShortExecutePathParams
-	Request    interface{} `request:"mediaType=application/json"`
-	Security   WebhooksShortExecuteSecurity
+    PathParams WebhooksShortExecutePathParams 
+    Request interface{} `request:"mediaType=application/json"`
+    Security WebhooksShortExecuteSecurity 
+    
 }
 
 type WebhooksShortExecuteResponse struct {
-	BadRequestResponse      *shared.BadRequestResponse
-	ContentType             string
-	ExecuteWebhookResponse  *shared.ExecuteWebhookResponse
-	NotFoundResponse        *shared.NotFoundResponse
-	PaymentRequiredResponse *shared.PaymentRequiredResponse
-	StatusCode              int64
-	UnauthorizedResponse    *shared.UnauthorizedResponse
-	UnexpectedErrorResponse *shared.UnexpectedErrorResponse
-	UnprocessableResponse   *shared.UnprocessableResponse
+    BadRequestResponse *shared.BadRequestResponse 
+    ContentType string 
+    ExecuteWebhookResponse *shared.ExecuteWebhookResponse 
+    NotFoundResponse *shared.NotFoundResponse 
+    PaymentRequiredResponse *shared.PaymentRequiredResponse 
+    StatusCode int64 
+    UnauthorizedResponse *shared.UnauthorizedResponse 
+    UnexpectedErrorResponse *shared.UnexpectedErrorResponse 
+    UnprocessableResponse *shared.UnprocessableResponse 
+    
 }
+

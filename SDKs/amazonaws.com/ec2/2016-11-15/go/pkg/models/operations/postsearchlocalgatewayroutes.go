@@ -1,42 +1,53 @@
 package operations
 
+
+
+
 type PostSearchLocalGatewayRoutesActionEnum string
 
 const (
-	PostSearchLocalGatewayRoutesActionEnumSearchLocalGatewayRoutes PostSearchLocalGatewayRoutesActionEnum = "SearchLocalGatewayRoutes"
+    PostSearchLocalGatewayRoutesActionEnumSearchLocalGatewayRoutes PostSearchLocalGatewayRoutesActionEnum = "SearchLocalGatewayRoutes"
 )
+
+
 
 type PostSearchLocalGatewayRoutesVersionEnum string
 
 const (
-	PostSearchLocalGatewayRoutesVersionEnumTwoThousandAndSixteen1115 PostSearchLocalGatewayRoutesVersionEnum = "2016-11-15"
+    PostSearchLocalGatewayRoutesVersionEnumTwoThousandAndSixteen1115 PostSearchLocalGatewayRoutesVersionEnum = "2016-11-15"
 )
 
+
 type PostSearchLocalGatewayRoutesQueryParams struct {
-	Action     PostSearchLocalGatewayRoutesActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	MaxResults *string                                 `queryParam:"style=form,explode=true,name=MaxResults"`
-	NextToken  *string                                 `queryParam:"style=form,explode=true,name=NextToken"`
-	Version    PostSearchLocalGatewayRoutesVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action PostSearchLocalGatewayRoutesActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
+    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
+    Version PostSearchLocalGatewayRoutesVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type PostSearchLocalGatewayRoutesHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type PostSearchLocalGatewayRoutesRequest struct {
-	QueryParams PostSearchLocalGatewayRoutesQueryParams
-	Headers     PostSearchLocalGatewayRoutesHeaders
-	Request     []byte `request:"mediaType=text/xml"`
+    QueryParams PostSearchLocalGatewayRoutesQueryParams 
+    Headers PostSearchLocalGatewayRoutesHeaders 
+    Request []byte `request:"mediaType=text/xml"`
+    
 }
 
 type PostSearchLocalGatewayRoutesResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

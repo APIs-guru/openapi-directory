@@ -19,21 +19,23 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def user_ctrl_get_user_by_id(self, request: operations.UserCtrlGetUserByIDRequest) -> operations.UserCtrlGetUserByIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/api/accounts/{account_id}/users/{user_id}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UserCtrlGetUserByIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UserHalResponse])
@@ -46,21 +48,21 @@ class SDK:
         return res
 
     
-    
     def user_ctrl_get_users(self, request: operations.UserCtrlGetUsersRequest) -> operations.UserCtrlGetUsersResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/api/accounts/{account_id}/users", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UserCtrlGetUsersResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UsersHalResponse])

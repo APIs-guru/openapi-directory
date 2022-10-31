@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CardActions struct {
-	BaseUrls []string `json:"baseUrls"`
+    BaseUrls []string `json:"baseUrls"`
+    
 }
+

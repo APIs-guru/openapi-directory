@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RevokeRoomUsersPathParams struct {
-	RoomID int64 `pathParam:"style=simple,explode=false,name=room_id"`
+    RoomID int64 `pathParam:"style=simple,explode=false,name=room_id"`
+    
 }
 
 type RevokeRoomUsersHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type RevokeRoomUsersRequest struct {
-	PathParams RevokeRoomUsersPathParams
-	Headers    RevokeRoomUsersHeaders
-	Request    shared.RoomUsersDeleteBatchRequest `request:"mediaType=application/json"`
+    PathParams RevokeRoomUsersPathParams 
+    Headers RevokeRoomUsersHeaders 
+    Request shared.RoomUsersDeleteBatchRequest `request:"mediaType=application/json"`
+    
 }
 
 type RevokeRoomUsersResponse struct {
-	ContentType   string
-	ErrorResponse *shared.ErrorResponse
-	StatusCode    int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    
 }
+

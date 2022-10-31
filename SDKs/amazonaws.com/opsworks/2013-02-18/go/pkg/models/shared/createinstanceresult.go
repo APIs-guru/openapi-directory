@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateInstanceResult struct {
-	InstanceID *string `json:"InstanceId,omitempty"`
+    InstanceID *string `json:"InstanceId,omitempty"`
+    
 }
+

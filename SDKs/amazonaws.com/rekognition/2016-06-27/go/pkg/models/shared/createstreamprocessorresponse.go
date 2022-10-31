@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateStreamProcessorResponse struct {
-	StreamProcessorArn *string `json:"StreamProcessorArn,omitempty"`
+    StreamProcessorArn *string `json:"StreamProcessorArn,omitempty"`
+    
 }
+

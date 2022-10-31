@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateModelExplainabilityJobDefinitionResponse struct {
-	JobDefinitionArn string `json:"JobDefinitionArn"`
+    JobDefinitionArn string `json:"JobDefinitionArn"`
+    
 }
+

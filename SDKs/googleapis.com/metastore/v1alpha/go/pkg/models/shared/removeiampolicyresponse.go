@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RemoveIamPolicyResponse struct {
-	Success *bool `json:"success,omitempty"`
+    Success *bool `json:"success,omitempty"`
+    
 }
+

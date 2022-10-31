@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateCaCertificateParams struct {
-	Action CaCertificateUpdateActionEnum `json:"action"`
+    Action CaCertificateUpdateActionEnum `json:"action"`
+    
 }
+

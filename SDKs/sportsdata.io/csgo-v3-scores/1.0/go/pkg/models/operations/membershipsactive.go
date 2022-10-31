@@ -1,22 +1,30 @@
 package operations
 
+
+
+
 type MembershipsActiveFormatEnum string
 
 const (
-	MembershipsActiveFormatEnumXML  MembershipsActiveFormatEnum = "xml"
-	MembershipsActiveFormatEnumJSON MembershipsActiveFormatEnum = "json"
+    MembershipsActiveFormatEnumXML MembershipsActiveFormatEnum = "xml"
+MembershipsActiveFormatEnumJSON MembershipsActiveFormatEnum = "json"
 )
 
+
 type MembershipsActivePathParams struct {
-	Format MembershipsActiveFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    Format MembershipsActiveFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    
 }
 
 type MembershipsActiveRequest struct {
-	PathParams MembershipsActivePathParams
+    PathParams MembershipsActivePathParams 
+    
 }
 
 type MembershipsActiveResponse struct {
-	ContentType string
-	Memberships []interface{}
-	StatusCode  int64
+    ContentType string 
+    Memberships []interface{} 
+    StatusCode int64 
+    
 }
+

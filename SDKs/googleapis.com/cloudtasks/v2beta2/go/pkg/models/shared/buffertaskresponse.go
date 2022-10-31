@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BufferTaskResponse struct {
-	Task *Task `json:"task,omitempty"`
+    Task *Task `json:"task,omitempty"`
+    
 }
+

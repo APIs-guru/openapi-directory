@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNamePathParams struct {
-	OrganizationName string `pathParam:"style=simple,explode=false,name=organizationName"`
-	ReceiverName     string `pathParam:"style=simple,explode=false,name=receiverName"`
+    OrganizationName string `pathParam:"style=simple,explode=false,name=organizationName"`
+    ReceiverName string `pathParam:"style=simple,explode=false,name=receiverName"`
+    
 }
 
 type DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameSecurity struct {
-	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
+    OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
+    
 }
 
 type DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameRequest struct {
-	PathParams DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNamePathParams
-	Security   DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameSecurity
+    PathParams DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNamePathParams 
+    Security DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameSecurity 
+    
 }
 
 type DeleteSettingsOrganizationsOrganizationNameReceiversReceiverNameResponse struct {
-	ContentType string
-	Receiver    *shared.Receiver
-	StatusCode  int64
+    ContentType string 
+    Receiver *shared.Receiver 
+    StatusCode int64 
+    
 }
+

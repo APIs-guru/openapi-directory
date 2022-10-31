@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteAssessmentRunRequest struct {
-	AssessmentRunArn string `json:"assessmentRunArn"`
+    AssessmentRunArn string `json:"assessmentRunArn"`
+    
 }
+

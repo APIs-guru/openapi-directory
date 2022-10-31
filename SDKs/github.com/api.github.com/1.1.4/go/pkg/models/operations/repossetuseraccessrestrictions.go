@@ -1,27 +1,31 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ReposSetUserAccessRestrictionsPathParams struct {
-	Branch string `pathParam:"style=simple,explode=false,name=branch"`
-	Owner  string `pathParam:"style=simple,explode=false,name=owner"`
-	Repo   string `pathParam:"style=simple,explode=false,name=repo"`
+    Branch string `pathParam:"style=simple,explode=false,name=branch"`
+    Owner string `pathParam:"style=simple,explode=false,name=owner"`
+    Repo string `pathParam:"style=simple,explode=false,name=repo"`
+    
 }
 
 type ReposSetUserAccessRestrictionsRequestBody struct {
-	Users []string `json:"users"`
+    Users []string `json:"users"`
+    
 }
 
 type ReposSetUserAccessRestrictionsRequest struct {
-	PathParams ReposSetUserAccessRestrictionsPathParams
-	Request    *ReposSetUserAccessRestrictionsRequestBody `request:"mediaType=application/json"`
+    PathParams ReposSetUserAccessRestrictionsPathParams 
+    Request *ReposSetUserAccessRestrictionsRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type ReposSetUserAccessRestrictionsResponse struct {
-	ContentType     string
-	StatusCode      int64
-	SimpleUsers     []shared.SimpleUser
-	ValidationError *shared.ValidationError
+    ContentType string 
+    StatusCode int64 
+    SimpleUsers []shared.SimpleUser 
+    ValidationError *shared.ValidationError 
+    
 }
+

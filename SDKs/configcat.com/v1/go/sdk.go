@@ -70,6 +70,7 @@ func (s *SDK) AddOrUpdateIntegrationLink(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -129,6 +130,7 @@ func (s *SDK) CreateConfig(ctx context.Context, request operations.CreateConfigR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -188,6 +190,7 @@ func (s *SDK) CreateEnvironment(ctx context.Context, request operations.CreateEn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -247,6 +250,7 @@ func (s *SDK) CreatePermissionGroup(ctx context.Context, request operations.Crea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -306,6 +310,7 @@ func (s *SDK) CreateProduct(ctx context.Context, request operations.CreateProduc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -365,6 +370,7 @@ func (s *SDK) CreateSetting(ctx context.Context, request operations.CreateSettin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -424,6 +430,7 @@ func (s *SDK) CreateTag(ctx context.Context, request operations.CreateTagRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1746,6 +1753,8 @@ func (s *SDK) GetSettingValueBySdkkey(ctx context.Context, request operations.Ge
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -2051,6 +2060,7 @@ func (s *SDK) InviteMember(ctx context.Context, request operations.InviteMemberR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2094,6 +2104,7 @@ func (s *SDK) ReplaceSettingValue(ctx context.Context, request operations.Replac
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2155,7 +2166,10 @@ func (s *SDK) ReplaceSettingValueBySdkkey(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2216,6 +2230,7 @@ func (s *SDK) UpdateConfig(ctx context.Context, request operations.UpdateConfigR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2275,6 +2290,7 @@ func (s *SDK) UpdateEnvironment(ctx context.Context, request operations.UpdateEn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2334,6 +2350,7 @@ func (s *SDK) UpdatePermissionGroup(ctx context.Context, request operations.Upda
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2393,6 +2410,7 @@ func (s *SDK) UpdateProduct(ctx context.Context, request operations.UpdateProduc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2452,6 +2470,7 @@ func (s *SDK) UpdateSetting(ctx context.Context, request operations.UpdateSettin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2511,6 +2530,7 @@ func (s *SDK) UpdateSettingValue(ctx context.Context, request operations.UpdateS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2573,7 +2593,10 @@ func (s *SDK) UpdateSettingValueBySdkkey(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2635,6 +2658,7 @@ func (s *SDK) UpdateTag(ctx context.Context, request operations.UpdateTagRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

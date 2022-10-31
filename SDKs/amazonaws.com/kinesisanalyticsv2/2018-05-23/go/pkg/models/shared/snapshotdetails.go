@@ -1,12 +1,13 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type SnapshotDetails struct {
-	ApplicationVersionID      int64              `json:"ApplicationVersionId"`
-	SnapshotCreationTimestamp *time.Time         `json:"SnapshotCreationTimestamp,omitempty"`
-	SnapshotName              string             `json:"SnapshotName"`
-	SnapshotStatus            SnapshotStatusEnum `json:"SnapshotStatus"`
+    ApplicationVersionID int64 `json:"ApplicationVersionId"`
+    SnapshotCreationTimestamp *time.Time `json:"SnapshotCreationTimestamp,omitempty"`
+    SnapshotName string `json:"SnapshotName"`
+    SnapshotStatus SnapshotStatusEnum `json:"SnapshotStatus"`
+    
 }
+

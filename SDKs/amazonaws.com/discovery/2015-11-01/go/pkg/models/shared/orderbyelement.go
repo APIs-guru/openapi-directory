@@ -1,6 +1,10 @@
 package shared
 
+
+
 type OrderByElement struct {
-	FieldName string           `json:"fieldName"`
-	SortOrder *OrderStringEnum `json:"sortOrder,omitempty"`
+    FieldName string `json:"fieldName"`
+    SortOrder *OrderStringEnum `json:"sortOrder,omitempty"`
+    
 }
+

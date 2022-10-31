@@ -5,9 +5,9 @@ from sdk.models import shared
 
 @dataclass
 class GetVaccineStatusHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept' }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
-    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type' }})
+    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

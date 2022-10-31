@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeTextTranslationJobResponse struct {
-	TextTranslationJobProperties *TextTranslationJobProperties `json:"TextTranslationJobProperties,omitempty"`
+    TextTranslationJobProperties *TextTranslationJobProperties `json:"TextTranslationJobProperties,omitempty"`
+    
 }
+

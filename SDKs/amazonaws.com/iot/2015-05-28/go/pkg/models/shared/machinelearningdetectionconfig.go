@@ -1,5 +1,9 @@
 package shared
 
+
+
 type MachineLearningDetectionConfig struct {
-	ConfidenceLevel ConfidenceLevelEnum `json:"confidenceLevel"`
+    ConfidenceLevel ConfidenceLevelEnum `json:"confidenceLevel"`
+    
 }
+

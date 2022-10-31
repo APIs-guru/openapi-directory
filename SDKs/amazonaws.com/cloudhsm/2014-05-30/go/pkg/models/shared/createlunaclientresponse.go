@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateLunaClientResponse struct {
-	ClientArn *string `json:"ClientArn,omitempty"`
+    ClientArn *string `json:"ClientArn,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BulkTransactions struct {
-	Transactions []SaveTransaction `json:"transactions"`
+    Transactions []SaveTransaction `json:"transactions"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ModifyHsmResponse struct {
-	HsmArn *string `json:"HsmArn,omitempty"`
+    HsmArn *string `json:"HsmArn,omitempty"`
+    
 }
+

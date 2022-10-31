@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SaveMonthCategoryWrapper struct {
-	Category SaveMonthCategory `json:"category"`
+    Category SaveMonthCategory `json:"category"`
+    
 }
+

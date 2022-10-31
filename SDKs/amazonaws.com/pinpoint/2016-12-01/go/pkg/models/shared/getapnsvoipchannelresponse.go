@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetApnsVoipChannelResponse struct {
-	ApnsVoipChannelResponse ApnsVoipChannelResponse `json:"APNSVoipChannelResponse"`
+    ApnsVoipChannelResponse ApnsVoipChannelResponse `json:"APNSVoipChannelResponse"`
+    
 }
+

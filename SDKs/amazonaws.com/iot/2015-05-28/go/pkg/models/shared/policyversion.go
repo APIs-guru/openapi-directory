@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type PolicyVersion struct {
-	CreateDate       *time.Time `json:"createDate,omitempty"`
-	IsDefaultVersion *bool      `json:"isDefaultVersion,omitempty"`
-	VersionID        *string    `json:"versionId,omitempty"`
+    CreateDate *time.Time `json:"createDate,omitempty"`
+    IsDefaultVersion *bool `json:"isDefaultVersion,omitempty"`
+    VersionID *string `json:"versionId,omitempty"`
+    
 }
+

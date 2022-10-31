@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetOffersResponse struct {
-	Products []Product `json:"products,omitempty"`
+    Products []Product `json:"products,omitempty"`
+    
 }
+

@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type CaptureModeEnum string
 
 const (
-	CaptureModeEnumInput  CaptureModeEnum = "Input"
-	CaptureModeEnumOutput CaptureModeEnum = "Output"
+    CaptureModeEnumInput CaptureModeEnum = "Input"
+CaptureModeEnumOutput CaptureModeEnum = "Output"
 )
+
+

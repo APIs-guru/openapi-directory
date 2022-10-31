@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PutResourcePolicyResponse struct {
-	ResourcePolicy *ResourcePolicy `json:"resourcePolicy,omitempty"`
+    ResourcePolicy *ResourcePolicy `json:"resourcePolicy,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetWebhookResult struct {
-	Webhook Webhook `json:"webhook"`
+    Webhook Webhook `json:"webhook"`
+    
 }
+

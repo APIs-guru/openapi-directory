@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetPanoramaFirewallPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetPanoramaFirewallSecurity struct {
-	APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
+    APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type GetPanoramaFirewallRequest struct {
-	PathParams GetPanoramaFirewallPathParams
-	Security   GetPanoramaFirewallSecurity
+    PathParams GetPanoramaFirewallPathParams 
+    Security GetPanoramaFirewallSecurity 
+    
 }
 
 type GetPanoramaFirewallResponse struct {
-	ContentType      string
-	StatusCode       int64
-	SwitchDataSource *shared.SwitchDataSource
+    ContentType string 
+    StatusCode int64 
+    SwitchDataSource *shared.SwitchDataSource 
+    
 }
+

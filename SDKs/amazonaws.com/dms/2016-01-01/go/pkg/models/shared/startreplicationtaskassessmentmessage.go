@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StartReplicationTaskAssessmentMessage struct {
-	ReplicationTaskArn string `json:"ReplicationTaskArn"`
+    ReplicationTaskArn string `json:"ReplicationTaskArn"`
+    
 }
+

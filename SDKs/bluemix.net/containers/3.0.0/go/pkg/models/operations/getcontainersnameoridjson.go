@@ -1,21 +1,28 @@
 package operations
 
+
+
 type GetContainersNameOrIDJSONPathParams struct {
-	NameOrID string `pathParam:"style=simple,explode=false,name=name_or_id"`
+    NameOrID string `pathParam:"style=simple,explode=false,name=name_or_id"`
+    
 }
 
 type GetContainersNameOrIDJSONHeaders struct {
-	XAuthProjectID string `header:"name=X-Auth-Project-Id"`
-	XAuthToken     string `header:"name=X-Auth-Token"`
+    XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
+    XAuthToken string `header:"style=simple,explode=false,name=X-Auth-Token"`
+    
 }
 
 type GetContainersNameOrIDJSONRequest struct {
-	PathParams GetContainersNameOrIDJSONPathParams
-	Headers    GetContainersNameOrIDJSONHeaders
+    PathParams GetContainersNameOrIDJSONPathParams 
+    Headers GetContainersNameOrIDJSONHeaders 
+    
 }
 
 type GetContainersNameOrIDJSONResponse struct {
-	ContainerInfo *interface{}
-	ContentType   string
-	StatusCode    int64
+    ContainerInfo *interface{} 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

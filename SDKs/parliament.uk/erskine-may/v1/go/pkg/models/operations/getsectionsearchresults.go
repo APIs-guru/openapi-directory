@@ -1,26 +1,30 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetSectionSearchResultsPathParams struct {
-	SearchTerm string `pathParam:"style=simple,explode=false,name=searchTerm"`
+    SearchTerm string `pathParam:"style=simple,explode=false,name=searchTerm"`
+    
 }
 
 type GetSectionSearchResultsQueryParams struct {
-	Skip *int32 `queryParam:"style=form,explode=true,name=skip"`
-	Take *int32 `queryParam:"style=form,explode=true,name=take"`
+    Skip *int32 `queryParam:"style=form,explode=true,name=skip"`
+    Take *int32 `queryParam:"style=form,explode=true,name=take"`
+    
 }
 
 type GetSectionSearchResultsRequest struct {
-	PathParams  GetSectionSearchResultsPathParams
-	QueryParams GetSectionSearchResultsQueryParams
+    PathParams GetSectionSearchResultsPathParams 
+    QueryParams GetSectionSearchResultsQueryParams 
+    
 }
 
 type GetSectionSearchResultsResponse struct {
-	Body                                          []byte
-	ContentType                                   string
-	ErskineMaySearchErskineMaySectionSearchResult *shared.ErskineMaySearchErskineMaySectionSearchResult
-	StatusCode                                    int64
+    Body []byte 
+    ContentType string 
+    ErskineMaySearchErskineMaySectionSearchResult *shared.ErskineMaySearchErskineMaySectionSearchResult 
+    StatusCode int64 
+    
 }
+

@@ -5,7 +5,7 @@ from dataclasses_json import dataclass_json
 
 @dataclass
 class TaxonomyAttractionsHeaders:
-    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 class TaxonomyAttractionsRequestBodySortOrderEnum(str, Enum):
     SEO_PUBLISHED_DATE_D = "SEO_PUBLISHED_DATE_D"

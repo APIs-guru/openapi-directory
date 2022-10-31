@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetAllAnnotatedGenesUsingGetPathParams struct {
-	AccID string `pathParam:"style=simple,explode=false,name=accId"`
+    AccID string `pathParam:"style=simple,explode=false,name=accId"`
+    
 }
 
 type GetAllAnnotatedGenesUsingGetRequest struct {
-	PathParams GetAllAnnotatedGenesUsingGetPathParams
+    PathParams GetAllAnnotatedGenesUsingGetPathParams 
+    
 }
 
 type GetAllAnnotatedGenesUsingGetResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

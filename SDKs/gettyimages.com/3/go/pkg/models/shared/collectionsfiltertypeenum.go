@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type CollectionsFilterTypeEnum string
 
 const (
-	CollectionsFilterTypeEnumInclude CollectionsFilterTypeEnum = "include"
-	CollectionsFilterTypeEnumExclude CollectionsFilterTypeEnum = "exclude"
+    CollectionsFilterTypeEnumInclude CollectionsFilterTypeEnum = "include"
+CollectionsFilterTypeEnumExclude CollectionsFilterTypeEnum = "exclude"
 )
+
+

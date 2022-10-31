@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetEnvironmentTemplateInput struct {
-	Name string `json:"name"`
+    Name string `json:"name"`
+    
 }
+

@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type SourceAuthTypeEnum string
 
 const (
-	SourceAuthTypeEnumOauth SourceAuthTypeEnum = "OAUTH"
+    SourceAuthTypeEnumOauth SourceAuthTypeEnum = "OAUTH"
 )
+
+

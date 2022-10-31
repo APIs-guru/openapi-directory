@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateLocationNfsResponse struct {
-	LocationArn *string `json:"LocationArn,omitempty"`
+    LocationArn *string `json:"LocationArn,omitempty"`
+    
 }
+

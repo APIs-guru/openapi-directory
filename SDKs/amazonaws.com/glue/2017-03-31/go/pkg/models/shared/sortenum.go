@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type SortEnum string
 
 const (
-	SortEnumAsc  SortEnum = "ASC"
-	SortEnumDesc SortEnum = "DESC"
+    SortEnumAsc SortEnum = "ASC"
+SortEnumDesc SortEnum = "DESC"
 )
+
+

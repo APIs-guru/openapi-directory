@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteDomainResponse struct {
-	Message string `json:"Message"`
+    Message string `json:"Message"`
+    
 }
+

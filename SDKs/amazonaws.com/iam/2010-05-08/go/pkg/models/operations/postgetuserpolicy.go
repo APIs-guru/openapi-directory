@@ -1,40 +1,51 @@
 package operations
 
+
+
+
 type PostGetUserPolicyActionEnum string
 
 const (
-	PostGetUserPolicyActionEnumGetUserPolicy PostGetUserPolicyActionEnum = "GetUserPolicy"
+    PostGetUserPolicyActionEnumGetUserPolicy PostGetUserPolicyActionEnum = "GetUserPolicy"
 )
+
+
 
 type PostGetUserPolicyVersionEnum string
 
 const (
-	PostGetUserPolicyVersionEnumTwoThousandAndTen0508 PostGetUserPolicyVersionEnum = "2010-05-08"
+    PostGetUserPolicyVersionEnumTwoThousandAndTen0508 PostGetUserPolicyVersionEnum = "2010-05-08"
 )
 
+
 type PostGetUserPolicyQueryParams struct {
-	Action  PostGetUserPolicyActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	Version PostGetUserPolicyVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action PostGetUserPolicyActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    Version PostGetUserPolicyVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type PostGetUserPolicyHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type PostGetUserPolicyRequest struct {
-	QueryParams PostGetUserPolicyQueryParams
-	Headers     PostGetUserPolicyHeaders
-	Request     []byte `request:"mediaType=text/xml"`
+    QueryParams PostGetUserPolicyQueryParams 
+    Headers PostGetUserPolicyHeaders 
+    Request []byte `request:"mediaType=text/xml"`
+    
 }
 
 type PostGetUserPolicyResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

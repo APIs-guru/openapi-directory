@@ -1,49 +1,53 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetV3SearchImagesQueryParams struct {
-	AgeOfPeople               []shared.AgeOfPeopleFilterTypeEnum    `queryParam:"style=form,explode=false,name=age_of_people"`
-	Artists                   *string                               `queryParam:"style=form,explode=true,name=artists"`
-	CollectionCodes           []string                              `queryParam:"style=form,explode=false,name=collection_codes"`
-	CollectionsFilterType     *shared.CollectionsFilterTypeEnum     `queryParam:"style=form,explode=true,name=collections_filter_type"`
-	Color                     *string                               `queryParam:"style=form,explode=true,name=color"`
-	Compositions              []shared.CompositionsFilterTypeEnum   `queryParam:"style=form,explode=false,name=compositions"`
-	DownloadProduct           *string                               `queryParam:"style=form,explode=true,name=download_product"`
-	EmbedContentOnly          *bool                                 `queryParam:"style=form,explode=true,name=embed_content_only"`
-	Ethnicity                 []shared.EthnicityFilterTypeEnum      `queryParam:"style=form,explode=false,name=ethnicity"`
-	EventIds                  []int32                               `queryParam:"style=form,explode=false,name=event_ids"`
-	ExcludeNudity             *bool                                 `queryParam:"style=form,explode=true,name=exclude_nudity"`
-	Fields                    []shared.ImagesFieldValuesEnum        `queryParam:"style=form,explode=false,name=fields"`
-	FileTypes                 []shared.SearchFileTypeEnum           `queryParam:"style=form,explode=false,name=file_types"`
-	GraphicalStyles           []shared.GraphicalStyleEnum           `queryParam:"style=form,explode=false,name=graphical_styles"`
-	GraphicalStylesFilterType *shared.GraphicalStylesFilterTypeEnum `queryParam:"style=form,explode=true,name=graphical_styles_filter_type"`
-	IncludeRelatedSearches    *bool                                 `queryParam:"style=form,explode=true,name=include_related_searches"`
-	KeywordIds                []int32                               `queryParam:"style=form,explode=false,name=keyword_ids"`
-	MinimumSize               *shared.TeeShirtSizeEnum              `queryParam:"style=form,explode=true,name=minimum_size"`
-	NumberOfPeople            []shared.NumberOfPeopleFilterTypeEnum `queryParam:"style=form,explode=false,name=number_of_people"`
-	Orientations              []shared.OrientationRequestEnum       `queryParam:"style=form,explode=false,name=orientations"`
-	Page                      *int32                                `queryParam:"style=form,explode=true,name=page"`
-	PageSize                  *int32                                `queryParam:"style=form,explode=true,name=page_size"`
-	Phrase                    *string                               `queryParam:"style=form,explode=true,name=phrase"`
-	SortOrder                 *shared.BlendedImageSortOrderEnum     `queryParam:"style=form,explode=true,name=sort_order"`
-	SpecificPeople            []string                              `queryParam:"style=form,explode=false,name=specific_people"`
+    AgeOfPeople []shared.AgeOfPeopleFilterTypeEnum `queryParam:"style=form,explode=false,name=age_of_people"`
+    Artists *string `queryParam:"style=form,explode=true,name=artists"`
+    CollectionCodes []string `queryParam:"style=form,explode=false,name=collection_codes"`
+    CollectionsFilterType *shared.CollectionsFilterTypeEnum `queryParam:"style=form,explode=true,name=collections_filter_type"`
+    Color *string `queryParam:"style=form,explode=true,name=color"`
+    Compositions []shared.CompositionsFilterTypeEnum `queryParam:"style=form,explode=false,name=compositions"`
+    DownloadProduct *string `queryParam:"style=form,explode=true,name=download_product"`
+    EmbedContentOnly *bool `queryParam:"style=form,explode=true,name=embed_content_only"`
+    Ethnicity []shared.EthnicityFilterTypeEnum `queryParam:"style=form,explode=false,name=ethnicity"`
+    EventIds []int32 `queryParam:"style=form,explode=false,name=event_ids"`
+    ExcludeNudity *bool `queryParam:"style=form,explode=true,name=exclude_nudity"`
+    Fields []shared.ImagesFieldValuesEnum `queryParam:"style=form,explode=false,name=fields"`
+    FileTypes []shared.SearchFileTypeEnum `queryParam:"style=form,explode=false,name=file_types"`
+    GraphicalStyles []shared.GraphicalStyleEnum `queryParam:"style=form,explode=false,name=graphical_styles"`
+    GraphicalStylesFilterType *shared.GraphicalStylesFilterTypeEnum `queryParam:"style=form,explode=true,name=graphical_styles_filter_type"`
+    IncludeRelatedSearches *bool `queryParam:"style=form,explode=true,name=include_related_searches"`
+    KeywordIds []int32 `queryParam:"style=form,explode=false,name=keyword_ids"`
+    MinimumSize *shared.TeeShirtSizeEnum `queryParam:"style=form,explode=true,name=minimum_size"`
+    NumberOfPeople []shared.NumberOfPeopleFilterTypeEnum `queryParam:"style=form,explode=false,name=number_of_people"`
+    Orientations []shared.OrientationRequestEnum `queryParam:"style=form,explode=false,name=orientations"`
+    Page *int32 `queryParam:"style=form,explode=true,name=page"`
+    PageSize *int32 `queryParam:"style=form,explode=true,name=page_size"`
+    Phrase *string `queryParam:"style=form,explode=true,name=phrase"`
+    SortOrder *shared.BlendedImageSortOrderEnum `queryParam:"style=form,explode=true,name=sort_order"`
+    SpecificPeople []string `queryParam:"style=form,explode=false,name=specific_people"`
+    
 }
 
 type GetV3SearchImagesHeaders struct {
-	AcceptLanguage *string `header:"name=Accept-Language"`
-	GiCountryCode  *string `header:"name=GI-Country-Code"`
+    AcceptLanguage *string `header:"style=simple,explode=false,name=Accept-Language"`
+    GiCountryCode *string `header:"style=simple,explode=false,name=GI-Country-Code"`
+    
 }
 
 type GetV3SearchImagesRequest struct {
-	QueryParams GetV3SearchImagesQueryParams
-	Headers     GetV3SearchImagesHeaders
+    QueryParams GetV3SearchImagesQueryParams 
+    Headers GetV3SearchImagesHeaders 
+    
 }
 
 type GetV3SearchImagesResponse struct {
-	ContentType                  string
-	ImageSearchItemSearchResults *shared.ImageSearchItemSearchResults
-	StatusCode                   int64
+    ContentType string 
+    ImageSearchItemSearchResults *shared.ImageSearchItemSearchResults 
+    StatusCode int64 
+    
 }
+

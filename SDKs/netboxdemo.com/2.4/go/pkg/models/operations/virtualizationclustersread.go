@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type VirtualizationClustersReadPathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type VirtualizationClustersReadRequest struct {
-	PathParams VirtualizationClustersReadPathParams
+    PathParams VirtualizationClustersReadPathParams 
+    
 }
 
 type VirtualizationClustersReadResponse struct {
-	Cluster     *shared.Cluster
-	ContentType string
-	StatusCode  int64
+    Cluster *shared.Cluster 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

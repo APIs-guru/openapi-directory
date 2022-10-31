@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AwsElbLoadBalancerInstance struct {
-	InstanceID *string `json:"InstanceId,omitempty"`
+    InstanceID *string `json:"InstanceId,omitempty"`
+    
 }
+

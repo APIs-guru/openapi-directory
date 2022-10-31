@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StopTrainingJobRequest struct {
-	TrainingJobName string `json:"TrainingJobName"`
+    TrainingJobName string `json:"TrainingJobName"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AssociateConnectionAliasResult struct {
-	ConnectionIdentifier *string `json:"ConnectionIdentifier,omitempty"`
+    ConnectionIdentifier *string `json:"ConnectionIdentifier,omitempty"`
+    
 }
+

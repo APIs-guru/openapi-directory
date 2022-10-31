@@ -1,14 +1,20 @@
 package operations
 
+
+
 type PostStorageCommitmentIDRemovePathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type PostStorageCommitmentIDRemoveRequest struct {
-	PathParams PostStorageCommitmentIDRemovePathParams
+    PathParams PostStorageCommitmentIDRemovePathParams 
+    
 }
 
 type PostStorageCommitmentIDRemoveResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,12 +1,13 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type RenewalSummary struct {
-	DomainValidationRecords []DomainValidationRecord `json:"domainValidationRecords,omitempty"`
-	RenewalStatus           *RenewalStatusEnum       `json:"renewalStatus,omitempty"`
-	RenewalStatusReason     *string                  `json:"renewalStatusReason,omitempty"`
-	UpdatedAt               *time.Time               `json:"updatedAt,omitempty"`
+    DomainValidationRecords []DomainValidationRecord `json:"domainValidationRecords,omitempty"`
+    RenewalStatus *RenewalStatusEnum `json:"renewalStatus,omitempty"`
+    RenewalStatusReason *string `json:"renewalStatusReason,omitempty"`
+    UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+    
 }
+

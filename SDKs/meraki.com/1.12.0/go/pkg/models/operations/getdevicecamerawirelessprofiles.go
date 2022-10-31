@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetDeviceCameraWirelessProfilesPathParams struct {
-	Serial string `pathParam:"style=simple,explode=false,name=serial"`
+    Serial string `pathParam:"style=simple,explode=false,name=serial"`
+    
 }
 
 type GetDeviceCameraWirelessProfilesRequest struct {
-	PathParams GetDeviceCameraWirelessProfilesPathParams
+    PathParams GetDeviceCameraWirelessProfilesPathParams 
+    
 }
 
 type GetDeviceCameraWirelessProfilesResponse struct {
-	ContentType                                             string
-	StatusCode                                              int64
-	GetDeviceCameraWirelessProfiles200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetDeviceCameraWirelessProfiles200ApplicationJSONObject map[string]interface{} 
+    
 }
+

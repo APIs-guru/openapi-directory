@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type DelegatedService struct {
-	DelegationEnabledDate *time.Time `json:"DelegationEnabledDate,omitempty"`
-	ServicePrincipal      *string    `json:"ServicePrincipal,omitempty"`
+    DelegationEnabledDate *time.Time `json:"DelegationEnabledDate,omitempty"`
+    ServicePrincipal *string `json:"ServicePrincipal,omitempty"`
+    
 }
+

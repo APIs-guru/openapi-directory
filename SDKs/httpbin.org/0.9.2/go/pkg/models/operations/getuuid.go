@@ -1,6 +1,10 @@
 package operations
 
+
+
 type GetUUIDResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

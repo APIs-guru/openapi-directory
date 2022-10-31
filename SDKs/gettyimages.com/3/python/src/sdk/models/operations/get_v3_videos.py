@@ -11,7 +11,7 @@ class GetV3VideosQueryParams:
 
 @dataclass
 class GetV3VideosHeaders:
-    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

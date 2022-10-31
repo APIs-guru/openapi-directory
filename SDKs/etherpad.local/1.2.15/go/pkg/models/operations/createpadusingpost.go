@@ -1,43 +1,53 @@
 package operations
 
+
+
 type CreatePadUsingPostQueryParams struct {
-	PadID *string `queryParam:"style=form,explode=true,name=padID"`
-	Text  *string `queryParam:"style=form,explode=true,name=text"`
+    PadID *string `queryParam:"style=form,explode=true,name=padID"`
+    Text *string `queryParam:"style=form,explode=true,name=text"`
+    
 }
 
 type CreatePadUsingPostRequest struct {
-	QueryParams CreatePadUsingPostQueryParams
+    QueryParams CreatePadUsingPostQueryParams 
+    
 }
 
 type CreatePadUsingPost200ApplicationJSON struct {
-	Code    *int64                 `json:"code,omitempty"`
-	Data    map[string]interface{} `json:"data,omitempty"`
-	Message *string                `json:"message,omitempty"`
+    Code *int64 `json:"code,omitempty"`
+    Data map[string]interface{} `json:"data,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type CreatePadUsingPost400ApplicationJSON struct {
-	Code    *int64                 `json:"code,omitempty"`
-	Data    map[string]interface{} `json:"data,omitempty"`
-	Message *string                `json:"message,omitempty"`
+    Code *int64 `json:"code,omitempty"`
+    Data map[string]interface{} `json:"data,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type CreatePadUsingPost401ApplicationJSON struct {
-	Code    *int64                 `json:"code,omitempty"`
-	Data    map[string]interface{} `json:"data,omitempty"`
-	Message *string                `json:"message,omitempty"`
+    Code *int64 `json:"code,omitempty"`
+    Data map[string]interface{} `json:"data,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type CreatePadUsingPost500ApplicationJSON struct {
-	Code    *int64                 `json:"code,omitempty"`
-	Data    map[string]interface{} `json:"data,omitempty"`
-	Message *string                `json:"message,omitempty"`
+    Code *int64 `json:"code,omitempty"`
+    Data map[string]interface{} `json:"data,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type CreatePadUsingPostResponse struct {
-	ContentType                                string
-	StatusCode                                 int64
-	CreatePadUsingPost200ApplicationJSONObject *CreatePadUsingPost200ApplicationJSON
-	CreatePadUsingPost400ApplicationJSONObject *CreatePadUsingPost400ApplicationJSON
-	CreatePadUsingPost401ApplicationJSONObject *CreatePadUsingPost401ApplicationJSON
-	CreatePadUsingPost500ApplicationJSONObject *CreatePadUsingPost500ApplicationJSON
+    ContentType string 
+    StatusCode int64 
+    CreatePadUsingPost200ApplicationJSONObject *CreatePadUsingPost200ApplicationJSON 
+    CreatePadUsingPost400ApplicationJSONObject *CreatePadUsingPost400ApplicationJSON 
+    CreatePadUsingPost401ApplicationJSONObject *CreatePadUsingPost401ApplicationJSON 
+    CreatePadUsingPost500ApplicationJSONObject *CreatePadUsingPost500ApplicationJSON 
+    
 }
+

@@ -1,6 +1,10 @@
 package shared
 
+
+
 type DeleteGeoMatchSetRequest struct {
-	ChangeToken   string `json:"ChangeToken"`
-	GeoMatchSetID string `json:"GeoMatchSetId"`
+    ChangeToken string `json:"ChangeToken"`
+    GeoMatchSetID string `json:"GeoMatchSetId"`
+    
 }
+

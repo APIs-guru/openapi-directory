@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetDeploymentConfigInput struct {
-	DeploymentConfigName string `json:"deploymentConfigName"`
+    DeploymentConfigName string `json:"deploymentConfigName"`
+    
 }
+

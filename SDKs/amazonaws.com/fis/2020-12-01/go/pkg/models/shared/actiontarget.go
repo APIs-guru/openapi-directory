@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ActionTarget struct {
-	ResourceType *string `json:"resourceType,omitempty"`
+    ResourceType *string `json:"resourceType,omitempty"`
+    
 }
+

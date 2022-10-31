@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ScoreConfigOutput struct {
-	ScoreConfigByCountry []ScoreConfig `json:"ScoreConfigByCountry,omitempty"`
+    ScoreConfigByCountry []ScoreConfig `json:"ScoreConfigByCountry,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteBatchPredictionOutput struct {
-	BatchPredictionID *string `json:"BatchPredictionId,omitempty"`
+    BatchPredictionID *string `json:"BatchPredictionId,omitempty"`
+    
 }
+

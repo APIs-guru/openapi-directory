@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TrackingIssue struct {
-	URL *string `json:"url,omitempty"`
+    URL *string `json:"url,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CellInput struct {
-	Fact *string `json:"fact,omitempty"`
+    Fact *string `json:"fact,omitempty"`
+    
 }
+

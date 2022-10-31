@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SapoDataSourceProperties struct {
-	ObjectPath *string `json:"objectPath,omitempty"`
+    ObjectPath *string `json:"objectPath,omitempty"`
+    
 }
+

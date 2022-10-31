@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RepositoryCredentials struct {
-	CredentialsParameter string `json:"credentialsParameter"`
+    CredentialsParameter string `json:"credentialsParameter"`
+    
 }
+

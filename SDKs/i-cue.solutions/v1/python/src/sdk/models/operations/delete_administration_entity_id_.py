@@ -9,7 +9,7 @@ class DeleteAdministrationEntityIDPathParams:
 
 @dataclass
 class DeleteAdministrationEntityIDHeaders:
-    token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Token' }})
+    token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeSubscriptionResponse struct {
-	Subscription *Subscription `json:"Subscription,omitempty"`
+    Subscription *Subscription `json:"Subscription,omitempty"`
+    
 }
+

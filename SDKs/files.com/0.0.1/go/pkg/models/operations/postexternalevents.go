@@ -1,28 +1,33 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
+
 
 type PostExternalEventsRequestBodyStatusEnum string
 
 const (
-	PostExternalEventsRequestBodyStatusEnumSuccess        PostExternalEventsRequestBodyStatusEnum = "success"
-	PostExternalEventsRequestBodyStatusEnumError          PostExternalEventsRequestBodyStatusEnum = "error"
-	PostExternalEventsRequestBodyStatusEnumPartialFailure PostExternalEventsRequestBodyStatusEnum = "partial_failure"
+    PostExternalEventsRequestBodyStatusEnumSuccess PostExternalEventsRequestBodyStatusEnum = "success"
+PostExternalEventsRequestBodyStatusEnumError PostExternalEventsRequestBodyStatusEnum = "error"
+PostExternalEventsRequestBodyStatusEnumPartialFailure PostExternalEventsRequestBodyStatusEnum = "partial_failure"
 )
 
+
 type PostExternalEventsRequestBody struct {
-	Body   string                                  `multipartForm:"name=body"`
-	Status PostExternalEventsRequestBodyStatusEnum `multipartForm:"name=status"`
+    Body string `multipartForm:"name=body"`
+    Status PostExternalEventsRequestBodyStatusEnum `multipartForm:"name=status"`
+    
 }
 
 type PostExternalEventsRequest struct {
-	Request PostExternalEventsRequestBody `request:"mediaType=multipart/form-data"`
+    Request PostExternalEventsRequestBody `request:"mediaType=multipart/form-data"`
+    
 }
 
 type PostExternalEventsResponse struct {
-	ContentType         string
-	ExternalEventEntity *shared.ExternalEventEntity
-	StatusCode          int64
+    ContentType string 
+    ExternalEventEntity *shared.ExternalEventEntity 
+    StatusCode int64 
+    
 }
+

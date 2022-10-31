@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type EventSubscription struct {
-	Event        InspectorEventEnum `json:"event"`
-	SubscribedAt time.Time          `json:"subscribedAt"`
+    Event InspectorEventEnum `json:"event"`
+    SubscribedAt time.Time `json:"subscribedAt"`
+    
 }
+

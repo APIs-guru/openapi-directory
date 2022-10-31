@@ -414,6 +414,7 @@ func (s *SDK) PostOauthAccessToken(ctx context.Context, request operations.PostO
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -472,6 +473,7 @@ func (s *SDK) PostOrders(ctx context.Context, request operations.PostOrdersReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -551,6 +553,7 @@ func (s *SDK) PutOrdersIDShip(ctx context.Context, request operations.PutOrdersI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -600,6 +603,7 @@ func (s *SDK) PutOrdersIDStatus(ctx context.Context, request operations.PutOrder
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -649,6 +653,7 @@ func (s *SDK) PutReturns(ctx context.Context, request operations.PutReturnsReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

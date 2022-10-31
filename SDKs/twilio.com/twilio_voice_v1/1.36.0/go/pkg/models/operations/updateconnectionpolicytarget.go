@@ -1,39 +1,43 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var UpdateConnectionPolicyTargetServers = []string{
 	"https://voice.twilio.com",
 }
 
 type UpdateConnectionPolicyTargetPathParams struct {
-	ConnectionPolicySid string `pathParam:"style=simple,explode=false,name=ConnectionPolicySid"`
-	Sid                 string `pathParam:"style=simple,explode=false,name=Sid"`
+    ConnectionPolicySid string `pathParam:"style=simple,explode=false,name=ConnectionPolicySid"`
+    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    
 }
 
 type UpdateConnectionPolicyTargetUpdateConnectionPolicyTargetRequest struct {
-	Enabled      *bool   `form:"name=Enabled"`
-	FriendlyName *string `form:"name=FriendlyName"`
-	Priority     *int64  `form:"name=Priority"`
-	Target       *string `form:"name=Target"`
-	Weight       *int64  `form:"name=Weight"`
+    Enabled *bool `form:"name=Enabled"`
+    FriendlyName *string `form:"name=FriendlyName"`
+    Priority *int64 `form:"name=Priority"`
+    Target *string `form:"name=Target"`
+    Weight *int64 `form:"name=Weight"`
+    
 }
 
 type UpdateConnectionPolicyTargetSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type UpdateConnectionPolicyTargetRequest struct {
-	ServerURL  *string
-	PathParams UpdateConnectionPolicyTargetPathParams
-	Request    *UpdateConnectionPolicyTargetUpdateConnectionPolicyTargetRequest `request:"mediaType=application/x-www-form-urlencoded"`
-	Security   UpdateConnectionPolicyTargetSecurity
+    ServerURL *string 
+    PathParams UpdateConnectionPolicyTargetPathParams 
+    Request *UpdateConnectionPolicyTargetUpdateConnectionPolicyTargetRequest `request:"mediaType=application/x-www-form-urlencoded"`
+    Security UpdateConnectionPolicyTargetSecurity 
+    
 }
 
 type UpdateConnectionPolicyTargetResponse struct {
-	ContentType                                   string
-	StatusCode                                    int64
-	VoiceV1ConnectionPolicyConnectionPolicyTarget *shared.VoiceV1ConnectionPolicyConnectionPolicyTarget
+    ContentType string 
+    StatusCode int64 
+    VoiceV1ConnectionPolicyConnectionPolicyTarget *shared.VoiceV1ConnectionPolicyConnectionPolicyTarget 
+    
 }
+

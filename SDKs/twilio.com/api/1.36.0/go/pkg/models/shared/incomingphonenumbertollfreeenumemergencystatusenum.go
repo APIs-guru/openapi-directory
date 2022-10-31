@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type IncomingPhoneNumberTollFreeEnumEmergencyStatusEnum string
 
 const (
-	IncomingPhoneNumberTollFreeEnumEmergencyStatusEnumActive   IncomingPhoneNumberTollFreeEnumEmergencyStatusEnum = "Active"
-	IncomingPhoneNumberTollFreeEnumEmergencyStatusEnumInactive IncomingPhoneNumberTollFreeEnumEmergencyStatusEnum = "Inactive"
+    IncomingPhoneNumberTollFreeEnumEmergencyStatusEnumActive IncomingPhoneNumberTollFreeEnumEmergencyStatusEnum = "Active"
+IncomingPhoneNumberTollFreeEnumEmergencyStatusEnumInactive IncomingPhoneNumberTollFreeEnumEmergencyStatusEnum = "Inactive"
 )
+
+

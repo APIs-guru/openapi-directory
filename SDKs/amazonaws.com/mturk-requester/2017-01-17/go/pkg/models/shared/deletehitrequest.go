@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteHitRequest struct {
-	HitID string `json:"HITId"`
+    HitID string `json:"HITId"`
+    
 }
+

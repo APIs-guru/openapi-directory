@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PutRequest struct {
-	Item map[string]AttributeValue `json:"Item"`
+    Item map[string]AttributeValue `json:"Item"`
+    
 }
+

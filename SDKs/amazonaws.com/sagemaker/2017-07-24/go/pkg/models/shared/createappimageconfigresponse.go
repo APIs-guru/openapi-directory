@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateAppImageConfigResponse struct {
-	AppImageConfigArn *string `json:"AppImageConfigArn,omitempty"`
+    AppImageConfigArn *string `json:"AppImageConfigArn,omitempty"`
+    
 }
+

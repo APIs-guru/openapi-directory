@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ReportTaskRunnerHeartbeatOutput struct {
-	Terminate bool `json:"terminate"`
+    Terminate bool `json:"terminate"`
+    
 }
+

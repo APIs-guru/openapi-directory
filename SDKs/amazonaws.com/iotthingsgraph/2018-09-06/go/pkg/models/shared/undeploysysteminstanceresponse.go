@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UndeploySystemInstanceResponse struct {
-	Summary *SystemInstanceSummary `json:"summary,omitempty"`
+    Summary *SystemInstanceSummary `json:"summary,omitempty"`
+    
 }
+

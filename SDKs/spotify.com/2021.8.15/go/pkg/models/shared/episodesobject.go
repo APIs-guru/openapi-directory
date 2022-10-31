@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EpisodesObject struct {
-	Episodes []EpisodeObject `json:"episodes,omitempty"`
+    Episodes []EpisodeObject `json:"episodes,omitempty"`
+    
 }
+

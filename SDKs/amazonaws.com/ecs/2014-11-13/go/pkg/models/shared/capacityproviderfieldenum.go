@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type CapacityProviderFieldEnum string
 
 const (
-	CapacityProviderFieldEnumTags CapacityProviderFieldEnum = "TAGS"
+    CapacityProviderFieldEnumTags CapacityProviderFieldEnum = "TAGS"
 )
+
+

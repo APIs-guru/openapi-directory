@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type Measurement struct {
-	Timestamp *time.Time `json:"timestamp,omitempty"`
-	Value     *float64   `json:"value,omitempty"`
+    Timestamp *time.Time `json:"timestamp,omitempty"`
+    Value *float64 `json:"value,omitempty"`
+    
 }
+

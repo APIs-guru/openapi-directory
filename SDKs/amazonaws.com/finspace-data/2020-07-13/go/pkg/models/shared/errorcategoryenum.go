@@ -1,14 +1,19 @@
 package shared
 
+
+
+
 type ErrorCategoryEnum string
 
 const (
-	ErrorCategoryEnumTheInputsToThisRequestAreInvalid                                ErrorCategoryEnum = "The_inputs_to_this_request_are_invalid"
-	ErrorCategoryEnumServiceLimitsHaveBeenExceeded                                   ErrorCategoryEnum = "Service_limits_have_been_exceeded"
-	ErrorCategoryEnumMissingRequiredPermissionToPerformThisRequest                   ErrorCategoryEnum = "Missing_required_permission_to_perform_this_request"
-	ErrorCategoryEnumOneOrMoreInputsToThisRequestWereNotFound                        ErrorCategoryEnum = "One_or_more_inputs_to_this_request_were_not_found"
-	ErrorCategoryEnumTheSystemTemporarilyLacksSufficientResourcesToProcessTheRequest ErrorCategoryEnum = "The_system_temporarily_lacks_sufficient_resources_to_process_the_request"
-	ErrorCategoryEnumAnInternalErrorHasOccurred                                      ErrorCategoryEnum = "An_internal_error_has_occurred"
-	ErrorCategoryEnumCancelled                                                       ErrorCategoryEnum = "Cancelled"
-	ErrorCategoryEnumAUserRecoverableErrorHasOccurred                                ErrorCategoryEnum = "A_user_recoverable_error_has_occurred"
+    ErrorCategoryEnumTheInputsToThisRequestAreInvalid ErrorCategoryEnum = "The_inputs_to_this_request_are_invalid"
+ErrorCategoryEnumServiceLimitsHaveBeenExceeded ErrorCategoryEnum = "Service_limits_have_been_exceeded"
+ErrorCategoryEnumMissingRequiredPermissionToPerformThisRequest ErrorCategoryEnum = "Missing_required_permission_to_perform_this_request"
+ErrorCategoryEnumOneOrMoreInputsToThisRequestWereNotFound ErrorCategoryEnum = "One_or_more_inputs_to_this_request_were_not_found"
+ErrorCategoryEnumTheSystemTemporarilyLacksSufficientResourcesToProcessTheRequest ErrorCategoryEnum = "The_system_temporarily_lacks_sufficient_resources_to_process_the_request"
+ErrorCategoryEnumAnInternalErrorHasOccurred ErrorCategoryEnum = "An_internal_error_has_occurred"
+ErrorCategoryEnumCancelled ErrorCategoryEnum = "Cancelled"
+ErrorCategoryEnumAUserRecoverableErrorHasOccurred ErrorCategoryEnum = "A_user_recoverable_error_has_occurred"
 )
+
+

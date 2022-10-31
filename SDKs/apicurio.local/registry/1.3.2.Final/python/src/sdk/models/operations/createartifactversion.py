@@ -23,7 +23,7 @@ class CreateArtifactVersionXRegistryArtifactTypeEnum(str, Enum):
 
 @dataclass
 class CreateArtifactVersionHeaders:
-    x_registry_artifact_type: Optional[CreateArtifactVersionXRegistryArtifactTypeEnum] = field(default=None, metadata={'header': { 'field_name': 'X-Registry-ArtifactType' }})
+    x_registry_artifact_type: Optional[CreateArtifactVersionXRegistryArtifactTypeEnum] = field(default=None, metadata={'header': { 'field_name': 'X-Registry-ArtifactType', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

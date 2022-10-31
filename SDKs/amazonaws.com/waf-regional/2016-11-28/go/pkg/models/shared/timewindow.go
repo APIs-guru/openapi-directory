@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type TimeWindow struct {
-	EndTime   time.Time `json:"EndTime"`
-	StartTime time.Time `json:"StartTime"`
+    EndTime time.Time `json:"EndTime"`
+    StartTime time.Time `json:"StartTime"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type NotificationTargetItem struct {
-	SnsTopicArn *string `json:"snsTopicArn,omitempty"`
+    SnsTopicArn *string `json:"snsTopicArn,omitempty"`
+    
 }
+

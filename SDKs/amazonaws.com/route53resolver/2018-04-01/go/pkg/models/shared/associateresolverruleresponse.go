@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AssociateResolverRuleResponse struct {
-	ResolverRuleAssociation *ResolverRuleAssociation `json:"ResolverRuleAssociation,omitempty"`
+    ResolverRuleAssociation *ResolverRuleAssociation `json:"ResolverRuleAssociation,omitempty"`
+    
 }
+

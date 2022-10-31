@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type BotLocaleFilterNameEnum string
 
 const (
-	BotLocaleFilterNameEnumBotLocaleName BotLocaleFilterNameEnum = "BotLocaleName"
+    BotLocaleFilterNameEnumBotLocaleName BotLocaleFilterNameEnum = "BotLocaleName"
 )
+
+

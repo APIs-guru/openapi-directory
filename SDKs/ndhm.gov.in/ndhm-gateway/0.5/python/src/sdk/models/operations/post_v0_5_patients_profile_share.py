@@ -8,8 +8,8 @@ POST_V0_5_PATIENTS_PROFILE_SHARE_SERVERS = [
 
 @dataclass
 class PostV05PatientsProfileShareHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
-    x_hip_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIP-ID' }})
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    x_hip_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIP-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

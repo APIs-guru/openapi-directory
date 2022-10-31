@@ -1,6 +1,10 @@
 package shared
 
+
+
 type BatchAssociateServiceActionWithProvisioningArtifactInput struct {
-	AcceptLanguage            *string                    `json:"AcceptLanguage,omitempty"`
-	ServiceActionAssociations []ServiceActionAssociation `json:"ServiceActionAssociations"`
+    AcceptLanguage *string `json:"AcceptLanguage,omitempty"`
+    ServiceActionAssociations []ServiceActionAssociation `json:"ServiceActionAssociations"`
+    
 }
+

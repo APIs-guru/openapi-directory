@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ItemClipFilesList struct {
-	Items []ItemClipFiles `json:"items"`
+    Items []ItemClipFiles `json:"items"`
+    
 }
+

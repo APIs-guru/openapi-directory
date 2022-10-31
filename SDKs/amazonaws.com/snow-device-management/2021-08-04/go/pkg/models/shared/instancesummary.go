@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type InstanceSummary struct {
-	Instance      *Instance  `json:"instance,omitempty"`
-	LastUpdatedAt *time.Time `json:"lastUpdatedAt,omitempty"`
+    Instance *Instance `json:"instance,omitempty"`
+    LastUpdatedAt *time.Time `json:"lastUpdatedAt,omitempty"`
+    
 }
+

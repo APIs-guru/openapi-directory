@@ -1,49 +1,55 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var ListSchemaVersionServers = []string{
 	"https://events.twilio.com",
 }
 
 type ListSchemaVersionPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=Id"`
+    ID string `pathParam:"style=simple,explode=false,name=Id"`
+    
 }
 
 type ListSchemaVersionQueryParams struct {
-	PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
+    PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
+    
 }
 
 type ListSchemaVersionSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type ListSchemaVersionRequest struct {
-	ServerURL   *string
-	PathParams  ListSchemaVersionPathParams
-	QueryParams ListSchemaVersionQueryParams
-	Security    ListSchemaVersionSecurity
+    ServerURL *string 
+    PathParams ListSchemaVersionPathParams 
+    QueryParams ListSchemaVersionQueryParams 
+    Security ListSchemaVersionSecurity 
+    
 }
 
 type ListSchemaVersionListSchemaVersionResponseMeta struct {
-	FirstPageURL    *string `json:"first_page_url,omitempty"`
-	Key             *string `json:"key,omitempty"`
-	NextPageURL     *string `json:"next_page_url,omitempty"`
-	Page            *int64  `json:"page,omitempty"`
-	PageSize        *int64  `json:"page_size,omitempty"`
-	PreviousPageURL *string `json:"previous_page_url,omitempty"`
-	URL             *string `json:"url,omitempty"`
+    FirstPageURL *string `json:"first_page_url,omitempty"`
+    Key *string `json:"key,omitempty"`
+    NextPageURL *string `json:"next_page_url,omitempty"`
+    Page *int64 `json:"page,omitempty"`
+    PageSize *int64 `json:"page_size,omitempty"`
+    PreviousPageURL *string `json:"previous_page_url,omitempty"`
+    URL *string `json:"url,omitempty"`
+    
 }
 
 type ListSchemaVersionListSchemaVersionResponse struct {
-	Meta           *ListSchemaVersionListSchemaVersionResponseMeta `json:"meta,omitempty"`
-	SchemaVersions []shared.EventsV1SchemaSchemaVersion            `json:"schema_versions,omitempty"`
+    Meta *ListSchemaVersionListSchemaVersionResponseMeta `json:"meta,omitempty"`
+    SchemaVersions []shared.EventsV1SchemaSchemaVersion `json:"schema_versions,omitempty"`
+    
 }
 
 type ListSchemaVersionResponse struct {
-	ContentType               string
-	ListSchemaVersionResponse *ListSchemaVersionListSchemaVersionResponse
-	StatusCode                int64
+    ContentType string 
+    ListSchemaVersionResponse *ListSchemaVersionListSchemaVersionResponse 
+    StatusCode int64 
+    
 }
+

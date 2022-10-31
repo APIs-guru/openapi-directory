@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LinkType struct {
-	Href string `json:"href"`
+    Href string `json:"href"`
+    
 }
+

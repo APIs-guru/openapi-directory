@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type BlacklistEntry struct {
-	Description *string    `json:"Description,omitempty"`
-	ListingTime *time.Time `json:"ListingTime,omitempty"`
-	RblName     *string    `json:"RblName,omitempty"`
+    Description *string `json:"Description,omitempty"`
+    ListingTime *time.Time `json:"ListingTime,omitempty"`
+    RblName *string `json:"RblName,omitempty"`
+    
 }
+

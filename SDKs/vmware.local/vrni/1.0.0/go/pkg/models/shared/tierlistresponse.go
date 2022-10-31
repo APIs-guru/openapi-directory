@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TierListResponse struct {
-	Results []Tier `json:"results,omitempty"`
+    Results []Tier `json:"results,omitempty"`
+    
 }
+

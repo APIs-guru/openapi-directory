@@ -1,15 +1,21 @@
 package operations
 
+
+
 type ConnectRequestBody struct {
-	Endpoint string `json:"endpoint"`
+    Endpoint string `json:"endpoint"`
+    
 }
 
 type ConnectRequest struct {
-	Request *ConnectRequestBody `request:"mediaType=application/json"`
+    Request *ConnectRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type ConnectResponse struct {
-	ContentType                     string
-	StatusCode                      int64
-	Connect200ApplicationJSONString *string
+    ContentType string 
+    StatusCode int64 
+    Connect200ApplicationJSONString *string 
+    
 }
+

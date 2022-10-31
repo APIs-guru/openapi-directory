@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type BlockPublicAccessConfigurationMetadata struct {
-	CreatedByArn     string    `json:"CreatedByArn"`
-	CreationDateTime time.Time `json:"CreationDateTime"`
+    CreatedByArn string `json:"CreatedByArn"`
+    CreationDateTime time.Time `json:"CreationDateTime"`
+    
 }
+

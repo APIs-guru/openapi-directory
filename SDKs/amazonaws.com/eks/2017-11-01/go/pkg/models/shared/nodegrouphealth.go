@@ -1,5 +1,9 @@
 package shared
 
+
+
 type NodegroupHealth struct {
-	Issues []Issue `json:"issues,omitempty"`
+    Issues []Issue `json:"issues,omitempty"`
+    
 }
+

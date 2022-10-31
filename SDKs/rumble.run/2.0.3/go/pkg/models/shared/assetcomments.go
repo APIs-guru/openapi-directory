@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AssetComments struct {
-	Comments string `json:"comments"`
+    Comments string `json:"comments"`
+    
 }
+

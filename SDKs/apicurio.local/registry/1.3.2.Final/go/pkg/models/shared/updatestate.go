@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateState struct {
-	State ArtifactStateEnum `json:"state"`
+    State ArtifactStateEnum `json:"state"`
+    
 }
+

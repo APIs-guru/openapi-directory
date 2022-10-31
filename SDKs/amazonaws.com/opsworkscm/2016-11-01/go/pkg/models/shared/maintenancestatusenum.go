@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type MaintenanceStatusEnum string
 
 const (
-	MaintenanceStatusEnumSuccess MaintenanceStatusEnum = "SUCCESS"
-	MaintenanceStatusEnumFailed  MaintenanceStatusEnum = "FAILED"
+    MaintenanceStatusEnumSuccess MaintenanceStatusEnum = "SUCCESS"
+MaintenanceStatusEnumFailed MaintenanceStatusEnum = "FAILED"
 )
+
+

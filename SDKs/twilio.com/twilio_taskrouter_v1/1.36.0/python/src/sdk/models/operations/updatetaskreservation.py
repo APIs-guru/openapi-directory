@@ -15,7 +15,7 @@ class UpdateTaskReservationPathParams:
 
 @dataclass
 class UpdateTaskReservationHeaders:
-    if_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-Match' }})
+    if_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-Match', 'style': 'simple', 'explode': False }})
     
 class UpdateTaskReservationUpdateTaskReservationRequestConferenceRecordingStatusCallbackMethodEnum(str, Enum):
     HEAD = "HEAD"

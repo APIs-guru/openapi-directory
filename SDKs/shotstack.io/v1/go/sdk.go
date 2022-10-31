@@ -215,6 +215,7 @@ func (s *SDK) PostRender(ctx context.Context, request operations.PostRenderReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

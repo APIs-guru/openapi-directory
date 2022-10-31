@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetCampaignDateRangeKpiResponse struct {
-	CampaignDateRangeKpiResponse CampaignDateRangeKpiResponse `json:"CampaignDateRangeKpiResponse"`
+    CampaignDateRangeKpiResponse CampaignDateRangeKpiResponse `json:"CampaignDateRangeKpiResponse"`
+    
 }
+

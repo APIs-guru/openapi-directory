@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteOrganizationalUnitRequest struct {
-	OrganizationalUnitID string `json:"OrganizationalUnitId"`
+    OrganizationalUnitID string `json:"OrganizationalUnitId"`
+    
 }
+

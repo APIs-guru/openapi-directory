@@ -1,5 +1,9 @@
 package shared
 
+
+
 type MoveReplicationTaskResponse struct {
-	ReplicationTask *ReplicationTask `json:"ReplicationTask,omitempty"`
+    ReplicationTask *ReplicationTask `json:"ReplicationTask,omitempty"`
+    
 }
+

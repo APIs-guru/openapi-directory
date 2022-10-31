@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EmailRecipients struct {
-	To []RecipientDetail `json:"to,omitempty"`
+    To []RecipientDetail `json:"to,omitempty"`
+    
 }
+

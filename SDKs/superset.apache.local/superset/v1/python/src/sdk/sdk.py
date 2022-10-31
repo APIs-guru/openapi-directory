@@ -20,22 +20,25 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def delete_annotation_layer_(self, request: operations.DeleteAnnotationLayerRequest) -> operations.DeleteAnnotationLayerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/annotation_layer/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAnnotationLayerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteAnnotationLayer200ApplicationJSON])
@@ -60,20 +63,19 @@ class SDK:
         return res
 
     
-    
     def delete_annotation_layer_pk_(self, request: operations.DeleteAnnotationLayerPkRequest) -> operations.DeleteAnnotationLayerPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/annotation_layer/{pk}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAnnotationLayerPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteAnnotationLayerPk200ApplicationJSON])
@@ -94,21 +96,21 @@ class SDK:
         return res
 
     
-    
     def delete_annotation_layer_pk_annotation_(self, request: operations.DeleteAnnotationLayerPkAnnotationRequest) -> operations.DeleteAnnotationLayerPkAnnotationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/annotation_layer/{pk}/annotation/", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAnnotationLayerPkAnnotationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteAnnotationLayerPkAnnotation200ApplicationJSON])
@@ -133,20 +135,19 @@ class SDK:
         return res
 
     
-    
     def delete_annotation_layer_pk_annotation_annotation_id_(self, request: operations.DeleteAnnotationLayerPkAnnotationAnnotationIDRequest) -> operations.DeleteAnnotationLayerPkAnnotationAnnotationIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/annotation_layer/{pk}/annotation/{annotation_id}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAnnotationLayerPkAnnotationAnnotationIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteAnnotationLayerPkAnnotationAnnotationID200ApplicationJSON])
@@ -167,21 +168,21 @@ class SDK:
         return res
 
     
-    
     def delete_chart_(self, request: operations.DeleteChartRequest) -> operations.DeleteChartResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/chart/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteChartResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteChart200ApplicationJSON])
@@ -210,20 +211,19 @@ class SDK:
         return res
 
     
-    
     def delete_chart_pk_(self, request: operations.DeleteChartPkRequest) -> operations.DeleteChartPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/chart/{pk}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteChartPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteChartPk200ApplicationJSON])
@@ -252,21 +252,21 @@ class SDK:
         return res
 
     
-    
     def delete_css_template_(self, request: operations.DeleteCSSTemplateRequest) -> operations.DeleteCSSTemplateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/css_template/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCSSTemplateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteCSSTemplate200ApplicationJSON])
@@ -291,20 +291,19 @@ class SDK:
         return res
 
     
-    
     def delete_css_template_pk_(self, request: operations.DeleteCSSTemplatePkRequest) -> operations.DeleteCSSTemplatePkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/css_template/{pk}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCSSTemplatePkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteCSSTemplatePk200ApplicationJSON])
@@ -325,21 +324,21 @@ class SDK:
         return res
 
     
-    
     def delete_dashboard_(self, request: operations.DeleteDashboardRequest) -> operations.DeleteDashboardResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/dashboard/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDashboardResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteDashboard200ApplicationJSON])
@@ -368,20 +367,19 @@ class SDK:
         return res
 
     
-    
     def delete_dashboard_pk_(self, request: operations.DeleteDashboardPkRequest) -> operations.DeleteDashboardPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dashboard/{pk}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDashboardPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteDashboardPk200ApplicationJSON])
@@ -410,20 +408,19 @@ class SDK:
         return res
 
     
-    
     def delete_database_pk_(self, request: operations.DeleteDatabasePkRequest) -> operations.DeleteDatabasePkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/database/{pk}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDatabasePkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteDatabasePk200ApplicationJSON])
@@ -452,21 +449,21 @@ class SDK:
         return res
 
     
-    
     def delete_dataset_(self, request: operations.DeleteDatasetRequest) -> operations.DeleteDatasetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/dataset/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDatasetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteDataset200ApplicationJSON])
@@ -499,20 +496,19 @@ class SDK:
         return res
 
     
-    
     def delete_dataset_pk_(self, request: operations.DeleteDatasetPkRequest) -> operations.DeleteDatasetPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dataset/{pk}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDatasetPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteDatasetPk200ApplicationJSON])
@@ -541,20 +537,19 @@ class SDK:
         return res
 
     
-    
     def delete_dataset_pk_column_column_id_(self, request: operations.DeleteDatasetPkColumnColumnIDRequest) -> operations.DeleteDatasetPkColumnColumnIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dataset/{pk}/column/{column_id}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDatasetPkColumnColumnIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteDatasetPkColumnColumnID200ApplicationJSON])
@@ -583,20 +578,19 @@ class SDK:
         return res
 
     
-    
     def delete_dataset_pk_metric_metric_id_(self, request: operations.DeleteDatasetPkMetricMetricIDRequest) -> operations.DeleteDatasetPkMetricMetricIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dataset/{pk}/metric/{metric_id}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteDatasetPkMetricMetricIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteDatasetPkMetricMetricID200ApplicationJSON])
@@ -625,21 +619,21 @@ class SDK:
         return res
 
     
-    
     def delete_report_(self, request: operations.DeleteReportRequest) -> operations.DeleteReportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/report/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteReportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteReport200ApplicationJSON])
@@ -668,20 +662,19 @@ class SDK:
         return res
 
     
-    
     def delete_report_pk_(self, request: operations.DeleteReportPkRequest) -> operations.DeleteReportPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/report/{pk}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteReportPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteReportPk200ApplicationJSON])
@@ -706,21 +699,21 @@ class SDK:
         return res
 
     
-    
     def delete_saved_query_(self, request: operations.DeleteSavedQueryRequest) -> operations.DeleteSavedQueryResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/saved_query/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSavedQueryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteSavedQuery200ApplicationJSON])
@@ -745,20 +738,19 @@ class SDK:
         return res
 
     
-    
     def delete_saved_query_pk_(self, request: operations.DeleteSavedQueryPkRequest) -> operations.DeleteSavedQueryPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/saved_query/{pk}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSavedQueryPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteSavedQueryPk200ApplicationJSON])
@@ -779,21 +771,21 @@ class SDK:
         return res
 
     
-    
     def get_annotation_layer_(self, request: operations.GetAnnotationLayerRequest) -> operations.GetAnnotationLayerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/annotation_layer/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAnnotationLayerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAnnotationLayer200ApplicationJSON])
@@ -818,21 +810,21 @@ class SDK:
         return res
 
     
-    
     def get_annotation_layer_info(self, request: operations.GetAnnotationLayerInfoRequest) -> operations.GetAnnotationLayerInfoResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/annotation_layer/_info"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAnnotationLayerInfoResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAnnotationLayerInfo200ApplicationJSON])
@@ -857,21 +849,21 @@ class SDK:
         return res
 
     
-    
     def get_annotation_layer_pk_(self, request: operations.GetAnnotationLayerPkRequest) -> operations.GetAnnotationLayerPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/annotation_layer/{pk}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAnnotationLayerPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAnnotationLayerPk200ApplicationJSON])
@@ -900,21 +892,21 @@ class SDK:
         return res
 
     
-    
     def get_annotation_layer_pk_annotation_(self, request: operations.GetAnnotationLayerPkAnnotationRequest) -> operations.GetAnnotationLayerPkAnnotationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/annotation_layer/{pk}/annotation/", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAnnotationLayerPkAnnotationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAnnotationLayerPkAnnotation200ApplicationJSON])
@@ -939,21 +931,21 @@ class SDK:
         return res
 
     
-    
     def get_annotation_layer_pk_annotation_annotation_id_(self, request: operations.GetAnnotationLayerPkAnnotationAnnotationIDRequest) -> operations.GetAnnotationLayerPkAnnotationAnnotationIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/annotation_layer/{pk}/annotation/{annotation_id}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAnnotationLayerPkAnnotationAnnotationIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAnnotationLayerPkAnnotationAnnotationID200ApplicationJSON])
@@ -982,21 +974,21 @@ class SDK:
         return res
 
     
-    
     def get_annotation_layer_related_column_name_(self, request: operations.GetAnnotationLayerRelatedColumnNameRequest) -> operations.GetAnnotationLayerRelatedColumnNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/annotation_layer/related/{column_name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAnnotationLayerRelatedColumnNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.RelatedResponseSchema])
@@ -1021,21 +1013,21 @@ class SDK:
         return res
 
     
-    
     def get_async_event_(self, request: operations.GetAsyncEventRequest) -> operations.GetAsyncEventResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/async_event/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAsyncEventResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAsyncEvent200ApplicationJSON])
@@ -1052,21 +1044,21 @@ class SDK:
         return res
 
     
-    
     def get_chart_(self, request: operations.GetChartRequest) -> operations.GetChartResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/chart/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChartResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetChart200ApplicationJSON])
@@ -1091,20 +1083,19 @@ class SDK:
         return res
 
     
-    
     def get_chart_data_cache_key_(self, request: operations.GetChartDataCacheKeyRequest) -> operations.GetChartDataCacheKeyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/chart/data/{cache_key}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChartDataCacheKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ChartDataResponseSchema])
@@ -1133,21 +1124,21 @@ class SDK:
         return res
 
     
-    
     def get_chart_export_(self, request: operations.GetChartExportRequest) -> operations.GetChartExportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/chart/export/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChartExportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/zip"):
                 res.get_chart_export_200_application_zip_binary_string = r.content
@@ -1171,21 +1162,21 @@ class SDK:
         return res
 
     
-    
     def get_chart_favorite_status_(self, request: operations.GetChartFavoriteStatusRequest) -> operations.GetChartFavoriteStatusResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/chart/favorite_status/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChartFavoriteStatusResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetFavStarIdsSchema])
@@ -1210,21 +1201,21 @@ class SDK:
         return res
 
     
-    
     def get_chart_info(self, request: operations.GetChartInfoRequest) -> operations.GetChartInfoResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/chart/_info"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChartInfoResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetChartInfo200ApplicationJSON])
@@ -1249,21 +1240,21 @@ class SDK:
         return res
 
     
-    
     def get_chart_pk_(self, request: operations.GetChartPkRequest) -> operations.GetChartPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/chart/{pk}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChartPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetChartPk200ApplicationJSON])
@@ -1292,21 +1283,21 @@ class SDK:
         return res
 
     
-    
     def get_chart_pk_cache_screenshot_(self, request: operations.GetChartPkCacheScreenshotRequest) -> operations.GetChartPkCacheScreenshotResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/chart/{pk}/cache_screenshot/", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChartPkCacheScreenshotResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ChartCacheScreenshotResponseSchema])
@@ -1333,21 +1324,21 @@ class SDK:
         return res
 
     
-    
     def get_chart_pk_data_(self, request: operations.GetChartPkDataRequest) -> operations.GetChartPkDataResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/chart/{pk}/data/", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChartPkDataResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ChartDataResponseSchema])
@@ -1372,20 +1363,19 @@ class SDK:
         return res
 
     
-    
     def get_chart_pk_screenshot_digest_(self, request: operations.GetChartPkScreenshotDigestRequest) -> operations.GetChartPkScreenshotDigestResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/chart/{pk}/screenshot/{digest}/", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChartPkScreenshotDigestResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "image/*"):
                 res.get_chart_pk_screenshot_digest_200_image_wildcard_binary_string = r.content
@@ -1411,20 +1401,19 @@ class SDK:
         return res
 
     
-    
     def get_chart_pk_thumbnail_digest_(self, request: operations.GetChartPkThumbnailDigestRequest) -> operations.GetChartPkThumbnailDigestResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/chart/{pk}/thumbnail/{digest}/", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChartPkThumbnailDigestResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "image/*"):
                 res.get_chart_pk_thumbnail_digest_200_image_wildcard_binary_string = r.content
@@ -1450,21 +1439,21 @@ class SDK:
         return res
 
     
-    
     def get_chart_related_column_name_(self, request: operations.GetChartRelatedColumnNameRequest) -> operations.GetChartRelatedColumnNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/chart/related/{column_name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChartRelatedColumnNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.RelatedResponseSchema])
@@ -1489,21 +1478,21 @@ class SDK:
         return res
 
     
-    
     def get_css_template_(self, request: operations.GetCSSTemplateRequest) -> operations.GetCSSTemplateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/css_template/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetCSSTemplateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetCSSTemplate200ApplicationJSON])
@@ -1528,21 +1517,21 @@ class SDK:
         return res
 
     
-    
     def get_css_template_info(self, request: operations.GetCSSTemplateInfoRequest) -> operations.GetCSSTemplateInfoResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/css_template/_info"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetCSSTemplateInfoResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetCSSTemplateInfo200ApplicationJSON])
@@ -1567,21 +1556,21 @@ class SDK:
         return res
 
     
-    
     def get_css_template_pk_(self, request: operations.GetCSSTemplatePkRequest) -> operations.GetCSSTemplatePkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/css_template/{pk}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetCSSTemplatePkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetCSSTemplatePk200ApplicationJSON])
@@ -1610,21 +1599,21 @@ class SDK:
         return res
 
     
-    
     def get_css_template_related_column_name_(self, request: operations.GetCSSTemplateRelatedColumnNameRequest) -> operations.GetCSSTemplateRelatedColumnNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/css_template/related/{column_name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetCSSTemplateRelatedColumnNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.RelatedResponseSchema])
@@ -1649,21 +1638,21 @@ class SDK:
         return res
 
     
-    
     def get_dashboard_(self, request: operations.GetDashboardRequest) -> operations.GetDashboardResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/dashboard/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDashboardResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDashboard200ApplicationJSON])
@@ -1688,21 +1677,21 @@ class SDK:
         return res
 
     
-    
     def get_dashboard_export_(self, request: operations.GetDashboardExportRequest) -> operations.GetDashboardExportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/dashboard/export/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDashboardExportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
                 res.get_dashboard_export_200_text_plain_string = r.content
@@ -1730,21 +1719,21 @@ class SDK:
         return res
 
     
-    
     def get_dashboard_favorite_status_(self, request: operations.GetDashboardFavoriteStatusRequest) -> operations.GetDashboardFavoriteStatusResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/dashboard/favorite_status/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDashboardFavoriteStatusResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetFavStarIdsSchema])
@@ -1769,20 +1758,19 @@ class SDK:
         return res
 
     
-    
     def get_dashboard_id_or_slug_(self, request: operations.GetDashboardIDOrSlugRequest) -> operations.GetDashboardIDOrSlugResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dashboard/{id_or_slug}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDashboardIDOrSlugResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDashboardIDOrSlug200ApplicationJSON])
@@ -1805,20 +1793,19 @@ class SDK:
         return res
 
     
-    
     def get_dashboard_id_or_slug_charts(self, request: operations.GetDashboardIDOrSlugChartsRequest) -> operations.GetDashboardIDOrSlugChartsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dashboard/{id_or_slug}/charts", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDashboardIDOrSlugChartsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDashboardIDOrSlugCharts200ApplicationJSON])
@@ -1841,20 +1828,19 @@ class SDK:
         return res
 
     
-    
     def get_dashboard_id_or_slug_datasets(self, request: operations.GetDashboardIDOrSlugDatasetsRequest) -> operations.GetDashboardIDOrSlugDatasetsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dashboard/{id_or_slug}/datasets", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDashboardIDOrSlugDatasetsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDashboardIDOrSlugDatasets200ApplicationJSON])
@@ -1877,21 +1863,21 @@ class SDK:
         return res
 
     
-    
     def get_dashboard_info(self, request: operations.GetDashboardInfoRequest) -> operations.GetDashboardInfoResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/dashboard/_info"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDashboardInfoResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDashboardInfo200ApplicationJSON])
@@ -1916,21 +1902,21 @@ class SDK:
         return res
 
     
-    
     def get_dashboard_pk_thumbnail_digest_(self, request: operations.GetDashboardPkThumbnailDigestRequest) -> operations.GetDashboardPkThumbnailDigestResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dashboard/{pk}/thumbnail/{digest}/", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDashboardPkThumbnailDigestResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "image/*"):
                 res.get_dashboard_pk_thumbnail_digest_200_image_wildcard_binary_string = r.content
@@ -1958,21 +1944,21 @@ class SDK:
         return res
 
     
-    
     def get_dashboard_related_column_name_(self, request: operations.GetDashboardRelatedColumnNameRequest) -> operations.GetDashboardRelatedColumnNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dashboard/related/{column_name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDashboardRelatedColumnNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.RelatedResponseSchema])
@@ -1997,21 +1983,21 @@ class SDK:
         return res
 
     
-    
     def get_database_(self, request: operations.GetDatabaseRequest) -> operations.GetDatabaseResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/database/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatabaseResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDatabase200ApplicationJSON])
@@ -2036,20 +2022,19 @@ class SDK:
         return res
 
     
-    
     def get_database_available_(self, request: operations.GetDatabaseAvailableRequest) -> operations.GetDatabaseAvailableResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/database/available/"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatabaseAvailableResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[List[operations.GetDatabaseAvailable200ApplicationJSON]])
@@ -2066,21 +2051,21 @@ class SDK:
         return res
 
     
-    
     def get_database_export_(self, request: operations.GetDatabaseExportRequest) -> operations.GetDatabaseExportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/database/export/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatabaseExportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/zip"):
                 res.get_database_export_200_application_zip_binary_string = r.content
@@ -2100,21 +2085,21 @@ class SDK:
         return res
 
     
-    
     def get_database_info(self, request: operations.GetDatabaseInfoRequest) -> operations.GetDatabaseInfoResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/database/_info"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatabaseInfoResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDatabaseInfo200ApplicationJSON])
@@ -2139,21 +2124,21 @@ class SDK:
         return res
 
     
-    
     def get_database_pk_(self, request: operations.GetDatabasePkRequest) -> operations.GetDatabasePkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/database/{pk}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatabasePkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDatabasePk200ApplicationJSON])
@@ -2182,20 +2167,19 @@ class SDK:
         return res
 
     
-    
     def get_database_pk_function_names_(self, request: operations.GetDatabasePkFunctionNamesRequest) -> operations.GetDatabasePkFunctionNamesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/database/{pk}/function_names/", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatabasePkFunctionNamesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DatabaseFunctionNamesResponse])
@@ -2216,20 +2200,19 @@ class SDK:
         return res
 
     
-    
     def get_database_pk_related_objects_(self, request: operations.GetDatabasePkRelatedObjectsRequest) -> operations.GetDatabasePkRelatedObjectsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/database/{pk}/related_objects/", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatabasePkRelatedObjectsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DatabaseRelatedObjectsResponse])
@@ -2250,21 +2233,21 @@ class SDK:
         return res
 
     
-    
     def get_database_pk_schemas_(self, request: operations.GetDatabasePkSchemasRequest) -> operations.GetDatabasePkSchemasResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/database/{pk}/schemas/", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatabasePkSchemasResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SchemasResponseSchema])
@@ -2289,21 +2272,21 @@ class SDK:
         return res
 
     
-    
     def get_database_pk_select_star_table_name_(self, request: operations.GetDatabasePkSelectStarTableNameRequest) -> operations.GetDatabasePkSelectStarTableNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/database/{pk}/select_star/{table_name}/", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatabasePkSelectStarTableNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SelectStarResponseSchema])
@@ -2332,20 +2315,19 @@ class SDK:
         return res
 
     
-    
     def get_database_pk_select_star_table_name_schema_name_(self, request: operations.GetDatabasePkSelectStarTableNameSchemaNameRequest) -> operations.GetDatabasePkSelectStarTableNameSchemaNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/database/{pk}/select_star/{table_name}/{schema_name}/", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatabasePkSelectStarTableNameSchemaNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SelectStarResponseSchema])
@@ -2374,20 +2356,19 @@ class SDK:
         return res
 
     
-    
     def get_database_pk_table_table_name_schema_name_(self, request: operations.GetDatabasePkTableTableNameSchemaNameRequest) -> operations.GetDatabasePkTableTableNameSchemaNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/database/{pk}/table/{table_name}/{schema_name}/", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatabasePkTableTableNameSchemaNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TableMetadataResponseSchema])
@@ -2416,21 +2397,21 @@ class SDK:
         return res
 
     
-    
     def get_dataset_(self, request: operations.GetDatasetRequest) -> operations.GetDatasetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/dataset/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatasetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDataset200ApplicationJSON])
@@ -2455,21 +2436,21 @@ class SDK:
         return res
 
     
-    
     def get_dataset_distinct_column_name_(self, request: operations.GetDatasetDistinctColumnNameRequest) -> operations.GetDatasetDistinctColumnNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dataset/distinct/{column_name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatasetDistinctColumnNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DistincResponseSchema])
@@ -2494,21 +2475,21 @@ class SDK:
         return res
 
     
-    
     def get_dataset_export_(self, request: operations.GetDatasetExportRequest) -> operations.GetDatasetExportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/dataset/export/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatasetExportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/plain"):
                 res.get_dataset_export_200_text_plain_string = r.content
@@ -2532,21 +2513,21 @@ class SDK:
         return res
 
     
-    
     def get_dataset_info(self, request: operations.GetDatasetInfoRequest) -> operations.GetDatasetInfoResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/dataset/_info"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatasetInfoResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDatasetInfo200ApplicationJSON])
@@ -2571,21 +2552,21 @@ class SDK:
         return res
 
     
-    
     def get_dataset_pk_(self, request: operations.GetDatasetPkRequest) -> operations.GetDatasetPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dataset/{pk}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatasetPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetDatasetPk200ApplicationJSON])
@@ -2614,20 +2595,19 @@ class SDK:
         return res
 
     
-    
     def get_dataset_pk_related_objects(self, request: operations.GetDatasetPkRelatedObjectsRequest) -> operations.GetDatasetPkRelatedObjectsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dataset/{pk}/related_objects", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatasetPkRelatedObjectsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DatasetRelatedObjectsResponse])
@@ -2648,21 +2628,21 @@ class SDK:
         return res
 
     
-    
     def get_dataset_related_column_name_(self, request: operations.GetDatasetRelatedColumnNameRequest) -> operations.GetDatasetRelatedColumnNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dataset/related/{column_name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetDatasetRelatedColumnNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.RelatedResponseSchema])
@@ -2687,21 +2667,21 @@ class SDK:
         return res
 
     
-    
     def get_log_(self, request: operations.GetLogRequest) -> operations.GetLogResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/log/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLogResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLog200ApplicationJSON])
@@ -2726,21 +2706,21 @@ class SDK:
         return res
 
     
-    
     def get_log_pk_(self, request: operations.GetLogPkRequest) -> operations.GetLogPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/log/{pk}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLogPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLogPk200ApplicationJSON])
@@ -2769,20 +2749,19 @@ class SDK:
         return res
 
     
-    
     def get_menu_(self, request: operations.GetMenuRequest) -> operations.GetMenuResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/menu/"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetMenuResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetMenu200ApplicationJSON])
@@ -2795,20 +2774,19 @@ class SDK:
         return res
 
     
-    
     def get_openapi_version_openapi(self, request: operations.GetOpenapiVersionOpenapiRequest) -> operations.GetOpenapiVersionOpenapiResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/openapi/{version}/_openapi", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetOpenapiVersionOpenapiResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -2825,21 +2803,21 @@ class SDK:
         return res
 
     
-    
     def get_query_(self, request: operations.GetQueryRequest) -> operations.GetQueryResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/query/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetQueryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetQuery200ApplicationJSON])
@@ -2864,21 +2842,21 @@ class SDK:
         return res
 
     
-    
     def get_query_distinct_column_name_(self, request: operations.GetQueryDistinctColumnNameRequest) -> operations.GetQueryDistinctColumnNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/query/distinct/{column_name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetQueryDistinctColumnNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DistincResponseSchema])
@@ -2903,21 +2881,21 @@ class SDK:
         return res
 
     
-    
     def get_query_pk_(self, request: operations.GetQueryPkRequest) -> operations.GetQueryPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/query/{pk}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetQueryPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetQueryPk200ApplicationJSON])
@@ -2946,21 +2924,21 @@ class SDK:
         return res
 
     
-    
     def get_query_related_column_name_(self, request: operations.GetQueryRelatedColumnNameRequest) -> operations.GetQueryRelatedColumnNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/query/related/{column_name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetQueryRelatedColumnNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.RelatedResponseSchema])
@@ -2985,21 +2963,21 @@ class SDK:
         return res
 
     
-    
     def get_report_(self, request: operations.GetReportRequest) -> operations.GetReportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/report/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetReportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetReport200ApplicationJSON])
@@ -3024,21 +3002,21 @@ class SDK:
         return res
 
     
-    
     def get_report_info(self, request: operations.GetReportInfoRequest) -> operations.GetReportInfoResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/report/_info"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetReportInfoResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetReportInfo200ApplicationJSON])
@@ -3063,21 +3041,21 @@ class SDK:
         return res
 
     
-    
     def get_report_pk_(self, request: operations.GetReportPkRequest) -> operations.GetReportPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/report/{pk}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetReportPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetReportPk200ApplicationJSON])
@@ -3106,21 +3084,21 @@ class SDK:
         return res
 
     
-    
     def get_report_pk_log_(self, request: operations.GetReportPkLogRequest) -> operations.GetReportPkLogResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/report/{pk}/log/", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetReportPkLogResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetReportPkLog200ApplicationJSON])
@@ -3145,21 +3123,21 @@ class SDK:
         return res
 
     
-    
     def get_report_pk_log_log_id_(self, request: operations.GetReportPkLogLogIDRequest) -> operations.GetReportPkLogLogIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/report/{pk}/log/{log_id}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetReportPkLogLogIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetReportPkLogLogID200ApplicationJSON])
@@ -3188,21 +3166,21 @@ class SDK:
         return res
 
     
-    
     def get_report_related_column_name_(self, request: operations.GetReportRelatedColumnNameRequest) -> operations.GetReportRelatedColumnNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/report/related/{column_name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetReportRelatedColumnNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.RelatedResponseSchema])
@@ -3227,21 +3205,21 @@ class SDK:
         return res
 
     
-    
     def get_saved_query_(self, request: operations.GetSavedQueryRequest) -> operations.GetSavedQueryResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/saved_query/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSavedQueryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetSavedQuery200ApplicationJSON])
@@ -3266,21 +3244,21 @@ class SDK:
         return res
 
     
-    
     def get_saved_query_distinct_column_name_(self, request: operations.GetSavedQueryDistinctColumnNameRequest) -> operations.GetSavedQueryDistinctColumnNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/saved_query/distinct/{column_name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSavedQueryDistinctColumnNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DistincResponseSchema])
@@ -3305,21 +3283,21 @@ class SDK:
         return res
 
     
-    
     def get_saved_query_export_(self, request: operations.GetSavedQueryExportRequest) -> operations.GetSavedQueryExportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/saved_query/export/"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSavedQueryExportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/zip"):
                 res.get_saved_query_export_200_application_zip_binary_string = r.content
@@ -3343,21 +3321,21 @@ class SDK:
         return res
 
     
-    
     def get_saved_query_info(self, request: operations.GetSavedQueryInfoRequest) -> operations.GetSavedQueryInfoResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/saved_query/_info"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSavedQueryInfoResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetSavedQueryInfo200ApplicationJSON])
@@ -3382,21 +3360,21 @@ class SDK:
         return res
 
     
-    
     def get_saved_query_pk_(self, request: operations.GetSavedQueryPkRequest) -> operations.GetSavedQueryPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/saved_query/{pk}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSavedQueryPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetSavedQueryPk200ApplicationJSON])
@@ -3425,21 +3403,21 @@ class SDK:
         return res
 
     
-    
     def get_saved_query_related_column_name_(self, request: operations.GetSavedQueryRelatedColumnNameRequest) -> operations.GetSavedQueryRelatedColumnNameResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/saved_query/related/{column_name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSavedQueryRelatedColumnNameResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.RelatedResponseSchema])
@@ -3464,20 +3442,19 @@ class SDK:
         return res
 
     
-    
     def get_security_csrf_token_(self, request: operations.GetSecurityCsrfTokenRequest) -> operations.GetSecurityCsrfTokenResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/security/csrf_token/"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSecurityCsrfTokenResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetSecurityCsrfToken200ApplicationJSON])
@@ -3494,27 +3471,28 @@ class SDK:
         return res
 
     
-    
     def post_annotation_layer_(self, request: operations.PostAnnotationLayerRequest) -> operations.PostAnnotationLayerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/annotation_layer/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostAnnotationLayerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostAnnotationLayer201ApplicationJSON])
@@ -3539,27 +3517,28 @@ class SDK:
         return res
 
     
-    
     def post_annotation_layer_pk_annotation_(self, request: operations.PostAnnotationLayerPkAnnotationRequest) -> operations.PostAnnotationLayerPkAnnotationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/annotation_layer/{pk}/annotation/", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostAnnotationLayerPkAnnotationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostAnnotationLayerPkAnnotation201ApplicationJSON])
@@ -3584,27 +3563,28 @@ class SDK:
         return res
 
     
-    
     def post_cachekey_invalidate(self, request: operations.PostCachekeyInvalidateRequest) -> operations.PostCachekeyInvalidateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/cachekey/invalidate"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostCachekeyInvalidateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             pass
         elif r.status_code == 400:
@@ -3619,27 +3599,28 @@ class SDK:
         return res
 
     
-    
     def post_chart_(self, request: operations.PostChartRequest) -> operations.PostChartResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/chart/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostChartResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostChart201ApplicationJSON])
@@ -3664,27 +3645,28 @@ class SDK:
         return res
 
     
-    
     def post_chart_data(self, request: operations.PostChartDataRequest) -> operations.PostChartDataResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/chart/data"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostChartDataResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ChartDataResponseSchema])
@@ -3709,27 +3691,28 @@ class SDK:
         return res
 
     
-    
     def post_chart_import_(self, request: operations.PostChartImportRequest) -> operations.PostChartImportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/chart/import/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostChartImportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostChartImport200ApplicationJSON])
@@ -3754,27 +3737,28 @@ class SDK:
         return res
 
     
-    
     def post_css_template_(self, request: operations.PostCSSTemplateRequest) -> operations.PostCSSTemplateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/css_template/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostCSSTemplateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostCSSTemplate201ApplicationJSON])
@@ -3799,27 +3783,28 @@ class SDK:
         return res
 
     
-    
     def post_dashboard_(self, request: operations.PostDashboardRequest) -> operations.PostDashboardResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/dashboard/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostDashboardResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostDashboard201ApplicationJSON])
@@ -3846,27 +3831,28 @@ class SDK:
         return res
 
     
-    
     def post_dashboard_import_(self, request: operations.PostDashboardImportRequest) -> operations.PostDashboardImportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/dashboard/import/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostDashboardImportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostDashboardImport200ApplicationJSON])
@@ -3891,27 +3877,28 @@ class SDK:
         return res
 
     
-    
     def post_database_(self, request: operations.PostDatabaseRequest) -> operations.PostDatabaseResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/database/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostDatabaseResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostDatabase201ApplicationJSON])
@@ -3938,27 +3925,28 @@ class SDK:
         return res
 
     
-    
     def post_database_import_(self, request: operations.PostDatabaseImportRequest) -> operations.PostDatabaseImportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/database/import/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostDatabaseImportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostDatabaseImport200ApplicationJSON])
@@ -3983,27 +3971,28 @@ class SDK:
         return res
 
     
-    
     def post_database_test_connection(self, request: operations.PostDatabaseTestConnectionRequest) -> operations.PostDatabaseTestConnectionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/database/test_connection"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostDatabaseTestConnectionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostDatabaseTestConnection200ApplicationJSON])
@@ -4024,27 +4013,28 @@ class SDK:
         return res
 
     
-    
     def post_database_validate_parameters(self, request: operations.PostDatabaseValidateParametersRequest) -> operations.PostDatabaseValidateParametersResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/database/validate_parameters"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostDatabaseValidateParametersResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostDatabaseValidateParameters200ApplicationJSON])
@@ -4065,27 +4055,28 @@ class SDK:
         return res
 
     
-    
     def post_dataset_(self, request: operations.PostDatasetRequest) -> operations.PostDatasetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/dataset/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostDatasetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostDataset201ApplicationJSON])
@@ -4110,27 +4101,28 @@ class SDK:
         return res
 
     
-    
     def post_dataset_import_(self, request: operations.PostDatasetImportRequest) -> operations.PostDatasetImportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/dataset/import/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostDatasetImportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostDatasetImport200ApplicationJSON])
@@ -4155,27 +4147,28 @@ class SDK:
         return res
 
     
-    
     def post_log_(self, request: operations.PostLogRequest) -> operations.PostLogResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/log/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostLogResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostLog201ApplicationJSON])
@@ -4200,27 +4193,28 @@ class SDK:
         return res
 
     
-    
     def post_report_(self, request: operations.PostReportRequest) -> operations.PostReportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/report/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostReportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostReport201ApplicationJSON])
@@ -4245,27 +4239,28 @@ class SDK:
         return res
 
     
-    
     def post_saved_query_(self, request: operations.PostSavedQueryRequest) -> operations.PostSavedQueryResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/saved_query/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostSavedQueryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostSavedQuery201ApplicationJSON])
@@ -4290,27 +4285,28 @@ class SDK:
         return res
 
     
-    
     def post_saved_query_import_(self, request: operations.PostSavedQueryImportRequest) -> operations.PostSavedQueryImportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/saved_query/import/"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostSavedQueryImportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostSavedQueryImport200ApplicationJSON])
@@ -4335,26 +4331,28 @@ class SDK:
         return res
 
     
-    
     def post_security_login(self, request: operations.PostSecurityLoginRequest) -> operations.PostSecurityLoginResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/security/login"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostSecurityLoginResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostSecurityLogin200ApplicationJSON])
@@ -4375,20 +4373,19 @@ class SDK:
         return res
 
     
-    
     def post_security_refresh(self, request: operations.PostSecurityRefreshRequest) -> operations.PostSecurityRefreshResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/security/refresh"
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostSecurityRefreshResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PostSecurityRefresh200ApplicationJSON])
@@ -4405,27 +4402,28 @@ class SDK:
         return res
 
     
-    
     def put_annotation_layer_pk_(self, request: operations.PutAnnotationLayerPkRequest) -> operations.PutAnnotationLayerPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/annotation_layer/{pk}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutAnnotationLayerPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PutAnnotationLayerPk200ApplicationJSON])
@@ -4450,27 +4448,28 @@ class SDK:
         return res
 
     
-    
     def put_annotation_layer_pk_annotation_annotation_id_(self, request: operations.PutAnnotationLayerPkAnnotationAnnotationIDRequest) -> operations.PutAnnotationLayerPkAnnotationAnnotationIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/annotation_layer/{pk}/annotation/{annotation_id}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutAnnotationLayerPkAnnotationAnnotationIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PutAnnotationLayerPkAnnotationAnnotationID200ApplicationJSON])
@@ -4495,27 +4494,28 @@ class SDK:
         return res
 
     
-    
     def put_chart_pk_(self, request: operations.PutChartPkRequest) -> operations.PutChartPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/chart/{pk}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutChartPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PutChartPk200ApplicationJSON])
@@ -4548,27 +4548,28 @@ class SDK:
         return res
 
     
-    
     def put_css_template_pk_(self, request: operations.PutCSSTemplatePkRequest) -> operations.PutCSSTemplatePkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/css_template/{pk}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutCSSTemplatePkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PutCSSTemplatePk200ApplicationJSON])
@@ -4597,27 +4598,28 @@ class SDK:
         return res
 
     
-    
     def put_dashboard_pk_(self, request: operations.PutDashboardPkRequest) -> operations.PutDashboardPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dashboard/{pk}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutDashboardPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PutDashboardPk200ApplicationJSON])
@@ -4650,27 +4652,28 @@ class SDK:
         return res
 
     
-    
     def put_database_pk_(self, request: operations.PutDatabasePkRequest) -> operations.PutDatabasePkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/database/{pk}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutDatabasePkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PutDatabasePk200ApplicationJSON])
@@ -4703,28 +4706,30 @@ class SDK:
         return res
 
     
-    
     def put_dataset_pk_(self, request: operations.PutDatasetPkRequest) -> operations.PutDatasetPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dataset/{pk}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutDatasetPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PutDatasetPk200ApplicationJSON])
@@ -4757,20 +4762,19 @@ class SDK:
         return res
 
     
-    
     def put_dataset_pk_refresh(self, request: operations.PutDatasetPkRefreshRequest) -> operations.PutDatasetPkRefreshResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/dataset/{pk}/refresh", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutDatasetPkRefreshResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PutDatasetPkRefresh200ApplicationJSON])
@@ -4799,27 +4803,28 @@ class SDK:
         return res
 
     
-    
     def put_report_pk_(self, request: operations.PutReportPkRequest) -> operations.PutReportPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/report/{pk}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutReportPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PutReportPk200ApplicationJSON])
@@ -4848,27 +4853,28 @@ class SDK:
         return res
 
     
-    
     def put_saved_query_pk_(self, request: operations.PutSavedQueryPkRequest) -> operations.PutSavedQueryPkResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/saved_query/{pk}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutSavedQueryPkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PutSavedQueryPk200ApplicationJSON])

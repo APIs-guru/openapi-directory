@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ExpiryEventsConfiguration struct {
-	DaysBeforeExpiry *int64 `json:"DaysBeforeExpiry,omitempty"`
+    DaysBeforeExpiry *int64 `json:"DaysBeforeExpiry,omitempty"`
+    
 }
+

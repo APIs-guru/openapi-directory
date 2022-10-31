@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchFirstLastNameUsRaceEthnicityOut struct {
-	PersonalNames []FirstLastNameUsRaceEthnicityOut `json:"personalNames,omitempty"`
+    PersonalNames []FirstLastNameUsRaceEthnicityOut `json:"personalNames,omitempty"`
+    
 }
+

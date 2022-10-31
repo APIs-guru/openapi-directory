@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetSitesSecurity struct {
-	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    
 }
 
 type GetSitesRequest struct {
-	Security GetSitesSecurity
+    Security GetSitesSecurity 
+    
 }
 
 type GetSitesResponse struct {
-	ContentType string
-	Sites       []shared.Site
-	StatusCode  int64
+    ContentType string 
+    Sites []shared.Site 
+    StatusCode int64 
+    
 }
+

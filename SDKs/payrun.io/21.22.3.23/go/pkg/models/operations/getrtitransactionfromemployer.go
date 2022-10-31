@@ -1,27 +1,31 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetRtiTransactionFromEmployerPathParams struct {
-	EmployerID       string `pathParam:"style=simple,explode=false,name=EmployerId"`
-	RtiTransactionID string `pathParam:"style=simple,explode=false,name=RtiTransactionId"`
+    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    RtiTransactionID string `pathParam:"style=simple,explode=false,name=RtiTransactionId"`
+    
 }
 
 type GetRtiTransactionFromEmployerHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type GetRtiTransactionFromEmployerRequest struct {
-	PathParams GetRtiTransactionFromEmployerPathParams
-	Headers    GetRtiTransactionFromEmployerHeaders
+    PathParams GetRtiTransactionFromEmployerPathParams 
+    Headers GetRtiTransactionFromEmployerHeaders 
+    
 }
 
 type GetRtiTransactionFromEmployerResponse struct {
-	ContentType        string
-	ErrorModel         *shared.ErrorModel
-	RtiTransactionBase *shared.RtiTransactionBase
-	StatusCode         int64
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    RtiTransactionBase *shared.RtiTransactionBase 
+    StatusCode int64 
+    
 }
+

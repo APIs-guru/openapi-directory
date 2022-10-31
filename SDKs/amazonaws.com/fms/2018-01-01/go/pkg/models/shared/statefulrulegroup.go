@@ -1,6 +1,10 @@
 package shared
 
+
+
 type StatefulRuleGroup struct {
-	ResourceID    *string `json:"ResourceId,omitempty"`
-	RuleGroupName *string `json:"RuleGroupName,omitempty"`
+    ResourceID *string `json:"ResourceId,omitempty"`
+    RuleGroupName *string `json:"RuleGroupName,omitempty"`
+    
 }
+

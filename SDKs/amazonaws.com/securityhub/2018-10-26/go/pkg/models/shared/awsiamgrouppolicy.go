@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AwsIamGroupPolicy struct {
-	PolicyName *string `json:"PolicyName,omitempty"`
+    PolicyName *string `json:"PolicyName,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CategoricalParameterRangeSpecification struct {
-	Values []string `json:"Values"`
+    Values []string `json:"Values"`
+    
 }
+

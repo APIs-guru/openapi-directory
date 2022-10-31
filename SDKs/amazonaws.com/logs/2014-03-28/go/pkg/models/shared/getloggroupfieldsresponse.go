@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetLogGroupFieldsResponse struct {
-	LogGroupFields []LogGroupField `json:"logGroupFields,omitempty"`
+    LogGroupFields []LogGroupField `json:"logGroupFields,omitempty"`
+    
 }
+

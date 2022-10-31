@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteModelPackageGroupInput struct {
-	ModelPackageGroupName string `json:"ModelPackageGroupName"`
+    ModelPackageGroupName string `json:"ModelPackageGroupName"`
+    
 }
+

@@ -1,15 +1,21 @@
 package operations
 
+
+
 type UsersPreprintsListPathParams struct {
-	UserID string `pathParam:"style=simple,explode=false,name=user_id"`
+    UserID string `pathParam:"style=simple,explode=false,name=user_id"`
+    
 }
 
 type UsersPreprintsListRequest struct {
-	PathParams UsersPreprintsListPathParams
+    PathParams UsersPreprintsListPathParams 
+    
 }
 
 type UsersPreprintsListResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

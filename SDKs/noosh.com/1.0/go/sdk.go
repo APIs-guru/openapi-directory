@@ -684,6 +684,7 @@ func (s *SDK) PostV1WorkgroupsWorkgroupIDProjectsProjectIDTeammembers(ctx contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -896,6 +897,7 @@ func (s *SDK) PutV1WorkgroupsWorkgroupIDProjectsProjectIDSpecsSpecID(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1255,6 +1257,7 @@ func (s *SDK) AttachProject(ctx context.Context, request operations.AttachProjec
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -16567,6 +16570,7 @@ func (s *SDK) PatchProject(ctx context.Context, request operations.PatchProjectR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -16779,6 +16783,7 @@ func (s *SDK) PostBuyOrder(ctx context.Context, request operations.PostBuyOrderR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -16991,6 +16996,7 @@ func (s *SDK) PostEstimate(ctx context.Context, request operations.PostEstimateR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17203,6 +17209,7 @@ func (s *SDK) PostExchangeRate(ctx context.Context, request operations.PostExcha
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17415,6 +17422,7 @@ func (s *SDK) PostProject(ctx context.Context, request operations.PostProjectReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17627,6 +17635,7 @@ func (s *SDK) PostRfe(ctx context.Context, request operations.PostRfeRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17839,6 +17848,7 @@ func (s *SDK) PostShipment(ctx context.Context, request operations.PostShipmentR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -18051,6 +18061,7 @@ func (s *SDK) PostSpec(ctx context.Context, request operations.PostSpecRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -18263,6 +18274,7 @@ func (s *SDK) PostSpecProductTypeListOfWorkgroup(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -18475,6 +18487,7 @@ func (s *SDK) PostTaskForProject(ctx context.Context, request operations.PostTas
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -18687,6 +18700,7 @@ func (s *SDK) PostTeamMemberOfProject(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -18899,6 +18913,7 @@ func (s *SDK) PutBuyOrder(ctx context.Context, request operations.PutBuyOrderReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -19111,6 +19126,7 @@ func (s *SDK) PutProject(ctx context.Context, request operations.PutProjectReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -19323,6 +19339,7 @@ func (s *SDK) PutQuote(ctx context.Context, request operations.PutQuoteRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -19535,6 +19552,7 @@ func (s *SDK) PutSellOrder(ctx context.Context, request operations.PutSellOrderR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -19747,6 +19765,7 @@ func (s *SDK) PutShipmentLocation(ctx context.Context, request operations.PutShi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -19959,6 +19978,7 @@ func (s *SDK) PutSpec(ctx context.Context, request operations.PutSpecRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -20171,6 +20191,7 @@ func (s *SDK) PutWorkgroup(ctx context.Context, request operations.PutWorkgroupR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -20383,6 +20404,7 @@ func (s *SDK) UploadFile(ctx context.Context, request operations.UploadFileReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -20536,6 +20558,7 @@ func (s *SDK) UploadProfileImage(ctx context.Context, request operations.UploadP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

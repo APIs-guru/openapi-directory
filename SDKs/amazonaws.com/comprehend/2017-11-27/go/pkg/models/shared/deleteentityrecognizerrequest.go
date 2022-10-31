@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteEntityRecognizerRequest struct {
-	EntityRecognizerArn string `json:"EntityRecognizerArn"`
+    EntityRecognizerArn string `json:"EntityRecognizerArn"`
+    
 }
+

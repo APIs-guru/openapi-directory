@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetCardinalityResponse struct {
-	Cardinality *int64 `json:"cardinality,omitempty"`
+    Cardinality *int64 `json:"cardinality,omitempty"`
+    
 }
+

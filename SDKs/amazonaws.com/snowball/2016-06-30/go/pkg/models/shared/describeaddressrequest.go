@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeAddressRequest struct {
-	AddressID string `json:"AddressId"`
+    AddressID string `json:"AddressId"`
+    
 }
+

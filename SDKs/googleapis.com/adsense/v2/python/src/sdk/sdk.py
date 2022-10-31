@@ -19,26 +19,31 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def adsense_accounts_adclients_adunits_create(self, request: operations.AdsenseAccountsAdclientsAdunitsCreateRequest) -> operations.AdsenseAccountsAdclientsAdunitsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/adunits", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsAdclientsAdunitsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AdUnit])
@@ -47,21 +52,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_adclients_adunits_get_adcode(self, request: operations.AdsenseAccountsAdclientsAdunitsGetAdcodeRequest) -> operations.AdsenseAccountsAdclientsAdunitsGetAdcodeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}/adcode", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsAdclientsAdunitsGetAdcodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AdUnitAdCode])
@@ -70,21 +75,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_adclients_adunits_list(self, request: operations.AdsenseAccountsAdclientsAdunitsListRequest) -> operations.AdsenseAccountsAdclientsAdunitsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/adunits", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsAdclientsAdunitsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAdUnitsResponse])
@@ -93,21 +98,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_adclients_adunits_list_linked_custom_channels(self, request: operations.AdsenseAccountsAdclientsAdunitsListLinkedCustomChannelsRequest) -> operations.AdsenseAccountsAdclientsAdunitsListLinkedCustomChannelsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}:listLinkedCustomChannels", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsAdclientsAdunitsListLinkedCustomChannelsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListLinkedCustomChannelsResponse])
@@ -116,25 +121,27 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_adclients_customchannels_create(self, request: operations.AdsenseAccountsAdclientsCustomchannelsCreateRequest) -> operations.AdsenseAccountsAdclientsCustomchannelsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/customchannels", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsAdclientsCustomchannelsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CustomChannel])
@@ -143,21 +150,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_adclients_customchannels_delete(self, request: operations.AdsenseAccountsAdclientsCustomchannelsDeleteRequest) -> operations.AdsenseAccountsAdclientsCustomchannelsDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsAdclientsCustomchannelsDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -166,21 +173,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_adclients_customchannels_list(self, request: operations.AdsenseAccountsAdclientsCustomchannelsListRequest) -> operations.AdsenseAccountsAdclientsCustomchannelsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/customchannels", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsAdclientsCustomchannelsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListCustomChannelsResponse])
@@ -189,21 +196,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_adclients_customchannels_list_linked_ad_units(self, request: operations.AdsenseAccountsAdclientsCustomchannelsListLinkedAdUnitsRequest) -> operations.AdsenseAccountsAdclientsCustomchannelsListLinkedAdUnitsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}:listLinkedAdUnits", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsAdclientsCustomchannelsListLinkedAdUnitsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListLinkedAdUnitsResponse])
@@ -212,25 +219,27 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_adclients_customchannels_patch(self, request: operations.AdsenseAccountsAdclientsCustomchannelsPatchRequest) -> operations.AdsenseAccountsAdclientsCustomchannelsPatchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsAdclientsCustomchannelsPatchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CustomChannel])
@@ -239,21 +248,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_adclients_list(self, request: operations.AdsenseAccountsAdclientsListRequest) -> operations.AdsenseAccountsAdclientsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/adclients", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsAdclientsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAdClientsResponse])
@@ -262,21 +271,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_adclients_urlchannels_list(self, request: operations.AdsenseAccountsAdclientsUrlchannelsListRequest) -> operations.AdsenseAccountsAdclientsUrlchannelsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/urlchannels", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsAdclientsUrlchannelsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListURLChannelsResponse])
@@ -285,21 +294,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_alerts_list(self, request: operations.AdsenseAccountsAlertsListRequest) -> operations.AdsenseAccountsAlertsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/alerts", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsAlertsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAlertsResponse])
@@ -308,21 +317,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_get_ad_blocking_recovery_tag(self, request: operations.AdsenseAccountsGetAdBlockingRecoveryTagRequest) -> operations.AdsenseAccountsGetAdBlockingRecoveryTagResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}/adBlockingRecoveryTag", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsGetAdBlockingRecoveryTagResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AdBlockingRecoveryTag])
@@ -331,21 +340,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_list(self, request: operations.AdsenseAccountsListRequest) -> operations.AdsenseAccountsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/v2/accounts"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAccountsResponse])
@@ -354,21 +363,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_list_child_accounts(self, request: operations.AdsenseAccountsListChildAccountsRequest) -> operations.AdsenseAccountsListChildAccountsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}:listChildAccounts", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsListChildAccountsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListChildAccountsResponse])
@@ -377,21 +386,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_payments_list(self, request: operations.AdsenseAccountsPaymentsListRequest) -> operations.AdsenseAccountsPaymentsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/payments", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsPaymentsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListPaymentsResponse])
@@ -400,21 +409,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_reports_generate(self, request: operations.AdsenseAccountsReportsGenerateRequest) -> operations.AdsenseAccountsReportsGenerateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{account}/reports:generate", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsReportsGenerateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ReportResult])
@@ -423,21 +432,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_reports_generate_csv(self, request: operations.AdsenseAccountsReportsGenerateCsvRequest) -> operations.AdsenseAccountsReportsGenerateCsvResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{account}/reports:generateCsv", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsReportsGenerateCsvResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -446,21 +455,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_reports_get_saved(self, request: operations.AdsenseAccountsReportsGetSavedRequest) -> operations.AdsenseAccountsReportsGetSavedResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}/saved", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsReportsGetSavedResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SavedReport])
@@ -469,21 +478,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_reports_saved_generate(self, request: operations.AdsenseAccountsReportsSavedGenerateRequest) -> operations.AdsenseAccountsReportsSavedGenerateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}/saved:generate", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsReportsSavedGenerateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ReportResult])
@@ -492,21 +501,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_reports_saved_generate_csv(self, request: operations.AdsenseAccountsReportsSavedGenerateCsvRequest) -> operations.AdsenseAccountsReportsSavedGenerateCsvResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}/saved:generateCsv", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsReportsSavedGenerateCsvResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -515,21 +524,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_reports_saved_list(self, request: operations.AdsenseAccountsReportsSavedListRequest) -> operations.AdsenseAccountsReportsSavedListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/reports/saved", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsReportsSavedListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListSavedReportsResponse])
@@ -538,21 +547,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_sites_get(self, request: operations.AdsenseAccountsSitesGetRequest) -> operations.AdsenseAccountsSitesGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsSitesGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Site])
@@ -561,21 +570,21 @@ class SDK:
         return res
 
     
-    
     def adsense_accounts_sites_list(self, request: operations.AdsenseAccountsSitesListRequest) -> operations.AdsenseAccountsSitesListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/sites", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AdsenseAccountsSitesListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListSitesResponse])

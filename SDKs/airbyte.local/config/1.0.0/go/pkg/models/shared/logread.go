@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LogRead struct {
-	LogLines []string `json:"logLines"`
+    LogLines []string `json:"logLines"`
+    
 }
+

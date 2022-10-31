@@ -1,16 +1,22 @@
 package operations
 
+
+
 type GetIPIpv4TxtPathParams struct {
-	Ipv4 string `pathParam:"style=simple,explode=false,name=ipv4"`
+    Ipv4 string `pathParam:"style=simple,explode=false,name=ipv4"`
+    
 }
 
 type GetIPIpv4TxtRequest struct {
-	PathParams GetIPIpv4TxtPathParams
+    PathParams GetIPIpv4TxtPathParams 
+    
 }
 
 type GetIPIpv4TxtResponse struct {
-	ContentType          string
-	DateTimeTextResponse *string
-	ErrorTextResponse    *string
-	StatusCode           int64
+    ContentType string 
+    DateTimeTextResponse *string 
+    ErrorTextResponse *string 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type OneannouncementsPostResponses403ContentApplication1jsonSchema struct {
-	Message *string `json:"message,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
+

@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def create_activity(self, request: operations.CreateActivityRequest) -> operations.CreateActivityResponse:
         warnings.simplefilter("ignore")
@@ -28,18 +30,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Activities", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateActivityResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceActivity])
@@ -47,7 +51,6 @@ class SDK:
 
         return res
 
-    
     
     def create_task(self, request: operations.CreateTaskRequest) -> operations.CreateTaskResponse:
         warnings.simplefilter("ignore")
@@ -56,18 +59,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Tasks", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTaskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTask])
@@ -75,7 +80,6 @@ class SDK:
 
         return res
 
-    
     
     def create_task_channel(self, request: operations.CreateTaskChannelRequest) -> operations.CreateTaskChannelResponse:
         warnings.simplefilter("ignore")
@@ -84,18 +88,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskChannels", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTaskChannelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTaskChannel])
@@ -103,7 +109,6 @@ class SDK:
 
         return res
 
-    
     
     def create_task_queue(self, request: operations.CreateTaskQueueRequest) -> operations.CreateTaskQueueResponse:
         warnings.simplefilter("ignore")
@@ -112,18 +117,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskQueues", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTaskQueueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTaskQueue])
@@ -131,7 +138,6 @@ class SDK:
 
         return res
 
-    
     
     def create_worker(self, request: operations.CreateWorkerRequest) -> operations.CreateWorkerResponse:
         warnings.simplefilter("ignore")
@@ -140,18 +146,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateWorkerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorker])
@@ -159,7 +167,6 @@ class SDK:
 
         return res
 
-    
     
     def create_workflow(self, request: operations.CreateWorkflowRequest) -> operations.CreateWorkflowResponse:
         warnings.simplefilter("ignore")
@@ -168,18 +175,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workflows", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateWorkflowResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkflow])
@@ -187,7 +196,6 @@ class SDK:
 
         return res
 
-    
     
     def create_workspace(self, request: operations.CreateWorkspaceRequest) -> operations.CreateWorkspaceResponse:
         warnings.simplefilter("ignore")
@@ -196,18 +204,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Workspaces"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateWorkspaceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1Workspace])
@@ -216,7 +226,6 @@ class SDK:
         return res
 
     
-    
     def delete_activity(self, request: operations.DeleteActivityRequest) -> operations.DeleteActivityResponse:
         warnings.simplefilter("ignore")
 
@@ -224,20 +233,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Activities/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteActivityResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_task(self, request: operations.DeleteTaskRequest) -> operations.DeleteTaskResponse:
         warnings.simplefilter("ignore")
@@ -246,20 +254,21 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Tasks/{Sid}", request.path_params)
-        
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url)
+        headers = utils.get_headers(request.headers)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteTaskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_task_channel(self, request: operations.DeleteTaskChannelRequest) -> operations.DeleteTaskChannelResponse:
         warnings.simplefilter("ignore")
@@ -268,20 +277,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskChannels/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteTaskChannelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_task_queue(self, request: operations.DeleteTaskQueueRequest) -> operations.DeleteTaskQueueResponse:
         warnings.simplefilter("ignore")
@@ -290,20 +298,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteTaskQueueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_worker(self, request: operations.DeleteWorkerRequest) -> operations.DeleteWorkerResponse:
         warnings.simplefilter("ignore")
@@ -312,20 +319,21 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers/{Sid}", request.path_params)
-        
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url)
+        headers = utils.get_headers(request.headers)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteWorkerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_workflow(self, request: operations.DeleteWorkflowRequest) -> operations.DeleteWorkflowResponse:
         warnings.simplefilter("ignore")
@@ -334,20 +342,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workflows/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteWorkflowResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_workspace(self, request: operations.DeleteWorkspaceRequest) -> operations.DeleteWorkspaceResponse:
         warnings.simplefilter("ignore")
@@ -356,20 +363,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteWorkspaceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def fetch_activity(self, request: operations.FetchActivityRequest) -> operations.FetchActivityResponse:
         warnings.simplefilter("ignore")
@@ -378,14 +384,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Activities/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchActivityResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceActivity])
@@ -393,7 +399,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_event(self, request: operations.FetchEventRequest) -> operations.FetchEventResponse:
         warnings.simplefilter("ignore")
@@ -402,14 +407,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Events/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchEventResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceEvent])
@@ -418,7 +423,6 @@ class SDK:
         return res
 
     
-    
     def fetch_task(self, request: operations.FetchTaskRequest) -> operations.FetchTaskResponse:
         warnings.simplefilter("ignore")
 
@@ -426,14 +430,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Tasks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTaskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTask])
@@ -441,7 +445,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_task_channel(self, request: operations.FetchTaskChannelRequest) -> operations.FetchTaskChannelResponse:
         warnings.simplefilter("ignore")
@@ -450,14 +453,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskChannels/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTaskChannelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTaskChannel])
@@ -465,7 +468,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_task_queue(self, request: operations.FetchTaskQueueRequest) -> operations.FetchTaskQueueResponse:
         warnings.simplefilter("ignore")
@@ -474,14 +476,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTaskQueueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTaskQueue])
@@ -489,7 +491,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_task_queue_cumulative_statistics(self, request: operations.FetchTaskQueueCumulativeStatisticsRequest) -> operations.FetchTaskQueueCumulativeStatisticsResponse:
         warnings.simplefilter("ignore")
@@ -498,15 +499,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/CumulativeStatistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTaskQueueCumulativeStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTaskQueueTaskQueueCumulativeStatistics])
@@ -515,7 +517,6 @@ class SDK:
         return res
 
     
-    
     def fetch_task_queue_real_time_statistics(self, request: operations.FetchTaskQueueRealTimeStatisticsRequest) -> operations.FetchTaskQueueRealTimeStatisticsResponse:
         warnings.simplefilter("ignore")
 
@@ -523,15 +524,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/RealTimeStatistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTaskQueueRealTimeStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTaskQueueTaskQueueRealTimeStatistics])
@@ -540,7 +542,6 @@ class SDK:
         return res
 
     
-    
     def fetch_task_queue_statistics(self, request: operations.FetchTaskQueueStatisticsRequest) -> operations.FetchTaskQueueStatisticsResponse:
         warnings.simplefilter("ignore")
 
@@ -548,15 +549,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{TaskQueueSid}/Statistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTaskQueueStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTaskQueueTaskQueueStatistics])
@@ -565,7 +567,6 @@ class SDK:
         return res
 
     
-    
     def fetch_task_reservation(self, request: operations.FetchTaskReservationRequest) -> operations.FetchTaskReservationResponse:
         warnings.simplefilter("ignore")
 
@@ -573,14 +574,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Tasks/{TaskSid}/Reservations/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTaskReservationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTaskTaskReservation])
@@ -588,7 +589,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_worker(self, request: operations.FetchWorkerRequest) -> operations.FetchWorkerResponse:
         warnings.simplefilter("ignore")
@@ -597,14 +597,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorker])
@@ -612,7 +612,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_worker_channel(self, request: operations.FetchWorkerChannelRequest) -> operations.FetchWorkerChannelResponse:
         warnings.simplefilter("ignore")
@@ -621,14 +620,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Channels/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkerChannelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkerWorkerChannel])
@@ -636,7 +635,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_worker_instance_statistics(self, request: operations.FetchWorkerInstanceStatisticsRequest) -> operations.FetchWorkerInstanceStatisticsResponse:
         warnings.simplefilter("ignore")
@@ -645,15 +643,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Statistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkerInstanceStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkerWorkerInstanceStatistics])
@@ -662,7 +661,6 @@ class SDK:
         return res
 
     
-    
     def fetch_worker_reservation(self, request: operations.FetchWorkerReservationRequest) -> operations.FetchWorkerReservationResponse:
         warnings.simplefilter("ignore")
 
@@ -670,14 +668,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Reservations/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkerReservationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkerWorkerReservation])
@@ -685,7 +683,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_worker_statistics(self, request: operations.FetchWorkerStatisticsRequest) -> operations.FetchWorkerStatisticsResponse:
         warnings.simplefilter("ignore")
@@ -694,15 +691,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers/Statistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkerStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkerWorkerStatistics])
@@ -711,7 +709,6 @@ class SDK:
         return res
 
     
-    
     def fetch_workers_cumulative_statistics(self, request: operations.FetchWorkersCumulativeStatisticsRequest) -> operations.FetchWorkersCumulativeStatisticsResponse:
         warnings.simplefilter("ignore")
 
@@ -719,15 +716,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers/CumulativeStatistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkersCumulativeStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkerWorkersCumulativeStatistics])
@@ -736,7 +734,6 @@ class SDK:
         return res
 
     
-    
     def fetch_workers_real_time_statistics(self, request: operations.FetchWorkersRealTimeStatisticsRequest) -> operations.FetchWorkersRealTimeStatisticsResponse:
         warnings.simplefilter("ignore")
 
@@ -744,15 +741,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers/RealTimeStatistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkersRealTimeStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkerWorkersRealTimeStatistics])
@@ -761,7 +759,6 @@ class SDK:
         return res
 
     
-    
     def fetch_workflow(self, request: operations.FetchWorkflowRequest) -> operations.FetchWorkflowResponse:
         warnings.simplefilter("ignore")
 
@@ -769,14 +766,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workflows/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkflowResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkflow])
@@ -784,7 +781,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_workflow_cumulative_statistics(self, request: operations.FetchWorkflowCumulativeStatisticsRequest) -> operations.FetchWorkflowCumulativeStatisticsResponse:
         warnings.simplefilter("ignore")
@@ -793,15 +789,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/CumulativeStatistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkflowCumulativeStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkflowWorkflowCumulativeStatistics])
@@ -810,7 +807,6 @@ class SDK:
         return res
 
     
-    
     def fetch_workflow_real_time_statistics(self, request: operations.FetchWorkflowRealTimeStatisticsRequest) -> operations.FetchWorkflowRealTimeStatisticsResponse:
         warnings.simplefilter("ignore")
 
@@ -818,15 +814,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/RealTimeStatistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkflowRealTimeStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkflowWorkflowRealTimeStatistics])
@@ -835,7 +832,6 @@ class SDK:
         return res
 
     
-    
     def fetch_workflow_statistics(self, request: operations.FetchWorkflowStatisticsRequest) -> operations.FetchWorkflowStatisticsResponse:
         warnings.simplefilter("ignore")
 
@@ -843,15 +839,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workflows/{WorkflowSid}/Statistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkflowStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkflowWorkflowStatistics])
@@ -860,7 +857,6 @@ class SDK:
         return res
 
     
-    
     def fetch_workspace(self, request: operations.FetchWorkspaceRequest) -> operations.FetchWorkspaceResponse:
         warnings.simplefilter("ignore")
 
@@ -868,14 +864,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkspaceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1Workspace])
@@ -884,7 +880,6 @@ class SDK:
         return res
 
     
-    
     def fetch_workspace_cumulative_statistics(self, request: operations.FetchWorkspaceCumulativeStatisticsRequest) -> operations.FetchWorkspaceCumulativeStatisticsResponse:
         warnings.simplefilter("ignore")
 
@@ -892,15 +887,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/CumulativeStatistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkspaceCumulativeStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkspaceCumulativeStatistics])
@@ -909,7 +905,6 @@ class SDK:
         return res
 
     
-    
     def fetch_workspace_real_time_statistics(self, request: operations.FetchWorkspaceRealTimeStatisticsRequest) -> operations.FetchWorkspaceRealTimeStatisticsResponse:
         warnings.simplefilter("ignore")
 
@@ -917,15 +912,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/RealTimeStatistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkspaceRealTimeStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkspaceRealTimeStatistics])
@@ -934,7 +930,6 @@ class SDK:
         return res
 
     
-    
     def fetch_workspace_statistics(self, request: operations.FetchWorkspaceStatisticsRequest) -> operations.FetchWorkspaceStatisticsResponse:
         warnings.simplefilter("ignore")
 
@@ -942,15 +937,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Statistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWorkspaceStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkspaceStatistics])
@@ -959,7 +955,6 @@ class SDK:
         return res
 
     
-    
     def list_activity(self, request: operations.ListActivityRequest) -> operations.ListActivityResponse:
         warnings.simplefilter("ignore")
 
@@ -967,15 +962,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Activities", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListActivityResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListActivityListActivityResponse])
@@ -984,7 +980,6 @@ class SDK:
         return res
 
     
-    
     def list_event(self, request: operations.ListEventRequest) -> operations.ListEventResponse:
         warnings.simplefilter("ignore")
 
@@ -992,15 +987,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Events", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEventResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListEventListEventResponse])
@@ -1009,7 +1005,6 @@ class SDK:
         return res
 
     
-    
     def list_task(self, request: operations.ListTaskRequest) -> operations.ListTaskResponse:
         warnings.simplefilter("ignore")
 
@@ -1017,15 +1012,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Tasks", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTaskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListTaskListTaskResponse])
@@ -1034,7 +1030,6 @@ class SDK:
         return res
 
     
-    
     def list_task_channel(self, request: operations.ListTaskChannelRequest) -> operations.ListTaskChannelResponse:
         warnings.simplefilter("ignore")
 
@@ -1042,15 +1037,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskChannels", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTaskChannelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListTaskChannelListTaskChannelResponse])
@@ -1059,7 +1055,6 @@ class SDK:
         return res
 
     
-    
     def list_task_queue(self, request: operations.ListTaskQueueRequest) -> operations.ListTaskQueueResponse:
         warnings.simplefilter("ignore")
 
@@ -1067,15 +1062,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskQueues", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTaskQueueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListTaskQueueListTaskQueueResponse])
@@ -1084,7 +1080,6 @@ class SDK:
         return res
 
     
-    
     def list_task_queues_statistics(self, request: operations.ListTaskQueuesStatisticsRequest) -> operations.ListTaskQueuesStatisticsResponse:
         warnings.simplefilter("ignore")
 
@@ -1092,15 +1087,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskQueues/Statistics", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTaskQueuesStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListTaskQueuesStatisticsListTaskQueuesStatisticsResponse])
@@ -1109,7 +1105,6 @@ class SDK:
         return res
 
     
-    
     def list_task_reservation(self, request: operations.ListTaskReservationRequest) -> operations.ListTaskReservationResponse:
         warnings.simplefilter("ignore")
 
@@ -1117,15 +1112,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Tasks/{TaskSid}/Reservations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTaskReservationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListTaskReservationListTaskReservationResponse])
@@ -1134,7 +1130,6 @@ class SDK:
         return res
 
     
-    
     def list_worker(self, request: operations.ListWorkerRequest) -> operations.ListWorkerResponse:
         warnings.simplefilter("ignore")
 
@@ -1142,15 +1137,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListWorkerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListWorkerListWorkerResponse])
@@ -1159,7 +1155,6 @@ class SDK:
         return res
 
     
-    
     def list_worker_channel(self, request: operations.ListWorkerChannelRequest) -> operations.ListWorkerChannelResponse:
         warnings.simplefilter("ignore")
 
@@ -1167,15 +1162,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Channels", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListWorkerChannelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListWorkerChannelListWorkerChannelResponse])
@@ -1184,7 +1180,6 @@ class SDK:
         return res
 
     
-    
     def list_worker_reservation(self, request: operations.ListWorkerReservationRequest) -> operations.ListWorkerReservationResponse:
         warnings.simplefilter("ignore")
 
@@ -1192,15 +1187,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Reservations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListWorkerReservationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListWorkerReservationListWorkerReservationResponse])
@@ -1209,7 +1205,6 @@ class SDK:
         return res
 
     
-    
     def list_workflow(self, request: operations.ListWorkflowRequest) -> operations.ListWorkflowResponse:
         warnings.simplefilter("ignore")
 
@@ -1217,15 +1212,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workflows", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListWorkflowResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListWorkflowListWorkflowResponse])
@@ -1234,7 +1230,6 @@ class SDK:
         return res
 
     
-    
     def list_workspace(self, request: operations.ListWorkspaceRequest) -> operations.ListWorkspaceResponse:
         warnings.simplefilter("ignore")
 
@@ -1242,15 +1237,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Workspaces"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListWorkspaceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListWorkspaceListWorkspaceResponse])
@@ -1259,7 +1255,6 @@ class SDK:
         return res
 
     
-    
     def update_activity(self, request: operations.UpdateActivityRequest) -> operations.UpdateActivityResponse:
         warnings.simplefilter("ignore")
 
@@ -1267,18 +1262,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Activities/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateActivityResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceActivity])
@@ -1287,7 +1284,6 @@ class SDK:
         return res
 
     
-    
     def update_task(self, request: operations.UpdateTaskRequest) -> operations.UpdateTaskResponse:
         warnings.simplefilter("ignore")
 
@@ -1295,18 +1291,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Tasks/{Sid}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateTaskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTask])
@@ -1315,7 +1313,6 @@ class SDK:
         return res
 
     
-    
     def update_task_channel(self, request: operations.UpdateTaskChannelRequest) -> operations.UpdateTaskChannelResponse:
         warnings.simplefilter("ignore")
 
@@ -1323,18 +1320,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskChannels/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateTaskChannelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTaskChannel])
@@ -1343,7 +1342,6 @@ class SDK:
         return res
 
     
-    
     def update_task_queue(self, request: operations.UpdateTaskQueueRequest) -> operations.UpdateTaskQueueResponse:
         warnings.simplefilter("ignore")
 
@@ -1351,18 +1349,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/TaskQueues/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateTaskQueueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTaskQueue])
@@ -1371,7 +1371,6 @@ class SDK:
         return res
 
     
-    
     def update_task_reservation(self, request: operations.UpdateTaskReservationRequest) -> operations.UpdateTaskReservationResponse:
         warnings.simplefilter("ignore")
 
@@ -1379,18 +1378,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Tasks/{TaskSid}/Reservations/{Sid}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateTaskReservationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceTaskTaskReservation])
@@ -1399,7 +1400,6 @@ class SDK:
         return res
 
     
-    
     def update_worker(self, request: operations.UpdateWorkerRequest) -> operations.UpdateWorkerResponse:
         warnings.simplefilter("ignore")
 
@@ -1407,18 +1407,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers/{Sid}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateWorkerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorker])
@@ -1427,7 +1429,6 @@ class SDK:
         return res
 
     
-    
     def update_worker_channel(self, request: operations.UpdateWorkerChannelRequest) -> operations.UpdateWorkerChannelResponse:
         warnings.simplefilter("ignore")
 
@@ -1435,18 +1436,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Channels/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateWorkerChannelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkerWorkerChannel])
@@ -1455,7 +1458,6 @@ class SDK:
         return res
 
     
-    
     def update_worker_reservation(self, request: operations.UpdateWorkerReservationRequest) -> operations.UpdateWorkerReservationResponse:
         warnings.simplefilter("ignore")
 
@@ -1463,18 +1465,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workers/{WorkerSid}/Reservations/{Sid}", request.path_params)
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateWorkerReservationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkerWorkerReservation])
@@ -1483,7 +1487,6 @@ class SDK:
         return res
 
     
-    
     def update_workflow(self, request: operations.UpdateWorkflowRequest) -> operations.UpdateWorkflowResponse:
         warnings.simplefilter("ignore")
 
@@ -1491,18 +1494,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{WorkspaceSid}/Workflows/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateWorkflowResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1WorkspaceWorkflow])
@@ -1511,7 +1516,6 @@ class SDK:
         return res
 
     
-    
     def update_workspace(self, request: operations.UpdateWorkspaceRequest) -> operations.UpdateWorkspaceResponse:
         warnings.simplefilter("ignore")
 
@@ -1519,18 +1523,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Workspaces/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateWorkspaceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TaskrouterV1Workspace])

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type NamedStylesSuggestionState struct {
-	StylesSuggestionStates []NamedStyleSuggestionState `json:"stylesSuggestionStates,omitempty"`
+    StylesSuggestionStates []NamedStyleSuggestionState `json:"stylesSuggestionStates,omitempty"`
+    
 }
+

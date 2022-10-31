@@ -1,6 +1,10 @@
 package shared
 
+
+
 type SearchProfilesResponse struct {
-	Items     []Profile `json:"Items,omitempty"`
-	NextToken *string   `json:"NextToken,omitempty"`
+    Items []Profile `json:"Items,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    
 }
+

@@ -1,9 +1,14 @@
 package shared
 
+
+
+
 type ConfidenceLevelEnum string
 
 const (
-	ConfidenceLevelEnumLow    ConfidenceLevelEnum = "LOW"
-	ConfidenceLevelEnumMedium ConfidenceLevelEnum = "MEDIUM"
-	ConfidenceLevelEnumHigh   ConfidenceLevelEnum = "HIGH"
+    ConfidenceLevelEnumLow ConfidenceLevelEnum = "LOW"
+ConfidenceLevelEnumMedium ConfidenceLevelEnum = "MEDIUM"
+ConfidenceLevelEnumHigh ConfidenceLevelEnum = "HIGH"
 )
+
+

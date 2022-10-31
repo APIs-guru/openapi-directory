@@ -1,17 +1,23 @@
 package shared
 
+
+
+
 type PrimaryStepRollUpEnum string
 
 const (
-	PrimaryStepRollUpEnumUnset        PrimaryStepRollUpEnum = "unset"
-	PrimaryStepRollUpEnumSuccess      PrimaryStepRollUpEnum = "success"
-	PrimaryStepRollUpEnumFailure      PrimaryStepRollUpEnum = "failure"
-	PrimaryStepRollUpEnumInconclusive PrimaryStepRollUpEnum = "inconclusive"
-	PrimaryStepRollUpEnumSkipped      PrimaryStepRollUpEnum = "skipped"
-	PrimaryStepRollUpEnumFlaky        PrimaryStepRollUpEnum = "flaky"
+    PrimaryStepRollUpEnumUnset PrimaryStepRollUpEnum = "unset"
+PrimaryStepRollUpEnumSuccess PrimaryStepRollUpEnum = "success"
+PrimaryStepRollUpEnumFailure PrimaryStepRollUpEnum = "failure"
+PrimaryStepRollUpEnumInconclusive PrimaryStepRollUpEnum = "inconclusive"
+PrimaryStepRollUpEnumSkipped PrimaryStepRollUpEnum = "skipped"
+PrimaryStepRollUpEnumFlaky PrimaryStepRollUpEnum = "flaky"
 )
 
+
 type PrimaryStep struct {
-	IndividualOutcome []IndividualOutcome    `json:"individualOutcome,omitempty"`
-	RollUp            *PrimaryStepRollUpEnum `json:"rollUp,omitempty"`
+    IndividualOutcome []IndividualOutcome `json:"individualOutcome,omitempty"`
+    RollUp *PrimaryStepRollUpEnum `json:"rollUp,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RefreshTrustedAdvisorCheckRequest struct {
-	CheckID string `json:"checkId"`
+    CheckID string `json:"checkId"`
+    
 }
+

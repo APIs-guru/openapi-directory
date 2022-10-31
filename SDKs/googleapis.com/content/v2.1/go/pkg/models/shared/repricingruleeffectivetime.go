@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RepricingRuleEffectiveTime struct {
-	FixedTimePeriods []RepricingRuleEffectiveTimeFixedTimePeriod `json:"fixedTimePeriods,omitempty"`
+    FixedTimePeriods []RepricingRuleEffectiveTimeFixedTimePeriod `json:"fixedTimePeriods,omitempty"`
+    
 }
+

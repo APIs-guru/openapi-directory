@@ -63,6 +63,7 @@ func (s *SDK) Labrp(ctx context.Context, request operations.LabrpRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

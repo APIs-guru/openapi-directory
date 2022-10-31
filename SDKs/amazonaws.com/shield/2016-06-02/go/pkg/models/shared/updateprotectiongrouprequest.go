@@ -1,9 +1,13 @@
 package shared
 
+
+
 type UpdateProtectionGroupRequest struct {
-	Aggregation       ProtectionGroupAggregationEnum `json:"Aggregation"`
-	Members           []string                       `json:"Members,omitempty"`
-	Pattern           ProtectionGroupPatternEnum     `json:"Pattern"`
-	ProtectionGroupID string                         `json:"ProtectionGroupId"`
-	ResourceType      *ProtectedResourceTypeEnum     `json:"ResourceType,omitempty"`
+    Aggregation ProtectionGroupAggregationEnum `json:"Aggregation"`
+    Members []string `json:"Members,omitempty"`
+    Pattern ProtectionGroupPatternEnum `json:"Pattern"`
+    ProtectionGroupID string `json:"ProtectionGroupId"`
+    ResourceType *ProtectedResourceTypeEnum `json:"ResourceType,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CategoryRequest struct {
-	Categories []CategoryDto `json:"categories"`
+    Categories []CategoryDto `json:"categories"`
+    
 }
+

@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type PublicSaleDates struct {
-	EndDateTime   *time.Time `json:"endDateTime,omitempty"`
-	StartDateTime *time.Time `json:"startDateTime,omitempty"`
-	StartTbd      *bool      `json:"startTBD,omitempty"`
+    EndDateTime *time.Time `json:"endDateTime,omitempty"`
+    StartDateTime *time.Time `json:"startDateTime,omitempty"`
+    StartTbd *bool `json:"startTBD,omitempty"`
+    
 }
+

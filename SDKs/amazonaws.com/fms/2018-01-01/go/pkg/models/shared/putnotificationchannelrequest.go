@@ -1,6 +1,10 @@
 package shared
 
+
+
 type PutNotificationChannelRequest struct {
-	SnsRoleName string `json:"SnsRoleName"`
-	SnsTopicArn string `json:"SnsTopicArn"`
+    SnsRoleName string `json:"SnsRoleName"`
+    SnsTopicArn string `json:"SnsTopicArn"`
+    
 }
+

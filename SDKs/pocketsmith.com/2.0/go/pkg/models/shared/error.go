@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Error struct {
-	Error *string `json:"error,omitempty"`
+    Error *string `json:"error,omitempty"`
+    
 }
+

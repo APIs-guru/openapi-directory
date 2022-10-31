@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SuppressionAttributes struct {
-	SuppressedReasons []SuppressionListReasonEnum `json:"SuppressedReasons,omitempty"`
+    SuppressedReasons []SuppressionListReasonEnum `json:"SuppressedReasons,omitempty"`
+    
 }
+

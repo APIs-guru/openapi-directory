@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetNetworkSwitchPortSchedulesPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type GetNetworkSwitchPortSchedulesRequest struct {
-	PathParams GetNetworkSwitchPortSchedulesPathParams
+    PathParams GetNetworkSwitchPortSchedulesPathParams 
+    
 }
 
 type GetNetworkSwitchPortSchedulesResponse struct {
-	ContentType                                           string
-	StatusCode                                            int64
-	GetNetworkSwitchPortSchedules200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetNetworkSwitchPortSchedules200ApplicationJSONObject map[string]interface{} 
+    
 }
+

@@ -1,50 +1,57 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type FitnessUsersSessionsDeletePathParams struct {
-	SessionID string `pathParam:"style=simple,explode=false,name=sessionId"`
-	UserID    string `pathParam:"style=simple,explode=false,name=userId"`
+    SessionID string `pathParam:"style=simple,explode=false,name=sessionId"`
+    UserID string `pathParam:"style=simple,explode=false,name=userId"`
+    
 }
 
 type FitnessUsersSessionsDeleteQueryParams struct {
-	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
-	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
-	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
-	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
-	Key            *string           `queryParam:"style=form,explode=true,name=key"`
-	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
-	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
-	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
-	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
+    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
+    Callback *string `queryParam:"style=form,explode=true,name=callback"`
+    Fields *string `queryParam:"style=form,explode=true,name=fields"`
+    Key *string `queryParam:"style=form,explode=true,name=key"`
+    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
+    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
+    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
+    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
+    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
+    
 }
 
 type FitnessUsersSessionsDeleteSecurityOption1 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type FitnessUsersSessionsDeleteSecurityOption2 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type FitnessUsersSessionsDeleteSecurity struct {
-	Option1 *FitnessUsersSessionsDeleteSecurityOption1 `security:"option"`
-	Option2 *FitnessUsersSessionsDeleteSecurityOption2 `security:"option"`
+    Option1 *FitnessUsersSessionsDeleteSecurityOption1 `security:"option"`
+    Option2 *FitnessUsersSessionsDeleteSecurityOption2 `security:"option"`
+    
 }
 
 type FitnessUsersSessionsDeleteRequest struct {
-	PathParams  FitnessUsersSessionsDeletePathParams
-	QueryParams FitnessUsersSessionsDeleteQueryParams
-	Security    FitnessUsersSessionsDeleteSecurity
+    PathParams FitnessUsersSessionsDeletePathParams 
+    QueryParams FitnessUsersSessionsDeleteQueryParams 
+    Security FitnessUsersSessionsDeleteSecurity 
+    
 }
 
 type FitnessUsersSessionsDeleteResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

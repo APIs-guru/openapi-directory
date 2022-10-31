@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AddFirebaseRequest struct {
-	LocationID *string `json:"locationId,omitempty"`
+    LocationID *string `json:"locationId,omitempty"`
+    
 }
+

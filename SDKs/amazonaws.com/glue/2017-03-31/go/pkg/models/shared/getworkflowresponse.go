@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetWorkflowResponse struct {
-	Workflow *Workflow `json:"Workflow,omitempty"`
+    Workflow *Workflow `json:"Workflow,omitempty"`
+    
 }
+

@@ -211,6 +211,7 @@ func (s *SDK) ExecuteAction(ctx context.Context, request operations.ExecuteActio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -355,6 +356,7 @@ func (s *SDK) LoadService(ctx context.Context, request operations.LoadServiceReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

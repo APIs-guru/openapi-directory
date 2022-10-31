@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class GetVehicleDetailsByRegistrationNumberHeaders:
-    x_correlation_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Correlation-Id' }})
-    x_api_key: str = field(default=None, metadata={'header': { 'field_name': 'x-api-key' }})
+    x_correlation_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Correlation-Id', 'style': 'simple', 'explode': False }})
+    x_api_key: str = field(default=None, metadata={'header': { 'field_name': 'x-api-key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

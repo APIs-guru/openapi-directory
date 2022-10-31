@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type SlotValueResolutionStrategyEnum string
 
 const (
-	SlotValueResolutionStrategyEnumOriginalValue SlotValueResolutionStrategyEnum = "OriginalValue"
-	SlotValueResolutionStrategyEnumTopResolution SlotValueResolutionStrategyEnum = "TopResolution"
+    SlotValueResolutionStrategyEnumOriginalValue SlotValueResolutionStrategyEnum = "OriginalValue"
+SlotValueResolutionStrategyEnumTopResolution SlotValueResolutionStrategyEnum = "TopResolution"
 )
+
+

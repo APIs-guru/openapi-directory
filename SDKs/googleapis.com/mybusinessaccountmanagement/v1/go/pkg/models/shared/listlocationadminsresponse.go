@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ListLocationAdminsResponse struct {
-	Admins []Admin `json:"admins,omitempty"`
+    Admins []Admin `json:"admins,omitempty"`
+    
 }
+

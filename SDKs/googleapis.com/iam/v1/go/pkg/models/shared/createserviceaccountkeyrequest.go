@@ -1,22 +1,30 @@
 package shared
 
+
+
+
 type CreateServiceAccountKeyRequestKeyAlgorithmEnum string
 
 const (
-	CreateServiceAccountKeyRequestKeyAlgorithmEnumKeyAlgUnspecified CreateServiceAccountKeyRequestKeyAlgorithmEnum = "KEY_ALG_UNSPECIFIED"
-	CreateServiceAccountKeyRequestKeyAlgorithmEnumKeyAlgRsa1024     CreateServiceAccountKeyRequestKeyAlgorithmEnum = "KEY_ALG_RSA_1024"
-	CreateServiceAccountKeyRequestKeyAlgorithmEnumKeyAlgRsa2048     CreateServiceAccountKeyRequestKeyAlgorithmEnum = "KEY_ALG_RSA_2048"
+    CreateServiceAccountKeyRequestKeyAlgorithmEnumKeyAlgUnspecified CreateServiceAccountKeyRequestKeyAlgorithmEnum = "KEY_ALG_UNSPECIFIED"
+CreateServiceAccountKeyRequestKeyAlgorithmEnumKeyAlgRsa1024 CreateServiceAccountKeyRequestKeyAlgorithmEnum = "KEY_ALG_RSA_1024"
+CreateServiceAccountKeyRequestKeyAlgorithmEnumKeyAlgRsa2048 CreateServiceAccountKeyRequestKeyAlgorithmEnum = "KEY_ALG_RSA_2048"
 )
+
+
 
 type CreateServiceAccountKeyRequestPrivateKeyTypeEnum string
 
 const (
-	CreateServiceAccountKeyRequestPrivateKeyTypeEnumTypeUnspecified           CreateServiceAccountKeyRequestPrivateKeyTypeEnum = "TYPE_UNSPECIFIED"
-	CreateServiceAccountKeyRequestPrivateKeyTypeEnumTypePkcs12File            CreateServiceAccountKeyRequestPrivateKeyTypeEnum = "TYPE_PKCS12_FILE"
-	CreateServiceAccountKeyRequestPrivateKeyTypeEnumTypeGoogleCredentialsFile CreateServiceAccountKeyRequestPrivateKeyTypeEnum = "TYPE_GOOGLE_CREDENTIALS_FILE"
+    CreateServiceAccountKeyRequestPrivateKeyTypeEnumTypeUnspecified CreateServiceAccountKeyRequestPrivateKeyTypeEnum = "TYPE_UNSPECIFIED"
+CreateServiceAccountKeyRequestPrivateKeyTypeEnumTypePkcs12File CreateServiceAccountKeyRequestPrivateKeyTypeEnum = "TYPE_PKCS12_FILE"
+CreateServiceAccountKeyRequestPrivateKeyTypeEnumTypeGoogleCredentialsFile CreateServiceAccountKeyRequestPrivateKeyTypeEnum = "TYPE_GOOGLE_CREDENTIALS_FILE"
 )
 
+
 type CreateServiceAccountKeyRequest struct {
-	KeyAlgorithm   *CreateServiceAccountKeyRequestKeyAlgorithmEnum   `json:"keyAlgorithm,omitempty"`
-	PrivateKeyType *CreateServiceAccountKeyRequestPrivateKeyTypeEnum `json:"privateKeyType,omitempty"`
+    KeyAlgorithm *CreateServiceAccountKeyRequestKeyAlgorithmEnum `json:"keyAlgorithm,omitempty"`
+    PrivateKeyType *CreateServiceAccountKeyRequestPrivateKeyTypeEnum `json:"privateKeyType,omitempty"`
+    
 }
+

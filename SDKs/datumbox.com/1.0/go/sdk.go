@@ -63,6 +63,7 @@ func (s *SDK) AdultContentDetection(ctx context.Context, request operations.Adul
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -99,6 +100,7 @@ func (s *SDK) CommercialDetection(ctx context.Context, request operations.Commer
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -135,6 +137,7 @@ func (s *SDK) DocumentSimilarity(ctx context.Context, request operations.Documen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -171,6 +174,7 @@ func (s *SDK) EducationalDetection(ctx context.Context, request operations.Educa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -207,6 +211,7 @@ func (s *SDK) GenderDetection(ctx context.Context, request operations.GenderDete
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -243,6 +248,7 @@ func (s *SDK) KeywordExtraction(ctx context.Context, request operations.KeywordE
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -279,6 +285,7 @@ func (s *SDK) LanguageDetection(ctx context.Context, request operations.Language
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -315,6 +322,7 @@ func (s *SDK) ReadabilityAssessment(ctx context.Context, request operations.Read
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -351,6 +359,7 @@ func (s *SDK) SentimentAnalysis(ctx context.Context, request operations.Sentimen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -387,6 +396,7 @@ func (s *SDK) SpamDetection(ctx context.Context, request operations.SpamDetectio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -423,6 +433,7 @@ func (s *SDK) SubjectivityAnalysis(ctx context.Context, request operations.Subje
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -459,6 +470,7 @@ func (s *SDK) TextExtraction(ctx context.Context, request operations.TextExtract
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -495,6 +507,7 @@ func (s *SDK) TopicClassification(ctx context.Context, request operations.TopicC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -531,6 +544,7 @@ func (s *SDK) TwitterSentimentAnalysis(ctx context.Context, request operations.T
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

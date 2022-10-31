@@ -1,36 +1,40 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var CreateDeployedDevicesCertificateServers = []string{
 	"https://preview.twilio.com",
 }
 
 type CreateDeployedDevicesCertificatePathParams struct {
-	FleetSid string `pathParam:"style=simple,explode=false,name=FleetSid"`
+    FleetSid string `pathParam:"style=simple,explode=false,name=FleetSid"`
+    
 }
 
 type CreateDeployedDevicesCertificateCreateDeployedDevicesCertificateRequest struct {
-	CertificateData string  `form:"name=CertificateData"`
-	DeviceSid       *string `form:"name=DeviceSid"`
-	FriendlyName    *string `form:"name=FriendlyName"`
+    CertificateData string `form:"name=CertificateData"`
+    DeviceSid *string `form:"name=DeviceSid"`
+    FriendlyName *string `form:"name=FriendlyName"`
+    
 }
 
 type CreateDeployedDevicesCertificateSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type CreateDeployedDevicesCertificateRequest struct {
-	ServerURL  *string
-	PathParams CreateDeployedDevicesCertificatePathParams
-	Request    *CreateDeployedDevicesCertificateCreateDeployedDevicesCertificateRequest `request:"mediaType=application/x-www-form-urlencoded"`
-	Security   CreateDeployedDevicesCertificateSecurity
+    ServerURL *string 
+    PathParams CreateDeployedDevicesCertificatePathParams 
+    Request *CreateDeployedDevicesCertificateCreateDeployedDevicesCertificateRequest `request:"mediaType=application/x-www-form-urlencoded"`
+    Security CreateDeployedDevicesCertificateSecurity 
+    
 }
 
 type CreateDeployedDevicesCertificateResponse struct {
-	ContentType                            string
-	StatusCode                             int64
-	PreviewDeployedDevicesFleetCertificate *shared.PreviewDeployedDevicesFleetCertificate
+    ContentType string 
+    StatusCode int64 
+    PreviewDeployedDevicesFleetCertificate *shared.PreviewDeployedDevicesFleetCertificate 
+    
 }
+

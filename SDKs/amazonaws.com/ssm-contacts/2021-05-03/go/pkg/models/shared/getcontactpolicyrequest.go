@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetContactPolicyRequest struct {
-	ContactArn string `json:"ContactArn"`
+    ContactArn string `json:"ContactArn"`
+    
 }
+

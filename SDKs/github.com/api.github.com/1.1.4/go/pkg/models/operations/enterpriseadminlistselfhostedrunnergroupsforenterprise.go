@@ -1,30 +1,35 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type EnterpriseAdminListSelfHostedRunnerGroupsForEnterprisePathParams struct {
-	Enterprise string `pathParam:"style=simple,explode=false,name=enterprise"`
+    Enterprise string `pathParam:"style=simple,explode=false,name=enterprise"`
+    
 }
 
 type EnterpriseAdminListSelfHostedRunnerGroupsForEnterpriseQueryParams struct {
-	Page    *int64 `queryParam:"style=form,explode=true,name=page"`
-	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
+    Page *int64 `queryParam:"style=form,explode=true,name=page"`
+    PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
+    
 }
 
 type EnterpriseAdminListSelfHostedRunnerGroupsForEnterpriseRequest struct {
-	PathParams  EnterpriseAdminListSelfHostedRunnerGroupsForEnterprisePathParams
-	QueryParams EnterpriseAdminListSelfHostedRunnerGroupsForEnterpriseQueryParams
+    PathParams EnterpriseAdminListSelfHostedRunnerGroupsForEnterprisePathParams 
+    QueryParams EnterpriseAdminListSelfHostedRunnerGroupsForEnterpriseQueryParams 
+    
 }
 
 type EnterpriseAdminListSelfHostedRunnerGroupsForEnterprise200ApplicationJSON struct {
-	RunnerGroups []shared.RunnerGroupsEnterprise `json:"runner_groups"`
-	TotalCount   float64                         `json:"total_count"`
+    RunnerGroups []shared.RunnerGroupsEnterprise `json:"runner_groups"`
+    TotalCount float64 `json:"total_count"`
+    
 }
 
 type EnterpriseAdminListSelfHostedRunnerGroupsForEnterpriseResponse struct {
-	ContentType                                                                    string
-	StatusCode                                                                     int64
-	EnterpriseAdminListSelfHostedRunnerGroupsForEnterprise200ApplicationJSONObject *EnterpriseAdminListSelfHostedRunnerGroupsForEnterprise200ApplicationJSON
+    ContentType string 
+    StatusCode int64 
+    EnterpriseAdminListSelfHostedRunnerGroupsForEnterprise200ApplicationJSONObject *EnterpriseAdminListSelfHostedRunnerGroupsForEnterprise200ApplicationJSON 
+    
 }
+

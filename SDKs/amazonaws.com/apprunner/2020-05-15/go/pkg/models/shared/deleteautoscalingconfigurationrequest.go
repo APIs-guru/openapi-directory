@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteAutoScalingConfigurationRequest struct {
-	AutoScalingConfigurationArn string `json:"AutoScalingConfigurationArn"`
+    AutoScalingConfigurationArn string `json:"AutoScalingConfigurationArn"`
+    
 }
+

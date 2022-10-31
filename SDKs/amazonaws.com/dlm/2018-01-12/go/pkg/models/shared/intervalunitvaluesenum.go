@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type IntervalUnitValuesEnum string
 
 const (
-	IntervalUnitValuesEnumHours IntervalUnitValuesEnum = "HOURS"
+    IntervalUnitValuesEnumHours IntervalUnitValuesEnum = "HOURS"
 )
+
+

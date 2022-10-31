@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListInsightsAnyStatusFilter struct {
-	StartTimeRange StartTimeRange  `json:"StartTimeRange"`
-	Type           InsightTypeEnum `json:"Type"`
+    StartTimeRange StartTimeRange `json:"StartTimeRange"`
+    Type InsightTypeEnum `json:"Type"`
+    
 }
+

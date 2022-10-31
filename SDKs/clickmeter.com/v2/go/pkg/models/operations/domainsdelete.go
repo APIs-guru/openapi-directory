@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DomainsDeletePathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type DomainsDeleteRequest struct {
-	PathParams DomainsDeletePathParams
+    PathParams DomainsDeletePathParams 
+    
 }
 
 type DomainsDeleteResponse struct {
-	APICoreResponsesEntityURISystemInt64 *shared.APICoreResponsesEntityURISystemInt64
-	Body                                 []byte
-	ContentType                          string
-	StatusCode                           int64
+    APICoreResponsesEntityURISystemInt64 *shared.APICoreResponsesEntityURISystemInt64 
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

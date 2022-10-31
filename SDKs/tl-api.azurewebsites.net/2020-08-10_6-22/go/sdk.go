@@ -75,6 +75,7 @@ func (s *SDK) ArticleAddMeasureUnit(ctx context.Context, request operations.Arti
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -414,6 +415,7 @@ func (s *SDK) ArticlePost(ctx context.Context, request operations.ArticlePostReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -472,6 +474,7 @@ func (s *SDK) ArticlePut(ctx context.Context, request operations.ArticlePutReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -591,6 +594,7 @@ func (s *SDK) ArticleUpdateArticleGymDetails(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -759,6 +763,7 @@ func (s *SDK) AuthLogin(ctx context.Context, request operations.AuthLoginRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -905,6 +910,7 @@ func (s *SDK) MembershipPost(ctx context.Context, request operations.MembershipP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1095,6 +1101,7 @@ func (s *SDK) PackagePost(ctx context.Context, request operations.PackagePostReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1153,6 +1160,7 @@ func (s *SDK) PackagePut(ctx context.Context, request operations.PackagePutReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeFeatureTransformationRequest struct {
-	FeatureTransformationArn string `json:"featureTransformationArn"`
+    FeatureTransformationArn string `json:"featureTransformationArn"`
+    
 }
+

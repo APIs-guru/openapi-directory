@@ -146,6 +146,7 @@ func (s *SDK) IntegrationsProjectsLocationsAppsScriptProjectsCreate(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -193,6 +194,7 @@ func (s *SDK) IntegrationsProjectsLocationsAppsScriptProjectsLink(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -363,6 +365,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsAuthConfigsCreate(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -451,6 +454,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsCertificatesCreate(ctx contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -539,6 +543,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsCreateBundle(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -586,6 +591,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsArchiveBundle(ctx
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -633,6 +639,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsExecute(ctx conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -680,6 +687,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsExecutionsCancel(
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -768,6 +776,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspens
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -856,6 +865,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsExecutionsSuspens
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -985,6 +995,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsMonitorexecutions
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1032,6 +1043,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsSchedule(ctx cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1079,6 +1091,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsVersionsArchive(c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1126,6 +1139,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsVersionsDeactivat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1255,6 +1269,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsVersionsPublish(c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1302,6 +1317,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsVersionsTakeoverE
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1349,6 +1365,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsVersionsUpdateBun
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1396,6 +1413,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsVersionsUpload(ct
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1443,6 +1461,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationsVersionsValidate(
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1490,6 +1509,7 @@ func (s *SDK) IntegrationsProjectsLocationsProductsIntegrationtemplatesVersionsC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1619,6 +1639,7 @@ func (s *SDK) IntegrationsProjectsLocationsSfdcInstancesCreate(ctx context.Conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1707,6 +1728,7 @@ func (s *SDK) IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsCreate(ctx c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1877,6 +1899,7 @@ func (s *SDK) IntegrationsProjectsLocationsSfdcInstancesSfdcChannelsPatch(ctx co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

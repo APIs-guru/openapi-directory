@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetNetworkApplianceWarmSparePathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type GetNetworkApplianceWarmSpareRequest struct {
-	PathParams GetNetworkApplianceWarmSparePathParams
+    PathParams GetNetworkApplianceWarmSparePathParams 
+    
 }
 
 type GetNetworkApplianceWarmSpareResponse struct {
-	ContentType                                          string
-	StatusCode                                           int64
-	GetNetworkApplianceWarmSpare200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetNetworkApplianceWarmSpare200ApplicationJSONObject map[string]interface{} 
+    
 }
+

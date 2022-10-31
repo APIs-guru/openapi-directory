@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateRecordsResponse struct {
-	Records []Record `json:"Records,omitempty"`
+    Records []Record `json:"Records,omitempty"`
+    
 }
+

@@ -1,27 +1,31 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type UsersCreateRequestBody struct {
-	Email    string  `json:"email"`
-	Name     *string `json:"name,omitempty"`
-	Password string  `json:"password"`
+    Email string `json:"email"`
+    Name *string `json:"name,omitempty"`
+    Password string `json:"password"`
+    
 }
 
 type UsersCreateSecurity struct {
-	Key     shared.SchemeKey     `security:"scheme,type=apiKey,subtype=header"`
-	Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
+    Key shared.SchemeKey `security:"scheme,type=apiKey,subtype=header"`
+    Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type UsersCreateRequest struct {
-	Request  *UsersCreateRequestBody `request:"mediaType=application/json"`
-	Security UsersCreateSecurity
+    Request *UsersCreateRequestBody `request:"mediaType=application/json"`
+    Security UsersCreateSecurity 
+    
 }
 
 type UsersCreateResponse struct {
-	ContentType string
-	StatusCode  int64
-	User        *shared.User
+    ContentType string 
+    StatusCode int64 
+    User *shared.User 
+    
 }
+

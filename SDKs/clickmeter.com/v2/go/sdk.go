@@ -775,6 +775,7 @@ func (s *SDK) AccountPatchPermissions(ctx context.Context, request operations.Ac
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -846,6 +847,7 @@ func (s *SDK) AccountPost(ctx context.Context, request operations.AccountPostReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -917,6 +919,7 @@ func (s *SDK) AccountPostGuest(ctx context.Context, request operations.AccountPo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -988,6 +991,7 @@ func (s *SDK) AccountPutDomainWhitelist(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1059,6 +1063,7 @@ func (s *SDK) AccountPutGuest(ctx context.Context, request operations.AccountPut
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1130,6 +1135,7 @@ func (s *SDK) AccountPutIPBlacklist(ctx context.Context, request operations.Acco
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2043,6 +2049,7 @@ func (s *SDK) ConversionsPatch(ctx context.Context, request operations.Conversio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2115,6 +2122,7 @@ func (s *SDK) ConversionsPatchNotes(ctx context.Context, request operations.Conv
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2188,6 +2196,7 @@ func (s *SDK) ConversionsPost(ctx context.Context, request operations.Conversion
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2260,6 +2269,7 @@ func (s *SDK) ConversionsPut(ctx context.Context, request operations.Conversions
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2876,6 +2886,7 @@ func (s *SDK) DataPointsPatchNotes(ctx context.Context, request operations.DataP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3125,6 +3136,7 @@ func (s *SDK) DomainsPut(ctx context.Context, request operations.DomainsPutReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3196,6 +3208,7 @@ func (s *SDK) DomainsUpdate(ctx context.Context, request operations.DomainsUpdat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4311,6 +4324,7 @@ func (s *SDK) GroupsPatchNotes(ctx context.Context, request operations.GroupsPat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4558,6 +4572,7 @@ func (s *SDK) PostAccountGuestsGuestIDTypePermissionsPatch(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4972,6 +4987,7 @@ func (s *SDK) RetargetingPost(ctx context.Context, request operations.Retargetin
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5044,6 +5060,7 @@ func (s *SDK) RetargetingPut(ctx context.Context, request operations.Retargeting
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5622,6 +5639,7 @@ func (s *SDK) TagsPatchDataPoint(ctx context.Context, request operations.TagsPat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5694,6 +5712,7 @@ func (s *SDK) TagsPatchGroup(ctx context.Context, request operations.TagsPatchGr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5766,6 +5785,7 @@ func (s *SDK) TagsPatchTagName(ctx context.Context, request operations.TagsPatch
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5837,6 +5857,7 @@ func (s *SDK) TagsPut(ctx context.Context, request operations.TagsPutRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

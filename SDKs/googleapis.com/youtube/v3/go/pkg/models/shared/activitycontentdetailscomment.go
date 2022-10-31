@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ActivityContentDetailsComment struct {
-	ResourceID *ResourceID `json:"resourceId,omitempty"`
+    ResourceID *ResourceID `json:"resourceId,omitempty"`
+    
 }
+

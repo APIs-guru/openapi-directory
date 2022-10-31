@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UserRequestIn struct {
-	Text string `json:"text"`
+    Text string `json:"text"`
+    
 }
+

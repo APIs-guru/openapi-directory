@@ -1,9 +1,14 @@
 package shared
 
+
+
 type LinksConversationSelf struct {
-	Href *string `json:"href,omitempty"`
+    Href *string `json:"href,omitempty"`
+    
 }
 
 type LinksConversation struct {
-	Self *LinksConversationSelf `json:"self,omitempty"`
+    Self *LinksConversationSelf `json:"self,omitempty"`
+    
 }
+

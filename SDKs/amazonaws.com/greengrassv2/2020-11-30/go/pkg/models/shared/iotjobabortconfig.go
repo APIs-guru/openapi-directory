@@ -1,5 +1,9 @@
 package shared
 
+
+
 type IoTJobAbortConfig struct {
-	CriteriaList []IoTJobAbortCriteria `json:"criteriaList"`
+    CriteriaList []IoTJobAbortCriteria `json:"criteriaList"`
+    
 }
+

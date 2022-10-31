@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AdditionalClientEmailAPIModel struct {
-	Email *string `json:"Email,omitempty"`
+    Email *string `json:"Email,omitempty"`
+    
 }
+

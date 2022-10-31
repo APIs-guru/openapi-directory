@@ -1,14 +1,20 @@
 package operations
 
+
+
 type DeletePlacementGroupsIDPathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type DeletePlacementGroupsIDRequest struct {
-	PathParams DeletePlacementGroupsIDPathParams
+    PathParams DeletePlacementGroupsIDPathParams 
+    
 }
 
 type DeletePlacementGroupsIDResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

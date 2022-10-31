@@ -19,28 +19,32 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def create_feed_connections(self, request: operations.CreateFeedConnectionsRequest) -> operations.CreateFeedConnectionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/FeedConnections"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateFeedConnectionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FeedConnections])
@@ -55,24 +59,25 @@ class SDK:
         return res
 
     
-    
     def create_statements(self, request: operations.CreateStatementsRequest) -> operations.CreateStatementsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/Statements"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateStatementsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Statements])
@@ -105,27 +110,28 @@ class SDK:
         return res
 
     
-    
     def delete_feed_connections(self, request: operations.DeleteFeedConnectionsRequest) -> operations.DeleteFeedConnectionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/FeedConnections/DeleteRequests"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         if data is None and form is None:
            raise Exception('request body is required')
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFeedConnectionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FeedConnections])
@@ -136,20 +142,21 @@ class SDK:
         return res
 
     
-    
     def get_feed_connection(self, request: operations.GetFeedConnectionRequest) -> operations.GetFeedConnectionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/FeedConnections/{id}", request.path_params)
-        
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url)
+        headers = utils.get_headers(request.headers)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFeedConnectionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FeedConnection])
@@ -160,21 +167,23 @@ class SDK:
         return res
 
     
-    
     def get_feed_connections(self, request: operations.GetFeedConnectionsRequest) -> operations.GetFeedConnectionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/FeedConnections"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFeedConnectionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FeedConnections])
@@ -185,21 +194,23 @@ class SDK:
         return res
 
     
-    
     def get_statement(self, request: operations.GetStatementRequest) -> operations.GetStatementResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/Statements/{statementID}", request.path_params)
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetStatementResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Statement])
@@ -210,21 +221,23 @@ class SDK:
         return res
 
     
-    
     def get_statements(self, request: operations.GetStatementsRequest) -> operations.GetStatementsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/Statements"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetStatementsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Statements])

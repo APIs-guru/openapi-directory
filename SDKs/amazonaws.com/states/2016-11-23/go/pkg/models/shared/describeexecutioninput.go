@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeExecutionInput struct {
-	ExecutionArn string `json:"executionArn"`
+    ExecutionArn string `json:"executionArn"`
+    
 }
+

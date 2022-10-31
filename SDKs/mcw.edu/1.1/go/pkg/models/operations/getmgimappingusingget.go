@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetMgiMappingUsingGetPathParams struct {
-	RgdID int32 `pathParam:"style=simple,explode=false,name=rgdId"`
+    RgdID int32 `pathParam:"style=simple,explode=false,name=rgdId"`
+    
 }
 
 type GetMgiMappingUsingGetRequest struct {
-	PathParams GetMgiMappingUsingGetPathParams
+    PathParams GetMgiMappingUsingGetPathParams 
+    
 }
 
 type GetMgiMappingUsingGetResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

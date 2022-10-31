@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AttachmentDataRef struct {
-	ResourceName *string `json:"resourceName,omitempty"`
+    ResourceName *string `json:"resourceName,omitempty"`
+    
 }
+

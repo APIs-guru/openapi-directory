@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteMlModelInput struct {
-	MlModelID string `json:"MLModelId"`
+    MlModelID string `json:"MLModelId"`
+    
 }
+

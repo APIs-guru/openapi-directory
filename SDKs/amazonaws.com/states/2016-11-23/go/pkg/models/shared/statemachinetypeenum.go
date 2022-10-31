@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type StateMachineTypeEnum string
 
 const (
-	StateMachineTypeEnumStandard StateMachineTypeEnum = "STANDARD"
-	StateMachineTypeEnumExpress  StateMachineTypeEnum = "EXPRESS"
+    StateMachineTypeEnumStandard StateMachineTypeEnum = "STANDARD"
+StateMachineTypeEnumExpress StateMachineTypeEnum = "EXPRESS"
 )
+
+

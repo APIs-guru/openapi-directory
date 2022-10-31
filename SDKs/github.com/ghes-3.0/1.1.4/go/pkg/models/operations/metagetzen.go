@@ -1,7 +1,11 @@
 package operations
 
+
+
 type MetaGetZenResponse struct {
-	ContentType                  string
-	StatusCode                   int64
-	MetaGetZen200TextPlainString *string
+    ContentType string 
+    StatusCode int64 
+    MetaGetZen200TextPlainString *string 
+    
 }
+

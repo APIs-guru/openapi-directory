@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetTokenHeaders struct {
-	Authorization string `header:"style=simple,explode=true,name=Authorization"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type GetTokenRequest struct {
-	Headers GetTokenHeaders
-	Request shared.GetTokenRequest `request:"mediaType=application/json"`
+    Headers GetTokenHeaders 
+    Request shared.GetTokenRequest `request:"mediaType=application/json"`
+    
 }
 
 type GetTokenResponse struct {
-	ContentType string
-	StatusCode  int64
-	GetToken    *shared.GetToken
+    ContentType string 
+    StatusCode int64 
+    GetToken *shared.GetToken 
+    
 }
+

@@ -1,13 +1,19 @@
 package shared
 
+
+
+
 type CommonCriteriaModeInfoCommonCriteriaModeStatusEnum string
 
 const (
-	CommonCriteriaModeInfoCommonCriteriaModeStatusEnumCommonCriteriaModeStatusUnknown CommonCriteriaModeInfoCommonCriteriaModeStatusEnum = "COMMON_CRITERIA_MODE_STATUS_UNKNOWN"
-	CommonCriteriaModeInfoCommonCriteriaModeStatusEnumCommonCriteriaModeDisabled      CommonCriteriaModeInfoCommonCriteriaModeStatusEnum = "COMMON_CRITERIA_MODE_DISABLED"
-	CommonCriteriaModeInfoCommonCriteriaModeStatusEnumCommonCriteriaModeEnabled       CommonCriteriaModeInfoCommonCriteriaModeStatusEnum = "COMMON_CRITERIA_MODE_ENABLED"
+    CommonCriteriaModeInfoCommonCriteriaModeStatusEnumCommonCriteriaModeStatusUnknown CommonCriteriaModeInfoCommonCriteriaModeStatusEnum = "COMMON_CRITERIA_MODE_STATUS_UNKNOWN"
+CommonCriteriaModeInfoCommonCriteriaModeStatusEnumCommonCriteriaModeDisabled CommonCriteriaModeInfoCommonCriteriaModeStatusEnum = "COMMON_CRITERIA_MODE_DISABLED"
+CommonCriteriaModeInfoCommonCriteriaModeStatusEnumCommonCriteriaModeEnabled CommonCriteriaModeInfoCommonCriteriaModeStatusEnum = "COMMON_CRITERIA_MODE_ENABLED"
 )
 
+
 type CommonCriteriaModeInfo struct {
-	CommonCriteriaModeStatus *CommonCriteriaModeInfoCommonCriteriaModeStatusEnum `json:"commonCriteriaModeStatus,omitempty"`
+    CommonCriteriaModeStatus *CommonCriteriaModeInfoCommonCriteriaModeStatusEnum `json:"commonCriteriaModeStatus,omitempty"`
+    
 }
+

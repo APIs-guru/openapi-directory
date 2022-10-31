@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DetectEntitiesRequest struct {
-	Text string `json:"Text"`
+    Text string `json:"Text"`
+    
 }
+

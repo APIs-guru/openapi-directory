@@ -1,6 +1,10 @@
 package shared
 
+
+
 type DeregisterGameServerInput struct {
-	GameServerGroupName string `json:"GameServerGroupName"`
-	GameServerID        string `json:"GameServerId"`
+    GameServerGroupName string `json:"GameServerGroupName"`
+    GameServerID string `json:"GameServerId"`
+    
 }
+

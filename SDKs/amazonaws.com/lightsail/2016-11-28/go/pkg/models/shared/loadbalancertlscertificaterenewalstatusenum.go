@@ -1,10 +1,15 @@
 package shared
 
+
+
+
 type LoadBalancerTLSCertificateRenewalStatusEnum string
 
 const (
-	LoadBalancerTLSCertificateRenewalStatusEnumPendingAutoRenewal LoadBalancerTLSCertificateRenewalStatusEnum = "PENDING_AUTO_RENEWAL"
-	LoadBalancerTLSCertificateRenewalStatusEnumPendingValidation  LoadBalancerTLSCertificateRenewalStatusEnum = "PENDING_VALIDATION"
-	LoadBalancerTLSCertificateRenewalStatusEnumSuccess            LoadBalancerTLSCertificateRenewalStatusEnum = "SUCCESS"
-	LoadBalancerTLSCertificateRenewalStatusEnumFailed             LoadBalancerTLSCertificateRenewalStatusEnum = "FAILED"
+    LoadBalancerTLSCertificateRenewalStatusEnumPendingAutoRenewal LoadBalancerTLSCertificateRenewalStatusEnum = "PENDING_AUTO_RENEWAL"
+LoadBalancerTLSCertificateRenewalStatusEnumPendingValidation LoadBalancerTLSCertificateRenewalStatusEnum = "PENDING_VALIDATION"
+LoadBalancerTLSCertificateRenewalStatusEnumSuccess LoadBalancerTLSCertificateRenewalStatusEnum = "SUCCESS"
+LoadBalancerTLSCertificateRenewalStatusEnumFailed LoadBalancerTLSCertificateRenewalStatusEnum = "FAILED"
 )
+
+

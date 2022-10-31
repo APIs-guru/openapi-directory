@@ -14,7 +14,7 @@ class GetUntaggedImageCountQueryParams:
 
 @dataclass
 class GetUntaggedImageCountHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key' }})
+    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

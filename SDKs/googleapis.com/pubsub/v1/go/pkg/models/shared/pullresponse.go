@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PullResponse struct {
-	ReceivedMessages []ReceivedMessage `json:"receivedMessages,omitempty"`
+    ReceivedMessages []ReceivedMessage `json:"receivedMessages,omitempty"`
+    
 }
+

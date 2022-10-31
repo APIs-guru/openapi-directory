@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InvokeAsyncResponse struct {
-	Status *int64 `json:"Status,omitempty"`
+    Status *int64 `json:"Status,omitempty"`
+    
 }
+

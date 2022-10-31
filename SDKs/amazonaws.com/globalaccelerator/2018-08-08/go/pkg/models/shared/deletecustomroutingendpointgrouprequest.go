@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteCustomRoutingEndpointGroupRequest struct {
-	EndpointGroupArn string `json:"EndpointGroupArn"`
+    EndpointGroupArn string `json:"EndpointGroupArn"`
+    
 }
+

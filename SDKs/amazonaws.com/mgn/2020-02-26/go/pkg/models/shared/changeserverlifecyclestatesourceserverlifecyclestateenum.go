@@ -1,9 +1,14 @@
 package shared
 
+
+
+
 type ChangeServerLifeCycleStateSourceServerLifecycleStateEnum string
 
 const (
-	ChangeServerLifeCycleStateSourceServerLifecycleStateEnumReadyForTest    ChangeServerLifeCycleStateSourceServerLifecycleStateEnum = "READY_FOR_TEST"
-	ChangeServerLifeCycleStateSourceServerLifecycleStateEnumReadyForCutover ChangeServerLifeCycleStateSourceServerLifecycleStateEnum = "READY_FOR_CUTOVER"
-	ChangeServerLifeCycleStateSourceServerLifecycleStateEnumCutover         ChangeServerLifeCycleStateSourceServerLifecycleStateEnum = "CUTOVER"
+    ChangeServerLifeCycleStateSourceServerLifecycleStateEnumReadyForTest ChangeServerLifeCycleStateSourceServerLifecycleStateEnum = "READY_FOR_TEST"
+ChangeServerLifeCycleStateSourceServerLifecycleStateEnumReadyForCutover ChangeServerLifeCycleStateSourceServerLifecycleStateEnum = "READY_FOR_CUTOVER"
+ChangeServerLifeCycleStateSourceServerLifecycleStateEnumCutover ChangeServerLifeCycleStateSourceServerLifecycleStateEnum = "CUTOVER"
 )
+
+

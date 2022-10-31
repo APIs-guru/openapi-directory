@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type AltEnum string
 
 const (
-	AltEnumAtom AltEnum = "atom"
+    AltEnumAtom AltEnum = "atom"
 )
+
+

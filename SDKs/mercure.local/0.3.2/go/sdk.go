@@ -66,6 +66,8 @@ func (s *SDK) GetWellKnownMercure(ctx context.Context, request operations.GetWel
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -224,6 +226,7 @@ func (s *SDK) PostWellKnownMercure(ctx context.Context, request operations.PostW
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

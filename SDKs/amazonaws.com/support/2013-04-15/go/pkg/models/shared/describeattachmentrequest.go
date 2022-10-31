@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeAttachmentRequest struct {
-	AttachmentID string `json:"attachmentId"`
+    AttachmentID string `json:"attachmentId"`
+    
 }
+

@@ -1,15 +1,21 @@
 package operations
 
+
+
 type NodesViewOnlyLinksListPathParams struct {
-	NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
+    NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
+    
 }
 
 type NodesViewOnlyLinksListRequest struct {
-	PathParams NodesViewOnlyLinksListPathParams
+    PathParams NodesViewOnlyLinksListPathParams 
+    
 }
 
 type NodesViewOnlyLinksListResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ReadOnly struct {
-	ReadTime *string `json:"readTime,omitempty"`
+    ReadTime *string `json:"readTime,omitempty"`
+    
 }
+

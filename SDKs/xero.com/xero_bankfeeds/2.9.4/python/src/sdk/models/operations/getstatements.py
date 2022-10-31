@@ -11,9 +11,9 @@ class GetStatementsQueryParams:
 
 @dataclass
 class GetStatementsHeaders:
-    xero_application_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Xero-Application-Id' }})
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'Xero-Tenant-Id' }})
-    xero_user_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Xero-User-Id' }})
+    xero_application_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Xero-Application-Id', 'style': 'simple', 'explode': False }})
+    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
+    xero_user_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Xero-User-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

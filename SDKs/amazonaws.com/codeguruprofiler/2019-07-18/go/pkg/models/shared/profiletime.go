@@ -1,9 +1,10 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ProfileTime struct {
-	Start *time.Time `json:"start,omitempty"`
+    Start *time.Time `json:"start,omitempty"`
+    
 }
+

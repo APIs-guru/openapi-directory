@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Advice struct {
-	Description *string `json:"description,omitempty"`
+    Description *string `json:"description,omitempty"`
+    
 }
+

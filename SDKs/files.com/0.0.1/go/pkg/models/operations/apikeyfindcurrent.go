@@ -1,11 +1,12 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type APIKeyFindCurrentResponse struct {
-	APIKeyEntity *shared.APIKeyEntity
-	ContentType  string
-	StatusCode   int64
+    APIKeyEntity *shared.APIKeyEntity 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

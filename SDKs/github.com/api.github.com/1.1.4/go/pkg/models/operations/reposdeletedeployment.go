@@ -1,22 +1,25 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ReposDeleteDeploymentPathParams struct {
-	DeploymentID int64  `pathParam:"style=simple,explode=false,name=deployment_id"`
-	Owner        string `pathParam:"style=simple,explode=false,name=owner"`
-	Repo         string `pathParam:"style=simple,explode=false,name=repo"`
+    DeploymentID int64 `pathParam:"style=simple,explode=false,name=deployment_id"`
+    Owner string `pathParam:"style=simple,explode=false,name=owner"`
+    Repo string `pathParam:"style=simple,explode=false,name=repo"`
+    
 }
 
 type ReposDeleteDeploymentRequest struct {
-	PathParams ReposDeleteDeploymentPathParams
+    PathParams ReposDeleteDeploymentPathParams 
+    
 }
 
 type ReposDeleteDeploymentResponse struct {
-	ContentType           string
-	StatusCode            int64
-	BasicError            *shared.BasicError
-	ValidationErrorSimple *shared.ValidationErrorSimple
+    ContentType string 
+    StatusCode int64 
+    BasicError *shared.BasicError 
+    ValidationErrorSimple *shared.ValidationErrorSimple 
+    
 }
+

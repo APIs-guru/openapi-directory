@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListGeofencesResponse struct {
-	Entries   []ListGeofenceResponseEntry `json:"Entries"`
-	NextToken *string                     `json:"NextToken,omitempty"`
+    Entries []ListGeofenceResponseEntry `json:"Entries"`
+    NextToken *string `json:"NextToken,omitempty"`
+    
 }
+

@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type LocaleEnum string
 
 const (
-	LocaleEnumEnUs LocaleEnum = "EN_US"
+    LocaleEnumEnUs LocaleEnum = "EN_US"
 )
+
+

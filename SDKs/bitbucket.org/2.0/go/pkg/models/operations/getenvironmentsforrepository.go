@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetEnvironmentsForRepositoryPathParams struct {
-	RepoSlug  string `pathParam:"style=simple,explode=false,name=repo_slug"`
-	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
+    RepoSlug string `pathParam:"style=simple,explode=false,name=repo_slug"`
+    Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
+    
 }
 
 type GetEnvironmentsForRepositoryRequest struct {
-	PathParams GetEnvironmentsForRepositoryPathParams
+    PathParams GetEnvironmentsForRepositoryPathParams 
+    
 }
 
 type GetEnvironmentsForRepositoryResponse struct {
-	ContentType           string
-	StatusCode            int64
-	PaginatedEnvironments *shared.PaginatedEnvironments
+    ContentType string 
+    StatusCode int64 
+    PaginatedEnvironments *shared.PaginatedEnvironments 
+    
 }
+

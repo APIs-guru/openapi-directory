@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GrpcGatewayRouteRewrite struct {
-	Hostname *GatewayRouteHostnameRewrite `json:"hostname,omitempty"`
+    Hostname *GatewayRouteHostnameRewrite `json:"hostname,omitempty"`
+    
 }
+

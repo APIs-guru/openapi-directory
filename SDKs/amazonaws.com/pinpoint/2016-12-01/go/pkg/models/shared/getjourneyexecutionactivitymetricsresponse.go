@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetJourneyExecutionActivityMetricsResponse struct {
-	JourneyExecutionActivityMetricsResponse JourneyExecutionActivityMetricsResponse `json:"JourneyExecutionActivityMetricsResponse"`
+    JourneyExecutionActivityMetricsResponse JourneyExecutionActivityMetricsResponse `json:"JourneyExecutionActivityMetricsResponse"`
+    
 }
+

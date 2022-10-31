@@ -1,5 +1,9 @@
 package shared
 
+
+
 type MappingJobResultFigiList struct {
-	Data []FigiResult `json:"data,omitempty"`
+    Data []FigiResult `json:"data,omitempty"`
+    
 }
+

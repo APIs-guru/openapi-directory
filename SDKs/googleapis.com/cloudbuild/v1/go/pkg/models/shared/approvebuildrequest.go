@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ApproveBuildRequest struct {
-	ApprovalResult *ApprovalResult `json:"approvalResult,omitempty"`
+    ApprovalResult *ApprovalResult `json:"approvalResult,omitempty"`
+    
 }
+

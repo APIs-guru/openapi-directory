@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetContainerServiceDeploymentsResult struct {
-	Deployments []ContainerServiceDeployment `json:"deployments,omitempty"`
+    Deployments []ContainerServiceDeployment `json:"deployments,omitempty"`
+    
 }
+

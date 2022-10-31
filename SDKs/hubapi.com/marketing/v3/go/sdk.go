@@ -261,6 +261,7 @@ func (s *SDK) PatchMarketingV3MarketingEventsEventsExternalEventIDUpdate(ctx con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -321,6 +322,7 @@ func (s *SDK) PostMarketingV3MarketingEventsAttendanceExternalEventIDSubscriberS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -381,6 +383,7 @@ func (s *SDK) PostMarketingV3MarketingEventsAttendanceExternalEventIDSubscriberS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -441,6 +444,7 @@ func (s *SDK) PostMarketingV3MarketingEventsEventsDeleteArchive(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -489,6 +493,7 @@ func (s *SDK) PostMarketingV3MarketingEventsEventsUpsertDoUpsert(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -598,6 +603,7 @@ func (s *SDK) PostMarketingV3MarketingEventsEventsExternalEventIDComplete(ctx co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -658,6 +664,7 @@ func (s *SDK) PostMarketingV3MarketingEventsEventsExternalEventIDSubscriberState
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -708,6 +715,7 @@ func (s *SDK) PostMarketingV3MarketingEventsEventsExternalEventIDSubscriberState
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -758,6 +766,7 @@ func (s *SDK) PostMarketingV3MarketingEventsEventsCreate(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -816,6 +825,7 @@ func (s *SDK) PostMarketingV3MarketingEventsAppIDSettingsCreate(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -874,6 +884,7 @@ func (s *SDK) PutMarketingV3MarketingEventsEventsExternalEventIDReplace(ctx cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AccessTokenValidationRequest struct {
-	Otp string `json:"otp"`
+    Otp string `json:"otp"`
+    
 }
+

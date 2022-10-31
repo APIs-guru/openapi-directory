@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ImportCertificateResponse struct {
-	CertificateArn *string `json:"CertificateArn,omitempty"`
+    CertificateArn *string `json:"CertificateArn,omitempty"`
+    
 }
+

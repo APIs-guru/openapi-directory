@@ -67,6 +67,7 @@ func (s *SDK) Translate(ctx context.Context, request operations.TranslateRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

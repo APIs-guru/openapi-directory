@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeMigrationTaskResult struct {
-	MigrationTask *MigrationTask `json:"MigrationTask,omitempty"`
+    MigrationTask *MigrationTask `json:"MigrationTask,omitempty"`
+    
 }
+

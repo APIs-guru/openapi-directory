@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ResizeVolumeRequest struct {
-	SizeGib *string `json:"sizeGib,omitempty"`
+    SizeGib *string `json:"sizeGib,omitempty"`
+    
 }
+

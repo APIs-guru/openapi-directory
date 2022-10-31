@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RemoveUploadSharePathParams struct {
-	ShareID int64 `pathParam:"style=simple,explode=false,name=share_id"`
+    ShareID int64 `pathParam:"style=simple,explode=false,name=share_id"`
+    
 }
 
 type RemoveUploadShareHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type RemoveUploadShareRequest struct {
-	PathParams RemoveUploadSharePathParams
-	Headers    RemoveUploadShareHeaders
+    PathParams RemoveUploadSharePathParams 
+    Headers RemoveUploadShareHeaders 
+    
 }
 
 type RemoveUploadShareResponse struct {
-	ContentType   string
-	ErrorResponse *shared.ErrorResponse
-	StatusCode    int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    
 }
+

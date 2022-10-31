@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudDialogflowV2DtmfParameters struct {
-	AcceptsDtmfInput *bool `json:"acceptsDtmfInput,omitempty"`
+    AcceptsDtmfInput *bool `json:"acceptsDtmfInput,omitempty"`
+    
 }
+

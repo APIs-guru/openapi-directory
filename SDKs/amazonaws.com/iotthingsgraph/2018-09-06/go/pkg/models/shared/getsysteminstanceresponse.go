@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetSystemInstanceResponse struct {
-	Description *SystemInstanceDescription `json:"description,omitempty"`
+    Description *SystemInstanceDescription `json:"description,omitempty"`
+    
 }
+

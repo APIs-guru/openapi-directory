@@ -19,26 +19,31 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def datalabeling_projects_annotation_spec_sets_create(self, request: operations.DatalabelingProjectsAnnotationSpecSetsCreateRequest) -> operations.DatalabelingProjectsAnnotationSpecSetsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/annotationSpecSets", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsAnnotationSpecSetsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1AnnotationSpecSet])
@@ -47,21 +52,21 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_annotation_spec_sets_list(self, request: operations.DatalabelingProjectsAnnotationSpecSetsListRequest) -> operations.DatalabelingProjectsAnnotationSpecSetsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/annotationSpecSets", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsAnnotationSpecSetsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1ListAnnotationSpecSetsResponse])
@@ -70,21 +75,21 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_datasets_annotated_datasets_examples_list(self, request: operations.DatalabelingProjectsDatasetsAnnotatedDatasetsExamplesListRequest) -> operations.DatalabelingProjectsDatasetsAnnotatedDatasetsExamplesListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/examples", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsAnnotatedDatasetsExamplesListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1ListExamplesResponse])
@@ -93,25 +98,27 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_datasets_annotated_datasets_feedback_threads_feedback_messages_create(self, request: operations.DatalabelingProjectsDatasetsAnnotatedDatasetsFeedbackThreadsFeedbackMessagesCreateRequest) -> operations.DatalabelingProjectsDatasetsAnnotatedDatasetsFeedbackThreadsFeedbackMessagesCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/feedbackMessages", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsAnnotatedDatasetsFeedbackThreadsFeedbackMessagesCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -120,21 +127,21 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_datasets_annotated_datasets_feedback_threads_feedback_messages_list(self, request: operations.DatalabelingProjectsDatasetsAnnotatedDatasetsFeedbackThreadsFeedbackMessagesListRequest) -> operations.DatalabelingProjectsDatasetsAnnotatedDatasetsFeedbackThreadsFeedbackMessagesListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/feedbackMessages", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsAnnotatedDatasetsFeedbackThreadsFeedbackMessagesListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1ListFeedbackMessagesResponse])
@@ -143,21 +150,21 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_datasets_annotated_datasets_feedback_threads_list(self, request: operations.DatalabelingProjectsDatasetsAnnotatedDatasetsFeedbackThreadsListRequest) -> operations.DatalabelingProjectsDatasetsAnnotatedDatasetsFeedbackThreadsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/feedbackThreads", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsAnnotatedDatasetsFeedbackThreadsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1ListFeedbackThreadsResponse])
@@ -166,21 +173,21 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_datasets_annotated_datasets_list(self, request: operations.DatalabelingProjectsDatasetsAnnotatedDatasetsListRequest) -> operations.DatalabelingProjectsDatasetsAnnotatedDatasetsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/annotatedDatasets", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsAnnotatedDatasetsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1ListAnnotatedDatasetsResponse])
@@ -189,25 +196,27 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_datasets_create(self, request: operations.DatalabelingProjectsDatasetsCreateRequest) -> operations.DatalabelingProjectsDatasetsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/datasets", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1Dataset])
@@ -216,21 +225,21 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_datasets_data_items_list(self, request: operations.DatalabelingProjectsDatasetsDataItemsListRequest) -> operations.DatalabelingProjectsDatasetsDataItemsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/dataItems", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsDataItemsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1ListDataItemsResponse])
@@ -239,25 +248,27 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_datasets_evaluations_example_comparisons_search(self, request: operations.DatalabelingProjectsDatasetsEvaluationsExampleComparisonsSearchRequest) -> operations.DatalabelingProjectsDatasetsEvaluationsExampleComparisonsSearchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/exampleComparisons:search", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsEvaluationsExampleComparisonsSearchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1SearchExampleComparisonsResponse])
@@ -266,25 +277,27 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_datasets_export_data(self, request: operations.DatalabelingProjectsDatasetsExportDataRequest) -> operations.DatalabelingProjectsDatasetsExportDataResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{name}:exportData", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsExportDataResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -292,26 +305,28 @@ class SDK:
 
         return res
 
-    
     
     def datalabeling_projects_datasets_image_label(self, request: operations.DatalabelingProjectsDatasetsImageLabelRequest) -> operations.DatalabelingProjectsDatasetsImageLabelResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/image:label", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsImageLabelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -319,26 +334,28 @@ class SDK:
 
         return res
 
-    
     
     def datalabeling_projects_datasets_import_data(self, request: operations.DatalabelingProjectsDatasetsImportDataRequest) -> operations.DatalabelingProjectsDatasetsImportDataResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{name}:importData", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsImportDataResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -347,21 +364,21 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_datasets_list(self, request: operations.DatalabelingProjectsDatasetsListRequest) -> operations.DatalabelingProjectsDatasetsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/datasets", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1ListDatasetsResponse])
@@ -370,25 +387,27 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_datasets_text_label(self, request: operations.DatalabelingProjectsDatasetsTextLabelRequest) -> operations.DatalabelingProjectsDatasetsTextLabelResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/text:label", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsTextLabelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -396,26 +415,28 @@ class SDK:
 
         return res
 
-    
     
     def datalabeling_projects_datasets_video_label(self, request: operations.DatalabelingProjectsDatasetsVideoLabelRequest) -> operations.DatalabelingProjectsDatasetsVideoLabelResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/video:label", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsDatasetsVideoLabelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -424,25 +445,27 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_evaluation_jobs_create(self, request: operations.DatalabelingProjectsEvaluationJobsCreateRequest) -> operations.DatalabelingProjectsEvaluationJobsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/evaluationJobs", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsEvaluationJobsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1EvaluationJob])
@@ -451,21 +474,21 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_evaluation_jobs_list(self, request: operations.DatalabelingProjectsEvaluationJobsListRequest) -> operations.DatalabelingProjectsEvaluationJobsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/evaluationJobs", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsEvaluationJobsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1ListEvaluationJobsResponse])
@@ -474,25 +497,27 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_evaluation_jobs_patch(self, request: operations.DatalabelingProjectsEvaluationJobsPatchRequest) -> operations.DatalabelingProjectsEvaluationJobsPatchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{name}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsEvaluationJobsPatchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1EvaluationJob])
@@ -501,25 +526,27 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_evaluation_jobs_pause(self, request: operations.DatalabelingProjectsEvaluationJobsPauseRequest) -> operations.DatalabelingProjectsEvaluationJobsPauseResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{name}:pause", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsEvaluationJobsPauseResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -527,26 +554,28 @@ class SDK:
 
         return res
 
-    
     
     def datalabeling_projects_evaluation_jobs_resume(self, request: operations.DatalabelingProjectsEvaluationJobsResumeRequest) -> operations.DatalabelingProjectsEvaluationJobsResumeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{name}:resume", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsEvaluationJobsResumeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -555,21 +584,21 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_evaluations_search(self, request: operations.DatalabelingProjectsEvaluationsSearchRequest) -> operations.DatalabelingProjectsEvaluationsSearchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/evaluations:search", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsEvaluationsSearchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1SearchEvaluationsResponse])
@@ -578,25 +607,27 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_instructions_create(self, request: operations.DatalabelingProjectsInstructionsCreateRequest) -> operations.DatalabelingProjectsInstructionsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/instructions", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsInstructionsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -605,21 +636,21 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_instructions_list(self, request: operations.DatalabelingProjectsInstructionsListRequest) -> operations.DatalabelingProjectsInstructionsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{parent}/instructions", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsInstructionsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDatalabelingV1beta1ListInstructionsResponse])
@@ -628,21 +659,21 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_operations_cancel(self, request: operations.DatalabelingProjectsOperationsCancelRequest) -> operations.DatalabelingProjectsOperationsCancelResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{name}:cancel", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsOperationsCancelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -650,22 +681,22 @@ class SDK:
 
         return res
 
-    
     
     def datalabeling_projects_operations_delete(self, request: operations.DatalabelingProjectsOperationsDeleteRequest) -> operations.DatalabelingProjectsOperationsDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsOperationsDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -674,21 +705,21 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_operations_get(self, request: operations.DatalabelingProjectsOperationsGetRequest) -> operations.DatalabelingProjectsOperationsGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsOperationsGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -697,21 +728,21 @@ class SDK:
         return res
 
     
-    
     def datalabeling_projects_operations_list(self, request: operations.DatalabelingProjectsOperationsListRequest) -> operations.DatalabelingProjectsOperationsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1beta1/{name}/operations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DatalabelingProjectsOperationsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningListOperationsResponse])

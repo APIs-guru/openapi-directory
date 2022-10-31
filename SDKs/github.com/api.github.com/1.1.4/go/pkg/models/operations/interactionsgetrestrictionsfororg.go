@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type InteractionsGetRestrictionsForOrgPathParams struct {
-	Org string `pathParam:"style=simple,explode=false,name=org"`
+    Org string `pathParam:"style=simple,explode=false,name=org"`
+    
 }
 
 type InteractionsGetRestrictionsForOrgRequest struct {
-	PathParams InteractionsGetRestrictionsForOrgPathParams
+    PathParams InteractionsGetRestrictionsForOrgPathParams 
+    
 }
 
 type InteractionsGetRestrictionsForOrgResponse struct {
-	ContentType              string
-	StatusCode               int64
-	InteractionLimitResponse *shared.InteractionLimitResponse
+    ContentType string 
+    StatusCode int64 
+    InteractionLimitResponse *shared.InteractionLimitResponse 
+    
 }
+

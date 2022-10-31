@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type DirectConnectGatewayAttachmentTypeEnum string
 
 const (
-	DirectConnectGatewayAttachmentTypeEnumTransitVirtualInterface DirectConnectGatewayAttachmentTypeEnum = "TransitVirtualInterface"
-	DirectConnectGatewayAttachmentTypeEnumPrivateVirtualInterface DirectConnectGatewayAttachmentTypeEnum = "PrivateVirtualInterface"
+    DirectConnectGatewayAttachmentTypeEnumTransitVirtualInterface DirectConnectGatewayAttachmentTypeEnum = "TransitVirtualInterface"
+DirectConnectGatewayAttachmentTypeEnumPrivateVirtualInterface DirectConnectGatewayAttachmentTypeEnum = "PrivateVirtualInterface"
 )
+
+

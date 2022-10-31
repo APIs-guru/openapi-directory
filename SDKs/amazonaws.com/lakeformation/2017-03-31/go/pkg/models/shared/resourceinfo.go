@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ResourceInfo struct {
-	LastModified *time.Time `json:"LastModified,omitempty"`
-	ResourceArn  *string    `json:"ResourceArn,omitempty"`
-	RoleArn      *string    `json:"RoleArn,omitempty"`
+    LastModified *time.Time `json:"LastModified,omitempty"`
+    ResourceArn *string `json:"ResourceArn,omitempty"`
+    RoleArn *string `json:"RoleArn,omitempty"`
+    
 }
+

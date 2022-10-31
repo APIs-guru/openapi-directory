@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeDeliveryStreamOutput struct {
-	DeliveryStreamDescription DeliveryStreamDescription `json:"DeliveryStreamDescription"`
+    DeliveryStreamDescription DeliveryStreamDescription `json:"DeliveryStreamDescription"`
+    
 }
+

@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type WorkloadEnvironmentEnum string
 
 const (
-	WorkloadEnvironmentEnumProduction    WorkloadEnvironmentEnum = "PRODUCTION"
-	WorkloadEnvironmentEnumPreproduction WorkloadEnvironmentEnum = "PREPRODUCTION"
+    WorkloadEnvironmentEnumProduction WorkloadEnvironmentEnum = "PRODUCTION"
+WorkloadEnvironmentEnumPreproduction WorkloadEnvironmentEnum = "PREPRODUCTION"
 )
+
+

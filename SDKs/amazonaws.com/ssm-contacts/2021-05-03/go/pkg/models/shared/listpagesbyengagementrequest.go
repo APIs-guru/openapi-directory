@@ -1,7 +1,11 @@
 package shared
 
+
+
 type ListPagesByEngagementRequest struct {
-	EngagementID string  `json:"EngagementId"`
-	MaxResults   *int64  `json:"MaxResults,omitempty"`
-	NextToken    *string `json:"NextToken,omitempty"`
+    EngagementID string `json:"EngagementId"`
+    MaxResults *int64 `json:"MaxResults,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    
 }
+

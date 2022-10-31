@@ -1,9 +1,13 @@
 package shared
 
+
+
 type Deployment struct {
-	CreatedAt      *string             `json:"CreatedAt,omitempty"`
-	DeploymentArn  *string             `json:"DeploymentArn,omitempty"`
-	DeploymentID   *string             `json:"DeploymentId,omitempty"`
-	DeploymentType *DeploymentTypeEnum `json:"DeploymentType,omitempty"`
-	GroupArn       *string             `json:"GroupArn,omitempty"`
+    CreatedAt *string `json:"CreatedAt,omitempty"`
+    DeploymentArn *string `json:"DeploymentArn,omitempty"`
+    DeploymentID *string `json:"DeploymentId,omitempty"`
+    DeploymentType *DeploymentTypeEnum `json:"DeploymentType,omitempty"`
+    GroupArn *string `json:"GroupArn,omitempty"`
+    
 }
+

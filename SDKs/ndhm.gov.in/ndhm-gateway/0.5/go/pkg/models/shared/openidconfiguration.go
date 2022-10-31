@@ -1,5 +1,9 @@
 package shared
 
+
+
 type OpenIDConfiguration struct {
-	JwksURI *string `json:"jwks_uri,omitempty"`
+    JwksURI *string `json:"jwks_uri,omitempty"`
+    
 }
+

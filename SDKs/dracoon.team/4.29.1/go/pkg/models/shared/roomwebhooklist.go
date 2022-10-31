@@ -1,6 +1,10 @@
 package shared
 
+
+
 type RoomWebhookList struct {
-	Items []RoomWebhook `json:"items"`
-	Range Range         `json:"range"`
+    Items []RoomWebhook `json:"items"`
+    Range Range `json:"range"`
+    
 }
+

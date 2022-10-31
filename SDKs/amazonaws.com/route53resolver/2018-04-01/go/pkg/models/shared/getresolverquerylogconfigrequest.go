@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetResolverQueryLogConfigRequest struct {
-	ResolverQueryLogConfigID string `json:"ResolverQueryLogConfigId"`
+    ResolverQueryLogConfigID string `json:"ResolverQueryLogConfigId"`
+    
 }
+

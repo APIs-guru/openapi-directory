@@ -74,6 +74,7 @@ func (s *SDK) Accessibility(ctx context.Context, request operations.Accessibilit
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -122,6 +123,7 @@ func (s *SDK) AlarmVolume(ctx context.Context, request operations.AlarmVolumeReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -170,6 +172,7 @@ func (s *SDK) AppDeviceID(ctx context.Context, request operations.AppDeviceIDReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -219,6 +222,7 @@ func (s *SDK) ChangeDiscoverability(ctx context.Context, request operations.Chan
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -267,6 +271,7 @@ func (s *SDK) CheckReadyStatus(ctx context.Context, request operations.CheckRead
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -345,6 +350,7 @@ func (s *SDK) ConnecttoWiFiNetwork(ctx context.Context, request operations.Conne
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -384,6 +390,7 @@ func (s *SDK) DeleteAlarmsandTimers(ctx context.Context, request operations.Dele
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -424,6 +431,8 @@ func (s *SDK) DoNotDisturb(ctx context.Context, request operations.DoNotDisturbR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -512,6 +521,7 @@ func (s *SDK) ForgetWiFiNetwork(ctx context.Context, request operations.ForgetWi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -560,6 +570,7 @@ func (s *SDK) Forgetpaireddevice(ctx context.Context, request operations.Forgetp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -882,6 +893,7 @@ func (s *SDK) NightModesettings(ctx context.Context, request operations.NightMod
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -969,6 +981,7 @@ func (s *SDK) PairwithSpeaker(ctx context.Context, request operations.PairwithSp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1017,6 +1030,7 @@ func (s *SDK) RebootandFactoryReset(ctx context.Context, request operations.Rebo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1104,6 +1118,7 @@ func (s *SDK) Scanfordevices(ctx context.Context, request operations.Scanfordevi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1152,6 +1167,7 @@ func (s *SDK) SetEqualizerValues(ctx context.Context, request operations.SetEqua
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1200,6 +1216,7 @@ func (s *SDK) SetEurekaInfo(ctx context.Context, request operations.SetEurekaInf
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1287,6 +1304,7 @@ func (s *SDK) TestInternetDownloadSpeed(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

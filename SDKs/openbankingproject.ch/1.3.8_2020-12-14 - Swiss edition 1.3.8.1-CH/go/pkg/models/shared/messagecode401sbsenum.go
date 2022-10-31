@@ -1,21 +1,26 @@
 package shared
 
+
+
+
 type MessageCode401SbsEnum string
 
 const (
-	MessageCode401SbsEnumCertificateInvalid    MessageCode401SbsEnum = "CERTIFICATE_INVALID"
-	MessageCode401SbsEnumRoleInvalid           MessageCode401SbsEnum = "ROLE_INVALID"
-	MessageCode401SbsEnumCertificateExpired    MessageCode401SbsEnum = "CERTIFICATE_EXPIRED"
-	MessageCode401SbsEnumCertificateBlocked    MessageCode401SbsEnum = "CERTIFICATE_BLOCKED"
-	MessageCode401SbsEnumCertificateRevoke     MessageCode401SbsEnum = "CERTIFICATE_REVOKE"
-	MessageCode401SbsEnumCertificateMissing    MessageCode401SbsEnum = "CERTIFICATE_MISSING"
-	MessageCode401SbsEnumSignatureInvalid      MessageCode401SbsEnum = "SIGNATURE_INVALID"
-	MessageCode401SbsEnumSignatureMissing      MessageCode401SbsEnum = "SIGNATURE_MISSING"
-	MessageCode401SbsEnumCorporateIDInvalid    MessageCode401SbsEnum = "CORPORATE_ID_INVALID"
-	MessageCode401SbsEnumPsuCredentialsInvalid MessageCode401SbsEnum = "PSU_CREDENTIALS_INVALID"
-	MessageCode401SbsEnumConsentInvalid        MessageCode401SbsEnum = "CONSENT_INVALID"
-	MessageCode401SbsEnumConsentExpired        MessageCode401SbsEnum = "CONSENT_EXPIRED"
-	MessageCode401SbsEnumTokenUnknown          MessageCode401SbsEnum = "TOKEN_UNKNOWN"
-	MessageCode401SbsEnumTokenInvalid          MessageCode401SbsEnum = "TOKEN_INVALID"
-	MessageCode401SbsEnumTokenExpired          MessageCode401SbsEnum = "TOKEN_EXPIRED"
+    MessageCode401SbsEnumCertificateInvalid MessageCode401SbsEnum = "CERTIFICATE_INVALID"
+MessageCode401SbsEnumRoleInvalid MessageCode401SbsEnum = "ROLE_INVALID"
+MessageCode401SbsEnumCertificateExpired MessageCode401SbsEnum = "CERTIFICATE_EXPIRED"
+MessageCode401SbsEnumCertificateBlocked MessageCode401SbsEnum = "CERTIFICATE_BLOCKED"
+MessageCode401SbsEnumCertificateRevoke MessageCode401SbsEnum = "CERTIFICATE_REVOKE"
+MessageCode401SbsEnumCertificateMissing MessageCode401SbsEnum = "CERTIFICATE_MISSING"
+MessageCode401SbsEnumSignatureInvalid MessageCode401SbsEnum = "SIGNATURE_INVALID"
+MessageCode401SbsEnumSignatureMissing MessageCode401SbsEnum = "SIGNATURE_MISSING"
+MessageCode401SbsEnumCorporateIDInvalid MessageCode401SbsEnum = "CORPORATE_ID_INVALID"
+MessageCode401SbsEnumPsuCredentialsInvalid MessageCode401SbsEnum = "PSU_CREDENTIALS_INVALID"
+MessageCode401SbsEnumConsentInvalid MessageCode401SbsEnum = "CONSENT_INVALID"
+MessageCode401SbsEnumConsentExpired MessageCode401SbsEnum = "CONSENT_EXPIRED"
+MessageCode401SbsEnumTokenUnknown MessageCode401SbsEnum = "TOKEN_UNKNOWN"
+MessageCode401SbsEnumTokenInvalid MessageCode401SbsEnum = "TOKEN_INVALID"
+MessageCode401SbsEnumTokenExpired MessageCode401SbsEnum = "TOKEN_EXPIRED"
 )
+
+

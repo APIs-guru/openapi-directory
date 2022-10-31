@@ -1,21 +1,28 @@
 package operations
 
+
+
 type CreateNetworkSwitchStackPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type CreateNetworkSwitchStackRequestBody struct {
-	Name    string   `json:"name"`
-	Serials []string `json:"serials"`
+    Name string `json:"name"`
+    Serials []string `json:"serials"`
+    
 }
 
 type CreateNetworkSwitchStackRequest struct {
-	PathParams CreateNetworkSwitchStackPathParams
-	Request    CreateNetworkSwitchStackRequestBody `request:"mediaType=application/json"`
+    PathParams CreateNetworkSwitchStackPathParams 
+    Request CreateNetworkSwitchStackRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type CreateNetworkSwitchStackResponse struct {
-	ContentType                                      string
-	StatusCode                                       int64
-	CreateNetworkSwitchStack201ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    CreateNetworkSwitchStack201ApplicationJSONObject map[string]interface{} 
+    
 }
+

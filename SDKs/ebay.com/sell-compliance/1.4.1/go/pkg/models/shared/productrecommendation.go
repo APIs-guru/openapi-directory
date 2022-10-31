@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ProductRecommendation struct {
-	Epid *string `json:"epid,omitempty"`
+    Epid *string `json:"epid,omitempty"`
+    
 }
+

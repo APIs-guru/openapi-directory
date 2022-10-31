@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleFirebaseAppcheckV1betaBatchGetRecaptchaConfigsResponse struct {
-	Configs []GoogleFirebaseAppcheckV1betaRecaptchaConfig `json:"configs,omitempty"`
+    Configs []GoogleFirebaseAppcheckV1betaRecaptchaConfig `json:"configs,omitempty"`
+    
 }
+

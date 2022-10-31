@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BuilderConfig struct {
-	ID *string `json:"id,omitempty"`
+    ID *string `json:"id,omitempty"`
+    
 }
+

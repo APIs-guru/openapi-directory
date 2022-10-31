@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TrackingNumberResponse struct {
-	TrackingNumber *string `json:"trackingNumber,omitempty"`
+    TrackingNumber *string `json:"trackingNumber,omitempty"`
+    
 }
+

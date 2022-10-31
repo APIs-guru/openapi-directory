@@ -1,14 +1,20 @@
 package operations
 
+
+
 type PostInventoryFinancialImapctForecastAccuracyHeaders struct {
-	Token *string `header:"name=Token"`
+    Token *string `header:"style=simple,explode=false,name=Token"`
+    
 }
 
 type PostInventoryFinancialImapctForecastAccuracyRequest struct {
-	Headers PostInventoryFinancialImapctForecastAccuracyHeaders
+    Headers PostInventoryFinancialImapctForecastAccuracyHeaders 
+    
 }
 
 type PostInventoryFinancialImapctForecastAccuracyResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

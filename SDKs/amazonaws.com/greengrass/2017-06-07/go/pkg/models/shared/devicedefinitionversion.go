@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeviceDefinitionVersion struct {
-	Devices []Device `json:"Devices,omitempty"`
+    Devices []Device `json:"Devices,omitempty"`
+    
 }
+

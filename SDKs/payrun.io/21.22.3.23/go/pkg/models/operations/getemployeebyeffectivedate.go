@@ -1,29 +1,33 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-	"time"
-)
+"time"
+"openapi/pkg/models/shared")
 
 type GetEmployeeByEffectiveDatePathParams struct {
-	EffectiveDate time.Time `pathParam:"style=simple,explode=false,name=EffectiveDate"`
-	EmployeeID    string    `pathParam:"style=simple,explode=false,name=EmployeeId"`
-	EmployerID    string    `pathParam:"style=simple,explode=false,name=EmployerId"`
+    EffectiveDate time.Time `pathParam:"style=simple,explode=false,name=EffectiveDate"`
+    EmployeeID string `pathParam:"style=simple,explode=false,name=EmployeeId"`
+    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    
 }
 
 type GetEmployeeByEffectiveDateHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type GetEmployeeByEffectiveDateRequest struct {
-	PathParams GetEmployeeByEffectiveDatePathParams
-	Headers    GetEmployeeByEffectiveDateHeaders
+    PathParams GetEmployeeByEffectiveDatePathParams 
+    Headers GetEmployeeByEffectiveDateHeaders 
+    
 }
 
 type GetEmployeeByEffectiveDateResponse struct {
-	ContentType string
-	Employee    *shared.Employee
-	ErrorModel  *shared.ErrorModel
-	StatusCode  int64
+    ContentType string 
+    Employee *shared.Employee 
+    ErrorModel *shared.ErrorModel 
+    StatusCode int64 
+    
 }
+

@@ -1,27 +1,32 @@
 package shared
 
+
+
+
 type SapoDataConnectorOperatorEnum string
 
 const (
-	SapoDataConnectorOperatorEnumProjection           SapoDataConnectorOperatorEnum = "PROJECTION"
-	SapoDataConnectorOperatorEnumLessThan             SapoDataConnectorOperatorEnum = "LESS_THAN"
-	SapoDataConnectorOperatorEnumContains             SapoDataConnectorOperatorEnum = "CONTAINS"
-	SapoDataConnectorOperatorEnumGreaterThan          SapoDataConnectorOperatorEnum = "GREATER_THAN"
-	SapoDataConnectorOperatorEnumBetween              SapoDataConnectorOperatorEnum = "BETWEEN"
-	SapoDataConnectorOperatorEnumLessThanOrEqualTo    SapoDataConnectorOperatorEnum = "LESS_THAN_OR_EQUAL_TO"
-	SapoDataConnectorOperatorEnumGreaterThanOrEqualTo SapoDataConnectorOperatorEnum = "GREATER_THAN_OR_EQUAL_TO"
-	SapoDataConnectorOperatorEnumEqualTo              SapoDataConnectorOperatorEnum = "EQUAL_TO"
-	SapoDataConnectorOperatorEnumNotEqualTo           SapoDataConnectorOperatorEnum = "NOT_EQUAL_TO"
-	SapoDataConnectorOperatorEnumAddition             SapoDataConnectorOperatorEnum = "ADDITION"
-	SapoDataConnectorOperatorEnumMultiplication       SapoDataConnectorOperatorEnum = "MULTIPLICATION"
-	SapoDataConnectorOperatorEnumDivision             SapoDataConnectorOperatorEnum = "DIVISION"
-	SapoDataConnectorOperatorEnumSubtraction          SapoDataConnectorOperatorEnum = "SUBTRACTION"
-	SapoDataConnectorOperatorEnumMaskAll              SapoDataConnectorOperatorEnum = "MASK_ALL"
-	SapoDataConnectorOperatorEnumMaskFirstN           SapoDataConnectorOperatorEnum = "MASK_FIRST_N"
-	SapoDataConnectorOperatorEnumMaskLastN            SapoDataConnectorOperatorEnum = "MASK_LAST_N"
-	SapoDataConnectorOperatorEnumValidateNonNull      SapoDataConnectorOperatorEnum = "VALIDATE_NON_NULL"
-	SapoDataConnectorOperatorEnumValidateNonZero      SapoDataConnectorOperatorEnum = "VALIDATE_NON_ZERO"
-	SapoDataConnectorOperatorEnumValidateNonNegative  SapoDataConnectorOperatorEnum = "VALIDATE_NON_NEGATIVE"
-	SapoDataConnectorOperatorEnumValidateNumeric      SapoDataConnectorOperatorEnum = "VALIDATE_NUMERIC"
-	SapoDataConnectorOperatorEnumNoOp                 SapoDataConnectorOperatorEnum = "NO_OP"
+    SapoDataConnectorOperatorEnumProjection SapoDataConnectorOperatorEnum = "PROJECTION"
+SapoDataConnectorOperatorEnumLessThan SapoDataConnectorOperatorEnum = "LESS_THAN"
+SapoDataConnectorOperatorEnumContains SapoDataConnectorOperatorEnum = "CONTAINS"
+SapoDataConnectorOperatorEnumGreaterThan SapoDataConnectorOperatorEnum = "GREATER_THAN"
+SapoDataConnectorOperatorEnumBetween SapoDataConnectorOperatorEnum = "BETWEEN"
+SapoDataConnectorOperatorEnumLessThanOrEqualTo SapoDataConnectorOperatorEnum = "LESS_THAN_OR_EQUAL_TO"
+SapoDataConnectorOperatorEnumGreaterThanOrEqualTo SapoDataConnectorOperatorEnum = "GREATER_THAN_OR_EQUAL_TO"
+SapoDataConnectorOperatorEnumEqualTo SapoDataConnectorOperatorEnum = "EQUAL_TO"
+SapoDataConnectorOperatorEnumNotEqualTo SapoDataConnectorOperatorEnum = "NOT_EQUAL_TO"
+SapoDataConnectorOperatorEnumAddition SapoDataConnectorOperatorEnum = "ADDITION"
+SapoDataConnectorOperatorEnumMultiplication SapoDataConnectorOperatorEnum = "MULTIPLICATION"
+SapoDataConnectorOperatorEnumDivision SapoDataConnectorOperatorEnum = "DIVISION"
+SapoDataConnectorOperatorEnumSubtraction SapoDataConnectorOperatorEnum = "SUBTRACTION"
+SapoDataConnectorOperatorEnumMaskAll SapoDataConnectorOperatorEnum = "MASK_ALL"
+SapoDataConnectorOperatorEnumMaskFirstN SapoDataConnectorOperatorEnum = "MASK_FIRST_N"
+SapoDataConnectorOperatorEnumMaskLastN SapoDataConnectorOperatorEnum = "MASK_LAST_N"
+SapoDataConnectorOperatorEnumValidateNonNull SapoDataConnectorOperatorEnum = "VALIDATE_NON_NULL"
+SapoDataConnectorOperatorEnumValidateNonZero SapoDataConnectorOperatorEnum = "VALIDATE_NON_ZERO"
+SapoDataConnectorOperatorEnumValidateNonNegative SapoDataConnectorOperatorEnum = "VALIDATE_NON_NEGATIVE"
+SapoDataConnectorOperatorEnumValidateNumeric SapoDataConnectorOperatorEnum = "VALIDATE_NUMERIC"
+SapoDataConnectorOperatorEnumNoOp SapoDataConnectorOperatorEnum = "NO_OP"
 )
+
+

@@ -1,18 +1,21 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DeleteUsersMeAvatarSecurity struct {
-	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
+    OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
+    
 }
 
 type DeleteUsersMeAvatarRequest struct {
-	Security DeleteUsersMeAvatarSecurity
+    Security DeleteUsersMeAvatarSecurity 
+    
 }
 
 type DeleteUsersMeAvatarResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

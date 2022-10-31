@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PutDestinationResponse struct {
-	Destination *Destination `json:"destination,omitempty"`
+    Destination *Destination `json:"destination,omitempty"`
+    
 }
+

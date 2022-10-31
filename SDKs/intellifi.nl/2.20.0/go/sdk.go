@@ -152,6 +152,7 @@ func (s *SDK) PostSpotsets(ctx context.Context, request operations.PostSpotsetsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -200,6 +201,7 @@ func (s *SDK) PutSpotsetsID(ctx context.Context, request operations.PutSpotsetsI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -248,6 +250,7 @@ func (s *SDK) AddBlob(ctx context.Context, request operations.AddBlobRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -296,6 +299,7 @@ func (s *SDK) AddItem(ctx context.Context, request operations.AddItemRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -344,6 +348,7 @@ func (s *SDK) AddItemIdsList(ctx context.Context, request operations.AddItemIdsL
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -392,6 +397,7 @@ func (s *SDK) AddItemIdsSpotList(ctx context.Context, request operations.AddItem
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -440,6 +446,7 @@ func (s *SDK) AddItemList(ctx context.Context, request operations.AddItemListReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -488,6 +495,7 @@ func (s *SDK) AddKey(ctx context.Context, request operations.AddKeyRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -536,6 +544,7 @@ func (s *SDK) AddKvPairs(ctx context.Context, request operations.AddKvPairsReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -584,6 +593,7 @@ func (s *SDK) AddLocation(ctx context.Context, request operations.AddLocationReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -632,6 +642,7 @@ func (s *SDK) AddLocationRule(ctx context.Context, request operations.AddLocatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -680,6 +691,7 @@ func (s *SDK) AddSpotList(ctx context.Context, request operations.AddSpotListReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -728,6 +740,7 @@ func (s *SDK) AddSpotSet(ctx context.Context, request operations.AddSpotSetReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -776,6 +789,7 @@ func (s *SDK) AddSubscription(ctx context.Context, request operations.AddSubscri
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -824,6 +838,7 @@ func (s *SDK) AddUser(ctx context.Context, request operations.AddUserRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2735,6 +2750,7 @@ func (s *SDK) UpdateItem(ctx context.Context, request operations.UpdateItemReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2783,6 +2799,7 @@ func (s *SDK) UpdateItemList(ctx context.Context, request operations.UpdateItemL
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2831,6 +2848,7 @@ func (s *SDK) UpdateKey(ctx context.Context, request operations.UpdateKeyRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2879,6 +2897,7 @@ func (s *SDK) UpdateKvPair(ctx context.Context, request operations.UpdateKvPairR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2927,6 +2946,7 @@ func (s *SDK) UpdateLocation(ctx context.Context, request operations.UpdateLocat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2975,6 +2995,7 @@ func (s *SDK) UpdateLocationRule(ctx context.Context, request operations.UpdateL
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3023,6 +3044,7 @@ func (s *SDK) UpdateService(ctx context.Context, request operations.UpdateServic
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3071,6 +3093,7 @@ func (s *SDK) UpdateSpot(ctx context.Context, request operations.UpdateSpotReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3119,6 +3142,7 @@ func (s *SDK) UpdateSpotList(ctx context.Context, request operations.UpdateSpotL
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3167,6 +3191,7 @@ func (s *SDK) UpdateSpotSet(ctx context.Context, request operations.UpdateSpotSe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3215,6 +3240,7 @@ func (s *SDK) UpdateSubscription(ctx context.Context, request operations.UpdateS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3263,6 +3289,7 @@ func (s *SDK) UpdateUser(ctx context.Context, request operations.UpdateUserReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3308,6 +3335,7 @@ func (s *SDK) UploadBlobByID(ctx context.Context, request operations.UploadBlobB
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

@@ -870,6 +870,7 @@ func (s *SDK) PostCancelJob(ctx context.Context, request operations.PostCancelJo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -977,6 +978,7 @@ func (s *SDK) PostCreateJob(ctx context.Context, request operations.PostCreateJo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1184,6 +1186,7 @@ func (s *SDK) PostGetShippingLabel(ctx context.Context, request operations.PostG
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1301,6 +1304,7 @@ func (s *SDK) PostGetStatus(ctx context.Context, request operations.PostGetStatu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1398,6 +1402,7 @@ func (s *SDK) PostListJobs(ctx context.Context, request operations.PostListJobsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1475,6 +1480,7 @@ func (s *SDK) PostUpdateJob(ctx context.Context, request operations.PostUpdateJo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

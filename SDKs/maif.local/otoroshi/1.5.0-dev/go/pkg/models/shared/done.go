@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Done struct {
-	Done bool `json:"done"`
+    Done bool `json:"done"`
+    
 }
+

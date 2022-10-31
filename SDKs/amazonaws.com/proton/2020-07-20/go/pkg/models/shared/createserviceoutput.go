@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateServiceOutput struct {
-	Service Service `json:"service"`
+    Service Service `json:"service"`
+    
 }
+

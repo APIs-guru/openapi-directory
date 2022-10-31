@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteActivationRequest struct {
-	ActivationID string `json:"ActivationId"`
+    ActivationID string `json:"ActivationId"`
+    
 }
+

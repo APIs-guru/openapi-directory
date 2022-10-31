@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type FhirVersionEnum string
 
 const (
-	FhirVersionEnumR4 FhirVersionEnum = "R4"
+    FhirVersionEnumR4 FhirVersionEnum = "R4"
 )
+
+

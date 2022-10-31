@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CompleteWorkflowExecutionDecisionAttributes struct {
-	Result *string `json:"result,omitempty"`
+    Result *string `json:"result,omitempty"`
+    
 }
+

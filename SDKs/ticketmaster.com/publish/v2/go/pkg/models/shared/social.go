@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Social struct {
-	Twitter *Twitter `json:"twitter,omitempty"`
+    Twitter *Twitter `json:"twitter,omitempty"`
+    
 }
+

@@ -1,28 +1,31 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var DeleteFaxServers = []string{
 	"https://fax.twilio.com",
 }
 
 type DeleteFaxPathParams struct {
-	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    
 }
 
 type DeleteFaxSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type DeleteFaxRequest struct {
-	ServerURL  *string
-	PathParams DeleteFaxPathParams
-	Security   DeleteFaxSecurity
+    ServerURL *string 
+    PathParams DeleteFaxPathParams 
+    Security DeleteFaxSecurity 
+    
 }
 
 type DeleteFaxResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

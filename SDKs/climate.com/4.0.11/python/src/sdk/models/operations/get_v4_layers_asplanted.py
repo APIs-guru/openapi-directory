@@ -16,9 +16,9 @@ class GetV4LayersAsPlantedQueryParams:
 
 @dataclass
 class GetV4LayersAsPlantedHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept' }})
-    x_limit: Optional[int] = field(default=None, metadata={'header': { 'field_name': 'X-Limit' }})
-    x_next_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Next-Token' }})
+    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
+    x_limit: Optional[int] = field(default=None, metadata={'header': { 'field_name': 'X-Limit', 'style': 'simple', 'explode': False }})
+    x_next_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Next-Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

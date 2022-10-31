@@ -166,6 +166,7 @@ func (s *SDK) PostCommunicationPreferencesV3SubscribeSubscribe(ctx context.Conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -224,6 +225,7 @@ func (s *SDK) PostCommunicationPreferencesV3UnsubscribeUnsubscribe(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

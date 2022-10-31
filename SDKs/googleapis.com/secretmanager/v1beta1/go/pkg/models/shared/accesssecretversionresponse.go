@@ -1,6 +1,10 @@
 package shared
 
+
+
 type AccessSecretVersionResponse struct {
-	Name    *string        `json:"name,omitempty"`
-	Payload *SecretPayload `json:"payload,omitempty"`
+    Name *string `json:"name,omitempty"`
+    Payload *SecretPayload `json:"payload,omitempty"`
+    
 }
+

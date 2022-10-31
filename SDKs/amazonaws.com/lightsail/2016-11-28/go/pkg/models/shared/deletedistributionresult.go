@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteDistributionResult struct {
-	Operation *Operation `json:"operation,omitempty"`
+    Operation *Operation `json:"operation,omitempty"`
+    
 }
+

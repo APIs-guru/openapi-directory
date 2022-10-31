@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetTimelineEventOutput struct {
-	Event TimelineEvent `json:"event"`
+    Event TimelineEvent `json:"event"`
+    
 }
+

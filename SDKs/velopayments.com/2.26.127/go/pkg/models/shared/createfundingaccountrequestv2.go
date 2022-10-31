@@ -1,18 +1,24 @@
 package shared
 
+
+
+
 type CreateFundingAccountRequestV2TypeEnum string
 
 const (
-	CreateFundingAccountRequestV2TypeEnumFbo           CreateFundingAccountRequestV2TypeEnum = "FBO"
-	CreateFundingAccountRequestV2TypeEnumWubsDecoupled CreateFundingAccountRequestV2TypeEnum = "WUBS_DECOUPLED"
+    CreateFundingAccountRequestV2TypeEnumFbo CreateFundingAccountRequestV2TypeEnum = "FBO"
+CreateFundingAccountRequestV2TypeEnumWubsDecoupled CreateFundingAccountRequestV2TypeEnum = "WUBS_DECOUPLED"
 )
 
+
 type CreateFundingAccountRequestV2 struct {
-	AccountName   *string                               `json:"accountName,omitempty"`
-	AccountNumber *string                               `json:"accountNumber,omitempty"`
-	Currency      *string                               `json:"currency,omitempty"`
-	Name          string                                `json:"name"`
-	PayorID       string                                `json:"payorId"`
-	RoutingNumber *string                               `json:"routingNumber,omitempty"`
-	Type          CreateFundingAccountRequestV2TypeEnum `json:"type"`
+    AccountName *string `json:"accountName,omitempty"`
+    AccountNumber *string `json:"accountNumber,omitempty"`
+    Currency *string `json:"currency,omitempty"`
+    Name string `json:"name"`
+    PayorID string `json:"payorId"`
+    RoutingNumber *string `json:"routingNumber,omitempty"`
+    Type CreateFundingAccountRequestV2TypeEnum `json:"type"`
+    
 }
+

@@ -1,40 +1,51 @@
 package operations
 
+
+
+
 type PostCreateDbParameterGroupActionEnum string
 
 const (
-	PostCreateDbParameterGroupActionEnumCreateDbParameterGroup PostCreateDbParameterGroupActionEnum = "CreateDBParameterGroup"
+    PostCreateDbParameterGroupActionEnumCreateDbParameterGroup PostCreateDbParameterGroupActionEnum = "CreateDBParameterGroup"
 )
+
+
 
 type PostCreateDbParameterGroupVersionEnum string
 
 const (
-	PostCreateDbParameterGroupVersionEnumTwoThousandAndThirteen0212 PostCreateDbParameterGroupVersionEnum = "2013-02-12"
+    PostCreateDbParameterGroupVersionEnumTwoThousandAndThirteen0212 PostCreateDbParameterGroupVersionEnum = "2013-02-12"
 )
 
+
 type PostCreateDbParameterGroupQueryParams struct {
-	Action  PostCreateDbParameterGroupActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	Version PostCreateDbParameterGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action PostCreateDbParameterGroupActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    Version PostCreateDbParameterGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type PostCreateDbParameterGroupHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type PostCreateDbParameterGroupRequest struct {
-	QueryParams PostCreateDbParameterGroupQueryParams
-	Headers     PostCreateDbParameterGroupHeaders
-	Request     []byte `request:"mediaType=text/xml"`
+    QueryParams PostCreateDbParameterGroupQueryParams 
+    Headers PostCreateDbParameterGroupHeaders 
+    Request []byte `request:"mediaType=text/xml"`
+    
 }
 
 type PostCreateDbParameterGroupResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

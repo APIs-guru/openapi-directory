@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EmailInput struct {
-	EmailAddress *string `json:"emailAddress,omitempty"`
+    EmailAddress *string `json:"emailAddress,omitempty"`
+    
 }
+

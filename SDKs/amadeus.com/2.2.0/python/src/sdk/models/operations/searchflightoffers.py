@@ -4,7 +4,7 @@ from typing import Any,Optional
 
 @dataclass
 class SearchFlightOffersHeaders:
-    x_http_method_override: str = field(default=None, metadata={'header': { 'field_name': 'X-HTTP-Method-Override' }})
+    x_http_method_override: str = field(default=None, metadata={'header': { 'field_name': 'X-HTTP-Method-Override', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

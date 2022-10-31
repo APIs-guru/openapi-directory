@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetInstancesIDAttachmentsPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetInstancesIDAttachmentsRequest struct {
-	PathParams GetInstancesIDAttachmentsPathParams
+    PathParams GetInstancesIDAttachmentsPathParams 
+    
 }
 
 type GetInstancesIDAttachmentsResponse struct {
-	ContentType                                    string
-	GetInstancesIDAttachments200ApplicationJSONAny *interface{}
-	StatusCode                                     int64
+    ContentType string 
+    GetInstancesIDAttachments200ApplicationJSONAny *interface{} 
+    StatusCode int64 
+    
 }
+

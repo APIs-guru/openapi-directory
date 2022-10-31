@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TwoHundredResult struct {
-	Result []interface{} `json:"result,omitempty"`
+    Result []interface{} `json:"result,omitempty"`
+    
 }
+

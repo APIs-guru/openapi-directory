@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type IdentityProviderTypeEnum string
 
 const (
-	IdentityProviderTypeEnumSaml IdentityProviderTypeEnum = "SAML"
+    IdentityProviderTypeEnumSaml IdentityProviderTypeEnum = "SAML"
 )
+
+

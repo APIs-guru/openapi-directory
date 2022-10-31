@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DistrictsResponse struct {
-	Data []DistrictResponse `json:"data,omitempty"`
+    Data []DistrictResponse `json:"data,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeclineHandshakeRequest struct {
-	HandshakeID string `json:"HandshakeId"`
+    HandshakeID string `json:"HandshakeId"`
+    
 }
+

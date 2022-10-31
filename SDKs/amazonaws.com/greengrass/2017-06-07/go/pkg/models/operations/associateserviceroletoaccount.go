@@ -1,32 +1,36 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type AssociateServiceRoleToAccountHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type AssociateServiceRoleToAccountRequestBody struct {
-	RoleArn string `json:"RoleArn"`
+    RoleArn string `json:"RoleArn"`
+    
 }
 
 type AssociateServiceRoleToAccountRequest struct {
-	Headers AssociateServiceRoleToAccountHeaders
-	Request AssociateServiceRoleToAccountRequestBody `request:"mediaType=application/json"`
+    Headers AssociateServiceRoleToAccountHeaders 
+    Request AssociateServiceRoleToAccountRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type AssociateServiceRoleToAccountResponse struct {
-	AssociateServiceRoleToAccountResponse *shared.AssociateServiceRoleToAccountResponse
-	BadRequestException                   *interface{}
-	ContentType                           string
-	InternalServerErrorException          *interface{}
-	StatusCode                            int64
+    AssociateServiceRoleToAccountResponse *shared.AssociateServiceRoleToAccountResponse 
+    BadRequestException *interface{} 
+    ContentType string 
+    InternalServerErrorException *interface{} 
+    StatusCode int64 
+    
 }
+

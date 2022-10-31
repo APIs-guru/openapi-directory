@@ -1,21 +1,29 @@
 package operations
 
+
+
+
 type GetAreasFormatEnum string
 
 const (
-	GetAreasFormatEnumJSON GetAreasFormatEnum = "json"
-	GetAreasFormatEnumXML  GetAreasFormatEnum = "xml"
+    GetAreasFormatEnumJSON GetAreasFormatEnum = "json"
+GetAreasFormatEnumXML GetAreasFormatEnum = "xml"
 )
 
+
 type GetAreasQueryParams struct {
-	Format *GetAreasFormatEnum `queryParam:"style=form,explode=true,name=format"`
+    Format *GetAreasFormatEnum `queryParam:"style=form,explode=true,name=format"`
+    
 }
 
 type GetAreasRequest struct {
-	QueryParams GetAreasQueryParams
+    QueryParams GetAreasQueryParams 
+    
 }
 
 type GetAreasResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

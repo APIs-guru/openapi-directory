@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LoginResponse struct {
-	Token string `json:"token"`
+    Token string `json:"token"`
+    
 }
+

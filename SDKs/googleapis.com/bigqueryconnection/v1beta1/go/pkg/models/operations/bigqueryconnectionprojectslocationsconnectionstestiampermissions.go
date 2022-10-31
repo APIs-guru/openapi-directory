@@ -1,51 +1,58 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsPathParams struct {
-	Resource string `pathParam:"style=simple,explode=false,name=resource"`
+    Resource string `pathParam:"style=simple,explode=false,name=resource"`
+    
 }
 
 type BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsQueryParams struct {
-	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
-	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
-	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
-	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
-	Key            *string           `queryParam:"style=form,explode=true,name=key"`
-	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
-	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
-	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
-	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
+    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
+    Callback *string `queryParam:"style=form,explode=true,name=callback"`
+    Fields *string `queryParam:"style=form,explode=true,name=fields"`
+    Key *string `queryParam:"style=form,explode=true,name=key"`
+    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
+    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
+    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
+    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
+    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
+    
 }
 
 type BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsSecurityOption1 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsSecurityOption2 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsSecurity struct {
-	Option1 *BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsSecurityOption1 `security:"option"`
-	Option2 *BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsSecurityOption2 `security:"option"`
+    Option1 *BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsSecurityOption1 `security:"option"`
+    Option2 *BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsSecurityOption2 `security:"option"`
+    
 }
 
 type BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsRequest struct {
-	PathParams  BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsPathParams
-	QueryParams BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsQueryParams
-	Request     *shared.TestIamPermissionsRequest `request:"mediaType=application/json"`
-	Security    BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsSecurity
+    PathParams BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsPathParams 
+    QueryParams BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsQueryParams 
+    Request *shared.TestIamPermissionsRequest `request:"mediaType=application/json"`
+    Security BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsSecurity 
+    
 }
 
 type BigqueryconnectionProjectsLocationsConnectionsTestIamPermissionsResponse struct {
-	ContentType                string
-	StatusCode                 int64
-	TestIamPermissionsResponse *shared.TestIamPermissionsResponse
+    ContentType string 
+    StatusCode int64 
+    TestIamPermissionsResponse *shared.TestIamPermissionsResponse 
+    
 }
+

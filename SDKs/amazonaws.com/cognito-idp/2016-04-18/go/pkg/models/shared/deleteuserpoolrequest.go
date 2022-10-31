@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteUserPoolRequest struct {
-	UserPoolID string `json:"UserPoolId"`
+    UserPoolID string `json:"UserPoolId"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateOrderOutput struct {
-	Order *Order `json:"Order,omitempty"`
+    Order *Order `json:"Order,omitempty"`
+    
 }
+

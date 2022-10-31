@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListTablesOutput struct {
-	LastEvaluatedTableName *string  `json:"LastEvaluatedTableName,omitempty"`
-	TableNames             []string `json:"TableNames,omitempty"`
+    LastEvaluatedTableName *string `json:"LastEvaluatedTableName,omitempty"`
+    TableNames []string `json:"TableNames,omitempty"`
+    
 }
+

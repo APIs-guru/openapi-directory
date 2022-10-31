@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ArrayStats struct {
-	MemberStats *DataStats `json:"memberStats,omitempty"`
+    MemberStats *DataStats `json:"memberStats,omitempty"`
+    
 }
+

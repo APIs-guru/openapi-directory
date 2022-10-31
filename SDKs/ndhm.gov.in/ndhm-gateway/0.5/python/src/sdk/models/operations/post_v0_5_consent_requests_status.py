@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class PostV05ConsentRequestsStatusHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
-    x_cm_id: str = field(default=None, metadata={'header': { 'field_name': 'X-CM-ID' }})
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    x_cm_id: str = field(default=None, metadata={'header': { 'field_name': 'X-CM-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

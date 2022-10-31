@@ -1,34 +1,44 @@
 package operations
 
+
+
 type GetPlacementGroupsIDPathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetPlacementGroupsIDRequest struct {
-	PathParams GetPlacementGroupsIDPathParams
+    PathParams GetPlacementGroupsIDPathParams 
+    
 }
+
 
 type GetPlacementGroupsIDPlacementGroupResponsePlacementGroupTypeEnum string
 
 const (
-	GetPlacementGroupsIDPlacementGroupResponsePlacementGroupTypeEnumSpread GetPlacementGroupsIDPlacementGroupResponsePlacementGroupTypeEnum = "spread"
+    GetPlacementGroupsIDPlacementGroupResponsePlacementGroupTypeEnumSpread GetPlacementGroupsIDPlacementGroupResponsePlacementGroupTypeEnum = "spread"
 )
 
+
 type GetPlacementGroupsIDPlacementGroupResponsePlacementGroup struct {
-	Created string                                                           `json:"created"`
-	ID      int64                                                            `json:"id"`
-	Labels  map[string]string                                                `json:"labels"`
-	Name    string                                                           `json:"name"`
-	Servers []int64                                                          `json:"servers"`
-	Type    GetPlacementGroupsIDPlacementGroupResponsePlacementGroupTypeEnum `json:"type"`
+    Created string `json:"created"`
+    ID int64 `json:"id"`
+    Labels map[string]string `json:"labels"`
+    Name string `json:"name"`
+    Servers []int64 `json:"servers"`
+    Type GetPlacementGroupsIDPlacementGroupResponsePlacementGroupTypeEnum `json:"type"`
+    
 }
 
 type GetPlacementGroupsIDPlacementGroupResponse struct {
-	PlacementGroup GetPlacementGroupsIDPlacementGroupResponsePlacementGroup `json:"placement_group"`
+    PlacementGroup GetPlacementGroupsIDPlacementGroupResponsePlacementGroup `json:"placement_group"`
+    
 }
 
 type GetPlacementGroupsIDResponse struct {
-	ContentType            string
-	PlacementGroupResponse *GetPlacementGroupsIDPlacementGroupResponse
-	StatusCode             int64
+    ContentType string 
+    PlacementGroupResponse *GetPlacementGroupsIDPlacementGroupResponse 
+    StatusCode int64 
+    
 }
+

@@ -618,6 +618,7 @@ func (s *SDK) SolrqueryPost(ctx context.Context, request operations.SolrqueryPos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

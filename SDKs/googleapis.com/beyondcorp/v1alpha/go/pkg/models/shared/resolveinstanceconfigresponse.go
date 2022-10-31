@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ResolveInstanceConfigResponse struct {
-	InstanceConfig *ConnectorInstanceConfig `json:"instanceConfig,omitempty"`
+    InstanceConfig *ConnectorInstanceConfig `json:"instanceConfig,omitempty"`
+    
 }
+

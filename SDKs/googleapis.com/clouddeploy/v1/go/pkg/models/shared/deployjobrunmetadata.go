@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeployJobRunMetadata struct {
-	CloudRun *CloudRunMetadata `json:"cloudRun,omitempty"`
+    CloudRun *CloudRunMetadata `json:"cloudRun,omitempty"`
+    
 }
+

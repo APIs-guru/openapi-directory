@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetPlansQueryParams struct {
-	Lang *string `queryParam:"style=form,explode=true,name=lang"`
+    Lang *string `queryParam:"style=form,explode=true,name=lang"`
+    
 }
 
 type GetPlansRequest struct {
-	QueryParams GetPlansQueryParams
+    QueryParams GetPlansQueryParams 
+    
 }
 
 type GetPlansResponse struct {
-	BtPlans      *shared.BtPlans
-	ContentType  string
-	ServiceError *shared.ServiceError
-	StatusCode   int64
+    BtPlans *shared.BtPlans 
+    ContentType string 
+    ServiceError *shared.ServiceError 
+    StatusCode int64 
+    
 }
+

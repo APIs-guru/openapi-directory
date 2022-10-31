@@ -1,14 +1,20 @@
 package operations
 
+
+
 type PeopleSearchReadPathParams struct {
-	User string `pathParam:"style=simple,explode=false,name=user"`
+    User string `pathParam:"style=simple,explode=false,name=user"`
+    
 }
 
 type PeopleSearchReadRequest struct {
-	PathParams PeopleSearchReadPathParams
+    PathParams PeopleSearchReadPathParams 
+    
 }
 
 type PeopleSearchReadResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

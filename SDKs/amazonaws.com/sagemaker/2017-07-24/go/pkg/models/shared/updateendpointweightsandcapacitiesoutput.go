@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateEndpointWeightsAndCapacitiesOutput struct {
-	EndpointArn string `json:"EndpointArn"`
+    EndpointArn string `json:"EndpointArn"`
+    
 }
+

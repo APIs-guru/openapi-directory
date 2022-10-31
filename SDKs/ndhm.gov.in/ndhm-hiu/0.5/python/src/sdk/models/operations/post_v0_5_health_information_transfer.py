@@ -8,7 +8,7 @@ POST_V0_5_HEALTH_INFORMATION_TRANSFER_SERVERS = [
 
 @dataclass
 class PostV05HealthInformationTransferHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

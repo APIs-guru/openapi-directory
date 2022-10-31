@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type CustomRoutingDestinationTrafficStateEnum string
 
 const (
-	CustomRoutingDestinationTrafficStateEnumAllow CustomRoutingDestinationTrafficStateEnum = "ALLOW"
-	CustomRoutingDestinationTrafficStateEnumDeny  CustomRoutingDestinationTrafficStateEnum = "DENY"
+    CustomRoutingDestinationTrafficStateEnumAllow CustomRoutingDestinationTrafficStateEnum = "ALLOW"
+CustomRoutingDestinationTrafficStateEnumDeny CustomRoutingDestinationTrafficStateEnum = "DENY"
 )
+
+

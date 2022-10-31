@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CollectionResponseActionFunctionIdentifierNoPaging struct {
-	Results []ActionFunctionIdentifier `json:"results"`
+    Results []ActionFunctionIdentifier `json:"results"`
+    
 }
+

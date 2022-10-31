@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetVideoPathParams struct {
-	VideoID float64 `pathParam:"style=simple,explode=false,name=video_id"`
+    VideoID float64 `pathParam:"style=simple,explode=false,name=video_id"`
+    
 }
 
 type GetVideoRequest struct {
-	PathParams GetVideoPathParams
+    PathParams GetVideoPathParams 
+    
 }
 
 type GetVideoResponse struct {
-	ContentType string
-	StatusCode  int64
-	LegacyError *shared.LegacyError
-	Video       *shared.Video
+    ContentType string 
+    StatusCode int64 
+    LegacyError *shared.LegacyError 
+    Video *shared.Video 
+    
 }
+

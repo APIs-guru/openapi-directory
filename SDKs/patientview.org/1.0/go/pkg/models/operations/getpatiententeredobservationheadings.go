@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetPatientEnteredObservationHeadingsPathParams struct {
-	UserID int64 `pathParam:"style=simple,explode=false,name=userId"`
+    UserID int64 `pathParam:"style=simple,explode=false,name=userId"`
+    
 }
 
 type GetPatientEnteredObservationHeadingsRequest struct {
-	PathParams GetPatientEnteredObservationHeadingsPathParams
+    PathParams GetPatientEnteredObservationHeadingsPathParams 
+    
 }
 
 type GetPatientEnteredObservationHeadingsResponse struct {
-	ContentType         string
-	ObservationHeadings []shared.ObservationHeading
-	StatusCode          int64
+    ContentType string 
+    ObservationHeadings []shared.ObservationHeading 
+    StatusCode int64 
+    
 }
+

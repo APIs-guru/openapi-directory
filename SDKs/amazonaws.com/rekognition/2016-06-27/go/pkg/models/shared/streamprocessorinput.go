@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StreamProcessorInput struct {
-	KinesisVideoStream *KinesisVideoStream `json:"KinesisVideoStream,omitempty"`
+    KinesisVideoStream *KinesisVideoStream `json:"KinesisVideoStream,omitempty"`
+    
 }
+

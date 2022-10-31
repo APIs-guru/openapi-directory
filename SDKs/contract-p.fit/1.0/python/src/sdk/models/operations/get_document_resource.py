@@ -10,7 +10,7 @@ class GetDocumentResourcePathParams:
 
 @dataclass
 class GetDocumentResourceHeaders:
-    x_fields: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Fields' }})
+    x_fields: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Fields', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

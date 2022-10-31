@@ -63,6 +63,7 @@ func (s *SDK) PostGetOnboardingURL(ctx context.Context, request operations.PostG
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -158,6 +159,7 @@ func (s *SDK) PostGetPciQuestionnaireURL(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

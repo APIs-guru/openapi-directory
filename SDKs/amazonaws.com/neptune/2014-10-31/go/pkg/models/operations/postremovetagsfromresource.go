@@ -1,40 +1,51 @@
 package operations
 
+
+
+
 type PostRemoveTagsFromResourceActionEnum string
 
 const (
-	PostRemoveTagsFromResourceActionEnumRemoveTagsFromResource PostRemoveTagsFromResourceActionEnum = "RemoveTagsFromResource"
+    PostRemoveTagsFromResourceActionEnumRemoveTagsFromResource PostRemoveTagsFromResourceActionEnum = "RemoveTagsFromResource"
 )
+
+
 
 type PostRemoveTagsFromResourceVersionEnum string
 
 const (
-	PostRemoveTagsFromResourceVersionEnumTwoThousandAndFourteen1031 PostRemoveTagsFromResourceVersionEnum = "2014-10-31"
+    PostRemoveTagsFromResourceVersionEnumTwoThousandAndFourteen1031 PostRemoveTagsFromResourceVersionEnum = "2014-10-31"
 )
 
+
 type PostRemoveTagsFromResourceQueryParams struct {
-	Action  PostRemoveTagsFromResourceActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	Version PostRemoveTagsFromResourceVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action PostRemoveTagsFromResourceActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    Version PostRemoveTagsFromResourceVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type PostRemoveTagsFromResourceHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type PostRemoveTagsFromResourceRequest struct {
-	QueryParams PostRemoveTagsFromResourceQueryParams
-	Headers     PostRemoveTagsFromResourceHeaders
-	Request     []byte `request:"mediaType=text/xml"`
+    QueryParams PostRemoveTagsFromResourceQueryParams 
+    Headers PostRemoveTagsFromResourceHeaders 
+    Request []byte `request:"mediaType=text/xml"`
+    
 }
 
 type PostRemoveTagsFromResourceResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

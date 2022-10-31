@@ -13,7 +13,7 @@ class ProductPhotosQueryParams:
 
 @dataclass
 class ProductPhotosHeaders:
-    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

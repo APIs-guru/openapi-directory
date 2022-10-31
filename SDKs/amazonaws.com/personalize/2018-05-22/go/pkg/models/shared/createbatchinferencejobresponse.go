@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateBatchInferenceJobResponse struct {
-	BatchInferenceJobArn *string `json:"batchInferenceJobArn,omitempty"`
+    BatchInferenceJobArn *string `json:"batchInferenceJobArn,omitempty"`
+    
 }
+

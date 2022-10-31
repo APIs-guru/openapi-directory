@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetEePlansQueryParams struct {
-	Lang *string `queryParam:"style=form,explode=true,name=lang"`
+    Lang *string `queryParam:"style=form,explode=true,name=lang"`
+    
 }
 
 type GetEePlansRequest struct {
-	QueryParams GetEePlansQueryParams
+    QueryParams GetEePlansQueryParams 
+    
 }
 
 type GetEePlansResponse struct {
-	ContentType  string
-	EePlans      *shared.EePlans
-	ServiceError *shared.ServiceError
-	StatusCode   int64
+    ContentType string 
+    EePlans *shared.EePlans 
+    ServiceError *shared.ServiceError 
+    StatusCode int64 
+    
 }
+

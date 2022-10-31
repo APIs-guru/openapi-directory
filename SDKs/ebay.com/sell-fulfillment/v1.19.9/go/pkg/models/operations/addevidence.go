@@ -1,30 +1,33 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var AddEvidenceServers = []string{
 	"https://apiz.ebay.com{basePath}",
 }
 
 type AddEvidencePathParams struct {
-	PaymentDisputeID string `pathParam:"style=simple,explode=false,name=payment_dispute_id"`
+    PaymentDisputeID string `pathParam:"style=simple,explode=false,name=payment_dispute_id"`
+    
 }
 
 type AddEvidenceSecurity struct {
-	APIAuth shared.SchemeAPIAuth `security:"scheme,type=oauth2"`
+    APIAuth shared.SchemeAPIAuth `security:"scheme,type=oauth2"`
+    
 }
 
 type AddEvidenceRequest struct {
-	ServerURL  *string
-	PathParams AddEvidencePathParams
-	Request    *shared.AddEvidencePaymentDisputeRequest `request:"mediaType=application/json"`
-	Security   AddEvidenceSecurity
+    ServerURL *string 
+    PathParams AddEvidencePathParams 
+    Request *shared.AddEvidencePaymentDisputeRequest `request:"mediaType=application/json"`
+    Security AddEvidenceSecurity 
+    
 }
 
 type AddEvidenceResponse struct {
-	AddEvidencePaymentDisputeResponse *shared.AddEvidencePaymentDisputeResponse
-	ContentType                       string
-	StatusCode                        int64
+    AddEvidencePaymentDisputeResponse *shared.AddEvidencePaymentDisputeResponse 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,35 +1,40 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetInstantMixFromArtistsPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetInstantMixFromArtistsQueryParams struct {
-	EnableImageTypes []shared.ImageTypeEnum  `queryParam:"style=form,explode=true,name=enableImageTypes"`
-	EnableImages     *bool                   `queryParam:"style=form,explode=true,name=enableImages"`
-	EnableUserData   *bool                   `queryParam:"style=form,explode=true,name=enableUserData"`
-	Fields           []shared.ItemFieldsEnum `queryParam:"style=form,explode=true,name=fields"`
-	ImageTypeLimit   *int32                  `queryParam:"style=form,explode=true,name=imageTypeLimit"`
-	Limit            *int32                  `queryParam:"style=form,explode=true,name=limit"`
-	UserID           *string                 `queryParam:"style=form,explode=true,name=userId"`
+    EnableImageTypes []shared.ImageTypeEnum `queryParam:"style=form,explode=true,name=enableImageTypes"`
+    EnableImages *bool `queryParam:"style=form,explode=true,name=enableImages"`
+    EnableUserData *bool `queryParam:"style=form,explode=true,name=enableUserData"`
+    Fields []shared.ItemFieldsEnum `queryParam:"style=form,explode=true,name=fields"`
+    ImageTypeLimit *int32 `queryParam:"style=form,explode=true,name=imageTypeLimit"`
+    Limit *int32 `queryParam:"style=form,explode=true,name=limit"`
+    UserID *string `queryParam:"style=form,explode=true,name=userId"`
+    
 }
 
 type GetInstantMixFromArtistsSecurity struct {
-	CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type GetInstantMixFromArtistsRequest struct {
-	PathParams  GetInstantMixFromArtistsPathParams
-	QueryParams GetInstantMixFromArtistsQueryParams
-	Security    GetInstantMixFromArtistsSecurity
+    PathParams GetInstantMixFromArtistsPathParams 
+    QueryParams GetInstantMixFromArtistsQueryParams 
+    Security GetInstantMixFromArtistsSecurity 
+    
 }
 
 type GetInstantMixFromArtistsResponse struct {
-	BaseItemDtoQueryResult *shared.BaseItemDtoQueryResult
-	ContentType            string
-	StatusCode             int64
+    BaseItemDtoQueryResult *shared.BaseItemDtoQueryResult 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

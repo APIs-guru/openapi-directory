@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribePermissionsResult struct {
-	Permissions []Permission `json:"Permissions,omitempty"`
+    Permissions []Permission `json:"Permissions,omitempty"`
+    
 }
+

@@ -1,6 +1,10 @@
 package shared
 
+
+
 type StreamingComputationRanges struct {
-	ComputationID    *string                      `json:"computationId,omitempty"`
-	RangeAssignments []KeyRangeDataDiskAssignment `json:"rangeAssignments,omitempty"`
+    ComputationID *string `json:"computationId,omitempty"`
+    RangeAssignments []KeyRangeDataDiskAssignment `json:"rangeAssignments,omitempty"`
+    
 }
+

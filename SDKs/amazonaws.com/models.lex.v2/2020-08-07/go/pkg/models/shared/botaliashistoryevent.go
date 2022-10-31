@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type BotAliasHistoryEvent struct {
-	BotVersion *string    `json:"botVersion,omitempty"`
-	EndDate    *time.Time `json:"endDate,omitempty"`
-	StartDate  *time.Time `json:"startDate,omitempty"`
+    BotVersion *string `json:"botVersion,omitempty"`
+    EndDate *time.Time `json:"endDate,omitempty"`
+    StartDate *time.Time `json:"startDate,omitempty"`
+    
 }
+

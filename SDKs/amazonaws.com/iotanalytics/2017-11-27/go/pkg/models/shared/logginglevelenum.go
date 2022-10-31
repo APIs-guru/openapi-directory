@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type LoggingLevelEnum string
 
 const (
-	LoggingLevelEnumError LoggingLevelEnum = "ERROR"
+    LoggingLevelEnumError LoggingLevelEnum = "ERROR"
 )
+
+

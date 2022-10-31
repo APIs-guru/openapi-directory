@@ -1,8 +1,12 @@
 package shared
 
+
+
 type DescribeBackupsRequest struct {
-	BackupIds  []string `json:"BackupIds,omitempty"`
-	Filters    []Filter `json:"Filters,omitempty"`
-	MaxResults *int64   `json:"MaxResults,omitempty"`
-	NextToken  *string  `json:"NextToken,omitempty"`
+    BackupIds []string `json:"BackupIds,omitempty"`
+    Filters []Filter `json:"Filters,omitempty"`
+    MaxResults *int64 `json:"MaxResults,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    
 }
+

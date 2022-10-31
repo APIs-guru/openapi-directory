@@ -1,15 +1,17 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DcimPlatformsCreateRequest struct {
-	Request shared.WritablePlatform `request:"mediaType=application/json"`
+    Request shared.WritablePlatform `request:"mediaType=application/json"`
+    
 }
 
 type DcimPlatformsCreateResponse struct {
-	ContentType string
-	Platform    *shared.Platform
-	StatusCode  int64
+    ContentType string 
+    Platform *shared.Platform 
+    StatusCode int64 
+    
 }
+

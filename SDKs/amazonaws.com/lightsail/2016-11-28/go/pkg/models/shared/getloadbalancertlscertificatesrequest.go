@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetLoadBalancerTLSCertificatesRequest struct {
-	LoadBalancerName string `json:"loadBalancerName"`
+    LoadBalancerName string `json:"loadBalancerName"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AutoMlJobObjective struct {
-	MetricName AutoMlMetricEnumEnum `json:"MetricName"`
+    MetricName AutoMlMetricEnumEnum `json:"MetricName"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TestResult struct {
-	Groups []GroupResult `json:"groups,omitempty"`
+    Groups []GroupResult `json:"groups,omitempty"`
+    
 }
+

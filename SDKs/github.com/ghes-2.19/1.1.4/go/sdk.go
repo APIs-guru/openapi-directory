@@ -1272,6 +1272,7 @@ func (s *SDK) ActivityMarkNotificationsAsRead(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1339,6 +1340,7 @@ func (s *SDK) ActivityMarkRepoNotificationsAsRead(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1426,6 +1428,7 @@ func (s *SDK) ActivitySetRepoSubscription(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1471,6 +1474,7 @@ func (s *SDK) ActivitySetThreadSubscription(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1710,6 +1714,7 @@ func (s *SDK) AppsCreateContentAttachment(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1806,6 +1811,7 @@ func (s *SDK) AppsCreateFromManifest(ctx context.Context, request operations.App
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1871,7 +1877,10 @@ func (s *SDK) AppsCreateInstallationAccessToken(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -1961,6 +1970,8 @@ func (s *SDK) AppsDeleteInstallation(ctx context.Context, request operations.App
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2110,6 +2121,8 @@ func (s *SDK) AppsGetInstallation(ctx context.Context, request operations.AppsGe
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2169,6 +2182,8 @@ func (s *SDK) AppsGetOrgInstallation(ctx context.Context, request operations.App
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2207,6 +2222,8 @@ func (s *SDK) AppsGetRepoInstallation(ctx context.Context, request operations.Ap
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2267,6 +2284,8 @@ func (s *SDK) AppsGetUserInstallation(ctx context.Context, request operations.Ap
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -2305,6 +2324,8 @@ func (s *SDK) AppsListInstallationReposForAuthenticatedUser(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2370,6 +2391,8 @@ func (s *SDK) AppsListInstallations(ctx context.Context, request operations.Apps
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -2412,6 +2435,8 @@ func (s *SDK) AppsListInstallationsForAuthenticatedUser(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2486,6 +2511,8 @@ func (s *SDK) AppsListReposAccessibleToInstallation(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -2606,6 +2633,7 @@ func (s *SDK) ChecksCreate(ctx context.Context, request operations.ChecksCreateR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2651,6 +2679,7 @@ func (s *SDK) ChecksCreateSuite(ctx context.Context, request operations.ChecksCr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2995,6 +3024,7 @@ func (s *SDK) ChecksSetSuitesPreferences(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3040,6 +3070,7 @@ func (s *SDK) ChecksUpdate(ctx context.Context, request operations.ChecksUpdateR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3235,6 +3266,7 @@ func (s *SDK) EnterpriseAdminAddAuthorizedSSHKey(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3280,6 +3312,7 @@ func (s *SDK) EnterpriseAdminCreateEnterpriseServerLicense(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3316,7 +3349,10 @@ func (s *SDK) EnterpriseAdminCreateGlobalWebhook(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -3361,6 +3397,7 @@ func (s *SDK) EnterpriseAdminCreateImpersonationOAuthToken(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3406,6 +3443,7 @@ func (s *SDK) EnterpriseAdminCreateOrg(ctx context.Context, request operations.E
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3451,6 +3489,7 @@ func (s *SDK) EnterpriseAdminCreatePreReceiveEnvironment(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3496,6 +3535,7 @@ func (s *SDK) EnterpriseAdminCreatePreReceiveHook(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3541,6 +3581,7 @@ func (s *SDK) EnterpriseAdminCreateUser(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3581,6 +3622,8 @@ func (s *SDK) EnterpriseAdminDeleteGlobalWebhook(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -3836,6 +3879,7 @@ func (s *SDK) EnterpriseAdminEnableOrDisableMaintenanceMode(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3993,6 +4037,8 @@ func (s *SDK) EnterpriseAdminGetGlobalWebhook(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -4345,6 +4391,8 @@ func (s *SDK) EnterpriseAdminListGlobalWebhooks(ctx context.Context, request ope
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -4638,6 +4686,8 @@ func (s *SDK) EnterpriseAdminPingGlobalWebhook(ctx context.Context, request oper
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -4702,6 +4752,7 @@ func (s *SDK) EnterpriseAdminRemoveAuthorizedSSHKey(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4825,6 +4876,7 @@ func (s *SDK) EnterpriseAdminSetSettings(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4940,6 +4992,7 @@ func (s *SDK) EnterpriseAdminSuspendUser(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5054,6 +5107,7 @@ func (s *SDK) EnterpriseAdminUnsuspendUser(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5090,7 +5144,10 @@ func (s *SDK) EnterpriseAdminUpdateGlobalWebhook(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -5135,6 +5192,7 @@ func (s *SDK) EnterpriseAdminUpdateLdapMappingForTeam(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5180,6 +5238,7 @@ func (s *SDK) EnterpriseAdminUpdateLdapMappingForUser(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5225,6 +5284,7 @@ func (s *SDK) EnterpriseAdminUpdateOrgName(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5270,6 +5330,7 @@ func (s *SDK) EnterpriseAdminUpdatePreReceiveEnvironment(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5325,6 +5386,7 @@ func (s *SDK) EnterpriseAdminUpdatePreReceiveHook(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5370,6 +5432,7 @@ func (s *SDK) EnterpriseAdminUpdatePreReceiveHookEnforcementForOrg(ctx context.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5415,6 +5478,7 @@ func (s *SDK) EnterpriseAdminUpdatePreReceiveHookEnforcementForRepo(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5460,6 +5524,7 @@ func (s *SDK) EnterpriseAdminUpdateUsernameForUser(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5505,6 +5570,7 @@ func (s *SDK) EnterpriseAdminUpgradeLicense(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5592,6 +5658,7 @@ func (s *SDK) GistsCreate(ctx context.Context, request operations.GistsCreateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5670,6 +5737,7 @@ func (s *SDK) GistsCreateComment(ctx context.Context, request operations.GistsCr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6630,6 +6698,7 @@ func (s *SDK) GistsUpdate(ctx context.Context, request operations.GistsUpdateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6695,6 +6764,7 @@ func (s *SDK) GistsUpdateComment(ctx context.Context, request operations.GistsUp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6750,6 +6820,7 @@ func (s *SDK) GitCreateBlob(ctx context.Context, request operations.GitCreateBlo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6837,6 +6908,7 @@ func (s *SDK) GitCreateCommit(ctx context.Context, request operations.GitCreateC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6904,6 +6976,7 @@ func (s *SDK) GitCreateRef(ctx context.Context, request operations.GitCreateRefR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6961,6 +7034,7 @@ func (s *SDK) GitCreateTag(ctx context.Context, request operations.GitCreateTagR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7018,6 +7092,7 @@ func (s *SDK) GitCreateTree(ctx context.Context, request operations.GitCreateTre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7455,6 +7530,7 @@ func (s *SDK) GitUpdateRef(ctx context.Context, request operations.GitUpdateRefR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7590,6 +7666,7 @@ func (s *SDK) IssuesAddAssignees(ctx context.Context, request operations.IssuesA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7635,6 +7712,7 @@ func (s *SDK) IssuesAddLabels(ctx context.Context, request operations.IssuesAddL
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7740,6 +7818,7 @@ func (s *SDK) IssuesCreate(ctx context.Context, request operations.IssuesCreateR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7837,6 +7916,7 @@ func (s *SDK) IssuesCreateComment(ctx context.Context, request operations.Issues
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7924,6 +8004,7 @@ func (s *SDK) IssuesCreateLabel(ctx context.Context, request operations.IssuesCr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7991,6 +8072,7 @@ func (s *SDK) IssuesCreateMilestone(ctx context.Context, request operations.Issu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9248,6 +9330,7 @@ func (s *SDK) IssuesLock(ctx context.Context, request operations.IssuesLockReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9364,6 +9447,7 @@ func (s *SDK) IssuesRemoveAssignees(ctx context.Context, request operations.Issu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9468,6 +9552,7 @@ func (s *SDK) IssuesSetLabels(ctx context.Context, request operations.IssuesSetL
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9583,6 +9668,7 @@ func (s *SDK) IssuesUpdate(ctx context.Context, request operations.IssuesUpdateR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9688,6 +9774,7 @@ func (s *SDK) IssuesUpdateComment(ctx context.Context, request operations.Issues
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9743,6 +9830,7 @@ func (s *SDK) IssuesUpdateLabel(ctx context.Context, request operations.IssuesUp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9788,6 +9876,7 @@ func (s *SDK) IssuesUpdateMilestone(ctx context.Context, request operations.Issu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -9974,6 +10063,7 @@ func (s *SDK) MarkdownRender(ctx context.Context, request operations.MarkdownRen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -10023,6 +10113,7 @@ func (s *SDK) MarkdownRenderRaw(ctx context.Context, request operations.Markdown
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -10272,6 +10363,7 @@ func (s *SDK) OauthAuthorizationsCreateAuthorization(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -10582,6 +10674,7 @@ func (s *SDK) OauthAuthorizationsGetOrCreateAuthorizationForApp(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -10672,6 +10765,7 @@ func (s *SDK) OauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprint(ct
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -10988,6 +11082,7 @@ func (s *SDK) OauthAuthorizationsUpdateAuthorization(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -11159,6 +11254,7 @@ func (s *SDK) OrgsCreateWebhook(ctx context.Context, request operations.OrgsCrea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -11521,6 +11617,8 @@ func (s *SDK) OrgsListAppInstallations(ctx context.Context, request operations.O
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -12145,6 +12243,7 @@ func (s *SDK) OrgsSetMembershipForUser(ctx context.Context, request operations.O
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12250,6 +12349,7 @@ func (s *SDK) OrgsUpdate(ctx context.Context, request operations.OrgsUpdateReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12325,6 +12425,7 @@ func (s *SDK) OrgsUpdateMembershipForAuthenticatedUser(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12400,6 +12501,7 @@ func (s *SDK) OrgsUpdateWebhook(ctx context.Context, request operations.OrgsUpda
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12465,6 +12567,7 @@ func (s *SDK) ProjectsAddCollaborator(ctx context.Context, request operations.Pr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12552,6 +12655,7 @@ func (s *SDK) ProjectsCreateCard(ctx context.Context, request operations.Project
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12638,6 +12742,7 @@ func (s *SDK) ProjectsCreateColumn(ctx context.Context, request operations.Proje
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12714,6 +12819,7 @@ func (s *SDK) ProjectsCreateForAuthenticatedUser(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12800,6 +12906,7 @@ func (s *SDK) ProjectsCreateForOrg(ctx context.Context, request operations.Proje
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -12895,6 +13002,7 @@ func (s *SDK) ProjectsCreateForRepo(ctx context.Context, request operations.Proj
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -13894,6 +14002,7 @@ func (s *SDK) ProjectsMoveCard(ctx context.Context, request operations.ProjectsM
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -13980,6 +14089,7 @@ func (s *SDK) ProjectsMoveColumn(ctx context.Context, request operations.Project
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -14137,6 +14247,7 @@ func (s *SDK) ProjectsUpdate(ctx context.Context, request operations.ProjectsUpd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -14224,6 +14335,7 @@ func (s *SDK) ProjectsUpdateCard(ctx context.Context, request operations.Project
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -14310,6 +14422,7 @@ func (s *SDK) ProjectsUpdateColumn(ctx context.Context, request operations.Proje
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -14407,6 +14520,7 @@ func (s *SDK) PullsCreate(ctx context.Context, request operations.PullsCreateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -14474,6 +14588,7 @@ func (s *SDK) PullsCreateReplyForReviewComment(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -14531,6 +14646,7 @@ func (s *SDK) PullsCreateReview(ctx context.Context, request operations.PullsCre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -14596,6 +14712,7 @@ func (s *SDK) PullsCreateReviewCommentAlternative(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -14742,6 +14859,7 @@ func (s *SDK) PullsDismissReview(ctx context.Context, request operations.PullsDi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15350,6 +15468,7 @@ func (s *SDK) PullsMerge(ctx context.Context, request operations.PullsMergeReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15445,6 +15564,7 @@ func (s *SDK) PullsRemoveRequestedReviewers(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15500,6 +15620,7 @@ func (s *SDK) PullsRequestReviewers(ctx context.Context, request operations.Pull
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15556,6 +15677,7 @@ func (s *SDK) PullsSubmitReview(ctx context.Context, request operations.PullsSub
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15631,6 +15753,7 @@ func (s *SDK) PullsUpdate(ctx context.Context, request operations.PullsUpdateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15696,6 +15819,7 @@ func (s *SDK) PullsUpdateBranch(ctx context.Context, request operations.PullsUpd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15771,6 +15895,7 @@ func (s *SDK) PullsUpdateReview(ctx context.Context, request operations.PullsUpd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15826,6 +15951,7 @@ func (s *SDK) PullsUpdateReviewComment(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15923,6 +16049,7 @@ func (s *SDK) ReactionsCreateForCommitComment(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -15998,6 +16125,7 @@ func (s *SDK) ReactionsCreateForIssue(ctx context.Context, request operations.Re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -16073,6 +16201,7 @@ func (s *SDK) ReactionsCreateForIssueComment(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -16148,6 +16277,7 @@ func (s *SDK) ReactionsCreateForPullRequestReviewComment(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -16223,7 +16353,10 @@ func (s *SDK) ReactionsCreateForTeamDiscussion(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -16268,7 +16401,10 @@ func (s *SDK) ReactionsCreateForTeamDiscussionComment(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -16308,6 +16444,8 @@ func (s *SDK) ReactionsDelete(ctx context.Context, request operations.ReactionsD
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -16601,6 +16739,8 @@ func (s *SDK) ReactionsListForTeamDiscussion(ctx context.Context, request operat
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -16643,6 +16783,8 @@ func (s *SDK) ReactionsListForTeamDiscussionComment(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -16752,6 +16894,7 @@ func (s *SDK) ReposAddAppAccessRestrictions(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -16807,6 +16950,7 @@ func (s *SDK) ReposAddCollaborator(ctx context.Context, request operations.Repos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -16873,6 +17017,7 @@ func (s *SDK) ReposAddStatusCheckContexts(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -16948,6 +17093,7 @@ func (s *SDK) ReposAddTeamAccessRestrictions(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17003,6 +17149,7 @@ func (s *SDK) ReposAddUserAccessRestrictions(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17148,6 +17295,7 @@ func (s *SDK) ReposCreateCommitComment(ctx context.Context, request operations.R
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17264,6 +17412,7 @@ func (s *SDK) ReposCreateCommitStatus(ctx context.Context, request operations.Re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17311,6 +17460,7 @@ func (s *SDK) ReposCreateDeployKey(ctx context.Context, request operations.Repos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17368,6 +17518,7 @@ func (s *SDK) ReposCreateDeployment(ctx context.Context, request operations.Repo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17434,6 +17585,7 @@ func (s *SDK) ReposCreateDeploymentStatus(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17491,6 +17643,7 @@ func (s *SDK) ReposCreateForAuthenticatedUser(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17596,6 +17749,7 @@ func (s *SDK) ReposCreateFork(ctx context.Context, request operations.ReposCreat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17688,6 +17842,7 @@ func (s *SDK) ReposCreateInOrg(ctx context.Context, request operations.ReposCrea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17755,6 +17910,7 @@ func (s *SDK) ReposCreateOrUpdateFileContents(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17840,6 +17996,7 @@ func (s *SDK) ReposCreatePagesSite(ctx context.Context, request operations.Repos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17915,6 +18072,7 @@ func (s *SDK) ReposCreateRelease(ctx context.Context, request operations.ReposCr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -17972,6 +18130,7 @@ func (s *SDK) ReposCreateUsingTemplate(ctx context.Context, request operations.R
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -18019,6 +18178,7 @@ func (s *SDK) ReposCreateWebhook(ctx context.Context, request operations.ReposCr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -18437,6 +18597,7 @@ func (s *SDK) ReposDeleteFile(ctx context.Context, request operations.ReposDelet
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -22019,6 +22180,7 @@ func (s *SDK) ReposMerge(ctx context.Context, request operations.ReposMergeReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -22127,6 +22289,7 @@ func (s *SDK) ReposRemoveAppAccessRestrictions(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -22212,6 +22375,7 @@ func (s *SDK) ReposRemoveStatusCheckContexts(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -22307,6 +22471,7 @@ func (s *SDK) ReposRemoveTeamAccessRestrictions(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -22362,6 +22527,7 @@ func (s *SDK) ReposRemoveUserAccessRestrictions(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -22417,6 +22583,7 @@ func (s *SDK) ReposReplaceAllTopics(ctx context.Context, request operations.Repo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -22570,6 +22737,7 @@ func (s *SDK) ReposSetAppAccessRestrictions(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -22625,6 +22793,7 @@ func (s *SDK) ReposSetStatusCheckContexts(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -22690,6 +22859,7 @@ func (s *SDK) ReposSetTeamAccessRestrictions(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -22745,6 +22915,7 @@ func (s *SDK) ReposSetUserAccessRestrictions(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -22840,6 +23011,7 @@ func (s *SDK) ReposTransfer(ctx context.Context, request operations.ReposTransfe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -22885,6 +23057,7 @@ func (s *SDK) ReposUpdate(ctx context.Context, request operations.ReposUpdateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -22970,6 +23143,7 @@ func (s *SDK) ReposUpdateBranchProtection(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -23055,6 +23229,7 @@ func (s *SDK) ReposUpdateCommitComment(ctx context.Context, request operations.R
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -23110,6 +23285,7 @@ func (s *SDK) ReposUpdateInformationAboutPagesSite(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -23173,6 +23349,7 @@ func (s *SDK) ReposUpdateInvitation(ctx context.Context, request operations.Repo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -23218,6 +23395,7 @@ func (s *SDK) ReposUpdatePullRequestReviewProtection(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -23273,6 +23451,7 @@ func (s *SDK) ReposUpdateRelease(ctx context.Context, request operations.ReposUp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -23318,6 +23497,7 @@ func (s *SDK) ReposUpdateReleaseAsset(ctx context.Context, request operations.Re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -23363,6 +23543,7 @@ func (s *SDK) ReposUpdateStatusCheckProtection(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -23428,6 +23609,7 @@ func (s *SDK) ReposUpdateWebhook(ctx context.Context, request operations.ReposUp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -23497,6 +23679,7 @@ func (s *SDK) ReposUploadReleaseAsset(ctx context.Context, request operations.Re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -24030,6 +24213,7 @@ func (s *SDK) TeamsAddOrUpdateMembershipForUser(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -24076,7 +24260,10 @@ func (s *SDK) TeamsAddOrUpdateProjectPermissions(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -24122,6 +24309,7 @@ func (s *SDK) TeamsAddOrUpdateRepoPermissions(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -24153,6 +24341,8 @@ func (s *SDK) TeamsCheckPermissionsForProject(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -24246,6 +24436,7 @@ func (s *SDK) TeamsCreate(ctx context.Context, request operations.TeamsCreateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -24311,6 +24502,7 @@ func (s *SDK) TeamsCreateDiscussion(ctx context.Context, request operations.Team
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -24356,6 +24548,7 @@ func (s *SDK) TeamsCreateDiscussionComment(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -25012,6 +25205,8 @@ func (s *SDK) TeamsListProjects(ctx context.Context, request operations.TeamsLis
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -25223,6 +25418,7 @@ func (s *SDK) TeamsUpdate(ctx context.Context, request operations.TeamsUpdateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -25268,6 +25464,7 @@ func (s *SDK) TeamsUpdateDiscussion(ctx context.Context, request operations.Team
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -25313,6 +25510,7 @@ func (s *SDK) TeamsUpdateDiscussionComment(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -25358,6 +25556,7 @@ func (s *SDK) UsersAddEmailForAuthenticated(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -25536,6 +25735,7 @@ func (s *SDK) UsersCreateGpgKeyForAuthenticated(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -25622,6 +25822,7 @@ func (s *SDK) UsersCreatePublicSSHKeyForAuthenticated(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -25708,6 +25909,7 @@ func (s *SDK) UsersDeleteEmailForAuthenticated(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -26999,6 +27201,7 @@ func (s *SDK) UsersUpdateAuthenticated(ctx context.Context, request operations.U
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

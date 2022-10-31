@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InsightSelector struct {
-	InsightType *InsightTypeEnum `json:"InsightType,omitempty"`
+    InsightType *InsightTypeEnum `json:"InsightType,omitempty"`
+    
 }
+

@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetBasicUserInformationPathParams struct {
-	Token string `pathParam:"style=simple,explode=false,name=token"`
+    Token string `pathParam:"style=simple,explode=false,name=token"`
+    
 }
 
 type GetBasicUserInformationRequest struct {
-	PathParams GetBasicUserInformationPathParams
+    PathParams GetBasicUserInformationPathParams 
+    
 }
 
 type GetBasicUserInformationResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

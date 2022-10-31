@@ -1,22 +1,30 @@
 package operations
 
+
+
+
 type PlayerDetailsByActiveFormatEnum string
 
 const (
-	PlayerDetailsByActiveFormatEnumXML  PlayerDetailsByActiveFormatEnum = "XML"
-	PlayerDetailsByActiveFormatEnumJSON PlayerDetailsByActiveFormatEnum = "JSON"
+    PlayerDetailsByActiveFormatEnumXML PlayerDetailsByActiveFormatEnum = "XML"
+PlayerDetailsByActiveFormatEnumJSON PlayerDetailsByActiveFormatEnum = "JSON"
 )
 
+
 type PlayerDetailsByActivePathParams struct {
-	Format PlayerDetailsByActiveFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    Format PlayerDetailsByActiveFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    
 }
 
 type PlayerDetailsByActiveRequest struct {
-	PathParams PlayerDetailsByActivePathParams
+    PathParams PlayerDetailsByActivePathParams 
+    
 }
 
 type PlayerDetailsByActiveResponse struct {
-	ContentType string
-	Players     []interface{}
-	StatusCode  int64
+    ContentType string 
+    Players []interface{} 
+    StatusCode int64 
+    
 }
+

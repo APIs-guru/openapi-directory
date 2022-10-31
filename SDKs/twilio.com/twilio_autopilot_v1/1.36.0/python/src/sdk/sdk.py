@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def create_assistant(self, request: operations.CreateAssistantRequest) -> operations.CreateAssistantResponse:
         warnings.simplefilter("ignore")
@@ -28,18 +30,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Assistants"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAssistantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1Assistant])
@@ -47,7 +51,6 @@ class SDK:
 
         return res
 
-    
     
     def create_field(self, request: operations.CreateFieldRequest) -> operations.CreateFieldResponse:
         warnings.simplefilter("ignore")
@@ -56,18 +59,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateFieldResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantTaskField])
@@ -75,7 +80,6 @@ class SDK:
 
         return res
 
-    
     
     def create_field_type(self, request: operations.CreateFieldTypeRequest) -> operations.CreateFieldTypeResponse:
         warnings.simplefilter("ignore")
@@ -84,18 +88,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/FieldTypes", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateFieldTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantFieldType])
@@ -103,7 +109,6 @@ class SDK:
 
         return res
 
-    
     
     def create_field_value(self, request: operations.CreateFieldValueRequest) -> operations.CreateFieldValueResponse:
         warnings.simplefilter("ignore")
@@ -112,18 +117,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateFieldValueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantFieldTypeFieldValue])
@@ -131,7 +138,6 @@ class SDK:
 
         return res
 
-    
     
     def create_model_build(self, request: operations.CreateModelBuildRequest) -> operations.CreateModelBuildResponse:
         warnings.simplefilter("ignore")
@@ -140,18 +146,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/ModelBuilds", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateModelBuildResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantModelBuild])
@@ -159,7 +167,6 @@ class SDK:
 
         return res
 
-    
     
     def create_query(self, request: operations.CreateQueryRequest) -> operations.CreateQueryResponse:
         warnings.simplefilter("ignore")
@@ -168,18 +175,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Queries", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateQueryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantQuery])
@@ -187,7 +196,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sample(self, request: operations.CreateSampleRequest) -> operations.CreateSampleResponse:
         warnings.simplefilter("ignore")
@@ -196,18 +204,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSampleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantTaskSample])
@@ -215,7 +225,6 @@ class SDK:
 
         return res
 
-    
     
     def create_task(self, request: operations.CreateTaskRequest) -> operations.CreateTaskResponse:
         warnings.simplefilter("ignore")
@@ -224,18 +233,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTaskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantTask])
@@ -243,7 +254,6 @@ class SDK:
 
         return res
 
-    
     
     def create_webhook(self, request: operations.CreateWebhookRequest) -> operations.CreateWebhookResponse:
         warnings.simplefilter("ignore")
@@ -252,18 +262,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Webhooks", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateWebhookResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantWebhook])
@@ -272,7 +284,6 @@ class SDK:
         return res
 
     
-    
     def delete_assistant(self, request: operations.DeleteAssistantRequest) -> operations.DeleteAssistantResponse:
         warnings.simplefilter("ignore")
 
@@ -280,20 +291,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAssistantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_field(self, request: operations.DeleteFieldRequest) -> operations.DeleteFieldResponse:
         warnings.simplefilter("ignore")
@@ -302,20 +312,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFieldResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_field_type(self, request: operations.DeleteFieldTypeRequest) -> operations.DeleteFieldTypeResponse:
         warnings.simplefilter("ignore")
@@ -324,20 +333,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/FieldTypes/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFieldTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_field_value(self, request: operations.DeleteFieldValueRequest) -> operations.DeleteFieldValueResponse:
         warnings.simplefilter("ignore")
@@ -346,20 +354,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFieldValueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_model_build(self, request: operations.DeleteModelBuildRequest) -> operations.DeleteModelBuildResponse:
         warnings.simplefilter("ignore")
@@ -368,20 +375,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/ModelBuilds/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteModelBuildResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_query(self, request: operations.DeleteQueryRequest) -> operations.DeleteQueryResponse:
         warnings.simplefilter("ignore")
@@ -390,20 +396,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Queries/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteQueryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_sample(self, request: operations.DeleteSampleRequest) -> operations.DeleteSampleResponse:
         warnings.simplefilter("ignore")
@@ -412,20 +417,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSampleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_task(self, request: operations.DeleteTaskRequest) -> operations.DeleteTaskResponse:
         warnings.simplefilter("ignore")
@@ -434,20 +438,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteTaskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_webhook(self, request: operations.DeleteWebhookRequest) -> operations.DeleteWebhookResponse:
         warnings.simplefilter("ignore")
@@ -456,20 +459,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Webhooks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteWebhookResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def fetch_assistant(self, request: operations.FetchAssistantRequest) -> operations.FetchAssistantResponse:
         warnings.simplefilter("ignore")
@@ -478,14 +480,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchAssistantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1Assistant])
@@ -493,7 +495,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_defaults(self, request: operations.FetchDefaultsRequest) -> operations.FetchDefaultsResponse:
         warnings.simplefilter("ignore")
@@ -502,14 +503,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Defaults", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchDefaultsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantDefaults])
@@ -517,7 +518,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_dialogue(self, request: operations.FetchDialogueRequest) -> operations.FetchDialogueResponse:
         warnings.simplefilter("ignore")
@@ -526,14 +526,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Dialogues/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchDialogueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantDialogue])
@@ -542,7 +542,6 @@ class SDK:
         return res
 
     
-    
     def fetch_field(self, request: operations.FetchFieldRequest) -> operations.FetchFieldResponse:
         warnings.simplefilter("ignore")
 
@@ -550,14 +549,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchFieldResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantTaskField])
@@ -566,7 +565,6 @@ class SDK:
         return res
 
     
-    
     def fetch_field_type(self, request: operations.FetchFieldTypeRequest) -> operations.FetchFieldTypeResponse:
         warnings.simplefilter("ignore")
 
@@ -574,14 +572,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/FieldTypes/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchFieldTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantFieldType])
@@ -589,7 +587,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_field_value(self, request: operations.FetchFieldValueRequest) -> operations.FetchFieldValueResponse:
         warnings.simplefilter("ignore")
@@ -598,14 +595,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchFieldValueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantFieldTypeFieldValue])
@@ -614,7 +611,6 @@ class SDK:
         return res
 
     
-    
     def fetch_model_build(self, request: operations.FetchModelBuildRequest) -> operations.FetchModelBuildResponse:
         warnings.simplefilter("ignore")
 
@@ -622,14 +618,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/ModelBuilds/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchModelBuildResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantModelBuild])
@@ -637,7 +633,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_query(self, request: operations.FetchQueryRequest) -> operations.FetchQueryResponse:
         warnings.simplefilter("ignore")
@@ -646,14 +641,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Queries/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchQueryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantQuery])
@@ -661,7 +656,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_sample(self, request: operations.FetchSampleRequest) -> operations.FetchSampleResponse:
         warnings.simplefilter("ignore")
@@ -670,14 +664,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSampleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantTaskSample])
@@ -685,7 +679,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_style_sheet(self, request: operations.FetchStyleSheetRequest) -> operations.FetchStyleSheetResponse:
         warnings.simplefilter("ignore")
@@ -694,14 +687,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/StyleSheet", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchStyleSheetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantStyleSheet])
@@ -709,7 +702,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_task(self, request: operations.FetchTaskRequest) -> operations.FetchTaskResponse:
         warnings.simplefilter("ignore")
@@ -718,14 +710,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTaskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantTask])
@@ -733,7 +725,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_task_actions(self, request: operations.FetchTaskActionsRequest) -> operations.FetchTaskActionsResponse:
         warnings.simplefilter("ignore")
@@ -742,14 +733,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Actions", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTaskActionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantTaskTaskActions])
@@ -757,7 +748,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_task_statistics(self, request: operations.FetchTaskStatisticsRequest) -> operations.FetchTaskStatisticsResponse:
         warnings.simplefilter("ignore")
@@ -766,14 +756,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Statistics", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTaskStatisticsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantTaskTaskStatistics])
@@ -782,7 +772,6 @@ class SDK:
         return res
 
     
-    
     def fetch_webhook(self, request: operations.FetchWebhookRequest) -> operations.FetchWebhookResponse:
         warnings.simplefilter("ignore")
 
@@ -790,14 +779,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Webhooks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchWebhookResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantWebhook])
@@ -806,7 +795,6 @@ class SDK:
         return res
 
     
-    
     def list_assistant(self, request: operations.ListAssistantRequest) -> operations.ListAssistantResponse:
         warnings.simplefilter("ignore")
 
@@ -814,15 +802,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Assistants"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAssistantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAssistantListAssistantResponse])
@@ -831,7 +820,6 @@ class SDK:
         return res
 
     
-    
     def list_field(self, request: operations.ListFieldRequest) -> operations.ListFieldResponse:
         warnings.simplefilter("ignore")
 
@@ -839,15 +827,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Fields", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListFieldResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListFieldListFieldResponse])
@@ -856,7 +845,6 @@ class SDK:
         return res
 
     
-    
     def list_field_type(self, request: operations.ListFieldTypeRequest) -> operations.ListFieldTypeResponse:
         warnings.simplefilter("ignore")
 
@@ -864,15 +852,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/FieldTypes", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListFieldTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListFieldTypeListFieldTypeResponse])
@@ -881,7 +870,6 @@ class SDK:
         return res
 
     
-    
     def list_field_value(self, request: operations.ListFieldValueRequest) -> operations.ListFieldValueResponse:
         warnings.simplefilter("ignore")
 
@@ -889,15 +877,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/FieldTypes/{FieldTypeSid}/FieldValues", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListFieldValueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListFieldValueListFieldValueResponse])
@@ -906,7 +895,6 @@ class SDK:
         return res
 
     
-    
     def list_model_build(self, request: operations.ListModelBuildRequest) -> operations.ListModelBuildResponse:
         warnings.simplefilter("ignore")
 
@@ -914,15 +902,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/ModelBuilds", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListModelBuildResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListModelBuildListModelBuildResponse])
@@ -931,7 +920,6 @@ class SDK:
         return res
 
     
-    
     def list_query(self, request: operations.ListQueryRequest) -> operations.ListQueryResponse:
         warnings.simplefilter("ignore")
 
@@ -939,15 +927,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Queries", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListQueryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListQueryListQueryResponse])
@@ -956,7 +945,6 @@ class SDK:
         return res
 
     
-    
     def list_sample(self, request: operations.ListSampleRequest) -> operations.ListSampleResponse:
         warnings.simplefilter("ignore")
 
@@ -964,15 +952,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSampleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSampleListSampleResponse])
@@ -981,7 +970,6 @@ class SDK:
         return res
 
     
-    
     def list_task(self, request: operations.ListTaskRequest) -> operations.ListTaskResponse:
         warnings.simplefilter("ignore")
 
@@ -989,15 +977,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTaskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListTaskListTaskResponse])
@@ -1006,7 +995,6 @@ class SDK:
         return res
 
     
-    
     def list_webhook(self, request: operations.ListWebhookRequest) -> operations.ListWebhookResponse:
         warnings.simplefilter("ignore")
 
@@ -1014,15 +1002,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Webhooks", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListWebhookResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListWebhookListWebhookResponse])
@@ -1031,7 +1020,6 @@ class SDK:
         return res
 
     
-    
     def update_assistant(self, request: operations.UpdateAssistantRequest) -> operations.UpdateAssistantResponse:
         warnings.simplefilter("ignore")
 
@@ -1039,18 +1027,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateAssistantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1Assistant])
@@ -1059,7 +1049,6 @@ class SDK:
         return res
 
     
-    
     def update_defaults(self, request: operations.UpdateDefaultsRequest) -> operations.UpdateDefaultsResponse:
         warnings.simplefilter("ignore")
 
@@ -1067,18 +1056,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Defaults", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateDefaultsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantDefaults])
@@ -1087,7 +1078,6 @@ class SDK:
         return res
 
     
-    
     def update_field_type(self, request: operations.UpdateFieldTypeRequest) -> operations.UpdateFieldTypeResponse:
         warnings.simplefilter("ignore")
 
@@ -1095,18 +1085,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/FieldTypes/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateFieldTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantFieldType])
@@ -1115,7 +1107,6 @@ class SDK:
         return res
 
     
-    
     def update_model_build(self, request: operations.UpdateModelBuildRequest) -> operations.UpdateModelBuildResponse:
         warnings.simplefilter("ignore")
 
@@ -1123,18 +1114,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/ModelBuilds/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateModelBuildResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantModelBuild])
@@ -1143,7 +1136,6 @@ class SDK:
         return res
 
     
-    
     def update_query(self, request: operations.UpdateQueryRequest) -> operations.UpdateQueryResponse:
         warnings.simplefilter("ignore")
 
@@ -1151,18 +1143,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Queries/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateQueryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantQuery])
@@ -1171,7 +1165,6 @@ class SDK:
         return res
 
     
-    
     def update_restore_assistant(self, request: operations.UpdateRestoreAssistantRequest) -> operations.UpdateRestoreAssistantResponse:
         warnings.simplefilter("ignore")
 
@@ -1179,18 +1172,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Assistants/Restore"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateRestoreAssistantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1RestoreAssistant])
@@ -1199,7 +1194,6 @@ class SDK:
         return res
 
     
-    
     def update_sample(self, request: operations.UpdateSampleRequest) -> operations.UpdateSampleResponse:
         warnings.simplefilter("ignore")
 
@@ -1207,18 +1201,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Samples/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSampleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantTaskSample])
@@ -1227,7 +1223,6 @@ class SDK:
         return res
 
     
-    
     def update_style_sheet(self, request: operations.UpdateStyleSheetRequest) -> operations.UpdateStyleSheetResponse:
         warnings.simplefilter("ignore")
 
@@ -1235,18 +1230,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/StyleSheet", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateStyleSheetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantStyleSheet])
@@ -1255,7 +1252,6 @@ class SDK:
         return res
 
     
-    
     def update_task(self, request: operations.UpdateTaskRequest) -> operations.UpdateTaskResponse:
         warnings.simplefilter("ignore")
 
@@ -1263,18 +1259,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateTaskResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantTask])
@@ -1283,7 +1281,6 @@ class SDK:
         return res
 
     
-    
     def update_task_actions(self, request: operations.UpdateTaskActionsRequest) -> operations.UpdateTaskActionsResponse:
         warnings.simplefilter("ignore")
 
@@ -1291,18 +1288,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Tasks/{TaskSid}/Actions", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateTaskActionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantTaskTaskActions])
@@ -1311,7 +1310,6 @@ class SDK:
         return res
 
     
-    
     def update_webhook(self, request: operations.UpdateWebhookRequest) -> operations.UpdateWebhookResponse:
         warnings.simplefilter("ignore")
 
@@ -1319,18 +1317,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Assistants/{AssistantSid}/Webhooks/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateWebhookResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutopilotV1AssistantWebhook])

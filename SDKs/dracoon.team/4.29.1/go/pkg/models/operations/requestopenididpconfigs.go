@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RequestOpenIDIdpConfigsHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type RequestOpenIDIdpConfigsRequest struct {
-	Headers RequestOpenIDIdpConfigsHeaders
+    Headers RequestOpenIDIdpConfigsHeaders 
+    
 }
 
 type RequestOpenIDIdpConfigsResponse struct {
-	ContentType      string
-	ErrorResponse    *shared.ErrorResponse
-	OpenIDIdpConfigs []shared.OpenIDIdpConfig
-	StatusCode       int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    OpenIDIdpConfigs []shared.OpenIDIdpConfig 
+    StatusCode int64 
+    
 }
+

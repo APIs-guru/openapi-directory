@@ -138,6 +138,7 @@ func (s *SDK) CachePost(ctx context.Context, request operations.CachePostRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -207,6 +208,7 @@ func (s *SDK) CollaboratorsPost(ctx context.Context, request operations.Collabor
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -544,6 +546,7 @@ func (s *SDK) SessionsIDViewsPost(ctx context.Context, request operations.Sessio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -873,6 +876,7 @@ func (s *SDK) StoryIDCollaboratorsInactivePost(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -952,6 +956,7 @@ func (s *SDK) StoryIDCollaboratorsPost(ctx context.Context, request operations.S
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1219,6 +1224,7 @@ func (s *SDK) StoryIDCollaboratorsUseridPut(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1406,6 +1412,7 @@ func (s *SDK) StoryIDEventsPost(ctx context.Context, request operations.StoryIDE
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1627,6 +1634,7 @@ func (s *SDK) StoryIDFilePost(ctx context.Context, request operations.StoryIDFil
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1817,6 +1825,7 @@ func (s *SDK) StoryIDMessagesPost(ctx context.Context, request operations.StoryI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1967,6 +1976,7 @@ func (s *SDK) StoryIDOutlinePost(ctx context.Context, request operations.StoryID
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2087,6 +2097,7 @@ func (s *SDK) StoryIDPut(ctx context.Context, request operations.StoryIDPutReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2238,6 +2249,7 @@ func (s *SDK) StoryIDSessionPost(ctx context.Context, request operations.StoryID
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2566,6 +2578,7 @@ func (s *SDK) StoryPost(ctx context.Context, request operations.StoryPostRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2636,6 +2649,7 @@ func (s *SDK) StoryPostFile(ctx context.Context, request operations.StoryPostFil
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2703,6 +2717,7 @@ func (s *SDK) StoryPostFileJSON(ctx context.Context, request operations.StoryPos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

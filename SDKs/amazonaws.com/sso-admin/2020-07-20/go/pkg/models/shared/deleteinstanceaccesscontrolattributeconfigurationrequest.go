@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteInstanceAccessControlAttributeConfigurationRequest struct {
-	InstanceArn string `json:"InstanceArn"`
+    InstanceArn string `json:"InstanceArn"`
+    
 }
+

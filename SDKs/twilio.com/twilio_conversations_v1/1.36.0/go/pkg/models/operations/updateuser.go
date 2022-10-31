@@ -1,41 +1,46 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var UpdateUserServers = []string{
 	"https://conversations.twilio.com",
 }
 
 type UpdateUserPathParams struct {
-	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    
 }
 
 type UpdateUserHeaders struct {
-	XTwilioWebhookEnabled *shared.UserEnumWebhookEnabledTypeEnum `header:"name=X-Twilio-Webhook-Enabled"`
+    XTwilioWebhookEnabled *shared.UserEnumWebhookEnabledTypeEnum `header:"style=simple,explode=false,name=X-Twilio-Webhook-Enabled"`
+    
 }
 
 type UpdateUserUpdateUserRequest struct {
-	Attributes   *string `form:"name=Attributes"`
-	FriendlyName *string `form:"name=FriendlyName"`
-	RoleSid      *string `form:"name=RoleSid"`
+    Attributes *string `form:"name=Attributes"`
+    FriendlyName *string `form:"name=FriendlyName"`
+    RoleSid *string `form:"name=RoleSid"`
+    
 }
 
 type UpdateUserSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type UpdateUserRequest struct {
-	ServerURL  *string
-	PathParams UpdateUserPathParams
-	Headers    UpdateUserHeaders
-	Request    *UpdateUserUpdateUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
-	Security   UpdateUserSecurity
+    ServerURL *string 
+    PathParams UpdateUserPathParams 
+    Headers UpdateUserHeaders 
+    Request *UpdateUserUpdateUserRequest `request:"mediaType=application/x-www-form-urlencoded"`
+    Security UpdateUserSecurity 
+    
 }
 
 type UpdateUserResponse struct {
-	ContentType         string
-	StatusCode          int64
-	ConversationsV1User *shared.ConversationsV1User
+    ContentType string 
+    StatusCode int64 
+    ConversationsV1User *shared.ConversationsV1User 
+    
 }
+

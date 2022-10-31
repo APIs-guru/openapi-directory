@@ -887,6 +887,7 @@ func (s *SDK) PatchAppsAppIDKeysKeyID(ctx context.Context, request operations.Pa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -992,6 +993,7 @@ func (s *SDK) PatchAppsAppIDNamespacesNamespaceID(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1087,6 +1089,7 @@ func (s *SDK) PatchAppsAppIDRulesRuleID(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1192,6 +1195,7 @@ func (s *SDK) PatchAppsID(ctx context.Context, request operations.PatchAppsIDReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1277,6 +1281,7 @@ func (s *SDK) PostAccountsAccountIDApps(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1372,6 +1377,7 @@ func (s *SDK) PostAppsAppIDKeys(ctx context.Context, request operations.PostApps
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1537,6 +1543,7 @@ func (s *SDK) PostAppsAppIDNamespaces(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1632,6 +1639,7 @@ func (s *SDK) PostAppsAppIDQueues(ctx context.Context, request operations.PostAp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1727,6 +1735,7 @@ func (s *SDK) PostAppsAppIDRules(ctx context.Context, request operations.PostApp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1832,6 +1841,7 @@ func (s *SDK) PostAppsIDPkcs12(ctx context.Context, request operations.PostAppsI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

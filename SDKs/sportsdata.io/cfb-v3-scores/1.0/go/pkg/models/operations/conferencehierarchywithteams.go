@@ -1,22 +1,30 @@
 package operations
 
+
+
+
 type ConferenceHierarchyWithTeamsFormatEnum string
 
 const (
-	ConferenceHierarchyWithTeamsFormatEnumXML  ConferenceHierarchyWithTeamsFormatEnum = "XML"
-	ConferenceHierarchyWithTeamsFormatEnumJSON ConferenceHierarchyWithTeamsFormatEnum = "JSON"
+    ConferenceHierarchyWithTeamsFormatEnumXML ConferenceHierarchyWithTeamsFormatEnum = "XML"
+ConferenceHierarchyWithTeamsFormatEnumJSON ConferenceHierarchyWithTeamsFormatEnum = "JSON"
 )
 
+
 type ConferenceHierarchyWithTeamsPathParams struct {
-	Format ConferenceHierarchyWithTeamsFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    Format ConferenceHierarchyWithTeamsFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    
 }
 
 type ConferenceHierarchyWithTeamsRequest struct {
-	PathParams ConferenceHierarchyWithTeamsPathParams
+    PathParams ConferenceHierarchyWithTeamsPathParams 
+    
 }
 
 type ConferenceHierarchyWithTeamsResponse struct {
-	Conferences []interface{}
-	ContentType string
-	StatusCode  int64
+    Conferences []interface{} 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

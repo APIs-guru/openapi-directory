@@ -1,6 +1,10 @@
 package shared
 
+
+
 type GoogleCloudIdentitytoolkitAdminV2DefaultSupportedIdp struct {
-	Description *string `json:"description,omitempty"`
-	IdpID       *string `json:"idpId,omitempty"`
+    Description *string `json:"description,omitempty"`
+    IdpID *string `json:"idpId,omitempty"`
+    
 }
+

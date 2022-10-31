@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DcimConsolePortTemplatesUpdatePathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type DcimConsolePortTemplatesUpdateRequest struct {
-	PathParams DcimConsolePortTemplatesUpdatePathParams
-	Request    shared.WritableConsolePortTemplate `request:"mediaType=application/json"`
+    PathParams DcimConsolePortTemplatesUpdatePathParams 
+    Request shared.WritableConsolePortTemplate `request:"mediaType=application/json"`
+    
 }
 
 type DcimConsolePortTemplatesUpdateResponse struct {
-	ConsolePortTemplate *shared.ConsolePortTemplate
-	ContentType         string
-	StatusCode          int64
+    ConsolePortTemplate *shared.ConsolePortTemplate 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

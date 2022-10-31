@@ -67,6 +67,7 @@ func (s *SDK) BroadcastTx(ctx context.Context, request operations.BroadcastTxReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -125,6 +126,7 @@ func (s *SDK) BurnToken(ctx context.Context, request operations.BurnTokenRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -982,6 +984,7 @@ func (s *SDK) IssueToken(ctx context.Context, request operations.IssueTokenReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1044,6 +1047,7 @@ func (s *SDK) JSONRPC(ctx context.Context, request operations.JSONRPCRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1094,6 +1098,7 @@ func (s *SDK) SendToken(ctx context.Context, request operations.SendTokenRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1152,6 +1157,7 @@ func (s *SDK) SendTx(ctx context.Context, request operations.SendTxRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1210,6 +1216,7 @@ func (s *SDK) TestnetBroadcastTx(ctx context.Context, request operations.Testnet
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1268,6 +1275,7 @@ func (s *SDK) TestnetBurnToken(ctx context.Context, request operations.TestnetBu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2166,6 +2174,7 @@ func (s *SDK) TestnetIssueToken(ctx context.Context, request operations.TestnetI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2224,6 +2233,7 @@ func (s *SDK) TestnetSendToken(ctx context.Context, request operations.TestnetSe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2282,6 +2292,7 @@ func (s *SDK) TestnetSendTx(ctx context.Context, request operations.TestnetSendT
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

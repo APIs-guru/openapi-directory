@@ -1,15 +1,21 @@
 package operations
 
+
+
 type DeleteNetworkFloorPlanPathParams struct {
-	FloorPlanID string `pathParam:"style=simple,explode=false,name=floorPlanId"`
-	NetworkID   string `pathParam:"style=simple,explode=false,name=networkId"`
+    FloorPlanID string `pathParam:"style=simple,explode=false,name=floorPlanId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type DeleteNetworkFloorPlanRequest struct {
-	PathParams DeleteNetworkFloorPlanPathParams
+    PathParams DeleteNetworkFloorPlanPathParams 
+    
 }
 
 type DeleteNetworkFloorPlanResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

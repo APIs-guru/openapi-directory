@@ -1,28 +1,32 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-	"time"
-)
+"time"
+"openapi/pkg/models/shared")
 
 type GetEmployerSummaryReportOuputQueryParams struct {
-	ContextDate time.Time `queryParam:"style=form,explode=true,name=ContextDate"`
-	EmployerKey string    `queryParam:"style=form,explode=true,name=EmployerKey"`
+    ContextDate time.Time `queryParam:"style=form,explode=true,name=ContextDate"`
+    EmployerKey string `queryParam:"style=form,explode=true,name=EmployerKey"`
+    
 }
 
 type GetEmployerSummaryReportOuputHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type GetEmployerSummaryReportOuputRequest struct {
-	QueryParams GetEmployerSummaryReportOuputQueryParams
-	Headers     GetEmployerSummaryReportOuputHeaders
+    QueryParams GetEmployerSummaryReportOuputQueryParams 
+    Headers GetEmployerSummaryReportOuputHeaders 
+    
 }
 
 type GetEmployerSummaryReportOuputResponse struct {
-	ContentType                                                 string
-	ErrorModel                                                  *shared.ErrorModel
-	GetEmployerSummaryReportOuput200ApplicationJSONBinaryString []byte
-	StatusCode                                                  int64
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    GetEmployerSummaryReportOuput200ApplicationJSONBinaryString []byte 
+    StatusCode int64 
+    
 }
+

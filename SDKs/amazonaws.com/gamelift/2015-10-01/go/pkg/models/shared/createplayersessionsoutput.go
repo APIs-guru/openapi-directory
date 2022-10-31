@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreatePlayerSessionsOutput struct {
-	PlayerSessions []PlayerSession `json:"PlayerSessions,omitempty"`
+    PlayerSessions []PlayerSession `json:"PlayerSessions,omitempty"`
+    
 }
+

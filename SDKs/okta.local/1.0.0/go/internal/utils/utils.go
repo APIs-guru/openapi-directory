@@ -9,6 +9,12 @@ import (
 	"strings"
 )
 
+const (
+	queryParamTagKey  = "queryParam"
+	headerParamTagKey = "headerParam"
+	pathParamTagKey   = "pathParam"
+)
+
 var paramRegex = regexp.MustCompile(`({.*?})`)
 
 func UnmarshalJsonFromResponseBody(body io.Reader, out interface{}) error {
@@ -58,4 +64,30 @@ func parseStructTag(tagKey string, field reflect.StructField) map[string]string 
 	}
 
 	return values
+}
+
+func parseParamTag(tagKey string, field reflect.StructField, defaultStyle string, defaultExplode bool) *paramTag {
+	// example `{tagKey}:"style=simple,explode=false,name=apiID"`
+	values := parseStructTag(tagKey, field)
+
+	tag := &paramTag{
+		Style:     defaultStyle,
+		Explode:   defaultExplode,
+		ParamName: strings.ToLower(field.Name),
+	}
+
+	for k, v := range values {
+		switch k {
+		case "style":
+			tag.Style = v
+		case "explode":
+			tag.Explode = v == "true"
+		case "name":
+			tag.ParamName = v
+		case "serialization":
+			tag.Serialization = v
+		}
+	}
+
+	return tag
 }

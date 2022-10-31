@@ -20,23 +20,27 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def append_chat_message_using_get(self, request: operations.AppendChatMessageUsingGetRequest) -> operations.AppendChatMessageUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/appendChatMessage"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AppendChatMessageUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.AppendChatMessageUsingGet200ApplicationJSON])
@@ -57,20 +61,21 @@ class SDK:
         return res
 
     
-    
     def append_chat_message_using_post(self, request: operations.AppendChatMessageUsingPostRequest) -> operations.AppendChatMessageUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/appendChatMessage"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AppendChatMessageUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.AppendChatMessageUsingPost200ApplicationJSON])
@@ -91,20 +96,21 @@ class SDK:
         return res
 
     
-    
     def append_text_using_get(self, request: operations.AppendTextUsingGetRequest) -> operations.AppendTextUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/appendText"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AppendTextUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.AppendTextUsingGet200ApplicationJSON])
@@ -125,20 +131,21 @@ class SDK:
         return res
 
     
-    
     def append_text_using_post(self, request: operations.AppendTextUsingPostRequest) -> operations.AppendTextUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/appendText"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AppendTextUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.AppendTextUsingPost200ApplicationJSON])
@@ -159,19 +166,19 @@ class SDK:
         return res
 
     
-    
     def check_token_using_get(self) -> operations.CheckTokenUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/checkToken"
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CheckTokenUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CheckTokenUsingGet200ApplicationJSON])
@@ -192,19 +199,19 @@ class SDK:
         return res
 
     
-    
     def check_token_using_post(self) -> operations.CheckTokenUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/checkToken"
-        
+
         client = self.client
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CheckTokenUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CheckTokenUsingPost200ApplicationJSON])
@@ -225,20 +232,21 @@ class SDK:
         return res
 
     
-    
     def copy_pad_using_get(self, request: operations.CopyPadUsingGetRequest) -> operations.CopyPadUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/copyPad"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CopyPadUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CopyPadUsingGet200ApplicationJSON])
@@ -259,20 +267,21 @@ class SDK:
         return res
 
     
-    
     def copy_pad_using_post(self, request: operations.CopyPadUsingPostRequest) -> operations.CopyPadUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/copyPad"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CopyPadUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CopyPadUsingPost200ApplicationJSON])
@@ -293,20 +302,21 @@ class SDK:
         return res
 
     
-    
     def copy_pad_without_history_using_get(self, request: operations.CopyPadWithoutHistoryUsingGetRequest) -> operations.CopyPadWithoutHistoryUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/copyPadWithoutHistory"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CopyPadWithoutHistoryUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CopyPadWithoutHistoryUsingGet200ApplicationJSON])
@@ -327,20 +337,21 @@ class SDK:
         return res
 
     
-    
     def copy_pad_without_history_using_post(self, request: operations.CopyPadWithoutHistoryUsingPostRequest) -> operations.CopyPadWithoutHistoryUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/copyPadWithoutHistory"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CopyPadWithoutHistoryUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CopyPadWithoutHistoryUsingPost200ApplicationJSON])
@@ -361,20 +372,21 @@ class SDK:
         return res
 
     
-    
     def create_author_if_not_exists_for_using_get(self, request: operations.CreateAuthorIfNotExistsForUsingGetRequest) -> operations.CreateAuthorIfNotExistsForUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createAuthorIfNotExistsFor"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAuthorIfNotExistsForUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateAuthorIfNotExistsForUsingGet200ApplicationJSON])
@@ -395,20 +407,21 @@ class SDK:
         return res
 
     
-    
     def create_author_if_not_exists_for_using_post(self, request: operations.CreateAuthorIfNotExistsForUsingPostRequest) -> operations.CreateAuthorIfNotExistsForUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createAuthorIfNotExistsFor"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAuthorIfNotExistsForUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateAuthorIfNotExistsForUsingPost200ApplicationJSON])
@@ -429,20 +442,21 @@ class SDK:
         return res
 
     
-    
     def create_author_using_get(self, request: operations.CreateAuthorUsingGetRequest) -> operations.CreateAuthorUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createAuthor"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAuthorUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateAuthorUsingGet200ApplicationJSON])
@@ -463,20 +477,21 @@ class SDK:
         return res
 
     
-    
     def create_author_using_post(self, request: operations.CreateAuthorUsingPostRequest) -> operations.CreateAuthorUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createAuthor"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAuthorUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateAuthorUsingPost200ApplicationJSON])
@@ -497,20 +512,21 @@ class SDK:
         return res
 
     
-    
     def create_diff_html_using_get(self, request: operations.CreateDiffHTMLUsingGetRequest) -> operations.CreateDiffHTMLUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createDiffHTML"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateDiffHTMLUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateDiffHTMLUsingGet200ApplicationJSON])
@@ -531,20 +547,21 @@ class SDK:
         return res
 
     
-    
     def create_diff_html_using_post(self, request: operations.CreateDiffHTMLUsingPostRequest) -> operations.CreateDiffHTMLUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createDiffHTML"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateDiffHTMLUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateDiffHTMLUsingPost200ApplicationJSON])
@@ -565,20 +582,21 @@ class SDK:
         return res
 
     
-    
     def create_group_if_not_exists_for_using_get(self, request: operations.CreateGroupIfNotExistsForUsingGetRequest) -> operations.CreateGroupIfNotExistsForUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createGroupIfNotExistsFor"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateGroupIfNotExistsForUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateGroupIfNotExistsForUsingGet200ApplicationJSON])
@@ -599,20 +617,21 @@ class SDK:
         return res
 
     
-    
     def create_group_if_not_exists_for_using_post(self, request: operations.CreateGroupIfNotExistsForUsingPostRequest) -> operations.CreateGroupIfNotExistsForUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createGroupIfNotExistsFor"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateGroupIfNotExistsForUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateGroupIfNotExistsForUsingPost200ApplicationJSON])
@@ -633,20 +652,21 @@ class SDK:
         return res
 
     
-    
     def create_group_pad_using_get(self, request: operations.CreateGroupPadUsingGetRequest) -> operations.CreateGroupPadUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createGroupPad"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateGroupPadUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateGroupPadUsingGet200ApplicationJSON])
@@ -667,20 +687,21 @@ class SDK:
         return res
 
     
-    
     def create_group_pad_using_post(self, request: operations.CreateGroupPadUsingPostRequest) -> operations.CreateGroupPadUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createGroupPad"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateGroupPadUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateGroupPadUsingPost200ApplicationJSON])
@@ -701,19 +722,19 @@ class SDK:
         return res
 
     
-    
     def create_group_using_get(self) -> operations.CreateGroupUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createGroup"
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateGroupUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateGroupUsingGet200ApplicationJSON])
@@ -734,19 +755,19 @@ class SDK:
         return res
 
     
-    
     def create_group_using_post(self) -> operations.CreateGroupUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createGroup"
-        
+
         client = self.client
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateGroupUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateGroupUsingPost200ApplicationJSON])
@@ -767,20 +788,21 @@ class SDK:
         return res
 
     
-    
     def create_pad_using_get(self, request: operations.CreatePadUsingGetRequest) -> operations.CreatePadUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createPad"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePadUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreatePadUsingGet200ApplicationJSON])
@@ -801,20 +823,21 @@ class SDK:
         return res
 
     
-    
     def create_pad_using_post(self, request: operations.CreatePadUsingPostRequest) -> operations.CreatePadUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createPad"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePadUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreatePadUsingPost200ApplicationJSON])
@@ -835,20 +858,21 @@ class SDK:
         return res
 
     
-    
     def create_session_using_get(self, request: operations.CreateSessionUsingGetRequest) -> operations.CreateSessionUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createSession"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSessionUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateSessionUsingGet200ApplicationJSON])
@@ -869,20 +893,21 @@ class SDK:
         return res
 
     
-    
     def create_session_using_post(self, request: operations.CreateSessionUsingPostRequest) -> operations.CreateSessionUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/createSession"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSessionUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.CreateSessionUsingPost200ApplicationJSON])
@@ -903,20 +928,21 @@ class SDK:
         return res
 
     
-    
     def delete_group_using_get(self, request: operations.DeleteGroupUsingGetRequest) -> operations.DeleteGroupUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/deleteGroup"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteGroupUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteGroupUsingGet200ApplicationJSON])
@@ -937,20 +963,21 @@ class SDK:
         return res
 
     
-    
     def delete_group_using_post(self, request: operations.DeleteGroupUsingPostRequest) -> operations.DeleteGroupUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/deleteGroup"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteGroupUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteGroupUsingPost200ApplicationJSON])
@@ -971,20 +998,21 @@ class SDK:
         return res
 
     
-    
     def delete_pad_using_get(self, request: operations.DeletePadUsingGetRequest) -> operations.DeletePadUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/deletePad"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeletePadUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeletePadUsingGet200ApplicationJSON])
@@ -1005,20 +1033,21 @@ class SDK:
         return res
 
     
-    
     def delete_pad_using_post(self, request: operations.DeletePadUsingPostRequest) -> operations.DeletePadUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/deletePad"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeletePadUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeletePadUsingPost200ApplicationJSON])
@@ -1039,20 +1068,21 @@ class SDK:
         return res
 
     
-    
     def delete_session_using_get(self, request: operations.DeleteSessionUsingGetRequest) -> operations.DeleteSessionUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/deleteSession"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSessionUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteSessionUsingGet200ApplicationJSON])
@@ -1073,20 +1103,21 @@ class SDK:
         return res
 
     
-    
     def delete_session_using_post(self, request: operations.DeleteSessionUsingPostRequest) -> operations.DeleteSessionUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/deleteSession"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSessionUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.DeleteSessionUsingPost200ApplicationJSON])
@@ -1107,20 +1138,21 @@ class SDK:
         return res
 
     
-    
     def get_attribute_pool_using_get(self, request: operations.GetAttributePoolUsingGetRequest) -> operations.GetAttributePoolUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getAttributePool"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAttributePoolUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAttributePoolUsingGet200ApplicationJSON])
@@ -1141,20 +1173,21 @@ class SDK:
         return res
 
     
-    
     def get_attribute_pool_using_post(self, request: operations.GetAttributePoolUsingPostRequest) -> operations.GetAttributePoolUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getAttributePool"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAttributePoolUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAttributePoolUsingPost200ApplicationJSON])
@@ -1175,20 +1208,21 @@ class SDK:
         return res
 
     
-    
     def get_author_name_using_get(self, request: operations.GetAuthorNameUsingGetRequest) -> operations.GetAuthorNameUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getAuthorName"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAuthorNameUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAuthorNameUsingGet200ApplicationJSON])
@@ -1209,20 +1243,21 @@ class SDK:
         return res
 
     
-    
     def get_author_name_using_post(self, request: operations.GetAuthorNameUsingPostRequest) -> operations.GetAuthorNameUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getAuthorName"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAuthorNameUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAuthorNameUsingPost200ApplicationJSON])
@@ -1243,20 +1278,21 @@ class SDK:
         return res
 
     
-    
     def get_chat_head_using_get(self, request: operations.GetChatHeadUsingGetRequest) -> operations.GetChatHeadUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getChatHead"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChatHeadUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetChatHeadUsingGet200ApplicationJSON])
@@ -1277,20 +1313,21 @@ class SDK:
         return res
 
     
-    
     def get_chat_head_using_post(self, request: operations.GetChatHeadUsingPostRequest) -> operations.GetChatHeadUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getChatHead"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChatHeadUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetChatHeadUsingPost200ApplicationJSON])
@@ -1311,20 +1348,21 @@ class SDK:
         return res
 
     
-    
     def get_chat_history_using_get(self, request: operations.GetChatHistoryUsingGetRequest) -> operations.GetChatHistoryUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getChatHistory"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChatHistoryUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetChatHistoryUsingGet200ApplicationJSON])
@@ -1345,20 +1383,21 @@ class SDK:
         return res
 
     
-    
     def get_chat_history_using_post(self, request: operations.GetChatHistoryUsingPostRequest) -> operations.GetChatHistoryUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getChatHistory"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetChatHistoryUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetChatHistoryUsingPost200ApplicationJSON])
@@ -1379,20 +1418,21 @@ class SDK:
         return res
 
     
-    
     def get_html_using_get(self, request: operations.GetHTMLUsingGetRequest) -> operations.GetHTMLUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getHTML"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetHTMLUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetHTMLUsingGet200ApplicationJSON])
@@ -1413,20 +1453,21 @@ class SDK:
         return res
 
     
-    
     def get_html_using_post(self, request: operations.GetHTMLUsingPostRequest) -> operations.GetHTMLUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getHTML"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetHTMLUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetHTMLUsingPost200ApplicationJSON])
@@ -1447,20 +1488,21 @@ class SDK:
         return res
 
     
-    
     def get_last_edited_using_get(self, request: operations.GetLastEditedUsingGetRequest) -> operations.GetLastEditedUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getLastEdited"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLastEditedUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLastEditedUsingGet200ApplicationJSON])
@@ -1481,20 +1523,21 @@ class SDK:
         return res
 
     
-    
     def get_last_edited_using_post(self, request: operations.GetLastEditedUsingPostRequest) -> operations.GetLastEditedUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getLastEdited"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetLastEditedUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetLastEditedUsingPost200ApplicationJSON])
@@ -1515,20 +1558,21 @@ class SDK:
         return res
 
     
-    
     def get_pad_id_using_get(self, request: operations.GetPadIDUsingGetRequest) -> operations.GetPadIDUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getPadID"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetPadIDUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetPadIDUsingGet200ApplicationJSON])
@@ -1549,20 +1593,21 @@ class SDK:
         return res
 
     
-    
     def get_pad_id_using_post(self, request: operations.GetPadIDUsingPostRequest) -> operations.GetPadIDUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getPadID"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetPadIDUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetPadIDUsingPost200ApplicationJSON])
@@ -1583,20 +1628,21 @@ class SDK:
         return res
 
     
-    
     def get_public_status_using_get(self, request: operations.GetPublicStatusUsingGetRequest) -> operations.GetPublicStatusUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getPublicStatus"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetPublicStatusUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetPublicStatusUsingGet200ApplicationJSON])
@@ -1617,20 +1663,21 @@ class SDK:
         return res
 
     
-    
     def get_public_status_using_post(self, request: operations.GetPublicStatusUsingPostRequest) -> operations.GetPublicStatusUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getPublicStatus"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetPublicStatusUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetPublicStatusUsingPost200ApplicationJSON])
@@ -1651,20 +1698,21 @@ class SDK:
         return res
 
     
-    
     def get_read_only_id_using_get(self, request: operations.GetReadOnlyIDUsingGetRequest) -> operations.GetReadOnlyIDUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getReadOnlyID"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetReadOnlyIDUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetReadOnlyIDUsingGet200ApplicationJSON])
@@ -1685,20 +1733,21 @@ class SDK:
         return res
 
     
-    
     def get_read_only_id_using_post(self, request: operations.GetReadOnlyIDUsingPostRequest) -> operations.GetReadOnlyIDUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getReadOnlyID"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetReadOnlyIDUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetReadOnlyIDUsingPost200ApplicationJSON])
@@ -1719,20 +1768,21 @@ class SDK:
         return res
 
     
-    
     def get_revision_changeset_using_get(self, request: operations.GetRevisionChangesetUsingGetRequest) -> operations.GetRevisionChangesetUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getRevisionChangeset"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetRevisionChangesetUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetRevisionChangesetUsingGet200ApplicationJSON])
@@ -1753,20 +1803,21 @@ class SDK:
         return res
 
     
-    
     def get_revision_changeset_using_post(self, request: operations.GetRevisionChangesetUsingPostRequest) -> operations.GetRevisionChangesetUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getRevisionChangeset"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetRevisionChangesetUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetRevisionChangesetUsingPost200ApplicationJSON])
@@ -1787,20 +1838,21 @@ class SDK:
         return res
 
     
-    
     def get_revisions_count_using_get(self, request: operations.GetRevisionsCountUsingGetRequest) -> operations.GetRevisionsCountUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getRevisionsCount"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetRevisionsCountUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetRevisionsCountUsingGet200ApplicationJSON])
@@ -1821,20 +1873,21 @@ class SDK:
         return res
 
     
-    
     def get_revisions_count_using_post(self, request: operations.GetRevisionsCountUsingPostRequest) -> operations.GetRevisionsCountUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getRevisionsCount"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetRevisionsCountUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetRevisionsCountUsingPost200ApplicationJSON])
@@ -1855,20 +1908,21 @@ class SDK:
         return res
 
     
-    
     def get_saved_revisions_count_using_get(self, request: operations.GetSavedRevisionsCountUsingGetRequest) -> operations.GetSavedRevisionsCountUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getSavedRevisionsCount"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSavedRevisionsCountUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetSavedRevisionsCountUsingGet200ApplicationJSON])
@@ -1889,20 +1943,21 @@ class SDK:
         return res
 
     
-    
     def get_saved_revisions_count_using_post(self, request: operations.GetSavedRevisionsCountUsingPostRequest) -> operations.GetSavedRevisionsCountUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getSavedRevisionsCount"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSavedRevisionsCountUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetSavedRevisionsCountUsingPost200ApplicationJSON])
@@ -1923,20 +1978,21 @@ class SDK:
         return res
 
     
-    
     def get_session_info_using_get(self, request: operations.GetSessionInfoUsingGetRequest) -> operations.GetSessionInfoUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getSessionInfo"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSessionInfoUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetSessionInfoUsingGet200ApplicationJSON])
@@ -1957,20 +2013,21 @@ class SDK:
         return res
 
     
-    
     def get_session_info_using_post(self, request: operations.GetSessionInfoUsingPostRequest) -> operations.GetSessionInfoUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getSessionInfo"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSessionInfoUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetSessionInfoUsingPost200ApplicationJSON])
@@ -1991,19 +2048,19 @@ class SDK:
         return res
 
     
-    
     def get_stats_using_get(self) -> operations.GetStatsUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getStats"
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetStatsUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetStatsUsingGet200ApplicationJSON])
@@ -2024,19 +2081,19 @@ class SDK:
         return res
 
     
-    
     def get_stats_using_post(self) -> operations.GetStatsUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getStats"
-        
+
         client = self.client
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetStatsUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetStatsUsingPost200ApplicationJSON])
@@ -2057,20 +2114,21 @@ class SDK:
         return res
 
     
-    
     def get_text_using_get(self, request: operations.GetTextUsingGetRequest) -> operations.GetTextUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getText"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetTextUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetTextUsingGet200ApplicationJSON])
@@ -2091,20 +2149,21 @@ class SDK:
         return res
 
     
-    
     def get_text_using_post(self, request: operations.GetTextUsingPostRequest) -> operations.GetTextUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/getText"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetTextUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetTextUsingPost200ApplicationJSON])
@@ -2125,19 +2184,19 @@ class SDK:
         return res
 
     
-    
     def list_all_groups_using_get(self) -> operations.ListAllGroupsUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listAllGroups"
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAllGroupsUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAllGroupsUsingGet200ApplicationJSON])
@@ -2158,19 +2217,19 @@ class SDK:
         return res
 
     
-    
     def list_all_groups_using_post(self) -> operations.ListAllGroupsUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listAllGroups"
-        
+
         client = self.client
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAllGroupsUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAllGroupsUsingPost200ApplicationJSON])
@@ -2191,19 +2250,19 @@ class SDK:
         return res
 
     
-    
     def list_all_pads_using_get(self) -> operations.ListAllPadsUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listAllPads"
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAllPadsUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAllPadsUsingGet200ApplicationJSON])
@@ -2224,19 +2283,19 @@ class SDK:
         return res
 
     
-    
     def list_all_pads_using_post(self) -> operations.ListAllPadsUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listAllPads"
-        
+
         client = self.client
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAllPadsUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAllPadsUsingPost200ApplicationJSON])
@@ -2257,20 +2316,21 @@ class SDK:
         return res
 
     
-    
     def list_authors_of_pad_using_get(self, request: operations.ListAuthorsOfPadUsingGetRequest) -> operations.ListAuthorsOfPadUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listAuthorsOfPad"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAuthorsOfPadUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAuthorsOfPadUsingGet200ApplicationJSON])
@@ -2291,20 +2351,21 @@ class SDK:
         return res
 
     
-    
     def list_authors_of_pad_using_post(self, request: operations.ListAuthorsOfPadUsingPostRequest) -> operations.ListAuthorsOfPadUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listAuthorsOfPad"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAuthorsOfPadUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAuthorsOfPadUsingPost200ApplicationJSON])
@@ -2325,20 +2386,21 @@ class SDK:
         return res
 
     
-    
     def list_pads_of_author_using_get(self, request: operations.ListPadsOfAuthorUsingGetRequest) -> operations.ListPadsOfAuthorUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listPadsOfAuthor"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListPadsOfAuthorUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListPadsOfAuthorUsingGet200ApplicationJSON])
@@ -2359,20 +2421,21 @@ class SDK:
         return res
 
     
-    
     def list_pads_of_author_using_post(self, request: operations.ListPadsOfAuthorUsingPostRequest) -> operations.ListPadsOfAuthorUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listPadsOfAuthor"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListPadsOfAuthorUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListPadsOfAuthorUsingPost200ApplicationJSON])
@@ -2393,20 +2456,21 @@ class SDK:
         return res
 
     
-    
     def list_pads_using_get(self, request: operations.ListPadsUsingGetRequest) -> operations.ListPadsUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listPads"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListPadsUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListPadsUsingGet200ApplicationJSON])
@@ -2427,20 +2491,21 @@ class SDK:
         return res
 
     
-    
     def list_pads_using_post(self, request: operations.ListPadsUsingPostRequest) -> operations.ListPadsUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listPads"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListPadsUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListPadsUsingPost200ApplicationJSON])
@@ -2461,20 +2526,21 @@ class SDK:
         return res
 
     
-    
     def list_saved_revisions_using_get(self, request: operations.ListSavedRevisionsUsingGetRequest) -> operations.ListSavedRevisionsUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listSavedRevisions"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSavedRevisionsUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSavedRevisionsUsingGet200ApplicationJSON])
@@ -2495,20 +2561,21 @@ class SDK:
         return res
 
     
-    
     def list_saved_revisions_using_post(self, request: operations.ListSavedRevisionsUsingPostRequest) -> operations.ListSavedRevisionsUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listSavedRevisions"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSavedRevisionsUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSavedRevisionsUsingPost200ApplicationJSON])
@@ -2529,20 +2596,21 @@ class SDK:
         return res
 
     
-    
     def list_sessions_of_author_using_get(self, request: operations.ListSessionsOfAuthorUsingGetRequest) -> operations.ListSessionsOfAuthorUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listSessionsOfAuthor"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSessionsOfAuthorUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSessionsOfAuthorUsingGet200ApplicationJSON])
@@ -2563,20 +2631,21 @@ class SDK:
         return res
 
     
-    
     def list_sessions_of_author_using_post(self, request: operations.ListSessionsOfAuthorUsingPostRequest) -> operations.ListSessionsOfAuthorUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listSessionsOfAuthor"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSessionsOfAuthorUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSessionsOfAuthorUsingPost200ApplicationJSON])
@@ -2597,20 +2666,21 @@ class SDK:
         return res
 
     
-    
     def list_sessions_of_group_using_get(self, request: operations.ListSessionsOfGroupUsingGetRequest) -> operations.ListSessionsOfGroupUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listSessionsOfGroup"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSessionsOfGroupUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSessionsOfGroupUsingGet200ApplicationJSON])
@@ -2631,20 +2701,21 @@ class SDK:
         return res
 
     
-    
     def list_sessions_of_group_using_post(self, request: operations.ListSessionsOfGroupUsingPostRequest) -> operations.ListSessionsOfGroupUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/listSessionsOfGroup"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSessionsOfGroupUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSessionsOfGroupUsingPost200ApplicationJSON])
@@ -2665,20 +2736,21 @@ class SDK:
         return res
 
     
-    
     def move_pad_using_get(self, request: operations.MovePadUsingGetRequest) -> operations.MovePadUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/movePad"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.MovePadUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.MovePadUsingGet200ApplicationJSON])
@@ -2699,20 +2771,21 @@ class SDK:
         return res
 
     
-    
     def move_pad_using_post(self, request: operations.MovePadUsingPostRequest) -> operations.MovePadUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/movePad"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.MovePadUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.MovePadUsingPost200ApplicationJSON])
@@ -2733,20 +2806,21 @@ class SDK:
         return res
 
     
-    
     def pad_users_count_using_get(self, request: operations.PadUsersCountUsingGetRequest) -> operations.PadUsersCountUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/padUsersCount"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PadUsersCountUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PadUsersCountUsingGet200ApplicationJSON])
@@ -2767,20 +2841,21 @@ class SDK:
         return res
 
     
-    
     def pad_users_count_using_post(self, request: operations.PadUsersCountUsingPostRequest) -> operations.PadUsersCountUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/padUsersCount"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PadUsersCountUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PadUsersCountUsingPost200ApplicationJSON])
@@ -2801,20 +2876,21 @@ class SDK:
         return res
 
     
-    
     def pad_users_using_get(self, request: operations.PadUsersUsingGetRequest) -> operations.PadUsersUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/padUsers"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PadUsersUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PadUsersUsingGet200ApplicationJSON])
@@ -2835,20 +2911,21 @@ class SDK:
         return res
 
     
-    
     def pad_users_using_post(self, request: operations.PadUsersUsingPostRequest) -> operations.PadUsersUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/padUsers"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PadUsersUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.PadUsersUsingPost200ApplicationJSON])
@@ -2869,20 +2946,21 @@ class SDK:
         return res
 
     
-    
     def restore_revision_using_get(self, request: operations.RestoreRevisionUsingGetRequest) -> operations.RestoreRevisionUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/restoreRevision"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RestoreRevisionUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.RestoreRevisionUsingGet200ApplicationJSON])
@@ -2903,20 +2981,21 @@ class SDK:
         return res
 
     
-    
     def restore_revision_using_post(self, request: operations.RestoreRevisionUsingPostRequest) -> operations.RestoreRevisionUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/restoreRevision"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.RestoreRevisionUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.RestoreRevisionUsingPost200ApplicationJSON])
@@ -2937,20 +3016,21 @@ class SDK:
         return res
 
     
-    
     def save_revision_using_get(self, request: operations.SaveRevisionUsingGetRequest) -> operations.SaveRevisionUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/saveRevision"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SaveRevisionUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.SaveRevisionUsingGet200ApplicationJSON])
@@ -2971,20 +3051,21 @@ class SDK:
         return res
 
     
-    
     def save_revision_using_post(self, request: operations.SaveRevisionUsingPostRequest) -> operations.SaveRevisionUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/saveRevision"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SaveRevisionUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.SaveRevisionUsingPost200ApplicationJSON])
@@ -3005,20 +3086,21 @@ class SDK:
         return res
 
     
-    
     def send_clients_message_using_get(self, request: operations.SendClientsMessageUsingGetRequest) -> operations.SendClientsMessageUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/sendClientsMessage"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SendClientsMessageUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.SendClientsMessageUsingGet200ApplicationJSON])
@@ -3039,20 +3121,21 @@ class SDK:
         return res
 
     
-    
     def send_clients_message_using_post(self, request: operations.SendClientsMessageUsingPostRequest) -> operations.SendClientsMessageUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/sendClientsMessage"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SendClientsMessageUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.SendClientsMessageUsingPost200ApplicationJSON])
@@ -3073,20 +3156,21 @@ class SDK:
         return res
 
     
-    
     def set_html_using_get(self, request: operations.SetHTMLUsingGetRequest) -> operations.SetHTMLUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/setHTML"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SetHTMLUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.SetHTMLUsingGet200ApplicationJSON])
@@ -3107,20 +3191,21 @@ class SDK:
         return res
 
     
-    
     def set_html_using_post(self, request: operations.SetHTMLUsingPostRequest) -> operations.SetHTMLUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/setHTML"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SetHTMLUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.SetHTMLUsingPost200ApplicationJSON])
@@ -3141,20 +3226,21 @@ class SDK:
         return res
 
     
-    
     def set_public_status_using_get(self, request: operations.SetPublicStatusUsingGetRequest) -> operations.SetPublicStatusUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/setPublicStatus"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SetPublicStatusUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.SetPublicStatusUsingGet200ApplicationJSON])
@@ -3175,20 +3261,21 @@ class SDK:
         return res
 
     
-    
     def set_public_status_using_post(self, request: operations.SetPublicStatusUsingPostRequest) -> operations.SetPublicStatusUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/setPublicStatus"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SetPublicStatusUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.SetPublicStatusUsingPost200ApplicationJSON])
@@ -3209,20 +3296,21 @@ class SDK:
         return res
 
     
-    
     def set_text_using_get(self, request: operations.SetTextUsingGetRequest) -> operations.SetTextUsingGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/setText"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SetTextUsingGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.SetTextUsingGet200ApplicationJSON])
@@ -3243,20 +3331,21 @@ class SDK:
         return res
 
     
-    
     def set_text_using_post(self, request: operations.SetTextUsingPostRequest) -> operations.SetTextUsingPostResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/setText"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.SetTextUsingPostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.SetTextUsingPost200ApplicationJSON])

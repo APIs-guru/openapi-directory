@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StringList struct {
-	Elements []string `json:"elements,omitempty"`
+    Elements []string `json:"elements,omitempty"`
+    
 }
+

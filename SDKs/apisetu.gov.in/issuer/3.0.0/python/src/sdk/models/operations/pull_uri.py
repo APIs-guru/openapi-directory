@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class PullURIHeaders:
-    content_type: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-Type' }})
-    x_digilocker_hmac: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-digilocker-hmac' }})
+    content_type: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
+    x_digilocker_hmac: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-digilocker-hmac', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

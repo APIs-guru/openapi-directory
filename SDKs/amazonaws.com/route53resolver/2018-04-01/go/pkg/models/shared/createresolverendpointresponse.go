@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateResolverEndpointResponse struct {
-	ResolverEndpoint *ResolverEndpoint `json:"ResolverEndpoint,omitempty"`
+    ResolverEndpoint *ResolverEndpoint `json:"ResolverEndpoint,omitempty"`
+    
 }
+

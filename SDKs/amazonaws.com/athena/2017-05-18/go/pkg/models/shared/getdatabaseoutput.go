@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetDatabaseOutput struct {
-	Database *Database `json:"Database,omitempty"`
+    Database *Database `json:"Database,omitempty"`
+    
 }
+

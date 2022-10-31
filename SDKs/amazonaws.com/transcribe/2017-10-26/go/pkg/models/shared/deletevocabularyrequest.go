@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteVocabularyRequest struct {
-	VocabularyName string `json:"VocabularyName"`
+    VocabularyName string `json:"VocabularyName"`
+    
 }
+

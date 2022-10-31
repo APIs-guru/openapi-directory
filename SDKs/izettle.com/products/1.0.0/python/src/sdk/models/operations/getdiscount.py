@@ -11,7 +11,7 @@ class GetDiscountPathParams:
 
 @dataclass
 class GetDiscountHeaders:
-    if_none_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-None-Match' }})
+    if_none_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-None-Match', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

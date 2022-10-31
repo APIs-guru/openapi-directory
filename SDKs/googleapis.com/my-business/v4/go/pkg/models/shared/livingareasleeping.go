@@ -1,158 +1,190 @@
 package shared
 
+
+
+
 type LivingAreaSleepingBedsCountExceptionEnum string
 
 const (
-	LivingAreaSleepingBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingBedsCountExceptionEnumUnderConstruction    LivingAreaSleepingBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingBedsCountExceptionEnumDependentOnSeason    LivingAreaSleepingBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingBedsCountExceptionEnumUnderConstruction LivingAreaSleepingBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingBedsCountExceptionEnumDependentOnSeason LivingAreaSleepingBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LivingAreaSleepingBunkBedsCountExceptionEnum string
 
 const (
-	LivingAreaSleepingBunkBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingBunkBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingBunkBedsCountExceptionEnumUnderConstruction    LivingAreaSleepingBunkBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingBunkBedsCountExceptionEnumDependentOnSeason    LivingAreaSleepingBunkBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingBunkBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingBunkBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingBunkBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingBunkBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingBunkBedsCountExceptionEnumUnderConstruction LivingAreaSleepingBunkBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingBunkBedsCountExceptionEnumDependentOnSeason LivingAreaSleepingBunkBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingBunkBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingBunkBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LivingAreaSleepingCribsCountExceptionEnum string
 
 const (
-	LivingAreaSleepingCribsCountExceptionEnumExceptionUnspecified LivingAreaSleepingCribsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingCribsCountExceptionEnumUnderConstruction    LivingAreaSleepingCribsCountExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingCribsCountExceptionEnumDependentOnSeason    LivingAreaSleepingCribsCountExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingCribsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingCribsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingCribsCountExceptionEnumExceptionUnspecified LivingAreaSleepingCribsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingCribsCountExceptionEnumUnderConstruction LivingAreaSleepingCribsCountExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingCribsCountExceptionEnumDependentOnSeason LivingAreaSleepingCribsCountExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingCribsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingCribsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LivingAreaSleepingDoubleBedsCountExceptionEnum string
 
 const (
-	LivingAreaSleepingDoubleBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingDoubleBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingDoubleBedsCountExceptionEnumUnderConstruction    LivingAreaSleepingDoubleBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingDoubleBedsCountExceptionEnumDependentOnSeason    LivingAreaSleepingDoubleBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingDoubleBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingDoubleBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingDoubleBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingDoubleBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingDoubleBedsCountExceptionEnumUnderConstruction LivingAreaSleepingDoubleBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingDoubleBedsCountExceptionEnumDependentOnSeason LivingAreaSleepingDoubleBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingDoubleBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingDoubleBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LivingAreaSleepingFeatherPillowsExceptionEnum string
 
 const (
-	LivingAreaSleepingFeatherPillowsExceptionEnumExceptionUnspecified LivingAreaSleepingFeatherPillowsExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingFeatherPillowsExceptionEnumUnderConstruction    LivingAreaSleepingFeatherPillowsExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingFeatherPillowsExceptionEnumDependentOnSeason    LivingAreaSleepingFeatherPillowsExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingFeatherPillowsExceptionEnumDependentOnDayOfWeek LivingAreaSleepingFeatherPillowsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingFeatherPillowsExceptionEnumExceptionUnspecified LivingAreaSleepingFeatherPillowsExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingFeatherPillowsExceptionEnumUnderConstruction LivingAreaSleepingFeatherPillowsExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingFeatherPillowsExceptionEnumDependentOnSeason LivingAreaSleepingFeatherPillowsExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingFeatherPillowsExceptionEnumDependentOnDayOfWeek LivingAreaSleepingFeatherPillowsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LivingAreaSleepingHypoallergenicBeddingExceptionEnum string
 
 const (
-	LivingAreaSleepingHypoallergenicBeddingExceptionEnumExceptionUnspecified LivingAreaSleepingHypoallergenicBeddingExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingHypoallergenicBeddingExceptionEnumUnderConstruction    LivingAreaSleepingHypoallergenicBeddingExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingHypoallergenicBeddingExceptionEnumDependentOnSeason    LivingAreaSleepingHypoallergenicBeddingExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingHypoallergenicBeddingExceptionEnumDependentOnDayOfWeek LivingAreaSleepingHypoallergenicBeddingExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingHypoallergenicBeddingExceptionEnumExceptionUnspecified LivingAreaSleepingHypoallergenicBeddingExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingHypoallergenicBeddingExceptionEnumUnderConstruction LivingAreaSleepingHypoallergenicBeddingExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingHypoallergenicBeddingExceptionEnumDependentOnSeason LivingAreaSleepingHypoallergenicBeddingExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingHypoallergenicBeddingExceptionEnumDependentOnDayOfWeek LivingAreaSleepingHypoallergenicBeddingExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LivingAreaSleepingKingBedsCountExceptionEnum string
 
 const (
-	LivingAreaSleepingKingBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingKingBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingKingBedsCountExceptionEnumUnderConstruction    LivingAreaSleepingKingBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingKingBedsCountExceptionEnumDependentOnSeason    LivingAreaSleepingKingBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingKingBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingKingBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingKingBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingKingBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingKingBedsCountExceptionEnumUnderConstruction LivingAreaSleepingKingBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingKingBedsCountExceptionEnumDependentOnSeason LivingAreaSleepingKingBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingKingBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingKingBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LivingAreaSleepingMemoryFoamPillowsExceptionEnum string
 
 const (
-	LivingAreaSleepingMemoryFoamPillowsExceptionEnumExceptionUnspecified LivingAreaSleepingMemoryFoamPillowsExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingMemoryFoamPillowsExceptionEnumUnderConstruction    LivingAreaSleepingMemoryFoamPillowsExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingMemoryFoamPillowsExceptionEnumDependentOnSeason    LivingAreaSleepingMemoryFoamPillowsExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingMemoryFoamPillowsExceptionEnumDependentOnDayOfWeek LivingAreaSleepingMemoryFoamPillowsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingMemoryFoamPillowsExceptionEnumExceptionUnspecified LivingAreaSleepingMemoryFoamPillowsExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingMemoryFoamPillowsExceptionEnumUnderConstruction LivingAreaSleepingMemoryFoamPillowsExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingMemoryFoamPillowsExceptionEnumDependentOnSeason LivingAreaSleepingMemoryFoamPillowsExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingMemoryFoamPillowsExceptionEnumDependentOnDayOfWeek LivingAreaSleepingMemoryFoamPillowsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LivingAreaSleepingOtherBedsCountExceptionEnum string
 
 const (
-	LivingAreaSleepingOtherBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingOtherBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingOtherBedsCountExceptionEnumUnderConstruction    LivingAreaSleepingOtherBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingOtherBedsCountExceptionEnumDependentOnSeason    LivingAreaSleepingOtherBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingOtherBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingOtherBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingOtherBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingOtherBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingOtherBedsCountExceptionEnumUnderConstruction LivingAreaSleepingOtherBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingOtherBedsCountExceptionEnumDependentOnSeason LivingAreaSleepingOtherBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingOtherBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingOtherBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LivingAreaSleepingQueenBedsCountExceptionEnum string
 
 const (
-	LivingAreaSleepingQueenBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingQueenBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingQueenBedsCountExceptionEnumUnderConstruction    LivingAreaSleepingQueenBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingQueenBedsCountExceptionEnumDependentOnSeason    LivingAreaSleepingQueenBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingQueenBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingQueenBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingQueenBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingQueenBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingQueenBedsCountExceptionEnumUnderConstruction LivingAreaSleepingQueenBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingQueenBedsCountExceptionEnumDependentOnSeason LivingAreaSleepingQueenBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingQueenBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingQueenBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LivingAreaSleepingRollAwayBedsCountExceptionEnum string
 
 const (
-	LivingAreaSleepingRollAwayBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingRollAwayBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingRollAwayBedsCountExceptionEnumUnderConstruction    LivingAreaSleepingRollAwayBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingRollAwayBedsCountExceptionEnumDependentOnSeason    LivingAreaSleepingRollAwayBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingRollAwayBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingRollAwayBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingRollAwayBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingRollAwayBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingRollAwayBedsCountExceptionEnumUnderConstruction LivingAreaSleepingRollAwayBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingRollAwayBedsCountExceptionEnumDependentOnSeason LivingAreaSleepingRollAwayBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingRollAwayBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingRollAwayBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LivingAreaSleepingSingleOrTwinBedsCountExceptionEnum string
 
 const (
-	LivingAreaSleepingSingleOrTwinBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingSingleOrTwinBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingSingleOrTwinBedsCountExceptionEnumUnderConstruction    LivingAreaSleepingSingleOrTwinBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingSingleOrTwinBedsCountExceptionEnumDependentOnSeason    LivingAreaSleepingSingleOrTwinBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingSingleOrTwinBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingSingleOrTwinBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingSingleOrTwinBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingSingleOrTwinBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingSingleOrTwinBedsCountExceptionEnumUnderConstruction LivingAreaSleepingSingleOrTwinBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingSingleOrTwinBedsCountExceptionEnumDependentOnSeason LivingAreaSleepingSingleOrTwinBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingSingleOrTwinBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingSingleOrTwinBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LivingAreaSleepingSofaBedsCountExceptionEnum string
 
 const (
-	LivingAreaSleepingSofaBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingSofaBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingSofaBedsCountExceptionEnumUnderConstruction    LivingAreaSleepingSofaBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingSofaBedsCountExceptionEnumDependentOnSeason    LivingAreaSleepingSofaBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingSofaBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingSofaBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingSofaBedsCountExceptionEnumExceptionUnspecified LivingAreaSleepingSofaBedsCountExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingSofaBedsCountExceptionEnumUnderConstruction LivingAreaSleepingSofaBedsCountExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingSofaBedsCountExceptionEnumDependentOnSeason LivingAreaSleepingSofaBedsCountExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingSofaBedsCountExceptionEnumDependentOnDayOfWeek LivingAreaSleepingSofaBedsCountExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LivingAreaSleepingSyntheticPillowsExceptionEnum string
 
 const (
-	LivingAreaSleepingSyntheticPillowsExceptionEnumExceptionUnspecified LivingAreaSleepingSyntheticPillowsExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LivingAreaSleepingSyntheticPillowsExceptionEnumUnderConstruction    LivingAreaSleepingSyntheticPillowsExceptionEnum = "UNDER_CONSTRUCTION"
-	LivingAreaSleepingSyntheticPillowsExceptionEnumDependentOnSeason    LivingAreaSleepingSyntheticPillowsExceptionEnum = "DEPENDENT_ON_SEASON"
-	LivingAreaSleepingSyntheticPillowsExceptionEnumDependentOnDayOfWeek LivingAreaSleepingSyntheticPillowsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LivingAreaSleepingSyntheticPillowsExceptionEnumExceptionUnspecified LivingAreaSleepingSyntheticPillowsExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LivingAreaSleepingSyntheticPillowsExceptionEnumUnderConstruction LivingAreaSleepingSyntheticPillowsExceptionEnum = "UNDER_CONSTRUCTION"
+LivingAreaSleepingSyntheticPillowsExceptionEnumDependentOnSeason LivingAreaSleepingSyntheticPillowsExceptionEnum = "DEPENDENT_ON_SEASON"
+LivingAreaSleepingSyntheticPillowsExceptionEnumDependentOnDayOfWeek LivingAreaSleepingSyntheticPillowsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+
 type LivingAreaSleeping struct {
-	BedsCount                      *int32                                                `json:"bedsCount,omitempty"`
-	BedsCountException             *LivingAreaSleepingBedsCountExceptionEnum             `json:"bedsCountException,omitempty"`
-	BunkBedsCount                  *int32                                                `json:"bunkBedsCount,omitempty"`
-	BunkBedsCountException         *LivingAreaSleepingBunkBedsCountExceptionEnum         `json:"bunkBedsCountException,omitempty"`
-	CribsCount                     *int32                                                `json:"cribsCount,omitempty"`
-	CribsCountException            *LivingAreaSleepingCribsCountExceptionEnum            `json:"cribsCountException,omitempty"`
-	DoubleBedsCount                *int32                                                `json:"doubleBedsCount,omitempty"`
-	DoubleBedsCountException       *LivingAreaSleepingDoubleBedsCountExceptionEnum       `json:"doubleBedsCountException,omitempty"`
-	FeatherPillows                 *bool                                                 `json:"featherPillows,omitempty"`
-	FeatherPillowsException        *LivingAreaSleepingFeatherPillowsExceptionEnum        `json:"featherPillowsException,omitempty"`
-	HypoallergenicBedding          *bool                                                 `json:"hypoallergenicBedding,omitempty"`
-	HypoallergenicBeddingException *LivingAreaSleepingHypoallergenicBeddingExceptionEnum `json:"hypoallergenicBeddingException,omitempty"`
-	KingBedsCount                  *int32                                                `json:"kingBedsCount,omitempty"`
-	KingBedsCountException         *LivingAreaSleepingKingBedsCountExceptionEnum         `json:"kingBedsCountException,omitempty"`
-	MemoryFoamPillows              *bool                                                 `json:"memoryFoamPillows,omitempty"`
-	MemoryFoamPillowsException     *LivingAreaSleepingMemoryFoamPillowsExceptionEnum     `json:"memoryFoamPillowsException,omitempty"`
-	OtherBedsCount                 *int32                                                `json:"otherBedsCount,omitempty"`
-	OtherBedsCountException        *LivingAreaSleepingOtherBedsCountExceptionEnum        `json:"otherBedsCountException,omitempty"`
-	QueenBedsCount                 *int32                                                `json:"queenBedsCount,omitempty"`
-	QueenBedsCountException        *LivingAreaSleepingQueenBedsCountExceptionEnum        `json:"queenBedsCountException,omitempty"`
-	RollAwayBedsCount              *int32                                                `json:"rollAwayBedsCount,omitempty"`
-	RollAwayBedsCountException     *LivingAreaSleepingRollAwayBedsCountExceptionEnum     `json:"rollAwayBedsCountException,omitempty"`
-	SingleOrTwinBedsCount          *int32                                                `json:"singleOrTwinBedsCount,omitempty"`
-	SingleOrTwinBedsCountException *LivingAreaSleepingSingleOrTwinBedsCountExceptionEnum `json:"singleOrTwinBedsCountException,omitempty"`
-	SofaBedsCount                  *int32                                                `json:"sofaBedsCount,omitempty"`
-	SofaBedsCountException         *LivingAreaSleepingSofaBedsCountExceptionEnum         `json:"sofaBedsCountException,omitempty"`
-	SyntheticPillows               *bool                                                 `json:"syntheticPillows,omitempty"`
-	SyntheticPillowsException      *LivingAreaSleepingSyntheticPillowsExceptionEnum      `json:"syntheticPillowsException,omitempty"`
+    BedsCount *int32 `json:"bedsCount,omitempty"`
+    BedsCountException *LivingAreaSleepingBedsCountExceptionEnum `json:"bedsCountException,omitempty"`
+    BunkBedsCount *int32 `json:"bunkBedsCount,omitempty"`
+    BunkBedsCountException *LivingAreaSleepingBunkBedsCountExceptionEnum `json:"bunkBedsCountException,omitempty"`
+    CribsCount *int32 `json:"cribsCount,omitempty"`
+    CribsCountException *LivingAreaSleepingCribsCountExceptionEnum `json:"cribsCountException,omitempty"`
+    DoubleBedsCount *int32 `json:"doubleBedsCount,omitempty"`
+    DoubleBedsCountException *LivingAreaSleepingDoubleBedsCountExceptionEnum `json:"doubleBedsCountException,omitempty"`
+    FeatherPillows *bool `json:"featherPillows,omitempty"`
+    FeatherPillowsException *LivingAreaSleepingFeatherPillowsExceptionEnum `json:"featherPillowsException,omitempty"`
+    HypoallergenicBedding *bool `json:"hypoallergenicBedding,omitempty"`
+    HypoallergenicBeddingException *LivingAreaSleepingHypoallergenicBeddingExceptionEnum `json:"hypoallergenicBeddingException,omitempty"`
+    KingBedsCount *int32 `json:"kingBedsCount,omitempty"`
+    KingBedsCountException *LivingAreaSleepingKingBedsCountExceptionEnum `json:"kingBedsCountException,omitempty"`
+    MemoryFoamPillows *bool `json:"memoryFoamPillows,omitempty"`
+    MemoryFoamPillowsException *LivingAreaSleepingMemoryFoamPillowsExceptionEnum `json:"memoryFoamPillowsException,omitempty"`
+    OtherBedsCount *int32 `json:"otherBedsCount,omitempty"`
+    OtherBedsCountException *LivingAreaSleepingOtherBedsCountExceptionEnum `json:"otherBedsCountException,omitempty"`
+    QueenBedsCount *int32 `json:"queenBedsCount,omitempty"`
+    QueenBedsCountException *LivingAreaSleepingQueenBedsCountExceptionEnum `json:"queenBedsCountException,omitempty"`
+    RollAwayBedsCount *int32 `json:"rollAwayBedsCount,omitempty"`
+    RollAwayBedsCountException *LivingAreaSleepingRollAwayBedsCountExceptionEnum `json:"rollAwayBedsCountException,omitempty"`
+    SingleOrTwinBedsCount *int32 `json:"singleOrTwinBedsCount,omitempty"`
+    SingleOrTwinBedsCountException *LivingAreaSleepingSingleOrTwinBedsCountExceptionEnum `json:"singleOrTwinBedsCountException,omitempty"`
+    SofaBedsCount *int32 `json:"sofaBedsCount,omitempty"`
+    SofaBedsCountException *LivingAreaSleepingSofaBedsCountExceptionEnum `json:"sofaBedsCountException,omitempty"`
+    SyntheticPillows *bool `json:"syntheticPillows,omitempty"`
+    SyntheticPillowsException *LivingAreaSleepingSyntheticPillowsExceptionEnum `json:"syntheticPillowsException,omitempty"`
+    
 }
+

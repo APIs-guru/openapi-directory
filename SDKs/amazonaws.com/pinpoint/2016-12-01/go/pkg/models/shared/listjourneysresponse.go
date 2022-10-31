@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ListJourneysResponse struct {
-	JourneysResponse JourneysResponse `json:"JourneysResponse"`
+    JourneysResponse JourneysResponse `json:"JourneysResponse"`
+    
 }
+

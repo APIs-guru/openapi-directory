@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GlossaryInputConfig struct {
-	GcsSource *GcsSource `json:"gcsSource,omitempty"`
+    GcsSource *GcsSource `json:"gcsSource,omitempty"`
+    
 }
+

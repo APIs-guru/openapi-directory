@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ActivityTaskStatus struct {
-	CancelRequested bool `json:"cancelRequested"`
+    CancelRequested bool `json:"cancelRequested"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetResourcePolicyOutput struct {
-	Policy *string `json:"policy,omitempty"`
+    Policy *string `json:"policy,omitempty"`
+    
 }
+

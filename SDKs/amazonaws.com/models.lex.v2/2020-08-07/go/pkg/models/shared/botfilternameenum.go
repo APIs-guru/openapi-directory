@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type BotFilterNameEnum string
 
 const (
-	BotFilterNameEnumBotName BotFilterNameEnum = "BotName"
+    BotFilterNameEnumBotName BotFilterNameEnum = "BotName"
 )
+
+

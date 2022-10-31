@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SalesTaxes struct {
-	SalesTaxes []SalesTax `json:"salesTaxes,omitempty"`
+    SalesTaxes []SalesTax `json:"salesTaxes,omitempty"`
+    
 }
+

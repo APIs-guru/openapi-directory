@@ -1,7 +1,11 @@
 package shared
 
+
+
 type ListListenersRequest struct {
-	AcceleratorArn string  `json:"AcceleratorArn"`
-	MaxResults     *int64  `json:"MaxResults,omitempty"`
-	NextToken      *string `json:"NextToken,omitempty"`
+    AcceleratorArn string `json:"AcceleratorArn"`
+    MaxResults *int64 `json:"MaxResults,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    
 }
+

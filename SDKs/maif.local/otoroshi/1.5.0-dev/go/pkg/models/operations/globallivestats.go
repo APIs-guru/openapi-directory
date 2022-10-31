@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GlobalLiveStatsSecurity struct {
-	OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
+    OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type GlobalLiveStatsRequest struct {
-	Security GlobalLiveStatsSecurity
+    Security GlobalLiveStatsSecurity 
+    
 }
 
 type GlobalLiveStatsResponse struct {
-	ContentType string
-	Stats       *shared.Stats
-	StatusCode  int64
+    ContentType string 
+    Stats *shared.Stats 
+    StatusCode int64 
+    
 }
+

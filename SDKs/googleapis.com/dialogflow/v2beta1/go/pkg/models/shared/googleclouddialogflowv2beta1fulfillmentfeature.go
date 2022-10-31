@@ -1,12 +1,18 @@
 package shared
 
+
+
+
 type GoogleCloudDialogflowV2beta1FulfillmentFeatureTypeEnum string
 
 const (
-	GoogleCloudDialogflowV2beta1FulfillmentFeatureTypeEnumTypeUnspecified GoogleCloudDialogflowV2beta1FulfillmentFeatureTypeEnum = "TYPE_UNSPECIFIED"
-	GoogleCloudDialogflowV2beta1FulfillmentFeatureTypeEnumSmalltalk       GoogleCloudDialogflowV2beta1FulfillmentFeatureTypeEnum = "SMALLTALK"
+    GoogleCloudDialogflowV2beta1FulfillmentFeatureTypeEnumTypeUnspecified GoogleCloudDialogflowV2beta1FulfillmentFeatureTypeEnum = "TYPE_UNSPECIFIED"
+GoogleCloudDialogflowV2beta1FulfillmentFeatureTypeEnumSmalltalk GoogleCloudDialogflowV2beta1FulfillmentFeatureTypeEnum = "SMALLTALK"
 )
 
+
 type GoogleCloudDialogflowV2beta1FulfillmentFeature struct {
-	Type *GoogleCloudDialogflowV2beta1FulfillmentFeatureTypeEnum `json:"type,omitempty"`
+    Type *GoogleCloudDialogflowV2beta1FulfillmentFeatureTypeEnum `json:"type,omitempty"`
+    
 }
+

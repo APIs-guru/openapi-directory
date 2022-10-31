@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DestinationSchema struct {
-	RecordFormatType RecordFormatTypeEnum `json:"RecordFormatType"`
+    RecordFormatType RecordFormatTypeEnum `json:"RecordFormatType"`
+    
 }
+

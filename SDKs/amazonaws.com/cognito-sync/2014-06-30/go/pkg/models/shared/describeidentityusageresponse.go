@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeIdentityUsageResponse struct {
-	IdentityUsage *IdentityUsage `json:"IdentityUsage,omitempty"`
+    IdentityUsage *IdentityUsage `json:"IdentityUsage,omitempty"`
+    
 }
+

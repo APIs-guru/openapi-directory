@@ -1,15 +1,21 @@
 package operations
 
+
+
 type AuthorizationCodeDefinitionsDeleteAuthorizationCodeDefinitionPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type AuthorizationCodeDefinitionsDeleteAuthorizationCodeDefinitionRequest struct {
-	PathParams AuthorizationCodeDefinitionsDeleteAuthorizationCodeDefinitionPathParams
+    PathParams AuthorizationCodeDefinitionsDeleteAuthorizationCodeDefinitionPathParams 
+    
 }
 
 type AuthorizationCodeDefinitionsDeleteAuthorizationCodeDefinitionResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

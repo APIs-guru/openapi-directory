@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListGeoMatchSetsRequest struct {
-	Limit      *int64  `json:"Limit,omitempty"`
-	NextMarker *string `json:"NextMarker,omitempty"`
+    Limit *int64 `json:"Limit,omitempty"`
+    NextMarker *string `json:"NextMarker,omitempty"`
+    
 }
+

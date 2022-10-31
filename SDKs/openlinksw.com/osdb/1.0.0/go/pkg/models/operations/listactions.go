@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ListActionsPathParams struct {
-	ServiceID string `pathParam:"style=simple,explode=false,name=serviceId"`
+    ServiceID string `pathParam:"style=simple,explode=false,name=serviceId"`
+    
 }
 
 type ListActionsRequest struct {
-	PathParams ListActionsPathParams
+    PathParams ListActionsPathParams 
+    
 }
 
 type ListActionsResponse struct {
-	ContentType         string
-	ErrorModel          *shared.ErrorModel
-	ListActionsResponse *shared.ListActionsResponse
-	StatusCode          int64
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    ListActionsResponse *shared.ListActionsResponse 
+    StatusCode int64 
+    
 }
+

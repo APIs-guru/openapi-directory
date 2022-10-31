@@ -1,18 +1,24 @@
 package shared
 
+
+
+
 type GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum string
 
 const (
-	GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnumOccurrenceTypeUnspecified GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum = "OCCURRENCE_TYPE_UNSPECIFIED"
-	GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnumOptionalOnce              GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum = "OPTIONAL_ONCE"
-	GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnumOptionalMultiple          GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum = "OPTIONAL_MULTIPLE"
-	GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnumRequiredOnce              GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum = "REQUIRED_ONCE"
-	GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnumRequiredMultiple          GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum = "REQUIRED_MULTIPLE"
+    GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnumOccurrenceTypeUnspecified GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum = "OCCURRENCE_TYPE_UNSPECIFIED"
+GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnumOptionalOnce GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum = "OPTIONAL_ONCE"
+GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnumOptionalMultiple GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum = "OPTIONAL_MULTIPLE"
+GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnumRequiredOnce GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum = "REQUIRED_ONCE"
+GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnumRequiredMultiple GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum = "REQUIRED_MULTIPLE"
 )
 
+
 type GoogleCloudDocumentaiV1DocumentSchemaEntityTypeProperty struct {
-	Name             *string                                                                    `json:"name,omitempty"`
-	OccurrenceType   *GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum `json:"occurrenceType,omitempty"`
-	PropertyMetadata *GoogleCloudDocumentaiV1PropertyMetadata                                   `json:"propertyMetadata,omitempty"`
-	ValueType        *string                                                                    `json:"valueType,omitempty"`
+    Name *string `json:"name,omitempty"`
+    OccurrenceType *GoogleCloudDocumentaiV1DocumentSchemaEntityTypePropertyOccurrenceTypeEnum `json:"occurrenceType,omitempty"`
+    PropertyMetadata *GoogleCloudDocumentaiV1PropertyMetadata `json:"propertyMetadata,omitempty"`
+    ValueType *string `json:"valueType,omitempty"`
+    
 }
+

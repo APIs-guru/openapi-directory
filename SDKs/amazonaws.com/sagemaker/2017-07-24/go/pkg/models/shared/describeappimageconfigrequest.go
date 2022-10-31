@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeAppImageConfigRequest struct {
-	AppImageConfigName string `json:"AppImageConfigName"`
+    AppImageConfigName string `json:"AppImageConfigName"`
+    
 }
+

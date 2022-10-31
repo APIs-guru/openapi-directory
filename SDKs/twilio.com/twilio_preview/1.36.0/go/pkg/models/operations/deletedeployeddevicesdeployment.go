@@ -1,29 +1,32 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var DeleteDeployedDevicesDeploymentServers = []string{
 	"https://preview.twilio.com",
 }
 
 type DeleteDeployedDevicesDeploymentPathParams struct {
-	FleetSid string `pathParam:"style=simple,explode=false,name=FleetSid"`
-	Sid      string `pathParam:"style=simple,explode=false,name=Sid"`
+    FleetSid string `pathParam:"style=simple,explode=false,name=FleetSid"`
+    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    
 }
 
 type DeleteDeployedDevicesDeploymentSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type DeleteDeployedDevicesDeploymentRequest struct {
-	ServerURL  *string
-	PathParams DeleteDeployedDevicesDeploymentPathParams
-	Security   DeleteDeployedDevicesDeploymentSecurity
+    ServerURL *string 
+    PathParams DeleteDeployedDevicesDeploymentPathParams 
+    Security DeleteDeployedDevicesDeploymentSecurity 
+    
 }
 
 type DeleteDeployedDevicesDeploymentResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

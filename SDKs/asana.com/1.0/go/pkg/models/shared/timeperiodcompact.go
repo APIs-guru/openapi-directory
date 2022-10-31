@@ -1,21 +1,27 @@
 package shared
 
+
+
+
 type TimePeriodCompactPeriodEnum string
 
 const (
-	TimePeriodCompactPeriodEnumFy TimePeriodCompactPeriodEnum = "FY"
-	TimePeriodCompactPeriodEnumH1 TimePeriodCompactPeriodEnum = "H1"
-	TimePeriodCompactPeriodEnumH2 TimePeriodCompactPeriodEnum = "H2"
-	TimePeriodCompactPeriodEnumQ1 TimePeriodCompactPeriodEnum = "Q1"
-	TimePeriodCompactPeriodEnumQ2 TimePeriodCompactPeriodEnum = "Q2"
-	TimePeriodCompactPeriodEnumQ3 TimePeriodCompactPeriodEnum = "Q3"
-	TimePeriodCompactPeriodEnumQ4 TimePeriodCompactPeriodEnum = "Q4"
+    TimePeriodCompactPeriodEnumFy TimePeriodCompactPeriodEnum = "FY"
+TimePeriodCompactPeriodEnumH1 TimePeriodCompactPeriodEnum = "H1"
+TimePeriodCompactPeriodEnumH2 TimePeriodCompactPeriodEnum = "H2"
+TimePeriodCompactPeriodEnumQ1 TimePeriodCompactPeriodEnum = "Q1"
+TimePeriodCompactPeriodEnumQ2 TimePeriodCompactPeriodEnum = "Q2"
+TimePeriodCompactPeriodEnumQ3 TimePeriodCompactPeriodEnum = "Q3"
+TimePeriodCompactPeriodEnumQ4 TimePeriodCompactPeriodEnum = "Q4"
 )
 
+
 type TimePeriodCompact struct {
-	EndOn        *string                      `json:"end_on,omitempty"`
-	Gid          *string                      `json:"gid,omitempty"`
-	Period       *TimePeriodCompactPeriodEnum `json:"period,omitempty"`
-	ResourceType *string                      `json:"resource_type,omitempty"`
-	StartOn      *string                      `json:"start_on,omitempty"`
+    EndOn *string `json:"end_on,omitempty"`
+    Gid *string `json:"gid,omitempty"`
+    Period *TimePeriodCompactPeriodEnum `json:"period,omitempty"`
+    ResourceType *string `json:"resource_type,omitempty"`
+    StartOn *string `json:"start_on,omitempty"`
+    
 }
+

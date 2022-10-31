@@ -1,18 +1,21 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type SyncPlayPauseSecurity struct {
-	CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type SyncPlayPauseRequest struct {
-	Security SyncPlayPauseSecurity
+    Security SyncPlayPauseSecurity 
+    
 }
 
 type SyncPlayPauseResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

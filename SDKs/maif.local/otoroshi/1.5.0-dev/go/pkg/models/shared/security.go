@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SchemeOtoroshiAuth struct {
-	Authorization string `security:"name=Authorization"`
+    Authorization string `security:"name=Authorization"`
+    
 }
+

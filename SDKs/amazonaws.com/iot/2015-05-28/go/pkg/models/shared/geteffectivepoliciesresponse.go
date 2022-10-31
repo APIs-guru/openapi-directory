@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetEffectivePoliciesResponse struct {
-	EffectivePolicies []EffectivePolicy `json:"effectivePolicies,omitempty"`
+    EffectivePolicies []EffectivePolicy `json:"effectivePolicies,omitempty"`
+    
 }
+

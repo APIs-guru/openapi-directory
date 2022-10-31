@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetManagedScalingPolicyInput struct {
-	ClusterID string `json:"ClusterId"`
+    ClusterID string `json:"ClusterId"`
+    
 }
+

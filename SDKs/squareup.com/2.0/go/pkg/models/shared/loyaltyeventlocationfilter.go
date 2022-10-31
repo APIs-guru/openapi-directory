@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LoyaltyEventLocationFilter struct {
-	LocationIds []string `json:"location_ids"`
+    LocationIds []string `json:"location_ids"`
+    
 }
+

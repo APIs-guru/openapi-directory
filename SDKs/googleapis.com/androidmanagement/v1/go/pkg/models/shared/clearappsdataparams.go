@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ClearAppsDataParams struct {
-	PackageNames []string `json:"packageNames,omitempty"`
+    PackageNames []string `json:"packageNames,omitempty"`
+    
 }
+

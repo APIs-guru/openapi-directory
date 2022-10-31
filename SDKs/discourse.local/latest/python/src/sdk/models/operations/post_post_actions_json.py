@@ -5,8 +5,8 @@ from dataclasses_json import dataclass_json
 
 @dataclass
 class PostPostActionsJSONHeaders:
-    api_key: str = field(default=None, metadata={'header': { 'field_name': 'Api-Key' }})
-    api_username: str = field(default=None, metadata={'header': { 'field_name': 'Api-Username' }})
+    api_key: str = field(default=None, metadata={'header': { 'field_name': 'Api-Key', 'style': 'simple', 'explode': False }})
+    api_username: str = field(default=None, metadata={'header': { 'field_name': 'Api-Username', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json

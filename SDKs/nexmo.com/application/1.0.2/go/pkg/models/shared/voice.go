@@ -1,25 +1,34 @@
 package shared
 
+
+
+
 type VoiceWebhooksEndpointTypeEnum string
 
 const (
-	VoiceWebhooksEndpointTypeEnumAnswerURL VoiceWebhooksEndpointTypeEnum = "answer_url"
-	VoiceWebhooksEndpointTypeEnumEventURL  VoiceWebhooksEndpointTypeEnum = "event_url"
+    VoiceWebhooksEndpointTypeEnumAnswerURL VoiceWebhooksEndpointTypeEnum = "answer_url"
+VoiceWebhooksEndpointTypeEnumEventURL VoiceWebhooksEndpointTypeEnum = "event_url"
 )
+
+
 
 type VoiceWebhooksHTTPMethodEnum string
 
 const (
-	VoiceWebhooksHTTPMethodEnumGet  VoiceWebhooksHTTPMethodEnum = "GET"
-	VoiceWebhooksHTTPMethodEnumPost VoiceWebhooksHTTPMethodEnum = "POST"
+    VoiceWebhooksHTTPMethodEnumGet VoiceWebhooksHTTPMethodEnum = "GET"
+VoiceWebhooksHTTPMethodEnumPost VoiceWebhooksHTTPMethodEnum = "POST"
 )
 
+
 type VoiceWebhooks struct {
-	Endpoint     string                        `json:"endpoint"`
-	EndpointType VoiceWebhooksEndpointTypeEnum `json:"endpoint_type"`
-	HTTPMethod   VoiceWebhooksHTTPMethodEnum   `json:"http_method"`
+    Endpoint string `json:"endpoint"`
+    EndpointType VoiceWebhooksEndpointTypeEnum `json:"endpoint_type"`
+    HTTPMethod VoiceWebhooksHTTPMethodEnum `json:"http_method"`
+    
 }
 
 type Voice struct {
-	Webhooks []VoiceWebhooks `json:"webhooks,omitempty"`
+    Webhooks []VoiceWebhooks `json:"webhooks,omitempty"`
+    
 }
+

@@ -1,21 +1,27 @@
 package shared
 
+
+
+
 type EnterpriseCrmEventbusProtoConditionOperatorEnum string
 
 const (
-	EnterpriseCrmEventbusProtoConditionOperatorEnumUnset        EnterpriseCrmEventbusProtoConditionOperatorEnum = "UNSET"
-	EnterpriseCrmEventbusProtoConditionOperatorEnumEquals       EnterpriseCrmEventbusProtoConditionOperatorEnum = "EQUALS"
-	EnterpriseCrmEventbusProtoConditionOperatorEnumContains     EnterpriseCrmEventbusProtoConditionOperatorEnum = "CONTAINS"
-	EnterpriseCrmEventbusProtoConditionOperatorEnumLessThan     EnterpriseCrmEventbusProtoConditionOperatorEnum = "LESS_THAN"
-	EnterpriseCrmEventbusProtoConditionOperatorEnumGreaterThan  EnterpriseCrmEventbusProtoConditionOperatorEnum = "GREATER_THAN"
-	EnterpriseCrmEventbusProtoConditionOperatorEnumExists       EnterpriseCrmEventbusProtoConditionOperatorEnum = "EXISTS"
-	EnterpriseCrmEventbusProtoConditionOperatorEnumDoesNotExist EnterpriseCrmEventbusProtoConditionOperatorEnum = "DOES_NOT_EXIST"
-	EnterpriseCrmEventbusProtoConditionOperatorEnumIsEmpty      EnterpriseCrmEventbusProtoConditionOperatorEnum = "IS_EMPTY"
-	EnterpriseCrmEventbusProtoConditionOperatorEnumIsNotEmpty   EnterpriseCrmEventbusProtoConditionOperatorEnum = "IS_NOT_EMPTY"
+    EnterpriseCrmEventbusProtoConditionOperatorEnumUnset EnterpriseCrmEventbusProtoConditionOperatorEnum = "UNSET"
+EnterpriseCrmEventbusProtoConditionOperatorEnumEquals EnterpriseCrmEventbusProtoConditionOperatorEnum = "EQUALS"
+EnterpriseCrmEventbusProtoConditionOperatorEnumContains EnterpriseCrmEventbusProtoConditionOperatorEnum = "CONTAINS"
+EnterpriseCrmEventbusProtoConditionOperatorEnumLessThan EnterpriseCrmEventbusProtoConditionOperatorEnum = "LESS_THAN"
+EnterpriseCrmEventbusProtoConditionOperatorEnumGreaterThan EnterpriseCrmEventbusProtoConditionOperatorEnum = "GREATER_THAN"
+EnterpriseCrmEventbusProtoConditionOperatorEnumExists EnterpriseCrmEventbusProtoConditionOperatorEnum = "EXISTS"
+EnterpriseCrmEventbusProtoConditionOperatorEnumDoesNotExist EnterpriseCrmEventbusProtoConditionOperatorEnum = "DOES_NOT_EXIST"
+EnterpriseCrmEventbusProtoConditionOperatorEnumIsEmpty EnterpriseCrmEventbusProtoConditionOperatorEnum = "IS_EMPTY"
+EnterpriseCrmEventbusProtoConditionOperatorEnumIsNotEmpty EnterpriseCrmEventbusProtoConditionOperatorEnum = "IS_NOT_EMPTY"
 )
 
+
 type EnterpriseCrmEventbusProtoCondition struct {
-	EventPropertyKey *string                                          `json:"eventPropertyKey,omitempty"`
-	Operator         *EnterpriseCrmEventbusProtoConditionOperatorEnum `json:"operator,omitempty"`
-	Value            *EnterpriseCrmEventbusProtoValueType             `json:"value,omitempty"`
+    EventPropertyKey *string `json:"eventPropertyKey,omitempty"`
+    Operator *EnterpriseCrmEventbusProtoConditionOperatorEnum `json:"operator,omitempty"`
+    Value *EnterpriseCrmEventbusProtoValueType `json:"value,omitempty"`
+    
 }
+

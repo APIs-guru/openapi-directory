@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RemoveRegionRequest struct {
-	DirectoryID string `json:"DirectoryId"`
+    DirectoryID string `json:"DirectoryId"`
+    
 }
+

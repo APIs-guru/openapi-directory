@@ -63,6 +63,7 @@ func (s *SDK) CompanyAlternativeSearch(ctx context.Context, request operations.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -167,6 +168,7 @@ func (s *SDK) CompanyDeepsearchIsin(ctx context.Context, request operations.Comp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -671,6 +673,7 @@ func (s *SDK) CompanyMonitorRegister(ctx context.Context, request operations.Com
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -864,6 +867,7 @@ func (s *SDK) CompanyNotificationRegister(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1266,6 +1270,7 @@ func (s *SDK) IbanBasic(ctx context.Context, request operations.IbanBasicRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1324,6 +1329,7 @@ func (s *SDK) IbanComprehensive(ctx context.Context, request operations.IbanComp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1382,6 +1388,7 @@ func (s *SDK) NifBasic(ctx context.Context, request operations.NifBasicRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1440,6 +1447,7 @@ func (s *SDK) NifComprehensive(ctx context.Context, request operations.NifCompre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1593,6 +1601,7 @@ func (s *SDK) PepMonitorUpdate(ctx context.Context, request operations.PepMonito
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1648,6 +1657,7 @@ func (s *SDK) PepOrder(ctx context.Context, request operations.PepOrderRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1698,6 +1708,8 @@ func (s *SDK) PepRetrieve(ctx context.Context, request operations.PepRetrieveReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1997,6 +2009,7 @@ func (s *SDK) ProductOrderConcierge(ctx context.Context, request operations.Prod
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2052,6 +2065,7 @@ func (s *SDK) ProductOrderUbo(ctx context.Context, request operations.ProductOrd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2303,6 +2317,7 @@ func (s *SDK) ProductUpdateAction(ctx context.Context, request operations.Produc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2612,6 +2627,7 @@ func (s *SDK) VatBasic(ctx context.Context, request operations.VatBasicRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2670,6 +2686,7 @@ func (s *SDK) VatComprehensive(ctx context.Context, request operations.VatCompre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2728,6 +2745,7 @@ func (s *SDK) VatLevelTwo(ctx context.Context, request operations.VatLevelTwoReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2786,6 +2804,7 @@ func (s *SDK) VatLookup(ctx context.Context, request operations.VatLookupRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

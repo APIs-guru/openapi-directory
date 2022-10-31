@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def create_esim_profile(self, request: operations.CreateEsimProfileRequest) -> operations.CreateEsimProfileResponse:
         warnings.simplefilter("ignore")
@@ -28,18 +30,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/ESimProfiles"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateEsimProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1EsimProfile])
@@ -47,7 +51,6 @@ class SDK:
 
         return res
 
-    
     
     def create_fleet(self, request: operations.CreateFleetRequest) -> operations.CreateFleetResponse:
         warnings.simplefilter("ignore")
@@ -56,18 +59,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Fleets"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateFleetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1Fleet])
@@ -75,7 +80,6 @@ class SDK:
 
         return res
 
-    
     
     def create_ip_command(self, request: operations.CreateIPCommandRequest) -> operations.CreateIPCommandResponse:
         warnings.simplefilter("ignore")
@@ -84,18 +88,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/IpCommands"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateIPCommandResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1IPCommand])
@@ -103,7 +109,6 @@ class SDK:
 
         return res
 
-    
     
     def create_network_access_profile(self, request: operations.CreateNetworkAccessProfileRequest) -> operations.CreateNetworkAccessProfileResponse:
         warnings.simplefilter("ignore")
@@ -112,18 +117,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/NetworkAccessProfiles"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateNetworkAccessProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1NetworkAccessProfile])
@@ -131,7 +138,6 @@ class SDK:
 
         return res
 
-    
     
     def create_network_access_profile_network(self, request: operations.CreateNetworkAccessProfileNetworkRequest) -> operations.CreateNetworkAccessProfileNetworkResponse:
         warnings.simplefilter("ignore")
@@ -140,18 +146,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/NetworkAccessProfiles/{NetworkAccessProfileSid}/Networks", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateNetworkAccessProfileNetworkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1NetworkAccessProfileNetworkAccessProfileNetwork])
@@ -159,7 +167,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sim(self, request: operations.CreateSimRequest) -> operations.CreateSimResponse:
         warnings.simplefilter("ignore")
@@ -168,18 +175,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Sims"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSimResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1Sim])
@@ -187,7 +196,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sms_command(self, request: operations.CreateSmsCommandRequest) -> operations.CreateSmsCommandResponse:
         warnings.simplefilter("ignore")
@@ -196,18 +204,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/SmsCommands"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSmsCommandResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1SmsCommand])
@@ -216,7 +226,6 @@ class SDK:
         return res
 
     
-    
     def delete_network_access_profile_network(self, request: operations.DeleteNetworkAccessProfileNetworkRequest) -> operations.DeleteNetworkAccessProfileNetworkResponse:
         warnings.simplefilter("ignore")
 
@@ -224,20 +233,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/NetworkAccessProfiles/{NetworkAccessProfileSid}/Networks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteNetworkAccessProfileNetworkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def fetch_esim_profile(self, request: operations.FetchEsimProfileRequest) -> operations.FetchEsimProfileResponse:
         warnings.simplefilter("ignore")
@@ -246,14 +254,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/ESimProfiles/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchEsimProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1EsimProfile])
@@ -262,7 +270,6 @@ class SDK:
         return res
 
     
-    
     def fetch_fleet(self, request: operations.FetchFleetRequest) -> operations.FetchFleetResponse:
         warnings.simplefilter("ignore")
 
@@ -270,14 +277,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Fleets/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchFleetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1Fleet])
@@ -285,7 +292,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_ip_command(self, request: operations.FetchIPCommandRequest) -> operations.FetchIPCommandResponse:
         warnings.simplefilter("ignore")
@@ -294,14 +300,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/IpCommands/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchIPCommandResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1IPCommand])
@@ -310,7 +316,6 @@ class SDK:
         return res
 
     
-    
     def fetch_network(self, request: operations.FetchNetworkRequest) -> operations.FetchNetworkResponse:
         warnings.simplefilter("ignore")
 
@@ -318,14 +323,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Networks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchNetworkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1Network])
@@ -334,7 +339,6 @@ class SDK:
         return res
 
     
-    
     def fetch_network_access_profile(self, request: operations.FetchNetworkAccessProfileRequest) -> operations.FetchNetworkAccessProfileResponse:
         warnings.simplefilter("ignore")
 
@@ -342,14 +346,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/NetworkAccessProfiles/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchNetworkAccessProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1NetworkAccessProfile])
@@ -357,7 +361,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_network_access_profile_network(self, request: operations.FetchNetworkAccessProfileNetworkRequest) -> operations.FetchNetworkAccessProfileNetworkResponse:
         warnings.simplefilter("ignore")
@@ -366,14 +369,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/NetworkAccessProfiles/{NetworkAccessProfileSid}/Networks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchNetworkAccessProfileNetworkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1NetworkAccessProfileNetworkAccessProfileNetwork])
@@ -382,7 +385,6 @@ class SDK:
         return res
 
     
-    
     def fetch_sim(self, request: operations.FetchSimRequest) -> operations.FetchSimResponse:
         warnings.simplefilter("ignore")
 
@@ -390,14 +392,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Sims/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSimResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1Sim])
@@ -406,7 +408,6 @@ class SDK:
         return res
 
     
-    
     def fetch_sms_command(self, request: operations.FetchSmsCommandRequest) -> operations.FetchSmsCommandResponse:
         warnings.simplefilter("ignore")
 
@@ -414,14 +415,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/SmsCommands/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSmsCommandResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1SmsCommand])
@@ -430,7 +431,6 @@ class SDK:
         return res
 
     
-    
     def list_billing_period(self, request: operations.ListBillingPeriodRequest) -> operations.ListBillingPeriodResponse:
         warnings.simplefilter("ignore")
 
@@ -438,15 +438,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Sims/{SimSid}/BillingPeriods", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListBillingPeriodResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListBillingPeriodListBillingPeriodResponse])
@@ -455,7 +456,6 @@ class SDK:
         return res
 
     
-    
     def list_esim_profile(self, request: operations.ListEsimProfileRequest) -> operations.ListEsimProfileResponse:
         warnings.simplefilter("ignore")
 
@@ -463,15 +463,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/ESimProfiles"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEsimProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListEsimProfileListEsimProfileResponse])
@@ -480,7 +481,6 @@ class SDK:
         return res
 
     
-    
     def list_fleet(self, request: operations.ListFleetRequest) -> operations.ListFleetResponse:
         warnings.simplefilter("ignore")
 
@@ -488,15 +488,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Fleets"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListFleetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListFleetListFleetResponse])
@@ -505,7 +506,6 @@ class SDK:
         return res
 
     
-    
     def list_ip_command(self, request: operations.ListIPCommandRequest) -> operations.ListIPCommandResponse:
         warnings.simplefilter("ignore")
 
@@ -513,15 +513,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/IpCommands"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListIPCommandResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListIPCommandListIPCommandResponse])
@@ -530,7 +531,6 @@ class SDK:
         return res
 
     
-    
     def list_network(self, request: operations.ListNetworkRequest) -> operations.ListNetworkResponse:
         warnings.simplefilter("ignore")
 
@@ -538,15 +538,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Networks"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListNetworkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListNetworkListNetworkResponse])
@@ -555,7 +556,6 @@ class SDK:
         return res
 
     
-    
     def list_network_access_profile(self, request: operations.ListNetworkAccessProfileRequest) -> operations.ListNetworkAccessProfileResponse:
         warnings.simplefilter("ignore")
 
@@ -563,15 +563,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/NetworkAccessProfiles"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListNetworkAccessProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListNetworkAccessProfileListNetworkAccessProfileResponse])
@@ -580,7 +581,6 @@ class SDK:
         return res
 
     
-    
     def list_network_access_profile_network(self, request: operations.ListNetworkAccessProfileNetworkRequest) -> operations.ListNetworkAccessProfileNetworkResponse:
         warnings.simplefilter("ignore")
 
@@ -588,15 +588,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/NetworkAccessProfiles/{NetworkAccessProfileSid}/Networks", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListNetworkAccessProfileNetworkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListNetworkAccessProfileNetworkListNetworkAccessProfileNetworkResponse])
@@ -605,7 +606,6 @@ class SDK:
         return res
 
     
-    
     def list_sim(self, request: operations.ListSimRequest) -> operations.ListSimResponse:
         warnings.simplefilter("ignore")
 
@@ -613,15 +613,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Sims"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSimResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSimListSimResponse])
@@ -630,7 +631,6 @@ class SDK:
         return res
 
     
-    
     def list_sim_ip_address(self, request: operations.ListSimIPAddressRequest) -> operations.ListSimIPAddressResponse:
         warnings.simplefilter("ignore")
 
@@ -638,15 +638,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Sims/{SimSid}/IpAddresses", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSimIPAddressResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSimIPAddressListSimIPAddressResponse])
@@ -655,7 +656,6 @@ class SDK:
         return res
 
     
-    
     def list_sms_command(self, request: operations.ListSmsCommandRequest) -> operations.ListSmsCommandResponse:
         warnings.simplefilter("ignore")
 
@@ -663,15 +663,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/SmsCommands"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSmsCommandResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSmsCommandListSmsCommandResponse])
@@ -680,7 +681,6 @@ class SDK:
         return res
 
     
-    
     def list_usage_record(self, request: operations.ListUsageRecordRequest) -> operations.ListUsageRecordResponse:
         warnings.simplefilter("ignore")
 
@@ -688,15 +688,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/UsageRecords"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUsageRecordResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecordListUsageRecordResponse])
@@ -705,7 +706,6 @@ class SDK:
         return res
 
     
-    
     def update_fleet(self, request: operations.UpdateFleetRequest) -> operations.UpdateFleetResponse:
         warnings.simplefilter("ignore")
 
@@ -713,18 +713,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Fleets/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateFleetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1Fleet])
@@ -733,7 +735,6 @@ class SDK:
         return res
 
     
-    
     def update_network_access_profile(self, request: operations.UpdateNetworkAccessProfileRequest) -> operations.UpdateNetworkAccessProfileResponse:
         warnings.simplefilter("ignore")
 
@@ -741,18 +742,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/NetworkAccessProfiles/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateNetworkAccessProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1NetworkAccessProfile])
@@ -761,7 +764,6 @@ class SDK:
         return res
 
     
-    
     def update_sim(self, request: operations.UpdateSimRequest) -> operations.UpdateSimResponse:
         warnings.simplefilter("ignore")
 
@@ -769,18 +771,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Sims/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSimResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SupersimV1Sim])

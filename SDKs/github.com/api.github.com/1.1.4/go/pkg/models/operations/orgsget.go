@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type OrgsGetPathParams struct {
-	Org string `pathParam:"style=simple,explode=false,name=org"`
+    Org string `pathParam:"style=simple,explode=false,name=org"`
+    
 }
 
 type OrgsGetRequest struct {
-	PathParams OrgsGetPathParams
+    PathParams OrgsGetPathParams 
+    
 }
 
 type OrgsGetResponse struct {
-	ContentType      string
-	StatusCode       int64
-	BasicError       *shared.BasicError
-	OrganizationFull *shared.OrganizationFull
+    ContentType string 
+    StatusCode int64 
+    BasicError *shared.BasicError 
+    OrganizationFull *shared.OrganizationFull 
+    
 }
+

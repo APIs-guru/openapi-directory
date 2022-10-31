@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetTelemetryMetadataResponse struct {
-	TelemetryMetadata []TelemetryMetadata `json:"telemetryMetadata"`
+    TelemetryMetadata []TelemetryMetadata `json:"telemetryMetadata"`
+    
 }
+

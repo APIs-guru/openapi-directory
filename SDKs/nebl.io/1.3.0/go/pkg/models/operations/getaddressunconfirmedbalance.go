@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetAddressUnconfirmedBalancePathParams struct {
-	Address string `pathParam:"style=simple,explode=false,name=address"`
+    Address string `pathParam:"style=simple,explode=false,name=address"`
+    
 }
 
 type GetAddressUnconfirmedBalanceRequest struct {
-	PathParams GetAddressUnconfirmedBalancePathParams
+    PathParams GetAddressUnconfirmedBalancePathParams 
+    
 }
 
 type GetAddressUnconfirmedBalanceResponse struct {
-	ContentType                          string
-	StatusCode                           int64
-	GetAddressUnconfirmedBalanceResponse *float64
+    ContentType string 
+    StatusCode int64 
+    GetAddressUnconfirmedBalanceResponse *float64 
+    
 }
+

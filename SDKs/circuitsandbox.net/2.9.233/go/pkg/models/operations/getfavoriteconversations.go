@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetFavoriteConversationsSecurity struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
+    Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
+    
 }
 
 type GetFavoriteConversationsRequest struct {
-	Security GetFavoriteConversationsSecurity
+    Security GetFavoriteConversationsSecurity 
+    
 }
 
 type GetFavoriteConversationsResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

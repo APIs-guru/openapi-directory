@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ImageTag struct {
-	Created *time.Time `json:"Created,omitempty"`
-	TagID   *string    `json:"TagId,omitempty"`
+    Created *time.Time `json:"Created,omitempty"`
+    TagID *string `json:"TagId,omitempty"`
+    
 }
+

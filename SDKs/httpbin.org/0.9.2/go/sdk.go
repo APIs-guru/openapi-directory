@@ -394,6 +394,8 @@ func (s *SDK) GetBearer(ctx context.Context, request operations.GetBearerRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -484,6 +486,8 @@ func (s *SDK) GetCache(ctx context.Context, request operations.GetCacheRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -914,6 +918,8 @@ func (s *SDK) GetEtagEtag(ctx context.Context, request operations.GetEtagEtagReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -2016,6 +2022,7 @@ func (s *SDK) PostRedirectTo(ctx context.Context, request operations.PostRedirec
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2241,6 +2248,7 @@ func (s *SDK) PutRedirectTo(ctx context.Context, request operations.PutRedirectT
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

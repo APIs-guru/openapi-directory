@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type TimePeriod struct {
-	End   *time.Time `json:"End,omitempty"`
-	Start *time.Time `json:"Start,omitempty"`
+    End *time.Time `json:"End,omitempty"`
+    Start *time.Time `json:"Start,omitempty"`
+    
 }
+

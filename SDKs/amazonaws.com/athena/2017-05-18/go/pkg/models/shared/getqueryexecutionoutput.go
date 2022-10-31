@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetQueryExecutionOutput struct {
-	QueryExecution *QueryExecution `json:"QueryExecution,omitempty"`
+    QueryExecution *QueryExecution `json:"QueryExecution,omitempty"`
+    
 }
+

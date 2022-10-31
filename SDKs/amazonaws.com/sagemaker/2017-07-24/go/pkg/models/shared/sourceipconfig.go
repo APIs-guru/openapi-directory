@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SourceIPConfig struct {
-	Cidrs []string `json:"Cidrs"`
+    Cidrs []string `json:"Cidrs"`
+    
 }
+

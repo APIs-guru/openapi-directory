@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteAdmChannelResponse struct {
-	AdmChannelResponse AdmChannelResponse `json:"ADMChannelResponse"`
+    AdmChannelResponse AdmChannelResponse `json:"ADMChannelResponse"`
+    
 }
+

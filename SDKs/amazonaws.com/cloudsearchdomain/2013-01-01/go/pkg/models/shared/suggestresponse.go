@@ -1,6 +1,10 @@
 package shared
 
+
+
 type SuggestResponse struct {
-	Status  *SuggestStatus `json:"status,omitempty"`
-	Suggest *SuggestModel  `json:"suggest,omitempty"`
+    Status *SuggestStatus `json:"status,omitempty"`
+    Suggest *SuggestModel `json:"suggest,omitempty"`
+    
 }
+

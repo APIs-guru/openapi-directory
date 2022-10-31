@@ -1,14 +1,20 @@
 package operations
 
+
+
 type GetFeedbackFeedbackIDPathParams struct {
-	FeedbackID string `pathParam:"style=simple,explode=false,name=feedback_id"`
+    FeedbackID string `pathParam:"style=simple,explode=false,name=feedback_id"`
+    
 }
 
 type GetFeedbackFeedbackIDRequest struct {
-	PathParams GetFeedbackFeedbackIDPathParams
+    PathParams GetFeedbackFeedbackIDPathParams 
+    
 }
 
 type GetFeedbackFeedbackIDResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

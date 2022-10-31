@@ -511,6 +511,7 @@ func (s *SDK) PostBlockedNumbers(ctx context.Context, request operations.PostBlo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -550,6 +551,7 @@ func (s *SDK) PostMessages(ctx context.Context, request operations.PostMessagesR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -620,6 +622,7 @@ func (s *SDK) PostRmmPreSignAttachment(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -668,6 +671,7 @@ func (s *SDK) PostWebhooks(ctx context.Context, request operations.PostWebhooksR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -726,6 +730,7 @@ func (s *SDK) PostWebhooksID(ctx context.Context, request operations.PostWebhook
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetEnvironmentAccountConnectionOutput struct {
-	EnvironmentAccountConnection EnvironmentAccountConnection `json:"environmentAccountConnection"`
+    EnvironmentAccountConnection EnvironmentAccountConnection `json:"environmentAccountConnection"`
+    
 }
+

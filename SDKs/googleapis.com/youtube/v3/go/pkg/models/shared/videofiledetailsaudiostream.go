@@ -1,8 +1,12 @@
 package shared
 
+
+
 type VideoFileDetailsAudioStream struct {
-	BitrateBps   *string `json:"bitrateBps,omitempty"`
-	ChannelCount *int64  `json:"channelCount,omitempty"`
-	Codec        *string `json:"codec,omitempty"`
-	Vendor       *string `json:"vendor,omitempty"`
+    BitrateBps *string `json:"bitrateBps,omitempty"`
+    ChannelCount *int64 `json:"channelCount,omitempty"`
+    Codec *string `json:"codec,omitempty"`
+    Vendor *string `json:"vendor,omitempty"`
+    
 }
+

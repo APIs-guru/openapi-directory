@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ComputeHeadCursorRequest struct {
-	Partition *string `json:"partition,omitempty"`
+    Partition *string `json:"partition,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleAnalyticsMetadata struct {
-	OAuthScopes []string `json:"oAuthScopes,omitempty"`
+    OAuthScopes []string `json:"oAuthScopes,omitempty"`
+    
 }
+

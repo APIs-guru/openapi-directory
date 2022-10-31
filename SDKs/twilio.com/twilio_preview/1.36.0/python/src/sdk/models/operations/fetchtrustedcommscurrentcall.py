@@ -8,8 +8,8 @@ FETCH_TRUSTED_COMMS_CURRENT_CALL_SERVERS = [
 
 @dataclass
 class FetchTrustedCommsCurrentCallHeaders:
-    x_xcnam_sensitive_phone_number_from: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Xcnam-Sensitive-Phone-Number-From' }})
-    x_xcnam_sensitive_phone_number_to: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Xcnam-Sensitive-Phone-Number-To' }})
+    x_xcnam_sensitive_phone_number_from: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Xcnam-Sensitive-Phone-Number-From', 'style': 'simple', 'explode': False }})
+    x_xcnam_sensitive_phone_number_to: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Xcnam-Sensitive-Phone-Number-To', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

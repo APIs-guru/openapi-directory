@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RequestAlgorithmsHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type RequestAlgorithmsRequest struct {
-	Headers RequestAlgorithmsHeaders
+    Headers RequestAlgorithmsHeaders 
+    
 }
 
 type RequestAlgorithmsResponse struct {
-	AlgorithmVersionInfoList *shared.AlgorithmVersionInfoList
-	ContentType              string
-	ErrorResponse            *shared.ErrorResponse
-	StatusCode               int64
+    AlgorithmVersionInfoList *shared.AlgorithmVersionInfoList 
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    
 }
+

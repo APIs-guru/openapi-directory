@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SchemaRestrictionResponse struct {
-	ActiveMetricRestrictions []ActiveMetricRestriction `json:"activeMetricRestrictions,omitempty"`
+    ActiveMetricRestrictions []ActiveMetricRestriction `json:"activeMetricRestrictions,omitempty"`
+    
 }
+

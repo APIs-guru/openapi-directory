@@ -362,6 +362,7 @@ func (s *SDK) PostChangePassword(ctx context.Context, request operations.PostCha
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -411,6 +412,7 @@ func (s *SDK) PostLogin(ctx context.Context, request operations.PostLoginRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -499,6 +501,7 @@ func (s *SDK) PostRequestPasswordReset(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -554,6 +557,7 @@ func (s *SDK) PostSignin(ctx context.Context, request operations.PostSigninReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -622,6 +626,7 @@ func (s *SDK) PostUser(ctx context.Context, request operations.PostUserRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -680,6 +685,7 @@ func (s *SDK) PostVerifyPasswordChange(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -726,6 +732,7 @@ func (s *SDK) PutSigninSigninID(ctx context.Context, request operations.PutSigni
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

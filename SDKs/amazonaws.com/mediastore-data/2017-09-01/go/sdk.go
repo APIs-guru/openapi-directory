@@ -69,6 +69,8 @@ func (s *SDK) DeleteObject(ctx context.Context, request operations.DeleteObjectR
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -138,6 +140,8 @@ func (s *SDK) DescribeObject(ctx context.Context, request operations.DescribeObj
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -206,6 +210,8 @@ func (s *SDK) GetObject(ctx context.Context, request operations.GetObjectRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -286,6 +292,8 @@ func (s *SDK) ListItems(ctx context.Context, request operations.ListItemsRequest
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.securityClient
@@ -354,7 +362,10 @@ func (s *SDK) PutObject(ctx context.Context, request operations.PutObjectRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 

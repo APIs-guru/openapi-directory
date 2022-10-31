@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RequestReference struct {
-	RequestID string `json:"requestId"`
+    RequestID string `json:"requestId"`
+    
 }
+

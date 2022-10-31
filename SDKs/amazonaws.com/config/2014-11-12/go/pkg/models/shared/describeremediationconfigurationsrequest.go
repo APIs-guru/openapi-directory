@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeRemediationConfigurationsRequest struct {
-	ConfigRuleNames []string `json:"ConfigRuleNames"`
+    ConfigRuleNames []string `json:"ConfigRuleNames"`
+    
 }
+

@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type LanguagesGetLanguagePathParams struct {
-	LocaleID int32 `pathParam:"style=simple,explode=false,name=LocaleID"`
+    LocaleID int32 `pathParam:"style=simple,explode=false,name=LocaleID"`
+    
 }
 
 type LanguagesGetLanguageRequest struct {
-	PathParams LanguagesGetLanguagePathParams
+    PathParams LanguagesGetLanguagePathParams 
+    
 }
 
 type LanguagesGetLanguageResponse struct {
-	APIModelsAPIError                   *shared.APIModelsAPIError
-	Body                                []byte
-	ContentType                         string
-	GlobalResourcesSharedModelsLanguage *shared.GlobalResourcesSharedModelsLanguage
-	StatusCode                          int64
+    APIModelsAPIError *shared.APIModelsAPIError 
+    Body []byte 
+    ContentType string 
+    GlobalResourcesSharedModelsLanguage *shared.GlobalResourcesSharedModelsLanguage 
+    StatusCode int64 
+    
 }
+

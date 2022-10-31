@@ -1,6 +1,10 @@
 package shared
 
+
+
 type CloseTunnelRequest struct {
-	Delete   *bool  `json:"delete,omitempty"`
-	TunnelID string `json:"tunnelId"`
+    Delete *bool `json:"delete,omitempty"`
+    TunnelID string `json:"tunnelId"`
+    
 }
+

@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type StreamEnumUpdateStatusEnum string
 
 const (
-	StreamEnumUpdateStatusEnumStopped StreamEnumUpdateStatusEnum = "stopped"
+    StreamEnumUpdateStatusEnumStopped StreamEnumUpdateStatusEnum = "stopped"
 )
+
+

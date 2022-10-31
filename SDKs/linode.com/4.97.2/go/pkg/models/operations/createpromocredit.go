@@ -1,38 +1,45 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type CreatePromoCreditRequestBody struct {
-	PromoCode string `json:"promo_code"`
+    PromoCode string `json:"promo_code"`
+    
 }
 
 type CreatePromoCreditSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+    PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+    
 }
 
 type CreatePromoCreditSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
+    Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
+    
 }
 
 type CreatePromoCreditSecurity struct {
-	Option1 *CreatePromoCreditSecurityOption1 `security:"option"`
-	Option2 *CreatePromoCreditSecurityOption2 `security:"option"`
+    Option1 *CreatePromoCreditSecurityOption1 `security:"option"`
+    Option2 *CreatePromoCreditSecurityOption2 `security:"option"`
+    
 }
 
 type CreatePromoCreditRequest struct {
-	Request  *CreatePromoCreditRequestBody `request:"mediaType=application/json"`
-	Security CreatePromoCreditSecurity
+    Request *CreatePromoCreditRequestBody `request:"mediaType=application/json"`
+    Security CreatePromoCreditSecurity 
+    
 }
 
 type CreatePromoCreditDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
+    Errors []shared.ErrorObject `json:"errors,omitempty"`
+    
 }
 
 type CreatePromoCreditResponse struct {
-	ContentType                                   string
-	Promotion                                     *shared.Promotion
-	StatusCode                                    int64
-	CreatePromoCreditDefaultApplicationJSONObject *CreatePromoCreditDefaultApplicationJSON
+    ContentType string 
+    Promotion *shared.Promotion 
+    StatusCode int64 
+    CreatePromoCreditDefaultApplicationJSONObject *CreatePromoCreditDefaultApplicationJSON 
+    
 }
+

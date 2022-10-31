@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribePipelineDefinitionForExecutionRequest struct {
-	PipelineExecutionArn string `json:"PipelineExecutionArn"`
+    PipelineExecutionArn string `json:"PipelineExecutionArn"`
+    
 }
+

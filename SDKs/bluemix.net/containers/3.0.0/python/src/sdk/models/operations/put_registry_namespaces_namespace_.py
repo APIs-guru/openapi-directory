@@ -10,8 +10,8 @@ class PutRegistryNamespacesNamespacePathParams:
 
 @dataclass
 class PutRegistryNamespacesNamespaceHeaders:
-    x_auth_project_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Project-Id' }})
-    x_auth_token: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Token' }})
+    x_auth_project_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Project-Id', 'style': 'simple', 'explode': False }})
+    x_auth_token: str = field(default=None, metadata={'header': { 'field_name': 'X-Auth-Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

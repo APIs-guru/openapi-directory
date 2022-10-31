@@ -1,30 +1,35 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetPortfolioMembershipPathParams struct {
-	PortfolioMembershipGid string `pathParam:"style=simple,explode=false,name=portfolio_membership_gid"`
+    PortfolioMembershipGid string `pathParam:"style=simple,explode=false,name=portfolio_membership_gid"`
+    
 }
 
 type GetPortfolioMembershipQueryParams struct {
-	OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
-	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
+    OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
+    OptPretty *bool `queryParam:"style=form,explode=true,name=opt_pretty"`
+    
 }
 
 type GetPortfolioMembershipRequest struct {
-	PathParams  GetPortfolioMembershipPathParams
-	QueryParams GetPortfolioMembershipQueryParams
+    PathParams GetPortfolioMembershipPathParams 
+    QueryParams GetPortfolioMembershipQueryParams 
+    
 }
 
 type GetPortfolioMembership200ApplicationJSON struct {
-	Data *shared.PortfolioMembershipResponse `json:"data,omitempty"`
+    Data *shared.PortfolioMembershipResponse `json:"data,omitempty"`
+    
 }
 
 type GetPortfolioMembershipResponse struct {
-	ContentType                                    string
-	ErrorResponse                                  *shared.ErrorResponse
-	StatusCode                                     int64
-	GetPortfolioMembership200ApplicationJSONObject *GetPortfolioMembership200ApplicationJSON
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    GetPortfolioMembership200ApplicationJSONObject *GetPortfolioMembership200ApplicationJSON 
+    
 }
+

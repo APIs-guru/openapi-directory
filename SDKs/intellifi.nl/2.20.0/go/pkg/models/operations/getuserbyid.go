@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetUserByIDPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetUserByIDSecurity struct {
-	CookieSid shared.SchemeCookieSid `security:"scheme,type=apiKey,subtype=cookie"`
+    CookieSid shared.SchemeCookieSid `security:"scheme,type=apiKey,subtype=cookie"`
+    
 }
 
 type GetUserByIDRequest struct {
-	PathParams GetUserByIDPathParams
-	Security   GetUserByIDSecurity
+    PathParams GetUserByIDPathParams 
+    Security GetUserByIDSecurity 
+    
 }
 
 type GetUserByIDResponse struct {
-	ContentType string
-	StatusCode  int64
-	User        *shared.User
+    ContentType string 
+    StatusCode int64 
+    User *shared.User 
+    
 }
+

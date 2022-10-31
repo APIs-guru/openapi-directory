@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type APIModelsLog struct {
-	ID        *string    `json:"ID,omitempty"`
-	Message   *string    `json:"Message,omitempty"`
-	TimeStamp *time.Time `json:"TimeStamp,omitempty"`
+    ID *string `json:"ID,omitempty"`
+    Message *string `json:"Message,omitempty"`
+    TimeStamp *time.Time `json:"TimeStamp,omitempty"`
+    
 }
+

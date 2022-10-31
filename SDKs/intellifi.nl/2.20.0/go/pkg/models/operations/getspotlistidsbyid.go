@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetSpotListIdsByIDPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetSpotListIdsByIDRequest struct {
-	PathParams GetSpotListIdsByIDPathParams
+    PathParams GetSpotListIdsByIDPathParams 
+    
 }
 
 type GetSpotListIdsByIDResponse struct {
-	ContentType   string
-	ListOfItemIds []string
-	StatusCode    int64
+    ContentType string 
+    ListOfItemIds []string 
+    StatusCode int64 
+    
 }
+

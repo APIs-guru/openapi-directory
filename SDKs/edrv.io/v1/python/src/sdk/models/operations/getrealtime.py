@@ -4,7 +4,7 @@ from dataclasses import dataclass, field
 
 @dataclass
 class GetRealtimeHeaders:
-    sec_websocket_protocol: str = field(default=None, metadata={'header': { 'field_name': 'sec-websocket-protocol' }})
+    sec_websocket_protocol: str = field(default=None, metadata={'header': { 'field_name': 'sec-websocket-protocol', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

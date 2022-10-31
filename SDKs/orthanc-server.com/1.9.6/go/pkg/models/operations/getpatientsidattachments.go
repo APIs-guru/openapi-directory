@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetPatientsIDAttachmentsPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetPatientsIDAttachmentsRequest struct {
-	PathParams GetPatientsIDAttachmentsPathParams
+    PathParams GetPatientsIDAttachmentsPathParams 
+    
 }
 
 type GetPatientsIDAttachmentsResponse struct {
-	ContentType                                   string
-	GetPatientsIDAttachments200ApplicationJSONAny *interface{}
-	StatusCode                                    int64
+    ContentType string 
+    GetPatientsIDAttachments200ApplicationJSONAny *interface{} 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateConnectorProfileResponse struct {
-	ConnectorProfileArn *string `json:"connectorProfileArn,omitempty"`
+    ConnectorProfileArn *string `json:"connectorProfileArn,omitempty"`
+    
 }
+

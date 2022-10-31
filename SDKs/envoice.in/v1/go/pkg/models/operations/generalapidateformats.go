@@ -1,18 +1,24 @@
 package operations
 
+
+
 type GeneralAPIDateFormatsHeaders struct {
-	XAuthKey    string `header:"name=x-auth-key"`
-	XAuthSecret string `header:"name=x-auth-secret"`
+    XAuthKey string `header:"style=simple,explode=false,name=x-auth-key"`
+    XAuthSecret string `header:"style=simple,explode=false,name=x-auth-secret"`
+    
 }
 
 type GeneralAPIDateFormatsRequest struct {
-	Headers GeneralAPIDateFormatsHeaders
+    Headers GeneralAPIDateFormatsHeaders 
+    
 }
 
 type GeneralAPIDateFormatsResponse struct {
-	Body                                           []byte
-	ContentType                                    string
-	GeneralAPIDateFormats200ApplicationJSONStrings []string
-	GeneralAPIDateFormats200TextJSONStrings        []string
-	StatusCode                                     int64
+    Body []byte 
+    ContentType string 
+    GeneralAPIDateFormats200ApplicationJSONStrings []string 
+    GeneralAPIDateFormats200TextJSONStrings []string 
+    StatusCode int64 
+    
 }
+

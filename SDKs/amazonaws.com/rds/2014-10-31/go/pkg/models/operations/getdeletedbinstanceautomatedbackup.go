@@ -1,41 +1,52 @@
 package operations
 
+
+
+
 type GetDeleteDbInstanceAutomatedBackupActionEnum string
 
 const (
-	GetDeleteDbInstanceAutomatedBackupActionEnumDeleteDbInstanceAutomatedBackup GetDeleteDbInstanceAutomatedBackupActionEnum = "DeleteDBInstanceAutomatedBackup"
+    GetDeleteDbInstanceAutomatedBackupActionEnumDeleteDbInstanceAutomatedBackup GetDeleteDbInstanceAutomatedBackupActionEnum = "DeleteDBInstanceAutomatedBackup"
 )
+
+
 
 type GetDeleteDbInstanceAutomatedBackupVersionEnum string
 
 const (
-	GetDeleteDbInstanceAutomatedBackupVersionEnumTwoThousandAndFourteen1031 GetDeleteDbInstanceAutomatedBackupVersionEnum = "2014-10-31"
+    GetDeleteDbInstanceAutomatedBackupVersionEnumTwoThousandAndFourteen1031 GetDeleteDbInstanceAutomatedBackupVersionEnum = "2014-10-31"
 )
 
+
 type GetDeleteDbInstanceAutomatedBackupQueryParams struct {
-	Action                        GetDeleteDbInstanceAutomatedBackupActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	DbInstanceAutomatedBackupsArn *string                                       `queryParam:"style=form,explode=true,name=DBInstanceAutomatedBackupsArn"`
-	DbiResourceID                 *string                                       `queryParam:"style=form,explode=true,name=DbiResourceId"`
-	Version                       GetDeleteDbInstanceAutomatedBackupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action GetDeleteDbInstanceAutomatedBackupActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    DbInstanceAutomatedBackupsArn *string `queryParam:"style=form,explode=true,name=DBInstanceAutomatedBackupsArn"`
+    DbiResourceID *string `queryParam:"style=form,explode=true,name=DbiResourceId"`
+    Version GetDeleteDbInstanceAutomatedBackupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type GetDeleteDbInstanceAutomatedBackupHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type GetDeleteDbInstanceAutomatedBackupRequest struct {
-	QueryParams GetDeleteDbInstanceAutomatedBackupQueryParams
-	Headers     GetDeleteDbInstanceAutomatedBackupHeaders
+    QueryParams GetDeleteDbInstanceAutomatedBackupQueryParams 
+    Headers GetDeleteDbInstanceAutomatedBackupHeaders 
+    
 }
 
 type GetDeleteDbInstanceAutomatedBackupResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

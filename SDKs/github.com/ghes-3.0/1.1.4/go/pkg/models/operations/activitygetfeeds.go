@@ -1,11 +1,12 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ActivityGetFeedsResponse struct {
-	ContentType string
-	StatusCode  int64
-	Feed        *shared.Feed
+    ContentType string 
+    StatusCode int64 
+    Feed *shared.Feed 
+    
 }
+

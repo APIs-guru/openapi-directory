@@ -1,6 +1,10 @@
 package shared
 
+
+
 type TeardownTag struct {
-	StopTeardownOnFailure *bool   `json:"stopTeardownOnFailure,omitempty"`
-	TagName               *string `json:"tagName,omitempty"`
+    StopTeardownOnFailure *bool `json:"stopTeardownOnFailure,omitempty"`
+    TagName *string `json:"tagName,omitempty"`
+    
 }
+

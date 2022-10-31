@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetThirdPartyJobStatusPathParams struct {
-	JobID string `pathParam:"style=simple,explode=false,name=JobId"`
+    JobID string `pathParam:"style=simple,explode=false,name=JobId"`
+    
 }
 
 type GetThirdPartyJobStatusHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type GetThirdPartyJobStatusRequest struct {
-	PathParams GetThirdPartyJobStatusPathParams
-	Headers    GetThirdPartyJobStatusHeaders
+    PathParams GetThirdPartyJobStatusPathParams 
+    Headers GetThirdPartyJobStatusHeaders 
+    
 }
 
 type GetThirdPartyJobStatusResponse struct {
-	ContentType string
-	ErrorModel  *shared.ErrorModel
-	StatusCode  int64
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    StatusCode int64 
+    
 }
+

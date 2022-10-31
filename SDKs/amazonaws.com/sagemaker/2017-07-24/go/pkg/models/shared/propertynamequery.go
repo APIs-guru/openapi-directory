@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PropertyNameQuery struct {
-	PropertyNameHint string `json:"PropertyNameHint"`
+    PropertyNameHint string `json:"PropertyNameHint"`
+    
 }
+

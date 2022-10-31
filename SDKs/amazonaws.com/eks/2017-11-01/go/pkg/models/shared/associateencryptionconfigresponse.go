@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AssociateEncryptionConfigResponse struct {
-	Update *Update `json:"update,omitempty"`
+    Update *Update `json:"update,omitempty"`
+    
 }
+

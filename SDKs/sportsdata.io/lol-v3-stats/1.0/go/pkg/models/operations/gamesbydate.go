@@ -1,23 +1,31 @@
 package operations
 
+
+
+
 type GamesByDateFormatEnum string
 
 const (
-	GamesByDateFormatEnumXML  GamesByDateFormatEnum = "xml"
-	GamesByDateFormatEnumJSON GamesByDateFormatEnum = "json"
+    GamesByDateFormatEnumXML GamesByDateFormatEnum = "xml"
+GamesByDateFormatEnumJSON GamesByDateFormatEnum = "json"
 )
 
+
 type GamesByDatePathParams struct {
-	Date   string                `pathParam:"style=simple,explode=false,name=date"`
-	Format GamesByDateFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    Date string `pathParam:"style=simple,explode=false,name=date"`
+    Format GamesByDateFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    
 }
 
 type GamesByDateRequest struct {
-	PathParams GamesByDatePathParams
+    PathParams GamesByDatePathParams 
+    
 }
 
 type GamesByDateResponse struct {
-	ContentType string
-	Games       []interface{}
-	StatusCode  int64
+    ContentType string 
+    Games []interface{} 
+    StatusCode int64 
+    
 }
+

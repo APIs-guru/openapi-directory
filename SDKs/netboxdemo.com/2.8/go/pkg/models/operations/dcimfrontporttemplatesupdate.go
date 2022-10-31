@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DcimFrontPortTemplatesUpdatePathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type DcimFrontPortTemplatesUpdateRequest struct {
-	PathParams DcimFrontPortTemplatesUpdatePathParams
-	Request    shared.WritableFrontPortTemplate `request:"mediaType=application/json"`
+    PathParams DcimFrontPortTemplatesUpdatePathParams 
+    Request shared.WritableFrontPortTemplate `request:"mediaType=application/json"`
+    
 }
 
 type DcimFrontPortTemplatesUpdateResponse struct {
-	ContentType       string
-	FrontPortTemplate *shared.FrontPortTemplate
-	StatusCode        int64
+    ContentType string 
+    FrontPortTemplate *shared.FrontPortTemplate 
+    StatusCode int64 
+    
 }
+

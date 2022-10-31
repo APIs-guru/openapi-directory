@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchCreateNotesResponse struct {
-	Notes []Note `json:"notes,omitempty"`
+    Notes []Note `json:"notes,omitempty"`
+    
 }
+

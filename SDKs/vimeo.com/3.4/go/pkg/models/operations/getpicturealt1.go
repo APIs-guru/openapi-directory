@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetPictureAlt1PathParams struct {
-	PortraitsetID float64 `pathParam:"style=simple,explode=false,name=portraitset_id"`
+    PortraitsetID float64 `pathParam:"style=simple,explode=false,name=portraitset_id"`
+    
 }
 
 type GetPictureAlt1Request struct {
-	PathParams GetPictureAlt1PathParams
+    PathParams GetPictureAlt1PathParams 
+    
 }
 
 type GetPictureAlt1Response struct {
-	ContentType string
-	StatusCode  int64
-	Picture     *shared.Picture
+    ContentType string 
+    StatusCode int64 
+    Picture *shared.Picture 
+    
 }
+

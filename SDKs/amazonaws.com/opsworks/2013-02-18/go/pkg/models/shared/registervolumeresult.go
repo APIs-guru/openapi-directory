@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RegisterVolumeResult struct {
-	VolumeID *string `json:"VolumeId,omitempty"`
+    VolumeID *string `json:"VolumeId,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ResolveComponentCandidatesResponse struct {
-	ResolvedComponentVersions []ResolvedComponentVersion `json:"resolvedComponentVersions,omitempty"`
+    ResolvedComponentVersions []ResolvedComponentVersion `json:"resolvedComponentVersions,omitempty"`
+    
 }
+

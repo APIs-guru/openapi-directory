@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetOwnershipOwnershipIDPathParams struct {
-	OwnershipID string `pathParam:"style=simple,explode=false,name=ownershipId"`
+    OwnershipID string `pathParam:"style=simple,explode=false,name=ownershipId"`
+    
 }
 
 type GetOwnershipOwnershipIDRequest struct {
-	PathParams GetOwnershipOwnershipIDPathParams
+    PathParams GetOwnershipOwnershipIDPathParams 
+    
 }
 
 type GetOwnershipOwnershipIDResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

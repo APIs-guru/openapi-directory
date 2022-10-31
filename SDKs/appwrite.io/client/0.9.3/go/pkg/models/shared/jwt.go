@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Jwt struct {
-	Jwt string `json:"jwt"`
+    Jwt string `json:"jwt"`
+    
 }
+

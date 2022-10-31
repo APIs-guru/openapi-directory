@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Partition struct {
-	AttributeName string `json:"attributeName"`
+    AttributeName string `json:"attributeName"`
+    
 }
+

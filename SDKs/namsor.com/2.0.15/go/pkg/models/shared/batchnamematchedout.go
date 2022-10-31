@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchNameMatchedOut struct {
-	MatchedNames []NameMatchedOut `json:"matchedNames,omitempty"`
+    MatchedNames []NameMatchedOut `json:"matchedNames,omitempty"`
+    
 }
+

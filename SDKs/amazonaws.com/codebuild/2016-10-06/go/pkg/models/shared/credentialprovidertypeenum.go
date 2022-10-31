@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type CredentialProviderTypeEnum string
 
 const (
-	CredentialProviderTypeEnumSecretsManager CredentialProviderTypeEnum = "SECRETS_MANAGER"
+    CredentialProviderTypeEnumSecretsManager CredentialProviderTypeEnum = "SECRETS_MANAGER"
 )
+
+

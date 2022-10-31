@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchGetApplicationsInput struct {
-	ApplicationNames []string `json:"applicationNames"`
+    ApplicationNames []string `json:"applicationNames"`
+    
 }
+

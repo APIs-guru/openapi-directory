@@ -1,16 +1,22 @@
 package operations
 
+
+
 type GetTimezoneAreaPathParams struct {
-	Area string `pathParam:"style=simple,explode=false,name=area"`
+    Area string `pathParam:"style=simple,explode=false,name=area"`
+    
 }
 
 type GetTimezoneAreaRequest struct {
-	PathParams GetTimezoneAreaPathParams
+    PathParams GetTimezoneAreaPathParams 
+    
 }
 
 type GetTimezoneAreaResponse struct {
-	ContentType       string
-	ErrorJSONResponse *interface{}
-	ListJSONResponse  []string
-	StatusCode        int64
+    ContentType string 
+    ErrorJSONResponse *interface{} 
+    ListJSONResponse []string 
+    StatusCode int64 
+    
 }
+

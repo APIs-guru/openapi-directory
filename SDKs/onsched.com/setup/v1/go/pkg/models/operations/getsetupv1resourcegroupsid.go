@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetSetupV1ResourcegroupsIDPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetSetupV1ResourcegroupsIDRequest struct {
-	PathParams GetSetupV1ResourcegroupsIDPathParams
+    PathParams GetSetupV1ResourcegroupsIDPathParams 
+    
 }
 
 type GetSetupV1ResourcegroupsIDResponse struct {
-	ContentType            string
-	ResourceGroupViewModel *shared.ResourceGroupViewModel
-	StatusCode             int64
+    ContentType string 
+    ResourceGroupViewModel *shared.ResourceGroupViewModel 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateAttachmentRequest struct {
-	Attachment *Attachment `json:"attachment,omitempty"`
+    Attachment *Attachment `json:"attachment,omitempty"`
+    
 }
+

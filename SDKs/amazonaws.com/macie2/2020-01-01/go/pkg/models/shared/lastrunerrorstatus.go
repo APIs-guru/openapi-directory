@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LastRunErrorStatus struct {
-	Code *LastRunErrorStatusCodeEnum `json:"code,omitempty"`
+    Code *LastRunErrorStatusCodeEnum `json:"code,omitempty"`
+    
 }
+

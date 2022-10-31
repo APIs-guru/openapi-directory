@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudApigeeV1ListAsyncQueriesResponse struct {
-	Queries []GoogleCloudApigeeV1AsyncQuery `json:"queries,omitempty"`
+    Queries []GoogleCloudApigeeV1AsyncQuery `json:"queries,omitempty"`
+    
 }
+

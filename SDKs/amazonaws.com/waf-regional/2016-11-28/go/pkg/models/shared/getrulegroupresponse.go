@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetRuleGroupResponse struct {
-	RuleGroup *RuleGroup `json:"RuleGroup,omitempty"`
+    RuleGroup *RuleGroup `json:"RuleGroup,omitempty"`
+    
 }
+

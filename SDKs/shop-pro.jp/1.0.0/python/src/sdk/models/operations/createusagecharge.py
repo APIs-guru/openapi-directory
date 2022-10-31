@@ -10,7 +10,7 @@ class CreateUsageChargePathParams:
 
 @dataclass
 class CreateUsageChargeHeaders:
-    x_appstore_usage_charge_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Appstore-Usage-Charge-Token' }})
+    x_appstore_usage_charge_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Appstore-Usage-Charge-Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json

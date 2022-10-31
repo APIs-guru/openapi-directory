@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetProjectUsernameProjectBuildNumArtifactsPathParams struct {
-	BuildNum int64  `pathParam:"style=simple,explode=false,name=build_num"`
-	Project  string `pathParam:"style=simple,explode=false,name=project"`
-	Username string `pathParam:"style=simple,explode=false,name=username"`
+    BuildNum int64 `pathParam:"style=simple,explode=false,name=build_num"`
+    Project string `pathParam:"style=simple,explode=false,name=project"`
+    Username string `pathParam:"style=simple,explode=false,name=username"`
+    
 }
 
 type GetProjectUsernameProjectBuildNumArtifactsRequest struct {
-	PathParams GetProjectUsernameProjectBuildNumArtifactsPathParams
+    PathParams GetProjectUsernameProjectBuildNumArtifactsPathParams 
+    
 }
 
 type GetProjectUsernameProjectBuildNumArtifactsResponse struct {
-	Artifacts   []shared.Artifact
-	ContentType string
-	StatusCode  int64
+    Artifacts []shared.Artifact 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

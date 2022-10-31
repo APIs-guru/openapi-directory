@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ItvGetCardDetailsRequest struct {
-	ProfileToken string `json:"profileToken"`
+    ProfileToken string `json:"profileToken"`
+    
 }
+

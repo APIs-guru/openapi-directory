@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetRelationalDatabaseRequest struct {
-	RelationalDatabaseName string `json:"relationalDatabaseName"`
+    RelationalDatabaseName string `json:"relationalDatabaseName"`
+    
 }
+

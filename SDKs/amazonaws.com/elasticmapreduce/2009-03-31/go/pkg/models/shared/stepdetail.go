@@ -1,6 +1,10 @@
 package shared
 
+
+
 type StepDetail struct {
-	ExecutionStatusDetail StepExecutionStatusDetail `json:"ExecutionStatusDetail"`
-	StepConfig            StepConfig                `json:"StepConfig"`
+    ExecutionStatusDetail StepExecutionStatusDetail `json:"ExecutionStatusDetail"`
+    StepConfig StepConfig `json:"StepConfig"`
+    
 }
+

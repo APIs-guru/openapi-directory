@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def fetch_trunking_country(self, request: operations.FetchTrunkingCountryRequest) -> operations.FetchTrunkingCountryResponse:
         warnings.simplefilter("ignore")
@@ -28,14 +30,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/Trunking/Countries/{IsoCountry}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTrunkingCountryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PricingV2TrunkingCountryInstance])
@@ -44,7 +46,6 @@ class SDK:
         return res
 
     
-    
     def fetch_trunking_number(self, request: operations.FetchTrunkingNumberRequest) -> operations.FetchTrunkingNumberResponse:
         warnings.simplefilter("ignore")
 
@@ -52,15 +53,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/Trunking/Numbers/{DestinationNumber}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTrunkingNumberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PricingV2TrunkingNumber])
@@ -69,7 +71,6 @@ class SDK:
         return res
 
     
-    
     def fetch_voice_country(self, request: operations.FetchVoiceCountryRequest) -> operations.FetchVoiceCountryResponse:
         warnings.simplefilter("ignore")
 
@@ -77,14 +78,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/Voice/Countries/{IsoCountry}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchVoiceCountryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PricingV2VoiceVoiceCountryInstance])
@@ -93,7 +94,6 @@ class SDK:
         return res
 
     
-    
     def fetch_voice_number(self, request: operations.FetchVoiceNumberRequest) -> operations.FetchVoiceNumberResponse:
         warnings.simplefilter("ignore")
 
@@ -101,15 +101,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/Voice/Numbers/{DestinationNumber}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchVoiceNumberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.PricingV2VoiceVoiceNumber])
@@ -118,7 +119,6 @@ class SDK:
         return res
 
     
-    
     def list_trunking_country(self, request: operations.ListTrunkingCountryRequest) -> operations.ListTrunkingCountryResponse:
         warnings.simplefilter("ignore")
 
@@ -126,15 +126,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v2/Trunking/Countries"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTrunkingCountryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListTrunkingCountryListTrunkingCountryResponse])
@@ -143,7 +144,6 @@ class SDK:
         return res
 
     
-    
     def list_voice_country(self, request: operations.ListVoiceCountryRequest) -> operations.ListVoiceCountryResponse:
         warnings.simplefilter("ignore")
 
@@ -151,15 +151,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v2/Voice/Countries"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListVoiceCountryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListVoiceCountryListVoiceCountryResponse])

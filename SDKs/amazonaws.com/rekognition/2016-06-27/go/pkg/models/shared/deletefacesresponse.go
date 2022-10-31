@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteFacesResponse struct {
-	DeletedFaces []string `json:"DeletedFaces,omitempty"`
+    DeletedFaces []string `json:"DeletedFaces,omitempty"`
+    
 }
+

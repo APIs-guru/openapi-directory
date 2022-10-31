@@ -1,42 +1,47 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type CloudfunctionsProjectsLocationsFunctionsCreatePathParams struct {
-	Parent string `pathParam:"style=simple,explode=false,name=parent"`
+    Parent string `pathParam:"style=simple,explode=false,name=parent"`
+    
 }
 
 type CloudfunctionsProjectsLocationsFunctionsCreateQueryParams struct {
-	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
-	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
-	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
-	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
-	FunctionID     *string           `queryParam:"style=form,explode=true,name=functionId"`
-	Key            *string           `queryParam:"style=form,explode=true,name=key"`
-	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
-	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
-	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
-	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
+    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
+    Callback *string `queryParam:"style=form,explode=true,name=callback"`
+    Fields *string `queryParam:"style=form,explode=true,name=fields"`
+    FunctionID *string `queryParam:"style=form,explode=true,name=functionId"`
+    Key *string `queryParam:"style=form,explode=true,name=key"`
+    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
+    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
+    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
+    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
+    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
+    
 }
 
 type CloudfunctionsProjectsLocationsFunctionsCreateSecurity struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type CloudfunctionsProjectsLocationsFunctionsCreateRequest struct {
-	PathParams  CloudfunctionsProjectsLocationsFunctionsCreatePathParams
-	QueryParams CloudfunctionsProjectsLocationsFunctionsCreateQueryParams
-	Request     *shared.Function `request:"mediaType=application/json"`
-	Security    CloudfunctionsProjectsLocationsFunctionsCreateSecurity
+    PathParams CloudfunctionsProjectsLocationsFunctionsCreatePathParams 
+    QueryParams CloudfunctionsProjectsLocationsFunctionsCreateQueryParams 
+    Request *shared.Function `request:"mediaType=application/json"`
+    Security CloudfunctionsProjectsLocationsFunctionsCreateSecurity 
+    
 }
 
 type CloudfunctionsProjectsLocationsFunctionsCreateResponse struct {
-	ContentType string
-	Operation   *shared.Operation
-	StatusCode  int64
+    ContentType string 
+    Operation *shared.Operation 
+    StatusCode int64 
+    
 }
+

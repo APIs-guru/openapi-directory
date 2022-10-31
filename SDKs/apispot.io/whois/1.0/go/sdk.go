@@ -113,6 +113,7 @@ func (s *SDK) CreateBatch(ctx context.Context, request operations.CreateBatchReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

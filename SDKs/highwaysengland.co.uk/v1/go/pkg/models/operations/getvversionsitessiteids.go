@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetVVersionSitesSiteIdsPathParams struct {
-	SiteIds string `pathParam:"style=simple,explode=false,name=site_Ids"`
-	Version string `pathParam:"style=simple,explode=false,name=version"`
+    SiteIds string `pathParam:"style=simple,explode=false,name=site_Ids"`
+    Version string `pathParam:"style=simple,explode=false,name=version"`
+    
 }
 
 type GetVVersionSitesSiteIdsRequest struct {
-	PathParams GetVVersionSitesSiteIdsPathParams
+    PathParams GetVVersionSitesSiteIdsPathParams 
+    
 }
 
 type GetVVersionSitesSiteIdsResponse struct {
-	ContentType  string
-	SiteResponse *shared.SiteResponse
-	StatusCode   int64
+    ContentType string 
+    SiteResponse *shared.SiteResponse 
+    StatusCode int64 
+    
 }
+

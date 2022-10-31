@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LocationInfo struct {
-	LatLng *LatLng `json:"latLng,omitempty"`
+    LatLng *LatLng `json:"latLng,omitempty"`
+    
 }
+

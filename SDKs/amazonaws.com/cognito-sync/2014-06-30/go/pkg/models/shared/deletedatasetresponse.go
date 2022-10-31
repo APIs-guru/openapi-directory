@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteDatasetResponse struct {
-	Dataset *Dataset `json:"Dataset,omitempty"`
+    Dataset *Dataset `json:"Dataset,omitempty"`
+    
 }
+

@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListLineItemAssignedTargetingOptionsResponse struct {
-	AssignedTargetingOptions []AssignedTargetingOption `json:"assignedTargetingOptions,omitempty"`
-	NextPageToken            *string                   `json:"nextPageToken,omitempty"`
+    AssignedTargetingOptions []AssignedTargetingOption `json:"assignedTargetingOptions,omitempty"`
+    NextPageToken *string `json:"nextPageToken,omitempty"`
+    
 }
+

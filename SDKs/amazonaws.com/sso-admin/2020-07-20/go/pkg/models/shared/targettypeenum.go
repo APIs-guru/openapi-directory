@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type TargetTypeEnum string
 
 const (
-	TargetTypeEnumAwsAccount TargetTypeEnum = "AWS_ACCOUNT"
+    TargetTypeEnumAwsAccount TargetTypeEnum = "AWS_ACCOUNT"
 )
+
+

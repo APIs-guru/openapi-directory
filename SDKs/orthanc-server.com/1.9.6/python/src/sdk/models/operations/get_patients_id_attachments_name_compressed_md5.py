@@ -10,7 +10,7 @@ class GetPatientsIDAttachmentsNameCompressedMd5PathParams:
 
 @dataclass
 class GetPatientsIDAttachmentsNameCompressedMd5Headers:
-    if_none_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-None-Match' }})
+    if_none_match: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'If-None-Match', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

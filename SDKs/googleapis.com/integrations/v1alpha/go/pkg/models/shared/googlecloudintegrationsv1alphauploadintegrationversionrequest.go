@@ -1,14 +1,20 @@
 package shared
 
+
+
+
 type GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnum string
 
 const (
-	GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnumFileFormatUnspecified GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnum = "FILE_FORMAT_UNSPECIFIED"
-	GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnumJSON                  GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnum = "JSON"
-	GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnumYaml                  GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnum = "YAML"
+    GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnumFileFormatUnspecified GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnum = "FILE_FORMAT_UNSPECIFIED"
+GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnumJSON GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnum = "JSON"
+GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnumYaml GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnum = "YAML"
 )
 
+
 type GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequest struct {
-	Content    *string                                                                      `json:"content,omitempty"`
-	FileFormat *GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnum `json:"fileFormat,omitempty"`
+    Content *string `json:"content,omitempty"`
+    FileFormat *GoogleCloudIntegrationsV1alphaUploadIntegrationVersionRequestFileFormatEnum `json:"fileFormat,omitempty"`
+    
 }
+

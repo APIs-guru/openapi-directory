@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CancelTimerDecisionAttributes struct {
-	TimerID string `json:"timerId"`
+    TimerID string `json:"timerId"`
+    
 }
+

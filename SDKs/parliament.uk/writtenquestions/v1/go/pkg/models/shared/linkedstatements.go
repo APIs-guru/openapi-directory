@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type LinkedStatements struct {
-	LinkDate          *time.Time                 `json:"linkDate,omitempty"`
-	LinkType          *StatementLinkTypeEnumEnum `json:"linkType,omitempty"`
-	LinkedStatementID *int32                     `json:"linkedStatementId,omitempty"`
+    LinkDate *time.Time `json:"linkDate,omitempty"`
+    LinkType *StatementLinkTypeEnumEnum `json:"linkType,omitempty"`
+    LinkedStatementID *int32 `json:"linkedStatementId,omitempty"`
+    
 }
+

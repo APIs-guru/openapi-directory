@@ -1,101 +1,109 @@
 package shared
 
+
+
+
 type WritableVirtualMachineInterfaceModeEnum string
 
 const (
-	WritableVirtualMachineInterfaceModeEnumAccess    WritableVirtualMachineInterfaceModeEnum = "access"
-	WritableVirtualMachineInterfaceModeEnumTagged    WritableVirtualMachineInterfaceModeEnum = "tagged"
-	WritableVirtualMachineInterfaceModeEnumTaggedAll WritableVirtualMachineInterfaceModeEnum = "tagged-all"
+    WritableVirtualMachineInterfaceModeEnumAccess WritableVirtualMachineInterfaceModeEnum = "access"
+WritableVirtualMachineInterfaceModeEnumTagged WritableVirtualMachineInterfaceModeEnum = "tagged"
+WritableVirtualMachineInterfaceModeEnumTaggedAll WritableVirtualMachineInterfaceModeEnum = "tagged-all"
 )
+
+
 
 type WritableVirtualMachineInterfaceTypeEnum string
 
 const (
-	WritableVirtualMachineInterfaceTypeEnumVirtual                          WritableVirtualMachineInterfaceTypeEnum = "virtual"
-	WritableVirtualMachineInterfaceTypeEnumLag                              WritableVirtualMachineInterfaceTypeEnum = "lag"
-	WritableVirtualMachineInterfaceTypeEnumOneHundredbaseTx                 WritableVirtualMachineInterfaceTypeEnum = "100base-tx"
-	WritableVirtualMachineInterfaceTypeEnumOneThousandbaseT                 WritableVirtualMachineInterfaceTypeEnum = "1000base-t"
-	WritableVirtualMachineInterfaceTypeEnumTwo5gbaseT                       WritableVirtualMachineInterfaceTypeEnum = "2.5gbase-t"
-	WritableVirtualMachineInterfaceTypeEnumFivegbaseT                       WritableVirtualMachineInterfaceTypeEnum = "5gbase-t"
-	WritableVirtualMachineInterfaceTypeEnumTengbaseT                        WritableVirtualMachineInterfaceTypeEnum = "10gbase-t"
-	WritableVirtualMachineInterfaceTypeEnumTengbaseCx4                      WritableVirtualMachineInterfaceTypeEnum = "10gbase-cx4"
-	WritableVirtualMachineInterfaceTypeEnumOneThousandbaseXGbic             WritableVirtualMachineInterfaceTypeEnum = "1000base-x-gbic"
-	WritableVirtualMachineInterfaceTypeEnumOneThousandbaseXSfp              WritableVirtualMachineInterfaceTypeEnum = "1000base-x-sfp"
-	WritableVirtualMachineInterfaceTypeEnumTengbaseXSfpp                    WritableVirtualMachineInterfaceTypeEnum = "10gbase-x-sfpp"
-	WritableVirtualMachineInterfaceTypeEnumTengbaseXXfp                     WritableVirtualMachineInterfaceTypeEnum = "10gbase-x-xfp"
-	WritableVirtualMachineInterfaceTypeEnumTengbaseXXenpak                  WritableVirtualMachineInterfaceTypeEnum = "10gbase-x-xenpak"
-	WritableVirtualMachineInterfaceTypeEnumTengbaseXx2                      WritableVirtualMachineInterfaceTypeEnum = "10gbase-x-x2"
-	WritableVirtualMachineInterfaceTypeEnumTwentyFivegbaseXSfp28            WritableVirtualMachineInterfaceTypeEnum = "25gbase-x-sfp28"
-	WritableVirtualMachineInterfaceTypeEnumFortygbaseXQsfpp                 WritableVirtualMachineInterfaceTypeEnum = "40gbase-x-qsfpp"
-	WritableVirtualMachineInterfaceTypeEnumFiftygbaseXSfp28                 WritableVirtualMachineInterfaceTypeEnum = "50gbase-x-sfp28"
-	WritableVirtualMachineInterfaceTypeEnumOneHundredgbaseXCfp              WritableVirtualMachineInterfaceTypeEnum = "100gbase-x-cfp"
-	WritableVirtualMachineInterfaceTypeEnumOneHundredgbaseXCfp2             WritableVirtualMachineInterfaceTypeEnum = "100gbase-x-cfp2"
-	WritableVirtualMachineInterfaceTypeEnumTwoHundredgbaseXCfp2             WritableVirtualMachineInterfaceTypeEnum = "200gbase-x-cfp2"
-	WritableVirtualMachineInterfaceTypeEnumOneHundredgbaseXCfp4             WritableVirtualMachineInterfaceTypeEnum = "100gbase-x-cfp4"
-	WritableVirtualMachineInterfaceTypeEnumOneHundredgbaseXCpak             WritableVirtualMachineInterfaceTypeEnum = "100gbase-x-cpak"
-	WritableVirtualMachineInterfaceTypeEnumOneHundredgbaseXQsfp28           WritableVirtualMachineInterfaceTypeEnum = "100gbase-x-qsfp28"
-	WritableVirtualMachineInterfaceTypeEnumTwoHundredgbaseXQsfp56           WritableVirtualMachineInterfaceTypeEnum = "200gbase-x-qsfp56"
-	WritableVirtualMachineInterfaceTypeEnumFourHundredgbaseXQsfpdd          WritableVirtualMachineInterfaceTypeEnum = "400gbase-x-qsfpdd"
-	WritableVirtualMachineInterfaceTypeEnumFourHundredgbaseXOsfp            WritableVirtualMachineInterfaceTypeEnum = "400gbase-x-osfp"
-	WritableVirtualMachineInterfaceTypeEnumIeee80211a                       WritableVirtualMachineInterfaceTypeEnum = "ieee802.11a"
-	WritableVirtualMachineInterfaceTypeEnumIeee80211g                       WritableVirtualMachineInterfaceTypeEnum = "ieee802.11g"
-	WritableVirtualMachineInterfaceTypeEnumIeee80211n                       WritableVirtualMachineInterfaceTypeEnum = "ieee802.11n"
-	WritableVirtualMachineInterfaceTypeEnumIeee80211ac                      WritableVirtualMachineInterfaceTypeEnum = "ieee802.11ac"
-	WritableVirtualMachineInterfaceTypeEnumIeee80211ad                      WritableVirtualMachineInterfaceTypeEnum = "ieee802.11ad"
-	WritableVirtualMachineInterfaceTypeEnumIeee80211ax                      WritableVirtualMachineInterfaceTypeEnum = "ieee802.11ax"
-	WritableVirtualMachineInterfaceTypeEnumGsm                              WritableVirtualMachineInterfaceTypeEnum = "gsm"
-	WritableVirtualMachineInterfaceTypeEnumCdma                             WritableVirtualMachineInterfaceTypeEnum = "cdma"
-	WritableVirtualMachineInterfaceTypeEnumLte                              WritableVirtualMachineInterfaceTypeEnum = "lte"
-	WritableVirtualMachineInterfaceTypeEnumSonetOc3                         WritableVirtualMachineInterfaceTypeEnum = "sonet-oc3"
-	WritableVirtualMachineInterfaceTypeEnumSonetOc12                        WritableVirtualMachineInterfaceTypeEnum = "sonet-oc12"
-	WritableVirtualMachineInterfaceTypeEnumSonetOc48                        WritableVirtualMachineInterfaceTypeEnum = "sonet-oc48"
-	WritableVirtualMachineInterfaceTypeEnumSonetOc192                       WritableVirtualMachineInterfaceTypeEnum = "sonet-oc192"
-	WritableVirtualMachineInterfaceTypeEnumSonetOc768                       WritableVirtualMachineInterfaceTypeEnum = "sonet-oc768"
-	WritableVirtualMachineInterfaceTypeEnumSonetOc1920                      WritableVirtualMachineInterfaceTypeEnum = "sonet-oc1920"
-	WritableVirtualMachineInterfaceTypeEnumSonetOc3840                      WritableVirtualMachineInterfaceTypeEnum = "sonet-oc3840"
-	WritableVirtualMachineInterfaceTypeEnumOnegfcSfp                        WritableVirtualMachineInterfaceTypeEnum = "1gfc-sfp"
-	WritableVirtualMachineInterfaceTypeEnumTwogfcSfp                        WritableVirtualMachineInterfaceTypeEnum = "2gfc-sfp"
-	WritableVirtualMachineInterfaceTypeEnumFourgfcSfp                       WritableVirtualMachineInterfaceTypeEnum = "4gfc-sfp"
-	WritableVirtualMachineInterfaceTypeEnumEightgfcSfpp                     WritableVirtualMachineInterfaceTypeEnum = "8gfc-sfpp"
-	WritableVirtualMachineInterfaceTypeEnumSixteengfcSfpp                   WritableVirtualMachineInterfaceTypeEnum = "16gfc-sfpp"
-	WritableVirtualMachineInterfaceTypeEnumThirtyTwogfcSfp28                WritableVirtualMachineInterfaceTypeEnum = "32gfc-sfp28"
-	WritableVirtualMachineInterfaceTypeEnumOneHundredAndTwentyEightgfcSfp28 WritableVirtualMachineInterfaceTypeEnum = "128gfc-sfp28"
-	WritableVirtualMachineInterfaceTypeEnumInfinibandSdr                    WritableVirtualMachineInterfaceTypeEnum = "infiniband-sdr"
-	WritableVirtualMachineInterfaceTypeEnumInfinibandDdr                    WritableVirtualMachineInterfaceTypeEnum = "infiniband-ddr"
-	WritableVirtualMachineInterfaceTypeEnumInfinibandQdr                    WritableVirtualMachineInterfaceTypeEnum = "infiniband-qdr"
-	WritableVirtualMachineInterfaceTypeEnumInfinibandFdr10                  WritableVirtualMachineInterfaceTypeEnum = "infiniband-fdr10"
-	WritableVirtualMachineInterfaceTypeEnumInfinibandFdr                    WritableVirtualMachineInterfaceTypeEnum = "infiniband-fdr"
-	WritableVirtualMachineInterfaceTypeEnumInfinibandEdr                    WritableVirtualMachineInterfaceTypeEnum = "infiniband-edr"
-	WritableVirtualMachineInterfaceTypeEnumInfinibandHdr                    WritableVirtualMachineInterfaceTypeEnum = "infiniband-hdr"
-	WritableVirtualMachineInterfaceTypeEnumInfinibandNdr                    WritableVirtualMachineInterfaceTypeEnum = "infiniband-ndr"
-	WritableVirtualMachineInterfaceTypeEnumInfinibandXdr                    WritableVirtualMachineInterfaceTypeEnum = "infiniband-xdr"
-	WritableVirtualMachineInterfaceTypeEnumT1                               WritableVirtualMachineInterfaceTypeEnum = "t1"
-	WritableVirtualMachineInterfaceTypeEnumE1                               WritableVirtualMachineInterfaceTypeEnum = "e1"
-	WritableVirtualMachineInterfaceTypeEnumT3                               WritableVirtualMachineInterfaceTypeEnum = "t3"
-	WritableVirtualMachineInterfaceTypeEnumE3                               WritableVirtualMachineInterfaceTypeEnum = "e3"
-	WritableVirtualMachineInterfaceTypeEnumCiscoStackwise                   WritableVirtualMachineInterfaceTypeEnum = "cisco-stackwise"
-	WritableVirtualMachineInterfaceTypeEnumCiscoStackwisePlus               WritableVirtualMachineInterfaceTypeEnum = "cisco-stackwise-plus"
-	WritableVirtualMachineInterfaceTypeEnumCiscoFlexstack                   WritableVirtualMachineInterfaceTypeEnum = "cisco-flexstack"
-	WritableVirtualMachineInterfaceTypeEnumCiscoFlexstackPlus               WritableVirtualMachineInterfaceTypeEnum = "cisco-flexstack-plus"
-	WritableVirtualMachineInterfaceTypeEnumJuniperVcp                       WritableVirtualMachineInterfaceTypeEnum = "juniper-vcp"
-	WritableVirtualMachineInterfaceTypeEnumExtremeSummitstack               WritableVirtualMachineInterfaceTypeEnum = "extreme-summitstack"
-	WritableVirtualMachineInterfaceTypeEnumExtremeSummitstack128            WritableVirtualMachineInterfaceTypeEnum = "extreme-summitstack-128"
-	WritableVirtualMachineInterfaceTypeEnumExtremeSummitstack256            WritableVirtualMachineInterfaceTypeEnum = "extreme-summitstack-256"
-	WritableVirtualMachineInterfaceTypeEnumExtremeSummitstack512            WritableVirtualMachineInterfaceTypeEnum = "extreme-summitstack-512"
-	WritableVirtualMachineInterfaceTypeEnumOther                            WritableVirtualMachineInterfaceTypeEnum = "other"
+    WritableVirtualMachineInterfaceTypeEnumVirtual WritableVirtualMachineInterfaceTypeEnum = "virtual"
+WritableVirtualMachineInterfaceTypeEnumLag WritableVirtualMachineInterfaceTypeEnum = "lag"
+WritableVirtualMachineInterfaceTypeEnumOneHundredbaseTx WritableVirtualMachineInterfaceTypeEnum = "100base-tx"
+WritableVirtualMachineInterfaceTypeEnumOneThousandbaseT WritableVirtualMachineInterfaceTypeEnum = "1000base-t"
+WritableVirtualMachineInterfaceTypeEnumTwo5gbaseT WritableVirtualMachineInterfaceTypeEnum = "2.5gbase-t"
+WritableVirtualMachineInterfaceTypeEnumFivegbaseT WritableVirtualMachineInterfaceTypeEnum = "5gbase-t"
+WritableVirtualMachineInterfaceTypeEnumTengbaseT WritableVirtualMachineInterfaceTypeEnum = "10gbase-t"
+WritableVirtualMachineInterfaceTypeEnumTengbaseCx4 WritableVirtualMachineInterfaceTypeEnum = "10gbase-cx4"
+WritableVirtualMachineInterfaceTypeEnumOneThousandbaseXGbic WritableVirtualMachineInterfaceTypeEnum = "1000base-x-gbic"
+WritableVirtualMachineInterfaceTypeEnumOneThousandbaseXSfp WritableVirtualMachineInterfaceTypeEnum = "1000base-x-sfp"
+WritableVirtualMachineInterfaceTypeEnumTengbaseXSfpp WritableVirtualMachineInterfaceTypeEnum = "10gbase-x-sfpp"
+WritableVirtualMachineInterfaceTypeEnumTengbaseXXfp WritableVirtualMachineInterfaceTypeEnum = "10gbase-x-xfp"
+WritableVirtualMachineInterfaceTypeEnumTengbaseXXenpak WritableVirtualMachineInterfaceTypeEnum = "10gbase-x-xenpak"
+WritableVirtualMachineInterfaceTypeEnumTengbaseXx2 WritableVirtualMachineInterfaceTypeEnum = "10gbase-x-x2"
+WritableVirtualMachineInterfaceTypeEnumTwentyFivegbaseXSfp28 WritableVirtualMachineInterfaceTypeEnum = "25gbase-x-sfp28"
+WritableVirtualMachineInterfaceTypeEnumFortygbaseXQsfpp WritableVirtualMachineInterfaceTypeEnum = "40gbase-x-qsfpp"
+WritableVirtualMachineInterfaceTypeEnumFiftygbaseXSfp28 WritableVirtualMachineInterfaceTypeEnum = "50gbase-x-sfp28"
+WritableVirtualMachineInterfaceTypeEnumOneHundredgbaseXCfp WritableVirtualMachineInterfaceTypeEnum = "100gbase-x-cfp"
+WritableVirtualMachineInterfaceTypeEnumOneHundredgbaseXCfp2 WritableVirtualMachineInterfaceTypeEnum = "100gbase-x-cfp2"
+WritableVirtualMachineInterfaceTypeEnumTwoHundredgbaseXCfp2 WritableVirtualMachineInterfaceTypeEnum = "200gbase-x-cfp2"
+WritableVirtualMachineInterfaceTypeEnumOneHundredgbaseXCfp4 WritableVirtualMachineInterfaceTypeEnum = "100gbase-x-cfp4"
+WritableVirtualMachineInterfaceTypeEnumOneHundredgbaseXCpak WritableVirtualMachineInterfaceTypeEnum = "100gbase-x-cpak"
+WritableVirtualMachineInterfaceTypeEnumOneHundredgbaseXQsfp28 WritableVirtualMachineInterfaceTypeEnum = "100gbase-x-qsfp28"
+WritableVirtualMachineInterfaceTypeEnumTwoHundredgbaseXQsfp56 WritableVirtualMachineInterfaceTypeEnum = "200gbase-x-qsfp56"
+WritableVirtualMachineInterfaceTypeEnumFourHundredgbaseXQsfpdd WritableVirtualMachineInterfaceTypeEnum = "400gbase-x-qsfpdd"
+WritableVirtualMachineInterfaceTypeEnumFourHundredgbaseXOsfp WritableVirtualMachineInterfaceTypeEnum = "400gbase-x-osfp"
+WritableVirtualMachineInterfaceTypeEnumIeee80211a WritableVirtualMachineInterfaceTypeEnum = "ieee802.11a"
+WritableVirtualMachineInterfaceTypeEnumIeee80211g WritableVirtualMachineInterfaceTypeEnum = "ieee802.11g"
+WritableVirtualMachineInterfaceTypeEnumIeee80211n WritableVirtualMachineInterfaceTypeEnum = "ieee802.11n"
+WritableVirtualMachineInterfaceTypeEnumIeee80211ac WritableVirtualMachineInterfaceTypeEnum = "ieee802.11ac"
+WritableVirtualMachineInterfaceTypeEnumIeee80211ad WritableVirtualMachineInterfaceTypeEnum = "ieee802.11ad"
+WritableVirtualMachineInterfaceTypeEnumIeee80211ax WritableVirtualMachineInterfaceTypeEnum = "ieee802.11ax"
+WritableVirtualMachineInterfaceTypeEnumGsm WritableVirtualMachineInterfaceTypeEnum = "gsm"
+WritableVirtualMachineInterfaceTypeEnumCdma WritableVirtualMachineInterfaceTypeEnum = "cdma"
+WritableVirtualMachineInterfaceTypeEnumLte WritableVirtualMachineInterfaceTypeEnum = "lte"
+WritableVirtualMachineInterfaceTypeEnumSonetOc3 WritableVirtualMachineInterfaceTypeEnum = "sonet-oc3"
+WritableVirtualMachineInterfaceTypeEnumSonetOc12 WritableVirtualMachineInterfaceTypeEnum = "sonet-oc12"
+WritableVirtualMachineInterfaceTypeEnumSonetOc48 WritableVirtualMachineInterfaceTypeEnum = "sonet-oc48"
+WritableVirtualMachineInterfaceTypeEnumSonetOc192 WritableVirtualMachineInterfaceTypeEnum = "sonet-oc192"
+WritableVirtualMachineInterfaceTypeEnumSonetOc768 WritableVirtualMachineInterfaceTypeEnum = "sonet-oc768"
+WritableVirtualMachineInterfaceTypeEnumSonetOc1920 WritableVirtualMachineInterfaceTypeEnum = "sonet-oc1920"
+WritableVirtualMachineInterfaceTypeEnumSonetOc3840 WritableVirtualMachineInterfaceTypeEnum = "sonet-oc3840"
+WritableVirtualMachineInterfaceTypeEnumOnegfcSfp WritableVirtualMachineInterfaceTypeEnum = "1gfc-sfp"
+WritableVirtualMachineInterfaceTypeEnumTwogfcSfp WritableVirtualMachineInterfaceTypeEnum = "2gfc-sfp"
+WritableVirtualMachineInterfaceTypeEnumFourgfcSfp WritableVirtualMachineInterfaceTypeEnum = "4gfc-sfp"
+WritableVirtualMachineInterfaceTypeEnumEightgfcSfpp WritableVirtualMachineInterfaceTypeEnum = "8gfc-sfpp"
+WritableVirtualMachineInterfaceTypeEnumSixteengfcSfpp WritableVirtualMachineInterfaceTypeEnum = "16gfc-sfpp"
+WritableVirtualMachineInterfaceTypeEnumThirtyTwogfcSfp28 WritableVirtualMachineInterfaceTypeEnum = "32gfc-sfp28"
+WritableVirtualMachineInterfaceTypeEnumOneHundredAndTwentyEightgfcSfp28 WritableVirtualMachineInterfaceTypeEnum = "128gfc-sfp28"
+WritableVirtualMachineInterfaceTypeEnumInfinibandSdr WritableVirtualMachineInterfaceTypeEnum = "infiniband-sdr"
+WritableVirtualMachineInterfaceTypeEnumInfinibandDdr WritableVirtualMachineInterfaceTypeEnum = "infiniband-ddr"
+WritableVirtualMachineInterfaceTypeEnumInfinibandQdr WritableVirtualMachineInterfaceTypeEnum = "infiniband-qdr"
+WritableVirtualMachineInterfaceTypeEnumInfinibandFdr10 WritableVirtualMachineInterfaceTypeEnum = "infiniband-fdr10"
+WritableVirtualMachineInterfaceTypeEnumInfinibandFdr WritableVirtualMachineInterfaceTypeEnum = "infiniband-fdr"
+WritableVirtualMachineInterfaceTypeEnumInfinibandEdr WritableVirtualMachineInterfaceTypeEnum = "infiniband-edr"
+WritableVirtualMachineInterfaceTypeEnumInfinibandHdr WritableVirtualMachineInterfaceTypeEnum = "infiniband-hdr"
+WritableVirtualMachineInterfaceTypeEnumInfinibandNdr WritableVirtualMachineInterfaceTypeEnum = "infiniband-ndr"
+WritableVirtualMachineInterfaceTypeEnumInfinibandXdr WritableVirtualMachineInterfaceTypeEnum = "infiniband-xdr"
+WritableVirtualMachineInterfaceTypeEnumT1 WritableVirtualMachineInterfaceTypeEnum = "t1"
+WritableVirtualMachineInterfaceTypeEnumE1 WritableVirtualMachineInterfaceTypeEnum = "e1"
+WritableVirtualMachineInterfaceTypeEnumT3 WritableVirtualMachineInterfaceTypeEnum = "t3"
+WritableVirtualMachineInterfaceTypeEnumE3 WritableVirtualMachineInterfaceTypeEnum = "e3"
+WritableVirtualMachineInterfaceTypeEnumCiscoStackwise WritableVirtualMachineInterfaceTypeEnum = "cisco-stackwise"
+WritableVirtualMachineInterfaceTypeEnumCiscoStackwisePlus WritableVirtualMachineInterfaceTypeEnum = "cisco-stackwise-plus"
+WritableVirtualMachineInterfaceTypeEnumCiscoFlexstack WritableVirtualMachineInterfaceTypeEnum = "cisco-flexstack"
+WritableVirtualMachineInterfaceTypeEnumCiscoFlexstackPlus WritableVirtualMachineInterfaceTypeEnum = "cisco-flexstack-plus"
+WritableVirtualMachineInterfaceTypeEnumJuniperVcp WritableVirtualMachineInterfaceTypeEnum = "juniper-vcp"
+WritableVirtualMachineInterfaceTypeEnumExtremeSummitstack WritableVirtualMachineInterfaceTypeEnum = "extreme-summitstack"
+WritableVirtualMachineInterfaceTypeEnumExtremeSummitstack128 WritableVirtualMachineInterfaceTypeEnum = "extreme-summitstack-128"
+WritableVirtualMachineInterfaceTypeEnumExtremeSummitstack256 WritableVirtualMachineInterfaceTypeEnum = "extreme-summitstack-256"
+WritableVirtualMachineInterfaceTypeEnumExtremeSummitstack512 WritableVirtualMachineInterfaceTypeEnum = "extreme-summitstack-512"
+WritableVirtualMachineInterfaceTypeEnumOther WritableVirtualMachineInterfaceTypeEnum = "other"
 )
 
+
 type WritableVirtualMachineInterface struct {
-	Description    *string                                  `json:"description,omitempty"`
-	Enabled        *bool                                    `json:"enabled,omitempty"`
-	ID             *int64                                   `json:"id,omitempty"`
-	MacAddress     *string                                  `json:"mac_address,omitempty"`
-	Mode           *WritableVirtualMachineInterfaceModeEnum `json:"mode,omitempty"`
-	Mtu            *int64                                   `json:"mtu,omitempty"`
-	Name           string                                   `json:"name"`
-	TaggedVlans    []int64                                  `json:"tagged_vlans,omitempty"`
-	Tags           []string                                 `json:"tags,omitempty"`
-	Type           WritableVirtualMachineInterfaceTypeEnum  `json:"type"`
-	UntaggedVlan   *int64                                   `json:"untagged_vlan,omitempty"`
-	VirtualMachine *int64                                   `json:"virtual_machine,omitempty"`
+    Description *string `json:"description,omitempty"`
+    Enabled *bool `json:"enabled,omitempty"`
+    ID *int64 `json:"id,omitempty"`
+    MacAddress *string `json:"mac_address,omitempty"`
+    Mode *WritableVirtualMachineInterfaceModeEnum `json:"mode,omitempty"`
+    Mtu *int64 `json:"mtu,omitempty"`
+    Name string `json:"name"`
+    TaggedVlans []int64 `json:"tagged_vlans,omitempty"`
+    Tags []string `json:"tags,omitempty"`
+    Type WritableVirtualMachineInterfaceTypeEnum `json:"type"`
+    UntaggedVlan *int64 `json:"untagged_vlan,omitempty"`
+    VirtualMachine *int64 `json:"virtual_machine,omitempty"`
+    
 }
+

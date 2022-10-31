@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ProvisionedCapacityUpdate struct {
-	McuCount    int64 `json:"mcuCount"`
-	WorkerCount int64 `json:"workerCount"`
+    McuCount int64 `json:"mcuCount"`
+    WorkerCount int64 `json:"workerCount"`
+    
 }
+

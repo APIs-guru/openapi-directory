@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type ReportTypeEnum string
 
 const (
-	ReportTypeEnumFinding ReportTypeEnum = "FINDING"
-	ReportTypeEnumFull    ReportTypeEnum = "FULL"
+    ReportTypeEnumFinding ReportTypeEnum = "FINDING"
+ReportTypeEnumFull ReportTypeEnum = "FULL"
 )
+
+

@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ExtrasRecentActivityReadPathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type ExtrasRecentActivityReadRequest struct {
-	PathParams ExtrasRecentActivityReadPathParams
+    PathParams ExtrasRecentActivityReadPathParams 
+    
 }
 
 type ExtrasRecentActivityReadResponse struct {
-	ContentType string
-	StatusCode  int64
-	UserAction  *shared.UserAction
+    ContentType string 
+    StatusCode int64 
+    UserAction *shared.UserAction 
+    
 }
+

@@ -1,14 +1,20 @@
 package operations
 
+
+
 type DeleteAPIKeysIDPathParams struct {
-	ID int32 `pathParam:"style=simple,explode=false,name=id"`
+    ID int32 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type DeleteAPIKeysIDRequest struct {
-	PathParams DeleteAPIKeysIDPathParams
+    PathParams DeleteAPIKeysIDPathParams 
+    
 }
 
 type DeleteAPIKeysIDResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

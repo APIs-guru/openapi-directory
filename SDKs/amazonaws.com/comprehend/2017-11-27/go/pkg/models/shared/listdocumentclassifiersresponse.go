@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListDocumentClassifiersResponse struct {
-	DocumentClassifierPropertiesList []DocumentClassifierProperties `json:"DocumentClassifierPropertiesList,omitempty"`
-	NextToken                        *string                        `json:"NextToken,omitempty"`
+    DocumentClassifierPropertiesList []DocumentClassifierProperties `json:"DocumentClassifierPropertiesList,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    
 }
+

@@ -20,21 +20,23 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def get_mostemailed_section_time_period_json(self, request: operations.GetMostemailedSectionTimePeriodJSONRequest) -> operations.GetMostemailedSectionTimePeriodJSONResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/mostemailed/{section}/{time-period}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetMostemailedSectionTimePeriodJSONResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetMostemailedSectionTimePeriodJSON200ApplicationJSON])
@@ -57,20 +59,19 @@ class SDK:
         return res
 
     
-    
     def get_mostshared_section_time_period_json(self, request: operations.GetMostsharedSectionTimePeriodJSONRequest) -> operations.GetMostsharedSectionTimePeriodJSONResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/mostshared/{section}/{time-period}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetMostsharedSectionTimePeriodJSONResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetMostsharedSectionTimePeriodJSON200ApplicationJSON])
@@ -83,20 +84,19 @@ class SDK:
         return res
 
     
-    
     def get_mostviewed_section_time_period_json(self, request: operations.GetMostviewedSectionTimePeriodJSONRequest) -> operations.GetMostviewedSectionTimePeriodJSONResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/mostviewed/{section}/{time-period}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetMostviewedSectionTimePeriodJSONResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetMostviewedSectionTimePeriodJSON200ApplicationJSON])

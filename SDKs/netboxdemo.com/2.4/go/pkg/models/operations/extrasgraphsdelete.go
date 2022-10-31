@@ -1,14 +1,20 @@
 package operations
 
+
+
 type ExtrasGraphsDeletePathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type ExtrasGraphsDeleteRequest struct {
-	PathParams ExtrasGraphsDeletePathParams
+    PathParams ExtrasGraphsDeletePathParams 
+    
 }
 
 type ExtrasGraphsDeleteResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

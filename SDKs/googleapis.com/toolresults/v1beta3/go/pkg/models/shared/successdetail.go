@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SuccessDetail struct {
-	OtherNativeCrash *bool `json:"otherNativeCrash,omitempty"`
+    OtherNativeCrash *bool `json:"otherNativeCrash,omitempty"`
+    
 }
+

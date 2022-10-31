@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetReisezentrenIDPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetReisezentrenIDRequest struct {
-	PathParams GetReisezentrenIDPathParams
+    PathParams GetReisezentrenIDPathParams 
+    
 }
 
 type GetReisezentrenIDResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InputConfig struct {
-	GcsSource *GcsSource `json:"gcsSource,omitempty"`
+    GcsSource *GcsSource `json:"gcsSource,omitempty"`
+    
 }
+

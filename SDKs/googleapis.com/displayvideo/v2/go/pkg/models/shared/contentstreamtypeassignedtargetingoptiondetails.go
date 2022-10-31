@@ -1,14 +1,20 @@
 package shared
 
+
+
+
 type ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnum string
 
 const (
-	ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnumContentStreamTypeUnspecified ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnum = "CONTENT_STREAM_TYPE_UNSPECIFIED"
-	ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnumContentLiveStream            ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnum = "CONTENT_LIVE_STREAM"
-	ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnumContentOnDemand              ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnum = "CONTENT_ON_DEMAND"
+    ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnumContentStreamTypeUnspecified ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnum = "CONTENT_STREAM_TYPE_UNSPECIFIED"
+ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnumContentLiveStream ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnum = "CONTENT_LIVE_STREAM"
+ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnumContentOnDemand ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnum = "CONTENT_ON_DEMAND"
 )
 
+
 type ContentStreamTypeAssignedTargetingOptionDetails struct {
-	ContentStreamType *ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnum `json:"contentStreamType,omitempty"`
-	TargetingOptionID *string                                                               `json:"targetingOptionId,omitempty"`
+    ContentStreamType *ContentStreamTypeAssignedTargetingOptionDetailsContentStreamTypeEnum `json:"contentStreamType,omitempty"`
+    TargetingOptionID *string `json:"targetingOptionId,omitempty"`
+    
 }
+

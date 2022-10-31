@@ -1,41 +1,52 @@
 package operations
 
+
+
+
 type GetDeleteCarrierGatewayActionEnum string
 
 const (
-	GetDeleteCarrierGatewayActionEnumDeleteCarrierGateway GetDeleteCarrierGatewayActionEnum = "DeleteCarrierGateway"
+    GetDeleteCarrierGatewayActionEnumDeleteCarrierGateway GetDeleteCarrierGatewayActionEnum = "DeleteCarrierGateway"
 )
+
+
 
 type GetDeleteCarrierGatewayVersionEnum string
 
 const (
-	GetDeleteCarrierGatewayVersionEnumTwoThousandAndSixteen1115 GetDeleteCarrierGatewayVersionEnum = "2016-11-15"
+    GetDeleteCarrierGatewayVersionEnumTwoThousandAndSixteen1115 GetDeleteCarrierGatewayVersionEnum = "2016-11-15"
 )
 
+
 type GetDeleteCarrierGatewayQueryParams struct {
-	Action           GetDeleteCarrierGatewayActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	CarrierGatewayID string                             `queryParam:"style=form,explode=true,name=CarrierGatewayId"`
-	DryRun           *bool                              `queryParam:"style=form,explode=true,name=DryRun"`
-	Version          GetDeleteCarrierGatewayVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action GetDeleteCarrierGatewayActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    CarrierGatewayID string `queryParam:"style=form,explode=true,name=CarrierGatewayId"`
+    DryRun *bool `queryParam:"style=form,explode=true,name=DryRun"`
+    Version GetDeleteCarrierGatewayVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type GetDeleteCarrierGatewayHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type GetDeleteCarrierGatewayRequest struct {
-	QueryParams GetDeleteCarrierGatewayQueryParams
-	Headers     GetDeleteCarrierGatewayHeaders
+    QueryParams GetDeleteCarrierGatewayQueryParams 
+    Headers GetDeleteCarrierGatewayHeaders 
+    
 }
 
 type GetDeleteCarrierGatewayResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

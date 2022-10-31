@@ -1,5 +1,9 @@
 package shared
 
+
+
 type VmwareVmsDetails struct {
-	Details []VmwareVMDetails `json:"details,omitempty"`
+    Details []VmwareVMDetails `json:"details,omitempty"`
+    
 }
+

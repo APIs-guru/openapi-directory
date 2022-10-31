@@ -10,7 +10,7 @@ class GetAPISpecificationQueryParams:
 
 @dataclass
 class GetAPISpecificationHeaders:
-    x_readme_version: str = field(default=None, metadata={'header': { 'field_name': 'x-readme-version' }})
+    x_readme_version: str = field(default=None, metadata={'header': { 'field_name': 'x-readme-version', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

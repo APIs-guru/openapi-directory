@@ -1,13 +1,14 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ModelPackageGroupSummary struct {
-	CreationTime                 time.Time                   `json:"CreationTime"`
-	ModelPackageGroupArn         string                      `json:"ModelPackageGroupArn"`
-	ModelPackageGroupDescription *string                     `json:"ModelPackageGroupDescription,omitempty"`
-	ModelPackageGroupName        string                      `json:"ModelPackageGroupName"`
-	ModelPackageGroupStatus      ModelPackageGroupStatusEnum `json:"ModelPackageGroupStatus"`
+    CreationTime time.Time `json:"CreationTime"`
+    ModelPackageGroupArn string `json:"ModelPackageGroupArn"`
+    ModelPackageGroupDescription *string `json:"ModelPackageGroupDescription,omitempty"`
+    ModelPackageGroupName string `json:"ModelPackageGroupName"`
+    ModelPackageGroupStatus ModelPackageGroupStatusEnum `json:"ModelPackageGroupStatus"`
+    
 }
+

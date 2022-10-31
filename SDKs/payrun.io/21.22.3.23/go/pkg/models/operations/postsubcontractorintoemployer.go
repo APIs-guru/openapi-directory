@@ -1,27 +1,31 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PostSubContractorIntoEmployerPathParams struct {
-	EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    
 }
 
 type PostSubContractorIntoEmployerHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type PostSubContractorIntoEmployerRequest struct {
-	PathParams PostSubContractorIntoEmployerPathParams
-	Headers    PostSubContractorIntoEmployerHeaders
-	Request    shared.SubContractor `request:"mediaType=application/json"`
+    PathParams PostSubContractorIntoEmployerPathParams 
+    Headers PostSubContractorIntoEmployerHeaders 
+    Request shared.SubContractor `request:"mediaType=application/json"`
+    
 }
 
 type PostSubContractorIntoEmployerResponse struct {
-	ContentType string
-	ErrorModel  *shared.ErrorModel
-	Link        *shared.Link
-	StatusCode  int64
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    Link *shared.Link 
+    StatusCode int64 
+    
 }
+

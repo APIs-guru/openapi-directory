@@ -1,27 +1,30 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type FindUsersByUsernameQueryParams struct {
-	Expansions  []shared.UserExpansionsParameterEnum `queryParam:"style=form,explode=false,name=expansions"`
-	MediaFields []shared.MediaFieldsParameterEnum    `queryParam:"style=form,explode=false,name=media.fields"`
-	PlaceFields []shared.PlaceFieldsParameterEnum    `queryParam:"style=form,explode=false,name=place.fields"`
-	PollFields  []shared.PollFieldsParameterEnum     `queryParam:"style=form,explode=false,name=poll.fields"`
-	TweetFields []shared.TweetFieldsParameterEnum    `queryParam:"style=form,explode=false,name=tweet.fields"`
-	UserFields  []shared.UserFieldsParameterEnum     `queryParam:"style=form,explode=false,name=user.fields"`
-	Usernames   []string                             `queryParam:"style=form,explode=false,name=usernames"`
+    Expansions []shared.UserExpansionsParameterEnum `queryParam:"style=form,explode=false,name=expansions"`
+    MediaFields []shared.MediaFieldsParameterEnum `queryParam:"style=form,explode=false,name=media.fields"`
+    PlaceFields []shared.PlaceFieldsParameterEnum `queryParam:"style=form,explode=false,name=place.fields"`
+    PollFields []shared.PollFieldsParameterEnum `queryParam:"style=form,explode=false,name=poll.fields"`
+    TweetFields []shared.TweetFieldsParameterEnum `queryParam:"style=form,explode=false,name=tweet.fields"`
+    UserFields []shared.UserFieldsParameterEnum `queryParam:"style=form,explode=false,name=user.fields"`
+    Usernames []string `queryParam:"style=form,explode=false,name=usernames"`
+    
 }
 
 type FindUsersByUsernameRequest struct {
-	QueryParams FindUsersByUsernameQueryParams
+    QueryParams FindUsersByUsernameQueryParams 
+    
 }
 
 type FindUsersByUsernameResponse struct {
-	ContentType        string
-	Error              *interface{}
-	Problem            *interface{}
-	StatusCode         int64
-	UserLookupResponse *shared.UserLookupResponse
+    ContentType string 
+    Error *interface{} 
+    Problem *interface{} 
+    StatusCode int64 
+    UserLookupResponse *shared.UserLookupResponse 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SuppressionListDestination struct {
-	SuppressionListImportAction SuppressionListImportActionEnum `json:"SuppressionListImportAction"`
+    SuppressionListImportAction SuppressionListImportActionEnum `json:"SuppressionListImportAction"`
+    
 }
+

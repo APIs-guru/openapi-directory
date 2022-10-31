@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type PendingMaintenanceAction struct {
-	Action           *string    `json:"action,omitempty"`
-	CurrentApplyDate *time.Time `json:"currentApplyDate,omitempty"`
-	Description      *string    `json:"description,omitempty"`
+    Action *string `json:"action,omitempty"`
+    CurrentApplyDate *time.Time `json:"currentApplyDate,omitempty"`
+    Description *string `json:"description,omitempty"`
+    
 }
+

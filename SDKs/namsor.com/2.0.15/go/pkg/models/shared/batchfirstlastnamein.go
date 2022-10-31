@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchFirstLastNameIn struct {
-	PersonalNames []FirstLastNameIn `json:"personalNames,omitempty"`
+    PersonalNames []FirstLastNameIn `json:"personalNames,omitempty"`
+    
 }
+

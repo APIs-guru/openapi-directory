@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TargetingValueDemogAgeCriteria struct {
-	DemogAgeCriteriaIds []string `json:"demogAgeCriteriaIds,omitempty"`
+    DemogAgeCriteriaIds []string `json:"demogAgeCriteriaIds,omitempty"`
+    
 }
+

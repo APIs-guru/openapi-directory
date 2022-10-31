@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def create_bundle(self, request: operations.CreateBundleRequest) -> operations.CreateBundleResponse:
         warnings.simplefilter("ignore")
@@ -28,18 +30,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v2/RegulatoryCompliance/Bundles"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateBundleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceBundle])
@@ -47,7 +51,6 @@ class SDK:
 
         return res
 
-    
     
     def create_bundle_copy(self, request: operations.CreateBundleCopyRequest) -> operations.CreateBundleCopyResponse:
         warnings.simplefilter("ignore")
@@ -56,18 +59,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Bundles/{BundleSid}/Copies", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateBundleCopyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceBundleBundleCopy])
@@ -76,7 +81,6 @@ class SDK:
         return res
 
     
-    
     def create_end_user(self, request: operations.CreateEndUserRequest) -> operations.CreateEndUserResponse:
         warnings.simplefilter("ignore")
 
@@ -84,18 +88,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v2/RegulatoryCompliance/EndUsers"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateEndUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceEndUser])
@@ -103,7 +109,6 @@ class SDK:
 
         return res
 
-    
     
     def create_evaluation(self, request: operations.CreateEvaluationRequest) -> operations.CreateEvaluationResponse:
         warnings.simplefilter("ignore")
@@ -112,14 +117,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Bundles/{BundleSid}/Evaluations", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateEvaluationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceBundleEvaluation])
@@ -127,7 +132,6 @@ class SDK:
 
         return res
 
-    
     
     def create_item_assignment(self, request: operations.CreateItemAssignmentRequest) -> operations.CreateItemAssignmentResponse:
         warnings.simplefilter("ignore")
@@ -136,18 +140,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Bundles/{BundleSid}/ItemAssignments", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateItemAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceBundleItemAssignment])
@@ -155,7 +161,6 @@ class SDK:
 
         return res
 
-    
     
     def create_replace_items(self, request: operations.CreateReplaceItemsRequest) -> operations.CreateReplaceItemsResponse:
         warnings.simplefilter("ignore")
@@ -164,18 +169,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Bundles/{BundleSid}/ReplaceItems", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateReplaceItemsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceBundleReplaceItems])
@@ -184,7 +191,6 @@ class SDK:
         return res
 
     
-    
     def create_supporting_document(self, request: operations.CreateSupportingDocumentRequest) -> operations.CreateSupportingDocumentResponse:
         warnings.simplefilter("ignore")
 
@@ -192,18 +198,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v2/RegulatoryCompliance/SupportingDocuments"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSupportingDocumentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceSupportingDocument])
@@ -212,7 +220,6 @@ class SDK:
         return res
 
     
-    
     def delete_bundle(self, request: operations.DeleteBundleRequest) -> operations.DeleteBundleResponse:
         warnings.simplefilter("ignore")
 
@@ -220,20 +227,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Bundles/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteBundleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_end_user(self, request: operations.DeleteEndUserRequest) -> operations.DeleteEndUserResponse:
         warnings.simplefilter("ignore")
@@ -242,20 +248,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/EndUsers/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteEndUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_item_assignment(self, request: operations.DeleteItemAssignmentRequest) -> operations.DeleteItemAssignmentResponse:
         warnings.simplefilter("ignore")
@@ -264,20 +269,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Bundles/{BundleSid}/ItemAssignments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteItemAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_supporting_document(self, request: operations.DeleteSupportingDocumentRequest) -> operations.DeleteSupportingDocumentResponse:
         warnings.simplefilter("ignore")
@@ -286,20 +290,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/SupportingDocuments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSupportingDocumentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def fetch_bundle(self, request: operations.FetchBundleRequest) -> operations.FetchBundleResponse:
         warnings.simplefilter("ignore")
@@ -308,14 +311,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Bundles/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchBundleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceBundle])
@@ -323,7 +326,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_end_user(self, request: operations.FetchEndUserRequest) -> operations.FetchEndUserResponse:
         warnings.simplefilter("ignore")
@@ -332,14 +334,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/EndUsers/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchEndUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceEndUser])
@@ -347,7 +349,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_end_user_type(self, request: operations.FetchEndUserTypeRequest) -> operations.FetchEndUserTypeResponse:
         warnings.simplefilter("ignore")
@@ -356,14 +357,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/EndUserTypes/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchEndUserTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceEndUserType])
@@ -372,7 +373,6 @@ class SDK:
         return res
 
     
-    
     def fetch_evaluation(self, request: operations.FetchEvaluationRequest) -> operations.FetchEvaluationResponse:
         warnings.simplefilter("ignore")
 
@@ -380,14 +380,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Bundles/{BundleSid}/Evaluations/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchEvaluationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceBundleEvaluation])
@@ -396,7 +396,6 @@ class SDK:
         return res
 
     
-    
     def fetch_item_assignment(self, request: operations.FetchItemAssignmentRequest) -> operations.FetchItemAssignmentResponse:
         warnings.simplefilter("ignore")
 
@@ -404,14 +403,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Bundles/{BundleSid}/ItemAssignments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchItemAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceBundleItemAssignment])
@@ -420,7 +419,6 @@ class SDK:
         return res
 
     
-    
     def fetch_regulation(self, request: operations.FetchRegulationRequest) -> operations.FetchRegulationResponse:
         warnings.simplefilter("ignore")
 
@@ -428,14 +426,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Regulations/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRegulationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceRegulation])
@@ -444,7 +442,6 @@ class SDK:
         return res
 
     
-    
     def fetch_supporting_document(self, request: operations.FetchSupportingDocumentRequest) -> operations.FetchSupportingDocumentResponse:
         warnings.simplefilter("ignore")
 
@@ -452,14 +449,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/SupportingDocuments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSupportingDocumentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceSupportingDocument])
@@ -468,7 +465,6 @@ class SDK:
         return res
 
     
-    
     def fetch_supporting_document_type(self, request: operations.FetchSupportingDocumentTypeRequest) -> operations.FetchSupportingDocumentTypeResponse:
         warnings.simplefilter("ignore")
 
@@ -476,14 +472,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/SupportingDocumentTypes/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSupportingDocumentTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceSupportingDocumentType])
@@ -492,7 +488,6 @@ class SDK:
         return res
 
     
-    
     def list_bundle(self, request: operations.ListBundleRequest) -> operations.ListBundleResponse:
         warnings.simplefilter("ignore")
 
@@ -500,15 +495,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v2/RegulatoryCompliance/Bundles"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListBundleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListBundleListBundleResponse])
@@ -517,7 +513,6 @@ class SDK:
         return res
 
     
-    
     def list_bundle_copy(self, request: operations.ListBundleCopyRequest) -> operations.ListBundleCopyResponse:
         warnings.simplefilter("ignore")
 
@@ -525,15 +520,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Bundles/{BundleSid}/Copies", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListBundleCopyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListBundleCopyListBundleCopyResponse])
@@ -542,7 +538,6 @@ class SDK:
         return res
 
     
-    
     def list_end_user(self, request: operations.ListEndUserRequest) -> operations.ListEndUserResponse:
         warnings.simplefilter("ignore")
 
@@ -550,15 +545,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v2/RegulatoryCompliance/EndUsers"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEndUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListEndUserListEndUserResponse])
@@ -567,7 +563,6 @@ class SDK:
         return res
 
     
-    
     def list_end_user_type(self, request: operations.ListEndUserTypeRequest) -> operations.ListEndUserTypeResponse:
         warnings.simplefilter("ignore")
 
@@ -575,15 +570,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v2/RegulatoryCompliance/EndUserTypes"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEndUserTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListEndUserTypeListEndUserTypeResponse])
@@ -592,7 +588,6 @@ class SDK:
         return res
 
     
-    
     def list_evaluation(self, request: operations.ListEvaluationRequest) -> operations.ListEvaluationResponse:
         warnings.simplefilter("ignore")
 
@@ -600,15 +595,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Bundles/{BundleSid}/Evaluations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEvaluationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListEvaluationListEvaluationResponse])
@@ -617,7 +613,6 @@ class SDK:
         return res
 
     
-    
     def list_item_assignment(self, request: operations.ListItemAssignmentRequest) -> operations.ListItemAssignmentResponse:
         warnings.simplefilter("ignore")
 
@@ -625,15 +620,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Bundles/{BundleSid}/ItemAssignments", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListItemAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListItemAssignmentListItemAssignmentResponse])
@@ -642,7 +638,6 @@ class SDK:
         return res
 
     
-    
     def list_regulation(self, request: operations.ListRegulationRequest) -> operations.ListRegulationResponse:
         warnings.simplefilter("ignore")
 
@@ -650,15 +645,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v2/RegulatoryCompliance/Regulations"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListRegulationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListRegulationListRegulationResponse])
@@ -667,7 +663,6 @@ class SDK:
         return res
 
     
-    
     def list_supporting_document(self, request: operations.ListSupportingDocumentRequest) -> operations.ListSupportingDocumentResponse:
         warnings.simplefilter("ignore")
 
@@ -675,15 +670,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v2/RegulatoryCompliance/SupportingDocuments"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSupportingDocumentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSupportingDocumentListSupportingDocumentResponse])
@@ -692,7 +688,6 @@ class SDK:
         return res
 
     
-    
     def list_supporting_document_type(self, request: operations.ListSupportingDocumentTypeRequest) -> operations.ListSupportingDocumentTypeResponse:
         warnings.simplefilter("ignore")
 
@@ -700,15 +695,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v2/RegulatoryCompliance/SupportingDocumentTypes"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSupportingDocumentTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSupportingDocumentTypeListSupportingDocumentTypeResponse])
@@ -717,7 +713,6 @@ class SDK:
         return res
 
     
-    
     def update_bundle(self, request: operations.UpdateBundleRequest) -> operations.UpdateBundleResponse:
         warnings.simplefilter("ignore")
 
@@ -725,18 +720,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/Bundles/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateBundleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceBundle])
@@ -745,7 +742,6 @@ class SDK:
         return res
 
     
-    
     def update_end_user(self, request: operations.UpdateEndUserRequest) -> operations.UpdateEndUserResponse:
         warnings.simplefilter("ignore")
 
@@ -753,18 +749,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/EndUsers/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateEndUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceEndUser])
@@ -773,7 +771,6 @@ class SDK:
         return res
 
     
-    
     def update_supporting_document(self, request: operations.UpdateSupportingDocumentRequest) -> operations.UpdateSupportingDocumentResponse:
         warnings.simplefilter("ignore")
 
@@ -781,18 +778,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v2/RegulatoryCompliance/SupportingDocuments/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSupportingDocumentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NumbersV2RegulatoryComplianceSupportingDocument])

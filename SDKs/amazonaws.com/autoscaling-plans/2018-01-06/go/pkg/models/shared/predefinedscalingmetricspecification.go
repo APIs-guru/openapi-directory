@@ -1,6 +1,10 @@
 package shared
 
+
+
 type PredefinedScalingMetricSpecification struct {
-	PredefinedScalingMetricType ScalingMetricTypeEnum `json:"PredefinedScalingMetricType"`
-	ResourceLabel               *string               `json:"ResourceLabel,omitempty"`
+    PredefinedScalingMetricType ScalingMetricTypeEnum `json:"PredefinedScalingMetricType"`
+    ResourceLabel *string `json:"ResourceLabel,omitempty"`
+    
 }
+

@@ -1,15 +1,17 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ExtrasImageAttachmentsCreateRequest struct {
-	Request shared.ImageAttachment `request:"mediaType=application/json"`
+    Request shared.ImageAttachment `request:"mediaType=application/json"`
+    
 }
 
 type ExtrasImageAttachmentsCreateResponse struct {
-	ContentType     string
-	ImageAttachment *shared.ImageAttachment
-	StatusCode      int64
+    ContentType string 
+    ImageAttachment *shared.ImageAttachment 
+    StatusCode int64 
+    
 }
+

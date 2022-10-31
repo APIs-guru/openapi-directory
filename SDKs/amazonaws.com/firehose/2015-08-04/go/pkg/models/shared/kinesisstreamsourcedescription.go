@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type KinesisStreamSourceDescription struct {
-	DeliveryStartTimestamp *time.Time `json:"DeliveryStartTimestamp,omitempty"`
-	KinesisStreamArn       *string    `json:"KinesisStreamARN,omitempty"`
-	RoleArn                *string    `json:"RoleARN,omitempty"`
+    DeliveryStartTimestamp *time.Time `json:"DeliveryStartTimestamp,omitempty"`
+    KinesisStreamArn *string `json:"KinesisStreamARN,omitempty"`
+    RoleArn *string `json:"RoleARN,omitempty"`
+    
 }
+

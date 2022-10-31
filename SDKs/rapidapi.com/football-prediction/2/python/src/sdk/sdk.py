@@ -19,20 +19,25 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def get_api_v2_list_federations(self, request: operations.GetAPIV2ListFederationsRequest) -> operations.GetAPIV2ListFederationsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/api/v2/list-federations"
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAPIV2ListFederationsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAPIV2ListFederations200ApplicationJSON])
@@ -45,19 +50,21 @@ class SDK:
         return res
 
     
-    
     def get_api_v2_list_markets(self, request: operations.GetAPIV2ListMarketsRequest) -> operations.GetAPIV2ListMarketsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/api/v2/list-markets"
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAPIV2ListMarketsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAPIV2ListMarkets200ApplicationJSON])
@@ -70,19 +77,21 @@ class SDK:
         return res
 
     
-    
     def get_api_v2_performance_stats(self, request: operations.GetAPIV2PerformanceStatsRequest) -> operations.GetAPIV2PerformanceStatsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/api/v2/performance-stats"
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAPIV2PerformanceStatsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAPIV2PerformanceStats200ApplicationJSON])
@@ -95,19 +104,21 @@ class SDK:
         return res
 
     
-    
     def get_api_v2_predictions(self, request: operations.GetAPIV2PredictionsRequest) -> operations.GetAPIV2PredictionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/api/v2/predictions"
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAPIV2PredictionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             pass
         elif r.status_code == 404:
@@ -118,19 +129,19 @@ class SDK:
         return res
 
     
-    
     def get_api_v2_predictions_id_(self, request: operations.GetAPIV2PredictionsIDRequest) -> operations.GetAPIV2PredictionsIDResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/api/v2/predictions/{id}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAPIV2PredictionsIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetAPIV2PredictionsID200ApplicationJSON])

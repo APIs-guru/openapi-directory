@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateFirewallConfigResponse struct {
-	FirewallConfig *FirewallConfig `json:"FirewallConfig,omitempty"`
+    FirewallConfig *FirewallConfig `json:"FirewallConfig,omitempty"`
+    
 }
+

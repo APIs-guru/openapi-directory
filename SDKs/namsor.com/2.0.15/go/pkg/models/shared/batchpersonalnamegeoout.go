@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchPersonalNameGeoOut struct {
-	PersonalNames []PersonalNameGeoOut `json:"personalNames,omitempty"`
+    PersonalNames []PersonalNameGeoOut `json:"personalNames,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TransferDomainResponse struct {
-	OperationID string `json:"OperationId"`
+    OperationID string `json:"OperationId"`
+    
 }
+

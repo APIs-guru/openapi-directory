@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type SecretsSecretsReadPathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type SecretsSecretsReadRequest struct {
-	PathParams SecretsSecretsReadPathParams
+    PathParams SecretsSecretsReadPathParams 
+    
 }
 
 type SecretsSecretsReadResponse struct {
-	ContentType string
-	Secret      *shared.Secret
-	StatusCode  int64
+    ContentType string 
+    Secret *shared.Secret 
+    StatusCode int64 
+    
 }
+

@@ -1,39 +1,46 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetBackupPathParams struct {
-	BackupID int64 `pathParam:"style=simple,explode=false,name=backupId"`
-	LinodeID int64 `pathParam:"style=simple,explode=false,name=linodeId"`
+    BackupID int64 `pathParam:"style=simple,explode=false,name=backupId"`
+    LinodeID int64 `pathParam:"style=simple,explode=false,name=linodeId"`
+    
 }
 
 type GetBackupSecurityOption1 struct {
-	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+    PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
+    
 }
 
 type GetBackupSecurityOption2 struct {
-	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
+    Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
+    
 }
 
 type GetBackupSecurity struct {
-	Option1 *GetBackupSecurityOption1 `security:"option"`
-	Option2 *GetBackupSecurityOption2 `security:"option"`
+    Option1 *GetBackupSecurityOption1 `security:"option"`
+    Option2 *GetBackupSecurityOption2 `security:"option"`
+    
 }
 
 type GetBackupRequest struct {
-	PathParams GetBackupPathParams
-	Security   GetBackupSecurity
+    PathParams GetBackupPathParams 
+    Security GetBackupSecurity 
+    
 }
 
 type GetBackupDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
+    Errors []shared.ErrorObject `json:"errors,omitempty"`
+    
 }
 
 type GetBackupResponse struct {
-	Backup                                *shared.Backup
-	ContentType                           string
-	StatusCode                            int64
-	GetBackupDefaultApplicationJSONObject *GetBackupDefaultApplicationJSON
+    Backup *shared.Backup 
+    ContentType string 
+    StatusCode int64 
+    GetBackupDefaultApplicationJSONObject *GetBackupDefaultApplicationJSON 
+    
 }
+

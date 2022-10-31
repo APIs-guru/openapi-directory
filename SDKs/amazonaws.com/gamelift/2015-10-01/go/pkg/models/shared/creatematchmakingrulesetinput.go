@@ -1,7 +1,11 @@
 package shared
 
+
+
 type CreateMatchmakingRuleSetInput struct {
-	Name        string `json:"Name"`
-	RuleSetBody string `json:"RuleSetBody"`
-	Tags        []Tag  `json:"Tags,omitempty"`
+    Name string `json:"Name"`
+    RuleSetBody string `json:"RuleSetBody"`
+    Tags []Tag `json:"Tags,omitempty"`
+    
 }
+

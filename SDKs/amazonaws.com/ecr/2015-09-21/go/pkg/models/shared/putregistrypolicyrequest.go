@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PutRegistryPolicyRequest struct {
-	PolicyText string `json:"policyText"`
+    PolicyText string `json:"policyText"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type WorkspaceReadList struct {
-	Workspaces []WorkspaceRead `json:"workspaces"`
+    Workspaces []WorkspaceRead `json:"workspaces"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetMappingResponse struct {
-	Mapping []MappingEntry `json:"Mapping"`
+    Mapping []MappingEntry `json:"Mapping"`
+    
 }
+

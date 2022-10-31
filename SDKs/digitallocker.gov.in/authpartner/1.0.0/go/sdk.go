@@ -255,6 +255,7 @@ func (s *SDK) GetDeviceCodeID(ctx context.Context, request operations.GetDeviceC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -444,6 +445,7 @@ func (s *SDK) GetListOfDocumentsProvidedByAnIssuerID(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -519,6 +521,7 @@ func (s *SDK) GetListOfIssuersID(ctx context.Context, request operations.GetList
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -850,6 +853,7 @@ func (s *SDK) GetSearchParametersForADocumentID(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -925,6 +929,7 @@ func (s *SDK) GetStatisticsID(ctx context.Context, request operations.GetStatist
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1079,6 +1084,7 @@ func (s *SDK) PullDocumentID(ctx context.Context, request operations.PullDocumen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1164,6 +1170,7 @@ func (s *SDK) PushURIToAccountID(ctx context.Context, request operations.PushURI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1249,6 +1256,7 @@ func (s *SDK) SignUpID(ctx context.Context, request operations.SignUpIDRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1324,7 +1332,10 @@ func (s *SDK) UploadFileToLockerID(ctx context.Context, request operations.Uploa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1399,6 +1410,7 @@ func (s *SDK) VerifyAccountID(ctx context.Context, request operations.VerifyAcco
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1474,6 +1486,7 @@ func (s *SDK) VerifyOtpID(ctx context.Context, request operations.VerifyOtpIDReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1549,6 +1562,7 @@ func (s *SDK) GetTokenRevocationID(ctx context.Context, request operations.GetTo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1589,6 +1603,7 @@ func (s *SDK) GetaccesstokenID(ctx context.Context, request operations.Getaccess
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

@@ -63,6 +63,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalDomainsAttachTrust(ctx con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -110,6 +111,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalDomainsBackupsCreate(ctx c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -198,6 +200,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalDomainsCheckMigrationPermi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -245,6 +248,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalDomainsCreate(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -292,6 +296,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalDomainsDetachTrust(ctx con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -339,6 +344,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalDomainsDisableMigration(ct
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -386,6 +392,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalDomainsEnableMigration(ctx
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -433,6 +440,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalDomainsExtendSchema(ctx co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -562,6 +570,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalDomainsReconfigureTrust(ct
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -609,6 +618,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalDomainsResetAdminPassword(
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -656,6 +666,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalDomainsRestore(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -744,6 +755,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalDomainsUpdateLdapssettings
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -791,6 +803,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalDomainsValidateTrust(ctx c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -838,6 +851,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalOperationsCancel(ctx conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -885,6 +899,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalPeeringsCreate(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1096,6 +1111,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalPeeringsPatch(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1143,6 +1159,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalPeeringsSetIamPolicy(ctx c
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1190,6 +1207,7 @@ func (s *SDK) ManagedidentitiesProjectsLocationsGlobalPeeringsTestIamPermissions
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

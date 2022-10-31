@@ -1,6 +1,10 @@
 package shared
 
+
+
 type DialogAction struct {
-	ActionStatus *ActionStatus `json:"actionStatus,omitempty"`
-	Dialog       *Dialog       `json:"dialog,omitempty"`
+    ActionStatus *ActionStatus `json:"actionStatus,omitempty"`
+    Dialog *Dialog `json:"dialog,omitempty"`
+    
 }
+

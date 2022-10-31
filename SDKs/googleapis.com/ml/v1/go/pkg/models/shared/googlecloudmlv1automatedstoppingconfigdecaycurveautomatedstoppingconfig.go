@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudMlV1AutomatedStoppingConfigDecayCurveAutomatedStoppingConfig struct {
-	UseElapsedTime *bool `json:"useElapsedTime,omitempty"`
+    UseElapsedTime *bool `json:"useElapsedTime,omitempty"`
+    
 }
+

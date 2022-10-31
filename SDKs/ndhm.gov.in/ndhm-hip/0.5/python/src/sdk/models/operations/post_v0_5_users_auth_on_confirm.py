@@ -8,9 +8,9 @@ POST_V0_5_USERS_AUTH_ON_CONFIRM_SERVERS = [
 
 @dataclass
 class PostV05UsersAuthOnConfirmHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
-    x_hip_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIP-ID' }})
-    x_hiu_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIU-ID' }})
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    x_hip_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIP-ID', 'style': 'simple', 'explode': False }})
+    x_hiu_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIU-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

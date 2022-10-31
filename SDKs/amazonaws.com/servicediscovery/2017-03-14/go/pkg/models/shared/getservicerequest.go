@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetServiceRequest struct {
-	ID string `json:"Id"`
+    ID string `json:"Id"`
+    
 }
+

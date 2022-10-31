@@ -152,6 +152,7 @@ func (s *SDK) PostDetect(ctx context.Context, request operations.PostDetectReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -286,6 +287,7 @@ func (s *SDK) PostTranslate(ctx context.Context, request operations.PostTranslat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

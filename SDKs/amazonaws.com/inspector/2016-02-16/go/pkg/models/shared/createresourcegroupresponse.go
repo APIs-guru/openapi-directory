@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateResourceGroupResponse struct {
-	ResourceGroupArn string `json:"resourceGroupArn"`
+    ResourceGroupArn string `json:"resourceGroupArn"`
+    
 }
+

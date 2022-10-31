@@ -1,15 +1,16 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type CampaignDateRangeKpiResponse struct {
-	ApplicationID string        `json:"ApplicationId"`
-	CampaignID    string        `json:"CampaignId"`
-	EndTime       time.Time     `json:"EndTime"`
-	KpiName       string        `json:"KpiName"`
-	KpiResult     BaseKpiResult `json:"KpiResult"`
-	NextToken     *string       `json:"NextToken,omitempty"`
-	StartTime     time.Time     `json:"StartTime"`
+    ApplicationID string `json:"ApplicationId"`
+    CampaignID string `json:"CampaignId"`
+    EndTime time.Time `json:"EndTime"`
+    KpiName string `json:"KpiName"`
+    KpiResult BaseKpiResult `json:"KpiResult"`
+    NextToken *string `json:"NextToken,omitempty"`
+    StartTime time.Time `json:"StartTime"`
+    
 }
+

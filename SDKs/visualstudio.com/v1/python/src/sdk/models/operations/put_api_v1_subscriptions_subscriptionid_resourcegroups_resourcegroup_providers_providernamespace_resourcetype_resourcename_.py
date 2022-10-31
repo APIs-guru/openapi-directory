@@ -14,7 +14,7 @@ class PutAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupProvidersPro
 
 @dataclass
 class PutAPIV1SubscriptionsSubscriptionIDResourceGroupsResourceGroupProvidersProviderNamespaceResourceTypeResourceNameHeaders:
-    headers: Optional[shared.PlanResourceHeaders] = field(default=None, metadata={'header': { 'field_name': 'headers' }})
+    headers: Optional[shared.PlanResourceHeaders] = field(default=None, metadata={'header': { 'field_name': 'headers', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

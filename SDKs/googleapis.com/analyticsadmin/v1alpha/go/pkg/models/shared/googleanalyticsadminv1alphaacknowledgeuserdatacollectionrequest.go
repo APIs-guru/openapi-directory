@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleAnalyticsAdminV1alphaAcknowledgeUserDataCollectionRequest struct {
-	Acknowledgement *string `json:"acknowledgement,omitempty"`
+    Acknowledgement *string `json:"acknowledgement,omitempty"`
+    
 }
+

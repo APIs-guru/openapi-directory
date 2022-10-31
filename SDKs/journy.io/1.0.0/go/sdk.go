@@ -66,6 +66,7 @@ func (s *SDK) AddUserToAccount(ctx context.Context, request operations.AddUserTo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -368,6 +369,7 @@ func (s *SDK) Link(ctx context.Context, request operations.LinkRequest) (*operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -478,6 +480,7 @@ func (s *SDK) RemoveUserFromAccount(ctx context.Context, request operations.Remo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -588,6 +591,7 @@ func (s *SDK) TrackJourneyEvent(ctx context.Context, request operations.TrackJou
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -698,6 +702,7 @@ func (s *SDK) UpsertAccount(ctx context.Context, request operations.UpsertAccoun
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -796,6 +801,7 @@ func (s *SDK) UpsertUser(ctx context.Context, request operations.UpsertUserReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

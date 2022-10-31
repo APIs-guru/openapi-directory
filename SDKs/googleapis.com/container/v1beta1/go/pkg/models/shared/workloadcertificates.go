@@ -1,5 +1,9 @@
 package shared
 
+
+
 type WorkloadCertificates struct {
-	EnableCertificates *bool `json:"enableCertificates,omitempty"`
+    EnableCertificates *bool `json:"enableCertificates,omitempty"`
+    
 }
+

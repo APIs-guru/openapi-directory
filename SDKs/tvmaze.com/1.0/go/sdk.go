@@ -1077,6 +1077,7 @@ func (s *SDK) PatchUserTagsTagID(ctx context.Context, request operations.PatchUs
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1127,6 +1128,7 @@ func (s *SDK) PostAuthPoll(ctx context.Context, request operations.PostAuthPollR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1178,6 +1180,7 @@ func (s *SDK) PostAuthStart(ctx context.Context, request operations.PostAuthStar
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1226,6 +1229,7 @@ func (s *SDK) PostScrobbleEpisodes(ctx context.Context, request operations.PostS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1291,6 +1295,7 @@ func (s *SDK) PostScrobbleShows(ctx context.Context, request operations.PostScro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1358,6 +1363,7 @@ func (s *SDK) PostUserTags(ctx context.Context, request operations.PostUserTagsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1404,6 +1410,7 @@ func (s *SDK) PutScrobbleEpisodesEpisodeID(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1451,6 +1458,7 @@ func (s *SDK) PutUserEpisodesEpisodeID(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1698,6 +1706,7 @@ func (s *SDK) PutUserVotesEpisodesEpisodeID(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1744,6 +1753,7 @@ func (s *SDK) PutUserVotesShowsShowID(ctx context.Context, request operations.Pu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

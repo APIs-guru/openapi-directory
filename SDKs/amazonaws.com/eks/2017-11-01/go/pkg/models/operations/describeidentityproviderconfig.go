@@ -1,45 +1,51 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DescribeIdentityProviderConfigPathParams struct {
-	Name string `pathParam:"style=simple,explode=false,name=name"`
+    Name string `pathParam:"style=simple,explode=false,name=name"`
+    
 }
 
 type DescribeIdentityProviderConfigHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type DescribeIdentityProviderConfigRequestBodyIdentityProviderConfig struct {
-	Name *string `json:"name,omitempty"`
-	Type *string `json:"type,omitempty"`
+    Name *string `json:"name,omitempty"`
+    Type *string `json:"type,omitempty"`
+    
 }
 
 type DescribeIdentityProviderConfigRequestBody struct {
-	IdentityProviderConfig DescribeIdentityProviderConfigRequestBodyIdentityProviderConfig `json:"identityProviderConfig"`
+    IdentityProviderConfig DescribeIdentityProviderConfigRequestBodyIdentityProviderConfig `json:"identityProviderConfig"`
+    
 }
 
 type DescribeIdentityProviderConfigRequest struct {
-	PathParams DescribeIdentityProviderConfigPathParams
-	Headers    DescribeIdentityProviderConfigHeaders
-	Request    DescribeIdentityProviderConfigRequestBody `request:"mediaType=application/json"`
+    PathParams DescribeIdentityProviderConfigPathParams 
+    Headers DescribeIdentityProviderConfigHeaders 
+    Request DescribeIdentityProviderConfigRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type DescribeIdentityProviderConfigResponse struct {
-	ClientException                        *interface{}
-	ContentType                            string
-	DescribeIdentityProviderConfigResponse *shared.DescribeIdentityProviderConfigResponse
-	InvalidParameterException              *interface{}
-	ResourceNotFoundException              *interface{}
-	ServerException                        *interface{}
-	ServiceUnavailableException            *interface{}
-	StatusCode                             int64
+    ClientException *interface{} 
+    ContentType string 
+    DescribeIdentityProviderConfigResponse *shared.DescribeIdentityProviderConfigResponse 
+    InvalidParameterException *interface{} 
+    ResourceNotFoundException *interface{} 
+    ServerException *interface{} 
+    ServiceUnavailableException *interface{} 
+    StatusCode int64 
+    
 }
+

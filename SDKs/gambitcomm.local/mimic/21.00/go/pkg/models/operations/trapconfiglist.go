@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type TrapConfigListPathParams struct {
-	AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
+    AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
+    
 }
 
 type TrapConfigListRequest struct {
-	PathParams TrapConfigListPathParams
+    PathParams TrapConfigListPathParams 
+    
 }
 
 type TrapConfigListResponse struct {
-	ContentType string
-	StatusCode  int64
-	TrapDests   []shared.TrapDest
+    ContentType string 
+    StatusCode int64 
+    TrapDests []shared.TrapDest 
+    
 }
+

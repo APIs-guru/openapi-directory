@@ -1,11 +1,12 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetCompanyEmployeesResponse struct {
-	ContentType       string
-	EmployeesResponse *shared.EmployeesResponse
-	StatusCode        int64
+    ContentType string 
+    EmployeesResponse *shared.EmployeesResponse 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateEndpointResponse struct {
-	MessageBody MessageBody `json:"MessageBody"`
+    MessageBody MessageBody `json:"MessageBody"`
+    
 }
+

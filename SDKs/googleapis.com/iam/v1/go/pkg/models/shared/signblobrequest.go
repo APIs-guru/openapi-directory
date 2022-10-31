@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SignBlobRequest struct {
-	BytesToSign *string `json:"bytesToSign,omitempty"`
+    BytesToSign *string `json:"bytesToSign,omitempty"`
+    
 }
+

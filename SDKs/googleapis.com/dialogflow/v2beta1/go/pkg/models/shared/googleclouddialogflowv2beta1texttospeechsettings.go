@@ -1,19 +1,25 @@
 package shared
 
+
+
+
 type GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum string
 
 const (
-	GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnumOutputAudioEncodingUnspecified GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_UNSPECIFIED"
-	GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnumOutputAudioEncodingLinear16    GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_LINEAR_16"
-	GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnumOutputAudioEncodingMp3         GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_MP3"
-	GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnumOutputAudioEncodingMp364Kbps   GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS"
-	GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnumOutputAudioEncodingOggOpus     GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_OGG_OPUS"
-	GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnumOutputAudioEncodingMulaw       GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_MULAW"
+    GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnumOutputAudioEncodingUnspecified GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_UNSPECIFIED"
+GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnumOutputAudioEncodingLinear16 GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_LINEAR_16"
+GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnumOutputAudioEncodingMp3 GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_MP3"
+GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnumOutputAudioEncodingMp364Kbps GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_MP3_64_KBPS"
+GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnumOutputAudioEncodingOggOpus GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_OGG_OPUS"
+GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnumOutputAudioEncodingMulaw GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum = "OUTPUT_AUDIO_ENCODING_MULAW"
 )
 
+
 type GoogleCloudDialogflowV2beta1TextToSpeechSettings struct {
-	EnableTextToSpeech      *bool                                                                    `json:"enableTextToSpeech,omitempty"`
-	OutputAudioEncoding     *GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum `json:"outputAudioEncoding,omitempty"`
-	SampleRateHertz         *int32                                                                   `json:"sampleRateHertz,omitempty"`
-	SynthesizeSpeechConfigs map[string]GoogleCloudDialogflowV2beta1SynthesizeSpeechConfig            `json:"synthesizeSpeechConfigs,omitempty"`
+    EnableTextToSpeech *bool `json:"enableTextToSpeech,omitempty"`
+    OutputAudioEncoding *GoogleCloudDialogflowV2beta1TextToSpeechSettingsOutputAudioEncodingEnum `json:"outputAudioEncoding,omitempty"`
+    SampleRateHertz *int32 `json:"sampleRateHertz,omitempty"`
+    SynthesizeSpeechConfigs map[string]GoogleCloudDialogflowV2beta1SynthesizeSpeechConfig `json:"synthesizeSpeechConfigs,omitempty"`
+    
 }
+

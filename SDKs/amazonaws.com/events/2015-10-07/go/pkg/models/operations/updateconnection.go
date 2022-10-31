@@ -1,37 +1,42 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
+
 
 type UpdateConnectionXAmzTargetEnum string
 
 const (
-	UpdateConnectionXAmzTargetEnumAwsEventsUpdateConnection UpdateConnectionXAmzTargetEnum = "AWSEvents.UpdateConnection"
+    UpdateConnectionXAmzTargetEnumAwsEventsUpdateConnection UpdateConnectionXAmzTargetEnum = "AWSEvents.UpdateConnection"
 )
 
+
 type UpdateConnectionHeaders struct {
-	XAmzAlgorithm     *string                        `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string                        `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string                        `header:"name=X-Amz-Credential"`
-	XAmzDate          *string                        `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string                        `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string                        `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string                        `header:"name=X-Amz-SignedHeaders"`
-	XAmzTarget        UpdateConnectionXAmzTargetEnum `header:"name=X-Amz-Target"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    XAmzTarget UpdateConnectionXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
+    
 }
 
 type UpdateConnectionRequest struct {
-	Headers UpdateConnectionHeaders
-	Request shared.UpdateConnectionRequest `request:"mediaType=application/json"`
+    Headers UpdateConnectionHeaders 
+    Request shared.UpdateConnectionRequest `request:"mediaType=application/json"`
+    
 }
 
 type UpdateConnectionResponse struct {
-	ConcurrentModificationException *interface{}
-	ContentType                     string
-	InternalException               *interface{}
-	LimitExceededException          *interface{}
-	ResourceNotFoundException       *interface{}
-	StatusCode                      int64
-	UpdateConnectionResponse        *shared.UpdateConnectionResponse
+    ConcurrentModificationException *interface{} 
+    ContentType string 
+    InternalException *interface{} 
+    LimitExceededException *interface{} 
+    ResourceNotFoundException *interface{} 
+    StatusCode int64 
+    UpdateConnectionResponse *shared.UpdateConnectionResponse 
+    
 }
+

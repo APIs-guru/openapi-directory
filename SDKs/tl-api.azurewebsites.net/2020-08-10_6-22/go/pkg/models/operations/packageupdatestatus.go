@@ -1,23 +1,26 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PackageUpdateStatusQueryParams struct {
-	PackageID *int32  `queryParam:"style=form,explode=true,name=packageId"`
-	Status    *int32  `queryParam:"style=form,explode=true,name=status"`
-	UserName  *string `queryParam:"style=form,explode=true,name=userName"`
+    PackageID *int32 `queryParam:"style=form,explode=true,name=packageId"`
+    Status *int32 `queryParam:"style=form,explode=true,name=status"`
+    UserName *string `queryParam:"style=form,explode=true,name=userName"`
+    
 }
 
 type PackageUpdateStatusRequest struct {
-	QueryParams PackageUpdateStatusQueryParams
+    QueryParams PackageUpdateStatusQueryParams 
+    
 }
 
 type PackageUpdateStatusResponse struct {
-	APIException                *shared.APIException
-	ContentType                 string
-	DefaultResponseDtoOfBoolean *shared.DefaultResponseDtoOfBoolean
-	DefaultResponseDtoOfString  *shared.DefaultResponseDtoOfString
-	StatusCode                  int64
+    APIException *shared.APIException 
+    ContentType string 
+    DefaultResponseDtoOfBoolean *shared.DefaultResponseDtoOfBoolean 
+    DefaultResponseDtoOfString *shared.DefaultResponseDtoOfString 
+    StatusCode int64 
+    
 }
+

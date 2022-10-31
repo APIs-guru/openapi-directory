@@ -1,5 +1,9 @@
 package shared
 
+
+
 type MembersHasMember struct {
-	IsMember *bool `json:"isMember,omitempty"`
+    IsMember *bool `json:"isMember,omitempty"`
+    
 }
+

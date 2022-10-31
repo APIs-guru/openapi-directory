@@ -1,9 +1,10 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type StopExecutionOutput struct {
-	StopDate time.Time `json:"stopDate"`
+    StopDate time.Time `json:"stopDate"`
+    
 }
+

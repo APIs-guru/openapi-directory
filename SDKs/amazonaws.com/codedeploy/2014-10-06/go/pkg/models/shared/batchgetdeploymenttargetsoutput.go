@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchGetDeploymentTargetsOutput struct {
-	DeploymentTargets []DeploymentTarget `json:"deploymentTargets,omitempty"`
+    DeploymentTargets []DeploymentTarget `json:"deploymentTargets,omitempty"`
+    
 }
+

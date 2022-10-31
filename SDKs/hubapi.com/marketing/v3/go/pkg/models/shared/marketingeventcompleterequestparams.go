@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type MarketingEventCompleteRequestParams struct {
-	EndDateTime   time.Time `json:"endDateTime"`
-	StartDateTime time.Time `json:"startDateTime"`
+    EndDateTime time.Time `json:"endDateTime"`
+    StartDateTime time.Time `json:"startDateTime"`
+    
 }
+

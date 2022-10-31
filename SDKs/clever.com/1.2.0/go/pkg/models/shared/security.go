@@ -1,9 +1,14 @@
 package shared
 
+
+
 type SchemeOauth struct {
-	Authorization string `security:"name=Authorization"`
+    Authorization string `security:"name=Authorization"`
+    
 }
 
 type Security struct {
-	Oauth SchemeOauth `security:"scheme,type=oauth2"`
+    Oauth SchemeOauth `security:"scheme,type=oauth2"`
+    
 }
+

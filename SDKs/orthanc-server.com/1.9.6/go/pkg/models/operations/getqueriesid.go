@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetQueriesIDPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetQueriesIDRequest struct {
-	PathParams GetQueriesIDPathParams
+    PathParams GetQueriesIDPathParams 
+    
 }
 
 type GetQueriesIDResponse struct {
-	ContentType                       string
-	GetQueriesID200ApplicationJSONAny *interface{}
-	StatusCode                        int64
+    ContentType string 
+    GetQueriesID200ApplicationJSONAny *interface{} 
+    StatusCode int64 
+    
 }
+

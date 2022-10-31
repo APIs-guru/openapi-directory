@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CloseStatusFilter struct {
-	Status CloseStatusEnum `json:"status"`
+    Status CloseStatusEnum `json:"status"`
+    
 }
+

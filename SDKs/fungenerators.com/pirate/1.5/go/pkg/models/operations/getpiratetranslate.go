@@ -1,23 +1,27 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetPirateTranslateQueryParams struct {
-	Text string `queryParam:"style=form,explode=true,name=text"`
+    Text string `queryParam:"style=form,explode=true,name=text"`
+    
 }
 
 type GetPirateTranslateSecurity struct {
-	XFungeneratorsAPISecret shared.SchemeXFungeneratorsAPISecret `security:"scheme,type=apiKey,subtype=header"`
+    XFungeneratorsAPISecret shared.SchemeXFungeneratorsAPISecret `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type GetPirateTranslateRequest struct {
-	QueryParams GetPirateTranslateQueryParams
-	Security    GetPirateTranslateSecurity
+    QueryParams GetPirateTranslateQueryParams 
+    Security GetPirateTranslateSecurity 
+    
 }
 
 type GetPirateTranslateResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,15 +1,17 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type EmployeeSecretEmployeeSecret struct {
-	Created *time.Time `json:"Created,omitempty"`
-	Name    *string    `json:"Name,omitempty"`
-	Value   *string    `json:"Value,omitempty"`
+    Created *time.Time `json:"Created,omitempty"`
+    Name *string `json:"Name,omitempty"`
+    Value *string `json:"Value,omitempty"`
+    
 }
 
 type EmployeeSecret struct {
-	EmployeeSecret *EmployeeSecretEmployeeSecret `json:"EmployeeSecret,omitempty"`
+    EmployeeSecret *EmployeeSecretEmployeeSecret `json:"EmployeeSecret,omitempty"`
+    
 }
+

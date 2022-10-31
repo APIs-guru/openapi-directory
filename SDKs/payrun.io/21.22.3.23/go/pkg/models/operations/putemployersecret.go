@@ -1,27 +1,31 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PutEmployerSecretPathParams struct {
-	EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
-	SecretID   string `pathParam:"style=simple,explode=false,name=SecretId"`
+    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    SecretID string `pathParam:"style=simple,explode=false,name=SecretId"`
+    
 }
 
 type PutEmployerSecretHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type PutEmployerSecretRequest struct {
-	PathParams PutEmployerSecretPathParams
-	Headers    PutEmployerSecretHeaders
+    PathParams PutEmployerSecretPathParams 
+    Headers PutEmployerSecretHeaders 
+    
 }
 
 type PutEmployerSecretResponse struct {
-	ContentType    string
-	EmployerSecret *shared.EmployerSecret
-	ErrorModel     *shared.ErrorModel
-	StatusCode     int64
+    ContentType string 
+    EmployerSecret *shared.EmployerSecret 
+    ErrorModel *shared.ErrorModel 
+    StatusCode int64 
+    
 }
+

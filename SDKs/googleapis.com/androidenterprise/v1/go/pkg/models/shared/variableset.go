@@ -1,6 +1,10 @@
 package shared
 
+
+
 type VariableSet struct {
-	Placeholder *string `json:"placeholder,omitempty"`
-	UserValue   *string `json:"userValue,omitempty"`
+    Placeholder *string `json:"placeholder,omitempty"`
+    UserValue *string `json:"userValue,omitempty"`
+    
 }
+

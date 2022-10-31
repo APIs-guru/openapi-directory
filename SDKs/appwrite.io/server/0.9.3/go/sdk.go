@@ -64,6 +64,7 @@ func (s *SDK) AccountCreateRecovery(ctx context.Context, request operations.Acco
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -109,6 +110,7 @@ func (s *SDK) AccountCreateVerification(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -439,6 +441,7 @@ func (s *SDK) AccountUpdateEmail(ctx context.Context, request operations.Account
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -484,6 +487,7 @@ func (s *SDK) AccountUpdateName(ctx context.Context, request operations.AccountU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -529,6 +533,7 @@ func (s *SDK) AccountUpdatePassword(ctx context.Context, request operations.Acco
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -574,6 +579,7 @@ func (s *SDK) AccountUpdatePrefs(ctx context.Context, request operations.Account
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -619,6 +625,7 @@ func (s *SDK) AccountUpdateRecovery(ctx context.Context, request operations.Acco
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -664,6 +671,7 @@ func (s *SDK) AccountUpdateVerification(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -933,6 +941,7 @@ func (s *SDK) DatabaseCreateCollection(ctx context.Context, request operations.D
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -978,6 +987,7 @@ func (s *SDK) DatabaseCreateDocument(ctx context.Context, request operations.Dat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1243,6 +1253,7 @@ func (s *SDK) DatabaseUpdateCollection(ctx context.Context, request operations.D
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1288,6 +1299,7 @@ func (s *SDK) DatabaseUpdateDocument(ctx context.Context, request operations.Dat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1333,6 +1345,7 @@ func (s *SDK) FunctionsCreate(ctx context.Context, request operations.FunctionsC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1378,6 +1391,7 @@ func (s *SDK) FunctionsCreateExecution(ctx context.Context, request operations.F
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1423,6 +1437,7 @@ func (s *SDK) FunctionsCreateTag(ctx context.Context, request operations.Functio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1768,6 +1783,7 @@ func (s *SDK) FunctionsUpdate(ctx context.Context, request operations.FunctionsU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1813,6 +1829,7 @@ func (s *SDK) FunctionsUpdateTag(ctx context.Context, request operations.Functio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2491,6 +2508,7 @@ func (s *SDK) StorageCreateFile(ctx context.Context, request operations.StorageC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2738,6 +2756,7 @@ func (s *SDK) StorageUpdateFile(ctx context.Context, request operations.StorageU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2783,6 +2802,7 @@ func (s *SDK) TeamsCreate(ctx context.Context, request operations.TeamsCreateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2828,6 +2848,7 @@ func (s *SDK) TeamsCreateMembership(ctx context.Context, request operations.Team
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3054,6 +3075,7 @@ func (s *SDK) TeamsUpdate(ctx context.Context, request operations.TeamsUpdateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3099,6 +3121,7 @@ func (s *SDK) TeamsUpdateMembershipRoles(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3144,6 +3167,7 @@ func (s *SDK) TeamsUpdateMembershipStatus(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3189,6 +3213,7 @@ func (s *SDK) UsersCreate(ctx context.Context, request operations.UsersCreateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3521,6 +3546,7 @@ func (s *SDK) UsersUpdatePrefs(ctx context.Context, request operations.UsersUpda
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3566,6 +3592,7 @@ func (s *SDK) UsersUpdateStatus(ctx context.Context, request operations.UsersUpd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3611,6 +3638,7 @@ func (s *SDK) UsersUpdateVerification(ctx context.Context, request operations.Us
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

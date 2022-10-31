@@ -66,6 +66,7 @@ func (s *SDK) Convert(ctx context.Context, request operations.ConvertRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -261,6 +262,7 @@ func (s *SDK) Validate(ctx context.Context, request operations.ValidateRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

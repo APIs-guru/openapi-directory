@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type AccessKeyLastUsed struct {
-	LastUsedDate *time.Time `json:"lastUsedDate,omitempty"`
-	Region       *string    `json:"region,omitempty"`
-	ServiceName  *string    `json:"serviceName,omitempty"`
+    LastUsedDate *time.Time `json:"lastUsedDate,omitempty"`
+    Region *string `json:"region,omitempty"`
+    ServiceName *string `json:"serviceName,omitempty"`
+    
 }
+

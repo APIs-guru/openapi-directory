@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CommitStats struct {
-	MutationCount *string `json:"mutationCount,omitempty"`
+    MutationCount *string `json:"mutationCount,omitempty"`
+    
 }
+

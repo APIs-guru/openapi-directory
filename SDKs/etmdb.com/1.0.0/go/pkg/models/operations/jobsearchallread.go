@@ -1,14 +1,20 @@
 package operations
 
+
+
 type JobSearchallReadPathParams struct {
-	CompanyName string `pathParam:"style=simple,explode=false,name=company_name"`
+    CompanyName string `pathParam:"style=simple,explode=false,name=company_name"`
+    
 }
 
 type JobSearchallReadRequest struct {
-	PathParams JobSearchallReadPathParams
+    PathParams JobSearchallReadPathParams 
+    
 }
 
 type JobSearchallReadResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

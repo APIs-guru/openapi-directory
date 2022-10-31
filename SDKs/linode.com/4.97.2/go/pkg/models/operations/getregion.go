@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetRegionPathParams struct {
-	RegionID string `pathParam:"style=simple,explode=false,name=regionId"`
+    RegionID string `pathParam:"style=simple,explode=false,name=regionId"`
+    
 }
 
 type GetRegionRequest struct {
-	PathParams GetRegionPathParams
+    PathParams GetRegionPathParams 
+    
 }
 
 type GetRegionDefaultApplicationJSON struct {
-	Errors []shared.ErrorObject `json:"errors,omitempty"`
+    Errors []shared.ErrorObject `json:"errors,omitempty"`
+    
 }
 
 type GetRegionResponse struct {
-	ContentType                           string
-	Region                                *shared.Region
-	StatusCode                            int64
-	GetRegionDefaultApplicationJSONObject *GetRegionDefaultApplicationJSON
+    ContentType string 
+    Region *shared.Region 
+    StatusCode int64 
+    GetRegionDefaultApplicationJSONObject *GetRegionDefaultApplicationJSON 
+    
 }
+

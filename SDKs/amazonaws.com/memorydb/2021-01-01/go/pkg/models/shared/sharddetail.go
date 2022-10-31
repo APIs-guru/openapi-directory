@@ -1,12 +1,13 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ShardDetail struct {
-	Configuration        *ShardConfiguration `json:"Configuration,omitempty"`
-	Name                 *string             `json:"Name,omitempty"`
-	Size                 *string             `json:"Size,omitempty"`
-	SnapshotCreationTime *time.Time          `json:"SnapshotCreationTime,omitempty"`
+    Configuration *ShardConfiguration `json:"Configuration,omitempty"`
+    Name *string `json:"Name,omitempty"`
+    Size *string `json:"Size,omitempty"`
+    SnapshotCreationTime *time.Time `json:"SnapshotCreationTime,omitempty"`
+    
 }
+

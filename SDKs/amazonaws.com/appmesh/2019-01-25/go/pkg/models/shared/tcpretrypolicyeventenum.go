@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type TCPRetryPolicyEventEnum string
 
 const (
-	TCPRetryPolicyEventEnumConnectionError TCPRetryPolicyEventEnum = "connection-error"
+    TCPRetryPolicyEventEnumConnectionError TCPRetryPolicyEventEnum = "connection-error"
 )
+
+

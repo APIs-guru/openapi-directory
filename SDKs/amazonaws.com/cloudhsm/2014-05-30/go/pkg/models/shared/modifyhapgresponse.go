@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ModifyHapgResponse struct {
-	HapgArn *string `json:"HapgArn,omitempty"`
+    HapgArn *string `json:"HapgArn,omitempty"`
+    
 }
+

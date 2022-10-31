@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeploymentConfigurationValidationPolicy struct {
-	TimeoutInSeconds *int64 `json:"timeoutInSeconds,omitempty"`
+    TimeoutInSeconds *int64 `json:"timeoutInSeconds,omitempty"`
+    
 }
+

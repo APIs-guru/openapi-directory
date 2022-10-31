@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EndpointsResponse struct {
-	Item []EndpointResponse `json:"Item"`
+    Item []EndpointResponse `json:"Item"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AddForwardedPortSettings struct {
-	IsPublic *bool `json:"isPublic,omitempty"`
+    IsPublic *bool `json:"isPublic,omitempty"`
+    
 }
+

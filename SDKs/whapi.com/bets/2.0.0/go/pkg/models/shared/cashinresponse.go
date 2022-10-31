@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CashInResponse struct {
-	Success bool `json:"success"`
+    Success bool `json:"success"`
+    
 }
+

@@ -1,17 +1,19 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type SubscriptionApprovalNotificationNotification struct {
-	Status                SubscriptionStatusEnum `json:"status"`
-	Subscription          *HiuSubscription       `json:"subscription,omitempty"`
-	SubscriptionRequestID *string                `json:"subscriptionRequestId,omitempty"`
+    Status SubscriptionStatusEnum `json:"status"`
+    Subscription *HiuSubscription `json:"subscription,omitempty"`
+    SubscriptionRequestID *string `json:"subscriptionRequestId,omitempty"`
+    
 }
 
 type SubscriptionApprovalNotification struct {
-	Notification SubscriptionApprovalNotificationNotification `json:"notification"`
-	RequestID    string                                       `json:"requestId"`
-	Timestamp    time.Time                                    `json:"timestamp"`
+    Notification SubscriptionApprovalNotificationNotification `json:"notification"`
+    RequestID string `json:"requestId"`
+    Timestamp time.Time `json:"timestamp"`
+    
 }
+

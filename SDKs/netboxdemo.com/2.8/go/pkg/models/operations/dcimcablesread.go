@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DcimCablesReadPathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type DcimCablesReadRequest struct {
-	PathParams DcimCablesReadPathParams
+    PathParams DcimCablesReadPathParams 
+    
 }
 
 type DcimCablesReadResponse struct {
-	Cable       *shared.Cable
-	ContentType string
-	StatusCode  int64
+    Cable *shared.Cable 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

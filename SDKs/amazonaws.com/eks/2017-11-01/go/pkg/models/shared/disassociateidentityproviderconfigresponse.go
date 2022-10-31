@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DisassociateIdentityProviderConfigResponse struct {
-	Update *Update `json:"update,omitempty"`
+    Update *Update `json:"update,omitempty"`
+    
 }
+

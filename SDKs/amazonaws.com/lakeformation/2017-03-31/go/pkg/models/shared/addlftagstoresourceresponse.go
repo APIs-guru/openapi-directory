@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AddLfTagsToResourceResponse struct {
-	Failures []LfTagError `json:"Failures,omitempty"`
+    Failures []LfTagError `json:"Failures,omitempty"`
+    
 }
+

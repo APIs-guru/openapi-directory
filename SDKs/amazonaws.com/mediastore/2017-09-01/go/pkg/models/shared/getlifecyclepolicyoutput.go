@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetLifecyclePolicyOutput struct {
-	LifecyclePolicy string `json:"LifecyclePolicy"`
+    LifecyclePolicy string `json:"LifecyclePolicy"`
+    
 }
+

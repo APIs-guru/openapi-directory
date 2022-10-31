@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RemoveGitLabConnectedRepositoryRequest struct {
-	ConnectedRepository *GitLabRepositoryID `json:"connectedRepository,omitempty"`
+    ConnectedRepository *GitLabRepositoryID `json:"connectedRepository,omitempty"`
+    
 }
+

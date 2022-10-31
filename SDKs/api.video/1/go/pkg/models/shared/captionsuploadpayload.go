@@ -1,10 +1,15 @@
 package shared
 
+
+
 type CaptionsUploadPayloadFile struct {
-	Content []byte `multipartForm:"content"`
-	File    string `multipartForm:"name=file"`
+    Content []byte `multipartForm:"content"`
+    File string `multipartForm:"name=file"`
+    
 }
 
 type CaptionsUploadPayload struct {
-	File CaptionsUploadPayloadFile `multipartForm:"file"`
+    File CaptionsUploadPayloadFile `multipartForm:"file"`
+    
 }
+

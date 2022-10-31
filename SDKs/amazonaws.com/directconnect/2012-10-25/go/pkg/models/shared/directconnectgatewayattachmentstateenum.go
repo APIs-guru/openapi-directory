@@ -1,10 +1,15 @@
 package shared
 
+
+
+
 type DirectConnectGatewayAttachmentStateEnum string
 
 const (
-	DirectConnectGatewayAttachmentStateEnumAttaching DirectConnectGatewayAttachmentStateEnum = "attaching"
-	DirectConnectGatewayAttachmentStateEnumAttached  DirectConnectGatewayAttachmentStateEnum = "attached"
-	DirectConnectGatewayAttachmentStateEnumDetaching DirectConnectGatewayAttachmentStateEnum = "detaching"
-	DirectConnectGatewayAttachmentStateEnumDetached  DirectConnectGatewayAttachmentStateEnum = "detached"
+    DirectConnectGatewayAttachmentStateEnumAttaching DirectConnectGatewayAttachmentStateEnum = "attaching"
+DirectConnectGatewayAttachmentStateEnumAttached DirectConnectGatewayAttachmentStateEnum = "attached"
+DirectConnectGatewayAttachmentStateEnumDetaching DirectConnectGatewayAttachmentStateEnum = "detaching"
+DirectConnectGatewayAttachmentStateEnumDetached DirectConnectGatewayAttachmentStateEnum = "detached"
 )
+
+

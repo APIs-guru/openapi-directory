@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeStateMachineForExecutionInput struct {
-	ExecutionArn string `json:"executionArn"`
+    ExecutionArn string `json:"executionArn"`
+    
 }
+

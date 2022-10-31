@@ -1,40 +1,51 @@
 package operations
 
+
+
+
 type PostDeleteNetworkInsightsPathActionEnum string
 
 const (
-	PostDeleteNetworkInsightsPathActionEnumDeleteNetworkInsightsPath PostDeleteNetworkInsightsPathActionEnum = "DeleteNetworkInsightsPath"
+    PostDeleteNetworkInsightsPathActionEnumDeleteNetworkInsightsPath PostDeleteNetworkInsightsPathActionEnum = "DeleteNetworkInsightsPath"
 )
+
+
 
 type PostDeleteNetworkInsightsPathVersionEnum string
 
 const (
-	PostDeleteNetworkInsightsPathVersionEnumTwoThousandAndSixteen1115 PostDeleteNetworkInsightsPathVersionEnum = "2016-11-15"
+    PostDeleteNetworkInsightsPathVersionEnumTwoThousandAndSixteen1115 PostDeleteNetworkInsightsPathVersionEnum = "2016-11-15"
 )
 
+
 type PostDeleteNetworkInsightsPathQueryParams struct {
-	Action  PostDeleteNetworkInsightsPathActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	Version PostDeleteNetworkInsightsPathVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action PostDeleteNetworkInsightsPathActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    Version PostDeleteNetworkInsightsPathVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type PostDeleteNetworkInsightsPathHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type PostDeleteNetworkInsightsPathRequest struct {
-	QueryParams PostDeleteNetworkInsightsPathQueryParams
-	Headers     PostDeleteNetworkInsightsPathHeaders
-	Request     []byte `request:"mediaType=text/xml"`
+    QueryParams PostDeleteNetworkInsightsPathQueryParams 
+    Headers PostDeleteNetworkInsightsPathHeaders 
+    Request []byte `request:"mediaType=text/xml"`
+    
 }
 
 type PostDeleteNetworkInsightsPathResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PatchRuleGroup struct {
-	PatchRules []PatchRule `json:"PatchRules"`
+    PatchRules []PatchRule `json:"PatchRules"`
+    
 }
+

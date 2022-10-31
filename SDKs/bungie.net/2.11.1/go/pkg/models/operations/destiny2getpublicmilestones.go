@@ -1,7 +1,11 @@
 package operations
 
+
+
 type Destiny2GetPublicMilestonesResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

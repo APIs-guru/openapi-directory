@@ -1,42 +1,53 @@
 package operations
 
+
+
+
 type GetCreateDbParameterGroupActionEnum string
 
 const (
-	GetCreateDbParameterGroupActionEnumCreateDbParameterGroup GetCreateDbParameterGroupActionEnum = "CreateDBParameterGroup"
+    GetCreateDbParameterGroupActionEnumCreateDbParameterGroup GetCreateDbParameterGroupActionEnum = "CreateDBParameterGroup"
 )
+
+
 
 type GetCreateDbParameterGroupVersionEnum string
 
 const (
-	GetCreateDbParameterGroupVersionEnumTwoThousandAndThirteen0110 GetCreateDbParameterGroupVersionEnum = "2013-01-10"
+    GetCreateDbParameterGroupVersionEnumTwoThousandAndThirteen0110 GetCreateDbParameterGroupVersionEnum = "2013-01-10"
 )
 
+
 type GetCreateDbParameterGroupQueryParams struct {
-	Action                 GetCreateDbParameterGroupActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	DbParameterGroupFamily string                               `queryParam:"style=form,explode=true,name=DBParameterGroupFamily"`
-	DbParameterGroupName   string                               `queryParam:"style=form,explode=true,name=DBParameterGroupName"`
-	Description            string                               `queryParam:"style=form,explode=true,name=Description"`
-	Version                GetCreateDbParameterGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action GetCreateDbParameterGroupActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    DbParameterGroupFamily string `queryParam:"style=form,explode=true,name=DBParameterGroupFamily"`
+    DbParameterGroupName string `queryParam:"style=form,explode=true,name=DBParameterGroupName"`
+    Description string `queryParam:"style=form,explode=true,name=Description"`
+    Version GetCreateDbParameterGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type GetCreateDbParameterGroupHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type GetCreateDbParameterGroupRequest struct {
-	QueryParams GetCreateDbParameterGroupQueryParams
-	Headers     GetCreateDbParameterGroupHeaders
+    QueryParams GetCreateDbParameterGroupQueryParams 
+    Headers GetCreateDbParameterGroupHeaders 
+    
 }
 
 type GetCreateDbParameterGroupResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

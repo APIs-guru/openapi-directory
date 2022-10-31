@@ -73,6 +73,7 @@ func (s *SDK) AddNetworkSwitchStack(ctx context.Context, request operations.AddN
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -121,6 +122,7 @@ func (s *SDK) AssignOrganizationLicensesSeats(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -169,6 +171,7 @@ func (s *SDK) BindNetwork(ctx context.Context, request operations.BindNetworkReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -214,6 +217,7 @@ func (s *SDK) BlinkDeviceLeds(ctx context.Context, request operations.BlinkDevic
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -259,6 +263,7 @@ func (s *SDK) CheckinNetworkSmDevices(ctx context.Context, request operations.Ch
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -304,6 +309,7 @@ func (s *SDK) ClaimIntoOrganization(ctx context.Context, request operations.Clai
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -352,6 +358,7 @@ func (s *SDK) ClaimNetworkDevices(ctx context.Context, request operations.ClaimN
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -391,6 +398,7 @@ func (s *SDK) CloneOrganization(ctx context.Context, request operations.CloneOrg
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -439,6 +447,7 @@ func (s *SDK) CloneOrganizationSwitchDevices(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -487,6 +496,7 @@ func (s *SDK) CombineOrganizationNetworks(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -535,6 +545,7 @@ func (s *SDK) CreateDeviceSwitchRoutingInterface(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -583,6 +594,7 @@ func (s *SDK) CreateDeviceSwitchRoutingStaticRoute(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -631,6 +643,7 @@ func (s *SDK) CreateNetworkApplianceStaticRoute(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -679,6 +692,7 @@ func (s *SDK) CreateNetworkApplianceTrafficShapingCustomPerformanceClass(ctx con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -727,6 +741,7 @@ func (s *SDK) CreateNetworkApplianceVlan(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -775,6 +790,7 @@ func (s *SDK) CreateNetworkCameraQualityRetentionProfile(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -823,6 +839,7 @@ func (s *SDK) CreateNetworkCameraWirelessProfile(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -871,6 +888,7 @@ func (s *SDK) CreateNetworkFirmwareUpgradesRollback(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -919,6 +937,7 @@ func (s *SDK) CreateNetworkFloorPlan(ctx context.Context, request operations.Cre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -967,6 +986,7 @@ func (s *SDK) CreateNetworkGroupPolicy(ctx context.Context, request operations.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1015,6 +1035,7 @@ func (s *SDK) CreateNetworkMerakiAuthUser(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1063,6 +1084,7 @@ func (s *SDK) CreateNetworkMqttBroker(ctx context.Context, request operations.Cr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1108,6 +1130,7 @@ func (s *SDK) CreateNetworkPiiRequest(ctx context.Context, request operations.Cr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1156,6 +1179,7 @@ func (s *SDK) CreateNetworkSmBypassActivationLockAttempt(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1201,6 +1225,7 @@ func (s *SDK) CreateNetworkSmTargetGroup(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1249,6 +1274,7 @@ func (s *SDK) CreateNetworkSwitchAccessPolicy(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1294,6 +1320,7 @@ func (s *SDK) CreateNetworkSwitchLinkAggregation(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1342,6 +1369,7 @@ func (s *SDK) CreateNetworkSwitchPortSchedule(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1390,6 +1418,7 @@ func (s *SDK) CreateNetworkSwitchQosRule(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1438,6 +1467,7 @@ func (s *SDK) CreateNetworkSwitchRoutingMulticastRendezvousPoint(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1486,6 +1516,7 @@ func (s *SDK) CreateNetworkSwitchStack(ctx context.Context, request operations.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1534,6 +1565,7 @@ func (s *SDK) CreateNetworkSwitchStackRoutingInterface(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1582,6 +1614,7 @@ func (s *SDK) CreateNetworkSwitchStackRoutingStaticRoute(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1630,6 +1663,7 @@ func (s *SDK) CreateNetworkWebhooksHTTPServer(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1678,6 +1712,7 @@ func (s *SDK) CreateNetworkWebhooksWebhookTest(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1726,6 +1761,7 @@ func (s *SDK) CreateNetworkWirelessRfProfile(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1774,6 +1810,7 @@ func (s *SDK) CreateNetworkWirelessSsidIdentityPsk(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1822,6 +1859,7 @@ func (s *SDK) CreateOrganization(ctx context.Context, request operations.CreateO
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1870,6 +1908,7 @@ func (s *SDK) CreateOrganizationActionBatch(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1918,6 +1957,7 @@ func (s *SDK) CreateOrganizationAdaptivePolicyACL(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1966,6 +2006,7 @@ func (s *SDK) CreateOrganizationAdmin(ctx context.Context, request operations.Cr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2014,6 +2055,7 @@ func (s *SDK) CreateOrganizationBrandingPolicy(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2062,6 +2104,7 @@ func (s *SDK) CreateOrganizationConfigTemplate(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2110,6 +2153,7 @@ func (s *SDK) CreateOrganizationInsightMonitoredMediaServer(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2158,6 +2202,7 @@ func (s *SDK) CreateOrganizationNetwork(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2206,6 +2251,7 @@ func (s *SDK) CreateOrganizationSamlIdp(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2254,6 +2300,7 @@ func (s *SDK) CreateOrganizationSamlRole(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2302,6 +2349,7 @@ func (s *SDK) CycleDeviceSwitchPorts(ctx context.Context, request operations.Cyc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3397,6 +3445,7 @@ func (s *SDK) GenerateDeviceCameraSnapshot(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13950,6 +13999,7 @@ func (s *SDK) LockNetworkSmDevices(ctx context.Context, request operations.LockN
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13998,6 +14048,7 @@ func (s *SDK) ModifyNetworkSmDevicesTags(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14046,6 +14097,7 @@ func (s *SDK) MoveNetworkSmDevices(ctx context.Context, request operations.MoveN
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14094,6 +14146,7 @@ func (s *SDK) MoveOrganizationLicenses(ctx context.Context, request operations.M
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14142,6 +14195,7 @@ func (s *SDK) MoveOrganizationLicensesSeats(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14190,6 +14244,7 @@ func (s *SDK) ProvisionNetworkClients(ctx context.Context, request operations.Pr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14307,6 +14362,7 @@ func (s *SDK) RemoveNetworkDevices(ctx context.Context, request operations.Remov
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14346,6 +14402,7 @@ func (s *SDK) RemoveNetworkSwitchStack(ctx context.Context, request operations.R
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14394,6 +14451,7 @@ func (s *SDK) RenewOrganizationLicensesSeats(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14595,6 +14653,7 @@ func (s *SDK) UpdateDevice(ctx context.Context, request operations.UpdateDeviceR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14640,6 +14699,7 @@ func (s *SDK) UpdateDeviceCameraQualityAndRetention(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14685,6 +14745,7 @@ func (s *SDK) UpdateDeviceCameraSense(ctx context.Context, request operations.Up
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14730,6 +14791,7 @@ func (s *SDK) UpdateDeviceCameraVideoSettings(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14778,6 +14840,7 @@ func (s *SDK) UpdateDeviceCameraWirelessProfiles(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14823,6 +14886,7 @@ func (s *SDK) UpdateDeviceCellularGatewayLan(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14868,6 +14932,7 @@ func (s *SDK) UpdateDeviceCellularGatewayPortForwardingRules(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14913,6 +14978,7 @@ func (s *SDK) UpdateDeviceManagementInterface(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14958,6 +15024,7 @@ func (s *SDK) UpdateDeviceSwitchPort(ctx context.Context, request operations.Upd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15003,6 +15070,7 @@ func (s *SDK) UpdateDeviceSwitchRoutingInterface(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15048,6 +15116,7 @@ func (s *SDK) UpdateDeviceSwitchRoutingInterfaceDhcp(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15093,6 +15162,7 @@ func (s *SDK) UpdateDeviceSwitchRoutingStaticRoute(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15141,6 +15211,7 @@ func (s *SDK) UpdateDeviceSwitchWarmSpare(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15186,6 +15257,7 @@ func (s *SDK) UpdateDeviceWirelessBluetoothSettings(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15231,6 +15303,7 @@ func (s *SDK) UpdateDeviceWirelessRadioSettings(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15276,6 +15349,7 @@ func (s *SDK) UpdateNetwork(ctx context.Context, request operations.UpdateNetwor
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15321,6 +15395,7 @@ func (s *SDK) UpdateNetworkAlertsSettings(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15366,6 +15441,7 @@ func (s *SDK) UpdateNetworkApplianceConnectivityMonitoringDestinations(ctx conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15411,6 +15487,7 @@ func (s *SDK) UpdateNetworkApplianceContentFiltering(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15456,6 +15533,7 @@ func (s *SDK) UpdateNetworkApplianceFirewallCellularFirewallRules(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15504,6 +15582,7 @@ func (s *SDK) UpdateNetworkApplianceFirewallFirewalledService(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15549,6 +15628,7 @@ func (s *SDK) UpdateNetworkApplianceFirewallInboundFirewallRules(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15594,6 +15674,7 @@ func (s *SDK) UpdateNetworkApplianceFirewallL3FirewallRules(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15639,6 +15720,7 @@ func (s *SDK) UpdateNetworkApplianceFirewallL7FirewallRules(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15687,6 +15769,7 @@ func (s *SDK) UpdateNetworkApplianceFirewallOneToManyNatRules(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15735,6 +15818,7 @@ func (s *SDK) UpdateNetworkApplianceFirewallOneToOneNatRules(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15783,6 +15867,7 @@ func (s *SDK) UpdateNetworkApplianceFirewallPortForwardingRules(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15828,6 +15913,7 @@ func (s *SDK) UpdateNetworkAppliancePort(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15873,6 +15959,7 @@ func (s *SDK) UpdateNetworkApplianceSecurityIntrusion(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15921,6 +16008,7 @@ func (s *SDK) UpdateNetworkApplianceSecurityMalware(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -15966,6 +16054,7 @@ func (s *SDK) UpdateNetworkApplianceSingleLan(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16011,6 +16100,7 @@ func (s *SDK) UpdateNetworkApplianceStaticRoute(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16056,6 +16146,7 @@ func (s *SDK) UpdateNetworkApplianceTrafficShaping(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16101,6 +16192,7 @@ func (s *SDK) UpdateNetworkApplianceTrafficShapingCustomPerformanceClass(ctx con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16146,6 +16238,7 @@ func (s *SDK) UpdateNetworkApplianceTrafficShapingRules(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16191,6 +16284,7 @@ func (s *SDK) UpdateNetworkApplianceTrafficShapingUplinkBandwidth(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16236,6 +16330,7 @@ func (s *SDK) UpdateNetworkApplianceTrafficShapingUplinkSelection(ctx context.Co
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16281,6 +16376,7 @@ func (s *SDK) UpdateNetworkApplianceVlan(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16326,6 +16422,7 @@ func (s *SDK) UpdateNetworkApplianceVlansSettings(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16374,6 +16471,7 @@ func (s *SDK) UpdateNetworkApplianceVpnBgp(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16422,6 +16520,7 @@ func (s *SDK) UpdateNetworkApplianceVpnSiteToSiteVpn(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16470,6 +16569,7 @@ func (s *SDK) UpdateNetworkApplianceWarmSpare(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16515,6 +16615,7 @@ func (s *SDK) UpdateNetworkCameraQualityRetentionProfile(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16560,6 +16661,7 @@ func (s *SDK) UpdateNetworkCameraWirelessProfile(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16605,6 +16707,7 @@ func (s *SDK) UpdateNetworkCellularGatewayConnectivityMonitoringDestinations(ctx
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16650,6 +16753,7 @@ func (s *SDK) UpdateNetworkCellularGatewayDhcp(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16695,6 +16799,7 @@ func (s *SDK) UpdateNetworkCellularGatewaySubnetPool(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16740,6 +16845,7 @@ func (s *SDK) UpdateNetworkCellularGatewayUplink(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16788,6 +16894,7 @@ func (s *SDK) UpdateNetworkClientPolicy(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16836,6 +16943,7 @@ func (s *SDK) UpdateNetworkClientSplashAuthorizationStatus(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16881,6 +16989,7 @@ func (s *SDK) UpdateNetworkFirmwareUpgrades(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16926,6 +17035,7 @@ func (s *SDK) UpdateNetworkFloorPlan(ctx context.Context, request operations.Upd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16971,6 +17081,7 @@ func (s *SDK) UpdateNetworkGroupPolicy(ctx context.Context, request operations.U
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17016,6 +17127,7 @@ func (s *SDK) UpdateNetworkMerakiAuthUser(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17061,6 +17173,7 @@ func (s *SDK) UpdateNetworkMqttBroker(ctx context.Context, request operations.Up
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17106,6 +17219,7 @@ func (s *SDK) UpdateNetworkNetflow(ctx context.Context, request operations.Updat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17151,6 +17265,7 @@ func (s *SDK) UpdateNetworkSettings(ctx context.Context, request operations.Upda
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17199,6 +17314,7 @@ func (s *SDK) UpdateNetworkSmDevicesFields(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17244,6 +17360,7 @@ func (s *SDK) UpdateNetworkSmTargetGroup(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17289,6 +17406,7 @@ func (s *SDK) UpdateNetworkSnmp(ctx context.Context, request operations.UpdateNe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17337,6 +17455,7 @@ func (s *SDK) UpdateNetworkSwitchAccessControlLists(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17382,6 +17501,7 @@ func (s *SDK) UpdateNetworkSwitchAccessPolicy(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17427,6 +17547,7 @@ func (s *SDK) UpdateNetworkSwitchAlternateManagementInterface(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17472,6 +17593,7 @@ func (s *SDK) UpdateNetworkSwitchDhcpServerPolicy(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17520,6 +17642,7 @@ func (s *SDK) UpdateNetworkSwitchDscpToCosMappings(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17565,6 +17688,7 @@ func (s *SDK) UpdateNetworkSwitchLinkAggregation(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17610,6 +17734,7 @@ func (s *SDK) UpdateNetworkSwitchMtu(ctx context.Context, request operations.Upd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17655,6 +17780,7 @@ func (s *SDK) UpdateNetworkSwitchPortSchedule(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17700,6 +17826,7 @@ func (s *SDK) UpdateNetworkSwitchQosRule(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17748,6 +17875,7 @@ func (s *SDK) UpdateNetworkSwitchQosRulesOrder(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17793,6 +17921,7 @@ func (s *SDK) UpdateNetworkSwitchRoutingMulticast(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17841,6 +17970,7 @@ func (s *SDK) UpdateNetworkSwitchRoutingMulticastRendezvousPoint(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17886,6 +18016,7 @@ func (s *SDK) UpdateNetworkSwitchRoutingOspf(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17931,6 +18062,7 @@ func (s *SDK) UpdateNetworkSwitchSettings(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -17976,6 +18108,7 @@ func (s *SDK) UpdateNetworkSwitchStackRoutingInterface(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18021,6 +18154,7 @@ func (s *SDK) UpdateNetworkSwitchStackRoutingInterfaceDhcp(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18066,6 +18200,7 @@ func (s *SDK) UpdateNetworkSwitchStackRoutingStaticRoute(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18111,6 +18246,7 @@ func (s *SDK) UpdateNetworkSwitchStormControl(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18156,6 +18292,7 @@ func (s *SDK) UpdateNetworkSwitchStp(ctx context.Context, request operations.Upd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18204,6 +18341,7 @@ func (s *SDK) UpdateNetworkSyslogServers(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18249,6 +18387,7 @@ func (s *SDK) UpdateNetworkTrafficAnalysis(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18294,6 +18433,7 @@ func (s *SDK) UpdateNetworkWebhooksHTTPServer(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18339,6 +18479,7 @@ func (s *SDK) UpdateNetworkWirelessAlternateManagementInterface(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18384,6 +18525,7 @@ func (s *SDK) UpdateNetworkWirelessBilling(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18429,6 +18571,7 @@ func (s *SDK) UpdateNetworkWirelessBluetoothSettings(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18474,6 +18617,7 @@ func (s *SDK) UpdateNetworkWirelessRfProfile(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18519,6 +18663,7 @@ func (s *SDK) UpdateNetworkWirelessSettings(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18564,6 +18709,7 @@ func (s *SDK) UpdateNetworkWirelessSsid(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18609,6 +18755,7 @@ func (s *SDK) UpdateNetworkWirelessSsidBonjourForwarding(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18654,6 +18801,7 @@ func (s *SDK) UpdateNetworkWirelessSsidDeviceTypeGroupPolicies(ctx context.Conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18699,6 +18847,7 @@ func (s *SDK) UpdateNetworkWirelessSsidEapOverride(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18744,6 +18893,7 @@ func (s *SDK) UpdateNetworkWirelessSsidFirewallL3FirewallRules(ctx context.Conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18789,6 +18939,7 @@ func (s *SDK) UpdateNetworkWirelessSsidFirewallL7FirewallRules(ctx context.Conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18834,6 +18985,7 @@ func (s *SDK) UpdateNetworkWirelessSsidHotspot20(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18879,6 +19031,7 @@ func (s *SDK) UpdateNetworkWirelessSsidIdentityPsk(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18924,6 +19077,7 @@ func (s *SDK) UpdateNetworkWirelessSsidSchedules(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -18969,6 +19123,7 @@ func (s *SDK) UpdateNetworkWirelessSsidSplashSettings(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19014,6 +19169,7 @@ func (s *SDK) UpdateNetworkWirelessSsidTrafficShapingRules(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19059,6 +19215,7 @@ func (s *SDK) UpdateNetworkWirelessSsidVpn(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19104,6 +19261,7 @@ func (s *SDK) UpdateOrganization(ctx context.Context, request operations.UpdateO
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19149,6 +19307,7 @@ func (s *SDK) UpdateOrganizationActionBatch(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19194,6 +19353,7 @@ func (s *SDK) UpdateOrganizationAdaptivePolicyACL(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19239,6 +19399,7 @@ func (s *SDK) UpdateOrganizationAdaptivePolicySettings(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19284,6 +19445,7 @@ func (s *SDK) UpdateOrganizationAdmin(ctx context.Context, request operations.Up
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19332,6 +19494,7 @@ func (s *SDK) UpdateOrganizationApplianceSecurityIntrusion(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19380,6 +19543,7 @@ func (s *SDK) UpdateOrganizationApplianceVpnThirdPartyVpnPeers(ctx context.Conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19425,6 +19589,7 @@ func (s *SDK) UpdateOrganizationApplianceVpnVpnFirewallRules(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19473,6 +19638,7 @@ func (s *SDK) UpdateOrganizationBrandingPoliciesPriorities(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19518,6 +19684,7 @@ func (s *SDK) UpdateOrganizationBrandingPolicy(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19563,6 +19730,7 @@ func (s *SDK) UpdateOrganizationCameraOnboardingStatuses(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19608,6 +19776,7 @@ func (s *SDK) UpdateOrganizationConfigTemplate(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19653,6 +19822,7 @@ func (s *SDK) UpdateOrganizationConfigTemplateSwitchProfilePort(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19698,6 +19868,7 @@ func (s *SDK) UpdateOrganizationInsightMonitoredMediaServer(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19743,6 +19914,7 @@ func (s *SDK) UpdateOrganizationLicense(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19788,6 +19960,7 @@ func (s *SDK) UpdateOrganizationLoginSecurity(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19833,6 +20006,7 @@ func (s *SDK) UpdateOrganizationSaml(ctx context.Context, request operations.Upd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19878,6 +20052,7 @@ func (s *SDK) UpdateOrganizationSamlIdp(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19923,6 +20098,7 @@ func (s *SDK) UpdateOrganizationSamlRole(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19968,6 +20144,7 @@ func (s *SDK) UpdateOrganizationSnmp(ctx context.Context, request operations.Upd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -20013,6 +20190,7 @@ func (s *SDK) WipeNetworkSmDevices(ctx context.Context, request operations.WipeN
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

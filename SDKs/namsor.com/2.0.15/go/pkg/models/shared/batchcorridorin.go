@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchCorridorIn struct {
-	CorridorFromTo []CorridorIn `json:"corridorFromTo,omitempty"`
+    CorridorFromTo []CorridorIn `json:"corridorFromTo,omitempty"`
+    
 }
+

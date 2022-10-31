@@ -65,6 +65,7 @@ func (s *SDK) Connect(ctx context.Context, request operations.ConnectRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -111,6 +112,7 @@ func (s *SDK) Connections(ctx context.Context, request operations.ConnectionsReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -156,6 +158,7 @@ func (s *SDK) Disconnect(ctx context.Context, request operations.DisconnectReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -202,6 +205,7 @@ func (s *SDK) Status(ctx context.Context, request operations.StatusRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

@@ -1,15 +1,21 @@
 package operations
 
+
+
 type JobsDeleteJobPathParams struct {
-	JobID int32 `pathParam:"style=simple,explode=false,name=jobID"`
+    JobID int32 `pathParam:"style=simple,explode=false,name=jobID"`
+    
 }
 
 type JobsDeleteJobRequest struct {
-	PathParams JobsDeleteJobPathParams
+    PathParams JobsDeleteJobPathParams 
+    
 }
 
 type JobsDeleteJobResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,11 +1,12 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ListDestinationDefinitionsResponse struct {
-	ContentType                   string
-	DestinationDefinitionReadList *shared.DestinationDefinitionReadList
-	StatusCode                    int64
+    ContentType string 
+    DestinationDefinitionReadList *shared.DestinationDefinitionReadList 
+    StatusCode int64 
+    
 }
+

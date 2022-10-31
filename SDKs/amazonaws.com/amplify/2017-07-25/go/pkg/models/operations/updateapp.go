@@ -1,75 +1,83 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type UpdateAppPathParams struct {
-	AppID string `pathParam:"style=simple,explode=false,name=appId"`
+    AppID string `pathParam:"style=simple,explode=false,name=appId"`
+    
 }
 
 type UpdateAppHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type UpdateAppRequestBodyAutoBranchCreationConfig struct {
-	BasicAuthCredentials       *string           `json:"basicAuthCredentials,omitempty"`
-	BuildSpec                  *string           `json:"buildSpec,omitempty"`
-	EnableAutoBuild            *bool             `json:"enableAutoBuild,omitempty"`
-	EnableBasicAuth            *bool             `json:"enableBasicAuth,omitempty"`
-	EnablePerformanceMode      *bool             `json:"enablePerformanceMode,omitempty"`
-	EnablePullRequestPreview   *bool             `json:"enablePullRequestPreview,omitempty"`
-	EnvironmentVariables       map[string]string `json:"environmentVariables,omitempty"`
-	Framework                  *string           `json:"framework,omitempty"`
-	PullRequestEnvironmentName *string           `json:"pullRequestEnvironmentName,omitempty"`
-	Stage                      *shared.StageEnum `json:"stage,omitempty"`
+    BasicAuthCredentials *string `json:"basicAuthCredentials,omitempty"`
+    BuildSpec *string `json:"buildSpec,omitempty"`
+    EnableAutoBuild *bool `json:"enableAutoBuild,omitempty"`
+    EnableBasicAuth *bool `json:"enableBasicAuth,omitempty"`
+    EnablePerformanceMode *bool `json:"enablePerformanceMode,omitempty"`
+    EnablePullRequestPreview *bool `json:"enablePullRequestPreview,omitempty"`
+    EnvironmentVariables map[string]string `json:"environmentVariables,omitempty"`
+    Framework *string `json:"framework,omitempty"`
+    PullRequestEnvironmentName *string `json:"pullRequestEnvironmentName,omitempty"`
+    Stage *shared.StageEnum `json:"stage,omitempty"`
+    
 }
+
 
 type UpdateAppRequestBodyPlatformEnum string
 
 const (
-	UpdateAppRequestBodyPlatformEnumWeb UpdateAppRequestBodyPlatformEnum = "WEB"
+    UpdateAppRequestBodyPlatformEnumWeb UpdateAppRequestBodyPlatformEnum = "WEB"
 )
 
+
 type UpdateAppRequestBody struct {
-	AccessToken                *string                                       `json:"accessToken,omitempty"`
-	AutoBranchCreationConfig   *UpdateAppRequestBodyAutoBranchCreationConfig `json:"autoBranchCreationConfig,omitempty"`
-	AutoBranchCreationPatterns []string                                      `json:"autoBranchCreationPatterns,omitempty"`
-	BasicAuthCredentials       *string                                       `json:"basicAuthCredentials,omitempty"`
-	BuildSpec                  *string                                       `json:"buildSpec,omitempty"`
-	CustomHeaders              *string                                       `json:"customHeaders,omitempty"`
-	CustomRules                []shared.CustomRule                           `json:"customRules,omitempty"`
-	Description                *string                                       `json:"description,omitempty"`
-	EnableAutoBranchCreation   *bool                                         `json:"enableAutoBranchCreation,omitempty"`
-	EnableBasicAuth            *bool                                         `json:"enableBasicAuth,omitempty"`
-	EnableBranchAutoBuild      *bool                                         `json:"enableBranchAutoBuild,omitempty"`
-	EnableBranchAutoDeletion   *bool                                         `json:"enableBranchAutoDeletion,omitempty"`
-	EnvironmentVariables       map[string]string                             `json:"environmentVariables,omitempty"`
-	IamServiceRoleArn          *string                                       `json:"iamServiceRoleArn,omitempty"`
-	Name                       *string                                       `json:"name,omitempty"`
-	OauthToken                 *string                                       `json:"oauthToken,omitempty"`
-	Platform                   *UpdateAppRequestBodyPlatformEnum             `json:"platform,omitempty"`
-	Repository                 *string                                       `json:"repository,omitempty"`
+    AccessToken *string `json:"accessToken,omitempty"`
+    AutoBranchCreationConfig *UpdateAppRequestBodyAutoBranchCreationConfig `json:"autoBranchCreationConfig,omitempty"`
+    AutoBranchCreationPatterns []string `json:"autoBranchCreationPatterns,omitempty"`
+    BasicAuthCredentials *string `json:"basicAuthCredentials,omitempty"`
+    BuildSpec *string `json:"buildSpec,omitempty"`
+    CustomHeaders *string `json:"customHeaders,omitempty"`
+    CustomRules []shared.CustomRule `json:"customRules,omitempty"`
+    Description *string `json:"description,omitempty"`
+    EnableAutoBranchCreation *bool `json:"enableAutoBranchCreation,omitempty"`
+    EnableBasicAuth *bool `json:"enableBasicAuth,omitempty"`
+    EnableBranchAutoBuild *bool `json:"enableBranchAutoBuild,omitempty"`
+    EnableBranchAutoDeletion *bool `json:"enableBranchAutoDeletion,omitempty"`
+    EnvironmentVariables map[string]string `json:"environmentVariables,omitempty"`
+    IamServiceRoleArn *string `json:"iamServiceRoleArn,omitempty"`
+    Name *string `json:"name,omitempty"`
+    OauthToken *string `json:"oauthToken,omitempty"`
+    Platform *UpdateAppRequestBodyPlatformEnum `json:"platform,omitempty"`
+    Repository *string `json:"repository,omitempty"`
+    
 }
 
 type UpdateAppRequest struct {
-	PathParams UpdateAppPathParams
-	Headers    UpdateAppHeaders
-	Request    UpdateAppRequestBody `request:"mediaType=application/json"`
+    PathParams UpdateAppPathParams 
+    Headers UpdateAppHeaders 
+    Request UpdateAppRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type UpdateAppResponse struct {
-	BadRequestException      *interface{}
-	ContentType              string
-	InternalFailureException *interface{}
-	NotFoundException        *interface{}
-	StatusCode               int64
-	UnauthorizedException    *interface{}
-	UpdateAppResult          *shared.UpdateAppResult
+    BadRequestException *interface{} 
+    ContentType string 
+    InternalFailureException *interface{} 
+    NotFoundException *interface{} 
+    StatusCode int64 
+    UnauthorizedException *interface{} 
+    UpdateAppResult *shared.UpdateAppResult 
+    
 }
+

@@ -10,7 +10,7 @@ class CreateCheckTruoraPriorityEnum(str, Enum):
 
 @dataclass
 class CreateCheckHeaders:
-    truora_priority: Optional[CreateCheckTruoraPriorityEnum] = field(default=None, metadata={'header': { 'field_name': 'Truora-Priority' }})
+    truora_priority: Optional[CreateCheckTruoraPriorityEnum] = field(default=None, metadata={'header': { 'field_name': 'Truora-Priority', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

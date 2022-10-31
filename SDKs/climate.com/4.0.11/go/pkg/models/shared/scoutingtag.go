@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ScoutingTag struct {
-	Code string `json:"code"`
+    Code string `json:"code"`
+    
 }
+

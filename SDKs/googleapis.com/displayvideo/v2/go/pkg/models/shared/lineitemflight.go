@@ -1,14 +1,20 @@
 package shared
 
+
+
+
 type LineItemFlightFlightDateTypeEnum string
 
 const (
-	LineItemFlightFlightDateTypeEnumLineItemFlightDateTypeUnspecified LineItemFlightFlightDateTypeEnum = "LINE_ITEM_FLIGHT_DATE_TYPE_UNSPECIFIED"
-	LineItemFlightFlightDateTypeEnumLineItemFlightDateTypeInherited   LineItemFlightFlightDateTypeEnum = "LINE_ITEM_FLIGHT_DATE_TYPE_INHERITED"
-	LineItemFlightFlightDateTypeEnumLineItemFlightDateTypeCustom      LineItemFlightFlightDateTypeEnum = "LINE_ITEM_FLIGHT_DATE_TYPE_CUSTOM"
+    LineItemFlightFlightDateTypeEnumLineItemFlightDateTypeUnspecified LineItemFlightFlightDateTypeEnum = "LINE_ITEM_FLIGHT_DATE_TYPE_UNSPECIFIED"
+LineItemFlightFlightDateTypeEnumLineItemFlightDateTypeInherited LineItemFlightFlightDateTypeEnum = "LINE_ITEM_FLIGHT_DATE_TYPE_INHERITED"
+LineItemFlightFlightDateTypeEnumLineItemFlightDateTypeCustom LineItemFlightFlightDateTypeEnum = "LINE_ITEM_FLIGHT_DATE_TYPE_CUSTOM"
 )
 
+
 type LineItemFlight struct {
-	DateRange      *DateRange                        `json:"dateRange,omitempty"`
-	FlightDateType *LineItemFlightFlightDateTypeEnum `json:"flightDateType,omitempty"`
+    DateRange *DateRange `json:"dateRange,omitempty"`
+    FlightDateType *LineItemFlightFlightDateTypeEnum `json:"flightDateType,omitempty"`
+    
 }
+

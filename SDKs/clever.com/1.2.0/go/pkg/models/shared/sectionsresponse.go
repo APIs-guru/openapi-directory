@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SectionsResponse struct {
-	Data []SectionResponse `json:"data,omitempty"`
+    Data []SectionResponse `json:"data,omitempty"`
+    
 }
+

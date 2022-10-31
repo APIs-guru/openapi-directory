@@ -19,23 +19,27 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def api_resource_coverage_one(self, request: operations.APIResourceCoverageOneRequest) -> operations.APIResourceCoverageOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/connector/apis/{id}/resources/{resource_id}/coverage", request.path_params)
-        
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url)
+        headers = utils.get_headers(request.headers)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.APIResourceCoverageOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetAPIResourceCoverageResponse])
@@ -60,20 +64,21 @@ class SDK:
         return res
 
     
-    
     def api_resources_one(self, request: operations.APIResourcesOneRequest) -> operations.APIResourcesOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/connector/apis/{id}/resources/{resource_id}", request.path_params)
-        
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url)
+        headers = utils.get_headers(request.headers)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.APIResourcesOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetAPIResourceResponse])
@@ -98,21 +103,23 @@ class SDK:
         return res
 
     
-    
     def apis_all(self, request: operations.ApisAllRequest) -> operations.ApisAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/connector/apis"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApisAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetApisResponse])
@@ -137,20 +144,21 @@ class SDK:
         return res
 
     
-    
     def apis_one(self, request: operations.ApisOneRequest) -> operations.ApisOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/connector/apis/{id}", request.path_params)
-        
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url)
+        headers = utils.get_headers(request.headers)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ApisOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetAPIResponse])
@@ -175,20 +183,21 @@ class SDK:
         return res
 
     
-    
     def connector_docs_one(self, request: operations.ConnectorDocsOneRequest) -> operations.ConnectorDocsOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/connector/connectors/{id}/docs/{doc_id}", request.path_params)
-        
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url)
+        headers = utils.get_headers(request.headers)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ConnectorDocsOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "text/markdown"):
                 res.connector_docs_one_200_text_markdown_markdown_string = r.content
@@ -212,20 +221,21 @@ class SDK:
         return res
 
     
-    
     def connector_resources_one(self, request: operations.ConnectorResourcesOneRequest) -> operations.ConnectorResourcesOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/connector/connectors/{id}/resources/{resource_id}", request.path_params)
-        
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url)
+        headers = utils.get_headers(request.headers)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ConnectorResourcesOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetConnectorResourceResponse])
@@ -250,21 +260,23 @@ class SDK:
         return res
 
     
-    
     def connectors_all(self, request: operations.ConnectorsAllRequest) -> operations.ConnectorsAllResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/connector/connectors"
-        
-        query_params = utils.get_query_params(request.query_params)
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url, params=query_params)
+        headers = utils.get_headers(request.headers)
+
+        query_params = utils.get_query_params(request.query_params)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, params=query_params, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ConnectorsAllResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetConnectorsResponse])
@@ -289,20 +301,21 @@ class SDK:
         return res
 
     
-    
     def connectors_one(self, request: operations.ConnectorsOneRequest) -> operations.ConnectorsOneResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/connector/connectors/{id}", request.path_params)
-        
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url)
+        headers = utils.get_headers(request.headers)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ConnectorsOneResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetConnectorResponse])

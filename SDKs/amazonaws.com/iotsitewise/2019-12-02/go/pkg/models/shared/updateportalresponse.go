@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdatePortalResponse struct {
-	PortalStatus PortalStatus `json:"portalStatus"`
+    PortalStatus PortalStatus `json:"portalStatus"`
+    
 }
+

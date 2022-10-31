@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetNetworkProfileRequest struct {
-	Arn string `json:"arn"`
+    Arn string `json:"arn"`
+    
 }
+

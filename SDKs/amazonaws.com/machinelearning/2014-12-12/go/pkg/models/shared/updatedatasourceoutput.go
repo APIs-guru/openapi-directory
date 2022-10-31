@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateDataSourceOutput struct {
-	DataSourceID *string `json:"DataSourceId,omitempty"`
+    DataSourceID *string `json:"DataSourceId,omitempty"`
+    
 }
+

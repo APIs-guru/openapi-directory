@@ -1,23 +1,27 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RemoveAccountOrganizationPathParams struct {
-	OrgID string `pathParam:"style=simple,explode=false,name=org_id"`
+    OrgID string `pathParam:"style=simple,explode=false,name=org_id"`
+    
 }
 
 type RemoveAccountOrganizationSecurity struct {
-	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    
 }
 
 type RemoveAccountOrganizationRequest struct {
-	PathParams RemoveAccountOrganizationPathParams
-	Security   RemoveAccountOrganizationSecurity
+    PathParams RemoveAccountOrganizationPathParams 
+    Security RemoveAccountOrganizationSecurity 
+    
 }
 
 type RemoveAccountOrganizationResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

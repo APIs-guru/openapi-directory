@@ -1,5 +1,9 @@
 package shared
 
+
+
 type KinesisFirehoseOutput struct {
-	ResourceArn string `json:"ResourceARN"`
+    ResourceArn string `json:"ResourceARN"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StopStackRequest struct {
-	StackID string `json:"StackId"`
+    StackID string `json:"StackId"`
+    
 }
+

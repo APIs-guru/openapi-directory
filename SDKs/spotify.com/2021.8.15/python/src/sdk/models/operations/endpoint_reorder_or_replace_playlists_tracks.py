@@ -16,8 +16,8 @@ class EndpointReorderOrReplacePlaylistsTracksQueryParams:
 
 @dataclass
 class EndpointReorderOrReplacePlaylistsTracksHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
-    content_type: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-Type' }})
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    content_type: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json

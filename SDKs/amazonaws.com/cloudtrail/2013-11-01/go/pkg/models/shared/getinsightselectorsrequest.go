@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetInsightSelectorsRequest struct {
-	TrailName string `json:"TrailName"`
+    TrailName string `json:"TrailName"`
+    
 }
+

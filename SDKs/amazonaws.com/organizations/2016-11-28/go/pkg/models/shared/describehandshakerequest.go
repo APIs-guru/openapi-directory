@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeHandshakeRequest struct {
-	HandshakeID string `json:"HandshakeId"`
+    HandshakeID string `json:"HandshakeId"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DataMaskingStatistics struct {
-	DataMaskingApplied *bool `json:"dataMaskingApplied,omitempty"`
+    DataMaskingApplied *bool `json:"dataMaskingApplied,omitempty"`
+    
 }
+

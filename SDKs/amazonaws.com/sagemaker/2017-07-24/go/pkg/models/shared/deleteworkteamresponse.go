@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteWorkteamResponse struct {
-	Success bool `json:"Success"`
+    Success bool `json:"Success"`
+    
 }
+

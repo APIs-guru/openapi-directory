@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class DoNotDisturbHeaders:
-    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': True }})
+    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

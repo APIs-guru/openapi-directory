@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-	"time"
-)
+"time"
+"openapi/pkg/models/shared")
 
 type GetAPIPostsSpeakerAndDeputiesForDatePathParams struct {
-	ForDate time.Time `pathParam:"style=simple,explode=false,name=forDate"`
+    ForDate time.Time `pathParam:"style=simple,explode=false,name=forDate"`
+    
 }
 
 type GetAPIPostsSpeakerAndDeputiesForDateRequest struct {
-	PathParams GetAPIPostsSpeakerAndDeputiesForDatePathParams
+    PathParams GetAPIPostsSpeakerAndDeputiesForDatePathParams 
+    
 }
 
 type GetAPIPostsSpeakerAndDeputiesForDateResponse struct {
-	Body        []byte
-	ContentType string
-	MemberItems []shared.MemberItem
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    MemberItems []shared.MemberItem 
+    StatusCode int64 
+    
 }
+

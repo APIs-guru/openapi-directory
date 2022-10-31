@@ -1,5 +1,9 @@
 package shared
 
+
+
 type NetworkConfig struct {
-	Consumers []Consumer `json:"consumers,omitempty"`
+    Consumers []Consumer `json:"consumers,omitempty"`
+    
 }
+

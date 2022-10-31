@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UnassignVolumeRequest struct {
-	VolumeID string `json:"VolumeId"`
+    VolumeID string `json:"VolumeId"`
+    
 }
+

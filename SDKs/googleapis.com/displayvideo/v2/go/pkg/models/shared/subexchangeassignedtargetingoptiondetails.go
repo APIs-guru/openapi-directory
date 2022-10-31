@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SubExchangeAssignedTargetingOptionDetails struct {
-	TargetingOptionID *string `json:"targetingOptionId,omitempty"`
+    TargetingOptionID *string `json:"targetingOptionId,omitempty"`
+    
 }
+

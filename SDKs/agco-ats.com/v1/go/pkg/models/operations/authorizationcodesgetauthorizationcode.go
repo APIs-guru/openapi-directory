@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type AuthorizationCodesGetAuthorizationCodePathParams struct {
-	ID int32 `pathParam:"style=simple,explode=false,name=id"`
+    ID int32 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type AuthorizationCodesGetAuthorizationCodeRequest struct {
-	PathParams AuthorizationCodesGetAuthorizationCodePathParams
+    PathParams AuthorizationCodesGetAuthorizationCodePathParams 
+    
 }
 
 type AuthorizationCodesGetAuthorizationCodeResponse struct {
-	APIModelsAPIError                               *shared.APIModelsAPIError
-	AuthorizationCodesSharedModelsAuthorizationCode *shared.AuthorizationCodesSharedModelsAuthorizationCode
-	Body                                            []byte
-	ContentType                                     string
-	StatusCode                                      int64
+    APIModelsAPIError *shared.APIModelsAPIError 
+    AuthorizationCodesSharedModelsAuthorizationCode *shared.AuthorizationCodesSharedModelsAuthorizationCode 
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

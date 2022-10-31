@@ -1,15 +1,21 @@
 package operations
 
+
+
 type DeleteNetworkSmUserAccessDevicePathParams struct {
-	NetworkID          string `pathParam:"style=simple,explode=false,name=networkId"`
-	UserAccessDeviceID string `pathParam:"style=simple,explode=false,name=userAccessDeviceId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    UserAccessDeviceID string `pathParam:"style=simple,explode=false,name=userAccessDeviceId"`
+    
 }
 
 type DeleteNetworkSmUserAccessDeviceRequest struct {
-	PathParams DeleteNetworkSmUserAccessDevicePathParams
+    PathParams DeleteNetworkSmUserAccessDevicePathParams 
+    
 }
 
 type DeleteNetworkSmUserAccessDeviceResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

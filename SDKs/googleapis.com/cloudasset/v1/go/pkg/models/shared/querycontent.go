@@ -1,5 +1,9 @@
 package shared
 
+
+
 type QueryContent struct {
-	IamPolicyAnalysisQuery *IamPolicyAnalysisQuery `json:"iamPolicyAnalysisQuery,omitempty"`
+    IamPolicyAnalysisQuery *IamPolicyAnalysisQuery `json:"iamPolicyAnalysisQuery,omitempty"`
+    
 }
+

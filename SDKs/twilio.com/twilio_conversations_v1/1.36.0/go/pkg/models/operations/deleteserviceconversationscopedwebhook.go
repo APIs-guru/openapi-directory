@@ -1,30 +1,33 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var DeleteServiceConversationScopedWebhookServers = []string{
 	"https://conversations.twilio.com",
 }
 
 type DeleteServiceConversationScopedWebhookPathParams struct {
-	ChatServiceSid  string `pathParam:"style=simple,explode=false,name=ChatServiceSid"`
-	ConversationSid string `pathParam:"style=simple,explode=false,name=ConversationSid"`
-	Sid             string `pathParam:"style=simple,explode=false,name=Sid"`
+    ChatServiceSid string `pathParam:"style=simple,explode=false,name=ChatServiceSid"`
+    ConversationSid string `pathParam:"style=simple,explode=false,name=ConversationSid"`
+    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    
 }
 
 type DeleteServiceConversationScopedWebhookSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type DeleteServiceConversationScopedWebhookRequest struct {
-	ServerURL  *string
-	PathParams DeleteServiceConversationScopedWebhookPathParams
-	Security   DeleteServiceConversationScopedWebhookSecurity
+    ServerURL *string 
+    PathParams DeleteServiceConversationScopedWebhookPathParams 
+    Security DeleteServiceConversationScopedWebhookSecurity 
+    
 }
 
 type DeleteServiceConversationScopedWebhookResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

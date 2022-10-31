@@ -1,42 +1,51 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DeleteRulePathParams struct {
-	RuleID string `pathParam:"style=simple,explode=false,name=ruleId"`
+    RuleID string `pathParam:"style=simple,explode=false,name=ruleId"`
+    
 }
 
 type DeleteRuleRequest struct {
-	PathParams DeleteRulePathParams
+    PathParams DeleteRulePathParams 
+    
 }
+
 
 type DeleteRule200ApplicationJSONActionEnum string
 
 const (
-	DeleteRule200ApplicationJSONActionEnumDeleteRule DeleteRule200ApplicationJSONActionEnum = "deleteRule"
+    DeleteRule200ApplicationJSONActionEnumDeleteRule DeleteRule200ApplicationJSONActionEnum = "deleteRule"
 )
 
+
 type DeleteRule200ApplicationJSONData struct {
-	Rules []shared.Rule `json:"rules"`
+    Rules []shared.Rule `json:"rules"`
+    
 }
+
 
 type DeleteRule200ApplicationJSONResultEnum string
 
 const (
-	DeleteRule200ApplicationJSONResultEnumSuccess DeleteRule200ApplicationJSONResultEnum = "success"
-	DeleteRule200ApplicationJSONResultEnumError   DeleteRule200ApplicationJSONResultEnum = "error"
+    DeleteRule200ApplicationJSONResultEnumSuccess DeleteRule200ApplicationJSONResultEnum = "success"
+DeleteRule200ApplicationJSONResultEnumError DeleteRule200ApplicationJSONResultEnum = "error"
 )
 
+
 type DeleteRule200ApplicationJSON struct {
-	Action DeleteRule200ApplicationJSONActionEnum `json:"action"`
-	Data   DeleteRule200ApplicationJSONData       `json:"data"`
-	Result DeleteRule200ApplicationJSONResultEnum `json:"result"`
+    Action DeleteRule200ApplicationJSONActionEnum `json:"action"`
+    Data DeleteRule200ApplicationJSONData `json:"data"`
+    Result DeleteRule200ApplicationJSONResultEnum `json:"result"`
+    
 }
 
 type DeleteRuleResponse struct {
-	ContentType                        string
-	StatusCode                         int64
-	DeleteRule200ApplicationJSONObject *DeleteRule200ApplicationJSON
+    ContentType string 
+    StatusCode int64 
+    DeleteRule200ApplicationJSONObject *DeleteRule200ApplicationJSON 
+    
 }
+

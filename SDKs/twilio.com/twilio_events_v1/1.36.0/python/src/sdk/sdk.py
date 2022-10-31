@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def create_sink(self, request: operations.CreateSinkRequest) -> operations.CreateSinkResponse:
         warnings.simplefilter("ignore")
@@ -28,18 +30,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Sinks"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSinkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1Sink])
@@ -47,7 +51,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sink_test(self, request: operations.CreateSinkTestRequest) -> operations.CreateSinkTestResponse:
         warnings.simplefilter("ignore")
@@ -56,14 +59,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Sinks/{Sid}/Test", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSinkTestResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1SinkSinkTest])
@@ -72,7 +75,6 @@ class SDK:
         return res
 
     
-    
     def create_sink_validate(self, request: operations.CreateSinkValidateRequest) -> operations.CreateSinkValidateResponse:
         warnings.simplefilter("ignore")
 
@@ -80,18 +82,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Sinks/{Sid}/Validate", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSinkValidateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1SinkSinkValidate])
@@ -100,7 +104,6 @@ class SDK:
         return res
 
     
-    
     def create_subscribed_event(self, request: operations.CreateSubscribedEventRequest) -> operations.CreateSubscribedEventResponse:
         warnings.simplefilter("ignore")
 
@@ -108,18 +111,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Subscriptions/{SubscriptionSid}/SubscribedEvents", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSubscribedEventResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1SubscriptionSubscribedEvent])
@@ -127,7 +132,6 @@ class SDK:
 
         return res
 
-    
     
     def create_subscription(self, request: operations.CreateSubscriptionRequest) -> operations.CreateSubscriptionResponse:
         warnings.simplefilter("ignore")
@@ -136,18 +140,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Subscriptions"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSubscriptionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1Subscription])
@@ -156,7 +162,6 @@ class SDK:
         return res
 
     
-    
     def delete_sink(self, request: operations.DeleteSinkRequest) -> operations.DeleteSinkResponse:
         warnings.simplefilter("ignore")
 
@@ -164,20 +169,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Sinks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSinkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_subscribed_event(self, request: operations.DeleteSubscribedEventRequest) -> operations.DeleteSubscribedEventResponse:
         warnings.simplefilter("ignore")
@@ -186,20 +190,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Subscriptions/{SubscriptionSid}/SubscribedEvents/{Type}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSubscribedEventResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_subscription(self, request: operations.DeleteSubscriptionRequest) -> operations.DeleteSubscriptionResponse:
         warnings.simplefilter("ignore")
@@ -208,20 +211,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Subscriptions/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSubscriptionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def fetch_event_type(self, request: operations.FetchEventTypeRequest) -> operations.FetchEventTypeResponse:
         warnings.simplefilter("ignore")
@@ -230,14 +232,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Types/{Type}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchEventTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1EventType])
@@ -246,7 +248,6 @@ class SDK:
         return res
 
     
-    
     def fetch_schema(self, request: operations.FetchSchemaRequest) -> operations.FetchSchemaResponse:
         warnings.simplefilter("ignore")
 
@@ -254,14 +255,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Schemas/{Id}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSchemaResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1Schema])
@@ -270,7 +271,6 @@ class SDK:
         return res
 
     
-    
     def fetch_schema_version(self, request: operations.FetchSchemaVersionRequest) -> operations.FetchSchemaVersionResponse:
         warnings.simplefilter("ignore")
 
@@ -278,14 +278,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Schemas/{Id}/Versions/{SchemaVersion}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSchemaVersionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1SchemaSchemaVersion])
@@ -294,7 +294,6 @@ class SDK:
         return res
 
     
-    
     def fetch_sink(self, request: operations.FetchSinkRequest) -> operations.FetchSinkResponse:
         warnings.simplefilter("ignore")
 
@@ -302,14 +301,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Sinks/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSinkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1Sink])
@@ -317,7 +316,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_subscribed_event(self, request: operations.FetchSubscribedEventRequest) -> operations.FetchSubscribedEventResponse:
         warnings.simplefilter("ignore")
@@ -326,14 +324,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Subscriptions/{SubscriptionSid}/SubscribedEvents/{Type}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSubscribedEventResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1SubscriptionSubscribedEvent])
@@ -341,7 +339,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_subscription(self, request: operations.FetchSubscriptionRequest) -> operations.FetchSubscriptionResponse:
         warnings.simplefilter("ignore")
@@ -350,14 +347,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Subscriptions/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSubscriptionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1Subscription])
@@ -366,7 +363,6 @@ class SDK:
         return res
 
     
-    
     def list_event_type(self, request: operations.ListEventTypeRequest) -> operations.ListEventTypeResponse:
         warnings.simplefilter("ignore")
 
@@ -374,15 +370,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Types"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEventTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListEventTypeListEventTypeResponse])
@@ -391,7 +388,6 @@ class SDK:
         return res
 
     
-    
     def list_schema_version(self, request: operations.ListSchemaVersionRequest) -> operations.ListSchemaVersionResponse:
         warnings.simplefilter("ignore")
 
@@ -399,15 +395,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Schemas/{Id}/Versions", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSchemaVersionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSchemaVersionListSchemaVersionResponse])
@@ -416,7 +413,6 @@ class SDK:
         return res
 
     
-    
     def list_sink(self, request: operations.ListSinkRequest) -> operations.ListSinkResponse:
         warnings.simplefilter("ignore")
 
@@ -424,15 +420,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Sinks"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSinkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSinkListSinkResponse])
@@ -441,7 +438,6 @@ class SDK:
         return res
 
     
-    
     def list_subscribed_event(self, request: operations.ListSubscribedEventRequest) -> operations.ListSubscribedEventResponse:
         warnings.simplefilter("ignore")
 
@@ -449,15 +445,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Subscriptions/{SubscriptionSid}/SubscribedEvents", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSubscribedEventResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSubscribedEventListSubscribedEventResponse])
@@ -466,7 +463,6 @@ class SDK:
         return res
 
     
-    
     def list_subscription(self, request: operations.ListSubscriptionRequest) -> operations.ListSubscriptionResponse:
         warnings.simplefilter("ignore")
 
@@ -474,15 +470,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Subscriptions"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSubscriptionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSubscriptionListSubscriptionResponse])
@@ -491,7 +488,6 @@ class SDK:
         return res
 
     
-    
     def update_sink(self, request: operations.UpdateSinkRequest) -> operations.UpdateSinkResponse:
         warnings.simplefilter("ignore")
 
@@ -499,18 +495,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Sinks/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSinkResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1Sink])
@@ -519,7 +517,6 @@ class SDK:
         return res
 
     
-    
     def update_subscribed_event(self, request: operations.UpdateSubscribedEventRequest) -> operations.UpdateSubscribedEventResponse:
         warnings.simplefilter("ignore")
 
@@ -527,18 +524,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Subscriptions/{SubscriptionSid}/SubscribedEvents/{Type}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSubscribedEventResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1SubscriptionSubscribedEvent])
@@ -547,7 +546,6 @@ class SDK:
         return res
 
     
-    
     def update_subscription(self, request: operations.UpdateSubscriptionRequest) -> operations.UpdateSubscriptionResponse:
         warnings.simplefilter("ignore")
 
@@ -555,18 +553,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Subscriptions/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSubscriptionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EventsV1Subscription])

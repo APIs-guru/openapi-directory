@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StopQueryExecutionInput struct {
-	QueryExecutionID string `json:"QueryExecutionId"`
+    QueryExecutionID string `json:"QueryExecutionId"`
+    
 }
+

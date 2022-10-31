@@ -17,7 +17,7 @@ class GetV3ImagesIDSameSeriesQueryParams:
 
 @dataclass
 class GetV3ImagesIDSameSeriesHeaders:
-    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

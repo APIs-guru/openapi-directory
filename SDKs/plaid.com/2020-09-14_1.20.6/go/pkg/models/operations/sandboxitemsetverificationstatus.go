@@ -1,15 +1,17 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type SandboxItemSetVerificationStatusRequest struct {
-	Request shared.SandboxItemSetVerificationStatusRequest `request:"mediaType=application/json"`
+    Request shared.SandboxItemSetVerificationStatusRequest `request:"mediaType=application/json"`
+    
 }
 
 type SandboxItemSetVerificationStatusResponse struct {
-	ContentType                              string
-	SandboxItemSetVerificationStatusResponse map[string]interface{}
-	StatusCode                               int64
+    ContentType string 
+    SandboxItemSetVerificationStatusResponse map[string]interface{} 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateCustomerGroupRequest struct {
-	Group CustomerGroup `json:"group"`
+    Group CustomerGroup `json:"group"`
+    
 }
+

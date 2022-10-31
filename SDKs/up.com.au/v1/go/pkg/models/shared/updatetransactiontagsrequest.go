@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateTransactionTagsRequest struct {
-	Data []TagInputResourceIdentifier `json:"data"`
+    Data []TagInputResourceIdentifier `json:"data"`
+    
 }
+

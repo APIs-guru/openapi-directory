@@ -1,6 +1,10 @@
 package shared
 
+
+
 type CreateSnapshotRequest struct {
-	DirectoryID string  `json:"DirectoryId"`
-	Name        *string `json:"Name,omitempty"`
+    DirectoryID string `json:"DirectoryId"`
+    Name *string `json:"Name,omitempty"`
+    
 }
+

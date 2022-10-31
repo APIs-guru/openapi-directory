@@ -1,11 +1,12 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ServicepacksResponse struct {
-	ContentType  string
-	Servicepacks []shared.Servicepack
-	StatusCode   int64
+    ContentType string 
+    Servicepacks []shared.Servicepack 
+    StatusCode int64 
+    
 }
+

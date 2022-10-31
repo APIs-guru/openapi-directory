@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RequestInfrastructurePropertiesHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type RequestInfrastructurePropertiesRequest struct {
-	Headers RequestInfrastructurePropertiesHeaders
+    Headers RequestInfrastructurePropertiesHeaders 
+    
 }
 
 type RequestInfrastructurePropertiesResponse struct {
-	ContentType              string
-	ErrorResponse            *shared.ErrorResponse
-	InfrastructureProperties *shared.InfrastructureProperties
-	StatusCode               int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    InfrastructureProperties *shared.InfrastructureProperties 
+    StatusCode int64 
+    
 }
+

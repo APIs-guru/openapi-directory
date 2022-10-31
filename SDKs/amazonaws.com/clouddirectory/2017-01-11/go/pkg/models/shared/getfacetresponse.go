@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetFacetResponse struct {
-	Facet *Facet `json:"Facet,omitempty"`
+    Facet *Facet `json:"Facet,omitempty"`
+    
 }
+

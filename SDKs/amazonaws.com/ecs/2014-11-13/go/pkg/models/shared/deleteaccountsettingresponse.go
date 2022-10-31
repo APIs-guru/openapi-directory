@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteAccountSettingResponse struct {
-	Setting *Setting `json:"setting,omitempty"`
+    Setting *Setting `json:"setting,omitempty"`
+    
 }
+

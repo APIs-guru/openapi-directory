@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type CopyOptionEnum string
 
 const (
-	CopyOptionEnumCopyTags CopyOptionEnum = "CopyTags"
+    CopyOptionEnumCopyTags CopyOptionEnum = "CopyTags"
 )
+
+

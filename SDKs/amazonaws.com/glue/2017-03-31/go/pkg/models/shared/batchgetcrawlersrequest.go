@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchGetCrawlersRequest struct {
-	CrawlerNames []string `json:"CrawlerNames"`
+    CrawlerNames []string `json:"CrawlerNames"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InlineObjectPropertiesSuggestionState struct {
-	EmbeddedObjectSuggestionState *EmbeddedObjectSuggestionState `json:"embeddedObjectSuggestionState,omitempty"`
+    EmbeddedObjectSuggestionState *EmbeddedObjectSuggestionState `json:"embeddedObjectSuggestionState,omitempty"`
+    
 }
+

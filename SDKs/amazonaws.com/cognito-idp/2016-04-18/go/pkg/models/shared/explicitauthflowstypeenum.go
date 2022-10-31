@@ -1,14 +1,19 @@
 package shared
 
+
+
+
 type ExplicitAuthFlowsTypeEnum string
 
 const (
-	ExplicitAuthFlowsTypeEnumAdminNoSrpAuth             ExplicitAuthFlowsTypeEnum = "ADMIN_NO_SRP_AUTH"
-	ExplicitAuthFlowsTypeEnumCustomAuthFlowOnly         ExplicitAuthFlowsTypeEnum = "CUSTOM_AUTH_FLOW_ONLY"
-	ExplicitAuthFlowsTypeEnumUserPasswordAuth           ExplicitAuthFlowsTypeEnum = "USER_PASSWORD_AUTH"
-	ExplicitAuthFlowsTypeEnumAllowAdminUserPasswordAuth ExplicitAuthFlowsTypeEnum = "ALLOW_ADMIN_USER_PASSWORD_AUTH"
-	ExplicitAuthFlowsTypeEnumAllowCustomAuth            ExplicitAuthFlowsTypeEnum = "ALLOW_CUSTOM_AUTH"
-	ExplicitAuthFlowsTypeEnumAllowUserPasswordAuth      ExplicitAuthFlowsTypeEnum = "ALLOW_USER_PASSWORD_AUTH"
-	ExplicitAuthFlowsTypeEnumAllowUserSrpAuth           ExplicitAuthFlowsTypeEnum = "ALLOW_USER_SRP_AUTH"
-	ExplicitAuthFlowsTypeEnumAllowRefreshTokenAuth      ExplicitAuthFlowsTypeEnum = "ALLOW_REFRESH_TOKEN_AUTH"
+    ExplicitAuthFlowsTypeEnumAdminNoSrpAuth ExplicitAuthFlowsTypeEnum = "ADMIN_NO_SRP_AUTH"
+ExplicitAuthFlowsTypeEnumCustomAuthFlowOnly ExplicitAuthFlowsTypeEnum = "CUSTOM_AUTH_FLOW_ONLY"
+ExplicitAuthFlowsTypeEnumUserPasswordAuth ExplicitAuthFlowsTypeEnum = "USER_PASSWORD_AUTH"
+ExplicitAuthFlowsTypeEnumAllowAdminUserPasswordAuth ExplicitAuthFlowsTypeEnum = "ALLOW_ADMIN_USER_PASSWORD_AUTH"
+ExplicitAuthFlowsTypeEnumAllowCustomAuth ExplicitAuthFlowsTypeEnum = "ALLOW_CUSTOM_AUTH"
+ExplicitAuthFlowsTypeEnumAllowUserPasswordAuth ExplicitAuthFlowsTypeEnum = "ALLOW_USER_PASSWORD_AUTH"
+ExplicitAuthFlowsTypeEnumAllowUserSrpAuth ExplicitAuthFlowsTypeEnum = "ALLOW_USER_SRP_AUTH"
+ExplicitAuthFlowsTypeEnumAllowRefreshTokenAuth ExplicitAuthFlowsTypeEnum = "ALLOW_REFRESH_TOKEN_AUTH"
 )
+
+

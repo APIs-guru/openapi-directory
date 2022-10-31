@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RegisterTaskWithMaintenanceWindowResult struct {
-	WindowTaskID *string `json:"WindowTaskId,omitempty"`
+    WindowTaskID *string `json:"WindowTaskId,omitempty"`
+    
 }
+

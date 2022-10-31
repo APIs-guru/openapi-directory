@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetLicenseManagerReportGeneratorRequest struct {
-	LicenseManagerReportGeneratorArn string `json:"LicenseManagerReportGeneratorArn"`
+    LicenseManagerReportGeneratorArn string `json:"LicenseManagerReportGeneratorArn"`
+    
 }
+

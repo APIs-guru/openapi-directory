@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ResultDisplayLine struct {
-	Fields []ResultDisplayField `json:"fields,omitempty"`
+    Fields []ResultDisplayField `json:"fields,omitempty"`
+    
 }
+

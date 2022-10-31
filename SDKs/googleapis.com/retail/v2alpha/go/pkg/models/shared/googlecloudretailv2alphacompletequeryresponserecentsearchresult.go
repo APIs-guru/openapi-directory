@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudRetailV2alphaCompleteQueryResponseRecentSearchResult struct {
-	RecentSearch *string `json:"recentSearch,omitempty"`
+    RecentSearch *string `json:"recentSearch,omitempty"`
+    
 }
+

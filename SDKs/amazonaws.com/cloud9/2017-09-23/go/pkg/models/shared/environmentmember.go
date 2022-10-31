@@ -1,13 +1,14 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type EnvironmentMember struct {
-	EnvironmentID string          `json:"environmentId"`
-	LastAccess    *time.Time      `json:"lastAccess,omitempty"`
-	Permissions   PermissionsEnum `json:"permissions"`
-	UserArn       string          `json:"userArn"`
-	UserID        string          `json:"userId"`
+    EnvironmentID string `json:"environmentId"`
+    LastAccess *time.Time `json:"lastAccess,omitempty"`
+    Permissions PermissionsEnum `json:"permissions"`
+    UserArn string `json:"userArn"`
+    UserID string `json:"userId"`
+    
 }
+

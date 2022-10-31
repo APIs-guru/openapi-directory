@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListChannelsResponse struct {
-	ChannelSummaries []ChannelSummary `json:"channelSummaries,omitempty"`
-	NextToken        *string          `json:"nextToken,omitempty"`
+    ChannelSummaries []ChannelSummary `json:"channelSummaries,omitempty"`
+    NextToken *string `json:"nextToken,omitempty"`
+    
 }
+

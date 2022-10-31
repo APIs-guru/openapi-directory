@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchCreateRowsRequest struct {
-	Requests []CreateRowRequest `json:"requests,omitempty"`
+    Requests []CreateRowRequest `json:"requests,omitempty"`
+    
 }
+

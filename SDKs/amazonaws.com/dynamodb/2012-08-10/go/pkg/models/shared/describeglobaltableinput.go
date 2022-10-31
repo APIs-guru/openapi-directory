@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeGlobalTableInput struct {
-	GlobalTableName string `json:"GlobalTableName"`
+    GlobalTableName string `json:"GlobalTableName"`
+    
 }
+

@@ -1,16 +1,22 @@
 package shared
 
+
+
+
 type AccountAccessPermissionEnum string
 
 const (
-	AccountAccessPermissionEnumRead          AccountAccessPermissionEnum = "read"
-	AccountAccessPermissionEnumEdit          AccountAccessPermissionEnum = "edit"
-	AccountAccessPermissionEnumPublish       AccountAccessPermissionEnum = "publish"
-	AccountAccessPermissionEnumDelete        AccountAccessPermissionEnum = "delete"
-	AccountAccessPermissionEnumManage        AccountAccessPermissionEnum = "manage"
-	AccountAccessPermissionEnumEditWorkspace AccountAccessPermissionEnum = "editWorkspace"
+    AccountAccessPermissionEnumRead AccountAccessPermissionEnum = "read"
+AccountAccessPermissionEnumEdit AccountAccessPermissionEnum = "edit"
+AccountAccessPermissionEnumPublish AccountAccessPermissionEnum = "publish"
+AccountAccessPermissionEnumDelete AccountAccessPermissionEnum = "delete"
+AccountAccessPermissionEnumManage AccountAccessPermissionEnum = "manage"
+AccountAccessPermissionEnumEditWorkspace AccountAccessPermissionEnum = "editWorkspace"
 )
 
+
 type AccountAccess struct {
-	Permission []AccountAccessPermissionEnum `json:"permission,omitempty"`
+    Permission []AccountAccessPermissionEnum `json:"permission,omitempty"`
+    
 }
+

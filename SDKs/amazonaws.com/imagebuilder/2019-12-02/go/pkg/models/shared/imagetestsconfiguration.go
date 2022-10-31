@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ImageTestsConfiguration struct {
-	ImageTestsEnabled *bool  `json:"imageTestsEnabled,omitempty"`
-	TimeoutMinutes    *int64 `json:"timeoutMinutes,omitempty"`
+    ImageTestsEnabled *bool `json:"imageTestsEnabled,omitempty"`
+    TimeoutMinutes *int64 `json:"timeoutMinutes,omitempty"`
+    
 }
+

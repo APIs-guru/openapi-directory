@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetSearchSuggestionsResponse struct {
-	PropertyNameSuggestions []PropertyNameSuggestion `json:"PropertyNameSuggestions,omitempty"`
+    PropertyNameSuggestions []PropertyNameSuggestion `json:"PropertyNameSuggestions,omitempty"`
+    
 }
+

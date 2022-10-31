@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateInfo struct {
-	BlueGreenInfo *BlueGreenInfo `json:"blueGreenInfo,omitempty"`
+    BlueGreenInfo *BlueGreenInfo `json:"blueGreenInfo,omitempty"`
+    
 }
+

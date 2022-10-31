@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ForwardingConfig struct {
-	State ForwardingConfigStateEnum `json:"state"`
+    State ForwardingConfigStateEnum `json:"state"`
+    
 }
+

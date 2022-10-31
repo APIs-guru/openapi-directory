@@ -68,6 +68,8 @@ func (s *SDK) GetRawMessageContent(ctx context.Context, request operations.GetRa
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -124,7 +126,10 @@ func (s *SDK) PutRawMessageContent(ctx context.Context, request operations.PutRa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 

@@ -1,15 +1,21 @@
 package operations
 
+
+
 type RediscoverPathParams struct {
-	DeviceID int32 `pathParam:"style=simple,explode=false,name=deviceId"`
+    DeviceID int32 `pathParam:"style=simple,explode=false,name=deviceId"`
+    
 }
 
 type RediscoverRequest struct {
-	PathParams RediscoverPathParams
+    PathParams RediscoverPathParams 
+    
 }
 
 type RediscoverResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -4,8 +4,8 @@ from typing import Optional
 
 @dataclass
 class CreateEventNotificationHeaders:
-    x_fapi_financial_id: str = field(default=None, metadata={'header': { 'field_name': 'x-fapi-financial-id' }})
-    x_fapi_interaction_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-fapi-interaction-id' }})
+    x_fapi_financial_id: str = field(default=None, metadata={'header': { 'field_name': 'x-fapi-financial-id', 'style': 'simple', 'explode': False }})
+    x_fapi_interaction_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'x-fapi-interaction-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

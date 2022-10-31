@@ -1,32 +1,42 @@
 package operations
 
+
+
 type PostPortfolioSimulationRebalancingFixedWeightRequestBodyAssets struct {
-	AssetPrices []float64 `json:"assetPrices"`
+    AssetPrices []float64 `json:"assetPrices"`
+    
 }
 
 type PostPortfolioSimulationRebalancingFixedWeightRequestBodyPortfolios struct {
-	AssetsWeights []float64 `json:"assetsWeights"`
+    AssetsWeights []float64 `json:"assetsWeights"`
+    
 }
 
 type PostPortfolioSimulationRebalancingFixedWeightRequestBody struct {
-	Assets     []PostPortfolioSimulationRebalancingFixedWeightRequestBodyAssets     `json:"assets"`
-	Portfolios []PostPortfolioSimulationRebalancingFixedWeightRequestBodyPortfolios `json:"portfolios"`
+    Assets []PostPortfolioSimulationRebalancingFixedWeightRequestBodyAssets `json:"assets"`
+    Portfolios []PostPortfolioSimulationRebalancingFixedWeightRequestBodyPortfolios `json:"portfolios"`
+    
 }
 
 type PostPortfolioSimulationRebalancingFixedWeightRequest struct {
-	Request PostPortfolioSimulationRebalancingFixedWeightRequestBody `request:"mediaType=application/json"`
+    Request PostPortfolioSimulationRebalancingFixedWeightRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type PostPortfolioSimulationRebalancingFixedWeight200ApplicationJSONPortfolios struct {
-	PortfolioValues []float64 `json:"portfolioValues"`
+    PortfolioValues []float64 `json:"portfolioValues"`
+    
 }
 
 type PostPortfolioSimulationRebalancingFixedWeight200ApplicationJSON struct {
-	Portfolios []PostPortfolioSimulationRebalancingFixedWeight200ApplicationJSONPortfolios `json:"portfolios"`
+    Portfolios []PostPortfolioSimulationRebalancingFixedWeight200ApplicationJSONPortfolios `json:"portfolios"`
+    
 }
 
 type PostPortfolioSimulationRebalancingFixedWeightResponse struct {
-	ContentType                                                           string
-	PostPortfolioSimulationRebalancingFixedWeight200ApplicationJSONObject *PostPortfolioSimulationRebalancingFixedWeight200ApplicationJSON
-	StatusCode                                                            int64
+    ContentType string 
+    PostPortfolioSimulationRebalancingFixedWeight200ApplicationJSONObject *PostPortfolioSimulationRebalancingFixedWeight200ApplicationJSON 
+    StatusCode int64 
+    
 }
+

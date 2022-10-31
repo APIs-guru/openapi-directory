@@ -1,17 +1,23 @@
 package operations
 
+
+
 type GetAuthorizableKeystorePathParams struct {
-	AuthorizableID   string `pathParam:"style=simple,explode=false,name=authorizableId"`
-	IntermediatePath string `pathParam:"style=simple,explode=false,name=intermediatePath"`
+    AuthorizableID string `pathParam:"style=simple,explode=false,name=authorizableId"`
+    IntermediatePath string `pathParam:"style=simple,explode=false,name=intermediatePath"`
+    
 }
 
 type GetAuthorizableKeystoreRequest struct {
-	PathParams GetAuthorizableKeystorePathParams
+    PathParams GetAuthorizableKeystorePathParams 
+    
 }
 
 type GetAuthorizableKeystoreResponse struct {
-	Body                                          []byte
-	ContentType                                   string
-	StatusCode                                    int64
-	GetAuthorizableKeystoreDefaultTextPlainString *string
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    GetAuthorizableKeystoreDefaultTextPlainString *string 
+    
 }
+

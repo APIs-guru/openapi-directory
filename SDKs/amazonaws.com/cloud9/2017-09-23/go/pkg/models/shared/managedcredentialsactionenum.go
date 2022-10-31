@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type ManagedCredentialsActionEnum string
 
 const (
-	ManagedCredentialsActionEnumEnable  ManagedCredentialsActionEnum = "ENABLE"
-	ManagedCredentialsActionEnumDisable ManagedCredentialsActionEnum = "DISABLE"
+    ManagedCredentialsActionEnumEnable ManagedCredentialsActionEnum = "ENABLE"
+ManagedCredentialsActionEnumDisable ManagedCredentialsActionEnum = "DISABLE"
 )
+
+

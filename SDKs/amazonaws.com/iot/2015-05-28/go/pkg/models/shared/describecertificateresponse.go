@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeCertificateResponse struct {
-	CertificateDescription *CertificateDescription `json:"certificateDescription,omitempty"`
+    CertificateDescription *CertificateDescription `json:"certificateDescription,omitempty"`
+    
 }
+

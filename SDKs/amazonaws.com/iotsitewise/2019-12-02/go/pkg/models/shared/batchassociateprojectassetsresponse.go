@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchAssociateProjectAssetsResponse struct {
-	Errors []AssetErrorDetails `json:"errors,omitempty"`
+    Errors []AssetErrorDetails `json:"errors,omitempty"`
+    
 }
+

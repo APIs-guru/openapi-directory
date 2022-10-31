@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetContactChannelRequest struct {
-	ContactChannelID string `json:"ContactChannelId"`
+    ContactChannelID string `json:"ContactChannelId"`
+    
 }
+

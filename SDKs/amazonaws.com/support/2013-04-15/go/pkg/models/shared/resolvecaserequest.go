@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ResolveCaseRequest struct {
-	CaseID *string `json:"caseId,omitempty"`
+    CaseID *string `json:"caseId,omitempty"`
+    
 }
+

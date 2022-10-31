@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeCertificateRequest struct {
-	CertificateArn string `json:"CertificateArn"`
+    CertificateArn string `json:"CertificateArn"`
+    
 }
+

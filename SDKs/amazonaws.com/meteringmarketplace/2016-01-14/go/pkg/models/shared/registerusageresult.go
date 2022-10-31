@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type RegisterUsageResult struct {
-	PublicKeyRotationTimestamp *time.Time `json:"PublicKeyRotationTimestamp,omitempty"`
-	Signature                  *string    `json:"Signature,omitempty"`
+    PublicKeyRotationTimestamp *time.Time `json:"PublicKeyRotationTimestamp,omitempty"`
+    Signature *string `json:"Signature,omitempty"`
+    
 }
+

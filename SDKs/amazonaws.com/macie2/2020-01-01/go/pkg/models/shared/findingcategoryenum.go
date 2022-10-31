@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type FindingCategoryEnum string
 
 const (
-	FindingCategoryEnumClassification FindingCategoryEnum = "CLASSIFICATION"
-	FindingCategoryEnumPolicy         FindingCategoryEnum = "POLICY"
+    FindingCategoryEnumClassification FindingCategoryEnum = "CLASSIFICATION"
+FindingCategoryEnumPolicy FindingCategoryEnum = "POLICY"
 )
+
+

@@ -1,27 +1,35 @@
 package operations
 
+
+
 type GetDocumentationRelationsPathParams struct {
-	APIID        string `pathParam:"style=simple,explode=false,name=apiId"`
-	APIVersionID string `pathParam:"style=simple,explode=false,name=apiVersionId"`
+    APIID string `pathParam:"style=simple,explode=false,name=apiId"`
+    APIVersionID string `pathParam:"style=simple,explode=false,name=apiVersionId"`
+    
 }
 
 type GetDocumentationRelationsRequest struct {
-	PathParams GetDocumentationRelationsPathParams
+    PathParams GetDocumentationRelationsPathParams 
+    
 }
 
 type GetDocumentationRelations200ApplicationJSONDocumentation struct {
-	CollectionID *string `json:"collectionId,omitempty"`
-	ID           *string `json:"id,omitempty"`
-	Name         *string `json:"name,omitempty"`
-	UpdatedAt    *string `json:"updatedAt,omitempty"`
+    CollectionID *string `json:"collectionId,omitempty"`
+    ID *string `json:"id,omitempty"`
+    Name *string `json:"name,omitempty"`
+    UpdatedAt *string `json:"updatedAt,omitempty"`
+    
 }
 
 type GetDocumentationRelations200ApplicationJSON struct {
-	Documentation []GetDocumentationRelations200ApplicationJSONDocumentation `json:"documentation,omitempty"`
+    Documentation []GetDocumentationRelations200ApplicationJSONDocumentation `json:"documentation,omitempty"`
+    
 }
 
 type GetDocumentationRelationsResponse struct {
-	ContentType                                       string
-	StatusCode                                        int64
-	GetDocumentationRelations200ApplicationJSONObject *GetDocumentationRelations200ApplicationJSON
+    ContentType string 
+    StatusCode int64 
+    GetDocumentationRelations200ApplicationJSONObject *GetDocumentationRelations200ApplicationJSON 
+    
 }
+

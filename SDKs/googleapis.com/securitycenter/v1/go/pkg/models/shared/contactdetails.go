@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ContactDetails struct {
-	Contacts []Contact `json:"contacts,omitempty"`
+    Contacts []Contact `json:"contacts,omitempty"`
+    
 }
+

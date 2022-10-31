@@ -1,6 +1,10 @@
 package shared
 
+
+
 type WebBackendConnectionRequestBody struct {
-	ConnectionID         string `json:"connectionId"`
-	WithRefreshedCatalog *bool  `json:"withRefreshedCatalog,omitempty"`
+    ConnectionID string `json:"connectionId"`
+    WithRefreshedCatalog *bool `json:"withRefreshedCatalog,omitempty"`
+    
 }
+

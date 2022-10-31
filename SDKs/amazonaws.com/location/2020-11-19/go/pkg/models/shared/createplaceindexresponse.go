@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type CreatePlaceIndexResponse struct {
-	CreateTime time.Time `json:"CreateTime"`
-	IndexArn   string    `json:"IndexArn"`
-	IndexName  string    `json:"IndexName"`
+    CreateTime time.Time `json:"CreateTime"`
+    IndexArn string `json:"IndexArn"`
+    IndexName string `json:"IndexName"`
+    
 }
+

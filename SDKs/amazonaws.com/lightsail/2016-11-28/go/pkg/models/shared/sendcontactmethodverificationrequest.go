@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SendContactMethodVerificationRequest struct {
-	Protocol ContactMethodVerificationProtocolEnum `json:"protocol"`
+    Protocol ContactMethodVerificationProtocolEnum `json:"protocol"`
+    
 }
+

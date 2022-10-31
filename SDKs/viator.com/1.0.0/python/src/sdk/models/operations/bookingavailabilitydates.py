@@ -10,7 +10,7 @@ class BookingAvailabilityDatesQueryParams:
 
 @dataclass
 class BookingAvailabilityDatesHeaders:
-    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

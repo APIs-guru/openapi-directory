@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ConferenceSolutionKey struct {
-	Type *string `json:"type,omitempty"`
+    Type *string `json:"type,omitempty"`
+    
 }
+

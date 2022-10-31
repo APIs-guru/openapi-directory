@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ConfigurationSpec struct {
-	Template *RevisionTemplate `json:"template,omitempty"`
+    Template *RevisionTemplate `json:"template,omitempty"`
+    
 }
+

@@ -64,6 +64,7 @@ func (s *SDK) CreateCall(ctx context.Context, request operations.CreateCallReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -192,6 +193,7 @@ func (s *SDK) StartDtmf(ctx context.Context, request operations.StartDtmfRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -240,6 +242,7 @@ func (s *SDK) StartStream(ctx context.Context, request operations.StartStreamReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -285,6 +288,7 @@ func (s *SDK) StartTalk(ctx context.Context, request operations.StartTalkRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -411,6 +415,7 @@ func (s *SDK) UpdateCall(ctx context.Context, request operations.UpdateCallReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

@@ -1,15 +1,17 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetUniProtMappingUsingPostRequest struct {
-	Request *shared.RgdidListRequest `request:"mediaType=application/json"`
+    Request *shared.RgdidListRequest `request:"mediaType=application/json"`
+    
 }
 
 type GetUniProtMappingUsingPostResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

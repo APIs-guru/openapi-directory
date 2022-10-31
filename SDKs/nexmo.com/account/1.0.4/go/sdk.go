@@ -69,6 +69,7 @@ func (s *SDK) ChangeAccountSettings(ctx context.Context, request operations.Chan
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -127,6 +128,7 @@ func (s *SDK) CreateAPISecret(ctx context.Context, request operations.CreateAPIS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -456,6 +458,7 @@ func (s *SDK) TopUpAccountBalance(ctx context.Context, request operations.TopUpA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

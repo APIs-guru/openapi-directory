@@ -75,6 +75,7 @@ func (s *SDK) PostV3PayeesPayeeIDRemoteIDUpdate(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -164,6 +165,7 @@ func (s *SDK) PostV4PayeesPayeeIDRemoteIDUpdate(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -253,6 +255,7 @@ func (s *SDK) CreateAchFundingRequest(ctx context.Context, request operations.Cr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -319,6 +322,7 @@ func (s *SDK) CreateFundingAccountV2(ctx context.Context, request operations.Cre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -390,6 +394,7 @@ func (s *SDK) CreateFundingRequest(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -469,6 +474,7 @@ func (s *SDK) CreateFundingRequestV3(ctx context.Context, request operations.Cre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -548,6 +554,7 @@ func (s *SDK) CreatePayorLinks(ctx context.Context, request operations.CreatePay
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -675,6 +682,7 @@ func (s *SDK) CreateWebhookV1(ctx context.Context, request operations.CreateWebh
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3486,6 +3494,7 @@ func (s *SDK) InviteUser(ctx context.Context, request operations.InviteUserReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4467,6 +4476,7 @@ func (s *SDK) PayeeDetailsUpdateV3(ctx context.Context, request operations.Payee
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4546,6 +4556,7 @@ func (s *SDK) PayeeDetailsUpdateV4(ctx context.Context, request operations.Payee
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4625,6 +4636,7 @@ func (s *SDK) PayorAddPayorLogo(ctx context.Context, request operations.PayorAdd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4694,6 +4706,7 @@ func (s *SDK) PayorCreateAPIKeyRequest(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4772,6 +4785,7 @@ func (s *SDK) PayorCreateApplicationRequest(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4853,6 +4867,7 @@ func (s *SDK) PayorEmailOptOut(ctx context.Context, request operations.PayorEmai
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5290,6 +5305,7 @@ func (s *SDK) RegisterSms(ctx context.Context, request operations.RegisterSmsReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5359,6 +5375,7 @@ func (s *SDK) ResendPayeeInviteV3(ctx context.Context, request operations.Resend
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5448,6 +5465,7 @@ func (s *SDK) ResendPayeeInviteV4(ctx context.Context, request operations.Resend
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5537,6 +5555,7 @@ func (s *SDK) ResendToken(ctx context.Context, request operations.ResendTokenReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5606,6 +5625,7 @@ func (s *SDK) ResetPassword(ctx context.Context, request operations.ResetPasswor
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -5655,6 +5675,7 @@ func (s *SDK) RoleUpdate(ctx context.Context, request operations.RoleUpdateReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5734,6 +5755,7 @@ func (s *SDK) SetNotificationsRequest(ctx context.Context, request operations.Se
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5813,6 +5835,7 @@ func (s *SDK) SubmitPayoutV3(ctx context.Context, request operations.SubmitPayou
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5884,6 +5907,7 @@ func (s *SDK) TransferFunds(ctx context.Context, request operations.TransferFund
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5963,6 +5987,7 @@ func (s *SDK) TransferFundsV3(ctx context.Context, request operations.TransferFu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6112,6 +6137,7 @@ func (s *SDK) UnregisterMfa(ctx context.Context, request operations.UnregisterMf
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6191,7 +6217,10 @@ func (s *SDK) UnregisterMfaForSelf(ctx context.Context, request operations.Unreg
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6260,6 +6289,7 @@ func (s *SDK) UpdatePasswordSelf(ctx context.Context, request operations.UpdateP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6326,6 +6356,7 @@ func (s *SDK) UpdateWebhookV1(ctx context.Context, request operations.UpdateWebh
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6405,6 +6436,7 @@ func (s *SDK) UserDetailsUpdate(ctx context.Context, request operations.UserDeta
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6494,6 +6526,7 @@ func (s *SDK) UserDetailsUpdateForSelf(ctx context.Context, request operations.U
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6570,6 +6603,7 @@ func (s *SDK) V3CreatePayee(ctx context.Context, request operations.V3CreatePaye
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6655,6 +6689,7 @@ func (s *SDK) V4CreatePayee(ctx context.Context, request operations.V4CreatePaye
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6743,7 +6778,10 @@ func (s *SDK) ValidateAccessToken(ctx context.Context, request operations.Valida
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -6811,6 +6849,7 @@ func (s *SDK) ValidatePasswordSelf(ctx context.Context, request operations.Valid
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6932,6 +6971,7 @@ func (s *SDK) WithdrawPayment(ctx context.Context, request operations.WithdrawPa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

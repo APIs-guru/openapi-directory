@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type GameServerHealthCheckEnum string
 
 const (
-	GameServerHealthCheckEnumHealthy GameServerHealthCheckEnum = "HEALTHY"
+    GameServerHealthCheckEnumHealthy GameServerHealthCheckEnum = "HEALTHY"
 )
+
+

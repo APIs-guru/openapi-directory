@@ -1,6 +1,10 @@
 package shared
 
+
+
 type AuthConfirmIdentifier struct {
-	Type  AuthConfirmIdentifierTypeEnum `json:"type"`
-	Value string                        `json:"value"`
+    Type AuthConfirmIdentifierTypeEnum `json:"type"`
+    Value string `json:"value"`
+    
 }
+

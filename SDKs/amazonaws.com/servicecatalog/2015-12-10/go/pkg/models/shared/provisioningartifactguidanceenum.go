@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type ProvisioningArtifactGuidanceEnum string
 
 const (
-	ProvisioningArtifactGuidanceEnumDefault    ProvisioningArtifactGuidanceEnum = "DEFAULT"
-	ProvisioningArtifactGuidanceEnumDeprecated ProvisioningArtifactGuidanceEnum = "DEPRECATED"
+    ProvisioningArtifactGuidanceEnumDefault ProvisioningArtifactGuidanceEnum = "DEFAULT"
+ProvisioningArtifactGuidanceEnumDeprecated ProvisioningArtifactGuidanceEnum = "DEPRECATED"
 )
+
+

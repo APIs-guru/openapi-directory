@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateVoiceTemplateResponse struct {
-	CreateTemplateMessageBody CreateTemplateMessageBody `json:"CreateTemplateMessageBody"`
+    CreateTemplateMessageBody CreateTemplateMessageBody `json:"CreateTemplateMessageBody"`
+    
 }
+

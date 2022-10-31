@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteNotebookInstanceInput struct {
-	NotebookInstanceName string `json:"NotebookInstanceName"`
+    NotebookInstanceName string `json:"NotebookInstanceName"`
+    
 }
+

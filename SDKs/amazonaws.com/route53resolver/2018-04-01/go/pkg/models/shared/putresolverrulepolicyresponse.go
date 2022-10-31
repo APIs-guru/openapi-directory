@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PutResolverRulePolicyResponse struct {
-	ReturnValue *bool `json:"ReturnValue,omitempty"`
+    ReturnValue *bool `json:"ReturnValue,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StopBackfillJobResponse struct {
-	Object *StreamObject `json:"object,omitempty"`
+    Object *StreamObject `json:"object,omitempty"`
+    
 }
+

@@ -75,7 +75,10 @@ func (s *SDK) InvokeEndpoint(ctx context.Context, request operations.InvokeEndpo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -155,6 +158,8 @@ func (s *SDK) InvokeEndpointAsync(ctx context.Context, request operations.Invoke
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 

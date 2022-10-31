@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateProfileResponse struct {
-	ProfileID string `json:"ProfileId"`
+    ProfileID string `json:"ProfileId"`
+    
 }
+

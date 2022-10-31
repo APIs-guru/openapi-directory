@@ -1,6 +1,10 @@
 package shared
 
+
+
 type RuleUpdate struct {
-	Action    ChangeActionEnum `json:"Action"`
-	Predicate Predicate        `json:"Predicate"`
+    Action ChangeActionEnum `json:"Action"`
+    Predicate Predicate `json:"Predicate"`
+    
 }
+

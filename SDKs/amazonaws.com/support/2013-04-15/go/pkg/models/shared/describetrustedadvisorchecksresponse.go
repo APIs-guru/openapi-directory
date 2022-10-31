@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeTrustedAdvisorChecksResponse struct {
-	Checks []TrustedAdvisorCheckDescription `json:"checks"`
+    Checks []TrustedAdvisorCheckDescription `json:"checks"`
+    
 }
+

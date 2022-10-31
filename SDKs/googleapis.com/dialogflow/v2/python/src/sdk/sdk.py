@@ -19,26 +19,31 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def dialogflow_projects_locations_agent_entity_types_batch_delete(self, request: operations.DialogflowProjectsLocationsAgentEntityTypesBatchDeleteRequest) -> operations.DialogflowProjectsLocationsAgentEntityTypesBatchDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/entityTypes:batchDelete", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentEntityTypesBatchDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -46,26 +51,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_agent_entity_types_batch_update(self, request: operations.DialogflowProjectsLocationsAgentEntityTypesBatchUpdateRequest) -> operations.DialogflowProjectsLocationsAgentEntityTypesBatchUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/entityTypes:batchUpdate", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentEntityTypesBatchUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -73,26 +80,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_agent_entity_types_entities_batch_create(self, request: operations.DialogflowProjectsLocationsAgentEntityTypesEntitiesBatchCreateRequest) -> operations.DialogflowProjectsLocationsAgentEntityTypesEntitiesBatchCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/entities:batchCreate", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentEntityTypesEntitiesBatchCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -100,26 +109,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_agent_entity_types_entities_batch_delete(self, request: operations.DialogflowProjectsLocationsAgentEntityTypesEntitiesBatchDeleteRequest) -> operations.DialogflowProjectsLocationsAgentEntityTypesEntitiesBatchDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/entities:batchDelete", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentEntityTypesEntitiesBatchDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -127,26 +138,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_agent_entity_types_entities_batch_update(self, request: operations.DialogflowProjectsLocationsAgentEntityTypesEntitiesBatchUpdateRequest) -> operations.DialogflowProjectsLocationsAgentEntityTypesEntitiesBatchUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/entities:batchUpdate", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentEntityTypesEntitiesBatchUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -155,25 +168,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_environments_create(self, request: operations.DialogflowProjectsLocationsAgentEnvironmentsCreateRequest) -> operations.DialogflowProjectsLocationsAgentEnvironmentsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/environments", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentEnvironmentsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2Environment])
@@ -182,21 +197,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_environments_get_history(self, request: operations.DialogflowProjectsLocationsAgentEnvironmentsGetHistoryRequest) -> operations.DialogflowProjectsLocationsAgentEnvironmentsGetHistoryResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/history", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentEnvironmentsGetHistoryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2EnvironmentHistory])
@@ -205,21 +220,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_environments_list(self, request: operations.DialogflowProjectsLocationsAgentEnvironmentsListRequest) -> operations.DialogflowProjectsLocationsAgentEnvironmentsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/environments", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentEnvironmentsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListEnvironmentsResponse])
@@ -228,25 +243,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_export(self, request: operations.DialogflowProjectsLocationsAgentExportRequest) -> operations.DialogflowProjectsLocationsAgentExportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/agent:export", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentExportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -255,21 +272,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_get_validation_result(self, request: operations.DialogflowProjectsLocationsAgentGetValidationResultRequest) -> operations.DialogflowProjectsLocationsAgentGetValidationResultResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/agent/validationResult", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentGetValidationResultResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ValidationResult])
@@ -278,25 +295,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_import(self, request: operations.DialogflowProjectsLocationsAgentImportRequest) -> operations.DialogflowProjectsLocationsAgentImportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/agent:import", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentImportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -304,26 +323,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_agent_intents_batch_delete(self, request: operations.DialogflowProjectsLocationsAgentIntentsBatchDeleteRequest) -> operations.DialogflowProjectsLocationsAgentIntentsBatchDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/intents:batchDelete", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentIntentsBatchDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -331,26 +352,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_agent_intents_batch_update(self, request: operations.DialogflowProjectsLocationsAgentIntentsBatchUpdateRequest) -> operations.DialogflowProjectsLocationsAgentIntentsBatchUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/intents:batchUpdate", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentIntentsBatchUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -359,25 +382,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_intents_create(self, request: operations.DialogflowProjectsLocationsAgentIntentsCreateRequest) -> operations.DialogflowProjectsLocationsAgentIntentsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/intents", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentIntentsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2Intent])
@@ -386,21 +411,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_intents_list(self, request: operations.DialogflowProjectsLocationsAgentIntentsListRequest) -> operations.DialogflowProjectsLocationsAgentIntentsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/intents", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentIntentsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListIntentsResponse])
@@ -409,25 +434,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_restore(self, request: operations.DialogflowProjectsLocationsAgentRestoreRequest) -> operations.DialogflowProjectsLocationsAgentRestoreResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/agent:restore", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentRestoreResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -436,21 +463,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_search(self, request: operations.DialogflowProjectsLocationsAgentSearchRequest) -> operations.DialogflowProjectsLocationsAgentSearchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/agent:search", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentSearchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2SearchAgentsResponse])
@@ -459,25 +486,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_sessions_contexts_create(self, request: operations.DialogflowProjectsLocationsAgentSessionsContextsCreateRequest) -> operations.DialogflowProjectsLocationsAgentSessionsContextsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/contexts", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentSessionsContextsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2Context])
@@ -486,21 +515,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_sessions_contexts_list(self, request: operations.DialogflowProjectsLocationsAgentSessionsContextsListRequest) -> operations.DialogflowProjectsLocationsAgentSessionsContextsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/contexts", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentSessionsContextsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListContextsResponse])
@@ -509,21 +538,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_sessions_delete_contexts(self, request: operations.DialogflowProjectsLocationsAgentSessionsDeleteContextsRequest) -> operations.DialogflowProjectsLocationsAgentSessionsDeleteContextsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/contexts", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentSessionsDeleteContextsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -532,25 +561,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_sessions_detect_intent(self, request: operations.DialogflowProjectsLocationsAgentSessionsDetectIntentRequest) -> operations.DialogflowProjectsLocationsAgentSessionsDetectIntentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{session}:detectIntent", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentSessionsDetectIntentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2DetectIntentResponse])
@@ -559,25 +590,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_sessions_entity_types_create(self, request: operations.DialogflowProjectsLocationsAgentSessionsEntityTypesCreateRequest) -> operations.DialogflowProjectsLocationsAgentSessionsEntityTypesCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/entityTypes", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentSessionsEntityTypesCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2SessionEntityType])
@@ -586,21 +619,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_sessions_entity_types_list(self, request: operations.DialogflowProjectsLocationsAgentSessionsEntityTypesListRequest) -> operations.DialogflowProjectsLocationsAgentSessionsEntityTypesListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/entityTypes", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentSessionsEntityTypesListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListSessionEntityTypesResponse])
@@ -609,25 +642,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_train(self, request: operations.DialogflowProjectsLocationsAgentTrainRequest) -> operations.DialogflowProjectsLocationsAgentTrainResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/agent:train", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentTrainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -636,25 +671,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_versions_create(self, request: operations.DialogflowProjectsLocationsAgentVersionsCreateRequest) -> operations.DialogflowProjectsLocationsAgentVersionsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/versions", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentVersionsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2Version])
@@ -663,21 +700,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_agent_versions_list(self, request: operations.DialogflowProjectsLocationsAgentVersionsListRequest) -> operations.DialogflowProjectsLocationsAgentVersionsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/versions", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAgentVersionsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListVersionsResponse])
@@ -686,21 +723,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_answer_records_list(self, request: operations.DialogflowProjectsLocationsAnswerRecordsListRequest) -> operations.DialogflowProjectsLocationsAnswerRecordsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/answerRecords", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsAnswerRecordsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListAnswerRecordsResponse])
@@ -709,25 +746,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversation_datasets_create(self, request: operations.DialogflowProjectsLocationsConversationDatasetsCreateRequest) -> operations.DialogflowProjectsLocationsConversationDatasetsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/conversationDatasets", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationDatasetsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -735,26 +774,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_conversation_datasets_import_conversation_data(self, request: operations.DialogflowProjectsLocationsConversationDatasetsImportConversationDataRequest) -> operations.DialogflowProjectsLocationsConversationDatasetsImportConversationDataResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}:importConversationData", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationDatasetsImportConversationDataResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -763,21 +804,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversation_datasets_list(self, request: operations.DialogflowProjectsLocationsConversationDatasetsListRequest) -> operations.DialogflowProjectsLocationsConversationDatasetsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/conversationDatasets", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationDatasetsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListConversationDatasetsResponse])
@@ -786,25 +827,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversation_models_create(self, request: operations.DialogflowProjectsLocationsConversationModelsCreateRequest) -> operations.DialogflowProjectsLocationsConversationModelsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/conversationModels", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationModelsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -812,26 +855,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_conversation_models_deploy(self, request: operations.DialogflowProjectsLocationsConversationModelsDeployRequest) -> operations.DialogflowProjectsLocationsConversationModelsDeployResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}:deploy", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationModelsDeployResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -839,26 +884,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_conversation_models_evaluations_create(self, request: operations.DialogflowProjectsLocationsConversationModelsEvaluationsCreateRequest) -> operations.DialogflowProjectsLocationsConversationModelsEvaluationsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/evaluations", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationModelsEvaluationsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -867,21 +914,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversation_models_evaluations_list(self, request: operations.DialogflowProjectsLocationsConversationModelsEvaluationsListRequest) -> operations.DialogflowProjectsLocationsConversationModelsEvaluationsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/evaluations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationModelsEvaluationsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListConversationModelEvaluationsResponse])
@@ -890,21 +937,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversation_models_list(self, request: operations.DialogflowProjectsLocationsConversationModelsListRequest) -> operations.DialogflowProjectsLocationsConversationModelsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/conversationModels", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationModelsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListConversationModelsResponse])
@@ -913,25 +960,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversation_models_undeploy(self, request: operations.DialogflowProjectsLocationsConversationModelsUndeployRequest) -> operations.DialogflowProjectsLocationsConversationModelsUndeployResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}:undeploy", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationModelsUndeployResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -939,26 +988,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_conversation_profiles_clear_suggestion_feature_config(self, request: operations.DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigRequest) -> operations.DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{conversationProfile}:clearSuggestionFeatureConfig", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationProfilesClearSuggestionFeatureConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -967,25 +1018,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversation_profiles_create(self, request: operations.DialogflowProjectsLocationsConversationProfilesCreateRequest) -> operations.DialogflowProjectsLocationsConversationProfilesCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/conversationProfiles", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationProfilesCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ConversationProfile])
@@ -994,21 +1047,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversation_profiles_list(self, request: operations.DialogflowProjectsLocationsConversationProfilesListRequest) -> operations.DialogflowProjectsLocationsConversationProfilesListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/conversationProfiles", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationProfilesListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListConversationProfilesResponse])
@@ -1017,25 +1070,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversation_profiles_set_suggestion_feature_config(self, request: operations.DialogflowProjectsLocationsConversationProfilesSetSuggestionFeatureConfigRequest) -> operations.DialogflowProjectsLocationsConversationProfilesSetSuggestionFeatureConfigResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{conversationProfile}:setSuggestionFeatureConfig", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationProfilesSetSuggestionFeatureConfigResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -1044,25 +1099,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversations_complete(self, request: operations.DialogflowProjectsLocationsConversationsCompleteRequest) -> operations.DialogflowProjectsLocationsConversationsCompleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}:complete", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationsCompleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2Conversation])
@@ -1070,26 +1127,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_conversations_create(self, request: operations.DialogflowProjectsLocationsConversationsCreateRequest) -> operations.DialogflowProjectsLocationsConversationsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/conversations", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2Conversation])
@@ -1098,21 +1157,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversations_list(self, request: operations.DialogflowProjectsLocationsConversationsListRequest) -> operations.DialogflowProjectsLocationsConversationsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/conversations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListConversationsResponse])
@@ -1121,21 +1180,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversations_messages_list(self, request: operations.DialogflowProjectsLocationsConversationsMessagesListRequest) -> operations.DialogflowProjectsLocationsConversationsMessagesListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/messages", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationsMessagesListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListMessagesResponse])
@@ -1144,25 +1203,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversations_participants_analyze_content(self, request: operations.DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentRequest) -> operations.DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{participant}:analyzeContent", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationsParticipantsAnalyzeContentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2AnalyzeContentResponse])
@@ -1171,25 +1232,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversations_participants_create(self, request: operations.DialogflowProjectsLocationsConversationsParticipantsCreateRequest) -> operations.DialogflowProjectsLocationsConversationsParticipantsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/participants", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationsParticipantsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2Participant])
@@ -1198,21 +1261,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversations_participants_list(self, request: operations.DialogflowProjectsLocationsConversationsParticipantsListRequest) -> operations.DialogflowProjectsLocationsConversationsParticipantsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/participants", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationsParticipantsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListParticipantsResponse])
@@ -1221,25 +1284,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversations_participants_suggestions_suggest_articles(self, request: operations.DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesRequest) -> operations.DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/suggestions:suggestArticles", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestArticlesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2SuggestArticlesResponse])
@@ -1248,25 +1313,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversations_participants_suggestions_suggest_faq_answers(self, request: operations.DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestFaqAnswersRequest) -> operations.DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestFaqAnswersResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/suggestions:suggestFaqAnswers", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestFaqAnswersResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2SuggestFaqAnswersResponse])
@@ -1275,25 +1342,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_conversations_participants_suggestions_suggest_smart_replies(self, request: operations.DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestSmartRepliesRequest) -> operations.DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestSmartRepliesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/suggestions:suggestSmartReplies", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsConversationsParticipantsSuggestionsSuggestSmartRepliesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2SuggestSmartRepliesResponse])
@@ -1302,21 +1371,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_delete_agent(self, request: operations.DialogflowProjectsLocationsDeleteAgentRequest) -> operations.DialogflowProjectsLocationsDeleteAgentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/agent", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsDeleteAgentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1325,21 +1394,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_get_agent(self, request: operations.DialogflowProjectsLocationsGetAgentRequest) -> operations.DialogflowProjectsLocationsGetAgentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/agent", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsGetAgentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2Agent])
@@ -1348,25 +1417,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_knowledge_bases_create(self, request: operations.DialogflowProjectsLocationsKnowledgeBasesCreateRequest) -> operations.DialogflowProjectsLocationsKnowledgeBasesCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/knowledgeBases", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsKnowledgeBasesCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2KnowledgeBase])
@@ -1375,25 +1446,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_knowledge_bases_documents_create(self, request: operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsCreateRequest) -> operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/documents", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -1401,22 +1474,22 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_knowledge_bases_documents_delete(self, request: operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsDeleteRequest) -> operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -1424,26 +1497,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_knowledge_bases_documents_export(self, request: operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsExportRequest) -> operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsExportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}:export", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsExportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -1451,26 +1526,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_knowledge_bases_documents_import(self, request: operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsImportRequest) -> operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsImportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/documents:import", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsImportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -1479,21 +1556,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_knowledge_bases_documents_list(self, request: operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsListRequest) -> operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/documents", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListDocumentsResponse])
@@ -1502,25 +1579,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_knowledge_bases_documents_patch(self, request: operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsPatchRequest) -> operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsPatchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsPatchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -1528,26 +1607,28 @@ class SDK:
 
         return res
 
-    
     
     def dialogflow_projects_locations_knowledge_bases_documents_reload(self, request: operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsReloadRequest) -> operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsReloadResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}:reload", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsKnowledgeBasesDocumentsReloadResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -1556,21 +1637,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_knowledge_bases_list(self, request: operations.DialogflowProjectsLocationsKnowledgeBasesListRequest) -> operations.DialogflowProjectsLocationsKnowledgeBasesListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/knowledgeBases", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsKnowledgeBasesListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2ListKnowledgeBasesResponse])
@@ -1579,21 +1660,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_list(self, request: operations.DialogflowProjectsLocationsListRequest) -> operations.DialogflowProjectsLocationsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}/locations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudLocationListLocationsResponse])
@@ -1602,25 +1683,27 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_locations_set_agent(self, request: operations.DialogflowProjectsLocationsSetAgentRequest) -> operations.DialogflowProjectsLocationsSetAgentResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{parent}/agent", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsLocationsSetAgentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleCloudDialogflowV2Agent])
@@ -1629,21 +1712,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_operations_cancel(self, request: operations.DialogflowProjectsOperationsCancelRequest) -> operations.DialogflowProjectsOperationsCancelResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}:cancel", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsOperationsCancelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1652,21 +1735,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_operations_get(self, request: operations.DialogflowProjectsOperationsGetRequest) -> operations.DialogflowProjectsOperationsGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsOperationsGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningOperation])
@@ -1675,21 +1758,21 @@ class SDK:
         return res
 
     
-    
     def dialogflow_projects_operations_list(self, request: operations.DialogflowProjectsOperationsListRequest) -> operations.DialogflowProjectsOperationsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}/operations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DialogflowProjectsOperationsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleLongrunningListOperationsResponse])

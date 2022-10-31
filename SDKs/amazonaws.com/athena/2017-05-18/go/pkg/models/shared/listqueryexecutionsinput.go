@@ -1,7 +1,11 @@
 package shared
 
+
+
 type ListQueryExecutionsInput struct {
-	MaxResults *int64  `json:"MaxResults,omitempty"`
-	NextToken  *string `json:"NextToken,omitempty"`
-	WorkGroup  *string `json:"WorkGroup,omitempty"`
+    MaxResults *int64 `json:"MaxResults,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    WorkGroup *string `json:"WorkGroup,omitempty"`
+    
 }
+

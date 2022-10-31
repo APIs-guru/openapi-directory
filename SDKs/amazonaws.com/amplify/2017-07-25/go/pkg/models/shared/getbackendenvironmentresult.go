@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetBackendEnvironmentResult struct {
-	BackendEnvironment BackendEnvironment `json:"backendEnvironment"`
+    BackendEnvironment BackendEnvironment `json:"backendEnvironment"`
+    
 }
+

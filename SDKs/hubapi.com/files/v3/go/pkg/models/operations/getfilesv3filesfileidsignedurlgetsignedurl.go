@@ -1,55 +1,65 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetFilesV3FilesFileIDSignedURLGetSignedURLPathParams struct {
-	FileID string `pathParam:"style=simple,explode=false,name=fileId"`
+    FileID string `pathParam:"style=simple,explode=false,name=fileId"`
+    
 }
+
 
 type GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnum string
 
 const (
-	GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnumThumb   GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnum = "thumb"
-	GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnumIcon    GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnum = "icon"
-	GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnumMedium  GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnum = "medium"
-	GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnumPreview GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnum = "preview"
+    GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnumThumb GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnum = "thumb"
+GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnumIcon GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnum = "icon"
+GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnumMedium GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnum = "medium"
+GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnumPreview GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnum = "preview"
 )
 
+
 type GetFilesV3FilesFileIDSignedURLGetSignedURLQueryParams struct {
-	ExpirationSeconds *int64                                              `queryParam:"style=form,explode=true,name=expirationSeconds"`
-	Size              *GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnum `queryParam:"style=form,explode=true,name=size"`
-	Upscale           *bool                                               `queryParam:"style=form,explode=true,name=upscale"`
+    ExpirationSeconds *int64 `queryParam:"style=form,explode=true,name=expirationSeconds"`
+    Size *GetFilesV3FilesFileIDSignedURLGetSignedURLSizeEnum `queryParam:"style=form,explode=true,name=size"`
+    Upscale *bool `queryParam:"style=form,explode=true,name=upscale"`
+    
 }
 
 type GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption1 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
+    Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
+    
 }
 
 type GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption2 struct {
-	Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
+    Hapikey shared.SchemeHapikey `security:"scheme,type=apiKey,subtype=query"`
+    
 }
 
 type GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption3 struct {
-	Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
+    Oauth2Legacy shared.SchemeOauth2Legacy `security:"scheme,type=oauth2"`
+    
 }
 
 type GetFilesV3FilesFileIDSignedURLGetSignedURLSecurity struct {
-	Option1 *GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption1 `security:"option"`
-	Option2 *GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption2 `security:"option"`
-	Option3 *GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption3 `security:"option"`
+    Option1 *GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption1 `security:"option"`
+    Option2 *GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption2 `security:"option"`
+    Option3 *GetFilesV3FilesFileIDSignedURLGetSignedURLSecurityOption3 `security:"option"`
+    
 }
 
 type GetFilesV3FilesFileIDSignedURLGetSignedURLRequest struct {
-	PathParams  GetFilesV3FilesFileIDSignedURLGetSignedURLPathParams
-	QueryParams GetFilesV3FilesFileIDSignedURLGetSignedURLQueryParams
-	Security    GetFilesV3FilesFileIDSignedURLGetSignedURLSecurity
+    PathParams GetFilesV3FilesFileIDSignedURLGetSignedURLPathParams 
+    QueryParams GetFilesV3FilesFileIDSignedURLGetSignedURLQueryParams 
+    Security GetFilesV3FilesFileIDSignedURLGetSignedURLSecurity 
+    
 }
 
 type GetFilesV3FilesFileIDSignedURLGetSignedURLResponse struct {
-	Body        []byte
-	ContentType string
-	SignedURL   *shared.SignedURL
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    SignedURL *shared.SignedURL 
+    StatusCode int64 
+    
 }
+

@@ -1,6 +1,10 @@
 package shared
 
+
+
 type SendTestEventNotificationRequest struct {
-	Notification  NotificationSpecification `json:"Notification"`
-	TestEventType EventTypeEnum             `json:"TestEventType"`
+    Notification NotificationSpecification `json:"Notification"`
+    TestEventType EventTypeEnum `json:"TestEventType"`
+    
 }
+

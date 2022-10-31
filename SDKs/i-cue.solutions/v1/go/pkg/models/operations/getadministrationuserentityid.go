@@ -1,19 +1,26 @@
 package operations
 
+
+
 type GetAdministrationUserEntityIDPathParams struct {
-	EntityID int32 `pathParam:"style=simple,explode=false,name=entityId"`
+    EntityID int32 `pathParam:"style=simple,explode=false,name=entityId"`
+    
 }
 
 type GetAdministrationUserEntityIDHeaders struct {
-	Token *string `header:"name=Token"`
+    Token *string `header:"style=simple,explode=false,name=Token"`
+    
 }
 
 type GetAdministrationUserEntityIDRequest struct {
-	PathParams GetAdministrationUserEntityIDPathParams
-	Headers    GetAdministrationUserEntityIDHeaders
+    PathParams GetAdministrationUserEntityIDPathParams 
+    Headers GetAdministrationUserEntityIDHeaders 
+    
 }
 
 type GetAdministrationUserEntityIDResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

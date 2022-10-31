@@ -1,9 +1,13 @@
 package shared
 
+
+
 type CommentReplyList struct {
-	Items         []CommentReply `json:"items,omitempty"`
-	Kind          *string        `json:"kind,omitempty"`
-	NextLink      *string        `json:"nextLink,omitempty"`
-	NextPageToken *string        `json:"nextPageToken,omitempty"`
-	SelfLink      *string        `json:"selfLink,omitempty"`
+    Items []CommentReply `json:"items,omitempty"`
+    Kind *string `json:"kind,omitempty"`
+    NextLink *string `json:"nextLink,omitempty"`
+    NextPageToken *string `json:"nextPageToken,omitempty"`
+    SelfLink *string `json:"selfLink,omitempty"`
+    
 }
+

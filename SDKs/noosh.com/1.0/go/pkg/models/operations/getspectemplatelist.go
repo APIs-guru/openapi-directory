@@ -1,17 +1,23 @@
 package operations
 
+
+
 type GetSpecTemplateListPathParams struct {
-	WorkgroupID string `pathParam:"style=simple,explode=false,name=workgroup_id"`
+    WorkgroupID string `pathParam:"style=simple,explode=false,name=workgroup_id"`
+    
 }
 
 type GetSpecTemplateListRequest struct {
-	PathParams GetSpecTemplateListPathParams
+    PathParams GetSpecTemplateListPathParams 
+    
 }
 
 type GetSpecTemplateListResponse struct {
-	Body               []byte
-	ContentType        string
-	HTTPStatusVo       *interface{}
-	SpecTemplateListVo *interface{}
-	StatusCode         int64
+    Body []byte 
+    ContentType string 
+    HTTPStatusVo *interface{} 
+    SpecTemplateListVo *interface{} 
+    StatusCode int64 
+    
 }
+

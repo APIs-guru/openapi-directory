@@ -1,14 +1,20 @@
 package shared
 
+
+
+
 type NamespaceServingVisibilityEnum string
 
 const (
-	NamespaceServingVisibilityEnumVisibilityUnspecified NamespaceServingVisibilityEnum = "VISIBILITY_UNSPECIFIED"
-	NamespaceServingVisibilityEnumUnlisted              NamespaceServingVisibilityEnum = "UNLISTED"
-	NamespaceServingVisibilityEnumPublic                NamespaceServingVisibilityEnum = "PUBLIC"
+    NamespaceServingVisibilityEnumVisibilityUnspecified NamespaceServingVisibilityEnum = "VISIBILITY_UNSPECIFIED"
+NamespaceServingVisibilityEnumUnlisted NamespaceServingVisibilityEnum = "UNLISTED"
+NamespaceServingVisibilityEnumPublic NamespaceServingVisibilityEnum = "PUBLIC"
 )
 
+
 type Namespace struct {
-	NamespaceName     *string                         `json:"namespaceName,omitempty"`
-	ServingVisibility *NamespaceServingVisibilityEnum `json:"servingVisibility,omitempty"`
+    NamespaceName *string `json:"namespaceName,omitempty"`
+    ServingVisibility *NamespaceServingVisibilityEnum `json:"servingVisibility,omitempty"`
+    
 }
+

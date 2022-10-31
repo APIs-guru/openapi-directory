@@ -22,22 +22,25 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def dfs_slates_by_date(self, request: operations.DfsSlatesByDateRequest) -> operations.DfsSlatesByDateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/{format}/DfsSlatesByDate/{date}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DfsSlatesByDateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[List[Any]])
@@ -46,19 +49,19 @@ class SDK:
         return res
 
     
-    
     def projected_player_game_stats_by_date(self, request: operations.ProjectedPlayerGameStatsByDateRequest) -> operations.ProjectedPlayerGameStatsByDateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/{format}/PlayerGameProjectionStatsByDate/{date}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ProjectedPlayerGameStatsByDateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[List[Any]])
@@ -67,19 +70,19 @@ class SDK:
         return res
 
     
-    
     def projected_player_game_stats_by_player(self, request: operations.ProjectedPlayerGameStatsByPlayerRequest) -> operations.ProjectedPlayerGameStatsByPlayerResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/{format}/PlayerGameProjectionStatsByPlayer/{date}/{playerid}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ProjectedPlayerGameStatsByPlayerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[List[Any]])

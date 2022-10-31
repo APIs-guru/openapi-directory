@@ -71,6 +71,7 @@ func (s *SDK) ChromeFromHTMLPost(ctx context.Context, request operations.ChromeF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -184,6 +185,7 @@ func (s *SDK) ChromeFromURLPost(ctx context.Context, request operations.ChromeFr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -239,6 +241,7 @@ func (s *SDK) LibreConvertPost(ctx context.Context, request operations.LibreConv
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -294,6 +297,7 @@ func (s *SDK) MergePost(ctx context.Context, request operations.MergePostRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -349,6 +353,7 @@ func (s *SDK) WkhtmltopdfFromHTMLPost(ctx context.Context, request operations.Wk
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -462,6 +467,7 @@ func (s *SDK) WkhtmltopdfFromURLPost(ctx context.Context, request operations.Wkh
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

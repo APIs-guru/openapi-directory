@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type PolicyTypeEnum string
 
 const (
-	PolicyTypeEnumTargetTrackingScaling PolicyTypeEnum = "TargetTrackingScaling"
+    PolicyTypeEnumTargetTrackingScaling PolicyTypeEnum = "TargetTrackingScaling"
 )
+
+

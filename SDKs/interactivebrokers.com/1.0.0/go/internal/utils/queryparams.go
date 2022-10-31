@@ -6,11 +6,6 @@ import (
 	"fmt"
 	"net/http"
 	"reflect"
-	"strings"
-)
-
-const (
-	queryParamTagKey = "queryParam"
 )
 
 func PopulateQueryParams(ctx context.Context, req *http.Request, queryParams interface{}) {
@@ -119,27 +114,5 @@ type paramTag struct {
 }
 
 func parseQueryParamTag(field reflect.StructField) *paramTag {
-	// example `queryParam:"style=deepObject,explode=true,name=op"`
-	values := parseStructTag(queryParamTagKey, field)
-
-	tag := &paramTag{
-		Style:     "form",
-		Explode:   true,
-		ParamName: strings.ToLower(field.Name),
-	}
-
-	for k, v := range values {
-		switch k {
-		case "style":
-			tag.Style = v
-		case "explode":
-			tag.Explode = v == "true"
-		case "name":
-			tag.ParamName = v
-		case "serialization":
-			tag.Serialization = v
-		}
-	}
-
-	return tag
+	return parseParamTag(queryParamTagKey, field, "form", true)
 }

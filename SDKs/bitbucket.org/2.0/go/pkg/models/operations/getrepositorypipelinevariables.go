@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetRepositoryPipelineVariablesPathParams struct {
-	RepoSlug  string `pathParam:"style=simple,explode=false,name=repo_slug"`
-	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
+    RepoSlug string `pathParam:"style=simple,explode=false,name=repo_slug"`
+    Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
+    
 }
 
 type GetRepositoryPipelineVariablesRequest struct {
-	PathParams GetRepositoryPipelineVariablesPathParams
+    PathParams GetRepositoryPipelineVariablesPathParams 
+    
 }
 
 type GetRepositoryPipelineVariablesResponse struct {
-	ContentType                string
-	StatusCode                 int64
-	PaginatedPipelineVariables *shared.PaginatedPipelineVariables
+    ContentType string 
+    StatusCode int64 
+    PaginatedPipelineVariables *shared.PaginatedPipelineVariables 
+    
 }
+

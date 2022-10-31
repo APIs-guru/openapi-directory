@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Proxy struct {
-	Mode string `json:"mode"`
+    Mode string `json:"mode"`
+    
 }
+

@@ -14,8 +14,8 @@ class GetV4LayersScoutingObservationsQueryParams:
 
 @dataclass
 class GetV4LayersScoutingObservationsHeaders:
-    x_limit: Optional[int] = field(default=None, metadata={'header': { 'field_name': 'X-Limit' }})
-    x_next_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Next-Token' }})
+    x_limit: Optional[int] = field(default=None, metadata={'header': { 'field_name': 'X-Limit', 'style': 'simple', 'explode': False }})
+    x_next_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Next-Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

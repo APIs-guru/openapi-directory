@@ -1,6 +1,10 @@
 package shared
 
+
+
 type V3DisruptionStop struct {
-	StopID   *int32  `json:"stop_id,omitempty"`
-	StopName *string `json:"stop_name,omitempty"`
+    StopID *int32 `json:"stop_id,omitempty"`
+    StopName *string `json:"stop_name,omitempty"`
+    
 }
+

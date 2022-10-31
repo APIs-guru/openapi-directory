@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SearchAvailabilityQuery struct {
-	Filter SearchAvailabilityFilter `json:"filter"`
+    Filter SearchAvailabilityFilter `json:"filter"`
+    
 }
+

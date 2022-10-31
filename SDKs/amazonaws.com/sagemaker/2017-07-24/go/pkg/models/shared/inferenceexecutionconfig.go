@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InferenceExecutionConfig struct {
-	Mode InferenceExecutionModeEnum `json:"Mode"`
+    Mode InferenceExecutionModeEnum `json:"Mode"`
+    
 }
+

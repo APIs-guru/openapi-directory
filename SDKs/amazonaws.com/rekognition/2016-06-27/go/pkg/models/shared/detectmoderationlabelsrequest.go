@@ -1,7 +1,11 @@
 package shared
 
+
+
 type DetectModerationLabelsRequest struct {
-	HumanLoopConfig *HumanLoopConfig `json:"HumanLoopConfig,omitempty"`
-	Image           Image            `json:"Image"`
-	MinConfidence   *float32         `json:"MinConfidence,omitempty"`
+    HumanLoopConfig *HumanLoopConfig `json:"HumanLoopConfig,omitempty"`
+    Image Image `json:"Image"`
+    MinConfidence *float32 `json:"MinConfidence,omitempty"`
+    
 }
+

@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetTokenBalanceHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': True }})
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

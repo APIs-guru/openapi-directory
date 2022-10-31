@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SplitCapacityCommitmentRequest struct {
-	SlotCount *string `json:"slotCount,omitempty"`
+    SlotCount *string `json:"slotCount,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RemoveBackendConfigResponse struct {
-	Error *string `json:"Error,omitempty"`
+    Error *string `json:"Error,omitempty"`
+    
 }
+

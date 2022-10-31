@@ -22,7 +22,7 @@ class CompileQueryParams:
 
 @dataclass
 class CompileHeaders:
-    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type' }})
+    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

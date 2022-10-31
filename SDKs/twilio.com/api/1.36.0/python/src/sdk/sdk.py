@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def create_account(self, request: operations.CreateAccountRequest) -> operations.CreateAccountResponse:
         warnings.simplefilter("ignore")
@@ -28,18 +30,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/2010-04-01/Accounts.json"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAccountResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010Account])
@@ -47,7 +51,6 @@ class SDK:
 
         return res
 
-    
     
     def create_address(self, request: operations.CreateAddressRequest) -> operations.CreateAddressResponse:
         warnings.simplefilter("ignore")
@@ -56,18 +59,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Addresses.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateAddressResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountAddress])
@@ -75,7 +80,6 @@ class SDK:
 
         return res
 
-    
     
     def create_application(self, request: operations.CreateApplicationRequest) -> operations.CreateApplicationResponse:
         warnings.simplefilter("ignore")
@@ -84,18 +88,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Applications.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateApplicationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountApplication])
@@ -103,7 +109,6 @@ class SDK:
 
         return res
 
-    
     
     def create_call(self, request: operations.CreateCallRequest) -> operations.CreateCallResponse:
         warnings.simplefilter("ignore")
@@ -112,18 +117,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCallResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCall])
@@ -131,7 +138,6 @@ class SDK:
 
         return res
 
-    
     
     def create_call_feedback_summary(self, request: operations.CreateCallFeedbackSummaryRequest) -> operations.CreateCallFeedbackSummaryResponse:
         warnings.simplefilter("ignore")
@@ -140,18 +146,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/FeedbackSummary.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCallFeedbackSummaryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallCallFeedbackSummary])
@@ -159,7 +167,6 @@ class SDK:
 
         return res
 
-    
     
     def create_call_recording(self, request: operations.CreateCallRecordingRequest) -> operations.CreateCallRecordingResponse:
         warnings.simplefilter("ignore")
@@ -168,18 +175,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Recordings.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCallRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallCallRecording])
@@ -187,7 +196,6 @@ class SDK:
 
         return res
 
-    
     
     def create_incoming_phone_number(self, request: operations.CreateIncomingPhoneNumberRequest) -> operations.CreateIncomingPhoneNumberResponse:
         warnings.simplefilter("ignore")
@@ -196,18 +204,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateIncomingPhoneNumberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountIncomingPhoneNumber])
@@ -215,7 +225,6 @@ class SDK:
 
         return res
 
-    
     
     def create_incoming_phone_number_assigned_add_on(self, request: operations.CreateIncomingPhoneNumberAssignedAddOnRequest) -> operations.CreateIncomingPhoneNumberAssignedAddOnResponse:
         warnings.simplefilter("ignore")
@@ -224,18 +233,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateIncomingPhoneNumberAssignedAddOnResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn])
@@ -243,7 +254,6 @@ class SDK:
 
         return res
 
-    
     
     def create_incoming_phone_number_local(self, request: operations.CreateIncomingPhoneNumberLocalRequest) -> operations.CreateIncomingPhoneNumberLocalResponse:
         warnings.simplefilter("ignore")
@@ -252,18 +262,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/Local.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateIncomingPhoneNumberLocalResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountIncomingPhoneNumberIncomingPhoneNumberLocal])
@@ -272,7 +284,6 @@ class SDK:
         return res
 
     
-    
     def create_incoming_phone_number_mobile(self, request: operations.CreateIncomingPhoneNumberMobileRequest) -> operations.CreateIncomingPhoneNumberMobileResponse:
         warnings.simplefilter("ignore")
 
@@ -280,18 +291,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/Mobile.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateIncomingPhoneNumberMobileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountIncomingPhoneNumberIncomingPhoneNumberMobile])
@@ -300,7 +313,6 @@ class SDK:
         return res
 
     
-    
     def create_incoming_phone_number_toll_free(self, request: operations.CreateIncomingPhoneNumberTollFreeRequest) -> operations.CreateIncomingPhoneNumberTollFreeResponse:
         warnings.simplefilter("ignore")
 
@@ -308,18 +320,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/TollFree.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateIncomingPhoneNumberTollFreeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountIncomingPhoneNumberIncomingPhoneNumberTollFree])
@@ -328,7 +342,6 @@ class SDK:
         return res
 
     
-    
     def create_message(self, request: operations.CreateMessageRequest) -> operations.CreateMessageResponse:
         warnings.simplefilter("ignore")
 
@@ -336,18 +349,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Messages.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateMessageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountMessage])
@@ -355,7 +370,6 @@ class SDK:
 
         return res
 
-    
     
     def create_message_feedback(self, request: operations.CreateMessageFeedbackRequest) -> operations.CreateMessageFeedbackResponse:
         warnings.simplefilter("ignore")
@@ -364,18 +378,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Feedback.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateMessageFeedbackResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountMessageMessageFeedback])
@@ -384,7 +400,6 @@ class SDK:
         return res
 
     
-    
     def create_new_key(self, request: operations.CreateNewKeyRequest) -> operations.CreateNewKeyResponse:
         warnings.simplefilter("ignore")
 
@@ -392,18 +407,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Keys.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateNewKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountNewKey])
@@ -412,7 +429,6 @@ class SDK:
         return res
 
     
-    
     def create_new_signing_key(self, request: operations.CreateNewSigningKeyRequest) -> operations.CreateNewSigningKeyResponse:
         warnings.simplefilter("ignore")
 
@@ -420,18 +436,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SigningKeys.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateNewSigningKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountNewSigningKey])
@@ -440,7 +458,6 @@ class SDK:
         return res
 
     
-    
     def create_participant(self, request: operations.CreateParticipantRequest) -> operations.CreateParticipantResponse:
         warnings.simplefilter("ignore")
 
@@ -448,18 +465,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Participants.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateParticipantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountConferenceParticipant])
@@ -467,7 +486,6 @@ class SDK:
 
         return res
 
-    
     
     def create_payments(self, request: operations.CreatePaymentsRequest) -> operations.CreatePaymentsResponse:
         warnings.simplefilter("ignore")
@@ -476,18 +494,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Payments.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreatePaymentsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallPayments])
@@ -495,7 +515,6 @@ class SDK:
 
         return res
 
-    
     
     def create_queue(self, request: operations.CreateQueueRequest) -> operations.CreateQueueResponse:
         warnings.simplefilter("ignore")
@@ -504,18 +523,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Queues.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateQueueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountQueue])
@@ -523,7 +544,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sip_auth_calls_credential_list_mapping(self, request: operations.CreateSipAuthCallsCredentialListMappingRequest) -> operations.CreateSipAuthCallsCredentialListMappingResponse:
         warnings.simplefilter("ignore")
@@ -532,18 +552,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/CredentialListMappings.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSipAuthCallsCredentialListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipDomainSipAuthSipAuthCallsSipAuthCallsCredentialListMapping])
@@ -551,7 +573,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sip_auth_calls_ip_access_control_list_mapping(self, request: operations.CreateSipAuthCallsIPAccessControlListMappingRequest) -> operations.CreateSipAuthCallsIPAccessControlListMappingResponse:
         warnings.simplefilter("ignore")
@@ -560,18 +581,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/IpAccessControlListMappings.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSipAuthCallsIPAccessControlListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipDomainSipAuthSipAuthCallsSipAuthCallsIPAccessControlListMapping])
@@ -579,7 +602,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sip_auth_registrations_credential_list_mapping(self, request: operations.CreateSipAuthRegistrationsCredentialListMappingRequest) -> operations.CreateSipAuthRegistrationsCredentialListMappingResponse:
         warnings.simplefilter("ignore")
@@ -588,18 +610,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations/CredentialListMappings.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSipAuthRegistrationsCredentialListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipDomainSipAuthSipAuthRegistrationsSipAuthRegistrationsCredentialListMapping])
@@ -607,7 +631,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sip_credential(self, request: operations.CreateSipCredentialRequest) -> operations.CreateSipCredentialResponse:
         warnings.simplefilter("ignore")
@@ -616,18 +639,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{CredentialListSid}/Credentials.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSipCredentialResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipCredentialListSipCredential])
@@ -635,7 +660,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sip_credential_list(self, request: operations.CreateSipCredentialListRequest) -> operations.CreateSipCredentialListResponse:
         warnings.simplefilter("ignore")
@@ -644,18 +668,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSipCredentialListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipCredentialList])
@@ -663,7 +689,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sip_credential_list_mapping(self, request: operations.CreateSipCredentialListMappingRequest) -> operations.CreateSipCredentialListMappingResponse:
         warnings.simplefilter("ignore")
@@ -672,18 +697,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/CredentialListMappings.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSipCredentialListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipDomainSipCredentialListMapping])
@@ -691,7 +718,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sip_domain(self, request: operations.CreateSipDomainRequest) -> operations.CreateSipDomainResponse:
         warnings.simplefilter("ignore")
@@ -700,18 +726,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSipDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipDomain])
@@ -719,7 +747,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sip_ip_access_control_list(self, request: operations.CreateSipIPAccessControlListRequest) -> operations.CreateSipIPAccessControlListResponse:
         warnings.simplefilter("ignore")
@@ -728,18 +755,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSipIPAccessControlListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipIPAccessControlList])
@@ -747,7 +776,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sip_ip_access_control_list_mapping(self, request: operations.CreateSipIPAccessControlListMappingRequest) -> operations.CreateSipIPAccessControlListMappingResponse:
         warnings.simplefilter("ignore")
@@ -756,18 +784,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/IpAccessControlListMappings.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSipIPAccessControlListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipDomainSipIPAccessControlListMapping])
@@ -775,7 +805,6 @@ class SDK:
 
         return res
 
-    
     
     def create_sip_ip_address(self, request: operations.CreateSipIPAddressRequest) -> operations.CreateSipIPAddressResponse:
         warnings.simplefilter("ignore")
@@ -784,18 +813,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/IpAddresses.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSipIPAddressResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipIPAccessControlListSipIPAddress])
@@ -803,7 +834,6 @@ class SDK:
 
         return res
 
-    
     
     def create_siprec(self, request: operations.CreateSiprecRequest) -> operations.CreateSiprecResponse:
         warnings.simplefilter("ignore")
@@ -812,18 +842,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Siprec.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSiprecResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallSiprec])
@@ -831,7 +863,6 @@ class SDK:
 
         return res
 
-    
     
     def create_stream(self, request: operations.CreateStreamRequest) -> operations.CreateStreamResponse:
         warnings.simplefilter("ignore")
@@ -840,18 +871,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Streams.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateStreamResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallStream])
@@ -859,7 +892,6 @@ class SDK:
 
         return res
 
-    
     
     def create_token(self, request: operations.CreateTokenRequest) -> operations.CreateTokenResponse:
         warnings.simplefilter("ignore")
@@ -868,18 +900,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Tokens.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTokenResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountToken])
@@ -888,7 +922,6 @@ class SDK:
         return res
 
     
-    
     def create_usage_trigger(self, request: operations.CreateUsageTriggerRequest) -> operations.CreateUsageTriggerResponse:
         warnings.simplefilter("ignore")
 
@@ -896,18 +929,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Triggers.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateUsageTriggerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountUsageUsageTrigger])
@@ -915,7 +950,6 @@ class SDK:
 
         return res
 
-    
     
     def create_validation_request(self, request: operations.CreateValidationRequestRequest) -> operations.CreateValidationRequestResponse:
         warnings.simplefilter("ignore")
@@ -924,18 +958,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateValidationRequestResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountValidationRequest])
@@ -944,7 +980,6 @@ class SDK:
         return res
 
     
-    
     def delete_address(self, request: operations.DeleteAddressRequest) -> operations.DeleteAddressResponse:
         warnings.simplefilter("ignore")
 
@@ -952,20 +987,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Addresses/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteAddressResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_application(self, request: operations.DeleteApplicationRequest) -> operations.DeleteApplicationResponse:
         warnings.simplefilter("ignore")
@@ -974,20 +1008,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Applications/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteApplicationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_call(self, request: operations.DeleteCallRequest) -> operations.DeleteCallResponse:
         warnings.simplefilter("ignore")
@@ -996,20 +1029,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCallResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_call_feedback_summary(self, request: operations.DeleteCallFeedbackSummaryRequest) -> operations.DeleteCallFeedbackSummaryResponse:
         warnings.simplefilter("ignore")
@@ -1018,20 +1050,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/FeedbackSummary/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCallFeedbackSummaryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_call_recording(self, request: operations.DeleteCallRecordingRequest) -> operations.DeleteCallRecordingResponse:
         warnings.simplefilter("ignore")
@@ -1040,20 +1071,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Recordings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCallRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_conference_recording(self, request: operations.DeleteConferenceRecordingRequest) -> operations.DeleteConferenceRecordingResponse:
         warnings.simplefilter("ignore")
@@ -1062,20 +1092,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Recordings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteConferenceRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_connect_app(self, request: operations.DeleteConnectAppRequest) -> operations.DeleteConnectAppResponse:
         warnings.simplefilter("ignore")
@@ -1084,20 +1113,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/ConnectApps/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteConnectAppResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_incoming_phone_number(self, request: operations.DeleteIncomingPhoneNumberRequest) -> operations.DeleteIncomingPhoneNumberResponse:
         warnings.simplefilter("ignore")
@@ -1106,20 +1134,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteIncomingPhoneNumberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_incoming_phone_number_assigned_add_on(self, request: operations.DeleteIncomingPhoneNumberAssignedAddOnRequest) -> operations.DeleteIncomingPhoneNumberAssignedAddOnResponse:
         warnings.simplefilter("ignore")
@@ -1128,20 +1155,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteIncomingPhoneNumberAssignedAddOnResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_key(self, request: operations.DeleteKeyRequest) -> operations.DeleteKeyResponse:
         warnings.simplefilter("ignore")
@@ -1150,20 +1176,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Keys/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_media(self, request: operations.DeleteMediaRequest) -> operations.DeleteMediaResponse:
         warnings.simplefilter("ignore")
@@ -1172,20 +1197,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Media/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteMediaResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_message(self, request: operations.DeleteMessageRequest) -> operations.DeleteMessageResponse:
         warnings.simplefilter("ignore")
@@ -1194,20 +1218,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Messages/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteMessageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_outgoing_caller_id(self, request: operations.DeleteOutgoingCallerIDRequest) -> operations.DeleteOutgoingCallerIDResponse:
         warnings.simplefilter("ignore")
@@ -1216,20 +1239,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteOutgoingCallerIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_participant(self, request: operations.DeleteParticipantRequest) -> operations.DeleteParticipantResponse:
         warnings.simplefilter("ignore")
@@ -1238,20 +1260,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Participants/{CallSid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteParticipantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_queue(self, request: operations.DeleteQueueRequest) -> operations.DeleteQueueResponse:
         warnings.simplefilter("ignore")
@@ -1260,20 +1281,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Queues/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteQueueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_recording(self, request: operations.DeleteRecordingRequest) -> operations.DeleteRecordingResponse:
         warnings.simplefilter("ignore")
@@ -1282,20 +1302,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Recordings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_recording_add_on_result(self, request: operations.DeleteRecordingAddOnResultRequest) -> operations.DeleteRecordingAddOnResultResponse:
         warnings.simplefilter("ignore")
@@ -1304,20 +1323,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteRecordingAddOnResultResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_recording_add_on_result_payload(self, request: operations.DeleteRecordingAddOnResultPayloadRequest) -> operations.DeleteRecordingAddOnResultPayloadResponse:
         warnings.simplefilter("ignore")
@@ -1326,20 +1344,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{AddOnResultSid}/Payloads/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteRecordingAddOnResultPayloadResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_recording_transcription(self, request: operations.DeleteRecordingTranscriptionRequest) -> operations.DeleteRecordingTranscriptionResponse:
         warnings.simplefilter("ignore")
@@ -1348,20 +1365,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}/Transcriptions/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteRecordingTranscriptionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_signing_key(self, request: operations.DeleteSigningKeyRequest) -> operations.DeleteSigningKeyResponse:
         warnings.simplefilter("ignore")
@@ -1370,20 +1386,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SigningKeys/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSigningKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_sip_auth_calls_credential_list_mapping(self, request: operations.DeleteSipAuthCallsCredentialListMappingRequest) -> operations.DeleteSipAuthCallsCredentialListMappingResponse:
         warnings.simplefilter("ignore")
@@ -1392,20 +1407,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/CredentialListMappings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSipAuthCallsCredentialListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_sip_auth_calls_ip_access_control_list_mapping(self, request: operations.DeleteSipAuthCallsIPAccessControlListMappingRequest) -> operations.DeleteSipAuthCallsIPAccessControlListMappingResponse:
         warnings.simplefilter("ignore")
@@ -1414,20 +1428,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/IpAccessControlListMappings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSipAuthCallsIPAccessControlListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_sip_auth_registrations_credential_list_mapping(self, request: operations.DeleteSipAuthRegistrationsCredentialListMappingRequest) -> operations.DeleteSipAuthRegistrationsCredentialListMappingResponse:
         warnings.simplefilter("ignore")
@@ -1436,20 +1449,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations/CredentialListMappings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSipAuthRegistrationsCredentialListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_sip_credential(self, request: operations.DeleteSipCredentialRequest) -> operations.DeleteSipCredentialResponse:
         warnings.simplefilter("ignore")
@@ -1458,20 +1470,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{CredentialListSid}/Credentials/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSipCredentialResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_sip_credential_list(self, request: operations.DeleteSipCredentialListRequest) -> operations.DeleteSipCredentialListResponse:
         warnings.simplefilter("ignore")
@@ -1480,20 +1491,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSipCredentialListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_sip_credential_list_mapping(self, request: operations.DeleteSipCredentialListMappingRequest) -> operations.DeleteSipCredentialListMappingResponse:
         warnings.simplefilter("ignore")
@@ -1502,20 +1512,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/CredentialListMappings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSipCredentialListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_sip_domain(self, request: operations.DeleteSipDomainRequest) -> operations.DeleteSipDomainResponse:
         warnings.simplefilter("ignore")
@@ -1524,20 +1533,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSipDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_sip_ip_access_control_list(self, request: operations.DeleteSipIPAccessControlListRequest) -> operations.DeleteSipIPAccessControlListResponse:
         warnings.simplefilter("ignore")
@@ -1546,20 +1554,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSipIPAccessControlListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_sip_ip_access_control_list_mapping(self, request: operations.DeleteSipIPAccessControlListMappingRequest) -> operations.DeleteSipIPAccessControlListMappingResponse:
         warnings.simplefilter("ignore")
@@ -1568,20 +1575,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/IpAccessControlListMappings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSipIPAccessControlListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_sip_ip_address(self, request: operations.DeleteSipIPAddressRequest) -> operations.DeleteSipIPAddressResponse:
         warnings.simplefilter("ignore")
@@ -1590,20 +1596,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/IpAddresses/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSipIPAddressResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_transcription(self, request: operations.DeleteTranscriptionRequest) -> operations.DeleteTranscriptionResponse:
         warnings.simplefilter("ignore")
@@ -1612,20 +1617,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Transcriptions/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteTranscriptionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_usage_trigger(self, request: operations.DeleteUsageTriggerRequest) -> operations.DeleteUsageTriggerResponse:
         warnings.simplefilter("ignore")
@@ -1634,20 +1638,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Triggers/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteUsageTriggerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def fetch_account(self, request: operations.FetchAccountRequest) -> operations.FetchAccountResponse:
         warnings.simplefilter("ignore")
@@ -1656,14 +1659,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchAccountResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010Account])
@@ -1671,7 +1674,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_address(self, request: operations.FetchAddressRequest) -> operations.FetchAddressResponse:
         warnings.simplefilter("ignore")
@@ -1680,14 +1682,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Addresses/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchAddressResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountAddress])
@@ -1695,7 +1697,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_application(self, request: operations.FetchApplicationRequest) -> operations.FetchApplicationResponse:
         warnings.simplefilter("ignore")
@@ -1704,14 +1705,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Applications/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchApplicationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountApplication])
@@ -1719,7 +1720,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_authorized_connect_app(self, request: operations.FetchAuthorizedConnectAppRequest) -> operations.FetchAuthorizedConnectAppResponse:
         warnings.simplefilter("ignore")
@@ -1728,14 +1728,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/AuthorizedConnectApps/{ConnectAppSid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchAuthorizedConnectAppResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountAuthorizedConnectApp])
@@ -1744,7 +1744,6 @@ class SDK:
         return res
 
     
-    
     def fetch_available_phone_number_country(self, request: operations.FetchAvailablePhoneNumberCountryRequest) -> operations.FetchAvailablePhoneNumberCountryResponse:
         warnings.simplefilter("ignore")
 
@@ -1752,14 +1751,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchAvailablePhoneNumberCountryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountAvailablePhoneNumberCountry])
@@ -1768,7 +1767,6 @@ class SDK:
         return res
 
     
-    
     def fetch_balance(self, request: operations.FetchBalanceRequest) -> operations.FetchBalanceResponse:
         warnings.simplefilter("ignore")
 
@@ -1776,14 +1774,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Balance.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchBalanceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountBalance])
@@ -1792,7 +1790,6 @@ class SDK:
         return res
 
     
-    
     def fetch_call(self, request: operations.FetchCallRequest) -> operations.FetchCallResponse:
         warnings.simplefilter("ignore")
 
@@ -1800,14 +1797,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCallResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCall])
@@ -1815,7 +1812,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_call_feedback(self, request: operations.FetchCallFeedbackRequest) -> operations.FetchCallFeedbackResponse:
         warnings.simplefilter("ignore")
@@ -1824,14 +1820,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Feedback.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCallFeedbackResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallCallFeedback])
@@ -1839,7 +1835,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_call_feedback_summary(self, request: operations.FetchCallFeedbackSummaryRequest) -> operations.FetchCallFeedbackSummaryResponse:
         warnings.simplefilter("ignore")
@@ -1848,14 +1843,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/FeedbackSummary/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCallFeedbackSummaryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallCallFeedbackSummary])
@@ -1864,7 +1859,6 @@ class SDK:
         return res
 
     
-    
     def fetch_call_notification(self, request: operations.FetchCallNotificationRequest) -> operations.FetchCallNotificationResponse:
         warnings.simplefilter("ignore")
 
@@ -1872,14 +1866,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Notifications/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCallNotificationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallCallNotificationInstance])
@@ -1888,7 +1882,6 @@ class SDK:
         return res
 
     
-    
     def fetch_call_recording(self, request: operations.FetchCallRecordingRequest) -> operations.FetchCallRecordingResponse:
         warnings.simplefilter("ignore")
 
@@ -1896,14 +1889,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Recordings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCallRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallCallRecording])
@@ -1911,7 +1904,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_conference(self, request: operations.FetchConferenceRequest) -> operations.FetchConferenceResponse:
         warnings.simplefilter("ignore")
@@ -1920,14 +1912,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Conferences/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchConferenceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountConference])
@@ -1935,7 +1927,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_conference_recording(self, request: operations.FetchConferenceRecordingRequest) -> operations.FetchConferenceRecordingResponse:
         warnings.simplefilter("ignore")
@@ -1944,14 +1935,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Recordings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchConferenceRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountConferenceConferenceRecording])
@@ -1959,7 +1950,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_connect_app(self, request: operations.FetchConnectAppRequest) -> operations.FetchConnectAppResponse:
         warnings.simplefilter("ignore")
@@ -1968,14 +1958,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/ConnectApps/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchConnectAppResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountConnectApp])
@@ -1983,7 +1973,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_incoming_phone_number(self, request: operations.FetchIncomingPhoneNumberRequest) -> operations.FetchIncomingPhoneNumberResponse:
         warnings.simplefilter("ignore")
@@ -1992,14 +1981,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchIncomingPhoneNumberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountIncomingPhoneNumber])
@@ -2007,7 +1996,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_incoming_phone_number_assigned_add_on(self, request: operations.FetchIncomingPhoneNumberAssignedAddOnRequest) -> operations.FetchIncomingPhoneNumberAssignedAddOnResponse:
         warnings.simplefilter("ignore")
@@ -2016,14 +2004,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchIncomingPhoneNumberAssignedAddOnResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOn])
@@ -2032,7 +2020,6 @@ class SDK:
         return res
 
     
-    
     def fetch_incoming_phone_number_assigned_add_on_extension(self, request: operations.FetchIncomingPhoneNumberAssignedAddOnExtensionRequest) -> operations.FetchIncomingPhoneNumberAssignedAddOnExtensionResponse:
         warnings.simplefilter("ignore")
 
@@ -2040,14 +2027,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{AssignedAddOnSid}/Extensions/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchIncomingPhoneNumberAssignedAddOnExtensionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountIncomingPhoneNumberIncomingPhoneNumberAssignedAddOnIncomingPhoneNumberAssignedAddOnExtension])
@@ -2056,7 +2043,6 @@ class SDK:
         return res
 
     
-    
     def fetch_key(self, request: operations.FetchKeyRequest) -> operations.FetchKeyResponse:
         warnings.simplefilter("ignore")
 
@@ -2064,14 +2050,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Keys/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountKey])
@@ -2079,7 +2065,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_media(self, request: operations.FetchMediaRequest) -> operations.FetchMediaResponse:
         warnings.simplefilter("ignore")
@@ -2088,14 +2073,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Media/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchMediaResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountMessageMedia])
@@ -2104,7 +2089,6 @@ class SDK:
         return res
 
     
-    
     def fetch_member(self, request: operations.FetchMemberRequest) -> operations.FetchMemberResponse:
         warnings.simplefilter("ignore")
 
@@ -2112,14 +2096,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Queues/{QueueSid}/Members/{CallSid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchMemberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountQueueMember])
@@ -2127,7 +2111,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_message(self, request: operations.FetchMessageRequest) -> operations.FetchMessageResponse:
         warnings.simplefilter("ignore")
@@ -2136,14 +2119,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Messages/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchMessageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountMessage])
@@ -2151,7 +2134,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_notification(self, request: operations.FetchNotificationRequest) -> operations.FetchNotificationResponse:
         warnings.simplefilter("ignore")
@@ -2160,14 +2142,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Notifications/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchNotificationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountNotificationInstance])
@@ -2176,7 +2158,6 @@ class SDK:
         return res
 
     
-    
     def fetch_outgoing_caller_id(self, request: operations.FetchOutgoingCallerIDRequest) -> operations.FetchOutgoingCallerIDResponse:
         warnings.simplefilter("ignore")
 
@@ -2184,14 +2165,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchOutgoingCallerIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountOutgoingCallerID])
@@ -2199,7 +2180,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_participant(self, request: operations.FetchParticipantRequest) -> operations.FetchParticipantResponse:
         warnings.simplefilter("ignore")
@@ -2208,14 +2188,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Participants/{CallSid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchParticipantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountConferenceParticipant])
@@ -2223,7 +2203,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_queue(self, request: operations.FetchQueueRequest) -> operations.FetchQueueResponse:
         warnings.simplefilter("ignore")
@@ -2232,14 +2211,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Queues/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchQueueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountQueue])
@@ -2247,7 +2226,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_recording(self, request: operations.FetchRecordingRequest) -> operations.FetchRecordingResponse:
         warnings.simplefilter("ignore")
@@ -2256,15 +2234,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Recordings/{Sid}.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountRecording])
@@ -2273,7 +2252,6 @@ class SDK:
         return res
 
     
-    
     def fetch_recording_add_on_result(self, request: operations.FetchRecordingAddOnResultRequest) -> operations.FetchRecordingAddOnResultResponse:
         warnings.simplefilter("ignore")
 
@@ -2281,14 +2259,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRecordingAddOnResultResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountRecordingRecordingAddOnResult])
@@ -2297,7 +2275,6 @@ class SDK:
         return res
 
     
-    
     def fetch_recording_add_on_result_payload(self, request: operations.FetchRecordingAddOnResultPayloadRequest) -> operations.FetchRecordingAddOnResultPayloadResponse:
         warnings.simplefilter("ignore")
 
@@ -2305,14 +2282,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{AddOnResultSid}/Payloads/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRecordingAddOnResultPayloadResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountRecordingRecordingAddOnResultRecordingAddOnResultPayload])
@@ -2321,7 +2298,6 @@ class SDK:
         return res
 
     
-    
     def fetch_recording_transcription(self, request: operations.FetchRecordingTranscriptionRequest) -> operations.FetchRecordingTranscriptionResponse:
         warnings.simplefilter("ignore")
 
@@ -2329,14 +2305,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}/Transcriptions/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchRecordingTranscriptionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountRecordingRecordingTranscription])
@@ -2345,7 +2321,6 @@ class SDK:
         return res
 
     
-    
     def fetch_short_code(self, request: operations.FetchShortCodeRequest) -> operations.FetchShortCodeResponse:
         warnings.simplefilter("ignore")
 
@@ -2353,14 +2328,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SMS/ShortCodes/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchShortCodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountShortCode])
@@ -2368,7 +2343,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_signing_key(self, request: operations.FetchSigningKeyRequest) -> operations.FetchSigningKeyResponse:
         warnings.simplefilter("ignore")
@@ -2377,14 +2351,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SigningKeys/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSigningKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSigningKey])
@@ -2392,7 +2366,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_sip_auth_calls_credential_list_mapping(self, request: operations.FetchSipAuthCallsCredentialListMappingRequest) -> operations.FetchSipAuthCallsCredentialListMappingResponse:
         warnings.simplefilter("ignore")
@@ -2401,14 +2374,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/CredentialListMappings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSipAuthCallsCredentialListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipDomainSipAuthSipAuthCallsSipAuthCallsCredentialListMapping])
@@ -2417,7 +2390,6 @@ class SDK:
         return res
 
     
-    
     def fetch_sip_auth_calls_ip_access_control_list_mapping(self, request: operations.FetchSipAuthCallsIPAccessControlListMappingRequest) -> operations.FetchSipAuthCallsIPAccessControlListMappingResponse:
         warnings.simplefilter("ignore")
 
@@ -2425,14 +2397,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/IpAccessControlListMappings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSipAuthCallsIPAccessControlListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipDomainSipAuthSipAuthCallsSipAuthCallsIPAccessControlListMapping])
@@ -2441,7 +2413,6 @@ class SDK:
         return res
 
     
-    
     def fetch_sip_auth_registrations_credential_list_mapping(self, request: operations.FetchSipAuthRegistrationsCredentialListMappingRequest) -> operations.FetchSipAuthRegistrationsCredentialListMappingResponse:
         warnings.simplefilter("ignore")
 
@@ -2449,14 +2420,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations/CredentialListMappings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSipAuthRegistrationsCredentialListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipDomainSipAuthSipAuthRegistrationsSipAuthRegistrationsCredentialListMapping])
@@ -2465,7 +2436,6 @@ class SDK:
         return res
 
     
-    
     def fetch_sip_credential(self, request: operations.FetchSipCredentialRequest) -> operations.FetchSipCredentialResponse:
         warnings.simplefilter("ignore")
 
@@ -2473,14 +2443,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{CredentialListSid}/Credentials/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSipCredentialResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipCredentialListSipCredential])
@@ -2488,7 +2458,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_sip_credential_list(self, request: operations.FetchSipCredentialListRequest) -> operations.FetchSipCredentialListResponse:
         warnings.simplefilter("ignore")
@@ -2497,14 +2466,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSipCredentialListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipCredentialList])
@@ -2512,7 +2481,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_sip_credential_list_mapping(self, request: operations.FetchSipCredentialListMappingRequest) -> operations.FetchSipCredentialListMappingResponse:
         warnings.simplefilter("ignore")
@@ -2521,14 +2489,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/CredentialListMappings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSipCredentialListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipDomainSipCredentialListMapping])
@@ -2537,7 +2505,6 @@ class SDK:
         return res
 
     
-    
     def fetch_sip_domain(self, request: operations.FetchSipDomainRequest) -> operations.FetchSipDomainResponse:
         warnings.simplefilter("ignore")
 
@@ -2545,14 +2512,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSipDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipDomain])
@@ -2560,7 +2527,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_sip_ip_access_control_list(self, request: operations.FetchSipIPAccessControlListRequest) -> operations.FetchSipIPAccessControlListResponse:
         warnings.simplefilter("ignore")
@@ -2569,14 +2535,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSipIPAccessControlListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipIPAccessControlList])
@@ -2584,7 +2550,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_sip_ip_access_control_list_mapping(self, request: operations.FetchSipIPAccessControlListMappingRequest) -> operations.FetchSipIPAccessControlListMappingResponse:
         warnings.simplefilter("ignore")
@@ -2593,14 +2558,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/IpAccessControlListMappings/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSipIPAccessControlListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipDomainSipIPAccessControlListMapping])
@@ -2609,7 +2574,6 @@ class SDK:
         return res
 
     
-    
     def fetch_sip_ip_address(self, request: operations.FetchSipIPAddressRequest) -> operations.FetchSipIPAddressResponse:
         warnings.simplefilter("ignore")
 
@@ -2617,14 +2581,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/IpAddresses/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSipIPAddressResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipIPAccessControlListSipIPAddress])
@@ -2632,7 +2596,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_transcription(self, request: operations.FetchTranscriptionRequest) -> operations.FetchTranscriptionResponse:
         warnings.simplefilter("ignore")
@@ -2641,14 +2604,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Transcriptions/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTranscriptionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountTranscription])
@@ -2657,7 +2620,6 @@ class SDK:
         return res
 
     
-    
     def fetch_usage_trigger(self, request: operations.FetchUsageTriggerRequest) -> operations.FetchUsageTriggerResponse:
         warnings.simplefilter("ignore")
 
@@ -2665,14 +2627,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Triggers/{Sid}.json", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchUsageTriggerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountUsageUsageTrigger])
@@ -2681,7 +2643,6 @@ class SDK:
         return res
 
     
-    
     def list_account(self, request: operations.ListAccountRequest) -> operations.ListAccountResponse:
         warnings.simplefilter("ignore")
 
@@ -2689,15 +2650,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/2010-04-01/Accounts.json"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAccountResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAccountListAccountResponse])
@@ -2706,7 +2668,6 @@ class SDK:
         return res
 
     
-    
     def list_address(self, request: operations.ListAddressRequest) -> operations.ListAddressResponse:
         warnings.simplefilter("ignore")
 
@@ -2714,15 +2675,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Addresses.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAddressResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAddressListAddressResponse])
@@ -2731,7 +2693,6 @@ class SDK:
         return res
 
     
-    
     def list_application(self, request: operations.ListApplicationRequest) -> operations.ListApplicationResponse:
         warnings.simplefilter("ignore")
 
@@ -2739,15 +2700,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Applications.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListApplicationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListApplicationListApplicationResponse])
@@ -2756,7 +2718,6 @@ class SDK:
         return res
 
     
-    
     def list_authorized_connect_app(self, request: operations.ListAuthorizedConnectAppRequest) -> operations.ListAuthorizedConnectAppResponse:
         warnings.simplefilter("ignore")
 
@@ -2764,15 +2725,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/AuthorizedConnectApps.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAuthorizedConnectAppResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAuthorizedConnectAppListAuthorizedConnectAppResponse])
@@ -2781,7 +2743,6 @@ class SDK:
         return res
 
     
-    
     def list_available_phone_number_country(self, request: operations.ListAvailablePhoneNumberCountryRequest) -> operations.ListAvailablePhoneNumberCountryResponse:
         warnings.simplefilter("ignore")
 
@@ -2789,15 +2750,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAvailablePhoneNumberCountryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAvailablePhoneNumberCountryListAvailablePhoneNumberCountryResponse])
@@ -2806,7 +2768,6 @@ class SDK:
         return res
 
     
-    
     def list_available_phone_number_local(self, request: operations.ListAvailablePhoneNumberLocalRequest) -> operations.ListAvailablePhoneNumberLocalResponse:
         warnings.simplefilter("ignore")
 
@@ -2814,15 +2775,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Local.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAvailablePhoneNumberLocalResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAvailablePhoneNumberLocalListAvailablePhoneNumberLocalResponse])
@@ -2831,7 +2793,6 @@ class SDK:
         return res
 
     
-    
     def list_available_phone_number_machine_to_machine(self, request: operations.ListAvailablePhoneNumberMachineToMachineRequest) -> operations.ListAvailablePhoneNumberMachineToMachineResponse:
         warnings.simplefilter("ignore")
 
@@ -2839,15 +2800,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/MachineToMachine.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAvailablePhoneNumberMachineToMachineResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAvailablePhoneNumberMachineToMachineListAvailablePhoneNumberMachineToMachineResponse])
@@ -2856,7 +2818,6 @@ class SDK:
         return res
 
     
-    
     def list_available_phone_number_mobile(self, request: operations.ListAvailablePhoneNumberMobileRequest) -> operations.ListAvailablePhoneNumberMobileResponse:
         warnings.simplefilter("ignore")
 
@@ -2864,15 +2825,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Mobile.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAvailablePhoneNumberMobileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAvailablePhoneNumberMobileListAvailablePhoneNumberMobileResponse])
@@ -2881,7 +2843,6 @@ class SDK:
         return res
 
     
-    
     def list_available_phone_number_national(self, request: operations.ListAvailablePhoneNumberNationalRequest) -> operations.ListAvailablePhoneNumberNationalResponse:
         warnings.simplefilter("ignore")
 
@@ -2889,15 +2850,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/National.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAvailablePhoneNumberNationalResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAvailablePhoneNumberNationalListAvailablePhoneNumberNationalResponse])
@@ -2906,7 +2868,6 @@ class SDK:
         return res
 
     
-    
     def list_available_phone_number_shared_cost(self, request: operations.ListAvailablePhoneNumberSharedCostRequest) -> operations.ListAvailablePhoneNumberSharedCostResponse:
         warnings.simplefilter("ignore")
 
@@ -2914,15 +2875,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/SharedCost.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAvailablePhoneNumberSharedCostResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAvailablePhoneNumberSharedCostListAvailablePhoneNumberSharedCostResponse])
@@ -2931,7 +2893,6 @@ class SDK:
         return res
 
     
-    
     def list_available_phone_number_toll_free(self, request: operations.ListAvailablePhoneNumberTollFreeRequest) -> operations.ListAvailablePhoneNumberTollFreeResponse:
         warnings.simplefilter("ignore")
 
@@ -2939,15 +2900,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/TollFree.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAvailablePhoneNumberTollFreeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAvailablePhoneNumberTollFreeListAvailablePhoneNumberTollFreeResponse])
@@ -2956,7 +2918,6 @@ class SDK:
         return res
 
     
-    
     def list_available_phone_number_voip(self, request: operations.ListAvailablePhoneNumberVoipRequest) -> operations.ListAvailablePhoneNumberVoipResponse:
         warnings.simplefilter("ignore")
 
@@ -2964,15 +2925,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/AvailablePhoneNumbers/{CountryCode}/Voip.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListAvailablePhoneNumberVoipResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListAvailablePhoneNumberVoipListAvailablePhoneNumberVoipResponse])
@@ -2981,7 +2943,6 @@ class SDK:
         return res
 
     
-    
     def list_call(self, request: operations.ListCallRequest) -> operations.ListCallResponse:
         warnings.simplefilter("ignore")
 
@@ -2989,15 +2950,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCallResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListCallListCallResponse])
@@ -3006,7 +2968,6 @@ class SDK:
         return res
 
     
-    
     def list_call_event(self, request: operations.ListCallEventRequest) -> operations.ListCallEventResponse:
         warnings.simplefilter("ignore")
 
@@ -3014,15 +2975,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Events.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCallEventResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListCallEventListCallEventResponse])
@@ -3031,7 +2993,6 @@ class SDK:
         return res
 
     
-    
     def list_call_notification(self, request: operations.ListCallNotificationRequest) -> operations.ListCallNotificationResponse:
         warnings.simplefilter("ignore")
 
@@ -3039,15 +3000,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Notifications.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCallNotificationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListCallNotificationListCallNotificationResponse])
@@ -3056,7 +3018,6 @@ class SDK:
         return res
 
     
-    
     def list_call_recording(self, request: operations.ListCallRecordingRequest) -> operations.ListCallRecordingResponse:
         warnings.simplefilter("ignore")
 
@@ -3064,15 +3025,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Recordings.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCallRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListCallRecordingListCallRecordingResponse])
@@ -3081,7 +3043,6 @@ class SDK:
         return res
 
     
-    
     def list_conference(self, request: operations.ListConferenceRequest) -> operations.ListConferenceResponse:
         warnings.simplefilter("ignore")
 
@@ -3089,15 +3050,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Conferences.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListConferenceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListConferenceListConferenceResponse])
@@ -3106,7 +3068,6 @@ class SDK:
         return res
 
     
-    
     def list_conference_recording(self, request: operations.ListConferenceRecordingRequest) -> operations.ListConferenceRecordingResponse:
         warnings.simplefilter("ignore")
 
@@ -3114,15 +3075,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Recordings.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListConferenceRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListConferenceRecordingListConferenceRecordingResponse])
@@ -3131,7 +3093,6 @@ class SDK:
         return res
 
     
-    
     def list_connect_app(self, request: operations.ListConnectAppRequest) -> operations.ListConnectAppResponse:
         warnings.simplefilter("ignore")
 
@@ -3139,15 +3100,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/ConnectApps.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListConnectAppResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListConnectAppListConnectAppResponse])
@@ -3156,7 +3118,6 @@ class SDK:
         return res
 
     
-    
     def list_dependent_phone_number(self, request: operations.ListDependentPhoneNumberRequest) -> operations.ListDependentPhoneNumberResponse:
         warnings.simplefilter("ignore")
 
@@ -3164,15 +3125,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Addresses/{AddressSid}/DependentPhoneNumbers.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListDependentPhoneNumberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListDependentPhoneNumberListDependentPhoneNumberResponse])
@@ -3181,7 +3143,6 @@ class SDK:
         return res
 
     
-    
     def list_incoming_phone_number(self, request: operations.ListIncomingPhoneNumberRequest) -> operations.ListIncomingPhoneNumberResponse:
         warnings.simplefilter("ignore")
 
@@ -3189,15 +3150,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListIncomingPhoneNumberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListIncomingPhoneNumberListIncomingPhoneNumberResponse])
@@ -3206,7 +3168,6 @@ class SDK:
         return res
 
     
-    
     def list_incoming_phone_number_assigned_add_on(self, request: operations.ListIncomingPhoneNumberAssignedAddOnRequest) -> operations.ListIncomingPhoneNumberAssignedAddOnResponse:
         warnings.simplefilter("ignore")
 
@@ -3214,15 +3175,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListIncomingPhoneNumberAssignedAddOnResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListIncomingPhoneNumberAssignedAddOnListIncomingPhoneNumberAssignedAddOnResponse])
@@ -3231,7 +3193,6 @@ class SDK:
         return res
 
     
-    
     def list_incoming_phone_number_assigned_add_on_extension(self, request: operations.ListIncomingPhoneNumberAssignedAddOnExtensionRequest) -> operations.ListIncomingPhoneNumberAssignedAddOnExtensionResponse:
         warnings.simplefilter("ignore")
 
@@ -3239,15 +3200,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{ResourceSid}/AssignedAddOns/{AssignedAddOnSid}/Extensions.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListIncomingPhoneNumberAssignedAddOnExtensionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListIncomingPhoneNumberAssignedAddOnExtensionListIncomingPhoneNumberAssignedAddOnExtensionResponse])
@@ -3256,7 +3218,6 @@ class SDK:
         return res
 
     
-    
     def list_incoming_phone_number_local(self, request: operations.ListIncomingPhoneNumberLocalRequest) -> operations.ListIncomingPhoneNumberLocalResponse:
         warnings.simplefilter("ignore")
 
@@ -3264,15 +3225,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/Local.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListIncomingPhoneNumberLocalResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListIncomingPhoneNumberLocalListIncomingPhoneNumberLocalResponse])
@@ -3281,7 +3243,6 @@ class SDK:
         return res
 
     
-    
     def list_incoming_phone_number_mobile(self, request: operations.ListIncomingPhoneNumberMobileRequest) -> operations.ListIncomingPhoneNumberMobileResponse:
         warnings.simplefilter("ignore")
 
@@ -3289,15 +3250,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/Mobile.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListIncomingPhoneNumberMobileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListIncomingPhoneNumberMobileListIncomingPhoneNumberMobileResponse])
@@ -3306,7 +3268,6 @@ class SDK:
         return res
 
     
-    
     def list_incoming_phone_number_toll_free(self, request: operations.ListIncomingPhoneNumberTollFreeRequest) -> operations.ListIncomingPhoneNumberTollFreeResponse:
         warnings.simplefilter("ignore")
 
@@ -3314,15 +3275,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/TollFree.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListIncomingPhoneNumberTollFreeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListIncomingPhoneNumberTollFreeListIncomingPhoneNumberTollFreeResponse])
@@ -3331,7 +3293,6 @@ class SDK:
         return res
 
     
-    
     def list_key(self, request: operations.ListKeyRequest) -> operations.ListKeyResponse:
         warnings.simplefilter("ignore")
 
@@ -3339,15 +3300,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Keys.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListKeyListKeyResponse])
@@ -3356,7 +3318,6 @@ class SDK:
         return res
 
     
-    
     def list_media(self, request: operations.ListMediaRequest) -> operations.ListMediaResponse:
         warnings.simplefilter("ignore")
 
@@ -3364,15 +3325,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Messages/{MessageSid}/Media.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListMediaResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListMediaListMediaResponse])
@@ -3381,7 +3343,6 @@ class SDK:
         return res
 
     
-    
     def list_member(self, request: operations.ListMemberRequest) -> operations.ListMemberResponse:
         warnings.simplefilter("ignore")
 
@@ -3389,15 +3350,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Queues/{QueueSid}/Members.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListMemberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListMemberListMemberResponse])
@@ -3406,7 +3368,6 @@ class SDK:
         return res
 
     
-    
     def list_message(self, request: operations.ListMessageRequest) -> operations.ListMessageResponse:
         warnings.simplefilter("ignore")
 
@@ -3414,15 +3375,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Messages.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListMessageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListMessageListMessageResponse])
@@ -3431,7 +3393,6 @@ class SDK:
         return res
 
     
-    
     def list_notification(self, request: operations.ListNotificationRequest) -> operations.ListNotificationResponse:
         warnings.simplefilter("ignore")
 
@@ -3439,15 +3400,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Notifications.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListNotificationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListNotificationListNotificationResponse])
@@ -3456,7 +3418,6 @@ class SDK:
         return res
 
     
-    
     def list_outgoing_caller_id(self, request: operations.ListOutgoingCallerIDRequest) -> operations.ListOutgoingCallerIDResponse:
         warnings.simplefilter("ignore")
 
@@ -3464,15 +3425,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListOutgoingCallerIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListOutgoingCallerIDListOutgoingCallerIDResponse])
@@ -3481,7 +3443,6 @@ class SDK:
         return res
 
     
-    
     def list_participant(self, request: operations.ListParticipantRequest) -> operations.ListParticipantResponse:
         warnings.simplefilter("ignore")
 
@@ -3489,15 +3450,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Participants.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListParticipantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListParticipantListParticipantResponse])
@@ -3506,7 +3468,6 @@ class SDK:
         return res
 
     
-    
     def list_queue(self, request: operations.ListQueueRequest) -> operations.ListQueueResponse:
         warnings.simplefilter("ignore")
 
@@ -3514,15 +3475,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Queues.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListQueueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListQueueListQueueResponse])
@@ -3531,7 +3493,6 @@ class SDK:
         return res
 
     
-    
     def list_recording(self, request: operations.ListRecordingRequest) -> operations.ListRecordingResponse:
         warnings.simplefilter("ignore")
 
@@ -3539,15 +3500,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Recordings.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListRecordingListRecordingResponse])
@@ -3556,7 +3518,6 @@ class SDK:
         return res
 
     
-    
     def list_recording_add_on_result(self, request: operations.ListRecordingAddOnResultRequest) -> operations.ListRecordingAddOnResultResponse:
         warnings.simplefilter("ignore")
 
@@ -3564,15 +3525,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListRecordingAddOnResultResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListRecordingAddOnResultListRecordingAddOnResultResponse])
@@ -3581,7 +3543,6 @@ class SDK:
         return res
 
     
-    
     def list_recording_add_on_result_payload(self, request: operations.ListRecordingAddOnResultPayloadRequest) -> operations.ListRecordingAddOnResultPayloadResponse:
         warnings.simplefilter("ignore")
 
@@ -3589,15 +3550,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Recordings/{ReferenceSid}/AddOnResults/{AddOnResultSid}/Payloads.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListRecordingAddOnResultPayloadResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListRecordingAddOnResultPayloadListRecordingAddOnResultPayloadResponse])
@@ -3606,7 +3568,6 @@ class SDK:
         return res
 
     
-    
     def list_recording_transcription(self, request: operations.ListRecordingTranscriptionRequest) -> operations.ListRecordingTranscriptionResponse:
         warnings.simplefilter("ignore")
 
@@ -3614,15 +3575,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Recordings/{RecordingSid}/Transcriptions.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListRecordingTranscriptionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListRecordingTranscriptionListRecordingTranscriptionResponse])
@@ -3631,7 +3593,6 @@ class SDK:
         return res
 
     
-    
     def list_short_code(self, request: operations.ListShortCodeRequest) -> operations.ListShortCodeResponse:
         warnings.simplefilter("ignore")
 
@@ -3639,15 +3600,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SMS/ShortCodes.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListShortCodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListShortCodeListShortCodeResponse])
@@ -3656,7 +3618,6 @@ class SDK:
         return res
 
     
-    
     def list_signing_key(self, request: operations.ListSigningKeyRequest) -> operations.ListSigningKeyResponse:
         warnings.simplefilter("ignore")
 
@@ -3664,15 +3625,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SigningKeys.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSigningKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSigningKeyListSigningKeyResponse])
@@ -3681,7 +3643,6 @@ class SDK:
         return res
 
     
-    
     def list_sip_auth_calls_credential_list_mapping(self, request: operations.ListSipAuthCallsCredentialListMappingRequest) -> operations.ListSipAuthCallsCredentialListMappingResponse:
         warnings.simplefilter("ignore")
 
@@ -3689,15 +3650,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/CredentialListMappings.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSipAuthCallsCredentialListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSipAuthCallsCredentialListMappingListSipAuthCallsCredentialListMappingResponse])
@@ -3706,7 +3668,6 @@ class SDK:
         return res
 
     
-    
     def list_sip_auth_calls_ip_access_control_list_mapping(self, request: operations.ListSipAuthCallsIPAccessControlListMappingRequest) -> operations.ListSipAuthCallsIPAccessControlListMappingResponse:
         warnings.simplefilter("ignore")
 
@@ -3714,15 +3675,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Calls/IpAccessControlListMappings.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSipAuthCallsIPAccessControlListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSipAuthCallsIPAccessControlListMappingListSipAuthCallsIPAccessControlListMappingResponse])
@@ -3731,7 +3693,6 @@ class SDK:
         return res
 
     
-    
     def list_sip_auth_registrations_credential_list_mapping(self, request: operations.ListSipAuthRegistrationsCredentialListMappingRequest) -> operations.ListSipAuthRegistrationsCredentialListMappingResponse:
         warnings.simplefilter("ignore")
 
@@ -3739,15 +3700,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/Auth/Registrations/CredentialListMappings.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSipAuthRegistrationsCredentialListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSipAuthRegistrationsCredentialListMappingListSipAuthRegistrationsCredentialListMappingResponse])
@@ -3756,7 +3718,6 @@ class SDK:
         return res
 
     
-    
     def list_sip_credential(self, request: operations.ListSipCredentialRequest) -> operations.ListSipCredentialResponse:
         warnings.simplefilter("ignore")
 
@@ -3764,15 +3725,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{CredentialListSid}/Credentials.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSipCredentialResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSipCredentialListSipCredentialResponse])
@@ -3781,7 +3743,6 @@ class SDK:
         return res
 
     
-    
     def list_sip_credential_list(self, request: operations.ListSipCredentialListRequest) -> operations.ListSipCredentialListResponse:
         warnings.simplefilter("ignore")
 
@@ -3789,15 +3750,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSipCredentialListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSipCredentialListListSipCredentialListResponse])
@@ -3806,7 +3768,6 @@ class SDK:
         return res
 
     
-    
     def list_sip_credential_list_mapping(self, request: operations.ListSipCredentialListMappingRequest) -> operations.ListSipCredentialListMappingResponse:
         warnings.simplefilter("ignore")
 
@@ -3814,15 +3775,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/CredentialListMappings.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSipCredentialListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSipCredentialListMappingListSipCredentialListMappingResponse])
@@ -3831,7 +3793,6 @@ class SDK:
         return res
 
     
-    
     def list_sip_domain(self, request: operations.ListSipDomainRequest) -> operations.ListSipDomainResponse:
         warnings.simplefilter("ignore")
 
@@ -3839,15 +3800,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSipDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSipDomainListSipDomainResponse])
@@ -3856,7 +3818,6 @@ class SDK:
         return res
 
     
-    
     def list_sip_ip_access_control_list(self, request: operations.ListSipIPAccessControlListRequest) -> operations.ListSipIPAccessControlListResponse:
         warnings.simplefilter("ignore")
 
@@ -3864,15 +3825,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSipIPAccessControlListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSipIPAccessControlListListSipIPAccessControlListResponse])
@@ -3881,7 +3843,6 @@ class SDK:
         return res
 
     
-    
     def list_sip_ip_access_control_list_mapping(self, request: operations.ListSipIPAccessControlListMappingRequest) -> operations.ListSipIPAccessControlListMappingResponse:
         warnings.simplefilter("ignore")
 
@@ -3889,15 +3850,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{DomainSid}/IpAccessControlListMappings.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSipIPAccessControlListMappingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSipIPAccessControlListMappingListSipIPAccessControlListMappingResponse])
@@ -3906,7 +3868,6 @@ class SDK:
         return res
 
     
-    
     def list_sip_ip_address(self, request: operations.ListSipIPAddressRequest) -> operations.ListSipIPAddressResponse:
         warnings.simplefilter("ignore")
 
@@ -3914,15 +3875,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/IpAddresses.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSipIPAddressResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSipIPAddressListSipIPAddressResponse])
@@ -3931,7 +3893,6 @@ class SDK:
         return res
 
     
-    
     def list_transcription(self, request: operations.ListTranscriptionRequest) -> operations.ListTranscriptionResponse:
         warnings.simplefilter("ignore")
 
@@ -3939,15 +3900,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Transcriptions.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTranscriptionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListTranscriptionListTranscriptionResponse])
@@ -3956,7 +3918,6 @@ class SDK:
         return res
 
     
-    
     def list_usage_record(self, request: operations.ListUsageRecordRequest) -> operations.ListUsageRecordResponse:
         warnings.simplefilter("ignore")
 
@@ -3964,15 +3925,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Records.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUsageRecordResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecordListUsageRecordResponse])
@@ -3981,7 +3943,6 @@ class SDK:
         return res
 
     
-    
     def list_usage_record_all_time(self, request: operations.ListUsageRecordAllTimeRequest) -> operations.ListUsageRecordAllTimeResponse:
         warnings.simplefilter("ignore")
 
@@ -3989,15 +3950,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Records/AllTime.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUsageRecordAllTimeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecordAllTimeListUsageRecordAllTimeResponse])
@@ -4006,7 +3968,6 @@ class SDK:
         return res
 
     
-    
     def list_usage_record_daily(self, request: operations.ListUsageRecordDailyRequest) -> operations.ListUsageRecordDailyResponse:
         warnings.simplefilter("ignore")
 
@@ -4014,15 +3975,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Daily.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUsageRecordDailyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecordDailyListUsageRecordDailyResponse])
@@ -4031,7 +3993,6 @@ class SDK:
         return res
 
     
-    
     def list_usage_record_last_month(self, request: operations.ListUsageRecordLastMonthRequest) -> operations.ListUsageRecordLastMonthResponse:
         warnings.simplefilter("ignore")
 
@@ -4039,15 +4000,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Records/LastMonth.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUsageRecordLastMonthResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecordLastMonthListUsageRecordLastMonthResponse])
@@ -4056,7 +4018,6 @@ class SDK:
         return res
 
     
-    
     def list_usage_record_monthly(self, request: operations.ListUsageRecordMonthlyRequest) -> operations.ListUsageRecordMonthlyResponse:
         warnings.simplefilter("ignore")
 
@@ -4064,15 +4025,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Monthly.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUsageRecordMonthlyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecordMonthlyListUsageRecordMonthlyResponse])
@@ -4081,7 +4043,6 @@ class SDK:
         return res
 
     
-    
     def list_usage_record_this_month(self, request: operations.ListUsageRecordThisMonthRequest) -> operations.ListUsageRecordThisMonthResponse:
         warnings.simplefilter("ignore")
 
@@ -4089,15 +4050,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Records/ThisMonth.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUsageRecordThisMonthResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecordThisMonthListUsageRecordThisMonthResponse])
@@ -4106,7 +4068,6 @@ class SDK:
         return res
 
     
-    
     def list_usage_record_today(self, request: operations.ListUsageRecordTodayRequest) -> operations.ListUsageRecordTodayResponse:
         warnings.simplefilter("ignore")
 
@@ -4114,15 +4075,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Today.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUsageRecordTodayResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecordTodayListUsageRecordTodayResponse])
@@ -4131,7 +4093,6 @@ class SDK:
         return res
 
     
-    
     def list_usage_record_yearly(self, request: operations.ListUsageRecordYearlyRequest) -> operations.ListUsageRecordYearlyResponse:
         warnings.simplefilter("ignore")
 
@@ -4139,15 +4100,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Yearly.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUsageRecordYearlyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecordYearlyListUsageRecordYearlyResponse])
@@ -4156,7 +4118,6 @@ class SDK:
         return res
 
     
-    
     def list_usage_record_yesterday(self, request: operations.ListUsageRecordYesterdayRequest) -> operations.ListUsageRecordYesterdayResponse:
         warnings.simplefilter("ignore")
 
@@ -4164,15 +4125,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Records/Yesterday.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUsageRecordYesterdayResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListUsageRecordYesterdayListUsageRecordYesterdayResponse])
@@ -4181,7 +4143,6 @@ class SDK:
         return res
 
     
-    
     def list_usage_trigger(self, request: operations.ListUsageTriggerRequest) -> operations.ListUsageTriggerResponse:
         warnings.simplefilter("ignore")
 
@@ -4189,15 +4150,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Triggers.json", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListUsageTriggerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListUsageTriggerListUsageTriggerResponse])
@@ -4206,7 +4168,6 @@ class SDK:
         return res
 
     
-    
     def update_account(self, request: operations.UpdateAccountRequest) -> operations.UpdateAccountResponse:
         warnings.simplefilter("ignore")
 
@@ -4214,18 +4175,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateAccountResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010Account])
@@ -4234,7 +4197,6 @@ class SDK:
         return res
 
     
-    
     def update_address(self, request: operations.UpdateAddressRequest) -> operations.UpdateAddressResponse:
         warnings.simplefilter("ignore")
 
@@ -4242,18 +4204,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Addresses/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateAddressResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountAddress])
@@ -4262,7 +4226,6 @@ class SDK:
         return res
 
     
-    
     def update_application(self, request: operations.UpdateApplicationRequest) -> operations.UpdateApplicationResponse:
         warnings.simplefilter("ignore")
 
@@ -4270,18 +4233,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Applications/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateApplicationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountApplication])
@@ -4290,7 +4255,6 @@ class SDK:
         return res
 
     
-    
     def update_call(self, request: operations.UpdateCallRequest) -> operations.UpdateCallResponse:
         warnings.simplefilter("ignore")
 
@@ -4298,18 +4262,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateCallResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCall])
@@ -4318,7 +4284,6 @@ class SDK:
         return res
 
     
-    
     def update_call_feedback(self, request: operations.UpdateCallFeedbackRequest) -> operations.UpdateCallFeedbackResponse:
         warnings.simplefilter("ignore")
 
@@ -4326,18 +4291,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Feedback.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateCallFeedbackResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallCallFeedback])
@@ -4346,7 +4313,6 @@ class SDK:
         return res
 
     
-    
     def update_call_recording(self, request: operations.UpdateCallRecordingRequest) -> operations.UpdateCallRecordingResponse:
         warnings.simplefilter("ignore")
 
@@ -4354,18 +4320,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Recordings/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateCallRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallCallRecording])
@@ -4374,7 +4342,6 @@ class SDK:
         return res
 
     
-    
     def update_conference(self, request: operations.UpdateConferenceRequest) -> operations.UpdateConferenceResponse:
         warnings.simplefilter("ignore")
 
@@ -4382,18 +4349,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Conferences/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateConferenceResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountConference])
@@ -4402,7 +4371,6 @@ class SDK:
         return res
 
     
-    
     def update_conference_recording(self, request: operations.UpdateConferenceRecordingRequest) -> operations.UpdateConferenceRecordingResponse:
         warnings.simplefilter("ignore")
 
@@ -4410,18 +4378,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Recordings/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateConferenceRecordingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountConferenceConferenceRecording])
@@ -4430,7 +4400,6 @@ class SDK:
         return res
 
     
-    
     def update_connect_app(self, request: operations.UpdateConnectAppRequest) -> operations.UpdateConnectAppResponse:
         warnings.simplefilter("ignore")
 
@@ -4438,18 +4407,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/ConnectApps/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateConnectAppResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountConnectApp])
@@ -4458,7 +4429,6 @@ class SDK:
         return res
 
     
-    
     def update_incoming_phone_number(self, request: operations.UpdateIncomingPhoneNumberRequest) -> operations.UpdateIncomingPhoneNumberResponse:
         warnings.simplefilter("ignore")
 
@@ -4466,18 +4436,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/IncomingPhoneNumbers/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateIncomingPhoneNumberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountIncomingPhoneNumber])
@@ -4486,7 +4458,6 @@ class SDK:
         return res
 
     
-    
     def update_key(self, request: operations.UpdateKeyRequest) -> operations.UpdateKeyResponse:
         warnings.simplefilter("ignore")
 
@@ -4494,18 +4465,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Keys/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountKey])
@@ -4514,7 +4487,6 @@ class SDK:
         return res
 
     
-    
     def update_member(self, request: operations.UpdateMemberRequest) -> operations.UpdateMemberResponse:
         warnings.simplefilter("ignore")
 
@@ -4522,18 +4494,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Queues/{QueueSid}/Members/{CallSid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateMemberResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountQueueMember])
@@ -4542,7 +4516,6 @@ class SDK:
         return res
 
     
-    
     def update_message(self, request: operations.UpdateMessageRequest) -> operations.UpdateMessageResponse:
         warnings.simplefilter("ignore")
 
@@ -4550,18 +4523,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Messages/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateMessageResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountMessage])
@@ -4570,7 +4545,6 @@ class SDK:
         return res
 
     
-    
     def update_outgoing_caller_id(self, request: operations.UpdateOutgoingCallerIDRequest) -> operations.UpdateOutgoingCallerIDResponse:
         warnings.simplefilter("ignore")
 
@@ -4578,18 +4552,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/OutgoingCallerIds/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateOutgoingCallerIDResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountOutgoingCallerID])
@@ -4598,7 +4574,6 @@ class SDK:
         return res
 
     
-    
     def update_participant(self, request: operations.UpdateParticipantRequest) -> operations.UpdateParticipantResponse:
         warnings.simplefilter("ignore")
 
@@ -4606,18 +4581,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Conferences/{ConferenceSid}/Participants/{CallSid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateParticipantResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountConferenceParticipant])
@@ -4626,7 +4603,6 @@ class SDK:
         return res
 
     
-    
     def update_payments(self, request: operations.UpdatePaymentsRequest) -> operations.UpdatePaymentsResponse:
         warnings.simplefilter("ignore")
 
@@ -4634,18 +4610,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Payments/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdatePaymentsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 202:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallPayments])
@@ -4654,7 +4632,6 @@ class SDK:
         return res
 
     
-    
     def update_queue(self, request: operations.UpdateQueueRequest) -> operations.UpdateQueueResponse:
         warnings.simplefilter("ignore")
 
@@ -4662,18 +4639,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Queues/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateQueueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountQueue])
@@ -4682,7 +4661,6 @@ class SDK:
         return res
 
     
-    
     def update_short_code(self, request: operations.UpdateShortCodeRequest) -> operations.UpdateShortCodeResponse:
         warnings.simplefilter("ignore")
 
@@ -4690,18 +4668,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SMS/ShortCodes/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateShortCodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountShortCode])
@@ -4710,7 +4690,6 @@ class SDK:
         return res
 
     
-    
     def update_signing_key(self, request: operations.UpdateSigningKeyRequest) -> operations.UpdateSigningKeyResponse:
         warnings.simplefilter("ignore")
 
@@ -4718,18 +4697,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SigningKeys/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSigningKeyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSigningKey])
@@ -4738,7 +4719,6 @@ class SDK:
         return res
 
     
-    
     def update_sip_credential(self, request: operations.UpdateSipCredentialRequest) -> operations.UpdateSipCredentialResponse:
         warnings.simplefilter("ignore")
 
@@ -4746,18 +4726,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{CredentialListSid}/Credentials/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSipCredentialResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipCredentialListSipCredential])
@@ -4766,7 +4748,6 @@ class SDK:
         return res
 
     
-    
     def update_sip_credential_list(self, request: operations.UpdateSipCredentialListRequest) -> operations.UpdateSipCredentialListResponse:
         warnings.simplefilter("ignore")
 
@@ -4774,18 +4755,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/CredentialLists/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSipCredentialListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipCredentialList])
@@ -4794,7 +4777,6 @@ class SDK:
         return res
 
     
-    
     def update_sip_domain(self, request: operations.UpdateSipDomainRequest) -> operations.UpdateSipDomainResponse:
         warnings.simplefilter("ignore")
 
@@ -4802,18 +4784,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/Domains/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSipDomainResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipDomain])
@@ -4822,7 +4806,6 @@ class SDK:
         return res
 
     
-    
     def update_sip_ip_access_control_list(self, request: operations.UpdateSipIPAccessControlListRequest) -> operations.UpdateSipIPAccessControlListResponse:
         warnings.simplefilter("ignore")
 
@@ -4830,18 +4813,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSipIPAccessControlListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipIPAccessControlList])
@@ -4850,7 +4835,6 @@ class SDK:
         return res
 
     
-    
     def update_sip_ip_address(self, request: operations.UpdateSipIPAddressRequest) -> operations.UpdateSipIPAddressResponse:
         warnings.simplefilter("ignore")
 
@@ -4858,18 +4842,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/SIP/IpAccessControlLists/{IpAccessControlListSid}/IpAddresses/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSipIPAddressResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountSipSipIPAccessControlListSipIPAddress])
@@ -4878,7 +4864,6 @@ class SDK:
         return res
 
     
-    
     def update_siprec(self, request: operations.UpdateSiprecRequest) -> operations.UpdateSiprecResponse:
         warnings.simplefilter("ignore")
 
@@ -4886,18 +4871,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Siprec/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSiprecResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallSiprec])
@@ -4906,7 +4893,6 @@ class SDK:
         return res
 
     
-    
     def update_stream(self, request: operations.UpdateStreamRequest) -> operations.UpdateStreamResponse:
         warnings.simplefilter("ignore")
 
@@ -4914,18 +4900,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Calls/{CallSid}/Streams/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateStreamResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountCallStream])
@@ -4934,7 +4922,6 @@ class SDK:
         return res
 
     
-    
     def update_usage_trigger(self, request: operations.UpdateUsageTriggerRequest) -> operations.UpdateUsageTriggerResponse:
         warnings.simplefilter("ignore")
 
@@ -4942,18 +4929,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/2010-04-01/Accounts/{AccountSid}/Usage/Triggers/{Sid}.json", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateUsageTriggerResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.APIV2010AccountUsageUsageTrigger])

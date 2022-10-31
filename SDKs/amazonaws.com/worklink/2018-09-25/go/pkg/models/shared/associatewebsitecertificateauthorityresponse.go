@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AssociateWebsiteCertificateAuthorityResponse struct {
-	WebsiteCaID *string `json:"WebsiteCaId,omitempty"`
+    WebsiteCaID *string `json:"WebsiteCaId,omitempty"`
+    
 }
+

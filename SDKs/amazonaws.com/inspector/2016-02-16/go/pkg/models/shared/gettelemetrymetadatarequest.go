@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetTelemetryMetadataRequest struct {
-	AssessmentRunArn string `json:"assessmentRunArn"`
+    AssessmentRunArn string `json:"assessmentRunArn"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ImagesDeleteAllResponse struct {
-	Deleted []Image `json:"deleted,omitempty"`
+    Deleted []Image `json:"deleted,omitempty"`
+    
 }
+

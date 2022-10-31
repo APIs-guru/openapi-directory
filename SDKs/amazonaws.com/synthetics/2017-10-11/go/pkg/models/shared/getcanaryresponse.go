@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetCanaryResponse struct {
-	Canary *Canary `json:"Canary,omitempty"`
+    Canary *Canary `json:"Canary,omitempty"`
+    
 }
+

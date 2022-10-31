@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeTaskRequest struct {
-	TaskArn string `json:"TaskArn"`
+    TaskArn string `json:"TaskArn"`
+    
 }
+

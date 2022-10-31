@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetServicesInScopeResponse struct {
-	ServiceMetadata []ServiceMetadata `json:"serviceMetadata,omitempty"`
+    ServiceMetadata []ServiceMetadata `json:"serviceMetadata,omitempty"`
+    
 }
+

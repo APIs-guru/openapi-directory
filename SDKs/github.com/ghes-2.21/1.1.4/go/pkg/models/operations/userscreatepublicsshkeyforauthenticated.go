@@ -1,22 +1,25 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type UsersCreatePublicSSHKeyForAuthenticatedRequestBody struct {
-	Key   string  `json:"key"`
-	Title *string `json:"title,omitempty"`
+    Key string `json:"key"`
+    Title *string `json:"title,omitempty"`
+    
 }
 
 type UsersCreatePublicSSHKeyForAuthenticatedRequest struct {
-	Request *UsersCreatePublicSSHKeyForAuthenticatedRequestBody `request:"mediaType=application/json"`
+    Request *UsersCreatePublicSSHKeyForAuthenticatedRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type UsersCreatePublicSSHKeyForAuthenticatedResponse struct {
-	ContentType     string
-	StatusCode      int64
-	BasicError      *shared.BasicError
-	Key             *shared.Key
-	ValidationError *shared.ValidationError
+    ContentType string 
+    StatusCode int64 
+    BasicError *shared.BasicError 
+    Key *shared.Key 
+    ValidationError *shared.ValidationError 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteReplicationGroupMemberAction struct {
-	RegionName string `json:"RegionName"`
+    RegionName string `json:"RegionName"`
+    
 }
+

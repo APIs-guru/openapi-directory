@@ -9,7 +9,7 @@ class GetInstancesIDFilePathParams:
 
 @dataclass
 class GetInstancesIDFileHeaders:
-    accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept' }})
+    accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

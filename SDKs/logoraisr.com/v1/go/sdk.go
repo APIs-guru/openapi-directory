@@ -153,6 +153,7 @@ func (s *SDK) ProjectsCreate(ctx context.Context, request operations.ProjectsCre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -286,6 +287,7 @@ func (s *SDK) ReportsCreate(ctx context.Context, request operations.ReportsCreat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -460,6 +462,7 @@ func (s *SDK) UploadsCreate(ctx context.Context, request operations.UploadsCreat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

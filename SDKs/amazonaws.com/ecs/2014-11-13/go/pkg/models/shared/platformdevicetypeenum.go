@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type PlatformDeviceTypeEnum string
 
 const (
-	PlatformDeviceTypeEnumGpu PlatformDeviceTypeEnum = "GPU"
+    PlatformDeviceTypeEnumGpu PlatformDeviceTypeEnum = "GPU"
 )
+
+

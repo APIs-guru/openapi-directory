@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RollbackApplicationResponse struct {
-	ApplicationDetail ApplicationDetail `json:"ApplicationDetail"`
+    ApplicationDetail ApplicationDetail `json:"ApplicationDetail"`
+    
 }
+

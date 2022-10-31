@@ -1,15 +1,21 @@
 package operations
 
+
+
 type NodesPreprintsListPathParams struct {
-	NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
+    NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
+    
 }
 
 type NodesPreprintsListRequest struct {
-	PathParams NodesPreprintsListPathParams
+    PathParams NodesPreprintsListPathParams 
+    
 }
 
 type NodesPreprintsListResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

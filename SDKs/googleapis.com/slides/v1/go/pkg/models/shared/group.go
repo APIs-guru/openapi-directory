@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Group struct {
-	Children []PageElement `json:"children,omitempty"`
+    Children []PageElement `json:"children,omitempty"`
+    
 }
+

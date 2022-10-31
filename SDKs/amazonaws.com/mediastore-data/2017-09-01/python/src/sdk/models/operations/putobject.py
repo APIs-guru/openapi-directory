@@ -18,17 +18,17 @@ class PutObjectXAmzUploadAvailabilityEnum(str, Enum):
 
 @dataclass
 class PutObjectHeaders:
-    cache_control: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Cache-Control' }})
-    content_type: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-Type' }})
-    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
-    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
-    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
-    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
-    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
-    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
-    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
-    x_amz_storage_class: Optional[PutObjectXAmzStorageClassEnum] = field(default=None, metadata={'header': { 'field_name': 'x-amz-storage-class' }})
-    x_amz_upload_availability: Optional[PutObjectXAmzUploadAvailabilityEnum] = field(default=None, metadata={'header': { 'field_name': 'x-amz-upload-availability' }})
+    cache_control: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Cache-Control', 'style': 'simple', 'explode': False }})
+    content_type: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date', 'style': 'simple', 'explode': False }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
+    x_amz_storage_class: Optional[PutObjectXAmzStorageClassEnum] = field(default=None, metadata={'header': { 'field_name': 'x-amz-storage-class', 'style': 'simple', 'explode': False }})
+    x_amz_upload_availability: Optional[PutObjectXAmzUploadAvailabilityEnum] = field(default=None, metadata={'header': { 'field_name': 'x-amz-upload-availability', 'style': 'simple', 'explode': False }})
     
 
 @dataclass_json

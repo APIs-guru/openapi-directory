@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ActivityContentDetailsUpload struct {
-	VideoID *string `json:"videoId,omitempty"`
+    VideoID *string `json:"videoId,omitempty"`
+    
 }
+

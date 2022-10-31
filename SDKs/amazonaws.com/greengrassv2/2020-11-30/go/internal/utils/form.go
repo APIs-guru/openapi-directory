@@ -70,7 +70,6 @@ func populateForm(paramName string, explode bool, objType reflect.Type, objValue
 
 func parseFormStyleArray(explode bool, objValue reflect.Value) []string {
 	values := []string{}
-
 	items := []string{}
 
 	for i := 0; i < objValue.Len(); i++ {

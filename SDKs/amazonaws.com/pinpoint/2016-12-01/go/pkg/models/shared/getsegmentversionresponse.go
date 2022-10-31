@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetSegmentVersionResponse struct {
-	SegmentResponse SegmentResponse `json:"SegmentResponse"`
+    SegmentResponse SegmentResponse `json:"SegmentResponse"`
+    
 }
+

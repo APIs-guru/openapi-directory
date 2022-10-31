@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GeneratedApksListResponse struct {
-	GeneratedApks []GeneratedApksPerSigningKey `json:"generatedApks,omitempty"`
+    GeneratedApks []GeneratedApksPerSigningKey `json:"generatedApks,omitempty"`
+    
 }
+

@@ -1,13 +1,14 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type DeauthorizeConnectionResponse struct {
-	ConnectionArn      *string              `json:"ConnectionArn,omitempty"`
-	ConnectionState    *ConnectionStateEnum `json:"ConnectionState,omitempty"`
-	CreationTime       *time.Time           `json:"CreationTime,omitempty"`
-	LastAuthorizedTime *time.Time           `json:"LastAuthorizedTime,omitempty"`
-	LastModifiedTime   *time.Time           `json:"LastModifiedTime,omitempty"`
+    ConnectionArn *string `json:"ConnectionArn,omitempty"`
+    ConnectionState *ConnectionStateEnum `json:"ConnectionState,omitempty"`
+    CreationTime *time.Time `json:"CreationTime,omitempty"`
+    LastAuthorizedTime *time.Time `json:"LastAuthorizedTime,omitempty"`
+    LastModifiedTime *time.Time `json:"LastModifiedTime,omitempty"`
+    
 }
+

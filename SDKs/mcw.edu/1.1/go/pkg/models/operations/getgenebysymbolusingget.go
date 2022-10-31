@@ -1,16 +1,22 @@
 package operations
 
+
+
 type GetGeneBySymbolUsingGetPathParams struct {
-	SpeciesTypeKey int32  `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
-	Symbol         string `pathParam:"style=simple,explode=false,name=symbol"`
+    SpeciesTypeKey int32 `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
+    Symbol string `pathParam:"style=simple,explode=false,name=symbol"`
+    
 }
 
 type GetGeneBySymbolUsingGetRequest struct {
-	PathParams GetGeneBySymbolUsingGetPathParams
+    PathParams GetGeneBySymbolUsingGetPathParams 
+    
 }
 
 type GetGeneBySymbolUsingGetResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

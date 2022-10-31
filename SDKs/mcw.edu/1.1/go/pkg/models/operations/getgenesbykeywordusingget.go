@@ -1,16 +1,22 @@
 package operations
 
+
+
 type GetGenesByKeywordUsingGetPathParams struct {
-	Keyword        string `pathParam:"style=simple,explode=false,name=keyword"`
-	SpeciesTypeKey int32  `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
+    Keyword string `pathParam:"style=simple,explode=false,name=keyword"`
+    SpeciesTypeKey int32 `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
+    
 }
 
 type GetGenesByKeywordUsingGetRequest struct {
-	PathParams GetGenesByKeywordUsingGetPathParams
+    PathParams GetGenesByKeywordUsingGetPathParams 
+    
 }
 
 type GetGenesByKeywordUsingGetResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

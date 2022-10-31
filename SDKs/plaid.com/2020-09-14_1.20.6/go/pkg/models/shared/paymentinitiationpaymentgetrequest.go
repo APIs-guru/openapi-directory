@@ -1,7 +1,11 @@
 package shared
 
+
+
 type PaymentInitiationPaymentGetRequest struct {
-	ClientID  *string `json:"client_id,omitempty"`
-	PaymentID string  `json:"payment_id"`
-	Secret    *string `json:"secret,omitempty"`
+    ClientID *string `json:"client_id,omitempty"`
+    PaymentID string `json:"payment_id"`
+    Secret *string `json:"secret,omitempty"`
+    
 }
+

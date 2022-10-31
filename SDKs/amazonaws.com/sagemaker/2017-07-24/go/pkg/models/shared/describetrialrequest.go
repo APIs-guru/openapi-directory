@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeTrialRequest struct {
-	TrialName string `json:"TrialName"`
+    TrialName string `json:"TrialName"`
+    
 }
+

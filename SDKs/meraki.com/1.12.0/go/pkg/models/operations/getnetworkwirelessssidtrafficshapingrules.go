@@ -1,16 +1,22 @@
 package operations
 
+
+
 type GetNetworkWirelessSsidTrafficShapingRulesPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
-	Number    string `pathParam:"style=simple,explode=false,name=number"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    Number string `pathParam:"style=simple,explode=false,name=number"`
+    
 }
 
 type GetNetworkWirelessSsidTrafficShapingRulesRequest struct {
-	PathParams GetNetworkWirelessSsidTrafficShapingRulesPathParams
+    PathParams GetNetworkWirelessSsidTrafficShapingRulesPathParams 
+    
 }
 
 type GetNetworkWirelessSsidTrafficShapingRulesResponse struct {
-	ContentType                                                       string
-	StatusCode                                                        int64
-	GetNetworkWirelessSsidTrafficShapingRules200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetNetworkWirelessSsidTrafficShapingRules200ApplicationJSONObject map[string]interface{} 
+    
 }
+

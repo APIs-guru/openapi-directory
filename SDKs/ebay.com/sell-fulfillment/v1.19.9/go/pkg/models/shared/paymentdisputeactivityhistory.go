@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PaymentDisputeActivityHistory struct {
-	Activity []PaymentDisputeActivity `json:"activity,omitempty"`
+    Activity []PaymentDisputeActivity `json:"activity,omitempty"`
+    
 }
+

@@ -1,13 +1,14 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type UtteranceData struct {
-	Count            *int64     `json:"count,omitempty"`
-	DistinctUsers    *int64     `json:"distinctUsers,omitempty"`
-	FirstUtteredDate *time.Time `json:"firstUtteredDate,omitempty"`
-	LastUtteredDate  *time.Time `json:"lastUtteredDate,omitempty"`
-	UtteranceString  *string    `json:"utteranceString,omitempty"`
+    Count *int64 `json:"count,omitempty"`
+    DistinctUsers *int64 `json:"distinctUsers,omitempty"`
+    FirstUtteredDate *time.Time `json:"firstUtteredDate,omitempty"`
+    LastUtteredDate *time.Time `json:"lastUtteredDate,omitempty"`
+    UtteranceString *string `json:"utteranceString,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteQueryDefinitionRequest struct {
-	QueryDefinitionID string `json:"queryDefinitionId"`
+    QueryDefinitionID string `json:"queryDefinitionId"`
+    
 }
+

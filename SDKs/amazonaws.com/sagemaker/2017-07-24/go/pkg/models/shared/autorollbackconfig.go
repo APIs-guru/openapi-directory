@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AutoRollbackConfig struct {
-	Alarms []Alarm `json:"Alarms,omitempty"`
+    Alarms []Alarm `json:"Alarms,omitempty"`
+    
 }
+

@@ -9,7 +9,7 @@ class DeleteWordsFromWordListPathParams:
 
 @dataclass
 class DeleteWordsFromWordListHeaders:
-    auth_token: str = field(default=None, metadata={'header': { 'field_name': 'auth_token' }})
+    auth_token: str = field(default=None, metadata={'header': { 'field_name': 'auth_token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

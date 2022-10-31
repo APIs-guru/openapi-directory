@@ -1,42 +1,51 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ReloadGroupPathParams struct {
-	GroupID string `pathParam:"style=simple,explode=false,name=groupId"`
+    GroupID string `pathParam:"style=simple,explode=false,name=groupId"`
+    
 }
 
 type ReloadGroupRequest struct {
-	PathParams ReloadGroupPathParams
+    PathParams ReloadGroupPathParams 
+    
 }
+
 
 type ReloadGroup200ApplicationJSONActionEnum string
 
 const (
-	ReloadGroup200ApplicationJSONActionEnumReloadGroup ReloadGroup200ApplicationJSONActionEnum = "reloadGroup"
+    ReloadGroup200ApplicationJSONActionEnumReloadGroup ReloadGroup200ApplicationJSONActionEnum = "reloadGroup"
 )
 
+
 type ReloadGroup200ApplicationJSONData struct {
-	Groups []shared.Group `json:"groups"`
+    Groups []shared.Group `json:"groups"`
+    
 }
+
 
 type ReloadGroup200ApplicationJSONResultEnum string
 
 const (
-	ReloadGroup200ApplicationJSONResultEnumSuccess ReloadGroup200ApplicationJSONResultEnum = "success"
-	ReloadGroup200ApplicationJSONResultEnumError   ReloadGroup200ApplicationJSONResultEnum = "error"
+    ReloadGroup200ApplicationJSONResultEnumSuccess ReloadGroup200ApplicationJSONResultEnum = "success"
+ReloadGroup200ApplicationJSONResultEnumError ReloadGroup200ApplicationJSONResultEnum = "error"
 )
 
+
 type ReloadGroup200ApplicationJSON struct {
-	Action ReloadGroup200ApplicationJSONActionEnum `json:"action"`
-	Data   ReloadGroup200ApplicationJSONData       `json:"data"`
-	Result ReloadGroup200ApplicationJSONResultEnum `json:"result"`
+    Action ReloadGroup200ApplicationJSONActionEnum `json:"action"`
+    Data ReloadGroup200ApplicationJSONData `json:"data"`
+    Result ReloadGroup200ApplicationJSONResultEnum `json:"result"`
+    
 }
 
 type ReloadGroupResponse struct {
-	ContentType                         string
-	StatusCode                          int64
-	ReloadGroup200ApplicationJSONObject *ReloadGroup200ApplicationJSON
+    ContentType string 
+    StatusCode int64 
+    ReloadGroup200ApplicationJSONObject *ReloadGroup200ApplicationJSON 
+    
 }
+

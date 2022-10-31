@@ -11,7 +11,7 @@ class GetSuperfundProductsQueryParams:
 
 @dataclass
 class GetSuperfundProductsHeaders:
-    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'Xero-Tenant-Id' }})
+    xero_tenant_id: str = field(default=None, metadata={'header': { 'field_name': 'Xero-Tenant-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

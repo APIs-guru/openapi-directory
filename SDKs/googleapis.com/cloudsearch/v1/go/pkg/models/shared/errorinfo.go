@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ErrorInfo struct {
-	ErrorMessages []ErrorMessage `json:"errorMessages,omitempty"`
+    ErrorMessages []ErrorMessage `json:"errorMessages,omitempty"`
+    
 }
+

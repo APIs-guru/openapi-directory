@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteParametersRequest struct {
-	Names []string `json:"Names"`
+    Names []string `json:"Names"`
+    
 }
+

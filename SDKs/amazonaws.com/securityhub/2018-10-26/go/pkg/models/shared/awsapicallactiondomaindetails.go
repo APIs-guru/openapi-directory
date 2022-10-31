@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AwsAPICallActionDomainDetails struct {
-	Domain *string `json:"Domain,omitempty"`
+    Domain *string `json:"Domain,omitempty"`
+    
 }
+

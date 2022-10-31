@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BulkEditSitesResponse struct {
-	Sites []Site `json:"sites,omitempty"`
+    Sites []Site `json:"sites,omitempty"`
+    
 }
+

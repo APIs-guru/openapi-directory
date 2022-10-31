@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateFlowTemplateResponse struct {
-	Summary *FlowTemplateSummary `json:"summary,omitempty"`
+    Summary *FlowTemplateSummary `json:"summary,omitempty"`
+    
 }
+

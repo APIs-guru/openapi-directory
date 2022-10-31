@@ -1,40 +1,51 @@
 package operations
 
+
+
+
 type PostDeleteFlowLogsActionEnum string
 
 const (
-	PostDeleteFlowLogsActionEnumDeleteFlowLogs PostDeleteFlowLogsActionEnum = "DeleteFlowLogs"
+    PostDeleteFlowLogsActionEnumDeleteFlowLogs PostDeleteFlowLogsActionEnum = "DeleteFlowLogs"
 )
+
+
 
 type PostDeleteFlowLogsVersionEnum string
 
 const (
-	PostDeleteFlowLogsVersionEnumTwoThousandAndSixteen1115 PostDeleteFlowLogsVersionEnum = "2016-11-15"
+    PostDeleteFlowLogsVersionEnumTwoThousandAndSixteen1115 PostDeleteFlowLogsVersionEnum = "2016-11-15"
 )
 
+
 type PostDeleteFlowLogsQueryParams struct {
-	Action  PostDeleteFlowLogsActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	Version PostDeleteFlowLogsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action PostDeleteFlowLogsActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    Version PostDeleteFlowLogsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type PostDeleteFlowLogsHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type PostDeleteFlowLogsRequest struct {
-	QueryParams PostDeleteFlowLogsQueryParams
-	Headers     PostDeleteFlowLogsHeaders
-	Request     []byte `request:"mediaType=text/xml"`
+    QueryParams PostDeleteFlowLogsQueryParams 
+    Headers PostDeleteFlowLogsHeaders 
+    Request []byte `request:"mediaType=text/xml"`
+    
 }
 
 type PostDeleteFlowLogsResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

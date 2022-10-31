@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ImageProperties struct {
-	DominantColors *DominantColorsAnnotation `json:"dominantColors,omitempty"`
+    DominantColors *DominantColorsAnnotation `json:"dominantColors,omitempty"`
+    
 }
+

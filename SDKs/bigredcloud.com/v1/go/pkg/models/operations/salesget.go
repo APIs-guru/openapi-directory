@@ -1,11 +1,12 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type SalesGetResponse struct {
-	ContentType             string
-	PageResultSalesQueryDto *shared.PageResultSalesQueryDto
-	StatusCode              int64
+    ContentType string 
+    PageResultSalesQueryDto *shared.PageResultSalesQueryDto 
+    StatusCode int64 
+    
 }
+

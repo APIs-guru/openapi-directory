@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetUserSecurity struct {
-	APIAuth shared.SchemeAPIAuth `security:"scheme,type=oauth2"`
+    APIAuth shared.SchemeAPIAuth `security:"scheme,type=oauth2"`
+    
 }
 
 type GetUserRequest struct {
-	Security GetUserSecurity
+    Security GetUserSecurity 
+    
 }
 
 type GetUserResponse struct {
-	ContentType  string
-	StatusCode   int64
-	UserResponse *shared.UserResponse
+    ContentType string 
+    StatusCode int64 
+    UserResponse *shared.UserResponse 
+    
 }
+

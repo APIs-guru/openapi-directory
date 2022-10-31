@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetEc2RecommendationProjectedMetricsResponse struct {
-	RecommendedOptionProjectedMetrics []RecommendedOptionProjectedMetric `json:"recommendedOptionProjectedMetrics,omitempty"`
+    RecommendedOptionProjectedMetrics []RecommendedOptionProjectedMetric `json:"recommendedOptionProjectedMetrics,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EnumOperatorOptions struct {
-	OperatorName *string `json:"operatorName,omitempty"`
+    OperatorName *string `json:"operatorName,omitempty"`
+    
 }
+

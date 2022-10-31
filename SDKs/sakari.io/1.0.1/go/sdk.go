@@ -64,6 +64,7 @@ func (s *SDK) AuthToken(ctx context.Context, request operations.AuthTokenRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -109,6 +110,7 @@ func (s *SDK) CampaignsCreate(ctx context.Context, request operations.CampaignsC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -332,6 +334,7 @@ func (s *SDK) ContactsCreate(ctx context.Context, request operations.ContactsCre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -776,6 +779,7 @@ func (s *SDK) MessagesSend(ctx context.Context, request operations.MessagesSendR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -821,6 +825,7 @@ func (s *SDK) TemplatesCreate(ctx context.Context, request operations.TemplatesC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1047,6 +1052,7 @@ func (s *SDK) ToolsShareFile(ctx context.Context, request operations.ToolsShareF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1154,6 +1160,7 @@ func (s *SDK) WebhooksSubscribe(ctx context.Context, request operations.Webhooks
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

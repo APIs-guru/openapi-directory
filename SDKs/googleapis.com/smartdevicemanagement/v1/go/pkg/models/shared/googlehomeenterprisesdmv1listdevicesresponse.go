@@ -1,6 +1,10 @@
 package shared
 
+
+
 type GoogleHomeEnterpriseSdmV1ListDevicesResponse struct {
-	Devices       []GoogleHomeEnterpriseSdmV1Device `json:"devices,omitempty"`
-	NextPageToken *string                           `json:"nextPageToken,omitempty"`
+    Devices []GoogleHomeEnterpriseSdmV1Device `json:"devices,omitempty"`
+    NextPageToken *string `json:"nextPageToken,omitempty"`
+    
 }
+

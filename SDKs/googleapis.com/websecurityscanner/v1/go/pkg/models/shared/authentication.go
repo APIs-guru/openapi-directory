@@ -1,7 +1,11 @@
 package shared
 
+
+
 type Authentication struct {
-	CustomAccount *CustomAccount `json:"customAccount,omitempty"`
-	GoogleAccount *GoogleAccount `json:"googleAccount,omitempty"`
-	IapCredential *IapCredential `json:"iapCredential,omitempty"`
+    CustomAccount *CustomAccount `json:"customAccount,omitempty"`
+    GoogleAccount *GoogleAccount `json:"googleAccount,omitempty"`
+    IapCredential *IapCredential `json:"iapCredential,omitempty"`
+    
 }
+

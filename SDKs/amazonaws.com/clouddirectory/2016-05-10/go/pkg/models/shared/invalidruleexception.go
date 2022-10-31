@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InvalidRuleException struct {
-	Message *string `json:"Message,omitempty"`
+    Message *string `json:"Message,omitempty"`
+    
 }
+

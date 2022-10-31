@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AttestationAuthorityHint struct {
-	HumanReadableName *string `json:"humanReadableName,omitempty"`
+    HumanReadableName *string `json:"humanReadableName,omitempty"`
+    
 }
+

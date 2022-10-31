@@ -1,19 +1,25 @@
 package operations
 
+
+
 type GetPatientsQueryParams struct {
-	Expand *string  `queryParam:"style=form,explode=true,name=expand"`
-	Full   *bool    `queryParam:"style=form,explode=true,name=full"`
-	Limit  *float64 `queryParam:"style=form,explode=true,name=limit"`
-	Short  *bool    `queryParam:"style=form,explode=true,name=short"`
-	Since  *float64 `queryParam:"style=form,explode=true,name=since"`
+    Expand *string `queryParam:"style=form,explode=true,name=expand"`
+    Full *bool `queryParam:"style=form,explode=true,name=full"`
+    Limit *float64 `queryParam:"style=form,explode=true,name=limit"`
+    Short *bool `queryParam:"style=form,explode=true,name=short"`
+    Since *float64 `queryParam:"style=form,explode=true,name=since"`
+    
 }
 
 type GetPatientsRequest struct {
-	QueryParams GetPatientsQueryParams
+    QueryParams GetPatientsQueryParams 
+    
 }
 
 type GetPatientsResponse struct {
-	ContentType                      string
-	GetPatients200ApplicationJSONAny *interface{}
-	StatusCode                       int64
+    ContentType string 
+    GetPatients200ApplicationJSONAny *interface{} 
+    StatusCode int64 
+    
 }
+

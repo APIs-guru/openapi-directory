@@ -225,6 +225,7 @@ func (s *SDK) BankAccountsPost(ctx context.Context, request operations.BankAccou
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -273,6 +274,7 @@ func (s *SDK) BankAccountsProcessBatch(ctx context.Context, request operations.B
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -321,6 +323,7 @@ func (s *SDK) BankAccountsPut(ctx context.Context, request operations.BankAccoun
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -488,6 +491,7 @@ func (s *SDK) CashPaymentsPost(ctx context.Context, request operations.CashPayme
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -536,6 +540,7 @@ func (s *SDK) CashPaymentsProcessBatch(ctx context.Context, request operations.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -584,6 +589,7 @@ func (s *SDK) CashPaymentsPut(ctx context.Context, request operations.CashPaymen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -712,6 +718,7 @@ func (s *SDK) CashReceiptsPost(ctx context.Context, request operations.CashRecei
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -760,6 +767,7 @@ func (s *SDK) CashReceiptsProcessBatch(ctx context.Context, request operations.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -808,6 +816,7 @@ func (s *SDK) CashReceiptsPut(ctx context.Context, request operations.CashReceip
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1287,6 +1296,7 @@ func (s *SDK) CustomersPost(ctx context.Context, request operations.CustomersPos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1335,6 +1345,7 @@ func (s *SDK) CustomersProcessBatch(ctx context.Context, request operations.Cust
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1383,6 +1394,7 @@ func (s *SDK) CustomersPut(ctx context.Context, request operations.CustomersPutR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1431,6 +1443,7 @@ func (s *SDK) EmailSendEmailStatement(ctx context.Context, request operations.Em
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1479,6 +1492,7 @@ func (s *SDK) EmailSendQuote(ctx context.Context, request operations.EmailSendQu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1527,6 +1541,7 @@ func (s *SDK) EmailSendSalesInvoice(ctx context.Context, request operations.Emai
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2244,6 +2259,7 @@ func (s *SDK) PaymentsPost(ctx context.Context, request operations.PaymentsPostR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2292,6 +2308,7 @@ func (s *SDK) PaymentsProcessBatch(ctx context.Context, request operations.Payme
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2340,6 +2357,7 @@ func (s *SDK) PaymentsPut(ctx context.Context, request operations.PaymentsPutReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2468,6 +2486,7 @@ func (s *SDK) ProductsPost(ctx context.Context, request operations.ProductsPostR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2516,6 +2535,7 @@ func (s *SDK) ProductsProcessBatch(ctx context.Context, request operations.Produ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2564,6 +2584,7 @@ func (s *SDK) ProductsPut(ctx context.Context, request operations.ProductsPutReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2692,6 +2713,7 @@ func (s *SDK) PurchasesPost(ctx context.Context, request operations.PurchasesPos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2740,6 +2762,7 @@ func (s *SDK) PurchasesProcessBatch(ctx context.Context, request operations.Purc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2788,6 +2811,7 @@ func (s *SDK) PurchasesPut(ctx context.Context, request operations.PurchasesPutR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2955,6 +2979,7 @@ func (s *SDK) QuotePost(ctx context.Context, request operations.QuotePostRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3003,6 +3028,7 @@ func (s *SDK) QuotePostCreateQuoteWithGeneratingReference(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3051,6 +3077,7 @@ func (s *SDK) QuotePostGenerateSaleInvoice(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3099,6 +3126,7 @@ func (s *SDK) QuoteProcessBatch(ctx context.Context, request operations.QuotePro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3147,6 +3175,7 @@ func (s *SDK) QuotePut(ctx context.Context, request operations.QuotePutRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3314,6 +3343,7 @@ func (s *SDK) SalesCreditNotesPost(ctx context.Context, request operations.Sales
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3362,6 +3392,7 @@ func (s *SDK) SalesCreditNotesProcessBatch(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3410,6 +3441,7 @@ func (s *SDK) SalesCreditNotesPut(ctx context.Context, request operations.SalesC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3538,6 +3570,7 @@ func (s *SDK) SalesEntriesPost(ctx context.Context, request operations.SalesEntr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3586,6 +3619,7 @@ func (s *SDK) SalesEntriesProcessBatch(ctx context.Context, request operations.S
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3634,6 +3668,7 @@ func (s *SDK) SalesEntriesPut(ctx context.Context, request operations.SalesEntri
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3762,6 +3797,7 @@ func (s *SDK) SalesInvoicesPost(ctx context.Context, request operations.SalesInv
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3810,6 +3846,7 @@ func (s *SDK) SalesInvoicesPostCreateSaleInvoiceWithGeneratingReference(ctx cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3858,6 +3895,7 @@ func (s *SDK) SalesInvoicesProcessBatch(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3906,6 +3944,7 @@ func (s *SDK) SalesInvoicesPut(ctx context.Context, request operations.SalesInvo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4034,6 +4073,7 @@ func (s *SDK) SalesRepPost(ctx context.Context, request operations.SalesRepPostR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4082,6 +4122,7 @@ func (s *SDK) SalesRepProcessBatch(ctx context.Context, request operations.Sales
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4130,6 +4171,7 @@ func (s *SDK) SalesRepPut(ctx context.Context, request operations.SalesRepPutReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4414,6 +4456,7 @@ func (s *SDK) SuppliersPost(ctx context.Context, request operations.SuppliersPos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4462,6 +4505,7 @@ func (s *SDK) SuppliersProcessBatch(ctx context.Context, request operations.Supp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4510,6 +4554,7 @@ func (s *SDK) SuppliersPut(ctx context.Context, request operations.SuppliersPutR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4675,6 +4720,7 @@ func (s *SDK) VatCategoriesProcessVatRates(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

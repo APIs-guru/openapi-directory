@@ -7454,6 +7454,7 @@ func (s *SDK) PostAlerts(ctx context.Context, request operations.PostAlertsReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7585,6 +7586,7 @@ func (s *SDK) PostAlertsAcknowledgeAll(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -7672,6 +7674,7 @@ func (s *SDK) PostAlertsAcknowledgeMultiple(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7780,6 +7783,7 @@ func (s *SDK) PostAlertsAlertIDAcknowledge(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7935,6 +7939,7 @@ func (s *SDK) PostAlertsAlertIDAnnotate(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8066,6 +8071,7 @@ func (s *SDK) PostAlertsAlertIDClose(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8221,6 +8227,7 @@ func (s *SDK) PostAlertsAlertIDUndoAcknowledge(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8352,6 +8359,7 @@ func (s *SDK) PostAlertsAlertIDUndoClose(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8483,6 +8491,7 @@ func (s *SDK) PostAlertsCloseAll(ctx context.Context, request operations.PostAle
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -8593,6 +8602,7 @@ func (s *SDK) PostAlertsCloseMultiple(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8701,6 +8711,7 @@ func (s *SDK) PostAlertsPaged(ctx context.Context, request operations.PostAlerts
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -8859,6 +8870,7 @@ func (s *SDK) PostAlertsUndoAcknowledgeMultiple(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8967,6 +8979,7 @@ func (s *SDK) PostAlertsUndoCloseMultiple(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9075,6 +9088,7 @@ func (s *SDK) PostCategoriesTeamID(ctx context.Context, request operations.PostC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9230,6 +9244,7 @@ func (s *SDK) PostCategoriesTeamIDCategoryIDSubscriptions(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9362,6 +9377,7 @@ func (s *SDK) PostEventsPaged(ctx context.Context, request operations.PostEvents
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -9496,6 +9512,7 @@ func (s *SDK) PostScriptsInstances(ctx context.Context, request operations.PostS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9901,6 +9918,7 @@ func (s *SDK) PostTeamsTeamIDAlertSettings(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10056,6 +10074,7 @@ func (s *SDK) PostTeamsTeamIDMemberships(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10189,6 +10208,7 @@ func (s *SDK) PostTeamsTeamIDMembershipsResendInviteMail(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10323,6 +10343,7 @@ func (s *SDK) PostTeamsTeamIDSchedules(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10502,6 +10523,7 @@ func (s *SDK) PostTeamsTeamIDSchedulesDeleteRange(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10681,6 +10703,7 @@ func (s *SDK) PostTeamsTeamIDSchedulesMultiple(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -10862,6 +10885,7 @@ func (s *SDK) PostUsersUserIDCheckPermissions(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11521,6 +11545,7 @@ func (s *SDK) PostWebhooks(ctx context.Context, request operations.PostWebhooksR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -11881,6 +11906,7 @@ func (s *SDK) PutCategoriesTeamIDCategoryID(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12036,6 +12062,7 @@ func (s *SDK) PutPrepaidSettings(ctx context.Context, request operations.PutPrep
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12167,6 +12194,7 @@ func (s *SDK) PutScriptsInstancesInstanceID(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12298,6 +12326,7 @@ func (s *SDK) PutScriptsInstancesInstanceIDData(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12429,6 +12458,7 @@ func (s *SDK) PutSubscriptionsSubscriptionIDPrepaidSettings(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12584,6 +12614,7 @@ func (s *SDK) PutSubscriptionsSubscriptionIDProfile(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12739,6 +12770,7 @@ func (s *SDK) PutTeamsTeamIDMembershipsUserID(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -12920,6 +12952,7 @@ func (s *SDK) PutTeamsTeamIDProfile(ctx context.Context, request operations.PutT
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13075,6 +13108,7 @@ func (s *SDK) PutUsersUserIDChangePassword(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13207,6 +13241,7 @@ func (s *SDK) PutUsersUserIDProfile(ctx context.Context, request operations.PutU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13362,6 +13397,7 @@ func (s *SDK) PutWebhooksWebhookID(ctx context.Context, request operations.PutWe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

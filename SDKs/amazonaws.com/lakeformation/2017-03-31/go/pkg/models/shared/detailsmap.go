@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DetailsMap struct {
-	ResourceShare []string `json:"ResourceShare,omitempty"`
+    ResourceShare []string `json:"ResourceShare,omitempty"`
+    
 }
+

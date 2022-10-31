@@ -1,5 +1,9 @@
 package shared
 
+
+
 type WafExcludedRule struct {
-	RuleID *string `json:"RuleId,omitempty"`
+    RuleID *string `json:"RuleId,omitempty"`
+    
 }
+

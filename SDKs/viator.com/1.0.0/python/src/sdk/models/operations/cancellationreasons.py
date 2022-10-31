@@ -8,7 +8,7 @@ CANCELLATION_REASONS_SERVERS = [
 
 @dataclass
 class CancellationReasonsHeaders:
-    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

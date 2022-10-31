@@ -1,14 +1,20 @@
 package operations
 
+
+
 type GetBearerHeaders struct {
-	Authorization *string `header:"name=Authorization"`
+    Authorization *string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type GetBearerRequest struct {
-	Headers GetBearerHeaders
+    Headers GetBearerHeaders 
+    
 }
 
 type GetBearerResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

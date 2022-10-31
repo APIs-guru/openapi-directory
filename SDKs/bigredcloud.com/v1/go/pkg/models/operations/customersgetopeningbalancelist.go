@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type CustomersGetOpeningBalanceListPathParams struct {
-	ItemID int64 `pathParam:"style=simple,explode=false,name=itemId"`
+    ItemID int64 `pathParam:"style=simple,explode=false,name=itemId"`
+    
 }
 
 type CustomersGetOpeningBalanceListRequest struct {
-	PathParams CustomersGetOpeningBalanceListPathParams
+    PathParams CustomersGetOpeningBalanceListPathParams 
+    
 }
 
 type CustomersGetOpeningBalanceListResponse struct {
-	ContentType             string
-	OwnerOpeningBalanceDtos []shared.OwnerOpeningBalanceDto
-	StatusCode              int64
+    ContentType string 
+    OwnerOpeningBalanceDtos []shared.OwnerOpeningBalanceDto 
+    StatusCode int64 
+    
 }
+

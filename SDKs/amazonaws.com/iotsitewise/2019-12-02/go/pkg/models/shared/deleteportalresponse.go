@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeletePortalResponse struct {
-	PortalStatus PortalStatus `json:"portalStatus"`
+    PortalStatus PortalStatus `json:"portalStatus"`
+    
 }
+

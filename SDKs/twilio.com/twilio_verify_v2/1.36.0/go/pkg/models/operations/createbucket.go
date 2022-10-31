@@ -1,36 +1,40 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var CreateBucketServers = []string{
 	"https://verify.twilio.com",
 }
 
 type CreateBucketPathParams struct {
-	RateLimitSid string `pathParam:"style=simple,explode=false,name=RateLimitSid"`
-	ServiceSid   string `pathParam:"style=simple,explode=false,name=ServiceSid"`
+    RateLimitSid string `pathParam:"style=simple,explode=false,name=RateLimitSid"`
+    ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
+    
 }
 
 type CreateBucketCreateBucketRequest struct {
-	Interval int64 `form:"name=Interval"`
-	Max      int64 `form:"name=Max"`
+    Interval int64 `form:"name=Interval"`
+    Max int64 `form:"name=Max"`
+    
 }
 
 type CreateBucketSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type CreateBucketRequest struct {
-	ServerURL  *string
-	PathParams CreateBucketPathParams
-	Request    *CreateBucketCreateBucketRequest `request:"mediaType=application/x-www-form-urlencoded"`
-	Security   CreateBucketSecurity
+    ServerURL *string 
+    PathParams CreateBucketPathParams 
+    Request *CreateBucketCreateBucketRequest `request:"mediaType=application/x-www-form-urlencoded"`
+    Security CreateBucketSecurity 
+    
 }
 
 type CreateBucketResponse struct {
-	ContentType                    string
-	StatusCode                     int64
-	VerifyV2ServiceRateLimitBucket *shared.VerifyV2ServiceRateLimitBucket
+    ContentType string 
+    StatusCode int64 
+    VerifyV2ServiceRateLimitBucket *shared.VerifyV2ServiceRateLimitBucket 
+    
 }
+

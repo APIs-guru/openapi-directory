@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type EnterpriseAdminGetGithubActionsPermissionsEnterprisePathParams struct {
-	Enterprise string `pathParam:"style=simple,explode=false,name=enterprise"`
+    Enterprise string `pathParam:"style=simple,explode=false,name=enterprise"`
+    
 }
 
 type EnterpriseAdminGetGithubActionsPermissionsEnterpriseRequest struct {
-	PathParams EnterpriseAdminGetGithubActionsPermissionsEnterprisePathParams
+    PathParams EnterpriseAdminGetGithubActionsPermissionsEnterprisePathParams 
+    
 }
 
 type EnterpriseAdminGetGithubActionsPermissionsEnterpriseResponse struct {
-	ContentType                  string
-	StatusCode                   int64
-	ActionsEnterprisePermissions *shared.ActionsEnterprisePermissions
+    ContentType string 
+    StatusCode int64 
+    ActionsEnterprisePermissions *shared.ActionsEnterprisePermissions 
+    
 }
+

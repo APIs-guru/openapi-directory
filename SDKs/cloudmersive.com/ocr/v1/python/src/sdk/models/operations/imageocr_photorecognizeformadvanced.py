@@ -5,11 +5,11 @@ from sdk.models import shared
 
 @dataclass
 class ImageOcrPhotoRecognizeFormAdvancedHeaders:
-    bucket_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'bucketID' }})
-    bucket_secret_key: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'bucketSecretKey' }})
-    diagnostics: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'diagnostics' }})
-    preprocessing: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'preprocessing' }})
-    recognition_mode: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'recognitionMode' }})
+    bucket_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'bucketID', 'style': 'simple', 'explode': False }})
+    bucket_secret_key: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'bucketSecretKey', 'style': 'simple', 'explode': False }})
+    diagnostics: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'diagnostics', 'style': 'simple', 'explode': False }})
+    preprocessing: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'preprocessing', 'style': 'simple', 'explode': False }})
+    recognition_mode: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'recognitionMode', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

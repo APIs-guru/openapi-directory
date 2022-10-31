@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeNotebookExecutionInput struct {
-	NotebookExecutionID string `json:"NotebookExecutionId"`
+    NotebookExecutionID string `json:"NotebookExecutionId"`
+    
 }
+

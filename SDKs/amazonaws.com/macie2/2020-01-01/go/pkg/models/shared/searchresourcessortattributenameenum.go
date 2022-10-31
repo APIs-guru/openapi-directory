@@ -1,10 +1,15 @@
 package shared
 
+
+
+
 type SearchResourcesSortAttributeNameEnum string
 
 const (
-	SearchResourcesSortAttributeNameEnumAccountID                 SearchResourcesSortAttributeNameEnum = "ACCOUNT_ID"
-	SearchResourcesSortAttributeNameEnumResourceName              SearchResourcesSortAttributeNameEnum = "RESOURCE_NAME"
-	SearchResourcesSortAttributeNameEnumS3ClassifiableObjectCount SearchResourcesSortAttributeNameEnum = "S3_CLASSIFIABLE_OBJECT_COUNT"
-	SearchResourcesSortAttributeNameEnumS3ClassifiableSizeInBytes SearchResourcesSortAttributeNameEnum = "S3_CLASSIFIABLE_SIZE_IN_BYTES"
+    SearchResourcesSortAttributeNameEnumAccountID SearchResourcesSortAttributeNameEnum = "ACCOUNT_ID"
+SearchResourcesSortAttributeNameEnumResourceName SearchResourcesSortAttributeNameEnum = "RESOURCE_NAME"
+SearchResourcesSortAttributeNameEnumS3ClassifiableObjectCount SearchResourcesSortAttributeNameEnum = "S3_CLASSIFIABLE_OBJECT_COUNT"
+SearchResourcesSortAttributeNameEnumS3ClassifiableSizeInBytes SearchResourcesSortAttributeNameEnum = "S3_CLASSIFIABLE_SIZE_IN_BYTES"
 )
+
+

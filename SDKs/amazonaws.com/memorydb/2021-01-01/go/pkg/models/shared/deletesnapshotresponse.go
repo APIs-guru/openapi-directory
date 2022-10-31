@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteSnapshotResponse struct {
-	Snapshot *Snapshot `json:"Snapshot,omitempty"`
+    Snapshot *Snapshot `json:"Snapshot,omitempty"`
+    
 }
+

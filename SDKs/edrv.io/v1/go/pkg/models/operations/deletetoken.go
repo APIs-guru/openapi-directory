@@ -1,14 +1,20 @@
 package operations
 
+
+
 type DeleteTokenPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type DeleteTokenRequest struct {
-	PathParams DeleteTokenPathParams
+    PathParams DeleteTokenPathParams 
+    
 }
 
 type DeleteTokenResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

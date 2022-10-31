@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type SyncListItemEnumQueryResultOrderEnum string
 
 const (
-	SyncListItemEnumQueryResultOrderEnumAsc  SyncListItemEnumQueryResultOrderEnum = "asc"
-	SyncListItemEnumQueryResultOrderEnumDesc SyncListItemEnumQueryResultOrderEnum = "desc"
+    SyncListItemEnumQueryResultOrderEnumAsc SyncListItemEnumQueryResultOrderEnum = "asc"
+SyncListItemEnumQueryResultOrderEnumDesc SyncListItemEnumQueryResultOrderEnum = "desc"
 )
+
+

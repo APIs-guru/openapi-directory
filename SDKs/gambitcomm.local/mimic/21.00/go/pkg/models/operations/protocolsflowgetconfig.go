@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ProtocolSflowGetConfigPathParams struct {
-	AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
+    AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
+    
 }
 
 type ProtocolSflowGetConfigRequest struct {
-	PathParams ProtocolSflowGetConfigPathParams
+    PathParams ProtocolSflowGetConfigPathParams 
+    
 }
 
 type ProtocolSflowGetConfigResponse struct {
-	ConfigSflow *shared.ConfigSflow
-	ContentType string
-	StatusCode  int64
+    ConfigSflow *shared.ConfigSflow 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

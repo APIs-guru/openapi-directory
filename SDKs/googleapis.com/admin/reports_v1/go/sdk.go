@@ -64,6 +64,7 @@ func (s *SDK) AdminChannelsStop(ctx context.Context, request operations.AdminCha
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -143,6 +144,7 @@ func (s *SDK) ReportsActivitiesWatch(ctx context.Context, request operations.Rep
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

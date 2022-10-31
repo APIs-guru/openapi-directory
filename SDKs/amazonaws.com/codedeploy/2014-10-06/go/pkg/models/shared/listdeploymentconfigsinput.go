@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ListDeploymentConfigsInput struct {
-	NextToken *string `json:"nextToken,omitempty"`
+    NextToken *string `json:"nextToken,omitempty"`
+    
 }
+

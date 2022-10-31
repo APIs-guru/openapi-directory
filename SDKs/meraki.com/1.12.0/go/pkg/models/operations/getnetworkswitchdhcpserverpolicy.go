@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetNetworkSwitchDhcpServerPolicyPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type GetNetworkSwitchDhcpServerPolicyRequest struct {
-	PathParams GetNetworkSwitchDhcpServerPolicyPathParams
+    PathParams GetNetworkSwitchDhcpServerPolicyPathParams 
+    
 }
 
 type GetNetworkSwitchDhcpServerPolicyResponse struct {
-	ContentType                                              string
-	StatusCode                                               int64
-	GetNetworkSwitchDhcpServerPolicy200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetNetworkSwitchDhcpServerPolicy200ApplicationJSONObject map[string]interface{} 
+    
 }
+

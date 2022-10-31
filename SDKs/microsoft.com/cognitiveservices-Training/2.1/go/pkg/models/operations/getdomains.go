@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetDomainsHeaders struct {
-	TrainingKey string `header:"name=Training-Key"`
+    TrainingKey string `header:"style=simple,explode=false,name=Training-Key"`
+    
 }
 
 type GetDomainsRequest struct {
-	Headers GetDomainsHeaders
+    Headers GetDomainsHeaders 
+    
 }
 
 type GetDomainsResponse struct {
-	Body        []byte
-	ContentType string
-	Domains     []shared.Domain
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    Domains []shared.Domain 
+    StatusCode int64 
+    
 }
+

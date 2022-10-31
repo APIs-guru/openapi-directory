@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StudentResponse struct {
-	Data *Student `json:"data,omitempty"`
+    Data *Student `json:"data,omitempty"`
+    
 }
+

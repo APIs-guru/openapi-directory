@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type ModeEnum string
 
 const (
-	ModeEnumEvent ModeEnum = "event"
+    ModeEnumEvent ModeEnum = "event"
 )
+
+

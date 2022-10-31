@@ -1,53 +1,63 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DeleteDatasetPkPathParams struct {
-	Pk int64 `pathParam:"style=simple,explode=false,name=pk"`
+    Pk int64 `pathParam:"style=simple,explode=false,name=pk"`
+    
 }
 
 type DeleteDatasetPkSecurity struct {
-	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
+    Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
+    
 }
 
 type DeleteDatasetPkRequest struct {
-	PathParams DeleteDatasetPkPathParams
-	Security   DeleteDatasetPkSecurity
+    PathParams DeleteDatasetPkPathParams 
+    Security DeleteDatasetPkSecurity 
+    
 }
 
 type DeleteDatasetPk200ApplicationJSON struct {
-	Message *string `json:"message,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type DeleteDatasetPk401ApplicationJSON struct {
-	Message *string `json:"message,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type DeleteDatasetPk403ApplicationJSON struct {
-	Message *string `json:"message,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type DeleteDatasetPk404ApplicationJSON struct {
-	Message *string `json:"message,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type DeleteDatasetPk422ApplicationJSON struct {
-	Message *string `json:"message,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type DeleteDatasetPk500ApplicationJSON struct {
-	Message *string `json:"message,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type DeleteDatasetPkResponse struct {
-	ContentType                             string
-	DeleteDatasetPk200ApplicationJSONObject *DeleteDatasetPk200ApplicationJSON
-	DeleteDatasetPk401ApplicationJSONObject *DeleteDatasetPk401ApplicationJSON
-	DeleteDatasetPk403ApplicationJSONObject *DeleteDatasetPk403ApplicationJSON
-	DeleteDatasetPk404ApplicationJSONObject *DeleteDatasetPk404ApplicationJSON
-	DeleteDatasetPk422ApplicationJSONObject *DeleteDatasetPk422ApplicationJSON
-	DeleteDatasetPk500ApplicationJSONObject *DeleteDatasetPk500ApplicationJSON
-	StatusCode                              int64
+    ContentType string 
+    DeleteDatasetPk200ApplicationJSONObject *DeleteDatasetPk200ApplicationJSON 
+    DeleteDatasetPk401ApplicationJSONObject *DeleteDatasetPk401ApplicationJSON 
+    DeleteDatasetPk403ApplicationJSONObject *DeleteDatasetPk403ApplicationJSON 
+    DeleteDatasetPk404ApplicationJSONObject *DeleteDatasetPk404ApplicationJSON 
+    DeleteDatasetPk422ApplicationJSONObject *DeleteDatasetPk422ApplicationJSON 
+    DeleteDatasetPk500ApplicationJSONObject *DeleteDatasetPk500ApplicationJSON 
+    StatusCode int64 
+    
 }
+

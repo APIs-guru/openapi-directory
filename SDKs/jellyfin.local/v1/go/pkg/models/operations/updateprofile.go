@@ -1,31 +1,36 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type UpdateProfilePathParams struct {
-	ProfileID string `pathParam:"style=simple,explode=false,name=profileId"`
+    ProfileID string `pathParam:"style=simple,explode=false,name=profileId"`
+    
 }
 
 type UpdateProfileRequests struct {
-	DeviceProfile  *shared.DeviceProfile `request:"mediaType=application/*+json"`
-	DeviceProfile1 *shared.DeviceProfile `request:"mediaType=application/json"`
-	DeviceProfile2 *shared.DeviceProfile `request:"mediaType=text/json"`
+    DeviceProfile *shared.DeviceProfile `request:"mediaType=application/*+json"`
+    DeviceProfile1 *shared.DeviceProfile `request:"mediaType=application/json"`
+    DeviceProfile2 *shared.DeviceProfile `request:"mediaType=text/json"`
+    
 }
 
 type UpdateProfileSecurity struct {
-	CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type UpdateProfileRequest struct {
-	PathParams UpdateProfilePathParams
-	Request    *UpdateProfileRequests
-	Security   UpdateProfileSecurity
+    PathParams UpdateProfilePathParams 
+    Request *UpdateProfileRequests 
+    Security UpdateProfileSecurity 
+    
 }
 
 type UpdateProfileResponse struct {
-	ContentType    string
-	ProblemDetails map[string]interface{}
-	StatusCode     int64
+    ContentType string 
+    ProblemDetails map[string]interface{} 
+    StatusCode int64 
+    
 }
+

@@ -19,21 +19,25 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def drivelabels_labels_get(self, request: operations.DrivelabelsLabelsGetRequest) -> operations.DrivelabelsLabelsGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v2/{name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DrivelabelsLabelsGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleAppsDriveLabelsV2Label])
@@ -42,20 +46,21 @@ class SDK:
         return res
 
     
-    
     def drivelabels_labels_list(self, request: operations.DrivelabelsLabelsListRequest) -> operations.DrivelabelsLabelsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/v2/labels"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DrivelabelsLabelsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GoogleAppsDriveLabelsV2ListLabelsResponse])

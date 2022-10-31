@@ -1,14 +1,20 @@
 package operations
 
+
+
 type DeleteWebhooksQueryParams struct {
-	TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
+    TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
+    
 }
 
 type DeleteWebhooksRequest struct {
-	QueryParams DeleteWebhooksQueryParams
+    QueryParams DeleteWebhooksQueryParams 
+    
 }
 
 type DeleteWebhooksResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

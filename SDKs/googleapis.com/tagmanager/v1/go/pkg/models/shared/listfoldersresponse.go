@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ListFoldersResponse struct {
-	Folders []Folder `json:"folders,omitempty"`
+    Folders []Folder `json:"folders,omitempty"`
+    
 }
+

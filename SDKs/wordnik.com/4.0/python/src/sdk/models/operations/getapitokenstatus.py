@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class GetAPITokenStatusHeaders:
-    api_key: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'api_key' }})
+    api_key: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'api_key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

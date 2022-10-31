@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ProductOptionValueEdit struct {
-	Value *ProductOptionValueEditFields `json:"value,omitempty"`
+    Value *ProductOptionValueEditFields `json:"value,omitempty"`
+    
 }
+

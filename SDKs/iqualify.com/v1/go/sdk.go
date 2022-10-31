@@ -202,6 +202,7 @@ func (s *SDK) DeleteOfferingsOfferingIDChannelsChannelIDLearners(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -351,6 +352,7 @@ func (s *SDK) DeleteOfferingsOfferingIDUsersMarkerEmailMarks(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3708,6 +3710,7 @@ func (s *SDK) PatchOfferingsOfferingID(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3796,6 +3799,7 @@ func (s *SDK) PatchOfferingsOfferingIDAssessmentsAssessmentID(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3884,6 +3888,7 @@ func (s *SDK) PatchOfferingsOfferingIDAssessmentsAssessmentIDUserEmail(ctx conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3963,6 +3968,7 @@ func (s *SDK) PatchOfferingsOfferingIDChannelsChannelID(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4048,6 +4054,7 @@ func (s *SDK) PatchUsersUserEmail(ctx context.Context, request operations.PatchU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4136,6 +4143,7 @@ func (s *SDK) PatchUsersUserEmailTransfer(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4215,6 +4223,7 @@ func (s *SDK) PostCoursesRootContentIDPermissionsUserEmail(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4303,6 +4312,7 @@ func (s *SDK) PostOfferings(ctx context.Context, request operations.PostOffering
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4391,6 +4401,7 @@ func (s *SDK) PostOfferingsOfferingIDChannels(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4479,6 +4490,7 @@ func (s *SDK) PostOfferingsOfferingIDChannelsChannelIDLearners(ctx context.Conte
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4558,6 +4570,7 @@ func (s *SDK) PostOfferingsOfferingIDGroups(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4646,6 +4659,7 @@ func (s *SDK) PostOfferingsOfferingIDGroupsGroupIDLearners(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4734,6 +4748,7 @@ func (s *SDK) PostOfferingsOfferingIDUsers(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4832,6 +4847,7 @@ func (s *SDK) PostOfferingsOfferingIDUsersMarkerEmailMarks(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4999,6 +5015,7 @@ func (s *SDK) PostUsers(ctx context.Context, request operations.PostUsersRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5147,6 +5164,7 @@ func (s *SDK) PostUsersUserEmailOfferings(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5383,6 +5401,7 @@ func (s *SDK) PutCoursesContentIDMetadataCategory(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5471,6 +5490,7 @@ func (s *SDK) PutCoursesContentIDMetadataLevel(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5559,6 +5579,7 @@ func (s *SDK) PutCoursesContentIDMetadataTags(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5647,6 +5668,7 @@ func (s *SDK) PutCoursesContentIDMetadataTopic(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5735,6 +5757,7 @@ func (s *SDK) PutOfferingsOfferingIDMetadataCategory(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5823,6 +5846,7 @@ func (s *SDK) PutOfferingsOfferingIDMetadataLevel(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5911,6 +5935,7 @@ func (s *SDK) PutOfferingsOfferingIDMetadataTags(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5999,6 +6024,7 @@ func (s *SDK) PutOfferingsOfferingIDMetadataTopic(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6087,6 +6113,7 @@ func (s *SDK) PutUsersUserEmailSuspend(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

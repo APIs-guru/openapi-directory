@@ -1,28 +1,33 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type AddVideoChannelSecurity struct {
-	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
+    OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
+    
 }
 
 type AddVideoChannelRequest struct {
-	Request  *shared.VideoChannelCreate `request:"mediaType=application/json"`
-	Security AddVideoChannelSecurity
+    Request *shared.VideoChannelCreate `request:"mediaType=application/json"`
+    Security AddVideoChannelSecurity 
+    
 }
 
 type AddVideoChannel204ApplicationJSONVideoChannel struct {
-	ID map[string]interface{} `json:"id,omitempty"`
+    ID map[string]interface{} `json:"id,omitempty"`
+    
 }
 
 type AddVideoChannel204ApplicationJSON struct {
-	VideoChannel *AddVideoChannel204ApplicationJSONVideoChannel `json:"videoChannel,omitempty"`
+    VideoChannel *AddVideoChannel204ApplicationJSONVideoChannel `json:"videoChannel,omitempty"`
+    
 }
 
 type AddVideoChannelResponse struct {
-	ContentType                             string
-	StatusCode                              int64
-	AddVideoChannel204ApplicationJSONObject *AddVideoChannel204ApplicationJSON
+    ContentType string 
+    StatusCode int64 
+    AddVideoChannel204ApplicationJSONObject *AddVideoChannel204ApplicationJSON 
+    
 }
+

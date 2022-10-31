@@ -1,9 +1,13 @@
 package shared
 
+
+
 type GoogleCloudApigeeV1DatastoreConfig struct {
-	BucketName  *string `json:"bucketName,omitempty"`
-	DatasetName *string `json:"datasetName,omitempty"`
-	Path        *string `json:"path,omitempty"`
-	ProjectID   *string `json:"projectId,omitempty"`
-	TablePrefix *string `json:"tablePrefix,omitempty"`
+    BucketName *string `json:"bucketName,omitempty"`
+    DatasetName *string `json:"datasetName,omitempty"`
+    Path *string `json:"path,omitempty"`
+    ProjectID *string `json:"projectId,omitempty"`
+    TablePrefix *string `json:"tablePrefix,omitempty"`
+    
 }
+

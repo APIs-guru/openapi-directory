@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type MitigationActionIdentifier struct {
-	ActionArn    *string    `json:"actionArn,omitempty"`
-	ActionName   *string    `json:"actionName,omitempty"`
-	CreationDate *time.Time `json:"creationDate,omitempty"`
+    ActionArn *string `json:"actionArn,omitempty"`
+    ActionName *string `json:"actionName,omitempty"`
+    CreationDate *time.Time `json:"creationDate,omitempty"`
+    
 }
+

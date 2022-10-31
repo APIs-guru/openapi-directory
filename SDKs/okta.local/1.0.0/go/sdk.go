@@ -64,6 +64,7 @@ func (s *SDK) ActivateUser(ctx context.Context, request operations.ActivateUserR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -102,6 +103,7 @@ func (s *SDK) ChangePassword(ctx context.Context, request operations.ChangePassw
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -138,6 +140,7 @@ func (s *SDK) ChangeRecoveryQuestion(ctx context.Context, request operations.Cha
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -174,6 +177,7 @@ func (s *SDK) ClearUserSessions(ctx context.Context, request operations.ClearUse
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -210,6 +214,7 @@ func (s *SDK) CreateUserInGroup(ctx context.Context, request operations.CreateUs
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -248,6 +253,7 @@ func (s *SDK) DeactivateUser(ctx context.Context, request operations.DeactivateU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -284,6 +290,7 @@ func (s *SDK) FindUser(ctx context.Context, request operations.FindUserRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -322,6 +329,7 @@ func (s *SDK) ForgotPasswordOneTimeCode(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -360,6 +368,7 @@ func (s *SDK) GetAssignedAppLinks(ctx context.Context, request operations.GetAss
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -396,6 +405,7 @@ func (s *SDK) GetCurrentUser(ctx context.Context, request operations.GetCurrentU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -432,6 +442,7 @@ func (s *SDK) GetGroupsForUser(ctx context.Context, request operations.GetGroups
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -468,6 +479,7 @@ func (s *SDK) GetUser(ctx context.Context, request operations.GetUserRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -504,6 +516,7 @@ func (s *SDK) ResetFactors(ctx context.Context, request operations.ResetFactorsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -540,6 +553,7 @@ func (s *SDK) ResetPassword(ctx context.Context, request operations.ResetPasswor
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -578,6 +592,7 @@ func (s *SDK) SetRecoveryCredential(ctx context.Context, request operations.SetR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -614,6 +629,7 @@ func (s *SDK) SetTempPassword(ctx context.Context, request operations.SetTempPas
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -652,6 +668,7 @@ func (s *SDK) SuspendUser(ctx context.Context, request operations.SuspendUserReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -688,6 +705,7 @@ func (s *SDK) UnlockUser(ctx context.Context, request operations.UnlockUserReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -724,6 +742,7 @@ func (s *SDK) UnsuspendUser(ctx context.Context, request operations.UnsuspendUse
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

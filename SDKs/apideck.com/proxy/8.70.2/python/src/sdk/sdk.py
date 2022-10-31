@@ -19,23 +19,27 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
     def config_security(self, security: shared.Security):
         self.client = utils.configure_security_client(security)
+
     
     def delete_proxy(self, request: operations.DeleteProxyRequest) -> operations.DeleteProxyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/proxy"
-        
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("DELETE", url)
+        headers = utils.get_headers(request.headers)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("DELETE", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteProxyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -46,6 +50,7 @@ class SDK:
                 res.delete_proxy_401_application_json_object = out
         else:
             res.headers = r.headers
+            
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
                 res.delete_proxy_default_application_json_any = out
@@ -53,20 +58,21 @@ class SDK:
         return res
 
     
-    
     def get_proxy(self, request: operations.GetProxyRequest) -> operations.GetProxyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/proxy"
-        
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("GET", url)
+        headers = utils.get_headers(request.headers)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetProxyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -77,6 +83,7 @@ class SDK:
                 res.get_proxy_401_application_json_object = out
         else:
             res.headers = r.headers
+            
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
                 res.get_proxy_default_application_json_any = out
@@ -84,20 +91,21 @@ class SDK:
         return res
 
     
-    
     def options_proxy(self, request: operations.OptionsProxyRequest) -> operations.OptionsProxyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/proxy"
-        
-        client = utils.configure_security_client(request.security)
-        
 
-        r = client.request("OPTIONS", url)
+        headers = utils.get_headers(request.headers)
+
+        client = utils.configure_security_client(request.security)
+
+        r = client.request("OPTIONS", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.OptionsProxyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -108,6 +116,7 @@ class SDK:
                 res.options_proxy_401_application_json_object = out
         else:
             res.headers = r.headers
+            
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
                 res.options_proxy_default_application_json_any = out
@@ -115,24 +124,25 @@ class SDK:
         return res
 
     
-    
     def patch_proxy(self, request: operations.PatchProxyRequest) -> operations.PatchProxyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/proxy"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PatchProxyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -143,6 +153,7 @@ class SDK:
                 res.patch_proxy_401_application_json_object = out
         else:
             res.headers = r.headers
+            
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
                 res.patch_proxy_default_application_json_any = out
@@ -150,24 +161,25 @@ class SDK:
         return res
 
     
-    
     def post_proxy(self, request: operations.PostProxyRequest) -> operations.PostProxyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/proxy"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PostProxyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -178,6 +190,7 @@ class SDK:
                 res.post_proxy_401_application_json_object = out
         else:
             res.headers = r.headers
+            
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
                 res.post_proxy_default_application_json_any = out
@@ -185,24 +198,25 @@ class SDK:
         return res
 
     
-    
     def put_proxy(self, request: operations.PutProxyRequest) -> operations.PutProxyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/proxy"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PutProxyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
@@ -213,6 +227,7 @@ class SDK:
                 res.put_proxy_401_application_json_object = out
         else:
             res.headers = r.headers
+            
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[Any])
                 res.put_proxy_default_application_json_any = out

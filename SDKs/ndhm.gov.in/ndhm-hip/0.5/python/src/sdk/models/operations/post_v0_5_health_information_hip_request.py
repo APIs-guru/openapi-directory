@@ -8,8 +8,8 @@ POST_V0_5_HEALTH_INFORMATION_HIP_REQUEST_SERVERS = [
 
 @dataclass
 class PostV05HealthInformationHipRequestHeaders:
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
-    x_hip_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIP-ID' }})
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    x_hip_id: str = field(default=None, metadata={'header': { 'field_name': 'X-HIP-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteExperimentTemplateResponse struct {
-	ExperimentTemplate *ExperimentTemplate `json:"experimentTemplate,omitempty"`
+    ExperimentTemplate *ExperimentTemplate `json:"experimentTemplate,omitempty"`
+    
 }
+

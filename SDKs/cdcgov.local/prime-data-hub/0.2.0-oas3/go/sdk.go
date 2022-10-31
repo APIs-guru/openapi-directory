@@ -465,6 +465,7 @@ func (s *SDK) PostReports(ctx context.Context, request operations.PostReportsReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -533,6 +534,7 @@ func (s *SDK) PutSettingsOrganizationsOrganizationName(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -590,6 +592,7 @@ func (s *SDK) PutSettingsOrganizationsOrganizationNameReceiversReceiverName(ctx 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -647,6 +650,7 @@ func (s *SDK) PutSettingsOrganizationsOrganizationNameSendersSenderName(ctx cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

@@ -1,14 +1,20 @@
 package operations
 
+
+
 type PostRealmPushRevocationPathParams struct {
-	Realm string `pathParam:"style=simple,explode=false,name=realm"`
+    Realm string `pathParam:"style=simple,explode=false,name=realm"`
+    
 }
 
 type PostRealmPushRevocationRequest struct {
-	PathParams PostRealmPushRevocationPathParams
+    PathParams PostRealmPushRevocationPathParams 
+    
 }
 
 type PostRealmPushRevocationResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

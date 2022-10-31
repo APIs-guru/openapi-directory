@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ManualSharding struct {
-	TestTargetsForShard []TestTargetsForShard `json:"testTargetsForShard,omitempty"`
+    TestTargetsForShard []TestTargetsForShard `json:"testTargetsForShard,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetWorkGroupInput struct {
-	WorkGroup string `json:"WorkGroup"`
+    WorkGroup string `json:"WorkGroup"`
+    
 }
+

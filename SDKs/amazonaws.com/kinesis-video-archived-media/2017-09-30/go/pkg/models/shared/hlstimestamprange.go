@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type HlsTimestampRange struct {
-	EndTimestamp   *time.Time `json:"EndTimestamp,omitempty"`
-	StartTimestamp *time.Time `json:"StartTimestamp,omitempty"`
+    EndTimestamp *time.Time `json:"EndTimestamp,omitempty"`
+    StartTimestamp *time.Time `json:"StartTimestamp,omitempty"`
+    
 }
+

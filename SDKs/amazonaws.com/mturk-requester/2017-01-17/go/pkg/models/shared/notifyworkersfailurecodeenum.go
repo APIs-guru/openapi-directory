@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type NotifyWorkersFailureCodeEnum string
 
 const (
-	NotifyWorkersFailureCodeEnumSoftFailure NotifyWorkersFailureCodeEnum = "SoftFailure"
-	NotifyWorkersFailureCodeEnumHardFailure NotifyWorkersFailureCodeEnum = "HardFailure"
+    NotifyWorkersFailureCodeEnumSoftFailure NotifyWorkersFailureCodeEnum = "SoftFailure"
+NotifyWorkersFailureCodeEnumHardFailure NotifyWorkersFailureCodeEnum = "HardFailure"
 )
+
+

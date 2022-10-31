@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Remediation struct {
-	Recommendation *Recommendation `json:"Recommendation,omitempty"`
+    Recommendation *Recommendation `json:"Recommendation,omitempty"`
+    
 }
+

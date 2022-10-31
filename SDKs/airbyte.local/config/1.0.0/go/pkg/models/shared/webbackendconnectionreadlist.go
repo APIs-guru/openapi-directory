@@ -1,5 +1,9 @@
 package shared
 
+
+
 type WebBackendConnectionReadList struct {
-	Connections []WebBackendConnectionRead `json:"connections"`
+    Connections []WebBackendConnectionRead `json:"connections"`
+    
 }
+

@@ -1,87 +1,106 @@
 package operations
 
+
+
 type AddUserToAccountPathParams struct {
-	AccountID string `pathParam:"style=simple,explode=false,name=accountId"`
+    AccountID string `pathParam:"style=simple,explode=false,name=accountId"`
+    
 }
 
 type AddUserToAccountRequestBody struct {
-	UserID string `json:"userId"`
+    UserID string `json:"userId"`
+    
 }
 
 type AddUserToAccountRequest struct {
-	PathParams AddUserToAccountPathParams
-	Request    AddUserToAccountRequestBody `request:"mediaType=application/json"`
+    PathParams AddUserToAccountPathParams 
+    Request AddUserToAccountRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type AddUserToAccount201ApplicationJSONMeta struct {
-	RequestID string  `json:"requestId"`
-	Status    float64 `json:"status"`
+    RequestID string `json:"requestId"`
+    Status float64 `json:"status"`
+    
 }
 
 type AddUserToAccount201ApplicationJSON struct {
-	Message string                                 `json:"message"`
-	Meta    AddUserToAccount201ApplicationJSONMeta `json:"meta"`
+    Message string `json:"message"`
+    Meta AddUserToAccount201ApplicationJSONMeta `json:"meta"`
+    
 }
 
 type AddUserToAccount400ApplicationJSONErrorsParameters struct {
-	Header map[string]string `json:"header,omitempty"`
-	Path   map[string]string `json:"path,omitempty"`
-	Query  map[string]string `json:"query,omitempty"`
+    Header map[string]string `json:"header,omitempty"`
+    Path map[string]string `json:"path,omitempty"`
+    Query map[string]string `json:"query,omitempty"`
+    
 }
 
 type AddUserToAccount400ApplicationJSONErrors struct {
-	Fields     map[string]string                                   `json:"fields,omitempty"`
-	Parameters *AddUserToAccount400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
+    Fields map[string]string `json:"fields,omitempty"`
+    Parameters *AddUserToAccount400ApplicationJSONErrorsParameters `json:"parameters,omitempty"`
+    
 }
 
 type AddUserToAccount400ApplicationJSONMeta struct {
-	RequestID string  `json:"requestId"`
-	Status    float64 `json:"status"`
+    RequestID string `json:"requestId"`
+    Status float64 `json:"status"`
+    
 }
 
 type AddUserToAccount400ApplicationJSON struct {
-	Errors  AddUserToAccount400ApplicationJSONErrors `json:"errors"`
-	Message string                                   `json:"message"`
-	Meta    AddUserToAccount400ApplicationJSONMeta   `json:"meta"`
+    Errors AddUserToAccount400ApplicationJSONErrors `json:"errors"`
+    Message string `json:"message"`
+    Meta AddUserToAccount400ApplicationJSONMeta `json:"meta"`
+    
 }
 
 type AddUserToAccount401ApplicationJSONMeta struct {
-	RequestID string  `json:"requestId"`
-	Status    float64 `json:"status"`
+    RequestID string `json:"requestId"`
+    Status float64 `json:"status"`
+    
 }
 
 type AddUserToAccount401ApplicationJSON struct {
-	Message string                                 `json:"message"`
-	Meta    AddUserToAccount401ApplicationJSONMeta `json:"meta"`
+    Message string `json:"message"`
+    Meta AddUserToAccount401ApplicationJSONMeta `json:"meta"`
+    
 }
 
 type AddUserToAccount429ApplicationJSONMeta struct {
-	RequestID string  `json:"requestId"`
-	Status    float64 `json:"status"`
+    RequestID string `json:"requestId"`
+    Status float64 `json:"status"`
+    
 }
 
 type AddUserToAccount429ApplicationJSON struct {
-	Message string                                 `json:"message"`
-	Meta    AddUserToAccount429ApplicationJSONMeta `json:"meta"`
+    Message string `json:"message"`
+    Meta AddUserToAccount429ApplicationJSONMeta `json:"meta"`
+    
 }
 
 type AddUserToAccount500ApplicationJSONMeta struct {
-	RequestID string  `json:"requestId"`
-	Status    float64 `json:"status"`
+    RequestID string `json:"requestId"`
+    Status float64 `json:"status"`
+    
 }
 
 type AddUserToAccount500ApplicationJSON struct {
-	Message string                                 `json:"message"`
-	Meta    AddUserToAccount500ApplicationJSONMeta `json:"meta"`
+    Message string `json:"message"`
+    Meta AddUserToAccount500ApplicationJSONMeta `json:"meta"`
+    
 }
 
 type AddUserToAccountResponse struct {
-	ContentType                              string
-	Headers                                  map[string][]string
-	StatusCode                               int64
-	AddUserToAccount201ApplicationJSONObject *AddUserToAccount201ApplicationJSON
-	AddUserToAccount400ApplicationJSONObject *AddUserToAccount400ApplicationJSON
-	AddUserToAccount401ApplicationJSONObject *AddUserToAccount401ApplicationJSON
-	AddUserToAccount429ApplicationJSONObject *AddUserToAccount429ApplicationJSON
-	AddUserToAccount500ApplicationJSONObject *AddUserToAccount500ApplicationJSON
+    ContentType string 
+    Headers map[string][]string 
+    StatusCode int64 
+    AddUserToAccount201ApplicationJSONObject *AddUserToAccount201ApplicationJSON 
+    AddUserToAccount400ApplicationJSONObject *AddUserToAccount400ApplicationJSON 
+    AddUserToAccount401ApplicationJSONObject *AddUserToAccount401ApplicationJSON 
+    AddUserToAccount429ApplicationJSONObject *AddUserToAccount429ApplicationJSON 
+    AddUserToAccount500ApplicationJSONObject *AddUserToAccount500ApplicationJSON 
+    
 }
+

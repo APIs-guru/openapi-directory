@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateTopicRuleDestinationResponse struct {
-	TopicRuleDestination *TopicRuleDestination `json:"topicRuleDestination,omitempty"`
+    TopicRuleDestination *TopicRuleDestination `json:"topicRuleDestination,omitempty"`
+    
 }
+

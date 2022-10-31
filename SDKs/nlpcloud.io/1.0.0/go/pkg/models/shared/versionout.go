@@ -1,5 +1,9 @@
 package shared
 
+
+
 type VersionOut struct {
-	Spacy string `json:"spacy"`
+    Spacy string `json:"spacy"`
+    
 }
+

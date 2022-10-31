@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TLSConfig struct {
-	ServerNameToVerify *string `json:"ServerNameToVerify,omitempty"`
+    ServerNameToVerify *string `json:"ServerNameToVerify,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DecodeIntegrityTokenResponse struct {
-	TokenPayloadExternal *TokenPayloadExternal `json:"tokenPayloadExternal,omitempty"`
+    TokenPayloadExternal *TokenPayloadExternal `json:"tokenPayloadExternal,omitempty"`
+    
 }
+

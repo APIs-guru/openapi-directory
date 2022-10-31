@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type HideTaskPathParams struct {
-	TaskID string `pathParam:"style=simple,explode=false,name=task_id"`
+    TaskID string `pathParam:"style=simple,explode=false,name=task_id"`
+    
 }
 
 type HideTaskSecurity struct {
-	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    
 }
 
 type HideTaskRequest struct {
-	PathParams HideTaskPathParams
-	Security   HideTaskSecurity
+    PathParams HideTaskPathParams 
+    Security HideTaskSecurity 
+    
 }
 
 type HideTaskResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,51 +1,58 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DirectoryUsersAliasesInsertPathParams struct {
-	UserKey string `pathParam:"style=simple,explode=false,name=userKey"`
+    UserKey string `pathParam:"style=simple,explode=false,name=userKey"`
+    
 }
 
 type DirectoryUsersAliasesInsertQueryParams struct {
-	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
-	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
-	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
-	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
-	Key            *string           `queryParam:"style=form,explode=true,name=key"`
-	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
-	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
-	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
-	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
+    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
+    Callback *string `queryParam:"style=form,explode=true,name=callback"`
+    Fields *string `queryParam:"style=form,explode=true,name=fields"`
+    Key *string `queryParam:"style=form,explode=true,name=key"`
+    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
+    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
+    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
+    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
+    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
+    
 }
 
 type DirectoryUsersAliasesInsertSecurityOption1 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type DirectoryUsersAliasesInsertSecurityOption2 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type DirectoryUsersAliasesInsertSecurity struct {
-	Option1 *DirectoryUsersAliasesInsertSecurityOption1 `security:"option"`
-	Option2 *DirectoryUsersAliasesInsertSecurityOption2 `security:"option"`
+    Option1 *DirectoryUsersAliasesInsertSecurityOption1 `security:"option"`
+    Option2 *DirectoryUsersAliasesInsertSecurityOption2 `security:"option"`
+    
 }
 
 type DirectoryUsersAliasesInsertRequest struct {
-	PathParams  DirectoryUsersAliasesInsertPathParams
-	QueryParams DirectoryUsersAliasesInsertQueryParams
-	Request     *shared.Alias `request:"mediaType=application/json"`
-	Security    DirectoryUsersAliasesInsertSecurity
+    PathParams DirectoryUsersAliasesInsertPathParams 
+    QueryParams DirectoryUsersAliasesInsertQueryParams 
+    Request *shared.Alias `request:"mediaType=application/json"`
+    Security DirectoryUsersAliasesInsertSecurity 
+    
 }
 
 type DirectoryUsersAliasesInsertResponse struct {
-	Alias       *shared.Alias
-	ContentType string
-	StatusCode  int64
+    Alias *shared.Alias 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

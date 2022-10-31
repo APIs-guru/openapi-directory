@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SubscriptionListResponse struct {
-	Results []SubscriptionResponse `json:"results"`
+    Results []SubscriptionResponse `json:"results"`
+    
 }
+

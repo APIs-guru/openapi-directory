@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PromisePostPathParams struct {
-	PostID string `pathParam:"style=simple,explode=false,name=post_id"`
+    PostID string `pathParam:"style=simple,explode=false,name=post_id"`
+    
 }
 
 type PromisePostRequest struct {
-	PathParams PromisePostPathParams
+    PathParams PromisePostPathParams 
+    
 }
 
 type PromisePostResponse struct {
-	ContentType string
-	Post        *shared.Post
-	StatusCode  int64
+    ContentType string 
+    Post *shared.Post 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AgentOrchestrationConfig struct {
-	ProfilingEnabled bool `json:"profilingEnabled"`
+    ProfilingEnabled bool `json:"profilingEnabled"`
+    
 }
+

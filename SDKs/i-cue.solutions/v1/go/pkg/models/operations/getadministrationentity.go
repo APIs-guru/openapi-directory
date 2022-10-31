@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAdministrationEntityHeaders struct {
-	Token *string `header:"name=Token"`
+    Token *string `header:"style=simple,explode=false,name=Token"`
+    
 }
 
 type GetAdministrationEntityRequest struct {
-	Headers GetAdministrationEntityHeaders
+    Headers GetAdministrationEntityHeaders 
+    
 }
 
 type GetAdministrationEntityResponse struct {
-	Body        []byte
-	ContentType string
-	Entities    []shared.Entity
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    Entities []shared.Entity 
+    StatusCode int64 
+    
 }
+

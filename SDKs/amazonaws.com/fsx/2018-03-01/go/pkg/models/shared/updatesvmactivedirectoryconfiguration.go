@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateSvmActiveDirectoryConfiguration struct {
-	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfigurationUpdates `json:"SelfManagedActiveDirectoryConfiguration,omitempty"`
+    SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfigurationUpdates `json:"SelfManagedActiveDirectoryConfiguration,omitempty"`
+    
 }
+

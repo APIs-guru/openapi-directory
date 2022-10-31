@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type GuideInfo struct {
-	EndDate   *time.Time `json:"EndDate,omitempty"`
-	StartDate *time.Time `json:"StartDate,omitempty"`
+    EndDate *time.Time `json:"EndDate,omitempty"`
+    StartDate *time.Time `json:"StartDate,omitempty"`
+    
 }
+

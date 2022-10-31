@@ -1,6 +1,10 @@
 package operations
 
+
+
 type GetJSONResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetResourcePolicyRequest struct {
-	ResourceArn *string `json:"ResourceArn,omitempty"`
+    ResourceArn *string `json:"ResourceArn,omitempty"`
+    
 }
+

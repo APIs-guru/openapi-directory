@@ -1,14 +1,20 @@
 package operations
 
+
+
 type DcimRearPortsDeletePathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type DcimRearPortsDeleteRequest struct {
-	PathParams DcimRearPortsDeletePathParams
+    PathParams DcimRearPortsDeletePathParams 
+    
 }
 
 type DcimRearPortsDeleteResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

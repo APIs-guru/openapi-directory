@@ -1,5 +1,9 @@
 package shared
 
+
+
 type IamRoleConfiguration struct {
-	TrustPolicy *string `json:"trustPolicy,omitempty"`
+    TrustPolicy *string `json:"trustPolicy,omitempty"`
+    
 }
+

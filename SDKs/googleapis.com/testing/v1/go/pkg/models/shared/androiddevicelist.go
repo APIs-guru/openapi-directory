@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AndroidDeviceList struct {
-	AndroidDevices []AndroidDevice `json:"androidDevices,omitempty"`
+    AndroidDevices []AndroidDevice `json:"androidDevices,omitempty"`
+    
 }
+

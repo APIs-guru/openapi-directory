@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ImportProductSetsRequest struct {
-	InputConfig *ImportProductSetsInputConfig `json:"inputConfig,omitempty"`
+    InputConfig *ImportProductSetsInputConfig `json:"inputConfig,omitempty"`
+    
 }
+

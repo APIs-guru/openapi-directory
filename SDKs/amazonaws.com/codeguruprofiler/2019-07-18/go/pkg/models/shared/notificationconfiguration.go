@@ -1,5 +1,9 @@
 package shared
 
+
+
 type NotificationConfiguration struct {
-	Channels []Channel `json:"channels,omitempty"`
+    Channels []Channel `json:"channels,omitempty"`
+    
 }
+

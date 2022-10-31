@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InstanceTemplateSpec struct {
-	Spec *InstanceSpec `json:"spec,omitempty"`
+    Spec *InstanceSpec `json:"spec,omitempty"`
+    
 }
+

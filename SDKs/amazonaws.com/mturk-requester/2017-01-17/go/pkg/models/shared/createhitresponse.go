@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateHitResponse struct {
-	Hit *Hit `json:"HIT,omitempty"`
+    Hit *Hit `json:"HIT,omitempty"`
+    
 }
+

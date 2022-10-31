@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type SuppliersGetAccountTransPathParams struct {
-	ItemID int64 `pathParam:"style=simple,explode=false,name=itemId"`
+    ItemID int64 `pathParam:"style=simple,explode=false,name=itemId"`
+    
 }
 
 type SuppliersGetAccountTransRequest struct {
-	PathParams SuppliersGetAccountTransPathParams
+    PathParams SuppliersGetAccountTransPathParams 
+    
 }
 
 type SuppliersGetAccountTransResponse struct {
-	AccountTranDtos []shared.AccountTranDto
-	ContentType     string
-	StatusCode      int64
+    AccountTranDtos []shared.AccountTranDto 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

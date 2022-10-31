@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type TrafficMirrorNetworkServiceEnum string
 
 const (
-	TrafficMirrorNetworkServiceEnumAmazonDNS TrafficMirrorNetworkServiceEnum = "amazon-dns"
+    TrafficMirrorNetworkServiceEnumAmazonDNS TrafficMirrorNetworkServiceEnum = "amazon-dns"
 )
+
+

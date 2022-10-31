@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetResolverRulePolicyRequest struct {
-	Arn string `json:"Arn"`
+    Arn string `json:"Arn"`
+    
 }
+

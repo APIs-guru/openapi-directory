@@ -1,6 +1,10 @@
 package shared
 
+
+
 type DescribeGroupResponse struct {
-	DisplayName string `json:"DisplayName"`
-	GroupID     string `json:"GroupId"`
+    DisplayName string `json:"DisplayName"`
+    GroupID string `json:"GroupId"`
+    
 }
+

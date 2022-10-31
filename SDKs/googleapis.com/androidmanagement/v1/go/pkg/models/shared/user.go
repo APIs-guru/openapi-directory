@@ -1,5 +1,9 @@
 package shared
 
+
+
 type User struct {
-	AccountIdentifier *string `json:"accountIdentifier,omitempty"`
+    AccountIdentifier *string `json:"accountIdentifier,omitempty"`
+    
 }
+

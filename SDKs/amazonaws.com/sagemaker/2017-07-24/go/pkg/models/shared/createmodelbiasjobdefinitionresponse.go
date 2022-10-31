@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateModelBiasJobDefinitionResponse struct {
-	JobDefinitionArn string `json:"JobDefinitionArn"`
+    JobDefinitionArn string `json:"JobDefinitionArn"`
+    
 }
+

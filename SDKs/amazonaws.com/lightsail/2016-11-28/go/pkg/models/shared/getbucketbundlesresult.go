@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetBucketBundlesResult struct {
-	Bundles []BucketBundle `json:"bundles,omitempty"`
+    Bundles []BucketBundle `json:"bundles,omitempty"`
+    
 }
+

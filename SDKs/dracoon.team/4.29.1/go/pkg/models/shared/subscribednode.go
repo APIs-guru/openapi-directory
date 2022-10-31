@@ -1,15 +1,21 @@
 package shared
 
+
+
+
 type SubscribedNodeTypeEnum string
 
 const (
-	SubscribedNodeTypeEnumRoom   SubscribedNodeTypeEnum = "room"
-	SubscribedNodeTypeEnumFolder SubscribedNodeTypeEnum = "folder"
-	SubscribedNodeTypeEnumFile   SubscribedNodeTypeEnum = "file"
+    SubscribedNodeTypeEnumRoom SubscribedNodeTypeEnum = "room"
+SubscribedNodeTypeEnumFolder SubscribedNodeTypeEnum = "folder"
+SubscribedNodeTypeEnumFile SubscribedNodeTypeEnum = "file"
 )
 
+
 type SubscribedNode struct {
-	AuthParentID *int64                  `json:"authParentId,omitempty"`
-	ID           int64                   `json:"id"`
-	Type         *SubscribedNodeTypeEnum `json:"type,omitempty"`
+    AuthParentID *int64 `json:"authParentId,omitempty"`
+    ID int64 `json:"id"`
+    Type *SubscribedNodeTypeEnum `json:"type,omitempty"`
+    
 }
+

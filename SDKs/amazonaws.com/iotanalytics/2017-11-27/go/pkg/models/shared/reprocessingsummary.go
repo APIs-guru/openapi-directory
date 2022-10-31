@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ReprocessingSummary struct {
-	CreationTime *time.Time              `json:"creationTime,omitempty"`
-	ID           *string                 `json:"id,omitempty"`
-	Status       *ReprocessingStatusEnum `json:"status,omitempty"`
+    CreationTime *time.Time `json:"creationTime,omitempty"`
+    ID *string `json:"id,omitempty"`
+    Status *ReprocessingStatusEnum `json:"status,omitempty"`
+    
 }
+

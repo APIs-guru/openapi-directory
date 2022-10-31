@@ -1,31 +1,35 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type AppsScopeTokenPathParams struct {
-	ClientID string `pathParam:"style=simple,explode=false,name=client_id"`
+    ClientID string `pathParam:"style=simple,explode=false,name=client_id"`
+    
 }
 
 type AppsScopeTokenRequestBody struct {
-	AccessToken   string                 `json:"access_token"`
-	Permissions   *shared.AppPermissions `json:"permissions,omitempty"`
-	Repositories  []string               `json:"repositories,omitempty"`
-	RepositoryIds []int64                `json:"repository_ids,omitempty"`
-	Target        *string                `json:"target,omitempty"`
-	TargetID      *int64                 `json:"target_id,omitempty"`
+    AccessToken string `json:"access_token"`
+    Permissions *shared.AppPermissions `json:"permissions,omitempty"`
+    Repositories []string `json:"repositories,omitempty"`
+    RepositoryIds []int64 `json:"repository_ids,omitempty"`
+    Target *string `json:"target,omitempty"`
+    TargetID *int64 `json:"target_id,omitempty"`
+    
 }
 
 type AppsScopeTokenRequest struct {
-	PathParams AppsScopeTokenPathParams
-	Request    *AppsScopeTokenRequestBody `request:"mediaType=application/json"`
+    PathParams AppsScopeTokenPathParams 
+    Request *AppsScopeTokenRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type AppsScopeTokenResponse struct {
-	ContentType     string
-	StatusCode      int64
-	Authorization   *shared.Authorization
-	BasicError      *shared.BasicError
-	ValidationError *shared.ValidationError
+    ContentType string 
+    StatusCode int64 
+    Authorization *shared.Authorization 
+    BasicError *shared.BasicError 
+    ValidationError *shared.ValidationError 
+    
 }
+

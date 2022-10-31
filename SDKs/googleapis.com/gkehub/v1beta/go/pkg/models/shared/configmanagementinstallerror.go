@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ConfigManagementInstallError struct {
-	ErrorMessage *string `json:"errorMessage,omitempty"`
+    ErrorMessage *string `json:"errorMessage,omitempty"`
+    
 }
+

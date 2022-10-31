@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SchemeAPIKeyAuth struct {
-	APIKey string `security:"name=x-api-key"`
+    APIKey string `security:"name=x-api-key"`
+    
 }
+

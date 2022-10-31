@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CurrentKey struct {
-	Current *bool `json:"current,omitempty"`
+    Current *bool `json:"current,omitempty"`
+    
 }
+

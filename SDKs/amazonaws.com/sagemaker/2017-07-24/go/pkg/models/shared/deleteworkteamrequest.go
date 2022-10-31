@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteWorkteamRequest struct {
-	WorkteamName string `json:"WorkteamName"`
+    WorkteamName string `json:"WorkteamName"`
+    
 }
+

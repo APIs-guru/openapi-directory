@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AutoMlResult struct {
-	BestRecipeArn *string `json:"bestRecipeArn,omitempty"`
+    BestRecipeArn *string `json:"bestRecipeArn,omitempty"`
+    
 }
+

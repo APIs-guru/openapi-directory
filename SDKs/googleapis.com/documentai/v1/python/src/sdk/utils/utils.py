@@ -136,6 +136,26 @@ def get_query_params(query_params: dataclass) -> dict[str, List[str]]:
     return params
 
 
+def get_headers(headers_params: dataclass) -> dict[str, str]:
+    if headers_params is None:
+        return {}
+
+    headers: dict[str, str] = {}
+
+    param_fields: Tuple[Field, ...] = fields(headers_params)
+    for f in param_fields:
+        metadata = f.metadata.get('header_param')
+        if not metadata:
+            continue
+
+        value = _serialize_header(metadata.get(
+            'explode', False), getattr(headers_params, f.name))
+        if value != '':
+            headers[metadata.get('field_name', f.name)] = value
+
+    return headers
+
+
 def _get_serialized_query_params(metadata: dict, field_name: str, obj: any) -> dict[str, List[str]]:
     params: dict[str, List[str]] = {}
 
@@ -386,6 +406,49 @@ def _populate_form(field_name: str, explode: boolean, obj: any, get_field_name_f
         params[field_name] = obj
 
     return params
+
+
+def _serialize_header(explode: boolean, obj: any) -> str:
+    if is_dataclass(obj):
+        items = []
+
+        obj_fields: Tuple[Field, ...] = fields(obj)
+        for obj_field in obj_fields:
+            obj_param_metadata = obj_field.metadata.get('header_param')
+
+            if not obj_param_metadata:
+                continue
+
+            obj_field_name = obj_param_metadata.get(
+                "field_name", obj_field.name)
+            if obj_field_name == "":
+                continue
+
+            if explode:
+                items.append(
+                    f'{obj_field_name}={getattr(obj, obj_field.name)}')
+            else:
+                items.append(obj_field_name)
+                items.append(getattr(obj, obj_field.name))
+
+        if len(items) > 0:
+            return [','.join(items)]
+    elif isinstance(obj, dict):
+        items = []
+
+        for key, value in obj.items():
+            if explode:
+                items.append(f'{key}={value}')
+            else:
+                items.append(key)
+                items.append(value)
+
+        if len(items) > 0:
+            return [','.join(items)]
+    elif isinstance(obj, list):
+        return [','.join(obj)]
+    else:
+        return f'{obj}'
 
 
 def unmarshal_json(data, t):

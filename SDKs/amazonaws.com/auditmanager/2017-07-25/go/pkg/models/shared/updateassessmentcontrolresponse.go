@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateAssessmentControlResponse struct {
-	Control *AssessmentControl `json:"control,omitempty"`
+    Control *AssessmentControl `json:"control,omitempty"`
+    
 }
+

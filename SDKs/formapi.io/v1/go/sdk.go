@@ -67,6 +67,7 @@ func (s *SDK) AddFieldsToTemplate(ctx context.Context, request operations.AddFie
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -125,6 +126,7 @@ func (s *SDK) BatchGeneratePdfV1(ctx context.Context, request operations.BatchGe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -203,6 +205,7 @@ func (s *SDK) BatchGeneratePdfs(ctx context.Context, request operations.BatchGen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -281,6 +284,7 @@ func (s *SDK) CombinePdfs(ctx context.Context, request operations.CombinePdfsReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -359,6 +363,7 @@ func (s *SDK) CombineSubmissions(ctx context.Context, request operations.Combine
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -434,6 +439,7 @@ func (s *SDK) CopyTemplate(ctx context.Context, request operations.CopyTemplateR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -492,6 +498,7 @@ func (s *SDK) CreateCustomFileFromUpload(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -599,6 +606,7 @@ func (s *SDK) CreateFolder(ctx context.Context, request operations.CreateFolderR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -677,6 +685,7 @@ func (s *SDK) CreateHTMLTemplate(ctx context.Context, request operations.CreateH
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -735,6 +744,7 @@ func (s *SDK) CreatePdfTemplate(ctx context.Context, request operations.CreatePd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -793,6 +803,7 @@ func (s *SDK) CreatePdfTemplateFromUpload(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1058,6 +1069,7 @@ func (s *SDK) GeneratePdf(ctx context.Context, request operations.GeneratePdfReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1655,6 +1667,7 @@ func (s *SDK) MoveFolderToFolder(ctx context.Context, request operations.MoveFol
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1723,6 +1736,7 @@ func (s *SDK) MoveTemplateToFolder(ctx context.Context, request operations.MoveT
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1781,6 +1795,7 @@ func (s *SDK) RenameFolder(ctx context.Context, request operations.RenameFolderR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1881,6 +1896,7 @@ func (s *SDK) UpdateDataRequest(ctx context.Context, request operations.UpdateDa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1959,6 +1975,7 @@ func (s *SDK) UpdateTemplate(ctx context.Context, request operations.UpdateTempl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

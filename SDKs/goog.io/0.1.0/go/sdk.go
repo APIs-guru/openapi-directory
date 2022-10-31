@@ -315,6 +315,7 @@ func (s *SDK) Serp(ctx context.Context, request operations.SerpRequest) (*operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

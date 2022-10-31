@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ThingGroupMetadata struct {
-	CreationDate            *time.Time        `json:"creationDate,omitempty"`
-	ParentGroupName         *string           `json:"parentGroupName,omitempty"`
-	RootToParentThingGroups []GroupNameAndArn `json:"rootToParentThingGroups,omitempty"`
+    CreationDate *time.Time `json:"creationDate,omitempty"`
+    ParentGroupName *string `json:"parentGroupName,omitempty"`
+    RootToParentThingGroups []GroupNameAndArn `json:"rootToParentThingGroups,omitempty"`
+    
 }
+

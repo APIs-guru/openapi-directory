@@ -1,7 +1,11 @@
 package shared
 
+
+
 type S3DestinationProperties struct {
-	BucketName           string                `json:"bucketName"`
-	BucketPrefix         *string               `json:"bucketPrefix,omitempty"`
-	S3OutputFormatConfig *S3OutputFormatConfig `json:"s3OutputFormatConfig,omitempty"`
+    BucketName string `json:"bucketName"`
+    BucketPrefix *string `json:"bucketPrefix,omitempty"`
+    S3OutputFormatConfig *S3OutputFormatConfig `json:"s3OutputFormatConfig,omitempty"`
+    
 }
+

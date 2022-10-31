@@ -133,6 +133,7 @@ func (s *SDK) CircuitsCircuitTerminationsCreate(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -252,6 +253,7 @@ func (s *SDK) CircuitsCircuitTerminationsPartialUpdate(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -339,6 +341,7 @@ func (s *SDK) CircuitsCircuitTerminationsUpdate(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -387,6 +390,7 @@ func (s *SDK) CircuitsCircuitTypesCreate(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -506,6 +510,7 @@ func (s *SDK) CircuitsCircuitTypesPartialUpdate(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -593,6 +598,7 @@ func (s *SDK) CircuitsCircuitTypesUpdate(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -641,6 +647,7 @@ func (s *SDK) CircuitsCircuitsCreate(ctx context.Context, request operations.Cir
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -760,6 +767,7 @@ func (s *SDK) CircuitsCircuitsPartialUpdate(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -847,6 +855,7 @@ func (s *SDK) CircuitsCircuitsUpdate(ctx context.Context, request operations.Cir
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -895,6 +904,7 @@ func (s *SDK) CircuitsProvidersCreate(ctx context.Context, request operations.Ci
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1053,6 +1063,7 @@ func (s *SDK) CircuitsProvidersPartialUpdate(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1140,6 +1151,7 @@ func (s *SDK) CircuitsProvidersUpdate(ctx context.Context, request operations.Ci
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1330,6 +1342,7 @@ func (s *SDK) DcimConsolePortTemplatesCreate(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1449,6 +1462,7 @@ func (s *SDK) DcimConsolePortTemplatesPartialUpdate(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1536,6 +1550,7 @@ func (s *SDK) DcimConsolePortTemplatesUpdate(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1584,6 +1599,7 @@ func (s *SDK) DcimConsolePortsCreate(ctx context.Context, request operations.Dci
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1703,6 +1719,7 @@ func (s *SDK) DcimConsolePortsPartialUpdate(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1790,6 +1807,7 @@ func (s *SDK) DcimConsolePortsUpdate(ctx context.Context, request operations.Dci
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1838,6 +1856,7 @@ func (s *SDK) DcimConsoleServerPortTemplatesCreate(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1957,6 +1976,7 @@ func (s *SDK) DcimConsoleServerPortTemplatesPartialUpdate(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2044,6 +2064,7 @@ func (s *SDK) DcimConsoleServerPortTemplatesUpdate(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2092,6 +2113,7 @@ func (s *SDK) DcimConsoleServerPortsCreate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2211,6 +2233,7 @@ func (s *SDK) DcimConsoleServerPortsPartialUpdate(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2298,6 +2321,7 @@ func (s *SDK) DcimConsoleServerPortsUpdate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2346,6 +2370,7 @@ func (s *SDK) DcimDeviceBayTemplatesCreate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2465,6 +2490,7 @@ func (s *SDK) DcimDeviceBayTemplatesPartialUpdate(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2552,6 +2578,7 @@ func (s *SDK) DcimDeviceBayTemplatesUpdate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2600,6 +2627,7 @@ func (s *SDK) DcimDeviceBaysCreate(ctx context.Context, request operations.DcimD
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2719,6 +2747,7 @@ func (s *SDK) DcimDeviceBaysPartialUpdate(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2806,6 +2835,7 @@ func (s *SDK) DcimDeviceBaysUpdate(ctx context.Context, request operations.DcimD
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2854,6 +2884,7 @@ func (s *SDK) DcimDeviceRolesCreate(ctx context.Context, request operations.Dcim
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2973,6 +3004,7 @@ func (s *SDK) DcimDeviceRolesPartialUpdate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3060,6 +3092,7 @@ func (s *SDK) DcimDeviceRolesUpdate(ctx context.Context, request operations.Dcim
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3108,6 +3141,7 @@ func (s *SDK) DcimDeviceTypesCreate(ctx context.Context, request operations.Dcim
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3227,6 +3261,7 @@ func (s *SDK) DcimDeviceTypesPartialUpdate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3314,6 +3349,7 @@ func (s *SDK) DcimDeviceTypesUpdate(ctx context.Context, request operations.Dcim
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3362,6 +3398,7 @@ func (s *SDK) DcimDevicesCreate(ctx context.Context, request operations.DcimDevi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3520,6 +3557,7 @@ func (s *SDK) DcimDevicesPartialUpdate(ctx context.Context, request operations.D
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3607,6 +3645,7 @@ func (s *SDK) DcimDevicesUpdate(ctx context.Context, request operations.DcimDevi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3655,6 +3694,7 @@ func (s *SDK) DcimInterfaceConnectionsCreate(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3774,6 +3814,7 @@ func (s *SDK) DcimInterfaceConnectionsPartialUpdate(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3861,6 +3902,7 @@ func (s *SDK) DcimInterfaceConnectionsUpdate(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3909,6 +3951,7 @@ func (s *SDK) DcimInterfaceTemplatesCreate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4028,6 +4071,7 @@ func (s *SDK) DcimInterfaceTemplatesPartialUpdate(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4115,6 +4159,7 @@ func (s *SDK) DcimInterfaceTemplatesUpdate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4163,6 +4208,7 @@ func (s *SDK) DcimInterfacesCreate(ctx context.Context, request operations.DcimI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4321,6 +4367,7 @@ func (s *SDK) DcimInterfacesPartialUpdate(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4408,6 +4455,7 @@ func (s *SDK) DcimInterfacesUpdate(ctx context.Context, request operations.DcimI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4456,6 +4504,7 @@ func (s *SDK) DcimInventoryItemsCreate(ctx context.Context, request operations.D
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4575,6 +4624,7 @@ func (s *SDK) DcimInventoryItemsPartialUpdate(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4662,6 +4712,7 @@ func (s *SDK) DcimInventoryItemsUpdate(ctx context.Context, request operations.D
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4710,6 +4761,7 @@ func (s *SDK) DcimManufacturersCreate(ctx context.Context, request operations.Dc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4829,6 +4881,7 @@ func (s *SDK) DcimManufacturersPartialUpdate(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4916,6 +4969,7 @@ func (s *SDK) DcimManufacturersUpdate(ctx context.Context, request operations.Dc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4964,6 +5018,7 @@ func (s *SDK) DcimPlatformsCreate(ctx context.Context, request operations.DcimPl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5083,6 +5138,7 @@ func (s *SDK) DcimPlatformsPartialUpdate(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5170,6 +5226,7 @@ func (s *SDK) DcimPlatformsUpdate(ctx context.Context, request operations.DcimPl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5259,6 +5316,7 @@ func (s *SDK) DcimPowerOutletTemplatesCreate(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5378,6 +5436,7 @@ func (s *SDK) DcimPowerOutletTemplatesPartialUpdate(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5465,6 +5524,7 @@ func (s *SDK) DcimPowerOutletTemplatesUpdate(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5513,6 +5573,7 @@ func (s *SDK) DcimPowerOutletsCreate(ctx context.Context, request operations.Dci
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5632,6 +5693,7 @@ func (s *SDK) DcimPowerOutletsPartialUpdate(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5719,6 +5781,7 @@ func (s *SDK) DcimPowerOutletsUpdate(ctx context.Context, request operations.Dci
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5767,6 +5830,7 @@ func (s *SDK) DcimPowerPortTemplatesCreate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5886,6 +5950,7 @@ func (s *SDK) DcimPowerPortTemplatesPartialUpdate(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -5973,6 +6038,7 @@ func (s *SDK) DcimPowerPortTemplatesUpdate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6021,6 +6087,7 @@ func (s *SDK) DcimPowerPortsCreate(ctx context.Context, request operations.DcimP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6140,6 +6207,7 @@ func (s *SDK) DcimPowerPortsPartialUpdate(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6227,6 +6295,7 @@ func (s *SDK) DcimPowerPortsUpdate(ctx context.Context, request operations.DcimP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6275,6 +6344,7 @@ func (s *SDK) DcimRackGroupsCreate(ctx context.Context, request operations.DcimR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6394,6 +6464,7 @@ func (s *SDK) DcimRackGroupsPartialUpdate(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6481,6 +6552,7 @@ func (s *SDK) DcimRackGroupsUpdate(ctx context.Context, request operations.DcimR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6529,6 +6601,7 @@ func (s *SDK) DcimRackReservationsCreate(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6648,6 +6721,7 @@ func (s *SDK) DcimRackReservationsPartialUpdate(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6735,6 +6809,7 @@ func (s *SDK) DcimRackReservationsUpdate(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6783,6 +6858,7 @@ func (s *SDK) DcimRackRolesCreate(ctx context.Context, request operations.DcimRa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6902,6 +6978,7 @@ func (s *SDK) DcimRackRolesPartialUpdate(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6989,6 +7066,7 @@ func (s *SDK) DcimRackRolesUpdate(ctx context.Context, request operations.DcimRa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7037,6 +7115,7 @@ func (s *SDK) DcimRacksCreate(ctx context.Context, request operations.DcimRacksC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7156,6 +7235,7 @@ func (s *SDK) DcimRacksPartialUpdate(ctx context.Context, request operations.Dci
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7282,6 +7362,7 @@ func (s *SDK) DcimRacksUpdate(ctx context.Context, request operations.DcimRacksU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7330,6 +7411,7 @@ func (s *SDK) DcimRegionsCreate(ctx context.Context, request operations.DcimRegi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7449,6 +7531,7 @@ func (s *SDK) DcimRegionsPartialUpdate(ctx context.Context, request operations.D
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7536,6 +7619,7 @@ func (s *SDK) DcimRegionsUpdate(ctx context.Context, request operations.DcimRegi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7584,6 +7668,7 @@ func (s *SDK) DcimSitesCreate(ctx context.Context, request operations.DcimSitesC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7742,6 +7827,7 @@ func (s *SDK) DcimSitesPartialUpdate(ctx context.Context, request operations.Dci
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7829,6 +7915,7 @@ func (s *SDK) DcimSitesUpdate(ctx context.Context, request operations.DcimSitesU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7877,6 +7964,7 @@ func (s *SDK) DcimVirtualChassisCreate(ctx context.Context, request operations.D
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7996,6 +8084,7 @@ func (s *SDK) DcimVirtualChassisPartialUpdate(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8083,6 +8172,7 @@ func (s *SDK) DcimVirtualChassisUpdate(ctx context.Context, request operations.D
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8191,6 +8281,7 @@ func (s *SDK) ExtrasConfigContextsCreate(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8310,6 +8401,7 @@ func (s *SDK) ExtrasConfigContextsPartialUpdate(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8397,6 +8489,7 @@ func (s *SDK) ExtrasConfigContextsUpdate(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8445,6 +8538,7 @@ func (s *SDK) ExtrasExportTemplatesCreate(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8564,6 +8658,7 @@ func (s *SDK) ExtrasExportTemplatesPartialUpdate(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8651,6 +8746,7 @@ func (s *SDK) ExtrasExportTemplatesUpdate(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8699,6 +8795,7 @@ func (s *SDK) ExtrasGraphsCreate(ctx context.Context, request operations.ExtrasG
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8818,6 +8915,7 @@ func (s *SDK) ExtrasGraphsPartialUpdate(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8905,6 +9003,7 @@ func (s *SDK) ExtrasGraphsUpdate(ctx context.Context, request operations.ExtrasG
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -8953,6 +9052,7 @@ func (s *SDK) ExtrasImageAttachmentsCreate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9072,6 +9172,7 @@ func (s *SDK) ExtrasImageAttachmentsPartialUpdate(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9159,6 +9260,7 @@ func (s *SDK) ExtrasImageAttachmentsUpdate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9367,6 +9469,7 @@ func (s *SDK) ExtrasTagsCreate(ctx context.Context, request operations.ExtrasTag
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9486,6 +9589,7 @@ func (s *SDK) ExtrasTagsPartialUpdate(ctx context.Context, request operations.Ex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9573,6 +9677,7 @@ func (s *SDK) ExtrasTagsUpdate(ctx context.Context, request operations.ExtrasTag
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9621,6 +9726,7 @@ func (s *SDK) ExtrasTopologyMapsCreate(ctx context.Context, request operations.E
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9740,6 +9846,7 @@ func (s *SDK) ExtrasTopologyMapsPartialUpdate(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9866,6 +9973,7 @@ func (s *SDK) ExtrasTopologyMapsUpdate(ctx context.Context, request operations.E
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -9974,6 +10082,7 @@ func (s *SDK) IpamAggregatesCreate(ctx context.Context, request operations.IpamA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10093,6 +10202,7 @@ func (s *SDK) IpamAggregatesPartialUpdate(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10180,6 +10290,7 @@ func (s *SDK) IpamAggregatesUpdate(ctx context.Context, request operations.IpamA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10228,6 +10339,7 @@ func (s *SDK) IpamIPAddressesCreate(ctx context.Context, request operations.Ipam
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10347,6 +10459,7 @@ func (s *SDK) IpamIPAddressesPartialUpdate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10434,6 +10547,7 @@ func (s *SDK) IpamIPAddressesUpdate(ctx context.Context, request operations.Ipam
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10482,6 +10596,7 @@ func (s *SDK) IpamPrefixesAvailableIpsCreate(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10569,6 +10684,7 @@ func (s *SDK) IpamPrefixesAvailablePrefixesCreate(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10656,6 +10772,7 @@ func (s *SDK) IpamPrefixesCreate(ctx context.Context, request operations.IpamPre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10775,6 +10892,7 @@ func (s *SDK) IpamPrefixesPartialUpdate(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10862,6 +10980,7 @@ func (s *SDK) IpamPrefixesUpdate(ctx context.Context, request operations.IpamPre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -10910,6 +11029,7 @@ func (s *SDK) IpamRirsCreate(ctx context.Context, request operations.IpamRirsCre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -11029,6 +11149,7 @@ func (s *SDK) IpamRirsPartialUpdate(ctx context.Context, request operations.Ipam
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -11116,6 +11237,7 @@ func (s *SDK) IpamRirsUpdate(ctx context.Context, request operations.IpamRirsUpd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -11164,6 +11286,7 @@ func (s *SDK) IpamRolesCreate(ctx context.Context, request operations.IpamRolesC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -11283,6 +11406,7 @@ func (s *SDK) IpamRolesPartialUpdate(ctx context.Context, request operations.Ipa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -11370,6 +11494,7 @@ func (s *SDK) IpamRolesUpdate(ctx context.Context, request operations.IpamRolesU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -11418,6 +11543,7 @@ func (s *SDK) IpamServicesCreate(ctx context.Context, request operations.IpamSer
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -11537,6 +11663,7 @@ func (s *SDK) IpamServicesPartialUpdate(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -11624,6 +11751,7 @@ func (s *SDK) IpamServicesUpdate(ctx context.Context, request operations.IpamSer
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -11672,6 +11800,7 @@ func (s *SDK) IpamVlanGroupsCreate(ctx context.Context, request operations.IpamV
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -11791,6 +11920,7 @@ func (s *SDK) IpamVlanGroupsPartialUpdate(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -11878,6 +12008,7 @@ func (s *SDK) IpamVlanGroupsUpdate(ctx context.Context, request operations.IpamV
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -11926,6 +12057,7 @@ func (s *SDK) IpamVlansCreate(ctx context.Context, request operations.IpamVlansC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12045,6 +12177,7 @@ func (s *SDK) IpamVlansPartialUpdate(ctx context.Context, request operations.Ipa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12132,6 +12265,7 @@ func (s *SDK) IpamVlansUpdate(ctx context.Context, request operations.IpamVlansU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12180,6 +12314,7 @@ func (s *SDK) IpamVrfsCreate(ctx context.Context, request operations.IpamVrfsCre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12299,6 +12434,7 @@ func (s *SDK) IpamVrfsPartialUpdate(ctx context.Context, request operations.Ipam
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12386,6 +12522,7 @@ func (s *SDK) IpamVrfsUpdate(ctx context.Context, request operations.IpamVrfsUpd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12554,6 +12691,7 @@ func (s *SDK) SecretsSecretRolesCreate(ctx context.Context, request operations.S
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12673,6 +12811,7 @@ func (s *SDK) SecretsSecretRolesPartialUpdate(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12760,6 +12899,7 @@ func (s *SDK) SecretsSecretRolesUpdate(ctx context.Context, request operations.S
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12808,6 +12948,7 @@ func (s *SDK) SecretsSecretsCreate(ctx context.Context, request operations.Secre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -12927,6 +13068,7 @@ func (s *SDK) SecretsSecretsPartialUpdate(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13014,6 +13156,7 @@ func (s *SDK) SecretsSecretsUpdate(ctx context.Context, request operations.Secre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13122,6 +13265,7 @@ func (s *SDK) TenancyTenantGroupsCreate(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13241,6 +13385,7 @@ func (s *SDK) TenancyTenantGroupsPartialUpdate(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13328,6 +13473,7 @@ func (s *SDK) TenancyTenantGroupsUpdate(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13376,6 +13522,7 @@ func (s *SDK) TenancyTenantsCreate(ctx context.Context, request operations.Tenan
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13495,6 +13642,7 @@ func (s *SDK) TenancyTenantsPartialUpdate(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13582,6 +13730,7 @@ func (s *SDK) TenancyTenantsUpdate(ctx context.Context, request operations.Tenan
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13690,6 +13839,7 @@ func (s *SDK) VirtualizationClusterGroupsCreate(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13809,6 +13959,7 @@ func (s *SDK) VirtualizationClusterGroupsPartialUpdate(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13896,6 +14047,7 @@ func (s *SDK) VirtualizationClusterGroupsUpdate(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -13944,6 +14096,7 @@ func (s *SDK) VirtualizationClusterTypesCreate(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14063,6 +14216,7 @@ func (s *SDK) VirtualizationClusterTypesPartialUpdate(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14150,6 +14304,7 @@ func (s *SDK) VirtualizationClusterTypesUpdate(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14198,6 +14353,7 @@ func (s *SDK) VirtualizationClustersCreate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14317,6 +14473,7 @@ func (s *SDK) VirtualizationClustersPartialUpdate(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14404,6 +14561,7 @@ func (s *SDK) VirtualizationClustersUpdate(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14452,6 +14610,7 @@ func (s *SDK) VirtualizationInterfacesCreate(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14571,6 +14730,7 @@ func (s *SDK) VirtualizationInterfacesPartialUpdate(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14658,6 +14818,7 @@ func (s *SDK) VirtualizationInterfacesUpdate(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14706,6 +14867,7 @@ func (s *SDK) VirtualizationVirtualMachinesCreate(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14825,6 +14987,7 @@ func (s *SDK) VirtualizationVirtualMachinesPartialUpdate(ctx context.Context, re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -14912,6 +15075,7 @@ func (s *SDK) VirtualizationVirtualMachinesUpdate(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

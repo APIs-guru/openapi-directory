@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribePhiDetectionJobRequest struct {
-	JobID string `json:"JobId"`
+    JobID string `json:"JobId"`
+    
 }
+

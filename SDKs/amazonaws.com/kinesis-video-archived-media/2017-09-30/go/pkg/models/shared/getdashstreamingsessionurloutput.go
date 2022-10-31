@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetDashStreamingSessionURLOutput struct {
-	DashStreamingSessionURL *string `json:"DASHStreamingSessionURL,omitempty"`
+    DashStreamingSessionURL *string `json:"DASHStreamingSessionURL,omitempty"`
+    
 }
+

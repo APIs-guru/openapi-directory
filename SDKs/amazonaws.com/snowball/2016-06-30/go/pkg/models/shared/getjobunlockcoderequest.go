@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetJobUnlockCodeRequest struct {
-	JobID string `json:"JobId"`
+    JobID string `json:"JobId"`
+    
 }
+

@@ -13,7 +13,7 @@ class PepRetrieveAcceptEnum(str, Enum):
 
 @dataclass
 class PepRetrieveHeaders:
-    accept: Optional[PepRetrieveAcceptEnum] = field(default=None, metadata={'header': { 'field_name': 'accept' }})
+    accept: Optional[PepRetrieveAcceptEnum] = field(default=None, metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

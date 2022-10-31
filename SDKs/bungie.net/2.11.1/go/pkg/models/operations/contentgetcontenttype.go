@@ -1,15 +1,21 @@
 package operations
 
+
+
 type ContentGetContentTypePathParams struct {
-	Type string `pathParam:"style=simple,explode=false,name=type"`
+    Type string `pathParam:"style=simple,explode=false,name=type"`
+    
 }
 
 type ContentGetContentTypeRequest struct {
-	PathParams ContentGetContentTypePathParams
+    PathParams ContentGetContentTypePathParams 
+    
 }
 
 type ContentGetContentTypeResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

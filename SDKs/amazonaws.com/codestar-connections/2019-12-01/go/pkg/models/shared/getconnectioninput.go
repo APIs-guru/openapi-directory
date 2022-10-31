@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetConnectionInput struct {
-	ConnectionArn string `json:"ConnectionArn"`
+    ConnectionArn string `json:"ConnectionArn"`
+    
 }
+

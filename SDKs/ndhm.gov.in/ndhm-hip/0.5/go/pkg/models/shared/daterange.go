@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type DateRange struct {
-	From time.Time `json:"from"`
-	To   time.Time `json:"to"`
+    From time.Time `json:"from"`
+    To time.Time `json:"to"`
+    
 }
+

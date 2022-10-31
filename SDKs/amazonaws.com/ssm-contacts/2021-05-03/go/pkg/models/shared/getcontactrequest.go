@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetContactRequest struct {
-	ContactID string `json:"ContactId"`
+    ContactID string `json:"ContactId"`
+    
 }
+

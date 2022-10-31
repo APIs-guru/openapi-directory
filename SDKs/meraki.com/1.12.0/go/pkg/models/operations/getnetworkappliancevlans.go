@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetNetworkApplianceVlansPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type GetNetworkApplianceVlansRequest struct {
-	PathParams GetNetworkApplianceVlansPathParams
+    PathParams GetNetworkApplianceVlansPathParams 
+    
 }
 
 type GetNetworkApplianceVlansResponse struct {
-	ContentType                                      string
-	StatusCode                                       int64
-	GetNetworkApplianceVlans200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetNetworkApplianceVlans200ApplicationJSONObject map[string]interface{} 
+    
 }
+

@@ -1,15 +1,17 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PurchasesPostRequest struct {
-	Request shared.PurchaseDto `request:"mediaType=application/json"`
+    Request shared.PurchaseDto `request:"mediaType=application/json"`
+    
 }
 
 type PurchasesPostResponse struct {
-	ContentType                           string
-	PurchasesPost200ApplicationJSONObject map[string]interface{}
-	StatusCode                            int64
+    ContentType string 
+    PurchasesPost200ApplicationJSONObject map[string]interface{} 
+    StatusCode int64 
+    
 }
+

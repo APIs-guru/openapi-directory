@@ -1,26 +1,30 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetDealerPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetDealerQueryParams struct {
-	APIKey   *string `queryParam:"style=form,explode=true,name=api_key"`
-	Provider *bool   `queryParam:"style=form,explode=true,name=provider"`
+    APIKey *string `queryParam:"style=form,explode=true,name=api_key"`
+    Provider *bool `queryParam:"style=form,explode=true,name=provider"`
+    
 }
 
 type GetDealerRequest struct {
-	PathParams  GetDealerPathParams
-	QueryParams GetDealerQueryParams
+    PathParams GetDealerPathParams 
+    QueryParams GetDealerQueryParams 
+    
 }
 
 type GetDealerResponse struct {
-	ContentType string
-	Dealer      *shared.Dealer
-	Error       *shared.Error
-	StatusCode  int64
+    ContentType string 
+    Dealer *shared.Dealer 
+    Error *shared.Error 
+    StatusCode int64 
+    
 }
+

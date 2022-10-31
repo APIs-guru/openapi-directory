@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetAccountConfigurationResponse struct {
-	ExpiryEvents *ExpiryEventsConfiguration `json:"ExpiryEvents,omitempty"`
+    ExpiryEvents *ExpiryEventsConfiguration `json:"ExpiryEvents,omitempty"`
+    
 }
+

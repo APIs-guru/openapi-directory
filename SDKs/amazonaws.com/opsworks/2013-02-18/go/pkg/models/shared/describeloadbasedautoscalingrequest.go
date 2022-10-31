@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeLoadBasedAutoScalingRequest struct {
-	LayerIds []string `json:"LayerIds"`
+    LayerIds []string `json:"LayerIds"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UsersListResponse struct {
-	User []User `json:"user,omitempty"`
+    User []User `json:"user,omitempty"`
+    
 }
+

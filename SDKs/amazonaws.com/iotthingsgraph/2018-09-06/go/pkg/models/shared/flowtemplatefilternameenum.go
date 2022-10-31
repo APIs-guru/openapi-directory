@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type FlowTemplateFilterNameEnum string
 
 const (
-	FlowTemplateFilterNameEnumDeviceModelID FlowTemplateFilterNameEnum = "DEVICE_MODEL_ID"
+    FlowTemplateFilterNameEnumDeviceModelID FlowTemplateFilterNameEnum = "DEVICE_MODEL_ID"
 )
+
+

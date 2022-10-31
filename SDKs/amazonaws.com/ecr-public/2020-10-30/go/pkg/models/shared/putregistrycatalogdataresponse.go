@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PutRegistryCatalogDataResponse struct {
-	RegistryCatalogData RegistryCatalogData `json:"registryCatalogData"`
+    RegistryCatalogData RegistryCatalogData `json:"registryCatalogData"`
+    
 }
+

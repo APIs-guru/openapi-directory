@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type PerformanceModeEnum string
 
 const (
-	PerformanceModeEnumGeneralPurpose PerformanceModeEnum = "generalPurpose"
-	PerformanceModeEnumMaxIo          PerformanceModeEnum = "maxIO"
+    PerformanceModeEnumGeneralPurpose PerformanceModeEnum = "generalPurpose"
+PerformanceModeEnumMaxIo PerformanceModeEnum = "maxIO"
 )
+
+

@@ -68,6 +68,7 @@ func (s *SDK) AccessTokenPut(ctx context.Context, request operations.AccessToken
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -613,6 +614,7 @@ func (s *SDK) DevicesPost(ctx context.Context, request operations.DevicesPostReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -961,6 +963,7 @@ func (s *SDK) FolderSettingsPost(ctx context.Context, request operations.FolderS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1376,6 +1379,7 @@ func (s *SDK) MBusPost(ctx context.Context, request operations.MBusPostRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1507,6 +1511,7 @@ func (s *SDK) MeterFolderInformationPost(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2170,6 +2175,7 @@ func (s *SDK) RegisterForRealtimeAPIPost(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2359,6 +2365,7 @@ func (s *SDK) SubUserPost(ctx context.Context, request operations.SubUserPostReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2738,6 +2745,7 @@ func (s *SDK) VirtualBillingMeterActivePost(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2810,6 +2818,7 @@ func (s *SDK) VirtualBillingMeterDeactivatePost(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

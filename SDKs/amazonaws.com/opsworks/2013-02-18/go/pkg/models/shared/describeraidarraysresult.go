@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeRaidArraysResult struct {
-	RaidArrays []RaidArray `json:"RaidArrays,omitempty"`
+    RaidArrays []RaidArray `json:"RaidArrays,omitempty"`
+    
 }
+

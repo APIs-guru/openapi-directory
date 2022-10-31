@@ -1,5 +1,9 @@
 package shared
 
+
+
 type IdentitySelector struct {
-	Identity *string `json:"identity,omitempty"`
+    Identity *string `json:"identity,omitempty"`
+    
 }
+

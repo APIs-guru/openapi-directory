@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type SubscribeDownloadSharesHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type SubscribeDownloadSharesRequest struct {
-	Headers SubscribeDownloadSharesHeaders
-	Request shared.UpdateSubscriptionsBulkRequest `request:"mediaType=application/json"`
+    Headers SubscribeDownloadSharesHeaders 
+    Request shared.UpdateSubscriptionsBulkRequest `request:"mediaType=application/json"`
+    
 }
 
 type SubscribeDownloadSharesResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

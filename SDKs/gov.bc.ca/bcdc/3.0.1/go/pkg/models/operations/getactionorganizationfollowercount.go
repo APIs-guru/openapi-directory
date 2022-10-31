@@ -1,14 +1,20 @@
 package operations
 
+
+
 type GetActionOrganizationFollowerCountQueryParams struct {
-	ID *string `queryParam:"style=form,explode=true,name=id"`
+    ID *string `queryParam:"style=form,explode=true,name=id"`
+    
 }
 
 type GetActionOrganizationFollowerCountRequest struct {
-	QueryParams GetActionOrganizationFollowerCountQueryParams
+    QueryParams GetActionOrganizationFollowerCountQueryParams 
+    
 }
 
 type GetActionOrganizationFollowerCountResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

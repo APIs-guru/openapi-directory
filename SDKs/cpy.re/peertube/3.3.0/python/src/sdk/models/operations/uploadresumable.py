@@ -9,8 +9,8 @@ class UploadResumableQueryParams:
 
 @dataclass
 class UploadResumableHeaders:
-    content_length: float = field(default=None, metadata={'header': { 'field_name': 'Content-Length' }})
-    content_range: str = field(default=None, metadata={'header': { 'field_name': 'Content-Range' }})
+    content_length: float = field(default=None, metadata={'header': { 'field_name': 'Content-Length', 'style': 'simple', 'explode': False }})
+    content_range: str = field(default=None, metadata={'header': { 'field_name': 'Content-Range', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

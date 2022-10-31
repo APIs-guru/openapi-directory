@@ -1,30 +1,33 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var FetchTrustProductEntityAssignmentServers = []string{
 	"https://trusthub.twilio.com",
 }
 
 type FetchTrustProductEntityAssignmentPathParams struct {
-	Sid             string `pathParam:"style=simple,explode=false,name=Sid"`
-	TrustProductSid string `pathParam:"style=simple,explode=false,name=TrustProductSid"`
+    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    TrustProductSid string `pathParam:"style=simple,explode=false,name=TrustProductSid"`
+    
 }
 
 type FetchTrustProductEntityAssignmentSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type FetchTrustProductEntityAssignmentRequest struct {
-	ServerURL  *string
-	PathParams FetchTrustProductEntityAssignmentPathParams
-	Security   FetchTrustProductEntityAssignmentSecurity
+    ServerURL *string 
+    PathParams FetchTrustProductEntityAssignmentPathParams 
+    Security FetchTrustProductEntityAssignmentSecurity 
+    
 }
 
 type FetchTrustProductEntityAssignmentResponse struct {
-	ContentType                                        string
-	StatusCode                                         int64
-	TrusthubV1TrustProductTrustProductEntityAssignment *shared.TrusthubV1TrustProductTrustProductEntityAssignment
+    ContentType string 
+    StatusCode int64 
+    TrusthubV1TrustProductTrustProductEntityAssignment *shared.TrusthubV1TrustProductTrustProductEntityAssignment 
+    
 }
+

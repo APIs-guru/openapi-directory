@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EventTypeList struct {
-	Items []EventType `json:"items"`
+    Items []EventType `json:"items"`
+    
 }
+

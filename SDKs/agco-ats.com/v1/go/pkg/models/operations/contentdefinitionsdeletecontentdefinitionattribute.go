@@ -1,15 +1,21 @@
 package operations
 
+
+
 type ContentDefinitionsDeleteContentDefinitionAttributePathParams struct {
-	ContentDefinitionAttributeID int32 `pathParam:"style=simple,explode=false,name=contentDefinitionAttributeID"`
+    ContentDefinitionAttributeID int32 `pathParam:"style=simple,explode=false,name=contentDefinitionAttributeID"`
+    
 }
 
 type ContentDefinitionsDeleteContentDefinitionAttributeRequest struct {
-	PathParams ContentDefinitionsDeleteContentDefinitionAttributePathParams
+    PathParams ContentDefinitionsDeleteContentDefinitionAttributePathParams 
+    
 }
 
 type ContentDefinitionsDeleteContentDefinitionAttributeResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

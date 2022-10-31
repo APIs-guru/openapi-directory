@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteCallAnalyticsJobRequest struct {
-	CallAnalyticsJobName string `json:"CallAnalyticsJobName"`
+    CallAnalyticsJobName string `json:"CallAnalyticsJobName"`
+    
 }
+

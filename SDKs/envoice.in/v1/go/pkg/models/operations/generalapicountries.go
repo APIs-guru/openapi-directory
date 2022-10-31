@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GeneralAPICountriesHeaders struct {
-	XAuthKey    string `header:"name=x-auth-key"`
-	XAuthSecret string `header:"name=x-auth-secret"`
+    XAuthKey string `header:"style=simple,explode=false,name=x-auth-key"`
+    XAuthSecret string `header:"style=simple,explode=false,name=x-auth-secret"`
+    
 }
 
 type GeneralAPICountriesRequest struct {
-	Headers GeneralAPICountriesHeaders
+    Headers GeneralAPICountriesHeaders 
+    
 }
 
 type GeneralAPICountriesResponse struct {
-	Body                    []byte
-	ContentType             string
-	CountryDetailsAPIModels []shared.CountryDetailsAPIModel
-	StatusCode              int64
+    Body []byte 
+    ContentType string 
+    CountryDetailsAPIModels []shared.CountryDetailsAPIModel 
+    StatusCode int64 
+    
 }
+

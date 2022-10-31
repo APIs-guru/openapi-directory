@@ -187,6 +187,7 @@ func (s *SDK) DriveChangesWatch(ctx context.Context, request operations.DriveCha
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -234,6 +235,7 @@ func (s *SDK) DriveChannelsStop(ctx context.Context, request operations.DriveCha
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -272,6 +274,7 @@ func (s *SDK) DriveCommentsCreate(ctx context.Context, request operations.DriveC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -433,6 +436,7 @@ func (s *SDK) DriveCommentsUpdate(ctx context.Context, request operations.DriveC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -480,6 +484,7 @@ func (s *SDK) DriveDrivesCreate(ctx context.Context, request operations.DriveDri
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -723,6 +728,7 @@ func (s *SDK) DriveDrivesUpdate(ctx context.Context, request operations.DriveDri
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -770,6 +776,7 @@ func (s *SDK) DriveFilesCopy(ctx context.Context, request operations.DriveFilesC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -817,6 +824,7 @@ func (s *SDK) DriveFilesCreate(ctx context.Context, request operations.DriveFile
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1124,6 +1132,7 @@ func (s *SDK) DriveFilesModifyLabels(ctx context.Context, request operations.Dri
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1171,6 +1180,7 @@ func (s *SDK) DriveFilesUpdate(ctx context.Context, request operations.DriveFile
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1218,6 +1228,7 @@ func (s *SDK) DriveFilesWatch(ctx context.Context, request operations.DriveFiles
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1265,6 +1276,7 @@ func (s *SDK) DrivePermissionsCreate(ctx context.Context, request operations.Dri
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1426,6 +1438,7 @@ func (s *SDK) DrivePermissionsUpdate(ctx context.Context, request operations.Dri
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1473,6 +1486,7 @@ func (s *SDK) DriveRepliesCreate(ctx context.Context, request operations.DriveRe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1634,6 +1648,7 @@ func (s *SDK) DriveRepliesUpdate(ctx context.Context, request operations.DriveRe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1795,6 +1810,7 @@ func (s *SDK) DriveRevisionsUpdate(ctx context.Context, request operations.Drive
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1842,6 +1858,7 @@ func (s *SDK) DriveTeamdrivesCreate(ctx context.Context, request operations.Driv
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2003,6 +2020,7 @@ func (s *SDK) DriveTeamdrivesUpdate(ctx context.Context, request operations.Driv
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

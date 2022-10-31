@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CryptoKeyConfig struct {
-	KeyReference *string `json:"keyReference,omitempty"`
+    KeyReference *string `json:"keyReference,omitempty"`
+    
 }
+

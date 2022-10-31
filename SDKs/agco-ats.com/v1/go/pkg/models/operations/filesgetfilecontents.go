@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type FilesGetFileContentsPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=ID"`
+    ID string `pathParam:"style=simple,explode=false,name=ID"`
+    
 }
 
 type FilesGetFileContentsRequest struct {
-	PathParams FilesGetFileContentsPathParams
+    PathParams FilesGetFileContentsPathParams 
+    
 }
 
 type FilesGetFileContentsResponse struct {
-	APIModelsAPIError *shared.APIModelsAPIError
-	Body              []byte
-	ContentType       string
-	StatusCode        int64
-	SystemObject      map[string]interface{}
+    APIModelsAPIError *shared.APIModelsAPIError 
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    SystemObject map[string]interface{} 
+    
 }
+

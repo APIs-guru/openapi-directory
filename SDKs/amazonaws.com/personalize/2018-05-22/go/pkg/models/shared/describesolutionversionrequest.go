@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeSolutionVersionRequest struct {
-	SolutionVersionArn string `json:"solutionVersionArn"`
+    SolutionVersionArn string `json:"solutionVersionArn"`
+    
 }
+

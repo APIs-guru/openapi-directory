@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetPublicKeysIDPathParams struct {
-	ID int32 `pathParam:"style=simple,explode=false,name=id"`
+    ID int32 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetPublicKeysIDRequest struct {
-	PathParams GetPublicKeysIDPathParams
+    PathParams GetPublicKeysIDPathParams 
+    
 }
 
 type GetPublicKeysIDResponse struct {
-	ContentType     string
-	PublicKeyEntity *shared.PublicKeyEntity
-	StatusCode      int64
+    ContentType string 
+    PublicKeyEntity *shared.PublicKeyEntity 
+    StatusCode int64 
+    
 }
+

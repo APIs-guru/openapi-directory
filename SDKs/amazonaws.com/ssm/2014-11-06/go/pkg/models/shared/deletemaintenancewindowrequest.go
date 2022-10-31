@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteMaintenanceWindowRequest struct {
-	WindowID string `json:"WindowId"`
+    WindowID string `json:"WindowId"`
+    
 }
+

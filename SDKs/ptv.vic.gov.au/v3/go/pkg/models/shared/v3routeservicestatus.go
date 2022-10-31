@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type V3RouteServiceStatus struct {
-	Description *string    `json:"description,omitempty"`
-	Timestamp   *time.Time `json:"timestamp,omitempty"`
+    Description *string `json:"description,omitempty"`
+    Timestamp *time.Time `json:"timestamp,omitempty"`
+    
 }
+

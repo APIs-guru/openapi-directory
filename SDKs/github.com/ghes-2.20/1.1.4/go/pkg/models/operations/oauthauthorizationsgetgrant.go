@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type OauthAuthorizationsGetGrantPathParams struct {
-	GrantID int64 `pathParam:"style=simple,explode=false,name=grant_id"`
+    GrantID int64 `pathParam:"style=simple,explode=false,name=grant_id"`
+    
 }
 
 type OauthAuthorizationsGetGrantRequest struct {
-	PathParams OauthAuthorizationsGetGrantPathParams
+    PathParams OauthAuthorizationsGetGrantPathParams 
+    
 }
 
 type OauthAuthorizationsGetGrantResponse struct {
-	ContentType      string
-	StatusCode       int64
-	ApplicationGrant *shared.ApplicationGrant
-	BasicError       *shared.BasicError
+    ContentType string 
+    StatusCode int64 
+    ApplicationGrant *shared.ApplicationGrant 
+    BasicError *shared.BasicError 
+    
 }
+

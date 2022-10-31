@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreatePipelineOutput struct {
-	PipelineID string `json:"pipelineId"`
+    PipelineID string `json:"pipelineId"`
+    
 }
+

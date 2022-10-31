@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetAffectedGenomicModelsUsingGetPathParams struct {
-	TaxonID string `pathParam:"style=simple,explode=false,name=taxonId"`
+    TaxonID string `pathParam:"style=simple,explode=false,name=taxonId"`
+    
 }
 
 type GetAffectedGenomicModelsUsingGetRequest struct {
-	PathParams GetAffectedGenomicModelsUsingGetPathParams
+    PathParams GetAffectedGenomicModelsUsingGetPathParams 
+    
 }
 
 type GetAffectedGenomicModelsUsingGetResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

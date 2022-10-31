@@ -10,7 +10,7 @@ class GetWellKnownMercureQueryParams:
 
 @dataclass
 class GetWellKnownMercureHeaders:
-    last_event_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Last-Event-ID' }})
+    last_event_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Last-Event-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

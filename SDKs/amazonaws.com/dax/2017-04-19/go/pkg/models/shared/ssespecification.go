@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SseSpecification struct {
-	Enabled bool `json:"Enabled"`
+    Enabled bool `json:"Enabled"`
+    
 }
+

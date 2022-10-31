@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateEnvironmentOutput struct {
-	Arn *string `json:"Arn,omitempty"`
+    Arn *string `json:"Arn,omitempty"`
+    
 }
+

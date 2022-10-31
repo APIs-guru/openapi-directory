@@ -434,6 +434,7 @@ func (s *SDK) AddBeleg(ctx context.Context, request operations.AddBelegRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -481,6 +482,7 @@ func (s *SDK) CreateAbschluss(ctx context.Context, request operations.CreateAbsc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

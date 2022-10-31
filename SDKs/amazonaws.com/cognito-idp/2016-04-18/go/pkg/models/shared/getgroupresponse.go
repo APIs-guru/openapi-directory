@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetGroupResponse struct {
-	Group *GroupType `json:"Group,omitempty"`
+    Group *GroupType `json:"Group,omitempty"`
+    
 }
+

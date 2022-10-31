@@ -1,19 +1,24 @@
 package shared
 
+
+
+
 type MessageCode400SbsEnum string
 
 const (
-	MessageCode400SbsEnumFormatError            MessageCode400SbsEnum = "FORMAT_ERROR"
-	MessageCode400SbsEnumParameterNotConsistent MessageCode400SbsEnum = "PARAMETER_NOT_CONSISTENT"
-	MessageCode400SbsEnumParameterNotSupported  MessageCode400SbsEnum = "PARAMETER_NOT_SUPPORTED"
-	MessageCode400SbsEnumServiceInvalid         MessageCode400SbsEnum = "SERVICE_INVALID"
-	MessageCode400SbsEnumResourceUnknown        MessageCode400SbsEnum = "RESOURCE_UNKNOWN"
-	MessageCode400SbsEnumResourceExpired        MessageCode400SbsEnum = "RESOURCE_EXPIRED"
-	MessageCode400SbsEnumResourceBlocked        MessageCode400SbsEnum = "RESOURCE_BLOCKED"
-	MessageCode400SbsEnumTimestampInvalid       MessageCode400SbsEnum = "TIMESTAMP_INVALID"
-	MessageCode400SbsEnumPeriodInvalid          MessageCode400SbsEnum = "PERIOD_INVALID"
-	MessageCode400SbsEnumScaMethodUnknown       MessageCode400SbsEnum = "SCA_METHOD_UNKNOWN"
-	MessageCode400SbsEnumScaInvalid             MessageCode400SbsEnum = "SCA_INVALID"
-	MessageCode400SbsEnumConsentUnknown         MessageCode400SbsEnum = "CONSENT_UNKNOWN"
-	MessageCode400SbsEnumReferenceMixInvalid    MessageCode400SbsEnum = "REFERENCE_MIX_INVALID"
+    MessageCode400SbsEnumFormatError MessageCode400SbsEnum = "FORMAT_ERROR"
+MessageCode400SbsEnumParameterNotConsistent MessageCode400SbsEnum = "PARAMETER_NOT_CONSISTENT"
+MessageCode400SbsEnumParameterNotSupported MessageCode400SbsEnum = "PARAMETER_NOT_SUPPORTED"
+MessageCode400SbsEnumServiceInvalid MessageCode400SbsEnum = "SERVICE_INVALID"
+MessageCode400SbsEnumResourceUnknown MessageCode400SbsEnum = "RESOURCE_UNKNOWN"
+MessageCode400SbsEnumResourceExpired MessageCode400SbsEnum = "RESOURCE_EXPIRED"
+MessageCode400SbsEnumResourceBlocked MessageCode400SbsEnum = "RESOURCE_BLOCKED"
+MessageCode400SbsEnumTimestampInvalid MessageCode400SbsEnum = "TIMESTAMP_INVALID"
+MessageCode400SbsEnumPeriodInvalid MessageCode400SbsEnum = "PERIOD_INVALID"
+MessageCode400SbsEnumScaMethodUnknown MessageCode400SbsEnum = "SCA_METHOD_UNKNOWN"
+MessageCode400SbsEnumScaInvalid MessageCode400SbsEnum = "SCA_INVALID"
+MessageCode400SbsEnumConsentUnknown MessageCode400SbsEnum = "CONSENT_UNKNOWN"
+MessageCode400SbsEnumReferenceMixInvalid MessageCode400SbsEnum = "REFERENCE_MIX_INVALID"
 )
+
+

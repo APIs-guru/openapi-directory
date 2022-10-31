@@ -104,6 +104,7 @@ func (s *SDK) AddAccount(ctx context.Context, request operations.AddAccountReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -152,6 +153,7 @@ func (s *SDK) AddBankTransferBatchPayment(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -200,6 +202,7 @@ func (s *SDK) AddInternalTransferBatchPayment(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -248,6 +251,7 @@ func (s *SDK) Authenticate(ctx context.Context, request operations.AuthenticateR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -356,6 +360,7 @@ func (s *SDK) CreateAPIApplication(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -404,6 +409,7 @@ func (s *SDK) CreateBatchPayment(ctx context.Context, request operations.CreateB
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -452,6 +458,7 @@ func (s *SDK) CreateNewCard(ctx context.Context, request operations.CreateNewCar
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1317,6 +1324,7 @@ func (s *SDK) NewPaymentRequest(ctx context.Context, request operations.NewPayme
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

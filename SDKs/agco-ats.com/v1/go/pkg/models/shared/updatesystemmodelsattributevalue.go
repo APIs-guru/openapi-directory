@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type UpdateSystemModelsAttributeValue struct {
-	Key       string     `json:"Key"`
-	TimeStamp *time.Time `json:"TimeStamp,omitempty"`
-	Value     *string    `json:"Value,omitempty"`
+    Key string `json:"Key"`
+    TimeStamp *time.Time `json:"TimeStamp,omitempty"`
+    Value *string `json:"Value,omitempty"`
+    
 }
+

@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type SessionStateEnum string
 
 const (
-	SessionStateEnumActive  SessionStateEnum = "Active"
-	SessionStateEnumHistory SessionStateEnum = "History"
+    SessionStateEnumActive SessionStateEnum = "Active"
+SessionStateEnumHistory SessionStateEnum = "History"
 )
+
+

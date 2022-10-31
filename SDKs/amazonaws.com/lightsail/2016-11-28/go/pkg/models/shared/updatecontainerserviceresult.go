@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateContainerServiceResult struct {
-	ContainerService *ContainerService `json:"containerService,omitempty"`
+    ContainerService *ContainerService `json:"containerService,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeregisterRdsDbInstanceRequest struct {
-	RdsDbInstanceArn string `json:"RdsDbInstanceArn"`
+    RdsDbInstanceArn string `json:"RdsDbInstanceArn"`
+    
 }
+

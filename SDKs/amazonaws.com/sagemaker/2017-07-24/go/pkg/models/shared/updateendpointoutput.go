@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateEndpointOutput struct {
-	EndpointArn string `json:"EndpointArn"`
+    EndpointArn string `json:"EndpointArn"`
+    
 }
+

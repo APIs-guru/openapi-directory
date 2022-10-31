@@ -67,6 +67,7 @@ func (s *SDK) PostJsontoxml(ctx context.Context, request operations.PostJsontoxm
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -106,6 +107,7 @@ func (s *SDK) PostXmltojson(ctx context.Context, request operations.PostXmltojso
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

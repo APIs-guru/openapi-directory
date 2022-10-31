@@ -1,24 +1,32 @@
 package operations
 
+
+
+
 type PlayerGameStatsByPlayerFormatEnum string
 
 const (
-	PlayerGameStatsByPlayerFormatEnumXML  PlayerGameStatsByPlayerFormatEnum = "XML"
-	PlayerGameStatsByPlayerFormatEnumJSON PlayerGameStatsByPlayerFormatEnum = "JSON"
+    PlayerGameStatsByPlayerFormatEnumXML PlayerGameStatsByPlayerFormatEnum = "XML"
+PlayerGameStatsByPlayerFormatEnumJSON PlayerGameStatsByPlayerFormatEnum = "JSON"
 )
 
+
 type PlayerGameStatsByPlayerPathParams struct {
-	Date     string                            `pathParam:"style=simple,explode=false,name=date"`
-	Format   PlayerGameStatsByPlayerFormatEnum `pathParam:"style=simple,explode=false,name=format"`
-	Playerid string                            `pathParam:"style=simple,explode=false,name=playerid"`
+    Date string `pathParam:"style=simple,explode=false,name=date"`
+    Format PlayerGameStatsByPlayerFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+    Playerid string `pathParam:"style=simple,explode=false,name=playerid"`
+    
 }
 
 type PlayerGameStatsByPlayerRequest struct {
-	PathParams PlayerGameStatsByPlayerPathParams
+    PathParams PlayerGameStatsByPlayerPathParams 
+    
 }
 
 type PlayerGameStatsByPlayerResponse struct {
-	ContentType string
-	PlayerGame  *interface{}
-	StatusCode  int64
+    ContentType string 
+    PlayerGame *interface{} 
+    StatusCode int64 
+    
 }
+

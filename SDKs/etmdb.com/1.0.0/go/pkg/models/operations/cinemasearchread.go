@@ -1,14 +1,20 @@
 package operations
 
+
+
 type CinemaSearchReadPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type CinemaSearchReadRequest struct {
-	PathParams CinemaSearchReadPathParams
+    PathParams CinemaSearchReadPathParams 
+    
 }
 
 type CinemaSearchReadResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

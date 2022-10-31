@@ -1,10 +1,14 @@
 package shared
 
+
+
 type QueryDriveActivityRequest struct {
-	AncestorName          *string                `json:"ancestorName,omitempty"`
-	ConsolidationStrategy *ConsolidationStrategy `json:"consolidationStrategy,omitempty"`
-	Filter                *string                `json:"filter,omitempty"`
-	ItemName              *string                `json:"itemName,omitempty"`
-	PageSize              *int32                 `json:"pageSize,omitempty"`
-	PageToken             *string                `json:"pageToken,omitempty"`
+    AncestorName *string `json:"ancestorName,omitempty"`
+    ConsolidationStrategy *ConsolidationStrategy `json:"consolidationStrategy,omitempty"`
+    Filter *string `json:"filter,omitempty"`
+    ItemName *string `json:"itemName,omitempty"`
+    PageSize *int32 `json:"pageSize,omitempty"`
+    PageToken *string `json:"pageToken,omitempty"`
+    
 }
+

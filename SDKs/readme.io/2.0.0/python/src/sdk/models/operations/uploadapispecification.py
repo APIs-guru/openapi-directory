@@ -4,7 +4,7 @@ from typing import Optional
 
 @dataclass
 class UploadAPISpecificationHeaders:
-    x_readme_version: str = field(default=None, metadata={'header': { 'field_name': 'x-readme-version' }})
+    x_readme_version: str = field(default=None, metadata={'header': { 'field_name': 'x-readme-version', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

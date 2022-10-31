@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchGetBuildBatchesInput struct {
-	Ids []string `json:"ids"`
+    Ids []string `json:"ids"`
+    
 }
+

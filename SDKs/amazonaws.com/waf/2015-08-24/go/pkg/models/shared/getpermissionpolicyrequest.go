@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetPermissionPolicyRequest struct {
-	ResourceArn string `json:"ResourceArn"`
+    ResourceArn string `json:"ResourceArn"`
+    
 }
+

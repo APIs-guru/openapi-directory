@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeWorkforceRequest struct {
-	WorkforceName string `json:"WorkforceName"`
+    WorkforceName string `json:"WorkforceName"`
+    
 }
+

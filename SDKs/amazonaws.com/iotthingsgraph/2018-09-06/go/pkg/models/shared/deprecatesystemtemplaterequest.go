@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeprecateSystemTemplateRequest struct {
-	ID string `json:"id"`
+    ID string `json:"id"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteBackendEnvironmentResult struct {
-	BackendEnvironment BackendEnvironment `json:"backendEnvironment"`
+    BackendEnvironment BackendEnvironment `json:"backendEnvironment"`
+    
 }
+

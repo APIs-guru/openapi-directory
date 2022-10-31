@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchGetDeploymentsInput struct {
-	DeploymentIds []string `json:"deploymentIds"`
+    DeploymentIds []string `json:"deploymentIds"`
+    
 }
+

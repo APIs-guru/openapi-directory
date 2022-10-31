@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateApplicationResponse struct {
-	ApplicationInfo *ApplicationInfo `json:"ApplicationInfo,omitempty"`
+    ApplicationInfo *ApplicationInfo `json:"ApplicationInfo,omitempty"`
+    
 }
+

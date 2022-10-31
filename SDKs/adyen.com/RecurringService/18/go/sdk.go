@@ -63,6 +63,7 @@ func (s *SDK) PostDisable(ctx context.Context, request operations.PostDisableReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -113,6 +114,7 @@ func (s *SDK) PostListRecurringDetails(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

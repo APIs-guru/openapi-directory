@@ -5,8 +5,8 @@ from sdk.models import shared
 
 @dataclass
 class ImageOcrImageWordsWithLocationHeaders:
-    language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'language' }})
-    preprocessing: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'preprocessing' }})
+    language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'language', 'style': 'simple', 'explode': False }})
+    preprocessing: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'preprocessing', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

@@ -1,26 +1,30 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type UpdateDellSwitchSnmpConfigPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type UpdateDellSwitchSnmpConfigSecurity struct {
-	APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
+    APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type UpdateDellSwitchSnmpConfigRequest struct {
-	PathParams UpdateDellSwitchSnmpConfigPathParams
-	Request    *shared.SnmpConfig `request:"mediaType=application/json"`
-	Security   UpdateDellSwitchSnmpConfigSecurity
+    PathParams UpdateDellSwitchSnmpConfigPathParams 
+    Request *shared.SnmpConfig `request:"mediaType=application/json"`
+    Security UpdateDellSwitchSnmpConfigSecurity 
+    
 }
 
 type UpdateDellSwitchSnmpConfigResponse struct {
-	APIError    *shared.APIError
-	ContentType string
-	SnmpConfig  *shared.SnmpConfig
-	StatusCode  int64
+    APIError *shared.APIError 
+    ContentType string 
+    SnmpConfig *shared.SnmpConfig 
+    StatusCode int64 
+    
 }
+

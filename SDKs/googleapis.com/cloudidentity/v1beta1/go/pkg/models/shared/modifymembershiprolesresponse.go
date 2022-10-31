@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ModifyMembershipRolesResponse struct {
-	Membership *Membership `json:"membership,omitempty"`
+    Membership *Membership `json:"membership,omitempty"`
+    
 }
+

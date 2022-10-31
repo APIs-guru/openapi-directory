@@ -1,8 +1,12 @@
 package shared
 
+
+
 type Subscription struct {
-	ID      string `json:"Id"`
-	Source  string `json:"Source"`
-	Subject string `json:"Subject"`
-	Target  string `json:"Target"`
+    ID string `json:"Id"`
+    Source string `json:"Source"`
+    Subject string `json:"Subject"`
+    Target string `json:"Target"`
+    
 }
+

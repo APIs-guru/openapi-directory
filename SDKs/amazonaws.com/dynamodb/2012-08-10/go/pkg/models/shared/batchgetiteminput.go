@@ -1,6 +1,10 @@
 package shared
 
+
+
 type BatchGetItemInput struct {
-	RequestItems           map[string]KeysAndAttributes `json:"RequestItems"`
-	ReturnConsumedCapacity *ReturnConsumedCapacityEnum  `json:"ReturnConsumedCapacity,omitempty"`
+    RequestItems map[string]KeysAndAttributes `json:"RequestItems"`
+    ReturnConsumedCapacity *ReturnConsumedCapacityEnum `json:"ReturnConsumedCapacity,omitempty"`
+    
 }
+

@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type BatchEvaluateGeofencesError struct {
-	DeviceID   string         `json:"DeviceId"`
-	Error      BatchItemError `json:"Error"`
-	SampleTime time.Time      `json:"SampleTime"`
+    DeviceID string `json:"DeviceId"`
+    Error BatchItemError `json:"Error"`
+    SampleTime time.Time `json:"SampleTime"`
+    
 }
+

@@ -1,26 +1,34 @@
 package operations
 
+
+
 type GetInstancesIDFramesFrameImageUint16PathParams struct {
-	Frame float64 `pathParam:"style=simple,explode=false,name=frame"`
-	ID    string  `pathParam:"style=simple,explode=false,name=id"`
+    Frame float64 `pathParam:"style=simple,explode=false,name=frame"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetInstancesIDFramesFrameImageUint16QueryParams struct {
-	Quality *float64 `queryParam:"style=form,explode=true,name=quality"`
+    Quality *float64 `queryParam:"style=form,explode=true,name=quality"`
+    
 }
 
 type GetInstancesIDFramesFrameImageUint16Headers struct {
-	Accept *string `header:"name=Accept"`
+    Accept *string `header:"style=simple,explode=false,name=Accept"`
+    
 }
 
 type GetInstancesIDFramesFrameImageUint16Request struct {
-	PathParams  GetInstancesIDFramesFrameImageUint16PathParams
-	QueryParams GetInstancesIDFramesFrameImageUint16QueryParams
-	Headers     GetInstancesIDFramesFrameImageUint16Headers
+    PathParams GetInstancesIDFramesFrameImageUint16PathParams 
+    QueryParams GetInstancesIDFramesFrameImageUint16QueryParams 
+    Headers GetInstancesIDFramesFrameImageUint16Headers 
+    
 }
 
 type GetInstancesIDFramesFrameImageUint16Response struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

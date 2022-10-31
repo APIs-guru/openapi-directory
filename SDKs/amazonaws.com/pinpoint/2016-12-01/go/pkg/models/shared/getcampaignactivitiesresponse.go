@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetCampaignActivitiesResponse struct {
-	ActivitiesResponse ActivitiesResponse `json:"ActivitiesResponse"`
+    ActivitiesResponse ActivitiesResponse `json:"ActivitiesResponse"`
+    
 }
+

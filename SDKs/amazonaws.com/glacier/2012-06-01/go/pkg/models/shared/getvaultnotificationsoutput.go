@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetVaultNotificationsOutput struct {
-	VaultNotificationConfig *VaultNotificationConfig `json:"vaultNotificationConfig,omitempty"`
+    VaultNotificationConfig *VaultNotificationConfig `json:"vaultNotificationConfig,omitempty"`
+    
 }
+

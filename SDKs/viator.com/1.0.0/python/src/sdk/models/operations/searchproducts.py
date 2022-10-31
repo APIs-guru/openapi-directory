@@ -6,7 +6,7 @@ from sdk.models import shared
 
 @dataclass
 class SearchProductsHeaders:
-    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 class SearchProductsRequestBodySortOrderEnum(str, Enum):
     TOP_SELLERS = "TOP_SELLERS"

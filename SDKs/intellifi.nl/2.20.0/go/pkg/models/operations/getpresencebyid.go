@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetPresenceByIDPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetPresenceByIDRequest struct {
-	PathParams GetPresenceByIDPathParams
+    PathParams GetPresenceByIDPathParams 
+    
 }
 
 type GetPresenceByIDResponse struct {
-	ContentType string
-	Presence    *shared.Presence
-	StatusCode  int64
+    ContentType string 
+    Presence *shared.Presence 
+    StatusCode int64 
+    
 }
+

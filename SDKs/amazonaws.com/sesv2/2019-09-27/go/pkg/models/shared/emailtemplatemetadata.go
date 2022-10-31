@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type EmailTemplateMetadata struct {
-	CreatedTimestamp *time.Time `json:"CreatedTimestamp,omitempty"`
-	TemplateName     *string    `json:"TemplateName,omitempty"`
+    CreatedTimestamp *time.Time `json:"CreatedTimestamp,omitempty"`
+    TemplateName *string `json:"TemplateName,omitempty"`
+    
 }
+

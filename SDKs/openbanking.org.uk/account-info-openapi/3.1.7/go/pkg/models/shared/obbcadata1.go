@@ -1,924 +1,1065 @@
 package shared
 
+
+
+
 type ObbcaData1CreditInterestTierBandSetCalculationMethodEnum string
 
 const (
-	ObbcaData1CreditInterestTierBandSetCalculationMethodEnumCompound       ObbcaData1CreditInterestTierBandSetCalculationMethodEnum = "Compound"
-	ObbcaData1CreditInterestTierBandSetCalculationMethodEnumSimpleInterest ObbcaData1CreditInterestTierBandSetCalculationMethodEnum = "SimpleInterest"
+    ObbcaData1CreditInterestTierBandSetCalculationMethodEnumCompound ObbcaData1CreditInterestTierBandSetCalculationMethodEnum = "Compound"
+ObbcaData1CreditInterestTierBandSetCalculationMethodEnumSimpleInterest ObbcaData1CreditInterestTierBandSetCalculationMethodEnum = "SimpleInterest"
 )
+
+
 
 type ObbcaData1CreditInterestTierBandSetDestinationEnum string
 
 const (
-	ObbcaData1CreditInterestTierBandSetDestinationEnumPayAway    ObbcaData1CreditInterestTierBandSetDestinationEnum = "PayAway"
-	ObbcaData1CreditInterestTierBandSetDestinationEnumSelfCredit ObbcaData1CreditInterestTierBandSetDestinationEnum = "SelfCredit"
+    ObbcaData1CreditInterestTierBandSetDestinationEnumPayAway ObbcaData1CreditInterestTierBandSetDestinationEnum = "PayAway"
+ObbcaData1CreditInterestTierBandSetDestinationEnumSelfCredit ObbcaData1CreditInterestTierBandSetDestinationEnum = "SelfCredit"
 )
+
+
 
 type ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum string
 
 const (
-	ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumDaily            ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "Daily"
-	ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumHalfYearly       ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "HalfYearly"
-	ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumMonthly          ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "Monthly"
-	ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumOther            ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "Other"
-	ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumQuarterly        ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "Quarterly"
-	ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumPerStatementDate ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "PerStatementDate"
-	ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumWeekly           ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "Weekly"
-	ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumYearly           ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "Yearly"
+    ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumDaily ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "Daily"
+ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumHalfYearly ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "HalfYearly"
+ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumMonthly ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "Monthly"
+ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumOther ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "Other"
+ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumQuarterly ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "Quarterly"
+ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumPerStatementDate ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "PerStatementDate"
+ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumWeekly ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "Weekly"
+ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnumYearly ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum = "Yearly"
 )
+
+
 
 type ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeEnum string
 
 const (
-	ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeEnumGross ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeEnum = "Gross"
-	ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeEnumOther ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeEnum = "Other"
+    ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeEnumGross ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeEnum = "Gross"
+ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeEnumOther ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeEnum = "Other"
 )
+
+
 
 type ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum string
 
 const (
-	ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumDaily            ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "Daily"
-	ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumHalfYearly       ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "HalfYearly"
-	ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumMonthly          ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "Monthly"
-	ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumOther            ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "Other"
-	ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumQuarterly        ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "Quarterly"
-	ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumPerStatementDate ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "PerStatementDate"
-	ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumWeekly           ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "Weekly"
-	ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumYearly           ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "Yearly"
+    ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumDaily ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "Daily"
+ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumHalfYearly ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "HalfYearly"
+ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumMonthly ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "Monthly"
+ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumOther ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "Other"
+ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumQuarterly ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "Quarterly"
+ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumPerStatementDate ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "PerStatementDate"
+ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumWeekly ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "Weekly"
+ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnumYearly ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum = "Yearly"
 )
+
+
 
 type ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum string
 
 const (
-	ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnumBanded ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum = "Banded"
-	ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnumTiered ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum = "Tiered"
-	ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnumWhole  ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum = "Whole"
+    ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnumBanded ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum = "Banded"
+ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnumTiered ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum = "Tiered"
+ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnumWhole ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum = "Whole"
 )
+
+
 
 type ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnum string
 
 const (
-	ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnumFixed    ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnum = "Fixed"
-	ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnumVariable ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnum = "Variable"
+    ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnumFixed ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnum = "Fixed"
+ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnumVariable ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnum = "Variable"
 )
 
+
 type ObbcaData1CreditInterestTierBandSetTierBandOtherApplicationFrequency struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1CreditInterestTierBandSetTierBandOtherBankInterestType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequency struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1CreditInterestTierBandSetTierBand struct {
-	Aer                            string                                                                         `json:"AER"`
-	ApplicationFrequency           ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum            `json:"ApplicationFrequency"`
-	BankInterestRate               *string                                                                        `json:"BankInterestRate,omitempty"`
-	BankInterestRateType           *ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeEnum           `json:"BankInterestRateType,omitempty"`
-	CalculationFrequency           *ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum           `json:"CalculationFrequency,omitempty"`
-	DepositInterestAppliedCoverage *ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum `json:"DepositInterestAppliedCoverage,omitempty"`
-	FixedVariableInterestRateType  ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnum   `json:"FixedVariableInterestRateType"`
-	Identification                 *string                                                                        `json:"Identification,omitempty"`
-	Notes                          []string                                                                       `json:"Notes,omitempty"`
-	OtherApplicationFrequency      *ObbcaData1CreditInterestTierBandSetTierBandOtherApplicationFrequency          `json:"OtherApplicationFrequency,omitempty"`
-	OtherBankInterestType          *ObbcaData1CreditInterestTierBandSetTierBandOtherBankInterestType              `json:"OtherBankInterestType,omitempty"`
-	OtherCalculationFrequency      *ObbcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequency          `json:"OtherCalculationFrequency,omitempty"`
-	TierValueMaximum               *string                                                                        `json:"TierValueMaximum,omitempty"`
-	TierValueMinimum               string                                                                         `json:"TierValueMinimum"`
+    Aer string `json:"AER"`
+    ApplicationFrequency ObbcaData1CreditInterestTierBandSetTierBandApplicationFrequencyEnum `json:"ApplicationFrequency"`
+    BankInterestRate *string `json:"BankInterestRate,omitempty"`
+    BankInterestRateType *ObbcaData1CreditInterestTierBandSetTierBandBankInterestRateTypeEnum `json:"BankInterestRateType,omitempty"`
+    CalculationFrequency *ObbcaData1CreditInterestTierBandSetTierBandCalculationFrequencyEnum `json:"CalculationFrequency,omitempty"`
+    DepositInterestAppliedCoverage *ObbcaData1CreditInterestTierBandSetTierBandDepositInterestAppliedCoverageEnum `json:"DepositInterestAppliedCoverage,omitempty"`
+    FixedVariableInterestRateType ObbcaData1CreditInterestTierBandSetTierBandFixedVariableInterestRateTypeEnum `json:"FixedVariableInterestRateType"`
+    Identification *string `json:"Identification,omitempty"`
+    Notes []string `json:"Notes,omitempty"`
+    OtherApplicationFrequency *ObbcaData1CreditInterestTierBandSetTierBandOtherApplicationFrequency `json:"OtherApplicationFrequency,omitempty"`
+    OtherBankInterestType *ObbcaData1CreditInterestTierBandSetTierBandOtherBankInterestType `json:"OtherBankInterestType,omitempty"`
+    OtherCalculationFrequency *ObbcaData1CreditInterestTierBandSetTierBandOtherCalculationFrequency `json:"OtherCalculationFrequency,omitempty"`
+    TierValueMaximum *string `json:"TierValueMaximum,omitempty"`
+    TierValueMinimum string `json:"TierValueMinimum"`
+    
 }
+
 
 type ObbcaData1CreditInterestTierBandSetTierBandMethodEnum string
 
 const (
-	ObbcaData1CreditInterestTierBandSetTierBandMethodEnumBanded ObbcaData1CreditInterestTierBandSetTierBandMethodEnum = "Banded"
-	ObbcaData1CreditInterestTierBandSetTierBandMethodEnumTiered ObbcaData1CreditInterestTierBandSetTierBandMethodEnum = "Tiered"
-	ObbcaData1CreditInterestTierBandSetTierBandMethodEnumWhole  ObbcaData1CreditInterestTierBandSetTierBandMethodEnum = "Whole"
+    ObbcaData1CreditInterestTierBandSetTierBandMethodEnumBanded ObbcaData1CreditInterestTierBandSetTierBandMethodEnum = "Banded"
+ObbcaData1CreditInterestTierBandSetTierBandMethodEnumTiered ObbcaData1CreditInterestTierBandSetTierBandMethodEnum = "Tiered"
+ObbcaData1CreditInterestTierBandSetTierBandMethodEnumWhole ObbcaData1CreditInterestTierBandSetTierBandMethodEnum = "Whole"
 )
 
+
 type ObbcaData1CreditInterestTierBandSet struct {
-	CalculationMethod *ObbcaData1CreditInterestTierBandSetCalculationMethodEnum `json:"CalculationMethod,omitempty"`
-	Destination       ObbcaData1CreditInterestTierBandSetDestinationEnum        `json:"Destination"`
-	Notes             []string                                                  `json:"Notes,omitempty"`
-	TierBand          []ObbcaData1CreditInterestTierBandSetTierBand             `json:"TierBand"`
-	TierBandMethod    ObbcaData1CreditInterestTierBandSetTierBandMethodEnum     `json:"TierBandMethod"`
+    CalculationMethod *ObbcaData1CreditInterestTierBandSetCalculationMethodEnum `json:"CalculationMethod,omitempty"`
+    Destination ObbcaData1CreditInterestTierBandSetDestinationEnum `json:"Destination"`
+    Notes []string `json:"Notes,omitempty"`
+    TierBand []ObbcaData1CreditInterestTierBandSetTierBand `json:"TierBand"`
+    TierBandMethod ObbcaData1CreditInterestTierBandSetTierBandMethodEnum `json:"TierBandMethod"`
+    
 }
 
 type ObbcaData1CreditInterest struct {
-	TierBandSet []ObbcaData1CreditInterestTierBandSet `json:"TierBandSet"`
+    TierBandSet []ObbcaData1CreditInterestTierBandSet `json:"TierBandSet"`
+    
 }
+
 
 type ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum string
 
 const (
-	ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnumDay      ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum = "Day"
-	ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnumHalfYear ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum = "Half Year"
-	ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnumMonth    ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum = "Month"
-	ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnumQuarter  ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum = "Quarter"
-	ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnumWeek     ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum = "Week"
-	ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnumYear     ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum = "Year"
+    ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnumDay ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum = "Day"
+ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnumHalfYear ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum = "Half Year"
+ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnumMonth ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum = "Month"
+ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnumQuarter ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum = "Quarter"
+ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnumWeek ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum = "Week"
+ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnumYear ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum = "Year"
 )
+
+
 
 type ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum string
 
 const (
-	ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumOther                       ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "Other"
-	ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCAccountFee          ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCAccountFee"
-	ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCAccountFeeMonthly   ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCAccountFeeMonthly"
-	ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCAccountFeeQuarterly ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCAccountFeeQuarterly"
-	ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCFixedTariff         ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCFixedTariff"
-	ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCBusiDepAccBreakage  ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCBusiDepAccBreakage"
-	ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCMinimumMonthlyFee   ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCMinimumMonthlyFee"
-	ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCOther               ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCOther"
+    ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumOther ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "Other"
+ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCAccountFee ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCAccountFee"
+ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCAccountFeeMonthly ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCAccountFeeMonthly"
+ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCAccountFeeQuarterly ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCAccountFeeQuarterly"
+ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCFixedTariff ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCFixedTariff"
+ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCBusiDepAccBreakage ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCBusiDepAccBreakage"
+ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCMinimumMonthlyFee ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCMinimumMonthlyFee"
+ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnumServiceCOther ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum = "ServiceCOther"
 )
+
+
 
 type ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnum string
 
 const (
-	ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnumMinimum ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnum = "Minimum"
-	ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnumMaximum ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnum = "Maximum"
+    ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnumMinimum ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnum = "Minimum"
+ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnumMaximum ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnum = "Maximum"
 )
 
+
 type ObbcaData1OtherFeesChargesFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeCap struct {
-	CappingPeriod    *ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
-	FeeCapAmount     *string                                                  `json:"FeeCapAmount,omitempty"`
-	FeeCapOccurrence *float32                                                 `json:"FeeCapOccurrence,omitempty"`
-	FeeType          []ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum      `json:"FeeType"`
-	MinMaxType       ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnum     `json:"MinMaxType"`
-	Notes            []string                                                 `json:"Notes,omitempty"`
-	OtherFeeType     []ObbcaData1OtherFeesChargesFeeChargeCapOtherFeeType     `json:"OtherFeeType,omitempty"`
+    CappingPeriod *ObbcaData1OtherFeesChargesFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
+    FeeCapAmount *string `json:"FeeCapAmount,omitempty"`
+    FeeCapOccurrence *float32 `json:"FeeCapOccurrence,omitempty"`
+    FeeType []ObbcaData1OtherFeesChargesFeeChargeCapFeeTypeEnum `json:"FeeType"`
+    MinMaxType ObbcaData1OtherFeesChargesFeeChargeCapMinMaxTypeEnum `json:"MinMaxType"`
+    Notes []string `json:"Notes,omitempty"`
+    OtherFeeType []ObbcaData1OtherFeesChargesFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
+    
 }
+
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum string
 
 const (
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumOnClosing                ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "OnClosing"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumOnOpening                ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "OnOpening"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumChargingPeriod           ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "ChargingPeriod"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumDaily                    ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "Daily"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerItem                  ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerItem"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumMonthly                  ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "Monthly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumOnAnniversary            ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "OnAnniversary"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumOther                    ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "Other"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerHundredPounds         ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerHundredPounds"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerHour                  ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerHour"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerOccurrence            ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerOccurrence"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerSheet                 ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerSheet"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerTransaction           ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerTransaction"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerTransactionAmount     ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerTransactionAmount"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerTransactionPercentage ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerTransactionPercentage"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumQuarterly                ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "Quarterly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumSixMonthly               ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "SixMonthly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumStatementMonthly         ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "StatementMonthly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumWeekly                   ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "Weekly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumYearly                   ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "Yearly"
+    ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumOnClosing ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "OnClosing"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumOnOpening ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "OnOpening"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumChargingPeriod ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "ChargingPeriod"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumDaily ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "Daily"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerItem ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerItem"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumMonthly ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "Monthly"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumOnAnniversary ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "OnAnniversary"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumOther ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "Other"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerHundredPounds ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerHundredPounds"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerHour ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerHour"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerOccurrence ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerOccurrence"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerSheet ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerSheet"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerTransaction ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerTransaction"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerTransactionAmount ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerTransactionAmount"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumPerTransactionPercentage ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "PerTransactionPercentage"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumQuarterly ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "Quarterly"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumSixMonthly ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "SixMonthly"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumStatementMonthly ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "StatementMonthly"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumWeekly ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "Weekly"
+ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnumYearly ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum = "Yearly"
 )
+
+
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum string
 
 const (
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumOnClosing                ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "OnClosing"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumOnOpening                ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "OnOpening"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumChargingPeriod           ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "ChargingPeriod"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumDaily                    ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "Daily"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerItem                  ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerItem"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumMonthly                  ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "Monthly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumOnAnniversary            ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "OnAnniversary"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumOther                    ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "Other"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerHundredPounds         ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerHundredPounds"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerHour                  ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerHour"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerOccurrence            ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerOccurrence"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerSheet                 ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerSheet"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerTransaction           ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerTransaction"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerTransactionAmount     ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerTransactionAmount"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerTransactionPercentage ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerTransactionPercentage"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumQuarterly                ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "Quarterly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumSixMonthly               ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "SixMonthly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumStatementMonthly         ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "StatementMonthly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumWeekly                   ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "Weekly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumYearly                   ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "Yearly"
+    ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumOnClosing ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "OnClosing"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumOnOpening ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "OnOpening"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumChargingPeriod ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "ChargingPeriod"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumDaily ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "Daily"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerItem ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerItem"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumMonthly ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "Monthly"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumOnAnniversary ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "OnAnniversary"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumOther ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "Other"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerHundredPounds ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerHundredPounds"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerHour ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerHour"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerOccurrence ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerOccurrence"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerSheet ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerSheet"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerTransaction ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerTransaction"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerTransactionAmount ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerTransactionAmount"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumPerTransactionPercentage ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "PerTransactionPercentage"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumQuarterly ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "Quarterly"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumSixMonthly ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "SixMonthly"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumStatementMonthly ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "StatementMonthly"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumWeekly ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "Weekly"
+ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnumYearly ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum = "Yearly"
 )
 
+
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeApplicableRange struct {
-	MaximumAmount *string `json:"MaximumAmount,omitempty"`
-	MaximumRate   *string `json:"MaximumRate,omitempty"`
-	MinimumAmount *string `json:"MinimumAmount,omitempty"`
-	MinimumRate   *string `json:"MinimumRate,omitempty"`
+    MaximumAmount *string `json:"MaximumAmount,omitempty"`
+    MaximumRate *string `json:"MaximumRate,omitempty"`
+    MinimumAmount *string `json:"MinimumAmount,omitempty"`
+    MinimumRate *string `json:"MinimumRate,omitempty"`
+    
 }
+
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryEnum string
 
 const (
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryEnumOther     ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryEnum = "Other"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryEnumServicing ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryEnum = "Servicing"
+    ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryEnumOther ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryEnum = "Other"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryEnumServicing ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryEnum = "Servicing"
 )
+
+
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum string
 
 const (
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnumDay      ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum = "Day"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnumHalfYear ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum = "Half Year"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnumMonth    ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum = "Month"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnumQuarter  ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum = "Quarter"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnumWeek     ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum = "Week"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnumYear     ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum = "Year"
+    ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnumDay ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum = "Day"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnumHalfYear ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum = "Half Year"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnumMonth ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum = "Month"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnumQuarter ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum = "Quarter"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnumWeek ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum = "Week"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnumYear ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum = "Year"
 )
+
+
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum string
 
 const (
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumOther                       ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "Other"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCAccountFee          ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCAccountFee"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCAccountFeeMonthly   ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCAccountFeeMonthly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCAccountFeeQuarterly ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCAccountFeeQuarterly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCFixedTariff         ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCFixedTariff"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCBusiDepAccBreakage  ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCBusiDepAccBreakage"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCMinimumMonthlyFee   ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCMinimumMonthlyFee"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCOther               ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCOther"
+    ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumOther ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "Other"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCAccountFee ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCAccountFee"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCAccountFeeMonthly ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCAccountFeeMonthly"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCAccountFeeQuarterly ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCAccountFeeQuarterly"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCFixedTariff ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCFixedTariff"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCBusiDepAccBreakage ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCBusiDepAccBreakage"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCMinimumMonthlyFee ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCMinimumMonthlyFee"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnumServiceCOther ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum = "ServiceCOther"
 )
+
+
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnum string
 
 const (
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnumMinimum ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnum = "Minimum"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnumMaximum ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnum = "Maximum"
+    ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnumMinimum ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnum = "Minimum"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnumMaximum ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnum = "Maximum"
 )
 
+
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCap struct {
-	CappingPeriod    *ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
-	FeeCapAmount     *string                                                                 `json:"FeeCapAmount,omitempty"`
-	FeeCapOccurrence *float32                                                                `json:"FeeCapOccurrence,omitempty"`
-	FeeType          []ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum      `json:"FeeType"`
-	MinMaxType       ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnum     `json:"MinMaxType"`
-	Notes            []string                                                                `json:"Notes,omitempty"`
-	OtherFeeType     []ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType     `json:"OtherFeeType,omitempty"`
+    CappingPeriod *ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
+    FeeCapAmount *string `json:"FeeCapAmount,omitempty"`
+    FeeCapOccurrence *float32 `json:"FeeCapOccurrence,omitempty"`
+    FeeType []ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapFeeTypeEnum `json:"FeeType"`
+    MinMaxType ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapMinMaxTypeEnum `json:"MinMaxType"`
+    Notes []string `json:"Notes,omitempty"`
+    OtherFeeType []ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
+    
 }
+
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeEnum string
 
 const (
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeEnumGross ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeEnum = "Gross"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeEnumOther ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeEnum = "Other"
+    ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeEnumGross ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeEnum = "Gross"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeEnumOther ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeEnum = "Other"
 )
+
+
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum string
 
 const (
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumOther                       ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "Other"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCAccountFee          ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCAccountFee"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCAccountFeeMonthly   ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCAccountFeeMonthly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCAccountFeeQuarterly ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCAccountFeeQuarterly"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCFixedTariff         ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCFixedTariff"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCBusiDepAccBreakage  ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCBusiDepAccBreakage"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCMinimumMonthlyFee   ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCMinimumMonthlyFee"
-	ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCOther               ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCOther"
+    ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumOther ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "Other"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCAccountFee ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCAccountFee"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCAccountFeeMonthly ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCAccountFeeMonthly"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCAccountFeeQuarterly ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCAccountFeeQuarterly"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCFixedTariff ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCFixedTariff"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCBusiDepAccBreakage ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCBusiDepAccBreakage"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCMinimumMonthlyFee ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCMinimumMonthlyFee"
+ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnumServiceCOther ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum = "ServiceCOther"
 )
 
+
 type ObbcaData1OtherFeesChargesFeeChargeDetailOtherApplicationFrequency struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailOtherCalculationFrequency struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeCategoryType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeRateType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
+
 
 type ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnum string
 
 const (
-	ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnumOther     ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnum = "Other"
-	ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnumServicing ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnum = "Servicing"
+    ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnumOther ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnum = "Other"
+ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnumServicing ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnum = "Servicing"
 )
 
+
 type ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeType struct {
-	Code        *string                                                              `json:"Code,omitempty"`
-	Description string                                                               `json:"Description"`
-	FeeCategory ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnum `json:"FeeCategory"`
-	Name        string                                                               `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    FeeCategory ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeTypeFeeCategoryEnum `json:"FeeCategory"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OtherFeesChargesFeeChargeDetail struct {
-	ApplicationFrequency      ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum   `json:"ApplicationFrequency"`
-	CalculationFrequency      *ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum  `json:"CalculationFrequency,omitempty"`
-	FeeAmount                 *string                                                             `json:"FeeAmount,omitempty"`
-	FeeApplicableRange        *ObbcaData1OtherFeesChargesFeeChargeDetailFeeApplicableRange        `json:"FeeApplicableRange,omitempty"`
-	FeeCategory               ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryEnum            `json:"FeeCategory"`
-	FeeChargeCap              []ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCap             `json:"FeeChargeCap,omitempty"`
-	FeeRate                   *string                                                             `json:"FeeRate,omitempty"`
-	FeeRateType               *ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeEnum           `json:"FeeRateType,omitempty"`
-	FeeType                   ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum                `json:"FeeType"`
-	NegotiableIndicator       *bool                                                               `json:"NegotiableIndicator,omitempty"`
-	Notes                     []string                                                            `json:"Notes,omitempty"`
-	OtherApplicationFrequency *ObbcaData1OtherFeesChargesFeeChargeDetailOtherApplicationFrequency `json:"OtherApplicationFrequency,omitempty"`
-	OtherCalculationFrequency *ObbcaData1OtherFeesChargesFeeChargeDetailOtherCalculationFrequency `json:"OtherCalculationFrequency,omitempty"`
-	OtherFeeCategoryType      *ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeCategoryType      `json:"OtherFeeCategoryType,omitempty"`
-	OtherFeeRateType          *ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeRateType          `json:"OtherFeeRateType,omitempty"`
-	OtherFeeType              *ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeType              `json:"OtherFeeType,omitempty"`
+    ApplicationFrequency ObbcaData1OtherFeesChargesFeeChargeDetailApplicationFrequencyEnum `json:"ApplicationFrequency"`
+    CalculationFrequency *ObbcaData1OtherFeesChargesFeeChargeDetailCalculationFrequencyEnum `json:"CalculationFrequency,omitempty"`
+    FeeAmount *string `json:"FeeAmount,omitempty"`
+    FeeApplicableRange *ObbcaData1OtherFeesChargesFeeChargeDetailFeeApplicableRange `json:"FeeApplicableRange,omitempty"`
+    FeeCategory ObbcaData1OtherFeesChargesFeeChargeDetailFeeCategoryEnum `json:"FeeCategory"`
+    FeeChargeCap []ObbcaData1OtherFeesChargesFeeChargeDetailFeeChargeCap `json:"FeeChargeCap,omitempty"`
+    FeeRate *string `json:"FeeRate,omitempty"`
+    FeeRateType *ObbcaData1OtherFeesChargesFeeChargeDetailFeeRateTypeEnum `json:"FeeRateType,omitempty"`
+    FeeType ObbcaData1OtherFeesChargesFeeChargeDetailFeeTypeEnum `json:"FeeType"`
+    NegotiableIndicator *bool `json:"NegotiableIndicator,omitempty"`
+    Notes []string `json:"Notes,omitempty"`
+    OtherApplicationFrequency *ObbcaData1OtherFeesChargesFeeChargeDetailOtherApplicationFrequency `json:"OtherApplicationFrequency,omitempty"`
+    OtherCalculationFrequency *ObbcaData1OtherFeesChargesFeeChargeDetailOtherCalculationFrequency `json:"OtherCalculationFrequency,omitempty"`
+    OtherFeeCategoryType *ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeCategoryType `json:"OtherFeeCategoryType,omitempty"`
+    OtherFeeRateType *ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeRateType `json:"OtherFeeRateType,omitempty"`
+    OtherFeeType *ObbcaData1OtherFeesChargesFeeChargeDetailOtherFeeType `json:"OtherFeeType,omitempty"`
+    
 }
 
 type ObbcaData1OtherFeesChargesOtherTariffType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
+
 
 type ObbcaData1OtherFeesChargesTariffTypeEnum string
 
 const (
-	ObbcaData1OtherFeesChargesTariffTypeEnumElectronic ObbcaData1OtherFeesChargesTariffTypeEnum = "Electronic"
-	ObbcaData1OtherFeesChargesTariffTypeEnumMixed      ObbcaData1OtherFeesChargesTariffTypeEnum = "Mixed"
-	ObbcaData1OtherFeesChargesTariffTypeEnumOther      ObbcaData1OtherFeesChargesTariffTypeEnum = "Other"
+    ObbcaData1OtherFeesChargesTariffTypeEnumElectronic ObbcaData1OtherFeesChargesTariffTypeEnum = "Electronic"
+ObbcaData1OtherFeesChargesTariffTypeEnumMixed ObbcaData1OtherFeesChargesTariffTypeEnum = "Mixed"
+ObbcaData1OtherFeesChargesTariffTypeEnumOther ObbcaData1OtherFeesChargesTariffTypeEnum = "Other"
 )
 
+
 type ObbcaData1OtherFeesCharges struct {
-	FeeChargeCap    []ObbcaData1OtherFeesChargesFeeChargeCap    `json:"FeeChargeCap,omitempty"`
-	FeeChargeDetail []ObbcaData1OtherFeesChargesFeeChargeDetail `json:"FeeChargeDetail"`
-	OtherTariffType *ObbcaData1OtherFeesChargesOtherTariffType  `json:"OtherTariffType,omitempty"`
-	TariffName      *string                                     `json:"TariffName,omitempty"`
-	TariffType      *ObbcaData1OtherFeesChargesTariffTypeEnum   `json:"TariffType,omitempty"`
+    FeeChargeCap []ObbcaData1OtherFeesChargesFeeChargeCap `json:"FeeChargeCap,omitempty"`
+    FeeChargeDetail []ObbcaData1OtherFeesChargesFeeChargeDetail `json:"FeeChargeDetail"`
+    OtherTariffType *ObbcaData1OtherFeesChargesOtherTariffType `json:"OtherTariffType,omitempty"`
+    TariffName *string `json:"TariffName,omitempty"`
+    TariffType *ObbcaData1OtherFeesChargesTariffTypeEnum `json:"TariffType,omitempty"`
+    
 }
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumDay      ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Day"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumHalfYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Half Year"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumMonth    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Month"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumQuarter  ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Quarter"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumWeek     ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Week"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumYear     ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Year"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumDay ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Day"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumHalfYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Half Year"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumMonth ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Month"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumQuarter ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Quarter"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumWeek ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Week"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Year"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumArrangedOverdraft       ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "ArrangedOverdraft"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumAnnualReview            ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "AnnualReview"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumEmergencyBorrowing      ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "EmergencyBorrowing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumBorrowingItem           ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "BorrowingItem"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumOverdraftRenewal        ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "OverdraftRenewal"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumOverdraftSetup          ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "OverdraftSetup"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumSurcharge               ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "Surcharge"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumTempOverdraft           ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "TempOverdraft"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumUnauthorisedBorrowing   ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedBorrowing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumUnauthorisedPaidTrans   ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedPaidTrans"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumOther                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "Other"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumUnauthorisedUnpaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedUnpaidTrans"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumArrangedOverdraft ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "ArrangedOverdraft"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumAnnualReview ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "AnnualReview"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumEmergencyBorrowing ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "EmergencyBorrowing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumBorrowingItem ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "BorrowingItem"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumOverdraftRenewal ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "OverdraftRenewal"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumOverdraftSetup ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "OverdraftSetup"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumSurcharge ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "Surcharge"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumTempOverdraft ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "TempOverdraft"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumUnauthorisedBorrowing ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedBorrowing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumUnauthorisedPaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedPaidTrans"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "Other"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumUnauthorisedUnpaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedUnpaidTrans"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnumMinimum ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum = "Minimum"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnumMaximum ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum = "Maximum"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnumMinimum ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum = "Minimum"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnumMaximum ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum = "Maximum"
 )
 
+
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap struct {
-	CappingPeriod    *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
-	FeeCapAmount     *string                                                                                            `json:"FeeCapAmount,omitempty"`
-	FeeCapOccurrence *float32                                                                                           `json:"FeeCapOccurrence,omitempty"`
-	FeeType          []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum      `json:"FeeType"`
-	MinMaxType       ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum     `json:"MinMaxType"`
-	Notes            []string                                                                                           `json:"Notes,omitempty"`
-	OtherFeeType     []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType     `json:"OtherFeeType,omitempty"`
+    CappingPeriod *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
+    FeeCapAmount *string `json:"FeeCapAmount,omitempty"`
+    FeeCapOccurrence *float32 `json:"FeeCapOccurrence,omitempty"`
+    FeeType []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum `json:"FeeType"`
+    MinMaxType ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum `json:"MinMaxType"`
+    Notes []string `json:"Notes,omitempty"`
+    OtherFeeType []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
+    
 }
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOnClosing                ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "OnClosing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOnOpening                ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "OnOpening"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumChargingPeriod           ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "ChargingPeriod"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumDaily                    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Daily"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerItem                  ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerItem"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumMonthly                  ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Monthly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOnAnniversary            ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "OnAnniversary"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOther                    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Other"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerHundredPounds         ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerHundredPounds"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerHour                  ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerHour"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerOccurrence            ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerOccurrence"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerSheet                 ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerSheet"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerTransaction           ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerTransaction"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerTransactionAmount     ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerTransactionAmount"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerTransactionPercentage ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerTransactionPercentage"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumQuarterly                ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Quarterly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumSixMonthly               ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "SixMonthly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumStatementMonthly         ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "StatementMonthly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumWeekly                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Weekly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumYearly                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Yearly"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOnClosing ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "OnClosing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOnOpening ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "OnOpening"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumChargingPeriod ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "ChargingPeriod"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumDaily ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Daily"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerItem ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerItem"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumMonthly ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Monthly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOnAnniversary ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "OnAnniversary"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Other"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerHundredPounds ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerHundredPounds"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerHour ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerHour"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerOccurrence ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerOccurrence"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerSheet ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerSheet"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerTransaction ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerTransaction"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerTransactionAmount ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerTransactionAmount"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerTransactionPercentage ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerTransactionPercentage"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumQuarterly ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Quarterly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumSixMonthly ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "SixMonthly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumStatementMonthly ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "StatementMonthly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumWeekly ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Weekly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumYearly ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Yearly"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOnClosing                ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "OnClosing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOnOpening                ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "OnOpening"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumChargingPeriod           ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "ChargingPeriod"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumDaily                    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Daily"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerItem                  ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerItem"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumMonthly                  ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Monthly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOnAnniversary            ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "OnAnniversary"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOther                    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Other"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerHundredPounds         ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerHundredPounds"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerHour                  ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerHour"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerOccurrence            ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerOccurrence"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerSheet                 ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerSheet"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerTransaction           ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerTransaction"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerTransactionAmount     ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerTransactionAmount"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerTransactionPercentage ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerTransactionPercentage"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumQuarterly                ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Quarterly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumSixMonthly               ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "SixMonthly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumStatementMonthly         ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "StatementMonthly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumWeekly                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Weekly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumYearly                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Yearly"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOnClosing ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "OnClosing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOnOpening ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "OnOpening"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumChargingPeriod ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "ChargingPeriod"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumDaily ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Daily"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerItem ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerItem"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumMonthly ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Monthly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOnAnniversary ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "OnAnniversary"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Other"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerHundredPounds ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerHundredPounds"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerHour ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerHour"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerOccurrence ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerOccurrence"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerSheet ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerSheet"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerTransaction ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerTransaction"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerTransactionAmount ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerTransactionAmount"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerTransactionPercentage ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerTransactionPercentage"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumQuarterly ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Quarterly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumSixMonthly ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "SixMonthly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumStatementMonthly ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "StatementMonthly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumWeekly ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Weekly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumYearly ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Yearly"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnumGross ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum = "Gross"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum = "Other"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnumGross ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum = "Gross"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum = "Other"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumArrangedOverdraft       ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "ArrangedOverdraft"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumAnnualReview            ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "AnnualReview"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumEmergencyBorrowing      ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "EmergencyBorrowing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumBorrowingItem           ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "BorrowingItem"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumOverdraftRenewal        ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "OverdraftRenewal"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumOverdraftSetup          ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "OverdraftSetup"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumSurcharge               ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "Surcharge"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumTempOverdraft           ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "TempOverdraft"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedBorrowing   ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedBorrowing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedPaidTrans   ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedPaidTrans"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumOther                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "Other"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedUnpaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedUnpaidTrans"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumArrangedOverdraft ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "ArrangedOverdraft"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumAnnualReview ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "AnnualReview"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumEmergencyBorrowing ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "EmergencyBorrowing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumBorrowingItem ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "BorrowingItem"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumOverdraftRenewal ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "OverdraftRenewal"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumOverdraftSetup ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "OverdraftSetup"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumSurcharge ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "Surcharge"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumTempOverdraft ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "TempOverdraft"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedBorrowing ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedBorrowing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedPaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedPaidTrans"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "Other"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedUnpaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedUnpaidTrans"
 )
 
+
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumDay      ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Day"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumHalfYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Half Year"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumMonth    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Month"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumQuarter  ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Quarter"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumWeek     ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Week"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumYear     ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Year"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumDay ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Day"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumHalfYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Half Year"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumMonth ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Month"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumQuarter ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Quarter"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumWeek ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Week"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Year"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumArrangedOverdraft       ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "ArrangedOverdraft"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumAnnualReview            ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "AnnualReview"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumEmergencyBorrowing      ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "EmergencyBorrowing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumBorrowingItem           ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "BorrowingItem"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumOverdraftRenewal        ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "OverdraftRenewal"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumOverdraftSetup          ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "OverdraftSetup"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumSurcharge               ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "Surcharge"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumTempOverdraft           ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "TempOverdraft"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumUnauthorisedBorrowing   ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedBorrowing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumUnauthorisedPaidTrans   ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedPaidTrans"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumOther                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "Other"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumUnauthorisedUnpaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedUnpaidTrans"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumArrangedOverdraft ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "ArrangedOverdraft"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumAnnualReview ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "AnnualReview"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumEmergencyBorrowing ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "EmergencyBorrowing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumBorrowingItem ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "BorrowingItem"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumOverdraftRenewal ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "OverdraftRenewal"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumOverdraftSetup ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "OverdraftSetup"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumSurcharge ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "Surcharge"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumTempOverdraft ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "TempOverdraft"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumUnauthorisedBorrowing ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedBorrowing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumUnauthorisedPaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedPaidTrans"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "Other"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumUnauthorisedUnpaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedUnpaidTrans"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnumMinimum ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum = "Minimum"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnumMaximum ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum = "Maximum"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnumMinimum ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum = "Minimum"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnumMaximum ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum = "Maximum"
 )
 
+
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap struct {
-	CappingPeriod    *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
-	FeeCapAmount     *string                                                                                                                    `json:"FeeCapAmount,omitempty"`
-	FeeCapOccurrence *float32                                                                                                                   `json:"FeeCapOccurrence,omitempty"`
-	FeeType          []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum      `json:"FeeType"`
-	MinMaxType       ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum     `json:"MinMaxType"`
-	Notes            []string                                                                                                                   `json:"Notes,omitempty"`
-	OtherFeeType     []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType     `json:"OtherFeeType,omitempty"`
+    CappingPeriod *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
+    FeeCapAmount *string `json:"FeeCapAmount,omitempty"`
+    FeeCapOccurrence *float32 `json:"FeeCapOccurrence,omitempty"`
+    FeeType []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum `json:"FeeType"`
+    MinMaxType ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum `json:"MinMaxType"`
+    Notes []string `json:"Notes,omitempty"`
+    OtherFeeType []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail struct {
-	ApplicationFrequency       ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum   `json:"ApplicationFrequency"`
-	CalculationFrequency       *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum  `json:"CalculationFrequency,omitempty"`
-	FeeAmount                  *string                                                                                                       `json:"FeeAmount,omitempty"`
-	FeeRate                    *string                                                                                                       `json:"FeeRate,omitempty"`
-	FeeRateType                *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum           `json:"FeeRateType,omitempty"`
-	FeeType                    ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum                `json:"FeeType"`
-	IncrementalBorrowingAmount *string                                                                                                       `json:"IncrementalBorrowingAmount,omitempty"`
-	NegotiableIndicator        *bool                                                                                                         `json:"NegotiableIndicator,omitempty"`
-	Notes                      []string                                                                                                      `json:"Notes,omitempty"`
-	OtherApplicationFrequency  *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency `json:"OtherApplicationFrequency,omitempty"`
-	OtherCalculationFrequency  *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency `json:"OtherCalculationFrequency,omitempty"`
-	OtherFeeRateType           *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType          `json:"OtherFeeRateType,omitempty"`
-	OtherFeeType               *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType              `json:"OtherFeeType,omitempty"`
-	OverdraftControlIndicator  *bool                                                                                                         `json:"OverdraftControlIndicator,omitempty"`
-	OverdraftFeeChargeCap      []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap,omitempty"`
+    ApplicationFrequency ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum `json:"ApplicationFrequency"`
+    CalculationFrequency *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum `json:"CalculationFrequency,omitempty"`
+    FeeAmount *string `json:"FeeAmount,omitempty"`
+    FeeRate *string `json:"FeeRate,omitempty"`
+    FeeRateType *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum `json:"FeeRateType,omitempty"`
+    FeeType ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum `json:"FeeType"`
+    IncrementalBorrowingAmount *string `json:"IncrementalBorrowingAmount,omitempty"`
+    NegotiableIndicator *bool `json:"NegotiableIndicator,omitempty"`
+    Notes []string `json:"Notes,omitempty"`
+    OtherApplicationFrequency *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency `json:"OtherApplicationFrequency,omitempty"`
+    OtherCalculationFrequency *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency `json:"OtherCalculationFrequency,omitempty"`
+    OtherFeeRateType *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType `json:"OtherFeeRateType,omitempty"`
+    OtherFeeType *ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType `json:"OtherFeeType,omitempty"`
+    OverdraftControlIndicator *bool `json:"OverdraftControlIndicator,omitempty"`
+    OverdraftFeeChargeCap []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap `json:"OverdraftFeeChargeCap,omitempty"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesCharges struct {
-	OverdraftFeeChargeCap    []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap,omitempty"`
-	OverdraftFeeChargeDetail []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail `json:"OverdraftFeeChargeDetail"`
+    OverdraftFeeChargeCap []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeCap `json:"OverdraftFeeChargeCap,omitempty"`
+    OverdraftFeeChargeDetail []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesChargesOverdraftFeeChargeDetail `json:"OverdraftFeeChargeDetail"`
+    
 }
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnumDay      ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum = "Day"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnumHalfYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum = "Half Year"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnumMonth    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum = "Month"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnumQuarter  ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum = "Quarter"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnumWeek     ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum = "Week"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnumYear     ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum = "Year"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnumDay ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum = "Day"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnumHalfYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum = "Half Year"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnumMonth ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum = "Month"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnumQuarter ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum = "Quarter"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnumWeek ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum = "Week"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnumYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum = "Year"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumDay      ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Day"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumHalfYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Half Year"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumMonth    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Month"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumQuarter  ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Quarter"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumWeek     ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Week"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumYear     ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Year"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumDay ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Day"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumHalfYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Half Year"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumMonth ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Month"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumQuarter ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Quarter"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumWeek ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Week"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnumYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum = "Year"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumArrangedOverdraft       ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "ArrangedOverdraft"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumAnnualReview            ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "AnnualReview"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumEmergencyBorrowing      ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "EmergencyBorrowing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumBorrowingItem           ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "BorrowingItem"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumOverdraftRenewal        ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "OverdraftRenewal"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumOverdraftSetup          ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "OverdraftSetup"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumSurcharge               ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "Surcharge"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumTempOverdraft           ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "TempOverdraft"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumUnauthorisedBorrowing   ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedBorrowing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumUnauthorisedPaidTrans   ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedPaidTrans"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumOther                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "Other"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumUnauthorisedUnpaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedUnpaidTrans"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumArrangedOverdraft ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "ArrangedOverdraft"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumAnnualReview ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "AnnualReview"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumEmergencyBorrowing ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "EmergencyBorrowing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumBorrowingItem ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "BorrowingItem"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumOverdraftRenewal ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "OverdraftRenewal"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumOverdraftSetup ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "OverdraftSetup"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumSurcharge ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "Surcharge"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumTempOverdraft ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "TempOverdraft"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumUnauthorisedBorrowing ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedBorrowing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumUnauthorisedPaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedPaidTrans"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "Other"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnumUnauthorisedUnpaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedUnpaidTrans"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnumMinimum ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum = "Minimum"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnumMaximum ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum = "Maximum"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnumMinimum ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum = "Minimum"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnumMaximum ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum = "Maximum"
 )
 
+
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap struct {
-	CappingPeriod    *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
-	FeeCapAmount     *string                                                                                                             `json:"FeeCapAmount,omitempty"`
-	FeeCapOccurrence *float32                                                                                                            `json:"FeeCapOccurrence,omitempty"`
-	FeeType          []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum      `json:"FeeType"`
-	MinMaxType       ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum     `json:"MinMaxType"`
-	Notes            []string                                                                                                            `json:"Notes,omitempty"`
-	OtherFeeType     []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType     `json:"OtherFeeType,omitempty"`
+    CappingPeriod *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
+    FeeCapAmount *string `json:"FeeCapAmount,omitempty"`
+    FeeCapOccurrence *float32 `json:"FeeCapOccurrence,omitempty"`
+    FeeType []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapFeeTypeEnum `json:"FeeType"`
+    MinMaxType ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapMinMaxTypeEnum `json:"MinMaxType"`
+    Notes []string `json:"Notes,omitempty"`
+    OtherFeeType []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
+    
 }
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOnClosing                ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "OnClosing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOnOpening                ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "OnOpening"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumChargingPeriod           ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "ChargingPeriod"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumDaily                    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Daily"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerItem                  ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerItem"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumMonthly                  ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Monthly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOnAnniversary            ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "OnAnniversary"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOther                    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Other"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerHundredPounds         ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerHundredPounds"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerHour                  ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerHour"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerOccurrence            ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerOccurrence"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerSheet                 ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerSheet"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerTransaction           ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerTransaction"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerTransactionAmount     ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerTransactionAmount"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerTransactionPercentage ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerTransactionPercentage"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumQuarterly                ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Quarterly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumSixMonthly               ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "SixMonthly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumStatementMonthly         ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "StatementMonthly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumWeekly                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Weekly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumYearly                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Yearly"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOnClosing ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "OnClosing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOnOpening ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "OnOpening"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumChargingPeriod ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "ChargingPeriod"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumDaily ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Daily"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerItem ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerItem"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumMonthly ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Monthly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOnAnniversary ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "OnAnniversary"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Other"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerHundredPounds ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerHundredPounds"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerHour ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerHour"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerOccurrence ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerOccurrence"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerSheet ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerSheet"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerTransaction ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerTransaction"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerTransactionAmount ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerTransactionAmount"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumPerTransactionPercentage ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "PerTransactionPercentage"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumQuarterly ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Quarterly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumSixMonthly ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "SixMonthly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumStatementMonthly ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "StatementMonthly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumWeekly ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Weekly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnumYearly ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum = "Yearly"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOnClosing                ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "OnClosing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOnOpening                ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "OnOpening"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumChargingPeriod           ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "ChargingPeriod"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumDaily                    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Daily"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerItem                  ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerItem"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumMonthly                  ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Monthly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOnAnniversary            ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "OnAnniversary"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOther                    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Other"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerHundredPounds         ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerHundredPounds"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerHour                  ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerHour"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerOccurrence            ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerOccurrence"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerSheet                 ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerSheet"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerTransaction           ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerTransaction"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerTransactionAmount     ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerTransactionAmount"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerTransactionPercentage ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerTransactionPercentage"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumQuarterly                ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Quarterly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumSixMonthly               ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "SixMonthly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumStatementMonthly         ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "StatementMonthly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumWeekly                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Weekly"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumYearly                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Yearly"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOnClosing ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "OnClosing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOnOpening ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "OnOpening"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumChargingPeriod ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "ChargingPeriod"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumDaily ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Daily"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerItem ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerItem"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumMonthly ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Monthly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOnAnniversary ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "OnAnniversary"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Other"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerHundredPounds ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerHundredPounds"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerHour ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerHour"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerOccurrence ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerOccurrence"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerSheet ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerSheet"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerTransaction ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerTransaction"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerTransactionAmount ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerTransactionAmount"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumPerTransactionPercentage ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "PerTransactionPercentage"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumQuarterly ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Quarterly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumSixMonthly ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "SixMonthly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumStatementMonthly ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "StatementMonthly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumWeekly ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Weekly"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnumYearly ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum = "Yearly"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnumGross ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum = "Gross"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum = "Other"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnumGross ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum = "Gross"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum = "Other"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumArrangedOverdraft       ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "ArrangedOverdraft"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumAnnualReview            ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "AnnualReview"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumEmergencyBorrowing      ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "EmergencyBorrowing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumBorrowingItem           ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "BorrowingItem"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumOverdraftRenewal        ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "OverdraftRenewal"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumOverdraftSetup          ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "OverdraftSetup"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumSurcharge               ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "Surcharge"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumTempOverdraft           ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "TempOverdraft"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedBorrowing   ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedBorrowing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedPaidTrans   ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedPaidTrans"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumOther                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "Other"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedUnpaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedUnpaidTrans"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumArrangedOverdraft ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "ArrangedOverdraft"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumAnnualReview ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "AnnualReview"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumEmergencyBorrowing ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "EmergencyBorrowing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumBorrowingItem ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "BorrowingItem"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumOverdraftRenewal ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "OverdraftRenewal"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumOverdraftSetup ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "OverdraftSetup"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumSurcharge ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "Surcharge"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumTempOverdraft ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "TempOverdraft"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedBorrowing ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedBorrowing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedPaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedPaidTrans"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "Other"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnumUnauthorisedUnpaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum = "UnauthorisedUnpaidTrans"
 )
 
+
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumDay      ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Day"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumHalfYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Half Year"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumMonth    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Month"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumQuarter  ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Quarter"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumWeek     ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Week"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumYear     ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Year"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumDay ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Day"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumHalfYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Half Year"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumMonth ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Month"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumQuarter ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Quarter"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumWeek ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Week"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnumYear ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum = "Year"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumArrangedOverdraft       ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "ArrangedOverdraft"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumAnnualReview            ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "AnnualReview"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumEmergencyBorrowing      ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "EmergencyBorrowing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumBorrowingItem           ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "BorrowingItem"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumOverdraftRenewal        ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "OverdraftRenewal"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumOverdraftSetup          ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "OverdraftSetup"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumSurcharge               ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "Surcharge"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumTempOverdraft           ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "TempOverdraft"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumUnauthorisedBorrowing   ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedBorrowing"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumUnauthorisedPaidTrans   ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedPaidTrans"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumOther                   ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "Other"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumUnauthorisedUnpaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedUnpaidTrans"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumArrangedOverdraft ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "ArrangedOverdraft"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumAnnualReview ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "AnnualReview"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumEmergencyBorrowing ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "EmergencyBorrowing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumBorrowingItem ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "BorrowingItem"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumOverdraftRenewal ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "OverdraftRenewal"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumOverdraftSetup ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "OverdraftSetup"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumSurcharge ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "Surcharge"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumTempOverdraft ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "TempOverdraft"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumUnauthorisedBorrowing ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedBorrowing"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumUnauthorisedPaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedPaidTrans"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumOther ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "Other"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnumUnauthorisedUnpaidTrans ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum = "UnauthorisedUnpaidTrans"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnumMinimum ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum = "Minimum"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnumMaximum ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum = "Maximum"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnumMinimum ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum = "Minimum"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnumMaximum ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum = "Maximum"
 )
 
+
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType struct {
-	Code        *string `json:"Code,omitempty"`
-	Description string  `json:"Description"`
-	Name        string  `json:"Name"`
+    Code *string `json:"Code,omitempty"`
+    Description string `json:"Description"`
+    Name string `json:"Name"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap struct {
-	CappingPeriod    *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
-	FeeCapAmount     *string                                                                                                                                     `json:"FeeCapAmount,omitempty"`
-	FeeCapOccurrence *float32                                                                                                                                    `json:"FeeCapOccurrence,omitempty"`
-	FeeType          []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum      `json:"FeeType"`
-	MinMaxType       ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum     `json:"MinMaxType"`
-	Notes            []string                                                                                                                                    `json:"Notes,omitempty"`
-	OtherFeeType     []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType     `json:"OtherFeeType,omitempty"`
+    CappingPeriod *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapCappingPeriodEnum `json:"CappingPeriod,omitempty"`
+    FeeCapAmount *string `json:"FeeCapAmount,omitempty"`
+    FeeCapOccurrence *float32 `json:"FeeCapOccurrence,omitempty"`
+    FeeType []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapFeeTypeEnum `json:"FeeType"`
+    MinMaxType ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapMinMaxTypeEnum `json:"MinMaxType"`
+    Notes []string `json:"Notes,omitempty"`
+    OtherFeeType []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCapOtherFeeType `json:"OtherFeeType,omitempty"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail struct {
-	ApplicationFrequency       ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum   `json:"ApplicationFrequency"`
-	CalculationFrequency       *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum  `json:"CalculationFrequency,omitempty"`
-	FeeAmount                  *string                                                                                                                        `json:"FeeAmount,omitempty"`
-	FeeRate                    *string                                                                                                                        `json:"FeeRate,omitempty"`
-	FeeRateType                *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum           `json:"FeeRateType,omitempty"`
-	FeeType                    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum                `json:"FeeType"`
-	IncrementalBorrowingAmount *string                                                                                                                        `json:"IncrementalBorrowingAmount,omitempty"`
-	NegotiableIndicator        *bool                                                                                                                          `json:"NegotiableIndicator,omitempty"`
-	Notes                      []string                                                                                                                       `json:"Notes,omitempty"`
-	OtherApplicationFrequency  *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency `json:"OtherApplicationFrequency,omitempty"`
-	OtherCalculationFrequency  *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency `json:"OtherCalculationFrequency,omitempty"`
-	OtherFeeRateType           *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType          `json:"OtherFeeRateType,omitempty"`
-	OtherFeeType               *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType              `json:"OtherFeeType,omitempty"`
-	OverdraftControlIndicator  *bool                                                                                                                          `json:"OverdraftControlIndicator,omitempty"`
-	OverdraftFeeChargeCap      []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap,omitempty"`
+    ApplicationFrequency ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailApplicationFrequencyEnum `json:"ApplicationFrequency"`
+    CalculationFrequency *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailCalculationFrequencyEnum `json:"CalculationFrequency,omitempty"`
+    FeeAmount *string `json:"FeeAmount,omitempty"`
+    FeeRate *string `json:"FeeRate,omitempty"`
+    FeeRateType *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeRateTypeEnum `json:"FeeRateType,omitempty"`
+    FeeType ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailFeeTypeEnum `json:"FeeType"`
+    IncrementalBorrowingAmount *string `json:"IncrementalBorrowingAmount,omitempty"`
+    NegotiableIndicator *bool `json:"NegotiableIndicator,omitempty"`
+    Notes []string `json:"Notes,omitempty"`
+    OtherApplicationFrequency *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherApplicationFrequency `json:"OtherApplicationFrequency,omitempty"`
+    OtherCalculationFrequency *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherCalculationFrequency `json:"OtherCalculationFrequency,omitempty"`
+    OtherFeeRateType *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeRateType `json:"OtherFeeRateType,omitempty"`
+    OtherFeeType *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOtherFeeType `json:"OtherFeeType,omitempty"`
+    OverdraftControlIndicator *bool `json:"OverdraftControlIndicator,omitempty"`
+    OverdraftFeeChargeCap []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetailOverdraftFeeChargeCap `json:"OverdraftFeeChargeCap,omitempty"`
+    
 }
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges struct {
-	OverdraftFeeChargeCap    []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap    `json:"OverdraftFeeChargeCap,omitempty"`
-	OverdraftFeeChargeDetail []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail `json:"OverdraftFeeChargeDetail"`
+    OverdraftFeeChargeCap []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeCap `json:"OverdraftFeeChargeCap,omitempty"`
+    OverdraftFeeChargeDetail []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesChargesOverdraftFeeChargeDetail `json:"OverdraftFeeChargeDetail"`
+    
 }
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnumBanded ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum = "Banded"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnumTiered ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum = "Tiered"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnumWhole  ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum = "Whole"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnumBanded ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum = "Banded"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnumTiered ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum = "Tiered"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnumWhole ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum = "Whole"
 )
 
+
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBand struct {
-	AgreementLengthMax                *float32                                                                                       `json:"AgreementLengthMax,omitempty"`
-	AgreementLengthMin                *float32                                                                                       `json:"AgreementLengthMin,omitempty"`
-	AgreementPeriod                   *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum                   `json:"AgreementPeriod,omitempty"`
-	BankGuaranteedIndicator           *bool                                                                                          `json:"BankGuaranteedIndicator,omitempty"`
-	Ear                               *string                                                                                        `json:"EAR,omitempty"`
-	Identification                    *string                                                                                        `json:"Identification,omitempty"`
-	Notes                             []string                                                                                       `json:"Notes,omitempty"`
-	OverdraftFeesCharges              []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges                 `json:"OverdraftFeesCharges,omitempty"`
-	OverdraftInterestChargingCoverage *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum `json:"OverdraftInterestChargingCoverage,omitempty"`
-	RepresentativeApr                 *string                                                                                        `json:"RepresentativeAPR,omitempty"`
-	TierValueMax                      *string                                                                                        `json:"TierValueMax,omitempty"`
-	TierValueMin                      string                                                                                         `json:"TierValueMin"`
+    AgreementLengthMax *float32 `json:"AgreementLengthMax,omitempty"`
+    AgreementLengthMin *float32 `json:"AgreementLengthMin,omitempty"`
+    AgreementPeriod *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandAgreementPeriodEnum `json:"AgreementPeriod,omitempty"`
+    BankGuaranteedIndicator *bool `json:"BankGuaranteedIndicator,omitempty"`
+    Ear *string `json:"EAR,omitempty"`
+    Identification *string `json:"Identification,omitempty"`
+    Notes []string `json:"Notes,omitempty"`
+    OverdraftFeesCharges []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftFeesCharges `json:"OverdraftFeesCharges,omitempty"`
+    OverdraftInterestChargingCoverage *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBandOverdraftInterestChargingCoverageEnum `json:"OverdraftInterestChargingCoverage,omitempty"`
+    RepresentativeApr *string `json:"RepresentativeAPR,omitempty"`
+    TierValueMax *string `json:"TierValueMax,omitempty"`
+    TierValueMin string `json:"TierValueMin"`
+    
 }
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeEnumCommitted ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeEnum = "Committed"
-	ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeEnumOnDemand  ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeEnum = "OnDemand"
+    ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeEnumCommitted ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeEnum = "Committed"
+ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeEnumOnDemand ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeEnum = "OnDemand"
 )
+
+
 
 type ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnum string
 
 const (
-	ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnumBanded ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnum = "Banded"
-	ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnumTiered ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnum = "Tiered"
-	ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnumWhole  ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnum = "Whole"
+    ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnumBanded ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnum = "Banded"
+ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnumTiered ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnum = "Tiered"
+ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnumWhole ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnum = "Whole"
 )
 
+
 type ObbcaData1OverdraftOverdraftTierBandSet struct {
-	AuthorisedIndicator  *bool                                                         `json:"AuthorisedIndicator,omitempty"`
-	BufferAmount         *string                                                       `json:"BufferAmount,omitempty"`
-	Identification       *string                                                       `json:"Identification,omitempty"`
-	Notes                []string                                                      `json:"Notes,omitempty"`
-	OverdraftFeesCharges []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesCharges `json:"OverdraftFeesCharges,omitempty"`
-	OverdraftTierBand    []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBand    `json:"OverdraftTierBand"`
-	OverdraftType        *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeEnum     `json:"OverdraftType,omitempty"`
-	TierBandMethod       ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnum     `json:"TierBandMethod"`
+    AuthorisedIndicator *bool `json:"AuthorisedIndicator,omitempty"`
+    BufferAmount *string `json:"BufferAmount,omitempty"`
+    Identification *string `json:"Identification,omitempty"`
+    Notes []string `json:"Notes,omitempty"`
+    OverdraftFeesCharges []ObbcaData1OverdraftOverdraftTierBandSetOverdraftFeesCharges `json:"OverdraftFeesCharges,omitempty"`
+    OverdraftTierBand []ObbcaData1OverdraftOverdraftTierBandSetOverdraftTierBand `json:"OverdraftTierBand"`
+    OverdraftType *ObbcaData1OverdraftOverdraftTierBandSetOverdraftTypeEnum `json:"OverdraftType,omitempty"`
+    TierBandMethod ObbcaData1OverdraftOverdraftTierBandSetTierBandMethodEnum `json:"TierBandMethod"`
+    
 }
 
 type ObbcaData1Overdraft struct {
-	Notes                []string                                  `json:"Notes,omitempty"`
-	OverdraftTierBandSet []ObbcaData1OverdraftOverdraftTierBandSet `json:"OverdraftTierBandSet"`
+    Notes []string `json:"Notes,omitempty"`
+    OverdraftTierBandSet []ObbcaData1OverdraftOverdraftTierBandSet `json:"OverdraftTierBandSet"`
+    
 }
+
 
 type ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum string
 
 const (
-	ObbcaData1ProductDetailsFeeFreeLengthPeriodEnumDay      ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum = "Day"
-	ObbcaData1ProductDetailsFeeFreeLengthPeriodEnumHalfYear ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum = "Half Year"
-	ObbcaData1ProductDetailsFeeFreeLengthPeriodEnumMonth    ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum = "Month"
-	ObbcaData1ProductDetailsFeeFreeLengthPeriodEnumQuarter  ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum = "Quarter"
-	ObbcaData1ProductDetailsFeeFreeLengthPeriodEnumWeek     ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum = "Week"
-	ObbcaData1ProductDetailsFeeFreeLengthPeriodEnumYear     ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum = "Year"
+    ObbcaData1ProductDetailsFeeFreeLengthPeriodEnumDay ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum = "Day"
+ObbcaData1ProductDetailsFeeFreeLengthPeriodEnumHalfYear ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum = "Half Year"
+ObbcaData1ProductDetailsFeeFreeLengthPeriodEnumMonth ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum = "Month"
+ObbcaData1ProductDetailsFeeFreeLengthPeriodEnumQuarter ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum = "Quarter"
+ObbcaData1ProductDetailsFeeFreeLengthPeriodEnumWeek ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum = "Week"
+ObbcaData1ProductDetailsFeeFreeLengthPeriodEnumYear ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum = "Year"
 )
+
+
 
 type ObbcaData1ProductDetailsSegmentEnum string
 
 const (
-	ObbcaData1ProductDetailsSegmentEnumClientAccount               ObbcaData1ProductDetailsSegmentEnum = "ClientAccount"
-	ObbcaData1ProductDetailsSegmentEnumStandard                    ObbcaData1ProductDetailsSegmentEnum = "Standard"
-	ObbcaData1ProductDetailsSegmentEnumNonCommercialChaitiesClbSoc ObbcaData1ProductDetailsSegmentEnum = "NonCommercialChaitiesClbSoc"
-	ObbcaData1ProductDetailsSegmentEnumNonCommercialPublicAuthGovt ObbcaData1ProductDetailsSegmentEnum = "NonCommercialPublicAuthGovt"
-	ObbcaData1ProductDetailsSegmentEnumReligious                   ObbcaData1ProductDetailsSegmentEnum = "Religious"
-	ObbcaData1ProductDetailsSegmentEnumSectorSpecific              ObbcaData1ProductDetailsSegmentEnum = "SectorSpecific"
-	ObbcaData1ProductDetailsSegmentEnumStartup                     ObbcaData1ProductDetailsSegmentEnum = "Startup"
-	ObbcaData1ProductDetailsSegmentEnumSwitcher                    ObbcaData1ProductDetailsSegmentEnum = "Switcher"
+    ObbcaData1ProductDetailsSegmentEnumClientAccount ObbcaData1ProductDetailsSegmentEnum = "ClientAccount"
+ObbcaData1ProductDetailsSegmentEnumStandard ObbcaData1ProductDetailsSegmentEnum = "Standard"
+ObbcaData1ProductDetailsSegmentEnumNonCommercialChaitiesClbSoc ObbcaData1ProductDetailsSegmentEnum = "NonCommercialChaitiesClbSoc"
+ObbcaData1ProductDetailsSegmentEnumNonCommercialPublicAuthGovt ObbcaData1ProductDetailsSegmentEnum = "NonCommercialPublicAuthGovt"
+ObbcaData1ProductDetailsSegmentEnumReligious ObbcaData1ProductDetailsSegmentEnum = "Religious"
+ObbcaData1ProductDetailsSegmentEnumSectorSpecific ObbcaData1ProductDetailsSegmentEnum = "SectorSpecific"
+ObbcaData1ProductDetailsSegmentEnumStartup ObbcaData1ProductDetailsSegmentEnum = "Startup"
+ObbcaData1ProductDetailsSegmentEnumSwitcher ObbcaData1ProductDetailsSegmentEnum = "Switcher"
 )
 
+
 type ObbcaData1ProductDetails struct {
-	FeeFreeLength       *float32                                         `json:"FeeFreeLength,omitempty"`
-	FeeFreeLengthPeriod *ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum `json:"FeeFreeLengthPeriod,omitempty"`
-	Notes               []string                                         `json:"Notes,omitempty"`
-	Segment             []ObbcaData1ProductDetailsSegmentEnum            `json:"Segment,omitempty"`
+    FeeFreeLength *float32 `json:"FeeFreeLength,omitempty"`
+    FeeFreeLengthPeriod *ObbcaData1ProductDetailsFeeFreeLengthPeriodEnum `json:"FeeFreeLengthPeriod,omitempty"`
+    Notes []string `json:"Notes,omitempty"`
+    Segment []ObbcaData1ProductDetailsSegmentEnum `json:"Segment,omitempty"`
+    
 }
 
 type ObbcaData1 struct {
-	CreditInterest   *ObbcaData1CreditInterest    `json:"CreditInterest,omitempty"`
-	OtherFeesCharges []ObbcaData1OtherFeesCharges `json:"OtherFeesCharges,omitempty"`
-	Overdraft        *ObbcaData1Overdraft         `json:"Overdraft,omitempty"`
-	ProductDetails   *ObbcaData1ProductDetails    `json:"ProductDetails,omitempty"`
+    CreditInterest *ObbcaData1CreditInterest `json:"CreditInterest,omitempty"`
+    OtherFeesCharges []ObbcaData1OtherFeesCharges `json:"OtherFeesCharges,omitempty"`
+    Overdraft *ObbcaData1Overdraft `json:"Overdraft,omitempty"`
+    ProductDetails *ObbcaData1ProductDetails `json:"ProductDetails,omitempty"`
+    
 }
+

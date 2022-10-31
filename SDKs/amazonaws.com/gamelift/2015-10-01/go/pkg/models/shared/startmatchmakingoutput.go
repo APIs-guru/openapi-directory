@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StartMatchmakingOutput struct {
-	MatchmakingTicket *MatchmakingTicket `json:"MatchmakingTicket,omitempty"`
+    MatchmakingTicket *MatchmakingTicket `json:"MatchmakingTicket,omitempty"`
+    
 }
+

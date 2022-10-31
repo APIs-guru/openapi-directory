@@ -106,6 +106,7 @@ func (s *SDK) CreateCategories(ctx context.Context, request operations.CreateCat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -143,6 +144,7 @@ func (s *SDK) CreateDiscount(ctx context.Context, request operations.CreateDisco
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -194,6 +196,7 @@ func (s *SDK) CreateProduct(ctx context.Context, request operations.CreateProduc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -246,6 +249,7 @@ func (s *SDK) CreateProductSlug(ctx context.Context, request operations.CreatePr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -294,6 +298,7 @@ func (s *SDK) CreateTaxRates(ctx context.Context, request operations.CreateTaxRa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -669,6 +674,8 @@ func (s *SDK) GetDiscount(ctx context.Context, request operations.GetDiscountReq
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := utils.CreateSecurityClient(request.Security)
 
 	httpRes, err := client.Do(req)
@@ -795,6 +802,8 @@ func (s *SDK) GetProduct(ctx context.Context, request operations.GetProductReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1087,6 +1096,7 @@ func (s *SDK) ImportLibraryV2(ctx context.Context, request operations.ImportLibr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1145,6 +1155,7 @@ func (s *SDK) SetTaxationMode(ctx context.Context, request operations.SetTaxatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1204,7 +1215,10 @@ func (s *SDK) UpdateDiscount(ctx context.Context, request operations.UpdateDisco
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1256,7 +1270,10 @@ func (s *SDK) UpdateProduct(ctx context.Context, request operations.UpdateProduc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := utils.CreateSecurityClient(request.Security)
 
@@ -1308,6 +1325,7 @@ func (s *SDK) UpdateTaxRate(ctx context.Context, request operations.UpdateTaxRat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

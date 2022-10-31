@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SlotValueRegexFilter struct {
-	Pattern string `json:"pattern"`
+    Pattern string `json:"pattern"`
+    
 }
+

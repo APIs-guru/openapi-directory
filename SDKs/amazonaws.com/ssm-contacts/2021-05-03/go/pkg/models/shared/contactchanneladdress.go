@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ContactChannelAddress struct {
-	SimpleAddress *string `json:"SimpleAddress,omitempty"`
+    SimpleAddress *string `json:"SimpleAddress,omitempty"`
+    
 }
+

@@ -1,9 +1,14 @@
 package shared
 
+
+
+
 type HitAccessActionsEnum string
 
 const (
-	HitAccessActionsEnumAccept                   HitAccessActionsEnum = "Accept"
-	HitAccessActionsEnumPreviewAndAccept         HitAccessActionsEnum = "PreviewAndAccept"
-	HitAccessActionsEnumDiscoverPreviewAndAccept HitAccessActionsEnum = "DiscoverPreviewAndAccept"
+    HitAccessActionsEnumAccept HitAccessActionsEnum = "Accept"
+HitAccessActionsEnumPreviewAndAccept HitAccessActionsEnum = "PreviewAndAccept"
+HitAccessActionsEnumDiscoverPreviewAndAccept HitAccessActionsEnum = "DiscoverPreviewAndAccept"
 )
+
+

@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type AwsS3BucketNotificationConfigurationS3KeyFilterRuleNameEnum string
 
 const (
-	AwsS3BucketNotificationConfigurationS3KeyFilterRuleNameEnumPrefix AwsS3BucketNotificationConfigurationS3KeyFilterRuleNameEnum = "Prefix"
-	AwsS3BucketNotificationConfigurationS3KeyFilterRuleNameEnumSuffix AwsS3BucketNotificationConfigurationS3KeyFilterRuleNameEnum = "Suffix"
+    AwsS3BucketNotificationConfigurationS3KeyFilterRuleNameEnumPrefix AwsS3BucketNotificationConfigurationS3KeyFilterRuleNameEnum = "Prefix"
+AwsS3BucketNotificationConfigurationS3KeyFilterRuleNameEnumSuffix AwsS3BucketNotificationConfigurationS3KeyFilterRuleNameEnum = "Suffix"
 )
+
+

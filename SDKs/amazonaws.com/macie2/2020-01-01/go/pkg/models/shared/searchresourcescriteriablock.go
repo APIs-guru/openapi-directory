@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SearchResourcesCriteriaBlock struct {
-	And []SearchResourcesCriteria `json:"and,omitempty"`
+    And []SearchResourcesCriteria `json:"and,omitempty"`
+    
 }
+

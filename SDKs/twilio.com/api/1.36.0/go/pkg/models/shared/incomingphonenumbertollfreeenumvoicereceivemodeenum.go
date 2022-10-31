@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type IncomingPhoneNumberTollFreeEnumVoiceReceiveModeEnum string
 
 const (
-	IncomingPhoneNumberTollFreeEnumVoiceReceiveModeEnumVoice IncomingPhoneNumberTollFreeEnumVoiceReceiveModeEnum = "voice"
-	IncomingPhoneNumberTollFreeEnumVoiceReceiveModeEnumFax   IncomingPhoneNumberTollFreeEnumVoiceReceiveModeEnum = "fax"
+    IncomingPhoneNumberTollFreeEnumVoiceReceiveModeEnumVoice IncomingPhoneNumberTollFreeEnumVoiceReceiveModeEnum = "voice"
+IncomingPhoneNumberTollFreeEnumVoiceReceiveModeEnumFax IncomingPhoneNumberTollFreeEnumVoiceReceiveModeEnum = "fax"
 )
+
+

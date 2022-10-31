@@ -1,10 +1,14 @@
 package shared
 
+
+
 type GetOrderTypeResponse struct {
-	Data       OrderType `json:"data"`
-	Operation  string    `json:"operation"`
-	Resource   string    `json:"resource"`
-	Service    string    `json:"service"`
-	Status     string    `json:"status"`
-	StatusCode int64     `json:"status_code"`
+    Data OrderType `json:"data"`
+    Operation string `json:"operation"`
+    Resource string `json:"resource"`
+    Service string `json:"service"`
+    Status string `json:"status"`
+    StatusCode int64 `json:"status_code"`
+    
 }
+

@@ -74,6 +74,7 @@ func (s *SDK) AppliedInventoriesTagsForServiceOffering(ctx context.Context, requ
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1115,6 +1116,7 @@ func (s *SDK) OrderServiceOffering(ctx context.Context, request operations.Order
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1164,6 +1166,7 @@ func (s *SDK) PostGraphQl(ctx context.Context, request operations.PostGraphQlReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1686,6 +1689,7 @@ func (s *SDK) TagServiceInventory(ctx context.Context, request operations.TagSer
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1735,6 +1739,7 @@ func (s *SDK) UntagServiceInventory(ctx context.Context, request operations.Unta
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1774,6 +1779,7 @@ func (s *SDK) UpdateTask(ctx context.Context, request operations.UpdateTaskReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

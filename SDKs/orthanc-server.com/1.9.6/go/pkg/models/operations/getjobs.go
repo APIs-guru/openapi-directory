@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetJobsQueryParams struct {
-	Expand *string `queryParam:"style=form,explode=true,name=expand"`
+    Expand *string `queryParam:"style=form,explode=true,name=expand"`
+    
 }
 
 type GetJobsRequest struct {
-	QueryParams GetJobsQueryParams
+    QueryParams GetJobsQueryParams 
+    
 }
 
 type GetJobsResponse struct {
-	ContentType                  string
-	GetJobs200ApplicationJSONAny *interface{}
-	StatusCode                   int64
+    ContentType string 
+    GetJobs200ApplicationJSONAny *interface{} 
+    StatusCode int64 
+    
 }
+

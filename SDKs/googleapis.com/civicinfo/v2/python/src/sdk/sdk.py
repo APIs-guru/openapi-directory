@@ -19,21 +19,25 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def civicinfo_divisions_search(self, request: operations.CivicinfoDivisionsSearchRequest) -> operations.CivicinfoDivisionsSearchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/civicinfo/v2/divisions"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CivicinfoDivisionsSearchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DivisionSearchResponse])
@@ -42,20 +46,21 @@ class SDK:
         return res
 
     
-    
     def civicinfo_elections_election_query(self, request: operations.CivicinfoElectionsElectionQueryRequest) -> operations.CivicinfoElectionsElectionQueryResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/civicinfo/v2/elections"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CivicinfoElectionsElectionQueryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ElectionsQueryResponse])
@@ -64,20 +69,21 @@ class SDK:
         return res
 
     
-    
     def civicinfo_elections_voter_info_query(self, request: operations.CivicinfoElectionsVoterInfoQueryRequest) -> operations.CivicinfoElectionsVoterInfoQueryResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/civicinfo/v2/voterinfo"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CivicinfoElectionsVoterInfoQueryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.VoterInfoResponse])
@@ -86,20 +92,21 @@ class SDK:
         return res
 
     
-    
     def civicinfo_representatives_representative_info_by_address(self, request: operations.CivicinfoRepresentativesRepresentativeInfoByAddressRequest) -> operations.CivicinfoRepresentativesRepresentativeInfoByAddressResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/civicinfo/v2/representatives"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CivicinfoRepresentativesRepresentativeInfoByAddressResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.RepresentativeInfoResponse])
@@ -108,20 +115,21 @@ class SDK:
         return res
 
     
-    
     def civicinfo_representatives_representative_info_by_division(self, request: operations.CivicinfoRepresentativesRepresentativeInfoByDivisionRequest) -> operations.CivicinfoRepresentativesRepresentativeInfoByDivisionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/civicinfo/v2/representatives/{ocdId}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CivicinfoRepresentativesRepresentativeInfoByDivisionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.RepresentativeInfoData])

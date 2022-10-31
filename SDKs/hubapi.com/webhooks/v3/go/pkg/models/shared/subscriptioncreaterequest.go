@@ -1,36 +1,42 @@
 package shared
 
+
+
+
 type SubscriptionCreateRequestEventTypeEnum string
 
 const (
-	SubscriptionCreateRequestEventTypeEnumContactPropertyChange       SubscriptionCreateRequestEventTypeEnum = "contact.propertyChange"
-	SubscriptionCreateRequestEventTypeEnumCompanyPropertyChange       SubscriptionCreateRequestEventTypeEnum = "company.propertyChange"
-	SubscriptionCreateRequestEventTypeEnumDealPropertyChange          SubscriptionCreateRequestEventTypeEnum = "deal.propertyChange"
-	SubscriptionCreateRequestEventTypeEnumTicketPropertyChange        SubscriptionCreateRequestEventTypeEnum = "ticket.propertyChange"
-	SubscriptionCreateRequestEventTypeEnumProductPropertyChange       SubscriptionCreateRequestEventTypeEnum = "product.propertyChange"
-	SubscriptionCreateRequestEventTypeEnumLineItemPropertyChange      SubscriptionCreateRequestEventTypeEnum = "line_item.propertyChange"
-	SubscriptionCreateRequestEventTypeEnumContactCreation             SubscriptionCreateRequestEventTypeEnum = "contact.creation"
-	SubscriptionCreateRequestEventTypeEnumContactDeletion             SubscriptionCreateRequestEventTypeEnum = "contact.deletion"
-	SubscriptionCreateRequestEventTypeEnumContactPrivacyDeletion      SubscriptionCreateRequestEventTypeEnum = "contact.privacyDeletion"
-	SubscriptionCreateRequestEventTypeEnumCompanyCreation             SubscriptionCreateRequestEventTypeEnum = "company.creation"
-	SubscriptionCreateRequestEventTypeEnumCompanyDeletion             SubscriptionCreateRequestEventTypeEnum = "company.deletion"
-	SubscriptionCreateRequestEventTypeEnumDealCreation                SubscriptionCreateRequestEventTypeEnum = "deal.creation"
-	SubscriptionCreateRequestEventTypeEnumDealDeletion                SubscriptionCreateRequestEventTypeEnum = "deal.deletion"
-	SubscriptionCreateRequestEventTypeEnumTicketCreation              SubscriptionCreateRequestEventTypeEnum = "ticket.creation"
-	SubscriptionCreateRequestEventTypeEnumTicketDeletion              SubscriptionCreateRequestEventTypeEnum = "ticket.deletion"
-	SubscriptionCreateRequestEventTypeEnumProductCreation             SubscriptionCreateRequestEventTypeEnum = "product.creation"
-	SubscriptionCreateRequestEventTypeEnumProductDeletion             SubscriptionCreateRequestEventTypeEnum = "product.deletion"
-	SubscriptionCreateRequestEventTypeEnumLineItemCreation            SubscriptionCreateRequestEventTypeEnum = "line_item.creation"
-	SubscriptionCreateRequestEventTypeEnumLineItemDeletion            SubscriptionCreateRequestEventTypeEnum = "line_item.deletion"
-	SubscriptionCreateRequestEventTypeEnumConversationCreation        SubscriptionCreateRequestEventTypeEnum = "conversation.creation"
-	SubscriptionCreateRequestEventTypeEnumConversationDeletion        SubscriptionCreateRequestEventTypeEnum = "conversation.deletion"
-	SubscriptionCreateRequestEventTypeEnumConversationNewMessage      SubscriptionCreateRequestEventTypeEnum = "conversation.newMessage"
-	SubscriptionCreateRequestEventTypeEnumConversationPrivacyDeletion SubscriptionCreateRequestEventTypeEnum = "conversation.privacyDeletion"
-	SubscriptionCreateRequestEventTypeEnumConversationPropertyChange  SubscriptionCreateRequestEventTypeEnum = "conversation.propertyChange"
+    SubscriptionCreateRequestEventTypeEnumContactPropertyChange SubscriptionCreateRequestEventTypeEnum = "contact.propertyChange"
+SubscriptionCreateRequestEventTypeEnumCompanyPropertyChange SubscriptionCreateRequestEventTypeEnum = "company.propertyChange"
+SubscriptionCreateRequestEventTypeEnumDealPropertyChange SubscriptionCreateRequestEventTypeEnum = "deal.propertyChange"
+SubscriptionCreateRequestEventTypeEnumTicketPropertyChange SubscriptionCreateRequestEventTypeEnum = "ticket.propertyChange"
+SubscriptionCreateRequestEventTypeEnumProductPropertyChange SubscriptionCreateRequestEventTypeEnum = "product.propertyChange"
+SubscriptionCreateRequestEventTypeEnumLineItemPropertyChange SubscriptionCreateRequestEventTypeEnum = "line_item.propertyChange"
+SubscriptionCreateRequestEventTypeEnumContactCreation SubscriptionCreateRequestEventTypeEnum = "contact.creation"
+SubscriptionCreateRequestEventTypeEnumContactDeletion SubscriptionCreateRequestEventTypeEnum = "contact.deletion"
+SubscriptionCreateRequestEventTypeEnumContactPrivacyDeletion SubscriptionCreateRequestEventTypeEnum = "contact.privacyDeletion"
+SubscriptionCreateRequestEventTypeEnumCompanyCreation SubscriptionCreateRequestEventTypeEnum = "company.creation"
+SubscriptionCreateRequestEventTypeEnumCompanyDeletion SubscriptionCreateRequestEventTypeEnum = "company.deletion"
+SubscriptionCreateRequestEventTypeEnumDealCreation SubscriptionCreateRequestEventTypeEnum = "deal.creation"
+SubscriptionCreateRequestEventTypeEnumDealDeletion SubscriptionCreateRequestEventTypeEnum = "deal.deletion"
+SubscriptionCreateRequestEventTypeEnumTicketCreation SubscriptionCreateRequestEventTypeEnum = "ticket.creation"
+SubscriptionCreateRequestEventTypeEnumTicketDeletion SubscriptionCreateRequestEventTypeEnum = "ticket.deletion"
+SubscriptionCreateRequestEventTypeEnumProductCreation SubscriptionCreateRequestEventTypeEnum = "product.creation"
+SubscriptionCreateRequestEventTypeEnumProductDeletion SubscriptionCreateRequestEventTypeEnum = "product.deletion"
+SubscriptionCreateRequestEventTypeEnumLineItemCreation SubscriptionCreateRequestEventTypeEnum = "line_item.creation"
+SubscriptionCreateRequestEventTypeEnumLineItemDeletion SubscriptionCreateRequestEventTypeEnum = "line_item.deletion"
+SubscriptionCreateRequestEventTypeEnumConversationCreation SubscriptionCreateRequestEventTypeEnum = "conversation.creation"
+SubscriptionCreateRequestEventTypeEnumConversationDeletion SubscriptionCreateRequestEventTypeEnum = "conversation.deletion"
+SubscriptionCreateRequestEventTypeEnumConversationNewMessage SubscriptionCreateRequestEventTypeEnum = "conversation.newMessage"
+SubscriptionCreateRequestEventTypeEnumConversationPrivacyDeletion SubscriptionCreateRequestEventTypeEnum = "conversation.privacyDeletion"
+SubscriptionCreateRequestEventTypeEnumConversationPropertyChange SubscriptionCreateRequestEventTypeEnum = "conversation.propertyChange"
 )
 
+
 type SubscriptionCreateRequest struct {
-	Active       *bool                                  `json:"active,omitempty"`
-	EventType    SubscriptionCreateRequestEventTypeEnum `json:"eventType"`
-	PropertyName *string                                `json:"propertyName,omitempty"`
+    Active *bool `json:"active,omitempty"`
+    EventType SubscriptionCreateRequestEventTypeEnum `json:"eventType"`
+    PropertyName *string `json:"propertyName,omitempty"`
+    
 }
+

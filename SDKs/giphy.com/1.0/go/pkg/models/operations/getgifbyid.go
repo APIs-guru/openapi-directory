@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetGifByIDPathParams struct {
-	GifID int32 `pathParam:"style=simple,explode=false,name=gifId"`
+    GifID int32 `pathParam:"style=simple,explode=false,name=gifId"`
+    
 }
 
 type GetGifByIDRequest struct {
-	PathParams GetGifByIDPathParams
+    PathParams GetGifByIDPathParams 
+    
 }
 
 type GetGifByID200ApplicationJSON struct {
-	Data *shared.Gif  `json:"data,omitempty"`
-	Meta *shared.Meta `json:"meta,omitempty"`
+    Data *shared.Gif `json:"data,omitempty"`
+    Meta *shared.Meta `json:"meta,omitempty"`
+    
 }
 
 type GetGifByIDResponse struct {
-	ContentType                        string
-	StatusCode                         int64
-	GetGifByID200ApplicationJSONObject *GetGifByID200ApplicationJSON
+    ContentType string 
+    StatusCode int64 
+    GetGifByID200ApplicationJSONObject *GetGifByID200ApplicationJSON 
+    
 }
+

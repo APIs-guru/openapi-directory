@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type StageRetryModeEnum string
 
 const (
-	StageRetryModeEnumFailedActions StageRetryModeEnum = "FAILED_ACTIONS"
+    StageRetryModeEnumFailedActions StageRetryModeEnum = "FAILED_ACTIONS"
 )
+
+

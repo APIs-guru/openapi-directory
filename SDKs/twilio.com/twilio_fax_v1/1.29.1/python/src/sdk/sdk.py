@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def delete_fax(self, request: operations.DeleteFaxRequest) -> operations.DeleteFaxResponse:
         warnings.simplefilter("ignore")
@@ -28,20 +30,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Faxes/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFaxResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_fax_media(self, request: operations.DeleteFaxMediaRequest) -> operations.DeleteFaxMediaResponse:
         warnings.simplefilter("ignore")
@@ -50,20 +51,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Faxes/{FaxSid}/Media/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteFaxMediaResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def fetch_fax(self, request: operations.FetchFaxRequest) -> operations.FetchFaxResponse:
         warnings.simplefilter("ignore")
@@ -72,14 +72,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Faxes/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchFaxResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FaxV1Fax])
@@ -88,7 +88,6 @@ class SDK:
         return res
 
     
-    
     def fetch_fax_media(self, request: operations.FetchFaxMediaRequest) -> operations.FetchFaxMediaResponse:
         warnings.simplefilter("ignore")
 
@@ -96,14 +95,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Faxes/{FaxSid}/Media/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchFaxMediaResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FaxV1FaxFaxMedia])
@@ -112,7 +111,6 @@ class SDK:
         return res
 
     
-    
     def list_fax(self, request: operations.ListFaxRequest) -> operations.ListFaxResponse:
         warnings.simplefilter("ignore")
 
@@ -120,15 +118,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Faxes"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListFaxResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListFaxListFaxResponse])
@@ -137,7 +136,6 @@ class SDK:
         return res
 
     
-    
     def list_fax_media(self, request: operations.ListFaxMediaRequest) -> operations.ListFaxMediaResponse:
         warnings.simplefilter("ignore")
 
@@ -145,15 +143,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Faxes/{FaxSid}/Media", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListFaxMediaResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListFaxMediaListFaxMediaResponse])

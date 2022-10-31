@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DisablePolicyTypeResponse struct {
-	Root *Root `json:"Root,omitempty"`
+    Root *Root `json:"Root,omitempty"`
+    
 }
+

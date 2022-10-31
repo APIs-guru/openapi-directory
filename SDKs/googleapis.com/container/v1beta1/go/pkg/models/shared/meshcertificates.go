@@ -1,5 +1,9 @@
 package shared
 
+
+
 type MeshCertificates struct {
-	EnableCertificates *bool `json:"enableCertificates,omitempty"`
+    EnableCertificates *bool `json:"enableCertificates,omitempty"`
+    
 }
+

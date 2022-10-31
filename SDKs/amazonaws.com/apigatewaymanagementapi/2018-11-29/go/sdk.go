@@ -68,6 +68,8 @@ func (s *SDK) DeleteConnection(ctx context.Context, request operations.DeleteCon
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.securityClient
 
 	httpRes, err := client.Do(req)
@@ -127,6 +129,8 @@ func (s *SDK) GetConnection(ctx context.Context, request operations.GetConnectio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -204,7 +208,10 @@ func (s *SDK) PostToConnection(ctx context.Context, request operations.PostToCon
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 

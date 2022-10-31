@@ -4165,6 +4165,7 @@ func (s *SDK) SongAPIPostRating(ctx context.Context, request operations.SongAPIP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -6998,6 +6999,7 @@ func (s *SDK) UserAPIPostReport(ctx context.Context, request operations.UserAPIP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -7088,6 +7090,7 @@ func (s *SDK) UserAPIPostSetting(ctx context.Context, request operations.UserAPI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

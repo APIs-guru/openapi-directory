@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StateAndNotificationPayload struct {
-	Devices *ReportStateAndNotificationDevice `json:"devices,omitempty"`
+    Devices *ReportStateAndNotificationDevice `json:"devices,omitempty"`
+    
 }
+

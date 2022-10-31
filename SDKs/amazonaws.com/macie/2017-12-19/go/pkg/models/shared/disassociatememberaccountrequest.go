@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DisassociateMemberAccountRequest struct {
-	MemberAccountID string `json:"memberAccountId"`
+    MemberAccountID string `json:"memberAccountId"`
+    
 }
+

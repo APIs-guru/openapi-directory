@@ -1,14 +1,20 @@
 package operations
 
+
+
 type GetVehicleBatteryPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetVehicleBatteryRequest struct {
-	PathParams GetVehicleBatteryPathParams
+    PathParams GetVehicleBatteryPathParams 
+    
 }
 
 type GetVehicleBatteryResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

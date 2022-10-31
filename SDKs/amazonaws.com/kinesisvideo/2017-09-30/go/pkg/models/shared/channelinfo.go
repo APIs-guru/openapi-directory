@@ -1,15 +1,16 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ChannelInfo struct {
-	ChannelArn                *string                    `json:"ChannelARN,omitempty"`
-	ChannelName               *string                    `json:"ChannelName,omitempty"`
-	ChannelStatus             *StatusEnum                `json:"ChannelStatus,omitempty"`
-	ChannelType               *ChannelTypeEnum           `json:"ChannelType,omitempty"`
-	CreationTime              *time.Time                 `json:"CreationTime,omitempty"`
-	SingleMasterConfiguration *SingleMasterConfiguration `json:"SingleMasterConfiguration,omitempty"`
-	Version                   *string                    `json:"Version,omitempty"`
+    ChannelArn *string `json:"ChannelARN,omitempty"`
+    ChannelName *string `json:"ChannelName,omitempty"`
+    ChannelStatus *StatusEnum `json:"ChannelStatus,omitempty"`
+    ChannelType *ChannelTypeEnum `json:"ChannelType,omitempty"`
+    CreationTime *time.Time `json:"CreationTime,omitempty"`
+    SingleMasterConfiguration *SingleMasterConfiguration `json:"SingleMasterConfiguration,omitempty"`
+    Version *string `json:"Version,omitempty"`
+    
 }
+

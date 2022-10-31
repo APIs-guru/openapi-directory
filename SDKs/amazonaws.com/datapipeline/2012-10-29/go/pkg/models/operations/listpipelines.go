@@ -1,40 +1,46 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ListPipelinesQueryParams struct {
-	Marker *string `queryParam:"style=form,explode=true,name=marker"`
+    Marker *string `queryParam:"style=form,explode=true,name=marker"`
+    
 }
+
 
 type ListPipelinesXAmzTargetEnum string
 
 const (
-	ListPipelinesXAmzTargetEnumDataPipelineListPipelines ListPipelinesXAmzTargetEnum = "DataPipeline.ListPipelines"
+    ListPipelinesXAmzTargetEnumDataPipelineListPipelines ListPipelinesXAmzTargetEnum = "DataPipeline.ListPipelines"
 )
 
+
 type ListPipelinesHeaders struct {
-	XAmzAlgorithm     *string                     `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string                     `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string                     `header:"name=X-Amz-Credential"`
-	XAmzDate          *string                     `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string                     `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string                     `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string                     `header:"name=X-Amz-SignedHeaders"`
-	XAmzTarget        ListPipelinesXAmzTargetEnum `header:"name=X-Amz-Target"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    XAmzTarget ListPipelinesXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
+    
 }
 
 type ListPipelinesRequest struct {
-	QueryParams ListPipelinesQueryParams
-	Headers     ListPipelinesHeaders
-	Request     shared.ListPipelinesInput `request:"mediaType=application/json"`
+    QueryParams ListPipelinesQueryParams 
+    Headers ListPipelinesHeaders 
+    Request shared.ListPipelinesInput `request:"mediaType=application/json"`
+    
 }
 
 type ListPipelinesResponse struct {
-	ContentType             string
-	InternalServiceError    *interface{}
-	InvalidRequestException *interface{}
-	ListPipelinesOutput     *shared.ListPipelinesOutput
-	StatusCode              int64
+    ContentType string 
+    InternalServiceError *interface{} 
+    InvalidRequestException *interface{} 
+    ListPipelinesOutput *shared.ListPipelinesOutput 
+    StatusCode int64 
+    
 }
+

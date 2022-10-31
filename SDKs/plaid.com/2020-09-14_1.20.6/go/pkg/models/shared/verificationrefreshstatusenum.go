@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type VerificationRefreshStatusEnum string
 
 const (
-	VerificationRefreshStatusEnumVerificationRefreshStatusUserPresenceRequired VerificationRefreshStatusEnum = "VERIFICATION_REFRESH_STATUS_USER_PRESENCE_REQUIRED"
+    VerificationRefreshStatusEnumVerificationRefreshStatusUserPresenceRequired VerificationRefreshStatusEnum = "VERIFICATION_REFRESH_STATUS_USER_PRESENCE_REQUIRED"
 )
+
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ControllersSystemsAdvisoriesResponse struct {
-	Data map[string][]string `json:"data,omitempty"`
+    Data map[string][]string `json:"data,omitempty"`
+    
 }
+

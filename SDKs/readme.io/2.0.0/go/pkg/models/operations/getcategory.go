@@ -1,28 +1,33 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetCategoryPathParams struct {
-	Slug string `pathParam:"style=simple,explode=false,name=slug"`
+    Slug string `pathParam:"style=simple,explode=false,name=slug"`
+    
 }
 
 type GetCategoryHeaders struct {
-	XReadmeVersion string `header:"name=x-readme-version"`
+    XReadmeVersion string `header:"style=simple,explode=false,name=x-readme-version"`
+    
 }
 
 type GetCategorySecurity struct {
-	APIKey shared.SchemeAPIKey `security:"scheme,type=http,subtype=basic"`
+    APIKey shared.SchemeAPIKey `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type GetCategoryRequest struct {
-	PathParams GetCategoryPathParams
-	Headers    GetCategoryHeaders
-	Security   GetCategorySecurity
+    PathParams GetCategoryPathParams 
+    Headers GetCategoryHeaders 
+    Security GetCategorySecurity 
+    
 }
 
 type GetCategoryResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

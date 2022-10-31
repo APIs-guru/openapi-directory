@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeRefreshSchemasStatusResponse struct {
-	RefreshSchemasStatus *RefreshSchemasStatus `json:"RefreshSchemasStatus,omitempty"`
+    RefreshSchemasStatus *RefreshSchemasStatus `json:"RefreshSchemasStatus,omitempty"`
+    
 }
+

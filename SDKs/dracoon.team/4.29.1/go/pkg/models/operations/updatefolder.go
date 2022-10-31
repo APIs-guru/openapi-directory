@@ -1,27 +1,31 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type UpdateFolderPathParams struct {
-	FolderID int64 `pathParam:"style=simple,explode=false,name=folder_id"`
+    FolderID int64 `pathParam:"style=simple,explode=false,name=folder_id"`
+    
 }
 
 type UpdateFolderHeaders struct {
-	XSdsAuthToken  *string      `header:"name=X-Sds-Auth-Token"`
-	XSdsDateFormat *interface{} `header:"name=X-Sds-Date-Format"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    XSdsDateFormat *interface{} `header:"style=simple,explode=false,name=X-Sds-Date-Format"`
+    
 }
 
 type UpdateFolderRequest struct {
-	PathParams UpdateFolderPathParams
-	Headers    UpdateFolderHeaders
-	Request    shared.UpdateFolderRequest `request:"mediaType=application/json"`
+    PathParams UpdateFolderPathParams 
+    Headers UpdateFolderHeaders 
+    Request shared.UpdateFolderRequest `request:"mediaType=application/json"`
+    
 }
 
 type UpdateFolderResponse struct {
-	ContentType   string
-	ErrorResponse *shared.ErrorResponse
-	Node          *shared.Node
-	StatusCode    int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    Node *shared.Node 
+    StatusCode int64 
+    
 }
+

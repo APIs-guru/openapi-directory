@@ -1,15 +1,21 @@
 package operations
 
+
+
 type ContentSubmissionsDeleteContentSubmissionPathParams struct {
-	ContentSubmissionID int32 `pathParam:"style=simple,explode=false,name=contentSubmissionID"`
+    ContentSubmissionID int32 `pathParam:"style=simple,explode=false,name=contentSubmissionID"`
+    
 }
 
 type ContentSubmissionsDeleteContentSubmissionRequest struct {
-	PathParams ContentSubmissionsDeleteContentSubmissionPathParams
+    PathParams ContentSubmissionsDeleteContentSubmissionPathParams 
+    
 }
 
 type ContentSubmissionsDeleteContentSubmissionResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

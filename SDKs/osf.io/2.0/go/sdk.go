@@ -292,6 +292,7 @@ func (s *SDK) CollectionsAddMetadata(ctx context.Context, request operations.Col
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -361,6 +362,7 @@ func (s *SDK) CollectionsCreate(ctx context.Context, request operations.Collecti
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -499,6 +501,7 @@ func (s *SDK) CollectionsLinkedNodesRelationships(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -568,6 +571,7 @@ func (s *SDK) CollectionsLinkedNodesRelationshipsDelete(ctx context.Context, req
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -667,6 +671,7 @@ func (s *SDK) CollectionsLinkedRegistrationsRelationships(ctx context.Context, r
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -736,6 +741,7 @@ func (s *SDK) CollectionsLinkedRegistrationsRelationshipsDelete(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -844,6 +850,7 @@ func (s *SDK) CollectionsMetadataDetail(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -973,6 +980,7 @@ func (s *SDK) CollectionsMetadataSubjectsRelationshipsUpdate(ctx context.Context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1042,6 +1050,7 @@ func (s *SDK) CommentsPut(ctx context.Context, request operations.CommentsPutReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1159,6 +1168,7 @@ func (s *SDK) FilesPatch(ctx context.Context, request operations.FilesPatchReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1804,6 +1814,7 @@ func (s *SDK) NodesChildrenCreate(ctx context.Context, request operations.NodesC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1960,6 +1971,7 @@ func (s *SDK) NodesCommentCreate(ctx context.Context, request operations.NodesCo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2038,6 +2050,7 @@ func (s *SDK) NodesContributorsCreate(ctx context.Context, request operations.No
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2146,6 +2159,7 @@ func (s *SDK) NodesContributorsPartialUpdate(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2224,6 +2238,7 @@ func (s *SDK) NodesCreate(ctx context.Context, request operations.NodesCreateReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2293,6 +2308,7 @@ func (s *SDK) NodesDraftRegistrationsCreate(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2401,6 +2417,7 @@ func (s *SDK) NodesDraftRegistrationsPartialUpdate(ctx context.Context, request 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2557,6 +2574,7 @@ func (s *SDK) NodesForksCreate(ctx context.Context, request operations.NodesFork
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2830,6 +2848,7 @@ func (s *SDK) NodesNodeAddonUpdate(ctx context.Context, request operations.Nodes
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2869,6 +2888,7 @@ func (s *SDK) NodesPartialUpdate(ctx context.Context, request operations.NodesPa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3493,6 +3513,7 @@ func (s *SDK) PreprintsCreate(ctx context.Context, request operations.PreprintsC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3571,6 +3592,7 @@ func (s *SDK) PreprintsPartialUpdate(ctx context.Context, request operations.Pre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3961,6 +3983,7 @@ func (s *SDK) RegistrationsForksCreate(ctx context.Context, request operations.R
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4234,6 +4257,7 @@ func (s *SDK) RegistrationsPartialUpdate(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -4741,6 +4765,7 @@ func (s *SDK) UsersPartialUpdate(ctx context.Context, request operations.UsersPa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

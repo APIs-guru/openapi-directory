@@ -1,49 +1,55 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var ListWebhookServers = []string{
 	"https://autopilot.twilio.com",
 }
 
 type ListWebhookPathParams struct {
-	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
+    AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
+    
 }
 
 type ListWebhookQueryParams struct {
-	PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
+    PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
+    
 }
 
 type ListWebhookSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type ListWebhookRequest struct {
-	ServerURL   *string
-	PathParams  ListWebhookPathParams
-	QueryParams ListWebhookQueryParams
-	Security    ListWebhookSecurity
+    ServerURL *string 
+    PathParams ListWebhookPathParams 
+    QueryParams ListWebhookQueryParams 
+    Security ListWebhookSecurity 
+    
 }
 
 type ListWebhookListWebhookResponseMeta struct {
-	FirstPageURL    *string `json:"first_page_url,omitempty"`
-	Key             *string `json:"key,omitempty"`
-	NextPageURL     *string `json:"next_page_url,omitempty"`
-	Page            *int64  `json:"page,omitempty"`
-	PageSize        *int64  `json:"page_size,omitempty"`
-	PreviousPageURL *string `json:"previous_page_url,omitempty"`
-	URL             *string `json:"url,omitempty"`
+    FirstPageURL *string `json:"first_page_url,omitempty"`
+    Key *string `json:"key,omitempty"`
+    NextPageURL *string `json:"next_page_url,omitempty"`
+    Page *int64 `json:"page,omitempty"`
+    PageSize *int64 `json:"page_size,omitempty"`
+    PreviousPageURL *string `json:"previous_page_url,omitempty"`
+    URL *string `json:"url,omitempty"`
+    
 }
 
 type ListWebhookListWebhookResponse struct {
-	Meta     *ListWebhookListWebhookResponseMeta  `json:"meta,omitempty"`
-	Webhooks []shared.AutopilotV1AssistantWebhook `json:"webhooks,omitempty"`
+    Meta *ListWebhookListWebhookResponseMeta `json:"meta,omitempty"`
+    Webhooks []shared.AutopilotV1AssistantWebhook `json:"webhooks,omitempty"`
+    
 }
 
 type ListWebhookResponse struct {
-	ContentType         string
-	ListWebhookResponse *ListWebhookListWebhookResponse
-	StatusCode          int64
+    ContentType string 
+    ListWebhookResponse *ListWebhookListWebhookResponse 
+    StatusCode int64 
+    
 }
+

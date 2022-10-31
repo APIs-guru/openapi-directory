@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetApnsChannelResponse struct {
-	ApnsChannelResponse ApnsChannelResponse `json:"APNSChannelResponse"`
+    ApnsChannelResponse ApnsChannelResponse `json:"APNSChannelResponse"`
+    
 }
+

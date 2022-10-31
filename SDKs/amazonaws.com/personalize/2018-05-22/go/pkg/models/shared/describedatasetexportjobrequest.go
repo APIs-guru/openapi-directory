@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeDatasetExportJobRequest struct {
-	DatasetExportJobArn string `json:"datasetExportJobArn"`
+    DatasetExportJobArn string `json:"datasetExportJobArn"`
+    
 }
+

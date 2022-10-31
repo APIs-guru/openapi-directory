@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteVirtualGatewayOutput struct {
-	VirtualGateway VirtualGatewayData `json:"virtualGateway"`
+    VirtualGateway VirtualGatewayData `json:"virtualGateway"`
+    
 }
+

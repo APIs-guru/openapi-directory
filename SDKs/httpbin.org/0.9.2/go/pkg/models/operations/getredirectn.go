@@ -1,14 +1,20 @@
 package operations
 
+
+
 type GetRedirectNPathParams struct {
-	N int64 `pathParam:"style=simple,explode=false,name=n"`
+    N int64 `pathParam:"style=simple,explode=false,name=n"`
+    
 }
 
 type GetRedirectNRequest struct {
-	PathParams GetRedirectNPathParams
+    PathParams GetRedirectNPathParams 
+    
 }
 
 type GetRedirectNResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

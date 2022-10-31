@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type Bookmark struct {
-	CreationDate time.Time `json:"creationDate"`
-	ItemID       string    `json:"itemId"`
+    CreationDate time.Time `json:"creationDate"`
+    ItemID string `json:"itemId"`
+    
 }
+

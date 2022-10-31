@@ -1,5 +1,9 @@
 package shared
 
+
+
 type KinesisParameters struct {
-	PartitionKeyPath string `json:"PartitionKeyPath"`
+    PartitionKeyPath string `json:"PartitionKeyPath"`
+    
 }
+

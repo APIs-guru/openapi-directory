@@ -1,21 +1,24 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ClientAPIAllHeaders struct {
-	XAuthKey    string `header:"name=x-auth-key"`
-	XAuthSecret string `header:"name=x-auth-secret"`
+    XAuthKey string `header:"style=simple,explode=false,name=x-auth-key"`
+    XAuthSecret string `header:"style=simple,explode=false,name=x-auth-secret"`
+    
 }
 
 type ClientAPIAllRequest struct {
-	Headers ClientAPIAllHeaders
+    Headers ClientAPIAllHeaders 
+    
 }
 
 type ClientAPIAllResponse struct {
-	Body                   []byte
-	ClientDetailsAPIModels []shared.ClientDetailsAPIModel
-	ContentType            string
-	StatusCode             int64
+    Body []byte 
+    ClientDetailsAPIModels []shared.ClientDetailsAPIModel 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

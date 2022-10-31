@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class GetDomainsHeaders:
-    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key' }})
+    training_key: str = field(default=None, metadata={'header': { 'field_name': 'Training-Key', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribePartnerEventSourceRequest struct {
-	Name string `json:"Name"`
+    Name string `json:"Name"`
+    
 }
+

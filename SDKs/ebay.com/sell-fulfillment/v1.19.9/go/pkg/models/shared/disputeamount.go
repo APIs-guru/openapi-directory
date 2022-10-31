@@ -1,9 +1,13 @@
 package shared
 
+
+
 type DisputeAmount struct {
-	ConvertedFromCurrency *string `json:"convertedFromCurrency,omitempty"`
-	ConvertedFromValue    *string `json:"convertedFromValue,omitempty"`
-	Currency              *string `json:"currency,omitempty"`
-	ExchangeRate          *string `json:"exchangeRate,omitempty"`
-	Value                 *string `json:"value,omitempty"`
+    ConvertedFromCurrency *string `json:"convertedFromCurrency,omitempty"`
+    ConvertedFromValue *string `json:"convertedFromValue,omitempty"`
+    Currency *string `json:"currency,omitempty"`
+    ExchangeRate *string `json:"exchangeRate,omitempty"`
+    Value *string `json:"value,omitempty"`
+    
 }
+

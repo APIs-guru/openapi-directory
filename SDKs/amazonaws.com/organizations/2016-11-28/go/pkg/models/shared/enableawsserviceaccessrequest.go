@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EnableAwsServiceAccessRequest struct {
-	ServicePrincipal string `json:"ServicePrincipal"`
+    ServicePrincipal string `json:"ServicePrincipal"`
+    
 }
+

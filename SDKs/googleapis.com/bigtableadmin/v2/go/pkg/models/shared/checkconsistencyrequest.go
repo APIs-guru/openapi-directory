@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CheckConsistencyRequest struct {
-	ConsistencyToken *string `json:"consistencyToken,omitempty"`
+    ConsistencyToken *string `json:"consistencyToken,omitempty"`
+    
 }
+

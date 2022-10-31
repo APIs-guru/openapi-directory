@@ -1,14 +1,20 @@
 package operations
 
+
+
 type GetBytesNPathParams struct {
-	N int64 `pathParam:"style=simple,explode=false,name=n"`
+    N int64 `pathParam:"style=simple,explode=false,name=n"`
+    
 }
 
 type GetBytesNRequest struct {
-	PathParams GetBytesNPathParams
+    PathParams GetBytesNPathParams 
+    
 }
 
 type GetBytesNResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DeletePermissionPathParams struct {
-	PermissionID string `pathParam:"style=simple,explode=false,name=PermissionId"`
+    PermissionID string `pathParam:"style=simple,explode=false,name=PermissionId"`
+    
 }
 
 type DeletePermissionHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type DeletePermissionRequest struct {
-	PathParams DeletePermissionPathParams
-	Headers    DeletePermissionHeaders
+    PathParams DeletePermissionPathParams 
+    Headers DeletePermissionHeaders 
+    
 }
 
 type DeletePermissionResponse struct {
-	ContentType string
-	ErrorModel  *shared.ErrorModel
-	StatusCode  int64
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    StatusCode int64 
+    
 }
+

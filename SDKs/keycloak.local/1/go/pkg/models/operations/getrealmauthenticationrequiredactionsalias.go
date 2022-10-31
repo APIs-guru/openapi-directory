@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetRealmAuthenticationRequiredActionsAliasPathParams struct {
-	Alias string `pathParam:"style=simple,explode=false,name=alias"`
-	Realm string `pathParam:"style=simple,explode=false,name=realm"`
+    Alias string `pathParam:"style=simple,explode=false,name=alias"`
+    Realm string `pathParam:"style=simple,explode=false,name=realm"`
+    
 }
 
 type GetRealmAuthenticationRequiredActionsAliasRequest struct {
-	PathParams GetRealmAuthenticationRequiredActionsAliasPathParams
+    PathParams GetRealmAuthenticationRequiredActionsAliasPathParams 
+    
 }
 
 type GetRealmAuthenticationRequiredActionsAliasResponse struct {
-	ContentType                          string
-	RequiredActionProviderRepresentation *shared.RequiredActionProviderRepresentation
-	StatusCode                           int64
+    ContentType string 
+    RequiredActionProviderRepresentation *shared.RequiredActionProviderRepresentation 
+    StatusCode int64 
+    
 }
+

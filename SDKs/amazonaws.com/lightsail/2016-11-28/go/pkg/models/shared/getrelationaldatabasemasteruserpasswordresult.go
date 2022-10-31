@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type GetRelationalDatabaseMasterUserPasswordResult struct {
-	CreatedAt          *time.Time `json:"createdAt,omitempty"`
-	MasterUserPassword *string    `json:"masterUserPassword,omitempty"`
+    CreatedAt *time.Time `json:"createdAt,omitempty"`
+    MasterUserPassword *string `json:"masterUserPassword,omitempty"`
+    
 }
+

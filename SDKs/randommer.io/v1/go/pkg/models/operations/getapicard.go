@@ -1,19 +1,26 @@
 package operations
 
+
+
 type GetAPICardQueryParams struct {
-	Type *string `queryParam:"style=form,explode=true,name=type"`
+    Type *string `queryParam:"style=form,explode=true,name=type"`
+    
 }
 
 type GetAPICardHeaders struct {
-	XAPIKey *string `header:"name=X-Api-Key"`
+    XAPIKey *string `header:"style=simple,explode=false,name=X-Api-Key"`
+    
 }
 
 type GetAPICardRequest struct {
-	QueryParams GetAPICardQueryParams
-	Headers     GetAPICardHeaders
+    QueryParams GetAPICardQueryParams 
+    Headers GetAPICardHeaders 
+    
 }
 
 type GetAPICardResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

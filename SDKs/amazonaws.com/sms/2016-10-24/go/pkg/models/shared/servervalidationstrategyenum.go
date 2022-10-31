@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type ServerValidationStrategyEnum string
 
 const (
-	ServerValidationStrategyEnumUserdata ServerValidationStrategyEnum = "USERDATA"
+    ServerValidationStrategyEnumUserdata ServerValidationStrategyEnum = "USERDATA"
 )
+
+

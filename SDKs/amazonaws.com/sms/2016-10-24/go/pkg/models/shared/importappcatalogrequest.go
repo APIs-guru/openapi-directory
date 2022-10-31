@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ImportAppCatalogRequest struct {
-	RoleName *string `json:"roleName,omitempty"`
+    RoleName *string `json:"roleName,omitempty"`
+    
 }
+

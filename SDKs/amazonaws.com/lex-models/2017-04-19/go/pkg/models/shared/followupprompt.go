@@ -1,6 +1,10 @@
 package shared
 
+
+
 type FollowUpPrompt struct {
-	Prompt             Prompt    `json:"prompt"`
-	RejectionStatement Statement `json:"rejectionStatement"`
+    Prompt Prompt `json:"prompt"`
+    RejectionStatement Statement `json:"rejectionStatement"`
+    
 }
+

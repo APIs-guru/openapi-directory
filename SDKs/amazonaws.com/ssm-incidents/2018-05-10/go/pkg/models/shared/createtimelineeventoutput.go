@@ -1,6 +1,10 @@
 package shared
 
+
+
 type CreateTimelineEventOutput struct {
-	EventID           string `json:"eventId"`
-	IncidentRecordArn string `json:"incidentRecordArn"`
+    EventID string `json:"eventId"`
+    IncidentRecordArn string `json:"incidentRecordArn"`
+    
 }
+

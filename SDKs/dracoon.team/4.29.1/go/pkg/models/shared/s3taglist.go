@@ -1,5 +1,9 @@
 package shared
 
+
+
 type S3TagList struct {
-	Items []S3Tag `json:"items,omitempty"`
+    Items []S3Tag `json:"items,omitempty"`
+    
 }
+

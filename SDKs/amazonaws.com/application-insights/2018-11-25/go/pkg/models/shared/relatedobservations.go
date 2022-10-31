@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RelatedObservations struct {
-	ObservationList []Observation `json:"ObservationList,omitempty"`
+    ObservationList []Observation `json:"ObservationList,omitempty"`
+    
 }
+

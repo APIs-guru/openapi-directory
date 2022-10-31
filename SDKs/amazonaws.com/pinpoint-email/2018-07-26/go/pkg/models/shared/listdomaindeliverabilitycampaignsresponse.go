@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListDomainDeliverabilityCampaignsResponse struct {
-	DomainDeliverabilityCampaigns []DomainDeliverabilityCampaign `json:"DomainDeliverabilityCampaigns"`
-	NextToken                     *string                        `json:"NextToken,omitempty"`
+    DomainDeliverabilityCampaigns []DomainDeliverabilityCampaign `json:"DomainDeliverabilityCampaigns"`
+    NextToken *string `json:"NextToken,omitempty"`
+    
 }
+

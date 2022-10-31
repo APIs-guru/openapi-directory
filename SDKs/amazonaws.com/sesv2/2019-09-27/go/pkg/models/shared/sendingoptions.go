@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SendingOptions struct {
-	SendingEnabled *bool `json:"SendingEnabled,omitempty"`
+    SendingEnabled *bool `json:"SendingEnabled,omitempty"`
+    
 }
+

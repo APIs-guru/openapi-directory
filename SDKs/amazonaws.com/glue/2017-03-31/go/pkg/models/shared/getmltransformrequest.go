@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetMlTransformRequest struct {
-	TransformID string `json:"TransformId"`
+    TransformID string `json:"TransformId"`
+    
 }
+

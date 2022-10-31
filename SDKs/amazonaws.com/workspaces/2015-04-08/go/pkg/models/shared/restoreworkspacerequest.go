@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RestoreWorkspaceRequest struct {
-	WorkspaceID string `json:"WorkspaceId"`
+    WorkspaceID string `json:"WorkspaceId"`
+    
 }
+

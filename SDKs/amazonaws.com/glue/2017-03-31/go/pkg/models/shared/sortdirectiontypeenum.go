@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type SortDirectionTypeEnum string
 
 const (
-	SortDirectionTypeEnumDescending SortDirectionTypeEnum = "DESCENDING"
-	SortDirectionTypeEnumAscending  SortDirectionTypeEnum = "ASCENDING"
+    SortDirectionTypeEnumDescending SortDirectionTypeEnum = "DESCENDING"
+SortDirectionTypeEnumAscending SortDirectionTypeEnum = "ASCENDING"
 )
+
+

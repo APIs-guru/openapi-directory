@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetAssociationForServiceQuotaTemplateResponse struct {
-	ServiceQuotaTemplateAssociationStatus *ServiceQuotaTemplateAssociationStatusEnum `json:"ServiceQuotaTemplateAssociationStatus,omitempty"`
+    ServiceQuotaTemplateAssociationStatus *ServiceQuotaTemplateAssociationStatusEnum `json:"ServiceQuotaTemplateAssociationStatus,omitempty"`
+    
 }
+

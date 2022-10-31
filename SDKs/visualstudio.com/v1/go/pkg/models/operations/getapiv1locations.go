@@ -1,12 +1,13 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAPIV1LocationsResponse struct {
-	Body            []byte
-	ContentType     string
-	LocationsResult *shared.LocationsResult
-	StatusCode      int64
+    Body []byte 
+    ContentType string 
+    LocationsResult *shared.LocationsResult 
+    StatusCode int64 
+    
 }
+

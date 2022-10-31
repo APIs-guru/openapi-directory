@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type CancelFileUploadViaSharePathParams struct {
-	AccessKey string `pathParam:"style=simple,explode=false,name=access_key"`
-	UploadID  string `pathParam:"style=simple,explode=false,name=upload_id"`
+    AccessKey string `pathParam:"style=simple,explode=false,name=access_key"`
+    UploadID string `pathParam:"style=simple,explode=false,name=upload_id"`
+    
 }
 
 type CancelFileUploadViaShareRequest struct {
-	PathParams CancelFileUploadViaSharePathParams
+    PathParams CancelFileUploadViaSharePathParams 
+    
 }
 
 type CancelFileUploadViaShareResponse struct {
-	ContentType   string
-	ErrorResponse *shared.ErrorResponse
-	StatusCode    int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    
 }
+

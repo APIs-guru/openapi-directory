@@ -1,7 +1,11 @@
 package shared
 
+
+
 type GooglePrivacyDlpV2Color struct {
-	Blue  *float32 `json:"blue,omitempty"`
-	Green *float32 `json:"green,omitempty"`
-	Red   *float32 `json:"red,omitempty"`
+    Blue *float32 `json:"blue,omitempty"`
+    Green *float32 `json:"green,omitempty"`
+    Red *float32 `json:"red,omitempty"`
+    
 }
+

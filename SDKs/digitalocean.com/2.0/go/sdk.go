@@ -74,6 +74,7 @@ func (s *SDK) AddConnectionPool(ctx context.Context, request operations.AddConne
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -184,6 +185,7 @@ func (s *SDK) AddDatabase(ctx context.Context, request operations.AddDatabaseReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -291,6 +293,7 @@ func (s *SDK) AddFirewallDroplets(ctx context.Context, request operations.AddFir
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -389,6 +392,7 @@ func (s *SDK) AddFirewallRules(ctx context.Context, request operations.AddFirewa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -487,6 +491,7 @@ func (s *SDK) AddFirewallTags(ctx context.Context, request operations.AddFirewal
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -588,6 +593,7 @@ func (s *SDK) AddKubernetesNodePool(ctx context.Context, request operations.AddK
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -698,6 +704,7 @@ func (s *SDK) AddLoadBalancerDroplets(ctx context.Context, request operations.Ad
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -799,6 +806,7 @@ func (s *SDK) AddLoadBalancerForwardingRules(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -897,6 +905,7 @@ func (s *SDK) AddRegistry(ctx context.Context, request operations.AddRegistryReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -986,6 +995,7 @@ func (s *SDK) AddUser(ctx context.Context, request operations.AddUserRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1096,6 +1106,7 @@ func (s *SDK) AssignDefaultProjectResources(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1206,6 +1217,7 @@ func (s *SDK) AssignProjectResources(ctx context.Context, request operations.Ass
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1316,6 +1328,7 @@ func (s *SDK) CreateAlertPolicy(ctx context.Context, request operations.CreateAl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1414,6 +1427,7 @@ func (s *SDK) CreateApp(ctx context.Context, request operations.CreateAppRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1512,6 +1526,7 @@ func (s *SDK) CreateCdnEndpoint(ctx context.Context, request operations.CreateCd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1610,6 +1625,7 @@ func (s *SDK) CreateCertificates(ctx context.Context, request operations.CreateC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1708,6 +1724,7 @@ func (s *SDK) CreateCustomImage(ctx context.Context, request operations.CreateCu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1806,6 +1823,7 @@ func (s *SDK) CreateDatabaseCluster(ctx context.Context, request operations.Crea
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1916,6 +1934,7 @@ func (s *SDK) CreateDeployment(ctx context.Context, request operations.CreateDep
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2023,6 +2042,7 @@ func (s *SDK) CreateDomain(ctx context.Context, request operations.CreateDomainR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2118,6 +2138,7 @@ func (s *SDK) CreateDomainRecord(ctx context.Context, request operations.CreateD
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2225,6 +2246,7 @@ func (s *SDK) CreateDroplet(ctx context.Context, request operations.CreateDrople
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2320,6 +2342,7 @@ func (s *SDK) CreateFirewall(ctx context.Context, request operations.CreateFirew
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2418,6 +2441,7 @@ func (s *SDK) CreateFloatingIP(ctx context.Context, request operations.CreateFlo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2516,6 +2540,7 @@ func (s *SDK) CreateKubernetesCluster(ctx context.Context, request operations.Cr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2614,6 +2639,7 @@ func (s *SDK) CreateLoadBalancer(ctx context.Context, request operations.CreateL
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2712,6 +2738,7 @@ func (s *SDK) CreateNewTag(ctx context.Context, request operations.CreateNewTagR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2822,6 +2849,7 @@ func (s *SDK) CreateNewVolume(ctx context.Context, request operations.CreateNewV
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2944,6 +2972,7 @@ func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjec
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3042,6 +3071,7 @@ func (s *SDK) CreateRegistry(ctx context.Context, request operations.CreateRegis
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3137,6 +3167,7 @@ func (s *SDK) CreateReplica(ctx context.Context, request operations.CreateReplic
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3247,6 +3278,7 @@ func (s *SDK) CreateSSHKey(ctx context.Context, request operations.CreateSSHKeyR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3345,6 +3377,7 @@ func (s *SDK) CreateVolumeSnapshot(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3467,6 +3500,7 @@ func (s *SDK) CreateVpc(ctx context.Context, request operations.CreateVpcRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4399,6 +4433,7 @@ func (s *SDK) DeleteFirewallDroplets(ctx context.Context, request operations.Del
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4497,6 +4532,7 @@ func (s *SDK) DeleteFirewallRules(ctx context.Context, request operations.Delete
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4595,6 +4631,7 @@ func (s *SDK) DeleteFirewallTags(ctx context.Context, request operations.DeleteF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6738,6 +6775,7 @@ func (s *SDK) DestroyKubernetesAssociatedResourcesSelective(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7015,6 +7053,8 @@ func (s *SDK) DestroyWithAssociatedResourcesDangerous(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.securityClient
 
@@ -13913,6 +13953,7 @@ func (s *SDK) InstallKubernetes(ctx context.Context, request operations.InstallK
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19350,6 +19391,7 @@ func (s *SDK) PatchDefaultProject(ctx context.Context, request operations.PatchD
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19460,6 +19502,7 @@ func (s *SDK) PatchProject(ctx context.Context, request operations.PatchProjectR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19567,6 +19610,7 @@ func (s *SDK) PatchUpdateDomainRecord(ctx context.Context, request operations.Pa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19677,6 +19721,7 @@ func (s *SDK) PatchVpc(ctx context.Context, request operations.PatchVpcRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19885,6 +19930,7 @@ func (s *SDK) PostDropletAction(ctx context.Context, request operations.PostDrop
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -19992,6 +20038,7 @@ func (s *SDK) PostDropletActionByTag(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -20089,6 +20136,7 @@ func (s *SDK) PostFloatingIPAction(ctx context.Context, request operations.PostF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -20196,6 +20244,7 @@ func (s *SDK) PostImageAction(ctx context.Context, request operations.PostImageA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -20303,6 +20352,7 @@ func (s *SDK) PostRegistrySubscription(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -20401,6 +20451,7 @@ func (s *SDK) PostVolumeActionByID(ctx context.Context, request operations.PostV
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -20513,6 +20564,7 @@ func (s *SDK) PostVolumeActionByName(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -20625,6 +20677,7 @@ func (s *SDK) PurgeCdnCache(ctx context.Context, request operations.PurgeCdnCach
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -20726,6 +20779,7 @@ func (s *SDK) RecycleKubernetesNodePool(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -20827,6 +20881,7 @@ func (s *SDK) RemoveLoadBalancerDroplets(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -20928,6 +20983,7 @@ func (s *SDK) RemoveLoadBalancerForwardingRules(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -21026,6 +21082,7 @@ func (s *SDK) RemoveRegistry(ctx context.Context, request operations.RemoveRegis
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -21115,6 +21172,7 @@ func (s *SDK) ResetAuth(ctx context.Context, request operations.ResetAuthRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -21326,6 +21384,7 @@ func (s *SDK) RunClusterlint(ctx context.Context, request operations.RunClusterl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -21537,6 +21596,7 @@ func (s *SDK) TagResource(ctx context.Context, request operations.TagResourceReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -21638,6 +21698,7 @@ func (s *SDK) UntagResource(ctx context.Context, request operations.UntagResourc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -21739,6 +21800,7 @@ func (s *SDK) UpdateAlertPolicy(ctx context.Context, request operations.UpdateAl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -21849,6 +21911,7 @@ func (s *SDK) UpdateApp(ctx context.Context, request operations.UpdateAppRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -21959,6 +22022,7 @@ func (s *SDK) UpdateCdnEndpoint(ctx context.Context, request operations.UpdateCd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -22069,6 +22133,7 @@ func (s *SDK) UpdateDatabaseCluster(ctx context.Context, request operations.Upda
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -22170,6 +22235,7 @@ func (s *SDK) UpdateDatabaseClusterSize(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -22271,6 +22337,7 @@ func (s *SDK) UpdateDatabaseFirewall(ctx context.Context, request operations.Upd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -22372,6 +22439,7 @@ func (s *SDK) UpdateDefaultProject(ctx context.Context, request operations.Updat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -22479,6 +22547,7 @@ func (s *SDK) UpdateDomainRecord(ctx context.Context, request operations.UpdateD
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -22589,6 +22658,7 @@ func (s *SDK) UpdateEvictionPolicy(ctx context.Context, request operations.Updat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -22687,6 +22757,7 @@ func (s *SDK) UpdateFirewall(ctx context.Context, request operations.UpdateFirew
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -22797,6 +22868,7 @@ func (s *SDK) UpdateGarbageCollection(ctx context.Context, request operations.Up
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -22907,6 +22979,7 @@ func (s *SDK) UpdateImage(ctx context.Context, request operations.UpdateImageReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -23017,6 +23090,7 @@ func (s *SDK) UpdateKubernetesCluster(ctx context.Context, request operations.Up
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -23127,6 +23201,7 @@ func (s *SDK) UpdateKubernetesNodePool(ctx context.Context, request operations.U
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -23237,6 +23312,7 @@ func (s *SDK) UpdateLoadBalancer(ctx context.Context, request operations.UpdateL
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -23347,6 +23423,7 @@ func (s *SDK) UpdateMaintenanceWindow(ctx context.Context, request operations.Up
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -23448,6 +23525,7 @@ func (s *SDK) UpdateOnlineMigration(ctx context.Context, request operations.Upda
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -23558,6 +23636,7 @@ func (s *SDK) UpdateProject(ctx context.Context, request operations.UpdateProjec
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -23668,6 +23747,7 @@ func (s *SDK) UpdateSQLMode(ctx context.Context, request operations.UpdateSQLMod
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -23769,6 +23849,7 @@ func (s *SDK) UpdateSSHKey(ctx context.Context, request operations.UpdateSSHKeyR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -23879,6 +23960,7 @@ func (s *SDK) UpdateVpc(ctx context.Context, request operations.UpdateVpcRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -23989,6 +24071,7 @@ func (s *SDK) UpgradeKubernetesCluster(ctx context.Context, request operations.U
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -24090,6 +24173,7 @@ func (s *SDK) ValidateAppSpec(ctx context.Context, request operations.ValidateAp
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -24188,6 +24272,7 @@ func (s *SDK) ValidateRegistryName(ctx context.Context, request operations.Valid
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ClientAuthenticationSettingInfo struct {
-	LastUpdatedDateTime *time.Time                      `json:"LastUpdatedDateTime,omitempty"`
-	Status              *ClientAuthenticationStatusEnum `json:"Status,omitempty"`
-	Type                *ClientAuthenticationTypeEnum   `json:"Type,omitempty"`
+    LastUpdatedDateTime *time.Time `json:"LastUpdatedDateTime,omitempty"`
+    Status *ClientAuthenticationStatusEnum `json:"Status,omitempty"`
+    Type *ClientAuthenticationTypeEnum `json:"Type,omitempty"`
+    
 }
+

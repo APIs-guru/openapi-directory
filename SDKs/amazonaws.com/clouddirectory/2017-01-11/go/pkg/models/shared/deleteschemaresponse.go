@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteSchemaResponse struct {
-	SchemaArn *string `json:"SchemaArn,omitempty"`
+    SchemaArn *string `json:"SchemaArn,omitempty"`
+    
 }
+

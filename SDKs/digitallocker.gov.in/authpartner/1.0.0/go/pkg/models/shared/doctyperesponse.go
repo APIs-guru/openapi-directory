@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DocTypeResponse struct {
-	Documents []interface{} `json:"documents"`
+    Documents []interface{} `json:"documents"`
+    
 }
+

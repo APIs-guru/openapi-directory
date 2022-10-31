@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AdBlockingConfiguration struct {
-	Enabled *bool `json:"enabled,omitempty"`
+    Enabled *bool `json:"enabled,omitempty"`
+    
 }
+

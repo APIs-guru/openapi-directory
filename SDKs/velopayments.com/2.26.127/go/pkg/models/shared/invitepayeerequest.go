@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InvitePayeeRequest struct {
-	PayorID string `json:"payorId"`
+    PayorID string `json:"payorId"`
+    
 }
+

@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetWakeOnLanInfoSecurity struct {
-	CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type GetWakeOnLanInfoRequest struct {
-	Security GetWakeOnLanInfoSecurity
+    Security GetWakeOnLanInfoSecurity 
+    
 }
 
 type GetWakeOnLanInfoResponse struct {
-	ContentType    string
-	StatusCode     int64
-	WakeOnLanInfos []shared.WakeOnLanInfo
+    ContentType string 
+    StatusCode int64 
+    WakeOnLanInfos []shared.WakeOnLanInfo 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ListenerTLSSdsCertificate struct {
-	SecretName string `json:"secretName"`
+    SecretName string `json:"secretName"`
+    
 }
+

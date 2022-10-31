@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type IoTJobAbortActionEnum string
 
 const (
-	IoTJobAbortActionEnumCancel IoTJobAbortActionEnum = "CANCEL"
+    IoTJobAbortActionEnumCancel IoTJobAbortActionEnum = "CANCEL"
 )
+
+

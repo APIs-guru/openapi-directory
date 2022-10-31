@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type ChannelLatencyModeEnum string
 
 const (
-	ChannelLatencyModeEnumNormal ChannelLatencyModeEnum = "NORMAL"
-	ChannelLatencyModeEnumLow    ChannelLatencyModeEnum = "LOW"
+    ChannelLatencyModeEnumNormal ChannelLatencyModeEnum = "NORMAL"
+ChannelLatencyModeEnumLow ChannelLatencyModeEnum = "LOW"
 )
+
+

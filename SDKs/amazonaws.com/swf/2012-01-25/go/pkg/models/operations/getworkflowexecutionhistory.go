@@ -1,41 +1,47 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetWorkflowExecutionHistoryQueryParams struct {
-	MaximumPageSize *string `queryParam:"style=form,explode=true,name=maximumPageSize"`
-	NextPageToken   *string `queryParam:"style=form,explode=true,name=nextPageToken"`
+    MaximumPageSize *string `queryParam:"style=form,explode=true,name=maximumPageSize"`
+    NextPageToken *string `queryParam:"style=form,explode=true,name=nextPageToken"`
+    
 }
+
 
 type GetWorkflowExecutionHistoryXAmzTargetEnum string
 
 const (
-	GetWorkflowExecutionHistoryXAmzTargetEnumSimpleWorkflowServiceGetWorkflowExecutionHistory GetWorkflowExecutionHistoryXAmzTargetEnum = "SimpleWorkflowService.GetWorkflowExecutionHistory"
+    GetWorkflowExecutionHistoryXAmzTargetEnumSimpleWorkflowServiceGetWorkflowExecutionHistory GetWorkflowExecutionHistoryXAmzTargetEnum = "SimpleWorkflowService.GetWorkflowExecutionHistory"
 )
 
+
 type GetWorkflowExecutionHistoryHeaders struct {
-	XAmzAlgorithm     *string                                   `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string                                   `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string                                   `header:"name=X-Amz-Credential"`
-	XAmzDate          *string                                   `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string                                   `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string                                   `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string                                   `header:"name=X-Amz-SignedHeaders"`
-	XAmzTarget        GetWorkflowExecutionHistoryXAmzTargetEnum `header:"name=X-Amz-Target"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    XAmzTarget GetWorkflowExecutionHistoryXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
+    
 }
 
 type GetWorkflowExecutionHistoryRequest struct {
-	QueryParams GetWorkflowExecutionHistoryQueryParams
-	Headers     GetWorkflowExecutionHistoryHeaders
-	Request     shared.GetWorkflowExecutionHistoryInput `request:"mediaType=application/json"`
+    QueryParams GetWorkflowExecutionHistoryQueryParams 
+    Headers GetWorkflowExecutionHistoryHeaders 
+    Request shared.GetWorkflowExecutionHistoryInput `request:"mediaType=application/json"`
+    
 }
 
 type GetWorkflowExecutionHistoryResponse struct {
-	ContentType                string
-	History                    *shared.History
-	OperationNotPermittedFault *interface{}
-	StatusCode                 int64
-	UnknownResourceFault       *interface{}
+    ContentType string 
+    History *shared.History 
+    OperationNotPermittedFault *interface{} 
+    StatusCode int64 
+    UnknownResourceFault *interface{} 
+    
 }
+

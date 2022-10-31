@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RegisterSmsRequest struct {
-	SmsNumber string `json:"smsNumber"`
+    SmsNumber string `json:"smsNumber"`
+    
 }
+

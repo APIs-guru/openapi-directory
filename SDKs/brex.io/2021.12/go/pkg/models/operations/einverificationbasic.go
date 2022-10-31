@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type EinVerificationBasicQueryParams struct {
-	Ein string `queryParam:"style=form,explode=true,name=ein"`
+    Ein string `queryParam:"style=form,explode=true,name=ein"`
+    
 }
 
 type EinVerificationBasicSecurity struct {
-	UserKey shared.SchemeUserKey `security:"scheme,type=apiKey,subtype=header"`
+    UserKey shared.SchemeUserKey `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type EinVerificationBasicRequest struct {
-	QueryParams EinVerificationBasicQueryParams
-	Security    EinVerificationBasicSecurity
+    QueryParams EinVerificationBasicQueryParams 
+    Security EinVerificationBasicSecurity 
+    
 }
 
 type EinVerificationBasicResponse struct {
-	ContentType                                   string
-	EinVerificationBasic200ApplicationJSONAny     *interface{}
-	EinVerificationBasicDefaultApplicationJSONAny *interface{}
-	StatusCode                                    int64
+    ContentType string 
+    EinVerificationBasic200ApplicationJSONAny *interface{} 
+    EinVerificationBasicDefaultApplicationJSONAny *interface{} 
+    StatusCode int64 
+    
 }
+

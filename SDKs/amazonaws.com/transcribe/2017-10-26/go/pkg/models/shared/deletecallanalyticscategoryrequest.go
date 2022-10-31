@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteCallAnalyticsCategoryRequest struct {
-	CategoryName string `json:"CategoryName"`
+    CategoryName string `json:"CategoryName"`
+    
 }
+

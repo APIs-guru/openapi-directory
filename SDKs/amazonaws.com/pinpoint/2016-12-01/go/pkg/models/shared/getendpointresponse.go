@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetEndpointResponse struct {
-	EndpointResponse EndpointResponse `json:"EndpointResponse"`
+    EndpointResponse EndpointResponse `json:"EndpointResponse"`
+    
 }
+

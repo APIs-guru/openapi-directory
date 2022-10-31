@@ -359,6 +359,7 @@ func (s *SDK) PostClient(ctx context.Context, request operations.PostClientReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -395,6 +396,7 @@ func (s *SDK) PostUser(ctx context.Context, request operations.PostUserRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

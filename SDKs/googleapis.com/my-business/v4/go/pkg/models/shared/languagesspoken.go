@@ -1,191 +1,229 @@
 package shared
 
+
+
+
 type LanguagesSpokenArabicSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenArabicSpokenExceptionEnumExceptionUnspecified LanguagesSpokenArabicSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenArabicSpokenExceptionEnumUnderConstruction    LanguagesSpokenArabicSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenArabicSpokenExceptionEnumDependentOnSeason    LanguagesSpokenArabicSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenArabicSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenArabicSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenArabicSpokenExceptionEnumExceptionUnspecified LanguagesSpokenArabicSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenArabicSpokenExceptionEnumUnderConstruction LanguagesSpokenArabicSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenArabicSpokenExceptionEnumDependentOnSeason LanguagesSpokenArabicSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenArabicSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenArabicSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenCantoneseSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenCantoneseSpokenExceptionEnumExceptionUnspecified LanguagesSpokenCantoneseSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenCantoneseSpokenExceptionEnumUnderConstruction    LanguagesSpokenCantoneseSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenCantoneseSpokenExceptionEnumDependentOnSeason    LanguagesSpokenCantoneseSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenCantoneseSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenCantoneseSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenCantoneseSpokenExceptionEnumExceptionUnspecified LanguagesSpokenCantoneseSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenCantoneseSpokenExceptionEnumUnderConstruction LanguagesSpokenCantoneseSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenCantoneseSpokenExceptionEnumDependentOnSeason LanguagesSpokenCantoneseSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenCantoneseSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenCantoneseSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenDutchSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenDutchSpokenExceptionEnumExceptionUnspecified LanguagesSpokenDutchSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenDutchSpokenExceptionEnumUnderConstruction    LanguagesSpokenDutchSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenDutchSpokenExceptionEnumDependentOnSeason    LanguagesSpokenDutchSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenDutchSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenDutchSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenDutchSpokenExceptionEnumExceptionUnspecified LanguagesSpokenDutchSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenDutchSpokenExceptionEnumUnderConstruction LanguagesSpokenDutchSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenDutchSpokenExceptionEnumDependentOnSeason LanguagesSpokenDutchSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenDutchSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenDutchSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenEnglishSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenEnglishSpokenExceptionEnumExceptionUnspecified LanguagesSpokenEnglishSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenEnglishSpokenExceptionEnumUnderConstruction    LanguagesSpokenEnglishSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenEnglishSpokenExceptionEnumDependentOnSeason    LanguagesSpokenEnglishSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenEnglishSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenEnglishSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenEnglishSpokenExceptionEnumExceptionUnspecified LanguagesSpokenEnglishSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenEnglishSpokenExceptionEnumUnderConstruction LanguagesSpokenEnglishSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenEnglishSpokenExceptionEnumDependentOnSeason LanguagesSpokenEnglishSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenEnglishSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenEnglishSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenFilipinoSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenFilipinoSpokenExceptionEnumExceptionUnspecified LanguagesSpokenFilipinoSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenFilipinoSpokenExceptionEnumUnderConstruction    LanguagesSpokenFilipinoSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenFilipinoSpokenExceptionEnumDependentOnSeason    LanguagesSpokenFilipinoSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenFilipinoSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenFilipinoSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenFilipinoSpokenExceptionEnumExceptionUnspecified LanguagesSpokenFilipinoSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenFilipinoSpokenExceptionEnumUnderConstruction LanguagesSpokenFilipinoSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenFilipinoSpokenExceptionEnumDependentOnSeason LanguagesSpokenFilipinoSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenFilipinoSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenFilipinoSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenFrenchSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenFrenchSpokenExceptionEnumExceptionUnspecified LanguagesSpokenFrenchSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenFrenchSpokenExceptionEnumUnderConstruction    LanguagesSpokenFrenchSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenFrenchSpokenExceptionEnumDependentOnSeason    LanguagesSpokenFrenchSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenFrenchSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenFrenchSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenFrenchSpokenExceptionEnumExceptionUnspecified LanguagesSpokenFrenchSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenFrenchSpokenExceptionEnumUnderConstruction LanguagesSpokenFrenchSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenFrenchSpokenExceptionEnumDependentOnSeason LanguagesSpokenFrenchSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenFrenchSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenFrenchSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenGermanSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenGermanSpokenExceptionEnumExceptionUnspecified LanguagesSpokenGermanSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenGermanSpokenExceptionEnumUnderConstruction    LanguagesSpokenGermanSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenGermanSpokenExceptionEnumDependentOnSeason    LanguagesSpokenGermanSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenGermanSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenGermanSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenGermanSpokenExceptionEnumExceptionUnspecified LanguagesSpokenGermanSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenGermanSpokenExceptionEnumUnderConstruction LanguagesSpokenGermanSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenGermanSpokenExceptionEnumDependentOnSeason LanguagesSpokenGermanSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenGermanSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenGermanSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenHindiSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenHindiSpokenExceptionEnumExceptionUnspecified LanguagesSpokenHindiSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenHindiSpokenExceptionEnumUnderConstruction    LanguagesSpokenHindiSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenHindiSpokenExceptionEnumDependentOnSeason    LanguagesSpokenHindiSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenHindiSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenHindiSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenHindiSpokenExceptionEnumExceptionUnspecified LanguagesSpokenHindiSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenHindiSpokenExceptionEnumUnderConstruction LanguagesSpokenHindiSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenHindiSpokenExceptionEnumDependentOnSeason LanguagesSpokenHindiSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenHindiSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenHindiSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenIndonesianSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenIndonesianSpokenExceptionEnumExceptionUnspecified LanguagesSpokenIndonesianSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenIndonesianSpokenExceptionEnumUnderConstruction    LanguagesSpokenIndonesianSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenIndonesianSpokenExceptionEnumDependentOnSeason    LanguagesSpokenIndonesianSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenIndonesianSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenIndonesianSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenIndonesianSpokenExceptionEnumExceptionUnspecified LanguagesSpokenIndonesianSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenIndonesianSpokenExceptionEnumUnderConstruction LanguagesSpokenIndonesianSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenIndonesianSpokenExceptionEnumDependentOnSeason LanguagesSpokenIndonesianSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenIndonesianSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenIndonesianSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenItalianSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenItalianSpokenExceptionEnumExceptionUnspecified LanguagesSpokenItalianSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenItalianSpokenExceptionEnumUnderConstruction    LanguagesSpokenItalianSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenItalianSpokenExceptionEnumDependentOnSeason    LanguagesSpokenItalianSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenItalianSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenItalianSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenItalianSpokenExceptionEnumExceptionUnspecified LanguagesSpokenItalianSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenItalianSpokenExceptionEnumUnderConstruction LanguagesSpokenItalianSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenItalianSpokenExceptionEnumDependentOnSeason LanguagesSpokenItalianSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenItalianSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenItalianSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenJapaneseSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenJapaneseSpokenExceptionEnumExceptionUnspecified LanguagesSpokenJapaneseSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenJapaneseSpokenExceptionEnumUnderConstruction    LanguagesSpokenJapaneseSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenJapaneseSpokenExceptionEnumDependentOnSeason    LanguagesSpokenJapaneseSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenJapaneseSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenJapaneseSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenJapaneseSpokenExceptionEnumExceptionUnspecified LanguagesSpokenJapaneseSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenJapaneseSpokenExceptionEnumUnderConstruction LanguagesSpokenJapaneseSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenJapaneseSpokenExceptionEnumDependentOnSeason LanguagesSpokenJapaneseSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenJapaneseSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenJapaneseSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenKoreanSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenKoreanSpokenExceptionEnumExceptionUnspecified LanguagesSpokenKoreanSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenKoreanSpokenExceptionEnumUnderConstruction    LanguagesSpokenKoreanSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenKoreanSpokenExceptionEnumDependentOnSeason    LanguagesSpokenKoreanSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenKoreanSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenKoreanSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenKoreanSpokenExceptionEnumExceptionUnspecified LanguagesSpokenKoreanSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenKoreanSpokenExceptionEnumUnderConstruction LanguagesSpokenKoreanSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenKoreanSpokenExceptionEnumDependentOnSeason LanguagesSpokenKoreanSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenKoreanSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenKoreanSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenMandarinSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenMandarinSpokenExceptionEnumExceptionUnspecified LanguagesSpokenMandarinSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenMandarinSpokenExceptionEnumUnderConstruction    LanguagesSpokenMandarinSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenMandarinSpokenExceptionEnumDependentOnSeason    LanguagesSpokenMandarinSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenMandarinSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenMandarinSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenMandarinSpokenExceptionEnumExceptionUnspecified LanguagesSpokenMandarinSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenMandarinSpokenExceptionEnumUnderConstruction LanguagesSpokenMandarinSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenMandarinSpokenExceptionEnumDependentOnSeason LanguagesSpokenMandarinSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenMandarinSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenMandarinSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenPortugueseSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenPortugueseSpokenExceptionEnumExceptionUnspecified LanguagesSpokenPortugueseSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenPortugueseSpokenExceptionEnumUnderConstruction    LanguagesSpokenPortugueseSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenPortugueseSpokenExceptionEnumDependentOnSeason    LanguagesSpokenPortugueseSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenPortugueseSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenPortugueseSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenPortugueseSpokenExceptionEnumExceptionUnspecified LanguagesSpokenPortugueseSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenPortugueseSpokenExceptionEnumUnderConstruction LanguagesSpokenPortugueseSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenPortugueseSpokenExceptionEnumDependentOnSeason LanguagesSpokenPortugueseSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenPortugueseSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenPortugueseSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenRussianSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenRussianSpokenExceptionEnumExceptionUnspecified LanguagesSpokenRussianSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenRussianSpokenExceptionEnumUnderConstruction    LanguagesSpokenRussianSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenRussianSpokenExceptionEnumDependentOnSeason    LanguagesSpokenRussianSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenRussianSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenRussianSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenRussianSpokenExceptionEnumExceptionUnspecified LanguagesSpokenRussianSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenRussianSpokenExceptionEnumUnderConstruction LanguagesSpokenRussianSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenRussianSpokenExceptionEnumDependentOnSeason LanguagesSpokenRussianSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenRussianSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenRussianSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenSpanishSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenSpanishSpokenExceptionEnumExceptionUnspecified LanguagesSpokenSpanishSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenSpanishSpokenExceptionEnumUnderConstruction    LanguagesSpokenSpanishSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenSpanishSpokenExceptionEnumDependentOnSeason    LanguagesSpokenSpanishSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenSpanishSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenSpanishSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenSpanishSpokenExceptionEnumExceptionUnspecified LanguagesSpokenSpanishSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenSpanishSpokenExceptionEnumUnderConstruction LanguagesSpokenSpanishSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenSpanishSpokenExceptionEnumDependentOnSeason LanguagesSpokenSpanishSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenSpanishSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenSpanishSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type LanguagesSpokenVietnameseSpokenExceptionEnum string
 
 const (
-	LanguagesSpokenVietnameseSpokenExceptionEnumExceptionUnspecified LanguagesSpokenVietnameseSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	LanguagesSpokenVietnameseSpokenExceptionEnumUnderConstruction    LanguagesSpokenVietnameseSpokenExceptionEnum = "UNDER_CONSTRUCTION"
-	LanguagesSpokenVietnameseSpokenExceptionEnumDependentOnSeason    LanguagesSpokenVietnameseSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
-	LanguagesSpokenVietnameseSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenVietnameseSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    LanguagesSpokenVietnameseSpokenExceptionEnumExceptionUnspecified LanguagesSpokenVietnameseSpokenExceptionEnum = "EXCEPTION_UNSPECIFIED"
+LanguagesSpokenVietnameseSpokenExceptionEnumUnderConstruction LanguagesSpokenVietnameseSpokenExceptionEnum = "UNDER_CONSTRUCTION"
+LanguagesSpokenVietnameseSpokenExceptionEnumDependentOnSeason LanguagesSpokenVietnameseSpokenExceptionEnum = "DEPENDENT_ON_SEASON"
+LanguagesSpokenVietnameseSpokenExceptionEnumDependentOnDayOfWeek LanguagesSpokenVietnameseSpokenExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+
 type LanguagesSpoken struct {
-	ArabicSpoken              *bool                                         `json:"arabicSpoken,omitempty"`
-	ArabicSpokenException     *LanguagesSpokenArabicSpokenExceptionEnum     `json:"arabicSpokenException,omitempty"`
-	CantoneseSpoken           *bool                                         `json:"cantoneseSpoken,omitempty"`
-	CantoneseSpokenException  *LanguagesSpokenCantoneseSpokenExceptionEnum  `json:"cantoneseSpokenException,omitempty"`
-	DutchSpoken               *bool                                         `json:"dutchSpoken,omitempty"`
-	DutchSpokenException      *LanguagesSpokenDutchSpokenExceptionEnum      `json:"dutchSpokenException,omitempty"`
-	EnglishSpoken             *bool                                         `json:"englishSpoken,omitempty"`
-	EnglishSpokenException    *LanguagesSpokenEnglishSpokenExceptionEnum    `json:"englishSpokenException,omitempty"`
-	FilipinoSpoken            *bool                                         `json:"filipinoSpoken,omitempty"`
-	FilipinoSpokenException   *LanguagesSpokenFilipinoSpokenExceptionEnum   `json:"filipinoSpokenException,omitempty"`
-	FrenchSpoken              *bool                                         `json:"frenchSpoken,omitempty"`
-	FrenchSpokenException     *LanguagesSpokenFrenchSpokenExceptionEnum     `json:"frenchSpokenException,omitempty"`
-	GermanSpoken              *bool                                         `json:"germanSpoken,omitempty"`
-	GermanSpokenException     *LanguagesSpokenGermanSpokenExceptionEnum     `json:"germanSpokenException,omitempty"`
-	HindiSpoken               *bool                                         `json:"hindiSpoken,omitempty"`
-	HindiSpokenException      *LanguagesSpokenHindiSpokenExceptionEnum      `json:"hindiSpokenException,omitempty"`
-	IndonesianSpoken          *bool                                         `json:"indonesianSpoken,omitempty"`
-	IndonesianSpokenException *LanguagesSpokenIndonesianSpokenExceptionEnum `json:"indonesianSpokenException,omitempty"`
-	ItalianSpoken             *bool                                         `json:"italianSpoken,omitempty"`
-	ItalianSpokenException    *LanguagesSpokenItalianSpokenExceptionEnum    `json:"italianSpokenException,omitempty"`
-	JapaneseSpoken            *bool                                         `json:"japaneseSpoken,omitempty"`
-	JapaneseSpokenException   *LanguagesSpokenJapaneseSpokenExceptionEnum   `json:"japaneseSpokenException,omitempty"`
-	KoreanSpoken              *bool                                         `json:"koreanSpoken,omitempty"`
-	KoreanSpokenException     *LanguagesSpokenKoreanSpokenExceptionEnum     `json:"koreanSpokenException,omitempty"`
-	MandarinSpoken            *bool                                         `json:"mandarinSpoken,omitempty"`
-	MandarinSpokenException   *LanguagesSpokenMandarinSpokenExceptionEnum   `json:"mandarinSpokenException,omitempty"`
-	PortugueseSpoken          *bool                                         `json:"portugueseSpoken,omitempty"`
-	PortugueseSpokenException *LanguagesSpokenPortugueseSpokenExceptionEnum `json:"portugueseSpokenException,omitempty"`
-	RussianSpoken             *bool                                         `json:"russianSpoken,omitempty"`
-	RussianSpokenException    *LanguagesSpokenRussianSpokenExceptionEnum    `json:"russianSpokenException,omitempty"`
-	SpanishSpoken             *bool                                         `json:"spanishSpoken,omitempty"`
-	SpanishSpokenException    *LanguagesSpokenSpanishSpokenExceptionEnum    `json:"spanishSpokenException,omitempty"`
-	VietnameseSpoken          *bool                                         `json:"vietnameseSpoken,omitempty"`
-	VietnameseSpokenException *LanguagesSpokenVietnameseSpokenExceptionEnum `json:"vietnameseSpokenException,omitempty"`
+    ArabicSpoken *bool `json:"arabicSpoken,omitempty"`
+    ArabicSpokenException *LanguagesSpokenArabicSpokenExceptionEnum `json:"arabicSpokenException,omitempty"`
+    CantoneseSpoken *bool `json:"cantoneseSpoken,omitempty"`
+    CantoneseSpokenException *LanguagesSpokenCantoneseSpokenExceptionEnum `json:"cantoneseSpokenException,omitempty"`
+    DutchSpoken *bool `json:"dutchSpoken,omitempty"`
+    DutchSpokenException *LanguagesSpokenDutchSpokenExceptionEnum `json:"dutchSpokenException,omitempty"`
+    EnglishSpoken *bool `json:"englishSpoken,omitempty"`
+    EnglishSpokenException *LanguagesSpokenEnglishSpokenExceptionEnum `json:"englishSpokenException,omitempty"`
+    FilipinoSpoken *bool `json:"filipinoSpoken,omitempty"`
+    FilipinoSpokenException *LanguagesSpokenFilipinoSpokenExceptionEnum `json:"filipinoSpokenException,omitempty"`
+    FrenchSpoken *bool `json:"frenchSpoken,omitempty"`
+    FrenchSpokenException *LanguagesSpokenFrenchSpokenExceptionEnum `json:"frenchSpokenException,omitempty"`
+    GermanSpoken *bool `json:"germanSpoken,omitempty"`
+    GermanSpokenException *LanguagesSpokenGermanSpokenExceptionEnum `json:"germanSpokenException,omitempty"`
+    HindiSpoken *bool `json:"hindiSpoken,omitempty"`
+    HindiSpokenException *LanguagesSpokenHindiSpokenExceptionEnum `json:"hindiSpokenException,omitempty"`
+    IndonesianSpoken *bool `json:"indonesianSpoken,omitempty"`
+    IndonesianSpokenException *LanguagesSpokenIndonesianSpokenExceptionEnum `json:"indonesianSpokenException,omitempty"`
+    ItalianSpoken *bool `json:"italianSpoken,omitempty"`
+    ItalianSpokenException *LanguagesSpokenItalianSpokenExceptionEnum `json:"italianSpokenException,omitempty"`
+    JapaneseSpoken *bool `json:"japaneseSpoken,omitempty"`
+    JapaneseSpokenException *LanguagesSpokenJapaneseSpokenExceptionEnum `json:"japaneseSpokenException,omitempty"`
+    KoreanSpoken *bool `json:"koreanSpoken,omitempty"`
+    KoreanSpokenException *LanguagesSpokenKoreanSpokenExceptionEnum `json:"koreanSpokenException,omitempty"`
+    MandarinSpoken *bool `json:"mandarinSpoken,omitempty"`
+    MandarinSpokenException *LanguagesSpokenMandarinSpokenExceptionEnum `json:"mandarinSpokenException,omitempty"`
+    PortugueseSpoken *bool `json:"portugueseSpoken,omitempty"`
+    PortugueseSpokenException *LanguagesSpokenPortugueseSpokenExceptionEnum `json:"portugueseSpokenException,omitempty"`
+    RussianSpoken *bool `json:"russianSpoken,omitempty"`
+    RussianSpokenException *LanguagesSpokenRussianSpokenExceptionEnum `json:"russianSpokenException,omitempty"`
+    SpanishSpoken *bool `json:"spanishSpoken,omitempty"`
+    SpanishSpokenException *LanguagesSpokenSpanishSpokenExceptionEnum `json:"spanishSpokenException,omitempty"`
+    VietnameseSpoken *bool `json:"vietnameseSpoken,omitempty"`
+    VietnameseSpokenException *LanguagesSpokenVietnameseSpokenExceptionEnum `json:"vietnameseSpokenException,omitempty"`
+    
 }
+

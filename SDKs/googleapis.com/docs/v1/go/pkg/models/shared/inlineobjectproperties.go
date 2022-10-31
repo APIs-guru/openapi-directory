@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InlineObjectProperties struct {
-	EmbeddedObject *EmbeddedObject `json:"embeddedObject,omitempty"`
+    EmbeddedObject *EmbeddedObject `json:"embeddedObject,omitempty"`
+    
 }
+

@@ -1,12 +1,13 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type CreateArchiveResponse struct {
-	ArchiveArn   *string           `json:"ArchiveArn,omitempty"`
-	CreationTime *time.Time        `json:"CreationTime,omitempty"`
-	State        *ArchiveStateEnum `json:"State,omitempty"`
-	StateReason  *string           `json:"StateReason,omitempty"`
+    ArchiveArn *string `json:"ArchiveArn,omitempty"`
+    CreationTime *time.Time `json:"CreationTime,omitempty"`
+    State *ArchiveStateEnum `json:"State,omitempty"`
+    StateReason *string `json:"StateReason,omitempty"`
+    
 }
+

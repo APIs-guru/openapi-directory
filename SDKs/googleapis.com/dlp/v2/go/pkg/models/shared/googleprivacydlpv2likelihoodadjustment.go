@@ -1,17 +1,23 @@
 package shared
 
+
+
+
 type GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum string
 
 const (
-	GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnumLikelihoodUnspecified GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum = "LIKELIHOOD_UNSPECIFIED"
-	GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnumVeryUnlikely          GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum = "VERY_UNLIKELY"
-	GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnumUnlikely              GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum = "UNLIKELY"
-	GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnumPossible              GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum = "POSSIBLE"
-	GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnumLikely                GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum = "LIKELY"
-	GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnumVeryLikely            GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum = "VERY_LIKELY"
+    GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnumLikelihoodUnspecified GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum = "LIKELIHOOD_UNSPECIFIED"
+GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnumVeryUnlikely GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum = "VERY_UNLIKELY"
+GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnumUnlikely GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum = "UNLIKELY"
+GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnumPossible GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum = "POSSIBLE"
+GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnumLikely GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum = "LIKELY"
+GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnumVeryLikely GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum = "VERY_LIKELY"
 )
 
+
 type GooglePrivacyDlpV2LikelihoodAdjustment struct {
-	FixedLikelihood    *GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum `json:"fixedLikelihood,omitempty"`
-	RelativeLikelihood *int32                                                     `json:"relativeLikelihood,omitempty"`
+    FixedLikelihood *GooglePrivacyDlpV2LikelihoodAdjustmentFixedLikelihoodEnum `json:"fixedLikelihood,omitempty"`
+    RelativeLikelihood *int32 `json:"relativeLikelihood,omitempty"`
+    
 }
+

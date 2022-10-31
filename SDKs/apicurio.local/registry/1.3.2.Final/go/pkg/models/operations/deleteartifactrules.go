@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DeleteArtifactRulesPathParams struct {
-	ArtifactID string `pathParam:"style=simple,explode=false,name=artifactId"`
+    ArtifactID string `pathParam:"style=simple,explode=false,name=artifactId"`
+    
 }
 
 type DeleteArtifactRulesRequest struct {
-	PathParams DeleteArtifactRulesPathParams
+    PathParams DeleteArtifactRulesPathParams 
+    
 }
 
 type DeleteArtifactRulesResponse struct {
-	ContentType string
-	Error       *shared.Error
-	StatusCode  int64
+    ContentType string 
+    Error *shared.Error 
+    StatusCode int64 
+    
 }
+

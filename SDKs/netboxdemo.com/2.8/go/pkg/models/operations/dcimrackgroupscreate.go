@@ -1,15 +1,17 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DcimRackGroupsCreateRequest struct {
-	Request shared.WritableRackGroup `request:"mediaType=application/json"`
+    Request shared.WritableRackGroup `request:"mediaType=application/json"`
+    
 }
 
 type DcimRackGroupsCreateResponse struct {
-	ContentType string
-	RackGroup   *shared.RackGroup
-	StatusCode  int64
+    ContentType string 
+    RackGroup *shared.RackGroup 
+    StatusCode int64 
+    
 }
+

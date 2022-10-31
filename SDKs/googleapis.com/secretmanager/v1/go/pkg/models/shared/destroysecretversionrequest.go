@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DestroySecretVersionRequest struct {
-	Etag *string `json:"etag,omitempty"`
+    Etag *string `json:"etag,omitempty"`
+    
 }
+

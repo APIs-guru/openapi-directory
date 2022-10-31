@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type InteractionLimitResponse struct {
-	ExpiresAt time.Time            `json:"expires_at"`
-	Limit     InteractionGroupEnum `json:"limit"`
-	Origin    string               `json:"origin"`
+    ExpiresAt time.Time `json:"expires_at"`
+    Limit InteractionGroupEnum `json:"limit"`
+    Origin string `json:"origin"`
+    
 }
+

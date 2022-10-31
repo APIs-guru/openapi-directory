@@ -1,5 +1,9 @@
 package shared
 
+
+
 type VirtualGatewayStatus struct {
-	Status VirtualGatewayStatusCodeEnum `json:"status"`
+    Status VirtualGatewayStatusCodeEnum `json:"status"`
+    
 }
+

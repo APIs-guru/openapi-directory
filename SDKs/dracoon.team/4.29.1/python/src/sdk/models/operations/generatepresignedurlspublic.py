@@ -11,7 +11,7 @@ class GeneratePresignedUrlsPublicPathParams:
 
 @dataclass
 class GeneratePresignedUrlsPublicHeaders:
-    x_sds_date_format: Optional[Any] = field(default=None, metadata={'header': { 'field_name': 'X-Sds-Date-Format' }})
+    x_sds_date_format: Optional[Any] = field(default=None, metadata={'header': { 'field_name': 'X-Sds-Date-Format', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

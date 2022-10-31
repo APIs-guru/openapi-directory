@@ -1,6 +1,10 @@
 package shared
 
+
+
 type CreateWorkloadOutput struct {
-	WorkloadArn *string `json:"WorkloadArn,omitempty"`
-	WorkloadID  *string `json:"WorkloadId,omitempty"`
+    WorkloadArn *string `json:"WorkloadArn,omitempty"`
+    WorkloadID *string `json:"WorkloadId,omitempty"`
+    
 }
+

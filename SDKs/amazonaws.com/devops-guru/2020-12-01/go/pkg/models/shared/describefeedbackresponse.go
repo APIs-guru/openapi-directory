@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeFeedbackResponse struct {
-	InsightFeedback *InsightFeedback `json:"InsightFeedback,omitempty"`
+    InsightFeedback *InsightFeedback `json:"InsightFeedback,omitempty"`
+    
 }
+

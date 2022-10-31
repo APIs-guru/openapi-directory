@@ -1,31 +1,36 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type CheckVoucherPathParams struct {
-	Platform string `pathParam:"style=simple,explode=false,name=platform"`
+    Platform string `pathParam:"style=simple,explode=false,name=platform"`
+    
 }
 
 type CheckVoucherQueryParams struct {
-	Lang *string `queryParam:"style=form,explode=true,name=lang"`
+    Lang *string `queryParam:"style=form,explode=true,name=lang"`
+    
 }
 
 type CheckVoucherSecurity struct {
-	AccountAuth shared.SchemeAccountAuth `security:"scheme,type=oauth2"`
+    AccountAuth shared.SchemeAccountAuth `security:"scheme,type=oauth2"`
+    
 }
 
 type CheckVoucherRequest struct {
-	PathParams  CheckVoucherPathParams
-	QueryParams CheckVoucherQueryParams
-	Request     shared.ItvVoucherRequest `request:"mediaType=application/json"`
-	Security    CheckVoucherSecurity
+    PathParams CheckVoucherPathParams 
+    QueryParams CheckVoucherQueryParams 
+    Request shared.ItvVoucherRequest `request:"mediaType=application/json"`
+    Security CheckVoucherSecurity 
+    
 }
 
 type CheckVoucherResponse struct {
-	ContentType  string
-	ItvVoucher   *shared.ItvVoucher
-	ServiceError *shared.ServiceError
-	StatusCode   int64
+    ContentType string 
+    ItvVoucher *shared.ItvVoucher 
+    ServiceError *shared.ServiceError 
+    StatusCode int64 
+    
 }
+

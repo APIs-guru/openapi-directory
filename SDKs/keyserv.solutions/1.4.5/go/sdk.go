@@ -224,6 +224,7 @@ func (s *SDK) ProductsAPICount(ctx context.Context, request operations.ProductsA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -265,6 +266,8 @@ func (s *SDK) ProductsAPIDeleteProduct(ctx context.Context, request operations.P
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	client := s.defaultClient
 
 	httpRes, err := client.Do(req)
@@ -294,6 +297,8 @@ func (s *SDK) ProductsAPIDeleteProduct2(ctx context.Context, request operations.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	client := s.defaultClient
 
@@ -332,6 +337,7 @@ func (s *SDK) ProductsAPIFind(ctx context.Context, request operations.ProductsAP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -382,6 +388,7 @@ func (s *SDK) ProductsAPIList(ctx context.Context, request operations.ProductsAP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -432,6 +439,7 @@ func (s *SDK) ProductsAPIPatchProduct(ctx context.Context, request operations.Pr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -471,6 +479,7 @@ func (s *SDK) ProductsAPIPatchProduct2(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -510,6 +519,7 @@ func (s *SDK) ProductsAPISave(ctx context.Context, request operations.ProductsAP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -558,6 +568,7 @@ func (s *SDK) SubscriptionsAPICount(ctx context.Context, request operations.Subs
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -599,6 +610,8 @@ func (s *SDK) SubscriptionsAPIDeleteSubscription(ctx context.Context, request op
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 
+	utils.PopulateHeaders(ctx, req, request.Headers)
+
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
 	client := s.defaultClient
@@ -630,6 +643,8 @@ func (s *SDK) SubscriptionsAPIDeleteSubscription2(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
+	utils.PopulateHeaders(ctx, req, request.Headers)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
 
@@ -670,6 +685,7 @@ func (s *SDK) SubscriptionsAPIDisable(ctx context.Context, request operations.Su
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -709,6 +725,7 @@ func (s *SDK) SubscriptionsAPIDisable2(ctx context.Context, request operations.S
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -748,6 +765,7 @@ func (s *SDK) SubscriptionsAPIEnable(ctx context.Context, request operations.Sub
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -787,6 +805,7 @@ func (s *SDK) SubscriptionsAPIEnable2(ctx context.Context, request operations.Su
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -826,6 +845,7 @@ func (s *SDK) SubscriptionsAPIFind(ctx context.Context, request operations.Subsc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -874,6 +894,7 @@ func (s *SDK) SubscriptionsAPIList(ctx context.Context, request operations.Subsc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -924,6 +945,7 @@ func (s *SDK) SubscriptionsAPIPutSubscription(ctx context.Context, request opera
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -963,6 +985,7 @@ func (s *SDK) SubscriptionsAPIPutSubscription2(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1002,6 +1025,7 @@ func (s *SDK) SubscriptionsAPISave(ctx context.Context, request operations.Subsc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

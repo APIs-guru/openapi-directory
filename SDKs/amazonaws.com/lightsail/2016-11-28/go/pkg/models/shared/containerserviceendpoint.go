@@ -1,7 +1,11 @@
 package shared
 
+
+
 type ContainerServiceEndpoint struct {
-	ContainerName *string                            `json:"containerName,omitempty"`
-	ContainerPort *int64                             `json:"containerPort,omitempty"`
-	HealthCheck   *ContainerServiceHealthCheckConfig `json:"healthCheck,omitempty"`
+    ContainerName *string `json:"containerName,omitempty"`
+    ContainerPort *int64 `json:"containerPort,omitempty"`
+    HealthCheck *ContainerServiceHealthCheckConfig `json:"healthCheck,omitempty"`
+    
 }
+

@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PutUserFollowsPeoplePersonIDPathParams struct {
-	PersonID int64 `pathParam:"style=simple,explode=false,name=person_id"`
+    PersonID int64 `pathParam:"style=simple,explode=false,name=person_id"`
+    
 }
 
 type PutUserFollowsPeoplePersonIDRequest struct {
-	PathParams PutUserFollowsPeoplePersonIDPathParams
+    PathParams PutUserFollowsPeoplePersonIDPathParams 
+    
 }
 
 type PutUserFollowsPeoplePersonIDResponse struct {
-	ContentType  string
-	PersonFollow *shared.PersonFollow
-	StatusCode   int64
+    ContentType string 
+    PersonFollow *shared.PersonFollow 
+    StatusCode int64 
+    
 }
+

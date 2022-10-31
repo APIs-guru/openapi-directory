@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type PayRunStatusEnum string
 
 const (
-	PayRunStatusEnumDraft  PayRunStatusEnum = "DRAFT"
-	PayRunStatusEnumPosted PayRunStatusEnum = "POSTED"
+    PayRunStatusEnumDraft PayRunStatusEnum = "DRAFT"
+PayRunStatusEnumPosted PayRunStatusEnum = "POSTED"
 )
+
+

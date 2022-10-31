@@ -1,15 +1,21 @@
 package operations
 
+
+
 type ForumGetPollPathParams struct {
-	TopicID int64 `pathParam:"style=simple,explode=false,name=topicId"`
+    TopicID int64 `pathParam:"style=simple,explode=false,name=topicId"`
+    
 }
 
 type ForumGetPollRequest struct {
-	PathParams ForumGetPollPathParams
+    PathParams ForumGetPollPathParams 
+    
 }
 
 type ForumGetPollResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

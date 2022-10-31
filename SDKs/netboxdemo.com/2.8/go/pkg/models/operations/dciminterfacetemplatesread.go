@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DcimInterfaceTemplatesReadPathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type DcimInterfaceTemplatesReadRequest struct {
-	PathParams DcimInterfaceTemplatesReadPathParams
+    PathParams DcimInterfaceTemplatesReadPathParams 
+    
 }
 
 type DcimInterfaceTemplatesReadResponse struct {
-	ContentType       string
-	InterfaceTemplate *shared.InterfaceTemplate
-	StatusCode        int64
+    ContentType string 
+    InterfaceTemplate *shared.InterfaceTemplate 
+    StatusCode int64 
+    
 }
+

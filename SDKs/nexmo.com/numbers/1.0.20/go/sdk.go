@@ -74,6 +74,7 @@ func (s *SDK) BuyANumber(ctx context.Context, request operations.BuyANumberReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -163,6 +164,7 @@ func (s *SDK) CancelANumber(ctx context.Context, request operations.CancelANumbe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -365,6 +367,7 @@ func (s *SDK) UpdateANumber(ctx context.Context, request operations.UpdateANumbe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

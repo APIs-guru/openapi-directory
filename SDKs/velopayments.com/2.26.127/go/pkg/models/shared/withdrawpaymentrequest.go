@@ -1,5 +1,9 @@
 package shared
 
+
+
 type WithdrawPaymentRequest struct {
-	Reason string `json:"reason"`
+    Reason string `json:"reason"`
+    
 }
+

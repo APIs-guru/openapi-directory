@@ -1,50 +1,56 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var ListServiceConversationParticipantServers = []string{
 	"https://conversations.twilio.com",
 }
 
 type ListServiceConversationParticipantPathParams struct {
-	ChatServiceSid  string `pathParam:"style=simple,explode=false,name=ChatServiceSid"`
-	ConversationSid string `pathParam:"style=simple,explode=false,name=ConversationSid"`
+    ChatServiceSid string `pathParam:"style=simple,explode=false,name=ChatServiceSid"`
+    ConversationSid string `pathParam:"style=simple,explode=false,name=ConversationSid"`
+    
 }
 
 type ListServiceConversationParticipantQueryParams struct {
-	PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
+    PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
+    
 }
 
 type ListServiceConversationParticipantSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type ListServiceConversationParticipantRequest struct {
-	ServerURL   *string
-	PathParams  ListServiceConversationParticipantPathParams
-	QueryParams ListServiceConversationParticipantQueryParams
-	Security    ListServiceConversationParticipantSecurity
+    ServerURL *string 
+    PathParams ListServiceConversationParticipantPathParams 
+    QueryParams ListServiceConversationParticipantQueryParams 
+    Security ListServiceConversationParticipantSecurity 
+    
 }
 
 type ListServiceConversationParticipantListServiceConversationParticipantResponseMeta struct {
-	FirstPageURL    *string `json:"first_page_url,omitempty"`
-	Key             *string `json:"key,omitempty"`
-	NextPageURL     *string `json:"next_page_url,omitempty"`
-	Page            *int64  `json:"page,omitempty"`
-	PageSize        *int64  `json:"page_size,omitempty"`
-	PreviousPageURL *string `json:"previous_page_url,omitempty"`
-	URL             *string `json:"url,omitempty"`
+    FirstPageURL *string `json:"first_page_url,omitempty"`
+    Key *string `json:"key,omitempty"`
+    NextPageURL *string `json:"next_page_url,omitempty"`
+    Page *int64 `json:"page,omitempty"`
+    PageSize *int64 `json:"page_size,omitempty"`
+    PreviousPageURL *string `json:"previous_page_url,omitempty"`
+    URL *string `json:"url,omitempty"`
+    
 }
 
 type ListServiceConversationParticipantListServiceConversationParticipantResponse struct {
-	Meta         *ListServiceConversationParticipantListServiceConversationParticipantResponseMeta `json:"meta,omitempty"`
-	Participants []shared.ConversationsV1ServiceServiceConversationServiceConversationParticipant  `json:"participants,omitempty"`
+    Meta *ListServiceConversationParticipantListServiceConversationParticipantResponseMeta `json:"meta,omitempty"`
+    Participants []shared.ConversationsV1ServiceServiceConversationServiceConversationParticipant `json:"participants,omitempty"`
+    
 }
 
 type ListServiceConversationParticipantResponse struct {
-	ContentType                                string
-	ListServiceConversationParticipantResponse *ListServiceConversationParticipantListServiceConversationParticipantResponse
-	StatusCode                                 int64
+    ContentType string 
+    ListServiceConversationParticipantResponse *ListServiceConversationParticipantListServiceConversationParticipantResponse 
+    StatusCode int64 
+    
 }
+

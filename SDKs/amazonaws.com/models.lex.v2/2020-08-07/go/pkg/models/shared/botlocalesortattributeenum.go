@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type BotLocaleSortAttributeEnum string
 
 const (
-	BotLocaleSortAttributeEnumBotLocaleName BotLocaleSortAttributeEnum = "BotLocaleName"
+    BotLocaleSortAttributeEnumBotLocaleName BotLocaleSortAttributeEnum = "BotLocaleName"
 )
+
+

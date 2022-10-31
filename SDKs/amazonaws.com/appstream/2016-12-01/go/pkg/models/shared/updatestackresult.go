@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateStackResult struct {
-	Stack *Stack `json:"Stack,omitempty"`
+    Stack *Stack `json:"Stack,omitempty"`
+    
 }
+

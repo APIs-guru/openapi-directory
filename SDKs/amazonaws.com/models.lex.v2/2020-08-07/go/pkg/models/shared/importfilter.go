@@ -1,7 +1,11 @@
 package shared
 
+
+
 type ImportFilter struct {
-	Name     ImportFilterNameEnum     `json:"name"`
-	Operator ImportFilterOperatorEnum `json:"operator"`
-	Values   []string                 `json:"values"`
+    Name ImportFilterNameEnum `json:"name"`
+    Operator ImportFilterOperatorEnum `json:"operator"`
+    Values []string `json:"values"`
+    
 }
+

@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type RetentionTypeEnum string
 
 const (
-	RetentionTypeEnumRetain RetentionTypeEnum = "Retain"
-	RetentionTypeEnumDelete RetentionTypeEnum = "Delete"
+    RetentionTypeEnumRetain RetentionTypeEnum = "Retain"
+RetentionTypeEnumDelete RetentionTypeEnum = "Delete"
 )
+
+

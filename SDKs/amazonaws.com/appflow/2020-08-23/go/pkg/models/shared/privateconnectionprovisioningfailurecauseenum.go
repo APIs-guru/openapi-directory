@@ -1,11 +1,16 @@
 package shared
 
+
+
+
 type PrivateConnectionProvisioningFailureCauseEnum string
 
 const (
-	PrivateConnectionProvisioningFailureCauseEnumConnectorAuthentication PrivateConnectionProvisioningFailureCauseEnum = "CONNECTOR_AUTHENTICATION"
-	PrivateConnectionProvisioningFailureCauseEnumConnectorServer         PrivateConnectionProvisioningFailureCauseEnum = "CONNECTOR_SERVER"
-	PrivateConnectionProvisioningFailureCauseEnumInternalServer          PrivateConnectionProvisioningFailureCauseEnum = "INTERNAL_SERVER"
-	PrivateConnectionProvisioningFailureCauseEnumAccessDenied            PrivateConnectionProvisioningFailureCauseEnum = "ACCESS_DENIED"
-	PrivateConnectionProvisioningFailureCauseEnumValidation              PrivateConnectionProvisioningFailureCauseEnum = "VALIDATION"
+    PrivateConnectionProvisioningFailureCauseEnumConnectorAuthentication PrivateConnectionProvisioningFailureCauseEnum = "CONNECTOR_AUTHENTICATION"
+PrivateConnectionProvisioningFailureCauseEnumConnectorServer PrivateConnectionProvisioningFailureCauseEnum = "CONNECTOR_SERVER"
+PrivateConnectionProvisioningFailureCauseEnumInternalServer PrivateConnectionProvisioningFailureCauseEnum = "INTERNAL_SERVER"
+PrivateConnectionProvisioningFailureCauseEnumAccessDenied PrivateConnectionProvisioningFailureCauseEnum = "ACCESS_DENIED"
+PrivateConnectionProvisioningFailureCauseEnumValidation PrivateConnectionProvisioningFailureCauseEnum = "VALIDATION"
 )
+
+

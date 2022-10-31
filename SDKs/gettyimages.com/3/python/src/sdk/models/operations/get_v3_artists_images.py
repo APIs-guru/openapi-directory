@@ -13,7 +13,7 @@ class GetV3ArtistsImagesQueryParams:
 
 @dataclass
 class GetV3ArtistsImagesHeaders:
-    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

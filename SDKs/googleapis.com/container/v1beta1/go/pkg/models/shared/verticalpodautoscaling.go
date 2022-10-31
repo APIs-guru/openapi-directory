@@ -1,5 +1,9 @@
 package shared
 
+
+
 type VerticalPodAutoscaling struct {
-	Enabled *bool `json:"enabled,omitempty"`
+    Enabled *bool `json:"enabled,omitempty"`
+    
 }
+

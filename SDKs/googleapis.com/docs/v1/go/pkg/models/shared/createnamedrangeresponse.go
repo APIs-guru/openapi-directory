@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateNamedRangeResponse struct {
-	NamedRangeID *string `json:"namedRangeId,omitempty"`
+    NamedRangeID *string `json:"namedRangeId,omitempty"`
+    
 }
+

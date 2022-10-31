@@ -1,5 +1,9 @@
 package shared
 
+
+
 type KeyValueTargetingExpression struct {
-	Expression *string `json:"expression,omitempty"`
+    Expression *string `json:"expression,omitempty"`
+    
 }
+

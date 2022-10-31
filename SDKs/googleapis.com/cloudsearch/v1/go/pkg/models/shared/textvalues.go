@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TextValues struct {
-	Values []string `json:"values,omitempty"`
+    Values []string `json:"values,omitempty"`
+    
 }
+

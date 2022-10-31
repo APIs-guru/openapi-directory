@@ -1,5 +1,9 @@
 package shared
 
+
+
 type KinesisStreamsOutput struct {
-	ResourceArn string `json:"ResourceARN"`
+    ResourceArn string `json:"ResourceARN"`
+    
 }
+

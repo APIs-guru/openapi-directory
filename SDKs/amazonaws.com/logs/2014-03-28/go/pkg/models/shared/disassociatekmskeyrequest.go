@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DisassociateKmsKeyRequest struct {
-	LogGroupName string `json:"logGroupName"`
+    LogGroupName string `json:"logGroupName"`
+    
 }
+

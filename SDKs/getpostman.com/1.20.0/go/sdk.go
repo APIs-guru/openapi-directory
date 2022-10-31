@@ -297,6 +297,7 @@ func (s *SDK) CreateAFork(ctx context.Context, request operations.CreateAForkReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -335,6 +336,7 @@ func (s *SDK) CreateAPI(ctx context.Context, request operations.CreateAPIRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -382,6 +384,7 @@ func (s *SDK) CreateAPIVersion(ctx context.Context, request operations.CreateAPI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -427,6 +430,7 @@ func (s *SDK) CreateCollection(ctx context.Context, request operations.CreateCol
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -482,6 +486,7 @@ func (s *SDK) CreateCollectionFromSchema(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -529,6 +534,7 @@ func (s *SDK) CreateEnvironment(ctx context.Context, request operations.CreateEn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -584,6 +590,7 @@ func (s *SDK) CreateMock(ctx context.Context, request operations.CreateMockReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -629,6 +636,7 @@ func (s *SDK) CreateMonitor(ctx context.Context, request operations.CreateMonito
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -684,6 +692,7 @@ func (s *SDK) CreateRelations(ctx context.Context, request operations.CreateRela
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -729,6 +738,7 @@ func (s *SDK) CreateSchema(ctx context.Context, request operations.CreateSchemaR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -774,6 +784,7 @@ func (s *SDK) CreateWebhook(ctx context.Context, request operations.CreateWebhoo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -812,6 +823,7 @@ func (s *SDK) CreateWorkspace(ctx context.Context, request operations.CreateWork
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1592,6 +1604,7 @@ func (s *SDK) ImportExportedData(ctx context.Context, request operations.ImportE
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1647,6 +1660,7 @@ func (s *SDK) ImportExternalAPISpecification(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1702,6 +1716,7 @@ func (s *SDK) MergeAFork(ctx context.Context, request operations.MergeAForkReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2158,6 +2173,7 @@ func (s *SDK) UpdateAnAPI(ctx context.Context, request operations.UpdateAnAPIReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2203,6 +2219,7 @@ func (s *SDK) UpdateAnAPIVersion(ctx context.Context, request operations.UpdateA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2248,6 +2265,7 @@ func (s *SDK) UpdateCollection(ctx context.Context, request operations.UpdateCol
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2323,6 +2341,7 @@ func (s *SDK) UpdateEnvironment(ctx context.Context, request operations.UpdateEn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2378,6 +2397,7 @@ func (s *SDK) UpdateMock(ctx context.Context, request operations.UpdateMockReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2423,6 +2443,7 @@ func (s *SDK) UpdateMonitor(ctx context.Context, request operations.UpdateMonito
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2468,6 +2489,7 @@ func (s *SDK) UpdateSchema(ctx context.Context, request operations.UpdateSchemaR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2513,6 +2535,7 @@ func (s *SDK) UpdateWorkspace(ctx context.Context, request operations.UpdateWork
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

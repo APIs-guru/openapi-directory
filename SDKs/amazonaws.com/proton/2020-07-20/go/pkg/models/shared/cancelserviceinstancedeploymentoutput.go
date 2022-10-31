@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CancelServiceInstanceDeploymentOutput struct {
-	ServiceInstance ServiceInstance `json:"serviceInstance"`
+    ServiceInstance ServiceInstance `json:"serviceInstance"`
+    
 }
+

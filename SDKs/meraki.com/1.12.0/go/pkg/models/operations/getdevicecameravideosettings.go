@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetDeviceCameraVideoSettingsPathParams struct {
-	Serial string `pathParam:"style=simple,explode=false,name=serial"`
+    Serial string `pathParam:"style=simple,explode=false,name=serial"`
+    
 }
 
 type GetDeviceCameraVideoSettingsRequest struct {
-	PathParams GetDeviceCameraVideoSettingsPathParams
+    PathParams GetDeviceCameraVideoSettingsPathParams 
+    
 }
 
 type GetDeviceCameraVideoSettingsResponse struct {
-	ContentType                                          string
-	StatusCode                                           int64
-	GetDeviceCameraVideoSettings200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetDeviceCameraVideoSettings200ApplicationJSONObject map[string]interface{} 
+    
 }
+

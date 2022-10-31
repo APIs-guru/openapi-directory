@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudVideointelligenceV1ShotChangeDetectionConfig struct {
-	Model *string `json:"model,omitempty"`
+    Model *string `json:"model,omitempty"`
+    
 }
+

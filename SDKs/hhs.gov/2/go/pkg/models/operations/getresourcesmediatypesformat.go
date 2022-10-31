@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetResourcesMediaTypesFormatPathParams struct {
-	Format string `pathParam:"style=simple,explode=false,name=format"`
+    Format string `pathParam:"style=simple,explode=false,name=format"`
+    
 }
 
 type GetResourcesMediaTypesFormatRequest struct {
-	PathParams GetResourcesMediaTypesFormatPathParams
+    PathParams GetResourcesMediaTypesFormatPathParams 
+    
 }
 
 type GetResourcesMediaTypesFormatResponse struct {
-	ContentType             string
-	MediaTypeHolderWrappeds []shared.MediaTypeHolderWrapped
-	StatusCode              int64
+    ContentType string 
+    MediaTypeHolderWrappeds []shared.MediaTypeHolderWrapped 
+    StatusCode int64 
+    
 }
+

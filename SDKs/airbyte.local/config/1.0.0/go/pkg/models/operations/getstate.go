@@ -1,17 +1,19 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetStateRequest struct {
-	Request shared.ConnectionIDRequestBody `request:"mediaType=application/json"`
+    Request shared.ConnectionIDRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type GetStateResponse struct {
-	ConnectionState            *shared.ConnectionState
-	ContentType                string
-	InvalidInputExceptionInfo  *shared.InvalidInputExceptionInfo
-	NotFoundKnownExceptionInfo *shared.NotFoundKnownExceptionInfo
-	StatusCode                 int64
+    ConnectionState *shared.ConnectionState 
+    ContentType string 
+    InvalidInputExceptionInfo *shared.InvalidInputExceptionInfo 
+    NotFoundKnownExceptionInfo *shared.NotFoundKnownExceptionInfo 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EnterpriseCrmFrontendsEventbusProtoParamSpecsMessage struct {
-	Parameters []EnterpriseCrmFrontendsEventbusProtoParamSpecEntry `json:"parameters,omitempty"`
+    Parameters []EnterpriseCrmFrontendsEventbusProtoParamSpecEntry `json:"parameters,omitempty"`
+    
 }
+

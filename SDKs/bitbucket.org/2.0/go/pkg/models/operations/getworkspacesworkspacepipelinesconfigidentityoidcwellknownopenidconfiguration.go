@@ -1,14 +1,20 @@
 package operations
 
+
+
 type GetWorkspacesWorkspacePipelinesConfigIdentityOidcWellKnownOpenidConfigurationPathParams struct {
-	Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
+    Workspace string `pathParam:"style=simple,explode=false,name=workspace"`
+    
 }
 
 type GetWorkspacesWorkspacePipelinesConfigIdentityOidcWellKnownOpenidConfigurationRequest struct {
-	PathParams GetWorkspacesWorkspacePipelinesConfigIdentityOidcWellKnownOpenidConfigurationPathParams
+    PathParams GetWorkspacesWorkspacePipelinesConfigIdentityOidcWellKnownOpenidConfigurationPathParams 
+    
 }
 
 type GetWorkspacesWorkspacePipelinesConfigIdentityOidcWellKnownOpenidConfigurationResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

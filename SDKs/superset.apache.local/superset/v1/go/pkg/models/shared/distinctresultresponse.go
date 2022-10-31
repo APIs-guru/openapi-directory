@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DistinctResultResponse struct {
-	Text *string `json:"text,omitempty"`
+    Text *string `json:"text,omitempty"`
+    
 }
+

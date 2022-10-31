@@ -73,6 +73,7 @@ func (s *SDK) ReadDependenciesV1EnCoreWebSmDependenciesPost(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -131,6 +132,7 @@ func (s *SDK) ReadEntitiesV1EnCoreWebSmEntitiesPost(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -228,6 +230,7 @@ func (s *SDK) ReadSentenceDependenciesV1EnCoreWebSmSentenceDependenciesPost(ctx 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

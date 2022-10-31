@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StackdriverLoggingConfig struct {
-	SamplingRatio *float64 `json:"samplingRatio,omitempty"`
+    SamplingRatio *float64 `json:"samplingRatio,omitempty"`
+    
 }
+

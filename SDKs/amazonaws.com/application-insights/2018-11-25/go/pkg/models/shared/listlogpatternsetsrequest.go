@@ -1,7 +1,11 @@
 package shared
 
+
+
 type ListLogPatternSetsRequest struct {
-	MaxResults        *int64  `json:"MaxResults,omitempty"`
-	NextToken         *string `json:"NextToken,omitempty"`
-	ResourceGroupName string  `json:"ResourceGroupName"`
+    MaxResults *int64 `json:"MaxResults,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    ResourceGroupName string `json:"ResourceGroupName"`
+    
 }
+

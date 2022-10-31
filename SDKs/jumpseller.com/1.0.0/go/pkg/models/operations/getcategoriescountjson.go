@@ -1,16 +1,22 @@
 package operations
 
+
+
 type GetCategoriesCountJSONQueryParams struct {
-	Authtoken string `queryParam:"style=form,explode=true,name=authtoken"`
-	Login     string `queryParam:"style=form,explode=true,name=login"`
+    Authtoken string `queryParam:"style=form,explode=true,name=authtoken"`
+    Login string `queryParam:"style=form,explode=true,name=login"`
+    
 }
 
 type GetCategoriesCountJSONRequest struct {
-	QueryParams GetCategoriesCountJSONQueryParams
+    QueryParams GetCategoriesCountJSONQueryParams 
+    
 }
 
 type GetCategoriesCountJSONResponse struct {
-	ContentType string
-	Count       *interface{}
-	StatusCode  int64
+    ContentType string 
+    Count *interface{} 
+    StatusCode int64 
+    
 }
+

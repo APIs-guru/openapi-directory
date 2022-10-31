@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type IpamVlanGroupsReadPathParams struct {
-	ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    ID int64 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type IpamVlanGroupsReadRequest struct {
-	PathParams IpamVlanGroupsReadPathParams
+    PathParams IpamVlanGroupsReadPathParams 
+    
 }
 
 type IpamVlanGroupsReadResponse struct {
-	ContentType string
-	StatusCode  int64
-	VlanGroup   *shared.VlanGroup
+    ContentType string 
+    StatusCode int64 
+    VlanGroup *shared.VlanGroup 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeAccountResponse struct {
-	Account *Account `json:"Account,omitempty"`
+    Account *Account `json:"Account,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ServiceNowConnectorProfileProperties struct {
-	InstanceURL string `json:"instanceUrl"`
+    InstanceURL string `json:"instanceUrl"`
+    
 }
+

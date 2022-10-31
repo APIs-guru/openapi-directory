@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type EnabledServicePrincipal struct {
-	DateEnabled      *time.Time `json:"DateEnabled,omitempty"`
-	ServicePrincipal *string    `json:"ServicePrincipal,omitempty"`
+    DateEnabled *time.Time `json:"DateEnabled,omitempty"`
+    ServicePrincipal *string `json:"ServicePrincipal,omitempty"`
+    
 }
+

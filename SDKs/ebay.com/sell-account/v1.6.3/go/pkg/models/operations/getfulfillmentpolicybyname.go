@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetFulfillmentPolicyByNameQueryParams struct {
-	MarketplaceID string `queryParam:"style=form,explode=true,name=marketplace_id"`
-	Name          string `queryParam:"style=form,explode=true,name=name"`
+    MarketplaceID string `queryParam:"style=form,explode=true,name=marketplace_id"`
+    Name string `queryParam:"style=form,explode=true,name=name"`
+    
 }
 
 type GetFulfillmentPolicyByNameSecurity struct {
-	APIAuth shared.SchemeAPIAuth `security:"scheme,type=oauth2"`
+    APIAuth shared.SchemeAPIAuth `security:"scheme,type=oauth2"`
+    
 }
 
 type GetFulfillmentPolicyByNameRequest struct {
-	QueryParams GetFulfillmentPolicyByNameQueryParams
-	Security    GetFulfillmentPolicyByNameSecurity
+    QueryParams GetFulfillmentPolicyByNameQueryParams 
+    Security GetFulfillmentPolicyByNameSecurity 
+    
 }
 
 type GetFulfillmentPolicyByNameResponse struct {
-	ContentType       string
-	FulfillmentPolicy *shared.FulfillmentPolicy
-	StatusCode        int64
+    ContentType string 
+    FulfillmentPolicy *shared.FulfillmentPolicy 
+    StatusCode int64 
+    
 }
+

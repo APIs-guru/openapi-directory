@@ -1,5 +1,9 @@
 package shared
 
+
+
 type NotificationScopeList struct {
-	Items []NotificationScope `json:"items"`
+    Items []NotificationScope `json:"items"`
+    
 }
+

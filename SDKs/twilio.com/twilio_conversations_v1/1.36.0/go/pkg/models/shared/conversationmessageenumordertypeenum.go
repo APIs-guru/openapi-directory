@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type ConversationMessageEnumOrderTypeEnum string
 
 const (
-	ConversationMessageEnumOrderTypeEnumAsc  ConversationMessageEnumOrderTypeEnum = "asc"
-	ConversationMessageEnumOrderTypeEnumDesc ConversationMessageEnumOrderTypeEnum = "desc"
+    ConversationMessageEnumOrderTypeEnumAsc ConversationMessageEnumOrderTypeEnum = "asc"
+ConversationMessageEnumOrderTypeEnumDesc ConversationMessageEnumOrderTypeEnum = "desc"
 )
+
+

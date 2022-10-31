@@ -1,16 +1,22 @@
 package operations
 
+
+
 type RegistryGetAPIPathParams struct {
-	API     string `pathParam:"style=simple,explode=false,name=api"`
-	Project string `pathParam:"style=simple,explode=false,name=project"`
+    API string `pathParam:"style=simple,explode=false,name=api"`
+    Project string `pathParam:"style=simple,explode=false,name=project"`
+    
 }
 
 type RegistryGetAPIRequest struct {
-	PathParams RegistryGetAPIPathParams
+    PathParams RegistryGetAPIPathParams 
+    
 }
 
 type RegistryGetAPIResponse struct {
-	API         *interface{}
-	ContentType string
-	StatusCode  int64
+    API *interface{} 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

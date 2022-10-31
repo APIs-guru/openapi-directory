@@ -1,11 +1,15 @@
 package shared
 
+
+
 type GoogleCloudDocumentaiV1beta3DocumentRevision struct {
-	Agent       *string                                                  `json:"agent,omitempty"`
-	CreateTime  *string                                                  `json:"createTime,omitempty"`
-	HumanReview *GoogleCloudDocumentaiV1beta3DocumentRevisionHumanReview `json:"humanReview,omitempty"`
-	ID          *string                                                  `json:"id,omitempty"`
-	Parent      []int32                                                  `json:"parent,omitempty"`
-	ParentIds   []string                                                 `json:"parentIds,omitempty"`
-	Processor   *string                                                  `json:"processor,omitempty"`
+    Agent *string `json:"agent,omitempty"`
+    CreateTime *string `json:"createTime,omitempty"`
+    HumanReview *GoogleCloudDocumentaiV1beta3DocumentRevisionHumanReview `json:"humanReview,omitempty"`
+    ID *string `json:"id,omitempty"`
+    Parent []int32 `json:"parent,omitempty"`
+    ParentIds []string `json:"parentIds,omitempty"`
+    Processor *string `json:"processor,omitempty"`
+    
 }
+

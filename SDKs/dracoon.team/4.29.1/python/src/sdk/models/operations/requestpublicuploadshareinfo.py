@@ -10,8 +10,8 @@ class RequestPublicUploadShareInfoPathParams:
 
 @dataclass
 class RequestPublicUploadShareInfoHeaders:
-    x_sds_date_format: Optional[Any] = field(default=None, metadata={'header': { 'field_name': 'X-Sds-Date-Format' }})
-    x_sds_share_password: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Sds-Share-Password' }})
+    x_sds_date_format: Optional[Any] = field(default=None, metadata={'header': { 'field_name': 'X-Sds-Date-Format', 'style': 'simple', 'explode': False }})
+    x_sds_share_password: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Sds-Share-Password', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

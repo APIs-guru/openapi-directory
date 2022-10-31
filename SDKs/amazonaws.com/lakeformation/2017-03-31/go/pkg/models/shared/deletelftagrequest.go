@@ -1,6 +1,10 @@
 package shared
 
+
+
 type DeleteLfTagRequest struct {
-	CatalogID *string `json:"CatalogId,omitempty"`
-	TagKey    string  `json:"TagKey"`
+    CatalogID *string `json:"CatalogId,omitempty"`
+    TagKey string `json:"TagKey"`
+    
 }
+

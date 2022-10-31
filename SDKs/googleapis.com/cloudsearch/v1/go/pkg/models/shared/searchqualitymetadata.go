@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SearchQualityMetadata struct {
-	Quality *float64 `json:"quality,omitempty"`
+    Quality *float64 `json:"quality,omitempty"`
+    
 }
+

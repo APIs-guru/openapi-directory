@@ -1,10 +1,15 @@
 package shared
 
+
+
+
 type IncomingPhoneNumberTollFreeEnumAddressRequirementEnum string
 
 const (
-	IncomingPhoneNumberTollFreeEnumAddressRequirementEnumNone    IncomingPhoneNumberTollFreeEnumAddressRequirementEnum = "none"
-	IncomingPhoneNumberTollFreeEnumAddressRequirementEnumAny     IncomingPhoneNumberTollFreeEnumAddressRequirementEnum = "any"
-	IncomingPhoneNumberTollFreeEnumAddressRequirementEnumLocal   IncomingPhoneNumberTollFreeEnumAddressRequirementEnum = "local"
-	IncomingPhoneNumberTollFreeEnumAddressRequirementEnumForeign IncomingPhoneNumberTollFreeEnumAddressRequirementEnum = "foreign"
+    IncomingPhoneNumberTollFreeEnumAddressRequirementEnumNone IncomingPhoneNumberTollFreeEnumAddressRequirementEnum = "none"
+IncomingPhoneNumberTollFreeEnumAddressRequirementEnumAny IncomingPhoneNumberTollFreeEnumAddressRequirementEnum = "any"
+IncomingPhoneNumberTollFreeEnumAddressRequirementEnumLocal IncomingPhoneNumberTollFreeEnumAddressRequirementEnum = "local"
+IncomingPhoneNumberTollFreeEnumAddressRequirementEnumForeign IncomingPhoneNumberTollFreeEnumAddressRequirementEnum = "foreign"
 )
+
+

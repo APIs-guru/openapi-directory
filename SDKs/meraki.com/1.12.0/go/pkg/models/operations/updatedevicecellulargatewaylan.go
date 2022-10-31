@@ -1,33 +1,42 @@
 package operations
 
+
+
 type UpdateDeviceCellularGatewayLanPathParams struct {
-	Serial string `pathParam:"style=simple,explode=false,name=serial"`
+    Serial string `pathParam:"style=simple,explode=false,name=serial"`
+    
 }
 
 type UpdateDeviceCellularGatewayLanRequestBodyFixedIPAssignments struct {
-	IP   string  `json:"ip"`
-	Mac  string  `json:"mac"`
-	Name *string `json:"name,omitempty"`
+    IP string `json:"ip"`
+    Mac string `json:"mac"`
+    Name *string `json:"name,omitempty"`
+    
 }
 
 type UpdateDeviceCellularGatewayLanRequestBodyReservedIPRanges struct {
-	Comment string `json:"comment"`
-	End     string `json:"end"`
-	Start   string `json:"start"`
+    Comment string `json:"comment"`
+    End string `json:"end"`
+    Start string `json:"start"`
+    
 }
 
 type UpdateDeviceCellularGatewayLanRequestBody struct {
-	FixedIPAssignments []UpdateDeviceCellularGatewayLanRequestBodyFixedIPAssignments `json:"fixedIpAssignments,omitempty"`
-	ReservedIPRanges   []UpdateDeviceCellularGatewayLanRequestBodyReservedIPRanges   `json:"reservedIpRanges,omitempty"`
+    FixedIPAssignments []UpdateDeviceCellularGatewayLanRequestBodyFixedIPAssignments `json:"fixedIpAssignments,omitempty"`
+    ReservedIPRanges []UpdateDeviceCellularGatewayLanRequestBodyReservedIPRanges `json:"reservedIpRanges,omitempty"`
+    
 }
 
 type UpdateDeviceCellularGatewayLanRequest struct {
-	PathParams UpdateDeviceCellularGatewayLanPathParams
-	Request    *UpdateDeviceCellularGatewayLanRequestBody `request:"mediaType=application/json"`
+    PathParams UpdateDeviceCellularGatewayLanPathParams 
+    Request *UpdateDeviceCellularGatewayLanRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type UpdateDeviceCellularGatewayLanResponse struct {
-	ContentType                                            string
-	StatusCode                                             int64
-	UpdateDeviceCellularGatewayLan200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    UpdateDeviceCellularGatewayLan200ApplicationJSONObject map[string]interface{} 
+    
 }
+

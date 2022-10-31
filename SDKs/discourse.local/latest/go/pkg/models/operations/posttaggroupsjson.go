@@ -1,28 +1,36 @@
 package operations
 
+
+
 type PostTagGroupsJSONRequestBody struct {
-	Name string `json:"name"`
+    Name string `json:"name"`
+    
 }
 
 type PostTagGroupsJSONRequest struct {
-	Request *PostTagGroupsJSONRequestBody `request:"mediaType=application/json"`
+    Request *PostTagGroupsJSONRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type PostTagGroupsJSON200ApplicationJSONTagGroup struct {
-	ID            int64                  `json:"id"`
-	Name          string                 `json:"name"`
-	OnePerTopic   bool                   `json:"one_per_topic"`
-	ParentTagName []interface{}          `json:"parent_tag_name"`
-	Permissions   map[string]interface{} `json:"permissions"`
-	TagNames      []interface{}          `json:"tag_names"`
+    ID int64 `json:"id"`
+    Name string `json:"name"`
+    OnePerTopic bool `json:"one_per_topic"`
+    ParentTagName []interface{} `json:"parent_tag_name"`
+    Permissions map[string]interface{} `json:"permissions"`
+    TagNames []interface{} `json:"tag_names"`
+    
 }
 
 type PostTagGroupsJSON200ApplicationJSON struct {
-	TagGroup PostTagGroupsJSON200ApplicationJSONTagGroup `json:"tag_group"`
+    TagGroup PostTagGroupsJSON200ApplicationJSONTagGroup `json:"tag_group"`
+    
 }
 
 type PostTagGroupsJSONResponse struct {
-	ContentType                               string
-	PostTagGroupsJSON200ApplicationJSONObject *PostTagGroupsJSON200ApplicationJSON
-	StatusCode                                int64
+    ContentType string 
+    PostTagGroupsJSON200ApplicationJSONObject *PostTagGroupsJSON200ApplicationJSON 
+    StatusCode int64 
+    
 }
+

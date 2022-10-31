@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetNetworkSwitchQosRulesPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type GetNetworkSwitchQosRulesRequest struct {
-	PathParams GetNetworkSwitchQosRulesPathParams
+    PathParams GetNetworkSwitchQosRulesPathParams 
+    
 }
 
 type GetNetworkSwitchQosRulesResponse struct {
-	ContentType                                      string
-	StatusCode                                       int64
-	GetNetworkSwitchQosRules200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetNetworkSwitchQosRules200ApplicationJSONObject map[string]interface{} 
+    
 }
+

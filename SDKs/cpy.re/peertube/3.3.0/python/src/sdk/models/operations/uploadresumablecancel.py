@@ -9,7 +9,7 @@ class UploadResumableCancelQueryParams:
 
 @dataclass
 class UploadResumableCancelHeaders:
-    content_length: float = field(default=None, metadata={'header': { 'field_name': 'Content-Length' }})
+    content_length: float = field(default=None, metadata={'header': { 'field_name': 'Content-Length', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

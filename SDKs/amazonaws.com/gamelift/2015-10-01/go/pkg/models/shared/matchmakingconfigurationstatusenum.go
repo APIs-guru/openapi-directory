@@ -1,14 +1,19 @@
 package shared
 
+
+
+
 type MatchmakingConfigurationStatusEnum string
 
 const (
-	MatchmakingConfigurationStatusEnumCancelled          MatchmakingConfigurationStatusEnum = "CANCELLED"
-	MatchmakingConfigurationStatusEnumCompleted          MatchmakingConfigurationStatusEnum = "COMPLETED"
-	MatchmakingConfigurationStatusEnumFailed             MatchmakingConfigurationStatusEnum = "FAILED"
-	MatchmakingConfigurationStatusEnumPlacing            MatchmakingConfigurationStatusEnum = "PLACING"
-	MatchmakingConfigurationStatusEnumQueued             MatchmakingConfigurationStatusEnum = "QUEUED"
-	MatchmakingConfigurationStatusEnumRequiresAcceptance MatchmakingConfigurationStatusEnum = "REQUIRES_ACCEPTANCE"
-	MatchmakingConfigurationStatusEnumSearching          MatchmakingConfigurationStatusEnum = "SEARCHING"
-	MatchmakingConfigurationStatusEnumTimedOut           MatchmakingConfigurationStatusEnum = "TIMED_OUT"
+    MatchmakingConfigurationStatusEnumCancelled MatchmakingConfigurationStatusEnum = "CANCELLED"
+MatchmakingConfigurationStatusEnumCompleted MatchmakingConfigurationStatusEnum = "COMPLETED"
+MatchmakingConfigurationStatusEnumFailed MatchmakingConfigurationStatusEnum = "FAILED"
+MatchmakingConfigurationStatusEnumPlacing MatchmakingConfigurationStatusEnum = "PLACING"
+MatchmakingConfigurationStatusEnumQueued MatchmakingConfigurationStatusEnum = "QUEUED"
+MatchmakingConfigurationStatusEnumRequiresAcceptance MatchmakingConfigurationStatusEnum = "REQUIRES_ACCEPTANCE"
+MatchmakingConfigurationStatusEnumSearching MatchmakingConfigurationStatusEnum = "SEARCHING"
+MatchmakingConfigurationStatusEnumTimedOut MatchmakingConfigurationStatusEnum = "TIMED_OUT"
 )
+
+

@@ -1,10 +1,15 @@
 package operations
 
+
+
 type PostTargetExpressionByEnsgidRequest struct {
-	Request string `request:"mediaType=application/json"`
+    Request string `request:"mediaType=application/json"`
+    
 }
 
 type PostTargetExpressionByEnsgidResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

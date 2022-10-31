@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetServiceQuotaIncreaseRequestFromTemplateResponse struct {
-	ServiceQuotaIncreaseRequestInTemplate *ServiceQuotaIncreaseRequestInTemplate `json:"ServiceQuotaIncreaseRequestInTemplate,omitempty"`
+    ServiceQuotaIncreaseRequestInTemplate *ServiceQuotaIncreaseRequestInTemplate `json:"ServiceQuotaIncreaseRequestInTemplate,omitempty"`
+    
 }
+

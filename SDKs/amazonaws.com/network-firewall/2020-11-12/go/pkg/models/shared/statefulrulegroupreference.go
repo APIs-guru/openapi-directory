@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StatefulRuleGroupReference struct {
-	ResourceArn string `json:"ResourceArn"`
+    ResourceArn string `json:"ResourceArn"`
+    
 }
+

@@ -1,7 +1,11 @@
 package operations
 
+
+
 type ExportArchiveResponse struct {
-	AirbyteArchive []byte
-	ContentType    string
-	StatusCode     int64
+    AirbyteArchive []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

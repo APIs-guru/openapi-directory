@@ -1,35 +1,41 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ReferencesAircraftByAircraftCodeGetPathParams struct {
-	AircraftCode string `pathParam:"style=simple,explode=false,name=aircraftCode"`
+    AircraftCode string `pathParam:"style=simple,explode=false,name=aircraftCode"`
+    
 }
 
 type ReferencesAircraftByAircraftCodeGetQueryParams struct {
-	Limit  *string `queryParam:"style=form,explode=true,name=limit"`
-	Offset *string `queryParam:"style=form,explode=true,name=offset"`
+    Limit *string `queryParam:"style=form,explode=true,name=limit"`
+    Offset *string `queryParam:"style=form,explode=true,name=offset"`
+    
 }
 
 type ReferencesAircraftByAircraftCodeGetHeaders struct {
-	Accept string `header:"name=Accept"`
+    Accept string `header:"style=simple,explode=false,name=Accept"`
+    
 }
 
 type ReferencesAircraftByAircraftCodeGetSecurity struct {
-	Auth shared.SchemeAuth `security:"scheme,type=oauth2"`
+    Auth shared.SchemeAuth `security:"scheme,type=oauth2"`
+    
 }
 
 type ReferencesAircraftByAircraftCodeGetRequest struct {
-	PathParams  ReferencesAircraftByAircraftCodeGetPathParams
-	QueryParams ReferencesAircraftByAircraftCodeGetQueryParams
-	Headers     ReferencesAircraftByAircraftCodeGetHeaders
-	Security    ReferencesAircraftByAircraftCodeGetSecurity
+    PathParams ReferencesAircraftByAircraftCodeGetPathParams 
+    QueryParams ReferencesAircraftByAircraftCodeGetQueryParams 
+    Headers ReferencesAircraftByAircraftCodeGetHeaders 
+    Security ReferencesAircraftByAircraftCodeGetSecurity 
+    
 }
 
 type ReferencesAircraftByAircraftCodeGetResponse struct {
-	ContentType                                                 string
-	ReferencesAircraftByAircraftCodeGet200ApplicationJSONObject map[string]interface{}
-	StatusCode                                                  int64
+    ContentType string 
+    ReferencesAircraftByAircraftCodeGet200ApplicationJSONObject map[string]interface{} 
+    StatusCode int64 
+    
 }
+

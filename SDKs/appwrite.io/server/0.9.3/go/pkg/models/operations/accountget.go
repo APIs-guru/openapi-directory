@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type AccountGetSecurity struct {
-	Jwt     shared.SchemeJwt     `security:"scheme,type=apiKey,subtype=header"`
-	Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
+    Jwt shared.SchemeJwt `security:"scheme,type=apiKey,subtype=header"`
+    Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type AccountGetRequest struct {
-	Security AccountGetSecurity
+    Security AccountGetSecurity 
+    
 }
 
 type AccountGetResponse struct {
-	ContentType string
-	StatusCode  int64
-	User        *shared.User
+    ContentType string 
+    StatusCode int64 
+    User *shared.User 
+    
 }
+

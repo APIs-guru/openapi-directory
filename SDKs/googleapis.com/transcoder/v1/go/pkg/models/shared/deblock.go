@@ -1,6 +1,10 @@
 package shared
 
+
+
 type Deblock struct {
-	Enabled  *bool    `json:"enabled,omitempty"`
-	Strength *float64 `json:"strength,omitempty"`
+    Enabled *bool `json:"enabled,omitempty"`
+    Strength *float64 `json:"strength,omitempty"`
+    
 }
+

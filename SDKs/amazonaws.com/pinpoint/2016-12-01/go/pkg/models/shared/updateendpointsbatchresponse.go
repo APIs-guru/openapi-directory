@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateEndpointsBatchResponse struct {
-	MessageBody MessageBody `json:"MessageBody"`
+    MessageBody MessageBody `json:"MessageBody"`
+    
 }
+

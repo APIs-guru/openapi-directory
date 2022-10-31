@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PatchVenuePathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type PatchVenueHeaders struct {
-	TmpsCorrelationID string `header:"name=TMPS-Correlation-Id"`
+    TmpsCorrelationID string `header:"style=simple,explode=false,name=TMPS-Correlation-Id"`
+    
 }
 
 type PatchVenueRequest struct {
-	PathParams PatchVenuePathParams
-	Headers    PatchVenueHeaders
-	Request    shared.AugmentationData `request:"mediaType=application/json"`
+    PathParams PatchVenuePathParams 
+    Headers PatchVenueHeaders 
+    Request shared.AugmentationData `request:"mediaType=application/json"`
+    
 }
 
 type PatchVenueResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

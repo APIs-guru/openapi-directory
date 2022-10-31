@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Background struct {
-	Color *OptionalColor `json:"color,omitempty"`
+    Color *OptionalColor `json:"color,omitempty"`
+    
 }
+

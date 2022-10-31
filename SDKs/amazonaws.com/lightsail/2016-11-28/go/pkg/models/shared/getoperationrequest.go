@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetOperationRequest struct {
-	OperationID string `json:"operationId"`
+    OperationID string `json:"operationId"`
+    
 }
+

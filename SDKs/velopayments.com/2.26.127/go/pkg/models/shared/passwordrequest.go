@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PasswordRequest struct {
-	Password string `json:"password"`
+    Password string `json:"password"`
+    
 }
+

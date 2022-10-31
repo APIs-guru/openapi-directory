@@ -1,14 +1,20 @@
 package operations
 
+
+
 type CinemaSheduleShowtimeSearchReadPathParams struct {
-	MovieTitle string `pathParam:"style=simple,explode=false,name=movie_title"`
+    MovieTitle string `pathParam:"style=simple,explode=false,name=movie_title"`
+    
 }
 
 type CinemaSheduleShowtimeSearchReadRequest struct {
-	PathParams CinemaSheduleShowtimeSearchReadPathParams
+    PathParams CinemaSheduleShowtimeSearchReadPathParams 
+    
 }
 
 type CinemaSheduleShowtimeSearchReadResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

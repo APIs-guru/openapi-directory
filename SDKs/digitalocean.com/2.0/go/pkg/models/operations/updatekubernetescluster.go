@@ -1,37 +1,42 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type UpdateKubernetesClusterPathParams struct {
-	ClusterID string `pathParam:"style=simple,explode=false,name=cluster_id"`
+    ClusterID string `pathParam:"style=simple,explode=false,name=cluster_id"`
+    
 }
 
 type UpdateKubernetesClusterRequestBody struct {
-	AutoUpgrade       *bool                                                                                                                                           `json:"auto_upgrade,omitempty"`
-	MaintenancePolicy *shared.Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesMaintenancePolicy `json:"maintenance_policy,omitempty"`
-	Name              string                                                                                                                                          `json:"name"`
-	SurgeUpgrade      *bool                                                                                                                                           `json:"surge_upgrade,omitempty"`
-	Tags              []string                                                                                                                                        `json:"tags,omitempty"`
+    AutoUpgrade *bool `json:"auto_upgrade,omitempty"`
+    MaintenancePolicy *shared.Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesMaintenancePolicy `json:"maintenance_policy,omitempty"`
+    Name string `json:"name"`
+    SurgeUpgrade *bool `json:"surge_upgrade,omitempty"`
+    Tags []string `json:"tags,omitempty"`
+    
 }
 
 type UpdateKubernetesClusterRequest struct {
-	PathParams UpdateKubernetesClusterPathParams
-	Request    UpdateKubernetesClusterRequestBody `request:"mediaType=application/json"`
+    PathParams UpdateKubernetesClusterPathParams 
+    Request UpdateKubernetesClusterRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type UpdateKubernetesCluster401ApplicationJSON struct {
-	ID        string  `json:"id"`
-	Message   string  `json:"message"`
-	RequestID *string `json:"request_id,omitempty"`
+    ID string `json:"id"`
+    Message string `json:"message"`
+    RequestID *string `json:"request_id,omitempty"`
+    
 }
 
 type UpdateKubernetesClusterResponse struct {
-	ContentType                                               string
-	Headers                                                   map[string][]string
-	StatusCode                                                int64
-	UpdateKubernetesCluster202ApplicationJSONAny              *interface{}
-	UpdateKubernetesCluster401ApplicationJSONObject           *UpdateKubernetesCluster401ApplicationJSON
-	Onev211ClicksGetResponses401ContentApplication1jsonSchema *shared.Onev211ClicksGetResponses401ContentApplication1jsonSchema
+    ContentType string 
+    Headers map[string][]string 
+    StatusCode int64 
+    UpdateKubernetesCluster202ApplicationJSONAny *interface{} 
+    UpdateKubernetesCluster401ApplicationJSONObject *UpdateKubernetesCluster401ApplicationJSON 
+    Onev211ClicksGetResponses401ContentApplication1jsonSchema *shared.Onev211ClicksGetResponses401ContentApplication1jsonSchema 
+    
 }
+

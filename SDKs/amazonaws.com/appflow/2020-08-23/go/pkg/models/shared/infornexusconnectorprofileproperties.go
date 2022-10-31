@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InforNexusConnectorProfileProperties struct {
-	InstanceURL string `json:"instanceUrl"`
+    InstanceURL string `json:"instanceUrl"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateReportGroupOutput struct {
-	ReportGroup *ReportGroup `json:"reportGroup,omitempty"`
+    ReportGroup *ReportGroup `json:"reportGroup,omitempty"`
+    
 }
+

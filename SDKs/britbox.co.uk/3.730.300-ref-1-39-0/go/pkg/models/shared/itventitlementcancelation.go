@@ -1,12 +1,13 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ItvEntitlementCancelation struct {
-	CancelledAt    time.Time `json:"cancelled_at"`
-	ItvID          string    `json:"itvId"`
-	Source         string    `json:"source"`
-	SubscriptionID string    `json:"subscriptionId"`
+    CancelledAt time.Time `json:"cancelled_at"`
+    ItvID string `json:"itvId"`
+    Source string `json:"source"`
+    SubscriptionID string `json:"subscriptionId"`
+    
 }
+

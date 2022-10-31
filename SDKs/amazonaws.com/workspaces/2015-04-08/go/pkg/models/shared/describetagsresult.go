@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeTagsResult struct {
-	TagList []Tag `json:"TagList,omitempty"`
+    TagList []Tag `json:"TagList,omitempty"`
+    
 }
+

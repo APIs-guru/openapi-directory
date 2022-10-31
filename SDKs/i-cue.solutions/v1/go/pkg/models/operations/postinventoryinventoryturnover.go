@@ -1,14 +1,20 @@
 package operations
 
+
+
 type PostInventoryInventoryTurnoverHeaders struct {
-	Token *string `header:"name=Token"`
+    Token *string `header:"style=simple,explode=false,name=Token"`
+    
 }
 
 type PostInventoryInventoryTurnoverRequest struct {
-	Headers PostInventoryInventoryTurnoverHeaders
+    Headers PostInventoryInventoryTurnoverHeaders 
+    
 }
 
 type PostInventoryInventoryTurnoverResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

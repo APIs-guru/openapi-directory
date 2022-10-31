@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteRulesResponse struct {
-	Meta RulesResponseMetadata `json:"meta"`
+    Meta RulesResponseMetadata `json:"meta"`
+    
 }
+

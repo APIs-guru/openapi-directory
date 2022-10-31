@@ -1,15 +1,21 @@
 package operations
 
+
+
 type DownloadZipArchiveViaTokenPathParams struct {
-	Token string `pathParam:"style=simple,explode=false,name=token"`
+    Token string `pathParam:"style=simple,explode=false,name=token"`
+    
 }
 
 type DownloadZipArchiveViaTokenRequest struct {
-	PathParams DownloadZipArchiveViaTokenPathParams
+    PathParams DownloadZipArchiveViaTokenPathParams 
+    
 }
 
 type DownloadZipArchiveViaTokenResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

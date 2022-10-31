@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type AugmentedManifestsDocumentTypeFormatEnum string
 
 const (
-	AugmentedManifestsDocumentTypeFormatEnumPlainTextDocument      AugmentedManifestsDocumentTypeFormatEnum = "PLAIN_TEXT_DOCUMENT"
-	AugmentedManifestsDocumentTypeFormatEnumSemiStructuredDocument AugmentedManifestsDocumentTypeFormatEnum = "SEMI_STRUCTURED_DOCUMENT"
+    AugmentedManifestsDocumentTypeFormatEnumPlainTextDocument AugmentedManifestsDocumentTypeFormatEnum = "PLAIN_TEXT_DOCUMENT"
+AugmentedManifestsDocumentTypeFormatEnumSemiStructuredDocument AugmentedManifestsDocumentTypeFormatEnum = "SEMI_STRUCTURED_DOCUMENT"
 )
+
+

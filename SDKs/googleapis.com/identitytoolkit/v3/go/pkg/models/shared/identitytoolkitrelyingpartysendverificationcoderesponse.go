@@ -1,5 +1,9 @@
 package shared
 
+
+
 type IdentitytoolkitRelyingpartySendVerificationCodeResponse struct {
-	SessionInfo *string `json:"sessionInfo,omitempty"`
+    SessionInfo *string `json:"sessionInfo,omitempty"`
+    
 }
+

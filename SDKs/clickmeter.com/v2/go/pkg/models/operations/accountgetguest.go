@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type AccountGetGuestPathParams struct {
-	GuestID int64 `pathParam:"style=simple,explode=false,name=guestId"`
+    GuestID int64 `pathParam:"style=simple,explode=false,name=guestId"`
+    
 }
 
 type AccountGetGuestRequest struct {
-	PathParams AccountGetGuestPathParams
+    PathParams AccountGetGuestPathParams 
+    
 }
 
 type AccountGetGuestResponse struct {
-	APICoreDtoAccountingGuest *shared.APICoreDtoAccountingGuest
-	Body                      []byte
-	ContentType               string
-	StatusCode                int64
+    APICoreDtoAccountingGuest *shared.APICoreDtoAccountingGuest 
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

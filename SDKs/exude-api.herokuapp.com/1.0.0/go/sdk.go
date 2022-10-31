@@ -67,6 +67,7 @@ func (s *SDK) FilterFileDataStoppings(ctx context.Context, request operations.Fi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -115,6 +116,7 @@ func (s *SDK) FilterStoppings(ctx context.Context, request operations.FilterStop
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

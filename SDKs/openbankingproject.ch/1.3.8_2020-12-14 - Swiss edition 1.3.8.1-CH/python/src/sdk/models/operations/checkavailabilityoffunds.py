@@ -6,11 +6,11 @@ from sdk.models import shared
 
 @dataclass
 class CheckAvailabilityOfFundsHeaders:
-    authorization: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
-    digest: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Digest' }})
-    signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Signature' }})
-    tpp_signature_certificate: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'TPP-Signature-Certificate' }})
-    x_request_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Request-ID' }})
+    authorization: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
+    digest: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Digest', 'style': 'simple', 'explode': False }})
+    signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Signature', 'style': 'simple', 'explode': False }})
+    tpp_signature_certificate: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'TPP-Signature-Certificate', 'style': 'simple', 'explode': False }})
+    x_request_id: str = field(default=None, metadata={'header': { 'field_name': 'X-Request-ID', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

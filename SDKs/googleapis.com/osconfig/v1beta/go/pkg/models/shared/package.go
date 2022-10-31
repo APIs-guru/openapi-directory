@@ -1,27 +1,35 @@
 package shared
 
+
+
+
 type PackageDesiredStateEnum string
 
 const (
-	PackageDesiredStateEnumDesiredStateUnspecified PackageDesiredStateEnum = "DESIRED_STATE_UNSPECIFIED"
-	PackageDesiredStateEnumInstalled               PackageDesiredStateEnum = "INSTALLED"
-	PackageDesiredStateEnumUpdated                 PackageDesiredStateEnum = "UPDATED"
-	PackageDesiredStateEnumRemoved                 PackageDesiredStateEnum = "REMOVED"
+    PackageDesiredStateEnumDesiredStateUnspecified PackageDesiredStateEnum = "DESIRED_STATE_UNSPECIFIED"
+PackageDesiredStateEnumInstalled PackageDesiredStateEnum = "INSTALLED"
+PackageDesiredStateEnumUpdated PackageDesiredStateEnum = "UPDATED"
+PackageDesiredStateEnumRemoved PackageDesiredStateEnum = "REMOVED"
 )
+
+
 
 type PackageManagerEnum string
 
 const (
-	PackageManagerEnumManagerUnspecified PackageManagerEnum = "MANAGER_UNSPECIFIED"
-	PackageManagerEnumAny                PackageManagerEnum = "ANY"
-	PackageManagerEnumApt                PackageManagerEnum = "APT"
-	PackageManagerEnumYum                PackageManagerEnum = "YUM"
-	PackageManagerEnumZypper             PackageManagerEnum = "ZYPPER"
-	PackageManagerEnumGoo                PackageManagerEnum = "GOO"
+    PackageManagerEnumManagerUnspecified PackageManagerEnum = "MANAGER_UNSPECIFIED"
+PackageManagerEnumAny PackageManagerEnum = "ANY"
+PackageManagerEnumApt PackageManagerEnum = "APT"
+PackageManagerEnumYum PackageManagerEnum = "YUM"
+PackageManagerEnumZypper PackageManagerEnum = "ZYPPER"
+PackageManagerEnumGoo PackageManagerEnum = "GOO"
 )
 
+
 type Package struct {
-	DesiredState *PackageDesiredStateEnum `json:"desiredState,omitempty"`
-	Manager      *PackageManagerEnum      `json:"manager,omitempty"`
-	Name         *string                  `json:"name,omitempty"`
+    DesiredState *PackageDesiredStateEnum `json:"desiredState,omitempty"`
+    Manager *PackageManagerEnum `json:"manager,omitempty"`
+    Name *string `json:"name,omitempty"`
+    
 }
+

@@ -1,33 +1,38 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type AppsListReposAccessibleToInstallationQueryParams struct {
-	Page    *int64 `queryParam:"style=form,explode=true,name=page"`
-	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
+    Page *int64 `queryParam:"style=form,explode=true,name=page"`
+    PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
+    
 }
 
 type AppsListReposAccessibleToInstallationHeaders struct {
-	Accept string `header:"name=accept"`
+    Accept string `header:"style=simple,explode=false,name=accept"`
+    
 }
 
 type AppsListReposAccessibleToInstallationRequest struct {
-	QueryParams AppsListReposAccessibleToInstallationQueryParams
-	Headers     AppsListReposAccessibleToInstallationHeaders
+    QueryParams AppsListReposAccessibleToInstallationQueryParams 
+    Headers AppsListReposAccessibleToInstallationHeaders 
+    
 }
 
 type AppsListReposAccessibleToInstallation200ApplicationJSON struct {
-	Repositories        []shared.Repository `json:"repositories"`
-	RepositorySelection *string             `json:"repository_selection,omitempty"`
-	TotalCount          int64               `json:"total_count"`
+    Repositories []shared.Repository `json:"repositories"`
+    RepositorySelection *string `json:"repository_selection,omitempty"`
+    TotalCount int64 `json:"total_count"`
+    
 }
 
 type AppsListReposAccessibleToInstallationResponse struct {
-	ContentType                                                   string
-	Headers                                                       map[string][]string
-	StatusCode                                                    int64
-	AppsListReposAccessibleToInstallation200ApplicationJSONObject *AppsListReposAccessibleToInstallation200ApplicationJSON
-	BasicError                                                    *shared.BasicError
+    ContentType string 
+    Headers map[string][]string 
+    StatusCode int64 
+    AppsListReposAccessibleToInstallation200ApplicationJSONObject *AppsListReposAccessibleToInstallation200ApplicationJSON 
+    BasicError *shared.BasicError 
+    
 }
+

@@ -1,15 +1,21 @@
 package operations
 
+
+
 type RegistrationsChildrenListPathParams struct {
-	RegistrationID string `pathParam:"style=simple,explode=false,name=registration_id"`
+    RegistrationID string `pathParam:"style=simple,explode=false,name=registration_id"`
+    
 }
 
 type RegistrationsChildrenListRequest struct {
-	PathParams RegistrationsChildrenListPathParams
+    PathParams RegistrationsChildrenListPathParams 
+    
 }
 
 type RegistrationsChildrenListResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

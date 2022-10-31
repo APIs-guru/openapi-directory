@@ -1,20 +1,26 @@
 package shared
 
+
+
+
 type CircuitTerminationTerminationEnum string
 
 const (
-	CircuitTerminationTerminationEnumA CircuitTerminationTerminationEnum = "A"
-	CircuitTerminationTerminationEnumZ CircuitTerminationTerminationEnum = "Z"
+    CircuitTerminationTerminationEnumA CircuitTerminationTerminationEnum = "A"
+CircuitTerminationTerminationEnumZ CircuitTerminationTerminationEnum = "Z"
 )
 
+
 type CircuitTermination struct {
-	Circuit       NestedCircuit                     `json:"circuit"`
-	ID            *int64                            `json:"id,omitempty"`
-	Interface     *NestedInterface                  `json:"interface,omitempty"`
-	PortSpeed     int64                             `json:"port_speed"`
-	PpInfo        *string                           `json:"pp_info,omitempty"`
-	Site          NestedSite                        `json:"site"`
-	TermSide      CircuitTerminationTerminationEnum `json:"term_side"`
-	UpstreamSpeed *int64                            `json:"upstream_speed,omitempty"`
-	XconnectID    *string                           `json:"xconnect_id,omitempty"`
+    Circuit NestedCircuit `json:"circuit"`
+    ID *int64 `json:"id,omitempty"`
+    Interface *NestedInterface `json:"interface,omitempty"`
+    PortSpeed int64 `json:"port_speed"`
+    PpInfo *string `json:"pp_info,omitempty"`
+    Site NestedSite `json:"site"`
+    TermSide CircuitTerminationTerminationEnum `json:"term_side"`
+    UpstreamSpeed *int64 `json:"upstream_speed,omitempty"`
+    XconnectID *string `json:"xconnect_id,omitempty"`
+    
 }
+

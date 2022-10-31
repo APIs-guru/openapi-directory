@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DatabaseDeleteCollectionPathParams struct {
-	CollectionID string `pathParam:"style=simple,explode=false,name=collectionId"`
+    CollectionID string `pathParam:"style=simple,explode=false,name=collectionId"`
+    
 }
 
 type DatabaseDeleteCollectionSecurity struct {
-	Key     shared.SchemeKey     `security:"scheme,type=apiKey,subtype=header"`
-	Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
+    Key shared.SchemeKey `security:"scheme,type=apiKey,subtype=header"`
+    Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
+    
 }
 
 type DatabaseDeleteCollectionRequest struct {
-	PathParams DatabaseDeleteCollectionPathParams
-	Security   DatabaseDeleteCollectionSecurity
+    PathParams DatabaseDeleteCollectionPathParams 
+    Security DatabaseDeleteCollectionSecurity 
+    
 }
 
 type DatabaseDeleteCollectionResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StopSolutionVersionCreationRequest struct {
-	SolutionVersionArn string `json:"solutionVersionArn"`
+    SolutionVersionArn string `json:"solutionVersionArn"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ActionTypePermissions struct {
-	AllowedAccounts []string `json:"allowedAccounts"`
+    AllowedAccounts []string `json:"allowedAccounts"`
+    
 }
+

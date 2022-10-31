@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAPILocationConstituencyIDPathParams struct {
-	ID int32 `pathParam:"style=simple,explode=false,name=id"`
+    ID int32 `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type GetAPILocationConstituencyIDRequest struct {
-	PathParams GetAPILocationConstituencyIDPathParams
+    PathParams GetAPILocationConstituencyIDPathParams 
+    
 }
 
 type GetAPILocationConstituencyIDResponse struct {
-	Body             []byte
-	ConstituencyItem *shared.ConstituencyItem
-	ContentType      string
-	StatusCode       int64
+    Body []byte 
+    ConstituencyItem *shared.ConstituencyItem 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

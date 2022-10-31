@@ -1,7 +1,11 @@
 package shared
 
+
+
 type DeleteTableRequest struct {
-	CatalogID    *string `json:"CatalogId,omitempty"`
-	DatabaseName string  `json:"DatabaseName"`
-	Name         string  `json:"Name"`
+    CatalogID *string `json:"CatalogId,omitempty"`
+    DatabaseName string `json:"DatabaseName"`
+    Name string `json:"Name"`
+    
 }
+

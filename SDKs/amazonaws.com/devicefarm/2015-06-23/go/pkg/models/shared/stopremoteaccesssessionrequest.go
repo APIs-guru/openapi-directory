@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StopRemoteAccessSessionRequest struct {
-	Arn string `json:"arn"`
+    Arn string `json:"arn"`
+    
 }
+

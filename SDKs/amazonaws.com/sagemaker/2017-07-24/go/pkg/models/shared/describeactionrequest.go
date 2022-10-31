@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeActionRequest struct {
-	ActionName string `json:"ActionName"`
+    ActionName string `json:"ActionName"`
+    
 }
+

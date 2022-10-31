@@ -1,26 +1,31 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
+
 
 type DeleteGlobalRuleRuleEnum string
 
 const (
-	DeleteGlobalRuleRuleEnumValidity      DeleteGlobalRuleRuleEnum = "VALIDITY"
-	DeleteGlobalRuleRuleEnumCompatibility DeleteGlobalRuleRuleEnum = "COMPATIBILITY"
+    DeleteGlobalRuleRuleEnumValidity DeleteGlobalRuleRuleEnum = "VALIDITY"
+DeleteGlobalRuleRuleEnumCompatibility DeleteGlobalRuleRuleEnum = "COMPATIBILITY"
 )
 
+
 type DeleteGlobalRulePathParams struct {
-	Rule DeleteGlobalRuleRuleEnum `pathParam:"style=simple,explode=false,name=rule"`
+    Rule DeleteGlobalRuleRuleEnum `pathParam:"style=simple,explode=false,name=rule"`
+    
 }
 
 type DeleteGlobalRuleRequest struct {
-	PathParams DeleteGlobalRulePathParams
+    PathParams DeleteGlobalRulePathParams 
+    
 }
 
 type DeleteGlobalRuleResponse struct {
-	ContentType string
-	Error       *shared.Error
-	StatusCode  int64
+    ContentType string 
+    Error *shared.Error 
+    StatusCode int64 
+    
 }
+

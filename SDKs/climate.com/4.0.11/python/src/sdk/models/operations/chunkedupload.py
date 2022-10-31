@@ -10,8 +10,8 @@ class ChunkedUploadPathParams:
 
 @dataclass
 class ChunkedUploadHeaders:
-    content_range: str = field(default=None, metadata={'header': { 'field_name': 'Content-Range' }})
-    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type' }})
+    content_range: str = field(default=None, metadata={'header': { 'field_name': 'Content-Range', 'style': 'simple', 'explode': False }})
+    content_type: str = field(default=None, metadata={'header': { 'field_name': 'Content-Type', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

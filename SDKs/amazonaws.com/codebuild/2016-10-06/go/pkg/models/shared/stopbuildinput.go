@@ -1,5 +1,9 @@
 package shared
 
+
+
 type StopBuildInput struct {
-	ID string `json:"id"`
+    ID string `json:"id"`
+    
 }
+

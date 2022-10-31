@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type HealthCheckProtocolEnum string
 
 const (
-	HealthCheckProtocolEnumTCP  HealthCheckProtocolEnum = "TCP"
-	HealthCheckProtocolEnumHTTP HealthCheckProtocolEnum = "HTTP"
+    HealthCheckProtocolEnumTCP HealthCheckProtocolEnum = "TCP"
+HealthCheckProtocolEnumHTTP HealthCheckProtocolEnum = "HTTP"
 )
+
+

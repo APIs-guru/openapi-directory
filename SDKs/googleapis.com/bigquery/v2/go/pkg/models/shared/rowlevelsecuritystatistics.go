@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RowLevelSecurityStatistics struct {
-	RowLevelSecurityApplied *bool `json:"rowLevelSecurityApplied,omitempty"`
+    RowLevelSecurityApplied *bool `json:"rowLevelSecurityApplied,omitempty"`
+    
 }
+

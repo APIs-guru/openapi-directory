@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudWebriskV1SearchUrisResponse struct {
-	Threat *GoogleCloudWebriskV1SearchUrisResponseThreatURI `json:"threat,omitempty"`
+    Threat *GoogleCloudWebriskV1SearchUrisResponseThreatURI `json:"threat,omitempty"`
+    
 }
+

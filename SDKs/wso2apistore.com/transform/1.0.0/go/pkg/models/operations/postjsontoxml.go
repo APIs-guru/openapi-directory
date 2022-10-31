@@ -1,10 +1,15 @@
 package operations
 
+
+
 type PostJsontoxmlRequest struct {
-	Request string `request:"mediaType=application/json"`
+    Request string `request:"mediaType=application/json"`
+    
 }
 
 type PostJsontoxmlResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

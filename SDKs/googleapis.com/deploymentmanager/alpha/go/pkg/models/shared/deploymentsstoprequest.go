@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeploymentsStopRequest struct {
-	Fingerprint *string `json:"fingerprint,omitempty"`
+    Fingerprint *string `json:"fingerprint,omitempty"`
+    
 }
+

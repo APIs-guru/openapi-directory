@@ -15,7 +15,7 @@ class GetInstancesIDFramesFrameImageUint16QueryParams:
 
 @dataclass
 class GetInstancesIDFramesFrameImageUint16Headers:
-    accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept' }})
+    accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

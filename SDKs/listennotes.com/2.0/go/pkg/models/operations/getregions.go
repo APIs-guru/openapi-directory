@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetRegionsHeaders struct {
-	XListenAPIKey string `header:"style=simple,explode=false,name=X-ListenAPI-Key"`
+    XListenAPIKey string `header:"style=simple,explode=false,name=X-ListenAPI-Key"`
+    
 }
 
 type GetRegionsRequest struct {
-	Headers GetRegionsHeaders
+    Headers GetRegionsHeaders 
+    
 }
 
 type GetRegionsResponse struct {
-	ContentType        string
-	GetRegionsResponse *shared.GetRegionsResponse
-	Headers            map[string][]string
-	StatusCode         int64
+    ContentType string 
+    GetRegionsResponse *shared.GetRegionsResponse 
+    Headers map[string][]string 
+    StatusCode int64 
+    
 }
+

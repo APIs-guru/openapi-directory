@@ -1,30 +1,35 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type OrdersPathParams struct {
-	Name    string `pathParam:"style=simple,explode=false,name=name"`
-	OrderID string `pathParam:"style=simple,explode=false,name=orderID"`
+    Name string `pathParam:"style=simple,explode=false,name=name"`
+    OrderID string `pathParam:"style=simple,explode=false,name=orderID"`
+    
 }
 
 type OrdersHeaders struct {
-	Accept string `header:"name=Accept"`
+    Accept string `header:"style=simple,explode=false,name=Accept"`
+    
 }
 
 type OrdersSecurity struct {
-	Auth shared.SchemeAuth `security:"scheme,type=oauth2"`
+    Auth shared.SchemeAuth `security:"scheme,type=oauth2"`
+    
 }
 
 type OrdersRequest struct {
-	PathParams OrdersPathParams
-	Headers    OrdersHeaders
-	Security   OrdersSecurity
+    PathParams OrdersPathParams 
+    Headers OrdersHeaders 
+    Security OrdersSecurity 
+    
 }
 
 type OrdersResponse struct {
-	ContentType                    string
-	Orders200ApplicationJSONString *string
-	StatusCode                     int64
+    ContentType string 
+    Orders200ApplicationJSONString *string 
+    StatusCode int64 
+    
 }
+

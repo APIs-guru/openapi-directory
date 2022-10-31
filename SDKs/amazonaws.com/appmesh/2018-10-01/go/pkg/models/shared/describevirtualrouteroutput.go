@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeVirtualRouterOutput struct {
-	VirtualRouter *VirtualRouterData `json:"virtualRouter,omitempty"`
+    VirtualRouter *VirtualRouterData `json:"virtualRouter,omitempty"`
+    
 }
+

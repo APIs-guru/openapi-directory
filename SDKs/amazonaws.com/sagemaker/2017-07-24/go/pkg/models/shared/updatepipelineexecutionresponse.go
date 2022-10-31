@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdatePipelineExecutionResponse struct {
-	PipelineExecutionArn *string `json:"PipelineExecutionArn,omitempty"`
+    PipelineExecutionArn *string `json:"PipelineExecutionArn,omitempty"`
+    
 }
+

@@ -1,15 +1,21 @@
 package shared
 
+
+
+
 type WarningPriorityEnum string
 
 const (
-	WarningPriorityEnumPriorityUnspecified WarningPriorityEnum = "PRIORITY_UNSPECIFIED"
-	WarningPriorityEnumInfo                WarningPriorityEnum = "INFO"
-	WarningPriorityEnumWarning             WarningPriorityEnum = "WARNING"
-	WarningPriorityEnumAlert               WarningPriorityEnum = "ALERT"
+    WarningPriorityEnumPriorityUnspecified WarningPriorityEnum = "PRIORITY_UNSPECIFIED"
+WarningPriorityEnumInfo WarningPriorityEnum = "INFO"
+WarningPriorityEnumWarning WarningPriorityEnum = "WARNING"
+WarningPriorityEnumAlert WarningPriorityEnum = "ALERT"
 )
 
+
 type Warning struct {
-	Priority *WarningPriorityEnum `json:"priority,omitempty"`
-	Text     *string              `json:"text,omitempty"`
+    Priority *WarningPriorityEnum `json:"priority,omitempty"`
+    Text *string `json:"text,omitempty"`
+    
 }
+

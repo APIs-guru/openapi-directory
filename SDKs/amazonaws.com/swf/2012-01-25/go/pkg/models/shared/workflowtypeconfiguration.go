@@ -1,10 +1,14 @@
 package shared
 
+
+
 type WorkflowTypeConfiguration struct {
-	DefaultChildPolicy                  *ChildPolicyEnum `json:"defaultChildPolicy,omitempty"`
-	DefaultExecutionStartToCloseTimeout *string          `json:"defaultExecutionStartToCloseTimeout,omitempty"`
-	DefaultLambdaRole                   *string          `json:"defaultLambdaRole,omitempty"`
-	DefaultTaskList                     *TaskList        `json:"defaultTaskList,omitempty"`
-	DefaultTaskPriority                 *string          `json:"defaultTaskPriority,omitempty"`
-	DefaultTaskStartToCloseTimeout      *string          `json:"defaultTaskStartToCloseTimeout,omitempty"`
+    DefaultChildPolicy *ChildPolicyEnum `json:"defaultChildPolicy,omitempty"`
+    DefaultExecutionStartToCloseTimeout *string `json:"defaultExecutionStartToCloseTimeout,omitempty"`
+    DefaultLambdaRole *string `json:"defaultLambdaRole,omitempty"`
+    DefaultTaskList *TaskList `json:"defaultTaskList,omitempty"`
+    DefaultTaskPriority *string `json:"defaultTaskPriority,omitempty"`
+    DefaultTaskStartToCloseTimeout *string `json:"defaultTaskStartToCloseTimeout,omitempty"`
+    
 }
+

@@ -1,12 +1,13 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type UpdateMedicalVocabularyResponse struct {
-	LanguageCode     *LanguageCodeEnum    `json:"LanguageCode,omitempty"`
-	LastModifiedTime *time.Time           `json:"LastModifiedTime,omitempty"`
-	VocabularyName   *string              `json:"VocabularyName,omitempty"`
-	VocabularyState  *VocabularyStateEnum `json:"VocabularyState,omitempty"`
+    LanguageCode *LanguageCodeEnum `json:"LanguageCode,omitempty"`
+    LastModifiedTime *time.Time `json:"LastModifiedTime,omitempty"`
+    VocabularyName *string `json:"VocabularyName,omitempty"`
+    VocabularyState *VocabularyStateEnum `json:"VocabularyState,omitempty"`
+    
 }
+

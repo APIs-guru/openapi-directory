@@ -1,13 +1,14 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type PolicyGeneration struct {
-	CompletedOn  *time.Time    `json:"completedOn,omitempty"`
-	JobID        string        `json:"jobId"`
-	PrincipalArn string        `json:"principalArn"`
-	StartedOn    time.Time     `json:"startedOn"`
-	Status       JobStatusEnum `json:"status"`
+    CompletedOn *time.Time `json:"completedOn,omitempty"`
+    JobID string `json:"jobId"`
+    PrincipalArn string `json:"principalArn"`
+    StartedOn time.Time `json:"startedOn"`
+    Status JobStatusEnum `json:"status"`
+    
 }
+

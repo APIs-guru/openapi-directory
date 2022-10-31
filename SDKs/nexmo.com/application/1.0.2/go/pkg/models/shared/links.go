@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Links struct {
-	Href *string `json:"href,omitempty"`
+    Href *string `json:"href,omitempty"`
+    
 }
+

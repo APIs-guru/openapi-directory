@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SupplierParty struct {
-	Contact *Contact `json:"contact,omitempty"`
+    Contact *Contact `json:"contact,omitempty"`
+    
 }
+

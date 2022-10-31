@@ -9,7 +9,7 @@ class GetDocPathParams:
 
 @dataclass
 class GetDocHeaders:
-    x_readme_version: str = field(default=None, metadata={'header': { 'field_name': 'x-readme-version' }})
+    x_readme_version: str = field(default=None, metadata={'header': { 'field_name': 'x-readme-version', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

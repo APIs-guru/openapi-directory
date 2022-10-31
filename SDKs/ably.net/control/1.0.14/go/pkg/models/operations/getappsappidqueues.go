@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAppsAppIDQueuesPathParams struct {
-	AppID string `pathParam:"style=simple,explode=false,name=app_id"`
+    AppID string `pathParam:"style=simple,explode=false,name=app_id"`
+    
 }
 
 type GetAppsAppIDQueuesSecurity struct {
-	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    
 }
 
 type GetAppsAppIDQueuesRequest struct {
-	PathParams GetAppsAppIDQueuesPathParams
-	Security   GetAppsAppIDQueuesSecurity
+    PathParams GetAppsAppIDQueuesPathParams 
+    Security GetAppsAppIDQueuesSecurity 
+    
 }
 
 type GetAppsAppIDQueuesResponse struct {
-	ContentType    string
-	StatusCode     int64
-	Error          *shared.Error
-	QueueResponses []shared.QueueResponse
+    ContentType string 
+    StatusCode int64 
+    Error *shared.Error 
+    QueueResponses []shared.QueueResponse 
+    
 }
+

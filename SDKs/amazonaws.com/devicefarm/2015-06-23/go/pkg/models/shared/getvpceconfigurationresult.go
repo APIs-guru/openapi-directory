@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetVpceConfigurationResult struct {
-	VpceConfiguration *VpceConfiguration `json:"vpceConfiguration,omitempty"`
+    VpceConfiguration *VpceConfiguration `json:"vpceConfiguration,omitempty"`
+    
 }
+

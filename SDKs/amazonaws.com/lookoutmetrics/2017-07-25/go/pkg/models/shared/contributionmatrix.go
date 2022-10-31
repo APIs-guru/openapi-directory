@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ContributionMatrix struct {
-	DimensionContributionList []DimensionContribution `json:"DimensionContributionList,omitempty"`
+    DimensionContributionList []DimensionContribution `json:"DimensionContributionList,omitempty"`
+    
 }
+

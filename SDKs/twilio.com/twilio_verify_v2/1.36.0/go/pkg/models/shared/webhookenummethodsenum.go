@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type WebhookEnumMethodsEnum string
 
 const (
-	WebhookEnumMethodsEnumGet  WebhookEnumMethodsEnum = "GET"
-	WebhookEnumMethodsEnumPost WebhookEnumMethodsEnum = "POST"
+    WebhookEnumMethodsEnumGet WebhookEnumMethodsEnum = "GET"
+WebhookEnumMethodsEnumPost WebhookEnumMethodsEnum = "POST"
 )
+
+

@@ -1,14 +1,20 @@
 package operations
 
+
+
 type PostPricingCompetitivePricingHeaders struct {
-	Token *string `header:"name=Token"`
+    Token *string `header:"style=simple,explode=false,name=Token"`
+    
 }
 
 type PostPricingCompetitivePricingRequest struct {
-	Headers PostPricingCompetitivePricingHeaders
+    Headers PostPricingCompetitivePricingHeaders 
+    
 }
 
 type PostPricingCompetitivePricingResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

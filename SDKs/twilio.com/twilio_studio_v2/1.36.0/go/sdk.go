@@ -68,6 +68,7 @@ func (s *SDK) CreateExecution(ctx context.Context, request operations.CreateExec
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -117,6 +118,7 @@ func (s *SDK) CreateFlow(ctx context.Context, request operations.CreateFlowReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -715,6 +717,7 @@ func (s *SDK) UpdateExecution(ctx context.Context, request operations.UpdateExec
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -764,6 +767,7 @@ func (s *SDK) UpdateFlow(ctx context.Context, request operations.UpdateFlowReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -813,6 +817,7 @@ func (s *SDK) UpdateFlowValidate(ctx context.Context, request operations.UpdateF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -862,6 +867,7 @@ func (s *SDK) UpdateTestUser(ctx context.Context, request operations.UpdateTestU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

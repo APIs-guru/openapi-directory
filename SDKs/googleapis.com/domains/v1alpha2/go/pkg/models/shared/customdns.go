@@ -1,6 +1,10 @@
 package shared
 
+
+
 type CustomDNS struct {
-	DsRecords   []DsRecord `json:"dsRecords,omitempty"`
-	NameServers []string   `json:"nameServers,omitempty"`
+    DsRecords []DsRecord `json:"dsRecords,omitempty"`
+    NameServers []string `json:"nameServers,omitempty"`
+    
 }
+

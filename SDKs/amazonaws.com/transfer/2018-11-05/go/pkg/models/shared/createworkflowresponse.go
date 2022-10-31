@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateWorkflowResponse struct {
-	WorkflowID string `json:"WorkflowId"`
+    WorkflowID string `json:"WorkflowId"`
+    
 }
+

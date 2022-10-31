@@ -294,6 +294,7 @@ func (s *SDK) PatchWebhooksV3AppIDSubscriptionsSubscriptionIDUpdate(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -352,6 +353,7 @@ func (s *SDK) PostWebhooksV3AppIDSubscriptionsBatchUpdateUpdateBatch(ctx context
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -420,6 +422,7 @@ func (s *SDK) PostWebhooksV3AppIDSubscriptionsCreate(ctx context.Context, reques
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -478,6 +481,7 @@ func (s *SDK) PutWebhooksV3AppIDSettingsConfigure(ctx context.Context, request o
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

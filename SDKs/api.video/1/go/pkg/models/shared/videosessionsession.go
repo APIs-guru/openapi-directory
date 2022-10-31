@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type VideoSessionSession struct {
-	EndedAt   *time.Time `json:"endedAt,omitempty"`
-	LoadedAt  *time.Time `json:"loadedAt,omitempty"`
-	SessionID *string    `json:"sessionId,omitempty"`
+    EndedAt *time.Time `json:"endedAt,omitempty"`
+    LoadedAt *time.Time `json:"loadedAt,omitempty"`
+    SessionID *string `json:"sessionId,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SearchDeveloperMetadataResponse struct {
-	MatchedDeveloperMetadata []MatchedDeveloperMetadata `json:"matchedDeveloperMetadata,omitempty"`
+    MatchedDeveloperMetadata []MatchedDeveloperMetadata `json:"matchedDeveloperMetadata,omitempty"`
+    
 }
+

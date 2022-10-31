@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeLanguageModelRequest struct {
-	ModelName string `json:"ModelName"`
+    ModelName string `json:"ModelName"`
+    
 }
+

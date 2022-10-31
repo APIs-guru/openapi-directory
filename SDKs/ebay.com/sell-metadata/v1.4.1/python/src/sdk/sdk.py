@@ -19,22 +19,25 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def get_automotive_parts_compatibility_policies(self, request: operations.GetAutomotivePartsCompatibilityPoliciesRequest) -> operations.GetAutomotivePartsCompatibilityPoliciesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/marketplace/{marketplace_id}/get_automotive_parts_compatibility_policies", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetAutomotivePartsCompatibilityPoliciesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AutomotivePartsCompatibilityPolicyResponse])
@@ -51,21 +54,21 @@ class SDK:
         return res
 
     
-    
     def get_item_condition_policies(self, request: operations.GetItemConditionPoliciesRequest) -> operations.GetItemConditionPoliciesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/marketplace/{marketplace_id}/get_item_condition_policies", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetItemConditionPoliciesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ItemConditionPolicyResponse])
@@ -82,21 +85,21 @@ class SDK:
         return res
 
     
-    
     def get_listing_structure_policies(self, request: operations.GetListingStructurePoliciesRequest) -> operations.GetListingStructurePoliciesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/marketplace/{marketplace_id}/get_listing_structure_policies", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetListingStructurePoliciesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListingStructurePolicyResponse])
@@ -113,21 +116,21 @@ class SDK:
         return res
 
     
-    
     def get_negotiated_price_policies(self, request: operations.GetNegotiatedPricePoliciesRequest) -> operations.GetNegotiatedPricePoliciesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/marketplace/{marketplace_id}/get_negotiated_price_policies", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetNegotiatedPricePoliciesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.NegotiatedPricePolicyResponse])
@@ -144,21 +147,21 @@ class SDK:
         return res
 
     
-    
     def get_product_adoption_policies(self, request: operations.GetProductAdoptionPoliciesRequest) -> operations.GetProductAdoptionPoliciesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/marketplace/{marketplace_id}/get_product_adoption_policies", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetProductAdoptionPoliciesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ProductAdoptionPolicyResponse])
@@ -175,21 +178,21 @@ class SDK:
         return res
 
     
-    
     def get_return_policies(self, request: operations.GetReturnPoliciesRequest) -> operations.GetReturnPoliciesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/marketplace/{marketplace_id}/get_return_policies", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetReturnPoliciesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ReturnPolicyResponse])
@@ -206,20 +209,19 @@ class SDK:
         return res
 
     
-    
     def get_sales_tax_jurisdictions(self, request: operations.GetSalesTaxJurisdictionsRequest) -> operations.GetSalesTaxJurisdictionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/country/{countryCode}/sales_tax_jurisdiction", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetSalesTaxJurisdictionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.SalesTaxJurisdictions])

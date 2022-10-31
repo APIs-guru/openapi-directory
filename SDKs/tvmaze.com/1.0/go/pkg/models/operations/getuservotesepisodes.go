@@ -1,11 +1,12 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetUserVotesEpisodesResponse struct {
-	ContentType  string
-	EpisodeVotes []shared.EpisodeVote
-	StatusCode   int64
+    ContentType string 
+    EpisodeVotes []shared.EpisodeVote 
+    StatusCode int64 
+    
 }
+

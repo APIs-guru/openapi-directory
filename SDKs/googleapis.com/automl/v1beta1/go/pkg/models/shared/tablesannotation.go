@@ -1,9 +1,13 @@
 package shared
 
+
+
 type TablesAnnotation struct {
-	BaselineScore         *float32                `json:"baselineScore,omitempty"`
-	PredictionInterval    *DoubleRange            `json:"predictionInterval,omitempty"`
-	Score                 *float32                `json:"score,omitempty"`
-	TablesModelColumnInfo []TablesModelColumnInfo `json:"tablesModelColumnInfo,omitempty"`
-	Value                 *interface{}            `json:"value,omitempty"`
+    BaselineScore *float32 `json:"baselineScore,omitempty"`
+    PredictionInterval *DoubleRange `json:"predictionInterval,omitempty"`
+    Score *float32 `json:"score,omitempty"`
+    TablesModelColumnInfo []TablesModelColumnInfo `json:"tablesModelColumnInfo,omitempty"`
+    Value *interface{} `json:"value,omitempty"`
+    
 }
+

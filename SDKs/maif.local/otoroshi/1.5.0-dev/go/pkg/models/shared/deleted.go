@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Deleted struct {
-	Deleted bool `json:"deleted"`
+    Deleted bool `json:"deleted"`
+    
 }
+

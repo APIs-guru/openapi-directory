@@ -1,14 +1,20 @@
 package operations
 
+
+
 type PostPricingPenetrationPricingHeaders struct {
-	Token *string `header:"name=Token"`
+    Token *string `header:"style=simple,explode=false,name=Token"`
+    
 }
 
 type PostPricingPenetrationPricingRequest struct {
-	Headers PostPricingPenetrationPricingHeaders
+    Headers PostPricingPenetrationPricingHeaders 
+    
 }
 
 type PostPricingPenetrationPricingResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

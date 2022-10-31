@@ -71,6 +71,7 @@ func (s *SDK) DeploymentsCreate(ctx context.Context, request operations.Deployme
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -283,6 +284,7 @@ func (s *SDK) HeartbeatsCreate(ctx context.Context, request operations.Heartbeat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -324,6 +326,7 @@ func (s *SDK) LogsCreate(ctx context.Context, request operations.LogsCreateReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -568,6 +571,7 @@ func (s *SDK) MessagesCreate(ctx context.Context, request operations.MessagesCre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -657,6 +661,7 @@ func (s *SDK) MessagesCreateBulk(ctx context.Context, request operations.Message
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -756,6 +761,7 @@ func (s *SDK) MessagesDeleteAll(ctx context.Context, request operations.Messages
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -989,6 +995,7 @@ func (s *SDK) SourceMapsCreateOrUpdate(ctx context.Context, request operations.S
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

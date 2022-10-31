@@ -1,26 +1,30 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PostDpsMessagePathParams struct {
-	EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    
 }
 
 type PostDpsMessageHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type PostDpsMessageRequest struct {
-	PathParams PostDpsMessagePathParams
-	Headers    PostDpsMessageHeaders
+    PathParams PostDpsMessagePathParams 
+    Headers PostDpsMessageHeaders 
+    
 }
 
 type PostDpsMessageResponse struct {
-	ContentType string
-	ErrorModel  *shared.ErrorModel
-	Link        *shared.Link
-	StatusCode  int64
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    Link *shared.Link 
+    StatusCode int64 
+    
 }
+

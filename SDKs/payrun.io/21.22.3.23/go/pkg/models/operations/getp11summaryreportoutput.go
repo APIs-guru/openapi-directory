@@ -1,30 +1,34 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetP11SummaryReportOutputQueryParams struct {
-	EmployerKey    string  `queryParam:"style=form,explode=true,name=EmployerKey"`
-	MaxIndex       *string `queryParam:"style=form,explode=true,name=MaxIndex"`
-	PayScheduleKey string  `queryParam:"style=form,explode=true,name=PayScheduleKey"`
-	StartIndex     *string `queryParam:"style=form,explode=true,name=StartIndex"`
-	TaxYear        string  `queryParam:"style=form,explode=true,name=TaxYear"`
+    EmployerKey string `queryParam:"style=form,explode=true,name=EmployerKey"`
+    MaxIndex *string `queryParam:"style=form,explode=true,name=MaxIndex"`
+    PayScheduleKey string `queryParam:"style=form,explode=true,name=PayScheduleKey"`
+    StartIndex *string `queryParam:"style=form,explode=true,name=StartIndex"`
+    TaxYear string `queryParam:"style=form,explode=true,name=TaxYear"`
+    
 }
 
 type GetP11SummaryReportOutputHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type GetP11SummaryReportOutputRequest struct {
-	QueryParams GetP11SummaryReportOutputQueryParams
-	Headers     GetP11SummaryReportOutputHeaders
+    QueryParams GetP11SummaryReportOutputQueryParams 
+    Headers GetP11SummaryReportOutputHeaders 
+    
 }
 
 type GetP11SummaryReportOutputResponse struct {
-	ContentType                                             string
-	ErrorModel                                              *shared.ErrorModel
-	GetP11SummaryReportOutput200ApplicationJSONBinaryString []byte
-	StatusCode                                              int64
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    GetP11SummaryReportOutput200ApplicationJSONBinaryString []byte 
+    StatusCode int64 
+    
 }
+

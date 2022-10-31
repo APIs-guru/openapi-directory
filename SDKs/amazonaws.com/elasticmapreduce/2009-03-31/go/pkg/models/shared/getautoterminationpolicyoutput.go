@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetAutoTerminationPolicyOutput struct {
-	AutoTerminationPolicy *AutoTerminationPolicy `json:"AutoTerminationPolicy,omitempty"`
+    AutoTerminationPolicy *AutoTerminationPolicy `json:"AutoTerminationPolicy,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeHostedConnectionsRequest struct {
-	ConnectionID string `json:"connectionId"`
+    ConnectionID string `json:"connectionId"`
+    
 }
+

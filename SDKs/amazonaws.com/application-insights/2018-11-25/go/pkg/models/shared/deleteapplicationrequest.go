@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteApplicationRequest struct {
-	ResourceGroupName string `json:"ResourceGroupName"`
+    ResourceGroupName string `json:"ResourceGroupName"`
+    
 }
+

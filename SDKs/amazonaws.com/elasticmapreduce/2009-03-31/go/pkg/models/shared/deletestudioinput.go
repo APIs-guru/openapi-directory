@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteStudioInput struct {
-	StudioID string `json:"StudioId"`
+    StudioID string `json:"StudioId"`
+    
 }
+

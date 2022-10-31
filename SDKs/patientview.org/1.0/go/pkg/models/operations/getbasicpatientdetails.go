@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetBasicPatientDetailsPathParams struct {
-	UserID int64 `pathParam:"style=simple,explode=false,name=userId"`
+    UserID int64 `pathParam:"style=simple,explode=false,name=userId"`
+    
 }
 
 type GetBasicPatientDetailsRequest struct {
-	PathParams GetBasicPatientDetailsPathParams
+    PathParams GetBasicPatientDetailsPathParams 
+    
 }
 
 type GetBasicPatientDetailsResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

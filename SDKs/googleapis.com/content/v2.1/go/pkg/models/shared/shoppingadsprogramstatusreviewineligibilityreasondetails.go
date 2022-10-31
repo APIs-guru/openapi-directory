@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ShoppingAdsProgramStatusReviewIneligibilityReasonDetails struct {
-	CooldownTime *string `json:"cooldownTime,omitempty"`
+    CooldownTime *string `json:"cooldownTime,omitempty"`
+    
 }
+

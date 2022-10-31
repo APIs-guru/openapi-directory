@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type MetricData struct {
-	MetricName *string    `json:"MetricName,omitempty"`
-	Timestamp  *time.Time `json:"Timestamp,omitempty"`
-	Value      *float32   `json:"Value,omitempty"`
+    MetricName *string `json:"MetricName,omitempty"`
+    Timestamp *time.Time `json:"Timestamp,omitempty"`
+    Value *float32 `json:"Value,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteDevEndpointRequest struct {
-	EndpointName string `json:"EndpointName"`
+    EndpointName string `json:"EndpointName"`
+    
 }
+

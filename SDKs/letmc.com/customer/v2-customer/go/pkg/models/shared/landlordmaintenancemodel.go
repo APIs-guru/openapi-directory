@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LandlordMaintenanceModel struct {
-	Jobs []LandlordMaintenanceJobModel `json:"Jobs,omitempty"`
+    Jobs []LandlordMaintenanceJobModel `json:"Jobs,omitempty"`
+    
 }
+

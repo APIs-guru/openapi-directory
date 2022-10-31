@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeRefreshSchemasStatusMessage struct {
-	EndpointArn string `json:"EndpointArn"`
+    EndpointArn string `json:"EndpointArn"`
+    
 }
+

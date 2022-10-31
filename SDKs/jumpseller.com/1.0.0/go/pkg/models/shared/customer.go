@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Customer struct {
-	Customer *CustomerFields `json:"customer,omitempty"`
+    Customer *CustomerFields `json:"customer,omitempty"`
+    
 }
+

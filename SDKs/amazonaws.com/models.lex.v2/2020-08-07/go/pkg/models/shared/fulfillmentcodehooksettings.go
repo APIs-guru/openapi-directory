@@ -1,5 +1,9 @@
 package shared
 
+
+
 type FulfillmentCodeHookSettings struct {
-	Enabled bool `json:"enabled"`
+    Enabled bool `json:"enabled"`
+    
 }
+

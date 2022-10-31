@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type AutomationSubtypeEnum string
 
 const (
-	AutomationSubtypeEnumChangeRequest AutomationSubtypeEnum = "ChangeRequest"
+    AutomationSubtypeEnumChangeRequest AutomationSubtypeEnum = "ChangeRequest"
 )
+
+

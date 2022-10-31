@@ -1,5 +1,9 @@
 package shared
 
+
+
 type MonitoringStatisticsResource struct {
-	S3URI *string `json:"S3Uri,omitempty"`
+    S3URI *string `json:"S3Uri,omitempty"`
+    
 }
+

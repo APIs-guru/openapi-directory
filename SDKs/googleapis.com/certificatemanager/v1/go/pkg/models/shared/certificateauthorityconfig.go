@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CertificateAuthorityConfig struct {
-	CertificateAuthorityServiceConfig *CertificateAuthorityServiceConfig `json:"certificateAuthorityServiceConfig,omitempty"`
+    CertificateAuthorityServiceConfig *CertificateAuthorityServiceConfig `json:"certificateAuthorityServiceConfig,omitempty"`
+    
 }
+

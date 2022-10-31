@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SendCommandResult struct {
-	Command *Command `json:"Command,omitempty"`
+    Command *Command `json:"Command,omitempty"`
+    
 }
+

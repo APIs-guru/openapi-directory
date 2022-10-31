@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetFavStarIdsSchema struct {
-	Result []ChartFavStarResponseResult `json:"result,omitempty"`
+    Result []ChartFavStarResponseResult `json:"result,omitempty"`
+    
 }
+

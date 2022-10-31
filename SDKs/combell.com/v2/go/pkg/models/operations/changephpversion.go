@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ChangePhpVersionPathParams struct {
-	DomainName string `pathParam:"style=simple,explode=false,name=domainName"`
+    DomainName string `pathParam:"style=simple,explode=false,name=domainName"`
+    
 }
 
 type ChangePhpVersionQueryParams struct {
-	DomainName string `queryParam:"style=form,explode=true,name=domain_name"`
+    DomainName string `queryParam:"style=form,explode=true,name=domain_name"`
+    
 }
 
 type ChangePhpVersionRequest struct {
-	PathParams  ChangePhpVersionPathParams
-	QueryParams ChangePhpVersionQueryParams
-	Request     *shared.PhpVersion `request:"mediaType=application/json"`
+    PathParams ChangePhpVersionPathParams 
+    QueryParams ChangePhpVersionQueryParams 
+    Request *shared.PhpVersion `request:"mediaType=application/json"`
+    
 }
 
 type ChangePhpVersionResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

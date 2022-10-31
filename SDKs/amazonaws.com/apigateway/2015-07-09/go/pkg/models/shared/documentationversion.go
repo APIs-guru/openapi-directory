@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type DocumentationVersion struct {
-	CreatedDate *time.Time `json:"createdDate,omitempty"`
-	Description *string    `json:"description,omitempty"`
-	Version     *string    `json:"version,omitempty"`
+    CreatedDate *time.Time `json:"createdDate,omitempty"`
+    Description *string `json:"description,omitempty"`
+    Version *string `json:"version,omitempty"`
+    
 }
+

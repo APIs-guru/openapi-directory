@@ -1,17 +1,23 @@
 package operations
 
+
+
 type GetBillingRecipientsPathParams struct {
-	WorkgroupID string `pathParam:"style=simple,explode=false,name=workgroup_id"`
+    WorkgroupID string `pathParam:"style=simple,explode=false,name=workgroup_id"`
+    
 }
 
 type GetBillingRecipientsRequest struct {
-	PathParams GetBillingRecipientsPathParams
+    PathParams GetBillingRecipientsPathParams 
+    
 }
 
 type GetBillingRecipientsResponse struct {
-	Body           []byte
-	ContactsListVo *interface{}
-	ContentType    string
-	HTTPStatusVo   *interface{}
-	StatusCode     int64
+    Body []byte 
+    ContactsListVo *interface{} 
+    ContentType string 
+    HTTPStatusVo *interface{} 
+    StatusCode int64 
+    
 }
+

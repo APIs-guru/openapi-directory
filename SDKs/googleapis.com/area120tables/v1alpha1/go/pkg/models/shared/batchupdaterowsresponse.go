@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchUpdateRowsResponse struct {
-	Rows []Row `json:"rows,omitempty"`
+    Rows []Row `json:"rows,omitempty"`
+    
 }
+

@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetCacheHeaders struct {
-	IfModifiedSince *string `header:"name=If-Modified-Since"`
-	IfNoneMatch     *string `header:"name=If-None-Match"`
+    IfModifiedSince *string `header:"style=simple,explode=false,name=If-Modified-Since"`
+    IfNoneMatch *string `header:"style=simple,explode=false,name=If-None-Match"`
+    
 }
 
 type GetCacheRequest struct {
-	Headers GetCacheHeaders
+    Headers GetCacheHeaders 
+    
 }
 
 type GetCacheResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

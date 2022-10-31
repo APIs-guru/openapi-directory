@@ -19,21 +19,25 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def all_tax_rates(self, request: operations.AllTaxRatesRequest) -> operations.AllTaxRatesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/v3/tax/rates"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AllTaxRatesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[List[operations.AllTaxRates200ApplicationJSON]])
@@ -48,20 +52,21 @@ class SDK:
         return res
 
     
-    
     def tax_rates_by_country_code(self, request: operations.TaxRatesByCountryCodeRequest) -> operations.TaxRatesByCountryCodeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/v1/tax/countrycode"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TaxRatesByCountryCodeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.TaxRatesByCountryCode200ApplicationJSON])
@@ -76,20 +81,21 @@ class SDK:
         return res
 
     
-    
     def tax_rates_by_ip_address(self, request: operations.TaxRatesByIPAddressRequest) -> operations.TaxRatesByIPAddressResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/v1/tax/ip"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.TaxRatesByIPAddressResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[List[operations.TaxRatesByIPAddress200ApplicationJSON]])

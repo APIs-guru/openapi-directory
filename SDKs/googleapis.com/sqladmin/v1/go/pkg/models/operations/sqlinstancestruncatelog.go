@@ -1,52 +1,59 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type SQLInstancesTruncateLogPathParams struct {
-	Instance string `pathParam:"style=simple,explode=false,name=instance"`
-	Project  string `pathParam:"style=simple,explode=false,name=project"`
+    Instance string `pathParam:"style=simple,explode=false,name=instance"`
+    Project string `pathParam:"style=simple,explode=false,name=project"`
+    
 }
 
 type SQLInstancesTruncateLogQueryParams struct {
-	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
-	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
-	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
-	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
-	Key            *string           `queryParam:"style=form,explode=true,name=key"`
-	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
-	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
-	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
-	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
-	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
+    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
+    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
+    Callback *string `queryParam:"style=form,explode=true,name=callback"`
+    Fields *string `queryParam:"style=form,explode=true,name=fields"`
+    Key *string `queryParam:"style=form,explode=true,name=key"`
+    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
+    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
+    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
+    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
+    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
+    
 }
 
 type SQLInstancesTruncateLogSecurityOption1 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type SQLInstancesTruncateLogSecurityOption2 struct {
-	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
-	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
+    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
+    
 }
 
 type SQLInstancesTruncateLogSecurity struct {
-	Option1 *SQLInstancesTruncateLogSecurityOption1 `security:"option"`
-	Option2 *SQLInstancesTruncateLogSecurityOption2 `security:"option"`
+    Option1 *SQLInstancesTruncateLogSecurityOption1 `security:"option"`
+    Option2 *SQLInstancesTruncateLogSecurityOption2 `security:"option"`
+    
 }
 
 type SQLInstancesTruncateLogRequest struct {
-	PathParams  SQLInstancesTruncateLogPathParams
-	QueryParams SQLInstancesTruncateLogQueryParams
-	Request     *shared.InstancesTruncateLogRequest `request:"mediaType=application/json"`
-	Security    SQLInstancesTruncateLogSecurity
+    PathParams SQLInstancesTruncateLogPathParams 
+    QueryParams SQLInstancesTruncateLogQueryParams 
+    Request *shared.InstancesTruncateLogRequest `request:"mediaType=application/json"`
+    Security SQLInstancesTruncateLogSecurity 
+    
 }
 
 type SQLInstancesTruncateLogResponse struct {
-	ContentType string
-	Operation   *shared.Operation
-	StatusCode  int64
+    ContentType string 
+    Operation *shared.Operation 
+    StatusCode int64 
+    
 }
+

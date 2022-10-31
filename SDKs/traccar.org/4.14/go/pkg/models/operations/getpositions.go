@@ -1,24 +1,27 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-	"time"
-)
+"time"
+"openapi/pkg/models/shared")
 
 type GetPositionsQueryParams struct {
-	DeviceID *int64     `queryParam:"style=form,explode=true,name=deviceId"`
-	From     *time.Time `queryParam:"style=form,explode=true,name=from"`
-	ID       *int64     `queryParam:"style=form,explode=true,name=id"`
-	To       *time.Time `queryParam:"style=form,explode=true,name=to"`
+    DeviceID *int64 `queryParam:"style=form,explode=true,name=deviceId"`
+    From *time.Time `queryParam:"style=form,explode=true,name=from"`
+    ID *int64 `queryParam:"style=form,explode=true,name=id"`
+    To *time.Time `queryParam:"style=form,explode=true,name=to"`
+    
 }
 
 type GetPositionsRequest struct {
-	QueryParams GetPositionsQueryParams
+    QueryParams GetPositionsQueryParams 
+    
 }
 
 type GetPositionsResponse struct {
-	Body        []byte
-	ContentType string
-	Positions   []shared.Position
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    Positions []shared.Position 
+    StatusCode int64 
+    
 }
+

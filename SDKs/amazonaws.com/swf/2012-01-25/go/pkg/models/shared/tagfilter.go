@@ -1,5 +1,9 @@
 package shared
 
+
+
 type TagFilter struct {
-	Tag string `json:"tag"`
+    Tag string `json:"tag"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetBatchPredictionInput struct {
-	BatchPredictionID string `json:"BatchPredictionId"`
+    BatchPredictionID string `json:"BatchPredictionId"`
+    
 }
+

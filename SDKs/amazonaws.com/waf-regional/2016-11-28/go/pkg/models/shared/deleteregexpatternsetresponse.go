@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteRegexPatternSetResponse struct {
-	ChangeToken *string `json:"ChangeToken,omitempty"`
+    ChangeToken *string `json:"ChangeToken,omitempty"`
+    
 }
+

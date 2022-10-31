@@ -1,7 +1,11 @@
 package shared
 
+
+
 type DescribePatchGroupsRequest struct {
-	Filters    []PatchOrchestratorFilter `json:"Filters,omitempty"`
-	MaxResults *int64                    `json:"MaxResults,omitempty"`
-	NextToken  *string                   `json:"NextToken,omitempty"`
+    Filters []PatchOrchestratorFilter `json:"Filters,omitempty"`
+    MaxResults *int64 `json:"MaxResults,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    
 }
+

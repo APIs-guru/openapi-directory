@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LoyaltyEventTypeFilter struct {
-	Types []string `json:"types"`
+    Types []string `json:"types"`
+    
 }
+

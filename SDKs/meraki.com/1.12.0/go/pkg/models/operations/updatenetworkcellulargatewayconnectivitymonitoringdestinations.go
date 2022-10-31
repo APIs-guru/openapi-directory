@@ -1,26 +1,34 @@
 package operations
 
+
+
 type UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsRequestBodyDestinations struct {
-	Default     *bool   `json:"default,omitempty"`
-	Description *string `json:"description,omitempty"`
-	IP          string  `json:"ip"`
+    Default *bool `json:"default,omitempty"`
+    Description *string `json:"description,omitempty"`
+    IP string `json:"ip"`
+    
 }
 
 type UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsRequestBody struct {
-	Destinations []UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsRequestBodyDestinations `json:"destinations,omitempty"`
+    Destinations []UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsRequestBodyDestinations `json:"destinations,omitempty"`
+    
 }
 
 type UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsRequest struct {
-	PathParams UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsPathParams
-	Request    *UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsRequestBody `request:"mediaType=application/json"`
+    PathParams UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsPathParams 
+    Request *UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type UpdateNetworkCellularGatewayConnectivityMonitoringDestinationsResponse struct {
-	ContentType                                                                            string
-	StatusCode                                                                             int64
-	UpdateNetworkCellularGatewayConnectivityMonitoringDestinations200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    UpdateNetworkCellularGatewayConnectivityMonitoringDestinations200ApplicationJSONObject map[string]interface{} 
+    
 }
+

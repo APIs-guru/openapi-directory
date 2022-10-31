@@ -63,6 +63,7 @@ func (s *SDK) AppendBlockChildren(ctx context.Context, request operations.Append
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -110,6 +111,7 @@ func (s *SDK) QueryADatabase(ctx context.Context, request operations.QueryADatab
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -364,6 +366,7 @@ func (s *SDK) UpdateABlock(ctx context.Context, request operations.UpdateABlockR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -411,6 +414,7 @@ func (s *SDK) UpdateADatabase(ctx context.Context, request operations.UpdateADat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -458,6 +462,7 @@ func (s *SDK) UpdatePageProperties(ctx context.Context, request operations.Updat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

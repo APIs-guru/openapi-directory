@@ -63,6 +63,7 @@ func (s *SDK) CloudkmsProjectsLocationsEkmConnectionsCreate(ctx context.Context,
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -151,6 +152,7 @@ func (s *SDK) CloudkmsProjectsLocationsGenerateRandomBytes(ctx context.Context, 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -198,6 +200,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCreate(ctx context.Context, reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -245,6 +248,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCryptoKeysCreate(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -292,6 +296,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymme
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -339,6 +344,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsAsymme
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -386,6 +392,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsCreate
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -433,6 +440,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsDestro
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -521,6 +529,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsImport
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -609,6 +618,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacSig
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -656,6 +666,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsMacVer
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -703,6 +714,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsPatch(
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -750,6 +762,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCryptoKeysCryptoKeyVersionsRestor
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -797,6 +810,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCryptoKeysDecrypt(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -844,6 +858,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCryptoKeysEncrypt(ctx context.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -932,6 +947,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsCryptoKeysUpdatePrimaryVersion(ct
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -979,6 +995,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsImportJobsCreate(ctx context.Cont
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1149,6 +1166,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsImportJobsSetIamPolicy(ctx contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1196,6 +1214,7 @@ func (s *SDK) CloudkmsProjectsLocationsKeyRingsImportJobsTestIamPermissions(ctx 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)

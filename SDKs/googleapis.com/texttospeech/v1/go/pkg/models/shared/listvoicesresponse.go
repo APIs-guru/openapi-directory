@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ListVoicesResponse struct {
-	Voices []Voice `json:"voices,omitempty"`
+    Voices []Voice `json:"voices,omitempty"`
+    
 }
+

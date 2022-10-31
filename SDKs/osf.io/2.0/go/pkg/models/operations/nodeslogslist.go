@@ -1,15 +1,21 @@
 package operations
 
+
+
 type NodesLogsListPathParams struct {
-	NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
+    NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
+    
 }
 
 type NodesLogsListRequest struct {
-	PathParams NodesLogsListPathParams
+    PathParams NodesLogsListPathParams 
+    
 }
 
 type NodesLogsListResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

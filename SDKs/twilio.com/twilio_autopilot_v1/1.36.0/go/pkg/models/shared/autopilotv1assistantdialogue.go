@@ -1,9 +1,13 @@
 package shared
 
+
+
 type AutopilotV1AssistantDialogue struct {
-	AccountSid   *string      `json:"account_sid,omitempty"`
-	AssistantSid *string      `json:"assistant_sid,omitempty"`
-	Data         *interface{} `json:"data,omitempty"`
-	Sid          *string      `json:"sid,omitempty"`
-	URL          *string      `json:"url,omitempty"`
+    AccountSid *string `json:"account_sid,omitempty"`
+    AssistantSid *string `json:"assistant_sid,omitempty"`
+    Data *interface{} `json:"data,omitempty"`
+    Sid *string `json:"sid,omitempty"`
+    URL *string `json:"url,omitempty"`
+    
 }
+

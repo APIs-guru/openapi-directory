@@ -1,40 +1,51 @@
 package operations
 
+
+
+
 type PostDisableImageDeprecationActionEnum string
 
 const (
-	PostDisableImageDeprecationActionEnumDisableImageDeprecation PostDisableImageDeprecationActionEnum = "DisableImageDeprecation"
+    PostDisableImageDeprecationActionEnumDisableImageDeprecation PostDisableImageDeprecationActionEnum = "DisableImageDeprecation"
 )
+
+
 
 type PostDisableImageDeprecationVersionEnum string
 
 const (
-	PostDisableImageDeprecationVersionEnumTwoThousandAndSixteen1115 PostDisableImageDeprecationVersionEnum = "2016-11-15"
+    PostDisableImageDeprecationVersionEnumTwoThousandAndSixteen1115 PostDisableImageDeprecationVersionEnum = "2016-11-15"
 )
 
+
 type PostDisableImageDeprecationQueryParams struct {
-	Action  PostDisableImageDeprecationActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	Version PostDisableImageDeprecationVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action PostDisableImageDeprecationActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    Version PostDisableImageDeprecationVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type PostDisableImageDeprecationHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type PostDisableImageDeprecationRequest struct {
-	QueryParams PostDisableImageDeprecationQueryParams
-	Headers     PostDisableImageDeprecationHeaders
-	Request     []byte `request:"mediaType=text/xml"`
+    QueryParams PostDisableImageDeprecationQueryParams 
+    Headers PostDisableImageDeprecationHeaders 
+    Request []byte `request:"mediaType=text/xml"`
+    
 }
 
 type PostDisableImageDeprecationResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

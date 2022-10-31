@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostForecastOptimalParameterHeaders:
-    token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Token' }})
+    token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Token', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

@@ -7,10 +7,6 @@ import (
 	"strings"
 )
 
-const (
-	pathParamTagKey = "pathParam"
-)
-
 func GenerateURL(ctx context.Context, serverURL, path string, pathParams interface{}) string {
 	url := strings.TrimSuffix(serverURL, "/") + path
 
@@ -23,7 +19,7 @@ func GenerateURL(ctx context.Context, serverURL, path string, pathParams interfa
 		fieldType := pathParamsStructType.Field(i)
 		valType := pathParamsValType.Field(i)
 
-		ppTag := parsePathParamTag(fieldType)
+		ppTag := parseParamTag(pathParamTagKey, fieldType, "simple", false)
 		if ppTag == nil {
 			continue
 		}
@@ -55,28 +51,4 @@ func getSimplePathParams(ctx context.Context, parentName string, objType reflect
 	pathParams[parentName] = fmt.Sprintf("%v", objValue.Interface())
 
 	return pathParams
-}
-
-func parsePathParamTag(field reflect.StructField) *paramTag {
-	// example `pathParam:"style=simple,explode=false,name=apiID"`
-	values := parseStructTag(pathParamTagKey, field)
-
-	tag := &paramTag{
-		Style:     "simple",
-		Explode:   false,
-		ParamName: strings.ToLower(field.Name),
-	}
-
-	for k, v := range values {
-		switch k {
-		case "style":
-			tag.Style = v
-		case "explode":
-			tag.Explode = v == "true"
-		case "name":
-			tag.ParamName = v
-		}
-	}
-
-	return tag
 }

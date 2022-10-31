@@ -1,33 +1,38 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetSuperfundsQueryParams struct {
-	Order *string `queryParam:"style=form,explode=true,name=order"`
-	Page  *int64  `queryParam:"style=form,explode=true,name=page"`
-	Where *string `queryParam:"style=form,explode=true,name=where"`
+    Order *string `queryParam:"style=form,explode=true,name=order"`
+    Page *int64 `queryParam:"style=form,explode=true,name=page"`
+    Where *string `queryParam:"style=form,explode=true,name=where"`
+    
 }
 
 type GetSuperfundsHeaders struct {
-	IfModifiedSince *string `header:"name=If-Modified-Since"`
-	XeroTenantID    string  `header:"name=Xero-Tenant-Id"`
+    IfModifiedSince *string `header:"style=simple,explode=false,name=If-Modified-Since"`
+    XeroTenantID string `header:"style=simple,explode=false,name=Xero-Tenant-Id"`
+    
 }
 
 type GetSuperfundsSecurity struct {
-	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
+    OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
+    
 }
 
 type GetSuperfundsRequest struct {
-	QueryParams GetSuperfundsQueryParams
-	Headers     GetSuperfundsHeaders
-	Security    GetSuperfundsSecurity
+    QueryParams GetSuperfundsQueryParams 
+    Headers GetSuperfundsHeaders 
+    Security GetSuperfundsSecurity 
+    
 }
 
 type GetSuperfundsResponse struct {
-	APIException *shared.APIException
-	ContentType  string
-	StatusCode   int64
-	SuperFunds   *shared.SuperFunds
+    APIException *shared.APIException 
+    ContentType string 
+    StatusCode int64 
+    SuperFunds *shared.SuperFunds 
+    
 }
+

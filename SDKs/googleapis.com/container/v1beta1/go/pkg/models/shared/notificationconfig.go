@@ -1,5 +1,9 @@
 package shared
 
+
+
 type NotificationConfig struct {
-	Pubsub *PubSub `json:"pubsub,omitempty"`
+    Pubsub *PubSub `json:"pubsub,omitempty"`
+    
 }
+

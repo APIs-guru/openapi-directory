@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RebootInstanceRequest struct {
-	InstanceID string `json:"InstanceId"`
+    InstanceID string `json:"InstanceId"`
+    
 }
+

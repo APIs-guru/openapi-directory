@@ -1,8 +1,12 @@
 package shared
 
+
+
 type ErrorUnsupportedProduct struct {
-	Detail   string `json:"detail"`
-	Instance string `json:"instance"`
-	Title    string `json:"title"`
-	Type     string `json:"type"`
+    Detail string `json:"detail"`
+    Instance string `json:"instance"`
+    Title string `json:"title"`
+    Type string `json:"type"`
+    
 }
+

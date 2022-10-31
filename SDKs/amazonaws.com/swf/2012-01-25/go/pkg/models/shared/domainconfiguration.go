@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DomainConfiguration struct {
-	WorkflowExecutionRetentionPeriodInDays string `json:"workflowExecutionRetentionPeriodInDays"`
+    WorkflowExecutionRetentionPeriodInDays string `json:"workflowExecutionRetentionPeriodInDays"`
+    
 }
+

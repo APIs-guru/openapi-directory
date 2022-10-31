@@ -403,6 +403,7 @@ func (s *SDK) GroceryListAddRecipe(ctx context.Context, request operations.Groce
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -592,6 +593,7 @@ func (s *SDK) GroceryListDepartment(ctx context.Context, request operations.Groc
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -721,6 +723,7 @@ func (s *SDK) GroceryListGroceryListItemGUID(ctx context.Context, request operat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -850,6 +853,7 @@ func (s *SDK) GroceryListPost(ctx context.Context, request operations.GroceryLis
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1409,6 +1413,7 @@ func (s *SDK) MePutMe(ctx context.Context, request operations.MePutMeRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1478,6 +1483,7 @@ func (s *SDK) MePutMePersonal(ctx context.Context, request operations.MePutMePer
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1547,6 +1553,7 @@ func (s *SDK) MePutMePreferences(ctx context.Context, request operations.MePutMe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1858,6 +1865,7 @@ func (s *SDK) NotePost(ctx context.Context, request operations.NotePostRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1927,6 +1935,7 @@ func (s *SDK) NotePut(ctx context.Context, request operations.NotePutRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1996,6 +2005,7 @@ func (s *SDK) PostGrocerylistItem(ctx context.Context, request operations.PostGr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2065,6 +2075,7 @@ func (s *SDK) PutMeProfile(ctx context.Context, request operations.PutMeProfileR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2440,6 +2451,7 @@ func (s *SDK) RecipeFeedback(ctx context.Context, request operations.RecipeFeedb
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3716,6 +3728,7 @@ func (s *SDK) ReviewPost(ctx context.Context, request operations.ReviewPostReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3785,6 +3798,7 @@ func (s *SDK) ReviewPostReply(ctx context.Context, request operations.ReviewPost
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3854,6 +3868,7 @@ func (s *SDK) ReviewPut(ctx context.Context, request operations.ReviewPutRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3923,6 +3938,7 @@ func (s *SDK) ReviewPutLegacy(ctx context.Context, request operations.ReviewPutL
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3992,6 +4008,7 @@ func (s *SDK) ReviewPutReply(ctx context.Context, request operations.ReviewPutRe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

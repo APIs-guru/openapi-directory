@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type ConnectionStatusEnum string
 
 const (
-	ConnectionStatusEnumConnected    ConnectionStatusEnum = "CONNECTED"
-	ConnectionStatusEnumDisconnected ConnectionStatusEnum = "DISCONNECTED"
+    ConnectionStatusEnumConnected ConnectionStatusEnum = "CONNECTED"
+ConnectionStatusEnumDisconnected ConnectionStatusEnum = "DISCONNECTED"
 )
+
+

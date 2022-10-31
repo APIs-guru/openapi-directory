@@ -19,26 +19,32 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def add_media_intent_handling(self, request: operations.AddMediaIntentHandlingRequest) -> operations.AddMediaIntentHandlingResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/intent/addMedia"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.AddMediaIntentHandlingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             res.headers = r.headers
+            
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[List[Any]])
                 res.add_media_intent_handling_invocation_responses = out
@@ -46,48 +52,55 @@ class SDK:
         return res
 
     
-    
     def extension_configuration(self, request: operations.ExtensionConfigurationRequest) -> operations.ExtensionConfigurationResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/configuration"
-        
+
+        headers = utils.get_headers(request.headers)
+
         client = self.client
 
-        r = client.request("GET", url)
+        r = client.request("GET", url, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ExtensionConfigurationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             res.headers = r.headers
+            
             if utils.match_content_type(content_type, "application/jose"):
                 res.body = r.content
         elif r.status_code == 304:
             res.headers = r.headers
+            
 
         return res
 
-    
     
     def play_media_intent_handling(self, request: operations.PlayMediaIntentHandlingRequest) -> operations.PlayMediaIntentHandlingResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/intent/playMedia"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PlayMediaIntentHandlingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             res.headers = r.headers
+            
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[List[Any]])
                 res.play_media_intent_handling_invocation_responses = out
@@ -95,23 +108,25 @@ class SDK:
         return res
 
     
-    
     def play_media_on_queue(self, request: operations.PlayMediaOnQueueRequest) -> operations.PlayMediaOnQueueResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/queues/playMedia"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.PlayMediaOnQueueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Queue])
@@ -126,23 +141,25 @@ class SDK:
         return res
 
     
-    
     def update_activity_on_queue(self, request: operations.UpdateActivityOnQueueRequest) -> operations.UpdateActivityOnQueueResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/queues/updateActivity"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateActivityOnQueueResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UpdateActivityResponse])
@@ -159,25 +176,28 @@ class SDK:
         return res
 
     
-    
     def update_media_affinity_intent_handling(self, request: operations.UpdateMediaAffinityIntentHandlingRequest) -> operations.UpdateMediaAffinityIntentHandlingResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/intent/updateMediaAffinity"
-        
+
+        headers = utils.get_headers(request.headers)
+
         req_content_type, data, form = utils.serialize_request_body(request)
-        headers = {}
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = self.client
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateMediaAffinityIntentHandlingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             res.headers = r.headers
+            
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[List[Any]])
                 res.update_media_affinity_intent_handling_invocation_responses = out

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateWageSettingRequest struct {
-	WageSetting WageSetting `json:"wage_setting"`
+    WageSetting WageSetting `json:"wage_setting"`
+    
 }
+

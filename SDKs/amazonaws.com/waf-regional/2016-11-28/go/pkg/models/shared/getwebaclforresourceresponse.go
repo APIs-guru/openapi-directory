@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetWebACLForResourceResponse struct {
-	WebACLSummary *WebACLSummary `json:"WebACLSummary,omitempty"`
+    WebACLSummary *WebACLSummary `json:"WebACLSummary,omitempty"`
+    
 }
+

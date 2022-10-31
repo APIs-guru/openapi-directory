@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ModifyAttachmentsRequest struct {
-	AddAttachments []Attachment `json:"addAttachments,omitempty"`
+    AddAttachments []Attachment `json:"addAttachments,omitempty"`
+    
 }
+

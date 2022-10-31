@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetNetworkApplianceFirewallOneToManyNatRulesPathParams struct {
-	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+    
 }
 
 type GetNetworkApplianceFirewallOneToManyNatRulesRequest struct {
-	PathParams GetNetworkApplianceFirewallOneToManyNatRulesPathParams
+    PathParams GetNetworkApplianceFirewallOneToManyNatRulesPathParams 
+    
 }
 
 type GetNetworkApplianceFirewallOneToManyNatRulesResponse struct {
-	ContentType                                                          string
-	StatusCode                                                           int64
-	GetNetworkApplianceFirewallOneToManyNatRules200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetNetworkApplianceFirewallOneToManyNatRules200ApplicationJSONObject map[string]interface{} 
+    
 }
+

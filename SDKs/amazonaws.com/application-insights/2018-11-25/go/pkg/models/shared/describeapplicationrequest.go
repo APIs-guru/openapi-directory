@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeApplicationRequest struct {
-	ResourceGroupName string `json:"ResourceGroupName"`
+    ResourceGroupName string `json:"ResourceGroupName"`
+    
 }
+

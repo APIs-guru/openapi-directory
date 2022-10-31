@@ -1,6 +1,10 @@
 package shared
 
+
+
 type DeprecateWorkflowTypeInput struct {
-	Domain       string       `json:"domain"`
-	WorkflowType WorkflowType `json:"workflowType"`
+    Domain string `json:"domain"`
+    WorkflowType WorkflowType `json:"workflowType"`
+    
 }
+

@@ -10,7 +10,7 @@ class UploadFileByTokenAsBinary1PathParams:
 
 @dataclass
 class UploadFileByTokenAsBinary1Headers:
-    content_range: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-Range' }})
+    content_range: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Content-Range', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

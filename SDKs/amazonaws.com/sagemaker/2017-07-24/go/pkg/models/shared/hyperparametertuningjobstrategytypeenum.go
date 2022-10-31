@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type HyperParameterTuningJobStrategyTypeEnum string
 
 const (
-	HyperParameterTuningJobStrategyTypeEnumBayesian HyperParameterTuningJobStrategyTypeEnum = "Bayesian"
-	HyperParameterTuningJobStrategyTypeEnumRandom   HyperParameterTuningJobStrategyTypeEnum = "Random"
+    HyperParameterTuningJobStrategyTypeEnumBayesian HyperParameterTuningJobStrategyTypeEnum = "Bayesian"
+HyperParameterTuningJobStrategyTypeEnumRandom HyperParameterTuningJobStrategyTypeEnum = "Random"
 )
+
+

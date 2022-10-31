@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ListPublicKeysRequest struct {
-	EndTime   *time.Time `json:"EndTime,omitempty"`
-	NextToken *string    `json:"NextToken,omitempty"`
-	StartTime *time.Time `json:"StartTime,omitempty"`
+    EndTime *time.Time `json:"EndTime,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    StartTime *time.Time `json:"StartTime,omitempty"`
+    
 }
+

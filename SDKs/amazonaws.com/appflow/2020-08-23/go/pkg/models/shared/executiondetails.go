@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ExecutionDetails struct {
-	MostRecentExecutionMessage *string              `json:"mostRecentExecutionMessage,omitempty"`
-	MostRecentExecutionStatus  *ExecutionStatusEnum `json:"mostRecentExecutionStatus,omitempty"`
-	MostRecentExecutionTime    *time.Time           `json:"mostRecentExecutionTime,omitempty"`
+    MostRecentExecutionMessage *string `json:"mostRecentExecutionMessage,omitempty"`
+    MostRecentExecutionStatus *ExecutionStatusEnum `json:"mostRecentExecutionStatus,omitempty"`
+    MostRecentExecutionTime *time.Time `json:"mostRecentExecutionTime,omitempty"`
+    
 }
+

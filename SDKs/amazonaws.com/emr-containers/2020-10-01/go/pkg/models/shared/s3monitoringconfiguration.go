@@ -1,5 +1,9 @@
 package shared
 
+
+
 type S3MonitoringConfiguration struct {
-	LogURI string `json:"logUri"`
+    LogURI string `json:"logUri"`
+    
 }
+

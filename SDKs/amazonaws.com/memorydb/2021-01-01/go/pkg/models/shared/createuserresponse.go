@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateUserResponse struct {
-	User *User `json:"User,omitempty"`
+    User *User `json:"User,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LastModifiedInfo struct {
-	Time *string `json:"time,omitempty"`
+    Time *string `json:"time,omitempty"`
+    
 }
+

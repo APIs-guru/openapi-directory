@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Places struct {
-	PlaceInfos []PlaceInfo `json:"placeInfos,omitempty"`
+    PlaceInfos []PlaceInfo `json:"placeInfos,omitempty"`
+    
 }
+

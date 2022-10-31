@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PortfolioRemoveItemRequest struct {
-	Item string `json:"item"`
+    Item string `json:"item"`
+    
 }
+

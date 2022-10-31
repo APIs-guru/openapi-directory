@@ -1,6 +1,10 @@
 package shared
 
+
+
 type SasPortalAssignment struct {
-	Members []string `json:"members,omitempty"`
-	Role    *string  `json:"role,omitempty"`
+    Members []string `json:"members,omitempty"`
+    Role *string `json:"role,omitempty"`
+    
 }
+

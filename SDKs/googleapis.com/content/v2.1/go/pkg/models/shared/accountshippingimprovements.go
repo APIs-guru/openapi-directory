@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AccountShippingImprovements struct {
-	AllowShippingImprovements *bool `json:"allowShippingImprovements,omitempty"`
+    AllowShippingImprovements *bool `json:"allowShippingImprovements,omitempty"`
+    
 }
+

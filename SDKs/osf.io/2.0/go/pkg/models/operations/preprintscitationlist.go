@@ -1,15 +1,21 @@
 package operations
 
+
+
 type PreprintsCitationListPathParams struct {
-	PreprintID string `pathParam:"style=simple,explode=false,name=preprint_id"`
+    PreprintID string `pathParam:"style=simple,explode=false,name=preprint_id"`
+    
 }
 
 type PreprintsCitationListRequest struct {
-	PathParams PreprintsCitationListPathParams
+    PathParams PreprintsCitationListPathParams 
+    
 }
 
 type PreprintsCitationListResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

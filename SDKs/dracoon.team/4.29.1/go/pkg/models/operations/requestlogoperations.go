@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RequestLogOperationsQueryParams struct {
-	IsDeprecated *bool `queryParam:"style=form,explode=true,name=is_deprecated"`
+    IsDeprecated *bool `queryParam:"style=form,explode=true,name=is_deprecated"`
+    
 }
 
 type RequestLogOperationsHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type RequestLogOperationsRequest struct {
-	QueryParams RequestLogOperationsQueryParams
-	Headers     RequestLogOperationsHeaders
+    QueryParams RequestLogOperationsQueryParams 
+    Headers RequestLogOperationsHeaders 
+    
 }
 
 type RequestLogOperationsResponse struct {
-	ContentType      string
-	ErrorResponse    *shared.ErrorResponse
-	LogOperationList *shared.LogOperationList
-	StatusCode       int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    LogOperationList *shared.LogOperationList 
+    StatusCode int64 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteContactMethodRequest struct {
-	Protocol ContactProtocolEnum `json:"protocol"`
+    Protocol ContactProtocolEnum `json:"protocol"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CertChain struct {
-	Certificates []string `json:"certificates,omitempty"`
+    Certificates []string `json:"certificates,omitempty"`
+    
 }
+

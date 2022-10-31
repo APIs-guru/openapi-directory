@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type ExecutionTimeFilter struct {
-	LatestDate *time.Time `json:"latestDate,omitempty"`
-	OldestDate time.Time  `json:"oldestDate"`
+    LatestDate *time.Time `json:"latestDate,omitempty"`
+    OldestDate time.Time `json:"oldestDate"`
+    
 }
+

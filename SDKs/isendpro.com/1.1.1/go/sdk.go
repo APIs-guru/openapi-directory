@@ -69,6 +69,7 @@ func (s *SDK) AddShortlink(ctx context.Context, request operations.AddShortlinkR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -127,6 +128,7 @@ func (s *SDK) Comptage(ctx context.Context, request operations.ComptageRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -352,6 +354,7 @@ func (s *SDK) GetHlr(ctx context.Context, request operations.GetHlrRequest) (*op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -461,6 +464,7 @@ func (s *SDK) Repertoire(ctx context.Context, request operations.RepertoireReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -519,6 +523,7 @@ func (s *SDK) RepertoireCrea(ctx context.Context, request operations.RepertoireC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -577,6 +582,7 @@ func (s *SDK) SendSms(ctx context.Context, request operations.SendSmsRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -635,6 +641,7 @@ func (s *SDK) SendSmsMulti(ctx context.Context, request operations.SendSmsMultiR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -744,6 +751,7 @@ func (s *SDK) SubaccountAdd(ctx context.Context, request operations.SubaccountAd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -802,6 +810,7 @@ func (s *SDK) SubaccountEdit(ctx context.Context, request operations.SubaccountE
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RemoveWebhookPathParams struct {
-	WebhookID int64 `pathParam:"style=simple,explode=false,name=webhook_id"`
+    WebhookID int64 `pathParam:"style=simple,explode=false,name=webhook_id"`
+    
 }
 
 type RemoveWebhookHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type RemoveWebhookRequest struct {
-	PathParams RemoveWebhookPathParams
-	Headers    RemoveWebhookHeaders
+    PathParams RemoveWebhookPathParams 
+    Headers RemoveWebhookHeaders 
+    
 }
 
 type RemoveWebhookResponse struct {
-	ContentType   string
-	ErrorResponse *shared.ErrorResponse
-	StatusCode    int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    
 }
+

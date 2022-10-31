@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteBuildBatchInput struct {
-	ID string `json:"id"`
+    ID string `json:"id"`
+    
 }
+

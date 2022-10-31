@@ -18,7 +18,7 @@ class TeamsListDiscussionCommentsQueryParams:
 
 @dataclass
 class TeamsListDiscussionCommentsHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'accept' }})
+    accept: str = field(default=None, metadata={'header': { 'field_name': 'accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

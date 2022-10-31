@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateResolverQueryLogConfigResponse struct {
-	ResolverQueryLogConfig *ResolverQueryLogConfig `json:"ResolverQueryLogConfig,omitempty"`
+    ResolverQueryLogConfig *ResolverQueryLogConfig `json:"ResolverQueryLogConfig,omitempty"`
+    
 }
+

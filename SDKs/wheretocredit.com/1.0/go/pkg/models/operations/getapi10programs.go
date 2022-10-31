@@ -1,11 +1,12 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAPI10ProgramsResponse struct {
-	ContentType string
-	Programs    []shared.Program
-	StatusCode  int64
+    ContentType string 
+    Programs []shared.Program 
+    StatusCode int64 
+    
 }
+

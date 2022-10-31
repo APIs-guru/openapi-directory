@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type EncodingTypeEnum string
 
 const (
-	EncodingTypeEnumBinary EncodingTypeEnum = "binary"
-	EncodingTypeEnumJSON   EncodingTypeEnum = "json"
+    EncodingTypeEnumBinary EncodingTypeEnum = "binary"
+EncodingTypeEnumJSON EncodingTypeEnum = "json"
 )
+
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ShuffleConfig struct {
-	Seed int64 `json:"Seed"`
+    Seed int64 `json:"Seed"`
+    
 }
+

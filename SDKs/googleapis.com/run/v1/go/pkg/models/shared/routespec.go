@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RouteSpec struct {
-	Traffic []TrafficTarget `json:"traffic,omitempty"`
+    Traffic []TrafficTarget `json:"traffic,omitempty"`
+    
 }
+

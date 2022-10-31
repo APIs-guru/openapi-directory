@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAttributeNamespaceMetaPathParams struct {
-	Namespace string `pathParam:"style=simple,explode=false,name=namespace"`
+    Namespace string `pathParam:"style=simple,explode=false,name=namespace"`
+    
 }
 
 type GetAttributeNamespaceMetaSecurity struct {
-	BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
+    BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type GetAttributeNamespaceMetaRequest struct {
-	PathParams GetAttributeNamespaceMetaPathParams
-	Security   GetAttributeNamespaceMetaSecurity
+    PathParams GetAttributeNamespaceMetaPathParams 
+    Security GetAttributeNamespaceMetaSecurity 
+    
 }
 
 type GetAttributeNamespaceMetaResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

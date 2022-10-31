@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateClientEventRequest struct {
-	ClientEvent *ClientEvent `json:"clientEvent,omitempty"`
+    ClientEvent *ClientEvent `json:"clientEvent,omitempty"`
+    
 }
+

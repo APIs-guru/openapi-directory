@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeForecastRequest struct {
-	ForecastArn string `json:"ForecastArn"`
+    ForecastArn string `json:"ForecastArn"`
+    
 }
+

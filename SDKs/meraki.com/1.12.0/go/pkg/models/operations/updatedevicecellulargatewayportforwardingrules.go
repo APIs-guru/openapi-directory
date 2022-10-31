@@ -1,30 +1,38 @@
 package operations
 
+
+
 type UpdateDeviceCellularGatewayPortForwardingRulesPathParams struct {
-	Serial string `pathParam:"style=simple,explode=false,name=serial"`
+    Serial string `pathParam:"style=simple,explode=false,name=serial"`
+    
 }
 
 type UpdateDeviceCellularGatewayPortForwardingRulesRequestBodyRules struct {
-	Access     string   `json:"access"`
-	AllowedIps []string `json:"allowedIps,omitempty"`
-	LanIP      string   `json:"lanIp"`
-	LocalPort  string   `json:"localPort"`
-	Name       *string  `json:"name,omitempty"`
-	Protocol   string   `json:"protocol"`
-	PublicPort string   `json:"publicPort"`
+    Access string `json:"access"`
+    AllowedIps []string `json:"allowedIps,omitempty"`
+    LanIP string `json:"lanIp"`
+    LocalPort string `json:"localPort"`
+    Name *string `json:"name,omitempty"`
+    Protocol string `json:"protocol"`
+    PublicPort string `json:"publicPort"`
+    
 }
 
 type UpdateDeviceCellularGatewayPortForwardingRulesRequestBody struct {
-	Rules []UpdateDeviceCellularGatewayPortForwardingRulesRequestBodyRules `json:"rules,omitempty"`
+    Rules []UpdateDeviceCellularGatewayPortForwardingRulesRequestBodyRules `json:"rules,omitempty"`
+    
 }
 
 type UpdateDeviceCellularGatewayPortForwardingRulesRequest struct {
-	PathParams UpdateDeviceCellularGatewayPortForwardingRulesPathParams
-	Request    *UpdateDeviceCellularGatewayPortForwardingRulesRequestBody `request:"mediaType=application/json"`
+    PathParams UpdateDeviceCellularGatewayPortForwardingRulesPathParams 
+    Request *UpdateDeviceCellularGatewayPortForwardingRulesRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type UpdateDeviceCellularGatewayPortForwardingRulesResponse struct {
-	ContentType                                                            string
-	StatusCode                                                             int64
-	UpdateDeviceCellularGatewayPortForwardingRules200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    UpdateDeviceCellularGatewayPortForwardingRules200ApplicationJSONObject map[string]interface{} 
+    
 }
+

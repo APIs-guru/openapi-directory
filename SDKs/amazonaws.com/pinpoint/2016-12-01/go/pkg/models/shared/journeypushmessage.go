@@ -1,5 +1,9 @@
 package shared
 
+
+
 type JourneyPushMessage struct {
-	TimeToLive *string `json:"TimeToLive,omitempty"`
+    TimeToLive *string `json:"TimeToLive,omitempty"`
+    
 }
+

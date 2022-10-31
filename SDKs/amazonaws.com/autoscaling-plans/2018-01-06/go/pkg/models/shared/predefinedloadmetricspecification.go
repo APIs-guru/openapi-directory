@@ -1,6 +1,10 @@
 package shared
 
+
+
 type PredefinedLoadMetricSpecification struct {
-	PredefinedLoadMetricType LoadMetricTypeEnum `json:"PredefinedLoadMetricType"`
-	ResourceLabel            *string            `json:"ResourceLabel,omitempty"`
+    PredefinedLoadMetricType LoadMetricTypeEnum `json:"PredefinedLoadMetricType"`
+    ResourceLabel *string `json:"ResourceLabel,omitempty"`
+    
 }
+

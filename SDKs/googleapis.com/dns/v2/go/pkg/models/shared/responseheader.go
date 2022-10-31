@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ResponseHeader struct {
-	OperationID *string `json:"operationId,omitempty"`
+    OperationID *string `json:"operationId,omitempty"`
+    
 }
+

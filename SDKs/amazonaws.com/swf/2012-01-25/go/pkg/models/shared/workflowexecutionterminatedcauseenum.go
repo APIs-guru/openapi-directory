@@ -1,9 +1,14 @@
 package shared
 
+
+
+
 type WorkflowExecutionTerminatedCauseEnum string
 
 const (
-	WorkflowExecutionTerminatedCauseEnumChildPolicyApplied WorkflowExecutionTerminatedCauseEnum = "CHILD_POLICY_APPLIED"
-	WorkflowExecutionTerminatedCauseEnumEventLimitExceeded WorkflowExecutionTerminatedCauseEnum = "EVENT_LIMIT_EXCEEDED"
-	WorkflowExecutionTerminatedCauseEnumOperatorInitiated  WorkflowExecutionTerminatedCauseEnum = "OPERATOR_INITIATED"
+    WorkflowExecutionTerminatedCauseEnumChildPolicyApplied WorkflowExecutionTerminatedCauseEnum = "CHILD_POLICY_APPLIED"
+WorkflowExecutionTerminatedCauseEnumEventLimitExceeded WorkflowExecutionTerminatedCauseEnum = "EVENT_LIMIT_EXCEEDED"
+WorkflowExecutionTerminatedCauseEnumOperatorInitiated WorkflowExecutionTerminatedCauseEnum = "OPERATOR_INITIATED"
 )
+
+

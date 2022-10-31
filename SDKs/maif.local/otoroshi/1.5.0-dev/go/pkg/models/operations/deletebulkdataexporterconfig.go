@@ -1,32 +1,38 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DeletebulkDataExporterConfigSecurity struct {
-	OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
+    OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type DeletebulkDataExporterConfigRequest struct {
-	Request  []shared.Patch `request:"mediaType=application/ndjson"`
-	Security DeletebulkDataExporterConfigSecurity
+    Request []shared.Patch `request:"mediaType=application/ndjson"`
+    Security DeletebulkDataExporterConfigSecurity 
+    
 }
+
 
 type DeletebulkDataExporterConfig200ApplicationJSONStatusEnum string
 
 const (
-	DeletebulkDataExporterConfig200ApplicationJSONStatusEnumTwoHundred DeletebulkDataExporterConfig200ApplicationJSONStatusEnum = "200"
+    DeletebulkDataExporterConfig200ApplicationJSONStatusEnumTwoHundred DeletebulkDataExporterConfig200ApplicationJSONStatusEnum = "200"
 )
 
+
 type DeletebulkDataExporterConfig200ApplicationJSON struct {
-	Deleted *bool                                                     `json:"deleted,omitempty"`
-	ID      *bool                                                     `json:"id,omitempty"`
-	Status  *DeletebulkDataExporterConfig200ApplicationJSONStatusEnum `json:"status,omitempty"`
+    Deleted *bool `json:"deleted,omitempty"`
+    ID *bool `json:"id,omitempty"`
+    Status *DeletebulkDataExporterConfig200ApplicationJSONStatusEnum `json:"status,omitempty"`
+    
 }
 
 type DeletebulkDataExporterConfigResponse struct {
-	ContentType                                           string
-	StatusCode                                            int64
-	DeletebulkDataExporterConfig200ApplicationJSONObjects []DeletebulkDataExporterConfig200ApplicationJSON
+    ContentType string 
+    StatusCode int64 
+    DeletebulkDataExporterConfig200ApplicationJSONObjects []DeletebulkDataExporterConfig200ApplicationJSON 
+    
 }
+

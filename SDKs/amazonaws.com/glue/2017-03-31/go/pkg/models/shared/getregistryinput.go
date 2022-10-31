@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetRegistryInput struct {
-	RegistryID RegistryID `json:"RegistryId"`
+    RegistryID RegistryID `json:"RegistryId"`
+    
 }
+

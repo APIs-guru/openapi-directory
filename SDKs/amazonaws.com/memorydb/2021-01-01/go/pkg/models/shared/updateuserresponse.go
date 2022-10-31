@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateUserResponse struct {
-	User *User `json:"User,omitempty"`
+    User *User `json:"User,omitempty"`
+    
 }
+

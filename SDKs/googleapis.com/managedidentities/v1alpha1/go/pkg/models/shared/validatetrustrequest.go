@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ValidateTrustRequest struct {
-	Trust *Trust `json:"trust,omitempty"`
+    Trust *Trust `json:"trust,omitempty"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BooleanPolicy struct {
-	Enforced *bool `json:"enforced,omitempty"`
+    Enforced *bool `json:"enforced,omitempty"`
+    
 }
+

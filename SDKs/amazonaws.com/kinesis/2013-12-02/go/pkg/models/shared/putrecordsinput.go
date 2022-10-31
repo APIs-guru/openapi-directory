@@ -1,6 +1,10 @@
 package shared
 
+
+
 type PutRecordsInput struct {
-	Records    []PutRecordsRequestEntry `json:"Records"`
-	StreamName string                   `json:"StreamName"`
+    Records []PutRecordsRequestEntry `json:"Records"`
+    StreamName string `json:"StreamName"`
+    
 }
+

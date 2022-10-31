@@ -1,6 +1,10 @@
 package shared
 
+
+
 type AsyncInferenceConfig struct {
-	ClientConfig *AsyncInferenceClientConfig `json:"ClientConfig,omitempty"`
-	OutputConfig AsyncInferenceOutputConfig  `json:"OutputConfig"`
+    ClientConfig *AsyncInferenceClientConfig `json:"ClientConfig,omitempty"`
+    OutputConfig AsyncInferenceOutputConfig `json:"OutputConfig"`
+    
 }
+

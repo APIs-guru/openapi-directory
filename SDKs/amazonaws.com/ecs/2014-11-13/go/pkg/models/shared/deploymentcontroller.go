@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeploymentController struct {
-	Type DeploymentControllerTypeEnum `json:"type"`
+    Type DeploymentControllerTypeEnum `json:"type"`
+    
 }
+

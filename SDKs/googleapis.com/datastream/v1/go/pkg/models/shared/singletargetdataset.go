@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SingleTargetDataset struct {
-	DatasetID *string `json:"datasetId,omitempty"`
+    DatasetID *string `json:"datasetId,omitempty"`
+    
 }
+

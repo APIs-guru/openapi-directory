@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateAppResult struct {
-	AppID *string `json:"AppId,omitempty"`
+    AppID *string `json:"AppId,omitempty"`
+    
 }
+

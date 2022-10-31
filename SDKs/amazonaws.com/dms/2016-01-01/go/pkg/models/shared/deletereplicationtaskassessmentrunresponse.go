@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteReplicationTaskAssessmentRunResponse struct {
-	ReplicationTaskAssessmentRun *ReplicationTaskAssessmentRun `json:"ReplicationTaskAssessmentRun,omitempty"`
+    ReplicationTaskAssessmentRun *ReplicationTaskAssessmentRun `json:"ReplicationTaskAssessmentRun,omitempty"`
+    
 }
+

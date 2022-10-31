@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteLocationRequest struct {
-	LocationArn string `json:"LocationArn"`
+    LocationArn string `json:"LocationArn"`
+    
 }
+

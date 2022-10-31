@@ -1,29 +1,32 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var FetchBundleServers = []string{
 	"https://numbers.twilio.com",
 }
 
 type FetchBundlePathParams struct {
-	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    
 }
 
 type FetchBundleSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type FetchBundleRequest struct {
-	ServerURL  *string
-	PathParams FetchBundlePathParams
-	Security   FetchBundleSecurity
+    ServerURL *string 
+    PathParams FetchBundlePathParams 
+    Security FetchBundleSecurity 
+    
 }
 
 type FetchBundleResponse struct {
-	ContentType                         string
-	StatusCode                          int64
-	NumbersV2RegulatoryComplianceBundle *shared.NumbersV2RegulatoryComplianceBundle
+    ContentType string 
+    StatusCode int64 
+    NumbersV2RegulatoryComplianceBundle *shared.NumbersV2RegulatoryComplianceBundle 
+    
 }
+

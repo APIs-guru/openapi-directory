@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AddHeldAccountsResponse struct {
-	Responses []AddHeldAccountResult `json:"responses,omitempty"`
+    Responses []AddHeldAccountResult `json:"responses,omitempty"`
+    
 }
+

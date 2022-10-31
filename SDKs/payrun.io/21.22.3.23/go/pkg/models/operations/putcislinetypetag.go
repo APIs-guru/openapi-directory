@@ -1,28 +1,32 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PutCisLineTypeTagPathParams struct {
-	CisLineTypeID string `pathParam:"style=simple,explode=false,name=CisLineTypeId"`
-	EmployerID    string `pathParam:"style=simple,explode=false,name=EmployerId"`
-	TagID         string `pathParam:"style=simple,explode=false,name=TagId"`
+    CisLineTypeID string `pathParam:"style=simple,explode=false,name=CisLineTypeId"`
+    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    TagID string `pathParam:"style=simple,explode=false,name=TagId"`
+    
 }
 
 type PutCisLineTypeTagHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type PutCisLineTypeTagRequest struct {
-	PathParams PutCisLineTypeTagPathParams
-	Headers    PutCisLineTypeTagHeaders
+    PathParams PutCisLineTypeTagPathParams 
+    Headers PutCisLineTypeTagHeaders 
+    
 }
 
 type PutCisLineTypeTagResponse struct {
-	ContentType string
-	ErrorModel  *shared.ErrorModel
-	StatusCode  int64
-	Tag         *shared.Tag
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    StatusCode int64 
+    Tag *shared.Tag 
+    
 }
+

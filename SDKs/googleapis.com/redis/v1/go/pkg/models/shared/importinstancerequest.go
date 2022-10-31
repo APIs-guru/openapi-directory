@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ImportInstanceRequest struct {
-	InputConfig *InputConfig `json:"inputConfig,omitempty"`
+    InputConfig *InputConfig `json:"inputConfig,omitempty"`
+    
 }
+

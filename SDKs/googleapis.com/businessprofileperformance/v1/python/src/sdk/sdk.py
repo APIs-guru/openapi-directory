@@ -19,21 +19,25 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def businessprofileperformance_locations_get_daily_metrics_time_series(self, request: operations.BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesRequest) -> operations.BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:getDailyMetricsTimeSeries", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.BusinessprofileperformanceLocationsGetDailyMetricsTimeSeriesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.GetDailyMetricsTimeSeriesResponse])
@@ -42,20 +46,21 @@ class SDK:
         return res
 
     
-    
     def businessprofileperformance_locations_searchkeywords_impressions_monthly_list(self, request: operations.BusinessprofileperformanceLocationsSearchkeywordsImpressionsMonthlyListRequest) -> operations.BusinessprofileperformanceLocationsSearchkeywordsImpressionsMonthlyListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/searchkeywords/impressions/monthly", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = self.client
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.BusinessprofileperformanceLocationsSearchkeywordsImpressionsMonthlyListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListSearchKeywordImpressionsMonthlyResponse])

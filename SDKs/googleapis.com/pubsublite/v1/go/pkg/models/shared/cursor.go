@@ -1,5 +1,9 @@
 package shared
 
+
+
 type Cursor struct {
-	Offset *string `json:"offset,omitempty"`
+    Offset *string `json:"offset,omitempty"`
+    
 }
+

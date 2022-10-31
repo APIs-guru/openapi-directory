@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchWriteItemInput struct {
-	RequestItems map[string][]WriteRequest `json:"RequestItems"`
+    RequestItems map[string][]WriteRequest `json:"RequestItems"`
+    
 }
+

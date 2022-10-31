@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateHyperParameterTuningJobResponse struct {
-	HyperParameterTuningJobArn string `json:"HyperParameterTuningJobArn"`
+    HyperParameterTuningJobArn string `json:"HyperParameterTuningJobArn"`
+    
 }
+

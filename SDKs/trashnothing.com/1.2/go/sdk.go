@@ -170,6 +170,7 @@ func (s *SDK) ChangeEmail(ctx context.Context, request operations.ChangeEmailReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -210,6 +211,7 @@ func (s *SDK) ContactModerators(ctx context.Context, request operations.ContactM
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -251,6 +253,7 @@ func (s *SDK) CreateAlert(ctx context.Context, request operations.CreateAlertReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -431,6 +434,7 @@ func (s *SDK) FlagPost(ctx context.Context, request operations.FlagPostRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -472,6 +476,7 @@ func (s *SDK) GeolocatePost(ctx context.Context, request operations.GeolocatePos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1538,6 +1543,7 @@ func (s *SDK) JoinGroups(ctx context.Context, request operations.JoinGroupsReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1671,6 +1677,7 @@ func (s *SDK) MarkAllConversationsRead(ctx context.Context, request operations.M
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1711,6 +1718,7 @@ func (s *SDK) MarkConversationRead(ctx context.Context, request operations.MarkC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1795,6 +1803,7 @@ func (s *SDK) ReplyToConversation(ctx context.Context, request operations.ReplyT
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1846,6 +1855,7 @@ func (s *SDK) ReplyToPost(ctx context.Context, request operations.ReplyToPostReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1888,6 +1898,7 @@ func (s *SDK) ReportConversation(ctx context.Context, request operations.ReportC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1930,6 +1941,7 @@ func (s *SDK) ReportUser(ctx context.Context, request operations.ReportUserReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2088,6 +2100,7 @@ func (s *SDK) SavePostLocation(ctx context.Context, request operations.SavePostL
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2346,6 +2359,7 @@ func (s *SDK) SendFeedback(ctx context.Context, request operations.SendFeedbackR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2452,6 +2466,7 @@ func (s *SDK) SetProfileImage(ctx context.Context, request operations.SetProfile
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2533,6 +2548,7 @@ func (s *SDK) SubmitAnswers(ctx context.Context, request operations.SubmitAnswer
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2580,6 +2596,7 @@ func (s *SDK) SubmitPost(ctx context.Context, request operations.SubmitPostReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2629,6 +2646,7 @@ func (s *SDK) SubmitStory(ctx context.Context, request operations.SubmitStoryReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2678,6 +2696,7 @@ func (s *SDK) SubmitUserFeedback(ctx context.Context, request operations.SubmitU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2873,6 +2892,7 @@ func (s *SDK) UpdateCurrentUser(ctx context.Context, request operations.UpdateCu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2922,6 +2942,7 @@ func (s *SDK) UpdateLocation(ctx context.Context, request operations.UpdateLocat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2971,6 +2992,7 @@ func (s *SDK) UpdatePost(ctx context.Context, request operations.UpdatePostReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -3022,6 +3044,7 @@ func (s *SDK) UploadPhoto(ctx context.Context, request operations.UploadPhotoReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

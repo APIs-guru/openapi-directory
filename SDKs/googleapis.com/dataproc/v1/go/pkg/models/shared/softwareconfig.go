@@ -1,25 +1,31 @@
 package shared
 
+
+
+
 type SoftwareConfigOptionalComponentsEnum string
 
 const (
-	SoftwareConfigOptionalComponentsEnumComponentUnspecified SoftwareConfigOptionalComponentsEnum = "COMPONENT_UNSPECIFIED"
-	SoftwareConfigOptionalComponentsEnumAnaconda             SoftwareConfigOptionalComponentsEnum = "ANACONDA"
-	SoftwareConfigOptionalComponentsEnumDocker               SoftwareConfigOptionalComponentsEnum = "DOCKER"
-	SoftwareConfigOptionalComponentsEnumDruid                SoftwareConfigOptionalComponentsEnum = "DRUID"
-	SoftwareConfigOptionalComponentsEnumFlink                SoftwareConfigOptionalComponentsEnum = "FLINK"
-	SoftwareConfigOptionalComponentsEnumHbase                SoftwareConfigOptionalComponentsEnum = "HBASE"
-	SoftwareConfigOptionalComponentsEnumHiveWebhcat          SoftwareConfigOptionalComponentsEnum = "HIVE_WEBHCAT"
-	SoftwareConfigOptionalComponentsEnumJupyter              SoftwareConfigOptionalComponentsEnum = "JUPYTER"
-	SoftwareConfigOptionalComponentsEnumPresto               SoftwareConfigOptionalComponentsEnum = "PRESTO"
-	SoftwareConfigOptionalComponentsEnumRanger               SoftwareConfigOptionalComponentsEnum = "RANGER"
-	SoftwareConfigOptionalComponentsEnumSolr                 SoftwareConfigOptionalComponentsEnum = "SOLR"
-	SoftwareConfigOptionalComponentsEnumZeppelin             SoftwareConfigOptionalComponentsEnum = "ZEPPELIN"
-	SoftwareConfigOptionalComponentsEnumZookeeper            SoftwareConfigOptionalComponentsEnum = "ZOOKEEPER"
+    SoftwareConfigOptionalComponentsEnumComponentUnspecified SoftwareConfigOptionalComponentsEnum = "COMPONENT_UNSPECIFIED"
+SoftwareConfigOptionalComponentsEnumAnaconda SoftwareConfigOptionalComponentsEnum = "ANACONDA"
+SoftwareConfigOptionalComponentsEnumDocker SoftwareConfigOptionalComponentsEnum = "DOCKER"
+SoftwareConfigOptionalComponentsEnumDruid SoftwareConfigOptionalComponentsEnum = "DRUID"
+SoftwareConfigOptionalComponentsEnumFlink SoftwareConfigOptionalComponentsEnum = "FLINK"
+SoftwareConfigOptionalComponentsEnumHbase SoftwareConfigOptionalComponentsEnum = "HBASE"
+SoftwareConfigOptionalComponentsEnumHiveWebhcat SoftwareConfigOptionalComponentsEnum = "HIVE_WEBHCAT"
+SoftwareConfigOptionalComponentsEnumJupyter SoftwareConfigOptionalComponentsEnum = "JUPYTER"
+SoftwareConfigOptionalComponentsEnumPresto SoftwareConfigOptionalComponentsEnum = "PRESTO"
+SoftwareConfigOptionalComponentsEnumRanger SoftwareConfigOptionalComponentsEnum = "RANGER"
+SoftwareConfigOptionalComponentsEnumSolr SoftwareConfigOptionalComponentsEnum = "SOLR"
+SoftwareConfigOptionalComponentsEnumZeppelin SoftwareConfigOptionalComponentsEnum = "ZEPPELIN"
+SoftwareConfigOptionalComponentsEnumZookeeper SoftwareConfigOptionalComponentsEnum = "ZOOKEEPER"
 )
 
+
 type SoftwareConfig struct {
-	ImageVersion       *string                                `json:"imageVersion,omitempty"`
-	OptionalComponents []SoftwareConfigOptionalComponentsEnum `json:"optionalComponents,omitempty"`
-	Properties         map[string]string                      `json:"properties,omitempty"`
+    ImageVersion *string `json:"imageVersion,omitempty"`
+    OptionalComponents []SoftwareConfigOptionalComponentsEnum `json:"optionalComponents,omitempty"`
+    Properties map[string]string `json:"properties,omitempty"`
+    
 }
+

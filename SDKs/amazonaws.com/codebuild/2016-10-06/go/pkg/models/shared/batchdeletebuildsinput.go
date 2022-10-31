@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchDeleteBuildsInput struct {
-	Ids []string `json:"ids"`
+    Ids []string `json:"ids"`
+    
 }
+

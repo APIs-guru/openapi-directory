@@ -19,26 +19,31 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def healthcare_projects_locations_datasets_consent_stores_attribute_definitions_create(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsCreateRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/attributeDefinitions", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AttributeDefinition])
@@ -47,21 +52,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_attribute_definitions_list(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsListRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/attributeDefinitions", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresAttributeDefinitionsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListAttributeDefinitionsResponse])
@@ -70,25 +75,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_check_data_access(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresCheckDataAccessRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresCheckDataAccessResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{consentStore}:checkDataAccess", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresCheckDataAccessResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.CheckDataAccessResponse])
@@ -97,25 +104,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_consent_artifacts_create(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreateRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/consentArtifacts", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ConsentArtifact])
@@ -124,21 +133,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_consent_artifacts_list(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsListRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/consentArtifacts", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentArtifactsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListConsentArtifactsResponse])
@@ -147,25 +156,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_consents_activate(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsActivateRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsActivateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:activate", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsActivateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Consent])
@@ -173,26 +184,28 @@ class SDK:
 
         return res
 
-    
     
     def healthcare_projects_locations_datasets_consent_stores_consents_create(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsCreateRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/consents", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Consent])
@@ -201,21 +214,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_consents_delete_revision(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevisionRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevisionResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:deleteRevision", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsDeleteRevisionResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -224,21 +237,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_consents_list(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsListRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/consents", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListConsentsResponse])
@@ -247,21 +260,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_consents_list_revisions(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsListRevisionsRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsListRevisionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:listRevisions", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsListRevisionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListConsentRevisionsResponse])
@@ -270,25 +283,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_consents_reject(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsRejectRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsRejectResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:reject", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsRejectResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Consent])
@@ -296,26 +311,28 @@ class SDK:
 
         return res
 
-    
     
     def healthcare_projects_locations_datasets_consent_stores_consents_revoke(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsRevokeRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsRevokeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:revoke", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresConsentsRevokeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Consent])
@@ -324,25 +341,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_create(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresCreateRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/consentStores", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ConsentStore])
@@ -351,25 +370,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_evaluate_user_consents(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{consentStore}:evaluateUserConsents", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresEvaluateUserConsentsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.EvaluateUserConsentsResponse])
@@ -378,21 +399,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_list(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresListRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/consentStores", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListConsentStoresResponse])
@@ -401,25 +422,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_query_accessible_data(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresQueryAccessibleDataRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresQueryAccessibleDataResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{consentStore}:queryAccessibleData", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresQueryAccessibleDataResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Operation])
@@ -428,25 +451,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_user_data_mappings_archive(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchiveRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchiveResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:archive", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsArchiveResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -455,25 +480,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_user_data_mappings_create(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/userDataMappings", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.UserDataMapping])
@@ -482,21 +509,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_consent_stores_user_data_mappings_list(self, request: operations.HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListRequest) -> operations.HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/userDataMappings", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsConsentStoresUserDataMappingsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListUserDataMappingsResponse])
@@ -505,25 +532,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_create(self, request: operations.HealthcareProjectsLocationsDatasetsCreateRequest) -> operations.HealthcareProjectsLocationsDatasetsCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/datasets", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Operation])
@@ -531,26 +560,28 @@ class SDK:
 
         return res
 
-    
     
     def healthcare_projects_locations_datasets_deidentify(self, request: operations.HealthcareProjectsLocationsDatasetsDeidentifyRequest) -> operations.HealthcareProjectsLocationsDatasetsDeidentifyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{sourceDataset}:deidentify", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsDeidentifyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Operation])
@@ -559,25 +590,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_dicom_stores_create(self, request: operations.HealthcareProjectsLocationsDatasetsDicomStoresCreateRequest) -> operations.HealthcareProjectsLocationsDatasetsDicomStoresCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/dicomStores", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsDicomStoresCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.DicomStore])
@@ -586,21 +619,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_dicom_stores_list(self, request: operations.HealthcareProjectsLocationsDatasetsDicomStoresListRequest) -> operations.HealthcareProjectsLocationsDatasetsDicomStoresListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/dicomStores", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsDicomStoresListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListDicomStoresResponse])
@@ -609,21 +642,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_dicom_stores_studies_series_instances_delete(self, request: operations.HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeleteRequest) -> operations.HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/dicomWeb/{dicomWebPath}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -632,21 +665,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_dicom_stores_studies_series_instances_frames_retrieve_rendered(self, request: operations.HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesRetrieveRenderedRequest) -> operations.HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesRetrieveRenderedResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/dicomWeb/{dicomWebPath}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsDicomStoresStudiesSeriesInstancesFramesRetrieveRenderedResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -654,26 +687,28 @@ class SDK:
 
         return res
 
-    
     
     def healthcare_projects_locations_datasets_dicom_stores_studies_store_instances(self, request: operations.HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstancesRequest) -> operations.HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstancesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/dicomWeb/{dicomWebPath}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsDicomStoresStudiesStoreInstancesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -682,25 +717,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_fhir_stores_create(self, request: operations.HealthcareProjectsLocationsDatasetsFhirStoresCreateRequest) -> operations.HealthcareProjectsLocationsDatasetsFhirStoresCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/fhirStores", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsFhirStoresCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.FhirStore])
@@ -709,25 +746,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_fhir_stores_deidentify(self, request: operations.HealthcareProjectsLocationsDatasetsFhirStoresDeidentifyRequest) -> operations.HealthcareProjectsLocationsDatasetsFhirStoresDeidentifyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{sourceStore}:deidentify", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsFhirStoresDeidentifyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Operation])
@@ -736,21 +775,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_fhir_stores_fhir_patient_everything(self, request: operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirPatientEverythingRequest) -> operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirPatientEverythingResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}/$everything", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirPatientEverythingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -759,21 +798,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_fhir_stores_fhir_resource_purge(self, request: operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcePurgeRequest) -> operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcePurgeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}/$purge", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirResourcePurgeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -782,25 +821,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_fhir_stores_fhir_resource_validate(self, request: operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidateRequest) -> operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/fhir/{type}/$validate", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirResourceValidateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -808,22 +849,22 @@ class SDK:
 
         return res
 
-    
     
     def healthcare_projects_locations_datasets_fhir_stores_fhir_capabilities(self, request: operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirCapabilitiesRequest) -> operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirCapabilitiesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}/fhir/metadata", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirCapabilitiesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -831,26 +872,28 @@ class SDK:
 
         return res
 
-    
     
     def healthcare_projects_locations_datasets_fhir_stores_fhir_create(self, request: operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirCreateRequest) -> operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/fhir/{type}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -858,26 +901,28 @@ class SDK:
 
         return res
 
-    
     
     def healthcare_projects_locations_datasets_fhir_stores_fhir_execute_bundle(self, request: operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirExecuteBundleRequest) -> operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirExecuteBundleResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/fhir", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirExecuteBundleResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -885,22 +930,22 @@ class SDK:
 
         return res
 
-    
     
     def healthcare_projects_locations_datasets_fhir_stores_fhir_history(self, request: operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirHistoryRequest) -> operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirHistoryResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}/_history", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirHistoryResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -908,26 +953,28 @@ class SDK:
 
         return res
 
-    
     
     def healthcare_projects_locations_datasets_fhir_stores_fhir_search(self, request: operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirSearchRequest) -> operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirSearchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/fhir/_search", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirSearchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -935,26 +982,28 @@ class SDK:
 
         return res
 
-    
     
     def healthcare_projects_locations_datasets_fhir_stores_fhir_search_type(self, request: operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirSearchTypeRequest) -> operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirSearchTypeResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/fhir/{resourceType}/_search", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirSearchTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -962,26 +1011,28 @@ class SDK:
 
         return res
 
-    
     
     def healthcare_projects_locations_datasets_fhir_stores_fhir_update(self, request: operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdateRequest) -> operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PUT", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsFhirStoresFhirUpdateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.HTTPBody])
@@ -990,21 +1041,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_fhir_stores_list(self, request: operations.HealthcareProjectsLocationsDatasetsFhirStoresListRequest) -> operations.HealthcareProjectsLocationsDatasetsFhirStoresListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/fhirStores", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsFhirStoresListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListFhirStoresResponse])
@@ -1013,25 +1064,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_hl7_v2_stores_create(self, request: operations.HealthcareProjectsLocationsDatasetsHl7V2StoresCreateRequest) -> operations.HealthcareProjectsLocationsDatasetsHl7V2StoresCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/hl7V2Stores", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsHl7V2StoresCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Hl7V2Store])
@@ -1040,25 +1093,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_hl7_v2_stores_export(self, request: operations.HealthcareProjectsLocationsDatasetsHl7V2StoresExportRequest) -> operations.HealthcareProjectsLocationsDatasetsHl7V2StoresExportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:export", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsHl7V2StoresExportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Operation])
@@ -1067,21 +1122,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_hl7_v2_stores_get_iam_policy(self, request: operations.HealthcareProjectsLocationsDatasetsHl7V2StoresGetIamPolicyRequest) -> operations.HealthcareProjectsLocationsDatasetsHl7V2StoresGetIamPolicyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{resource}:getIamPolicy", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsHl7V2StoresGetIamPolicyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Policy])
@@ -1090,25 +1145,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_hl7_v2_stores_import(self, request: operations.HealthcareProjectsLocationsDatasetsHl7V2StoresImportRequest) -> operations.HealthcareProjectsLocationsDatasetsHl7V2StoresImportResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:import", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsHl7V2StoresImportResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Operation])
@@ -1117,21 +1174,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_hl7_v2_stores_list(self, request: operations.HealthcareProjectsLocationsDatasetsHl7V2StoresListRequest) -> operations.HealthcareProjectsLocationsDatasetsHl7V2StoresListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/hl7V2Stores", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsHl7V2StoresListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListHl7V2StoresResponse])
@@ -1140,25 +1197,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_hl7_v2_stores_messages_create(self, request: operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesCreateRequest) -> operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesCreateResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/messages", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesCreateResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Message])
@@ -1167,21 +1226,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_hl7_v2_stores_messages_delete(self, request: operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesDeleteRequest) -> operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesDeleteResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesDeleteResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1190,25 +1249,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_hl7_v2_stores_messages_ingest(self, request: operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngestRequest) -> operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngestResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/messages:ingest", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesIngestResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.IngestMessageResponse])
@@ -1217,21 +1278,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_hl7_v2_stores_messages_list(self, request: operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesListRequest) -> operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/messages", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListMessagesResponse])
@@ -1240,25 +1301,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_hl7_v2_stores_messages_patch(self, request: operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatchRequest) -> operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatchResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("PATCH", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsHl7V2StoresMessagesPatchResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Message])
@@ -1267,25 +1330,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_hl7_v2_stores_set_iam_policy(self, request: operations.HealthcareProjectsLocationsDatasetsHl7V2StoresSetIamPolicyRequest) -> operations.HealthcareProjectsLocationsDatasetsHl7V2StoresSetIamPolicyResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{resource}:setIamPolicy", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsHl7V2StoresSetIamPolicyResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Policy])
@@ -1294,25 +1359,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_hl7_v2_stores_test_iam_permissions(self, request: operations.HealthcareProjectsLocationsDatasetsHl7V2StoresTestIamPermissionsRequest) -> operations.HealthcareProjectsLocationsDatasetsHl7V2StoresTestIamPermissionsResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{resource}:testIamPermissions", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsHl7V2StoresTestIamPermissionsResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TestIamPermissionsResponse])
@@ -1321,21 +1388,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_list(self, request: operations.HealthcareProjectsLocationsDatasetsListRequest) -> operations.HealthcareProjectsLocationsDatasetsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{parent}/datasets", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListDatasetsResponse])
@@ -1344,25 +1411,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_operations_cancel(self, request: operations.HealthcareProjectsLocationsDatasetsOperationsCancelRequest) -> operations.HealthcareProjectsLocationsDatasetsOperationsCancelResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}:cancel", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsOperationsCancelResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[dict[str, Any]])
@@ -1371,21 +1440,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_operations_get(self, request: operations.HealthcareProjectsLocationsDatasetsOperationsGetRequest) -> operations.HealthcareProjectsLocationsDatasetsOperationsGetResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsOperationsGetResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.Operation])
@@ -1394,21 +1463,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_datasets_operations_list(self, request: operations.HealthcareProjectsLocationsDatasetsOperationsListRequest) -> operations.HealthcareProjectsLocationsDatasetsOperationsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}/operations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsDatasetsOperationsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListOperationsResponse])
@@ -1417,21 +1486,21 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_list(self, request: operations.HealthcareProjectsLocationsListRequest) -> operations.HealthcareProjectsLocationsListResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{name}/locations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsListResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.ListLocationsResponse])
@@ -1440,25 +1509,27 @@ class SDK:
         return res
 
     
-    
     def healthcare_projects_locations_services_nlp_analyze_entities(self, request: operations.HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesRequest) -> operations.HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/v1/{nlpService}:analyzeEntities", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, params=query_params, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.HealthcareProjectsLocationsServicesNlpAnalyzeEntitiesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.AnalyzeEntitiesResponse])

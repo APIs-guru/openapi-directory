@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CloudWatchDestination struct {
-	DimensionConfigurations []CloudWatchDimensionConfiguration `json:"DimensionConfigurations"`
+    DimensionConfigurations []CloudWatchDimensionConfiguration `json:"DimensionConfigurations"`
+    
 }
+

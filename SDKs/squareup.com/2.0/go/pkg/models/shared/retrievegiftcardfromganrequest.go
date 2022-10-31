@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RetrieveGiftCardFromGanRequest struct {
-	Gan string `json:"gan"`
+    Gan string `json:"gan"`
+    
 }
+

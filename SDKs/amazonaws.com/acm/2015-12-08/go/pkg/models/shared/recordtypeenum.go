@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type RecordTypeEnum string
 
 const (
-	RecordTypeEnumCname RecordTypeEnum = "CNAME"
+    RecordTypeEnumCname RecordTypeEnum = "CNAME"
 )
+
+

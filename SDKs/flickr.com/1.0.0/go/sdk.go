@@ -1053,6 +1053,7 @@ func (s *SDK) UploadPhoto(ctx context.Context, request operations.UploadPhotoReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

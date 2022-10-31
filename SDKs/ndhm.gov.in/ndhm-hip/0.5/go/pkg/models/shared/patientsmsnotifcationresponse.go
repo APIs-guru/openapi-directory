@@ -1,20 +1,23 @@
 package shared
 
 import (
-	"time"
-)
+"time")
+
 
 type PatientSmsNotifcationResponseStatusEnum string
 
 const (
-	PatientSmsNotifcationResponseStatusEnumAcknowledged PatientSmsNotifcationResponseStatusEnum = "ACKNOWLEDGED"
-	PatientSmsNotifcationResponseStatusEnumErrored      PatientSmsNotifcationResponseStatusEnum = "ERRORED"
+    PatientSmsNotifcationResponseStatusEnumAcknowledged PatientSmsNotifcationResponseStatusEnum = "ACKNOWLEDGED"
+PatientSmsNotifcationResponseStatusEnumErrored PatientSmsNotifcationResponseStatusEnum = "ERRORED"
 )
 
+
 type PatientSmsNotifcationResponse struct {
-	Error     *Error                                   `json:"error,omitempty"`
-	RequestID string                                   `json:"requestId"`
-	Resp      RequestReference                         `json:"resp"`
-	Status    *PatientSmsNotifcationResponseStatusEnum `json:"status,omitempty"`
-	Timestamp time.Time                                `json:"timestamp"`
+    Error *Error `json:"error,omitempty"`
+    RequestID string `json:"requestId"`
+    Resp RequestReference `json:"resp"`
+    Status *PatientSmsNotifcationResponseStatusEnum `json:"status,omitempty"`
+    Timestamp time.Time `json:"timestamp"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeTrailsResponse struct {
-	TrailList []Trail `json:"trailList,omitempty"`
+    TrailList []Trail `json:"trailList,omitempty"`
+    
 }
+

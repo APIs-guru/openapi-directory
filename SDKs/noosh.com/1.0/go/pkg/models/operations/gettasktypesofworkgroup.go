@@ -1,17 +1,23 @@
 package operations
 
+
+
 type GetTaskTypesOfWorkgroupPathParams struct {
-	WorkgroupID string `pathParam:"style=simple,explode=false,name=workgroup_id"`
+    WorkgroupID string `pathParam:"style=simple,explode=false,name=workgroup_id"`
+    
 }
 
 type GetTaskTypesOfWorkgroupRequest struct {
-	PathParams GetTaskTypesOfWorkgroupPathParams
+    PathParams GetTaskTypesOfWorkgroupPathParams 
+    
 }
 
 type GetTaskTypesOfWorkgroupResponse struct {
-	Body           []byte
-	ContentType    string
-	HTTPStatusVo   *interface{}
-	StatusCode     int64
-	TaskTypeListVo *interface{}
+    Body []byte 
+    ContentType string 
+    HTTPStatusVo *interface{} 
+    StatusCode int64 
+    TaskTypeListVo *interface{} 
+    
 }
+

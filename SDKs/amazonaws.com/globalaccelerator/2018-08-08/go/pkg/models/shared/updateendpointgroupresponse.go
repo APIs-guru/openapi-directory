@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateEndpointGroupResponse struct {
-	EndpointGroup *EndpointGroup `json:"EndpointGroup,omitempty"`
+    EndpointGroup *EndpointGroup `json:"EndpointGroup,omitempty"`
+    
 }
+

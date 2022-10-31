@@ -5,7 +5,7 @@ from sdk.models import shared
 
 @dataclass
 class PostUploadHeaders:
-    x_recipient_email: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Recipient-Email' }})
+    x_recipient_email: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Recipient-Email', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

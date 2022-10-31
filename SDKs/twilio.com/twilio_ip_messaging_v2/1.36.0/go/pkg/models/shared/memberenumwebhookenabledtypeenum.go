@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type MemberEnumWebhookEnabledTypeEnum string
 
 const (
-	MemberEnumWebhookEnabledTypeEnumTrue  MemberEnumWebhookEnabledTypeEnum = "true"
-	MemberEnumWebhookEnabledTypeEnumFalse MemberEnumWebhookEnabledTypeEnum = "false"
+    MemberEnumWebhookEnabledTypeEnumTrue MemberEnumWebhookEnabledTypeEnum = "true"
+MemberEnumWebhookEnabledTypeEnumFalse MemberEnumWebhookEnabledTypeEnum = "false"
 )
+
+

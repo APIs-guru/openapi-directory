@@ -73,6 +73,7 @@ func (s *SDK) AddChannelCategories(ctx context.Context, request operations.AddCh
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -201,6 +202,7 @@ func (s *SDK) AddChannelModerators(ctx context.Context, request operations.AddCh
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -330,6 +332,7 @@ func (s *SDK) AddTagsToChannel(ctx context.Context, request operations.AddTagsTo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -408,6 +411,7 @@ func (s *SDK) AddVideoCredit(ctx context.Context, request operations.AddVideoCre
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -476,6 +480,7 @@ func (s *SDK) AddVideoCreditAlt1(ctx context.Context, request operations.AddVide
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -801,6 +806,7 @@ func (s *SDK) AddVideoTags(ctx context.Context, request operations.AddVideoTagsR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1229,6 +1235,7 @@ func (s *SDK) AddVideoToVod(ctx context.Context, request operations.AddVideoToVo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1357,6 +1364,7 @@ func (s *SDK) AddVideosToChannel(ctx context.Context, request operations.AddVide
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2639,6 +2647,7 @@ func (s *SDK) ClientAuth(ctx context.Context, request operations.ClientAuthReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2759,6 +2768,7 @@ func (s *SDK) ConvertAccessToken(ctx context.Context, request operations.Convert
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2817,6 +2827,7 @@ func (s *SDK) CreateAlbum(ctx context.Context, request operations.CreateAlbumReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2885,6 +2896,7 @@ func (s *SDK) CreateAlbumAlt1(ctx context.Context, request operations.CreateAlbu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3071,6 +3083,7 @@ func (s *SDK) CreateChannel(ctx context.Context, request operations.CreateChanne
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3139,6 +3152,7 @@ func (s *SDK) CreateComment(ctx context.Context, request operations.CreateCommen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3217,6 +3231,7 @@ func (s *SDK) CreateCommentAlt1(ctx context.Context, request operations.CreateCo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3295,6 +3310,7 @@ func (s *SDK) CreateCommentReply(ctx context.Context, request operations.CreateC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3461,6 +3477,7 @@ func (s *SDK) CreateGroup(ctx context.Context, request operations.CreateGroupReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3607,6 +3624,7 @@ func (s *SDK) CreateProject(ctx context.Context, request operations.CreateProjec
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3685,6 +3703,7 @@ func (s *SDK) CreateProjectAlt1(ctx context.Context, request operations.CreatePr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3763,6 +3782,7 @@ func (s *SDK) CreateTextTrack(ctx context.Context, request operations.CreateText
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3821,6 +3841,7 @@ func (s *SDK) CreateTextTrackAlt1(ctx context.Context, request operations.Create
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3935,6 +3956,7 @@ func (s *SDK) CreateVideoThumbnail(ctx context.Context, request operations.Creat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3980,6 +4002,7 @@ func (s *SDK) CreateVideoThumbnailAlt1(ctx context.Context, request operations.C
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -4028,6 +4051,7 @@ func (s *SDK) CreateVideoVersion(ctx context.Context, request operations.CreateV
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4106,6 +4130,7 @@ func (s *SDK) CreateVod(ctx context.Context, request operations.CreateVodRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4154,6 +4179,7 @@ func (s *SDK) CreateVodAlt1(ctx context.Context, request operations.CreateVodAlt
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -4261,6 +4287,7 @@ func (s *SDK) CreateVodPromotion(ctx context.Context, request operations.CreateV
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -5988,6 +6015,7 @@ func (s *SDK) DeleteVodRegions(ctx context.Context, request operations.DeleteVod
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6083,6 +6111,7 @@ func (s *SDK) EditAlbum(ctx context.Context, request operations.EditAlbumRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6158,6 +6187,7 @@ func (s *SDK) EditAlbumAlt1(ctx context.Context, request operations.EditAlbumAlt
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6233,6 +6263,7 @@ func (s *SDK) EditChannel(ctx context.Context, request operations.EditChannelReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6291,6 +6322,7 @@ func (s *SDK) EditComment(ctx context.Context, request operations.EditCommentReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6356,6 +6388,7 @@ func (s *SDK) EditEmbedPreset(ctx context.Context, request operations.EditEmbedP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6421,6 +6454,7 @@ func (s *SDK) EditEmbedPresetAlt1(ctx context.Context, request operations.EditEm
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6486,6 +6520,7 @@ func (s *SDK) EditPicture(ctx context.Context, request operations.EditPictureReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6531,6 +6566,7 @@ func (s *SDK) EditPictureAlt1(ctx context.Context, request operations.EditPictur
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6579,6 +6615,7 @@ func (s *SDK) EditProject(ctx context.Context, request operations.EditProjectReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6667,6 +6704,7 @@ func (s *SDK) EditProjectAlt1(ctx context.Context, request operations.EditProjec
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6752,6 +6790,7 @@ func (s *SDK) EditTextTrack(ctx context.Context, request operations.EditTextTrac
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6817,6 +6856,7 @@ func (s *SDK) EditUser(ctx context.Context, request operations.EditUserRequest) 
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6862,6 +6902,7 @@ func (s *SDK) EditUserAlt1(ctx context.Context, request operations.EditUserAlt1R
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -6910,6 +6951,7 @@ func (s *SDK) EditVideo(ctx context.Context, request operations.EditVideoRequest
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -6975,6 +7017,7 @@ func (s *SDK) EditVideoCredit(ctx context.Context, request operations.EditVideoC
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7040,6 +7083,7 @@ func (s *SDK) EditVideoThumbnail(ctx context.Context, request operations.EditVid
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7085,6 +7129,7 @@ func (s *SDK) EditVod(ctx context.Context, request operations.EditVodRequest) (*
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7150,6 +7195,7 @@ func (s *SDK) EditVodBackground(ctx context.Context, request operations.EditVodB
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7215,6 +7261,7 @@ func (s *SDK) EditVodPoster(ctx context.Context, request operations.EditVodPoste
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7263,6 +7310,7 @@ func (s *SDK) ExchangeAuthCode(ctx context.Context, request operations.ExchangeA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -7401,6 +7449,7 @@ func (s *SDK) FollowUsers(ctx context.Context, request operations.FollowUsersReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -7490,6 +7539,7 @@ func (s *SDK) FollowUsersAlt1(ctx context.Context, request operations.FollowUser
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -14492,6 +14542,7 @@ func (s *SDK) RemoveChannelModerators(ctx context.Context, request operations.Re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -14780,6 +14831,7 @@ func (s *SDK) RemoveVideosFromChannel(ctx context.Context, request operations.Re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -14969,6 +15021,7 @@ func (s *SDK) ReplaceAlbumCustomThumb(ctx context.Context, request operations.Re
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -15034,6 +15087,7 @@ func (s *SDK) ReplaceAlbumLogo(ctx context.Context, request operations.ReplaceAl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -15102,6 +15156,7 @@ func (s *SDK) ReplaceChannelModerators(ctx context.Context, request operations.R
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -15180,6 +15235,7 @@ func (s *SDK) ReplaceVideosInAlbum(ctx context.Context, request operations.Repla
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -15239,6 +15295,7 @@ func (s *SDK) ReplaceVideosInAlbumAlt1(ctx context.Context, request operations.R
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -15480,6 +15537,7 @@ func (s *SDK) SetChannelPrivacyUsers(ctx context.Context, request operations.Set
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -15565,6 +15623,7 @@ func (s *SDK) SetVideoAsAlbumThumbnail(ctx context.Context, request operations.S
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -15640,6 +15699,7 @@ func (s *SDK) SetVideoAsAlbumThumbnailAlt1(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -15718,6 +15778,7 @@ func (s *SDK) SetVodRegions(ctx context.Context, request operations.SetVodRegion
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -15926,6 +15987,7 @@ func (s *SDK) SuggestVideoCategory(ctx context.Context, request operations.Sugge
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -16274,6 +16336,7 @@ func (s *SDK) UploadVideo(ctx context.Context, request operations.UploadVideoReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -16362,6 +16425,7 @@ func (s *SDK) UploadVideoAlt1(ctx context.Context, request operations.UploadVide
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type WebAsset struct {
-	Site *string `json:"site,omitempty"`
+    Site *string `json:"site,omitempty"`
+    
 }
+

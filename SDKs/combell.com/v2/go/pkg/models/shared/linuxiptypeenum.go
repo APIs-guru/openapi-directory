@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type LinuxIPTypeEnum string
 
 const (
-	LinuxIPTypeEnumDedicated LinuxIPTypeEnum = "dedicated"
-	LinuxIPTypeEnumShared    LinuxIPTypeEnum = "shared"
+    LinuxIPTypeEnumDedicated LinuxIPTypeEnum = "dedicated"
+LinuxIPTypeEnumShared LinuxIPTypeEnum = "shared"
 )
+
+

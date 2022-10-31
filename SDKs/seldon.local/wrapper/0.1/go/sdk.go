@@ -69,6 +69,7 @@ func (s *SDK) Aggregate2(ctx context.Context, request operations.Aggregate2Reque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -117,6 +118,7 @@ func (s *SDK) Route(ctx context.Context, request operations.RouteRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -165,6 +167,7 @@ func (s *SDK) SendFeedback(ctx context.Context, request operations.SendFeedbackR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -213,6 +216,7 @@ func (s *SDK) TransformInput(ctx context.Context, request operations.TransformIn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -261,6 +265,7 @@ func (s *SDK) TransformInput3(ctx context.Context, request operations.TransformI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -309,6 +314,7 @@ func (s *SDK) TransformOutput(ctx context.Context, request operations.TransformO
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient

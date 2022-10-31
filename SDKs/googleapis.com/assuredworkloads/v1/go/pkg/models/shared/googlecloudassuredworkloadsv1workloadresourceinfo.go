@@ -1,16 +1,22 @@
 package shared
 
+
+
+
 type GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum string
 
 const (
-	GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnumResourceTypeUnspecified GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum = "RESOURCE_TYPE_UNSPECIFIED"
-	GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnumConsumerProject         GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum = "CONSUMER_PROJECT"
-	GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnumConsumerFolder          GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum = "CONSUMER_FOLDER"
-	GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnumEncryptionKeysProject   GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum = "ENCRYPTION_KEYS_PROJECT"
-	GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnumKeyring                 GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum = "KEYRING"
+    GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnumResourceTypeUnspecified GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum = "RESOURCE_TYPE_UNSPECIFIED"
+GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnumConsumerProject GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum = "CONSUMER_PROJECT"
+GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnumConsumerFolder GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum = "CONSUMER_FOLDER"
+GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnumEncryptionKeysProject GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum = "ENCRYPTION_KEYS_PROJECT"
+GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnumKeyring GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum = "KEYRING"
 )
 
+
 type GoogleCloudAssuredworkloadsV1WorkloadResourceInfo struct {
-	ResourceID   *string                                                            `json:"resourceId,omitempty"`
-	ResourceType *GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum `json:"resourceType,omitempty"`
+    ResourceID *string `json:"resourceId,omitempty"`
+    ResourceType *GoogleCloudAssuredworkloadsV1WorkloadResourceInfoResourceTypeEnum `json:"resourceType,omitempty"`
+    
 }
+

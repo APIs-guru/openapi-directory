@@ -10,7 +10,7 @@ class GetSettingValueBySdkkeyPathParams:
 
 @dataclass
 class GetSettingValueBySdkkeyHeaders:
-    x_configcat_sdkkey: str = field(default=None, metadata={'header': { 'field_name': 'X-CONFIGCAT-SDKKEY' }})
+    x_configcat_sdkkey: str = field(default=None, metadata={'header': { 'field_name': 'X-CONFIGCAT-SDKKEY', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

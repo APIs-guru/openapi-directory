@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetTagPathParams struct {
-	Word string `pathParam:"style=simple,explode=false,name=word"`
+    Word string `pathParam:"style=simple,explode=false,name=word"`
+    
 }
 
 type GetTagRequest struct {
-	PathParams GetTagPathParams
+    PathParams GetTagPathParams 
+    
 }
 
 type GetTagResponse struct {
-	ContentType string
-	StatusCode  int64
-	Tag         *shared.Tag
+    ContentType string 
+    StatusCode int64 
+    Tag *shared.Tag 
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PullRequestStatusChangedEventMetadata struct {
-	PullRequestStatus *PullRequestStatusEnumEnum `json:"pullRequestStatus,omitempty"`
+    PullRequestStatus *PullRequestStatusEnumEnum `json:"pullRequestStatus,omitempty"`
+    
 }
+

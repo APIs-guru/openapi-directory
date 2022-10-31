@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CustomListTargetingSetting struct {
-	CustomListID *string `json:"customListId,omitempty"`
+    CustomListID *string `json:"customListId,omitempty"`
+    
 }
+

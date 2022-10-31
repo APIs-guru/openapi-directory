@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateQualificationTypeResponse struct {
-	QualificationType *QualificationType `json:"QualificationType,omitempty"`
+    QualificationType *QualificationType `json:"QualificationType,omitempty"`
+    
 }
+

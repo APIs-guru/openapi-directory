@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EnterpriseCrmEventbusProtoTaskUIConfig struct {
-	TaskUIModuleConfigs []EnterpriseCrmEventbusProtoTaskUIModuleConfig `json:"taskUiModuleConfigs,omitempty"`
+    TaskUIModuleConfigs []EnterpriseCrmEventbusProtoTaskUIModuleConfig `json:"taskUiModuleConfigs,omitempty"`
+    
 }
+

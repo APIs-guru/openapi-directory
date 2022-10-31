@@ -1,90 +1,97 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-	"time"
-)
+"time"
+"openapi/pkg/models/shared")
+
 
 type GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum string
 
 const (
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumAccountDoesNotAcceptDirectDebits     GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "ACCOUNT_DOES_NOT_ACCEPT_DIRECT_DEBITS"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumDdic                                 GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "DDIC"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumAccountNotFound                      GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "ACCOUNT_NOT_FOUND"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumAccountNotLive                       GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "ACCOUNT_NOT_LIVE"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumCustomerNotFound                     GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "CUSTOMER_NOT_FOUND"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumBusinessNotLive                      GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "BUSINESS_NOT_LIVE"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumBusinessNotFull                      GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "BUSINESS_NOT_FULL"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumPersonalUserNotLive                  GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "PERSONAL_USER_NOT_LIVE"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumPersonalUserNotFull                  GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "PERSONAL_USER_NOT_FULL"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumMandateAlreadyExists                 GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "MANDATE_ALREADY_EXISTS"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumMandateWithDiferentAccount           GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "MANDATE_WITH_DIFERENT_ACCOUNT"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumNullMandateReference                 GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "NULL_MANDATE_REFERENCE"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumInvalidAccountCurrency               GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "INVALID_ACCOUNT_CURRENCY"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumInvalidMandateReference              GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "INVALID_MANDATE_REFERENCE"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumRequestedByCustomerViaSupport        GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "REQUESTED_BY_CUSTOMER_VIA_SUPPORT"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumCustomerAccountClosed                GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "CUSTOMER_ACCOUNT_CLOSED"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumCustomerDeceased                     GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "CUSTOMER_DECEASED"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumAccountTransferred                   GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "ACCOUNT_TRANSFERRED"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumMandateNotFound                      GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "MANDATE_NOT_FOUND"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumAccountTransferredToDifferentAccount GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "ACCOUNT_TRANSFERRED_TO_DIFFERENT_ACCOUNT"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumInvalidAccountType                   GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "INVALID_ACCOUNT_TYPE"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumMandateExpired                       GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "MANDATE_EXPIRED"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumMandateCancelled                     GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "MANDATE_CANCELLED"
-	GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumRequestedByCustomer                  GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "REQUESTED_BY_CUSTOMER"
+    GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumAccountDoesNotAcceptDirectDebits GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "ACCOUNT_DOES_NOT_ACCEPT_DIRECT_DEBITS"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumDdic GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "DDIC"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumAccountNotFound GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "ACCOUNT_NOT_FOUND"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumAccountNotLive GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "ACCOUNT_NOT_LIVE"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumCustomerNotFound GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "CUSTOMER_NOT_FOUND"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumBusinessNotLive GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "BUSINESS_NOT_LIVE"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumBusinessNotFull GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "BUSINESS_NOT_FULL"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumPersonalUserNotLive GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "PERSONAL_USER_NOT_LIVE"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumPersonalUserNotFull GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "PERSONAL_USER_NOT_FULL"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumMandateAlreadyExists GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "MANDATE_ALREADY_EXISTS"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumMandateWithDiferentAccount GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "MANDATE_WITH_DIFERENT_ACCOUNT"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumNullMandateReference GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "NULL_MANDATE_REFERENCE"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumInvalidAccountCurrency GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "INVALID_ACCOUNT_CURRENCY"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumInvalidMandateReference GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "INVALID_MANDATE_REFERENCE"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumRequestedByCustomerViaSupport GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "REQUESTED_BY_CUSTOMER_VIA_SUPPORT"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumCustomerAccountClosed GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "CUSTOMER_ACCOUNT_CLOSED"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumCustomerDeceased GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "CUSTOMER_DECEASED"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumAccountTransferred GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "ACCOUNT_TRANSFERRED"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumMandateNotFound GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "MANDATE_NOT_FOUND"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumAccountTransferredToDifferentAccount GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "ACCOUNT_TRANSFERRED_TO_DIFFERENT_ACCOUNT"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumInvalidAccountType GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "INVALID_ACCOUNT_TYPE"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumMandateExpired GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "MANDATE_EXPIRED"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumMandateCancelled GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "MANDATE_CANCELLED"
+GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnumRequestedByCustomer GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum = "REQUESTED_BY_CUSTOMER"
 )
+
+
 
 type GetDirectDebitMandatesMandatesMandateStatusEnum string
 
 const (
-	GetDirectDebitMandatesMandatesMandateStatusEnumCreated                GetDirectDebitMandatesMandatesMandateStatusEnum = "CREATED"
-	GetDirectDebitMandatesMandatesMandateStatusEnumLive                   GetDirectDebitMandatesMandatesMandateStatusEnum = "LIVE"
-	GetDirectDebitMandatesMandatesMandateStatusEnumRejectRequested        GetDirectDebitMandatesMandatesMandateStatusEnum = "REJECT_REQUESTED"
-	GetDirectDebitMandatesMandatesMandateStatusEnumRejectRecordInProgress GetDirectDebitMandatesMandatesMandateStatusEnum = "REJECT_RECORD_IN_PROGRESS"
-	GetDirectDebitMandatesMandatesMandateStatusEnumRejectRecorded         GetDirectDebitMandatesMandatesMandateStatusEnum = "REJECT_RECORDED"
-	GetDirectDebitMandatesMandatesMandateStatusEnumRejectFileCreated      GetDirectDebitMandatesMandatesMandateStatusEnum = "REJECT_FILE_CREATED"
-	GetDirectDebitMandatesMandatesMandateStatusEnumRejectFileSent         GetDirectDebitMandatesMandatesMandateStatusEnum = "REJECT_FILE_SENT"
-	GetDirectDebitMandatesMandatesMandateStatusEnumCancelRequested        GetDirectDebitMandatesMandatesMandateStatusEnum = "CANCEL_REQUESTED"
-	GetDirectDebitMandatesMandatesMandateStatusEnumCancelRecordInProgress GetDirectDebitMandatesMandatesMandateStatusEnum = "CANCEL_RECORD_IN_PROGRESS"
-	GetDirectDebitMandatesMandatesMandateStatusEnumCancelRecorded         GetDirectDebitMandatesMandatesMandateStatusEnum = "CANCEL_RECORDED"
-	GetDirectDebitMandatesMandatesMandateStatusEnumCancelFileCreated      GetDirectDebitMandatesMandatesMandateStatusEnum = "CANCEL_FILE_CREATED"
-	GetDirectDebitMandatesMandatesMandateStatusEnumCancelFileSent         GetDirectDebitMandatesMandatesMandateStatusEnum = "CANCEL_FILE_SENT"
-	GetDirectDebitMandatesMandatesMandateStatusEnumComplete               GetDirectDebitMandatesMandatesMandateStatusEnum = "COMPLETE"
-	GetDirectDebitMandatesMandatesMandateStatusEnumDormant                GetDirectDebitMandatesMandatesMandateStatusEnum = "DORMANT"
+    GetDirectDebitMandatesMandatesMandateStatusEnumCreated GetDirectDebitMandatesMandatesMandateStatusEnum = "CREATED"
+GetDirectDebitMandatesMandatesMandateStatusEnumLive GetDirectDebitMandatesMandatesMandateStatusEnum = "LIVE"
+GetDirectDebitMandatesMandatesMandateStatusEnumRejectRequested GetDirectDebitMandatesMandatesMandateStatusEnum = "REJECT_REQUESTED"
+GetDirectDebitMandatesMandatesMandateStatusEnumRejectRecordInProgress GetDirectDebitMandatesMandatesMandateStatusEnum = "REJECT_RECORD_IN_PROGRESS"
+GetDirectDebitMandatesMandatesMandateStatusEnumRejectRecorded GetDirectDebitMandatesMandatesMandateStatusEnum = "REJECT_RECORDED"
+GetDirectDebitMandatesMandatesMandateStatusEnumRejectFileCreated GetDirectDebitMandatesMandatesMandateStatusEnum = "REJECT_FILE_CREATED"
+GetDirectDebitMandatesMandatesMandateStatusEnumRejectFileSent GetDirectDebitMandatesMandatesMandateStatusEnum = "REJECT_FILE_SENT"
+GetDirectDebitMandatesMandatesMandateStatusEnumCancelRequested GetDirectDebitMandatesMandatesMandateStatusEnum = "CANCEL_REQUESTED"
+GetDirectDebitMandatesMandatesMandateStatusEnumCancelRecordInProgress GetDirectDebitMandatesMandatesMandateStatusEnum = "CANCEL_RECORD_IN_PROGRESS"
+GetDirectDebitMandatesMandatesMandateStatusEnumCancelRecorded GetDirectDebitMandatesMandatesMandateStatusEnum = "CANCEL_RECORDED"
+GetDirectDebitMandatesMandatesMandateStatusEnumCancelFileCreated GetDirectDebitMandatesMandatesMandateStatusEnum = "CANCEL_FILE_CREATED"
+GetDirectDebitMandatesMandatesMandateStatusEnumCancelFileSent GetDirectDebitMandatesMandatesMandateStatusEnum = "CANCEL_FILE_SENT"
+GetDirectDebitMandatesMandatesMandateStatusEnumComplete GetDirectDebitMandatesMandatesMandateStatusEnum = "COMPLETE"
+GetDirectDebitMandatesMandatesMandateStatusEnumDormant GetDirectDebitMandatesMandatesMandateStatusEnum = "DORMANT"
 )
 
+
 type GetDirectDebitMandatesMandatesMandate struct {
-	Alias                        *string                                                                                                  `json:"alias,omitempty"`
-	Currency                     *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency,omitempty"`
-	DateCancelled                *time.Time                                                                                               `json:"dateCancelled,omitempty"`
-	DateCompleted                *time.Time                                                                                               `json:"dateCompleted,omitempty"`
-	DateCreated                  *time.Time                                                                                               `json:"dateCreated,omitempty"`
-	FireRejectionReason          *GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum                                            `json:"fireRejectionReason,omitempty"`
-	LastUpdated                  *time.Time                                                                                               `json:"lastUpdated,omitempty"`
-	LatestDirectDebitAmount      *int64                                                                                                   `json:"latestDirectDebitAmount,omitempty"`
-	LatestDirectDebitDate        *time.Time                                                                                               `json:"latestDirectDebitDate,omitempty"`
-	MandateReference             *string                                                                                                  `json:"mandateReference,omitempty"`
-	MandateUUID                  *string                                                                                                  `json:"mandateUuid,omitempty"`
-	NumberOfDirectDebitCollected *int64                                                                                                   `json:"numberOfDirectDebitCollected,omitempty"`
-	OriginatorAlias              *string                                                                                                  `json:"originatorAlias,omitempty"`
-	OriginatorLogoURLLarge       *string                                                                                                  `json:"originatorLogoUrlLarge,omitempty"`
-	OriginatorLogoURLSmall       *string                                                                                                  `json:"originatorLogoUrlSmall,omitempty"`
-	OriginatorName               *string                                                                                                  `json:"originatorName,omitempty"`
-	OriginatorReference          *string                                                                                                  `json:"originatorReference,omitempty"`
-	SchemeCancelReason           *string                                                                                                  `json:"schemeCancelReason,omitempty"`
-	SchemeCancelReasonCode       *string                                                                                                  `json:"schemeCancelReasonCode,omitempty"`
-	Status                       *GetDirectDebitMandatesMandatesMandateStatusEnum                                                         `json:"status,omitempty"`
-	TargetIcan                   *int64                                                                                                   `json:"targetIcan,omitempty"`
-	ValueOfDirectDebitCollected  *int64                                                                                                   `json:"valueOfDirectDebitCollected,omitempty"`
+    Alias *string `json:"alias,omitempty"`
+    Currency *shared.OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency,omitempty"`
+    DateCancelled *time.Time `json:"dateCancelled,omitempty"`
+    DateCompleted *time.Time `json:"dateCompleted,omitempty"`
+    DateCreated *time.Time `json:"dateCreated,omitempty"`
+    FireRejectionReason *GetDirectDebitMandatesMandatesMandateFireRejectionReasonEnum `json:"fireRejectionReason,omitempty"`
+    LastUpdated *time.Time `json:"lastUpdated,omitempty"`
+    LatestDirectDebitAmount *int64 `json:"latestDirectDebitAmount,omitempty"`
+    LatestDirectDebitDate *time.Time `json:"latestDirectDebitDate,omitempty"`
+    MandateReference *string `json:"mandateReference,omitempty"`
+    MandateUUID *string `json:"mandateUuid,omitempty"`
+    NumberOfDirectDebitCollected *int64 `json:"numberOfDirectDebitCollected,omitempty"`
+    OriginatorAlias *string `json:"originatorAlias,omitempty"`
+    OriginatorLogoURLLarge *string `json:"originatorLogoUrlLarge,omitempty"`
+    OriginatorLogoURLSmall *string `json:"originatorLogoUrlSmall,omitempty"`
+    OriginatorName *string `json:"originatorName,omitempty"`
+    OriginatorReference *string `json:"originatorReference,omitempty"`
+    SchemeCancelReason *string `json:"schemeCancelReason,omitempty"`
+    SchemeCancelReasonCode *string `json:"schemeCancelReasonCode,omitempty"`
+    Status *GetDirectDebitMandatesMandatesMandateStatusEnum `json:"status,omitempty"`
+    TargetIcan *int64 `json:"targetIcan,omitempty"`
+    ValueOfDirectDebitCollected *int64 `json:"valueOfDirectDebitCollected,omitempty"`
+    
 }
 
 type GetDirectDebitMandatesMandates struct {
-	Mandates []GetDirectDebitMandatesMandatesMandate `json:"mandates,omitempty"`
-	Total    *int64                                  `json:"total,omitempty"`
+    Mandates []GetDirectDebitMandatesMandatesMandate `json:"mandates,omitempty"`
+    Total *int64 `json:"total,omitempty"`
+    
 }
 
 type GetDirectDebitMandatesResponse struct {
-	ContentType string
-	Mandates    *GetDirectDebitMandatesMandates
-	StatusCode  int64
+    ContentType string 
+    Mandates *GetDirectDebitMandatesMandates 
+    StatusCode int64 
+    
 }
+

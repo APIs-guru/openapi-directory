@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateBaiduChannelResponse struct {
-	BaiduChannelResponse BaiduChannelResponse `json:"BaiduChannelResponse"`
+    BaiduChannelResponse BaiduChannelResponse `json:"BaiduChannelResponse"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type IntArrayHparamSearchSpace struct {
-	Candidates []IntArray `json:"candidates,omitempty"`
+    Candidates []IntArray `json:"candidates,omitempty"`
+    
 }
+

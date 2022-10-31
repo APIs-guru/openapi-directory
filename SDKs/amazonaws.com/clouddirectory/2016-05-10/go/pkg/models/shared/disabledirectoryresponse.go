@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DisableDirectoryResponse struct {
-	DirectoryArn string `json:"DirectoryArn"`
+    DirectoryArn string `json:"DirectoryArn"`
+    
 }
+

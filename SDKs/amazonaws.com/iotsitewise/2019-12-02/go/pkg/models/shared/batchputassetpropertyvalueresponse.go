@@ -1,5 +1,9 @@
 package shared
 
+
+
 type BatchPutAssetPropertyValueResponse struct {
-	ErrorEntries []BatchPutAssetPropertyErrorEntry `json:"errorEntries"`
+    ErrorEntries []BatchPutAssetPropertyErrorEntry `json:"errorEntries"`
+    
 }
+

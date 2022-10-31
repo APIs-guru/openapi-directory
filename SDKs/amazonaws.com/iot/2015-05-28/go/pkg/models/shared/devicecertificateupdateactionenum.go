@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type DeviceCertificateUpdateActionEnum string
 
 const (
-	DeviceCertificateUpdateActionEnumDeactivate DeviceCertificateUpdateActionEnum = "DEACTIVATE"
+    DeviceCertificateUpdateActionEnumDeactivate DeviceCertificateUpdateActionEnum = "DEACTIVATE"
 )
+
+

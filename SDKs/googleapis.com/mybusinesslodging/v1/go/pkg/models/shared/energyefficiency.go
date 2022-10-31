@@ -1,81 +1,99 @@
 package shared
 
+
+
+
 type EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum string
 
 const (
-	EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnumExceptionUnspecified EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnumUnderConstruction    EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum = "UNDER_CONSTRUCTION"
-	EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnumDependentOnSeason    EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum = "DEPENDENT_ON_SEASON"
-	EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnumDependentOnDayOfWeek EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnumExceptionUnspecified EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum = "EXCEPTION_UNSPECIFIED"
+EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnumUnderConstruction EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum = "UNDER_CONSTRUCTION"
+EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnumDependentOnSeason EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum = "DEPENDENT_ON_SEASON"
+EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnumDependentOnDayOfWeek EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type EnergyEfficiencyEnergyConservationProgramExceptionEnum string
 
 const (
-	EnergyEfficiencyEnergyConservationProgramExceptionEnumExceptionUnspecified EnergyEfficiencyEnergyConservationProgramExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	EnergyEfficiencyEnergyConservationProgramExceptionEnumUnderConstruction    EnergyEfficiencyEnergyConservationProgramExceptionEnum = "UNDER_CONSTRUCTION"
-	EnergyEfficiencyEnergyConservationProgramExceptionEnumDependentOnSeason    EnergyEfficiencyEnergyConservationProgramExceptionEnum = "DEPENDENT_ON_SEASON"
-	EnergyEfficiencyEnergyConservationProgramExceptionEnumDependentOnDayOfWeek EnergyEfficiencyEnergyConservationProgramExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    EnergyEfficiencyEnergyConservationProgramExceptionEnumExceptionUnspecified EnergyEfficiencyEnergyConservationProgramExceptionEnum = "EXCEPTION_UNSPECIFIED"
+EnergyEfficiencyEnergyConservationProgramExceptionEnumUnderConstruction EnergyEfficiencyEnergyConservationProgramExceptionEnum = "UNDER_CONSTRUCTION"
+EnergyEfficiencyEnergyConservationProgramExceptionEnumDependentOnSeason EnergyEfficiencyEnergyConservationProgramExceptionEnum = "DEPENDENT_ON_SEASON"
+EnergyEfficiencyEnergyConservationProgramExceptionEnumDependentOnDayOfWeek EnergyEfficiencyEnergyConservationProgramExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum string
 
 const (
-	EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnumExceptionUnspecified EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnumUnderConstruction    EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum = "UNDER_CONSTRUCTION"
-	EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnumDependentOnSeason    EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum = "DEPENDENT_ON_SEASON"
-	EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnumDependentOnDayOfWeek EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnumExceptionUnspecified EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum = "EXCEPTION_UNSPECIFIED"
+EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnumUnderConstruction EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum = "UNDER_CONSTRUCTION"
+EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnumDependentOnSeason EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum = "DEPENDENT_ON_SEASON"
+EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnumDependentOnDayOfWeek EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type EnergyEfficiencyEnergyEfficientLightingExceptionEnum string
 
 const (
-	EnergyEfficiencyEnergyEfficientLightingExceptionEnumExceptionUnspecified EnergyEfficiencyEnergyEfficientLightingExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	EnergyEfficiencyEnergyEfficientLightingExceptionEnumUnderConstruction    EnergyEfficiencyEnergyEfficientLightingExceptionEnum = "UNDER_CONSTRUCTION"
-	EnergyEfficiencyEnergyEfficientLightingExceptionEnumDependentOnSeason    EnergyEfficiencyEnergyEfficientLightingExceptionEnum = "DEPENDENT_ON_SEASON"
-	EnergyEfficiencyEnergyEfficientLightingExceptionEnumDependentOnDayOfWeek EnergyEfficiencyEnergyEfficientLightingExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    EnergyEfficiencyEnergyEfficientLightingExceptionEnumExceptionUnspecified EnergyEfficiencyEnergyEfficientLightingExceptionEnum = "EXCEPTION_UNSPECIFIED"
+EnergyEfficiencyEnergyEfficientLightingExceptionEnumUnderConstruction EnergyEfficiencyEnergyEfficientLightingExceptionEnum = "UNDER_CONSTRUCTION"
+EnergyEfficiencyEnergyEfficientLightingExceptionEnumDependentOnSeason EnergyEfficiencyEnergyEfficientLightingExceptionEnum = "DEPENDENT_ON_SEASON"
+EnergyEfficiencyEnergyEfficientLightingExceptionEnumDependentOnDayOfWeek EnergyEfficiencyEnergyEfficientLightingExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type EnergyEfficiencyEnergySavingThermostatsExceptionEnum string
 
 const (
-	EnergyEfficiencyEnergySavingThermostatsExceptionEnumExceptionUnspecified EnergyEfficiencyEnergySavingThermostatsExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	EnergyEfficiencyEnergySavingThermostatsExceptionEnumUnderConstruction    EnergyEfficiencyEnergySavingThermostatsExceptionEnum = "UNDER_CONSTRUCTION"
-	EnergyEfficiencyEnergySavingThermostatsExceptionEnumDependentOnSeason    EnergyEfficiencyEnergySavingThermostatsExceptionEnum = "DEPENDENT_ON_SEASON"
-	EnergyEfficiencyEnergySavingThermostatsExceptionEnumDependentOnDayOfWeek EnergyEfficiencyEnergySavingThermostatsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    EnergyEfficiencyEnergySavingThermostatsExceptionEnumExceptionUnspecified EnergyEfficiencyEnergySavingThermostatsExceptionEnum = "EXCEPTION_UNSPECIFIED"
+EnergyEfficiencyEnergySavingThermostatsExceptionEnumUnderConstruction EnergyEfficiencyEnergySavingThermostatsExceptionEnum = "UNDER_CONSTRUCTION"
+EnergyEfficiencyEnergySavingThermostatsExceptionEnumDependentOnSeason EnergyEfficiencyEnergySavingThermostatsExceptionEnum = "DEPENDENT_ON_SEASON"
+EnergyEfficiencyEnergySavingThermostatsExceptionEnumDependentOnDayOfWeek EnergyEfficiencyEnergySavingThermostatsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type EnergyEfficiencyGreenBuildingDesignExceptionEnum string
 
 const (
-	EnergyEfficiencyGreenBuildingDesignExceptionEnumExceptionUnspecified EnergyEfficiencyGreenBuildingDesignExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	EnergyEfficiencyGreenBuildingDesignExceptionEnumUnderConstruction    EnergyEfficiencyGreenBuildingDesignExceptionEnum = "UNDER_CONSTRUCTION"
-	EnergyEfficiencyGreenBuildingDesignExceptionEnumDependentOnSeason    EnergyEfficiencyGreenBuildingDesignExceptionEnum = "DEPENDENT_ON_SEASON"
-	EnergyEfficiencyGreenBuildingDesignExceptionEnumDependentOnDayOfWeek EnergyEfficiencyGreenBuildingDesignExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    EnergyEfficiencyGreenBuildingDesignExceptionEnumExceptionUnspecified EnergyEfficiencyGreenBuildingDesignExceptionEnum = "EXCEPTION_UNSPECIFIED"
+EnergyEfficiencyGreenBuildingDesignExceptionEnumUnderConstruction EnergyEfficiencyGreenBuildingDesignExceptionEnum = "UNDER_CONSTRUCTION"
+EnergyEfficiencyGreenBuildingDesignExceptionEnumDependentOnSeason EnergyEfficiencyGreenBuildingDesignExceptionEnum = "DEPENDENT_ON_SEASON"
+EnergyEfficiencyGreenBuildingDesignExceptionEnumDependentOnDayOfWeek EnergyEfficiencyGreenBuildingDesignExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
+
+
 
 type EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum string
 
 const (
-	EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnumExceptionUnspecified EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum = "EXCEPTION_UNSPECIFIED"
-	EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnumUnderConstruction    EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum = "UNDER_CONSTRUCTION"
-	EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnumDependentOnSeason    EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum = "DEPENDENT_ON_SEASON"
-	EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnumDependentOnDayOfWeek EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+    EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnumExceptionUnspecified EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum = "EXCEPTION_UNSPECIFIED"
+EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnumUnderConstruction EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum = "UNDER_CONSTRUCTION"
+EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnumDependentOnSeason EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum = "DEPENDENT_ON_SEASON"
+EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnumDependentOnDayOfWeek EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
+
 type EnergyEfficiency struct {
-	CarbonFreeEnergySources                          *bool                                                                 `json:"carbonFreeEnergySources,omitempty"`
-	CarbonFreeEnergySourcesException                 *EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum                 `json:"carbonFreeEnergySourcesException,omitempty"`
-	EnergyConservationProgram                        *bool                                                                 `json:"energyConservationProgram,omitempty"`
-	EnergyConservationProgramException               *EnergyEfficiencyEnergyConservationProgramExceptionEnum               `json:"energyConservationProgramException,omitempty"`
-	EnergyEfficientHeatingAndCoolingSystems          *bool                                                                 `json:"energyEfficientHeatingAndCoolingSystems,omitempty"`
-	EnergyEfficientHeatingAndCoolingSystemsException *EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum `json:"energyEfficientHeatingAndCoolingSystemsException,omitempty"`
-	EnergyEfficientLighting                          *bool                                                                 `json:"energyEfficientLighting,omitempty"`
-	EnergyEfficientLightingException                 *EnergyEfficiencyEnergyEfficientLightingExceptionEnum                 `json:"energyEfficientLightingException,omitempty"`
-	EnergySavingThermostats                          *bool                                                                 `json:"energySavingThermostats,omitempty"`
-	EnergySavingThermostatsException                 *EnergyEfficiencyEnergySavingThermostatsExceptionEnum                 `json:"energySavingThermostatsException,omitempty"`
-	GreenBuildingDesign                              *bool                                                                 `json:"greenBuildingDesign,omitempty"`
-	GreenBuildingDesignException                     *EnergyEfficiencyGreenBuildingDesignExceptionEnum                     `json:"greenBuildingDesignException,omitempty"`
-	IndependentOrganizationAuditsEnergyUse           *bool                                                                 `json:"independentOrganizationAuditsEnergyUse,omitempty"`
-	IndependentOrganizationAuditsEnergyUseException  *EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum  `json:"independentOrganizationAuditsEnergyUseException,omitempty"`
+    CarbonFreeEnergySources *bool `json:"carbonFreeEnergySources,omitempty"`
+    CarbonFreeEnergySourcesException *EnergyEfficiencyCarbonFreeEnergySourcesExceptionEnum `json:"carbonFreeEnergySourcesException,omitempty"`
+    EnergyConservationProgram *bool `json:"energyConservationProgram,omitempty"`
+    EnergyConservationProgramException *EnergyEfficiencyEnergyConservationProgramExceptionEnum `json:"energyConservationProgramException,omitempty"`
+    EnergyEfficientHeatingAndCoolingSystems *bool `json:"energyEfficientHeatingAndCoolingSystems,omitempty"`
+    EnergyEfficientHeatingAndCoolingSystemsException *EnergyEfficiencyEnergyEfficientHeatingAndCoolingSystemsExceptionEnum `json:"energyEfficientHeatingAndCoolingSystemsException,omitempty"`
+    EnergyEfficientLighting *bool `json:"energyEfficientLighting,omitempty"`
+    EnergyEfficientLightingException *EnergyEfficiencyEnergyEfficientLightingExceptionEnum `json:"energyEfficientLightingException,omitempty"`
+    EnergySavingThermostats *bool `json:"energySavingThermostats,omitempty"`
+    EnergySavingThermostatsException *EnergyEfficiencyEnergySavingThermostatsExceptionEnum `json:"energySavingThermostatsException,omitempty"`
+    GreenBuildingDesign *bool `json:"greenBuildingDesign,omitempty"`
+    GreenBuildingDesignException *EnergyEfficiencyGreenBuildingDesignExceptionEnum `json:"greenBuildingDesignException,omitempty"`
+    IndependentOrganizationAuditsEnergyUse *bool `json:"independentOrganizationAuditsEnergyUse,omitempty"`
+    IndependentOrganizationAuditsEnergyUseException *EnergyEfficiencyIndependentOrganizationAuditsEnergyUseExceptionEnum `json:"independentOrganizationAuditsEnergyUseException,omitempty"`
+    
 }
+

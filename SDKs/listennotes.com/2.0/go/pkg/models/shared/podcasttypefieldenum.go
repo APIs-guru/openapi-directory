@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type PodcastTypeFieldEnum string
 
 const (
-	PodcastTypeFieldEnumEpisodic PodcastTypeFieldEnum = "episodic"
-	PodcastTypeFieldEnumSerial   PodcastTypeFieldEnum = "serial"
+    PodcastTypeFieldEnumEpisodic PodcastTypeFieldEnum = "episodic"
+PodcastTypeFieldEnumSerial PodcastTypeFieldEnum = "serial"
 )
+
+

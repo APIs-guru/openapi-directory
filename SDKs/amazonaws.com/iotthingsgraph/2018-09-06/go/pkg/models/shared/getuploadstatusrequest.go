@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetUploadStatusRequest struct {
-	UploadID string `json:"uploadId"`
+    UploadID string `json:"uploadId"`
+    
 }
+

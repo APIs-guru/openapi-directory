@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ClusterResourceRestoreScope struct {
-	SelectedGroupKinds []GroupKind `json:"selectedGroupKinds,omitempty"`
+    SelectedGroupKinds []GroupKind `json:"selectedGroupKinds,omitempty"`
+    
 }
+

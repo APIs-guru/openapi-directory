@@ -1,59 +1,67 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ListAttachedIndicesQueryParams struct {
-	MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
-	NextToken  *string `queryParam:"style=form,explode=true,name=NextToken"`
+    MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
+    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
+    
 }
+
 
 type ListAttachedIndicesXAmzConsistencyLevelEnum string
 
 const (
-	ListAttachedIndicesXAmzConsistencyLevelEnumSerializable ListAttachedIndicesXAmzConsistencyLevelEnum = "SERIALIZABLE"
-	ListAttachedIndicesXAmzConsistencyLevelEnumEventual     ListAttachedIndicesXAmzConsistencyLevelEnum = "EVENTUAL"
+    ListAttachedIndicesXAmzConsistencyLevelEnumSerializable ListAttachedIndicesXAmzConsistencyLevelEnum = "SERIALIZABLE"
+ListAttachedIndicesXAmzConsistencyLevelEnumEventual ListAttachedIndicesXAmzConsistencyLevelEnum = "EVENTUAL"
 )
 
+
 type ListAttachedIndicesHeaders struct {
-	XAmzAlgorithm        *string                                      `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256    *string                                      `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential       *string                                      `header:"name=X-Amz-Credential"`
-	XAmzDate             *string                                      `header:"name=X-Amz-Date"`
-	XAmzSecurityToken    *string                                      `header:"name=X-Amz-Security-Token"`
-	XAmzSignature        *string                                      `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders    *string                                      `header:"name=X-Amz-SignedHeaders"`
-	XAmzConsistencyLevel *ListAttachedIndicesXAmzConsistencyLevelEnum `header:"name=x-amz-consistency-level"`
-	XAmzDataPartition    string                                       `header:"name=x-amz-data-partition"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    XAmzConsistencyLevel *ListAttachedIndicesXAmzConsistencyLevelEnum `header:"style=simple,explode=false,name=x-amz-consistency-level"`
+    XAmzDataPartition string `header:"style=simple,explode=false,name=x-amz-data-partition"`
+    
 }
 
 type ListAttachedIndicesRequestBodyTargetReference struct {
-	Selector *string `json:"Selector,omitempty"`
+    Selector *string `json:"Selector,omitempty"`
+    
 }
 
 type ListAttachedIndicesRequestBody struct {
-	MaxResults      *int64                                        `json:"MaxResults,omitempty"`
-	NextToken       *string                                       `json:"NextToken,omitempty"`
-	TargetReference ListAttachedIndicesRequestBodyTargetReference `json:"TargetReference"`
+    MaxResults *int64 `json:"MaxResults,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    TargetReference ListAttachedIndicesRequestBodyTargetReference `json:"TargetReference"`
+    
 }
 
 type ListAttachedIndicesRequest struct {
-	QueryParams ListAttachedIndicesQueryParams
-	Headers     ListAttachedIndicesHeaders
-	Request     ListAttachedIndicesRequestBody `request:"mediaType=application/json"`
+    QueryParams ListAttachedIndicesQueryParams 
+    Headers ListAttachedIndicesHeaders 
+    Request ListAttachedIndicesRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type ListAttachedIndicesResponse struct {
-	AccessDeniedException        *interface{}
-	ContentType                  string
-	DirectoryNotEnabledException *interface{}
-	InternalServiceException     *interface{}
-	InvalidArnException          *interface{}
-	LimitExceededException       *interface{}
-	ListAttachedIndicesResponse  *shared.ListAttachedIndicesResponse
-	ResourceNotFoundException    *interface{}
-	RetryableConflictException   *interface{}
-	StatusCode                   int64
-	ValidationException          *interface{}
+    AccessDeniedException *interface{} 
+    ContentType string 
+    DirectoryNotEnabledException *interface{} 
+    InternalServiceException *interface{} 
+    InvalidArnException *interface{} 
+    LimitExceededException *interface{} 
+    ListAttachedIndicesResponse *shared.ListAttachedIndicesResponse 
+    ResourceNotFoundException *interface{} 
+    RetryableConflictException *interface{} 
+    StatusCode int64 
+    ValidationException *interface{} 
+    
 }
+

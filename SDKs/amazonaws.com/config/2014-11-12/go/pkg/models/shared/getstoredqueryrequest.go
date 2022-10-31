@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetStoredQueryRequest struct {
-	QueryName string `json:"QueryName"`
+    QueryName string `json:"QueryName"`
+    
 }
+

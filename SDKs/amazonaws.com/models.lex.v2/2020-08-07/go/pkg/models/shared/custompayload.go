@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CustomPayload struct {
-	Value string `json:"value"`
+    Value string `json:"value"`
+    
 }
+

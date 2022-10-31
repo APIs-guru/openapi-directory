@@ -1,49 +1,57 @@
 package shared
 
+
+
+
 type EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum string
 
 const (
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumDataTypeUnspecified   EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "DATA_TYPE_UNSPECIFIED"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumStringValue           EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "STRING_VALUE"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumIntValue              EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "INT_VALUE"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumDoubleValue           EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "DOUBLE_VALUE"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumBooleanValue          EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "BOOLEAN_VALUE"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumProtoValue            EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "PROTO_VALUE"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumSerializedObjectValue EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "SERIALIZED_OBJECT_VALUE"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumStringArray           EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "STRING_ARRAY"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumIntArray              EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "INT_ARRAY"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumDoubleArray           EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "DOUBLE_ARRAY"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumProtoArray            EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "PROTO_ARRAY"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumProtoEnum             EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "PROTO_ENUM"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumBooleanArray          EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "BOOLEAN_ARRAY"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumProtoEnumArray        EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "PROTO_ENUM_ARRAY"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumBytes                 EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "BYTES"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumBytesArray            EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "BYTES_ARRAY"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumNonSerializableObject EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "NON_SERIALIZABLE_OBJECT"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumJSONValue             EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "JSON_VALUE"
+    EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumDataTypeUnspecified EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "DATA_TYPE_UNSPECIFIED"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumStringValue EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "STRING_VALUE"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumIntValue EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "INT_VALUE"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumDoubleValue EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "DOUBLE_VALUE"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumBooleanValue EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "BOOLEAN_VALUE"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumProtoValue EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "PROTO_VALUE"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumSerializedObjectValue EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "SERIALIZED_OBJECT_VALUE"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumStringArray EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "STRING_ARRAY"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumIntArray EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "INT_ARRAY"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumDoubleArray EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "DOUBLE_ARRAY"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumProtoArray EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "PROTO_ARRAY"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumProtoEnum EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "PROTO_ENUM"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumBooleanArray EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "BOOLEAN_ARRAY"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumProtoEnumArray EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "PROTO_ENUM_ARRAY"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumBytes EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "BYTES"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumBytesArray EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "BYTES_ARRAY"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumNonSerializableObject EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "NON_SERIALIZABLE_OBJECT"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnumJSONValue EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum = "JSON_VALUE"
 )
+
+
 
 type EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnum string
 
 const (
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnumInOutTypeUnspecified EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnum = "IN_OUT_TYPE_UNSPECIFIED"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnumIn                   EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnum = "IN"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnumOut                  EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnum = "OUT"
-	EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnumInOut                EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnum = "IN_OUT"
+    EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnumInOutTypeUnspecified EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnum = "IN_OUT_TYPE_UNSPECIFIED"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnumIn EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnum = "IN"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnumOut EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnum = "OUT"
+EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnumInOut EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnum = "IN_OUT"
 )
 
+
 type EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntry struct {
-	Attributes   *EnterpriseCrmEventbusProtoAttributes                                   `json:"attributes,omitempty"`
-	Children     []EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntry             `json:"children,omitempty"`
-	DataType     *EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum  `json:"dataType,omitempty"`
-	DefaultValue *EnterpriseCrmFrontendsEventbusProtoParameterValueType                  `json:"defaultValue,omitempty"`
-	InOutType    *EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnum `json:"inOutType,omitempty"`
-	IsTransient  *bool                                                                   `json:"isTransient,omitempty"`
-	JSONSchema   *string                                                                 `json:"jsonSchema,omitempty"`
-	Key          *string                                                                 `json:"key,omitempty"`
-	Name         *string                                                                 `json:"name,omitempty"`
-	ProducedBy   *EnterpriseCrmEventbusProtoNodeIdentifier                               `json:"producedBy,omitempty"`
-	Producer     *string                                                                 `json:"producer,omitempty"`
-	ProtoDefName *string                                                                 `json:"protoDefName,omitempty"`
-	ProtoDefPath *string                                                                 `json:"protoDefPath,omitempty"`
+    Attributes *EnterpriseCrmEventbusProtoAttributes `json:"attributes,omitempty"`
+    Children []EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntry `json:"children,omitempty"`
+    DataType *EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryDataTypeEnum `json:"dataType,omitempty"`
+    DefaultValue *EnterpriseCrmFrontendsEventbusProtoParameterValueType `json:"defaultValue,omitempty"`
+    InOutType *EnterpriseCrmFrontendsEventbusProtoWorkflowParameterEntryInOutTypeEnum `json:"inOutType,omitempty"`
+    IsTransient *bool `json:"isTransient,omitempty"`
+    JSONSchema *string `json:"jsonSchema,omitempty"`
+    Key *string `json:"key,omitempty"`
+    Name *string `json:"name,omitempty"`
+    ProducedBy *EnterpriseCrmEventbusProtoNodeIdentifier `json:"producedBy,omitempty"`
+    Producer *string `json:"producer,omitempty"`
+    ProtoDefName *string `json:"protoDefName,omitempty"`
+    ProtoDefPath *string `json:"protoDefPath,omitempty"`
+    
 }
+

@@ -1,15 +1,21 @@
 package operations
 
+
+
 type GetOrganizationWebhooksAlertTypesPathParams struct {
-	OrganizationID string `pathParam:"style=simple,explode=false,name=organizationId"`
+    OrganizationID string `pathParam:"style=simple,explode=false,name=organizationId"`
+    
 }
 
 type GetOrganizationWebhooksAlertTypesRequest struct {
-	PathParams GetOrganizationWebhooksAlertTypesPathParams
+    PathParams GetOrganizationWebhooksAlertTypesPathParams 
+    
 }
 
 type GetOrganizationWebhooksAlertTypesResponse struct {
-	ContentType                                               string
-	StatusCode                                                int64
-	GetOrganizationWebhooksAlertTypes200ApplicationJSONObject map[string]interface{}
+    ContentType string 
+    StatusCode int64 
+    GetOrganizationWebhooksAlertTypes200ApplicationJSONObject map[string]interface{} 
+    
 }
+

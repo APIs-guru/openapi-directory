@@ -1,12 +1,13 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetAPIReferencePolicyInterestsResponse struct {
-	Body                 []byte
-	ContentType          string
-	GenericReferenceData []shared.GenericReferenceData
-	StatusCode           int64
+    Body []byte 
+    ContentType string 
+    GenericReferenceData []shared.GenericReferenceData 
+    StatusCode int64 
+    
 }
+

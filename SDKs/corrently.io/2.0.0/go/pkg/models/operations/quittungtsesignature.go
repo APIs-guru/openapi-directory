@@ -1,14 +1,20 @@
 package operations
 
+
+
 type QuittungTsEsignatureQueryParams struct {
-	Account *string `queryParam:"style=form,explode=true,name=account"`
+    Account *string `queryParam:"style=form,explode=true,name=account"`
+    
 }
 
 type QuittungTsEsignatureRequest struct {
-	QueryParams QuittungTsEsignatureQueryParams
+    QueryParams QuittungTsEsignatureQueryParams 
+    
 }
 
 type QuittungTsEsignatureResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

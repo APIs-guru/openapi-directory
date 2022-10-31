@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteDirectoryRequest struct {
-	DirectoryID string `json:"DirectoryId"`
+    DirectoryID string `json:"DirectoryId"`
+    
 }
+

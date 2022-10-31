@@ -1,6 +1,10 @@
 package shared
 
+
+
 type CloudWatchLoggingOptionUpdate struct {
-	CloudWatchLoggingOptionID string  `json:"CloudWatchLoggingOptionId"`
-	LogStreamArnUpdate        *string `json:"LogStreamARNUpdate,omitempty"`
+    CloudWatchLoggingOptionID string `json:"CloudWatchLoggingOptionId"`
+    LogStreamArnUpdate *string `json:"LogStreamARNUpdate,omitempty"`
+    
 }
+

@@ -1,35 +1,39 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
-
+"openapi/pkg/models/shared")
 var UpdateSipIPAccessControlListServers = []string{
 	"https://api.twilio.com",
 }
 
 type UpdateSipIPAccessControlListPathParams struct {
-	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
-	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
+    AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
+    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
+    
 }
 
 type UpdateSipIPAccessControlListUpdateSipIPAccessControlListRequest struct {
-	FriendlyName string `form:"name=FriendlyName"`
+    FriendlyName string `form:"name=FriendlyName"`
+    
 }
 
 type UpdateSipIPAccessControlListSecurity struct {
-	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type UpdateSipIPAccessControlListRequest struct {
-	ServerURL  *string
-	PathParams UpdateSipIPAccessControlListPathParams
-	Request    *UpdateSipIPAccessControlListUpdateSipIPAccessControlListRequest `request:"mediaType=application/x-www-form-urlencoded"`
-	Security   UpdateSipIPAccessControlListSecurity
+    ServerURL *string 
+    PathParams UpdateSipIPAccessControlListPathParams 
+    Request *UpdateSipIPAccessControlListUpdateSipIPAccessControlListRequest `request:"mediaType=application/x-www-form-urlencoded"`
+    Security UpdateSipIPAccessControlListSecurity 
+    
 }
 
 type UpdateSipIPAccessControlListResponse struct {
-	ContentType                              string
-	StatusCode                               int64
-	APIV2010AccountSipSipIPAccessControlList *shared.APIV2010AccountSipSipIPAccessControlList
+    ContentType string 
+    StatusCode int64 
+    APIV2010AccountSipSipIPAccessControlList *shared.APIV2010AccountSipSipIPAccessControlList 
+    
 }
+

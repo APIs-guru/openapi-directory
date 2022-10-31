@@ -1,10 +1,11 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type BotLocaleHistoryEvent struct {
-	Event     string    `json:"event"`
-	EventDate time.Time `json:"eventDate"`
+    Event string `json:"event"`
+    EventDate time.Time `json:"eventDate"`
+    
 }
+

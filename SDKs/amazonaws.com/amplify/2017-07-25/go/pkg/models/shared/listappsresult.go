@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListAppsResult struct {
-	Apps      []App   `json:"apps"`
-	NextToken *string `json:"nextToken,omitempty"`
+    Apps []App `json:"apps"`
+    NextToken *string `json:"nextToken,omitempty"`
+    
 }
+

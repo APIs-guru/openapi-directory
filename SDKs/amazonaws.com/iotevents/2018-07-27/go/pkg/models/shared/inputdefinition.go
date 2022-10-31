@@ -1,5 +1,9 @@
 package shared
 
+
+
 type InputDefinition struct {
-	Attributes []Attribute `json:"attributes"`
+    Attributes []Attribute `json:"attributes"`
+    
 }
+

@@ -8,7 +8,7 @@ FETCH_TRUSTED_COMMS_CPS_SERVERS = [
 
 @dataclass
 class FetchTrustedCommsCpsHeaders:
-    x_xcnam_sensitive_phone_number: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Xcnam-Sensitive-Phone-Number' }})
+    x_xcnam_sensitive_phone_number: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Xcnam-Sensitive-Phone-Number', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

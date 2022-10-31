@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateActionResponse struct {
-	ActionArn *string `json:"ActionArn,omitempty"`
+    ActionArn *string `json:"ActionArn,omitempty"`
+    
 }
+

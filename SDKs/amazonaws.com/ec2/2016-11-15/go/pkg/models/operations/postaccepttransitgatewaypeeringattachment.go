@@ -1,40 +1,51 @@
 package operations
 
+
+
+
 type PostAcceptTransitGatewayPeeringAttachmentActionEnum string
 
 const (
-	PostAcceptTransitGatewayPeeringAttachmentActionEnumAcceptTransitGatewayPeeringAttachment PostAcceptTransitGatewayPeeringAttachmentActionEnum = "AcceptTransitGatewayPeeringAttachment"
+    PostAcceptTransitGatewayPeeringAttachmentActionEnumAcceptTransitGatewayPeeringAttachment PostAcceptTransitGatewayPeeringAttachmentActionEnum = "AcceptTransitGatewayPeeringAttachment"
 )
+
+
 
 type PostAcceptTransitGatewayPeeringAttachmentVersionEnum string
 
 const (
-	PostAcceptTransitGatewayPeeringAttachmentVersionEnumTwoThousandAndSixteen1115 PostAcceptTransitGatewayPeeringAttachmentVersionEnum = "2016-11-15"
+    PostAcceptTransitGatewayPeeringAttachmentVersionEnumTwoThousandAndSixteen1115 PostAcceptTransitGatewayPeeringAttachmentVersionEnum = "2016-11-15"
 )
 
+
 type PostAcceptTransitGatewayPeeringAttachmentQueryParams struct {
-	Action  PostAcceptTransitGatewayPeeringAttachmentActionEnum  `queryParam:"style=form,explode=true,name=Action"`
-	Version PostAcceptTransitGatewayPeeringAttachmentVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    Action PostAcceptTransitGatewayPeeringAttachmentActionEnum `queryParam:"style=form,explode=true,name=Action"`
+    Version PostAcceptTransitGatewayPeeringAttachmentVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+    
 }
 
 type PostAcceptTransitGatewayPeeringAttachmentHeaders struct {
-	XAmzAlgorithm     *string `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string `header:"name=X-Amz-Credential"`
-	XAmzDate          *string `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string `header:"name=X-Amz-SignedHeaders"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    
 }
 
 type PostAcceptTransitGatewayPeeringAttachmentRequest struct {
-	QueryParams PostAcceptTransitGatewayPeeringAttachmentQueryParams
-	Headers     PostAcceptTransitGatewayPeeringAttachmentHeaders
-	Request     []byte `request:"mediaType=text/xml"`
+    QueryParams PostAcceptTransitGatewayPeeringAttachmentQueryParams 
+    Headers PostAcceptTransitGatewayPeeringAttachmentHeaders 
+    Request []byte `request:"mediaType=text/xml"`
+    
 }
 
 type PostAcceptTransitGatewayPeeringAttachmentResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

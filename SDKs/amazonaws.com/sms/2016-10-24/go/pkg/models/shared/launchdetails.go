@@ -1,11 +1,12 @@
 package shared
 
 import (
-	"time"
-)
+"time")
 
 type LaunchDetails struct {
-	LatestLaunchTime *time.Time `json:"latestLaunchTime,omitempty"`
-	StackID          *string    `json:"stackId,omitempty"`
-	StackName        *string    `json:"stackName,omitempty"`
+    LatestLaunchTime *time.Time `json:"latestLaunchTime,omitempty"`
+    StackID *string `json:"stackId,omitempty"`
+    StackName *string `json:"stackName,omitempty"`
+    
 }
+

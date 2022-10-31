@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeEnvironmentStatusRequest struct {
-	EnvironmentID string `json:"environmentId"`
+    EnvironmentID string `json:"environmentId"`
+    
 }
+

@@ -1,28 +1,32 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type DeleteCisInstructionTagPathParams struct {
-	CisInstructionID string `pathParam:"style=simple,explode=false,name=CisInstructionId"`
-	EmployerID       string `pathParam:"style=simple,explode=false,name=EmployerId"`
-	SubContractorID  string `pathParam:"style=simple,explode=false,name=SubContractorId"`
-	TagID            string `pathParam:"style=simple,explode=false,name=TagId"`
+    CisInstructionID string `pathParam:"style=simple,explode=false,name=CisInstructionId"`
+    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+    SubContractorID string `pathParam:"style=simple,explode=false,name=SubContractorId"`
+    TagID string `pathParam:"style=simple,explode=false,name=TagId"`
+    
 }
 
 type DeleteCisInstructionTagHeaders struct {
-	APIVersion    string `header:"name=Api-Version"`
-	Authorization string `header:"name=Authorization"`
+    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
+    Authorization string `header:"style=simple,explode=false,name=Authorization"`
+    
 }
 
 type DeleteCisInstructionTagRequest struct {
-	PathParams DeleteCisInstructionTagPathParams
-	Headers    DeleteCisInstructionTagHeaders
+    PathParams DeleteCisInstructionTagPathParams 
+    Headers DeleteCisInstructionTagHeaders 
+    
 }
 
 type DeleteCisInstructionTagResponse struct {
-	ContentType string
-	ErrorModel  *shared.ErrorModel
-	StatusCode  int64
+    ContentType string 
+    ErrorModel *shared.ErrorModel 
+    StatusCode int64 
+    
 }
+

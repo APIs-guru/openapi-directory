@@ -1,45 +1,53 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetChartPkScreenshotDigestPathParams struct {
-	Digest string `pathParam:"style=simple,explode=false,name=digest"`
-	Pk     int64  `pathParam:"style=simple,explode=false,name=pk"`
+    Digest string `pathParam:"style=simple,explode=false,name=digest"`
+    Pk int64 `pathParam:"style=simple,explode=false,name=pk"`
+    
 }
 
 type GetChartPkScreenshotDigestSecurity struct {
-	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
+    Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
+    
 }
 
 type GetChartPkScreenshotDigestRequest struct {
-	PathParams GetChartPkScreenshotDigestPathParams
-	Security   GetChartPkScreenshotDigestSecurity
+    PathParams GetChartPkScreenshotDigestPathParams 
+    Security GetChartPkScreenshotDigestSecurity 
+    
 }
 
 type GetChartPkScreenshotDigest400ApplicationJSON struct {
-	Message *string `json:"message,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type GetChartPkScreenshotDigest401ApplicationJSON struct {
-	Message *string `json:"message,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type GetChartPkScreenshotDigest404ApplicationJSON struct {
-	Message *string `json:"message,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type GetChartPkScreenshotDigest500ApplicationJSON struct {
-	Message *string `json:"message,omitempty"`
+    Message *string `json:"message,omitempty"`
+    
 }
 
 type GetChartPkScreenshotDigestResponse struct {
-	ContentType                                            string
-	GetChartPkScreenshotDigest200ImageWildcardBinaryString []byte
-	GetChartPkScreenshotDigest400ApplicationJSONObject     *GetChartPkScreenshotDigest400ApplicationJSON
-	GetChartPkScreenshotDigest401ApplicationJSONObject     *GetChartPkScreenshotDigest401ApplicationJSON
-	GetChartPkScreenshotDigest404ApplicationJSONObject     *GetChartPkScreenshotDigest404ApplicationJSON
-	GetChartPkScreenshotDigest500ApplicationJSONObject     *GetChartPkScreenshotDigest500ApplicationJSON
-	StatusCode                                             int64
+    ContentType string 
+    GetChartPkScreenshotDigest200ImageWildcardBinaryString []byte 
+    GetChartPkScreenshotDigest400ApplicationJSONObject *GetChartPkScreenshotDigest400ApplicationJSON 
+    GetChartPkScreenshotDigest401ApplicationJSONObject *GetChartPkScreenshotDigest401ApplicationJSON 
+    GetChartPkScreenshotDigest404ApplicationJSONObject *GetChartPkScreenshotDigest404ApplicationJSON 
+    GetChartPkScreenshotDigest500ApplicationJSONObject *GetChartPkScreenshotDigest500ApplicationJSON 
+    StatusCode int64 
+    
 }
+

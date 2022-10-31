@@ -1,5 +1,9 @@
 package shared
 
+
+
 type PublishFindingToSnsParams struct {
-	TopicArn string `json:"topicArn"`
+    TopicArn string `json:"topicArn"`
+    
 }
+

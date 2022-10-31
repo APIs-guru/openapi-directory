@@ -1,6 +1,10 @@
 package shared
 
+
+
 type CreateContactMethodRequest struct {
-	ContactEndpoint string              `json:"contactEndpoint"`
-	Protocol        ContactProtocolEnum `json:"protocol"`
+    ContactEndpoint string `json:"contactEndpoint"`
+    Protocol ContactProtocolEnum `json:"protocol"`
+    
 }
+

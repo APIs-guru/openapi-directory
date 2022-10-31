@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateIdentityProviderResponse struct {
-	IdentityProvider IdentityProviderType `json:"IdentityProvider"`
+    IdentityProvider IdentityProviderType `json:"IdentityProvider"`
+    
 }
+

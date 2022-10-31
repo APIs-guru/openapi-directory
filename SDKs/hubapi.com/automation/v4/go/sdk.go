@@ -537,6 +537,7 @@ func (s *SDK) PatchAutomationV4ActionsAppIDDefinitionIDUpdate(ctx context.Contex
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -595,6 +596,7 @@ func (s *SDK) PostAutomationV4ActionsCallbacksCompleteCompleteBatch(ctx context.
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -644,6 +646,7 @@ func (s *SDK) PostAutomationV4ActionsCallbacksCallbackIDCompleteComplete(ctx con
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -693,6 +696,7 @@ func (s *SDK) PostAutomationV4ActionsAppIDCreate(ctx context.Context, request op
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -751,6 +755,7 @@ func (s *SDK) PutAutomationV4ActionsAppIDDefinitionIDFunctionsFunctionTypeFuncti
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -809,6 +814,7 @@ func (s *SDK) PutAutomationV4ActionsAppIDDefinitionIDFunctionsFunctionTypeCreate
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

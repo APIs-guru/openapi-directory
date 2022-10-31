@@ -1,7 +1,12 @@
 package shared
 
+
+
+
 type RateKeyEnum string
 
 const (
-	RateKeyEnumIP RateKeyEnum = "IP"
+    RateKeyEnumIP RateKeyEnum = "IP"
 )
+
+

@@ -121,6 +121,7 @@ func (s *SDK) AddListingProvider(ctx context.Context, request operations.AddList
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -187,6 +188,7 @@ func (s *SDK) AddMediaPath(ctx context.Context, request operations.AddMediaPathR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -295,6 +297,7 @@ func (s *SDK) AddTunerHost(ctx context.Context, request operations.AddTunerHostR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -388,6 +391,7 @@ func (s *SDK) AddVirtualFolder(ctx context.Context, request operations.AddVirtua
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -431,6 +435,7 @@ func (s *SDK) ApplySearchCriteria(ctx context.Context, request operations.ApplyS
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -577,6 +582,7 @@ func (s *SDK) AuthenticateUserByName(ctx context.Context, request operations.Aut
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -639,6 +645,7 @@ func (s *SDK) AuthenticateWithQuickConnect(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -1179,6 +1186,7 @@ func (s *SDK) CreatePlaylist(ctx context.Context, request operations.CreatePlayl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -1242,6 +1250,7 @@ func (s *SDK) CreateProfile(ctx context.Context, request operations.CreateProfil
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1280,6 +1289,7 @@ func (s *SDK) CreateSeriesTimer(ctx context.Context, request operations.CreateSe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1318,6 +1328,7 @@ func (s *SDK) CreateTimer(ctx context.Context, request operations.CreateTimerReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -1359,6 +1370,7 @@ func (s *SDK) CreateUserByName(ctx context.Context, request operations.CreateUse
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -2515,6 +2527,7 @@ func (s *SDK) ForgotPassword(ctx context.Context, request operations.ForgotPassw
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -2574,6 +2587,7 @@ func (s *SDK) ForgotPasswordPin(ctx context.Context, request operations.ForgotPa
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -3396,6 +3410,7 @@ func (s *SDK) GetBookRemoteSearchResults(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -3460,6 +3475,7 @@ func (s *SDK) GetBoxSetRemoteSearchResults(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9196,6 +9212,7 @@ func (s *SDK) GetMovieRemoteSearchResults(ctx context.Context, request operation
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9260,6 +9277,7 @@ func (s *SDK) GetMusicAlbumRemoteSearchResults(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9324,6 +9342,7 @@ func (s *SDK) GetMusicArtistRemoteSearchResults(ctx context.Context, request ope
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -9632,6 +9651,7 @@ func (s *SDK) GetMusicVideoRemoteSearchResults(ctx context.Context, request oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -10562,6 +10582,7 @@ func (s *SDK) GetPersonRemoteSearchResults(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -11096,6 +11117,7 @@ func (s *SDK) GetPostedPlaybackInfo(ctx context.Context, request operations.GetP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -11350,6 +11372,7 @@ func (s *SDK) GetPrograms(ctx context.Context, request operations.GetProgramsReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -12761,6 +12784,7 @@ func (s *SDK) GetSeriesRemoteSearchResults(ctx context.Context, request operatio
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -14527,6 +14551,7 @@ func (s *SDK) GetTrailerRemoteSearchResults(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -17266,6 +17291,7 @@ func (s *SDK) OpenLiveStream(ctx context.Context, request operations.OpenLiveStr
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -17560,6 +17586,7 @@ func (s *SDK) PostFullCapabilities(ctx context.Context, request operations.PostF
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -17659,6 +17686,7 @@ func (s *SDK) PostUpdatedMedia(ctx context.Context, request operations.PostUpdat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -18279,6 +18307,7 @@ func (s *SDK) ReportPlaybackProgress(ctx context.Context, request operations.Rep
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -18317,6 +18346,7 @@ func (s *SDK) ReportPlaybackStart(ctx context.Context, request operations.Report
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -18355,6 +18385,7 @@ func (s *SDK) ReportPlaybackStopped(ctx context.Context, request operations.Repo
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -18615,6 +18646,7 @@ func (s *SDK) SendFullGeneralCommand(ctx context.Context, request operations.Sen
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -18788,6 +18820,7 @@ func (s *SDK) SetChannelMapping(ctx context.Context, request operations.SetChann
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -18996,6 +19029,7 @@ func (s *SDK) SetRemoteAccess(ctx context.Context, request operations.SetRemoteA
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19034,6 +19068,7 @@ func (s *SDK) SetRepositories(ctx context.Context, request operations.SetReposit
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19285,6 +19320,7 @@ func (s *SDK) SyncPlayBuffering(ctx context.Context, request operations.SyncPlay
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19326,6 +19362,7 @@ func (s *SDK) SyncPlayCreateGroup(ctx context.Context, request operations.SyncPl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19422,6 +19459,7 @@ func (s *SDK) SyncPlayJoinGroup(ctx context.Context, request operations.SyncPlay
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19495,6 +19533,7 @@ func (s *SDK) SyncPlayMovePlaylistItem(ctx context.Context, request operations.S
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19536,6 +19575,7 @@ func (s *SDK) SyncPlayNextItem(ctx context.Context, request operations.SyncPlayN
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19609,6 +19649,7 @@ func (s *SDK) SyncPlayPing(ctx context.Context, request operations.SyncPlayPingR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19650,6 +19691,7 @@ func (s *SDK) SyncPlayPreviousItem(ctx context.Context, request operations.SyncP
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19691,6 +19733,7 @@ func (s *SDK) SyncPlayQueue(ctx context.Context, request operations.SyncPlayQueu
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19732,6 +19775,7 @@ func (s *SDK) SyncPlayReady(ctx context.Context, request operations.SyncPlayRead
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19773,6 +19817,7 @@ func (s *SDK) SyncPlayRemoveFromPlaylist(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19814,6 +19859,7 @@ func (s *SDK) SyncPlaySeek(ctx context.Context, request operations.SyncPlaySeekR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19855,6 +19901,7 @@ func (s *SDK) SyncPlaySetIgnoreWait(ctx context.Context, request operations.Sync
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19896,6 +19943,7 @@ func (s *SDK) SyncPlaySetNewQueue(ctx context.Context, request operations.SyncPl
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19937,6 +19985,7 @@ func (s *SDK) SyncPlaySetPlaylistItem(ctx context.Context, request operations.Sy
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -19978,6 +20027,7 @@ func (s *SDK) SyncPlaySetRepeatMode(ctx context.Context, request operations.Sync
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -20019,6 +20069,7 @@ func (s *SDK) SyncPlaySetShuffleMode(ctx context.Context, request operations.Syn
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -20235,6 +20286,7 @@ func (s *SDK) UpdateConfiguration(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -20276,6 +20328,7 @@ func (s *SDK) UpdateDeviceOptions(ctx context.Context, request operations.Update
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -20343,6 +20396,7 @@ func (s *SDK) UpdateDisplayPreferences(ctx context.Context, request operations.U
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -20386,6 +20440,7 @@ func (s *SDK) UpdateInitialConfiguration(ctx context.Context, request operations
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -20427,6 +20482,7 @@ func (s *SDK) UpdateItem(ctx context.Context, request operations.UpdateItemReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -20605,6 +20661,7 @@ func (s *SDK) UpdateLibraryOptions(ctx context.Context, request operations.Updat
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -20646,6 +20703,7 @@ func (s *SDK) UpdateMediaEncoderPath(ctx context.Context, request operations.Upd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -20684,6 +20742,7 @@ func (s *SDK) UpdateMediaPath(ctx context.Context, request operations.UpdateMedi
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -20815,6 +20874,7 @@ func (s *SDK) UpdatePluginSecurityInfo(ctx context.Context, request operations.U
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -20853,6 +20913,7 @@ func (s *SDK) UpdateProfile(ctx context.Context, request operations.UpdateProfil
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -20915,6 +20976,7 @@ func (s *SDK) UpdateSeriesTimer(ctx context.Context, request operations.UpdateSe
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -20953,6 +21015,7 @@ func (s *SDK) UpdateStartupUser(ctx context.Context, request operations.UpdateSt
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -20994,6 +21057,7 @@ func (s *SDK) UpdateTask(ctx context.Context, request operations.UpdateTaskReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -21056,6 +21120,7 @@ func (s *SDK) UpdateTimer(ctx context.Context, request operations.UpdateTimerReq
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -21097,6 +21162,7 @@ func (s *SDK) UpdateUser(ctx context.Context, request operations.UpdateUserReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -21185,6 +21251,7 @@ func (s *SDK) UpdateUserConfiguration(ctx context.Context, request operations.Up
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -21249,6 +21316,7 @@ func (s *SDK) UpdateUserEasyPassword(ctx context.Context, request operations.Upd
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -21394,6 +21462,7 @@ func (s *SDK) UpdateUserPassword(ctx context.Context, request operations.UpdateU
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -21482,6 +21551,7 @@ func (s *SDK) UpdateUserPolicy(ctx context.Context, request operations.UpdateUse
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)
@@ -21570,6 +21640,7 @@ func (s *SDK) UploadSubtitle(ctx context.Context, request operations.UploadSubti
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.defaultClient
@@ -21609,6 +21680,7 @@ func (s *SDK) ValidatePath(ctx context.Context, request operations.ValidatePathR
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

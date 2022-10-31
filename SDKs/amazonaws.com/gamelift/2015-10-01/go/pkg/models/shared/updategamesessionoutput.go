@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateGameSessionOutput struct {
-	GameSession *GameSession `json:"GameSession,omitempty"`
+    GameSession *GameSession `json:"GameSession,omitempty"`
+    
 }
+

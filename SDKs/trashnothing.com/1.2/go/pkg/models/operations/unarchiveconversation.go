@@ -1,14 +1,20 @@
 package operations
 
+
+
 type UnarchiveConversationPathParams struct {
-	ConversationID string `pathParam:"style=simple,explode=false,name=conversation_id"`
+    ConversationID string `pathParam:"style=simple,explode=false,name=conversation_id"`
+    
 }
 
 type UnarchiveConversationRequest struct {
-	PathParams UnarchiveConversationPathParams
+    PathParams UnarchiveConversationPathParams 
+    
 }
 
 type UnarchiveConversationResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

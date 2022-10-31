@@ -1,5 +1,9 @@
 package shared
 
+
+
 type VersionResponse struct {
-	APIVersion *string `json:"api_version,omitempty"`
+    APIVersion *string `json:"api_version,omitempty"`
+    
 }
+

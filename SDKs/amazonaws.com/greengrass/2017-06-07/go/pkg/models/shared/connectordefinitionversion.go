@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ConnectorDefinitionVersion struct {
-	Connectors []Connector `json:"Connectors,omitempty"`
+    Connectors []Connector `json:"Connectors,omitempty"`
+    
 }
+

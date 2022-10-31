@@ -1,26 +1,30 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ActivitySetRepoSubscriptionPathParams struct {
-	Owner string `pathParam:"style=simple,explode=false,name=owner"`
-	Repo  string `pathParam:"style=simple,explode=false,name=repo"`
+    Owner string `pathParam:"style=simple,explode=false,name=owner"`
+    Repo string `pathParam:"style=simple,explode=false,name=repo"`
+    
 }
 
 type ActivitySetRepoSubscriptionRequestBody struct {
-	Ignored    *bool `json:"ignored,omitempty"`
-	Subscribed *bool `json:"subscribed,omitempty"`
+    Ignored *bool `json:"ignored,omitempty"`
+    Subscribed *bool `json:"subscribed,omitempty"`
+    
 }
 
 type ActivitySetRepoSubscriptionRequest struct {
-	PathParams ActivitySetRepoSubscriptionPathParams
-	Request    *ActivitySetRepoSubscriptionRequestBody `request:"mediaType=application/json"`
+    PathParams ActivitySetRepoSubscriptionPathParams 
+    Request *ActivitySetRepoSubscriptionRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type ActivitySetRepoSubscriptionResponse struct {
-	ContentType            string
-	StatusCode             int64
-	RepositorySubscription *shared.RepositorySubscription
+    ContentType string 
+    StatusCode int64 
+    RepositorySubscription *shared.RepositorySubscription 
+    
 }
+

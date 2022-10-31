@@ -1,34 +1,44 @@
 package operations
 
+
+
 type DeleteEnvironmentPathParams struct {
-	EnvironmentUID string `pathParam:"style=simple,explode=false,name=environment_uid"`
+    EnvironmentUID string `pathParam:"style=simple,explode=false,name=environment_uid"`
+    
 }
 
 type DeleteEnvironmentRequest struct {
-	PathParams DeleteEnvironmentPathParams
+    PathParams DeleteEnvironmentPathParams 
+    
 }
 
 type DeleteEnvironment200ApplicationJSONEnvironment struct {
-	ID  *string `json:"id,omitempty"`
-	UID *string `json:"uid,omitempty"`
+    ID *string `json:"id,omitempty"`
+    UID *string `json:"uid,omitempty"`
+    
 }
 
 type DeleteEnvironment200ApplicationJSON struct {
-	Environment *DeleteEnvironment200ApplicationJSONEnvironment `json:"environment,omitempty"`
+    Environment *DeleteEnvironment200ApplicationJSONEnvironment `json:"environment,omitempty"`
+    
 }
 
 type DeleteEnvironment404ApplicationJSONError struct {
-	Message *string `json:"message,omitempty"`
-	Name    *string `json:"name,omitempty"`
+    Message *string `json:"message,omitempty"`
+    Name *string `json:"name,omitempty"`
+    
 }
 
 type DeleteEnvironment404ApplicationJSON struct {
-	Error *DeleteEnvironment404ApplicationJSONError `json:"error,omitempty"`
+    Error *DeleteEnvironment404ApplicationJSONError `json:"error,omitempty"`
+    
 }
 
 type DeleteEnvironmentResponse struct {
-	ContentType                               string
-	StatusCode                                int64
-	DeleteEnvironment200ApplicationJSONObject *DeleteEnvironment200ApplicationJSON
-	DeleteEnvironment404ApplicationJSONObject *DeleteEnvironment404ApplicationJSON
+    ContentType string 
+    StatusCode int64 
+    DeleteEnvironment200ApplicationJSONObject *DeleteEnvironment200ApplicationJSON 
+    DeleteEnvironment404ApplicationJSONObject *DeleteEnvironment404ApplicationJSON 
+    
 }
+

@@ -9,7 +9,7 @@ class PatchVenuePathParams:
 
 @dataclass
 class PatchVenueHeaders:
-    tmps_correlation_id: str = field(default=None, metadata={'header': { 'field_name': 'TMPS-Correlation-Id' }})
+    tmps_correlation_id: str = field(default=None, metadata={'header': { 'field_name': 'TMPS-Correlation-Id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

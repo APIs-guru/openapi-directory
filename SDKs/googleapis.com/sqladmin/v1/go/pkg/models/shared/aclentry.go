@@ -1,8 +1,12 @@
 package shared
 
+
+
 type ACLEntry struct {
-	ExpirationTime *string `json:"expirationTime,omitempty"`
-	Kind           *string `json:"kind,omitempty"`
-	Name           *string `json:"name,omitempty"`
-	Value          *string `json:"value,omitempty"`
+    ExpirationTime *string `json:"expirationTime,omitempty"`
+    Kind *string `json:"kind,omitempty"`
+    Name *string `json:"name,omitempty"`
+    Value *string `json:"value,omitempty"`
+    
 }
+

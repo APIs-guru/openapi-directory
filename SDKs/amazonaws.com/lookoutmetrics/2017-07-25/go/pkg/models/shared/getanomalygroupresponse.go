@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetAnomalyGroupResponse struct {
-	AnomalyGroup *AnomalyGroup `json:"AnomalyGroup,omitempty"`
+    AnomalyGroup *AnomalyGroup `json:"AnomalyGroup,omitempty"`
+    
 }
+

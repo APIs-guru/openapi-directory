@@ -1,16 +1,22 @@
 package shared
 
+
+
+
 type GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum string
 
 const (
-	GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnumTableSourceTypeUnspecified GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum = "TABLE_SOURCE_TYPE_UNSPECIFIED"
-	GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnumBigqueryView               GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum = "BIGQUERY_VIEW"
-	GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnumBigqueryTable              GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum = "BIGQUERY_TABLE"
-	GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnumBigqueryMaterializedView   GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum = "BIGQUERY_MATERIALIZED_VIEW"
+    GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnumTableSourceTypeUnspecified GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum = "TABLE_SOURCE_TYPE_UNSPECIFIED"
+GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnumBigqueryView GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum = "BIGQUERY_VIEW"
+GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnumBigqueryTable GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum = "BIGQUERY_TABLE"
+GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnumBigqueryMaterializedView GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum = "BIGQUERY_MATERIALIZED_VIEW"
 )
 
+
 type GoogleCloudDatacatalogV1BigQueryTableSpec struct {
-	TableSourceType *GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum `json:"tableSourceType,omitempty"`
-	TableSpec       *GoogleCloudDatacatalogV1TableSpec                            `json:"tableSpec,omitempty"`
-	ViewSpec        *GoogleCloudDatacatalogV1ViewSpec                             `json:"viewSpec,omitempty"`
+    TableSourceType *GoogleCloudDatacatalogV1BigQueryTableSpecTableSourceTypeEnum `json:"tableSourceType,omitempty"`
+    TableSpec *GoogleCloudDatacatalogV1TableSpec `json:"tableSpec,omitempty"`
+    ViewSpec *GoogleCloudDatacatalogV1ViewSpec `json:"viewSpec,omitempty"`
+    
 }
+

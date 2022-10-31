@@ -5,8 +5,8 @@ from dataclasses_json import dataclass_json
 
 @dataclass
 class UploadFileToLockerIDHeaders:
-    hmac: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'hmac' }})
-    path: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'path' }})
+    hmac: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'hmac', 'style': 'simple', 'explode': False }})
+    path: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'path', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

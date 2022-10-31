@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetTokenRequest struct {
-	Contractaddress string `json:"contractaddress"`
+    Contractaddress string `json:"contractaddress"`
+    
 }
+

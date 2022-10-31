@@ -1,22 +1,25 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-	"time"
-)
+"time"
+"openapi/pkg/models/shared")
 
 type GetBudgetMonthPathParams struct {
-	BudgetID string    `pathParam:"style=simple,explode=false,name=budget_id"`
-	Month    time.Time `pathParam:"style=simple,explode=false,name=month"`
+    BudgetID string `pathParam:"style=simple,explode=false,name=budget_id"`
+    Month time.Time `pathParam:"style=simple,explode=false,name=month"`
+    
 }
 
 type GetBudgetMonthRequest struct {
-	PathParams GetBudgetMonthPathParams
+    PathParams GetBudgetMonthPathParams 
+    
 }
 
 type GetBudgetMonthResponse struct {
-	ContentType         string
-	ErrorResponse       *shared.ErrorResponse
-	MonthDetailResponse *shared.MonthDetailResponse
-	StatusCode          int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    MonthDetailResponse *shared.MonthDetailResponse 
+    StatusCode int64 
+    
 }
+

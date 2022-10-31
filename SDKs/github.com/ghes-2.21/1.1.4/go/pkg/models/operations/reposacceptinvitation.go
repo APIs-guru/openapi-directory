@@ -1,19 +1,22 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ReposAcceptInvitationPathParams struct {
-	InvitationID int64 `pathParam:"style=simple,explode=false,name=invitation_id"`
+    InvitationID int64 `pathParam:"style=simple,explode=false,name=invitation_id"`
+    
 }
 
 type ReposAcceptInvitationRequest struct {
-	PathParams ReposAcceptInvitationPathParams
+    PathParams ReposAcceptInvitationPathParams 
+    
 }
 
 type ReposAcceptInvitationResponse struct {
-	ContentType string
-	StatusCode  int64
-	BasicError  *shared.BasicError
+    ContentType string 
+    StatusCode int64 
+    BasicError *shared.BasicError 
+    
 }
+

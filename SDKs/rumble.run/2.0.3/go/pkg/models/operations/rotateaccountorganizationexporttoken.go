@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type RotateAccountOrganizationExportTokenPathParams struct {
-	OrgID string `pathParam:"style=simple,explode=false,name=org_id"`
+    OrgID string `pathParam:"style=simple,explode=false,name=org_id"`
+    
 }
 
 type RotateAccountOrganizationExportTokenSecurity struct {
-	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
+    
 }
 
 type RotateAccountOrganizationExportTokenRequest struct {
-	PathParams RotateAccountOrganizationExportTokenPathParams
-	Security   RotateAccountOrganizationExportTokenSecurity
+    PathParams RotateAccountOrganizationExportTokenPathParams 
+    Security RotateAccountOrganizationExportTokenSecurity 
+    
 }
 
 type RotateAccountOrganizationExportTokenResponse struct {
-	ContentType  string
-	Organization *shared.Organization
-	StatusCode   int64
+    ContentType string 
+    Organization *shared.Organization 
+    StatusCode int64 
+    
 }
+

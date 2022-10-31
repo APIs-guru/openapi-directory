@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeConnectionRequest struct {
-	Name string `json:"Name"`
+    Name string `json:"Name"`
+    
 }
+

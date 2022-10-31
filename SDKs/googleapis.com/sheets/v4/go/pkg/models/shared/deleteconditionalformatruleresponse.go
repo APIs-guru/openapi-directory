@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteConditionalFormatRuleResponse struct {
-	Rule *ConditionalFormatRule `json:"rule,omitempty"`
+    Rule *ConditionalFormatRule `json:"rule,omitempty"`
+    
 }
+

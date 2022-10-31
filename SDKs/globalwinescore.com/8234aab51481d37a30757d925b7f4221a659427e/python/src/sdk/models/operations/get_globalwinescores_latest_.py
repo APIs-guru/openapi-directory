@@ -28,7 +28,7 @@ class GetGlobalwinescoresLatestQueryParams:
 
 @dataclass
 class GetGlobalwinescoresLatestHeaders:
-    authorization: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
+    authorization: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

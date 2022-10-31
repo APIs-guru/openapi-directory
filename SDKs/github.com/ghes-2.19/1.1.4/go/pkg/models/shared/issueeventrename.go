@@ -1,6 +1,10 @@
 package shared
 
+
+
 type IssueEventRename struct {
-	From string `json:"from"`
-	To   string `json:"to"`
+    From string `json:"from"`
+    To string `json:"to"`
+    
 }
+

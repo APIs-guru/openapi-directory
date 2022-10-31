@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteRunRequest struct {
-	Arn string `json:"arn"`
+    Arn string `json:"arn"`
+    
 }
+

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type UpdateAppResult struct {
-	App App `json:"app"`
+    App App `json:"app"`
+    
 }
+

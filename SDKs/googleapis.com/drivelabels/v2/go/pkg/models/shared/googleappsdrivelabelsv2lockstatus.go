@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleAppsDriveLabelsV2LockStatus struct {
-	Locked *bool `json:"locked,omitempty"`
+    Locked *bool `json:"locked,omitempty"`
+    
 }
+

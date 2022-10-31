@@ -1,5 +1,9 @@
 package shared
 
+
+
 type OsPolicyResourceComplianceExecResourceOutput struct {
-	EnforcementOutput *string `json:"enforcementOutput,omitempty"`
+    EnforcementOutput *string `json:"enforcementOutput,omitempty"`
+    
 }
+

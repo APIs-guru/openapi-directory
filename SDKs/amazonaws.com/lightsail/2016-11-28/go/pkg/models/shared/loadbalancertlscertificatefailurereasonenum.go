@@ -1,11 +1,16 @@
 package shared
 
+
+
+
 type LoadBalancerTLSCertificateFailureReasonEnum string
 
 const (
-	LoadBalancerTLSCertificateFailureReasonEnumNoAvailableContacts            LoadBalancerTLSCertificateFailureReasonEnum = "NO_AVAILABLE_CONTACTS"
-	LoadBalancerTLSCertificateFailureReasonEnumAdditionalVerificationRequired LoadBalancerTLSCertificateFailureReasonEnum = "ADDITIONAL_VERIFICATION_REQUIRED"
-	LoadBalancerTLSCertificateFailureReasonEnumDomainNotAllowed               LoadBalancerTLSCertificateFailureReasonEnum = "DOMAIN_NOT_ALLOWED"
-	LoadBalancerTLSCertificateFailureReasonEnumInvalidPublicDomain            LoadBalancerTLSCertificateFailureReasonEnum = "INVALID_PUBLIC_DOMAIN"
-	LoadBalancerTLSCertificateFailureReasonEnumOther                          LoadBalancerTLSCertificateFailureReasonEnum = "OTHER"
+    LoadBalancerTLSCertificateFailureReasonEnumNoAvailableContacts LoadBalancerTLSCertificateFailureReasonEnum = "NO_AVAILABLE_CONTACTS"
+LoadBalancerTLSCertificateFailureReasonEnumAdditionalVerificationRequired LoadBalancerTLSCertificateFailureReasonEnum = "ADDITIONAL_VERIFICATION_REQUIRED"
+LoadBalancerTLSCertificateFailureReasonEnumDomainNotAllowed LoadBalancerTLSCertificateFailureReasonEnum = "DOMAIN_NOT_ALLOWED"
+LoadBalancerTLSCertificateFailureReasonEnumInvalidPublicDomain LoadBalancerTLSCertificateFailureReasonEnum = "INVALID_PUBLIC_DOMAIN"
+LoadBalancerTLSCertificateFailureReasonEnumOther LoadBalancerTLSCertificateFailureReasonEnum = "OTHER"
 )
+
+

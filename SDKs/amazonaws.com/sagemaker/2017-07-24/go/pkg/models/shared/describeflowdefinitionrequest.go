@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeFlowDefinitionRequest struct {
-	FlowDefinitionName string `json:"FlowDefinitionName"`
+    FlowDefinitionName string `json:"FlowDefinitionName"`
+    
 }
+

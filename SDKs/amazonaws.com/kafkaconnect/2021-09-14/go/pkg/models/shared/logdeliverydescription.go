@@ -1,5 +1,9 @@
 package shared
 
+
+
 type LogDeliveryDescription struct {
-	WorkerLogDelivery *WorkerLogDeliveryDescription `json:"workerLogDelivery,omitempty"`
+    WorkerLogDelivery *WorkerLogDeliveryDescription `json:"workerLogDelivery,omitempty"`
+    
 }
+

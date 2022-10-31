@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type InventoryAttributeDataTypeEnum string
 
 const (
-	InventoryAttributeDataTypeEnumString InventoryAttributeDataTypeEnum = "string"
-	InventoryAttributeDataTypeEnumNumber InventoryAttributeDataTypeEnum = "number"
+    InventoryAttributeDataTypeEnumString InventoryAttributeDataTypeEnum = "string"
+InventoryAttributeDataTypeEnumNumber InventoryAttributeDataTypeEnum = "number"
 )
+
+

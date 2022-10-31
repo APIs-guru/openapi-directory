@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type ShowServiceOfferingPathParams struct {
-	ID string `pathParam:"style=simple,explode=false,name=id"`
+    ID string `pathParam:"style=simple,explode=false,name=id"`
+    
 }
 
 type ShowServiceOfferingRequest struct {
-	PathParams ShowServiceOfferingPathParams
+    PathParams ShowServiceOfferingPathParams 
+    
 }
 
 type ShowServiceOfferingResponse struct {
-	ContentType     string
-	ErrorNotFound   *shared.ErrorNotFound
-	ServiceOffering *shared.ServiceOffering
-	StatusCode      int64
+    ContentType string 
+    ErrorNotFound *shared.ErrorNotFound 
+    ServiceOffering *shared.ServiceOffering 
+    StatusCode int64 
+    
 }
+

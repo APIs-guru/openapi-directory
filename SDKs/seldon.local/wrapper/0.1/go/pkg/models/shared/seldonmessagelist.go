@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SeldonMessageList struct {
-	SeldonMessages []SeldonMessage `json:"seldonMessages,omitempty"`
+    SeldonMessages []SeldonMessage `json:"seldonMessages,omitempty"`
+    
 }
+

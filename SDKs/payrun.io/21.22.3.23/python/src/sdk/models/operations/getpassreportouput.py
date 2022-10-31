@@ -20,8 +20,8 @@ class GetPassReportOuputQueryParams:
 
 @dataclass
 class GetPassReportOuputHeaders:
-    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version' }})
-    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization' }})
+    api_version: str = field(default=None, metadata={'header': { 'field_name': 'Api-Version', 'style': 'simple', 'explode': False }})
+    authorization: str = field(default=None, metadata={'header': { 'field_name': 'Authorization', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

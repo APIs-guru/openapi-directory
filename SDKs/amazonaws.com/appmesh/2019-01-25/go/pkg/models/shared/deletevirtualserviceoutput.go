@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteVirtualServiceOutput struct {
-	VirtualService VirtualServiceData `json:"virtualService"`
+    VirtualService VirtualServiceData `json:"virtualService"`
+    
 }
+

@@ -1,14 +1,20 @@
 package operations
 
+
+
 type UserAPIDeleteFollowedTagPathParams struct {
-	TagID int32 `pathParam:"style=simple,explode=false,name=tagId"`
+    TagID int32 `pathParam:"style=simple,explode=false,name=tagId"`
+    
 }
 
 type UserAPIDeleteFollowedTagRequest struct {
-	PathParams UserAPIDeleteFollowedTagPathParams
+    PathParams UserAPIDeleteFollowedTagPathParams 
+    
 }
 
 type UserAPIDeleteFollowedTagResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

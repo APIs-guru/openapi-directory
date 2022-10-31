@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetDeploymentConfigOutput struct {
-	DeploymentConfigInfo *DeploymentConfigInfo `json:"deploymentConfigInfo,omitempty"`
+    DeploymentConfigInfo *DeploymentConfigInfo `json:"deploymentConfigInfo,omitempty"`
+    
 }
+

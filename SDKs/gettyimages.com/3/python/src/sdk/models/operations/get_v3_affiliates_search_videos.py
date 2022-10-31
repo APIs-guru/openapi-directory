@@ -10,7 +10,7 @@ class GetV3AffiliatesSearchVideosQueryParams:
 
 @dataclass
 class GetV3AffiliatesSearchVideosHeaders:
-    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
+    accept_language: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ListDelegatesResponse struct {
-	Delegates []Delegate `json:"delegates,omitempty"`
+    Delegates []Delegate `json:"delegates,omitempty"`
+    
 }
+

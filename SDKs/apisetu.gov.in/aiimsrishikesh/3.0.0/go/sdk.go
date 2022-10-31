@@ -63,6 +63,7 @@ func (s *SDK) Dgcer(ctx context.Context, request operations.DgcerRequest) (*oper
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := utils.CreateSecurityClient(request.Security)

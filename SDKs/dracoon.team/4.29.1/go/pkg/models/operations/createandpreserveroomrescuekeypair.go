@@ -1,25 +1,29 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type CreateAndPreserveRoomRescueKeyPairPathParams struct {
-	RoomID int64 `pathParam:"style=simple,explode=false,name=room_id"`
+    RoomID int64 `pathParam:"style=simple,explode=false,name=room_id"`
+    
 }
 
 type CreateAndPreserveRoomRescueKeyPairHeaders struct {
-	XSdsAuthToken *string `header:"name=X-Sds-Auth-Token"`
+    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
+    
 }
 
 type CreateAndPreserveRoomRescueKeyPairRequest struct {
-	PathParams CreateAndPreserveRoomRescueKeyPairPathParams
-	Headers    CreateAndPreserveRoomRescueKeyPairHeaders
-	Request    shared.CreateKeyPairRequest `request:"mediaType=application/json"`
+    PathParams CreateAndPreserveRoomRescueKeyPairPathParams 
+    Headers CreateAndPreserveRoomRescueKeyPairHeaders 
+    Request shared.CreateKeyPairRequest `request:"mediaType=application/json"`
+    
 }
 
 type CreateAndPreserveRoomRescueKeyPairResponse struct {
-	ContentType   string
-	ErrorResponse *shared.ErrorResponse
-	StatusCode    int64
+    ContentType string 
+    ErrorResponse *shared.ErrorResponse 
+    StatusCode int64 
+    
 }
+

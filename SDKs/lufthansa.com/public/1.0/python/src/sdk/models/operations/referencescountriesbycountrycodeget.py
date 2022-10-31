@@ -16,7 +16,7 @@ class ReferencesCountriesByCountryCodeGetQueryParams:
 
 @dataclass
 class ReferencesCountriesByCountryCodeGetHeaders:
-    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept' }})
+    accept: str = field(default=None, metadata={'header': { 'field_name': 'Accept', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

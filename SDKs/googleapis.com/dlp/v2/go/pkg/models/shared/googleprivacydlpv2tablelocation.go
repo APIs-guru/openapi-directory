@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GooglePrivacyDlpV2TableLocation struct {
-	RowIndex *string `json:"rowIndex,omitempty"`
+    RowIndex *string `json:"rowIndex,omitempty"`
+    
 }
+

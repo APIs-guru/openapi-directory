@@ -1,15 +1,21 @@
 package operations
 
+
+
 type PreprintProviderDetailPathParams struct {
-	PreprintProviderID string `pathParam:"style=simple,explode=false,name=preprint_provider_id"`
+    PreprintProviderID string `pathParam:"style=simple,explode=false,name=preprint_provider_id"`
+    
 }
 
 type PreprintProviderDetailRequest struct {
-	PathParams PreprintProviderDetailPathParams
+    PathParams PreprintProviderDetailPathParams 
+    
 }
 
 type PreprintProviderDetailResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

@@ -1,6 +1,10 @@
 package shared
 
+
+
 type URLTargeting struct {
-	ExcludedUrls []string `json:"excludedUrls,omitempty"`
-	TargetedUrls []string `json:"targetedUrls,omitempty"`
+    ExcludedUrls []string `json:"excludedUrls,omitempty"`
+    TargetedUrls []string `json:"targetedUrls,omitempty"`
+    
 }
+

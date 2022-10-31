@@ -1,16 +1,22 @@
 package operations
 
+
+
 type OptionsTransactionHashPathParams struct {
-	Hash string `pathParam:"style=simple,explode=false,name=hash"`
+    Hash string `pathParam:"style=simple,explode=false,name=hash"`
+    
 }
 
 type OptionsTransactionHashRequest struct {
-	PathParams OptionsTransactionHashPathParams
+    PathParams OptionsTransactionHashPathParams 
+    
 }
 
 type OptionsTransactionHashResponse struct {
-	ContentType string
-	Empty       map[string]interface{}
-	Headers     map[string][]string
-	StatusCode  int64
+    ContentType string 
+    Empty map[string]interface{} 
+    Headers map[string][]string 
+    StatusCode int64 
+    
 }
+

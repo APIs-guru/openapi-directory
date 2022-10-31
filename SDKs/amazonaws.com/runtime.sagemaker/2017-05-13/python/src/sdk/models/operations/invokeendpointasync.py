@@ -10,19 +10,19 @@ class InvokeEndpointAsyncPathParams:
 
 @dataclass
 class InvokeEndpointAsyncHeaders:
-    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm' }})
-    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256' }})
-    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential' }})
-    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date' }})
-    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token' }})
-    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature' }})
-    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders' }})
-    x_amzn_sage_maker_accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amzn-SageMaker-Accept' }})
-    x_amzn_sage_maker_content_type: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amzn-SageMaker-Content-Type' }})
-    x_amzn_sage_maker_custom_attributes: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amzn-SageMaker-Custom-Attributes' }})
-    x_amzn_sage_maker_inference_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amzn-SageMaker-Inference-Id' }})
-    x_amzn_sage_maker_input_location: str = field(default=None, metadata={'header': { 'field_name': 'X-Amzn-SageMaker-InputLocation' }})
-    x_amzn_sage_maker_request_ttl_seconds: Optional[int] = field(default=None, metadata={'header': { 'field_name': 'X-Amzn-SageMaker-RequestTTLSeconds' }})
+    x_amz_algorithm: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Algorithm', 'style': 'simple', 'explode': False }})
+    x_amz_content_sha256: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Content-Sha256', 'style': 'simple', 'explode': False }})
+    x_amz_credential: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Credential', 'style': 'simple', 'explode': False }})
+    x_amz_date: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Date', 'style': 'simple', 'explode': False }})
+    x_amz_security_token: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Security-Token', 'style': 'simple', 'explode': False }})
+    x_amz_signature: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-Signature', 'style': 'simple', 'explode': False }})
+    x_amz_signed_headers: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amz-SignedHeaders', 'style': 'simple', 'explode': False }})
+    x_amzn_sage_maker_accept: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amzn-SageMaker-Accept', 'style': 'simple', 'explode': False }})
+    x_amzn_sage_maker_content_type: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amzn-SageMaker-Content-Type', 'style': 'simple', 'explode': False }})
+    x_amzn_sage_maker_custom_attributes: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amzn-SageMaker-Custom-Attributes', 'style': 'simple', 'explode': False }})
+    x_amzn_sage_maker_inference_id: Optional[str] = field(default=None, metadata={'header': { 'field_name': 'X-Amzn-SageMaker-Inference-Id', 'style': 'simple', 'explode': False }})
+    x_amzn_sage_maker_input_location: str = field(default=None, metadata={'header': { 'field_name': 'X-Amzn-SageMaker-InputLocation', 'style': 'simple', 'explode': False }})
+    x_amzn_sage_maker_request_ttl_seconds: Optional[int] = field(default=None, metadata={'header': { 'field_name': 'X-Amzn-SageMaker-RequestTTLSeconds', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

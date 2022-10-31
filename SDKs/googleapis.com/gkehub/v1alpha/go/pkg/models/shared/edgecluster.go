@@ -1,5 +1,9 @@
 package shared
 
+
+
 type EdgeCluster struct {
-	ResourceLink *string `json:"resourceLink,omitempty"`
+    ResourceLink *string `json:"resourceLink,omitempty"`
+    
 }
+

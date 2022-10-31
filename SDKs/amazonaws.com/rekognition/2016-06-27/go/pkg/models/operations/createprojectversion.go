@@ -1,42 +1,47 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
+
 
 type CreateProjectVersionXAmzTargetEnum string
 
 const (
-	CreateProjectVersionXAmzTargetEnumRekognitionServiceCreateProjectVersion CreateProjectVersionXAmzTargetEnum = "RekognitionService.CreateProjectVersion"
+    CreateProjectVersionXAmzTargetEnumRekognitionServiceCreateProjectVersion CreateProjectVersionXAmzTargetEnum = "RekognitionService.CreateProjectVersion"
 )
 
+
 type CreateProjectVersionHeaders struct {
-	XAmzAlgorithm     *string                            `header:"name=X-Amz-Algorithm"`
-	XAmzContentSha256 *string                            `header:"name=X-Amz-Content-Sha256"`
-	XAmzCredential    *string                            `header:"name=X-Amz-Credential"`
-	XAmzDate          *string                            `header:"name=X-Amz-Date"`
-	XAmzSecurityToken *string                            `header:"name=X-Amz-Security-Token"`
-	XAmzSignature     *string                            `header:"name=X-Amz-Signature"`
-	XAmzSignedHeaders *string                            `header:"name=X-Amz-SignedHeaders"`
-	XAmzTarget        CreateProjectVersionXAmzTargetEnum `header:"name=X-Amz-Target"`
+    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+    XAmzTarget CreateProjectVersionXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
+    
 }
 
 type CreateProjectVersionRequest struct {
-	Headers CreateProjectVersionHeaders
-	Request shared.CreateProjectVersionRequest `request:"mediaType=application/json"`
+    Headers CreateProjectVersionHeaders 
+    Request shared.CreateProjectVersionRequest `request:"mediaType=application/json"`
+    
 }
 
 type CreateProjectVersionResponse struct {
-	AccessDeniedException                  *interface{}
-	ContentType                            string
-	CreateProjectVersionResponse           *shared.CreateProjectVersionResponse
-	InternalServerError                    *interface{}
-	InvalidParameterException              *interface{}
-	LimitExceededException                 *interface{}
-	ProvisionedThroughputExceededException *interface{}
-	ResourceInUseException                 *interface{}
-	ResourceNotFoundException              *interface{}
-	ServiceQuotaExceededException          *interface{}
-	StatusCode                             int64
-	ThrottlingException                    *interface{}
+    AccessDeniedException *interface{} 
+    ContentType string 
+    CreateProjectVersionResponse *shared.CreateProjectVersionResponse 
+    InternalServerError *interface{} 
+    InvalidParameterException *interface{} 
+    LimitExceededException *interface{} 
+    ProvisionedThroughputExceededException *interface{} 
+    ResourceInUseException *interface{} 
+    ResourceNotFoundException *interface{} 
+    ServiceQuotaExceededException *interface{} 
+    StatusCode int64 
+    ThrottlingException *interface{} 
+    
 }
+

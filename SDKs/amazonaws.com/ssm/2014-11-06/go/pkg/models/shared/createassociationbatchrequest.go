@@ -1,5 +1,9 @@
 package shared
 
+
+
 type CreateAssociationBatchRequest struct {
-	Entries []CreateAssociationBatchRequestEntry `json:"Entries"`
+    Entries []CreateAssociationBatchRequestEntry `json:"Entries"`
+    
 }
+

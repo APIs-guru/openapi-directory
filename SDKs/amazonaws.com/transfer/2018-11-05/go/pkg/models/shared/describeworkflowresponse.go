@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeWorkflowResponse struct {
-	Workflow DescribedWorkflow `json:"Workflow"`
+    Workflow DescribedWorkflow `json:"Workflow"`
+    
 }
+

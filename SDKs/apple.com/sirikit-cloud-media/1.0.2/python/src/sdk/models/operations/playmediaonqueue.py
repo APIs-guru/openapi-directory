@@ -5,10 +5,10 @@ from sdk.models import shared
 
 @dataclass
 class PlayMediaOnQueueHeaders:
-    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language' }})
-    user_agent: str = field(default=None, metadata={'header': { 'field_name': 'User-Agent' }})
-    x_applecloudextension_retry_count: Optional[float] = field(default=None, metadata={'header': { 'field_name': 'x-applecloudextension-retry-count' }})
-    x_applecloudextension_session_id: str = field(default=None, metadata={'header': { 'field_name': 'x-applecloudextension-session-id' }})
+    accept_language: str = field(default=None, metadata={'header': { 'field_name': 'Accept-Language', 'style': 'simple', 'explode': False }})
+    user_agent: str = field(default=None, metadata={'header': { 'field_name': 'User-Agent', 'style': 'simple', 'explode': False }})
+    x_applecloudextension_retry_count: Optional[float] = field(default=None, metadata={'header': { 'field_name': 'x-applecloudextension-retry-count', 'style': 'simple', 'explode': False }})
+    x_applecloudextension_session_id: str = field(default=None, metadata={'header': { 'field_name': 'x-applecloudextension-session-id', 'style': 'simple', 'explode': False }})
     
 
 @dataclass

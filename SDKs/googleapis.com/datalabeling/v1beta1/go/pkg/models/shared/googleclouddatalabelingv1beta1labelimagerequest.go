@@ -1,22 +1,28 @@
 package shared
 
+
+
+
 type GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum string
 
 const (
-	GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumFeatureUnspecified  GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "FEATURE_UNSPECIFIED"
-	GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumClassification      GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "CLASSIFICATION"
-	GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumBoundingBox         GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "BOUNDING_BOX"
-	GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumOrientedBoundingBox GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "ORIENTED_BOUNDING_BOX"
-	GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumBoundingPoly        GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "BOUNDING_POLY"
-	GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumPolyline            GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "POLYLINE"
-	GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumSegmentation        GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "SEGMENTATION"
+    GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumFeatureUnspecified GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "FEATURE_UNSPECIFIED"
+GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumClassification GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "CLASSIFICATION"
+GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumBoundingBox GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "BOUNDING_BOX"
+GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumOrientedBoundingBox GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "ORIENTED_BOUNDING_BOX"
+GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumBoundingPoly GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "BOUNDING_POLY"
+GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumPolyline GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "POLYLINE"
+GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnumSegmentation GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum = "SEGMENTATION"
 )
 
+
 type GoogleCloudDatalabelingV1beta1LabelImageRequest struct {
-	BasicConfig               *GoogleCloudDatalabelingV1beta1HumanAnnotationConfig        `json:"basicConfig,omitempty"`
-	BoundingPolyConfig        *GoogleCloudDatalabelingV1beta1BoundingPolyConfig           `json:"boundingPolyConfig,omitempty"`
-	Feature                   *GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum `json:"feature,omitempty"`
-	ImageClassificationConfig *GoogleCloudDatalabelingV1beta1ImageClassificationConfig    `json:"imageClassificationConfig,omitempty"`
-	PolylineConfig            *GoogleCloudDatalabelingV1beta1PolylineConfig               `json:"polylineConfig,omitempty"`
-	SegmentationConfig        *GoogleCloudDatalabelingV1beta1SegmentationConfig           `json:"segmentationConfig,omitempty"`
+    BasicConfig *GoogleCloudDatalabelingV1beta1HumanAnnotationConfig `json:"basicConfig,omitempty"`
+    BoundingPolyConfig *GoogleCloudDatalabelingV1beta1BoundingPolyConfig `json:"boundingPolyConfig,omitempty"`
+    Feature *GoogleCloudDatalabelingV1beta1LabelImageRequestFeatureEnum `json:"feature,omitempty"`
+    ImageClassificationConfig *GoogleCloudDatalabelingV1beta1ImageClassificationConfig `json:"imageClassificationConfig,omitempty"`
+    PolylineConfig *GoogleCloudDatalabelingV1beta1PolylineConfig `json:"polylineConfig,omitempty"`
+    SegmentationConfig *GoogleCloudDatalabelingV1beta1SegmentationConfig `json:"segmentationConfig,omitempty"`
+    
 }
+

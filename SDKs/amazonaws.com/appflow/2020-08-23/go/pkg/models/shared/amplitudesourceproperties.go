@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AmplitudeSourceProperties struct {
-	Object string `json:"object"`
+    Object string `json:"object"`
+    
 }
+

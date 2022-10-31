@@ -1,15 +1,17 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type IdentityGetRequest struct {
-	Request shared.IdentityGetRequest `request:"mediaType=application/json"`
+    Request shared.IdentityGetRequest `request:"mediaType=application/json"`
+    
 }
 
 type IdentityGetResponse struct {
-	ContentType         string
-	IdentityGetResponse map[string]interface{}
-	StatusCode          int64
+    ContentType string 
+    IdentityGetResponse map[string]interface{} 
+    StatusCode int64 
+    
 }
+

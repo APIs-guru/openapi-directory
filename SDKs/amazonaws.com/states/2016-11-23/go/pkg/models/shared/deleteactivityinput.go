@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteActivityInput struct {
-	ActivityArn string `json:"activityArn"`
+    ActivityArn string `json:"activityArn"`
+    
 }
+

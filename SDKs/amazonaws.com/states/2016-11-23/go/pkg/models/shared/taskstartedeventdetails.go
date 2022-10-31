@@ -1,6 +1,10 @@
 package shared
 
+
+
 type TaskStartedEventDetails struct {
-	Resource     string `json:"resource"`
-	ResourceType string `json:"resourceType"`
+    Resource string `json:"resource"`
+    ResourceType string `json:"resourceType"`
+    
 }
+

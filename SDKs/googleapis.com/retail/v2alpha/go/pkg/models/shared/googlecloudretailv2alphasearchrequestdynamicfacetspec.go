@@ -1,13 +1,19 @@
 package shared
 
+
+
+
 type GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum string
 
 const (
-	GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnumModeUnspecified GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum = "MODE_UNSPECIFIED"
-	GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnumDisabled        GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum = "DISABLED"
-	GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnumEnabled         GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum = "ENABLED"
+    GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnumModeUnspecified GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum = "MODE_UNSPECIFIED"
+GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnumDisabled GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum = "DISABLED"
+GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnumEnabled GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum = "ENABLED"
 )
 
+
 type GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpec struct {
-	Mode *GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum `json:"mode,omitempty"`
+    Mode *GoogleCloudRetailV2alphaSearchRequestDynamicFacetSpecModeEnum `json:"mode,omitempty"`
+    
 }
+

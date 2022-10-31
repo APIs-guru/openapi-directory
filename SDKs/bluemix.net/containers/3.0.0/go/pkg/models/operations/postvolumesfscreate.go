@@ -1,20 +1,23 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type PostVolumesFsCreateHeaders struct {
-	XAuthProjectID string `header:"name=X-Auth-Project-Id"`
-	XAuthToken     string `header:"name=X-Auth-Token"`
+    XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
+    XAuthToken string `header:"style=simple,explode=false,name=X-Auth-Token"`
+    
 }
 
 type PostVolumesFsCreateRequest struct {
-	Headers PostVolumesFsCreateHeaders
-	Request shared.FileshareParam `request:"mediaType=application/json"`
+    Headers PostVolumesFsCreateHeaders 
+    Request shared.FileshareParam `request:"mediaType=application/json"`
+    
 }
 
 type PostVolumesFsCreateResponse struct {
-	ContentType string
-	StatusCode  int64
+    ContentType string 
+    StatusCode int64 
+    
 }
+

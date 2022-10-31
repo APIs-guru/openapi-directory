@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ProductID struct {
-	ProductID *string `json:"productId,omitempty"`
+    ProductID *string `json:"productId,omitempty"`
+    
 }
+

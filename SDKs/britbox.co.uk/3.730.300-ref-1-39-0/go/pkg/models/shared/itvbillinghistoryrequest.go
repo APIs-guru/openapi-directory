@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ItvBillingHistoryRequest struct {
-	ProfileToken string `json:"profileToken"`
+    ProfileToken string `json:"profileToken"`
+    
 }
+

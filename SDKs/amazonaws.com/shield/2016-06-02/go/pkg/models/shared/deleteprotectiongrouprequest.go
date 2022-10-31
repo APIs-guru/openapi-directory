@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteProtectionGroupRequest struct {
-	ProtectionGroupID string `json:"ProtectionGroupId"`
+    ProtectionGroupID string `json:"ProtectionGroupId"`
+    
 }
+

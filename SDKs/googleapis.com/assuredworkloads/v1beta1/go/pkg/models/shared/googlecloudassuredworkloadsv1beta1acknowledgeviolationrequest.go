@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GoogleCloudAssuredworkloadsV1beta1AcknowledgeViolationRequest struct {
-	Comment *string `json:"comment,omitempty"`
+    Comment *string `json:"comment,omitempty"`
+    
 }
+

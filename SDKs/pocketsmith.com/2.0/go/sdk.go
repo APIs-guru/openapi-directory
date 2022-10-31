@@ -1592,6 +1592,7 @@ func (s *SDK) PostCategoriesIDCategoryRules(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1667,6 +1668,7 @@ func (s *SDK) PostTransactionAccountsIDTransactions(ctx context.Context, request
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1742,6 +1744,7 @@ func (s *SDK) PostTransactionsIDAttachments(ctx context.Context, request operati
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1817,6 +1820,7 @@ func (s *SDK) PostUsersIDAccounts(ctx context.Context, request operations.PostUs
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1882,6 +1886,7 @@ func (s *SDK) PostUsersIDAttachments(ctx context.Context, request operations.Pos
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -1957,6 +1962,7 @@ func (s *SDK) PostUsersIDCategories(ctx context.Context, request operations.Post
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2032,6 +2038,7 @@ func (s *SDK) PostUsersIDInstitutions(ctx context.Context, request operations.Po
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2107,6 +2114,7 @@ func (s *SDK) PutAccountsID(ctx context.Context, request operations.PutAccountsI
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2182,6 +2190,7 @@ func (s *SDK) PutAttachmentsID(ctx context.Context, request operations.PutAttach
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2247,6 +2256,7 @@ func (s *SDK) PutCategoriesID(ctx context.Context, request operations.PutCategor
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2322,6 +2332,7 @@ func (s *SDK) PutInstitutionsID(ctx context.Context, request operations.PutInsti
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2397,6 +2408,7 @@ func (s *SDK) PutTransactionAccountsID(ctx context.Context, request operations.P
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2462,6 +2474,7 @@ func (s *SDK) PutTransactionsID(ctx context.Context, request operations.PutTrans
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateQueryParams(ctx, req, request.QueryParams)
@@ -2539,6 +2552,7 @@ func (s *SDK) PutUsersID(ctx context.Context, request operations.PutUsersIDReque
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient
@@ -2614,6 +2628,7 @@ func (s *SDK) PutUsersIDAccounts(ctx context.Context, request operations.PutUser
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
+
 	req.Header.Set("Content-Type", reqContentType)
 
 	client := s.securityClient

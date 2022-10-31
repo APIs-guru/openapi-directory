@@ -1,5 +1,9 @@
 package shared
 
+
+
 type SetShuffleModeRequestDto struct {
-	Mode *GroupShuffleModeEnum `json:"Mode,omitempty"`
+    Mode *GroupShuffleModeEnum `json:"Mode,omitempty"`
+    
 }
+

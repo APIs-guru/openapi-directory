@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeVirtualGatewayOutput struct {
-	VirtualGateway VirtualGatewayData `json:"virtualGateway"`
+    VirtualGateway VirtualGatewayData `json:"virtualGateway"`
+    
 }
+

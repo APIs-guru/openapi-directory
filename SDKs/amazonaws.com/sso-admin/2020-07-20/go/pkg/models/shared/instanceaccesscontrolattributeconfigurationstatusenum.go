@@ -1,9 +1,14 @@
 package shared
 
+
+
+
 type InstanceAccessControlAttributeConfigurationStatusEnum string
 
 const (
-	InstanceAccessControlAttributeConfigurationStatusEnumEnabled            InstanceAccessControlAttributeConfigurationStatusEnum = "ENABLED"
-	InstanceAccessControlAttributeConfigurationStatusEnumCreationInProgress InstanceAccessControlAttributeConfigurationStatusEnum = "CREATION_IN_PROGRESS"
-	InstanceAccessControlAttributeConfigurationStatusEnumCreationFailed     InstanceAccessControlAttributeConfigurationStatusEnum = "CREATION_FAILED"
+    InstanceAccessControlAttributeConfigurationStatusEnumEnabled InstanceAccessControlAttributeConfigurationStatusEnum = "ENABLED"
+InstanceAccessControlAttributeConfigurationStatusEnumCreationInProgress InstanceAccessControlAttributeConfigurationStatusEnum = "CREATION_IN_PROGRESS"
+InstanceAccessControlAttributeConfigurationStatusEnumCreationFailed InstanceAccessControlAttributeConfigurationStatusEnum = "CREATION_FAILED"
 )
+
+

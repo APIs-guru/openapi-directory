@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type TppMessageCategoryEnum string
 
 const (
-	TppMessageCategoryEnumError   TppMessageCategoryEnum = "ERROR"
-	TppMessageCategoryEnumWarning TppMessageCategoryEnum = "WARNING"
+    TppMessageCategoryEnumError TppMessageCategoryEnum = "ERROR"
+TppMessageCategoryEnumWarning TppMessageCategoryEnum = "WARNING"
 )
+
+

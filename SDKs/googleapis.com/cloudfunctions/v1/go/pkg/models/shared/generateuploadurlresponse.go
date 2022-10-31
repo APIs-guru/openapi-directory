@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GenerateUploadURLResponse struct {
-	UploadURL *string `json:"uploadUrl,omitempty"`
+    UploadURL *string `json:"uploadUrl,omitempty"`
+    
 }
+

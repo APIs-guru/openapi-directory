@@ -1,27 +1,35 @@
 package shared
 
+
+
+
 type GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum string
 
 const (
-	GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnumMemoryEncryptionAlgorithmUnspecified GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum = "MEMORY_ENCRYPTION_ALGORITHM_UNSPECIFIED"
-	GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnumMemoryEncryptionAlgorithmUnknown     GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum = "MEMORY_ENCRYPTION_ALGORITHM_UNKNOWN"
-	GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnumMemoryEncryptionAlgorithmAesXts128   GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum = "MEMORY_ENCRYPTION_ALGORITHM_AES_XTS_128"
-	GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnumMemoryEncryptionAlgorithmAesXts256   GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum = "MEMORY_ENCRYPTION_ALGORITHM_AES_XTS_256"
+    GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnumMemoryEncryptionAlgorithmUnspecified GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum = "MEMORY_ENCRYPTION_ALGORITHM_UNSPECIFIED"
+GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnumMemoryEncryptionAlgorithmUnknown GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum = "MEMORY_ENCRYPTION_ALGORITHM_UNKNOWN"
+GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnumMemoryEncryptionAlgorithmAesXts128 GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum = "MEMORY_ENCRYPTION_ALGORITHM_AES_XTS_128"
+GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnumMemoryEncryptionAlgorithmAesXts256 GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum = "MEMORY_ENCRYPTION_ALGORITHM_AES_XTS_256"
 )
+
+
 
 type GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum string
 
 const (
-	GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnumMemoryEncryptionStateUnspecified GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum = "MEMORY_ENCRYPTION_STATE_UNSPECIFIED"
-	GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnumMemoryEncryptionStateUnknown     GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum = "MEMORY_ENCRYPTION_STATE_UNKNOWN"
-	GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnumMemoryEncryptionStateDisabled    GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum = "MEMORY_ENCRYPTION_STATE_DISABLED"
-	GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnumMemoryEncryptionStateTme         GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum = "MEMORY_ENCRYPTION_STATE_TME"
-	GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnumMemoryEncryptionStateMktme       GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum = "MEMORY_ENCRYPTION_STATE_MKTME"
+    GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnumMemoryEncryptionStateUnspecified GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum = "MEMORY_ENCRYPTION_STATE_UNSPECIFIED"
+GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnumMemoryEncryptionStateUnknown GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum = "MEMORY_ENCRYPTION_STATE_UNKNOWN"
+GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnumMemoryEncryptionStateDisabled GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum = "MEMORY_ENCRYPTION_STATE_DISABLED"
+GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnumMemoryEncryptionStateTme GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum = "MEMORY_ENCRYPTION_STATE_TME"
+GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnumMemoryEncryptionStateMktme GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum = "MEMORY_ENCRYPTION_STATE_MKTME"
 )
 
+
 type GoogleChromeManagementV1TotalMemoryEncryptionInfo struct {
-	EncryptionAlgorithm *GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum `json:"encryptionAlgorithm,omitempty"`
-	EncryptionState     *GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum     `json:"encryptionState,omitempty"`
-	KeyLength           *string                                                                   `json:"keyLength,omitempty"`
-	MaxKeys             *string                                                                   `json:"maxKeys,omitempty"`
+    EncryptionAlgorithm *GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionAlgorithmEnum `json:"encryptionAlgorithm,omitempty"`
+    EncryptionState *GoogleChromeManagementV1TotalMemoryEncryptionInfoEncryptionStateEnum `json:"encryptionState,omitempty"`
+    KeyLength *string `json:"keyLength,omitempty"`
+    MaxKeys *string `json:"maxKeys,omitempty"`
+    
 }
+

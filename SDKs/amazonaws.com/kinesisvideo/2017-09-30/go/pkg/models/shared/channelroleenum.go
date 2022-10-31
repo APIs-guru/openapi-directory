@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type ChannelRoleEnum string
 
 const (
-	ChannelRoleEnumMaster ChannelRoleEnum = "MASTER"
-	ChannelRoleEnumViewer ChannelRoleEnum = "VIEWER"
+    ChannelRoleEnumMaster ChannelRoleEnum = "MASTER"
+ChannelRoleEnumViewer ChannelRoleEnum = "VIEWER"
 )
+
+

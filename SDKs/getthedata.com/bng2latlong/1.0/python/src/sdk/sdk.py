@@ -19,20 +19,23 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def get_bng2latlong_easting_northing_(self, request: operations.GetBng2latlongEastingNorthingRequest) -> operations.GetBng2latlongEastingNorthingResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = utils.generate_url(base_url, "/bng2latlong/{easting}/{northing}", request.path_params)
-        
+
         client = self.client
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetBng2latlongEastingNorthingResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.GetBng2latlongEastingNorthing200ApplicationJSON])

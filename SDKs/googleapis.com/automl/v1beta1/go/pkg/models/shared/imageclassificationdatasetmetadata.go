@@ -1,13 +1,19 @@
 package shared
 
+
+
+
 type ImageClassificationDatasetMetadataClassificationTypeEnum string
 
 const (
-	ImageClassificationDatasetMetadataClassificationTypeEnumClassificationTypeUnspecified ImageClassificationDatasetMetadataClassificationTypeEnum = "CLASSIFICATION_TYPE_UNSPECIFIED"
-	ImageClassificationDatasetMetadataClassificationTypeEnumMulticlass                    ImageClassificationDatasetMetadataClassificationTypeEnum = "MULTICLASS"
-	ImageClassificationDatasetMetadataClassificationTypeEnumMultilabel                    ImageClassificationDatasetMetadataClassificationTypeEnum = "MULTILABEL"
+    ImageClassificationDatasetMetadataClassificationTypeEnumClassificationTypeUnspecified ImageClassificationDatasetMetadataClassificationTypeEnum = "CLASSIFICATION_TYPE_UNSPECIFIED"
+ImageClassificationDatasetMetadataClassificationTypeEnumMulticlass ImageClassificationDatasetMetadataClassificationTypeEnum = "MULTICLASS"
+ImageClassificationDatasetMetadataClassificationTypeEnumMultilabel ImageClassificationDatasetMetadataClassificationTypeEnum = "MULTILABEL"
 )
 
+
 type ImageClassificationDatasetMetadata struct {
-	ClassificationType *ImageClassificationDatasetMetadataClassificationTypeEnum `json:"classificationType,omitempty"`
+    ClassificationType *ImageClassificationDatasetMetadataClassificationTypeEnum `json:"classificationType,omitempty"`
+    
 }
+

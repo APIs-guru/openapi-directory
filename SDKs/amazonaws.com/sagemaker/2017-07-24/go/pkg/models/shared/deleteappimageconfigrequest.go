@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteAppImageConfigRequest struct {
-	AppImageConfigName string `json:"AppImageConfigName"`
+    AppImageConfigName string `json:"AppImageConfigName"`
+    
 }
+

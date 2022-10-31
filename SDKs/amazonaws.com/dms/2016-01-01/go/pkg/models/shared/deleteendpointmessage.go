@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DeleteEndpointMessage struct {
-	EndpointArn string `json:"EndpointArn"`
+    EndpointArn string `json:"EndpointArn"`
+    
 }
+

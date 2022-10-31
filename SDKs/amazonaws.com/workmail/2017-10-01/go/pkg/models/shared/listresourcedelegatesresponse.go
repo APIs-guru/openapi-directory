@@ -1,6 +1,10 @@
 package shared
 
+
+
 type ListResourceDelegatesResponse struct {
-	Delegates []Delegate `json:"Delegates,omitempty"`
-	NextToken *string    `json:"NextToken,omitempty"`
+    Delegates []Delegate `json:"Delegates,omitempty"`
+    NextToken *string `json:"NextToken,omitempty"`
+    
 }
+

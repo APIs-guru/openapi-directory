@@ -19,22 +19,25 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def get_food_branded_barcode_php(self, request: operations.GetFoodBrandedBarcodePhpRequest) -> operations.GetFoodBrandedBarcodePhpResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/food/branded/barcode.php"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFoodBrandedBarcodePhpResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.BrandedFoodObject])
@@ -50,22 +53,22 @@ class SDK:
 
         return res
 
-    
     
     def get_food_branded_name_php(self, request: operations.GetFoodBrandedNamePhpRequest) -> operations.GetFoodBrandedNamePhpResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/food/branded/name.php"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFoodBrandedNamePhpResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.BrandedFoodObject])
@@ -81,22 +84,22 @@ class SDK:
 
         return res
 
-    
     
     def get_food_branded_search_php(self, request: operations.GetFoodBrandedSearchPhpRequest) -> operations.GetFoodBrandedSearchPhpResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/food/branded/search.php"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFoodBrandedSearchPhpResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.BrandedFoodObject])
@@ -113,21 +116,21 @@ class SDK:
         return res
 
     
-    
     def get_food_ingredient_search_php(self, request: operations.GetFoodIngredientSearchPhpRequest) -> operations.GetFoodIngredientSearchPhpResponse:
         warnings.simplefilter("ignore")
 
         base_url = self.server_url
         url = base_url.removesuffix("/") + "/food/ingredient/search.php"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.GetFoodIngredientSearchPhpResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.IngredientObject])

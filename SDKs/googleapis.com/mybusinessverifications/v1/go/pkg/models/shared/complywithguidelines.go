@@ -1,13 +1,19 @@
 package shared
 
+
+
+
 type ComplyWithGuidelinesRecommendationReasonEnum string
 
 const (
-	ComplyWithGuidelinesRecommendationReasonEnumRecommendationReasonUnspecified ComplyWithGuidelinesRecommendationReasonEnum = "RECOMMENDATION_REASON_UNSPECIFIED"
-	ComplyWithGuidelinesRecommendationReasonEnumBusinessLocationSuspended       ComplyWithGuidelinesRecommendationReasonEnum = "BUSINESS_LOCATION_SUSPENDED"
-	ComplyWithGuidelinesRecommendationReasonEnumBusinessLocationDisabled        ComplyWithGuidelinesRecommendationReasonEnum = "BUSINESS_LOCATION_DISABLED"
+    ComplyWithGuidelinesRecommendationReasonEnumRecommendationReasonUnspecified ComplyWithGuidelinesRecommendationReasonEnum = "RECOMMENDATION_REASON_UNSPECIFIED"
+ComplyWithGuidelinesRecommendationReasonEnumBusinessLocationSuspended ComplyWithGuidelinesRecommendationReasonEnum = "BUSINESS_LOCATION_SUSPENDED"
+ComplyWithGuidelinesRecommendationReasonEnumBusinessLocationDisabled ComplyWithGuidelinesRecommendationReasonEnum = "BUSINESS_LOCATION_DISABLED"
 )
 
+
 type ComplyWithGuidelines struct {
-	RecommendationReason *ComplyWithGuidelinesRecommendationReasonEnum `json:"recommendationReason,omitempty"`
+    RecommendationReason *ComplyWithGuidelinesRecommendationReasonEnum `json:"recommendationReason,omitempty"`
+    
 }
+

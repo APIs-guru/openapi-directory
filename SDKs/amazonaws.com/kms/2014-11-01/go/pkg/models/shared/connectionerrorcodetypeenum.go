@@ -1,15 +1,20 @@
 package shared
 
+
+
+
 type ConnectionErrorCodeTypeEnum string
 
 const (
-	ConnectionErrorCodeTypeEnumInvalidCredentials       ConnectionErrorCodeTypeEnum = "INVALID_CREDENTIALS"
-	ConnectionErrorCodeTypeEnumClusterNotFound          ConnectionErrorCodeTypeEnum = "CLUSTER_NOT_FOUND"
-	ConnectionErrorCodeTypeEnumNetworkErrors            ConnectionErrorCodeTypeEnum = "NETWORK_ERRORS"
-	ConnectionErrorCodeTypeEnumInternalError            ConnectionErrorCodeTypeEnum = "INTERNAL_ERROR"
-	ConnectionErrorCodeTypeEnumInsufficientCloudhsmHsms ConnectionErrorCodeTypeEnum = "INSUFFICIENT_CLOUDHSM_HSMS"
-	ConnectionErrorCodeTypeEnumUserLockedOut            ConnectionErrorCodeTypeEnum = "USER_LOCKED_OUT"
-	ConnectionErrorCodeTypeEnumUserNotFound             ConnectionErrorCodeTypeEnum = "USER_NOT_FOUND"
-	ConnectionErrorCodeTypeEnumUserLoggedIn             ConnectionErrorCodeTypeEnum = "USER_LOGGED_IN"
-	ConnectionErrorCodeTypeEnumSubnetNotFound           ConnectionErrorCodeTypeEnum = "SUBNET_NOT_FOUND"
+    ConnectionErrorCodeTypeEnumInvalidCredentials ConnectionErrorCodeTypeEnum = "INVALID_CREDENTIALS"
+ConnectionErrorCodeTypeEnumClusterNotFound ConnectionErrorCodeTypeEnum = "CLUSTER_NOT_FOUND"
+ConnectionErrorCodeTypeEnumNetworkErrors ConnectionErrorCodeTypeEnum = "NETWORK_ERRORS"
+ConnectionErrorCodeTypeEnumInternalError ConnectionErrorCodeTypeEnum = "INTERNAL_ERROR"
+ConnectionErrorCodeTypeEnumInsufficientCloudhsmHsms ConnectionErrorCodeTypeEnum = "INSUFFICIENT_CLOUDHSM_HSMS"
+ConnectionErrorCodeTypeEnumUserLockedOut ConnectionErrorCodeTypeEnum = "USER_LOCKED_OUT"
+ConnectionErrorCodeTypeEnumUserNotFound ConnectionErrorCodeTypeEnum = "USER_NOT_FOUND"
+ConnectionErrorCodeTypeEnumUserLoggedIn ConnectionErrorCodeTypeEnum = "USER_LOGGED_IN"
+ConnectionErrorCodeTypeEnumSubnetNotFound ConnectionErrorCodeTypeEnum = "SUBNET_NOT_FOUND"
 )
+
+

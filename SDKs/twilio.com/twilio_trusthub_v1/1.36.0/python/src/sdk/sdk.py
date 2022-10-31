@@ -19,7 +19,9 @@ class SDK:
             self.server_url = utils.replace_parameters(server_url, params)
         else:
             self.server_url = server_url
+            
     
+
     
     def create_customer_profile(self, request: operations.CreateCustomerProfileRequest) -> operations.CreateCustomerProfileResponse:
         warnings.simplefilter("ignore")
@@ -28,18 +30,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/CustomerProfiles"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCustomerProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1CustomerProfile])
@@ -47,7 +51,6 @@ class SDK:
 
         return res
 
-    
     
     def create_customer_profile_channel_endpoint_assignment(self, request: operations.CreateCustomerProfileChannelEndpointAssignmentRequest) -> operations.CreateCustomerProfileChannelEndpointAssignmentResponse:
         warnings.simplefilter("ignore")
@@ -56,18 +59,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{CustomerProfileSid}/ChannelEndpointAssignments", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCustomerProfileChannelEndpointAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1CustomerProfileCustomerProfileChannelEndpointAssignment])
@@ -75,7 +80,6 @@ class SDK:
 
         return res
 
-    
     
     def create_customer_profile_entity_assignment(self, request: operations.CreateCustomerProfileEntityAssignmentRequest) -> operations.CreateCustomerProfileEntityAssignmentResponse:
         warnings.simplefilter("ignore")
@@ -84,18 +88,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{CustomerProfileSid}/EntityAssignments", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCustomerProfileEntityAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1CustomerProfileCustomerProfileEntityAssignment])
@@ -103,7 +109,6 @@ class SDK:
 
         return res
 
-    
     
     def create_customer_profile_evaluation(self, request: operations.CreateCustomerProfileEvaluationRequest) -> operations.CreateCustomerProfileEvaluationResponse:
         warnings.simplefilter("ignore")
@@ -112,18 +117,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{CustomerProfileSid}/Evaluations", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateCustomerProfileEvaluationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1CustomerProfileCustomerProfileEvaluation])
@@ -131,7 +138,6 @@ class SDK:
 
         return res
 
-    
     
     def create_end_user(self, request: operations.CreateEndUserRequest) -> operations.CreateEndUserResponse:
         warnings.simplefilter("ignore")
@@ -140,18 +146,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/EndUsers"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateEndUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1EndUser])
@@ -159,7 +167,6 @@ class SDK:
 
         return res
 
-    
     
     def create_supporting_document(self, request: operations.CreateSupportingDocumentRequest) -> operations.CreateSupportingDocumentResponse:
         warnings.simplefilter("ignore")
@@ -168,18 +175,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/SupportingDocuments"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateSupportingDocumentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1SupportingDocument])
@@ -187,7 +196,6 @@ class SDK:
 
         return res
 
-    
     
     def create_trust_product(self, request: operations.CreateTrustProductRequest) -> operations.CreateTrustProductResponse:
         warnings.simplefilter("ignore")
@@ -196,18 +204,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/TrustProducts"
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTrustProductResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1TrustProduct])
@@ -215,7 +225,6 @@ class SDK:
 
         return res
 
-    
     
     def create_trust_product_channel_endpoint_assignment(self, request: operations.CreateTrustProductChannelEndpointAssignmentRequest) -> operations.CreateTrustProductChannelEndpointAssignmentResponse:
         warnings.simplefilter("ignore")
@@ -224,18 +233,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{TrustProductSid}/ChannelEndpointAssignments", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTrustProductChannelEndpointAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1TrustProductTrustProductChannelEndpointAssignment])
@@ -243,7 +254,6 @@ class SDK:
 
         return res
 
-    
     
     def create_trust_product_entity_assignment(self, request: operations.CreateTrustProductEntityAssignmentRequest) -> operations.CreateTrustProductEntityAssignmentResponse:
         warnings.simplefilter("ignore")
@@ -252,18 +262,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{TrustProductSid}/EntityAssignments", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTrustProductEntityAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1TrustProductTrustProductEntityAssignment])
@@ -271,7 +283,6 @@ class SDK:
 
         return res
 
-    
     
     def create_trust_product_evaluation(self, request: operations.CreateTrustProductEvaluationRequest) -> operations.CreateTrustProductEvaluationResponse:
         warnings.simplefilter("ignore")
@@ -280,18 +291,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{TrustProductSid}/Evaluations", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.CreateTrustProductEvaluationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 201:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1TrustProductTrustProductEvaluation])
@@ -300,7 +313,6 @@ class SDK:
         return res
 
     
-    
     def delete_customer_profile(self, request: operations.DeleteCustomerProfileRequest) -> operations.DeleteCustomerProfileResponse:
         warnings.simplefilter("ignore")
 
@@ -308,20 +320,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCustomerProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_customer_profile_channel_endpoint_assignment(self, request: operations.DeleteCustomerProfileChannelEndpointAssignmentRequest) -> operations.DeleteCustomerProfileChannelEndpointAssignmentResponse:
         warnings.simplefilter("ignore")
@@ -330,20 +341,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{CustomerProfileSid}/ChannelEndpointAssignments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCustomerProfileChannelEndpointAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_customer_profile_entity_assignment(self, request: operations.DeleteCustomerProfileEntityAssignmentRequest) -> operations.DeleteCustomerProfileEntityAssignmentResponse:
         warnings.simplefilter("ignore")
@@ -352,20 +362,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{CustomerProfileSid}/EntityAssignments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteCustomerProfileEntityAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_end_user(self, request: operations.DeleteEndUserRequest) -> operations.DeleteEndUserResponse:
         warnings.simplefilter("ignore")
@@ -374,20 +383,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/EndUsers/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteEndUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_supporting_document(self, request: operations.DeleteSupportingDocumentRequest) -> operations.DeleteSupportingDocumentResponse:
         warnings.simplefilter("ignore")
@@ -396,20 +404,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/SupportingDocuments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteSupportingDocumentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_trust_product(self, request: operations.DeleteTrustProductRequest) -> operations.DeleteTrustProductResponse:
         warnings.simplefilter("ignore")
@@ -418,20 +425,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteTrustProductResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_trust_product_channel_endpoint_assignment(self, request: operations.DeleteTrustProductChannelEndpointAssignmentRequest) -> operations.DeleteTrustProductChannelEndpointAssignmentResponse:
         warnings.simplefilter("ignore")
@@ -440,20 +446,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{TrustProductSid}/ChannelEndpointAssignments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteTrustProductChannelEndpointAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def delete_trust_product_entity_assignment(self, request: operations.DeleteTrustProductEntityAssignmentRequest) -> operations.DeleteTrustProductEntityAssignmentResponse:
         warnings.simplefilter("ignore")
@@ -462,20 +467,19 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{TrustProductSid}/EntityAssignments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("DELETE", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.DeleteTrustProductEntityAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 204:
             pass
 
         return res
 
-    
     
     def fetch_customer_profile(self, request: operations.FetchCustomerProfileRequest) -> operations.FetchCustomerProfileResponse:
         warnings.simplefilter("ignore")
@@ -484,14 +488,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCustomerProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1CustomerProfile])
@@ -499,7 +503,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_customer_profile_channel_endpoint_assignment(self, request: operations.FetchCustomerProfileChannelEndpointAssignmentRequest) -> operations.FetchCustomerProfileChannelEndpointAssignmentResponse:
         warnings.simplefilter("ignore")
@@ -508,14 +511,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{CustomerProfileSid}/ChannelEndpointAssignments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCustomerProfileChannelEndpointAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1CustomerProfileCustomerProfileChannelEndpointAssignment])
@@ -524,7 +527,6 @@ class SDK:
         return res
 
     
-    
     def fetch_customer_profile_entity_assignment(self, request: operations.FetchCustomerProfileEntityAssignmentRequest) -> operations.FetchCustomerProfileEntityAssignmentResponse:
         warnings.simplefilter("ignore")
 
@@ -532,14 +534,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{CustomerProfileSid}/EntityAssignments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCustomerProfileEntityAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1CustomerProfileCustomerProfileEntityAssignment])
@@ -548,7 +550,6 @@ class SDK:
         return res
 
     
-    
     def fetch_customer_profile_evaluation(self, request: operations.FetchCustomerProfileEvaluationRequest) -> operations.FetchCustomerProfileEvaluationResponse:
         warnings.simplefilter("ignore")
 
@@ -556,14 +557,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{CustomerProfileSid}/Evaluations/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchCustomerProfileEvaluationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1CustomerProfileCustomerProfileEvaluation])
@@ -572,7 +573,6 @@ class SDK:
         return res
 
     
-    
     def fetch_end_user(self, request: operations.FetchEndUserRequest) -> operations.FetchEndUserResponse:
         warnings.simplefilter("ignore")
 
@@ -580,14 +580,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/EndUsers/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchEndUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1EndUser])
@@ -595,7 +595,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_end_user_type(self, request: operations.FetchEndUserTypeRequest) -> operations.FetchEndUserTypeResponse:
         warnings.simplefilter("ignore")
@@ -604,14 +603,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/EndUserTypes/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchEndUserTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1EndUserType])
@@ -620,7 +619,6 @@ class SDK:
         return res
 
     
-    
     def fetch_policies(self, request: operations.FetchPoliciesRequest) -> operations.FetchPoliciesResponse:
         warnings.simplefilter("ignore")
 
@@ -628,14 +626,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/Policies/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchPoliciesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1Policies])
@@ -644,7 +642,6 @@ class SDK:
         return res
 
     
-    
     def fetch_supporting_document(self, request: operations.FetchSupportingDocumentRequest) -> operations.FetchSupportingDocumentResponse:
         warnings.simplefilter("ignore")
 
@@ -652,14 +649,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/SupportingDocuments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSupportingDocumentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1SupportingDocument])
@@ -667,7 +664,6 @@ class SDK:
 
         return res
 
-    
     
     def fetch_supporting_document_type(self, request: operations.FetchSupportingDocumentTypeRequest) -> operations.FetchSupportingDocumentTypeResponse:
         warnings.simplefilter("ignore")
@@ -676,14 +672,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/SupportingDocumentTypes/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchSupportingDocumentTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1SupportingDocumentType])
@@ -692,7 +688,6 @@ class SDK:
         return res
 
     
-    
     def fetch_trust_product(self, request: operations.FetchTrustProductRequest) -> operations.FetchTrustProductResponse:
         warnings.simplefilter("ignore")
 
@@ -700,14 +695,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTrustProductResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1TrustProduct])
@@ -716,7 +711,6 @@ class SDK:
         return res
 
     
-    
     def fetch_trust_product_channel_endpoint_assignment(self, request: operations.FetchTrustProductChannelEndpointAssignmentRequest) -> operations.FetchTrustProductChannelEndpointAssignmentResponse:
         warnings.simplefilter("ignore")
 
@@ -724,14 +718,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{TrustProductSid}/ChannelEndpointAssignments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTrustProductChannelEndpointAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1TrustProductTrustProductChannelEndpointAssignment])
@@ -740,7 +734,6 @@ class SDK:
         return res
 
     
-    
     def fetch_trust_product_entity_assignment(self, request: operations.FetchTrustProductEntityAssignmentRequest) -> operations.FetchTrustProductEntityAssignmentResponse:
         warnings.simplefilter("ignore")
 
@@ -748,14 +741,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{TrustProductSid}/EntityAssignments/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTrustProductEntityAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1TrustProductTrustProductEntityAssignment])
@@ -764,7 +757,6 @@ class SDK:
         return res
 
     
-    
     def fetch_trust_product_evaluation(self, request: operations.FetchTrustProductEvaluationRequest) -> operations.FetchTrustProductEvaluationResponse:
         warnings.simplefilter("ignore")
 
@@ -772,14 +764,14 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{TrustProductSid}/Evaluations/{Sid}", request.path_params)
-        
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url)
         content_type = r.headers.get("Content-Type")
 
         res = operations.FetchTrustProductEvaluationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1TrustProductTrustProductEvaluation])
@@ -788,7 +780,6 @@ class SDK:
         return res
 
     
-    
     def list_customer_profile(self, request: operations.ListCustomerProfileRequest) -> operations.ListCustomerProfileResponse:
         warnings.simplefilter("ignore")
 
@@ -796,15 +787,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/CustomerProfiles"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCustomerProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListCustomerProfileListCustomerProfileResponse])
@@ -813,7 +805,6 @@ class SDK:
         return res
 
     
-    
     def list_customer_profile_channel_endpoint_assignment(self, request: operations.ListCustomerProfileChannelEndpointAssignmentRequest) -> operations.ListCustomerProfileChannelEndpointAssignmentResponse:
         warnings.simplefilter("ignore")
 
@@ -821,15 +812,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{CustomerProfileSid}/ChannelEndpointAssignments", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCustomerProfileChannelEndpointAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListCustomerProfileChannelEndpointAssignmentListCustomerProfileChannelEndpointAssignmentResponse])
@@ -838,7 +830,6 @@ class SDK:
         return res
 
     
-    
     def list_customer_profile_entity_assignment(self, request: operations.ListCustomerProfileEntityAssignmentRequest) -> operations.ListCustomerProfileEntityAssignmentResponse:
         warnings.simplefilter("ignore")
 
@@ -846,15 +837,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{CustomerProfileSid}/EntityAssignments", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCustomerProfileEntityAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListCustomerProfileEntityAssignmentListCustomerProfileEntityAssignmentResponse])
@@ -863,7 +855,6 @@ class SDK:
         return res
 
     
-    
     def list_customer_profile_evaluation(self, request: operations.ListCustomerProfileEvaluationRequest) -> operations.ListCustomerProfileEvaluationResponse:
         warnings.simplefilter("ignore")
 
@@ -871,15 +862,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{CustomerProfileSid}/Evaluations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListCustomerProfileEvaluationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListCustomerProfileEvaluationListCustomerProfileEvaluationResponse])
@@ -888,7 +880,6 @@ class SDK:
         return res
 
     
-    
     def list_end_user(self, request: operations.ListEndUserRequest) -> operations.ListEndUserResponse:
         warnings.simplefilter("ignore")
 
@@ -896,15 +887,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/EndUsers"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEndUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListEndUserListEndUserResponse])
@@ -913,7 +905,6 @@ class SDK:
         return res
 
     
-    
     def list_end_user_type(self, request: operations.ListEndUserTypeRequest) -> operations.ListEndUserTypeResponse:
         warnings.simplefilter("ignore")
 
@@ -921,15 +912,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/EndUserTypes"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListEndUserTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListEndUserTypeListEndUserTypeResponse])
@@ -938,7 +930,6 @@ class SDK:
         return res
 
     
-    
     def list_policies(self, request: operations.ListPoliciesRequest) -> operations.ListPoliciesResponse:
         warnings.simplefilter("ignore")
 
@@ -946,15 +937,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/Policies"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListPoliciesResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListPoliciesListPoliciesResponse])
@@ -963,7 +955,6 @@ class SDK:
         return res
 
     
-    
     def list_supporting_document(self, request: operations.ListSupportingDocumentRequest) -> operations.ListSupportingDocumentResponse:
         warnings.simplefilter("ignore")
 
@@ -971,15 +962,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/SupportingDocuments"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSupportingDocumentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSupportingDocumentListSupportingDocumentResponse])
@@ -988,7 +980,6 @@ class SDK:
         return res
 
     
-    
     def list_supporting_document_type(self, request: operations.ListSupportingDocumentTypeRequest) -> operations.ListSupportingDocumentTypeResponse:
         warnings.simplefilter("ignore")
 
@@ -996,15 +987,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/SupportingDocumentTypes"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListSupportingDocumentTypeResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListSupportingDocumentTypeListSupportingDocumentTypeResponse])
@@ -1013,7 +1005,6 @@ class SDK:
         return res
 
     
-    
     def list_trust_product(self, request: operations.ListTrustProductRequest) -> operations.ListTrustProductResponse:
         warnings.simplefilter("ignore")
 
@@ -1021,15 +1012,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = base_url.removesuffix("/") + "/v1/TrustProducts"
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTrustProductResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListTrustProductListTrustProductResponse])
@@ -1038,7 +1030,6 @@ class SDK:
         return res
 
     
-    
     def list_trust_product_channel_endpoint_assignment(self, request: operations.ListTrustProductChannelEndpointAssignmentRequest) -> operations.ListTrustProductChannelEndpointAssignmentResponse:
         warnings.simplefilter("ignore")
 
@@ -1046,15 +1037,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{TrustProductSid}/ChannelEndpointAssignments", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTrustProductChannelEndpointAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListTrustProductChannelEndpointAssignmentListTrustProductChannelEndpointAssignmentResponse])
@@ -1063,7 +1055,6 @@ class SDK:
         return res
 
     
-    
     def list_trust_product_entity_assignment(self, request: operations.ListTrustProductEntityAssignmentRequest) -> operations.ListTrustProductEntityAssignmentResponse:
         warnings.simplefilter("ignore")
 
@@ -1071,15 +1062,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{TrustProductSid}/EntityAssignments", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTrustProductEntityAssignmentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListTrustProductEntityAssignmentListTrustProductEntityAssignmentResponse])
@@ -1088,7 +1080,6 @@ class SDK:
         return res
 
     
-    
     def list_trust_product_evaluation(self, request: operations.ListTrustProductEvaluationRequest) -> operations.ListTrustProductEvaluationResponse:
         warnings.simplefilter("ignore")
 
@@ -1096,15 +1087,16 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{TrustProductSid}/Evaluations", request.path_params)
-        
+
         query_params = utils.get_query_params(request.query_params)
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("GET", url, params=query_params)
         content_type = r.headers.get("Content-Type")
 
         res = operations.ListTrustProductEvaluationResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[operations.ListTrustProductEvaluationListTrustProductEvaluationResponse])
@@ -1113,7 +1105,6 @@ class SDK:
         return res
 
     
-    
     def update_customer_profile(self, request: operations.UpdateCustomerProfileRequest) -> operations.UpdateCustomerProfileResponse:
         warnings.simplefilter("ignore")
 
@@ -1121,18 +1112,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/CustomerProfiles/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateCustomerProfileResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1CustomerProfile])
@@ -1141,7 +1134,6 @@ class SDK:
         return res
 
     
-    
     def update_end_user(self, request: operations.UpdateEndUserRequest) -> operations.UpdateEndUserResponse:
         warnings.simplefilter("ignore")
 
@@ -1149,18 +1141,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/EndUsers/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateEndUserResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1EndUser])
@@ -1169,7 +1163,6 @@ class SDK:
         return res
 
     
-    
     def update_supporting_document(self, request: operations.UpdateSupportingDocumentRequest) -> operations.UpdateSupportingDocumentResponse:
         warnings.simplefilter("ignore")
 
@@ -1177,18 +1170,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/SupportingDocuments/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateSupportingDocumentResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1SupportingDocument])
@@ -1197,7 +1192,6 @@ class SDK:
         return res
 
     
-    
     def update_trust_product(self, request: operations.UpdateTrustProductRequest) -> operations.UpdateTrustProductResponse:
         warnings.simplefilter("ignore")
 
@@ -1205,18 +1199,20 @@ class SDK:
         if not request.server_url is None:
             base_url = request.server_url
         url = utils.generate_url(base_url, "/v1/TrustProducts/{Sid}", request.path_params)
-        
-        req_content_type, data, form = utils.serialize_request_body(request)
+
         headers = {}
+
+        req_content_type, data, form = utils.serialize_request_body(request)
         if req_content_type != "multipart/form-data" and req_content_type != "multipart/mixed":
-            headers = {"content-type": req_content_type}
+            headers["content-type"] = req_content_type
+
         client = utils.configure_security_client(request.security)
-        
 
         r = client.request("POST", url, data=data, files=form, headers=headers)
         content_type = r.headers.get("Content-Type")
 
         res = operations.UpdateTrustProductResponse(status_code=r.status_code, content_type=content_type)
+        
         if r.status_code == 200:
             if utils.match_content_type(content_type, "application/json"):
                 out = utils.unmarshal_json(r.text, Optional[shared.TrusthubV1TrustProduct])

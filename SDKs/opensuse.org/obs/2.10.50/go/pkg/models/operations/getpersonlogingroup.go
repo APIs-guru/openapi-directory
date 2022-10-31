@@ -1,24 +1,28 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetPersonLoginGroupPathParams struct {
-	Login string `pathParam:"style=simple,explode=false,name=login"`
+    Login string `pathParam:"style=simple,explode=false,name=login"`
+    
 }
 
 type GetPersonLoginGroupSecurity struct {
-	BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
+    BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
+    
 }
 
 type GetPersonLoginGroupRequest struct {
-	PathParams GetPersonLoginGroupPathParams
-	Security   GetPersonLoginGroupSecurity
+    PathParams GetPersonLoginGroupPathParams 
+    Security GetPersonLoginGroupSecurity 
+    
 }
 
 type GetPersonLoginGroupResponse struct {
-	Body        []byte
-	ContentType string
-	StatusCode  int64
+    Body []byte 
+    ContentType string 
+    StatusCode int64 
+    
 }
+

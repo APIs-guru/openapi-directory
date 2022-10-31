@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ModifyDependenciesRequest struct {
-	Dependencies []string `json:"dependencies,omitempty"`
+    Dependencies []string `json:"dependencies,omitempty"`
+    
 }
+

@@ -1,33 +1,39 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type GetHolidaysHolidayIDPathParams struct {
-	HolidayID int64 `pathParam:"style=simple,explode=false,name=holidayId"`
+    HolidayID int64 `pathParam:"style=simple,explode=false,name=holidayId"`
+    
 }
 
 type GetHolidaysHolidayIDQueryParams struct {
-	Year *string `queryParam:"style=form,explode=true,name=year"`
+    Year *string `queryParam:"style=form,explode=true,name=year"`
+    
 }
 
 type GetHolidaysHolidayIDRequest struct {
-	PathParams  GetHolidaysHolidayIDPathParams
-	QueryParams GetHolidaysHolidayIDQueryParams
+    PathParams GetHolidaysHolidayIDPathParams 
+    QueryParams GetHolidaysHolidayIDQueryParams 
+    
 }
 
 type GetHolidaysHolidayID200ApplicationJSON struct {
-	Holiday *shared.Holiday `json:"holiday,omitempty"`
+    Holiday *shared.Holiday `json:"holiday,omitempty"`
+    
 }
 
 type GetHolidaysHolidayID404ApplicationJSON struct {
-	Error *shared.Error `json:"error,omitempty"`
+    Error *shared.Error `json:"error,omitempty"`
+    
 }
 
 type GetHolidaysHolidayIDResponse struct {
-	ContentType                                  string
-	StatusCode                                   int64
-	GetHolidaysHolidayID200ApplicationJSONObject *GetHolidaysHolidayID200ApplicationJSON
-	GetHolidaysHolidayID404ApplicationJSONObject *GetHolidaysHolidayID404ApplicationJSON
+    ContentType string 
+    StatusCode int64 
+    GetHolidaysHolidayID200ApplicationJSONObject *GetHolidaysHolidayID200ApplicationJSON 
+    GetHolidaysHolidayID404ApplicationJSONObject *GetHolidaysHolidayID404ApplicationJSON 
+    
 }
+

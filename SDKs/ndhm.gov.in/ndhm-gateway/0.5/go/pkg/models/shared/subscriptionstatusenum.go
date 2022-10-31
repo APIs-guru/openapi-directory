@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type SubscriptionStatusEnum string
 
 const (
-	SubscriptionStatusEnumGranted SubscriptionStatusEnum = "GRANTED"
-	SubscriptionStatusEnumDenied  SubscriptionStatusEnum = "DENIED"
+    SubscriptionStatusEnumGranted SubscriptionStatusEnum = "GRANTED"
+SubscriptionStatusEnumDenied SubscriptionStatusEnum = "DENIED"
 )
+
+

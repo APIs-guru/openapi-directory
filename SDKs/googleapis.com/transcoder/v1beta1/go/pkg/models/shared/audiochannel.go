@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AudioChannel struct {
-	Inputs []AudioChannelInput `json:"inputs,omitempty"`
+    Inputs []AudioChannelInput `json:"inputs,omitempty"`
+    
 }
+

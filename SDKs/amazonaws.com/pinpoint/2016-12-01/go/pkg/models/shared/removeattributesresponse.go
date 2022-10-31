@@ -1,5 +1,9 @@
 package shared
 
+
+
 type RemoveAttributesResponse struct {
-	AttributesResource AttributesResource `json:"AttributesResource"`
+    AttributesResource AttributesResource `json:"AttributesResource"`
+    
 }
+

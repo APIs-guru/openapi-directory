@@ -1,31 +1,40 @@
 package operations
 
+
+
 type PostPortfolioAnalysisContributionsRiskRequestBodyPortfolios struct {
-	AssetsWeights []float64 `json:"assetsWeights"`
+    AssetsWeights []float64 `json:"assetsWeights"`
+    
 }
 
 type PostPortfolioAnalysisContributionsRiskRequestBody struct {
-	Assets                 int64                                                         `json:"assets"`
-	AssetsCovarianceMatrix [][]float64                                                   `json:"assetsCovarianceMatrix"`
-	AssetsGroups           [][]int64                                                     `json:"assetsGroups,omitempty"`
-	Portfolios             []PostPortfolioAnalysisContributionsRiskRequestBodyPortfolios `json:"portfolios"`
+    Assets int64 `json:"assets"`
+    AssetsCovarianceMatrix [][]float64 `json:"assetsCovarianceMatrix"`
+    AssetsGroups [][]int64 `json:"assetsGroups,omitempty"`
+    Portfolios []PostPortfolioAnalysisContributionsRiskRequestBodyPortfolios `json:"portfolios"`
+    
 }
 
 type PostPortfolioAnalysisContributionsRiskRequest struct {
-	Request PostPortfolioAnalysisContributionsRiskRequestBody `request:"mediaType=application/json"`
+    Request PostPortfolioAnalysisContributionsRiskRequestBody `request:"mediaType=application/json"`
+    
 }
 
 type PostPortfolioAnalysisContributionsRisk200ApplicationJSONPortfolios struct {
-	AssetsGroupsRiskContributions []float64 `json:"assetsGroupsRiskContributions,omitempty"`
-	AssetsRiskContributions       []float64 `json:"assetsRiskContributions"`
+    AssetsGroupsRiskContributions []float64 `json:"assetsGroupsRiskContributions,omitempty"`
+    AssetsRiskContributions []float64 `json:"assetsRiskContributions"`
+    
 }
 
 type PostPortfolioAnalysisContributionsRisk200ApplicationJSON struct {
-	Portfolios []PostPortfolioAnalysisContributionsRisk200ApplicationJSONPortfolios `json:"portfolios"`
+    Portfolios []PostPortfolioAnalysisContributionsRisk200ApplicationJSONPortfolios `json:"portfolios"`
+    
 }
 
 type PostPortfolioAnalysisContributionsRiskResponse struct {
-	ContentType                                                    string
-	PostPortfolioAnalysisContributionsRisk200ApplicationJSONObject *PostPortfolioAnalysisContributionsRisk200ApplicationJSON
-	StatusCode                                                     int64
+    ContentType string 
+    PostPortfolioAnalysisContributionsRisk200ApplicationJSONObject *PostPortfolioAnalysisContributionsRisk200ApplicationJSON 
+    StatusCode int64 
+    
 }
+

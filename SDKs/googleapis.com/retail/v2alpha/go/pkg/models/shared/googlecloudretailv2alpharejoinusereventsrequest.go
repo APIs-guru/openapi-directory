@@ -1,13 +1,19 @@
 package shared
 
+
+
+
 type GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum string
 
 const (
-	GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnumUserEventRejoinScopeUnspecified GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum = "USER_EVENT_REJOIN_SCOPE_UNSPECIFIED"
-	GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnumJoinedEvents                    GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum = "JOINED_EVENTS"
-	GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnumUnjoinedEvents                  GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum = "UNJOINED_EVENTS"
+    GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnumUserEventRejoinScopeUnspecified GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum = "USER_EVENT_REJOIN_SCOPE_UNSPECIFIED"
+GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnumJoinedEvents GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum = "JOINED_EVENTS"
+GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnumUnjoinedEvents GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum = "UNJOINED_EVENTS"
 )
 
+
 type GoogleCloudRetailV2alphaRejoinUserEventsRequest struct {
-	UserEventRejoinScope *GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum `json:"userEventRejoinScope,omitempty"`
+    UserEventRejoinScope *GoogleCloudRetailV2alphaRejoinUserEventsRequestUserEventRejoinScopeEnum `json:"userEventRejoinScope,omitempty"`
+    
 }
+

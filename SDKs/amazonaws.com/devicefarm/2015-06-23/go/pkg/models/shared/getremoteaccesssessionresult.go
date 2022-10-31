@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GetRemoteAccessSessionResult struct {
-	RemoteAccessSession *RemoteAccessSession `json:"remoteAccessSession,omitempty"`
+    RemoteAccessSession *RemoteAccessSession `json:"remoteAccessSession,omitempty"`
+    
 }
+

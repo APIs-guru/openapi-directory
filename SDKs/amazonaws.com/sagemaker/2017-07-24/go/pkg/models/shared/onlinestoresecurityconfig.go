@@ -1,5 +1,9 @@
 package shared
 
+
+
 type OnlineStoreSecurityConfig struct {
-	KmsKeyID *string `json:"KmsKeyId,omitempty"`
+    KmsKeyID *string `json:"KmsKeyId,omitempty"`
+    
 }
+

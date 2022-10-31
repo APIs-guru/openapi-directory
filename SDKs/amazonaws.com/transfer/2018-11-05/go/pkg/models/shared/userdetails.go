@@ -1,7 +1,11 @@
 package shared
 
+
+
 type UserDetails struct {
-	ServerID  string  `json:"ServerId"`
-	SessionID *string `json:"SessionId,omitempty"`
-	UserName  string  `json:"UserName"`
+    ServerID string `json:"ServerId"`
+    SessionID *string `json:"SessionId,omitempty"`
+    UserName string `json:"UserName"`
+    
 }
+

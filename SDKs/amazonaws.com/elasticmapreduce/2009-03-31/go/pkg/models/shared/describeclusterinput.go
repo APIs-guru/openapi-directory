@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DescribeClusterInput struct {
-	ClusterID string `json:"ClusterId"`
+    ClusterID string `json:"ClusterId"`
+    
 }
+

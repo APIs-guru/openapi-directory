@@ -1,5 +1,9 @@
 package shared
 
+
+
 type AssociateDrtRoleRequest struct {
-	RoleArn string `json:"RoleArn"`
+    RoleArn string `json:"RoleArn"`
+    
 }
+

@@ -1,24 +1,27 @@
 package operations
 
 import (
-	"openapi/pkg/models/shared"
-)
+"openapi/pkg/models/shared")
 
 type LogsPostLogQueryParams struct {
-	Message string `queryParam:"style=form,explode=true,name=Message"`
+    Message string `queryParam:"style=form,explode=true,name=Message"`
+    
 }
 
 type LogsPostLogRequest struct {
-	QueryParams LogsPostLogQueryParams
+    QueryParams LogsPostLogQueryParams 
+    
 }
 
 type LogsPostLogResponse struct {
-	APIModelsAPIError                   *shared.APIModelsAPIError
-	Body                                []byte
-	ContentType                         string
-	LogsPostLog200ApplicationJSONString *string
-	LogsPostLog200ApplicationXMLString  *string
-	LogsPostLog200TextJSONString        *string
-	LogsPostLog200TextXMLString         *string
-	StatusCode                          int64
+    APIModelsAPIError *shared.APIModelsAPIError 
+    Body []byte 
+    ContentType string 
+    LogsPostLog200ApplicationJSONString *string 
+    LogsPostLog200ApplicationXMLString *string 
+    LogsPostLog200TextJSONString *string 
+    LogsPostLog200TextXMLString *string 
+    StatusCode int64 
+    
 }
+

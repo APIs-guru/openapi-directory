@@ -1,8 +1,13 @@
 package shared
 
+
+
+
 type AuthorizerStatusEnum string
 
 const (
-	AuthorizerStatusEnumActive   AuthorizerStatusEnum = "ACTIVE"
-	AuthorizerStatusEnumInactive AuthorizerStatusEnum = "INACTIVE"
+    AuthorizerStatusEnumActive AuthorizerStatusEnum = "ACTIVE"
+AuthorizerStatusEnumInactive AuthorizerStatusEnum = "INACTIVE"
 )
+
+

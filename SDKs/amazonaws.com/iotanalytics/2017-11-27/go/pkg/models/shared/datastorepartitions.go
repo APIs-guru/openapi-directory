@@ -1,5 +1,9 @@
 package shared
 
+
+
 type DatastorePartitions struct {
-	Partitions []DatastorePartition `json:"partitions,omitempty"`
+    Partitions []DatastorePartition `json:"partitions,omitempty"`
+    
 }
+

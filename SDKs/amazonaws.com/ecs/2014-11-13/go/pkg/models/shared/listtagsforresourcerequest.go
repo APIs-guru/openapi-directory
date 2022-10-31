@@ -1,5 +1,9 @@
 package shared
 
+
+
 type ListTagsForResourceRequest struct {
-	ResourceArn string `json:"resourceArn"`
+    ResourceArn string `json:"resourceArn"`
+    
 }
+

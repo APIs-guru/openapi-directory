@@ -1,5 +1,9 @@
 package shared
 
+
+
 type WindowsVersions struct {
-	WindowsVersions []WindowsVersion `json:"windowsVersions,omitempty"`
+    WindowsVersions []WindowsVersion `json:"windowsVersions,omitempty"`
+    
 }
+

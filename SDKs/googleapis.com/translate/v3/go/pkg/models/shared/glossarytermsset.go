@@ -1,5 +1,9 @@
 package shared
 
+
+
 type GlossaryTermsSet struct {
-	Terms []GlossaryTerm `json:"terms,omitempty"`
+    Terms []GlossaryTerm `json:"terms,omitempty"`
+    
 }
+
