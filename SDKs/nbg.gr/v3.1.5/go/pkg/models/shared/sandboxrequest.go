@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SandboxRequest struct {
-    SandboxID string `json:"sandboxId"`
-    
+	SandboxID string `json:"sandboxId"`
 }
-

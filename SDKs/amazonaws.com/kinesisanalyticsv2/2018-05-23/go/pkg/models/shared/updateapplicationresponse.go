@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateApplicationResponse struct {
-    ApplicationDetail ApplicationDetail `json:"ApplicationDetail"`
-    
+	ApplicationDetail ApplicationDetail `json:"ApplicationDetail"`
 }
-

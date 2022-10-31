@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LanguageSettings struct {
-    DisplayLanguage *string `json:"displayLanguage,omitempty"`
-    
+	DisplayLanguage *string `json:"displayLanguage,omitempty"`
 }
-

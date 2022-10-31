@@ -1,32 +1,29 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var DeleteSipCredentialListServers = []string{
 	"https://api.twilio.com",
 }
 
 type DeleteSipCredentialListPathParams struct {
-    AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
-    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
-    
+	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
+	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
 type DeleteSipCredentialListSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type DeleteSipCredentialListRequest struct {
-    ServerURL *string 
-    PathParams DeleteSipCredentialListPathParams 
-    Security DeleteSipCredentialListSecurity 
-    
+	ServerURL  *string
+	PathParams DeleteSipCredentialListPathParams
+	Security   DeleteSipCredentialListSecurity
 }
 
 type DeleteSipCredentialListResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

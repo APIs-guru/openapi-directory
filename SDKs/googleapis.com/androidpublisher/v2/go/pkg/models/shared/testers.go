@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Testers struct {
-    GoogleGroups []string `json:"googleGroups,omitempty"`
-    
+	GoogleGroups []string `json:"googleGroups,omitempty"`
 }
-

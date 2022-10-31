@@ -1,9 +1,5 @@
 package shared
 
-
-
 type InviteMembersResponse struct {
-    UnprocessedAccounts []Result `json:"UnprocessedAccounts,omitempty"`
-    
+	UnprocessedAccounts []Result `json:"UnprocessedAccounts,omitempty"`
 }
-

@@ -1,11 +1,7 @@
 package shared
 
-
-
 type Database struct {
-    Description *string `json:"Description,omitempty"`
-    Name string `json:"Name"`
-    Parameters map[string]string `json:"Parameters,omitempty"`
-    
+	Description *string           `json:"Description,omitempty"`
+	Name        string            `json:"Name"`
+	Parameters  map[string]string `json:"Parameters,omitempty"`
 }
-

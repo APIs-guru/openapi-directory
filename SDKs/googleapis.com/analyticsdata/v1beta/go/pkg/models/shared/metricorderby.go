@@ -1,9 +1,5 @@
 package shared
 
-
-
 type MetricOrderBy struct {
-    MetricName *string `json:"metricName,omitempty"`
-    
+	MetricName *string `json:"metricName,omitempty"`
 }
-

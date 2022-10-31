@@ -1,15 +1,10 @@
 package operations
 
-
-
 type PutToolsLogLevelPluginsRequest struct {
-    Request []byte `request:"mediaType=text/plain"`
-    
+	Request []byte `request:"mediaType=text/plain"`
 }
 
 type PutToolsLogLevelPluginsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

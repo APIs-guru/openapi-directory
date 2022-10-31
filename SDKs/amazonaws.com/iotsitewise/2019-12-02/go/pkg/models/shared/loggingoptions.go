@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LoggingOptions struct {
-    Level LoggingLevelEnum `json:"level"`
-    
+	Level LoggingLevelEnum `json:"level"`
 }
-

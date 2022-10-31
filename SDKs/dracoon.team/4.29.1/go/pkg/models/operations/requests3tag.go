@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type RequestS3TagPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type RequestS3TagHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type RequestS3TagRequest struct {
-    PathParams RequestS3TagPathParams 
-    Headers RequestS3TagHeaders 
-    
+	PathParams RequestS3TagPathParams
+	Headers    RequestS3TagHeaders
 }
 
 type RequestS3TagResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    S3Tag *shared.S3Tag 
-    StatusCode int64 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	S3Tag         *shared.S3Tag
+	StatusCode    int64
 }
-

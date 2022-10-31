@@ -1,10 +1,6 @@
 package shared
 
-
-
 type Address struct {
-    Pipe *Pipe `json:"pipe,omitempty"`
-    SocketAddress *SocketAddress `json:"socketAddress,omitempty"`
-    
+	Pipe          *Pipe          `json:"pipe,omitempty"`
+	SocketAddress *SocketAddress `json:"socketAddress,omitempty"`
 }
-

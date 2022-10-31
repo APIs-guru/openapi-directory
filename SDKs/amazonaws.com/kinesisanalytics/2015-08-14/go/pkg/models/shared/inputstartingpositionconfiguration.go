@@ -1,9 +1,5 @@
 package shared
 
-
-
 type InputStartingPositionConfiguration struct {
-    InputStartingPosition *InputStartingPositionEnum `json:"InputStartingPosition,omitempty"`
-    
+	InputStartingPosition *InputStartingPositionEnum `json:"InputStartingPosition,omitempty"`
 }
-

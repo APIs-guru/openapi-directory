@@ -1,9 +1,5 @@
 package shared
 
-
-
 type IssuerResponse struct {
-    Issuers []interface{} `json:"issuers"`
-    
+	Issuers []interface{} `json:"issuers"`
 }
-

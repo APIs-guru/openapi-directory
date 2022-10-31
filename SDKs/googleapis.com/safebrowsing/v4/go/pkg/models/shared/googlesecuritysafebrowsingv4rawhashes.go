@@ -1,10 +1,6 @@
 package shared
 
-
-
 type GoogleSecuritySafebrowsingV4RawHashes struct {
-    PrefixSize *int32 `json:"prefixSize,omitempty"`
-    RawHashes *string `json:"rawHashes,omitempty"`
-    
+	PrefixSize *int32  `json:"prefixSize,omitempty"`
+	RawHashes  *string `json:"rawHashes,omitempty"`
 }
-

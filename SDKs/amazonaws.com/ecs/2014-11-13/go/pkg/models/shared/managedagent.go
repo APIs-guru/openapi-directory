@@ -1,13 +1,12 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ManagedAgent struct {
-    LastStartedAt *time.Time `json:"lastStartedAt,omitempty"`
-    LastStatus *string `json:"lastStatus,omitempty"`
-    Name *ManagedAgentNameEnum `json:"name,omitempty"`
-    Reason *string `json:"reason,omitempty"`
-    
+	LastStartedAt *time.Time            `json:"lastStartedAt,omitempty"`
+	LastStatus    *string               `json:"lastStatus,omitempty"`
+	Name          *ManagedAgentNameEnum `json:"name,omitempty"`
+	Reason        *string               `json:"reason,omitempty"`
 }
-

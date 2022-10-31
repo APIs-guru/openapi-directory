@@ -1,34 +1,29 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type RenameFolderPathParams struct {
-    FolderID string `pathParam:"style=simple,explode=false,name=folder_id"`
-    
+	FolderID string `pathParam:"style=simple,explode=false,name=folder_id"`
 }
 
 type RenameFolderRenameFolderData struct {
-    Name string `json:"name"`
-    
+	Name string `json:"name"`
 }
 
 type RenameFolderSecurity struct {
-    APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
-    
+	APITokenBasic shared.SchemeAPITokenBasic `security:"scheme,type=http,subtype=basic"`
 }
 
 type RenameFolderRequest struct {
-    PathParams RenameFolderPathParams 
-    Request RenameFolderRenameFolderData `request:"mediaType=application/json"`
-    Security RenameFolderSecurity 
-    
+	PathParams RenameFolderPathParams
+	Request    RenameFolderRenameFolderData `request:"mediaType=application/json"`
+	Security   RenameFolderSecurity
 }
 
 type RenameFolderResponse struct {
-    ContentType string 
-    StatusCode int64 
-    AuthenticationError *shared.AuthenticationError 
-    
+	ContentType         string
+	StatusCode          int64
+	AuthenticationError *shared.AuthenticationError
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ApprovalConfig struct {
-    ApprovalRequired *bool `json:"approvalRequired,omitempty"`
-    
+	ApprovalRequired *bool `json:"approvalRequired,omitempty"`
 }
-

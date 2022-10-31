@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type ServiceUserConversationEnumNotificationLevelEnum string
 
 const (
-    ServiceUserConversationEnumNotificationLevelEnumDefault ServiceUserConversationEnumNotificationLevelEnum = "default"
-ServiceUserConversationEnumNotificationLevelEnumMuted ServiceUserConversationEnumNotificationLevelEnum = "muted"
+	ServiceUserConversationEnumNotificationLevelEnumDefault ServiceUserConversationEnumNotificationLevelEnum = "default"
+	ServiceUserConversationEnumNotificationLevelEnumMuted   ServiceUserConversationEnumNotificationLevelEnum = "muted"
 )
-
-

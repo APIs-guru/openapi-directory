@@ -1,22 +1,16 @@
 package operations
 
-
-
 type GetRawBrandPathParams struct {
-    Pid string `pathParam:"style=simple,explode=false,name=pid"`
-    
+	Pid string `pathParam:"style=simple,explode=false,name=pid"`
 }
 
 type GetRawBrandRequest struct {
-    PathParams GetRawBrandPathParams 
-    
+	PathParams GetRawBrandPathParams
 }
 
 type GetRawBrandResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    Nitro *interface{} 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
+	Nitro       *interface{}
 }
-

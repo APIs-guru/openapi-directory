@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetActionTagListQueryParams struct {
-    Limit *int64 `queryParam:"style=form,explode=true,name=limit"`
-    Offset *int64 `queryParam:"style=form,explode=true,name=offset"`
-    
+	Limit  *int64 `queryParam:"style=form,explode=true,name=limit"`
+	Offset *int64 `queryParam:"style=form,explode=true,name=offset"`
 }
 
 type GetActionTagListRequest struct {
-    QueryParams GetActionTagListQueryParams 
-    
+	QueryParams GetActionTagListQueryParams
 }
 
 type GetActionTagListResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

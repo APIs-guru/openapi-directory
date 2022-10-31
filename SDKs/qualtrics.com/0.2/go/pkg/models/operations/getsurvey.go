@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetSurveyPathParams struct {
-    SurveyID string `pathParam:"style=simple,explode=false,name=SurveyId"`
-    
+	SurveyID string `pathParam:"style=simple,explode=false,name=SurveyId"`
 }
 
 type GetSurveyRequest struct {
-    PathParams GetSurveyPathParams 
-    
+	PathParams GetSurveyPathParams
 }
 
 type GetSurveyResponse struct {
-    ContentType string 
-    StatusCode int64 
-    SurveyResponse map[string]interface{} 
-    
+	ContentType    string
+	StatusCode     int64
+	SurveyResponse map[string]interface{}
 }
-

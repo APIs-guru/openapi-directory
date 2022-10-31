@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetRunResult struct {
-    Run *Run `json:"run,omitempty"`
-    
+	Run *Run `json:"run,omitempty"`
 }
-

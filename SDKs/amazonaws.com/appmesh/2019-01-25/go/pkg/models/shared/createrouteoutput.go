@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateRouteOutput struct {
-    Route RouteData `json:"route"`
-    
+	Route RouteData `json:"route"`
 }
-

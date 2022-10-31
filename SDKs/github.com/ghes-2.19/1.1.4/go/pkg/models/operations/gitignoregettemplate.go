@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GitignoreGetTemplatePathParams struct {
-    Name string `pathParam:"style=simple,explode=false,name=name"`
-    
+	Name string `pathParam:"style=simple,explode=false,name=name"`
 }
 
 type GitignoreGetTemplateRequest struct {
-    PathParams GitignoreGetTemplatePathParams 
-    
+	PathParams GitignoreGetTemplatePathParams
 }
 
 type GitignoreGetTemplateResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GitignoreTemplate *shared.GitignoreTemplate 
-    
+	ContentType       string
+	StatusCode        int64
+	GitignoreTemplate *shared.GitignoreTemplate
 }
-

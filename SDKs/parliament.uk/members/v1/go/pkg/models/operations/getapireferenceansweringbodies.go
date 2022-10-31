@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAPIReferenceAnsweringBodiesQueryParams struct {
-    ID *int32 `queryParam:"style=form,explode=true,name=id"`
-    NameContains *string `queryParam:"style=form,explode=true,name=nameContains"`
-    
+	ID           *int32  `queryParam:"style=form,explode=true,name=id"`
+	NameContains *string `queryParam:"style=form,explode=true,name=nameContains"`
 }
 
 type GetAPIReferenceAnsweringBodiesRequest struct {
-    QueryParams GetAPIReferenceAnsweringBodiesQueryParams 
-    
+	QueryParams GetAPIReferenceAnsweringBodiesQueryParams
 }
 
 type GetAPIReferenceAnsweringBodiesResponse struct {
-    AnsweringBodies []shared.AnsweringBody 
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	AnsweringBodies []shared.AnsweringBody
+	Body            []byte
+	ContentType     string
+	StatusCode      int64
 }
-

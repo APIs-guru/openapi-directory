@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CopySnapshotResponse struct {
-    Snapshot *Snapshot `json:"Snapshot,omitempty"`
-    
+	Snapshot *Snapshot `json:"Snapshot,omitempty"`
 }
-

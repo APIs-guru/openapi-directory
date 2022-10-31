@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type ExecutionRuleEnum string
 
 const (
-    ExecutionRuleEnumFollowing ExecutionRuleEnum = "following"
-ExecutionRuleEnumPreceding ExecutionRuleEnum = "preceding"
+	ExecutionRuleEnumFollowing ExecutionRuleEnum = "following"
+	ExecutionRuleEnumPreceding ExecutionRuleEnum = "preceding"
 )
-
-

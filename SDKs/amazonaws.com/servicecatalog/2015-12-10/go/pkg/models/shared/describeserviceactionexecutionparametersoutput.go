@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeServiceActionExecutionParametersOutput struct {
-    ServiceActionParameters []ExecutionParameter `json:"ServiceActionParameters,omitempty"`
-    
+	ServiceActionParameters []ExecutionParameter `json:"ServiceActionParameters,omitempty"`
 }
-

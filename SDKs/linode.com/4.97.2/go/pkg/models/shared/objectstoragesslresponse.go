@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ObjectStorageSslResponse struct {
-    Ssl *bool `json:"ssl,omitempty"`
-    
+	Ssl *bool `json:"ssl,omitempty"`
 }
-

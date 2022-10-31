@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetPatientsIDProtectedPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetPatientsIDProtectedRequest struct {
-    PathParams GetPatientsIDProtectedPathParams 
-    
+	PathParams GetPatientsIDProtectedPathParams
 }
 
 type GetPatientsIDProtectedResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,24 +1,18 @@
 package shared
 
-
-
-
 type TargetingExpansionConfigTargetingExpansionLevelEnum string
 
 const (
-    TargetingExpansionConfigTargetingExpansionLevelEnumTargetingExpansionLevelUnspecified TargetingExpansionConfigTargetingExpansionLevelEnum = "TARGETING_EXPANSION_LEVEL_UNSPECIFIED"
-TargetingExpansionConfigTargetingExpansionLevelEnumNoExpansion TargetingExpansionConfigTargetingExpansionLevelEnum = "NO_EXPANSION"
-TargetingExpansionConfigTargetingExpansionLevelEnumLeastExpansion TargetingExpansionConfigTargetingExpansionLevelEnum = "LEAST_EXPANSION"
-TargetingExpansionConfigTargetingExpansionLevelEnumSomeExpansion TargetingExpansionConfigTargetingExpansionLevelEnum = "SOME_EXPANSION"
-TargetingExpansionConfigTargetingExpansionLevelEnumBalancedExpansion TargetingExpansionConfigTargetingExpansionLevelEnum = "BALANCED_EXPANSION"
-TargetingExpansionConfigTargetingExpansionLevelEnumMoreExpansion TargetingExpansionConfigTargetingExpansionLevelEnum = "MORE_EXPANSION"
-TargetingExpansionConfigTargetingExpansionLevelEnumMostExpansion TargetingExpansionConfigTargetingExpansionLevelEnum = "MOST_EXPANSION"
+	TargetingExpansionConfigTargetingExpansionLevelEnumTargetingExpansionLevelUnspecified TargetingExpansionConfigTargetingExpansionLevelEnum = "TARGETING_EXPANSION_LEVEL_UNSPECIFIED"
+	TargetingExpansionConfigTargetingExpansionLevelEnumNoExpansion                        TargetingExpansionConfigTargetingExpansionLevelEnum = "NO_EXPANSION"
+	TargetingExpansionConfigTargetingExpansionLevelEnumLeastExpansion                     TargetingExpansionConfigTargetingExpansionLevelEnum = "LEAST_EXPANSION"
+	TargetingExpansionConfigTargetingExpansionLevelEnumSomeExpansion                      TargetingExpansionConfigTargetingExpansionLevelEnum = "SOME_EXPANSION"
+	TargetingExpansionConfigTargetingExpansionLevelEnumBalancedExpansion                  TargetingExpansionConfigTargetingExpansionLevelEnum = "BALANCED_EXPANSION"
+	TargetingExpansionConfigTargetingExpansionLevelEnumMoreExpansion                      TargetingExpansionConfigTargetingExpansionLevelEnum = "MORE_EXPANSION"
+	TargetingExpansionConfigTargetingExpansionLevelEnumMostExpansion                      TargetingExpansionConfigTargetingExpansionLevelEnum = "MOST_EXPANSION"
 )
 
-
 type TargetingExpansionConfig struct {
-    ExcludeFirstPartyAudience *bool `json:"excludeFirstPartyAudience,omitempty"`
-    TargetingExpansionLevel *TargetingExpansionConfigTargetingExpansionLevelEnum `json:"targetingExpansionLevel,omitempty"`
-    
+	ExcludeFirstPartyAudience *bool                                                `json:"excludeFirstPartyAudience,omitempty"`
+	TargetingExpansionLevel   *TargetingExpansionConfigTargetingExpansionLevelEnum `json:"targetingExpansionLevel,omitempty"`
 }
-

@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ProductInformation struct {
-    ProductInformationFilterList []ProductInformationFilter `json:"ProductInformationFilterList"`
-    ResourceType string `json:"ResourceType"`
-    
+	ProductInformationFilterList []ProductInformationFilter `json:"ProductInformationFilterList"`
+	ResourceType                 string                     `json:"ResourceType"`
 }
-

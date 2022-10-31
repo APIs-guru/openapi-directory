@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RetrieveTransferParametersResponse struct {
-    TransferParameters *TransferParameters `json:"transferParameters,omitempty"`
-    
+	TransferParameters *TransferParameters `json:"transferParameters,omitempty"`
 }
-

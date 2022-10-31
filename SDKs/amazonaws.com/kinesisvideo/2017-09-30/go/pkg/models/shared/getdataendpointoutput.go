@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetDataEndpointOutput struct {
-    DataEndpoint *string `json:"DataEndpoint,omitempty"`
-    
+	DataEndpoint *string `json:"DataEndpoint,omitempty"`
 }
-

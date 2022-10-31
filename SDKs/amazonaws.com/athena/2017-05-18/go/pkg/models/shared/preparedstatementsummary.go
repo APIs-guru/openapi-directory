@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type PreparedStatementSummary struct {
-    LastModifiedTime *time.Time `json:"LastModifiedTime,omitempty"`
-    StatementName *string `json:"StatementName,omitempty"`
-    
+	LastModifiedTime *time.Time `json:"LastModifiedTime,omitempty"`
+	StatementName    *string    `json:"StatementName,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetServiceResponse struct {
-    Service *Service `json:"Service,omitempty"`
-    
+	Service *Service `json:"Service,omitempty"`
 }
-

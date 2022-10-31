@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetAddressBalancePathParams struct {
-    Address string `pathParam:"style=simple,explode=false,name=address"`
-    
+	Address string `pathParam:"style=simple,explode=false,name=address"`
 }
 
 type GetAddressBalanceRequest struct {
-    PathParams GetAddressBalancePathParams 
-    
+	PathParams GetAddressBalancePathParams
 }
 
 type GetAddressBalanceResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetAddressBalanceResponse *float64 
-    
+	ContentType               string
+	StatusCode                int64
+	GetAddressBalanceResponse *float64
 }
-

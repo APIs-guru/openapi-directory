@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DuplicateObjectResponse struct {
-    ObjectID *string `json:"objectId,omitempty"`
-    
+	ObjectID *string `json:"objectId,omitempty"`
 }
-

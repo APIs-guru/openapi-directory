@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DcimSitesGraphsPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type DcimSitesGraphsRequest struct {
-    PathParams DcimSitesGraphsPathParams 
-    
+	PathParams DcimSitesGraphsPathParams
 }
 
 type DcimSitesGraphsResponse struct {
-    ContentType string 
-    Site *shared.Site 
-    StatusCode int64 
-    
+	ContentType string
+	Site        *shared.Site
+	StatusCode  int64
 }
-

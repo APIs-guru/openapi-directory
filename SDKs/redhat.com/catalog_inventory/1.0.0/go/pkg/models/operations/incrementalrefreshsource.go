@@ -1,20 +1,14 @@
 package operations
 
-
-
 type IncrementalRefreshSourcePathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type IncrementalRefreshSourceRequest struct {
-    PathParams IncrementalRefreshSourcePathParams 
-    
+	PathParams IncrementalRefreshSourcePathParams
 }
 
 type IncrementalRefreshSourceResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

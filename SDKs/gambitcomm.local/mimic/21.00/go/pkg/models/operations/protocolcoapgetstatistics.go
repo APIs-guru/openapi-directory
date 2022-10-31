@@ -1,21 +1,15 @@
 package operations
 
-
-
 type ProtocolCoapGetStatisticsPathParams struct {
-    AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
-    
+	AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
 }
 
 type ProtocolCoapGetStatisticsRequest struct {
-    PathParams ProtocolCoapGetStatisticsPathParams 
-    
+	PathParams ProtocolCoapGetStatisticsPathParams
 }
 
 type ProtocolCoapGetStatisticsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    ProtocolCoapGetStatistics200ApplicationJSONInt32Integers []int32 
-    
+	ContentType                                              string
+	StatusCode                                               int64
+	ProtocolCoapGetStatistics200ApplicationJSONInt32Integers []int32
 }
-

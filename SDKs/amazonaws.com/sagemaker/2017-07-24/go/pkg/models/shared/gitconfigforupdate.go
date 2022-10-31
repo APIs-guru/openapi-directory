@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GitConfigForUpdate struct {
-    SecretArn *string `json:"SecretArn,omitempty"`
-    
+	SecretArn *string `json:"SecretArn,omitempty"`
 }
-

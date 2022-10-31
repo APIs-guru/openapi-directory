@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ClearTimerAction struct {
-    TimerName string `json:"timerName"`
-    
+	TimerName string `json:"timerName"`
 }
-

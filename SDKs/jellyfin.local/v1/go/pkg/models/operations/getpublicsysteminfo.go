@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetPublicSystemInfoResponse struct {
-    ContentType string 
-    PublicSystemInfo *shared.PublicSystemInfo 
-    StatusCode int64 
-    
+	ContentType      string
+	PublicSystemInfo *shared.PublicSystemInfo
+	StatusCode       int64
 }
-

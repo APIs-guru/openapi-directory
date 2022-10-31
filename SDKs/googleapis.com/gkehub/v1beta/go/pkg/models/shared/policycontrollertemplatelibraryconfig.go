@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PolicyControllerTemplateLibraryConfig struct {
-    Included *bool `json:"included,omitempty"`
-    
+	Included *bool `json:"included,omitempty"`
 }
-

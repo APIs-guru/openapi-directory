@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudDialogflowV2BatchDeleteEntityTypesRequest struct {
-    EntityTypeNames []string `json:"entityTypeNames,omitempty"`
-    
+	EntityTypeNames []string `json:"entityTypeNames,omitempty"`
 }
-

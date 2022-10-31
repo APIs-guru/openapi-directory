@@ -1,11 +1,7 @@
 package shared
 
-
-
 type ListOpsItemEventsRequest struct {
-    Filters []OpsItemEventFilter `json:"Filters,omitempty"`
-    MaxResults *int64 `json:"MaxResults,omitempty"`
-    NextToken *string `json:"NextToken,omitempty"`
-    
+	Filters    []OpsItemEventFilter `json:"Filters,omitempty"`
+	MaxResults *int64               `json:"MaxResults,omitempty"`
+	NextToken  *string              `json:"NextToken,omitempty"`
 }
-

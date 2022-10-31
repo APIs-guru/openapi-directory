@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CatalogObjectBatch struct {
-    Objects []CatalogObject `json:"objects"`
-    
+	Objects []CatalogObject `json:"objects"`
 }
-

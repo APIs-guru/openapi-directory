@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type ConnectionModeEnum string
 
 const (
-    ConnectionModeEnumPublic ConnectionModeEnum = "Public"
-ConnectionModeEnumPrivate ConnectionModeEnum = "Private"
+	ConnectionModeEnumPublic  ConnectionModeEnum = "Public"
+	ConnectionModeEnumPrivate ConnectionModeEnum = "Private"
 )
-
-

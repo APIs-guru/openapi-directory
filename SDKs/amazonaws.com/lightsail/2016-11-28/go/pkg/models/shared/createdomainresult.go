@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateDomainResult struct {
-    Operation *Operation `json:"operation,omitempty"`
-    
+	Operation *Operation `json:"operation,omitempty"`
 }
-

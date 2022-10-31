@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostDescribeIndexFieldsActionEnum string
 
 const (
-    PostDescribeIndexFieldsActionEnumDescribeIndexFields PostDescribeIndexFieldsActionEnum = "DescribeIndexFields"
+	PostDescribeIndexFieldsActionEnumDescribeIndexFields PostDescribeIndexFieldsActionEnum = "DescribeIndexFields"
 )
-
-
 
 type PostDescribeIndexFieldsVersionEnum string
 
 const (
-    PostDescribeIndexFieldsVersionEnumTwoThousandAndEleven0201 PostDescribeIndexFieldsVersionEnum = "2011-02-01"
+	PostDescribeIndexFieldsVersionEnumTwoThousandAndEleven0201 PostDescribeIndexFieldsVersionEnum = "2011-02-01"
 )
 
-
 type PostDescribeIndexFieldsQueryParams struct {
-    Action PostDescribeIndexFieldsActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostDescribeIndexFieldsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostDescribeIndexFieldsActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostDescribeIndexFieldsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostDescribeIndexFieldsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostDescribeIndexFieldsRequest struct {
-    QueryParams PostDescribeIndexFieldsQueryParams 
-    Headers PostDescribeIndexFieldsHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostDescribeIndexFieldsQueryParams
+	Headers     PostDescribeIndexFieldsHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostDescribeIndexFieldsResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,20 +1,14 @@
 package operations
 
-
-
 type PostInventoryFillRateHeaders struct {
-    Token *string `header:"style=simple,explode=false,name=Token"`
-    
+	Token *string `header:"style=simple,explode=false,name=Token"`
 }
 
 type PostInventoryFillRateRequest struct {
-    Headers PostInventoryFillRateHeaders 
-    
+	Headers PostInventoryFillRateHeaders
 }
 
 type PostInventoryFillRateResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

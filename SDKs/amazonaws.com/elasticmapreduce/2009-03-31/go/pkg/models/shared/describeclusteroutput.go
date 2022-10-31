@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeClusterOutput struct {
-    Cluster *Cluster `json:"Cluster,omitempty"`
-    
+	Cluster *Cluster `json:"Cluster,omitempty"`
 }
-

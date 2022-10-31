@@ -1,15 +1,10 @@
 package shared
 
-
-
 type BudgetSummaryResponseData struct {
-    Budgets []BudgetSummary `json:"budgets"`
-    DefaultBudget *BudgetSummary `json:"default_budget,omitempty"`
-    
+	Budgets       []BudgetSummary `json:"budgets"`
+	DefaultBudget *BudgetSummary  `json:"default_budget,omitempty"`
 }
 
 type BudgetSummaryResponse struct {
-    Data BudgetSummaryResponseData `json:"data"`
-    
+	Data BudgetSummaryResponseData `json:"data"`
 }
-

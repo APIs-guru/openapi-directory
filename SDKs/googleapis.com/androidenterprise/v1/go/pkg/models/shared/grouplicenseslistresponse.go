@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GroupLicensesListResponse struct {
-    GroupLicense []GroupLicense `json:"groupLicense,omitempty"`
-    
+	GroupLicense []GroupLicense `json:"groupLicense,omitempty"`
 }
-

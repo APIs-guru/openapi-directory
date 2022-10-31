@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetOntDagsUsingGetPathParams struct {
-    AccID string `pathParam:"style=simple,explode=false,name=accId"`
-    
+	AccID string `pathParam:"style=simple,explode=false,name=accId"`
 }
 
 type GetOntDagsUsingGetRequest struct {
-    PathParams GetOntDagsUsingGetPathParams 
-    
+	PathParams GetOntDagsUsingGetPathParams
 }
 
 type GetOntDagsUsingGetResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

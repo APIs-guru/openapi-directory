@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetBlockIndexResponse struct {
-    BlockHash *string `json:"blockHash,omitempty"`
-    
+	BlockHash *string `json:"blockHash,omitempty"`
 }
-

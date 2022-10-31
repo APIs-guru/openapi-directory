@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StopLabelingJobRequest struct {
-    LabelingJobName string `json:"LabelingJobName"`
-    
+	LabelingJobName string `json:"LabelingJobName"`
 }
-

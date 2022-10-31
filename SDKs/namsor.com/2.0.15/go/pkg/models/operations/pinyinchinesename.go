@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PinyinChineseNamePathParams struct {
-    ChineseName string `pathParam:"style=simple,explode=false,name=chineseName"`
-    
+	ChineseName string `pathParam:"style=simple,explode=false,name=chineseName"`
 }
 
 type PinyinChineseNameSecurity struct {
-    APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PinyinChineseNameRequest struct {
-    PathParams PinyinChineseNamePathParams 
-    Security PinyinChineseNameSecurity 
-    
+	PathParams PinyinChineseNamePathParams
+	Security   PinyinChineseNameSecurity
 }
 
 type PinyinChineseNameResponse struct {
-    ContentType string 
-    PersonalNameParsedOut *shared.PersonalNameParsedOut 
-    StatusCode int64 
-    
+	ContentType           string
+	PersonalNameParsedOut *shared.PersonalNameParsedOut
+	StatusCode            int64
 }
-

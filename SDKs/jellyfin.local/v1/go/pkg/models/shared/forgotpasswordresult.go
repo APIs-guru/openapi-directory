@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ForgotPasswordResult struct {
-    Action *ForgotPasswordActionEnum `json:"Action,omitempty"`
-    PinExpirationDate *time.Time `json:"PinExpirationDate,omitempty"`
-    PinFile *string `json:"PinFile,omitempty"`
-    
+	Action            *ForgotPasswordActionEnum `json:"Action,omitempty"`
+	PinExpirationDate *time.Time                `json:"PinExpirationDate,omitempty"`
+	PinFile           *string                   `json:"PinFile,omitempty"`
 }
-

@@ -1,33 +1,29 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ReposUpdateStatusCheckProtectionPathParams struct {
-    Branch string `pathParam:"style=simple,explode=false,name=branch"`
-    Owner string `pathParam:"style=simple,explode=false,name=owner"`
-    Repo string `pathParam:"style=simple,explode=false,name=repo"`
-    
+	Branch string `pathParam:"style=simple,explode=false,name=branch"`
+	Owner  string `pathParam:"style=simple,explode=false,name=owner"`
+	Repo   string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
 type ReposUpdateStatusCheckProtectionRequestBody struct {
-    Contexts []string `json:"contexts,omitempty"`
-    Strict *bool `json:"strict,omitempty"`
-    
+	Contexts []string `json:"contexts,omitempty"`
+	Strict   *bool    `json:"strict,omitempty"`
 }
 
 type ReposUpdateStatusCheckProtectionRequest struct {
-    PathParams ReposUpdateStatusCheckProtectionPathParams 
-    Request *ReposUpdateStatusCheckProtectionRequestBody `request:"mediaType=application/json"`
-    
+	PathParams ReposUpdateStatusCheckProtectionPathParams
+	Request    *ReposUpdateStatusCheckProtectionRequestBody `request:"mediaType=application/json"`
 }
 
 type ReposUpdateStatusCheckProtectionResponse struct {
-    ContentType string 
-    StatusCode int64 
-    BasicError *shared.BasicError 
-    StatusCheckPolicy *shared.StatusCheckPolicy 
-    ValidationError *shared.ValidationError 
-    
+	ContentType       string
+	StatusCode        int64
+	BasicError        *shared.BasicError
+	StatusCheckPolicy *shared.StatusCheckPolicy
+	ValidationError   *shared.ValidationError
 }
-

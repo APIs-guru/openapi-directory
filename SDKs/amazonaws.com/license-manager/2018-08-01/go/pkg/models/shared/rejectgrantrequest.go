@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RejectGrantRequest struct {
-    GrantArn string `json:"GrantArn"`
-    
+	GrantArn string `json:"GrantArn"`
 }
-

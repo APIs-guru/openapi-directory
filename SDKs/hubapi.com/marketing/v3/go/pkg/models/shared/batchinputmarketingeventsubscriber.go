@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchInputMarketingEventSubscriber struct {
-    Inputs []MarketingEventSubscriber `json:"inputs"`
-    
+	Inputs []MarketingEventSubscriber `json:"inputs"`
 }
-

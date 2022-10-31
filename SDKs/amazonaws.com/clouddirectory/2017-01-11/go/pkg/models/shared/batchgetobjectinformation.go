@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchGetObjectInformation struct {
-    ObjectReference ObjectReference `json:"ObjectReference"`
-    
+	ObjectReference ObjectReference `json:"ObjectReference"`
 }
-

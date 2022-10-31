@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EditCustomerMatchMembersResponse struct {
-    FirstAndThirdPartyAudienceID *string `json:"firstAndThirdPartyAudienceId,omitempty"`
-    
+	FirstAndThirdPartyAudienceID *string `json:"firstAndThirdPartyAudienceId,omitempty"`
 }
-

@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ItemIdentifier struct {
-    Type ItemTypeEnum `json:"type"`
-    Value ItemValue `json:"value"`
-    
+	Type  ItemTypeEnum `json:"type"`
+	Value ItemValue    `json:"value"`
 }
-

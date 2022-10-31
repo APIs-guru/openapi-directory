@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TimestampPropertyOptions struct {
-    OperatorOptions *TimestampOperatorOptions `json:"operatorOptions,omitempty"`
-    
+	OperatorOptions *TimestampOperatorOptions `json:"operatorOptions,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetCrawlerResponse struct {
-    Crawler *Crawler `json:"Crawler,omitempty"`
-    
+	Crawler *Crawler `json:"Crawler,omitempty"`
 }
-

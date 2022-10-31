@@ -1,73 +1,59 @@
 package shared
 
-
-
-
 type IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum string
 
 const (
-    IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnumExceptionUnspecified IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum = "EXCEPTION_UNSPECIFIED"
-IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnumUnderConstruction IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum = "UNDER_CONSTRUCTION"
-IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnumDependentOnSeason IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum = "DEPENDENT_ON_SEASON"
-IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnumDependentOnDayOfWeek IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnumExceptionUnspecified IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnumUnderConstruction    IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum = "UNDER_CONSTRUCTION"
+	IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnumDependentOnSeason    IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum = "DEPENDENT_ON_SEASON"
+	IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnumDependentOnDayOfWeek IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type IncreasedFoodSafetyDisposableFlatwareExceptionEnum string
 
 const (
-    IncreasedFoodSafetyDisposableFlatwareExceptionEnumExceptionUnspecified IncreasedFoodSafetyDisposableFlatwareExceptionEnum = "EXCEPTION_UNSPECIFIED"
-IncreasedFoodSafetyDisposableFlatwareExceptionEnumUnderConstruction IncreasedFoodSafetyDisposableFlatwareExceptionEnum = "UNDER_CONSTRUCTION"
-IncreasedFoodSafetyDisposableFlatwareExceptionEnumDependentOnSeason IncreasedFoodSafetyDisposableFlatwareExceptionEnum = "DEPENDENT_ON_SEASON"
-IncreasedFoodSafetyDisposableFlatwareExceptionEnumDependentOnDayOfWeek IncreasedFoodSafetyDisposableFlatwareExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	IncreasedFoodSafetyDisposableFlatwareExceptionEnumExceptionUnspecified IncreasedFoodSafetyDisposableFlatwareExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	IncreasedFoodSafetyDisposableFlatwareExceptionEnumUnderConstruction    IncreasedFoodSafetyDisposableFlatwareExceptionEnum = "UNDER_CONSTRUCTION"
+	IncreasedFoodSafetyDisposableFlatwareExceptionEnumDependentOnSeason    IncreasedFoodSafetyDisposableFlatwareExceptionEnum = "DEPENDENT_ON_SEASON"
+	IncreasedFoodSafetyDisposableFlatwareExceptionEnumDependentOnDayOfWeek IncreasedFoodSafetyDisposableFlatwareExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnum string
 
 const (
-    IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnumExceptionUnspecified IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnum = "EXCEPTION_UNSPECIFIED"
-IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnumUnderConstruction IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnum = "UNDER_CONSTRUCTION"
-IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnumDependentOnSeason IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnum = "DEPENDENT_ON_SEASON"
-IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnumDependentOnDayOfWeek IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnumExceptionUnspecified IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnumUnderConstruction    IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnum = "UNDER_CONSTRUCTION"
+	IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnumDependentOnSeason    IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnum = "DEPENDENT_ON_SEASON"
+	IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnumDependentOnDayOfWeek IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type IncreasedFoodSafetyIndividualPackagedMealsExceptionEnum string
 
 const (
-    IncreasedFoodSafetyIndividualPackagedMealsExceptionEnumExceptionUnspecified IncreasedFoodSafetyIndividualPackagedMealsExceptionEnum = "EXCEPTION_UNSPECIFIED"
-IncreasedFoodSafetyIndividualPackagedMealsExceptionEnumUnderConstruction IncreasedFoodSafetyIndividualPackagedMealsExceptionEnum = "UNDER_CONSTRUCTION"
-IncreasedFoodSafetyIndividualPackagedMealsExceptionEnumDependentOnSeason IncreasedFoodSafetyIndividualPackagedMealsExceptionEnum = "DEPENDENT_ON_SEASON"
-IncreasedFoodSafetyIndividualPackagedMealsExceptionEnumDependentOnDayOfWeek IncreasedFoodSafetyIndividualPackagedMealsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	IncreasedFoodSafetyIndividualPackagedMealsExceptionEnumExceptionUnspecified IncreasedFoodSafetyIndividualPackagedMealsExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	IncreasedFoodSafetyIndividualPackagedMealsExceptionEnumUnderConstruction    IncreasedFoodSafetyIndividualPackagedMealsExceptionEnum = "UNDER_CONSTRUCTION"
+	IncreasedFoodSafetyIndividualPackagedMealsExceptionEnumDependentOnSeason    IncreasedFoodSafetyIndividualPackagedMealsExceptionEnum = "DEPENDENT_ON_SEASON"
+	IncreasedFoodSafetyIndividualPackagedMealsExceptionEnumDependentOnDayOfWeek IncreasedFoodSafetyIndividualPackagedMealsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type IncreasedFoodSafetySingleUseFoodMenusExceptionEnum string
 
 const (
-    IncreasedFoodSafetySingleUseFoodMenusExceptionEnumExceptionUnspecified IncreasedFoodSafetySingleUseFoodMenusExceptionEnum = "EXCEPTION_UNSPECIFIED"
-IncreasedFoodSafetySingleUseFoodMenusExceptionEnumUnderConstruction IncreasedFoodSafetySingleUseFoodMenusExceptionEnum = "UNDER_CONSTRUCTION"
-IncreasedFoodSafetySingleUseFoodMenusExceptionEnumDependentOnSeason IncreasedFoodSafetySingleUseFoodMenusExceptionEnum = "DEPENDENT_ON_SEASON"
-IncreasedFoodSafetySingleUseFoodMenusExceptionEnumDependentOnDayOfWeek IncreasedFoodSafetySingleUseFoodMenusExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	IncreasedFoodSafetySingleUseFoodMenusExceptionEnumExceptionUnspecified IncreasedFoodSafetySingleUseFoodMenusExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	IncreasedFoodSafetySingleUseFoodMenusExceptionEnumUnderConstruction    IncreasedFoodSafetySingleUseFoodMenusExceptionEnum = "UNDER_CONSTRUCTION"
+	IncreasedFoodSafetySingleUseFoodMenusExceptionEnumDependentOnSeason    IncreasedFoodSafetySingleUseFoodMenusExceptionEnum = "DEPENDENT_ON_SEASON"
+	IncreasedFoodSafetySingleUseFoodMenusExceptionEnumDependentOnDayOfWeek IncreasedFoodSafetySingleUseFoodMenusExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
-
 type IncreasedFoodSafety struct {
-    DiningAreasAdditionalSanitation *bool `json:"diningAreasAdditionalSanitation,omitempty"`
-    DiningAreasAdditionalSanitationException *IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum `json:"diningAreasAdditionalSanitationException,omitempty"`
-    DisposableFlatware *bool `json:"disposableFlatware,omitempty"`
-    DisposableFlatwareException *IncreasedFoodSafetyDisposableFlatwareExceptionEnum `json:"disposableFlatwareException,omitempty"`
-    FoodPreparationAndServingAdditionalSafety *bool `json:"foodPreparationAndServingAdditionalSafety,omitempty"`
-    FoodPreparationAndServingAdditionalSafetyException *IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnum `json:"foodPreparationAndServingAdditionalSafetyException,omitempty"`
-    IndividualPackagedMeals *bool `json:"individualPackagedMeals,omitempty"`
-    IndividualPackagedMealsException *IncreasedFoodSafetyIndividualPackagedMealsExceptionEnum `json:"individualPackagedMealsException,omitempty"`
-    SingleUseFoodMenus *bool `json:"singleUseFoodMenus,omitempty"`
-    SingleUseFoodMenusException *IncreasedFoodSafetySingleUseFoodMenusExceptionEnum `json:"singleUseFoodMenusException,omitempty"`
-    
+	DiningAreasAdditionalSanitation                    *bool                                                                      `json:"diningAreasAdditionalSanitation,omitempty"`
+	DiningAreasAdditionalSanitationException           *IncreasedFoodSafetyDiningAreasAdditionalSanitationExceptionEnum           `json:"diningAreasAdditionalSanitationException,omitempty"`
+	DisposableFlatware                                 *bool                                                                      `json:"disposableFlatware,omitempty"`
+	DisposableFlatwareException                        *IncreasedFoodSafetyDisposableFlatwareExceptionEnum                        `json:"disposableFlatwareException,omitempty"`
+	FoodPreparationAndServingAdditionalSafety          *bool                                                                      `json:"foodPreparationAndServingAdditionalSafety,omitempty"`
+	FoodPreparationAndServingAdditionalSafetyException *IncreasedFoodSafetyFoodPreparationAndServingAdditionalSafetyExceptionEnum `json:"foodPreparationAndServingAdditionalSafetyException,omitempty"`
+	IndividualPackagedMeals                            *bool                                                                      `json:"individualPackagedMeals,omitempty"`
+	IndividualPackagedMealsException                   *IncreasedFoodSafetyIndividualPackagedMealsExceptionEnum                   `json:"individualPackagedMealsException,omitempty"`
+	SingleUseFoodMenus                                 *bool                                                                      `json:"singleUseFoodMenus,omitempty"`
+	SingleUseFoodMenusException                        *IncreasedFoodSafetySingleUseFoodMenusExceptionEnum                        `json:"singleUseFoodMenusException,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetAutomationExecutionRequest struct {
-    AutomationExecutionID string `json:"AutomationExecutionId"`
-    
+	AutomationExecutionID string `json:"AutomationExecutionId"`
 }
-

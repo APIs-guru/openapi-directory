@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteReplicaAction struct {
-    RegionName string `json:"RegionName"`
-    
+	RegionName string `json:"RegionName"`
 }
-

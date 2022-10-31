@@ -1,33 +1,25 @@
 package shared
 
-
-
-
 type OsPolicyResourceConfigStepOutcomeEnum string
 
 const (
-    OsPolicyResourceConfigStepOutcomeEnumOutcomeUnspecified OsPolicyResourceConfigStepOutcomeEnum = "OUTCOME_UNSPECIFIED"
-OsPolicyResourceConfigStepOutcomeEnumSucceeded OsPolicyResourceConfigStepOutcomeEnum = "SUCCEEDED"
-OsPolicyResourceConfigStepOutcomeEnumFailed OsPolicyResourceConfigStepOutcomeEnum = "FAILED"
+	OsPolicyResourceConfigStepOutcomeEnumOutcomeUnspecified OsPolicyResourceConfigStepOutcomeEnum = "OUTCOME_UNSPECIFIED"
+	OsPolicyResourceConfigStepOutcomeEnumSucceeded          OsPolicyResourceConfigStepOutcomeEnum = "SUCCEEDED"
+	OsPolicyResourceConfigStepOutcomeEnumFailed             OsPolicyResourceConfigStepOutcomeEnum = "FAILED"
 )
-
-
 
 type OsPolicyResourceConfigStepTypeEnum string
 
 const (
-    OsPolicyResourceConfigStepTypeEnumTypeUnspecified OsPolicyResourceConfigStepTypeEnum = "TYPE_UNSPECIFIED"
-OsPolicyResourceConfigStepTypeEnumValidation OsPolicyResourceConfigStepTypeEnum = "VALIDATION"
-OsPolicyResourceConfigStepTypeEnumDesiredStateCheck OsPolicyResourceConfigStepTypeEnum = "DESIRED_STATE_CHECK"
-OsPolicyResourceConfigStepTypeEnumDesiredStateEnforcement OsPolicyResourceConfigStepTypeEnum = "DESIRED_STATE_ENFORCEMENT"
-OsPolicyResourceConfigStepTypeEnumDesiredStateCheckPostEnforcement OsPolicyResourceConfigStepTypeEnum = "DESIRED_STATE_CHECK_POST_ENFORCEMENT"
+	OsPolicyResourceConfigStepTypeEnumTypeUnspecified                  OsPolicyResourceConfigStepTypeEnum = "TYPE_UNSPECIFIED"
+	OsPolicyResourceConfigStepTypeEnumValidation                       OsPolicyResourceConfigStepTypeEnum = "VALIDATION"
+	OsPolicyResourceConfigStepTypeEnumDesiredStateCheck                OsPolicyResourceConfigStepTypeEnum = "DESIRED_STATE_CHECK"
+	OsPolicyResourceConfigStepTypeEnumDesiredStateEnforcement          OsPolicyResourceConfigStepTypeEnum = "DESIRED_STATE_ENFORCEMENT"
+	OsPolicyResourceConfigStepTypeEnumDesiredStateCheckPostEnforcement OsPolicyResourceConfigStepTypeEnum = "DESIRED_STATE_CHECK_POST_ENFORCEMENT"
 )
 
-
 type OsPolicyResourceConfigStep struct {
-    ErrorMessage *string `json:"errorMessage,omitempty"`
-    Outcome *OsPolicyResourceConfigStepOutcomeEnum `json:"outcome,omitempty"`
-    Type *OsPolicyResourceConfigStepTypeEnum `json:"type,omitempty"`
-    
+	ErrorMessage *string                                `json:"errorMessage,omitempty"`
+	Outcome      *OsPolicyResourceConfigStepOutcomeEnum `json:"outcome,omitempty"`
+	Type         *OsPolicyResourceConfigStepTypeEnum    `json:"type,omitempty"`
 }
-

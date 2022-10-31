@@ -1,52 +1,41 @@
 package operations
 
-
-
-
 type GetUpdateAvailabilityOptionsActionEnum string
 
 const (
-    GetUpdateAvailabilityOptionsActionEnumUpdateAvailabilityOptions GetUpdateAvailabilityOptionsActionEnum = "UpdateAvailabilityOptions"
+	GetUpdateAvailabilityOptionsActionEnumUpdateAvailabilityOptions GetUpdateAvailabilityOptionsActionEnum = "UpdateAvailabilityOptions"
 )
-
-
 
 type GetUpdateAvailabilityOptionsVersionEnum string
 
 const (
-    GetUpdateAvailabilityOptionsVersionEnumTwoThousandAndEleven0201 GetUpdateAvailabilityOptionsVersionEnum = "2011-02-01"
+	GetUpdateAvailabilityOptionsVersionEnumTwoThousandAndEleven0201 GetUpdateAvailabilityOptionsVersionEnum = "2011-02-01"
 )
 
-
 type GetUpdateAvailabilityOptionsQueryParams struct {
-    Action GetUpdateAvailabilityOptionsActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    DomainName string `queryParam:"style=form,explode=true,name=DomainName"`
-    MultiAz bool `queryParam:"style=form,explode=true,name=MultiAZ"`
-    Version GetUpdateAvailabilityOptionsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action     GetUpdateAvailabilityOptionsActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	DomainName string                                  `queryParam:"style=form,explode=true,name=DomainName"`
+	MultiAz    bool                                    `queryParam:"style=form,explode=true,name=MultiAZ"`
+	Version    GetUpdateAvailabilityOptionsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type GetUpdateAvailabilityOptionsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetUpdateAvailabilityOptionsRequest struct {
-    QueryParams GetUpdateAvailabilityOptionsQueryParams 
-    Headers GetUpdateAvailabilityOptionsHeaders 
-    
+	QueryParams GetUpdateAvailabilityOptionsQueryParams
+	Headers     GetUpdateAvailabilityOptionsHeaders
 }
 
 type GetUpdateAvailabilityOptionsResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

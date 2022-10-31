@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetRealmClientsInitialAccessPathParams struct {
-    Realm string `pathParam:"style=simple,explode=false,name=realm"`
-    
+	Realm string `pathParam:"style=simple,explode=false,name=realm"`
 }
 
 type GetRealmClientsInitialAccessRequest struct {
-    PathParams GetRealmClientsInitialAccessPathParams 
-    
+	PathParams GetRealmClientsInitialAccessPathParams
 }
 
 type GetRealmClientsInitialAccessResponse struct {
-    ClientInitialAccessPresentations []shared.ClientInitialAccessPresentation 
-    ContentType string 
-    StatusCode int64 
-    
+	ClientInitialAccessPresentations []shared.ClientInitialAccessPresentation
+	ContentType                      string
+	StatusCode                       int64
 }
-

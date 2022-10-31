@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeSecurityPolicyRequest struct {
-    SecurityPolicyName string `json:"SecurityPolicyName"`
-    
+	SecurityPolicyName string `json:"SecurityPolicyName"`
 }
-

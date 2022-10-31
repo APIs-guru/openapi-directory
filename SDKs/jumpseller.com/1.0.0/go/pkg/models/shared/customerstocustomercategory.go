@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CustomersToCustomerCategory struct {
-    Customers []CustomerToCustomerCategory `json:"customers,omitempty"`
-    
+	Customers []CustomerToCustomerCategory `json:"customers,omitempty"`
 }
-

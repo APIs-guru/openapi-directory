@@ -1,9 +1,5 @@
 package shared
 
-
-
 type FileUploadAnswers struct {
-    Answers []FileUploadAnswer `json:"answers,omitempty"`
-    
+	Answers []FileUploadAnswer `json:"answers,omitempty"`
 }
-

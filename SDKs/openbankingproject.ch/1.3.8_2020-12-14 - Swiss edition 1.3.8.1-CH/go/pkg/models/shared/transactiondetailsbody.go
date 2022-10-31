@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TransactionDetailsBody struct {
-    TransactionDetails Transactions `json:"transactionDetails"`
-    
+	TransactionDetails Transactions `json:"transactionDetails"`
 }
-

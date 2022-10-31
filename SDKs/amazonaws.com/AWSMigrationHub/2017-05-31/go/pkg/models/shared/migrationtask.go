@@ -1,14 +1,13 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type MigrationTask struct {
-    MigrationTaskName *string `json:"MigrationTaskName,omitempty"`
-    ProgressUpdateStream *string `json:"ProgressUpdateStream,omitempty"`
-    ResourceAttributeList []ResourceAttribute `json:"ResourceAttributeList,omitempty"`
-    Task *Task `json:"Task,omitempty"`
-    UpdateDateTime *time.Time `json:"UpdateDateTime,omitempty"`
-    
+	MigrationTaskName     *string             `json:"MigrationTaskName,omitempty"`
+	ProgressUpdateStream  *string             `json:"ProgressUpdateStream,omitempty"`
+	ResourceAttributeList []ResourceAttribute `json:"ResourceAttributeList,omitempty"`
+	Task                  *Task               `json:"Task,omitempty"`
+	UpdateDateTime        *time.Time          `json:"UpdateDateTime,omitempty"`
 }
-

@@ -1,32 +1,29 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var FetchIPCommandServers = []string{
 	"https://supersim.twilio.com",
 }
 
 type FetchIPCommandPathParams struct {
-    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
-    
+	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
 type FetchIPCommandSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type FetchIPCommandRequest struct {
-    ServerURL *string 
-    PathParams FetchIPCommandPathParams 
-    Security FetchIPCommandSecurity 
-    
+	ServerURL  *string
+	PathParams FetchIPCommandPathParams
+	Security   FetchIPCommandSecurity
 }
 
 type FetchIPCommandResponse struct {
-    ContentType string 
-    StatusCode int64 
-    SupersimV1IPCommand *shared.SupersimV1IPCommand 
-    
+	ContentType         string
+	StatusCode          int64
+	SupersimV1IPCommand *shared.SupersimV1IPCommand
 }
-

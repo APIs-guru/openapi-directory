@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PropertyDisplayOptions struct {
-    DisplayLabel *string `json:"displayLabel,omitempty"`
-    
+	DisplayLabel *string `json:"displayLabel,omitempty"`
 }
-

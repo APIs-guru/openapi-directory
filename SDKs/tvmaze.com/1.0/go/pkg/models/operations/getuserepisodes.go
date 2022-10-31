@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetUserEpisodesQueryParams struct {
-    ShowID *int64 `queryParam:"style=form,explode=true,name=show_id"`
-    
+	ShowID *int64 `queryParam:"style=form,explode=true,name=show_id"`
 }
 
 type GetUserEpisodesRequest struct {
-    QueryParams GetUserEpisodesQueryParams 
-    
+	QueryParams GetUserEpisodesQueryParams
 }
 
 type GetUserEpisodesResponse struct {
-    ContentType string 
-    MarkedEpisodes []shared.MarkedEpisode 
-    StatusCode int64 
-    
+	ContentType    string
+	MarkedEpisodes []shared.MarkedEpisode
+	StatusCode     int64
 }
-

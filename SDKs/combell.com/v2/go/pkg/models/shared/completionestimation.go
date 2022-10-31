@@ -1,10 +1,9 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type CompletionEstimation struct {
-    Estimate *time.Time `json:"estimate,omitempty"`
-    
+	Estimate *time.Time `json:"estimate,omitempty"`
 }
-

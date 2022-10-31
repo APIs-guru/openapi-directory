@@ -1,20 +1,15 @@
 package shared
 
-
-
-
 type VideoParticipantSummaryEnumEdgeLocationEnum string
 
 const (
-    VideoParticipantSummaryEnumEdgeLocationEnumAshburn VideoParticipantSummaryEnumEdgeLocationEnum = "ashburn"
-VideoParticipantSummaryEnumEdgeLocationEnumDublin VideoParticipantSummaryEnumEdgeLocationEnum = "dublin"
-VideoParticipantSummaryEnumEdgeLocationEnumFrankfurt VideoParticipantSummaryEnumEdgeLocationEnum = "frankfurt"
-VideoParticipantSummaryEnumEdgeLocationEnumSingapore VideoParticipantSummaryEnumEdgeLocationEnum = "singapore"
-VideoParticipantSummaryEnumEdgeLocationEnumSydney VideoParticipantSummaryEnumEdgeLocationEnum = "sydney"
-VideoParticipantSummaryEnumEdgeLocationEnumSaoPaulo VideoParticipantSummaryEnumEdgeLocationEnum = "sao_paulo"
-VideoParticipantSummaryEnumEdgeLocationEnumRoaming VideoParticipantSummaryEnumEdgeLocationEnum = "roaming"
-VideoParticipantSummaryEnumEdgeLocationEnumUmatilla VideoParticipantSummaryEnumEdgeLocationEnum = "umatilla"
-VideoParticipantSummaryEnumEdgeLocationEnumTokyo VideoParticipantSummaryEnumEdgeLocationEnum = "tokyo"
+	VideoParticipantSummaryEnumEdgeLocationEnumAshburn   VideoParticipantSummaryEnumEdgeLocationEnum = "ashburn"
+	VideoParticipantSummaryEnumEdgeLocationEnumDublin    VideoParticipantSummaryEnumEdgeLocationEnum = "dublin"
+	VideoParticipantSummaryEnumEdgeLocationEnumFrankfurt VideoParticipantSummaryEnumEdgeLocationEnum = "frankfurt"
+	VideoParticipantSummaryEnumEdgeLocationEnumSingapore VideoParticipantSummaryEnumEdgeLocationEnum = "singapore"
+	VideoParticipantSummaryEnumEdgeLocationEnumSydney    VideoParticipantSummaryEnumEdgeLocationEnum = "sydney"
+	VideoParticipantSummaryEnumEdgeLocationEnumSaoPaulo  VideoParticipantSummaryEnumEdgeLocationEnum = "sao_paulo"
+	VideoParticipantSummaryEnumEdgeLocationEnumRoaming   VideoParticipantSummaryEnumEdgeLocationEnum = "roaming"
+	VideoParticipantSummaryEnumEdgeLocationEnumUmatilla  VideoParticipantSummaryEnumEdgeLocationEnum = "umatilla"
+	VideoParticipantSummaryEnumEdgeLocationEnumTokyo     VideoParticipantSummaryEnumEdgeLocationEnum = "tokyo"
 )
-
-

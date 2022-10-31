@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ServiceInfo struct {
-    ServiceCode *string `json:"ServiceCode,omitempty"`
-    ServiceName *string `json:"ServiceName,omitempty"`
-    
+	ServiceCode *string `json:"ServiceCode,omitempty"`
+	ServiceName *string `json:"ServiceName,omitempty"`
 }
-

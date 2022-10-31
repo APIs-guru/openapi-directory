@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LambdaOutput struct {
-    ResourceArn string `json:"ResourceARN"`
-    
+	ResourceArn string `json:"ResourceARN"`
 }
-

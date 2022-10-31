@@ -1,12 +1,8 @@
 package shared
 
-
-
 type BatchParameters struct {
-    ArrayProperties *BatchArrayProperties `json:"ArrayProperties,omitempty"`
-    JobDefinition string `json:"JobDefinition"`
-    JobName string `json:"JobName"`
-    RetryStrategy *BatchRetryStrategy `json:"RetryStrategy,omitempty"`
-    
+	ArrayProperties *BatchArrayProperties `json:"ArrayProperties,omitempty"`
+	JobDefinition   string                `json:"JobDefinition"`
+	JobName         string                `json:"JobName"`
+	RetryStrategy   *BatchRetryStrategy   `json:"RetryStrategy,omitempty"`
 }
-

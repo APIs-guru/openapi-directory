@@ -1,54 +1,46 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetEntityTransfersQueryParams struct {
-    Page *int64 `queryParam:"style=form,explode=true,name=page"`
-    PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
-    
+	Page     *int64 `queryParam:"style=form,explode=true,name=page"`
+	PageSize *int64 `queryParam:"style=form,explode=true,name=page_size"`
 }
 
 type GetEntityTransfersSecurityOption1 struct {
-    PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-    
+	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
 }
 
 type GetEntityTransfersSecurityOption2 struct {
-    Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-    
+	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
 }
 
 type GetEntityTransfersSecurity struct {
-    Option1 *GetEntityTransfersSecurityOption1 `security:"option"`
-    Option2 *GetEntityTransfersSecurityOption2 `security:"option"`
-    
+	Option1 *GetEntityTransfersSecurityOption1 `security:"option"`
+	Option2 *GetEntityTransfersSecurityOption2 `security:"option"`
 }
 
 type GetEntityTransfersRequest struct {
-    QueryParams GetEntityTransfersQueryParams 
-    Security GetEntityTransfersSecurity 
-    
+	QueryParams GetEntityTransfersQueryParams
+	Security    GetEntityTransfersSecurity
 }
 
 type GetEntityTransfers200ApplicationJSON struct {
-    Data []shared.EntityTransfer `json:"data,omitempty"`
-    Page *int64 `json:"page,omitempty"`
-    Pages *int64 `json:"pages,omitempty"`
-    Results *int64 `json:"results,omitempty"`
-    
+	Data    []shared.EntityTransfer `json:"data,omitempty"`
+	Page    *int64                  `json:"page,omitempty"`
+	Pages   *int64                  `json:"pages,omitempty"`
+	Results *int64                  `json:"results,omitempty"`
 }
 
 type GetEntityTransfersDefaultApplicationJSON struct {
-    Errors []shared.ErrorObject `json:"errors,omitempty"`
-    
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetEntityTransfersResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetEntityTransfers200ApplicationJSONObject *GetEntityTransfers200ApplicationJSON 
-    GetEntityTransfersDefaultApplicationJSONObject *GetEntityTransfersDefaultApplicationJSON 
-    
+	ContentType                                    string
+	StatusCode                                     int64
+	GetEntityTransfers200ApplicationJSONObject     *GetEntityTransfers200ApplicationJSON
+	GetEntityTransfersDefaultApplicationJSONObject *GetEntityTransfersDefaultApplicationJSON
 }
-

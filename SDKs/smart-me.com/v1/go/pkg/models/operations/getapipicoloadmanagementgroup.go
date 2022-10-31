@@ -1,13 +1,12 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAPIPicoLoadmanagementgroupResponse struct {
-    Body []byte 
-    ContentType string 
-    PicoLoadmanagementGroupDtos []shared.PicoLoadmanagementGroupDto 
-    StatusCode int64 
-    
+	Body                        []byte
+	ContentType                 string
+	PicoLoadmanagementGroupDtos []shared.PicoLoadmanagementGroupDto
+	StatusCode                  int64
 }
-

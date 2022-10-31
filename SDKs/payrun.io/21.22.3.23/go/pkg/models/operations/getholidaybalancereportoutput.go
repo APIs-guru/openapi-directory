@@ -1,35 +1,31 @@
 package operations
 
 import (
-"time"
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+	"time"
+)
 
 type GetHolidayBalanceReportOutputQueryParams struct {
-    EmployeeCodes *string `queryParam:"style=form,explode=true,name=EmployeeCodes"`
-    EmployerKey string `queryParam:"style=form,explode=true,name=EmployerKey"`
-    HolidayYearEnd time.Time `queryParam:"style=form,explode=true,name=HolidayYearEnd"`
-    MaxIndex *string `queryParam:"style=form,explode=true,name=MaxIndex"`
-    StartIndex *string `queryParam:"style=form,explode=true,name=StartIndex"`
-    
+	EmployeeCodes  *string   `queryParam:"style=form,explode=true,name=EmployeeCodes"`
+	EmployerKey    string    `queryParam:"style=form,explode=true,name=EmployerKey"`
+	HolidayYearEnd time.Time `queryParam:"style=form,explode=true,name=HolidayYearEnd"`
+	MaxIndex       *string   `queryParam:"style=form,explode=true,name=MaxIndex"`
+	StartIndex     *string   `queryParam:"style=form,explode=true,name=StartIndex"`
 }
 
 type GetHolidayBalanceReportOutputHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type GetHolidayBalanceReportOutputRequest struct {
-    QueryParams GetHolidayBalanceReportOutputQueryParams 
-    Headers GetHolidayBalanceReportOutputHeaders 
-    
+	QueryParams GetHolidayBalanceReportOutputQueryParams
+	Headers     GetHolidayBalanceReportOutputHeaders
 }
 
 type GetHolidayBalanceReportOutputResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    GetHolidayBalanceReportOutput200ApplicationJSONBinaryString []byte 
-    StatusCode int64 
-    
+	ContentType                                                 string
+	ErrorModel                                                  *shared.ErrorModel
+	GetHolidayBalanceReportOutput200ApplicationJSONBinaryString []byte
+	StatusCode                                                  int64
 }
-

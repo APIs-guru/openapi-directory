@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteApplicationInput struct {
-    ApplicationName string `json:"applicationName"`
-    
+	ApplicationName string `json:"applicationName"`
 }
-

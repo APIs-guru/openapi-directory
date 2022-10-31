@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EventLink struct {
-    Self *interface{} `json:"self,omitempty"`
-    
+	Self *interface{} `json:"self,omitempty"`
 }
-

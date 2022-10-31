@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeFeatureTransformationResponse struct {
-    FeatureTransformation *FeatureTransformation `json:"featureTransformation,omitempty"`
-    
+	FeatureTransformation *FeatureTransformation `json:"featureTransformation,omitempty"`
 }
-

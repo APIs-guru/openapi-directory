@@ -1,17 +1,12 @@
 package shared
 
-
-
-
 type StreamingSessionStreamStateEnum string
 
 const (
-    StreamingSessionStreamStateEnumReady StreamingSessionStreamStateEnum = "READY"
-StreamingSessionStreamStateEnumCreateInProgress StreamingSessionStreamStateEnum = "CREATE_IN_PROGRESS"
-StreamingSessionStreamStateEnumDeleteInProgress StreamingSessionStreamStateEnum = "DELETE_IN_PROGRESS"
-StreamingSessionStreamStateEnumDeleted StreamingSessionStreamStateEnum = "DELETED"
-StreamingSessionStreamStateEnumCreateFailed StreamingSessionStreamStateEnum = "CREATE_FAILED"
-StreamingSessionStreamStateEnumDeleteFailed StreamingSessionStreamStateEnum = "DELETE_FAILED"
+	StreamingSessionStreamStateEnumReady            StreamingSessionStreamStateEnum = "READY"
+	StreamingSessionStreamStateEnumCreateInProgress StreamingSessionStreamStateEnum = "CREATE_IN_PROGRESS"
+	StreamingSessionStreamStateEnumDeleteInProgress StreamingSessionStreamStateEnum = "DELETE_IN_PROGRESS"
+	StreamingSessionStreamStateEnumDeleted          StreamingSessionStreamStateEnum = "DELETED"
+	StreamingSessionStreamStateEnumCreateFailed     StreamingSessionStreamStateEnum = "CREATE_FAILED"
+	StreamingSessionStreamStateEnumDeleteFailed     StreamingSessionStreamStateEnum = "DELETE_FAILED"
 )
-
-

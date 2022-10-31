@@ -1,19 +1,13 @@
 package shared
 
-
-
-
 type ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnum string
 
 const (
-    ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnumContentStreamTypeUnspecified ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnum = "CONTENT_STREAM_TYPE_UNSPECIFIED"
-ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnumContentLiveStream ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnum = "CONTENT_LIVE_STREAM"
-ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnumContentOnDemand ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnum = "CONTENT_ON_DEMAND"
+	ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnumContentStreamTypeUnspecified ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnum = "CONTENT_STREAM_TYPE_UNSPECIFIED"
+	ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnumContentLiveStream            ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnum = "CONTENT_LIVE_STREAM"
+	ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnumContentOnDemand              ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnum = "CONTENT_ON_DEMAND"
 )
 
-
 type ContentStreamTypeTargetingOptionDetails struct {
-    ContentStreamType *ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnum `json:"contentStreamType,omitempty"`
-    
+	ContentStreamType *ContentStreamTypeTargetingOptionDetailsContentStreamTypeEnum `json:"contentStreamType,omitempty"`
 }
-

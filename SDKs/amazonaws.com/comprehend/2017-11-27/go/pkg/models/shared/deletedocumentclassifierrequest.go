@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteDocumentClassifierRequest struct {
-    DocumentClassifierArn string `json:"DocumentClassifierArn"`
-    
+	DocumentClassifierArn string `json:"DocumentClassifierArn"`
 }
-

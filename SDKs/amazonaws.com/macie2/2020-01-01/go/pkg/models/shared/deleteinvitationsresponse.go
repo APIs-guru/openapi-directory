@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteInvitationsResponse struct {
-    UnprocessedAccounts []UnprocessedAccount `json:"unprocessedAccounts,omitempty"`
-    
+	UnprocessedAccounts []UnprocessedAccount `json:"unprocessedAccounts,omitempty"`
 }
-

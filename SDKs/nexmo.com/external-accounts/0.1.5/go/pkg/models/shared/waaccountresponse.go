@@ -1,13 +1,9 @@
 package shared
 
-
-
 type WaAccountResponse struct {
-    APIKey string `json:"api_key"`
-    Applications []string `json:"applications,omitempty"`
-    ExternalID string `json:"external_id"`
-    Name *string `json:"name,omitempty"`
-    Provider string `json:"provider"`
-    
+	APIKey       string   `json:"api_key"`
+	Applications []string `json:"applications,omitempty"`
+	ExternalID   string   `json:"external_id"`
+	Name         *string  `json:"name,omitempty"`
+	Provider     string   `json:"provider"`
 }
-

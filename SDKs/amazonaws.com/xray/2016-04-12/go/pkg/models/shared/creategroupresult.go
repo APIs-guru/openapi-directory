@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateGroupResult struct {
-    Group *Group `json:"Group,omitempty"`
-    
+	Group *Group `json:"Group,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ModifyBackupAttributesResponse struct {
-    Backup *Backup `json:"Backup,omitempty"`
-    
+	Backup *Backup `json:"Backup,omitempty"`
 }
-

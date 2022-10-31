@@ -1,43 +1,38 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type DeleteResolverRuleXAmzTargetEnum string
 
 const (
-    DeleteResolverRuleXAmzTargetEnumRoute53ResolverDeleteResolverRule DeleteResolverRuleXAmzTargetEnum = "Route53Resolver.DeleteResolverRule"
+	DeleteResolverRuleXAmzTargetEnumRoute53ResolverDeleteResolverRule DeleteResolverRuleXAmzTargetEnum = "Route53Resolver.DeleteResolverRule"
 )
 
-
 type DeleteResolverRuleHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget DeleteResolverRuleXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                          `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                          `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                          `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                          `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                          `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                          `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                          `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        DeleteResolverRuleXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type DeleteResolverRuleRequest struct {
-    Headers DeleteResolverRuleHeaders 
-    Request shared.DeleteResolverRuleRequest `request:"mediaType=application/json"`
-    
+	Headers DeleteResolverRuleHeaders
+	Request shared.DeleteResolverRuleRequest `request:"mediaType=application/json"`
 }
 
 type DeleteResolverRuleResponse struct {
-    ContentType string 
-    DeleteResolverRuleResponse *shared.DeleteResolverRuleResponse 
-    InternalServiceErrorException *interface{} 
-    InvalidParameterException *interface{} 
-    ResourceInUseException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    
+	ContentType                   string
+	DeleteResolverRuleResponse    *shared.DeleteResolverRuleResponse
+	InternalServiceErrorException *interface{}
+	InvalidParameterException     *interface{}
+	ResourceInUseException        *interface{}
+	ResourceNotFoundException     *interface{}
+	StatusCode                    int64
+	ThrottlingException           *interface{}
 }
-

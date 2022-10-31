@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SourceIDRequestBody struct {
-    SourceID string `json:"sourceId"`
-    
+	SourceID string `json:"sourceId"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SubscriptionDefinitionsResponse struct {
-    SubscriptionDefinitions []SubscriptionDefinition `json:"subscriptionDefinitions"`
-    
+	SubscriptionDefinitions []SubscriptionDefinition `json:"subscriptionDefinitions"`
 }
-

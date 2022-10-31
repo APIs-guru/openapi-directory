@@ -1,20 +1,14 @@
 package operations
 
-
-
 type GetEcObyIDPathParams struct {
-    EcoID string `pathParam:"style=simple,explode=false,name=ECO_ID"`
-    
+	EcoID string `pathParam:"style=simple,explode=false,name=ECO_ID"`
 }
 
 type GetEcObyIDRequest struct {
-    PathParams GetEcObyIDPathParams 
-    
+	PathParams GetEcObyIDPathParams
 }
 
 type GetEcObyIDResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

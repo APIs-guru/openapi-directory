@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UsersEmbeddedObject struct {
-    Data []User `json:"data,omitempty"`
-    
+	Data []User `json:"data,omitempty"`
 }
-

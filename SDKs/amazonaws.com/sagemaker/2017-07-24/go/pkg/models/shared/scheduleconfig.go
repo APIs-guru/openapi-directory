@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ScheduleConfig struct {
-    ScheduleExpression string `json:"ScheduleExpression"`
-    
+	ScheduleExpression string `json:"ScheduleExpression"`
 }
-

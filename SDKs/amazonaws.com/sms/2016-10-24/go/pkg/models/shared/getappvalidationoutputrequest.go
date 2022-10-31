@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetAppValidationOutputRequest struct {
-    AppID string `json:"appId"`
-    
+	AppID string `json:"appId"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetChannelsResponse struct {
-    ChannelsResponse ChannelsResponse `json:"ChannelsResponse"`
-    
+	ChannelsResponse ChannelsResponse `json:"ChannelsResponse"`
 }
-

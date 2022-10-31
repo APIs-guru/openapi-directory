@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ExportEvaluatedExamplesOutputConfig struct {
-    BigqueryDestination *BigQueryDestination `json:"bigqueryDestination,omitempty"`
-    
+	BigqueryDestination *BigQueryDestination `json:"bigqueryDestination,omitempty"`
 }
-

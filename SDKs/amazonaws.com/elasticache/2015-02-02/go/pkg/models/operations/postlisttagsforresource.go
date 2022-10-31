@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostListTagsForResourceActionEnum string
 
 const (
-    PostListTagsForResourceActionEnumListTagsForResource PostListTagsForResourceActionEnum = "ListTagsForResource"
+	PostListTagsForResourceActionEnumListTagsForResource PostListTagsForResourceActionEnum = "ListTagsForResource"
 )
-
-
 
 type PostListTagsForResourceVersionEnum string
 
 const (
-    PostListTagsForResourceVersionEnumTwoThousandAndFifteen0202 PostListTagsForResourceVersionEnum = "2015-02-02"
+	PostListTagsForResourceVersionEnumTwoThousandAndFifteen0202 PostListTagsForResourceVersionEnum = "2015-02-02"
 )
 
-
 type PostListTagsForResourceQueryParams struct {
-    Action PostListTagsForResourceActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostListTagsForResourceVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostListTagsForResourceActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostListTagsForResourceVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostListTagsForResourceHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostListTagsForResourceRequest struct {
-    QueryParams PostListTagsForResourceQueryParams 
-    Headers PostListTagsForResourceHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostListTagsForResourceQueryParams
+	Headers     PostListTagsForResourceHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostListTagsForResourceResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

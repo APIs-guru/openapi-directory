@@ -1,9 +1,5 @@
 package shared
 
-
-
 type InventorySourceAccessorsAdvertiserAccessors struct {
-    AdvertiserIds []string `json:"advertiserIds,omitempty"`
-    
+	AdvertiserIds []string `json:"advertiserIds,omitempty"`
 }
-

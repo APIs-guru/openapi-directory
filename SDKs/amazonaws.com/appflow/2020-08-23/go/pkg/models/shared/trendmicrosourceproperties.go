@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TrendmicroSourceProperties struct {
-    Object string `json:"object"`
-    
+	Object string `json:"object"`
 }
-

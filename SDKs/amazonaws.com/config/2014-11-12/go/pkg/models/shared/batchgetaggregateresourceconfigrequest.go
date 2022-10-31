@@ -1,10 +1,6 @@
 package shared
 
-
-
 type BatchGetAggregateResourceConfigRequest struct {
-    ConfigurationAggregatorName string `json:"ConfigurationAggregatorName"`
-    ResourceIdentifiers []AggregateResourceIdentifier `json:"ResourceIdentifiers"`
-    
+	ConfigurationAggregatorName string                        `json:"ConfigurationAggregatorName"`
+	ResourceIdentifiers         []AggregateResourceIdentifier `json:"ResourceIdentifiers"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchCreateOccurrencesResponse struct {
-    Occurrences []Occurrence `json:"occurrences,omitempty"`
-    
+	Occurrences []Occurrence `json:"occurrences,omitempty"`
 }
-

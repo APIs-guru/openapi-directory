@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CancelWorkflowExecutionDecisionAttributes struct {
-    Details *string `json:"details,omitempty"`
-    
+	Details *string `json:"details,omitempty"`
 }
-

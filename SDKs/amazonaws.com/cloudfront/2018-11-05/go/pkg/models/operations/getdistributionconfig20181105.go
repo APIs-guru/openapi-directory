@@ -1,33 +1,26 @@
 package operations
 
-
-
 type GetDistributionConfig20181105PathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=Id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=Id"`
 }
 
 type GetDistributionConfig20181105Headers struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetDistributionConfig20181105Request struct {
-    PathParams GetDistributionConfig20181105PathParams 
-    Headers GetDistributionConfig20181105Headers 
-    
+	PathParams GetDistributionConfig20181105PathParams
+	Headers    GetDistributionConfig20181105Headers
 }
 
 type GetDistributionConfig20181105Response struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

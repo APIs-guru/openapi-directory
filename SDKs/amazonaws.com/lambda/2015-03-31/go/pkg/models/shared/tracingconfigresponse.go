@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TracingConfigResponse struct {
-    Mode *TracingModeEnum `json:"Mode,omitempty"`
-    
+	Mode *TracingModeEnum `json:"Mode,omitempty"`
 }
-

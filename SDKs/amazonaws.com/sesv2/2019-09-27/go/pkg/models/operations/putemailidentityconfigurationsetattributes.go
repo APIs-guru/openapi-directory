@@ -1,42 +1,34 @@
 package operations
 
-
-
 type PutEmailIdentityConfigurationSetAttributesPathParams struct {
-    EmailIdentity string `pathParam:"style=simple,explode=false,name=EmailIdentity"`
-    
+	EmailIdentity string `pathParam:"style=simple,explode=false,name=EmailIdentity"`
 }
 
 type PutEmailIdentityConfigurationSetAttributesHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PutEmailIdentityConfigurationSetAttributesRequestBody struct {
-    ConfigurationSetName *string `json:"ConfigurationSetName,omitempty"`
-    
+	ConfigurationSetName *string `json:"ConfigurationSetName,omitempty"`
 }
 
 type PutEmailIdentityConfigurationSetAttributesRequest struct {
-    PathParams PutEmailIdentityConfigurationSetAttributesPathParams 
-    Headers PutEmailIdentityConfigurationSetAttributesHeaders 
-    Request PutEmailIdentityConfigurationSetAttributesRequestBody `request:"mediaType=application/json"`
-    
+	PathParams PutEmailIdentityConfigurationSetAttributesPathParams
+	Headers    PutEmailIdentityConfigurationSetAttributesHeaders
+	Request    PutEmailIdentityConfigurationSetAttributesRequestBody `request:"mediaType=application/json"`
 }
 
 type PutEmailIdentityConfigurationSetAttributesResponse struct {
-    BadRequestException *interface{} 
-    ContentType string 
-    NotFoundException *interface{} 
-    PutEmailIdentityConfigurationSetAttributesResponse map[string]interface{} 
-    StatusCode int64 
-    TooManyRequestsException *interface{} 
-    
+	BadRequestException                                *interface{}
+	ContentType                                        string
+	NotFoundException                                  *interface{}
+	PutEmailIdentityConfigurationSetAttributesResponse map[string]interface{}
+	StatusCode                                         int64
+	TooManyRequestsException                           *interface{}
 }
-

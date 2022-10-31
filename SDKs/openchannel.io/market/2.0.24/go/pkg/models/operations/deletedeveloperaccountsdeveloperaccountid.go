@@ -1,20 +1,14 @@
 package operations
 
-
-
 type DeleteDeveloperAccountsDeveloperAccountIDPathParams struct {
-    DeveloperAccountID string `pathParam:"style=simple,explode=false,name=developerAccountId"`
-    
+	DeveloperAccountID string `pathParam:"style=simple,explode=false,name=developerAccountId"`
 }
 
 type DeleteDeveloperAccountsDeveloperAccountIDRequest struct {
-    PathParams DeleteDeveloperAccountsDeveloperAccountIDPathParams 
-    
+	PathParams DeleteDeveloperAccountsDeveloperAccountIDPathParams
 }
 
 type DeleteDeveloperAccountsDeveloperAccountIDResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

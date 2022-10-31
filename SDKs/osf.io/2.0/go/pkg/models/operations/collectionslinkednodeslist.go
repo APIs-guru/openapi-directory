@@ -1,20 +1,14 @@
 package operations
 
-
-
 type CollectionsLinkedNodesListPathParams struct {
-    CollectionID string `pathParam:"style=simple,explode=false,name=collection_id"`
-    
+	CollectionID string `pathParam:"style=simple,explode=false,name=collection_id"`
 }
 
 type CollectionsLinkedNodesListRequest struct {
-    PathParams CollectionsLinkedNodesListPathParams 
-    
+	PathParams CollectionsLinkedNodesListPathParams
 }
 
 type CollectionsLinkedNodesListResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

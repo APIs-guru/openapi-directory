@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetLoggedInUserHeaders struct {
-    AuthToken string `header:"style=simple,explode=false,name=auth_token"`
-    
+	AuthToken string `header:"style=simple,explode=false,name=auth_token"`
 }
 
 type GetLoggedInUserRequest struct {
-    Headers GetLoggedInUserHeaders 
-    
+	Headers GetLoggedInUserHeaders
 }
 
 type GetLoggedInUserResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

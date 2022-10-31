@@ -1,41 +1,36 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type GetCommunicationCostsAggregatesSupportOpposeIndicatorEnum string
 
 const (
-    GetCommunicationCostsAggregatesSupportOpposeIndicatorEnumS GetCommunicationCostsAggregatesSupportOpposeIndicatorEnum = "S"
-GetCommunicationCostsAggregatesSupportOpposeIndicatorEnumO GetCommunicationCostsAggregatesSupportOpposeIndicatorEnum = "O"
+	GetCommunicationCostsAggregatesSupportOpposeIndicatorEnumS GetCommunicationCostsAggregatesSupportOpposeIndicatorEnum = "S"
+	GetCommunicationCostsAggregatesSupportOpposeIndicatorEnumO GetCommunicationCostsAggregatesSupportOpposeIndicatorEnum = "O"
 )
 
-
 type GetCommunicationCostsAggregatesQueryParams struct {
-    APIKey string `queryParam:"style=form,explode=true,name=api_key"`
-    CandidateID []string `queryParam:"style=form,explode=true,name=candidate_id"`
-    CommitteeID []string `queryParam:"style=form,explode=true,name=committee_id"`
-    Cycle []int32 `queryParam:"style=form,explode=true,name=cycle"`
-    Page *int32 `queryParam:"style=form,explode=true,name=page"`
-    PerPage *int32 `queryParam:"style=form,explode=true,name=per_page"`
-    Sort *string `queryParam:"style=form,explode=true,name=sort"`
-    SortHideNull *bool `queryParam:"style=form,explode=true,name=sort_hide_null"`
-    SortNullOnly *bool `queryParam:"style=form,explode=true,name=sort_null_only"`
-    SortNullsLast *bool `queryParam:"style=form,explode=true,name=sort_nulls_last"`
-    SupportOpposeIndicator *GetCommunicationCostsAggregatesSupportOpposeIndicatorEnum `queryParam:"style=form,explode=true,name=support_oppose_indicator"`
-    
+	APIKey                 string                                                     `queryParam:"style=form,explode=true,name=api_key"`
+	CandidateID            []string                                                   `queryParam:"style=form,explode=true,name=candidate_id"`
+	CommitteeID            []string                                                   `queryParam:"style=form,explode=true,name=committee_id"`
+	Cycle                  []int32                                                    `queryParam:"style=form,explode=true,name=cycle"`
+	Page                   *int32                                                     `queryParam:"style=form,explode=true,name=page"`
+	PerPage                *int32                                                     `queryParam:"style=form,explode=true,name=per_page"`
+	Sort                   *string                                                    `queryParam:"style=form,explode=true,name=sort"`
+	SortHideNull           *bool                                                      `queryParam:"style=form,explode=true,name=sort_hide_null"`
+	SortNullOnly           *bool                                                      `queryParam:"style=form,explode=true,name=sort_null_only"`
+	SortNullsLast          *bool                                                      `queryParam:"style=form,explode=true,name=sort_nulls_last"`
+	SupportOpposeIndicator *GetCommunicationCostsAggregatesSupportOpposeIndicatorEnum `queryParam:"style=form,explode=true,name=support_oppose_indicator"`
 }
 
 type GetCommunicationCostsAggregatesRequest struct {
-    QueryParams GetCommunicationCostsAggregatesQueryParams 
-    
+	QueryParams GetCommunicationCostsAggregatesQueryParams
 }
 
 type GetCommunicationCostsAggregatesResponse struct {
-    CommunicationCostByCandidatePage *shared.CommunicationCostByCandidatePage 
-    ContentType string 
-    StatusCode int64 
-    
+	CommunicationCostByCandidatePage *shared.CommunicationCostByCandidatePage
+	ContentType                      string
+	StatusCode                       int64
 }
-

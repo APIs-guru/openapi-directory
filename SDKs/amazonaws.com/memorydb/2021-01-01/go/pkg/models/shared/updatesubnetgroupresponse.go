@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateSubnetGroupResponse struct {
-    SubnetGroup *SubnetGroup `json:"SubnetGroup,omitempty"`
-    
+	SubnetGroup *SubnetGroup `json:"SubnetGroup,omitempty"`
 }
-

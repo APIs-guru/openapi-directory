@@ -1,52 +1,44 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetChartExportQueryParams struct {
-    Q []int64 `queryParam:"serialization=json,name=q"`
-    
+	Q []int64 `queryParam:"serialization=json,name=q"`
 }
 
 type GetChartExportSecurity struct {
-    Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
-    
+	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
 type GetChartExportRequest struct {
-    QueryParams GetChartExportQueryParams 
-    Security GetChartExportSecurity 
-    
+	QueryParams GetChartExportQueryParams
+	Security    GetChartExportSecurity
 }
 
 type GetChartExport400ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartExport401ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartExport404ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartExport500ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type GetChartExportResponse struct {
-    ContentType string 
-    GetChartExport200ApplicationZipBinaryString []byte 
-    GetChartExport400ApplicationJSONObject *GetChartExport400ApplicationJSON 
-    GetChartExport401ApplicationJSONObject *GetChartExport401ApplicationJSON 
-    GetChartExport404ApplicationJSONObject *GetChartExport404ApplicationJSON 
-    GetChartExport500ApplicationJSONObject *GetChartExport500ApplicationJSON 
-    StatusCode int64 
-    
+	ContentType                                 string
+	GetChartExport200ApplicationZipBinaryString []byte
+	GetChartExport400ApplicationJSONObject      *GetChartExport400ApplicationJSON
+	GetChartExport401ApplicationJSONObject      *GetChartExport401ApplicationJSON
+	GetChartExport404ApplicationJSONObject      *GetChartExport404ApplicationJSON
+	GetChartExport500ApplicationJSONObject      *GetChartExport500ApplicationJSON
+	StatusCode                                  int64
 }
-

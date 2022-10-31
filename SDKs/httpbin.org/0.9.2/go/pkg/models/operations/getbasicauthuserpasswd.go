@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetBasicAuthUserPasswdPathParams struct {
-    Passwd string `pathParam:"style=simple,explode=false,name=passwd"`
-    User string `pathParam:"style=simple,explode=false,name=user"`
-    
+	Passwd string `pathParam:"style=simple,explode=false,name=passwd"`
+	User   string `pathParam:"style=simple,explode=false,name=user"`
 }
 
 type GetBasicAuthUserPasswdRequest struct {
-    PathParams GetBasicAuthUserPasswdPathParams 
-    
+	PathParams GetBasicAuthUserPasswdPathParams
 }
 
 type GetBasicAuthUserPasswdResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

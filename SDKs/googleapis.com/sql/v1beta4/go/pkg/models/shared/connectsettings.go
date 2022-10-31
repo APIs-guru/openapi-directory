@@ -1,58 +1,50 @@
 package shared
 
-
-
-
 type ConnectSettingsBackendTypeEnum string
 
 const (
-    ConnectSettingsBackendTypeEnumSQLBackendTypeUnspecified ConnectSettingsBackendTypeEnum = "SQL_BACKEND_TYPE_UNSPECIFIED"
-ConnectSettingsBackendTypeEnumFirstGen ConnectSettingsBackendTypeEnum = "FIRST_GEN"
-ConnectSettingsBackendTypeEnumSecondGen ConnectSettingsBackendTypeEnum = "SECOND_GEN"
-ConnectSettingsBackendTypeEnumExternal ConnectSettingsBackendTypeEnum = "EXTERNAL"
+	ConnectSettingsBackendTypeEnumSQLBackendTypeUnspecified ConnectSettingsBackendTypeEnum = "SQL_BACKEND_TYPE_UNSPECIFIED"
+	ConnectSettingsBackendTypeEnumFirstGen                  ConnectSettingsBackendTypeEnum = "FIRST_GEN"
+	ConnectSettingsBackendTypeEnumSecondGen                 ConnectSettingsBackendTypeEnum = "SECOND_GEN"
+	ConnectSettingsBackendTypeEnumExternal                  ConnectSettingsBackendTypeEnum = "EXTERNAL"
 )
-
-
 
 type ConnectSettingsDatabaseVersionEnum string
 
 const (
-    ConnectSettingsDatabaseVersionEnumSQLDatabaseVersionUnspecified ConnectSettingsDatabaseVersionEnum = "SQL_DATABASE_VERSION_UNSPECIFIED"
-ConnectSettingsDatabaseVersionEnumMysql51 ConnectSettingsDatabaseVersionEnum = "MYSQL_5_1"
-ConnectSettingsDatabaseVersionEnumMysql55 ConnectSettingsDatabaseVersionEnum = "MYSQL_5_5"
-ConnectSettingsDatabaseVersionEnumMysql56 ConnectSettingsDatabaseVersionEnum = "MYSQL_5_6"
-ConnectSettingsDatabaseVersionEnumMysql57 ConnectSettingsDatabaseVersionEnum = "MYSQL_5_7"
-ConnectSettingsDatabaseVersionEnumSqlserver2017Standard ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2017_STANDARD"
-ConnectSettingsDatabaseVersionEnumSqlserver2017Enterprise ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2017_ENTERPRISE"
-ConnectSettingsDatabaseVersionEnumSqlserver2017Express ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2017_EXPRESS"
-ConnectSettingsDatabaseVersionEnumSqlserver2017Web ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2017_WEB"
-ConnectSettingsDatabaseVersionEnumPostgres96 ConnectSettingsDatabaseVersionEnum = "POSTGRES_9_6"
-ConnectSettingsDatabaseVersionEnumPostgres10 ConnectSettingsDatabaseVersionEnum = "POSTGRES_10"
-ConnectSettingsDatabaseVersionEnumPostgres11 ConnectSettingsDatabaseVersionEnum = "POSTGRES_11"
-ConnectSettingsDatabaseVersionEnumPostgres12 ConnectSettingsDatabaseVersionEnum = "POSTGRES_12"
-ConnectSettingsDatabaseVersionEnumPostgres13 ConnectSettingsDatabaseVersionEnum = "POSTGRES_13"
-ConnectSettingsDatabaseVersionEnumPostgres14 ConnectSettingsDatabaseVersionEnum = "POSTGRES_14"
-ConnectSettingsDatabaseVersionEnumMysql80 ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0"
-ConnectSettingsDatabaseVersionEnumMysql8018 ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0_18"
-ConnectSettingsDatabaseVersionEnumMysql8026 ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0_26"
-ConnectSettingsDatabaseVersionEnumMysql8027 ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0_27"
-ConnectSettingsDatabaseVersionEnumMysql8028 ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0_28"
-ConnectSettingsDatabaseVersionEnumMysql8029 ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0_29"
-ConnectSettingsDatabaseVersionEnumMysql8030 ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0_30"
-ConnectSettingsDatabaseVersionEnumSqlserver2019Standard ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2019_STANDARD"
-ConnectSettingsDatabaseVersionEnumSqlserver2019Enterprise ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2019_ENTERPRISE"
-ConnectSettingsDatabaseVersionEnumSqlserver2019Express ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2019_EXPRESS"
-ConnectSettingsDatabaseVersionEnumSqlserver2019Web ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2019_WEB"
+	ConnectSettingsDatabaseVersionEnumSQLDatabaseVersionUnspecified ConnectSettingsDatabaseVersionEnum = "SQL_DATABASE_VERSION_UNSPECIFIED"
+	ConnectSettingsDatabaseVersionEnumMysql51                       ConnectSettingsDatabaseVersionEnum = "MYSQL_5_1"
+	ConnectSettingsDatabaseVersionEnumMysql55                       ConnectSettingsDatabaseVersionEnum = "MYSQL_5_5"
+	ConnectSettingsDatabaseVersionEnumMysql56                       ConnectSettingsDatabaseVersionEnum = "MYSQL_5_6"
+	ConnectSettingsDatabaseVersionEnumMysql57                       ConnectSettingsDatabaseVersionEnum = "MYSQL_5_7"
+	ConnectSettingsDatabaseVersionEnumSqlserver2017Standard         ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2017_STANDARD"
+	ConnectSettingsDatabaseVersionEnumSqlserver2017Enterprise       ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2017_ENTERPRISE"
+	ConnectSettingsDatabaseVersionEnumSqlserver2017Express          ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2017_EXPRESS"
+	ConnectSettingsDatabaseVersionEnumSqlserver2017Web              ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2017_WEB"
+	ConnectSettingsDatabaseVersionEnumPostgres96                    ConnectSettingsDatabaseVersionEnum = "POSTGRES_9_6"
+	ConnectSettingsDatabaseVersionEnumPostgres10                    ConnectSettingsDatabaseVersionEnum = "POSTGRES_10"
+	ConnectSettingsDatabaseVersionEnumPostgres11                    ConnectSettingsDatabaseVersionEnum = "POSTGRES_11"
+	ConnectSettingsDatabaseVersionEnumPostgres12                    ConnectSettingsDatabaseVersionEnum = "POSTGRES_12"
+	ConnectSettingsDatabaseVersionEnumPostgres13                    ConnectSettingsDatabaseVersionEnum = "POSTGRES_13"
+	ConnectSettingsDatabaseVersionEnumPostgres14                    ConnectSettingsDatabaseVersionEnum = "POSTGRES_14"
+	ConnectSettingsDatabaseVersionEnumMysql80                       ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0"
+	ConnectSettingsDatabaseVersionEnumMysql8018                     ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0_18"
+	ConnectSettingsDatabaseVersionEnumMysql8026                     ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0_26"
+	ConnectSettingsDatabaseVersionEnumMysql8027                     ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0_27"
+	ConnectSettingsDatabaseVersionEnumMysql8028                     ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0_28"
+	ConnectSettingsDatabaseVersionEnumMysql8029                     ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0_29"
+	ConnectSettingsDatabaseVersionEnumMysql8030                     ConnectSettingsDatabaseVersionEnum = "MYSQL_8_0_30"
+	ConnectSettingsDatabaseVersionEnumSqlserver2019Standard         ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2019_STANDARD"
+	ConnectSettingsDatabaseVersionEnumSqlserver2019Enterprise       ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2019_ENTERPRISE"
+	ConnectSettingsDatabaseVersionEnumSqlserver2019Express          ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2019_EXPRESS"
+	ConnectSettingsDatabaseVersionEnumSqlserver2019Web              ConnectSettingsDatabaseVersionEnum = "SQLSERVER_2019_WEB"
 )
 
-
 type ConnectSettings struct {
-    BackendType *ConnectSettingsBackendTypeEnum `json:"backendType,omitempty"`
-    DatabaseVersion *ConnectSettingsDatabaseVersionEnum `json:"databaseVersion,omitempty"`
-    IPAddresses []IPMapping `json:"ipAddresses,omitempty"`
-    Kind *string `json:"kind,omitempty"`
-    Region *string `json:"region,omitempty"`
-    ServerCaCert *SslCert `json:"serverCaCert,omitempty"`
-    
+	BackendType     *ConnectSettingsBackendTypeEnum     `json:"backendType,omitempty"`
+	DatabaseVersion *ConnectSettingsDatabaseVersionEnum `json:"databaseVersion,omitempty"`
+	IPAddresses     []IPMapping                         `json:"ipAddresses,omitempty"`
+	Kind            *string                             `json:"kind,omitempty"`
+	Region          *string                             `json:"region,omitempty"`
+	ServerCaCert    *SslCert                            `json:"serverCaCert,omitempty"`
 }
-

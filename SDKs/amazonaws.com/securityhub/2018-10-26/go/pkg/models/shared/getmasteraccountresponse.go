@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetMasterAccountResponse struct {
-    Master *Invitation `json:"Master,omitempty"`
-    
+	Master *Invitation `json:"Master,omitempty"`
 }
-

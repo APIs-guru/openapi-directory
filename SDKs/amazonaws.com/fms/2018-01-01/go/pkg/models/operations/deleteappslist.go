@@ -1,40 +1,35 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type DeleteAppsListXAmzTargetEnum string
 
 const (
-    DeleteAppsListXAmzTargetEnumAwsfms20180101DeleteAppsList DeleteAppsListXAmzTargetEnum = "AWSFMS_20180101.DeleteAppsList"
+	DeleteAppsListXAmzTargetEnumAwsfms20180101DeleteAppsList DeleteAppsListXAmzTargetEnum = "AWSFMS_20180101.DeleteAppsList"
 )
 
-
 type DeleteAppsListHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget DeleteAppsListXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                      `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                      `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                      `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                      `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                      `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                      `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                      `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        DeleteAppsListXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type DeleteAppsListRequest struct {
-    Headers DeleteAppsListHeaders 
-    Request shared.DeleteAppsListRequest `request:"mediaType=application/json"`
-    
+	Headers DeleteAppsListHeaders
+	Request shared.DeleteAppsListRequest `request:"mediaType=application/json"`
 }
 
 type DeleteAppsListResponse struct {
-    ContentType string 
-    InternalErrorException *interface{} 
-    InvalidOperationException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    
+	ContentType               string
+	InternalErrorException    *interface{}
+	InvalidOperationException *interface{}
+	ResourceNotFoundException *interface{}
+	StatusCode                int64
 }
-

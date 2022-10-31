@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ImportDataSourceConfig struct {
-    DataSourceURL *string `json:"dataSourceUrl,omitempty"`
-    
+	DataSourceURL *string `json:"dataSourceUrl,omitempty"`
 }
-

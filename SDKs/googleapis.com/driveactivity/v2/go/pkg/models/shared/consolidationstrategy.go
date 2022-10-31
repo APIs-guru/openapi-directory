@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ConsolidationStrategy struct {
-    Legacy map[string]interface{} `json:"legacy,omitempty"`
-    None map[string]interface{} `json:"none,omitempty"`
-    
+	Legacy map[string]interface{} `json:"legacy,omitempty"`
+	None   map[string]interface{} `json:"none,omitempty"`
 }
-

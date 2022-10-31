@@ -1,27 +1,20 @@
 package operations
 
-
-
 type AuthenticatePathParams struct {
-    Username string `pathParam:"style=simple,explode=false,name=username"`
-    
+	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
 
 type AuthenticateQueryParams struct {
-    Password string `queryParam:"style=form,explode=true,name=password"`
-    
+	Password string `queryParam:"style=form,explode=true,name=password"`
 }
 
 type AuthenticateRequest struct {
-    PathParams AuthenticatePathParams 
-    QueryParams AuthenticateQueryParams 
-    
+	PathParams  AuthenticatePathParams
+	QueryParams AuthenticateQueryParams
 }
 
 type AuthenticateResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

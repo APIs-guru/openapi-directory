@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteUserEndpointsResponse struct {
-    EndpointsResponse EndpointsResponse `json:"EndpointsResponse"`
-    
+	EndpointsResponse EndpointsResponse `json:"EndpointsResponse"`
 }
-

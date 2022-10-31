@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetResolverDnssecConfigRequest struct {
-    ResourceID string `json:"ResourceId"`
-    
+	ResourceID string `json:"ResourceId"`
 }
-

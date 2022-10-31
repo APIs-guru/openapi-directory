@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchGetResourceConfigRequest struct {
-    ResourceKeys []ResourceKey `json:"resourceKeys"`
-    
+	ResourceKeys []ResourceKey `json:"resourceKeys"`
 }
-

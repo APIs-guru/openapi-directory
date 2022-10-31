@@ -1,20 +1,14 @@
 package operations
 
-
-
 type FilmographySearchReadPathParams struct {
-    MovieTitle string `pathParam:"style=simple,explode=false,name=movie_title"`
-    
+	MovieTitle string `pathParam:"style=simple,explode=false,name=movie_title"`
 }
 
 type FilmographySearchReadRequest struct {
-    PathParams FilmographySearchReadPathParams 
-    
+	PathParams FilmographySearchReadPathParams
 }
 
 type FilmographySearchReadResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

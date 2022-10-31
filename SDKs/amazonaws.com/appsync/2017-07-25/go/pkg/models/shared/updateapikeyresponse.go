@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateAPIKeyResponse struct {
-    APIKey *APIKey `json:"apiKey,omitempty"`
-    
+	APIKey *APIKey `json:"apiKey,omitempty"`
 }
-

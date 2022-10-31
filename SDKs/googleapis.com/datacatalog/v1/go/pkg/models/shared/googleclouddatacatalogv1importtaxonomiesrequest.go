@@ -1,10 +1,6 @@
 package shared
 
-
-
 type GoogleCloudDatacatalogV1ImportTaxonomiesRequest struct {
-    CrossRegionalSource *GoogleCloudDatacatalogV1CrossRegionalSource `json:"crossRegionalSource,omitempty"`
-    InlineSource *GoogleCloudDatacatalogV1InlineSource `json:"inlineSource,omitempty"`
-    
+	CrossRegionalSource *GoogleCloudDatacatalogV1CrossRegionalSource `json:"crossRegionalSource,omitempty"`
+	InlineSource        *GoogleCloudDatacatalogV1InlineSource        `json:"inlineSource,omitempty"`
 }
-

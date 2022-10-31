@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetModelPackageGroupPolicyInput struct {
-    ModelPackageGroupName string `json:"ModelPackageGroupName"`
-    
+	ModelPackageGroupName string `json:"ModelPackageGroupName"`
 }
-

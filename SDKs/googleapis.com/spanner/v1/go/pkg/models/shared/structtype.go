@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StructType struct {
-    Fields []Field `json:"fields,omitempty"`
-    
+	Fields []Field `json:"fields,omitempty"`
 }
-

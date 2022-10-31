@@ -1,22 +1,16 @@
 package operations
 
-
-
 type GetXdbsCountUsingGetPathParams struct {
-    DateYyyymmdd string `pathParam:"style=simple,explode=false,name=dateYYYYMMDD"`
-    SpeciesTypeKey int32 `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
-    
+	DateYyyymmdd   string `pathParam:"style=simple,explode=false,name=dateYYYYMMDD"`
+	SpeciesTypeKey int32  `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
 }
 
 type GetXdbsCountUsingGetRequest struct {
-    PathParams GetXdbsCountUsingGetPathParams 
-    
+	PathParams GetXdbsCountUsingGetPathParams
 }
 
 type GetXdbsCountUsingGetResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

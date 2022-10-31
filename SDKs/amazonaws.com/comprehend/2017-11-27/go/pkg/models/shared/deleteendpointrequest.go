@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteEndpointRequest struct {
-    EndpointArn string `json:"EndpointArn"`
-    
+	EndpointArn string `json:"EndpointArn"`
 }
-

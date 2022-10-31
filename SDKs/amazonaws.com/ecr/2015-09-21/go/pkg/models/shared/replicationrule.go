@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ReplicationRule struct {
-    Destinations []ReplicationDestination `json:"destinations"`
-    
+	Destinations []ReplicationDestination `json:"destinations"`
 }
-

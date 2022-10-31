@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetWebACLResponse struct {
-    WebACL *WebACL `json:"WebACL,omitempty"`
-    
+	WebACL *WebACL `json:"WebACL,omitempty"`
 }
-

@@ -1,41 +1,36 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type PutLifecyclePolicyXAmzTargetEnum string
 
 const (
-    PutLifecyclePolicyXAmzTargetEnumAmazonEc2ContainerRegistryV20150921PutLifecyclePolicy PutLifecyclePolicyXAmzTargetEnum = "AmazonEC2ContainerRegistry_V20150921.PutLifecyclePolicy"
+	PutLifecyclePolicyXAmzTargetEnumAmazonEc2ContainerRegistryV20150921PutLifecyclePolicy PutLifecyclePolicyXAmzTargetEnum = "AmazonEC2ContainerRegistry_V20150921.PutLifecyclePolicy"
 )
 
-
 type PutLifecyclePolicyHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget PutLifecyclePolicyXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                          `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                          `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                          `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                          `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                          `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                          `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                          `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        PutLifecyclePolicyXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type PutLifecyclePolicyRequest struct {
-    Headers PutLifecyclePolicyHeaders 
-    Request shared.PutLifecyclePolicyRequest `request:"mediaType=application/json"`
-    
+	Headers PutLifecyclePolicyHeaders
+	Request shared.PutLifecyclePolicyRequest `request:"mediaType=application/json"`
 }
 
 type PutLifecyclePolicyResponse struct {
-    ContentType string 
-    InvalidParameterException *interface{} 
-    PutLifecyclePolicyResponse *shared.PutLifecyclePolicyResponse 
-    RepositoryNotFoundException *interface{} 
-    ServerException *interface{} 
-    StatusCode int64 
-    
+	ContentType                 string
+	InvalidParameterException   *interface{}
+	PutLifecyclePolicyResponse  *shared.PutLifecyclePolicyResponse
+	RepositoryNotFoundException *interface{}
+	ServerException             *interface{}
+	StatusCode                  int64
 }
-

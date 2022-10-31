@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type ImportSortAttributeEnum string
 
 const (
-    ImportSortAttributeEnumLastUpdatedDateTime ImportSortAttributeEnum = "LastUpdatedDateTime"
+	ImportSortAttributeEnumLastUpdatedDateTime ImportSortAttributeEnum = "LastUpdatedDateTime"
 )
-
-

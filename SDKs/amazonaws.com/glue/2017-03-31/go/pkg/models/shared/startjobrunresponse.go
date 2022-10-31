@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartJobRunResponse struct {
-    JobRunID *string `json:"JobRunId,omitempty"`
-    
+	JobRunID *string `json:"JobRunId,omitempty"`
 }
-

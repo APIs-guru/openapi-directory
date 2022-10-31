@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteDomainAssociationResult struct {
-    DomainAssociation DomainAssociation `json:"domainAssociation"`
-    
+	DomainAssociation DomainAssociation `json:"domainAssociation"`
 }
-

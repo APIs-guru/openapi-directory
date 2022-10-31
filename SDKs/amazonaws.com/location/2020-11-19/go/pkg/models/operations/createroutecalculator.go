@@ -1,53 +1,47 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CreateRouteCalculatorHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
-
 
 type CreateRouteCalculatorRequestBodyPricingPlanEnum string
 
 const (
-    CreateRouteCalculatorRequestBodyPricingPlanEnumRequestBasedUsage CreateRouteCalculatorRequestBodyPricingPlanEnum = "RequestBasedUsage"
-CreateRouteCalculatorRequestBodyPricingPlanEnumMobileAssetTracking CreateRouteCalculatorRequestBodyPricingPlanEnum = "MobileAssetTracking"
-CreateRouteCalculatorRequestBodyPricingPlanEnumMobileAssetManagement CreateRouteCalculatorRequestBodyPricingPlanEnum = "MobileAssetManagement"
+	CreateRouteCalculatorRequestBodyPricingPlanEnumRequestBasedUsage     CreateRouteCalculatorRequestBodyPricingPlanEnum = "RequestBasedUsage"
+	CreateRouteCalculatorRequestBodyPricingPlanEnumMobileAssetTracking   CreateRouteCalculatorRequestBodyPricingPlanEnum = "MobileAssetTracking"
+	CreateRouteCalculatorRequestBodyPricingPlanEnumMobileAssetManagement CreateRouteCalculatorRequestBodyPricingPlanEnum = "MobileAssetManagement"
 )
 
-
 type CreateRouteCalculatorRequestBody struct {
-    CalculatorName string `json:"CalculatorName"`
-    DataSource string `json:"DataSource"`
-    Description *string `json:"Description,omitempty"`
-    PricingPlan CreateRouteCalculatorRequestBodyPricingPlanEnum `json:"PricingPlan"`
-    Tags map[string]string `json:"Tags,omitempty"`
-    
+	CalculatorName string                                          `json:"CalculatorName"`
+	DataSource     string                                          `json:"DataSource"`
+	Description    *string                                         `json:"Description,omitempty"`
+	PricingPlan    CreateRouteCalculatorRequestBodyPricingPlanEnum `json:"PricingPlan"`
+	Tags           map[string]string                               `json:"Tags,omitempty"`
 }
 
 type CreateRouteCalculatorRequest struct {
-    Headers CreateRouteCalculatorHeaders 
-    Request CreateRouteCalculatorRequestBody `request:"mediaType=application/json"`
-    
+	Headers CreateRouteCalculatorHeaders
+	Request CreateRouteCalculatorRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateRouteCalculatorResponse struct {
-    AccessDeniedException *interface{} 
-    ConflictException *interface{} 
-    ContentType string 
-    CreateRouteCalculatorResponse *shared.CreateRouteCalculatorResponse 
-    InternalServerException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    ValidationException *interface{} 
-    
+	AccessDeniedException         *interface{}
+	ConflictException             *interface{}
+	ContentType                   string
+	CreateRouteCalculatorResponse *shared.CreateRouteCalculatorResponse
+	InternalServerException       *interface{}
+	StatusCode                    int64
+	ThrottlingException           *interface{}
+	ValidationException           *interface{}
 }
-

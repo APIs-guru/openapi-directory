@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateJourneyResponse struct {
-    JourneyResponse JourneyResponse `json:"JourneyResponse"`
-    
+	JourneyResponse JourneyResponse `json:"JourneyResponse"`
 }
-

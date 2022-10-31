@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ZendeskSourceProperties struct {
-    Object string `json:"Object"`
-    
+	Object string `json:"Object"`
 }
-

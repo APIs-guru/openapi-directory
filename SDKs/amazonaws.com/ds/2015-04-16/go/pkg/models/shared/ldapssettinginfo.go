@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type LdapsSettingInfo struct {
-    LdapsStatus *LdapsStatusEnum `json:"LDAPSStatus,omitempty"`
-    LdapsStatusReason *string `json:"LDAPSStatusReason,omitempty"`
-    LastUpdatedDateTime *time.Time `json:"LastUpdatedDateTime,omitempty"`
-    
+	LdapsStatus         *LdapsStatusEnum `json:"LDAPSStatus,omitempty"`
+	LdapsStatusReason   *string          `json:"LDAPSStatusReason,omitempty"`
+	LastUpdatedDateTime *time.Time       `json:"LastUpdatedDateTime,omitempty"`
 }
-

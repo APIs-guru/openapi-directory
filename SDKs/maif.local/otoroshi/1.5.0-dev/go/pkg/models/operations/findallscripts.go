@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type FindAllScriptsSecurity struct {
-    OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
-    
+	OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
 }
 
 type FindAllScriptsRequest struct {
-    Security FindAllScriptsSecurity 
-    
+	Security FindAllScriptsSecurity
 }
 
 type FindAllScriptsResponse struct {
-    ContentType string 
-    Scripts []shared.Script 
-    StatusCode int64 
-    
+	ContentType string
+	Scripts     []shared.Script
+	StatusCode  int64
 }
-

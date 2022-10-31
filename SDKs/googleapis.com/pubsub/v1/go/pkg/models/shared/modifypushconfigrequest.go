@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ModifyPushConfigRequest struct {
-    PushConfig *PushConfig `json:"pushConfig,omitempty"`
-    
+	PushConfig *PushConfig `json:"pushConfig,omitempty"`
 }
-

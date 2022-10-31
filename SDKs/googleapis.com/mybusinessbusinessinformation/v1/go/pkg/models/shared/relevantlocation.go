@@ -1,20 +1,14 @@
 package shared
 
-
-
-
 type RelevantLocationRelationTypeEnum string
 
 const (
-    RelevantLocationRelationTypeEnumRelationTypeUnspecified RelevantLocationRelationTypeEnum = "RELATION_TYPE_UNSPECIFIED"
-RelevantLocationRelationTypeEnumDepartmentOf RelevantLocationRelationTypeEnum = "DEPARTMENT_OF"
-RelevantLocationRelationTypeEnumIndependentEstablishmentIn RelevantLocationRelationTypeEnum = "INDEPENDENT_ESTABLISHMENT_IN"
+	RelevantLocationRelationTypeEnumRelationTypeUnspecified    RelevantLocationRelationTypeEnum = "RELATION_TYPE_UNSPECIFIED"
+	RelevantLocationRelationTypeEnumDepartmentOf               RelevantLocationRelationTypeEnum = "DEPARTMENT_OF"
+	RelevantLocationRelationTypeEnumIndependentEstablishmentIn RelevantLocationRelationTypeEnum = "INDEPENDENT_ESTABLISHMENT_IN"
 )
 
-
 type RelevantLocation struct {
-    PlaceID *string `json:"placeId,omitempty"`
-    RelationType *RelevantLocationRelationTypeEnum `json:"relationType,omitempty"`
-    
+	PlaceID      *string                           `json:"placeId,omitempty"`
+	RelationType *RelevantLocationRelationTypeEnum `json:"relationType,omitempty"`
 }
-

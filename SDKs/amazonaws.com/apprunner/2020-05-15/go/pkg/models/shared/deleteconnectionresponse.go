@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteConnectionResponse struct {
-    Connection *Connection `json:"Connection,omitempty"`
-    
+	Connection *Connection `json:"Connection,omitempty"`
 }
-

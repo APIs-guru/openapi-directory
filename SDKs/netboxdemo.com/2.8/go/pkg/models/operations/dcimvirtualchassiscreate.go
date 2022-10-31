@@ -1,17 +1,15 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DcimVirtualChassisCreateRequest struct {
-    Request shared.WritableVirtualChassis `request:"mediaType=application/json"`
-    
+	Request shared.WritableVirtualChassis `request:"mediaType=application/json"`
 }
 
 type DcimVirtualChassisCreateResponse struct {
-    ContentType string 
-    StatusCode int64 
-    VirtualChassis *shared.VirtualChassis 
-    
+	ContentType    string
+	StatusCode     int64
+	VirtualChassis *shared.VirtualChassis
 }
-

@@ -1,14 +1,13 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ResourceDetail struct {
-    Arn *string `json:"ARN,omitempty"`
-    CreatedTime *time.Time `json:"CreatedTime,omitempty"`
-    Description *string `json:"Description,omitempty"`
-    ID *string `json:"Id,omitempty"`
-    Name *string `json:"Name,omitempty"`
-    
+	Arn         *string    `json:"ARN,omitempty"`
+	CreatedTime *time.Time `json:"CreatedTime,omitempty"`
+	Description *string    `json:"Description,omitempty"`
+	ID          *string    `json:"Id,omitempty"`
+	Name        *string    `json:"Name,omitempty"`
 }
-

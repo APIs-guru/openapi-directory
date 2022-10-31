@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Action struct {
-    SsmAutomation *SsmAutomation `json:"ssmAutomation,omitempty"`
-    
+	SsmAutomation *SsmAutomation `json:"ssmAutomation,omitempty"`
 }
-

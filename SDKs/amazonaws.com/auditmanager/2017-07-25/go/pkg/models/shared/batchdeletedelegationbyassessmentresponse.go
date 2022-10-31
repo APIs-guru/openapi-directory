@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchDeleteDelegationByAssessmentResponse struct {
-    Errors []BatchDeleteDelegationByAssessmentError `json:"errors,omitempty"`
-    
+	Errors []BatchDeleteDelegationByAssessmentError `json:"errors,omitempty"`
 }
-

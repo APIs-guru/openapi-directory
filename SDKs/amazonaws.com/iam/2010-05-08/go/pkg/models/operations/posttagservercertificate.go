@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostTagServerCertificateActionEnum string
 
 const (
-    PostTagServerCertificateActionEnumTagServerCertificate PostTagServerCertificateActionEnum = "TagServerCertificate"
+	PostTagServerCertificateActionEnumTagServerCertificate PostTagServerCertificateActionEnum = "TagServerCertificate"
 )
-
-
 
 type PostTagServerCertificateVersionEnum string
 
 const (
-    PostTagServerCertificateVersionEnumTwoThousandAndTen0508 PostTagServerCertificateVersionEnum = "2010-05-08"
+	PostTagServerCertificateVersionEnumTwoThousandAndTen0508 PostTagServerCertificateVersionEnum = "2010-05-08"
 )
 
-
 type PostTagServerCertificateQueryParams struct {
-    Action PostTagServerCertificateActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostTagServerCertificateVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostTagServerCertificateActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostTagServerCertificateVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostTagServerCertificateHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostTagServerCertificateRequest struct {
-    QueryParams PostTagServerCertificateQueryParams 
-    Headers PostTagServerCertificateHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostTagServerCertificateQueryParams
+	Headers     PostTagServerCertificateHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostTagServerCertificateResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

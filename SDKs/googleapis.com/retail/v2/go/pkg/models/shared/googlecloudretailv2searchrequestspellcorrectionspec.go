@@ -1,19 +1,13 @@
 package shared
 
-
-
-
 type GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnum string
 
 const (
-    GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnumModeUnspecified GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnum = "MODE_UNSPECIFIED"
-GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnumSuggestionOnly GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnum = "SUGGESTION_ONLY"
-GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnumAuto GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnum = "AUTO"
+	GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnumModeUnspecified GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnum = "MODE_UNSPECIFIED"
+	GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnumSuggestionOnly  GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnum = "SUGGESTION_ONLY"
+	GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnumAuto            GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnum = "AUTO"
 )
 
-
 type GoogleCloudRetailV2SearchRequestSpellCorrectionSpec struct {
-    Mode *GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnum `json:"mode,omitempty"`
-    
+	Mode *GoogleCloudRetailV2SearchRequestSpellCorrectionSpecModeEnum `json:"mode,omitempty"`
 }
-

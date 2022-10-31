@@ -1,20 +1,14 @@
 package shared
 
-
-
-
 type UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnum string
 
 const (
-    UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnumUserRewardedContentUnspecified UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnum = "USER_REWARDED_CONTENT_UNSPECIFIED"
-UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnumUserRewardedContentUserRewarded UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnum = "USER_REWARDED_CONTENT_USER_REWARDED"
-UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnumUserRewardedContentNotUserRewarded UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnum = "USER_REWARDED_CONTENT_NOT_USER_REWARDED"
+	UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnumUserRewardedContentUnspecified     UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnum = "USER_REWARDED_CONTENT_UNSPECIFIED"
+	UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnumUserRewardedContentUserRewarded    UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnum = "USER_REWARDED_CONTENT_USER_REWARDED"
+	UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnumUserRewardedContentNotUserRewarded UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnum = "USER_REWARDED_CONTENT_NOT_USER_REWARDED"
 )
 
-
 type UserRewardedContentAssignedTargetingOptionDetails struct {
-    TargetingOptionID *string `json:"targetingOptionId,omitempty"`
-    UserRewardedContent *UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnum `json:"userRewardedContent,omitempty"`
-    
+	TargetingOptionID   *string                                                                   `json:"targetingOptionId,omitempty"`
+	UserRewardedContent *UserRewardedContentAssignedTargetingOptionDetailsUserRewardedContentEnum `json:"userRewardedContent,omitempty"`
 }
-

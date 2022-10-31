@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeregisterWorkspaceDirectoryRequest struct {
-    DirectoryID string `json:"DirectoryId"`
-    
+	DirectoryID string `json:"DirectoryId"`
 }
-

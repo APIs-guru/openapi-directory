@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TopupRequest struct {
-    Trx string `form:"name=trx"`
-    
+	Trx string `form:"name=trx"`
 }
-

@@ -1,20 +1,14 @@
 package operations
 
-
-
 type RegistryDeleteProjectPathParams struct {
-    Project string `pathParam:"style=simple,explode=false,name=project"`
-    
+	Project string `pathParam:"style=simple,explode=false,name=project"`
 }
 
 type RegistryDeleteProjectRequest struct {
-    PathParams RegistryDeleteProjectPathParams 
-    
+	PathParams RegistryDeleteProjectPathParams
 }
 
 type RegistryDeleteProjectResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

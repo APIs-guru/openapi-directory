@@ -1,60 +1,48 @@
 package operations
 
-
-
 type GetActionsIDPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetActionsIDRequest struct {
-    PathParams GetActionsIDPathParams 
-    
+	PathParams GetActionsIDPathParams
 }
 
 type GetActionsIDActionResponseActionError struct {
-    Code string `json:"code"`
-    Message string `json:"message"`
-    
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type GetActionsIDActionResponseActionResources struct {
-    ID int64 `json:"id"`
-    Type string `json:"type"`
-    
+	ID   int64  `json:"id"`
+	Type string `json:"type"`
 }
-
 
 type GetActionsIDActionResponseActionStatusEnum string
 
 const (
-    GetActionsIDActionResponseActionStatusEnumSuccess GetActionsIDActionResponseActionStatusEnum = "success"
-GetActionsIDActionResponseActionStatusEnumRunning GetActionsIDActionResponseActionStatusEnum = "running"
-GetActionsIDActionResponseActionStatusEnumError GetActionsIDActionResponseActionStatusEnum = "error"
+	GetActionsIDActionResponseActionStatusEnumSuccess GetActionsIDActionResponseActionStatusEnum = "success"
+	GetActionsIDActionResponseActionStatusEnumRunning GetActionsIDActionResponseActionStatusEnum = "running"
+	GetActionsIDActionResponseActionStatusEnumError   GetActionsIDActionResponseActionStatusEnum = "error"
 )
 
-
 type GetActionsIDActionResponseAction struct {
-    Command string `json:"command"`
-    Error GetActionsIDActionResponseActionError `json:"error"`
-    Finished string `json:"finished"`
-    ID int64 `json:"id"`
-    Progress float64 `json:"progress"`
-    Resources []GetActionsIDActionResponseActionResources `json:"resources"`
-    Started string `json:"started"`
-    Status GetActionsIDActionResponseActionStatusEnum `json:"status"`
-    
+	Command   string                                      `json:"command"`
+	Error     GetActionsIDActionResponseActionError       `json:"error"`
+	Finished  string                                      `json:"finished"`
+	ID        int64                                       `json:"id"`
+	Progress  float64                                     `json:"progress"`
+	Resources []GetActionsIDActionResponseActionResources `json:"resources"`
+	Started   string                                      `json:"started"`
+	Status    GetActionsIDActionResponseActionStatusEnum  `json:"status"`
 }
 
 type GetActionsIDActionResponse struct {
-    Action GetActionsIDActionResponseAction `json:"action"`
-    
+	Action GetActionsIDActionResponseAction `json:"action"`
 }
 
 type GetActionsIDResponse struct {
-    ActionResponse *GetActionsIDActionResponse 
-    ContentType string 
-    StatusCode int64 
-    
+	ActionResponse *GetActionsIDActionResponse
+	ContentType    string
+	StatusCode     int64
 }
-

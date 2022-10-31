@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ValidateSchemaRequest struct {
-    Schema *Schema `json:"schema,omitempty"`
-    
+	Schema *Schema `json:"schema,omitempty"`
 }
-

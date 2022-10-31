@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TLSValidationContextFileTrust struct {
-    CertificateChain string `json:"certificateChain"`
-    
+	CertificateChain string `json:"certificateChain"`
 }
-

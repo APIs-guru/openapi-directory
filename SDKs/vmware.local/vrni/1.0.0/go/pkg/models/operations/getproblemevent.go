@@ -1,35 +1,30 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetProblemEventPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetProblemEventQueryParams struct {
-    Time *int64 `queryParam:"style=form,explode=true,name=time"`
-    
+	Time *int64 `queryParam:"style=form,explode=true,name=time"`
 }
 
 type GetProblemEventSecurity struct {
-    APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetProblemEventRequest struct {
-    PathParams GetProblemEventPathParams 
-    QueryParams GetProblemEventQueryParams 
-    Security GetProblemEventSecurity 
-    
+	PathParams  GetProblemEventPathParams
+	QueryParams GetProblemEventQueryParams
+	Security    GetProblemEventSecurity
 }
 
 type GetProblemEventResponse struct {
-    APIError *shared.APIError 
-    ContentType string 
-    ProblemEvent *shared.ProblemEvent 
-    StatusCode int64 
-    
+	APIError     *shared.APIError
+	ContentType  string
+	ProblemEvent *shared.ProblemEvent
+	StatusCode   int64
 }
-

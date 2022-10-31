@@ -1,20 +1,14 @@
 package operations
 
-
-
 type ShowtimeSearchallReadPathParams struct {
-    Param string `pathParam:"style=simple,explode=false,name=param"`
-    
+	Param string `pathParam:"style=simple,explode=false,name=param"`
 }
 
 type ShowtimeSearchallReadRequest struct {
-    PathParams ShowtimeSearchallReadPathParams 
-    
+	PathParams ShowtimeSearchallReadPathParams
 }
 
 type ShowtimeSearchallReadResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

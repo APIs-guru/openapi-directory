@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AssociateFileSystemAliasesResponse struct {
-    Aliases []Alias `json:"Aliases,omitempty"`
-    
+	Aliases []Alias `json:"Aliases,omitempty"`
 }
-

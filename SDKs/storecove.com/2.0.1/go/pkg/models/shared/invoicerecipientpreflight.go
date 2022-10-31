@@ -1,9 +1,5 @@
 package shared
 
-
-
 type InvoiceRecipientPreflight struct {
-    PublicIdentifiers []PublicIdentifier `json:"publicIdentifiers,omitempty"`
-    
+	PublicIdentifiers []PublicIdentifier `json:"publicIdentifiers,omitempty"`
 }
-

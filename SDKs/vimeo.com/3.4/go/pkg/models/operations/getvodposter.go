@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetVodPosterPathParams struct {
-    OndemandID float64 `pathParam:"style=simple,explode=false,name=ondemand_id"`
-    PosterID float64 `pathParam:"style=simple,explode=false,name=poster_id"`
-    
+	OndemandID float64 `pathParam:"style=simple,explode=false,name=ondemand_id"`
+	PosterID   float64 `pathParam:"style=simple,explode=false,name=poster_id"`
 }
 
 type GetVodPosterRequest struct {
-    PathParams GetVodPosterPathParams 
-    
+	PathParams GetVodPosterPathParams
 }
 
 type GetVodPosterResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Picture *shared.Picture 
-    
+	ContentType string
+	StatusCode  int64
+	Picture     *shared.Picture
 }
-

@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostRemoveClientIDFromOpenIDConnectProviderActionEnum string
 
 const (
-    PostRemoveClientIDFromOpenIDConnectProviderActionEnumRemoveClientIDFromOpenIDConnectProvider PostRemoveClientIDFromOpenIDConnectProviderActionEnum = "RemoveClientIDFromOpenIDConnectProvider"
+	PostRemoveClientIDFromOpenIDConnectProviderActionEnumRemoveClientIDFromOpenIDConnectProvider PostRemoveClientIDFromOpenIDConnectProviderActionEnum = "RemoveClientIDFromOpenIDConnectProvider"
 )
-
-
 
 type PostRemoveClientIDFromOpenIDConnectProviderVersionEnum string
 
 const (
-    PostRemoveClientIDFromOpenIDConnectProviderVersionEnumTwoThousandAndTen0508 PostRemoveClientIDFromOpenIDConnectProviderVersionEnum = "2010-05-08"
+	PostRemoveClientIDFromOpenIDConnectProviderVersionEnumTwoThousandAndTen0508 PostRemoveClientIDFromOpenIDConnectProviderVersionEnum = "2010-05-08"
 )
 
-
 type PostRemoveClientIDFromOpenIDConnectProviderQueryParams struct {
-    Action PostRemoveClientIDFromOpenIDConnectProviderActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostRemoveClientIDFromOpenIDConnectProviderVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostRemoveClientIDFromOpenIDConnectProviderActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostRemoveClientIDFromOpenIDConnectProviderVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostRemoveClientIDFromOpenIDConnectProviderHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostRemoveClientIDFromOpenIDConnectProviderRequest struct {
-    QueryParams PostRemoveClientIDFromOpenIDConnectProviderQueryParams 
-    Headers PostRemoveClientIDFromOpenIDConnectProviderHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostRemoveClientIDFromOpenIDConnectProviderQueryParams
+	Headers     PostRemoveClientIDFromOpenIDConnectProviderHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostRemoveClientIDFromOpenIDConnectProviderResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

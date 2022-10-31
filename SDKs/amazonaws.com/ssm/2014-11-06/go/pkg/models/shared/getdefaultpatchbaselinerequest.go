@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetDefaultPatchBaselineRequest struct {
-    OperatingSystem *OperatingSystemEnum `json:"OperatingSystem,omitempty"`
-    
+	OperatingSystem *OperatingSystemEnum `json:"OperatingSystem,omitempty"`
 }
-

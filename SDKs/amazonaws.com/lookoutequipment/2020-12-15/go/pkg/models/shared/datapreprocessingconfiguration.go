@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DataPreProcessingConfiguration struct {
-    TargetSamplingRate *TargetSamplingRateEnum `json:"TargetSamplingRate,omitempty"`
-    
+	TargetSamplingRate *TargetSamplingRateEnum `json:"TargetSamplingRate,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeExperimentRequest struct {
-    ExperimentName string `json:"ExperimentName"`
-    
+	ExperimentName string `json:"ExperimentName"`
 }
-

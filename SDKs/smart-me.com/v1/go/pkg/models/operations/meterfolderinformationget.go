@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type MeterFolderInformationGetPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type MeterFolderInformationGetRequest struct {
-    PathParams MeterFolderInformationGetPathParams 
-    
+	PathParams MeterFolderInformationGetPathParams
 }
 
 type MeterFolderInformationGetResponse struct {
-    Body []byte 
-    ContentType string 
-    MeterFolderInformation *shared.MeterFolderInformation 
-    StatusCode int64 
-    
+	Body                   []byte
+	ContentType            string
+	MeterFolderInformation *shared.MeterFolderInformation
+	StatusCode             int64
 }
-

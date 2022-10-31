@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateTeamMemberRequest struct {
-    TeamMember *TeamMember `json:"team_member,omitempty"`
-    
+	TeamMember *TeamMember `json:"team_member,omitempty"`
 }
-

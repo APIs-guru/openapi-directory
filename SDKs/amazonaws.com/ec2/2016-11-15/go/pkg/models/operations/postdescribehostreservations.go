@@ -1,53 +1,42 @@
 package operations
 
-
-
-
 type PostDescribeHostReservationsActionEnum string
 
 const (
-    PostDescribeHostReservationsActionEnumDescribeHostReservations PostDescribeHostReservationsActionEnum = "DescribeHostReservations"
+	PostDescribeHostReservationsActionEnumDescribeHostReservations PostDescribeHostReservationsActionEnum = "DescribeHostReservations"
 )
-
-
 
 type PostDescribeHostReservationsVersionEnum string
 
 const (
-    PostDescribeHostReservationsVersionEnumTwoThousandAndSixteen1115 PostDescribeHostReservationsVersionEnum = "2016-11-15"
+	PostDescribeHostReservationsVersionEnumTwoThousandAndSixteen1115 PostDescribeHostReservationsVersionEnum = "2016-11-15"
 )
 
-
 type PostDescribeHostReservationsQueryParams struct {
-    Action PostDescribeHostReservationsActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
-    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
-    Version PostDescribeHostReservationsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action     PostDescribeHostReservationsActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	MaxResults *string                                 `queryParam:"style=form,explode=true,name=MaxResults"`
+	NextToken  *string                                 `queryParam:"style=form,explode=true,name=NextToken"`
+	Version    PostDescribeHostReservationsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostDescribeHostReservationsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostDescribeHostReservationsRequest struct {
-    QueryParams PostDescribeHostReservationsQueryParams 
-    Headers PostDescribeHostReservationsHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostDescribeHostReservationsQueryParams
+	Headers     PostDescribeHostReservationsHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostDescribeHostReservationsResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ActiveDirectoryConfigList struct {
-    Items []ActiveDirectoryConfig `json:"items"`
-    
+	Items []ActiveDirectoryConfig `json:"items"`
 }
-

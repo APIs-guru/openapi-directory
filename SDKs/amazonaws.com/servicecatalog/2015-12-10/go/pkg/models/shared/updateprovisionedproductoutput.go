@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateProvisionedProductOutput struct {
-    RecordDetail *RecordDetail `json:"RecordDetail,omitempty"`
-    
+	RecordDetail *RecordDetail `json:"RecordDetail,omitempty"`
 }
-

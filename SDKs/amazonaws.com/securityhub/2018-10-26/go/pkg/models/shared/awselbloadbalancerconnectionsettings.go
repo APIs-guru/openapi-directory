@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AwsElbLoadBalancerConnectionSettings struct {
-    IdleTimeout *int64 `json:"IdleTimeout,omitempty"`
-    
+	IdleTimeout *int64 `json:"IdleTimeout,omitempty"`
 }
-

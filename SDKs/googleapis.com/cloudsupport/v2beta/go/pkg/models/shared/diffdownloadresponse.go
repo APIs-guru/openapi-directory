@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DiffDownloadResponse struct {
-    ObjectLocation *CompositeMedia `json:"objectLocation,omitempty"`
-    
+	ObjectLocation *CompositeMedia `json:"objectLocation,omitempty"`
 }
-

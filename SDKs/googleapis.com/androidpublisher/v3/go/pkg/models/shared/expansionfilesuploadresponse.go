@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ExpansionFilesUploadResponse struct {
-    ExpansionFile *ExpansionFile `json:"expansionFile,omitempty"`
-    
+	ExpansionFile *ExpansionFile `json:"expansionFile,omitempty"`
 }
-

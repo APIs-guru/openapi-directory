@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CopySheetToAnotherSpreadsheetRequest struct {
-    DestinationSpreadsheetID *string `json:"destinationSpreadsheetId,omitempty"`
-    
+	DestinationSpreadsheetID *string `json:"destinationSpreadsheetId,omitempty"`
 }
-

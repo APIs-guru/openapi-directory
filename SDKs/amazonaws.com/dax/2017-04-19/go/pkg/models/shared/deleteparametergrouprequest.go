@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteParameterGroupRequest struct {
-    ParameterGroupName string `json:"ParameterGroupName"`
-    
+	ParameterGroupName string `json:"ParameterGroupName"`
 }
-

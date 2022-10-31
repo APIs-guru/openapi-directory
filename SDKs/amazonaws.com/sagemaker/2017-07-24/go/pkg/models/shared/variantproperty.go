@@ -1,9 +1,5 @@
 package shared
 
-
-
 type VariantProperty struct {
-    VariantPropertyType VariantPropertyTypeEnum `json:"VariantPropertyType"`
-    
+	VariantPropertyType VariantPropertyTypeEnum `json:"VariantPropertyType"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListFiltersResponse struct {
-    Filter []Filter `json:"filter,omitempty"`
-    
+	Filter []Filter `json:"filter,omitempty"`
 }
-

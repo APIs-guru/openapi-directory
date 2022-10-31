@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateGovCloudAccountResponse struct {
-    CreateAccountStatus *CreateAccountStatus `json:"CreateAccountStatus,omitempty"`
-    
+	CreateAccountStatus *CreateAccountStatus `json:"CreateAccountStatus,omitempty"`
 }
-

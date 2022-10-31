@@ -1,20 +1,14 @@
 package operations
 
-
-
 type DeleteFileCommentsIDPathParams struct {
-    ID int32 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int32 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type DeleteFileCommentsIDRequest struct {
-    PathParams DeleteFileCommentsIDPathParams 
-    
+	PathParams DeleteFileCommentsIDPathParams
 }
 
 type DeleteFileCommentsIDResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

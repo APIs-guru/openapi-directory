@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetBaiduChannelResponse struct {
-    BaiduChannelResponse BaiduChannelResponse `json:"BaiduChannelResponse"`
-    
+	BaiduChannelResponse BaiduChannelResponse `json:"BaiduChannelResponse"`
 }
-

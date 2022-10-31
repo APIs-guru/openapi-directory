@@ -1,11 +1,7 @@
 package operations
 
-
-
 type GetToolsDefaultEncodingResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

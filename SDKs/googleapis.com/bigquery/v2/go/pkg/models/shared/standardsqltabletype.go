@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StandardSQLTableType struct {
-    Columns []StandardSQLField `json:"columns,omitempty"`
-    
+	Columns []StandardSQLField `json:"columns,omitempty"`
 }
-

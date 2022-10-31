@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetMediaOutput struct {
-    Payload *string `json:"Payload,omitempty"`
-    
+	Payload *string `json:"Payload,omitempty"`
 }
-

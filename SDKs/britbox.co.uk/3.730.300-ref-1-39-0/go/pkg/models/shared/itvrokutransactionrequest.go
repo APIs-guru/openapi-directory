@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ItvRokuTransactionRequest struct {
-    ProfileToken string `json:"profileToken"`
-    
+	ProfileToken string `json:"profileToken"`
 }
-

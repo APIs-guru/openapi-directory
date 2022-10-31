@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateMlModelOutput struct {
-    MlModelID *string `json:"MLModelId,omitempty"`
-    
+	MlModelID *string `json:"MLModelId,omitempty"`
 }
-

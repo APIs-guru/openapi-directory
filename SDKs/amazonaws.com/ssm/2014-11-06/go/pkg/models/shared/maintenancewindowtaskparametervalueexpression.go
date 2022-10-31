@@ -1,9 +1,5 @@
 package shared
 
-
-
 type MaintenanceWindowTaskParameterValueExpression struct {
-    Values []string `json:"Values,omitempty"`
-    
+	Values []string `json:"Values,omitempty"`
 }
-

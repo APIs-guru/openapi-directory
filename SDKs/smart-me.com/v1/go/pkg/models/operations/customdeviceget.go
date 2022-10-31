@@ -1,13 +1,12 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CustomDeviceGetResponse struct {
-    Body []byte 
-    ContentType string 
-    CustomDeviceToPosts []shared.CustomDeviceToPost 
-    StatusCode int64 
-    
+	Body                []byte
+	ContentType         string
+	CustomDeviceToPosts []shared.CustomDeviceToPost
+	StatusCode          int64
 }
-

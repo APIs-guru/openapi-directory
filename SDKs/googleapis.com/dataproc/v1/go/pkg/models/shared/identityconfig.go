@@ -1,9 +1,5 @@
 package shared
 
-
-
 type IdentityConfig struct {
-    UserServiceAccountMapping map[string]string `json:"userServiceAccountMapping,omitempty"`
-    
+	UserServiceAccountMapping map[string]string `json:"userServiceAccountMapping,omitempty"`
 }
-

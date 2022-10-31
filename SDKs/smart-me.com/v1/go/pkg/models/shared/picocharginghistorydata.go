@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type PicoChargingHistoryData struct {
-    Duration *int32 `json:"Duration,omitempty"`
-    EnergyUsed *float64 `json:"EnergyUsed,omitempty"`
-    StartTime *time.Time `json:"StartTime,omitempty"`
-    
+	Duration   *int32     `json:"Duration,omitempty"`
+	EnergyUsed *float64   `json:"EnergyUsed,omitempty"`
+	StartTime  *time.Time `json:"StartTime,omitempty"`
 }
-

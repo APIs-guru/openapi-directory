@@ -1,14 +1,9 @@
 package shared
 
-
-
-
 type RoomParticipantPublishedTrackEnumKindEnum string
 
 const (
-    RoomParticipantPublishedTrackEnumKindEnumAudio RoomParticipantPublishedTrackEnumKindEnum = "audio"
-RoomParticipantPublishedTrackEnumKindEnumVideo RoomParticipantPublishedTrackEnumKindEnum = "video"
-RoomParticipantPublishedTrackEnumKindEnumData RoomParticipantPublishedTrackEnumKindEnum = "data"
+	RoomParticipantPublishedTrackEnumKindEnumAudio RoomParticipantPublishedTrackEnumKindEnum = "audio"
+	RoomParticipantPublishedTrackEnumKindEnumVideo RoomParticipantPublishedTrackEnumKindEnum = "video"
+	RoomParticipantPublishedTrackEnumKindEnumData  RoomParticipantPublishedTrackEnumKindEnum = "data"
 )
-
-

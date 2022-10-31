@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetVocabularyFilterRequest struct {
-    VocabularyFilterName string `json:"VocabularyFilterName"`
-    
+	VocabularyFilterName string `json:"VocabularyFilterName"`
 }
-

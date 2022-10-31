@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Ingress struct {
-    Config *Config `json:"config,omitempty"`
-    
+	Config *Config `json:"config,omitempty"`
 }
-

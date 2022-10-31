@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetGameSessionLogURLOutput struct {
-    PreSignedURL *string `json:"PreSignedUrl,omitempty"`
-    
+	PreSignedURL *string `json:"PreSignedUrl,omitempty"`
 }
-

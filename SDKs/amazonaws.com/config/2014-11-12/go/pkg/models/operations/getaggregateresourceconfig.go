@@ -1,42 +1,37 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type GetAggregateResourceConfigXAmzTargetEnum string
 
 const (
-    GetAggregateResourceConfigXAmzTargetEnumStarlingDoveServiceGetAggregateResourceConfig GetAggregateResourceConfigXAmzTargetEnum = "StarlingDoveService.GetAggregateResourceConfig"
+	GetAggregateResourceConfigXAmzTargetEnumStarlingDoveServiceGetAggregateResourceConfig GetAggregateResourceConfigXAmzTargetEnum = "StarlingDoveService.GetAggregateResourceConfig"
 )
 
-
 type GetAggregateResourceConfigHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget GetAggregateResourceConfigXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                                  `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                                  `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                                  `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                                  `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                                  `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                                  `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                                  `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        GetAggregateResourceConfigXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type GetAggregateResourceConfigRequest struct {
-    Headers GetAggregateResourceConfigHeaders 
-    Request shared.GetAggregateResourceConfigRequest `request:"mediaType=application/json"`
-    
+	Headers GetAggregateResourceConfigHeaders
+	Request shared.GetAggregateResourceConfigRequest `request:"mediaType=application/json"`
 }
 
 type GetAggregateResourceConfigResponse struct {
-    ContentType string 
-    GetAggregateResourceConfigResponse *shared.GetAggregateResourceConfigResponse 
-    NoSuchConfigurationAggregatorException *interface{} 
-    OversizedConfigurationItemException *interface{} 
-    ResourceNotDiscoveredException *interface{} 
-    StatusCode int64 
-    ValidationException *interface{} 
-    
+	ContentType                            string
+	GetAggregateResourceConfigResponse     *shared.GetAggregateResourceConfigResponse
+	NoSuchConfigurationAggregatorException *interface{}
+	OversizedConfigurationItemException    *interface{}
+	ResourceNotDiscoveredException         *interface{}
+	StatusCode                             int64
+	ValidationException                    *interface{}
 }
-

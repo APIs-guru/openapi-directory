@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type FullExportSecurity struct {
-    OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
-    
+	OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
 }
 
 type FullExportRequest struct {
-    Security FullExportSecurity 
-    
+	Security FullExportSecurity
 }
 
 type FullExportResponse struct {
-    ContentType string 
-    ImportExport *shared.ImportExport 
-    StatusCode int64 
-    
+	ContentType  string
+	ImportExport *shared.ImportExport
+	StatusCode   int64
 }
-

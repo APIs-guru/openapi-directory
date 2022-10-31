@@ -1,43 +1,34 @@
 package operations
 
-
-
-
 type GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum string
 
 const (
-    GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumJSON GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "json"
-GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumXML GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "xml"
-GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumKml GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "kml"
-GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumKmz GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "kmz"
-GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumShp GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "shp"
-GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumShpz GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "shpz"
-GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumGeojson GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "geojson"
-GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumGml GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "gml"
-GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumWkt GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "wkt"
+	GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumJSON    GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "json"
+	GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumXML     GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "xml"
+	GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumKml     GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "kml"
+	GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumKmz     GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "kmz"
+	GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumShp     GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "shp"
+	GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumShpz    GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "shpz"
+	GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumGeojson GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "geojson"
+	GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumGml     GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "gml"
+	GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnumWkt     GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum = "wkt"
 )
 
-
 type GetGeomarksGeomarkIDPointFileFormatExtensionPathParams struct {
-    FileFormatExtension GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum `pathParam:"style=simple,explode=false,name=fileFormatExtension"`
-    GeomarkID string `pathParam:"style=simple,explode=false,name=geomarkId"`
-    
+	FileFormatExtension GetGeomarksGeomarkIDPointFileFormatExtensionFileFormatExtensionEnum `pathParam:"style=simple,explode=false,name=fileFormatExtension"`
+	GeomarkID           string                                                              `pathParam:"style=simple,explode=false,name=geomarkId"`
 }
 
 type GetGeomarksGeomarkIDPointFileFormatExtensionQueryParams struct {
-    Srid *int64 `queryParam:"style=form,explode=true,name=srid"`
-    
+	Srid *int64 `queryParam:"style=form,explode=true,name=srid"`
 }
 
 type GetGeomarksGeomarkIDPointFileFormatExtensionRequest struct {
-    PathParams GetGeomarksGeomarkIDPointFileFormatExtensionPathParams 
-    QueryParams GetGeomarksGeomarkIDPointFileFormatExtensionQueryParams 
-    
+	PathParams  GetGeomarksGeomarkIDPointFileFormatExtensionPathParams
+	QueryParams GetGeomarksGeomarkIDPointFileFormatExtensionQueryParams
 }
 
 type GetGeomarksGeomarkIDPointFileFormatExtensionResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

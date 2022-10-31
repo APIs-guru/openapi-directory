@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ControllersAdvisoryDetailResponse struct {
-    Data *ControllersAdvisoryDetailItem `json:"data,omitempty"`
-    
+	Data *ControllersAdvisoryDetailItem `json:"data,omitempty"`
 }
-

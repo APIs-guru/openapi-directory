@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteContextRequest struct {
-    ContextName string `json:"ContextName"`
-    
+	ContextName string `json:"ContextName"`
 }
-

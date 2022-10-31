@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetErrorsIDPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetErrorsIDRequest struct {
-    PathParams GetErrorsIDPathParams 
-    
+	PathParams GetErrorsIDPathParams
 }
 
 type GetErrorsIDResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

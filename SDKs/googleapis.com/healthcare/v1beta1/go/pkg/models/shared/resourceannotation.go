@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ResourceAnnotation struct {
-    Label *string `json:"label,omitempty"`
-    
+	Label *string `json:"label,omitempty"`
 }
-

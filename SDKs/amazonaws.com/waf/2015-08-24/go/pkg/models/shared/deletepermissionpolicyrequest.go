@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeletePermissionPolicyRequest struct {
-    ResourceArn string `json:"ResourceArn"`
-    
+	ResourceArn string `json:"ResourceArn"`
 }
-

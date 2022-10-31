@@ -1,20 +1,14 @@
 package operations
 
-
-
 type EnterpriseAdminUpgradeLicenseRequestBody struct {
-    License *string `json:"license,omitempty"`
-    
+	License *string `json:"license,omitempty"`
 }
 
 type EnterpriseAdminUpgradeLicenseRequest struct {
-    Request *EnterpriseAdminUpgradeLicenseRequestBody `request:"mediaType=application/json"`
-    
+	Request *EnterpriseAdminUpgradeLicenseRequestBody `request:"mediaType=application/json"`
 }
 
 type EnterpriseAdminUpgradeLicenseResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

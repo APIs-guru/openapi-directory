@@ -1,50 +1,44 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ListDatabasesQueryParams struct {
-    MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
-    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
-    
+	MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
+	NextToken  *string `queryParam:"style=form,explode=true,name=NextToken"`
 }
-
 
 type ListDatabasesXAmzTargetEnum string
 
 const (
-    ListDatabasesXAmzTargetEnumTimestream20181101ListDatabases ListDatabasesXAmzTargetEnum = "Timestream_20181101.ListDatabases"
+	ListDatabasesXAmzTargetEnumTimestream20181101ListDatabases ListDatabasesXAmzTargetEnum = "Timestream_20181101.ListDatabases"
 )
 
-
 type ListDatabasesHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget ListDatabasesXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                     `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                     `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                     `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                     `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                     `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                     `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                     `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        ListDatabasesXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type ListDatabasesRequest struct {
-    QueryParams ListDatabasesQueryParams 
-    Headers ListDatabasesHeaders 
-    Request shared.ListDatabasesRequest `request:"mediaType=application/json"`
-    
+	QueryParams ListDatabasesQueryParams
+	Headers     ListDatabasesHeaders
+	Request     shared.ListDatabasesRequest `request:"mediaType=application/json"`
 }
 
 type ListDatabasesResponse struct {
-    AccessDeniedException *interface{} 
-    ContentType string 
-    InternalServerException *interface{} 
-    InvalidEndpointException *interface{} 
-    ListDatabasesResponse *shared.ListDatabasesResponse 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    ValidationException *interface{} 
-    
+	AccessDeniedException    *interface{}
+	ContentType              string
+	InternalServerException  *interface{}
+	InvalidEndpointException *interface{}
+	ListDatabasesResponse    *shared.ListDatabasesResponse
+	StatusCode               int64
+	ThrottlingException      *interface{}
+	ValidationException      *interface{}
 }
-

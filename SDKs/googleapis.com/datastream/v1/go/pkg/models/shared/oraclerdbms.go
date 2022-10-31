@@ -1,9 +1,5 @@
 package shared
 
-
-
 type OracleRdbms struct {
-    OracleSchemas []OracleSchema `json:"oracleSchemas,omitempty"`
-    
+	OracleSchemas []OracleSchema `json:"oracleSchemas,omitempty"`
 }
-

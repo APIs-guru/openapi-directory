@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetManagedScalingPolicyOutput struct {
-    ManagedScalingPolicy *ManagedScalingPolicy `json:"ManagedScalingPolicy,omitempty"`
-    
+	ManagedScalingPolicy *ManagedScalingPolicy `json:"ManagedScalingPolicy,omitempty"`
 }
-

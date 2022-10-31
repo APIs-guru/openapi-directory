@@ -1,44 +1,39 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ChangeServerLifeCycleStateHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type ChangeServerLifeCycleStateRequestBodyLifeCycle struct {
-    State *shared.ChangeServerLifeCycleStateSourceServerLifecycleStateEnum `json:"state,omitempty"`
-    
+	State *shared.ChangeServerLifeCycleStateSourceServerLifecycleStateEnum `json:"state,omitempty"`
 }
 
 type ChangeServerLifeCycleStateRequestBody struct {
-    LifeCycle ChangeServerLifeCycleStateRequestBodyLifeCycle `json:"lifeCycle"`
-    SourceServerID string `json:"sourceServerID"`
-    
+	LifeCycle      ChangeServerLifeCycleStateRequestBodyLifeCycle `json:"lifeCycle"`
+	SourceServerID string                                         `json:"sourceServerID"`
 }
 
 type ChangeServerLifeCycleStateRequest struct {
-    Headers ChangeServerLifeCycleStateHeaders 
-    Request ChangeServerLifeCycleStateRequestBody `request:"mediaType=application/json"`
-    
+	Headers ChangeServerLifeCycleStateHeaders
+	Request ChangeServerLifeCycleStateRequestBody `request:"mediaType=application/json"`
 }
 
 type ChangeServerLifeCycleStateResponse struct {
-    ConflictException *interface{} 
-    ContentType string 
-    ResourceNotFoundException *interface{} 
-    SourceServer *shared.SourceServer 
-    StatusCode int64 
-    UninitializedAccountException *interface{} 
-    ValidationException *interface{} 
-    
+	ConflictException             *interface{}
+	ContentType                   string
+	ResourceNotFoundException     *interface{}
+	SourceServer                  *shared.SourceServer
+	StatusCode                    int64
+	UninitializedAccountException *interface{}
+	ValidationException           *interface{}
 }
-

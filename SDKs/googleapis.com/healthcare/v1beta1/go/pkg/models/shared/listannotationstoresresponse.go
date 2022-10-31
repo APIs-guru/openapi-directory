@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListAnnotationStoresResponse struct {
-    AnnotationStores []AnnotationStore `json:"annotationStores,omitempty"`
-    NextPageToken *string `json:"nextPageToken,omitempty"`
-    
+	AnnotationStores []AnnotationStore `json:"annotationStores,omitempty"`
+	NextPageToken    *string           `json:"nextPageToken,omitempty"`
 }
-

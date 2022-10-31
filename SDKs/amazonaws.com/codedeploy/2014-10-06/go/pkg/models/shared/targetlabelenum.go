@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type TargetLabelEnum string
 
 const (
-    TargetLabelEnumBlue TargetLabelEnum = "Blue"
-TargetLabelEnumGreen TargetLabelEnum = "Green"
+	TargetLabelEnumBlue  TargetLabelEnum = "Blue"
+	TargetLabelEnumGreen TargetLabelEnum = "Green"
 )
-
-

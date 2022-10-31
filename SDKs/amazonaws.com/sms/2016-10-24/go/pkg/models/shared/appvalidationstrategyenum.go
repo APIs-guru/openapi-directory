@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type AppValidationStrategyEnum string
 
 const (
-    AppValidationStrategyEnumSsm AppValidationStrategyEnum = "SSM"
+	AppValidationStrategyEnumSsm AppValidationStrategyEnum = "SSM"
 )
-
-

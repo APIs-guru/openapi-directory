@@ -1,22 +1,17 @@
 package shared
 
-
-
-
 type RecommendationCategoryEnum string
 
 const (
-    RecommendationCategoryEnumAwsBestPractices RecommendationCategoryEnum = "AWSBestPractices"
-RecommendationCategoryEnumAwsCloudFormationIssues RecommendationCategoryEnum = "AWSCloudFormationIssues"
-RecommendationCategoryEnumDuplicateCode RecommendationCategoryEnum = "DuplicateCode"
-RecommendationCategoryEnumCodeMaintenanceIssues RecommendationCategoryEnum = "CodeMaintenanceIssues"
-RecommendationCategoryEnumConcurrencyIssues RecommendationCategoryEnum = "ConcurrencyIssues"
-RecommendationCategoryEnumInputValidations RecommendationCategoryEnum = "InputValidations"
-RecommendationCategoryEnumPythonBestPractices RecommendationCategoryEnum = "PythonBestPractices"
-RecommendationCategoryEnumJavaBestPractices RecommendationCategoryEnum = "JavaBestPractices"
-RecommendationCategoryEnumResourceLeaks RecommendationCategoryEnum = "ResourceLeaks"
-RecommendationCategoryEnumSecurityIssues RecommendationCategoryEnum = "SecurityIssues"
-RecommendationCategoryEnumCodeInconsistencies RecommendationCategoryEnum = "CodeInconsistencies"
+	RecommendationCategoryEnumAwsBestPractices        RecommendationCategoryEnum = "AWSBestPractices"
+	RecommendationCategoryEnumAwsCloudFormationIssues RecommendationCategoryEnum = "AWSCloudFormationIssues"
+	RecommendationCategoryEnumDuplicateCode           RecommendationCategoryEnum = "DuplicateCode"
+	RecommendationCategoryEnumCodeMaintenanceIssues   RecommendationCategoryEnum = "CodeMaintenanceIssues"
+	RecommendationCategoryEnumConcurrencyIssues       RecommendationCategoryEnum = "ConcurrencyIssues"
+	RecommendationCategoryEnumInputValidations        RecommendationCategoryEnum = "InputValidations"
+	RecommendationCategoryEnumPythonBestPractices     RecommendationCategoryEnum = "PythonBestPractices"
+	RecommendationCategoryEnumJavaBestPractices       RecommendationCategoryEnum = "JavaBestPractices"
+	RecommendationCategoryEnumResourceLeaks           RecommendationCategoryEnum = "ResourceLeaks"
+	RecommendationCategoryEnumSecurityIssues          RecommendationCategoryEnum = "SecurityIssues"
+	RecommendationCategoryEnumCodeInconsistencies     RecommendationCategoryEnum = "CodeInconsistencies"
 )
-
-

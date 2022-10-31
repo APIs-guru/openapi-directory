@@ -1,19 +1,13 @@
 package shared
 
-
-
-
 type ProjectSettingsClassificationTypeEnum string
 
 const (
-    ProjectSettingsClassificationTypeEnumMulticlass ProjectSettingsClassificationTypeEnum = "Multiclass"
-ProjectSettingsClassificationTypeEnumMultilabel ProjectSettingsClassificationTypeEnum = "Multilabel"
+	ProjectSettingsClassificationTypeEnumMulticlass ProjectSettingsClassificationTypeEnum = "Multiclass"
+	ProjectSettingsClassificationTypeEnumMultilabel ProjectSettingsClassificationTypeEnum = "Multilabel"
 )
 
-
 type ProjectSettings struct {
-    ClassificationType *ProjectSettingsClassificationTypeEnum `json:"classificationType,omitempty" form:"name=classificationType"`
-    DomainID *string `json:"domainId,omitempty" form:"name=domainId"`
-    
+	ClassificationType *ProjectSettingsClassificationTypeEnum `json:"classificationType,omitempty" form:"name=classificationType"`
+	DomainID           *string                                `json:"domainId,omitempty" form:"name=domainId"`
 }
-

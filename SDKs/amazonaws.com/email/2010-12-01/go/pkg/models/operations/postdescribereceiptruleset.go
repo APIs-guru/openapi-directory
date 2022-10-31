@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostDescribeReceiptRuleSetActionEnum string
 
 const (
-    PostDescribeReceiptRuleSetActionEnumDescribeReceiptRuleSet PostDescribeReceiptRuleSetActionEnum = "DescribeReceiptRuleSet"
+	PostDescribeReceiptRuleSetActionEnumDescribeReceiptRuleSet PostDescribeReceiptRuleSetActionEnum = "DescribeReceiptRuleSet"
 )
-
-
 
 type PostDescribeReceiptRuleSetVersionEnum string
 
 const (
-    PostDescribeReceiptRuleSetVersionEnumTwoThousandAndTen1201 PostDescribeReceiptRuleSetVersionEnum = "2010-12-01"
+	PostDescribeReceiptRuleSetVersionEnumTwoThousandAndTen1201 PostDescribeReceiptRuleSetVersionEnum = "2010-12-01"
 )
 
-
 type PostDescribeReceiptRuleSetQueryParams struct {
-    Action PostDescribeReceiptRuleSetActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostDescribeReceiptRuleSetVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostDescribeReceiptRuleSetActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostDescribeReceiptRuleSetVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostDescribeReceiptRuleSetHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostDescribeReceiptRuleSetRequest struct {
-    QueryParams PostDescribeReceiptRuleSetQueryParams 
-    Headers PostDescribeReceiptRuleSetHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostDescribeReceiptRuleSetQueryParams
+	Headers     PostDescribeReceiptRuleSetHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostDescribeReceiptRuleSetResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

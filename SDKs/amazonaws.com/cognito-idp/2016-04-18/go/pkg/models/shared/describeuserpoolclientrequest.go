@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DescribeUserPoolClientRequest struct {
-    ClientID string `json:"ClientId"`
-    UserPoolID string `json:"UserPoolId"`
-    
+	ClientID   string `json:"ClientId"`
+	UserPoolID string `json:"UserPoolId"`
 }
-

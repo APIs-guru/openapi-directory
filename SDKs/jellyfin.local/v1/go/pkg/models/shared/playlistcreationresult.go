@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PlaylistCreationResult struct {
-    ID *string `json:"Id,omitempty"`
-    
+	ID *string `json:"Id,omitempty"`
 }
-

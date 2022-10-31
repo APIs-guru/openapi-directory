@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ModifyEndpointResponse struct {
-    Endpoint *Endpoint `json:"Endpoint,omitempty"`
-    
+	Endpoint *Endpoint `json:"Endpoint,omitempty"`
 }
-

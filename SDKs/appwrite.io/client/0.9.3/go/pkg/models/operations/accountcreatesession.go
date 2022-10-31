@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type AccountCreateSessionRequestBody struct {
-    Email string `json:"email"`
-    Password string `json:"password"`
-    
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
 type AccountCreateSessionSecurity struct {
-    Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
-    
+	Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type AccountCreateSessionRequest struct {
-    Request *AccountCreateSessionRequestBody `request:"mediaType=application/json"`
-    Security AccountCreateSessionSecurity 
-    
+	Request  *AccountCreateSessionRequestBody `request:"mediaType=application/json"`
+	Security AccountCreateSessionSecurity
 }
 
 type AccountCreateSessionResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Session *shared.Session 
-    
+	ContentType string
+	StatusCode  int64
+	Session     *shared.Session
 }
-

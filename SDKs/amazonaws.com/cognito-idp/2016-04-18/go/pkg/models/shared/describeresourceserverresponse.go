@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeResourceServerResponse struct {
-    ResourceServer ResourceServerType `json:"ResourceServer"`
-    
+	ResourceServer ResourceServerType `json:"ResourceServer"`
 }
-

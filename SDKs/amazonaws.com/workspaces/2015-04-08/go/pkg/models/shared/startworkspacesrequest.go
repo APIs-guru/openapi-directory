@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartWorkspacesRequest struct {
-    StartWorkspaceRequests []StartRequest `json:"StartWorkspaceRequests"`
-    
+	StartWorkspaceRequests []StartRequest `json:"StartWorkspaceRequests"`
 }
-

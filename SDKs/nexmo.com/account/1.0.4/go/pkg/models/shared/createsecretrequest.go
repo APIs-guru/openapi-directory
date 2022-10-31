@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateSecretRequest struct {
-    Secret string `json:"secret"`
-    
+	Secret string `json:"secret"`
 }
-

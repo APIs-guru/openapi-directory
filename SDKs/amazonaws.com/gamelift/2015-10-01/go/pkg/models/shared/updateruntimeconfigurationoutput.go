@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateRuntimeConfigurationOutput struct {
-    RuntimeConfiguration *RuntimeConfiguration `json:"RuntimeConfiguration,omitempty"`
-    
+	RuntimeConfiguration *RuntimeConfiguration `json:"RuntimeConfiguration,omitempty"`
 }
-

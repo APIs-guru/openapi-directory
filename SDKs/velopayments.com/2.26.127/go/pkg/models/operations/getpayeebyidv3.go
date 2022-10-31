@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetPayeeByIDV3PathParams struct {
-    PayeeID string `pathParam:"style=simple,explode=false,name=payeeId"`
-    
+	PayeeID string `pathParam:"style=simple,explode=false,name=payeeId"`
 }
 
 type GetPayeeByIDV3QueryParams struct {
-    Sensitive *bool `queryParam:"style=form,explode=true,name=sensitive"`
-    
+	Sensitive *bool `queryParam:"style=form,explode=true,name=sensitive"`
 }
 
 type GetPayeeByIDV3Request struct {
-    PathParams GetPayeeByIDV3PathParams 
-    QueryParams GetPayeeByIDV3QueryParams 
-    
+	PathParams  GetPayeeByIDV3PathParams
+	QueryParams GetPayeeByIDV3QueryParams
 }
 
 type GetPayeeByIDV3Response struct {
-    ContentType string 
-    PayeeDetailResponse *shared.PayeeDetailResponse 
-    StatusCode int64 
-    
+	ContentType         string
+	PayeeDetailResponse *shared.PayeeDetailResponse
+	StatusCode          int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchDisassociateUserStackRequest struct {
-    UserStackAssociations []UserStackAssociation `json:"UserStackAssociations"`
-    
+	UserStackAssociations []UserStackAssociation `json:"UserStackAssociations"`
 }
-

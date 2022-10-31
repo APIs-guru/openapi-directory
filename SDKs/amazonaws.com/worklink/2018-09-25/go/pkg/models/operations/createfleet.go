@@ -1,43 +1,39 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CreateFleetHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type CreateFleetRequestBody struct {
-    DisplayName *string `json:"DisplayName,omitempty"`
-    FleetName string `json:"FleetName"`
-    OptimizeForEndUserLocation *bool `json:"OptimizeForEndUserLocation,omitempty"`
-    Tags map[string]string `json:"Tags,omitempty"`
-    
+	DisplayName                *string           `json:"DisplayName,omitempty"`
+	FleetName                  string            `json:"FleetName"`
+	OptimizeForEndUserLocation *bool             `json:"OptimizeForEndUserLocation,omitempty"`
+	Tags                       map[string]string `json:"Tags,omitempty"`
 }
 
 type CreateFleetRequest struct {
-    Headers CreateFleetHeaders 
-    Request CreateFleetRequestBody `request:"mediaType=application/json"`
-    
+	Headers CreateFleetHeaders
+	Request CreateFleetRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateFleetResponse struct {
-    ContentType string 
-    CreateFleetResponse *shared.CreateFleetResponse 
-    InternalServerErrorException *interface{} 
-    InvalidRequestException *interface{} 
-    ResourceAlreadyExistsException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    TooManyRequestsException *interface{} 
-    UnauthorizedException *interface{} 
-    
+	ContentType                    string
+	CreateFleetResponse            *shared.CreateFleetResponse
+	InternalServerErrorException   *interface{}
+	InvalidRequestException        *interface{}
+	ResourceAlreadyExistsException *interface{}
+	ResourceNotFoundException      *interface{}
+	StatusCode                     int64
+	TooManyRequestsException       *interface{}
+	UnauthorizedException          *interface{}
 }
-

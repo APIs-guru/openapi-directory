@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GenerateNetworkReportRequest struct {
-    ReportSpec *NetworkReportSpec `json:"reportSpec,omitempty"`
-    
+	ReportSpec *NetworkReportSpec `json:"reportSpec,omitempty"`
 }
-

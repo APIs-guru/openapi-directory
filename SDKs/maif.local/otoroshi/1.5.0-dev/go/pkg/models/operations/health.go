@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type HealthResponse struct {
-    ContentType string 
-    OtoroshiHealth *shared.OtoroshiHealth 
-    StatusCode int64 
-    
+	ContentType    string
+	OtoroshiHealth *shared.OtoroshiHealth
+	StatusCode     int64
 }
-

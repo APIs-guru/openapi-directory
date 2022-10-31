@@ -1,32 +1,28 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PatchPayCodePathParams struct {
-    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
-    PayCodeID string `pathParam:"style=simple,explode=false,name=PayCodeId"`
-    
+	EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+	PayCodeID  string `pathParam:"style=simple,explode=false,name=PayCodeId"`
 }
 
 type PatchPayCodeHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type PatchPayCodeRequest struct {
-    PathParams PatchPayCodePathParams 
-    Headers PatchPayCodeHeaders 
-    Request shared.PayCode `request:"mediaType=application/json"`
-    
+	PathParams PatchPayCodePathParams
+	Headers    PatchPayCodeHeaders
+	Request    shared.PayCode `request:"mediaType=application/json"`
 }
 
 type PatchPayCodeResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    PayCode *shared.PayCode 
-    StatusCode int64 
-    
+	ContentType string
+	ErrorModel  *shared.ErrorModel
+	PayCode     *shared.PayCode
+	StatusCode  int64
 }
-

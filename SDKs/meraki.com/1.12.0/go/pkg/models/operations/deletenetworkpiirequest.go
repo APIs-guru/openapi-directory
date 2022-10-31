@@ -1,21 +1,15 @@
 package operations
 
-
-
 type DeleteNetworkPiiRequestPathParams struct {
-    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
-    RequestID string `pathParam:"style=simple,explode=false,name=requestId"`
-    
+	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+	RequestID string `pathParam:"style=simple,explode=false,name=requestId"`
 }
 
 type DeleteNetworkPiiRequestRequest struct {
-    PathParams DeleteNetworkPiiRequestPathParams 
-    
+	PathParams DeleteNetworkPiiRequestPathParams
 }
 
 type DeleteNetworkPiiRequestResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

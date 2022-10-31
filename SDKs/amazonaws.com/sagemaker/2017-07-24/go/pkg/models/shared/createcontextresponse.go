@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateContextResponse struct {
-    ContextArn *string `json:"ContextArn,omitempty"`
-    
+	ContextArn *string `json:"ContextArn,omitempty"`
 }
-

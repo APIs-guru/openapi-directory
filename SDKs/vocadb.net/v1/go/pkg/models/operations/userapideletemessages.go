@@ -1,26 +1,19 @@
 package operations
 
-
-
 type UserAPIDeleteMessagesPathParams struct {
-    ID int32 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int32 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type UserAPIDeleteMessagesQueryParams struct {
-    MessageID []int32 `queryParam:"style=form,explode=true,name=messageId"`
-    
+	MessageID []int32 `queryParam:"style=form,explode=true,name=messageId"`
 }
 
 type UserAPIDeleteMessagesRequest struct {
-    PathParams UserAPIDeleteMessagesPathParams 
-    QueryParams UserAPIDeleteMessagesQueryParams 
-    
+	PathParams  UserAPIDeleteMessagesPathParams
+	QueryParams UserAPIDeleteMessagesQueryParams
 }
 
 type UserAPIDeleteMessagesResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

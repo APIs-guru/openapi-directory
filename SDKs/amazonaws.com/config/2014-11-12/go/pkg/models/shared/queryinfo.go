@@ -1,9 +1,5 @@
 package shared
 
-
-
 type QueryInfo struct {
-    SelectFields []FieldInfo `json:"SelectFields,omitempty"`
-    
+	SelectFields []FieldInfo `json:"SelectFields,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetDevEndpointRequest struct {
-    EndpointName string `json:"EndpointName"`
-    
+	EndpointName string `json:"EndpointName"`
 }
-

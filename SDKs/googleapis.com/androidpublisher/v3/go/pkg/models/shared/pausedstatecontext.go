@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PausedStateContext struct {
-    AutoResumeTime *string `json:"autoResumeTime,omitempty"`
-    
+	AutoResumeTime *string `json:"autoResumeTime,omitempty"`
 }
-

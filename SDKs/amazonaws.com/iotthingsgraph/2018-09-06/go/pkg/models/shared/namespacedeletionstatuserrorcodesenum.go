@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type NamespaceDeletionStatusErrorCodesEnum string
 
 const (
-    NamespaceDeletionStatusErrorCodesEnumValidationFailed NamespaceDeletionStatusErrorCodesEnum = "VALIDATION_FAILED"
+	NamespaceDeletionStatusErrorCodesEnumValidationFailed NamespaceDeletionStatusErrorCodesEnum = "VALIDATION_FAILED"
 )
-
-

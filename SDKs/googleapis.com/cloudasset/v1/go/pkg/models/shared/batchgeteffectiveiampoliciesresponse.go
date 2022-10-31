@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchGetEffectiveIamPoliciesResponse struct {
-    PolicyResults []EffectiveIamPolicy `json:"policyResults,omitempty"`
-    
+	PolicyResults []EffectiveIamPolicy `json:"policyResults,omitempty"`
 }
-

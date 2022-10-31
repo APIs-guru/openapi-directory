@@ -1,31 +1,28 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type BundlesPostBundleRequests struct {
-    ApplicationXML []byte `request:"mediaType=application/xml"`
-    TextXML []byte `request:"mediaType=text/xml"`
-    UpdateSystemModelsBundle *shared.UpdateSystemModelsBundle `request:"mediaType=application/json"`
-    UpdateSystemModelsBundle1 *shared.UpdateSystemModelsBundle `request:"mediaType=application/x-www-form-urlencoded"`
-    UpdateSystemModelsBundle2 *shared.UpdateSystemModelsBundle `request:"mediaType=text/json"`
-    
+	ApplicationXML            []byte                           `request:"mediaType=application/xml"`
+	TextXML                   []byte                           `request:"mediaType=text/xml"`
+	UpdateSystemModelsBundle  *shared.UpdateSystemModelsBundle `request:"mediaType=application/json"`
+	UpdateSystemModelsBundle1 *shared.UpdateSystemModelsBundle `request:"mediaType=application/x-www-form-urlencoded"`
+	UpdateSystemModelsBundle2 *shared.UpdateSystemModelsBundle `request:"mediaType=text/json"`
 }
 
 type BundlesPostBundleRequest struct {
-    Request BundlesPostBundleRequests 
-    
+	Request BundlesPostBundleRequests
 }
 
 type BundlesPostBundleResponse struct {
-    APIModelsAPIError *shared.APIModelsAPIError 
-    Body []byte 
-    BundlesPostBundle200ApplicationJSONString *string 
-    BundlesPostBundle200ApplicationXMLString *string 
-    BundlesPostBundle200TextJSONString *string 
-    BundlesPostBundle200TextXMLString *string 
-    ContentType string 
-    StatusCode int64 
-    
+	APIModelsAPIError                         *shared.APIModelsAPIError
+	Body                                      []byte
+	BundlesPostBundle200ApplicationJSONString *string
+	BundlesPostBundle200ApplicationXMLString  *string
+	BundlesPostBundle200TextJSONString        *string
+	BundlesPostBundle200TextXMLString         *string
+	ContentType                               string
+	StatusCode                                int64
 }
-

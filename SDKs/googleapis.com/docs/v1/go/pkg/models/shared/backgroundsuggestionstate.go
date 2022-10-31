@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BackgroundSuggestionState struct {
-    BackgroundColorSuggested *bool `json:"backgroundColorSuggested,omitempty"`
-    
+	BackgroundColorSuggested *bool `json:"backgroundColorSuggested,omitempty"`
 }
-

@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetFactRandomQueryParams struct {
-    Category *string `queryParam:"style=form,explode=true,name=category"`
-    Subcategory *string `queryParam:"style=form,explode=true,name=subcategory"`
-    
+	Category    *string `queryParam:"style=form,explode=true,name=category"`
+	Subcategory *string `queryParam:"style=form,explode=true,name=subcategory"`
 }
 
 type GetFactRandomSecurity struct {
-    XFungeneratorsAPISecret shared.SchemeXFungeneratorsAPISecret `security:"scheme,type=apiKey,subtype=header"`
-    
+	XFungeneratorsAPISecret shared.SchemeXFungeneratorsAPISecret `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetFactRandomRequest struct {
-    QueryParams GetFactRandomQueryParams 
-    Security GetFactRandomSecurity 
-    
+	QueryParams GetFactRandomQueryParams
+	Security    GetFactRandomSecurity
 }
 
 type GetFactRandomResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PublishXunitXMLFilesRequest struct {
-    XunitXMLFiles []FileReference `json:"xunitXmlFiles,omitempty"`
-    
+	XunitXMLFiles []FileReference `json:"xunitXmlFiles,omitempty"`
 }
-

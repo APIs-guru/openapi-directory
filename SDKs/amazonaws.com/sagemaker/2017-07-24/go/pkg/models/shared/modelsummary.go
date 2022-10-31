@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ModelSummary struct {
-    CreationTime time.Time `json:"CreationTime"`
-    ModelArn string `json:"ModelArn"`
-    ModelName string `json:"ModelName"`
-    
+	CreationTime time.Time `json:"CreationTime"`
+	ModelArn     string    `json:"ModelArn"`
+	ModelName    string    `json:"ModelName"`
 }
-

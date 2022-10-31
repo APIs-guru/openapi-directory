@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetVodGenresResponse struct {
-    ContentType string 
-    StatusCode int64 
-    OnDemandGenres []shared.OnDemandGenre 
-    
+	ContentType    string
+	StatusCode     int64
+	OnDemandGenres []shared.OnDemandGenre
 }
-

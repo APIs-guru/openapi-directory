@@ -1,50 +1,39 @@
 package operations
 
-
-
-
 type GetDescribeTerminationPolicyTypesActionEnum string
 
 const (
-    GetDescribeTerminationPolicyTypesActionEnumDescribeTerminationPolicyTypes GetDescribeTerminationPolicyTypesActionEnum = "DescribeTerminationPolicyTypes"
+	GetDescribeTerminationPolicyTypesActionEnumDescribeTerminationPolicyTypes GetDescribeTerminationPolicyTypesActionEnum = "DescribeTerminationPolicyTypes"
 )
-
-
 
 type GetDescribeTerminationPolicyTypesVersionEnum string
 
 const (
-    GetDescribeTerminationPolicyTypesVersionEnumTwoThousandAndEleven0101 GetDescribeTerminationPolicyTypesVersionEnum = "2011-01-01"
+	GetDescribeTerminationPolicyTypesVersionEnumTwoThousandAndEleven0101 GetDescribeTerminationPolicyTypesVersionEnum = "2011-01-01"
 )
 
-
 type GetDescribeTerminationPolicyTypesQueryParams struct {
-    Action GetDescribeTerminationPolicyTypesActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version GetDescribeTerminationPolicyTypesVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  GetDescribeTerminationPolicyTypesActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version GetDescribeTerminationPolicyTypesVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type GetDescribeTerminationPolicyTypesHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetDescribeTerminationPolicyTypesRequest struct {
-    QueryParams GetDescribeTerminationPolicyTypesQueryParams 
-    Headers GetDescribeTerminationPolicyTypesHeaders 
-    
+	QueryParams GetDescribeTerminationPolicyTypesQueryParams
+	Headers     GetDescribeTerminationPolicyTypesHeaders
 }
 
 type GetDescribeTerminationPolicyTypesResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

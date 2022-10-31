@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type SurveysListResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Surveys []shared.Survey 
-    
+	ContentType string
+	StatusCode  int64
+	Surveys     []shared.Survey
 }
-

@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ListTokensSecurity struct {
-    BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
-    
+	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
 }
 
 type ListTokensRequest struct {
-    Security ListTokensSecurity 
-    
+	Security ListTokensSecurity
 }
 
 type ListTokensResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    Netlicensings []interface{} 
-    
+	Body          []byte
+	ContentType   string
+	StatusCode    int64
+	Netlicensings []interface{}
 }
-

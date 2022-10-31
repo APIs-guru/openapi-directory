@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ConferenceParameters struct {
-    AddOnParameters *ConferenceParametersAddOnParameters `json:"addOnParameters,omitempty"`
-    
+	AddOnParameters *ConferenceParametersAddOnParameters `json:"addOnParameters,omitempty"`
 }
-

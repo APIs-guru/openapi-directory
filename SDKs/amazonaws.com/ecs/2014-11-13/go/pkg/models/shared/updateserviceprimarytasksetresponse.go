@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateServicePrimaryTaskSetResponse struct {
-    TaskSet *TaskSet `json:"taskSet,omitempty"`
-    
+	TaskSet *TaskSet `json:"taskSet,omitempty"`
 }
-

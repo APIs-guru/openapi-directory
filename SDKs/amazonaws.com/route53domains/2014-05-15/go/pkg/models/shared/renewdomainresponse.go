@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RenewDomainResponse struct {
-    OperationID string `json:"OperationId"`
-    
+	OperationID string `json:"OperationId"`
 }
-

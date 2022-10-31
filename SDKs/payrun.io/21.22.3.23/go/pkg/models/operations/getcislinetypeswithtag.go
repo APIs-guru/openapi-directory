@@ -1,31 +1,27 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetCisLineTypesWithTagPathParams struct {
-    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
-    TagID string `pathParam:"style=simple,explode=false,name=TagId"`
-    
+	EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+	TagID      string `pathParam:"style=simple,explode=false,name=TagId"`
 }
 
 type GetCisLineTypesWithTagHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type GetCisLineTypesWithTagRequest struct {
-    PathParams GetCisLineTypesWithTagPathParams 
-    Headers GetCisLineTypesWithTagHeaders 
-    
+	PathParams GetCisLineTypesWithTagPathParams
+	Headers    GetCisLineTypesWithTagHeaders
 }
 
 type GetCisLineTypesWithTagResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    LinkCollection *shared.LinkCollection 
-    StatusCode int64 
-    
+	ContentType    string
+	ErrorModel     *shared.ErrorModel
+	LinkCollection *shared.LinkCollection
+	StatusCode     int64
 }
-

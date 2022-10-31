@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetProfileSecurity struct {
-    BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
-    
+	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
 }
 
 type GetProfileRequest struct {
-    Security GetProfileSecurity 
-    
+	Security GetProfileSecurity
 }
 
 type GetProfileResponse struct {
-    ContentType string 
-    Profile *shared.Profile 
-    StatusCode int64 
-    
+	ContentType string
+	Profile     *shared.Profile
+	StatusCode  int64
 }
-

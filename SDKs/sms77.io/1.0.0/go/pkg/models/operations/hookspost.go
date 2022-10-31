@@ -1,61 +1,48 @@
 package operations
 
-
-
-
 type HooksPostActionEnum string
 
 const (
-    HooksPostActionEnumSubscribe HooksPostActionEnum = "subscribe"
-HooksPostActionEnumUnsubscribe HooksPostActionEnum = "unsubscribe"
+	HooksPostActionEnumSubscribe   HooksPostActionEnum = "subscribe"
+	HooksPostActionEnumUnsubscribe HooksPostActionEnum = "unsubscribe"
 )
-
-
 
 type HooksPostEventTypeEnum string
 
 const (
-    HooksPostEventTypeEnumAll HooksPostEventTypeEnum = "all"
-HooksPostEventTypeEnumSmsMo HooksPostEventTypeEnum = "sms_mo"
-HooksPostEventTypeEnumDlr HooksPostEventTypeEnum = "dlr"
-HooksPostEventTypeEnumVoiceStatus HooksPostEventTypeEnum = "voice_status"
+	HooksPostEventTypeEnumAll         HooksPostEventTypeEnum = "all"
+	HooksPostEventTypeEnumSmsMo       HooksPostEventTypeEnum = "sms_mo"
+	HooksPostEventTypeEnumDlr         HooksPostEventTypeEnum = "dlr"
+	HooksPostEventTypeEnumVoiceStatus HooksPostEventTypeEnum = "voice_status"
 )
-
-
 
 type HooksPostRequestMethodEnum string
 
 const (
-    HooksPostRequestMethodEnumPost HooksPostRequestMethodEnum = "POST"
-HooksPostRequestMethodEnumJSON HooksPostRequestMethodEnum = "JSON"
-HooksPostRequestMethodEnumGet HooksPostRequestMethodEnum = "GET"
+	HooksPostRequestMethodEnumPost HooksPostRequestMethodEnum = "POST"
+	HooksPostRequestMethodEnumJSON HooksPostRequestMethodEnum = "JSON"
+	HooksPostRequestMethodEnumGet  HooksPostRequestMethodEnum = "GET"
 )
 
-
 type HooksPostQueryParams struct {
-    Action HooksPostActionEnum `queryParam:"style=form,explode=true,name=action"`
-    EventType *HooksPostEventTypeEnum `queryParam:"style=form,explode=true,name=event_type"`
-    ID *int64 `queryParam:"style=form,explode=true,name=id"`
-    RequestMethod *HooksPostRequestMethodEnum `queryParam:"style=form,explode=true,name=request_method"`
-    TargetURL *string `queryParam:"style=form,explode=true,name=target_url"`
-    
+	Action        HooksPostActionEnum         `queryParam:"style=form,explode=true,name=action"`
+	EventType     *HooksPostEventTypeEnum     `queryParam:"style=form,explode=true,name=event_type"`
+	ID            *int64                      `queryParam:"style=form,explode=true,name=id"`
+	RequestMethod *HooksPostRequestMethodEnum `queryParam:"style=form,explode=true,name=request_method"`
+	TargetURL     *string                     `queryParam:"style=form,explode=true,name=target_url"`
 }
 
 type HooksPostRequest struct {
-    QueryParams HooksPostQueryParams 
-    
+	QueryParams HooksPostQueryParams
 }
 
 type HooksPost200ApplicationJSON struct {
-    ID *int64 `json:"id,omitempty"`
-    Success *bool `json:"success,omitempty"`
-    
+	ID      *int64 `json:"id,omitempty"`
+	Success *bool  `json:"success,omitempty"`
 }
 
 type HooksPostResponse struct {
-    ContentType string 
-    HooksPost200ApplicationJSONObject *HooksPost200ApplicationJSON 
-    StatusCode int64 
-    
+	ContentType                       string
+	HooksPost200ApplicationJSONObject *HooksPost200ApplicationJSON
+	StatusCode                        int64
 }
-

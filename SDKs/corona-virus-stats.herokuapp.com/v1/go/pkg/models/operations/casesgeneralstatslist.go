@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CasesGeneralStatsListResponse struct {
-    ContentType string 
-    GeneralStats []shared.GeneralStats 
-    StatusCode int64 
-    
+	ContentType  string
+	GeneralStats []shared.GeneralStats
+	StatusCode   int64
 }
-

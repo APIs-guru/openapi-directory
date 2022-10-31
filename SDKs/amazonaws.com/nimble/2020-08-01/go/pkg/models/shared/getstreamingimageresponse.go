@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetStreamingImageResponse struct {
-    StreamingImage *StreamingImage `json:"streamingImage,omitempty"`
-    
+	StreamingImage *StreamingImage `json:"streamingImage,omitempty"`
 }
-

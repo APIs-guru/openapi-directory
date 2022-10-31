@@ -1,11 +1,7 @@
 package shared
 
-
-
 type CreateAliasRequest struct {
-    Alias string `json:"Alias"`
-    EntityID string `json:"EntityId"`
-    OrganizationID string `json:"OrganizationId"`
-    
+	Alias          string `json:"Alias"`
+	EntityID       string `json:"EntityId"`
+	OrganizationID string `json:"OrganizationId"`
 }
-

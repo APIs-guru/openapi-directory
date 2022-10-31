@@ -1,20 +1,14 @@
 package operations
 
-
-
 type DcimPowerFeedsDeletePathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type DcimPowerFeedsDeleteRequest struct {
-    PathParams DcimPowerFeedsDeletePathParams 
-    
+	PathParams DcimPowerFeedsDeletePathParams
 }
 
 type DcimPowerFeedsDeleteResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,53 +1,42 @@
 package operations
 
-
-
-
 type GetPutIdentityPolicyActionEnum string
 
 const (
-    GetPutIdentityPolicyActionEnumPutIdentityPolicy GetPutIdentityPolicyActionEnum = "PutIdentityPolicy"
+	GetPutIdentityPolicyActionEnumPutIdentityPolicy GetPutIdentityPolicyActionEnum = "PutIdentityPolicy"
 )
-
-
 
 type GetPutIdentityPolicyVersionEnum string
 
 const (
-    GetPutIdentityPolicyVersionEnumTwoThousandAndTen1201 GetPutIdentityPolicyVersionEnum = "2010-12-01"
+	GetPutIdentityPolicyVersionEnumTwoThousandAndTen1201 GetPutIdentityPolicyVersionEnum = "2010-12-01"
 )
 
-
 type GetPutIdentityPolicyQueryParams struct {
-    Action GetPutIdentityPolicyActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Identity string `queryParam:"style=form,explode=true,name=Identity"`
-    Policy string `queryParam:"style=form,explode=true,name=Policy"`
-    PolicyName string `queryParam:"style=form,explode=true,name=PolicyName"`
-    Version GetPutIdentityPolicyVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action     GetPutIdentityPolicyActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Identity   string                          `queryParam:"style=form,explode=true,name=Identity"`
+	Policy     string                          `queryParam:"style=form,explode=true,name=Policy"`
+	PolicyName string                          `queryParam:"style=form,explode=true,name=PolicyName"`
+	Version    GetPutIdentityPolicyVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type GetPutIdentityPolicyHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetPutIdentityPolicyRequest struct {
-    QueryParams GetPutIdentityPolicyQueryParams 
-    Headers GetPutIdentityPolicyHeaders 
-    
+	QueryParams GetPutIdentityPolicyQueryParams
+	Headers     GetPutIdentityPolicyHeaders
 }
 
 type GetPutIdentityPolicyResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

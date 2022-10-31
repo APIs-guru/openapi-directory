@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SitesURLInfo struct {
-    Urls []string `json:"urls,omitempty"`
-    
+	Urls []string `json:"urls,omitempty"`
 }
-

@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type MigrationsGetStatusForAuthenticatedUserPathParams struct {
-    MigrationID int64 `pathParam:"style=simple,explode=false,name=migration_id"`
-    
+	MigrationID int64 `pathParam:"style=simple,explode=false,name=migration_id"`
 }
 
 type MigrationsGetStatusForAuthenticatedUserQueryParams struct {
-    Exclude []string `queryParam:"style=form,explode=true,name=exclude"`
-    
+	Exclude []string `queryParam:"style=form,explode=true,name=exclude"`
 }
 
 type MigrationsGetStatusForAuthenticatedUserRequest struct {
-    PathParams MigrationsGetStatusForAuthenticatedUserPathParams 
-    QueryParams MigrationsGetStatusForAuthenticatedUserQueryParams 
-    
+	PathParams  MigrationsGetStatusForAuthenticatedUserPathParams
+	QueryParams MigrationsGetStatusForAuthenticatedUserQueryParams
 }
 
 type MigrationsGetStatusForAuthenticatedUserResponse struct {
-    ContentType string 
-    StatusCode int64 
-    BasicError *shared.BasicError 
-    Migration *shared.Migration 
-    
+	ContentType string
+	StatusCode  int64
+	BasicError  *shared.BasicError
+	Migration   *shared.Migration
 }
-

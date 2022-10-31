@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EpisodeRestrictionObject struct {
-    Reason *string `json:"reason,omitempty"`
-    
+	Reason *string `json:"reason,omitempty"`
 }
-

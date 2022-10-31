@@ -1,27 +1,20 @@
 package operations
 
-
-
 type DeleteImagesIDPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type DeleteImagesIDHeaders struct {
-    XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
-    XAuthToken string `header:"style=simple,explode=false,name=X-Auth-Token"`
-    
+	XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
+	XAuthToken     string `header:"style=simple,explode=false,name=X-Auth-Token"`
 }
 
 type DeleteImagesIDRequest struct {
-    PathParams DeleteImagesIDPathParams 
-    Headers DeleteImagesIDHeaders 
-    
+	PathParams DeleteImagesIDPathParams
+	Headers    DeleteImagesIDHeaders
 }
 
 type DeleteImagesIDResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,20 +1,14 @@
 package operations
 
-
-
 type LogsEnablePathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type LogsEnableRequest struct {
-    PathParams LogsEnablePathParams 
-    
+	PathParams LogsEnablePathParams
 }
 
 type LogsEnableResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

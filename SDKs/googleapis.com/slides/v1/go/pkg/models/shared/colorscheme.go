@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ColorScheme struct {
-    Colors []ThemeColorPair `json:"colors,omitempty"`
-    
+	Colors []ThemeColorPair `json:"colors,omitempty"`
 }
-

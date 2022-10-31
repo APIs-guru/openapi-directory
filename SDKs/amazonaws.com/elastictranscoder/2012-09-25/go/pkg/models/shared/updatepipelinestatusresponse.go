@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdatePipelineStatusResponse struct {
-    Pipeline *Pipeline `json:"Pipeline,omitempty"`
-    
+	Pipeline *Pipeline `json:"Pipeline,omitempty"`
 }
-

@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ActionsListRunnerApplicationsForOrgPathParams struct {
-    Org string `pathParam:"style=simple,explode=false,name=org"`
-    
+	Org string `pathParam:"style=simple,explode=false,name=org"`
 }
 
 type ActionsListRunnerApplicationsForOrgRequest struct {
-    PathParams ActionsListRunnerApplicationsForOrgPathParams 
-    
+	PathParams ActionsListRunnerApplicationsForOrgPathParams
 }
 
 type ActionsListRunnerApplicationsForOrgResponse struct {
-    ContentType string 
-    StatusCode int64 
-    RunnerApplications []shared.RunnerApplication 
-    
+	ContentType        string
+	StatusCode         int64
+	RunnerApplications []shared.RunnerApplication
 }
-

@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GamesMoviesReadPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GamesMoviesReadRequest struct {
-    PathParams GamesMoviesReadPathParams 
-    
+	PathParams GamesMoviesReadPathParams
 }
 
 type GamesMoviesReadResponse struct {
-    ContentType string 
-    Movie *shared.Movie 
-    StatusCode int64 
-    
+	ContentType string
+	Movie       *shared.Movie
+	StatusCode  int64
 }
-

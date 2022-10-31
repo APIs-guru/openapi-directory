@@ -1,9 +1,5 @@
 package shared
 
-
-
 type QueryParameterMatch struct {
-    Exact *string `json:"exact,omitempty"`
-    
+	Exact *string `json:"exact,omitempty"`
 }
-

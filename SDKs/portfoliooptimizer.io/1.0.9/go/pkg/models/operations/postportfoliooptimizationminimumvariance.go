@@ -1,40 +1,32 @@
 package operations
 
-
-
 type PostPortfolioOptimizationMinimumVarianceRequestBodyConstraints struct {
-    AssetsGroups [][]int64 `json:"assetsGroups,omitempty"`
-    AssetsGroupsMatrix [][]float64 `json:"assetsGroupsMatrix,omitempty"`
-    MaximumAssetsGroupsWeights []float64 `json:"maximumAssetsGroupsWeights,omitempty"`
-    MaximumAssetsWeights []float64 `json:"maximumAssetsWeights,omitempty"`
-    MaximumPortfolioExposure *float64 `json:"maximumPortfolioExposure,omitempty"`
-    MinimumAssetsWeights []float64 `json:"minimumAssetsWeights,omitempty"`
-    MinimumPortfolioExposure *float64 `json:"minimumPortfolioExposure,omitempty"`
-    
+	AssetsGroups               [][]int64   `json:"assetsGroups,omitempty"`
+	AssetsGroupsMatrix         [][]float64 `json:"assetsGroupsMatrix,omitempty"`
+	MaximumAssetsGroupsWeights []float64   `json:"maximumAssetsGroupsWeights,omitempty"`
+	MaximumAssetsWeights       []float64   `json:"maximumAssetsWeights,omitempty"`
+	MaximumPortfolioExposure   *float64    `json:"maximumPortfolioExposure,omitempty"`
+	MinimumAssetsWeights       []float64   `json:"minimumAssetsWeights,omitempty"`
+	MinimumPortfolioExposure   *float64    `json:"minimumPortfolioExposure,omitempty"`
 }
 
 type PostPortfolioOptimizationMinimumVarianceRequestBody struct {
-    Assets int64 `json:"assets"`
-    AssetsCovarianceMatrix [][]float64 `json:"assetsCovarianceMatrix"`
-    AssetsReturns []float64 `json:"assetsReturns,omitempty"`
-    Constraints *PostPortfolioOptimizationMinimumVarianceRequestBodyConstraints `json:"constraints,omitempty"`
-    
+	Assets                 int64                                                           `json:"assets"`
+	AssetsCovarianceMatrix [][]float64                                                     `json:"assetsCovarianceMatrix"`
+	AssetsReturns          []float64                                                       `json:"assetsReturns,omitempty"`
+	Constraints            *PostPortfolioOptimizationMinimumVarianceRequestBodyConstraints `json:"constraints,omitempty"`
 }
 
 type PostPortfolioOptimizationMinimumVarianceRequest struct {
-    Request PostPortfolioOptimizationMinimumVarianceRequestBody `request:"mediaType=application/json"`
-    
+	Request PostPortfolioOptimizationMinimumVarianceRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioOptimizationMinimumVariance200ApplicationJSON struct {
-    AssetsWeights []float64 `json:"assetsWeights"`
-    
+	AssetsWeights []float64 `json:"assetsWeights"`
 }
 
 type PostPortfolioOptimizationMinimumVarianceResponse struct {
-    ContentType string 
-    PostPortfolioOptimizationMinimumVariance200ApplicationJSONObject *PostPortfolioOptimizationMinimumVariance200ApplicationJSON 
-    StatusCode int64 
-    
+	ContentType                                                      string
+	PostPortfolioOptimizationMinimumVariance200ApplicationJSONObject *PostPortfolioOptimizationMinimumVariance200ApplicationJSON
+	StatusCode                                                       int64
 }
-

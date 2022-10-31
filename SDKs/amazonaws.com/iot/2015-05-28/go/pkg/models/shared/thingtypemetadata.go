@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ThingTypeMetadata struct {
-    CreationDate *time.Time `json:"creationDate,omitempty"`
-    Deprecated *bool `json:"deprecated,omitempty"`
-    DeprecationDate *time.Time `json:"deprecationDate,omitempty"`
-    
+	CreationDate    *time.Time `json:"creationDate,omitempty"`
+	Deprecated      *bool      `json:"deprecated,omitempty"`
+	DeprecationDate *time.Time `json:"deprecationDate,omitempty"`
 }
-

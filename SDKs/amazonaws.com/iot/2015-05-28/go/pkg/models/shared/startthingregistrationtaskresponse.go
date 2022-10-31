@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartThingRegistrationTaskResponse struct {
-    TaskID *string `json:"taskId,omitempty"`
-    
+	TaskID *string `json:"taskId,omitempty"`
 }
-

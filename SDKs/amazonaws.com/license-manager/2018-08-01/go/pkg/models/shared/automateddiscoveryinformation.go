@@ -1,10 +1,9 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type AutomatedDiscoveryInformation struct {
-    LastRunTime *time.Time `json:"LastRunTime,omitempty"`
-    
+	LastRunTime *time.Time `json:"LastRunTime,omitempty"`
 }
-

@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type ReplicationConfigurationDefaultLargeStagingDiskTypeEnum string
 
 const (
-    ReplicationConfigurationDefaultLargeStagingDiskTypeEnumGp2 ReplicationConfigurationDefaultLargeStagingDiskTypeEnum = "GP2"
-ReplicationConfigurationDefaultLargeStagingDiskTypeEnumSt1 ReplicationConfigurationDefaultLargeStagingDiskTypeEnum = "ST1"
+	ReplicationConfigurationDefaultLargeStagingDiskTypeEnumGp2 ReplicationConfigurationDefaultLargeStagingDiskTypeEnum = "GP2"
+	ReplicationConfigurationDefaultLargeStagingDiskTypeEnumSt1 ReplicationConfigurationDefaultLargeStagingDiskTypeEnum = "ST1"
 )
-
-

@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ListFailedIPNsHeaders struct {
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    ContentType string `header:"style=simple,explode=false,name=Content-Type"`
-    
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
+	ContentType   string `header:"style=simple,explode=false,name=Content-Type"`
 }
 
 type ListFailedIPNsRequest struct {
-    Headers ListFailedIPNsHeaders 
-    
+	Headers ListFailedIPNsHeaders
 }
 
 type ListFailedIPNsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    ListFailedIPNs *shared.ListFailedIPNs 
-    
+	ContentType    string
+	StatusCode     int64
+	ListFailedIPNs *shared.ListFailedIPNs
 }
-

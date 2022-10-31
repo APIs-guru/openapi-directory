@@ -1,21 +1,15 @@
 package operations
 
-
-
 type UsersReadPathParams struct {
-    UserID string `pathParam:"style=simple,explode=false,name=user_id"`
-    
+	UserID string `pathParam:"style=simple,explode=false,name=user_id"`
 }
 
 type UsersReadRequest struct {
-    PathParams UsersReadPathParams 
-    
+	PathParams UsersReadPathParams
 }
 
 type UsersReadResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

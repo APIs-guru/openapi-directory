@@ -1,20 +1,14 @@
 package operations
 
-
-
 type SubUserDeletePathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type SubUserDeleteRequest struct {
-    PathParams SubUserDeletePathParams 
-    
+	PathParams SubUserDeletePathParams
 }
 
 type SubUserDeleteResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

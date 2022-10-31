@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CombinedAudienceTargetingSetting struct {
-    CombinedAudienceID *string `json:"combinedAudienceId,omitempty"`
-    
+	CombinedAudienceID *string `json:"combinedAudienceId,omitempty"`
 }
-

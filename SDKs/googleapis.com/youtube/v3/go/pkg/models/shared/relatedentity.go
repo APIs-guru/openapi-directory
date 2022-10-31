@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RelatedEntity struct {
-    Entity *Entity `json:"entity,omitempty"`
-    
+	Entity *Entity `json:"entity,omitempty"`
 }
-

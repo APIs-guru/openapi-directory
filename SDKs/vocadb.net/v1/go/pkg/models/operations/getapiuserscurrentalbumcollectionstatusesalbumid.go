@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDPathParams struct {
-    AlbumID int32 `pathParam:"style=simple,explode=false,name=albumId"`
-    
+	AlbumID int32 `pathParam:"style=simple,explode=false,name=albumId"`
 }
 
 type GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDRequest struct {
-    PathParams GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDPathParams 
-    
+	PathParams GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDPathParams
 }
 
 type GetAPIUsersCurrentAlbumCollectionStatusesAlbumIDResponse struct {
-    AlbumForUserForAPIContract *shared.AlbumForUserForAPIContract 
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	AlbumForUserForAPIContract *shared.AlbumForUserForAPIContract
+	Body                       []byte
+	ContentType                string
+	StatusCode                 int64
 }
-

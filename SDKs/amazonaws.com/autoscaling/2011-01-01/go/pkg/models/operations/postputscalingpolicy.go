@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostPutScalingPolicyActionEnum string
 
 const (
-    PostPutScalingPolicyActionEnumPutScalingPolicy PostPutScalingPolicyActionEnum = "PutScalingPolicy"
+	PostPutScalingPolicyActionEnumPutScalingPolicy PostPutScalingPolicyActionEnum = "PutScalingPolicy"
 )
-
-
 
 type PostPutScalingPolicyVersionEnum string
 
 const (
-    PostPutScalingPolicyVersionEnumTwoThousandAndEleven0101 PostPutScalingPolicyVersionEnum = "2011-01-01"
+	PostPutScalingPolicyVersionEnumTwoThousandAndEleven0101 PostPutScalingPolicyVersionEnum = "2011-01-01"
 )
 
-
 type PostPutScalingPolicyQueryParams struct {
-    Action PostPutScalingPolicyActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostPutScalingPolicyVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostPutScalingPolicyActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostPutScalingPolicyVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostPutScalingPolicyHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostPutScalingPolicyRequest struct {
-    QueryParams PostPutScalingPolicyQueryParams 
-    Headers PostPutScalingPolicyHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostPutScalingPolicyQueryParams
+	Headers     PostPutScalingPolicyHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostPutScalingPolicyResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

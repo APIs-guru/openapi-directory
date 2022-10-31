@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TerminateWorkspacesRequest struct {
-    TerminateWorkspaceRequests []TerminateRequest `json:"TerminateWorkspaceRequests"`
-    
+	TerminateWorkspaceRequests []TerminateRequest `json:"TerminateWorkspaceRequests"`
 }
-

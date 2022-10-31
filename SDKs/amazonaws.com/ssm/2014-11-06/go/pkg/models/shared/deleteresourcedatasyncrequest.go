@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DeleteResourceDataSyncRequest struct {
-    SyncName string `json:"SyncName"`
-    SyncType *string `json:"SyncType,omitempty"`
-    
+	SyncName string  `json:"SyncName"`
+	SyncType *string `json:"SyncType,omitempty"`
 }
-

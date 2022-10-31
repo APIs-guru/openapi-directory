@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeProblemObservationsResponse struct {
-    RelatedObservations *RelatedObservations `json:"RelatedObservations,omitempty"`
-    
+	RelatedObservations *RelatedObservations `json:"RelatedObservations,omitempty"`
 }
-

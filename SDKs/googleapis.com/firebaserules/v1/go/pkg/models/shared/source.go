@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Source struct {
-    Files []File `json:"files,omitempty"`
-    
+	Files []File `json:"files,omitempty"`
 }
-

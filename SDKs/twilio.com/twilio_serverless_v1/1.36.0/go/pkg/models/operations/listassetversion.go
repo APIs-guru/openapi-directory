@@ -1,56 +1,50 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var ListAssetVersionServers = []string{
 	"https://serverless.twilio.com",
 }
 
 type ListAssetVersionPathParams struct {
-    AssetSid string `pathParam:"style=simple,explode=false,name=AssetSid"`
-    ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
-    
+	AssetSid   string `pathParam:"style=simple,explode=false,name=AssetSid"`
+	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
 type ListAssetVersionQueryParams struct {
-    PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
-    
+	PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
 }
 
 type ListAssetVersionSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type ListAssetVersionRequest struct {
-    ServerURL *string 
-    PathParams ListAssetVersionPathParams 
-    QueryParams ListAssetVersionQueryParams 
-    Security ListAssetVersionSecurity 
-    
+	ServerURL   *string
+	PathParams  ListAssetVersionPathParams
+	QueryParams ListAssetVersionQueryParams
+	Security    ListAssetVersionSecurity
 }
 
 type ListAssetVersionListAssetVersionResponseMeta struct {
-    FirstPageURL *string `json:"first_page_url,omitempty"`
-    Key *string `json:"key,omitempty"`
-    NextPageURL *string `json:"next_page_url,omitempty"`
-    Page *int64 `json:"page,omitempty"`
-    PageSize *int64 `json:"page_size,omitempty"`
-    PreviousPageURL *string `json:"previous_page_url,omitempty"`
-    URL *string `json:"url,omitempty"`
-    
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListAssetVersionListAssetVersionResponse struct {
-    AssetVersions []shared.ServerlessV1ServiceAssetAssetVersion `json:"asset_versions,omitempty"`
-    Meta *ListAssetVersionListAssetVersionResponseMeta `json:"meta,omitempty"`
-    
+	AssetVersions []shared.ServerlessV1ServiceAssetAssetVersion `json:"asset_versions,omitempty"`
+	Meta          *ListAssetVersionListAssetVersionResponseMeta `json:"meta,omitempty"`
 }
 
 type ListAssetVersionResponse struct {
-    ContentType string 
-    ListAssetVersionResponse *ListAssetVersionListAssetVersionResponse 
-    StatusCode int64 
-    
+	ContentType              string
+	ListAssetVersionResponse *ListAssetVersionListAssetVersionResponse
+	StatusCode               int64
 }
-

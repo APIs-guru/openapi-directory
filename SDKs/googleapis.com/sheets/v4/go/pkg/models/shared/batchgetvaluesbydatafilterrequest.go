@@ -1,41 +1,31 @@
 package shared
 
-
-
-
 type BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnum string
 
 const (
-    BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnumSerialNumber BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnum = "SERIAL_NUMBER"
-BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnumFormattedString BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnum = "FORMATTED_STRING"
+	BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnumSerialNumber    BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnum = "SERIAL_NUMBER"
+	BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnumFormattedString BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnum = "FORMATTED_STRING"
 )
-
-
 
 type BatchGetValuesByDataFilterRequestMajorDimensionEnum string
 
 const (
-    BatchGetValuesByDataFilterRequestMajorDimensionEnumDimensionUnspecified BatchGetValuesByDataFilterRequestMajorDimensionEnum = "DIMENSION_UNSPECIFIED"
-BatchGetValuesByDataFilterRequestMajorDimensionEnumRows BatchGetValuesByDataFilterRequestMajorDimensionEnum = "ROWS"
-BatchGetValuesByDataFilterRequestMajorDimensionEnumColumns BatchGetValuesByDataFilterRequestMajorDimensionEnum = "COLUMNS"
+	BatchGetValuesByDataFilterRequestMajorDimensionEnumDimensionUnspecified BatchGetValuesByDataFilterRequestMajorDimensionEnum = "DIMENSION_UNSPECIFIED"
+	BatchGetValuesByDataFilterRequestMajorDimensionEnumRows                 BatchGetValuesByDataFilterRequestMajorDimensionEnum = "ROWS"
+	BatchGetValuesByDataFilterRequestMajorDimensionEnumColumns              BatchGetValuesByDataFilterRequestMajorDimensionEnum = "COLUMNS"
 )
-
-
 
 type BatchGetValuesByDataFilterRequestValueRenderOptionEnum string
 
 const (
-    BatchGetValuesByDataFilterRequestValueRenderOptionEnumFormattedValue BatchGetValuesByDataFilterRequestValueRenderOptionEnum = "FORMATTED_VALUE"
-BatchGetValuesByDataFilterRequestValueRenderOptionEnumUnformattedValue BatchGetValuesByDataFilterRequestValueRenderOptionEnum = "UNFORMATTED_VALUE"
-BatchGetValuesByDataFilterRequestValueRenderOptionEnumFormula BatchGetValuesByDataFilterRequestValueRenderOptionEnum = "FORMULA"
+	BatchGetValuesByDataFilterRequestValueRenderOptionEnumFormattedValue   BatchGetValuesByDataFilterRequestValueRenderOptionEnum = "FORMATTED_VALUE"
+	BatchGetValuesByDataFilterRequestValueRenderOptionEnumUnformattedValue BatchGetValuesByDataFilterRequestValueRenderOptionEnum = "UNFORMATTED_VALUE"
+	BatchGetValuesByDataFilterRequestValueRenderOptionEnumFormula          BatchGetValuesByDataFilterRequestValueRenderOptionEnum = "FORMULA"
 )
 
-
 type BatchGetValuesByDataFilterRequest struct {
-    DataFilters []DataFilter `json:"dataFilters,omitempty"`
-    DateTimeRenderOption *BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnum `json:"dateTimeRenderOption,omitempty"`
-    MajorDimension *BatchGetValuesByDataFilterRequestMajorDimensionEnum `json:"majorDimension,omitempty"`
-    ValueRenderOption *BatchGetValuesByDataFilterRequestValueRenderOptionEnum `json:"valueRenderOption,omitempty"`
-    
+	DataFilters          []DataFilter                                               `json:"dataFilters,omitempty"`
+	DateTimeRenderOption *BatchGetValuesByDataFilterRequestDateTimeRenderOptionEnum `json:"dateTimeRenderOption,omitempty"`
+	MajorDimension       *BatchGetValuesByDataFilterRequestMajorDimensionEnum       `json:"majorDimension,omitempty"`
+	ValueRenderOption    *BatchGetValuesByDataFilterRequestValueRenderOptionEnum    `json:"valueRenderOption,omitempty"`
 }
-

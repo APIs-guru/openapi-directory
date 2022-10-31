@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type ImageFileTypeEnum string
 
 const (
-    ImageFileTypeEnumPng ImageFileTypeEnum = "PNG"
+	ImageFileTypeEnumPng ImageFileTypeEnum = "PNG"
 )
-
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BulkDeleteAdResponse struct {
-    Responses []DeleteAdResponse `json:"responses,omitempty"`
-    
+	Responses []DeleteAdResponse `json:"responses,omitempty"`
 }
-

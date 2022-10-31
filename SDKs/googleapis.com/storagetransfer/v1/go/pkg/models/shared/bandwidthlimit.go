@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BandwidthLimit struct {
-    LimitMbps *string `json:"limitMbps,omitempty"`
-    
+	LimitMbps *string `json:"limitMbps,omitempty"`
 }
-

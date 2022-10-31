@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CloudFormationCollectionFilter struct {
-    StackNames []string `json:"StackNames,omitempty"`
-    
+	StackNames []string `json:"StackNames,omitempty"`
 }
-

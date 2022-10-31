@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ConfigureAgentResponse struct {
-    Configuration AgentConfiguration `json:"configuration"`
-    
+	Configuration AgentConfiguration `json:"configuration"`
 }
-

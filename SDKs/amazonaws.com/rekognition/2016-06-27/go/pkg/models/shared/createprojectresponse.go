@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateProjectResponse struct {
-    ProjectArn *string `json:"ProjectArn,omitempty"`
-    
+	ProjectArn *string `json:"ProjectArn,omitempty"`
 }
-

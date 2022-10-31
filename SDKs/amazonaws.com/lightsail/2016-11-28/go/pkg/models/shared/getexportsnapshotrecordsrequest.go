@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetExportSnapshotRecordsRequest struct {
-    PageToken *string `json:"pageToken,omitempty"`
-    
+	PageToken *string `json:"pageToken,omitempty"`
 }
-

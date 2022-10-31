@@ -1,14 +1,10 @@
 package shared
 
-
-
 type LambdaFunctionScheduledEventAttributes struct {
-    Control *string `json:"control,omitempty"`
-    DecisionTaskCompletedEventID int64 `json:"decisionTaskCompletedEventId"`
-    ID string `json:"id"`
-    Input *string `json:"input,omitempty"`
-    Name string `json:"name"`
-    StartToCloseTimeout *string `json:"startToCloseTimeout,omitempty"`
-    
+	Control                      *string `json:"control,omitempty"`
+	DecisionTaskCompletedEventID int64   `json:"decisionTaskCompletedEventId"`
+	ID                           string  `json:"id"`
+	Input                        *string `json:"input,omitempty"`
+	Name                         string  `json:"name"`
+	StartToCloseTimeout          *string `json:"startToCloseTimeout,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateInAppTemplateResponse struct {
-    TemplateCreateMessageBody TemplateCreateMessageBody `json:"TemplateCreateMessageBody"`
-    
+	TemplateCreateMessageBody TemplateCreateMessageBody `json:"TemplateCreateMessageBody"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetResolverRuleAssociationRequest struct {
-    ResolverRuleAssociationID string `json:"ResolverRuleAssociationId"`
-    
+	ResolverRuleAssociationID string `json:"ResolverRuleAssociationId"`
 }
-

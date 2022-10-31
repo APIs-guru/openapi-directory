@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CancelReplayRequest struct {
-    ReplayName string `json:"ReplayName"`
-    
+	ReplayName string `json:"ReplayName"`
 }
-

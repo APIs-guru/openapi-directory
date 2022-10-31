@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SchemeDeveloperHapikey struct {
-    APIKey string `security:"name=hapikey"`
-    
+	APIKey string `security:"name=hapikey"`
 }
-

@@ -1,32 +1,28 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PullsListRequestedReviewersPathParams struct {
-    Owner string `pathParam:"style=simple,explode=false,name=owner"`
-    PullNumber int64 `pathParam:"style=simple,explode=false,name=pull_number"`
-    Repo string `pathParam:"style=simple,explode=false,name=repo"`
-    
+	Owner      string `pathParam:"style=simple,explode=false,name=owner"`
+	PullNumber int64  `pathParam:"style=simple,explode=false,name=pull_number"`
+	Repo       string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
 type PullsListRequestedReviewersQueryParams struct {
-    Page *int64 `queryParam:"style=form,explode=true,name=page"`
-    PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
-    
+	Page    *int64 `queryParam:"style=form,explode=true,name=page"`
+	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
 type PullsListRequestedReviewersRequest struct {
-    PathParams PullsListRequestedReviewersPathParams 
-    QueryParams PullsListRequestedReviewersQueryParams 
-    
+	PathParams  PullsListRequestedReviewersPathParams
+	QueryParams PullsListRequestedReviewersQueryParams
 }
 
 type PullsListRequestedReviewersResponse struct {
-    ContentType string 
-    Headers map[string][]string 
-    StatusCode int64 
-    PullRequestReviewRequest *shared.PullRequestReviewRequest 
-    
+	ContentType              string
+	Headers                  map[string][]string
+	StatusCode               int64
+	PullRequestReviewRequest *shared.PullRequestReviewRequest
 }
-

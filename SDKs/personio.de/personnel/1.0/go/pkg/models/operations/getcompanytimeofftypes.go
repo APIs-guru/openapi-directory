@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetCompanyTimeOffTypesQueryParams struct {
-    Limit *int64 `queryParam:"style=form,explode=true,name=limit"`
-    Offset *int64 `queryParam:"style=form,explode=true,name=offset"`
-    
+	Limit  *int64 `queryParam:"style=form,explode=true,name=limit"`
+	Offset *int64 `queryParam:"style=form,explode=true,name=offset"`
 }
 
 type GetCompanyTimeOffTypesRequest struct {
-    QueryParams GetCompanyTimeOffTypesQueryParams 
-    
+	QueryParams GetCompanyTimeOffTypesQueryParams
 }
 
 type GetCompanyTimeOffTypes200ApplicationJSON struct {
-    Data []shared.TimeOffTypeResource `json:"data,omitempty"`
-    Success *bool `json:"success,omitempty"`
-    
+	Data    []shared.TimeOffTypeResource `json:"data,omitempty"`
+	Success *bool                        `json:"success,omitempty"`
 }
 
 type GetCompanyTimeOffTypesResponse struct {
-    ContentType string 
-    GetCompanyTimeOffTypes200ApplicationJSONObject *GetCompanyTimeOffTypes200ApplicationJSON 
-    StatusCode int64 
-    
+	ContentType                                    string
+	GetCompanyTimeOffTypes200ApplicationJSONObject *GetCompanyTimeOffTypes200ApplicationJSON
+	StatusCode                                     int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetAccountSettingsResult struct {
-    AccountSettings *AccountSettings `json:"accountSettings,omitempty"`
-    
+	AccountSettings *AccountSettings `json:"accountSettings,omitempty"`
 }
-

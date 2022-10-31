@@ -1,14 +1,13 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type SolutionVersionSummary struct {
-    CreationDateTime *time.Time `json:"creationDateTime,omitempty"`
-    FailureReason *string `json:"failureReason,omitempty"`
-    LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime,omitempty"`
-    SolutionVersionArn *string `json:"solutionVersionArn,omitempty"`
-    Status *string `json:"status,omitempty"`
-    
+	CreationDateTime    *time.Time `json:"creationDateTime,omitempty"`
+	FailureReason       *string    `json:"failureReason,omitempty"`
+	LastUpdatedDateTime *time.Time `json:"lastUpdatedDateTime,omitempty"`
+	SolutionVersionArn  *string    `json:"solutionVersionArn,omitempty"`
+	Status              *string    `json:"status,omitempty"`
 }
-

@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListClientUsersResponse struct {
-    ClientUsers []ClientUser `json:"clientUsers,omitempty"`
-    NextPageToken *string `json:"nextPageToken,omitempty"`
-    
+	ClientUsers   []ClientUser `json:"clientUsers,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
 }
-

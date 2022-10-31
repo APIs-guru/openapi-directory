@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type AggregationTypeEnum string
 
 const (
-    AggregationTypeEnumNone AggregationTypeEnum = "None"
-AggregationTypeEnumSingleFile AggregationTypeEnum = "SingleFile"
+	AggregationTypeEnumNone       AggregationTypeEnum = "None"
+	AggregationTypeEnumSingleFile AggregationTypeEnum = "SingleFile"
 )
-
-

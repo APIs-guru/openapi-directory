@@ -1,13 +1,12 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetUtilPingResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    PingResponse *shared.PingResponse 
-    StatusCode int64 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	PingResponse  *shared.PingResponse
+	StatusCode    int64
 }
-

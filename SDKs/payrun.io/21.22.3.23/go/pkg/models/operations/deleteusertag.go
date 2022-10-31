@@ -1,30 +1,26 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeleteUserTagPathParams struct {
-    TagID string `pathParam:"style=simple,explode=false,name=TagId"`
-    UserID string `pathParam:"style=simple,explode=false,name=UserId"`
-    
+	TagID  string `pathParam:"style=simple,explode=false,name=TagId"`
+	UserID string `pathParam:"style=simple,explode=false,name=UserId"`
 }
 
 type DeleteUserTagHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type DeleteUserTagRequest struct {
-    PathParams DeleteUserTagPathParams 
-    Headers DeleteUserTagHeaders 
-    
+	PathParams DeleteUserTagPathParams
+	Headers    DeleteUserTagHeaders
 }
 
 type DeleteUserTagResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    StatusCode int64 
-    
+	ContentType string
+	ErrorModel  *shared.ErrorModel
+	StatusCode  int64
 }
-

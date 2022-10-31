@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type FolderSettingsGetPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type FolderSettingsGetRequest struct {
-    PathParams FolderSettingsGetPathParams 
-    
+	PathParams FolderSettingsGetPathParams
 }
 
 type FolderSettingsGetResponse struct {
-    Body []byte 
-    ContentType string 
-    FolderSettings *shared.FolderSettings 
-    StatusCode int64 
-    
+	Body           []byte
+	ContentType    string
+	FolderSettings *shared.FolderSettings
+	StatusCode     int64
 }
-

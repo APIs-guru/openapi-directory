@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type ExportFilterNameEnum string
 
 const (
-    ExportFilterNameEnumExportResourceType ExportFilterNameEnum = "ExportResourceType"
+	ExportFilterNameEnumExportResourceType ExportFilterNameEnum = "ExportResourceType"
 )
-
-

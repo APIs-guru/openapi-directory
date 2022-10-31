@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetSnowMonkeyConfigSecurity struct {
-    OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
-    
+	OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
 }
 
 type GetSnowMonkeyConfigRequest struct {
-    Security GetSnowMonkeyConfigSecurity 
-    
+	Security GetSnowMonkeyConfigSecurity
 }
 
 type GetSnowMonkeyConfigResponse struct {
-    ContentType string 
-    SnowMonkeyConfig *shared.SnowMonkeyConfig 
-    StatusCode int64 
-    
+	ContentType      string
+	SnowMonkeyConfig *shared.SnowMonkeyConfig
+	StatusCode       int64
 }
-

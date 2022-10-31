@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeSecretRequest struct {
-    SecretID string `json:"SecretId"`
-    
+	SecretID string `json:"SecretId"`
 }
-

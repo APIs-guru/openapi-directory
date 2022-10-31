@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ReportStateAndNotificationResponse struct {
-    RequestID *string `json:"requestId,omitempty"`
-    
+	RequestID *string `json:"requestId,omitempty"`
 }
-

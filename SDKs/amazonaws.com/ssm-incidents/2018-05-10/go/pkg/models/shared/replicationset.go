@@ -1,17 +1,16 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ReplicationSet struct {
-    Arn *string `json:"arn,omitempty"`
-    CreatedBy string `json:"createdBy"`
-    CreatedTime time.Time `json:"createdTime"`
-    DeletionProtected bool `json:"deletionProtected"`
-    LastModifiedBy string `json:"lastModifiedBy"`
-    LastModifiedTime time.Time `json:"lastModifiedTime"`
-    RegionMap map[string]RegionInfo `json:"regionMap"`
-    Status ReplicationSetStatusEnum `json:"status"`
-    
+	Arn               *string                  `json:"arn,omitempty"`
+	CreatedBy         string                   `json:"createdBy"`
+	CreatedTime       time.Time                `json:"createdTime"`
+	DeletionProtected bool                     `json:"deletionProtected"`
+	LastModifiedBy    string                   `json:"lastModifiedBy"`
+	LastModifiedTime  time.Time                `json:"lastModifiedTime"`
+	RegionMap         map[string]RegionInfo    `json:"regionMap"`
+	Status            ReplicationSetStatusEnum `json:"status"`
 }
-

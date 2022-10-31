@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetDomainPathParams struct {
-    DomainID string `pathParam:"style=simple,explode=false,name=domainId"`
-    
+	DomainID string `pathParam:"style=simple,explode=false,name=domainId"`
 }
 
 type GetDomainHeaders struct {
-    TrainingKey string `header:"style=simple,explode=false,name=Training-Key"`
-    
+	TrainingKey string `header:"style=simple,explode=false,name=Training-Key"`
 }
 
 type GetDomainRequest struct {
-    PathParams GetDomainPathParams 
-    Headers GetDomainHeaders 
-    
+	PathParams GetDomainPathParams
+	Headers    GetDomainHeaders
 }
 
 type GetDomainResponse struct {
-    Body []byte 
-    ContentType string 
-    Domain *shared.Domain 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	Domain      *shared.Domain
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeProcessingJobRequest struct {
-    ProcessingJobName string `json:"ProcessingJobName"`
-    
+	ProcessingJobName string `json:"ProcessingJobName"`
 }
-

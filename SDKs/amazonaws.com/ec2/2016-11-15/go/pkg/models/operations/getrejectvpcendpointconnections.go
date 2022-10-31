@@ -1,53 +1,42 @@
 package operations
 
-
-
-
 type GetRejectVpcEndpointConnectionsActionEnum string
 
 const (
-    GetRejectVpcEndpointConnectionsActionEnumRejectVpcEndpointConnections GetRejectVpcEndpointConnectionsActionEnum = "RejectVpcEndpointConnections"
+	GetRejectVpcEndpointConnectionsActionEnumRejectVpcEndpointConnections GetRejectVpcEndpointConnectionsActionEnum = "RejectVpcEndpointConnections"
 )
-
-
 
 type GetRejectVpcEndpointConnectionsVersionEnum string
 
 const (
-    GetRejectVpcEndpointConnectionsVersionEnumTwoThousandAndSixteen1115 GetRejectVpcEndpointConnectionsVersionEnum = "2016-11-15"
+	GetRejectVpcEndpointConnectionsVersionEnumTwoThousandAndSixteen1115 GetRejectVpcEndpointConnectionsVersionEnum = "2016-11-15"
 )
 
-
 type GetRejectVpcEndpointConnectionsQueryParams struct {
-    Action GetRejectVpcEndpointConnectionsActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    DryRun *bool `queryParam:"style=form,explode=true,name=DryRun"`
-    ServiceID string `queryParam:"style=form,explode=true,name=ServiceId"`
-    Version GetRejectVpcEndpointConnectionsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    VpcEndpointID []string `queryParam:"style=form,explode=true,name=VpcEndpointId"`
-    
+	Action        GetRejectVpcEndpointConnectionsActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	DryRun        *bool                                      `queryParam:"style=form,explode=true,name=DryRun"`
+	ServiceID     string                                     `queryParam:"style=form,explode=true,name=ServiceId"`
+	Version       GetRejectVpcEndpointConnectionsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
+	VpcEndpointID []string                                   `queryParam:"style=form,explode=true,name=VpcEndpointId"`
 }
 
 type GetRejectVpcEndpointConnectionsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetRejectVpcEndpointConnectionsRequest struct {
-    QueryParams GetRejectVpcEndpointConnectionsQueryParams 
-    Headers GetRejectVpcEndpointConnectionsHeaders 
-    
+	QueryParams GetRejectVpcEndpointConnectionsQueryParams
+	Headers     GetRejectVpcEndpointConnectionsHeaders
 }
 
 type GetRejectVpcEndpointConnectionsResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ContainerServiceLogEvent struct {
-    CreatedAt *time.Time `json:"createdAt,omitempty"`
-    Message *string `json:"message,omitempty"`
-    
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	Message   *string    `json:"message,omitempty"`
 }
-

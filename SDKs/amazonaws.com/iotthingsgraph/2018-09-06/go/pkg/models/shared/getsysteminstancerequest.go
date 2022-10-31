@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetSystemInstanceRequest struct {
-    ID string `json:"id"`
-    
+	ID string `json:"id"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateDeviceMetadataRequest struct {
-    DeviceMetadata *DeviceMetadata `json:"deviceMetadata,omitempty"`
-    
+	DeviceMetadata *DeviceMetadata `json:"deviceMetadata,omitempty"`
 }
-

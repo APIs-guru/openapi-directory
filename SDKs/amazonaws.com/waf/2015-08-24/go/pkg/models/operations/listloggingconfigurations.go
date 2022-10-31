@@ -1,41 +1,36 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type ListLoggingConfigurationsXAmzTargetEnum string
 
 const (
-    ListLoggingConfigurationsXAmzTargetEnumAwswaf20150824ListLoggingConfigurations ListLoggingConfigurationsXAmzTargetEnum = "AWSWAF_20150824.ListLoggingConfigurations"
+	ListLoggingConfigurationsXAmzTargetEnumAwswaf20150824ListLoggingConfigurations ListLoggingConfigurationsXAmzTargetEnum = "AWSWAF_20150824.ListLoggingConfigurations"
 )
 
-
 type ListLoggingConfigurationsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget ListLoggingConfigurationsXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                                 `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                                 `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                                 `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                                 `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                                 `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                                 `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                                 `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        ListLoggingConfigurationsXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type ListLoggingConfigurationsRequest struct {
-    Headers ListLoggingConfigurationsHeaders 
-    Request shared.ListLoggingConfigurationsRequest `request:"mediaType=application/json"`
-    
+	Headers ListLoggingConfigurationsHeaders
+	Request shared.ListLoggingConfigurationsRequest `request:"mediaType=application/json"`
 }
 
 type ListLoggingConfigurationsResponse struct {
-    ContentType string 
-    ListLoggingConfigurationsResponse *shared.ListLoggingConfigurationsResponse 
-    StatusCode int64 
-    WafInternalErrorException *interface{} 
-    WafInvalidParameterException *interface{} 
-    WafNonexistentItemException *interface{} 
-    
+	ContentType                       string
+	ListLoggingConfigurationsResponse *shared.ListLoggingConfigurationsResponse
+	StatusCode                        int64
+	WafInternalErrorException         *interface{}
+	WafInvalidParameterException      *interface{}
+	WafNonexistentItemException       *interface{}
 }
-

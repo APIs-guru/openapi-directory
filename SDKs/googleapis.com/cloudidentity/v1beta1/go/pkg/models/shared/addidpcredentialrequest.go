@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AddIdpCredentialRequest struct {
-    PemData *string `json:"pemData,omitempty"`
-    
+	PemData *string `json:"pemData,omitempty"`
 }
-

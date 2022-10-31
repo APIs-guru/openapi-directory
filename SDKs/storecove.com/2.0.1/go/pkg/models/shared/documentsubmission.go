@@ -1,15 +1,11 @@
 package shared
 
-
-
 type DocumentSubmission struct {
-    Attachments []Attachment `json:"attachments,omitempty"`
-    CreatePrimaryImage *bool `json:"createPrimaryImage,omitempty"`
-    Document *SendableDocument `json:"document,omitempty"`
-    IdempotencyGUID *string `json:"idempotencyGuid,omitempty"`
-    LegalEntityID *int64 `json:"legalEntityId,omitempty"`
-    ReceiveGUID *string `json:"receiveGuid,omitempty"`
-    Routing *Routing `json:"routing,omitempty"`
-    
+	Attachments        []Attachment      `json:"attachments,omitempty"`
+	CreatePrimaryImage *bool             `json:"createPrimaryImage,omitempty"`
+	Document           *SendableDocument `json:"document,omitempty"`
+	IdempotencyGUID    *string           `json:"idempotencyGuid,omitempty"`
+	LegalEntityID      *int64            `json:"legalEntityId,omitempty"`
+	ReceiveGUID        *string           `json:"receiveGuid,omitempty"`
+	Routing            *Routing          `json:"routing,omitempty"`
 }
-

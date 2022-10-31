@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DcimSitesPartialUpdatePathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type DcimSitesPartialUpdateRequest struct {
-    PathParams DcimSitesPartialUpdatePathParams 
-    Request shared.WritableSite `request:"mediaType=application/json"`
-    
+	PathParams DcimSitesPartialUpdatePathParams
+	Request    shared.WritableSite `request:"mediaType=application/json"`
 }
 
 type DcimSitesPartialUpdateResponse struct {
-    ContentType string 
-    Site *shared.Site 
-    StatusCode int64 
-    
+	ContentType string
+	Site        *shared.Site
+	StatusCode  int64
 }
-

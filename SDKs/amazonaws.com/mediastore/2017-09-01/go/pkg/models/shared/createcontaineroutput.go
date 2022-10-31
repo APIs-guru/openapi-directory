@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateContainerOutput struct {
-    Container Container `json:"Container"`
-    
+	Container Container `json:"Container"`
 }
-

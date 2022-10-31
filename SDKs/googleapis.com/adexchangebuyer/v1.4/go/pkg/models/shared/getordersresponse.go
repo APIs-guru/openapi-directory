@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetOrdersResponse struct {
-    Proposals []Proposal `json:"proposals,omitempty"`
-    
+	Proposals []Proposal `json:"proposals,omitempty"`
 }
-

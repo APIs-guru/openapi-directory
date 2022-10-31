@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateTagOptionOutput struct {
-    TagOptionDetail *TagOptionDetail `json:"TagOptionDetail,omitempty"`
-    
+	TagOptionDetail *TagOptionDetail `json:"TagOptionDetail,omitempty"`
 }
-

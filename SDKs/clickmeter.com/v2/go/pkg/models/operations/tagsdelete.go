@@ -1,21 +1,15 @@
 package operations
 
-
-
 type TagsDeletePathParams struct {
-    TagID int64 `pathParam:"style=simple,explode=false,name=tagId"`
-    
+	TagID int64 `pathParam:"style=simple,explode=false,name=tagId"`
 }
 
 type TagsDeleteRequest struct {
-    PathParams TagsDeletePathParams 
-    
+	PathParams TagsDeletePathParams
 }
 
 type TagsDeleteResponse struct {
-    ContentType string 
-    StatusCode int64 
-    SystemObject map[string]interface{} 
-    
+	ContentType  string
+	StatusCode   int64
+	SystemObject map[string]interface{}
 }
-

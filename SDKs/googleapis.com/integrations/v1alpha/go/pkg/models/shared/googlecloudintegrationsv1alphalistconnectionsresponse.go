@@ -1,10 +1,6 @@
 package shared
 
-
-
 type GoogleCloudIntegrationsV1alphaListConnectionsResponse struct {
-    Connections []GoogleCloudConnectorsV1Connection `json:"connections,omitempty"`
-    NextPageToken *string `json:"nextPageToken,omitempty"`
-    
+	Connections   []GoogleCloudConnectorsV1Connection `json:"connections,omitempty"`
+	NextPageToken *string                             `json:"nextPageToken,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SlackSourceProperties struct {
-    Object string `json:"object"`
-    
+	Object string `json:"object"`
 }
-

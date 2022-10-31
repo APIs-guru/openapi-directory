@@ -1,30 +1,26 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type OrgsConvertMemberToOutsideCollaboratorPathParams struct {
-    Org string `pathParam:"style=simple,explode=false,name=org"`
-    Username string `pathParam:"style=simple,explode=false,name=username"`
-    
+	Org      string `pathParam:"style=simple,explode=false,name=org"`
+	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
 
 type OrgsConvertMemberToOutsideCollaboratorRequest struct {
-    PathParams OrgsConvertMemberToOutsideCollaboratorPathParams 
-    
+	PathParams OrgsConvertMemberToOutsideCollaboratorPathParams
 }
 
 type OrgsConvertMemberToOutsideCollaborator403ApplicationJSON struct {
-    DocumentationURL *string `json:"documentation_url,omitempty"`
-    Message *string `json:"message,omitempty"`
-    
+	DocumentationURL *string `json:"documentation_url,omitempty"`
+	Message          *string `json:"message,omitempty"`
 }
 
 type OrgsConvertMemberToOutsideCollaboratorResponse struct {
-    ContentType string 
-    StatusCode int64 
-    BasicError *shared.BasicError 
-    OrgsConvertMemberToOutsideCollaborator403ApplicationJSONObject *OrgsConvertMemberToOutsideCollaborator403ApplicationJSON 
-    
+	ContentType                                                    string
+	StatusCode                                                     int64
+	BasicError                                                     *shared.BasicError
+	OrgsConvertMemberToOutsideCollaborator403ApplicationJSONObject *OrgsConvertMemberToOutsideCollaborator403ApplicationJSON
 }
-

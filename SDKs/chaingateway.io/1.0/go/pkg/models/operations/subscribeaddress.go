@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type SubscribeAddressHeaders struct {
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type SubscribeAddressRequest struct {
-    Headers SubscribeAddressHeaders 
-    Request shared.SubscribeAddressRequest `request:"mediaType=application/json"`
-    
+	Headers SubscribeAddressHeaders
+	Request shared.SubscribeAddressRequest `request:"mediaType=application/json"`
 }
 
 type SubscribeAddressResponse struct {
-    ContentType string 
-    StatusCode int64 
-    SubscribeAddress *shared.SubscribeAddress 
-    
+	ContentType      string
+	StatusCode       int64
+	SubscribeAddress *shared.SubscribeAddress
 }
-

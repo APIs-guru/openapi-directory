@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteAssetModelResponse struct {
-    AssetModelStatus AssetModelStatus `json:"assetModelStatus"`
-    
+	AssetModelStatus AssetModelStatus `json:"assetModelStatus"`
 }
-

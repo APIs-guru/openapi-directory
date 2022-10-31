@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateInstanceProfileResult struct {
-    InstanceProfile *InstanceProfile `json:"instanceProfile,omitempty"`
-    
+	InstanceProfile *InstanceProfile `json:"instanceProfile,omitempty"`
 }
-

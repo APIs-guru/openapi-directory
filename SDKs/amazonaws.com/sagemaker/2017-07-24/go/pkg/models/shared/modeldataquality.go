@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ModelDataQuality struct {
-    Constraints *MetricsSource `json:"Constraints,omitempty"`
-    Statistics *MetricsSource `json:"Statistics,omitempty"`
-    
+	Constraints *MetricsSource `json:"Constraints,omitempty"`
+	Statistics  *MetricsSource `json:"Statistics,omitempty"`
 }
-

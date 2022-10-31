@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CancelDomainTransferToAnotherAwsAccountRequest struct {
-    DomainName string `json:"DomainName"`
-    
+	DomainName string `json:"DomainName"`
 }
-

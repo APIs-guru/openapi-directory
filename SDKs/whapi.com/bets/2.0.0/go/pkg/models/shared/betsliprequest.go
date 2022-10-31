@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BetSlipRequest struct {
-    Legs []Leg `json:"legs,omitempty"`
-    
+	Legs []Leg `json:"legs,omitempty"`
 }
-

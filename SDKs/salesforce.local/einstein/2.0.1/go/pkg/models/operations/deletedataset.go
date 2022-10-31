@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeleteDatasetPathParams struct {
-    DatasetID string `pathParam:"style=simple,explode=false,name=datasetId"`
-    
+	DatasetID string `pathParam:"style=simple,explode=false,name=datasetId"`
 }
 
 type DeleteDatasetSecurity struct {
-    BearerToken shared.SchemeBearerToken `security:"scheme,type=http,subtype=bearer"`
-    
+	BearerToken shared.SchemeBearerToken `security:"scheme,type=http,subtype=bearer"`
 }
 
 type DeleteDatasetRequest struct {
-    PathParams DeleteDatasetPathParams 
-    Security DeleteDatasetSecurity 
-    
+	PathParams DeleteDatasetPathParams
+	Security   DeleteDatasetSecurity
 }
 
 type DeleteDatasetResponse struct {
-    ContentType string 
-    DeletionResponse *shared.DeletionResponse 
-    StatusCode int64 
-    
+	ContentType      string
+	DeletionResponse *shared.DeletionResponse
+	StatusCode       int64
 }
-

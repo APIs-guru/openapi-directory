@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DataflowEndpointGroupIDResponse struct {
-    DataflowEndpointGroupID *string `json:"dataflowEndpointGroupId,omitempty"`
-    
+	DataflowEndpointGroupID *string `json:"dataflowEndpointGroupId,omitempty"`
 }
-

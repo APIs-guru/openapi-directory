@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostChangeMessageVisibilityActionEnum string
 
 const (
-    PostChangeMessageVisibilityActionEnumChangeMessageVisibility PostChangeMessageVisibilityActionEnum = "ChangeMessageVisibility"
+	PostChangeMessageVisibilityActionEnumChangeMessageVisibility PostChangeMessageVisibilityActionEnum = "ChangeMessageVisibility"
 )
-
-
 
 type PostChangeMessageVisibilityVersionEnum string
 
 const (
-    PostChangeMessageVisibilityVersionEnumTwoThousandAndTwelve1105 PostChangeMessageVisibilityVersionEnum = "2012-11-05"
+	PostChangeMessageVisibilityVersionEnumTwoThousandAndTwelve1105 PostChangeMessageVisibilityVersionEnum = "2012-11-05"
 )
 
-
 type PostChangeMessageVisibilityQueryParams struct {
-    Action PostChangeMessageVisibilityActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostChangeMessageVisibilityVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostChangeMessageVisibilityActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostChangeMessageVisibilityVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostChangeMessageVisibilityHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostChangeMessageVisibilityRequest struct {
-    QueryParams PostChangeMessageVisibilityQueryParams 
-    Headers PostChangeMessageVisibilityHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostChangeMessageVisibilityQueryParams
+	Headers     PostChangeMessageVisibilityHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostChangeMessageVisibilityResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

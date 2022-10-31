@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetNetworkAlertsSettingsPathParams struct {
-    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
-    
+	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
 type GetNetworkAlertsSettingsRequest struct {
-    PathParams GetNetworkAlertsSettingsPathParams 
-    
+	PathParams GetNetworkAlertsSettingsPathParams
 }
 
 type GetNetworkAlertsSettingsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetNetworkAlertsSettings200ApplicationJSONObject map[string]interface{} 
-    
+	ContentType                                      string
+	StatusCode                                       int64
+	GetNetworkAlertsSettings200ApplicationJSONObject map[string]interface{}
 }
-

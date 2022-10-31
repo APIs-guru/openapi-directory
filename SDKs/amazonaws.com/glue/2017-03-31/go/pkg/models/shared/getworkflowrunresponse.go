@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetWorkflowRunResponse struct {
-    Run *WorkflowRun `json:"Run,omitempty"`
-    
+	Run *WorkflowRun `json:"Run,omitempty"`
 }
-

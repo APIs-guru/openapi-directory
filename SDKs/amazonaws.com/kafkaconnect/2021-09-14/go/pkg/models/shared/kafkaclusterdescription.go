@@ -1,9 +1,5 @@
 package shared
 
-
-
 type KafkaClusterDescription struct {
-    ApacheKafkaCluster *ApacheKafkaClusterDescription `json:"apacheKafkaCluster,omitempty"`
-    
+	ApacheKafkaCluster *ApacheKafkaClusterDescription `json:"apacheKafkaCluster,omitempty"`
 }
-

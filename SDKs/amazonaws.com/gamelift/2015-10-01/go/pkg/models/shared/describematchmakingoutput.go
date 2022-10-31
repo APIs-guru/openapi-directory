@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeMatchmakingOutput struct {
-    TicketList []MatchmakingTicket `json:"TicketList,omitempty"`
-    
+	TicketList []MatchmakingTicket `json:"TicketList,omitempty"`
 }
-

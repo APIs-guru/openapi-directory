@@ -1,9 +1,5 @@
 package shared
 
-
-
 type InputArtifact struct {
-    Name string `json:"name"`
-    
+	Name string `json:"name"`
 }
-

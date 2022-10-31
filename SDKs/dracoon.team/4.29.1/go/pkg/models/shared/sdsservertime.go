@@ -1,10 +1,9 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type SdsServerTime struct {
-    Time *time.Time `json:"time,omitempty"`
-    
+	Time *time.Time `json:"time,omitempty"`
 }
-

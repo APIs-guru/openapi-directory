@@ -1,9 +1,5 @@
 package shared
 
-
-
 type MetadataValue struct {
-    Value *string `json:"Value,omitempty"`
-    
+	Value *string `json:"Value,omitempty"`
 }
-

@@ -1,218 +1,176 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type SicerRequestBodyCertificateParameters struct {
-    Name string `json:"_name"`
-    ConsumerID string `json:"consumer_id"`
-    
+	Name       string `json:"_name"`
+	ConsumerID string `json:"consumer_id"`
 }
-
 
 type SicerRequestBodyFormatEnum string
 
 const (
-    SicerRequestBodyFormatEnumPdf SicerRequestBodyFormatEnum = "pdf"
+	SicerRequestBodyFormatEnumPdf SicerRequestBodyFormatEnum = "pdf"
 )
 
-
 type SicerRequestBody struct {
-    CertificateParameters *SicerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
-    ConsentArtifact *interface{} `json:"consentArtifact,omitempty"`
-    Format SicerRequestBodyFormatEnum `json:"format"`
-    TxnID string `json:"txnId"`
-    
+	CertificateParameters *SicerRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
+	Format                SicerRequestBodyFormatEnum             `json:"format"`
+	TxnID                 string                                 `json:"txnId"`
 }
 
 type SicerSecurity struct {
-    APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-    ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKey   shared.SchemeAPIKey   `security:"scheme,type=apiKey,subtype=header"`
+	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type SicerRequest struct {
-    Request *SicerRequestBody `request:"mediaType=application/json"`
-    Security SicerSecurity 
-    
+	Request  *SicerRequestBody `request:"mediaType=application/json"`
+	Security SicerSecurity
 }
-
 
 type Sicer400ApplicationJSONErrorEnum string
 
 const (
-    Sicer400ApplicationJSONErrorEnumMissingParameter Sicer400ApplicationJSONErrorEnum = "missing_parameter"
-Sicer400ApplicationJSONErrorEnumInvalidParameter Sicer400ApplicationJSONErrorEnum = "invalid_parameter"
-Sicer400ApplicationJSONErrorEnumInvalidFormat Sicer400ApplicationJSONErrorEnum = "invalid_format"
-Sicer400ApplicationJSONErrorEnumInvalidTxnid Sicer400ApplicationJSONErrorEnum = "invalid_txnid"
-Sicer400ApplicationJSONErrorEnumInvalidConsentid Sicer400ApplicationJSONErrorEnum = "invalid_consentid"
+	Sicer400ApplicationJSONErrorEnumMissingParameter Sicer400ApplicationJSONErrorEnum = "missing_parameter"
+	Sicer400ApplicationJSONErrorEnumInvalidParameter Sicer400ApplicationJSONErrorEnum = "invalid_parameter"
+	Sicer400ApplicationJSONErrorEnumInvalidFormat    Sicer400ApplicationJSONErrorEnum = "invalid_format"
+	Sicer400ApplicationJSONErrorEnumInvalidTxnid     Sicer400ApplicationJSONErrorEnum = "invalid_txnid"
+	Sicer400ApplicationJSONErrorEnumInvalidConsentid Sicer400ApplicationJSONErrorEnum = "invalid_consentid"
 )
-
-
 
 type Sicer400ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sicer400ApplicationJSONErrorDescriptionEnumPleaseProvideAllMandatoryParameters Sicer400ApplicationJSONErrorDescriptionEnum = "Please provide all mandatory parameters"
-Sicer400ApplicationJSONErrorDescriptionEnumBadRequest Sicer400ApplicationJSONErrorDescriptionEnum = "Bad request"
-Sicer400ApplicationJSONErrorDescriptionEnumTheFormatParameterIsInvalid Sicer400ApplicationJSONErrorDescriptionEnum = "The format parameter is invalid"
-Sicer400ApplicationJSONErrorDescriptionEnumTheTxnIDParameterMustBeInUUIDFormat Sicer400ApplicationJSONErrorDescriptionEnum = "The txnId parameter must be in UUID format"
-Sicer400ApplicationJSONErrorDescriptionEnumTheConsentIDParameterMustBeInUUIDFormat Sicer400ApplicationJSONErrorDescriptionEnum = "The consentId parameter must be in UUID format"
+	Sicer400ApplicationJSONErrorDescriptionEnumPleaseProvideAllMandatoryParameters     Sicer400ApplicationJSONErrorDescriptionEnum = "Please provide all mandatory parameters"
+	Sicer400ApplicationJSONErrorDescriptionEnumBadRequest                              Sicer400ApplicationJSONErrorDescriptionEnum = "Bad request"
+	Sicer400ApplicationJSONErrorDescriptionEnumTheFormatParameterIsInvalid             Sicer400ApplicationJSONErrorDescriptionEnum = "The format parameter is invalid"
+	Sicer400ApplicationJSONErrorDescriptionEnumTheTxnIDParameterMustBeInUUIDFormat     Sicer400ApplicationJSONErrorDescriptionEnum = "The txnId parameter must be in UUID format"
+	Sicer400ApplicationJSONErrorDescriptionEnumTheConsentIDParameterMustBeInUUIDFormat Sicer400ApplicationJSONErrorDescriptionEnum = "The consentId parameter must be in UUID format"
 )
 
-
 type Sicer400ApplicationJSON struct {
-    Error *Sicer400ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sicer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sicer400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
-
 
 type Sicer401ApplicationJSONErrorEnum string
 
 const (
-    Sicer401ApplicationJSONErrorEnumInvalidAuthentication Sicer401ApplicationJSONErrorEnum = "invalid_authentication"
-Sicer401ApplicationJSONErrorEnumInvalidAuthorization Sicer401ApplicationJSONErrorEnum = "invalid_authorization"
+	Sicer401ApplicationJSONErrorEnumInvalidAuthentication Sicer401ApplicationJSONErrorEnum = "invalid_authentication"
+	Sicer401ApplicationJSONErrorEnumInvalidAuthorization  Sicer401ApplicationJSONErrorEnum = "invalid_authorization"
 )
-
-
 
 type Sicer401ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sicer401ApplicationJSONErrorDescriptionEnumAuthenticationFailed Sicer401ApplicationJSONErrorDescriptionEnum = "Authentication failed"
-Sicer401ApplicationJSONErrorDescriptionEnumYouAreNotAuthorizedToUseThisAPI Sicer401ApplicationJSONErrorDescriptionEnum = "You are not authorized to use this API"
+	Sicer401ApplicationJSONErrorDescriptionEnumAuthenticationFailed            Sicer401ApplicationJSONErrorDescriptionEnum = "Authentication failed"
+	Sicer401ApplicationJSONErrorDescriptionEnumYouAreNotAuthorizedToUseThisAPI Sicer401ApplicationJSONErrorDescriptionEnum = "You are not authorized to use this API"
 )
 
-
 type Sicer401ApplicationJSON struct {
-    Error *Sicer401ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sicer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sicer401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
-
 
 type Sicer404ApplicationJSONErrorEnum string
 
 const (
-    Sicer404ApplicationJSONErrorEnumRecordNotFound Sicer404ApplicationJSONErrorEnum = "record_not_found"
-Sicer404ApplicationJSONErrorEnumURLNotFound Sicer404ApplicationJSONErrorEnum = "url_not_found"
+	Sicer404ApplicationJSONErrorEnumRecordNotFound Sicer404ApplicationJSONErrorEnum = "record_not_found"
+	Sicer404ApplicationJSONErrorEnumURLNotFound    Sicer404ApplicationJSONErrorEnum = "url_not_found"
 )
-
-
 
 type Sicer404ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sicer404ApplicationJSONErrorDescriptionEnumNoRecordFound Sicer404ApplicationJSONErrorDescriptionEnum = "No record found"
-Sicer404ApplicationJSONErrorDescriptionEnumYourApiurlOrPathIsIncorrect Sicer404ApplicationJSONErrorDescriptionEnum = "Your API url or path is incorrect"
+	Sicer404ApplicationJSONErrorDescriptionEnumNoRecordFound               Sicer404ApplicationJSONErrorDescriptionEnum = "No record found"
+	Sicer404ApplicationJSONErrorDescriptionEnumYourApiurlOrPathIsIncorrect Sicer404ApplicationJSONErrorDescriptionEnum = "Your API url or path is incorrect"
 )
 
-
 type Sicer404ApplicationJSON struct {
-    Error *Sicer404ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sicer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sicer404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
-
 
 type Sicer500ApplicationJSONErrorEnum string
 
 const (
-    Sicer500ApplicationJSONErrorEnumInternalServerError Sicer500ApplicationJSONErrorEnum = "internal_server_error"
+	Sicer500ApplicationJSONErrorEnumInternalServerError Sicer500ApplicationJSONErrorEnum = "internal_server_error"
 )
-
-
 
 type Sicer500ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sicer500ApplicationJSONErrorDescriptionEnumInternalServerError Sicer500ApplicationJSONErrorDescriptionEnum = "Internal server error"
+	Sicer500ApplicationJSONErrorDescriptionEnumInternalServerError Sicer500ApplicationJSONErrorDescriptionEnum = "Internal server error"
 )
 
-
 type Sicer500ApplicationJSON struct {
-    Error *Sicer500ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sicer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sicer500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
-
 
 type Sicer502ApplicationJSONErrorEnum string
 
 const (
-    Sicer502ApplicationJSONErrorEnumBadGatewy Sicer502ApplicationJSONErrorEnum = "bad_gatewy"
+	Sicer502ApplicationJSONErrorEnumBadGatewy Sicer502ApplicationJSONErrorEnum = "bad_gatewy"
 )
-
-
 
 type Sicer502ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sicer502ApplicationJSONErrorDescriptionEnumPublisherServiceReturnedAnInvalidResponse Sicer502ApplicationJSONErrorDescriptionEnum = "Publisher service returned an invalid response"
+	Sicer502ApplicationJSONErrorDescriptionEnumPublisherServiceReturnedAnInvalidResponse Sicer502ApplicationJSONErrorDescriptionEnum = "Publisher service returned an invalid response"
 )
 
-
 type Sicer502ApplicationJSON struct {
-    Error *Sicer502ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sicer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sicer502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
-
 
 type Sicer503ApplicationJSONErrorEnum string
 
 const (
-    Sicer503ApplicationJSONErrorEnumServiceUnavailable Sicer503ApplicationJSONErrorEnum = "service_unavailable"
+	Sicer503ApplicationJSONErrorEnumServiceUnavailable Sicer503ApplicationJSONErrorEnum = "service_unavailable"
 )
-
-
 
 type Sicer503ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sicer503ApplicationJSONErrorDescriptionEnumPublisherServiceIsTemporarilyUnavailable Sicer503ApplicationJSONErrorDescriptionEnum = "Publisher service is temporarily unavailable"
+	Sicer503ApplicationJSONErrorDescriptionEnumPublisherServiceIsTemporarilyUnavailable Sicer503ApplicationJSONErrorDescriptionEnum = "Publisher service is temporarily unavailable"
 )
 
-
 type Sicer503ApplicationJSON struct {
-    Error *Sicer503ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sicer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sicer503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
-
 
 type Sicer504ApplicationJSONErrorEnum string
 
 const (
-    Sicer504ApplicationJSONErrorEnumGatewayTimeout Sicer504ApplicationJSONErrorEnum = "gateway_timeout"
+	Sicer504ApplicationJSONErrorEnumGatewayTimeout Sicer504ApplicationJSONErrorEnum = "gateway_timeout"
 )
-
-
 
 type Sicer504ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sicer504ApplicationJSONErrorDescriptionEnumPublisherServiceDidNotRespondInTime Sicer504ApplicationJSONErrorDescriptionEnum = "Publisher service did not respond in time"
+	Sicer504ApplicationJSONErrorDescriptionEnumPublisherServiceDidNotRespondInTime Sicer504ApplicationJSONErrorDescriptionEnum = "Publisher service did not respond in time"
 )
 
-
 type Sicer504ApplicationJSON struct {
-    Error *Sicer504ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sicer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sicer504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sicer504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type SicerResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Sicer400ApplicationJSONObject *Sicer400ApplicationJSON 
-    Sicer401ApplicationJSONObject *Sicer401ApplicationJSON 
-    Sicer404ApplicationJSONObject *Sicer404ApplicationJSON 
-    Sicer500ApplicationJSONObject *Sicer500ApplicationJSON 
-    Sicer502ApplicationJSONObject *Sicer502ApplicationJSON 
-    Sicer503ApplicationJSONObject *Sicer503ApplicationJSON 
-    Sicer504ApplicationJSONObject *Sicer504ApplicationJSON 
-    
+	ContentType                   string
+	StatusCode                    int64
+	Sicer400ApplicationJSONObject *Sicer400ApplicationJSON
+	Sicer401ApplicationJSONObject *Sicer401ApplicationJSON
+	Sicer404ApplicationJSONObject *Sicer404ApplicationJSON
+	Sicer500ApplicationJSONObject *Sicer500ApplicationJSON
+	Sicer502ApplicationJSONObject *Sicer502ApplicationJSON
+	Sicer503ApplicationJSONObject *Sicer503ApplicationJSON
+	Sicer504ApplicationJSONObject *Sicer504ApplicationJSON
 }
-

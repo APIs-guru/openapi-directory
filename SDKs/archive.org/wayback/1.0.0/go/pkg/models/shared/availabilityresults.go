@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AvailabilityResults struct {
-    Results []ArchivedResult `json:"results"`
-    
+	Results []ArchivedResult `json:"results"`
 }
-

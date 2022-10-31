@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GooglePrivacyDlpV2StorageMetadataLabel struct {
-    Key *string `json:"key,omitempty"`
-    
+	Key *string `json:"key,omitempty"`
 }
-

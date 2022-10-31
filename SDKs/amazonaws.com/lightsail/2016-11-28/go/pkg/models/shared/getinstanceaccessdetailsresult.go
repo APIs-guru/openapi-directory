@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetInstanceAccessDetailsResult struct {
-    AccessDetails *InstanceAccessDetails `json:"accessDetails,omitempty"`
-    
+	AccessDetails *InstanceAccessDetails `json:"accessDetails,omitempty"`
 }
-

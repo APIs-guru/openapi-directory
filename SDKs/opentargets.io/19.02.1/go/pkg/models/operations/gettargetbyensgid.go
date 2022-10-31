@@ -1,20 +1,14 @@
 package operations
 
-
-
 type GetTargetByEnsgidPathParams struct {
-    Target string `pathParam:"style=simple,explode=false,name=target"`
-    
+	Target string `pathParam:"style=simple,explode=false,name=target"`
 }
 
 type GetTargetByEnsgidRequest struct {
-    PathParams GetTargetByEnsgidPathParams 
-    
+	PathParams GetTargetByEnsgidPathParams
 }
 
 type GetTargetByEnsgidResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

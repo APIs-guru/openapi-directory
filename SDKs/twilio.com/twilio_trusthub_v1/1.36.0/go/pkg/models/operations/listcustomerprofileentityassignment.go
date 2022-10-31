@@ -1,55 +1,49 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var ListCustomerProfileEntityAssignmentServers = []string{
 	"https://trusthub.twilio.com",
 }
 
 type ListCustomerProfileEntityAssignmentPathParams struct {
-    CustomerProfileSid string `pathParam:"style=simple,explode=false,name=CustomerProfileSid"`
-    
+	CustomerProfileSid string `pathParam:"style=simple,explode=false,name=CustomerProfileSid"`
 }
 
 type ListCustomerProfileEntityAssignmentQueryParams struct {
-    PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
-    
+	PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
 }
 
 type ListCustomerProfileEntityAssignmentSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type ListCustomerProfileEntityAssignmentRequest struct {
-    ServerURL *string 
-    PathParams ListCustomerProfileEntityAssignmentPathParams 
-    QueryParams ListCustomerProfileEntityAssignmentQueryParams 
-    Security ListCustomerProfileEntityAssignmentSecurity 
-    
+	ServerURL   *string
+	PathParams  ListCustomerProfileEntityAssignmentPathParams
+	QueryParams ListCustomerProfileEntityAssignmentQueryParams
+	Security    ListCustomerProfileEntityAssignmentSecurity
 }
 
 type ListCustomerProfileEntityAssignmentListCustomerProfileEntityAssignmentResponseMeta struct {
-    FirstPageURL *string `json:"first_page_url,omitempty"`
-    Key *string `json:"key,omitempty"`
-    NextPageURL *string `json:"next_page_url,omitempty"`
-    Page *int64 `json:"page,omitempty"`
-    PageSize *int64 `json:"page_size,omitempty"`
-    PreviousPageURL *string `json:"previous_page_url,omitempty"`
-    URL *string `json:"url,omitempty"`
-    
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListCustomerProfileEntityAssignmentListCustomerProfileEntityAssignmentResponse struct {
-    Meta *ListCustomerProfileEntityAssignmentListCustomerProfileEntityAssignmentResponseMeta `json:"meta,omitempty"`
-    Results []shared.TrusthubV1CustomerProfileCustomerProfileEntityAssignment `json:"results,omitempty"`
-    
+	Meta    *ListCustomerProfileEntityAssignmentListCustomerProfileEntityAssignmentResponseMeta `json:"meta,omitempty"`
+	Results []shared.TrusthubV1CustomerProfileCustomerProfileEntityAssignment                   `json:"results,omitempty"`
 }
 
 type ListCustomerProfileEntityAssignmentResponse struct {
-    ContentType string 
-    ListCustomerProfileEntityAssignmentResponse *ListCustomerProfileEntityAssignmentListCustomerProfileEntityAssignmentResponse 
-    StatusCode int64 
-    
+	ContentType                                 string
+	ListCustomerProfileEntityAssignmentResponse *ListCustomerProfileEntityAssignmentListCustomerProfileEntityAssignmentResponse
+	StatusCode                                  int64
 }
-

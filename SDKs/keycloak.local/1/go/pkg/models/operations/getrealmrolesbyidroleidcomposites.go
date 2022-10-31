@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetRealmRolesByIDRoleIDCompositesPathParams struct {
-    Realm string `pathParam:"style=simple,explode=false,name=realm"`
-    RoleID string `pathParam:"style=simple,explode=false,name=role-id"`
-    
+	Realm  string `pathParam:"style=simple,explode=false,name=realm"`
+	RoleID string `pathParam:"style=simple,explode=false,name=role-id"`
 }
 
 type GetRealmRolesByIDRoleIDCompositesRequest struct {
-    PathParams GetRealmRolesByIDRoleIDCompositesPathParams 
-    
+	PathParams GetRealmRolesByIDRoleIDCompositesPathParams
 }
 
 type GetRealmRolesByIDRoleIDCompositesResponse struct {
-    ContentType string 
-    RoleRepresentations []shared.RoleRepresentation 
-    StatusCode int64 
-    
+	ContentType         string
+	RoleRepresentations []shared.RoleRepresentation
+	StatusCode          int64
 }
-

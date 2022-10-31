@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateIdentityProviderResponse struct {
-    IdentityProvider IdentityProviderType `json:"IdentityProvider"`
-    
+	IdentityProvider IdentityProviderType `json:"IdentityProvider"`
 }
-

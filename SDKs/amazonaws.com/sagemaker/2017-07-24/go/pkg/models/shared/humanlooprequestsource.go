@@ -1,9 +1,5 @@
 package shared
 
-
-
 type HumanLoopRequestSource struct {
-    AwsManagedHumanLoopRequestSource AwsManagedHumanLoopRequestSourceEnum `json:"AwsManagedHumanLoopRequestSource"`
-    
+	AwsManagedHumanLoopRequestSource AwsManagedHumanLoopRequestSourceEnum `json:"AwsManagedHumanLoopRequestSource"`
 }
-

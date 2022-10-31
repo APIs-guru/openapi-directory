@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeRiskConfigurationResponse struct {
-    RiskConfiguration RiskConfigurationType `json:"RiskConfiguration"`
-    
+	RiskConfiguration RiskConfigurationType `json:"RiskConfiguration"`
 }
-

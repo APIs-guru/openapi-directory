@@ -1,10 +1,6 @@
 package shared
 
-
-
 type RemoveTagsFromStreamInput struct {
-    StreamName string `json:"StreamName"`
-    TagKeys []string `json:"TagKeys"`
-    
+	StreamName string   `json:"StreamName"`
+	TagKeys    []string `json:"TagKeys"`
 }
-

@@ -1,15 +1,10 @@
 package shared
 
-
-
-
 type DetectMitigationActionExecutionStatusEnum string
 
 const (
-    DetectMitigationActionExecutionStatusEnumInProgress DetectMitigationActionExecutionStatusEnum = "IN_PROGRESS"
-DetectMitigationActionExecutionStatusEnumSuccessful DetectMitigationActionExecutionStatusEnum = "SUCCESSFUL"
-DetectMitigationActionExecutionStatusEnumFailed DetectMitigationActionExecutionStatusEnum = "FAILED"
-DetectMitigationActionExecutionStatusEnumSkipped DetectMitigationActionExecutionStatusEnum = "SKIPPED"
+	DetectMitigationActionExecutionStatusEnumInProgress DetectMitigationActionExecutionStatusEnum = "IN_PROGRESS"
+	DetectMitigationActionExecutionStatusEnumSuccessful DetectMitigationActionExecutionStatusEnum = "SUCCESSFUL"
+	DetectMitigationActionExecutionStatusEnumFailed     DetectMitigationActionExecutionStatusEnum = "FAILED"
+	DetectMitigationActionExecutionStatusEnumSkipped    DetectMitigationActionExecutionStatusEnum = "SKIPPED"
 )
-
-

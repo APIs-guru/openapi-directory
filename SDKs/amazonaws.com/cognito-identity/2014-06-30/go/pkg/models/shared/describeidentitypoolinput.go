@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeIdentityPoolInput struct {
-    IdentityPoolID string `json:"IdentityPoolId"`
-    
+	IdentityPoolID string `json:"IdentityPoolId"`
 }
-

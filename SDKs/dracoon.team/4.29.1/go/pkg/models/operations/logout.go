@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type LogoutQueryParams struct {
-    Everywhere *bool `queryParam:"style=form,explode=true,name=everywhere"`
-    
+	Everywhere *bool `queryParam:"style=form,explode=true,name=everywhere"`
 }
 
 type LogoutHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type LogoutRequest struct {
-    QueryParams LogoutQueryParams 
-    Headers LogoutHeaders 
-    
+	QueryParams LogoutQueryParams
+	Headers     LogoutHeaders
 }
 
 type LogoutResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	StatusCode    int64
 }
-

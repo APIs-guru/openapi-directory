@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CareContext struct {
-    ReferenceNumber string `json:"referenceNumber"`
-    
+	ReferenceNumber string `json:"referenceNumber"`
 }
-

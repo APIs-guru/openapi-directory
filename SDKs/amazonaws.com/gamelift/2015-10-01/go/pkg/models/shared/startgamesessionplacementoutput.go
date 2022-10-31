@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartGameSessionPlacementOutput struct {
-    GameSessionPlacement *GameSessionPlacement `json:"GameSessionPlacement,omitempty"`
-    
+	GameSessionPlacement *GameSessionPlacement `json:"GameSessionPlacement,omitempty"`
 }
-

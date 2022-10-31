@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetTermUsingGetPathParams struct {
-    AccID string `pathParam:"style=simple,explode=false,name=accId"`
-    
+	AccID string `pathParam:"style=simple,explode=false,name=accId"`
 }
 
 type GetTermUsingGetRequest struct {
-    PathParams GetTermUsingGetPathParams 
-    
+	PathParams GetTermUsingGetPathParams
 }
 
 type GetTermUsingGetResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

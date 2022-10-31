@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Billing struct {
-    ConsumerDestinations []BillingDestination `json:"consumerDestinations,omitempty"`
-    
+	ConsumerDestinations []BillingDestination `json:"consumerDestinations,omitempty"`
 }
-

@@ -1,47 +1,42 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DfareportingAdvertiserLandingPagesPatchPathParams struct {
-    ProfileID string `pathParam:"style=simple,explode=false,name=profileId"`
-    
+	ProfileID string `pathParam:"style=simple,explode=false,name=profileId"`
 }
 
 type DfareportingAdvertiserLandingPagesPatchQueryParams struct {
-    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
-    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
-    Callback *string `queryParam:"style=form,explode=true,name=callback"`
-    Fields *string `queryParam:"style=form,explode=true,name=fields"`
-    ID string `queryParam:"style=form,explode=true,name=id"`
-    Key *string `queryParam:"style=form,explode=true,name=key"`
-    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
-    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
-    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
-    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
-    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
-    
+	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
+	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
+	ID             string            `queryParam:"style=form,explode=true,name=id"`
+	Key            *string           `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
+	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
 type DfareportingAdvertiserLandingPagesPatchSecurity struct {
-    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-    
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
 }
 
 type DfareportingAdvertiserLandingPagesPatchRequest struct {
-    PathParams DfareportingAdvertiserLandingPagesPatchPathParams 
-    QueryParams DfareportingAdvertiserLandingPagesPatchQueryParams 
-    Request *shared.LandingPage `request:"mediaType=application/json"`
-    Security DfareportingAdvertiserLandingPagesPatchSecurity 
-    
+	PathParams  DfareportingAdvertiserLandingPagesPatchPathParams
+	QueryParams DfareportingAdvertiserLandingPagesPatchQueryParams
+	Request     *shared.LandingPage `request:"mediaType=application/json"`
+	Security    DfareportingAdvertiserLandingPagesPatchSecurity
 }
 
 type DfareportingAdvertiserLandingPagesPatchResponse struct {
-    ContentType string 
-    LandingPage *shared.LandingPage 
-    StatusCode int64 
-    
+	ContentType string
+	LandingPage *shared.LandingPage
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DataPrivacy struct {
-    ChildDirected bool `json:"childDirected"`
-    
+	ChildDirected bool `json:"childDirected"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeInstanceAccessControlAttributeConfigurationRequest struct {
-    InstanceArn string `json:"InstanceArn"`
-    
+	InstanceArn string `json:"InstanceArn"`
 }
-

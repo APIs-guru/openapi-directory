@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartRequest struct {
-    WorkspaceID *string `json:"WorkspaceId,omitempty"`
-    
+	WorkspaceID *string `json:"WorkspaceId,omitempty"`
 }
-

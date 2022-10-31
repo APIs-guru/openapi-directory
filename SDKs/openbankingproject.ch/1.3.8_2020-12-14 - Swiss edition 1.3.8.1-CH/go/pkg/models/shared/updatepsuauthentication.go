@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdatePsuAuthentication struct {
-    PsuData PsuData `json:"psuData"`
-    
+	PsuData PsuData `json:"psuData"`
 }
-

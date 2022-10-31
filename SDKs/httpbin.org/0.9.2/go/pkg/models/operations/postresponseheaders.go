@@ -1,20 +1,14 @@
 package operations
 
-
-
 type PostResponseHeadersQueryParams struct {
-    Freeform *string `queryParam:"style=form,explode=true,name=freeform"`
-    
+	Freeform *string `queryParam:"style=form,explode=true,name=freeform"`
 }
 
 type PostResponseHeadersRequest struct {
-    QueryParams PostResponseHeadersQueryParams 
-    
+	QueryParams PostResponseHeadersQueryParams
 }
 
 type PostResponseHeadersResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

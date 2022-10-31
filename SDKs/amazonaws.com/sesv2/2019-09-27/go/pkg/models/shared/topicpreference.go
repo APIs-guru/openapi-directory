@@ -1,10 +1,6 @@
 package shared
 
-
-
 type TopicPreference struct {
-    SubscriptionStatus SubscriptionStatusEnum `json:"SubscriptionStatus"`
-    TopicName string `json:"TopicName"`
-    
+	SubscriptionStatus SubscriptionStatusEnum `json:"SubscriptionStatus"`
+	TopicName          string                 `json:"TopicName"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type IdentityProviderConfigResponse struct {
-    Oidc *OidcIdentityProviderConfig `json:"oidc,omitempty"`
-    
+	Oidc *OidcIdentityProviderConfig `json:"oidc,omitempty"`
 }
-

@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetServerLogsSecurity struct {
-    CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
-    
+	CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetServerLogsRequest struct {
-    Security GetServerLogsSecurity 
-    
+	Security GetServerLogsSecurity
 }
 
 type GetServerLogsResponse struct {
-    ContentType string 
-    LogFiles []shared.LogFile 
-    StatusCode int64 
-    
+	ContentType string
+	LogFiles    []shared.LogFile
+	StatusCode  int64
 }
-

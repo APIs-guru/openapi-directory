@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TransactionAuthorisation struct {
-    ScaAuthenticationData string `json:"scaAuthenticationData"`
-    
+	ScaAuthenticationData string `json:"scaAuthenticationData"`
 }
-

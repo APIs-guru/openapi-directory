@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostDisassociateGlobalReplicationGroupActionEnum string
 
 const (
-    PostDisassociateGlobalReplicationGroupActionEnumDisassociateGlobalReplicationGroup PostDisassociateGlobalReplicationGroupActionEnum = "DisassociateGlobalReplicationGroup"
+	PostDisassociateGlobalReplicationGroupActionEnumDisassociateGlobalReplicationGroup PostDisassociateGlobalReplicationGroupActionEnum = "DisassociateGlobalReplicationGroup"
 )
-
-
 
 type PostDisassociateGlobalReplicationGroupVersionEnum string
 
 const (
-    PostDisassociateGlobalReplicationGroupVersionEnumTwoThousandAndFifteen0202 PostDisassociateGlobalReplicationGroupVersionEnum = "2015-02-02"
+	PostDisassociateGlobalReplicationGroupVersionEnumTwoThousandAndFifteen0202 PostDisassociateGlobalReplicationGroupVersionEnum = "2015-02-02"
 )
 
-
 type PostDisassociateGlobalReplicationGroupQueryParams struct {
-    Action PostDisassociateGlobalReplicationGroupActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostDisassociateGlobalReplicationGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostDisassociateGlobalReplicationGroupActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostDisassociateGlobalReplicationGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostDisassociateGlobalReplicationGroupHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostDisassociateGlobalReplicationGroupRequest struct {
-    QueryParams PostDisassociateGlobalReplicationGroupQueryParams 
-    Headers PostDisassociateGlobalReplicationGroupHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostDisassociateGlobalReplicationGroupQueryParams
+	Headers     PostDisassociateGlobalReplicationGroupHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostDisassociateGlobalReplicationGroupResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

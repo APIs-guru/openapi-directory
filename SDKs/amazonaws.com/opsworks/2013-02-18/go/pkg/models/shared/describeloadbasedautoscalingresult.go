@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeLoadBasedAutoScalingResult struct {
-    LoadBasedAutoScalingConfigurations []LoadBasedAutoScalingConfiguration `json:"LoadBasedAutoScalingConfigurations,omitempty"`
-    
+	LoadBasedAutoScalingConfigurations []LoadBasedAutoScalingConfiguration `json:"LoadBasedAutoScalingConfigurations,omitempty"`
 }
-

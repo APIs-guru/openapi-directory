@@ -1,9 +1,5 @@
 package shared
 
-
-
 type VirtualRouterSpec struct {
-    ServiceNames []string `json:"serviceNames,omitempty"`
-    
+	ServiceNames []string `json:"serviceNames,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type WorkerShutdownNotice struct {
-    Reason *string `json:"reason,omitempty"`
-    
+	Reason *string `json:"reason,omitempty"`
 }
-

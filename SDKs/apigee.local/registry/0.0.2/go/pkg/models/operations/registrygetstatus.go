@@ -1,11 +1,7 @@
 package operations
 
-
-
 type RegistryGetStatusResponse struct {
-    ContentType string 
-    Status *interface{} 
-    StatusCode int64 
-    
+	ContentType string
+	Status      *interface{}
+	StatusCode  int64
 }
-

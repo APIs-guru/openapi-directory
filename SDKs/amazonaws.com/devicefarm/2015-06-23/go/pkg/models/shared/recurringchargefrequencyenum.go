@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type RecurringChargeFrequencyEnum string
 
 const (
-    RecurringChargeFrequencyEnumMonthly RecurringChargeFrequencyEnum = "MONTHLY"
+	RecurringChargeFrequencyEnumMonthly RecurringChargeFrequencyEnum = "MONTHLY"
 )
-
-

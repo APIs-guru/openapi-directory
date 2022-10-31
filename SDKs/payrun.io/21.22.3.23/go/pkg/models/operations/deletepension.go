@@ -1,30 +1,26 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeletePensionPathParams struct {
-    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
-    PensionID string `pathParam:"style=simple,explode=false,name=PensionId"`
-    
+	EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+	PensionID  string `pathParam:"style=simple,explode=false,name=PensionId"`
 }
 
 type DeletePensionHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type DeletePensionRequest struct {
-    PathParams DeletePensionPathParams 
-    Headers DeletePensionHeaders 
-    
+	PathParams DeletePensionPathParams
+	Headers    DeletePensionHeaders
 }
 
 type DeletePensionResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    StatusCode int64 
-    
+	ContentType string
+	ErrorModel  *shared.ErrorModel
+	StatusCode  int64
 }
-

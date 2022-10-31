@@ -1,34 +1,29 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetTierPathParams struct {
-    TierID string `pathParam:"style=simple,explode=false,name=tier-id"`
-    
+	TierID string `pathParam:"style=simple,explode=false,name=tier-id"`
 }
 
 type GetTierHeaders struct {
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type GetTierSecurity struct {
-    APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetTierRequest struct {
-    PathParams GetTierPathParams 
-    Headers GetTierHeaders 
-    Security GetTierSecurity 
-    
+	PathParams GetTierPathParams
+	Headers    GetTierHeaders
+	Security   GetTierSecurity
 }
 
 type GetTierResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Tier *shared.Tier 
-    
+	ContentType string
+	StatusCode  int64
+	Tier        *shared.Tier
 }
-

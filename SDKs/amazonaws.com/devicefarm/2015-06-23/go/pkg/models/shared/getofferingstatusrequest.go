@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetOfferingStatusRequest struct {
-    NextToken *string `json:"nextToken,omitempty"`
-    
+	NextToken *string `json:"nextToken,omitempty"`
 }
-

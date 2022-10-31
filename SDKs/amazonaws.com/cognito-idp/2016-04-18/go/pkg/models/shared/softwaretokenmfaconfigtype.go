@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SoftwareTokenMfaConfigType struct {
-    Enabled *bool `json:"Enabled,omitempty"`
-    
+	Enabled *bool `json:"Enabled,omitempty"`
 }
-

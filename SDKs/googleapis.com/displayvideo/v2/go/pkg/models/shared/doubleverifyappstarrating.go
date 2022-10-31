@@ -1,25 +1,19 @@
 package shared
 
-
-
-
 type DoubleVerifyAppStarRatingAvoidedStarRatingEnum string
 
 const (
-    DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRateUnspecified DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_UNSPECIFIED"
-DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate1Point5Less DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_1_POINT_5_LESS"
-DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate2Less DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_2_LESS"
-DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate2Point5Less DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_2_POINT_5_LESS"
-DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate3Less DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_3_LESS"
-DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate3Point5Less DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_3_POINT_5_LESS"
-DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate4Less DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_4_LESS"
-DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate4Point5Less DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_4_POINT_5_LESS"
+	DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRateUnspecified DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_UNSPECIFIED"
+	DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate1Point5Less DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_1_POINT_5_LESS"
+	DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate2Less       DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_2_LESS"
+	DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate2Point5Less DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_2_POINT_5_LESS"
+	DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate3Less       DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_3_LESS"
+	DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate3Point5Less DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_3_POINT_5_LESS"
+	DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate4Less       DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_4_LESS"
+	DoubleVerifyAppStarRatingAvoidedStarRatingEnumAppStarRate4Point5Less DoubleVerifyAppStarRatingAvoidedStarRatingEnum = "APP_STAR_RATE_4_POINT_5_LESS"
 )
 
-
 type DoubleVerifyAppStarRating struct {
-    AvoidInsufficientStarRating *bool `json:"avoidInsufficientStarRating,omitempty"`
-    AvoidedStarRating *DoubleVerifyAppStarRatingAvoidedStarRatingEnum `json:"avoidedStarRating,omitempty"`
-    
+	AvoidInsufficientStarRating *bool                                           `json:"avoidInsufficientStarRating,omitempty"`
+	AvoidedStarRating           *DoubleVerifyAppStarRatingAvoidedStarRatingEnum `json:"avoidedStarRating,omitempty"`
 }
-

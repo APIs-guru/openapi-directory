@@ -1,68 +1,55 @@
 package operations
 
-
-
 type PostServersIDActionsAttachToNetworkPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type PostServersIDActionsAttachToNetworkAttachToNetworkRequest struct {
-    AliasIps []string `json:"alias_ips,omitempty"`
-    IP *string `json:"ip,omitempty"`
-    Network int64 `json:"network"`
-    
+	AliasIps []string `json:"alias_ips,omitempty"`
+	IP       *string  `json:"ip,omitempty"`
+	Network  int64    `json:"network"`
 }
 
 type PostServersIDActionsAttachToNetworkRequest struct {
-    PathParams PostServersIDActionsAttachToNetworkPathParams 
-    Request *PostServersIDActionsAttachToNetworkAttachToNetworkRequest `request:"mediaType=application/json"`
-    
+	PathParams PostServersIDActionsAttachToNetworkPathParams
+	Request    *PostServersIDActionsAttachToNetworkAttachToNetworkRequest `request:"mediaType=application/json"`
 }
 
 type PostServersIDActionsAttachToNetworkActionResponseActionError struct {
-    Code string `json:"code"`
-    Message string `json:"message"`
-    
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type PostServersIDActionsAttachToNetworkActionResponseActionResources struct {
-    ID int64 `json:"id"`
-    Type string `json:"type"`
-    
+	ID   int64  `json:"id"`
+	Type string `json:"type"`
 }
-
 
 type PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum string
 
 const (
-    PostServersIDActionsAttachToNetworkActionResponseActionStatusEnumSuccess PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum = "success"
-PostServersIDActionsAttachToNetworkActionResponseActionStatusEnumRunning PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum = "running"
-PostServersIDActionsAttachToNetworkActionResponseActionStatusEnumError PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum = "error"
+	PostServersIDActionsAttachToNetworkActionResponseActionStatusEnumSuccess PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum = "success"
+	PostServersIDActionsAttachToNetworkActionResponseActionStatusEnumRunning PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum = "running"
+	PostServersIDActionsAttachToNetworkActionResponseActionStatusEnumError   PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum = "error"
 )
 
-
 type PostServersIDActionsAttachToNetworkActionResponseAction struct {
-    Command string `json:"command"`
-    Error PostServersIDActionsAttachToNetworkActionResponseActionError `json:"error"`
-    Finished string `json:"finished"`
-    ID int64 `json:"id"`
-    Progress float64 `json:"progress"`
-    Resources []PostServersIDActionsAttachToNetworkActionResponseActionResources `json:"resources"`
-    Started string `json:"started"`
-    Status PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum `json:"status"`
-    
+	Command   string                                                             `json:"command"`
+	Error     PostServersIDActionsAttachToNetworkActionResponseActionError       `json:"error"`
+	Finished  string                                                             `json:"finished"`
+	ID        int64                                                              `json:"id"`
+	Progress  float64                                                            `json:"progress"`
+	Resources []PostServersIDActionsAttachToNetworkActionResponseActionResources `json:"resources"`
+	Started   string                                                             `json:"started"`
+	Status    PostServersIDActionsAttachToNetworkActionResponseActionStatusEnum  `json:"status"`
 }
 
 type PostServersIDActionsAttachToNetworkActionResponse struct {
-    Action PostServersIDActionsAttachToNetworkActionResponseAction `json:"action"`
-    
+	Action PostServersIDActionsAttachToNetworkActionResponseAction `json:"action"`
 }
 
 type PostServersIDActionsAttachToNetworkResponse struct {
-    ActionResponse *PostServersIDActionsAttachToNetworkActionResponse 
-    ContentType string 
-    StatusCode int64 
-    
+	ActionResponse *PostServersIDActionsAttachToNetworkActionResponse
+	ContentType    string
+	StatusCode     int64
 }
-

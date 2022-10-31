@@ -1,23 +1,17 @@
 package shared
 
-
-
-
 type GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnum string
 
 const (
-    GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnumKnowledgeTypeUnspecified GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnum = "KNOWLEDGE_TYPE_UNSPECIFIED"
-GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnumFaq GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnum = "FAQ"
-GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnumExtractiveQa GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnum = "EXTRACTIVE_QA"
-GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnumArticleSuggestion GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnum = "ARTICLE_SUGGESTION"
-GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnumAgentFacingSmartReply GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnum = "AGENT_FACING_SMART_REPLY"
+	GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnumKnowledgeTypeUnspecified GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnum = "KNOWLEDGE_TYPE_UNSPECIFIED"
+	GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnumFaq                      GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnum = "FAQ"
+	GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnumExtractiveQa             GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnum = "EXTRACTIVE_QA"
+	GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnumArticleSuggestion        GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnum = "ARTICLE_SUGGESTION"
+	GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnumAgentFacingSmartReply    GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnum = "AGENT_FACING_SMART_REPLY"
 )
 
-
 type GoogleCloudDialogflowV2ImportDocumentTemplate struct {
-    KnowledgeTypes []GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnum `json:"knowledgeTypes,omitempty"`
-    Metadata map[string]string `json:"metadata,omitempty"`
-    MimeType *string `json:"mimeType,omitempty"`
-    
+	KnowledgeTypes []GoogleCloudDialogflowV2ImportDocumentTemplateKnowledgeTypesEnum `json:"knowledgeTypes,omitempty"`
+	Metadata       map[string]string                                                 `json:"metadata,omitempty"`
+	MimeType       *string                                                           `json:"mimeType,omitempty"`
 }
-

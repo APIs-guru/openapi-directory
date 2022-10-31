@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SettingsChange struct {
-    RestrictionChanges []RestrictionChange `json:"restrictionChanges,omitempty"`
-    
+	RestrictionChanges []RestrictionChange `json:"restrictionChanges,omitempty"`
 }
-

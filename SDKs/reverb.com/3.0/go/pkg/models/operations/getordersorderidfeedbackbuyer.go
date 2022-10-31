@@ -1,20 +1,14 @@
 package operations
 
-
-
 type GetOrdersOrderIDFeedbackBuyerPathParams struct {
-    OrderID string `pathParam:"style=simple,explode=false,name=order_id"`
-    
+	OrderID string `pathParam:"style=simple,explode=false,name=order_id"`
 }
 
 type GetOrdersOrderIDFeedbackBuyerRequest struct {
-    PathParams GetOrdersOrderIDFeedbackBuyerPathParams 
-    
+	PathParams GetOrdersOrderIDFeedbackBuyerPathParams
 }
 
 type GetOrdersOrderIDFeedbackBuyerResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

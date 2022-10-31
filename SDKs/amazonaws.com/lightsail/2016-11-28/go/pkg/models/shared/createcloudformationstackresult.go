@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateCloudFormationStackResult struct {
-    Operations []Operation `json:"operations,omitempty"`
-    
+	Operations []Operation `json:"operations,omitempty"`
 }
-

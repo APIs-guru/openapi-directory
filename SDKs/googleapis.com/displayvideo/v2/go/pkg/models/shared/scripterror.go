@@ -1,23 +1,17 @@
 package shared
 
-
-
-
 type ScriptErrorErrorCodeEnum string
 
 const (
-    ScriptErrorErrorCodeEnumErrorCodeUnspecified ScriptErrorErrorCodeEnum = "ERROR_CODE_UNSPECIFIED"
-ScriptErrorErrorCodeEnumSyntaxError ScriptErrorErrorCodeEnum = "SYNTAX_ERROR"
-ScriptErrorErrorCodeEnumDeprecatedSyntax ScriptErrorErrorCodeEnum = "DEPRECATED_SYNTAX"
-ScriptErrorErrorCodeEnumInternalError ScriptErrorErrorCodeEnum = "INTERNAL_ERROR"
+	ScriptErrorErrorCodeEnumErrorCodeUnspecified ScriptErrorErrorCodeEnum = "ERROR_CODE_UNSPECIFIED"
+	ScriptErrorErrorCodeEnumSyntaxError          ScriptErrorErrorCodeEnum = "SYNTAX_ERROR"
+	ScriptErrorErrorCodeEnumDeprecatedSyntax     ScriptErrorErrorCodeEnum = "DEPRECATED_SYNTAX"
+	ScriptErrorErrorCodeEnumInternalError        ScriptErrorErrorCodeEnum = "INTERNAL_ERROR"
 )
 
-
 type ScriptError struct {
-    Column *string `json:"column,omitempty"`
-    ErrorCode *ScriptErrorErrorCodeEnum `json:"errorCode,omitempty"`
-    ErrorMessage *string `json:"errorMessage,omitempty"`
-    Line *string `json:"line,omitempty"`
-    
+	Column       *string                   `json:"column,omitempty"`
+	ErrorCode    *ScriptErrorErrorCodeEnum `json:"errorCode,omitempty"`
+	ErrorMessage *string                   `json:"errorMessage,omitempty"`
+	Line         *string                   `json:"line,omitempty"`
 }
-

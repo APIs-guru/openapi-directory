@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetWebhooksQueryParams struct {
-    TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
-    
+	TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
 }
 
 type GetWebhooksRequest struct {
-    QueryParams GetWebhooksQueryParams 
-    
+	QueryParams GetWebhooksQueryParams
 }
 
 type GetWebhooksResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Webhooks []interface{} 
-    
+	ContentType string
+	StatusCode  int64
+	Webhooks    []interface{}
 }
-

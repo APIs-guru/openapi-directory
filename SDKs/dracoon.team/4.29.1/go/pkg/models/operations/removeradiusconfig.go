@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type RemoveRadiusConfigHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type RemoveRadiusConfigRequest struct {
-    Headers RemoveRadiusConfigHeaders 
-    
+	Headers RemoveRadiusConfigHeaders
 }
 
 type RemoveRadiusConfigResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	StatusCode    int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type MergePullRequestBySquashOutput struct {
-    PullRequest *PullRequest `json:"pullRequest,omitempty"`
-    
+	PullRequest *PullRequest `json:"pullRequest,omitempty"`
 }
-

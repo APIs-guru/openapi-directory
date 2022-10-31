@@ -1,10 +1,6 @@
 package shared
 
-
-
 type GetKeyPolicyRequest struct {
-    KeyID string `json:"KeyId"`
-    PolicyName string `json:"PolicyName"`
-    
+	KeyID      string `json:"KeyId"`
+	PolicyName string `json:"PolicyName"`
 }
-

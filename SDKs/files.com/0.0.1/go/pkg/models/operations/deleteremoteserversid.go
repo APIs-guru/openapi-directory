@@ -1,20 +1,14 @@
 package operations
 
-
-
 type DeleteRemoteServersIDPathParams struct {
-    ID int32 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int32 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type DeleteRemoteServersIDRequest struct {
-    PathParams DeleteRemoteServersIDPathParams 
-    
+	PathParams DeleteRemoteServersIDPathParams
 }
 
 type DeleteRemoteServersIDResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

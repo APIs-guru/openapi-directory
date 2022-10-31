@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ServiceDiscovery struct {
-    DNS *DNSServiceDiscovery `json:"dns,omitempty"`
-    
+	DNS *DNSServiceDiscovery `json:"dns,omitempty"`
 }
-

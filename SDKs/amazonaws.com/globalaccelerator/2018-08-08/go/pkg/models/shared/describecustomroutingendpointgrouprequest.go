@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeCustomRoutingEndpointGroupRequest struct {
-    EndpointGroupArn string `json:"EndpointGroupArn"`
-    
+	EndpointGroupArn string `json:"EndpointGroupArn"`
 }
-

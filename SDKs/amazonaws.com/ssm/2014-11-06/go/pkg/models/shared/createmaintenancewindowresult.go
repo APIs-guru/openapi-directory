@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateMaintenanceWindowResult struct {
-    WindowID *string `json:"WindowId,omitempty"`
-    
+	WindowID *string `json:"WindowId,omitempty"`
 }
-

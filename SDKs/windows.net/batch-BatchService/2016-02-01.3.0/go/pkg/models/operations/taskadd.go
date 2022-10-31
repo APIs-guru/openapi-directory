@@ -1,38 +1,30 @@
 package operations
 
-
-
 type TaskAddPathParams struct {
-    JobID string `pathParam:"style=simple,explode=false,name=jobId"`
-    
+	JobID string `pathParam:"style=simple,explode=false,name=jobId"`
 }
 
 type TaskAddQueryParams struct {
-    APIVersion string `queryParam:"style=form,explode=true,name=api-version"`
-    Timeout *int32 `queryParam:"style=form,explode=true,name=timeout"`
-    
+	APIVersion string `queryParam:"style=form,explode=true,name=api-version"`
+	Timeout    *int32 `queryParam:"style=form,explode=true,name=timeout"`
 }
 
 type TaskAddHeaders struct {
-    ClientRequestID *string `header:"style=simple,explode=false,name=client-request-id"`
-    OcpDate *string `header:"style=simple,explode=false,name=ocp-date"`
-    ReturnClientRequestID *bool `header:"style=simple,explode=false,name=return-client-request-id"`
-    
+	ClientRequestID       *string `header:"style=simple,explode=false,name=client-request-id"`
+	OcpDate               *string `header:"style=simple,explode=false,name=ocp-date"`
+	ReturnClientRequestID *bool   `header:"style=simple,explode=false,name=return-client-request-id"`
 }
 
 type TaskAddRequest struct {
-    PathParams TaskAddPathParams 
-    QueryParams TaskAddQueryParams 
-    Headers TaskAddHeaders 
-    Request interface{} `request:"mediaType=application/json"`
-    
+	PathParams  TaskAddPathParams
+	QueryParams TaskAddQueryParams
+	Headers     TaskAddHeaders
+	Request     interface{} `request:"mediaType=application/json"`
 }
 
 type TaskAddResponse struct {
-    BatchError *interface{} 
-    ContentType string 
-    Headers map[string][]string 
-    StatusCode int64 
-    
+	BatchError  *interface{}
+	ContentType string
+	Headers     map[string][]string
+	StatusCode  int64
 }
-

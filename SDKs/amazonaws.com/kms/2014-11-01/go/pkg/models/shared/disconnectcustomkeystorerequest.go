@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DisconnectCustomKeyStoreRequest struct {
-    CustomKeyStoreID string `json:"CustomKeyStoreId"`
-    
+	CustomKeyStoreID string `json:"CustomKeyStoreId"`
 }
-

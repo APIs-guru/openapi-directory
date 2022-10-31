@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AccountLevelPermissions struct {
-    BlockPublicAccess *BlockPublicAccess `json:"blockPublicAccess,omitempty"`
-    
+	BlockPublicAccess *BlockPublicAccess `json:"blockPublicAccess,omitempty"`
 }
-

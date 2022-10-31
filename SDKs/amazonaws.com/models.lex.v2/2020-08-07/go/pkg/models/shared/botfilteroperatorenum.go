@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type BotFilterOperatorEnum string
 
 const (
-    BotFilterOperatorEnumCo BotFilterOperatorEnum = "CO"
-BotFilterOperatorEnumEq BotFilterOperatorEnum = "EQ"
+	BotFilterOperatorEnumCo BotFilterOperatorEnum = "CO"
+	BotFilterOperatorEnumEq BotFilterOperatorEnum = "EQ"
 )
-
-

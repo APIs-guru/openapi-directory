@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeImageRequest struct {
-    ImageName string `json:"ImageName"`
-    
+	ImageName string `json:"ImageName"`
 }
-

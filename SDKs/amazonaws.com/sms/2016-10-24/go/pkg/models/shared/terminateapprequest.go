@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TerminateAppRequest struct {
-    AppID *string `json:"appId,omitempty"`
-    
+	AppID *string `json:"appId,omitempty"`
 }
-

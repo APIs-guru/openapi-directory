@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SampleUtterance struct {
-    Utterance string `json:"utterance"`
-    
+	Utterance string `json:"utterance"`
 }
-

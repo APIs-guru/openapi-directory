@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetStudioComponentResponse struct {
-    StudioComponent *StudioComponent `json:"studioComponent,omitempty"`
-    
+	StudioComponent *StudioComponent `json:"studioComponent,omitempty"`
 }
-

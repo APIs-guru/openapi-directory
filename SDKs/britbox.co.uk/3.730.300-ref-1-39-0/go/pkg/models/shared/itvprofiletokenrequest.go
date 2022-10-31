@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ItvProfileTokenRequest struct {
-    Password string `json:"password"`
-    
+	Password string `json:"password"`
 }
-

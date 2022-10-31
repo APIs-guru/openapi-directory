@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RebuildRequest struct {
-    WorkspaceID string `json:"WorkspaceId"`
-    
+	WorkspaceID string `json:"WorkspaceId"`
 }
-

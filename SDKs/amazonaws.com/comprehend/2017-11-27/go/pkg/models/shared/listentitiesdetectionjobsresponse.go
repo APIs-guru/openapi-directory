@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListEntitiesDetectionJobsResponse struct {
-    EntitiesDetectionJobPropertiesList []EntitiesDetectionJobProperties `json:"EntitiesDetectionJobPropertiesList,omitempty"`
-    NextToken *string `json:"NextToken,omitempty"`
-    
+	EntitiesDetectionJobPropertiesList []EntitiesDetectionJobProperties `json:"EntitiesDetectionJobPropertiesList,omitempty"`
+	NextToken                          *string                          `json:"NextToken,omitempty"`
 }
-

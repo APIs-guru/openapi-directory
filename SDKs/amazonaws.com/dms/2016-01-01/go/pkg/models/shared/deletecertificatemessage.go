@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteCertificateMessage struct {
-    CertificateArn string `json:"CertificateArn"`
-    
+	CertificateArn string `json:"CertificateArn"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListResourcesForWebACLResponse struct {
-    ResourceArns []string `json:"ResourceArns,omitempty"`
-    
+	ResourceArns []string `json:"ResourceArns,omitempty"`
 }
-

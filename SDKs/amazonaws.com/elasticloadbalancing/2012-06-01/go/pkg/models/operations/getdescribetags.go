@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type GetDescribeTagsActionEnum string
 
 const (
-    GetDescribeTagsActionEnumDescribeTags GetDescribeTagsActionEnum = "DescribeTags"
+	GetDescribeTagsActionEnumDescribeTags GetDescribeTagsActionEnum = "DescribeTags"
 )
-
-
 
 type GetDescribeTagsVersionEnum string
 
 const (
-    GetDescribeTagsVersionEnumTwoThousandAndTwelve0601 GetDescribeTagsVersionEnum = "2012-06-01"
+	GetDescribeTagsVersionEnumTwoThousandAndTwelve0601 GetDescribeTagsVersionEnum = "2012-06-01"
 )
 
-
 type GetDescribeTagsQueryParams struct {
-    Action GetDescribeTagsActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    LoadBalancerNames []string `queryParam:"style=form,explode=true,name=LoadBalancerNames"`
-    Version GetDescribeTagsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action            GetDescribeTagsActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	LoadBalancerNames []string                   `queryParam:"style=form,explode=true,name=LoadBalancerNames"`
+	Version           GetDescribeTagsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type GetDescribeTagsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetDescribeTagsRequest struct {
-    QueryParams GetDescribeTagsQueryParams 
-    Headers GetDescribeTagsHeaders 
-    
+	QueryParams GetDescribeTagsQueryParams
+	Headers     GetDescribeTagsHeaders
 }
 
 type GetDescribeTagsResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

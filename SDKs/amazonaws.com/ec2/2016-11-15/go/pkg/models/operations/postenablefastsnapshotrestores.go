@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostEnableFastSnapshotRestoresActionEnum string
 
 const (
-    PostEnableFastSnapshotRestoresActionEnumEnableFastSnapshotRestores PostEnableFastSnapshotRestoresActionEnum = "EnableFastSnapshotRestores"
+	PostEnableFastSnapshotRestoresActionEnumEnableFastSnapshotRestores PostEnableFastSnapshotRestoresActionEnum = "EnableFastSnapshotRestores"
 )
-
-
 
 type PostEnableFastSnapshotRestoresVersionEnum string
 
 const (
-    PostEnableFastSnapshotRestoresVersionEnumTwoThousandAndSixteen1115 PostEnableFastSnapshotRestoresVersionEnum = "2016-11-15"
+	PostEnableFastSnapshotRestoresVersionEnumTwoThousandAndSixteen1115 PostEnableFastSnapshotRestoresVersionEnum = "2016-11-15"
 )
 
-
 type PostEnableFastSnapshotRestoresQueryParams struct {
-    Action PostEnableFastSnapshotRestoresActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostEnableFastSnapshotRestoresVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostEnableFastSnapshotRestoresActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostEnableFastSnapshotRestoresVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostEnableFastSnapshotRestoresHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostEnableFastSnapshotRestoresRequest struct {
-    QueryParams PostEnableFastSnapshotRestoresQueryParams 
-    Headers PostEnableFastSnapshotRestoresHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostEnableFastSnapshotRestoresQueryParams
+	Headers     PostEnableFastSnapshotRestoresHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostEnableFastSnapshotRestoresResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

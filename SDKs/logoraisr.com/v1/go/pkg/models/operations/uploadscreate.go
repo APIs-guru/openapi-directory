@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type UploadsCreateRequestBodyFile struct {
-    Content []byte `multipartForm:"content"`
-    File string `multipartForm:"name=file"`
-    
+	Content []byte `multipartForm:"content"`
+	File    string `multipartForm:"name=file"`
 }
 
 type UploadsCreateRequestBody struct {
-    File UploadsCreateRequestBodyFile `multipartForm:"file"`
-    
+	File UploadsCreateRequestBodyFile `multipartForm:"file"`
 }
 
 type UploadsCreateRequest struct {
-    Request UploadsCreateRequestBody `request:"mediaType=multipart/form-data"`
-    
+	Request UploadsCreateRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type UploadsCreateResponse struct {
-    ContentType string 
-    FileResponse *shared.FileResponse 
-    StatusCode int64 
-    
+	ContentType  string
+	FileResponse *shared.FileResponse
+	StatusCode   int64
 }
-

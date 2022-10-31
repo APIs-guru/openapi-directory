@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeDatabaseRequest struct {
-    DatabaseName string `json:"DatabaseName"`
-    
+	DatabaseName string `json:"DatabaseName"`
 }
-

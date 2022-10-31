@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ResolveAliasInput struct {
-    AliasID string `json:"AliasId"`
-    
+	AliasID string `json:"AliasId"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetInsightResultsResponse struct {
-    InsightResults InsightResults `json:"InsightResults"`
-    
+	InsightResults InsightResults `json:"InsightResults"`
 }
-

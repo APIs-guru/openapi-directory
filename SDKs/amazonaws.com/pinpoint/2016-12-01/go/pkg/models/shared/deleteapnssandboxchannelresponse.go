@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteApnsSandboxChannelResponse struct {
-    ApnsSandboxChannelResponse ApnsSandboxChannelResponse `json:"APNSSandboxChannelResponse"`
-    
+	ApnsSandboxChannelResponse ApnsSandboxChannelResponse `json:"APNSSandboxChannelResponse"`
 }
-

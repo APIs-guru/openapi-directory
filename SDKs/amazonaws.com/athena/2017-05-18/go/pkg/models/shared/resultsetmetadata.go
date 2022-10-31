@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ResultSetMetadata struct {
-    ColumnInfo []ColumnInfo `json:"ColumnInfo,omitempty"`
-    
+	ColumnInfo []ColumnInfo `json:"ColumnInfo,omitempty"`
 }
-

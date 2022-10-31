@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeStateMachineInput struct {
-    StateMachineArn string `json:"stateMachineArn"`
-    
+	StateMachineArn string `json:"stateMachineArn"`
 }
-

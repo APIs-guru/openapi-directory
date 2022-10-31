@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type DefaultGatewayRouteRewriteEnum string
 
 const (
-    DefaultGatewayRouteRewriteEnumEnabled DefaultGatewayRouteRewriteEnum = "ENABLED"
-DefaultGatewayRouteRewriteEnumDisabled DefaultGatewayRouteRewriteEnum = "DISABLED"
+	DefaultGatewayRouteRewriteEnumEnabled  DefaultGatewayRouteRewriteEnum = "ENABLED"
+	DefaultGatewayRouteRewriteEnumDisabled DefaultGatewayRouteRewriteEnum = "DISABLED"
 )
-
-

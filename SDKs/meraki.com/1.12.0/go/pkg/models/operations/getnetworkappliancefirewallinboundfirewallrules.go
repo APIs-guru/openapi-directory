@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetNetworkApplianceFirewallInboundFirewallRulesPathParams struct {
-    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
-    
+	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
 type GetNetworkApplianceFirewallInboundFirewallRulesRequest struct {
-    PathParams GetNetworkApplianceFirewallInboundFirewallRulesPathParams 
-    
+	PathParams GetNetworkApplianceFirewallInboundFirewallRulesPathParams
 }
 
 type GetNetworkApplianceFirewallInboundFirewallRulesResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetNetworkApplianceFirewallInboundFirewallRules200ApplicationJSONObject map[string]interface{} 
-    
+	ContentType                                                             string
+	StatusCode                                                              int64
+	GetNetworkApplianceFirewallInboundFirewallRules200ApplicationJSONObject map[string]interface{}
 }
-

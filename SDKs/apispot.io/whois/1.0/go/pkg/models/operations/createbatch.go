@@ -1,47 +1,36 @@
 package operations
 
-
-
-
 type CreateBatchRequestBodyOperationEnum string
 
 const (
-    CreateBatchRequestBodyOperationEnumWhois CreateBatchRequestBodyOperationEnum = "whois"
-CreateBatchRequestBodyOperationEnumCheck CreateBatchRequestBodyOperationEnum = "check"
+	CreateBatchRequestBodyOperationEnumWhois CreateBatchRequestBodyOperationEnum = "whois"
+	CreateBatchRequestBodyOperationEnumCheck CreateBatchRequestBodyOperationEnum = "check"
 )
-
-
 
 type CreateBatchRequestBodyOptionsFormatEnum string
 
 const (
-    CreateBatchRequestBodyOptionsFormatEnumRaw CreateBatchRequestBodyOptionsFormatEnum = "raw"
-CreateBatchRequestBodyOptionsFormatEnumFormatted CreateBatchRequestBodyOptionsFormatEnum = "formatted"
-CreateBatchRequestBodyOptionsFormatEnumJSON CreateBatchRequestBodyOptionsFormatEnum = "json"
+	CreateBatchRequestBodyOptionsFormatEnumRaw       CreateBatchRequestBodyOptionsFormatEnum = "raw"
+	CreateBatchRequestBodyOptionsFormatEnumFormatted CreateBatchRequestBodyOptionsFormatEnum = "formatted"
+	CreateBatchRequestBodyOptionsFormatEnumJSON      CreateBatchRequestBodyOptionsFormatEnum = "json"
 )
 
-
 type CreateBatchRequestBodyOptions struct {
-    Format *CreateBatchRequestBodyOptionsFormatEnum `json:"format,omitempty"`
-    
+	Format *CreateBatchRequestBodyOptionsFormatEnum `json:"format,omitempty"`
 }
 
 type CreateBatchRequestBody struct {
-    Domains []string `json:"domains"`
-    Operation CreateBatchRequestBodyOperationEnum `json:"operation"`
-    Options *CreateBatchRequestBodyOptions `json:"options,omitempty"`
-    
+	Domains   []string                            `json:"domains"`
+	Operation CreateBatchRequestBodyOperationEnum `json:"operation"`
+	Options   *CreateBatchRequestBodyOptions      `json:"options,omitempty"`
 }
 
 type CreateBatchRequest struct {
-    Request CreateBatchRequestBody `request:"mediaType=application/json"`
-    
+	Request CreateBatchRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateBatchResponse struct {
-    Batch *interface{} 
-    ContentType string 
-    StatusCode int64 
-    
+	Batch       *interface{}
+	ContentType string
+	StatusCode  int64
 }
-

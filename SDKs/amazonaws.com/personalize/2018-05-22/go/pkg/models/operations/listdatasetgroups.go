@@ -1,46 +1,40 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ListDatasetGroupsQueryParams struct {
-    MaxResults *string `queryParam:"style=form,explode=true,name=maxResults"`
-    NextToken *string `queryParam:"style=form,explode=true,name=nextToken"`
-    
+	MaxResults *string `queryParam:"style=form,explode=true,name=maxResults"`
+	NextToken  *string `queryParam:"style=form,explode=true,name=nextToken"`
 }
-
 
 type ListDatasetGroupsXAmzTargetEnum string
 
 const (
-    ListDatasetGroupsXAmzTargetEnumAmazonPersonalizeListDatasetGroups ListDatasetGroupsXAmzTargetEnum = "AmazonPersonalize.ListDatasetGroups"
+	ListDatasetGroupsXAmzTargetEnumAmazonPersonalizeListDatasetGroups ListDatasetGroupsXAmzTargetEnum = "AmazonPersonalize.ListDatasetGroups"
 )
 
-
 type ListDatasetGroupsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget ListDatasetGroupsXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                         `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                         `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                         `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                         `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                         `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                         `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                         `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        ListDatasetGroupsXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type ListDatasetGroupsRequest struct {
-    QueryParams ListDatasetGroupsQueryParams 
-    Headers ListDatasetGroupsHeaders 
-    Request shared.ListDatasetGroupsRequest `request:"mediaType=application/json"`
-    
+	QueryParams ListDatasetGroupsQueryParams
+	Headers     ListDatasetGroupsHeaders
+	Request     shared.ListDatasetGroupsRequest `request:"mediaType=application/json"`
 }
 
 type ListDatasetGroupsResponse struct {
-    ContentType string 
-    InvalidNextTokenException *interface{} 
-    ListDatasetGroupsResponse *shared.ListDatasetGroupsResponse 
-    StatusCode int64 
-    
+	ContentType               string
+	InvalidNextTokenException *interface{}
+	ListDatasetGroupsResponse *shared.ListDatasetGroupsResponse
+	StatusCode                int64
 }
-

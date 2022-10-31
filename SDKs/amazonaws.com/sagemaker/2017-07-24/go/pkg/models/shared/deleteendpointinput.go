@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteEndpointInput struct {
-    EndpointName string `json:"EndpointName"`
-    
+	EndpointName string `json:"EndpointName"`
 }
-

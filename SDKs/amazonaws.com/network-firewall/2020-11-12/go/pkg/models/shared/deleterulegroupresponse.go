@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteRuleGroupResponse struct {
-    RuleGroupResponse RuleGroupResponse `json:"RuleGroupResponse"`
-    
+	RuleGroupResponse RuleGroupResponse `json:"RuleGroupResponse"`
 }
-

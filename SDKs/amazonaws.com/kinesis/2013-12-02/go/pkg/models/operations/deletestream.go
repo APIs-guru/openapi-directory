@@ -1,40 +1,35 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type DeleteStreamXAmzTargetEnum string
 
 const (
-    DeleteStreamXAmzTargetEnumKinesis20131202DeleteStream DeleteStreamXAmzTargetEnum = "Kinesis_20131202.DeleteStream"
+	DeleteStreamXAmzTargetEnumKinesis20131202DeleteStream DeleteStreamXAmzTargetEnum = "Kinesis_20131202.DeleteStream"
 )
 
-
 type DeleteStreamHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget DeleteStreamXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                    `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                    `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                    `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                    `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                    `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                    `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                    `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        DeleteStreamXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type DeleteStreamRequest struct {
-    Headers DeleteStreamHeaders 
-    Request shared.DeleteStreamInput `request:"mediaType=application/json"`
-    
+	Headers DeleteStreamHeaders
+	Request shared.DeleteStreamInput `request:"mediaType=application/json"`
 }
 
 type DeleteStreamResponse struct {
-    ContentType string 
-    LimitExceededException *interface{} 
-    ResourceInUseException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    
+	ContentType               string
+	LimitExceededException    *interface{}
+	ResourceInUseException    *interface{}
+	ResourceNotFoundException *interface{}
+	StatusCode                int64
 }
-

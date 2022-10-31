@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type CreateImageBuilderStreamingURLResult struct {
-    Expires *time.Time `json:"Expires,omitempty"`
-    StreamingURL *string `json:"StreamingURL,omitempty"`
-    
+	Expires      *time.Time `json:"Expires,omitempty"`
+	StreamingURL *string    `json:"StreamingURL,omitempty"`
 }
-

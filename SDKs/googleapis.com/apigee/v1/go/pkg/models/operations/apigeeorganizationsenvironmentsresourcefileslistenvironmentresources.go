@@ -1,46 +1,41 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ApigeeOrganizationsEnvironmentsResourcefilesListEnvironmentResourcesPathParams struct {
-    Parent string `pathParam:"style=simple,explode=false,name=parent"`
-    Type string `pathParam:"style=simple,explode=false,name=type"`
-    
+	Parent string `pathParam:"style=simple,explode=false,name=parent"`
+	Type   string `pathParam:"style=simple,explode=false,name=type"`
 }
 
 type ApigeeOrganizationsEnvironmentsResourcefilesListEnvironmentResourcesQueryParams struct {
-    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
-    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
-    Callback *string `queryParam:"style=form,explode=true,name=callback"`
-    Fields *string `queryParam:"style=form,explode=true,name=fields"`
-    Key *string `queryParam:"style=form,explode=true,name=key"`
-    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
-    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
-    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
-    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
-    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
-    
+	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
+	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
+	Key            *string           `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
+	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
 type ApigeeOrganizationsEnvironmentsResourcefilesListEnvironmentResourcesSecurity struct {
-    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-    
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
 }
 
 type ApigeeOrganizationsEnvironmentsResourcefilesListEnvironmentResourcesRequest struct {
-    PathParams ApigeeOrganizationsEnvironmentsResourcefilesListEnvironmentResourcesPathParams 
-    QueryParams ApigeeOrganizationsEnvironmentsResourcefilesListEnvironmentResourcesQueryParams 
-    Security ApigeeOrganizationsEnvironmentsResourcefilesListEnvironmentResourcesSecurity 
-    
+	PathParams  ApigeeOrganizationsEnvironmentsResourcefilesListEnvironmentResourcesPathParams
+	QueryParams ApigeeOrganizationsEnvironmentsResourcefilesListEnvironmentResourcesQueryParams
+	Security    ApigeeOrganizationsEnvironmentsResourcefilesListEnvironmentResourcesSecurity
 }
 
 type ApigeeOrganizationsEnvironmentsResourcefilesListEnvironmentResourcesResponse struct {
-    ContentType string 
-    GoogleCloudApigeeV1ListEnvironmentResourcesResponse *shared.GoogleCloudApigeeV1ListEnvironmentResourcesResponse 
-    StatusCode int64 
-    
+	ContentType                                         string
+	GoogleCloudApigeeV1ListEnvironmentResourcesResponse *shared.GoogleCloudApigeeV1ListEnvironmentResourcesResponse
+	StatusCode                                          int64
 }
-

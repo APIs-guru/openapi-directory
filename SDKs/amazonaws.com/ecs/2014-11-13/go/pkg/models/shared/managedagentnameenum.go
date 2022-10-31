@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type ManagedAgentNameEnum string
 
 const (
-    ManagedAgentNameEnumExecuteCommandAgent ManagedAgentNameEnum = "ExecuteCommandAgent"
+	ManagedAgentNameEnumExecuteCommandAgent ManagedAgentNameEnum = "ExecuteCommandAgent"
 )
-
-

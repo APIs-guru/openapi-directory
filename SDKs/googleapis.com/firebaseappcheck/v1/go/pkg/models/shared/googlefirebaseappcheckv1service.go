@@ -1,20 +1,14 @@
 package shared
 
-
-
-
 type GoogleFirebaseAppcheckV1ServiceEnforcementModeEnum string
 
 const (
-    GoogleFirebaseAppcheckV1ServiceEnforcementModeEnumOff GoogleFirebaseAppcheckV1ServiceEnforcementModeEnum = "OFF"
-GoogleFirebaseAppcheckV1ServiceEnforcementModeEnumUnenforced GoogleFirebaseAppcheckV1ServiceEnforcementModeEnum = "UNENFORCED"
-GoogleFirebaseAppcheckV1ServiceEnforcementModeEnumEnforced GoogleFirebaseAppcheckV1ServiceEnforcementModeEnum = "ENFORCED"
+	GoogleFirebaseAppcheckV1ServiceEnforcementModeEnumOff        GoogleFirebaseAppcheckV1ServiceEnforcementModeEnum = "OFF"
+	GoogleFirebaseAppcheckV1ServiceEnforcementModeEnumUnenforced GoogleFirebaseAppcheckV1ServiceEnforcementModeEnum = "UNENFORCED"
+	GoogleFirebaseAppcheckV1ServiceEnforcementModeEnumEnforced   GoogleFirebaseAppcheckV1ServiceEnforcementModeEnum = "ENFORCED"
 )
 
-
 type GoogleFirebaseAppcheckV1Service struct {
-    EnforcementMode *GoogleFirebaseAppcheckV1ServiceEnforcementModeEnum `json:"enforcementMode,omitempty"`
-    Name *string `json:"name,omitempty"`
-    
+	EnforcementMode *GoogleFirebaseAppcheckV1ServiceEnforcementModeEnum `json:"enforcementMode,omitempty"`
+	Name            *string                                             `json:"name,omitempty"`
 }
-

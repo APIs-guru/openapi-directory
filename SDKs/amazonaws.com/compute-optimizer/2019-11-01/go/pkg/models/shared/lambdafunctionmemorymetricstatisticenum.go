@@ -1,14 +1,9 @@
 package shared
 
-
-
-
 type LambdaFunctionMemoryMetricStatisticEnum string
 
 const (
-    LambdaFunctionMemoryMetricStatisticEnumLowerBound LambdaFunctionMemoryMetricStatisticEnum = "LowerBound"
-LambdaFunctionMemoryMetricStatisticEnumUpperBound LambdaFunctionMemoryMetricStatisticEnum = "UpperBound"
-LambdaFunctionMemoryMetricStatisticEnumExpected LambdaFunctionMemoryMetricStatisticEnum = "Expected"
+	LambdaFunctionMemoryMetricStatisticEnumLowerBound LambdaFunctionMemoryMetricStatisticEnum = "LowerBound"
+	LambdaFunctionMemoryMetricStatisticEnumUpperBound LambdaFunctionMemoryMetricStatisticEnum = "UpperBound"
+	LambdaFunctionMemoryMetricStatisticEnumExpected   LambdaFunctionMemoryMetricStatisticEnum = "Expected"
 )
-
-

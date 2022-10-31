@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CancelClusterRequest struct {
-    ClusterID string `json:"ClusterId"`
-    
+	ClusterID string `json:"ClusterId"`
 }
-

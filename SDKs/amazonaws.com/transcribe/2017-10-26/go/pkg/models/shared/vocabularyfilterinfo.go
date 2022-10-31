@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type VocabularyFilterInfo struct {
-    LanguageCode *LanguageCodeEnum `json:"LanguageCode,omitempty"`
-    LastModifiedTime *time.Time `json:"LastModifiedTime,omitempty"`
-    VocabularyFilterName *string `json:"VocabularyFilterName,omitempty"`
-    
+	LanguageCode         *LanguageCodeEnum `json:"LanguageCode,omitempty"`
+	LastModifiedTime     *time.Time        `json:"LastModifiedTime,omitempty"`
+	VocabularyFilterName *string           `json:"VocabularyFilterName,omitempty"`
 }
-

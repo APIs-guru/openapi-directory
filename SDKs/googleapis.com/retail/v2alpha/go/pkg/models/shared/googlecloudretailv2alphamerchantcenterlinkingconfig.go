@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudRetailV2alphaMerchantCenterLinkingConfig struct {
-    Links []GoogleCloudRetailV2alphaMerchantCenterLink `json:"links,omitempty"`
-    
+	Links []GoogleCloudRetailV2alphaMerchantCenterLink `json:"links,omitempty"`
 }
-

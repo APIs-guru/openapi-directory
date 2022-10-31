@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleFirebaseAppcheckV1betaExchangeRecaptchaTokenRequest struct {
-    RecaptchaToken *string `json:"recaptchaToken,omitempty"`
-    
+	RecaptchaToken *string `json:"recaptchaToken,omitempty"`
 }
-

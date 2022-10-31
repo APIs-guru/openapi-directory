@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ToggleNotificationChannelsHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type ToggleNotificationChannelsRequest struct {
-    Headers ToggleNotificationChannelsHeaders 
-    Request shared.NotificationChannelActivationRequest `request:"mediaType=application/json"`
-    
+	Headers ToggleNotificationChannelsHeaders
+	Request shared.NotificationChannelActivationRequest `request:"mediaType=application/json"`
 }
 
 type ToggleNotificationChannelsResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    NotificationChannelList *shared.NotificationChannelList 
-    StatusCode int64 
-    
+	ContentType             string
+	ErrorResponse           *shared.ErrorResponse
+	NotificationChannelList *shared.NotificationChannelList
+	StatusCode              int64
 }
-

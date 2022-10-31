@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EnableDirectoryResponse struct {
-    DirectoryArn string `json:"DirectoryArn"`
-    
+	DirectoryArn string `json:"DirectoryArn"`
 }
-

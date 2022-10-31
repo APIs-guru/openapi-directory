@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type InteractionChannelParticipantEnumStatusEnum string
 
 const (
-    InteractionChannelParticipantEnumStatusEnumClosed InteractionChannelParticipantEnumStatusEnum = "closed"
-InteractionChannelParticipantEnumStatusEnumWrapup InteractionChannelParticipantEnumStatusEnum = "wrapup"
+	InteractionChannelParticipantEnumStatusEnumClosed InteractionChannelParticipantEnumStatusEnum = "closed"
+	InteractionChannelParticipantEnumStatusEnumWrapup InteractionChannelParticipantEnumStatusEnum = "wrapup"
 )
-
-

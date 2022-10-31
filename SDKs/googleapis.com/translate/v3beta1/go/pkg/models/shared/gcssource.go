@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GcsSource struct {
-    InputURI *string `json:"inputUri,omitempty"`
-    
+	InputURI *string `json:"inputUri,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CompromisedCredentialsActionsType struct {
-    EventAction CompromisedCredentialsEventActionTypeEnum `json:"EventAction"`
-    
+	EventAction CompromisedCredentialsEventActionTypeEnum `json:"EventAction"`
 }
-

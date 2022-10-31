@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LogList struct {
-    Logs []Log `json:"logs"`
-    
+	Logs []Log `json:"logs"`
 }
-

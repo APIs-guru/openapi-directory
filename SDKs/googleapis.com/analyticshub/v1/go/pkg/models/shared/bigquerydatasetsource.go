@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BigQueryDatasetSource struct {
-    Dataset *string `json:"dataset,omitempty"`
-    
+	Dataset *string `json:"dataset,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteAssessmentTargetRequest struct {
-    AssessmentTargetArn string `json:"assessmentTargetArn"`
-    
+	AssessmentTargetArn string `json:"assessmentTargetArn"`
 }
-

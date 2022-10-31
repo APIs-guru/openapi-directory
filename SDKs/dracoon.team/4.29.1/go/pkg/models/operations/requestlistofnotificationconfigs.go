@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type RequestListOfNotificationConfigsHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type RequestListOfNotificationConfigsRequest struct {
-    Headers RequestListOfNotificationConfigsHeaders 
-    
+	Headers RequestListOfNotificationConfigsHeaders
 }
 
 type RequestListOfNotificationConfigsResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    NotificationConfigList *shared.NotificationConfigList 
-    StatusCode int64 
-    
+	ContentType            string
+	ErrorResponse          *shared.ErrorResponse
+	NotificationConfigList *shared.NotificationConfigList
+	StatusCode             int64
 }
-

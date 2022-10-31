@@ -1,47 +1,42 @@
 package operations
 
 import (
-"time"
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+	"time"
+)
 
 type GetRecommendationsPathParams struct {
-    ProfilingGroupName string `pathParam:"style=simple,explode=false,name=profilingGroupName"`
-    
+	ProfilingGroupName string `pathParam:"style=simple,explode=false,name=profilingGroupName"`
 }
 
 type GetRecommendationsQueryParams struct {
-    EndTime time.Time `queryParam:"style=form,explode=true,name=endTime"`
-    Locale *string `queryParam:"style=form,explode=true,name=locale"`
-    StartTime time.Time `queryParam:"style=form,explode=true,name=startTime"`
-    
+	EndTime   time.Time `queryParam:"style=form,explode=true,name=endTime"`
+	Locale    *string   `queryParam:"style=form,explode=true,name=locale"`
+	StartTime time.Time `queryParam:"style=form,explode=true,name=startTime"`
 }
 
 type GetRecommendationsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetRecommendationsRequest struct {
-    PathParams GetRecommendationsPathParams 
-    QueryParams GetRecommendationsQueryParams 
-    Headers GetRecommendationsHeaders 
-    
+	PathParams  GetRecommendationsPathParams
+	QueryParams GetRecommendationsQueryParams
+	Headers     GetRecommendationsHeaders
 }
 
 type GetRecommendationsResponse struct {
-    ContentType string 
-    GetRecommendationsResponse *shared.GetRecommendationsResponse 
-    InternalServerException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    ValidationException *interface{} 
-    
+	ContentType                string
+	GetRecommendationsResponse *shared.GetRecommendationsResponse
+	InternalServerException    *interface{}
+	ResourceNotFoundException  *interface{}
+	StatusCode                 int64
+	ThrottlingException        *interface{}
+	ValidationException        *interface{}
 }
-

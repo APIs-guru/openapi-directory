@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetNamespaceRequest struct {
-    ID string `json:"Id"`
-    
+	ID string `json:"Id"`
 }
-

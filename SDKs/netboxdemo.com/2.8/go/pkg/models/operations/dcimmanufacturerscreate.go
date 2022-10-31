@@ -1,17 +1,15 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DcimManufacturersCreateRequest struct {
-    Request shared.Manufacturer `request:"mediaType=application/json"`
-    
+	Request shared.Manufacturer `request:"mediaType=application/json"`
 }
 
 type DcimManufacturersCreateResponse struct {
-    ContentType string 
-    Manufacturer *shared.Manufacturer 
-    StatusCode int64 
-    
+	ContentType  string
+	Manufacturer *shared.Manufacturer
+	StatusCode   int64
 }
-

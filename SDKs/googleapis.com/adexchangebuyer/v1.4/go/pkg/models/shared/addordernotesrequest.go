@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AddOrderNotesRequest struct {
-    Notes []MarketplaceNote `json:"notes,omitempty"`
-    
+	Notes []MarketplaceNote `json:"notes,omitempty"`
 }
-

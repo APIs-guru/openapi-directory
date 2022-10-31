@@ -1,9 +1,5 @@
 package shared
 
-
-
 type FargatePlatformConfiguration struct {
-    PlatformVersion *string `json:"platformVersion,omitempty"`
-    
+	PlatformVersion *string `json:"platformVersion,omitempty"`
 }
-

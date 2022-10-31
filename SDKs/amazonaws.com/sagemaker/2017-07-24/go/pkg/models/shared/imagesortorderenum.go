@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type ImageSortOrderEnum string
 
 const (
-    ImageSortOrderEnumAscending ImageSortOrderEnum = "ASCENDING"
-ImageSortOrderEnumDescending ImageSortOrderEnum = "DESCENDING"
+	ImageSortOrderEnumAscending  ImageSortOrderEnum = "ASCENDING"
+	ImageSortOrderEnumDescending ImageSortOrderEnum = "DESCENDING"
 )
-
-

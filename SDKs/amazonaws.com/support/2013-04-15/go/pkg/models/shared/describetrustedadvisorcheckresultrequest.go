@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DescribeTrustedAdvisorCheckResultRequest struct {
-    CheckID string `json:"checkId"`
-    Language *string `json:"language,omitempty"`
-    
+	CheckID  string  `json:"checkId"`
+	Language *string `json:"language,omitempty"`
 }
-

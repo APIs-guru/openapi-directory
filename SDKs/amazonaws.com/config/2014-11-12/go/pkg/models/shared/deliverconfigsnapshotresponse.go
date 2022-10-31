@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeliverConfigSnapshotResponse struct {
-    ConfigSnapshotID *string `json:"configSnapshotId,omitempty"`
-    
+	ConfigSnapshotID *string `json:"configSnapshotId,omitempty"`
 }
-

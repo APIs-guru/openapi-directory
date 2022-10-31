@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListReturnPolicyOnlineResponse struct {
-    ReturnPolicies []ReturnPolicyOnline `json:"returnPolicies,omitempty"`
-    
+	ReturnPolicies []ReturnPolicyOnline `json:"returnPolicies,omitempty"`
 }
-

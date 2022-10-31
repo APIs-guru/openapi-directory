@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BusinessHours struct {
-    Periods []BusinessHoursPeriod `json:"periods,omitempty"`
-    
+	Periods []BusinessHoursPeriod `json:"periods,omitempty"`
 }
-

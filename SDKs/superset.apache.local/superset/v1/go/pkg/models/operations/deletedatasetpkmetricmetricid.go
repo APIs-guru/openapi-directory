@@ -1,64 +1,54 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeleteDatasetPkMetricMetricIDPathParams struct {
-    MetricID int64 `pathParam:"style=simple,explode=false,name=metric_id"`
-    Pk int64 `pathParam:"style=simple,explode=false,name=pk"`
-    
+	MetricID int64 `pathParam:"style=simple,explode=false,name=metric_id"`
+	Pk       int64 `pathParam:"style=simple,explode=false,name=pk"`
 }
 
 type DeleteDatasetPkMetricMetricIDSecurity struct {
-    Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
-    
+	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
 type DeleteDatasetPkMetricMetricIDRequest struct {
-    PathParams DeleteDatasetPkMetricMetricIDPathParams 
-    Security DeleteDatasetPkMetricMetricIDSecurity 
-    
+	PathParams DeleteDatasetPkMetricMetricIDPathParams
+	Security   DeleteDatasetPkMetricMetricIDSecurity
 }
 
 type DeleteDatasetPkMetricMetricID200ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteDatasetPkMetricMetricID401ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteDatasetPkMetricMetricID403ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteDatasetPkMetricMetricID404ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteDatasetPkMetricMetricID422ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteDatasetPkMetricMetricID500ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type DeleteDatasetPkMetricMetricIDResponse struct {
-    ContentType string 
-    DeleteDatasetPkMetricMetricID200ApplicationJSONObject *DeleteDatasetPkMetricMetricID200ApplicationJSON 
-    DeleteDatasetPkMetricMetricID401ApplicationJSONObject *DeleteDatasetPkMetricMetricID401ApplicationJSON 
-    DeleteDatasetPkMetricMetricID403ApplicationJSONObject *DeleteDatasetPkMetricMetricID403ApplicationJSON 
-    DeleteDatasetPkMetricMetricID404ApplicationJSONObject *DeleteDatasetPkMetricMetricID404ApplicationJSON 
-    DeleteDatasetPkMetricMetricID422ApplicationJSONObject *DeleteDatasetPkMetricMetricID422ApplicationJSON 
-    DeleteDatasetPkMetricMetricID500ApplicationJSONObject *DeleteDatasetPkMetricMetricID500ApplicationJSON 
-    StatusCode int64 
-    
+	ContentType                                           string
+	DeleteDatasetPkMetricMetricID200ApplicationJSONObject *DeleteDatasetPkMetricMetricID200ApplicationJSON
+	DeleteDatasetPkMetricMetricID401ApplicationJSONObject *DeleteDatasetPkMetricMetricID401ApplicationJSON
+	DeleteDatasetPkMetricMetricID403ApplicationJSONObject *DeleteDatasetPkMetricMetricID403ApplicationJSON
+	DeleteDatasetPkMetricMetricID404ApplicationJSONObject *DeleteDatasetPkMetricMetricID404ApplicationJSON
+	DeleteDatasetPkMetricMetricID422ApplicationJSONObject *DeleteDatasetPkMetricMetricID422ApplicationJSON
+	DeleteDatasetPkMetricMetricID500ApplicationJSONObject *DeleteDatasetPkMetricMetricID500ApplicationJSON
+	StatusCode                                            int64
 }
-

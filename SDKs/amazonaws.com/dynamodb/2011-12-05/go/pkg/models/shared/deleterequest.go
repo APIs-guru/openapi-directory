@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteRequest struct {
-    Key Key `json:"Key"`
-    
+	Key Key `json:"Key"`
 }
-

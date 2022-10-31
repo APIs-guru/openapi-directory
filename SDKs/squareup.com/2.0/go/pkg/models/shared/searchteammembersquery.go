@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SearchTeamMembersQuery struct {
-    Filter *SearchTeamMembersFilter `json:"filter,omitempty"`
-    
+	Filter *SearchTeamMembersFilter `json:"filter,omitempty"`
 }
-

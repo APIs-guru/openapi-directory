@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type SlotFilterNameEnum string
 
 const (
-    SlotFilterNameEnumSlotName SlotFilterNameEnum = "SlotName"
+	SlotFilterNameEnumSlotName SlotFilterNameEnum = "SlotName"
 )
-
-

@@ -1,40 +1,36 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var UpdateUnderstandFieldTypeServers = []string{
 	"https://preview.twilio.com",
 }
 
 type UpdateUnderstandFieldTypePathParams struct {
-    AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
-    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
-    
+	AssistantSid string `pathParam:"style=simple,explode=false,name=AssistantSid"`
+	Sid          string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
 type UpdateUnderstandFieldTypeUpdateUnderstandFieldTypeRequest struct {
-    FriendlyName *string `form:"name=FriendlyName"`
-    UniqueName *string `form:"name=UniqueName"`
-    
+	FriendlyName *string `form:"name=FriendlyName"`
+	UniqueName   *string `form:"name=UniqueName"`
 }
 
 type UpdateUnderstandFieldTypeSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type UpdateUnderstandFieldTypeRequest struct {
-    ServerURL *string 
-    PathParams UpdateUnderstandFieldTypePathParams 
-    Request *UpdateUnderstandFieldTypeUpdateUnderstandFieldTypeRequest `request:"mediaType=application/x-www-form-urlencoded"`
-    Security UpdateUnderstandFieldTypeSecurity 
-    
+	ServerURL  *string
+	PathParams UpdateUnderstandFieldTypePathParams
+	Request    *UpdateUnderstandFieldTypeUpdateUnderstandFieldTypeRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Security   UpdateUnderstandFieldTypeSecurity
 }
 
 type UpdateUnderstandFieldTypeResponse struct {
-    ContentType string 
-    StatusCode int64 
-    PreviewUnderstandAssistantFieldType *shared.PreviewUnderstandAssistantFieldType 
-    
+	ContentType                         string
+	StatusCode                          int64
+	PreviewUnderstandAssistantFieldType *shared.PreviewUnderstandAssistantFieldType
 }
-

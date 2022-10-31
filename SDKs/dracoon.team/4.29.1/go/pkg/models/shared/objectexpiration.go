@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ObjectExpiration struct {
-    EnableExpiration bool `json:"enableExpiration"`
-    ExpireAt *time.Time `json:"expireAt,omitempty"`
-    
+	EnableExpiration bool       `json:"enableExpiration"`
+	ExpireAt         *time.Time `json:"expireAt,omitempty"`
 }
-

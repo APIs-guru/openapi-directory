@@ -1,9 +1,5 @@
 package shared
 
-
-
 type VaccineStatusRequest struct {
-    UUID *string `json:"uuid,omitempty"`
-    
+	UUID *string `json:"uuid,omitempty"`
 }
-

@@ -1,21 +1,15 @@
 package operations
 
-
-
 type ProtocolIpmiGetStatisticsPathParams struct {
-    AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
-    
+	AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
 }
 
 type ProtocolIpmiGetStatisticsRequest struct {
-    PathParams ProtocolIpmiGetStatisticsPathParams 
-    
+	PathParams ProtocolIpmiGetStatisticsPathParams
 }
 
 type ProtocolIpmiGetStatisticsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    ProtocolIpmiGetStatistics200ApplicationJSONInt32Integers []int32 
-    
+	ContentType                                              string
+	StatusCode                                               int64
+	ProtocolIpmiGetStatistics200ApplicationJSONInt32Integers []int32
 }
-

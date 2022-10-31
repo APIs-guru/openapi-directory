@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchWriteSpansRequest struct {
-    Spans []Span `json:"spans,omitempty"`
-    
+	Spans []Span `json:"spans,omitempty"`
 }
-

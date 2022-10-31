@@ -1,20 +1,15 @@
 package shared
 
-
-
-
 type PullRequestEventTypeEnum string
 
 const (
-    PullRequestEventTypeEnumPullRequestCreated PullRequestEventTypeEnum = "PULL_REQUEST_CREATED"
-PullRequestEventTypeEnumPullRequestStatusChanged PullRequestEventTypeEnum = "PULL_REQUEST_STATUS_CHANGED"
-PullRequestEventTypeEnumPullRequestSourceReferenceUpdated PullRequestEventTypeEnum = "PULL_REQUEST_SOURCE_REFERENCE_UPDATED"
-PullRequestEventTypeEnumPullRequestMergeStateChanged PullRequestEventTypeEnum = "PULL_REQUEST_MERGE_STATE_CHANGED"
-PullRequestEventTypeEnumPullRequestApprovalRuleCreated PullRequestEventTypeEnum = "PULL_REQUEST_APPROVAL_RULE_CREATED"
-PullRequestEventTypeEnumPullRequestApprovalRuleUpdated PullRequestEventTypeEnum = "PULL_REQUEST_APPROVAL_RULE_UPDATED"
-PullRequestEventTypeEnumPullRequestApprovalRuleDeleted PullRequestEventTypeEnum = "PULL_REQUEST_APPROVAL_RULE_DELETED"
-PullRequestEventTypeEnumPullRequestApprovalRuleOverridden PullRequestEventTypeEnum = "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN"
-PullRequestEventTypeEnumPullRequestApprovalStateChanged PullRequestEventTypeEnum = "PULL_REQUEST_APPROVAL_STATE_CHANGED"
+	PullRequestEventTypeEnumPullRequestCreated                PullRequestEventTypeEnum = "PULL_REQUEST_CREATED"
+	PullRequestEventTypeEnumPullRequestStatusChanged          PullRequestEventTypeEnum = "PULL_REQUEST_STATUS_CHANGED"
+	PullRequestEventTypeEnumPullRequestSourceReferenceUpdated PullRequestEventTypeEnum = "PULL_REQUEST_SOURCE_REFERENCE_UPDATED"
+	PullRequestEventTypeEnumPullRequestMergeStateChanged      PullRequestEventTypeEnum = "PULL_REQUEST_MERGE_STATE_CHANGED"
+	PullRequestEventTypeEnumPullRequestApprovalRuleCreated    PullRequestEventTypeEnum = "PULL_REQUEST_APPROVAL_RULE_CREATED"
+	PullRequestEventTypeEnumPullRequestApprovalRuleUpdated    PullRequestEventTypeEnum = "PULL_REQUEST_APPROVAL_RULE_UPDATED"
+	PullRequestEventTypeEnumPullRequestApprovalRuleDeleted    PullRequestEventTypeEnum = "PULL_REQUEST_APPROVAL_RULE_DELETED"
+	PullRequestEventTypeEnumPullRequestApprovalRuleOverridden PullRequestEventTypeEnum = "PULL_REQUEST_APPROVAL_RULE_OVERRIDDEN"
+	PullRequestEventTypeEnumPullRequestApprovalStateChanged   PullRequestEventTypeEnum = "PULL_REQUEST_APPROVAL_STATE_CHANGED"
 )
-
-

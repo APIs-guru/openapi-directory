@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteIntegrationLinkModel struct {
-    HasRemainingIntegrationLink *bool `json:"hasRemainingIntegrationLink,omitempty"`
-    
+	HasRemainingIntegrationLink *bool `json:"hasRemainingIntegrationLink,omitempty"`
 }
-

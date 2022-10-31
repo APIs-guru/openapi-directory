@@ -1,20 +1,14 @@
 package operations
 
-
-
 type DeleteNetworksIDPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type DeleteNetworksIDRequest struct {
-    PathParams DeleteNetworksIDPathParams 
-    
+	PathParams DeleteNetworksIDPathParams
 }
 
 type DeleteNetworksIDResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

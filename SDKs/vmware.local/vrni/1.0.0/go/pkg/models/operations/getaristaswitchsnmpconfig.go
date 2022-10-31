@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAristaSwitchSnmpConfigPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetAristaSwitchSnmpConfigSecurity struct {
-    APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetAristaSwitchSnmpConfigRequest struct {
-    PathParams GetAristaSwitchSnmpConfigPathParams 
-    Security GetAristaSwitchSnmpConfigSecurity 
-    
+	PathParams GetAristaSwitchSnmpConfigPathParams
+	Security   GetAristaSwitchSnmpConfigSecurity
 }
 
 type GetAristaSwitchSnmpConfigResponse struct {
-    ContentType string 
-    SnmpConfig *shared.SnmpConfig 
-    StatusCode int64 
-    
+	ContentType string
+	SnmpConfig  *shared.SnmpConfig
+	StatusCode  int64
 }
-

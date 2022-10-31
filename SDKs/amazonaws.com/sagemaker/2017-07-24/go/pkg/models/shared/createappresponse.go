@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateAppResponse struct {
-    AppArn *string `json:"AppArn,omitempty"`
-    
+	AppArn *string `json:"AppArn,omitempty"`
 }
-

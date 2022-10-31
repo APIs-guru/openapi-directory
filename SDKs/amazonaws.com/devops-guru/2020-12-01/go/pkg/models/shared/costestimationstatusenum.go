@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type CostEstimationStatusEnum string
 
 const (
-    CostEstimationStatusEnumOngoing CostEstimationStatusEnum = "ONGOING"
-CostEstimationStatusEnumCompleted CostEstimationStatusEnum = "COMPLETED"
+	CostEstimationStatusEnumOngoing   CostEstimationStatusEnum = "ONGOING"
+	CostEstimationStatusEnumCompleted CostEstimationStatusEnum = "COMPLETED"
 )
-
-

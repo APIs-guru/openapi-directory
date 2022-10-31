@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TransitiveMembershipRole struct {
-    Role *string `json:"role,omitempty"`
-    
+	Role *string `json:"role,omitempty"`
 }
-

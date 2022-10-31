@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PostIssueTrackersSecurity struct {
-    BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
-    
+	BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
 }
 
 type PostIssueTrackersRequest struct {
-    Request []byte `request:"mediaType=application/xml"`
-    Security PostIssueTrackersSecurity 
-    
+	Request  []byte `request:"mediaType=application/xml"`
+	Security PostIssueTrackersSecurity
 }
 
 type PostIssueTrackersResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

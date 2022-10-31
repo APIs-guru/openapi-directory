@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ImagesGetPathParams struct {
-    RecipeID int32 `pathParam:"style=simple,explode=false,name=recipeId"`
-    
+	RecipeID int32 `pathParam:"style=simple,explode=false,name=recipeId"`
 }
 
 type ImagesGetRequest struct {
-    PathParams ImagesGetPathParams 
-    
+	PathParams ImagesGetPathParams
 }
 
 type ImagesGetResponse struct {
-    BigOvenModelAPIImages []shared.BigOvenModelAPIImage 
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	BigOvenModelAPIImages []shared.BigOvenModelAPIImage
+	Body                  []byte
+	ContentType           string
+	StatusCode            int64
 }
-

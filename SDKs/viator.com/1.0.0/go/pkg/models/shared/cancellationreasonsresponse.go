@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CancellationReasonsResponse struct {
-    Reasons []CancellationReason `json:"reasons,omitempty"`
-    
+	Reasons []CancellationReason `json:"reasons,omitempty"`
 }
-

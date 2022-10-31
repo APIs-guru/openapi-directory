@@ -1,31 +1,25 @@
 package shared
 
-
-
-
 type GooglePrivacyDlpV2ByteContentItemTypeEnum string
 
 const (
-    GooglePrivacyDlpV2ByteContentItemTypeEnumBytesTypeUnspecified GooglePrivacyDlpV2ByteContentItemTypeEnum = "BYTES_TYPE_UNSPECIFIED"
-GooglePrivacyDlpV2ByteContentItemTypeEnumImage GooglePrivacyDlpV2ByteContentItemTypeEnum = "IMAGE"
-GooglePrivacyDlpV2ByteContentItemTypeEnumImageJpeg GooglePrivacyDlpV2ByteContentItemTypeEnum = "IMAGE_JPEG"
-GooglePrivacyDlpV2ByteContentItemTypeEnumImageBmp GooglePrivacyDlpV2ByteContentItemTypeEnum = "IMAGE_BMP"
-GooglePrivacyDlpV2ByteContentItemTypeEnumImagePng GooglePrivacyDlpV2ByteContentItemTypeEnum = "IMAGE_PNG"
-GooglePrivacyDlpV2ByteContentItemTypeEnumImageSvg GooglePrivacyDlpV2ByteContentItemTypeEnum = "IMAGE_SVG"
-GooglePrivacyDlpV2ByteContentItemTypeEnumTextUTF8 GooglePrivacyDlpV2ByteContentItemTypeEnum = "TEXT_UTF8"
-GooglePrivacyDlpV2ByteContentItemTypeEnumWordDocument GooglePrivacyDlpV2ByteContentItemTypeEnum = "WORD_DOCUMENT"
-GooglePrivacyDlpV2ByteContentItemTypeEnumPdf GooglePrivacyDlpV2ByteContentItemTypeEnum = "PDF"
-GooglePrivacyDlpV2ByteContentItemTypeEnumPowerpointDocument GooglePrivacyDlpV2ByteContentItemTypeEnum = "POWERPOINT_DOCUMENT"
-GooglePrivacyDlpV2ByteContentItemTypeEnumExcelDocument GooglePrivacyDlpV2ByteContentItemTypeEnum = "EXCEL_DOCUMENT"
-GooglePrivacyDlpV2ByteContentItemTypeEnumAvro GooglePrivacyDlpV2ByteContentItemTypeEnum = "AVRO"
-GooglePrivacyDlpV2ByteContentItemTypeEnumCsv GooglePrivacyDlpV2ByteContentItemTypeEnum = "CSV"
-GooglePrivacyDlpV2ByteContentItemTypeEnumTsv GooglePrivacyDlpV2ByteContentItemTypeEnum = "TSV"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumBytesTypeUnspecified GooglePrivacyDlpV2ByteContentItemTypeEnum = "BYTES_TYPE_UNSPECIFIED"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumImage                GooglePrivacyDlpV2ByteContentItemTypeEnum = "IMAGE"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumImageJpeg            GooglePrivacyDlpV2ByteContentItemTypeEnum = "IMAGE_JPEG"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumImageBmp             GooglePrivacyDlpV2ByteContentItemTypeEnum = "IMAGE_BMP"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumImagePng             GooglePrivacyDlpV2ByteContentItemTypeEnum = "IMAGE_PNG"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumImageSvg             GooglePrivacyDlpV2ByteContentItemTypeEnum = "IMAGE_SVG"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumTextUTF8             GooglePrivacyDlpV2ByteContentItemTypeEnum = "TEXT_UTF8"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumWordDocument         GooglePrivacyDlpV2ByteContentItemTypeEnum = "WORD_DOCUMENT"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumPdf                  GooglePrivacyDlpV2ByteContentItemTypeEnum = "PDF"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumPowerpointDocument   GooglePrivacyDlpV2ByteContentItemTypeEnum = "POWERPOINT_DOCUMENT"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumExcelDocument        GooglePrivacyDlpV2ByteContentItemTypeEnum = "EXCEL_DOCUMENT"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumAvro                 GooglePrivacyDlpV2ByteContentItemTypeEnum = "AVRO"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumCsv                  GooglePrivacyDlpV2ByteContentItemTypeEnum = "CSV"
+	GooglePrivacyDlpV2ByteContentItemTypeEnumTsv                  GooglePrivacyDlpV2ByteContentItemTypeEnum = "TSV"
 )
 
-
 type GooglePrivacyDlpV2ByteContentItem struct {
-    Data *string `json:"data,omitempty"`
-    Type *GooglePrivacyDlpV2ByteContentItemTypeEnum `json:"type,omitempty"`
-    
+	Data *string                                    `json:"data,omitempty"`
+	Type *GooglePrivacyDlpV2ByteContentItemTypeEnum `json:"type,omitempty"`
 }
-

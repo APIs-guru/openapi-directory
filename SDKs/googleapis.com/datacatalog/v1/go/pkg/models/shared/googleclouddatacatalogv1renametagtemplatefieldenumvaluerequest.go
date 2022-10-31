@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudDatacatalogV1RenameTagTemplateFieldEnumValueRequest struct {
-    NewEnumValueDisplayName *string `json:"newEnumValueDisplayName,omitempty"`
-    
+	NewEnumValueDisplayName *string `json:"newEnumValueDisplayName,omitempty"`
 }
-

@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetDeletedSettingsPathParams struct {
-    ConfigID string `pathParam:"style=simple,explode=false,name=configId"`
-    
+	ConfigID string `pathParam:"style=simple,explode=false,name=configId"`
 }
 
 type GetDeletedSettingsRequest struct {
-    PathParams GetDeletedSettingsPathParams 
-    
+	PathParams GetDeletedSettingsPathParams
 }
 
 type GetDeletedSettingsResponse struct {
-    ContentType string 
-    SettingModelHaljsons []shared.SettingModelHaljson 
-    SettingModels []shared.SettingModel 
-    StatusCode int64 
-    
+	ContentType          string
+	SettingModelHaljsons []shared.SettingModelHaljson
+	SettingModels        []shared.SettingModel
+	StatusCode           int64
 }
-

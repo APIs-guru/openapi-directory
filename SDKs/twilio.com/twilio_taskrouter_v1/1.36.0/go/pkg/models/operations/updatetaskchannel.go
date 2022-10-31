@@ -1,40 +1,36 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var UpdateTaskChannelServers = []string{
 	"https://taskrouter.twilio.com",
 }
 
 type UpdateTaskChannelPathParams struct {
-    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
-    WorkspaceSid string `pathParam:"style=simple,explode=false,name=WorkspaceSid"`
-    
+	Sid          string `pathParam:"style=simple,explode=false,name=Sid"`
+	WorkspaceSid string `pathParam:"style=simple,explode=false,name=WorkspaceSid"`
 }
 
 type UpdateTaskChannelUpdateTaskChannelRequest struct {
-    ChannelOptimizedRouting *bool `form:"name=ChannelOptimizedRouting"`
-    FriendlyName *string `form:"name=FriendlyName"`
-    
+	ChannelOptimizedRouting *bool   `form:"name=ChannelOptimizedRouting"`
+	FriendlyName            *string `form:"name=FriendlyName"`
 }
 
 type UpdateTaskChannelSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type UpdateTaskChannelRequest struct {
-    ServerURL *string 
-    PathParams UpdateTaskChannelPathParams 
-    Request *UpdateTaskChannelUpdateTaskChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
-    Security UpdateTaskChannelSecurity 
-    
+	ServerURL  *string
+	PathParams UpdateTaskChannelPathParams
+	Request    *UpdateTaskChannelUpdateTaskChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Security   UpdateTaskChannelSecurity
 }
 
 type UpdateTaskChannelResponse struct {
-    ContentType string 
-    StatusCode int64 
-    TaskrouterV1WorkspaceTaskChannel *shared.TaskrouterV1WorkspaceTaskChannel 
-    
+	ContentType                      string
+	StatusCode                       int64
+	TaskrouterV1WorkspaceTaskChannel *shared.TaskrouterV1WorkspaceTaskChannel
 }
-

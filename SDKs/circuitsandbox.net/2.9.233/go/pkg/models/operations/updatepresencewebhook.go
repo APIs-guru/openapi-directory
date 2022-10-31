@@ -1,36 +1,31 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type UpdatePresenceWebHookPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type UpdatePresenceWebHookRequestBody struct {
-    URL *string `form:"name=url"`
-    UserIds []string `form:"name=userIds"`
-    
+	URL     *string  `form:"name=url"`
+	UserIds []string `form:"name=userIds"`
 }
 
 type UpdatePresenceWebHookSecurity struct {
-    Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-    
+	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
 }
 
 type UpdatePresenceWebHookRequest struct {
-    PathParams UpdatePresenceWebHookPathParams 
-    Request *UpdatePresenceWebHookRequestBody `request:"mediaType=application/x-www-form-urlencoded"`
-    Security UpdatePresenceWebHookSecurity 
-    
+	PathParams UpdatePresenceWebHookPathParams
+	Request    *UpdatePresenceWebHookRequestBody `request:"mediaType=application/x-www-form-urlencoded"`
+	Security   UpdatePresenceWebHookSecurity
 }
 
 type UpdatePresenceWebHookResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    WebHook *interface{} 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
+	WebHook     *interface{}
 }
-

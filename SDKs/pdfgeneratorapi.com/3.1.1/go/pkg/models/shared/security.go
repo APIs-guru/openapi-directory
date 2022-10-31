@@ -1,14 +1,9 @@
 package shared
 
-
-
 type SchemeJSONWebTokenAuth struct {
-    Authorization string `security:"name=Authorization"`
-    
+	Authorization string `security:"name=Authorization"`
 }
 
 type Security struct {
-    JSONWebTokenAuth SchemeJSONWebTokenAuth `security:"scheme,type=http,subtype=bearer"`
-    
+	JSONWebTokenAuth SchemeJSONWebTokenAuth `security:"scheme,type=http,subtype=bearer"`
 }
-

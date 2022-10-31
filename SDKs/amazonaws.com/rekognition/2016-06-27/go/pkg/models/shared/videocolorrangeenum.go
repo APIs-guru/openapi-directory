@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type VideoColorRangeEnum string
 
 const (
-    VideoColorRangeEnumFull VideoColorRangeEnum = "FULL"
-VideoColorRangeEnumLimited VideoColorRangeEnum = "LIMITED"
+	VideoColorRangeEnumFull    VideoColorRangeEnum = "FULL"
+	VideoColorRangeEnumLimited VideoColorRangeEnum = "LIMITED"
 )
-
-

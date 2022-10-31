@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetUsersQueryParams struct {
-    UserID *string `queryParam:"style=form,explode=true,name=userId"`
-    
+	UserID *string `queryParam:"style=form,explode=true,name=userId"`
 }
 
 type GetUsersRequest struct {
-    QueryParams GetUsersQueryParams 
-    
+	QueryParams GetUsersQueryParams
 }
 
 type GetUsersResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Users []shared.User 
-    
+	ContentType string
+	StatusCode  int64
+	Users       []shared.User
 }
-

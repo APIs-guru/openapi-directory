@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EstimateCostScenarioForBillingAccountResponse struct {
-    CostEstimationResult *CostEstimationResult `json:"costEstimationResult,omitempty"`
-    
+	CostEstimationResult *CostEstimationResult `json:"costEstimationResult,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PutAccountSettingResponse struct {
-    Setting *Setting `json:"setting,omitempty"`
-    
+	Setting *Setting `json:"setting,omitempty"`
 }
-

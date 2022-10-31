@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SchemeAPIKeyAuth struct {
-    APIKey string `security:"name=X-IPTWIST-TOKEN"`
-    
+	APIKey string `security:"name=X-IPTWIST-TOKEN"`
 }
-

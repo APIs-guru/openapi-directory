@@ -1,13 +1,12 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type APICallDetails struct {
-    API *string `json:"api,omitempty"`
-    APIServiceName *string `json:"apiServiceName,omitempty"`
-    FirstSeen *time.Time `json:"firstSeen,omitempty"`
-    LastSeen *time.Time `json:"lastSeen,omitempty"`
-    
+	API            *string    `json:"api,omitempty"`
+	APIServiceName *string    `json:"apiServiceName,omitempty"`
+	FirstSeen      *time.Time `json:"firstSeen,omitempty"`
+	LastSeen       *time.Time `json:"lastSeen,omitempty"`
 }
-

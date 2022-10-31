@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ProtocolSnmptcpGetConfigPathParams struct {
-    AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
-    
+	AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
 }
 
 type ProtocolSnmptcpGetConfigRequest struct {
-    PathParams ProtocolSnmptcpGetConfigPathParams 
-    
+	PathParams ProtocolSnmptcpGetConfigPathParams
 }
 
 type ProtocolSnmptcpGetConfigResponse struct {
-    ConfigSnmptcp *shared.ConfigSnmptcp 
-    ContentType string 
-    StatusCode int64 
-    
+	ConfigSnmptcp *shared.ConfigSnmptcp
+	ContentType   string
+	StatusCode    int64
 }
-

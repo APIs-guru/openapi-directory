@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetTransactionsRequest struct {
-    Txid string `json:"txid"`
-    
+	Txid string `json:"txid"`
 }
-

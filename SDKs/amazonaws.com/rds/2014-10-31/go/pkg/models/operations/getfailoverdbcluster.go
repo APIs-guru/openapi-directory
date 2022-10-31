@@ -1,52 +1,41 @@
 package operations
 
-
-
-
 type GetFailoverDbClusterActionEnum string
 
 const (
-    GetFailoverDbClusterActionEnumFailoverDbCluster GetFailoverDbClusterActionEnum = "FailoverDBCluster"
+	GetFailoverDbClusterActionEnumFailoverDbCluster GetFailoverDbClusterActionEnum = "FailoverDBCluster"
 )
-
-
 
 type GetFailoverDbClusterVersionEnum string
 
 const (
-    GetFailoverDbClusterVersionEnumTwoThousandAndFourteen1031 GetFailoverDbClusterVersionEnum = "2014-10-31"
+	GetFailoverDbClusterVersionEnumTwoThousandAndFourteen1031 GetFailoverDbClusterVersionEnum = "2014-10-31"
 )
 
-
 type GetFailoverDbClusterQueryParams struct {
-    Action GetFailoverDbClusterActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    DbClusterIdentifier string `queryParam:"style=form,explode=true,name=DBClusterIdentifier"`
-    TargetDbInstanceIdentifier *string `queryParam:"style=form,explode=true,name=TargetDBInstanceIdentifier"`
-    Version GetFailoverDbClusterVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action                     GetFailoverDbClusterActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	DbClusterIdentifier        string                          `queryParam:"style=form,explode=true,name=DBClusterIdentifier"`
+	TargetDbInstanceIdentifier *string                         `queryParam:"style=form,explode=true,name=TargetDBInstanceIdentifier"`
+	Version                    GetFailoverDbClusterVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type GetFailoverDbClusterHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetFailoverDbClusterRequest struct {
-    QueryParams GetFailoverDbClusterQueryParams 
-    Headers GetFailoverDbClusterHeaders 
-    
+	QueryParams GetFailoverDbClusterQueryParams
+	Headers     GetFailoverDbClusterHeaders
 }
 
 type GetFailoverDbClusterResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

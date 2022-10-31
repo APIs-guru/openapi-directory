@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListVolumeRestoresResponse struct {
-    NextPageToken *string `json:"nextPageToken,omitempty"`
-    VolumeRestores []VolumeRestore `json:"volumeRestores,omitempty"`
-    
+	NextPageToken  *string         `json:"nextPageToken,omitempty"`
+	VolumeRestores []VolumeRestore `json:"volumeRestores,omitempty"`
 }
-

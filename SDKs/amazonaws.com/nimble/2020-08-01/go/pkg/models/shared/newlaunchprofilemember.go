@@ -1,10 +1,6 @@
 package shared
 
-
-
 type NewLaunchProfileMember struct {
-    Persona LaunchProfilePersonaEnum `json:"persona"`
-    PrincipalID string `json:"principalId"`
-    
+	Persona     LaunchProfilePersonaEnum `json:"persona"`
+	PrincipalID string                   `json:"principalId"`
 }
-

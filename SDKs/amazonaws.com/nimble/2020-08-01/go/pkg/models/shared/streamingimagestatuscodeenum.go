@@ -1,17 +1,12 @@
 package shared
 
-
-
-
 type StreamingImageStatusCodeEnum string
 
 const (
-    StreamingImageStatusCodeEnumStreamingImageCreateInProgress StreamingImageStatusCodeEnum = "STREAMING_IMAGE_CREATE_IN_PROGRESS"
-StreamingImageStatusCodeEnumStreamingImageReady StreamingImageStatusCodeEnum = "STREAMING_IMAGE_READY"
-StreamingImageStatusCodeEnumStreamingImageDeleteInProgress StreamingImageStatusCodeEnum = "STREAMING_IMAGE_DELETE_IN_PROGRESS"
-StreamingImageStatusCodeEnumStreamingImageDeleted StreamingImageStatusCodeEnum = "STREAMING_IMAGE_DELETED"
-StreamingImageStatusCodeEnumStreamingImageUpdateInProgress StreamingImageStatusCodeEnum = "STREAMING_IMAGE_UPDATE_IN_PROGRESS"
-StreamingImageStatusCodeEnumInternalError StreamingImageStatusCodeEnum = "INTERNAL_ERROR"
+	StreamingImageStatusCodeEnumStreamingImageCreateInProgress StreamingImageStatusCodeEnum = "STREAMING_IMAGE_CREATE_IN_PROGRESS"
+	StreamingImageStatusCodeEnumStreamingImageReady            StreamingImageStatusCodeEnum = "STREAMING_IMAGE_READY"
+	StreamingImageStatusCodeEnumStreamingImageDeleteInProgress StreamingImageStatusCodeEnum = "STREAMING_IMAGE_DELETE_IN_PROGRESS"
+	StreamingImageStatusCodeEnumStreamingImageDeleted          StreamingImageStatusCodeEnum = "STREAMING_IMAGE_DELETED"
+	StreamingImageStatusCodeEnumStreamingImageUpdateInProgress StreamingImageStatusCodeEnum = "STREAMING_IMAGE_UPDATE_IN_PROGRESS"
+	StreamingImageStatusCodeEnumInternalError                  StreamingImageStatusCodeEnum = "INTERNAL_ERROR"
 )
-
-

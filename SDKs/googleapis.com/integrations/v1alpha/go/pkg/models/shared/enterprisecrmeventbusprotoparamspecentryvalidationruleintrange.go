@@ -1,10 +1,6 @@
 package shared
 
-
-
 type EnterpriseCrmEventbusProtoParamSpecEntryValidationRuleIntRange struct {
-    Max *string `json:"max,omitempty"`
-    Min *string `json:"min,omitempty"`
-    
+	Max *string `json:"max,omitempty"`
+	Min *string `json:"min,omitempty"`
 }
-

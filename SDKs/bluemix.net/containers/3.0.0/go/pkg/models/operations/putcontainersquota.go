@@ -1,22 +1,16 @@
 package operations
 
-
-
 type PutContainersQuotaHeaders struct {
-    XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
-    XAuthToken string `header:"style=simple,explode=false,name=X-Auth-Token"`
-    
+	XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
+	XAuthToken     string `header:"style=simple,explode=false,name=X-Auth-Token"`
 }
 
 type PutContainersQuotaRequest struct {
-    Headers PutContainersQuotaHeaders 
-    Request interface{} `request:"mediaType=application/json"`
-    
+	Headers PutContainersQuotaHeaders
+	Request interface{} `request:"mediaType=application/json"`
 }
 
 type PutContainersQuotaResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

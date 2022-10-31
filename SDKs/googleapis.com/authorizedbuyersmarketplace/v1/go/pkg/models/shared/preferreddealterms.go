@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PreferredDealTerms struct {
-    FixedPrice *Price `json:"fixedPrice,omitempty"`
-    
+	FixedPrice *Price `json:"fixedPrice,omitempty"`
 }
-

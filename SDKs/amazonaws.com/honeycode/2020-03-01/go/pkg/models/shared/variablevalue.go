@@ -1,9 +1,5 @@
 package shared
 
-
-
 type VariableValue struct {
-    RawValue string `json:"rawValue"`
-    
+	RawValue string `json:"rawValue"`
 }
-

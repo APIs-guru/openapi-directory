@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeRemediationConfigurationsResponse struct {
-    RemediationConfigurations []RemediationConfiguration `json:"RemediationConfigurations,omitempty"`
-    
+	RemediationConfigurations []RemediationConfiguration `json:"RemediationConfigurations,omitempty"`
 }
-

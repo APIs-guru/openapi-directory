@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TimesheetObject struct {
-    Timesheet *Timesheet `json:"Timesheet,omitempty"`
-    
+	Timesheet *Timesheet `json:"Timesheet,omitempty"`
 }
-

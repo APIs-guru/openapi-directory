@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ResetRuntimeRequest struct {
-    RequestID *string `json:"requestId,omitempty"`
-    
+	RequestID *string `json:"requestId,omitempty"`
 }
-

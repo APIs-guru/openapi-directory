@@ -1,57 +1,49 @@
 package shared
 
-
-
-
 type PublicKeyAlgorithmEnum string
 
 const (
-    PublicKeyAlgorithmEnumCryptoKeyVersionAlgorithmUnspecified PublicKeyAlgorithmEnum = "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED"
-PublicKeyAlgorithmEnumGoogleSymmetricEncryption PublicKeyAlgorithmEnum = "GOOGLE_SYMMETRIC_ENCRYPTION"
-PublicKeyAlgorithmEnumRsaSignPss2048Sha256 PublicKeyAlgorithmEnum = "RSA_SIGN_PSS_2048_SHA256"
-PublicKeyAlgorithmEnumRsaSignPss3072Sha256 PublicKeyAlgorithmEnum = "RSA_SIGN_PSS_3072_SHA256"
-PublicKeyAlgorithmEnumRsaSignPss4096Sha256 PublicKeyAlgorithmEnum = "RSA_SIGN_PSS_4096_SHA256"
-PublicKeyAlgorithmEnumRsaSignPss4096Sha512 PublicKeyAlgorithmEnum = "RSA_SIGN_PSS_4096_SHA512"
-PublicKeyAlgorithmEnumRsaSignPkcs12048Sha256 PublicKeyAlgorithmEnum = "RSA_SIGN_PKCS1_2048_SHA256"
-PublicKeyAlgorithmEnumRsaSignPkcs13072Sha256 PublicKeyAlgorithmEnum = "RSA_SIGN_PKCS1_3072_SHA256"
-PublicKeyAlgorithmEnumRsaSignPkcs14096Sha256 PublicKeyAlgorithmEnum = "RSA_SIGN_PKCS1_4096_SHA256"
-PublicKeyAlgorithmEnumRsaSignPkcs14096Sha512 PublicKeyAlgorithmEnum = "RSA_SIGN_PKCS1_4096_SHA512"
-PublicKeyAlgorithmEnumRsaSignRawPkcs12048 PublicKeyAlgorithmEnum = "RSA_SIGN_RAW_PKCS1_2048"
-PublicKeyAlgorithmEnumRsaSignRawPkcs13072 PublicKeyAlgorithmEnum = "RSA_SIGN_RAW_PKCS1_3072"
-PublicKeyAlgorithmEnumRsaSignRawPkcs14096 PublicKeyAlgorithmEnum = "RSA_SIGN_RAW_PKCS1_4096"
-PublicKeyAlgorithmEnumRsaDecryptOaep2048Sha256 PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_2048_SHA256"
-PublicKeyAlgorithmEnumRsaDecryptOaep3072Sha256 PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_3072_SHA256"
-PublicKeyAlgorithmEnumRsaDecryptOaep4096Sha256 PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_4096_SHA256"
-PublicKeyAlgorithmEnumRsaDecryptOaep4096Sha512 PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_4096_SHA512"
-PublicKeyAlgorithmEnumRsaDecryptOaep2048Sha1 PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_2048_SHA1"
-PublicKeyAlgorithmEnumRsaDecryptOaep3072Sha1 PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_3072_SHA1"
-PublicKeyAlgorithmEnumRsaDecryptOaep4096Sha1 PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_4096_SHA1"
-PublicKeyAlgorithmEnumEcSignP256Sha256 PublicKeyAlgorithmEnum = "EC_SIGN_P256_SHA256"
-PublicKeyAlgorithmEnumEcSignP384Sha384 PublicKeyAlgorithmEnum = "EC_SIGN_P384_SHA384"
-PublicKeyAlgorithmEnumEcSignSecp256K1Sha256 PublicKeyAlgorithmEnum = "EC_SIGN_SECP256K1_SHA256"
-PublicKeyAlgorithmEnumHmacSha256 PublicKeyAlgorithmEnum = "HMAC_SHA256"
-PublicKeyAlgorithmEnumExternalSymmetricEncryption PublicKeyAlgorithmEnum = "EXTERNAL_SYMMETRIC_ENCRYPTION"
+	PublicKeyAlgorithmEnumCryptoKeyVersionAlgorithmUnspecified PublicKeyAlgorithmEnum = "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED"
+	PublicKeyAlgorithmEnumGoogleSymmetricEncryption            PublicKeyAlgorithmEnum = "GOOGLE_SYMMETRIC_ENCRYPTION"
+	PublicKeyAlgorithmEnumRsaSignPss2048Sha256                 PublicKeyAlgorithmEnum = "RSA_SIGN_PSS_2048_SHA256"
+	PublicKeyAlgorithmEnumRsaSignPss3072Sha256                 PublicKeyAlgorithmEnum = "RSA_SIGN_PSS_3072_SHA256"
+	PublicKeyAlgorithmEnumRsaSignPss4096Sha256                 PublicKeyAlgorithmEnum = "RSA_SIGN_PSS_4096_SHA256"
+	PublicKeyAlgorithmEnumRsaSignPss4096Sha512                 PublicKeyAlgorithmEnum = "RSA_SIGN_PSS_4096_SHA512"
+	PublicKeyAlgorithmEnumRsaSignPkcs12048Sha256               PublicKeyAlgorithmEnum = "RSA_SIGN_PKCS1_2048_SHA256"
+	PublicKeyAlgorithmEnumRsaSignPkcs13072Sha256               PublicKeyAlgorithmEnum = "RSA_SIGN_PKCS1_3072_SHA256"
+	PublicKeyAlgorithmEnumRsaSignPkcs14096Sha256               PublicKeyAlgorithmEnum = "RSA_SIGN_PKCS1_4096_SHA256"
+	PublicKeyAlgorithmEnumRsaSignPkcs14096Sha512               PublicKeyAlgorithmEnum = "RSA_SIGN_PKCS1_4096_SHA512"
+	PublicKeyAlgorithmEnumRsaSignRawPkcs12048                  PublicKeyAlgorithmEnum = "RSA_SIGN_RAW_PKCS1_2048"
+	PublicKeyAlgorithmEnumRsaSignRawPkcs13072                  PublicKeyAlgorithmEnum = "RSA_SIGN_RAW_PKCS1_3072"
+	PublicKeyAlgorithmEnumRsaSignRawPkcs14096                  PublicKeyAlgorithmEnum = "RSA_SIGN_RAW_PKCS1_4096"
+	PublicKeyAlgorithmEnumRsaDecryptOaep2048Sha256             PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_2048_SHA256"
+	PublicKeyAlgorithmEnumRsaDecryptOaep3072Sha256             PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_3072_SHA256"
+	PublicKeyAlgorithmEnumRsaDecryptOaep4096Sha256             PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_4096_SHA256"
+	PublicKeyAlgorithmEnumRsaDecryptOaep4096Sha512             PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_4096_SHA512"
+	PublicKeyAlgorithmEnumRsaDecryptOaep2048Sha1               PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_2048_SHA1"
+	PublicKeyAlgorithmEnumRsaDecryptOaep3072Sha1               PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_3072_SHA1"
+	PublicKeyAlgorithmEnumRsaDecryptOaep4096Sha1               PublicKeyAlgorithmEnum = "RSA_DECRYPT_OAEP_4096_SHA1"
+	PublicKeyAlgorithmEnumEcSignP256Sha256                     PublicKeyAlgorithmEnum = "EC_SIGN_P256_SHA256"
+	PublicKeyAlgorithmEnumEcSignP384Sha384                     PublicKeyAlgorithmEnum = "EC_SIGN_P384_SHA384"
+	PublicKeyAlgorithmEnumEcSignSecp256K1Sha256                PublicKeyAlgorithmEnum = "EC_SIGN_SECP256K1_SHA256"
+	PublicKeyAlgorithmEnumHmacSha256                           PublicKeyAlgorithmEnum = "HMAC_SHA256"
+	PublicKeyAlgorithmEnumExternalSymmetricEncryption          PublicKeyAlgorithmEnum = "EXTERNAL_SYMMETRIC_ENCRYPTION"
 )
-
-
 
 type PublicKeyProtectionLevelEnum string
 
 const (
-    PublicKeyProtectionLevelEnumProtectionLevelUnspecified PublicKeyProtectionLevelEnum = "PROTECTION_LEVEL_UNSPECIFIED"
-PublicKeyProtectionLevelEnumSoftware PublicKeyProtectionLevelEnum = "SOFTWARE"
-PublicKeyProtectionLevelEnumHsm PublicKeyProtectionLevelEnum = "HSM"
-PublicKeyProtectionLevelEnumExternal PublicKeyProtectionLevelEnum = "EXTERNAL"
-PublicKeyProtectionLevelEnumExternalVpc PublicKeyProtectionLevelEnum = "EXTERNAL_VPC"
+	PublicKeyProtectionLevelEnumProtectionLevelUnspecified PublicKeyProtectionLevelEnum = "PROTECTION_LEVEL_UNSPECIFIED"
+	PublicKeyProtectionLevelEnumSoftware                   PublicKeyProtectionLevelEnum = "SOFTWARE"
+	PublicKeyProtectionLevelEnumHsm                        PublicKeyProtectionLevelEnum = "HSM"
+	PublicKeyProtectionLevelEnumExternal                   PublicKeyProtectionLevelEnum = "EXTERNAL"
+	PublicKeyProtectionLevelEnumExternalVpc                PublicKeyProtectionLevelEnum = "EXTERNAL_VPC"
 )
 
-
 type PublicKey struct {
-    Algorithm *PublicKeyAlgorithmEnum `json:"algorithm,omitempty"`
-    Name *string `json:"name,omitempty"`
-    Pem *string `json:"pem,omitempty"`
-    PemCrc32c *string `json:"pemCrc32c,omitempty"`
-    ProtectionLevel *PublicKeyProtectionLevelEnum `json:"protectionLevel,omitempty"`
-    
+	Algorithm       *PublicKeyAlgorithmEnum       `json:"algorithm,omitempty"`
+	Name            *string                       `json:"name,omitempty"`
+	Pem             *string                       `json:"pem,omitempty"`
+	PemCrc32c       *string                       `json:"pemCrc32c,omitempty"`
+	ProtectionLevel *PublicKeyProtectionLevelEnum `json:"protectionLevel,omitempty"`
 }
-

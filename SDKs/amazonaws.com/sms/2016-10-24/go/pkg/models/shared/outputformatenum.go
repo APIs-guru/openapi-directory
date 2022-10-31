@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type OutputFormatEnum string
 
 const (
-    OutputFormatEnumJSON OutputFormatEnum = "JSON"
-OutputFormatEnumYaml OutputFormatEnum = "YAML"
+	OutputFormatEnumJSON OutputFormatEnum = "JSON"
+	OutputFormatEnumYaml OutputFormatEnum = "YAML"
 )
-
-

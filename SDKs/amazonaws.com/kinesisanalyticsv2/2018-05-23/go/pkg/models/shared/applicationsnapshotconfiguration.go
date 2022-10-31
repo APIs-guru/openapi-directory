@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ApplicationSnapshotConfiguration struct {
-    SnapshotsEnabled bool `json:"SnapshotsEnabled"`
-    
+	SnapshotsEnabled bool `json:"SnapshotsEnabled"`
 }
-

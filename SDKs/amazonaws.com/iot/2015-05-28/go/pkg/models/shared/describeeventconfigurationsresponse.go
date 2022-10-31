@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type DescribeEventConfigurationsResponse struct {
-    CreationDate *time.Time `json:"creationDate,omitempty"`
-    EventConfigurations map[string]Configuration `json:"eventConfigurations,omitempty"`
-    LastModifiedDate *time.Time `json:"lastModifiedDate,omitempty"`
-    
+	CreationDate        *time.Time               `json:"creationDate,omitempty"`
+	EventConfigurations map[string]Configuration `json:"eventConfigurations,omitempty"`
+	LastModifiedDate    *time.Time               `json:"lastModifiedDate,omitempty"`
 }
-

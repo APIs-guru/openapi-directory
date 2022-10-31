@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListScreenshotClustersResponse struct {
-    Clusters []ScreenshotCluster `json:"clusters,omitempty"`
-    
+	Clusters []ScreenshotCluster `json:"clusters,omitempty"`
 }
-

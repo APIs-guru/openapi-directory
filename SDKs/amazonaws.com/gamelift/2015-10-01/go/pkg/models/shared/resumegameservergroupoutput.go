@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ResumeGameServerGroupOutput struct {
-    GameServerGroup *GameServerGroup `json:"GameServerGroup,omitempty"`
-    
+	GameServerGroup *GameServerGroup `json:"GameServerGroup,omitempty"`
 }
-

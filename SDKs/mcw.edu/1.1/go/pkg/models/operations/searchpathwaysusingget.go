@@ -1,21 +1,15 @@
 package operations
 
-
-
 type SearchPathwaysUsingGetPathParams struct {
-    SearchString string `pathParam:"style=simple,explode=false,name=searchString"`
-    
+	SearchString string `pathParam:"style=simple,explode=false,name=searchString"`
 }
 
 type SearchPathwaysUsingGetRequest struct {
-    PathParams SearchPathwaysUsingGetPathParams 
-    
+	PathParams SearchPathwaysUsingGetPathParams
 }
 
 type SearchPathwaysUsingGetResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

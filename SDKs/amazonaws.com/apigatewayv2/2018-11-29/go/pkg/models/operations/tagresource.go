@@ -1,43 +1,35 @@
 package operations
 
-
-
 type TagResourcePathParams struct {
-    ResourceArn string `pathParam:"style=simple,explode=false,name=resource-arn"`
-    
+	ResourceArn string `pathParam:"style=simple,explode=false,name=resource-arn"`
 }
 
 type TagResourceHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type TagResourceRequestBody struct {
-    Tags map[string]string `json:"tags,omitempty"`
-    
+	Tags map[string]string `json:"tags,omitempty"`
 }
 
 type TagResourceRequest struct {
-    PathParams TagResourcePathParams 
-    Headers TagResourceHeaders 
-    Request TagResourceRequestBody `request:"mediaType=application/json"`
-    
+	PathParams TagResourcePathParams
+	Headers    TagResourceHeaders
+	Request    TagResourceRequestBody `request:"mediaType=application/json"`
 }
 
 type TagResourceResponse struct {
-    BadRequestException *interface{} 
-    ConflictException *interface{} 
-    ContentType string 
-    NotFoundException *interface{} 
-    StatusCode int64 
-    TagResourceResponse map[string]interface{} 
-    TooManyRequestsException *interface{} 
-    
+	BadRequestException      *interface{}
+	ConflictException        *interface{}
+	ContentType              string
+	NotFoundException        *interface{}
+	StatusCode               int64
+	TagResourceResponse      map[string]interface{}
+	TooManyRequestsException *interface{}
 }
-

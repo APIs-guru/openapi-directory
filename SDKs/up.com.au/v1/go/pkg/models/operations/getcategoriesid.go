@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetCategoriesIDPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetCategoriesIDRequest struct {
-    PathParams GetCategoriesIDPathParams 
-    
+	PathParams GetCategoriesIDPathParams
 }
 
 type GetCategoriesIDResponse struct {
-    ContentType string 
-    GetCategoryResponse *shared.GetCategoryResponse 
-    StatusCode int64 
-    
+	ContentType         string
+	GetCategoryResponse *shared.GetCategoryResponse
+	StatusCode          int64
 }
-

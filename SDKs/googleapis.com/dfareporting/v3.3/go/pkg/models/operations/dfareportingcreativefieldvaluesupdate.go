@@ -1,47 +1,42 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DfareportingCreativeFieldValuesUpdatePathParams struct {
-    CreativeFieldID string `pathParam:"style=simple,explode=false,name=creativeFieldId"`
-    ProfileID string `pathParam:"style=simple,explode=false,name=profileId"`
-    
+	CreativeFieldID string `pathParam:"style=simple,explode=false,name=creativeFieldId"`
+	ProfileID       string `pathParam:"style=simple,explode=false,name=profileId"`
 }
 
 type DfareportingCreativeFieldValuesUpdateQueryParams struct {
-    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
-    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
-    Callback *string `queryParam:"style=form,explode=true,name=callback"`
-    Fields *string `queryParam:"style=form,explode=true,name=fields"`
-    Key *string `queryParam:"style=form,explode=true,name=key"`
-    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
-    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
-    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
-    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
-    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
-    
+	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
+	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
+	Key            *string           `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
+	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
 type DfareportingCreativeFieldValuesUpdateSecurity struct {
-    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-    
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
 }
 
 type DfareportingCreativeFieldValuesUpdateRequest struct {
-    PathParams DfareportingCreativeFieldValuesUpdatePathParams 
-    QueryParams DfareportingCreativeFieldValuesUpdateQueryParams 
-    Request *shared.CreativeFieldValue `request:"mediaType=application/json"`
-    Security DfareportingCreativeFieldValuesUpdateSecurity 
-    
+	PathParams  DfareportingCreativeFieldValuesUpdatePathParams
+	QueryParams DfareportingCreativeFieldValuesUpdateQueryParams
+	Request     *shared.CreativeFieldValue `request:"mediaType=application/json"`
+	Security    DfareportingCreativeFieldValuesUpdateSecurity
 }
 
 type DfareportingCreativeFieldValuesUpdateResponse struct {
-    ContentType string 
-    CreativeFieldValue *shared.CreativeFieldValue 
-    StatusCode int64 
-    
+	ContentType        string
+	CreativeFieldValue *shared.CreativeFieldValue
+	StatusCode         int64
 }
-

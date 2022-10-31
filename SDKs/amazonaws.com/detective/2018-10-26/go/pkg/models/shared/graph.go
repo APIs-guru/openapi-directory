@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type Graph struct {
-    Arn *string `json:"Arn,omitempty"`
-    CreatedTime *time.Time `json:"CreatedTime,omitempty"`
-    
+	Arn         *string    `json:"Arn,omitempty"`
+	CreatedTime *time.Time `json:"CreatedTime,omitempty"`
 }
-

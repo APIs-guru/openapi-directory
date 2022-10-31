@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CategoryDetails struct {
-    PointsOfInterest []PointOfInterest `json:"PointsOfInterest"`
-    
+	PointsOfInterest []PointOfInterest `json:"PointsOfInterest"`
 }
-

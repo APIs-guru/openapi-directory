@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ReplicationConfiguration struct {
-    Rules []ReplicationRule `json:"rules"`
-    
+	Rules []ReplicationRule `json:"rules"`
 }
-

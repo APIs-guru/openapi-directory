@@ -1,14 +1,9 @@
 package shared
 
-
-
-
 type ConferenceParticipantEnumProcessingStateEnum string
 
 const (
-    ConferenceParticipantEnumProcessingStateEnumComplete ConferenceParticipantEnumProcessingStateEnum = "complete"
-ConferenceParticipantEnumProcessingStateEnumInProgress ConferenceParticipantEnumProcessingStateEnum = "in_progress"
-ConferenceParticipantEnumProcessingStateEnumTimeout ConferenceParticipantEnumProcessingStateEnum = "timeout"
+	ConferenceParticipantEnumProcessingStateEnumComplete   ConferenceParticipantEnumProcessingStateEnum = "complete"
+	ConferenceParticipantEnumProcessingStateEnumInProgress ConferenceParticipantEnumProcessingStateEnum = "in_progress"
+	ConferenceParticipantEnumProcessingStateEnumTimeout    ConferenceParticipantEnumProcessingStateEnum = "timeout"
 )
-
-

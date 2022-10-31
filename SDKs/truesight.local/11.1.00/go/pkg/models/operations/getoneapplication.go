@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetOneApplicationPathParams struct {
-    ApplicationID string `pathParam:"style=simple,explode=false,name=applicationId"`
-    
+	ApplicationID string `pathParam:"style=simple,explode=false,name=applicationId"`
 }
 
 type GetOneApplicationRequest struct {
-    PathParams GetOneApplicationPathParams 
-    
+	PathParams GetOneApplicationPathParams
 }
 
 type GetOneApplicationResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

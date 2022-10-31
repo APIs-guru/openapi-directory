@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type CreateSecurityConfigurationOutput struct {
-    CreationDateTime time.Time `json:"CreationDateTime"`
-    Name string `json:"Name"`
-    
+	CreationDateTime time.Time `json:"CreationDateTime"`
+	Name             string    `json:"Name"`
 }
-

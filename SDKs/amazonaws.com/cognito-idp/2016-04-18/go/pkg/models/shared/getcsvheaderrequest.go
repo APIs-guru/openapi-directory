@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetCsvHeaderRequest struct {
-    UserPoolID string `json:"UserPoolId"`
-    
+	UserPoolID string `json:"UserPoolId"`
 }
-

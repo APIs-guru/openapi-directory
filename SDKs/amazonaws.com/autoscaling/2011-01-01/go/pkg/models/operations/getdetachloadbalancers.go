@@ -1,52 +1,41 @@
 package operations
 
-
-
-
 type GetDetachLoadBalancersActionEnum string
 
 const (
-    GetDetachLoadBalancersActionEnumDetachLoadBalancers GetDetachLoadBalancersActionEnum = "DetachLoadBalancers"
+	GetDetachLoadBalancersActionEnumDetachLoadBalancers GetDetachLoadBalancersActionEnum = "DetachLoadBalancers"
 )
-
-
 
 type GetDetachLoadBalancersVersionEnum string
 
 const (
-    GetDetachLoadBalancersVersionEnumTwoThousandAndEleven0101 GetDetachLoadBalancersVersionEnum = "2011-01-01"
+	GetDetachLoadBalancersVersionEnumTwoThousandAndEleven0101 GetDetachLoadBalancersVersionEnum = "2011-01-01"
 )
 
-
 type GetDetachLoadBalancersQueryParams struct {
-    Action GetDetachLoadBalancersActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    AutoScalingGroupName string `queryParam:"style=form,explode=true,name=AutoScalingGroupName"`
-    LoadBalancerNames []string `queryParam:"style=form,explode=true,name=LoadBalancerNames"`
-    Version GetDetachLoadBalancersVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action               GetDetachLoadBalancersActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	AutoScalingGroupName string                            `queryParam:"style=form,explode=true,name=AutoScalingGroupName"`
+	LoadBalancerNames    []string                          `queryParam:"style=form,explode=true,name=LoadBalancerNames"`
+	Version              GetDetachLoadBalancersVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type GetDetachLoadBalancersHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetDetachLoadBalancersRequest struct {
-    QueryParams GetDetachLoadBalancersQueryParams 
-    Headers GetDetachLoadBalancersHeaders 
-    
+	QueryParams GetDetachLoadBalancersQueryParams
+	Headers     GetDetachLoadBalancersHeaders
 }
 
 type GetDetachLoadBalancersResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

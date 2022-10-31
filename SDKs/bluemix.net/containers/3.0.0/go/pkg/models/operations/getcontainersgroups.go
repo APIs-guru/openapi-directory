@@ -1,22 +1,16 @@
 package operations
 
-
-
 type GetContainersGroupsHeaders struct {
-    XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
-    XAuthToken string `header:"style=simple,explode=false,name=X-Auth-Token"`
-    
+	XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
+	XAuthToken     string `header:"style=simple,explode=false,name=X-Auth-Token"`
 }
 
 type GetContainersGroupsRequest struct {
-    Headers GetContainersGroupsHeaders 
-    
+	Headers GetContainersGroupsHeaders
 }
 
 type GetContainersGroupsResponse struct {
-    ContainersGroupsGetListItems []interface{} 
-    ContentType string 
-    StatusCode int64 
-    
+	ContainersGroupsGetListItems []interface{}
+	ContentType                  string
+	StatusCode                   int64
 }
-

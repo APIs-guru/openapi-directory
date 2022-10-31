@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeJobExecutionResponse struct {
-    Execution *JobExecution `json:"execution,omitempty"`
-    
+	Execution *JobExecution `json:"execution,omitempty"`
 }
-

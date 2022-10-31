@@ -1,32 +1,27 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type UpdatePluginRequestBody1 struct {
-    NpmName string `json:"npmName"`
-    
+	NpmName string `json:"npmName"`
 }
 
 type UpdatePluginRequestBody2 struct {
-    Path string `json:"path"`
-    
+	Path string `json:"path"`
 }
 
 type UpdatePluginSecurity struct {
-    OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
-    
+	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
 type UpdatePluginRequest struct {
-    Request *interface{} `request:"mediaType=application/json"`
-    Security UpdatePluginSecurity 
-    
+	Request  *interface{} `request:"mediaType=application/json"`
+	Security UpdatePluginSecurity
 }
 
 type UpdatePluginResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

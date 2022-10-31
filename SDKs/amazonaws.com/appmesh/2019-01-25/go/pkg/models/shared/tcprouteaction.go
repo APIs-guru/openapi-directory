@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TCPRouteAction struct {
-    WeightedTargets []WeightedTarget `json:"weightedTargets"`
-    
+	WeightedTargets []WeightedTarget `json:"weightedTargets"`
 }
-

@@ -1,45 +1,40 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeleteProfilePathParams struct {
-    DomainName string `pathParam:"style=simple,explode=false,name=DomainName"`
-    
+	DomainName string `pathParam:"style=simple,explode=false,name=DomainName"`
 }
 
 type DeleteProfileHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type DeleteProfileRequestBody struct {
-    ProfileID string `json:"ProfileId"`
-    
+	ProfileID string `json:"ProfileId"`
 }
 
 type DeleteProfileRequest struct {
-    PathParams DeleteProfilePathParams 
-    Headers DeleteProfileHeaders 
-    Request DeleteProfileRequestBody `request:"mediaType=application/json"`
-    
+	PathParams DeleteProfilePathParams
+	Headers    DeleteProfileHeaders
+	Request    DeleteProfileRequestBody `request:"mediaType=application/json"`
 }
 
 type DeleteProfileResponse struct {
-    AccessDeniedException *interface{} 
-    BadRequestException *interface{} 
-    ContentType string 
-    DeleteProfileResponse *shared.DeleteProfileResponse 
-    InternalServerException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    
+	AccessDeniedException     *interface{}
+	BadRequestException       *interface{}
+	ContentType               string
+	DeleteProfileResponse     *shared.DeleteProfileResponse
+	InternalServerException   *interface{}
+	ResourceNotFoundException *interface{}
+	StatusCode                int64
+	ThrottlingException       *interface{}
 }
-

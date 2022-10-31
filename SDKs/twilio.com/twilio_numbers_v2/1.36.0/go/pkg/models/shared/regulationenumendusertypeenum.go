@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type RegulationEnumEndUserTypeEnum string
 
 const (
-    RegulationEnumEndUserTypeEnumIndividual RegulationEnumEndUserTypeEnum = "individual"
-RegulationEnumEndUserTypeEnumBusiness RegulationEnumEndUserTypeEnum = "business"
+	RegulationEnumEndUserTypeEnumIndividual RegulationEnumEndUserTypeEnum = "individual"
+	RegulationEnumEndUserTypeEnumBusiness   RegulationEnumEndUserTypeEnum = "business"
 )
-
-

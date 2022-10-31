@@ -1,42 +1,34 @@
 package operations
 
-
-
 type PutEmailIdentityDkimAttributesPathParams struct {
-    EmailIdentity string `pathParam:"style=simple,explode=false,name=EmailIdentity"`
-    
+	EmailIdentity string `pathParam:"style=simple,explode=false,name=EmailIdentity"`
 }
 
 type PutEmailIdentityDkimAttributesHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PutEmailIdentityDkimAttributesRequestBody struct {
-    SigningEnabled *bool `json:"SigningEnabled,omitempty"`
-    
+	SigningEnabled *bool `json:"SigningEnabled,omitempty"`
 }
 
 type PutEmailIdentityDkimAttributesRequest struct {
-    PathParams PutEmailIdentityDkimAttributesPathParams 
-    Headers PutEmailIdentityDkimAttributesHeaders 
-    Request PutEmailIdentityDkimAttributesRequestBody `request:"mediaType=application/json"`
-    
+	PathParams PutEmailIdentityDkimAttributesPathParams
+	Headers    PutEmailIdentityDkimAttributesHeaders
+	Request    PutEmailIdentityDkimAttributesRequestBody `request:"mediaType=application/json"`
 }
 
 type PutEmailIdentityDkimAttributesResponse struct {
-    BadRequestException *interface{} 
-    ContentType string 
-    NotFoundException *interface{} 
-    PutEmailIdentityDkimAttributesResponse map[string]interface{} 
-    StatusCode int64 
-    TooManyRequestsException *interface{} 
-    
+	BadRequestException                    *interface{}
+	ContentType                            string
+	NotFoundException                      *interface{}
+	PutEmailIdentityDkimAttributesResponse map[string]interface{}
+	StatusCode                             int64
+	TooManyRequestsException               *interface{}
 }
-

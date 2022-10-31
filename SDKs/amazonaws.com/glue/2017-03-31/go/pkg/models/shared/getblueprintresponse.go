@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetBlueprintResponse struct {
-    Blueprint *Blueprint `json:"Blueprint,omitempty"`
-    
+	Blueprint *Blueprint `json:"Blueprint,omitempty"`
 }
-

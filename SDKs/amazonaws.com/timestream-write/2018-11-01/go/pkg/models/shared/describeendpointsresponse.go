@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeEndpointsResponse struct {
-    Endpoints []Endpoint `json:"Endpoints"`
-    
+	Endpoints []Endpoint `json:"Endpoints"`
 }
-

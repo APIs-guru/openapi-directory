@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ProtocolTftpGetTracePathParams struct {
-    AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
-    
+	AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
 }
 
 type ProtocolTftpGetTraceRequest struct {
-    PathParams ProtocolTftpGetTracePathParams 
-    
+	PathParams ProtocolTftpGetTracePathParams
 }
 
 type ProtocolTftpGetTraceResponse struct {
-    ConfigTftp *shared.ConfigTftp 
-    ContentType string 
-    StatusCode int64 
-    
+	ConfigTftp  *shared.ConfigTftp
+	ContentType string
+	StatusCode  int64
 }
-

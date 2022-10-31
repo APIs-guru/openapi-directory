@@ -1,38 +1,33 @@
 package operations
 
 import (
-"time")
+	"time"
+)
 
 type GetListofApproversForBatchPathParams struct {
-    BatchUUID string `pathParam:"style=simple,explode=false,name=batchUuid"`
-    
+	BatchUUID string `pathParam:"style=simple,explode=false,name=batchUuid"`
 }
 
 type GetListofApproversForBatchRequest struct {
-    PathParams GetListofApproversForBatchPathParams 
-    
+	PathParams GetListofApproversForBatchPathParams
 }
 
 type GetListofApproversForBatchBatchApproversApprovals struct {
-    EmailAddress *string `json:"emailAddress,omitempty"`
-    FirstName *string `json:"firstName,omitempty"`
-    LastName *string `json:"lastName,omitempty"`
-    LastUpdated *time.Time `json:"lastUpdated,omitempty"`
-    MobileNumber *string `json:"mobileNumber,omitempty"`
-    Status *string `json:"status,omitempty"`
-    UserID *int64 `json:"userId,omitempty"`
-    
+	EmailAddress *string    `json:"emailAddress,omitempty"`
+	FirstName    *string    `json:"firstName,omitempty"`
+	LastName     *string    `json:"lastName,omitempty"`
+	LastUpdated  *time.Time `json:"lastUpdated,omitempty"`
+	MobileNumber *string    `json:"mobileNumber,omitempty"`
+	Status       *string    `json:"status,omitempty"`
+	UserID       *int64     `json:"userId,omitempty"`
 }
 
 type GetListofApproversForBatchBatchApprovers struct {
-    Approvals []GetListofApproversForBatchBatchApproversApprovals `json:"approvals,omitempty"`
-    
+	Approvals []GetListofApproversForBatchBatchApproversApprovals `json:"approvals,omitempty"`
 }
 
 type GetListofApproversForBatchResponse struct {
-    BatchApprovers *GetListofApproversForBatchBatchApprovers 
-    ContentType string 
-    StatusCode int64 
-    
+	BatchApprovers *GetListofApproversForBatchBatchApprovers
+	ContentType    string
+	StatusCode     int64
 }
-

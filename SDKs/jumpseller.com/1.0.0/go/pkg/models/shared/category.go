@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Category struct {
-    Category *CategoryFields `json:"category,omitempty"`
-    
+	Category *CategoryFields `json:"category,omitempty"`
 }
-

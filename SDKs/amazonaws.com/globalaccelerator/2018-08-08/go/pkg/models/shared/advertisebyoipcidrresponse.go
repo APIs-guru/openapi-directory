@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AdvertiseByoipCidrResponse struct {
-    ByoipCidr *ByoipCidr `json:"ByoipCidr,omitempty"`
-    
+	ByoipCidr *ByoipCidr `json:"ByoipCidr,omitempty"`
 }
-

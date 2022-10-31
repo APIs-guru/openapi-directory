@@ -1,60 +1,48 @@
 package operations
 
-
-
 type GetAddPermissionPathParams struct {
-    AccountNumber int64 `pathParam:"style=simple,explode=false,name=AccountNumber"`
-    QueueName string `pathParam:"style=simple,explode=false,name=QueueName"`
-    
+	AccountNumber int64  `pathParam:"style=simple,explode=false,name=AccountNumber"`
+	QueueName     string `pathParam:"style=simple,explode=false,name=QueueName"`
 }
-
 
 type GetAddPermissionActionEnum string
 
 const (
-    GetAddPermissionActionEnumAddPermission GetAddPermissionActionEnum = "AddPermission"
+	GetAddPermissionActionEnumAddPermission GetAddPermissionActionEnum = "AddPermission"
 )
-
-
 
 type GetAddPermissionVersionEnum string
 
 const (
-    GetAddPermissionVersionEnumTwoThousandAndTwelve1105 GetAddPermissionVersionEnum = "2012-11-05"
+	GetAddPermissionVersionEnumTwoThousandAndTwelve1105 GetAddPermissionVersionEnum = "2012-11-05"
 )
 
-
 type GetAddPermissionQueryParams struct {
-    AwsAccountIds []string `queryParam:"style=form,explode=true,name=AWSAccountIds"`
-    Action GetAddPermissionActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Actions []string `queryParam:"style=form,explode=true,name=Actions"`
-    Label string `queryParam:"style=form,explode=true,name=Label"`
-    Version GetAddPermissionVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	AwsAccountIds []string                    `queryParam:"style=form,explode=true,name=AWSAccountIds"`
+	Action        GetAddPermissionActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Actions       []string                    `queryParam:"style=form,explode=true,name=Actions"`
+	Label         string                      `queryParam:"style=form,explode=true,name=Label"`
+	Version       GetAddPermissionVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type GetAddPermissionHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetAddPermissionRequest struct {
-    PathParams GetAddPermissionPathParams 
-    QueryParams GetAddPermissionQueryParams 
-    Headers GetAddPermissionHeaders 
-    
+	PathParams  GetAddPermissionPathParams
+	QueryParams GetAddPermissionQueryParams
+	Headers     GetAddPermissionHeaders
 }
 
 type GetAddPermissionResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

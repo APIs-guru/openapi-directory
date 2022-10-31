@@ -1,10 +1,6 @@
 package shared
 
-
-
 type AttributePayload struct {
-    Attributes map[string]string `json:"attributes,omitempty"`
-    Merge *bool `json:"merge,omitempty"`
-    
+	Attributes map[string]string `json:"attributes,omitempty"`
+	Merge      *bool             `json:"merge,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BudgetDetail struct {
-    BudgetName *string `json:"BudgetName,omitempty"`
-    
+	BudgetName *string `json:"BudgetName,omitempty"`
 }
-

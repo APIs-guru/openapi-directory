@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ReplicationSync struct {
-    LastSyncTime *string `json:"lastSyncTime,omitempty"`
-    
+	LastSyncTime *string `json:"lastSyncTime,omitempty"`
 }
-

@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type CodeContentTypeEnum string
 
 const (
-    CodeContentTypeEnumPlaintext CodeContentTypeEnum = "PLAINTEXT"
-CodeContentTypeEnumZipfile CodeContentTypeEnum = "ZIPFILE"
+	CodeContentTypeEnumPlaintext CodeContentTypeEnum = "PLAINTEXT"
+	CodeContentTypeEnumZipfile   CodeContentTypeEnum = "ZIPFILE"
 )
-
-

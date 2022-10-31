@@ -1,9 +1,5 @@
 package shared
 
-
-
 type FhirOutput struct {
-    FhirStore *string `json:"fhirStore,omitempty"`
-    
+	FhirStore *string `json:"fhirStore,omitempty"`
 }
-

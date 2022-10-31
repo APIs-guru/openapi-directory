@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteAlarmResult struct {
-    Operations []Operation `json:"operations,omitempty"`
-    
+	Operations []Operation `json:"operations,omitempty"`
 }
-

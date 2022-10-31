@@ -1,69 +1,55 @@
 package operations
 
-
-
 type UpdateNetworkSwitchAccessControlListsPathParams struct {
-    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
-    
+	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
-
 
 type UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnum string
 
 const (
-    UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnumAny UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnum = "any"
-UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnumIpv4 UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnum = "ipv4"
-UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnumIpv6 UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnum = "ipv6"
+	UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnumAny  UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnum = "any"
+	UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnumIpv4 UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnum = "ipv4"
+	UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnumIpv6 UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnum = "ipv6"
 )
-
-
 
 type UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnum string
 
 const (
-    UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnumAllow UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnum = "allow"
-UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnumDeny UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnum = "deny"
+	UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnumAllow UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnum = "allow"
+	UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnumDeny  UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnum = "deny"
 )
-
-
 
 type UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnum string
 
 const (
-    UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnumTCP UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnum = "tcp"
-UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnumUDP UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnum = "udp"
-UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnumAny UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnum = "any"
+	UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnumTCP UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnum = "tcp"
+	UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnumUDP UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnum = "udp"
+	UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnumAny UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnum = "any"
 )
 
-
 type UpdateNetworkSwitchAccessControlListsRequestBodyRules struct {
-    Comment *string `json:"comment,omitempty"`
-    DstCidr string `json:"dstCidr"`
-    DstPort *string `json:"dstPort,omitempty"`
-    IPVersion *UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnum `json:"ipVersion,omitempty"`
-    Policy UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnum `json:"policy"`
-    Protocol UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnum `json:"protocol"`
-    SrcCidr string `json:"srcCidr"`
-    SrcPort *string `json:"srcPort,omitempty"`
-    Vlan *string `json:"vlan,omitempty"`
-    
+	Comment   *string                                                             `json:"comment,omitempty"`
+	DstCidr   string                                                              `json:"dstCidr"`
+	DstPort   *string                                                             `json:"dstPort,omitempty"`
+	IPVersion *UpdateNetworkSwitchAccessControlListsRequestBodyRulesIPVersionEnum `json:"ipVersion,omitempty"`
+	Policy    UpdateNetworkSwitchAccessControlListsRequestBodyRulesPolicyEnum     `json:"policy"`
+	Protocol  UpdateNetworkSwitchAccessControlListsRequestBodyRulesProtocolEnum   `json:"protocol"`
+	SrcCidr   string                                                              `json:"srcCidr"`
+	SrcPort   *string                                                             `json:"srcPort,omitempty"`
+	Vlan      *string                                                             `json:"vlan,omitempty"`
 }
 
 type UpdateNetworkSwitchAccessControlListsRequestBody struct {
-    Rules []UpdateNetworkSwitchAccessControlListsRequestBodyRules `json:"rules"`
-    
+	Rules []UpdateNetworkSwitchAccessControlListsRequestBodyRules `json:"rules"`
 }
 
 type UpdateNetworkSwitchAccessControlListsRequest struct {
-    PathParams UpdateNetworkSwitchAccessControlListsPathParams 
-    Request UpdateNetworkSwitchAccessControlListsRequestBody `request:"mediaType=application/json"`
-    
+	PathParams UpdateNetworkSwitchAccessControlListsPathParams
+	Request    UpdateNetworkSwitchAccessControlListsRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateNetworkSwitchAccessControlListsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    UpdateNetworkSwitchAccessControlLists200ApplicationJSONObject map[string]interface{} 
-    
+	ContentType                                                   string
+	StatusCode                                                    int64
+	UpdateNetworkSwitchAccessControlLists200ApplicationJSONObject map[string]interface{}
 }
-

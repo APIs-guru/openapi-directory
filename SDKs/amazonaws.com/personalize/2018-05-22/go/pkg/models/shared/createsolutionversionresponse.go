@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateSolutionVersionResponse struct {
-    SolutionVersionArn *string `json:"solutionVersionArn,omitempty"`
-    
+	SolutionVersionArn *string `json:"solutionVersionArn,omitempty"`
 }
-

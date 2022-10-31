@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type ConversationMessageEnumWebhookEnabledTypeEnum string
 
 const (
-    ConversationMessageEnumWebhookEnabledTypeEnumTrue ConversationMessageEnumWebhookEnabledTypeEnum = "true"
-ConversationMessageEnumWebhookEnabledTypeEnumFalse ConversationMessageEnumWebhookEnabledTypeEnum = "false"
+	ConversationMessageEnumWebhookEnabledTypeEnumTrue  ConversationMessageEnumWebhookEnabledTypeEnum = "true"
+	ConversationMessageEnumWebhookEnabledTypeEnumFalse ConversationMessageEnumWebhookEnabledTypeEnum = "false"
 )
-
-

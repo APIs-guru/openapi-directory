@@ -1,23 +1,17 @@
 package operations
 
-
-
 type GetProjectCategoryListPathParams struct {
-    WorkgroupID string `pathParam:"style=simple,explode=false,name=workgroup_id"`
-    
+	WorkgroupID string `pathParam:"style=simple,explode=false,name=workgroup_id"`
 }
 
 type GetProjectCategoryListRequest struct {
-    PathParams GetProjectCategoryListPathParams 
-    
+	PathParams GetProjectCategoryListPathParams
 }
 
 type GetProjectCategoryListResponse struct {
-    Body []byte 
-    ContentType string 
-    HTTPStatusVo *interface{} 
-    ProjectCategoryListVo *interface{} 
-    StatusCode int64 
-    
+	Body                  []byte
+	ContentType           string
+	HTTPStatusVo          *interface{}
+	ProjectCategoryListVo *interface{}
+	StatusCode            int64
 }
-

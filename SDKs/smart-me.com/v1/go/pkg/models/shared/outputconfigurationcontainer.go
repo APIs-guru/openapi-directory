@@ -1,47 +1,37 @@
 package shared
 
-
-
-
 type OutputConfigurationContainerDigitalOutputNoConnectionActionEnum string
 
 const (
-    OutputConfigurationContainerDigitalOutputNoConnectionActionEnumNothing OutputConfigurationContainerDigitalOutputNoConnectionActionEnum = "Nothing"
-OutputConfigurationContainerDigitalOutputNoConnectionActionEnumTurnOff OutputConfigurationContainerDigitalOutputNoConnectionActionEnum = "TurnOff"
-OutputConfigurationContainerDigitalOutputNoConnectionActionEnumTurnOn OutputConfigurationContainerDigitalOutputNoConnectionActionEnum = "TurnOn"
-OutputConfigurationContainerDigitalOutputNoConnectionActionEnumSetPwmValue OutputConfigurationContainerDigitalOutputNoConnectionActionEnum = "SetPwmValue"
+	OutputConfigurationContainerDigitalOutputNoConnectionActionEnumNothing     OutputConfigurationContainerDigitalOutputNoConnectionActionEnum = "Nothing"
+	OutputConfigurationContainerDigitalOutputNoConnectionActionEnumTurnOff     OutputConfigurationContainerDigitalOutputNoConnectionActionEnum = "TurnOff"
+	OutputConfigurationContainerDigitalOutputNoConnectionActionEnumTurnOn      OutputConfigurationContainerDigitalOutputNoConnectionActionEnum = "TurnOn"
+	OutputConfigurationContainerDigitalOutputNoConnectionActionEnumSetPwmValue OutputConfigurationContainerDigitalOutputNoConnectionActionEnum = "SetPwmValue"
 )
-
-
 
 type OutputConfigurationContainerS0PulseValueEnum string
 
 const (
-    OutputConfigurationContainerS0PulseValueEnumPulseValue1000Kwh OutputConfigurationContainerS0PulseValueEnum = "PulseValue1000Kwh"
-OutputConfigurationContainerS0PulseValueEnumPulseValue10000Kwh OutputConfigurationContainerS0PulseValueEnum = "PulseValue10000Kwh"
+	OutputConfigurationContainerS0PulseValueEnumPulseValue1000Kwh  OutputConfigurationContainerS0PulseValueEnum = "PulseValue1000Kwh"
+	OutputConfigurationContainerS0PulseValueEnumPulseValue10000Kwh OutputConfigurationContainerS0PulseValueEnum = "PulseValue10000Kwh"
 )
-
-
 
 type OutputConfigurationContainerTypeEnum string
 
 const (
-    OutputConfigurationContainerTypeEnumImpulseOutputActiveEnergy OutputConfigurationContainerTypeEnum = "ImpulseOutputActiveEnergy"
-OutputConfigurationContainerTypeEnumImpulseOutputActiveEnergyImport OutputConfigurationContainerTypeEnum = "ImpulseOutputActiveEnergyImport"
-OutputConfigurationContainerTypeEnumImpulseOutputActiveEnergyExport OutputConfigurationContainerTypeEnum = "ImpulseOutputActiveEnergyExport"
-OutputConfigurationContainerTypeEnumImpulseOutputReactiveEnergy OutputConfigurationContainerTypeEnum = "ImpulseOutputReactiveEnergy"
-OutputConfigurationContainerTypeEnumDigitalOutput OutputConfigurationContainerTypeEnum = "DigitalOutput"
-OutputConfigurationContainerTypeEnumAnalogPwmSignalOutput OutputConfigurationContainerTypeEnum = "AnalogPwmSignalOutput"
-OutputConfigurationContainerTypeEnumDisabled OutputConfigurationContainerTypeEnum = "Disabled"
+	OutputConfigurationContainerTypeEnumImpulseOutputActiveEnergy       OutputConfigurationContainerTypeEnum = "ImpulseOutputActiveEnergy"
+	OutputConfigurationContainerTypeEnumImpulseOutputActiveEnergyImport OutputConfigurationContainerTypeEnum = "ImpulseOutputActiveEnergyImport"
+	OutputConfigurationContainerTypeEnumImpulseOutputActiveEnergyExport OutputConfigurationContainerTypeEnum = "ImpulseOutputActiveEnergyExport"
+	OutputConfigurationContainerTypeEnumImpulseOutputReactiveEnergy     OutputConfigurationContainerTypeEnum = "ImpulseOutputReactiveEnergy"
+	OutputConfigurationContainerTypeEnumDigitalOutput                   OutputConfigurationContainerTypeEnum = "DigitalOutput"
+	OutputConfigurationContainerTypeEnumAnalogPwmSignalOutput           OutputConfigurationContainerTypeEnum = "AnalogPwmSignalOutput"
+	OutputConfigurationContainerTypeEnumDisabled                        OutputConfigurationContainerTypeEnum = "Disabled"
 )
 
-
 type OutputConfigurationContainer struct {
-    DigitalOutputNoConnectionAction *OutputConfigurationContainerDigitalOutputNoConnectionActionEnum `json:"DigitalOutputNoConnectionAction,omitempty"`
-    Name *string `json:"Name,omitempty"`
-    Number *int32 `json:"Number,omitempty"`
-    S0PulseValue *OutputConfigurationContainerS0PulseValueEnum `json:"S0PulseValue,omitempty"`
-    Type *OutputConfigurationContainerTypeEnum `json:"Type,omitempty"`
-    
+	DigitalOutputNoConnectionAction *OutputConfigurationContainerDigitalOutputNoConnectionActionEnum `json:"DigitalOutputNoConnectionAction,omitempty"`
+	Name                            *string                                                          `json:"Name,omitempty"`
+	Number                          *int32                                                           `json:"Number,omitempty"`
+	S0PulseValue                    *OutputConfigurationContainerS0PulseValueEnum                    `json:"S0PulseValue,omitempty"`
+	Type                            *OutputConfigurationContainerTypeEnum                            `json:"Type,omitempty"`
 }
-

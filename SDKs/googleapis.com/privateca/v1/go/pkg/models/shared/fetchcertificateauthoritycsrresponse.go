@@ -1,9 +1,5 @@
 package shared
 
-
-
 type FetchCertificateAuthorityCsrResponse struct {
-    PemCsr *string `json:"pemCsr,omitempty"`
-    
+	PemCsr *string `json:"pemCsr,omitempty"`
 }
-

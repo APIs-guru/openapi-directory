@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type CostEstimationServiceResourceStateEnum string
 
 const (
-    CostEstimationServiceResourceStateEnumActive CostEstimationServiceResourceStateEnum = "ACTIVE"
-CostEstimationServiceResourceStateEnumInactive CostEstimationServiceResourceStateEnum = "INACTIVE"
+	CostEstimationServiceResourceStateEnumActive   CostEstimationServiceResourceStateEnum = "ACTIVE"
+	CostEstimationServiceResourceStateEnumInactive CostEstimationServiceResourceStateEnum = "INACTIVE"
 )
-
-

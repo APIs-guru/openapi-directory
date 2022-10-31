@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ReadPresetResponse struct {
-    Preset *Preset `json:"Preset,omitempty"`
-    
+	Preset *Preset `json:"Preset,omitempty"`
 }
-

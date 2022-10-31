@@ -1,11 +1,7 @@
 package shared
 
-
-
 type CreateManagedShortLinkResponse struct {
-    ManagedShortLink *ManagedShortLink `json:"managedShortLink,omitempty"`
-    PreviewLink *string `json:"previewLink,omitempty"`
-    Warning []DynamicLinkWarning `json:"warning,omitempty"`
-    
+	ManagedShortLink *ManagedShortLink    `json:"managedShortLink,omitempty"`
+	PreviewLink      *string              `json:"previewLink,omitempty"`
+	Warning          []DynamicLinkWarning `json:"warning,omitempty"`
 }
-

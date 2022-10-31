@@ -1,15 +1,10 @@
 package operations
 
-
-
 type PutToolsLogLevelLuaRequest struct {
-    Request []byte `request:"mediaType=text/plain"`
-    
+	Request []byte `request:"mediaType=text/plain"`
 }
 
 type PutToolsLogLevelLuaResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

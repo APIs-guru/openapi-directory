@@ -1,9 +1,5 @@
 package shared
 
-
-
 type WebhookEventCallback struct {
-    Data WebhookEventResource `json:"data"`
-    
+	Data WebhookEventResource `json:"data"`
 }
-

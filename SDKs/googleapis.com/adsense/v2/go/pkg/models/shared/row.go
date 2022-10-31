@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Row struct {
-    Cells []Cell `json:"cells,omitempty"`
-    
+	Cells []Cell `json:"cells,omitempty"`
 }
-

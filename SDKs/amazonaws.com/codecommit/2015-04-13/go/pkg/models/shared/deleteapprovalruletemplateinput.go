@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteApprovalRuleTemplateInput struct {
-    ApprovalRuleTemplateName string `json:"approvalRuleTemplateName"`
-    
+	ApprovalRuleTemplateName string `json:"approvalRuleTemplateName"`
 }
-

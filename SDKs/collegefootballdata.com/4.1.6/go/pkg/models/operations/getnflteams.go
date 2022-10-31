@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetNflTeamsResponse struct {
-    ContentType string 
-    DraftTeams []shared.DraftTeam 
-    StatusCode int64 
-    
+	ContentType string
+	DraftTeams  []shared.DraftTeam
+	StatusCode  int64
 }
-

@@ -1,22 +1,19 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type BatchJobInstructionBatchJobInstructionDelete struct {
-    Delete []interface{} `json:"DELETE,omitempty"`
-    
+	Delete []interface{} `json:"DELETE,omitempty"`
 }
 
 type BatchJobInstructionBatchJobInstruction struct {
-    HoldingDate *time.Time `json:"HoldingDate,omitempty"`
-    Instructions *BatchJobInstructionBatchJobInstructionDelete `json:"Instructions,omitempty"`
-    ValidateOnly *bool `json:"ValidateOnly,omitempty"`
-    
+	HoldingDate  *time.Time                                    `json:"HoldingDate,omitempty"`
+	Instructions *BatchJobInstructionBatchJobInstructionDelete `json:"Instructions,omitempty"`
+	ValidateOnly *bool                                         `json:"ValidateOnly,omitempty"`
 }
 
 type BatchJobInstruction struct {
-    BatchJobInstruction *BatchJobInstructionBatchJobInstruction `json:"BatchJobInstruction,omitempty"`
-    
+	BatchJobInstruction *BatchJobInstructionBatchJobInstruction `json:"BatchJobInstruction,omitempty"`
 }
-

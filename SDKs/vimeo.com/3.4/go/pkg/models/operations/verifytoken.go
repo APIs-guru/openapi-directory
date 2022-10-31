@@ -1,13 +1,12 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type VerifyTokenResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Auth *shared.Auth 
-    LegacyError *shared.LegacyError 
-    
+	ContentType string
+	StatusCode  int64
+	Auth        *shared.Auth
+	LegacyError *shared.LegacyError
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ReportRecipientConfigJSON struct {
-    Target *string `json:"target,omitempty"`
-    
+	Target *string `json:"target,omitempty"`
 }
-

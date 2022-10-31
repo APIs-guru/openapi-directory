@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type AvailableServicesResponse struct {
-    APIServicesOut *shared.APIServicesOut 
-    ContentType string 
-    StatusCode int64 
-    
+	APIServicesOut *shared.APIServicesOut
+	ContentType    string
+	StatusCode     int64
 }
-

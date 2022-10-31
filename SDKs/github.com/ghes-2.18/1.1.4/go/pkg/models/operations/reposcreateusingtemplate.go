@@ -1,34 +1,30 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ReposCreateUsingTemplatePathParams struct {
-    TemplateOwner string `pathParam:"style=simple,explode=false,name=template_owner"`
-    TemplateRepo string `pathParam:"style=simple,explode=false,name=template_repo"`
-    
+	TemplateOwner string `pathParam:"style=simple,explode=false,name=template_owner"`
+	TemplateRepo  string `pathParam:"style=simple,explode=false,name=template_repo"`
 }
 
 type ReposCreateUsingTemplateRequestBody struct {
-    Description *string `json:"description,omitempty"`
-    IncludeAllBranches *bool `json:"include_all_branches,omitempty"`
-    Name string `json:"name"`
-    Owner *string `json:"owner,omitempty"`
-    Private *bool `json:"private,omitempty"`
-    
+	Description        *string `json:"description,omitempty"`
+	IncludeAllBranches *bool   `json:"include_all_branches,omitempty"`
+	Name               string  `json:"name"`
+	Owner              *string `json:"owner,omitempty"`
+	Private            *bool   `json:"private,omitempty"`
 }
 
 type ReposCreateUsingTemplateRequest struct {
-    PathParams ReposCreateUsingTemplatePathParams 
-    Request *ReposCreateUsingTemplateRequestBody `request:"mediaType=application/json"`
-    
+	PathParams ReposCreateUsingTemplatePathParams
+	Request    *ReposCreateUsingTemplateRequestBody `request:"mediaType=application/json"`
 }
 
 type ReposCreateUsingTemplateResponse struct {
-    ContentType string 
-    Headers map[string][]string 
-    StatusCode int64 
-    Repository *shared.Repository 
-    
+	ContentType string
+	Headers     map[string][]string
+	StatusCode  int64
+	Repository  *shared.Repository
 }
-

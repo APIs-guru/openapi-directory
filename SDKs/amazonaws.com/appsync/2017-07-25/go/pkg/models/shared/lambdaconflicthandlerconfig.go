@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LambdaConflictHandlerConfig struct {
-    LambdaConflictHandlerArn *string `json:"lambdaConflictHandlerArn,omitempty"`
-    
+	LambdaConflictHandlerArn *string `json:"lambdaConflictHandlerArn,omitempty"`
 }
-

@@ -1,32 +1,28 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetTagsFromPayRunPathParams struct {
-    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
-    PayRunID string `pathParam:"style=simple,explode=false,name=PayRunId"`
-    PayScheduleID string `pathParam:"style=simple,explode=false,name=PayScheduleId"`
-    
+	EmployerID    string `pathParam:"style=simple,explode=false,name=EmployerId"`
+	PayRunID      string `pathParam:"style=simple,explode=false,name=PayRunId"`
+	PayScheduleID string `pathParam:"style=simple,explode=false,name=PayScheduleId"`
 }
 
 type GetTagsFromPayRunHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type GetTagsFromPayRunRequest struct {
-    PathParams GetTagsFromPayRunPathParams 
-    Headers GetTagsFromPayRunHeaders 
-    
+	PathParams GetTagsFromPayRunPathParams
+	Headers    GetTagsFromPayRunHeaders
 }
 
 type GetTagsFromPayRunResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    LinkCollection *shared.LinkCollection 
-    StatusCode int64 
-    
+	ContentType    string
+	ErrorModel     *shared.ErrorModel
+	LinkCollection *shared.LinkCollection
+	StatusCode     int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchApprovePublisherConnectionsRequest struct {
-    Names []string `json:"names,omitempty"`
-    
+	Names []string `json:"names,omitempty"`
 }
-

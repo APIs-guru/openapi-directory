@@ -1,28 +1,21 @@
 package operations
 
-
-
 type GetPatientsIDMediaPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetPatientsIDMediaQueryParams struct {
-    Extended *string `queryParam:"style=form,explode=true,name=extended"`
-    Transcode *string `queryParam:"style=form,explode=true,name=transcode"`
-    
+	Extended  *string `queryParam:"style=form,explode=true,name=extended"`
+	Transcode *string `queryParam:"style=form,explode=true,name=transcode"`
 }
 
 type GetPatientsIDMediaRequest struct {
-    PathParams GetPatientsIDMediaPathParams 
-    QueryParams GetPatientsIDMediaQueryParams 
-    
+	PathParams  GetPatientsIDMediaPathParams
+	QueryParams GetPatientsIDMediaQueryParams
 }
 
 type GetPatientsIDMediaResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

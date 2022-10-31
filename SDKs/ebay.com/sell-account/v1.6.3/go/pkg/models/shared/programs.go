@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Programs struct {
-    Programs []Program `json:"programs,omitempty"`
-    
+	Programs []Program `json:"programs,omitempty"`
 }
-

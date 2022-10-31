@@ -1,20 +1,14 @@
 package operations
 
-
-
 type GetCacheValuePathParams struct {
-    Value int64 `pathParam:"style=simple,explode=false,name=value"`
-    
+	Value int64 `pathParam:"style=simple,explode=false,name=value"`
 }
 
 type GetCacheValueRequest struct {
-    PathParams GetCacheValuePathParams 
-    
+	PathParams GetCacheValuePathParams
 }
 
 type GetCacheValueResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteImageRequest struct {
-    ImageName string `json:"ImageName"`
-    
+	ImageName string `json:"ImageName"`
 }
-

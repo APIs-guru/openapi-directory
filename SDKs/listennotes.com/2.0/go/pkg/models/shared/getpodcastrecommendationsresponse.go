@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetPodcastRecommendationsResponse struct {
-    Recommendations []PodcastSimple `json:"recommendations"`
-    
+	Recommendations []PodcastSimple `json:"recommendations"`
 }
-

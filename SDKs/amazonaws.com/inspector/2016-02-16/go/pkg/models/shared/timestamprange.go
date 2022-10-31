@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type TimestampRange struct {
-    BeginDate *time.Time `json:"beginDate,omitempty"`
-    EndDate *time.Time `json:"endDate,omitempty"`
-    
+	BeginDate *time.Time `json:"beginDate,omitempty"`
+	EndDate   *time.Time `json:"endDate,omitempty"`
 }
-

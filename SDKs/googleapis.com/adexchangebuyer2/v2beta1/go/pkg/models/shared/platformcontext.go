@@ -1,19 +1,13 @@
 package shared
 
-
-
-
 type PlatformContextPlatformsEnum string
 
 const (
-    PlatformContextPlatformsEnumDesktop PlatformContextPlatformsEnum = "DESKTOP"
-PlatformContextPlatformsEnumAndroid PlatformContextPlatformsEnum = "ANDROID"
-PlatformContextPlatformsEnumIos PlatformContextPlatformsEnum = "IOS"
+	PlatformContextPlatformsEnumDesktop PlatformContextPlatformsEnum = "DESKTOP"
+	PlatformContextPlatformsEnumAndroid PlatformContextPlatformsEnum = "ANDROID"
+	PlatformContextPlatformsEnumIos     PlatformContextPlatformsEnum = "IOS"
 )
 
-
 type PlatformContext struct {
-    Platforms []PlatformContextPlatformsEnum `json:"platforms,omitempty"`
-    
+	Platforms []PlatformContextPlatformsEnum `json:"platforms,omitempty"`
 }
-

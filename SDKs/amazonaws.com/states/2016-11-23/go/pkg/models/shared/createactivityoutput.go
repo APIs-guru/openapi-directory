@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type CreateActivityOutput struct {
-    ActivityArn string `json:"activityArn"`
-    CreationDate time.Time `json:"creationDate"`
-    
+	ActivityArn  string    `json:"activityArn"`
+	CreationDate time.Time `json:"creationDate"`
 }
-

@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetCategoryPathParams struct {
-    Category string `pathParam:"style=simple,explode=false,name=category"`
-    
+	Category string `pathParam:"style=simple,explode=false,name=category"`
 }
 
 type GetCategoryRequest struct {
-    PathParams GetCategoryPathParams 
-    
+	PathParams GetCategoryPathParams
 }
 
 type GetCategoryResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Category *shared.Category 
-    LegacyError *shared.LegacyError 
-    
+	ContentType string
+	StatusCode  int64
+	Category    *shared.Category
+	LegacyError *shared.LegacyError
 }
-

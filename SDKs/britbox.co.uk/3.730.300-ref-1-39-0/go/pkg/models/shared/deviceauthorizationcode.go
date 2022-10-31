@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeviceAuthorizationCode struct {
-    Code string `json:"code"`
-    
+	Code string `json:"code"`
 }
-

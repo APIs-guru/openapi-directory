@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DynatraceConnectorProfileCredentials struct {
-    APIToken string `json:"apiToken"`
-    
+	APIToken string `json:"apiToken"`
 }
-

@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetRealmDefaultOptionalClientScopesPathParams struct {
-    Realm string `pathParam:"style=simple,explode=false,name=realm"`
-    
+	Realm string `pathParam:"style=simple,explode=false,name=realm"`
 }
 
 type GetRealmDefaultOptionalClientScopesRequest struct {
-    PathParams GetRealmDefaultOptionalClientScopesPathParams 
-    
+	PathParams GetRealmDefaultOptionalClientScopesPathParams
 }
 
 type GetRealmDefaultOptionalClientScopesResponse struct {
-    ClientScopeRepresentations []shared.ClientScopeRepresentation 
-    ContentType string 
-    StatusCode int64 
-    
+	ClientScopeRepresentations []shared.ClientScopeRepresentation
+	ContentType                string
+	StatusCode                 int64
 }
-

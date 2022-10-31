@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeObservationRequest struct {
-    ObservationID string `json:"ObservationId"`
-    
+	ObservationID string `json:"ObservationId"`
 }
-

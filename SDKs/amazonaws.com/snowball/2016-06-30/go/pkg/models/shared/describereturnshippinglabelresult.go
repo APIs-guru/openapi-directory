@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type DescribeReturnShippingLabelResult struct {
-    ExpirationDate *time.Time `json:"ExpirationDate,omitempty"`
-    Status *ShippingLabelStatusEnum `json:"Status,omitempty"`
-    
+	ExpirationDate *time.Time               `json:"ExpirationDate,omitempty"`
+	Status         *ShippingLabelStatusEnum `json:"Status,omitempty"`
 }
-

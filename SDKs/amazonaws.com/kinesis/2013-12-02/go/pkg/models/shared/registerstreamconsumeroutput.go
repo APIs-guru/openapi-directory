@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RegisterStreamConsumerOutput struct {
-    Consumer Consumer `json:"Consumer"`
-    
+	Consumer Consumer `json:"Consumer"`
 }
-

@@ -1,10 +1,6 @@
 package shared
 
-
-
 type TLSRouteRouteDestination struct {
-    ServiceName *string `json:"serviceName,omitempty"`
-    Weight *int32 `json:"weight,omitempty"`
-    
+	ServiceName *string `json:"serviceName,omitempty"`
+	Weight      *int32  `json:"weight,omitempty"`
 }
-

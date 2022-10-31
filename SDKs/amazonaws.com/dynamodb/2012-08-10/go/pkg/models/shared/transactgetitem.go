@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TransactGetItem struct {
-    Get Get `json:"Get"`
-    
+	Get Get `json:"Get"`
 }
-

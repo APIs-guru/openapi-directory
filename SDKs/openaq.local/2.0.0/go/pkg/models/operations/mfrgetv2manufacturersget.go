@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type MfrGetV2ManufacturersGetResponse struct {
-    ContentType string 
-    OpenAqResult *shared.OpenAqResult 
-    StatusCode int64 
-    
+	ContentType  string
+	OpenAqResult *shared.OpenAqResult
+	StatusCode   int64
 }
-

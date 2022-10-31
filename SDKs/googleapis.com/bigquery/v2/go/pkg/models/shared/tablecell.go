@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TableCell struct {
-    V *interface{} `json:"v,omitempty"`
-    
+	V *interface{} `json:"v,omitempty"`
 }
-

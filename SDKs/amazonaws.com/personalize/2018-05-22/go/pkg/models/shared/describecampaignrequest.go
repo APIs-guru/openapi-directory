@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeCampaignRequest struct {
-    CampaignArn string `json:"campaignArn"`
-    
+	CampaignArn string `json:"campaignArn"`
 }
-

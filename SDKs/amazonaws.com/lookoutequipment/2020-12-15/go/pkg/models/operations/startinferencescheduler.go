@@ -1,44 +1,39 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type StartInferenceSchedulerXAmzTargetEnum string
 
 const (
-    StartInferenceSchedulerXAmzTargetEnumAwsLookoutEquipmentFrontendServiceStartInferenceScheduler StartInferenceSchedulerXAmzTargetEnum = "AWSLookoutEquipmentFrontendService.StartInferenceScheduler"
+	StartInferenceSchedulerXAmzTargetEnumAwsLookoutEquipmentFrontendServiceStartInferenceScheduler StartInferenceSchedulerXAmzTargetEnum = "AWSLookoutEquipmentFrontendService.StartInferenceScheduler"
 )
 
-
 type StartInferenceSchedulerHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget StartInferenceSchedulerXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                               `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                               `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                               `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                               `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                               `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                               `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                               `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        StartInferenceSchedulerXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type StartInferenceSchedulerRequest struct {
-    Headers StartInferenceSchedulerHeaders 
-    Request shared.StartInferenceSchedulerRequest `request:"mediaType=application/json"`
-    
+	Headers StartInferenceSchedulerHeaders
+	Request shared.StartInferenceSchedulerRequest `request:"mediaType=application/json"`
 }
 
 type StartInferenceSchedulerResponse struct {
-    AccessDeniedException *interface{} 
-    ConflictException *interface{} 
-    ContentType string 
-    InternalServerException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StartInferenceSchedulerResponse *shared.StartInferenceSchedulerResponse 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    ValidationException *interface{} 
-    
+	AccessDeniedException           *interface{}
+	ConflictException               *interface{}
+	ContentType                     string
+	InternalServerException         *interface{}
+	ResourceNotFoundException       *interface{}
+	StartInferenceSchedulerResponse *shared.StartInferenceSchedulerResponse
+	StatusCode                      int64
+	ThrottlingException             *interface{}
+	ValidationException             *interface{}
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeProtectionGroupResponse struct {
-    ProtectionGroup ProtectionGroup `json:"ProtectionGroup"`
-    
+	ProtectionGroup ProtectionGroup `json:"ProtectionGroup"`
 }
-

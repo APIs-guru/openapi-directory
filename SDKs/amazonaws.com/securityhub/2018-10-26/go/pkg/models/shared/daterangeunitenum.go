@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type DateRangeUnitEnum string
 
 const (
-    DateRangeUnitEnumDays DateRangeUnitEnum = "DAYS"
+	DateRangeUnitEnumDays DateRangeUnitEnum = "DAYS"
 )
-
-

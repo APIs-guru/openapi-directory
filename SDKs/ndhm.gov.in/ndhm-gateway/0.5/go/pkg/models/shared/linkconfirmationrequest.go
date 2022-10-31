@@ -1,18 +1,16 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type LinkConfirmationRequestConfirmation struct {
-    LinkRefNumber string `json:"linkRefNumber"`
-    Token string `json:"token"`
-    
+	LinkRefNumber string `json:"linkRefNumber"`
+	Token         string `json:"token"`
 }
 
 type LinkConfirmationRequest struct {
-    Confirmation LinkConfirmationRequestConfirmation `json:"confirmation"`
-    RequestID string `json:"requestId"`
-    Timestamp time.Time `json:"timestamp"`
-    
+	Confirmation LinkConfirmationRequestConfirmation `json:"confirmation"`
+	RequestID    string                              `json:"requestId"`
+	Timestamp    time.Time                           `json:"timestamp"`
 }
-

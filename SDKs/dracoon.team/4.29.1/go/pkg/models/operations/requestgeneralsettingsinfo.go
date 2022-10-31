@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type RequestGeneralSettingsInfoHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type RequestGeneralSettingsInfoRequest struct {
-    Headers RequestGeneralSettingsInfoHeaders 
-    
+	Headers RequestGeneralSettingsInfoHeaders
 }
 
 type RequestGeneralSettingsInfoResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    GeneralSettingsInfo *shared.GeneralSettingsInfo 
-    StatusCode int64 
-    
+	ContentType         string
+	ErrorResponse       *shared.ErrorResponse
+	GeneralSettingsInfo *shared.GeneralSettingsInfo
+	StatusCode          int64
 }
-

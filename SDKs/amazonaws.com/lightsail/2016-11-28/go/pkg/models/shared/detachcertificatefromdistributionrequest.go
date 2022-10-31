@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DetachCertificateFromDistributionRequest struct {
-    DistributionName string `json:"distributionName"`
-    
+	DistributionName string `json:"distributionName"`
 }
-

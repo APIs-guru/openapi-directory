@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type EndpointConfigSummary struct {
-    CreationTime time.Time `json:"CreationTime"`
-    EndpointConfigArn string `json:"EndpointConfigArn"`
-    EndpointConfigName string `json:"EndpointConfigName"`
-    
+	CreationTime       time.Time `json:"CreationTime"`
+	EndpointConfigArn  string    `json:"EndpointConfigArn"`
+	EndpointConfigName string    `json:"EndpointConfigName"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteReplicationTaskAssessmentRunMessage struct {
-    ReplicationTaskAssessmentRunArn string `json:"ReplicationTaskAssessmentRunArn"`
-    
+	ReplicationTaskAssessmentRunArn string `json:"ReplicationTaskAssessmentRunArn"`
 }
-

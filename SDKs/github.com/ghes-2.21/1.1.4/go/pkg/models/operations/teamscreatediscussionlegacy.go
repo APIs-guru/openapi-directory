@@ -1,30 +1,26 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type TeamsCreateDiscussionLegacyPathParams struct {
-    TeamID int64 `pathParam:"style=simple,explode=false,name=team_id"`
-    
+	TeamID int64 `pathParam:"style=simple,explode=false,name=team_id"`
 }
 
 type TeamsCreateDiscussionLegacyRequestBody struct {
-    Body string `json:"body"`
-    Private *bool `json:"private,omitempty"`
-    Title string `json:"title"`
-    
+	Body    string `json:"body"`
+	Private *bool  `json:"private,omitempty"`
+	Title   string `json:"title"`
 }
 
 type TeamsCreateDiscussionLegacyRequest struct {
-    PathParams TeamsCreateDiscussionLegacyPathParams 
-    Request *TeamsCreateDiscussionLegacyRequestBody `request:"mediaType=application/json"`
-    
+	PathParams TeamsCreateDiscussionLegacyPathParams
+	Request    *TeamsCreateDiscussionLegacyRequestBody `request:"mediaType=application/json"`
 }
 
 type TeamsCreateDiscussionLegacyResponse struct {
-    ContentType string 
-    StatusCode int64 
-    TeamDiscussion *shared.TeamDiscussion 
-    
+	ContentType    string
+	StatusCode     int64
+	TeamDiscussion *shared.TeamDiscussion
 }
-

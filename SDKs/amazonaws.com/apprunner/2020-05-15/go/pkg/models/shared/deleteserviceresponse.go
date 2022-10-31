@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DeleteServiceResponse struct {
-    OperationID string `json:"OperationId"`
-    Service Service `json:"Service"`
-    
+	OperationID string  `json:"OperationId"`
+	Service     Service `json:"Service"`
 }
-

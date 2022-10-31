@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SessionInfo struct {
-    SessionID *string `json:"sessionId,omitempty"`
-    
+	SessionID *string `json:"sessionId,omitempty"`
 }
-

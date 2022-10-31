@@ -1,10 +1,6 @@
 package shared
 
-
-
 type CreateReturnShippingLabelRequest struct {
-    JobID string `json:"JobId"`
-    ShippingOption *ShippingOptionEnum `json:"ShippingOption,omitempty"`
-    
+	JobID          string              `json:"JobId"`
+	ShippingOption *ShippingOptionEnum `json:"ShippingOption,omitempty"`
 }
-

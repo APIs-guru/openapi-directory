@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetDistributionsQueryParams struct {
-    SurveyID string `queryParam:"style=form,explode=true,name=surveyId"`
-    
+	SurveyID string `queryParam:"style=form,explode=true,name=surveyId"`
 }
 
 type GetDistributionsRequest struct {
-    QueryParams GetDistributionsQueryParams 
-    
+	QueryParams GetDistributionsQueryParams
 }
 
 type GetDistributionsResponse struct {
-    ContentType string 
-    DistributionsResponse *shared.DistributionsResponse 
-    StatusCode int64 
-    
+	ContentType           string
+	DistributionsResponse *shared.DistributionsResponse
+	StatusCode            int64
 }
-

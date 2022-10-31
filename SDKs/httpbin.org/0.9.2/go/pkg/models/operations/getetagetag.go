@@ -1,27 +1,20 @@
 package operations
 
-
-
 type GetEtagEtagPathParams struct {
-    Etag string `pathParam:"style=simple,explode=false,name=etag"`
-    
+	Etag string `pathParam:"style=simple,explode=false,name=etag"`
 }
 
 type GetEtagEtagHeaders struct {
-    IfMatch *string `header:"style=simple,explode=false,name=If-Match"`
-    IfNoneMatch *string `header:"style=simple,explode=false,name=If-None-Match"`
-    
+	IfMatch     *string `header:"style=simple,explode=false,name=If-Match"`
+	IfNoneMatch *string `header:"style=simple,explode=false,name=If-None-Match"`
 }
 
 type GetEtagEtagRequest struct {
-    PathParams GetEtagEtagPathParams 
-    Headers GetEtagEtagHeaders 
-    
+	PathParams GetEtagEtagPathParams
+	Headers    GetEtagEtagHeaders
 }
 
 type GetEtagEtagResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,13 +1,12 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type AccountGetResponse struct {
-    APICoreDtoAccountingUser *shared.APICoreDtoAccountingUser 
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	APICoreDtoAccountingUser *shared.APICoreDtoAccountingUser
+	Body                     []byte
+	ContentType              string
+	StatusCode               int64
 }
-

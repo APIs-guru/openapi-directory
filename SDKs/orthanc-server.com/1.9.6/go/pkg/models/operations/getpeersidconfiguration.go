@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetPeersIDConfigurationPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetPeersIDConfigurationRequest struct {
-    PathParams GetPeersIDConfigurationPathParams 
-    
+	PathParams GetPeersIDConfigurationPathParams
 }
 
 type GetPeersIDConfigurationResponse struct {
-    ContentType string 
-    GetPeersIDConfiguration200ApplicationJSONAny *interface{} 
-    StatusCode int64 
-    
+	ContentType                                  string
+	GetPeersIDConfiguration200ApplicationJSONAny *interface{}
+	StatusCode                                   int64
 }
-

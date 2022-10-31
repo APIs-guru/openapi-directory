@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetUserPoolMfaConfigRequest struct {
-    UserPoolID string `json:"UserPoolId"`
-    
+	UserPoolID string `json:"UserPoolId"`
 }
-

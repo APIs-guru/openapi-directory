@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchGetNamedQueryInput struct {
-    NamedQueryIds []string `json:"NamedQueryIds"`
-    
+	NamedQueryIds []string `json:"NamedQueryIds"`
 }
-

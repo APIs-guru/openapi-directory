@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PauseServiceRequest struct {
-    ServiceArn string `json:"ServiceArn"`
-    
+	ServiceArn string `json:"ServiceArn"`
 }
-

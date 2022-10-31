@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AnthosObservabilityFeatureSpec struct {
-    DefaultMembershipSpec *AnthosObservabilityMembershipSpec `json:"defaultMembershipSpec,omitempty"`
-    
+	DefaultMembershipSpec *AnthosObservabilityMembershipSpec `json:"defaultMembershipSpec,omitempty"`
 }
-

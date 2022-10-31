@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetAccuracyMetricsRequest struct {
-    PredictorArn string `json:"PredictorArn"`
-    
+	PredictorArn string `json:"PredictorArn"`
 }
-

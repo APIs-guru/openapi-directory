@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeScriptOutput struct {
-    Script *Script `json:"Script,omitempty"`
-    
+	Script *Script `json:"Script,omitempty"`
 }
-

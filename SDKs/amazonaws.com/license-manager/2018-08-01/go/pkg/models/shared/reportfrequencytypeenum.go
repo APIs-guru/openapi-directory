@@ -1,14 +1,9 @@
 package shared
 
-
-
-
 type ReportFrequencyTypeEnum string
 
 const (
-    ReportFrequencyTypeEnumDay ReportFrequencyTypeEnum = "DAY"
-ReportFrequencyTypeEnumWeek ReportFrequencyTypeEnum = "WEEK"
-ReportFrequencyTypeEnumMonth ReportFrequencyTypeEnum = "MONTH"
+	ReportFrequencyTypeEnumDay   ReportFrequencyTypeEnum = "DAY"
+	ReportFrequencyTypeEnumWeek  ReportFrequencyTypeEnum = "WEEK"
+	ReportFrequencyTypeEnumMonth ReportFrequencyTypeEnum = "MONTH"
 )
-
-

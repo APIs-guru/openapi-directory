@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ReposGetPullRequestReviewProtectionPathParams struct {
-    Branch string `pathParam:"style=simple,explode=false,name=branch"`
-    Owner string `pathParam:"style=simple,explode=false,name=owner"`
-    Repo string `pathParam:"style=simple,explode=false,name=repo"`
-    
+	Branch string `pathParam:"style=simple,explode=false,name=branch"`
+	Owner  string `pathParam:"style=simple,explode=false,name=owner"`
+	Repo   string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
 type ReposGetPullRequestReviewProtectionRequest struct {
-    PathParams ReposGetPullRequestReviewProtectionPathParams 
-    
+	PathParams ReposGetPullRequestReviewProtectionPathParams
 }
 
 type ReposGetPullRequestReviewProtectionResponse struct {
-    ContentType string 
-    StatusCode int64 
-    ProtectedBranchPullRequestReview *shared.ProtectedBranchPullRequestReview 
-    
+	ContentType                      string
+	StatusCode                       int64
+	ProtectedBranchPullRequestReview *shared.ProtectedBranchPullRequestReview
 }
-

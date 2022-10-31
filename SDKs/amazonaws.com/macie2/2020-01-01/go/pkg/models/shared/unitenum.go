@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type UnitEnum string
 
 const (
-    UnitEnumTerabytes UnitEnum = "TERABYTES"
+	UnitEnumTerabytes UnitEnum = "TERABYTES"
 )
-
-

@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetNcbiGeneMappingUsingGetPathParams struct {
-    RgdID int32 `pathParam:"style=simple,explode=false,name=rgdId"`
-    
+	RgdID int32 `pathParam:"style=simple,explode=false,name=rgdId"`
 }
 
 type GetNcbiGeneMappingUsingGetRequest struct {
-    PathParams GetNcbiGeneMappingUsingGetPathParams 
-    
+	PathParams GetNcbiGeneMappingUsingGetPathParams
 }
 
 type GetNcbiGeneMappingUsingGetResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

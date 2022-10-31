@@ -1,39 +1,35 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var DeleteServiceConversationMessageServers = []string{
 	"https://conversations.twilio.com",
 }
 
 type DeleteServiceConversationMessagePathParams struct {
-    ChatServiceSid string `pathParam:"style=simple,explode=false,name=ChatServiceSid"`
-    ConversationSid string `pathParam:"style=simple,explode=false,name=ConversationSid"`
-    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
-    
+	ChatServiceSid  string `pathParam:"style=simple,explode=false,name=ChatServiceSid"`
+	ConversationSid string `pathParam:"style=simple,explode=false,name=ConversationSid"`
+	Sid             string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
 type DeleteServiceConversationMessageHeaders struct {
-    XTwilioWebhookEnabled *shared.ServiceConversationMessageEnumWebhookEnabledTypeEnum `header:"style=simple,explode=false,name=X-Twilio-Webhook-Enabled"`
-    
+	XTwilioWebhookEnabled *shared.ServiceConversationMessageEnumWebhookEnabledTypeEnum `header:"style=simple,explode=false,name=X-Twilio-Webhook-Enabled"`
 }
 
 type DeleteServiceConversationMessageSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type DeleteServiceConversationMessageRequest struct {
-    ServerURL *string 
-    PathParams DeleteServiceConversationMessagePathParams 
-    Headers DeleteServiceConversationMessageHeaders 
-    Security DeleteServiceConversationMessageSecurity 
-    
+	ServerURL  *string
+	PathParams DeleteServiceConversationMessagePathParams
+	Headers    DeleteServiceConversationMessageHeaders
+	Security   DeleteServiceConversationMessageSecurity
 }
 
 type DeleteServiceConversationMessageResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

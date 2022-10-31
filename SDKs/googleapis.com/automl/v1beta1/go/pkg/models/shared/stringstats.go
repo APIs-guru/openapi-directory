@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StringStats struct {
-    TopUnigramStats []UnigramStats `json:"topUnigramStats,omitempty"`
-    
+	TopUnigramStats []UnigramStats `json:"topUnigramStats,omitempty"`
 }
-

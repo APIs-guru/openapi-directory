@@ -1,20 +1,14 @@
 package operations
 
-
-
 type GetActionOrganizationActivityListHTMLQueryParams struct {
-    ID *string `queryParam:"style=form,explode=true,name=id"`
-    
+	ID *string `queryParam:"style=form,explode=true,name=id"`
 }
 
 type GetActionOrganizationActivityListHTMLRequest struct {
-    QueryParams GetActionOrganizationActivityListHTMLQueryParams 
-    
+	QueryParams GetActionOrganizationActivityListHTMLQueryParams
 }
 
 type GetActionOrganizationActivityListHTMLResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

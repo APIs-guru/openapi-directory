@@ -1,55 +1,49 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var ListPhoneNumberServers = []string{
 	"https://proxy.twilio.com",
 }
 
 type ListPhoneNumberPathParams struct {
-    ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
-    
+	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
 type ListPhoneNumberQueryParams struct {
-    PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
-    
+	PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
 }
 
 type ListPhoneNumberSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type ListPhoneNumberRequest struct {
-    ServerURL *string 
-    PathParams ListPhoneNumberPathParams 
-    QueryParams ListPhoneNumberQueryParams 
-    Security ListPhoneNumberSecurity 
-    
+	ServerURL   *string
+	PathParams  ListPhoneNumberPathParams
+	QueryParams ListPhoneNumberQueryParams
+	Security    ListPhoneNumberSecurity
 }
 
 type ListPhoneNumberListPhoneNumberResponseMeta struct {
-    FirstPageURL *string `json:"first_page_url,omitempty"`
-    Key *string `json:"key,omitempty"`
-    NextPageURL *string `json:"next_page_url,omitempty"`
-    Page *int64 `json:"page,omitempty"`
-    PageSize *int64 `json:"page_size,omitempty"`
-    PreviousPageURL *string `json:"previous_page_url,omitempty"`
-    URL *string `json:"url,omitempty"`
-    
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListPhoneNumberListPhoneNumberResponse struct {
-    Meta *ListPhoneNumberListPhoneNumberResponseMeta `json:"meta,omitempty"`
-    PhoneNumbers []shared.ProxyV1ServicePhoneNumber `json:"phone_numbers,omitempty"`
-    
+	Meta         *ListPhoneNumberListPhoneNumberResponseMeta `json:"meta,omitempty"`
+	PhoneNumbers []shared.ProxyV1ServicePhoneNumber          `json:"phone_numbers,omitempty"`
 }
 
 type ListPhoneNumberResponse struct {
-    ContentType string 
-    ListPhoneNumberResponse *ListPhoneNumberListPhoneNumberResponse 
-    StatusCode int64 
-    
+	ContentType             string
+	ListPhoneNumberResponse *ListPhoneNumberListPhoneNumberResponse
+	StatusCode              int64
 }
-

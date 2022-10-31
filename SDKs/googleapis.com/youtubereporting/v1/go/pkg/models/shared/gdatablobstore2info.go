@@ -1,13 +1,9 @@
 package shared
 
-
-
 type GdataBlobstore2Info struct {
-    BlobGeneration *string `json:"blobGeneration,omitempty"`
-    BlobID *string `json:"blobId,omitempty"`
-    DownloadReadHandle *string `json:"downloadReadHandle,omitempty"`
-    ReadToken *string `json:"readToken,omitempty"`
-    UploadMetadataContainer *string `json:"uploadMetadataContainer,omitempty"`
-    
+	BlobGeneration          *string `json:"blobGeneration,omitempty"`
+	BlobID                  *string `json:"blobId,omitempty"`
+	DownloadReadHandle      *string `json:"downloadReadHandle,omitempty"`
+	ReadToken               *string `json:"readToken,omitempty"`
+	UploadMetadataContainer *string `json:"uploadMetadataContainer,omitempty"`
 }
-

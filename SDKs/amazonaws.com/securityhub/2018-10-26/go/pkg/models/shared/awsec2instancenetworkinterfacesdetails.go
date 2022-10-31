@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AwsEc2InstanceNetworkInterfacesDetails struct {
-    NetworkInterfaceID *string `json:"NetworkInterfaceId,omitempty"`
-    
+	NetworkInterfaceID *string `json:"NetworkInterfaceId,omitempty"`
 }
-

@@ -1,53 +1,42 @@
 package operations
 
-
-
-
 type PostDescribePrincipalIDFormatActionEnum string
 
 const (
-    PostDescribePrincipalIDFormatActionEnumDescribePrincipalIDFormat PostDescribePrincipalIDFormatActionEnum = "DescribePrincipalIdFormat"
+	PostDescribePrincipalIDFormatActionEnumDescribePrincipalIDFormat PostDescribePrincipalIDFormatActionEnum = "DescribePrincipalIdFormat"
 )
-
-
 
 type PostDescribePrincipalIDFormatVersionEnum string
 
 const (
-    PostDescribePrincipalIDFormatVersionEnumTwoThousandAndSixteen1115 PostDescribePrincipalIDFormatVersionEnum = "2016-11-15"
+	PostDescribePrincipalIDFormatVersionEnumTwoThousandAndSixteen1115 PostDescribePrincipalIDFormatVersionEnum = "2016-11-15"
 )
 
-
 type PostDescribePrincipalIDFormatQueryParams struct {
-    Action PostDescribePrincipalIDFormatActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
-    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
-    Version PostDescribePrincipalIDFormatVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action     PostDescribePrincipalIDFormatActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	MaxResults *string                                  `queryParam:"style=form,explode=true,name=MaxResults"`
+	NextToken  *string                                  `queryParam:"style=form,explode=true,name=NextToken"`
+	Version    PostDescribePrincipalIDFormatVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostDescribePrincipalIDFormatHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostDescribePrincipalIDFormatRequest struct {
-    QueryParams PostDescribePrincipalIDFormatQueryParams 
-    Headers PostDescribePrincipalIDFormatHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostDescribePrincipalIDFormatQueryParams
+	Headers     PostDescribePrincipalIDFormatHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostDescribePrincipalIDFormatResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

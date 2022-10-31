@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListDeviceFleetsResponse struct {
-    DeviceFleetSummaries []DeviceFleetSummary `json:"DeviceFleetSummaries"`
-    NextToken *string `json:"NextToken,omitempty"`
-    
+	DeviceFleetSummaries []DeviceFleetSummary `json:"DeviceFleetSummaries"`
+	NextToken            *string              `json:"NextToken,omitempty"`
 }
-

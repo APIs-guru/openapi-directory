@@ -1,9 +1,5 @@
 package shared
 
-
-
 type MarketsObject struct {
-    Markets []string `json:"markets,omitempty"`
-    
+	Markets []string `json:"markets,omitempty"`
 }
-

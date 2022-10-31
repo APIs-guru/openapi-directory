@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteStateMachineInput struct {
-    StateMachineArn string `json:"stateMachineArn"`
-    
+	StateMachineArn string `json:"stateMachineArn"`
 }
-

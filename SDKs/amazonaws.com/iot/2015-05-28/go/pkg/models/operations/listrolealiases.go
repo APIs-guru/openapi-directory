@@ -1,41 +1,37 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ListRoleAliasesQueryParams struct {
-    IsAscendingOrder *bool `queryParam:"style=form,explode=true,name=isAscendingOrder"`
-    Marker *string `queryParam:"style=form,explode=true,name=marker"`
-    PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
-    
+	IsAscendingOrder *bool   `queryParam:"style=form,explode=true,name=isAscendingOrder"`
+	Marker           *string `queryParam:"style=form,explode=true,name=marker"`
+	PageSize         *int64  `queryParam:"style=form,explode=true,name=pageSize"`
 }
 
 type ListRoleAliasesHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type ListRoleAliasesRequest struct {
-    QueryParams ListRoleAliasesQueryParams 
-    Headers ListRoleAliasesHeaders 
-    
+	QueryParams ListRoleAliasesQueryParams
+	Headers     ListRoleAliasesHeaders
 }
 
 type ListRoleAliasesResponse struct {
-    ContentType string 
-    InternalFailureException *interface{} 
-    InvalidRequestException *interface{} 
-    ListRoleAliasesResponse *shared.ListRoleAliasesResponse 
-    ServiceUnavailableException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    UnauthorizedException *interface{} 
-    
+	ContentType                 string
+	InternalFailureException    *interface{}
+	InvalidRequestException     *interface{}
+	ListRoleAliasesResponse     *shared.ListRoleAliasesResponse
+	ServiceUnavailableException *interface{}
+	StatusCode                  int64
+	ThrottlingException         *interface{}
+	UnauthorizedException       *interface{}
 }
-

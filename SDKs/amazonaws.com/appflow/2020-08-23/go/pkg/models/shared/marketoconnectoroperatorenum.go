@@ -1,27 +1,22 @@
 package shared
 
-
-
-
 type MarketoConnectorOperatorEnum string
 
 const (
-    MarketoConnectorOperatorEnumProjection MarketoConnectorOperatorEnum = "PROJECTION"
-MarketoConnectorOperatorEnumLessThan MarketoConnectorOperatorEnum = "LESS_THAN"
-MarketoConnectorOperatorEnumGreaterThan MarketoConnectorOperatorEnum = "GREATER_THAN"
-MarketoConnectorOperatorEnumBetween MarketoConnectorOperatorEnum = "BETWEEN"
-MarketoConnectorOperatorEnumAddition MarketoConnectorOperatorEnum = "ADDITION"
-MarketoConnectorOperatorEnumMultiplication MarketoConnectorOperatorEnum = "MULTIPLICATION"
-MarketoConnectorOperatorEnumDivision MarketoConnectorOperatorEnum = "DIVISION"
-MarketoConnectorOperatorEnumSubtraction MarketoConnectorOperatorEnum = "SUBTRACTION"
-MarketoConnectorOperatorEnumMaskAll MarketoConnectorOperatorEnum = "MASK_ALL"
-MarketoConnectorOperatorEnumMaskFirstN MarketoConnectorOperatorEnum = "MASK_FIRST_N"
-MarketoConnectorOperatorEnumMaskLastN MarketoConnectorOperatorEnum = "MASK_LAST_N"
-MarketoConnectorOperatorEnumValidateNonNull MarketoConnectorOperatorEnum = "VALIDATE_NON_NULL"
-MarketoConnectorOperatorEnumValidateNonZero MarketoConnectorOperatorEnum = "VALIDATE_NON_ZERO"
-MarketoConnectorOperatorEnumValidateNonNegative MarketoConnectorOperatorEnum = "VALIDATE_NON_NEGATIVE"
-MarketoConnectorOperatorEnumValidateNumeric MarketoConnectorOperatorEnum = "VALIDATE_NUMERIC"
-MarketoConnectorOperatorEnumNoOp MarketoConnectorOperatorEnum = "NO_OP"
+	MarketoConnectorOperatorEnumProjection          MarketoConnectorOperatorEnum = "PROJECTION"
+	MarketoConnectorOperatorEnumLessThan            MarketoConnectorOperatorEnum = "LESS_THAN"
+	MarketoConnectorOperatorEnumGreaterThan         MarketoConnectorOperatorEnum = "GREATER_THAN"
+	MarketoConnectorOperatorEnumBetween             MarketoConnectorOperatorEnum = "BETWEEN"
+	MarketoConnectorOperatorEnumAddition            MarketoConnectorOperatorEnum = "ADDITION"
+	MarketoConnectorOperatorEnumMultiplication      MarketoConnectorOperatorEnum = "MULTIPLICATION"
+	MarketoConnectorOperatorEnumDivision            MarketoConnectorOperatorEnum = "DIVISION"
+	MarketoConnectorOperatorEnumSubtraction         MarketoConnectorOperatorEnum = "SUBTRACTION"
+	MarketoConnectorOperatorEnumMaskAll             MarketoConnectorOperatorEnum = "MASK_ALL"
+	MarketoConnectorOperatorEnumMaskFirstN          MarketoConnectorOperatorEnum = "MASK_FIRST_N"
+	MarketoConnectorOperatorEnumMaskLastN           MarketoConnectorOperatorEnum = "MASK_LAST_N"
+	MarketoConnectorOperatorEnumValidateNonNull     MarketoConnectorOperatorEnum = "VALIDATE_NON_NULL"
+	MarketoConnectorOperatorEnumValidateNonZero     MarketoConnectorOperatorEnum = "VALIDATE_NON_ZERO"
+	MarketoConnectorOperatorEnumValidateNonNegative MarketoConnectorOperatorEnum = "VALIDATE_NON_NEGATIVE"
+	MarketoConnectorOperatorEnumValidateNumeric     MarketoConnectorOperatorEnum = "VALIDATE_NUMERIC"
+	MarketoConnectorOperatorEnumNoOp                MarketoConnectorOperatorEnum = "NO_OP"
 )
-
-

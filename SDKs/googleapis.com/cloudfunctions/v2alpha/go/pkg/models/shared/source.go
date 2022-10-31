@@ -1,10 +1,6 @@
 package shared
 
-
-
 type Source struct {
-    RepoSource *RepoSource `json:"repoSource,omitempty"`
-    StorageSource *StorageSource `json:"storageSource,omitempty"`
-    
+	RepoSource    *RepoSource    `json:"repoSource,omitempty"`
+	StorageSource *StorageSource `json:"storageSource,omitempty"`
 }
-

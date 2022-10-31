@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LaunchFlexTemplateResponse struct {
-    Job *Job `json:"job,omitempty"`
-    
+	Job *Job `json:"job,omitempty"`
 }
-

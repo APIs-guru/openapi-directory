@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AttachToIndexResponse struct {
-    AttachedObjectIdentifier *string `json:"AttachedObjectIdentifier,omitempty"`
-    
+	AttachedObjectIdentifier *string `json:"AttachedObjectIdentifier,omitempty"`
 }
-

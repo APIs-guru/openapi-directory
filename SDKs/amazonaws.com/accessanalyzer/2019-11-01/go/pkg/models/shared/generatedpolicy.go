@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GeneratedPolicy struct {
-    Policy string `json:"policy"`
-    
+	Policy string `json:"policy"`
 }
-

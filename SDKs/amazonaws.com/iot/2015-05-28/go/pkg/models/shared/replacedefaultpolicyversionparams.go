@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ReplaceDefaultPolicyVersionParams struct {
-    TemplateName PolicyTemplateNameEnum `json:"templateName"`
-    
+	TemplateName PolicyTemplateNameEnum `json:"templateName"`
 }
-

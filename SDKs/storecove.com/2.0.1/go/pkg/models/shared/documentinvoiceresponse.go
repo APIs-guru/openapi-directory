@@ -1,25 +1,19 @@
 package shared
 
-
-
-
 type DocumentInvoiceResponseResponseCodeEnum string
 
 const (
-    DocumentInvoiceResponseResponseCodeEnumAb DocumentInvoiceResponseResponseCodeEnum = "AB"
-DocumentInvoiceResponseResponseCodeEnumIP DocumentInvoiceResponseResponseCodeEnum = "IP"
-DocumentInvoiceResponseResponseCodeEnumUq DocumentInvoiceResponseResponseCodeEnum = "UQ"
-DocumentInvoiceResponseResponseCodeEnumRe DocumentInvoiceResponseResponseCodeEnum = "RE"
-DocumentInvoiceResponseResponseCodeEnumAp DocumentInvoiceResponseResponseCodeEnum = "AP"
-DocumentInvoiceResponseResponseCodeEnumPd DocumentInvoiceResponseResponseCodeEnum = "PD"
+	DocumentInvoiceResponseResponseCodeEnumAb DocumentInvoiceResponseResponseCodeEnum = "AB"
+	DocumentInvoiceResponseResponseCodeEnumIP DocumentInvoiceResponseResponseCodeEnum = "IP"
+	DocumentInvoiceResponseResponseCodeEnumUq DocumentInvoiceResponseResponseCodeEnum = "UQ"
+	DocumentInvoiceResponseResponseCodeEnumRe DocumentInvoiceResponseResponseCodeEnum = "RE"
+	DocumentInvoiceResponseResponseCodeEnumAp DocumentInvoiceResponseResponseCodeEnum = "AP"
+	DocumentInvoiceResponseResponseCodeEnumPd DocumentInvoiceResponseResponseCodeEnum = "PD"
 )
 
-
 type DocumentInvoiceResponse struct {
-    Clarifications []InvoiceResponseClarification `json:"clarifications,omitempty"`
-    EffectiveDate *string `json:"effectiveDate,omitempty"`
-    Note *string `json:"note,omitempty"`
-    ResponseCode DocumentInvoiceResponseResponseCodeEnum `json:"responseCode"`
-    
+	Clarifications []InvoiceResponseClarification          `json:"clarifications,omitempty"`
+	EffectiveDate  *string                                 `json:"effectiveDate,omitempty"`
+	Note           *string                                 `json:"note,omitempty"`
+	ResponseCode   DocumentInvoiceResponseResponseCodeEnum `json:"responseCode"`
 }
-

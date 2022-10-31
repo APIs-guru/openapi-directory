@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type AddOnTypeEnum string
 
 const (
-    AddOnTypeEnumAutoSnapshot AddOnTypeEnum = "AutoSnapshot"
+	AddOnTypeEnumAutoSnapshot AddOnTypeEnum = "AutoSnapshot"
 )
-
-

@@ -1,95 +1,79 @@
 package shared
 
-
-
-
 type ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum string
 
 const (
-    ApplicationPolicyAlwaysOnVpnLockdownExemptionEnumAlwaysOnVpnLockdownExemptionUnspecified ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum = "ALWAYS_ON_VPN_LOCKDOWN_EXEMPTION_UNSPECIFIED"
-ApplicationPolicyAlwaysOnVpnLockdownExemptionEnumVpnLockdownEnforced ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum = "VPN_LOCKDOWN_ENFORCED"
-ApplicationPolicyAlwaysOnVpnLockdownExemptionEnumVpnLockdownExemption ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum = "VPN_LOCKDOWN_EXEMPTION"
+	ApplicationPolicyAlwaysOnVpnLockdownExemptionEnumAlwaysOnVpnLockdownExemptionUnspecified ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum = "ALWAYS_ON_VPN_LOCKDOWN_EXEMPTION_UNSPECIFIED"
+	ApplicationPolicyAlwaysOnVpnLockdownExemptionEnumVpnLockdownEnforced                     ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum = "VPN_LOCKDOWN_ENFORCED"
+	ApplicationPolicyAlwaysOnVpnLockdownExemptionEnumVpnLockdownExemption                    ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum = "VPN_LOCKDOWN_EXEMPTION"
 )
-
-
 
 type ApplicationPolicyAutoUpdateModeEnum string
 
 const (
-    ApplicationPolicyAutoUpdateModeEnumAutoUpdateModeUnspecified ApplicationPolicyAutoUpdateModeEnum = "AUTO_UPDATE_MODE_UNSPECIFIED"
-ApplicationPolicyAutoUpdateModeEnumAutoUpdateDefault ApplicationPolicyAutoUpdateModeEnum = "AUTO_UPDATE_DEFAULT"
-ApplicationPolicyAutoUpdateModeEnumAutoUpdatePostponed ApplicationPolicyAutoUpdateModeEnum = "AUTO_UPDATE_POSTPONED"
-ApplicationPolicyAutoUpdateModeEnumAutoUpdateHighPriority ApplicationPolicyAutoUpdateModeEnum = "AUTO_UPDATE_HIGH_PRIORITY"
+	ApplicationPolicyAutoUpdateModeEnumAutoUpdateModeUnspecified ApplicationPolicyAutoUpdateModeEnum = "AUTO_UPDATE_MODE_UNSPECIFIED"
+	ApplicationPolicyAutoUpdateModeEnumAutoUpdateDefault         ApplicationPolicyAutoUpdateModeEnum = "AUTO_UPDATE_DEFAULT"
+	ApplicationPolicyAutoUpdateModeEnumAutoUpdatePostponed       ApplicationPolicyAutoUpdateModeEnum = "AUTO_UPDATE_POSTPONED"
+	ApplicationPolicyAutoUpdateModeEnumAutoUpdateHighPriority    ApplicationPolicyAutoUpdateModeEnum = "AUTO_UPDATE_HIGH_PRIORITY"
 )
-
-
 
 type ApplicationPolicyConnectedWorkAndPersonalAppEnum string
 
 const (
-    ApplicationPolicyConnectedWorkAndPersonalAppEnumConnectedWorkAndPersonalAppUnspecified ApplicationPolicyConnectedWorkAndPersonalAppEnum = "CONNECTED_WORK_AND_PERSONAL_APP_UNSPECIFIED"
-ApplicationPolicyConnectedWorkAndPersonalAppEnumConnectedWorkAndPersonalAppDisallowed ApplicationPolicyConnectedWorkAndPersonalAppEnum = "CONNECTED_WORK_AND_PERSONAL_APP_DISALLOWED"
-ApplicationPolicyConnectedWorkAndPersonalAppEnumConnectedWorkAndPersonalAppAllowed ApplicationPolicyConnectedWorkAndPersonalAppEnum = "CONNECTED_WORK_AND_PERSONAL_APP_ALLOWED"
+	ApplicationPolicyConnectedWorkAndPersonalAppEnumConnectedWorkAndPersonalAppUnspecified ApplicationPolicyConnectedWorkAndPersonalAppEnum = "CONNECTED_WORK_AND_PERSONAL_APP_UNSPECIFIED"
+	ApplicationPolicyConnectedWorkAndPersonalAppEnumConnectedWorkAndPersonalAppDisallowed  ApplicationPolicyConnectedWorkAndPersonalAppEnum = "CONNECTED_WORK_AND_PERSONAL_APP_DISALLOWED"
+	ApplicationPolicyConnectedWorkAndPersonalAppEnumConnectedWorkAndPersonalAppAllowed     ApplicationPolicyConnectedWorkAndPersonalAppEnum = "CONNECTED_WORK_AND_PERSONAL_APP_ALLOWED"
 )
-
-
 
 type ApplicationPolicyDefaultPermissionPolicyEnum string
 
 const (
-    ApplicationPolicyDefaultPermissionPolicyEnumPermissionPolicyUnspecified ApplicationPolicyDefaultPermissionPolicyEnum = "PERMISSION_POLICY_UNSPECIFIED"
-ApplicationPolicyDefaultPermissionPolicyEnumPrompt ApplicationPolicyDefaultPermissionPolicyEnum = "PROMPT"
-ApplicationPolicyDefaultPermissionPolicyEnumGrant ApplicationPolicyDefaultPermissionPolicyEnum = "GRANT"
-ApplicationPolicyDefaultPermissionPolicyEnumDeny ApplicationPolicyDefaultPermissionPolicyEnum = "DENY"
+	ApplicationPolicyDefaultPermissionPolicyEnumPermissionPolicyUnspecified ApplicationPolicyDefaultPermissionPolicyEnum = "PERMISSION_POLICY_UNSPECIFIED"
+	ApplicationPolicyDefaultPermissionPolicyEnumPrompt                      ApplicationPolicyDefaultPermissionPolicyEnum = "PROMPT"
+	ApplicationPolicyDefaultPermissionPolicyEnumGrant                       ApplicationPolicyDefaultPermissionPolicyEnum = "GRANT"
+	ApplicationPolicyDefaultPermissionPolicyEnumDeny                        ApplicationPolicyDefaultPermissionPolicyEnum = "DENY"
 )
-
-
 
 type ApplicationPolicyDelegatedScopesEnum string
 
 const (
-    ApplicationPolicyDelegatedScopesEnumDelegatedScopeUnspecified ApplicationPolicyDelegatedScopesEnum = "DELEGATED_SCOPE_UNSPECIFIED"
-ApplicationPolicyDelegatedScopesEnumCertInstall ApplicationPolicyDelegatedScopesEnum = "CERT_INSTALL"
-ApplicationPolicyDelegatedScopesEnumManagedConfigurations ApplicationPolicyDelegatedScopesEnum = "MANAGED_CONFIGURATIONS"
-ApplicationPolicyDelegatedScopesEnumBlockUninstall ApplicationPolicyDelegatedScopesEnum = "BLOCK_UNINSTALL"
-ApplicationPolicyDelegatedScopesEnumPermissionGrant ApplicationPolicyDelegatedScopesEnum = "PERMISSION_GRANT"
-ApplicationPolicyDelegatedScopesEnumPackageAccess ApplicationPolicyDelegatedScopesEnum = "PACKAGE_ACCESS"
-ApplicationPolicyDelegatedScopesEnumEnableSystemApp ApplicationPolicyDelegatedScopesEnum = "ENABLE_SYSTEM_APP"
-ApplicationPolicyDelegatedScopesEnumNetworkActivityLogs ApplicationPolicyDelegatedScopesEnum = "NETWORK_ACTIVITY_LOGS"
-ApplicationPolicyDelegatedScopesEnumSecurityLogs ApplicationPolicyDelegatedScopesEnum = "SECURITY_LOGS"
+	ApplicationPolicyDelegatedScopesEnumDelegatedScopeUnspecified ApplicationPolicyDelegatedScopesEnum = "DELEGATED_SCOPE_UNSPECIFIED"
+	ApplicationPolicyDelegatedScopesEnumCertInstall               ApplicationPolicyDelegatedScopesEnum = "CERT_INSTALL"
+	ApplicationPolicyDelegatedScopesEnumManagedConfigurations     ApplicationPolicyDelegatedScopesEnum = "MANAGED_CONFIGURATIONS"
+	ApplicationPolicyDelegatedScopesEnumBlockUninstall            ApplicationPolicyDelegatedScopesEnum = "BLOCK_UNINSTALL"
+	ApplicationPolicyDelegatedScopesEnumPermissionGrant           ApplicationPolicyDelegatedScopesEnum = "PERMISSION_GRANT"
+	ApplicationPolicyDelegatedScopesEnumPackageAccess             ApplicationPolicyDelegatedScopesEnum = "PACKAGE_ACCESS"
+	ApplicationPolicyDelegatedScopesEnumEnableSystemApp           ApplicationPolicyDelegatedScopesEnum = "ENABLE_SYSTEM_APP"
+	ApplicationPolicyDelegatedScopesEnumNetworkActivityLogs       ApplicationPolicyDelegatedScopesEnum = "NETWORK_ACTIVITY_LOGS"
+	ApplicationPolicyDelegatedScopesEnumSecurityLogs              ApplicationPolicyDelegatedScopesEnum = "SECURITY_LOGS"
 )
-
-
 
 type ApplicationPolicyInstallTypeEnum string
 
 const (
-    ApplicationPolicyInstallTypeEnumInstallTypeUnspecified ApplicationPolicyInstallTypeEnum = "INSTALL_TYPE_UNSPECIFIED"
-ApplicationPolicyInstallTypeEnumPreinstalled ApplicationPolicyInstallTypeEnum = "PREINSTALLED"
-ApplicationPolicyInstallTypeEnumForceInstalled ApplicationPolicyInstallTypeEnum = "FORCE_INSTALLED"
-ApplicationPolicyInstallTypeEnumBlocked ApplicationPolicyInstallTypeEnum = "BLOCKED"
-ApplicationPolicyInstallTypeEnumAvailable ApplicationPolicyInstallTypeEnum = "AVAILABLE"
-ApplicationPolicyInstallTypeEnumRequiredForSetup ApplicationPolicyInstallTypeEnum = "REQUIRED_FOR_SETUP"
-ApplicationPolicyInstallTypeEnumKiosk ApplicationPolicyInstallTypeEnum = "KIOSK"
+	ApplicationPolicyInstallTypeEnumInstallTypeUnspecified ApplicationPolicyInstallTypeEnum = "INSTALL_TYPE_UNSPECIFIED"
+	ApplicationPolicyInstallTypeEnumPreinstalled           ApplicationPolicyInstallTypeEnum = "PREINSTALLED"
+	ApplicationPolicyInstallTypeEnumForceInstalled         ApplicationPolicyInstallTypeEnum = "FORCE_INSTALLED"
+	ApplicationPolicyInstallTypeEnumBlocked                ApplicationPolicyInstallTypeEnum = "BLOCKED"
+	ApplicationPolicyInstallTypeEnumAvailable              ApplicationPolicyInstallTypeEnum = "AVAILABLE"
+	ApplicationPolicyInstallTypeEnumRequiredForSetup       ApplicationPolicyInstallTypeEnum = "REQUIRED_FOR_SETUP"
+	ApplicationPolicyInstallTypeEnumKiosk                  ApplicationPolicyInstallTypeEnum = "KIOSK"
 )
 
-
 type ApplicationPolicy struct {
-    AccessibleTrackIds []string `json:"accessibleTrackIds,omitempty"`
-    AlwaysOnVpnLockdownExemption *ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum `json:"alwaysOnVpnLockdownExemption,omitempty"`
-    AutoUpdateMode *ApplicationPolicyAutoUpdateModeEnum `json:"autoUpdateMode,omitempty"`
-    ConnectedWorkAndPersonalApp *ApplicationPolicyConnectedWorkAndPersonalAppEnum `json:"connectedWorkAndPersonalApp,omitempty"`
-    DefaultPermissionPolicy *ApplicationPolicyDefaultPermissionPolicyEnum `json:"defaultPermissionPolicy,omitempty"`
-    DelegatedScopes []ApplicationPolicyDelegatedScopesEnum `json:"delegatedScopes,omitempty"`
-    Disabled *bool `json:"disabled,omitempty"`
-    ExtensionConfig *ExtensionConfig `json:"extensionConfig,omitempty"`
-    InstallType *ApplicationPolicyInstallTypeEnum `json:"installType,omitempty"`
-    LockTaskAllowed *bool `json:"lockTaskAllowed,omitempty"`
-    ManagedConfiguration map[string]interface{} `json:"managedConfiguration,omitempty"`
-    ManagedConfigurationTemplate *ManagedConfigurationTemplate `json:"managedConfigurationTemplate,omitempty"`
-    MinimumVersionCode *int32 `json:"minimumVersionCode,omitempty"`
-    PackageName *string `json:"packageName,omitempty"`
-    PermissionGrants []PermissionGrant `json:"permissionGrants,omitempty"`
-    
+	AccessibleTrackIds           []string                                           `json:"accessibleTrackIds,omitempty"`
+	AlwaysOnVpnLockdownExemption *ApplicationPolicyAlwaysOnVpnLockdownExemptionEnum `json:"alwaysOnVpnLockdownExemption,omitempty"`
+	AutoUpdateMode               *ApplicationPolicyAutoUpdateModeEnum               `json:"autoUpdateMode,omitempty"`
+	ConnectedWorkAndPersonalApp  *ApplicationPolicyConnectedWorkAndPersonalAppEnum  `json:"connectedWorkAndPersonalApp,omitempty"`
+	DefaultPermissionPolicy      *ApplicationPolicyDefaultPermissionPolicyEnum      `json:"defaultPermissionPolicy,omitempty"`
+	DelegatedScopes              []ApplicationPolicyDelegatedScopesEnum             `json:"delegatedScopes,omitempty"`
+	Disabled                     *bool                                              `json:"disabled,omitempty"`
+	ExtensionConfig              *ExtensionConfig                                   `json:"extensionConfig,omitempty"`
+	InstallType                  *ApplicationPolicyInstallTypeEnum                  `json:"installType,omitempty"`
+	LockTaskAllowed              *bool                                              `json:"lockTaskAllowed,omitempty"`
+	ManagedConfiguration         map[string]interface{}                             `json:"managedConfiguration,omitempty"`
+	ManagedConfigurationTemplate *ManagedConfigurationTemplate                      `json:"managedConfigurationTemplate,omitempty"`
+	MinimumVersionCode           *int32                                             `json:"minimumVersionCode,omitempty"`
+	PackageName                  *string                                            `json:"packageName,omitempty"`
+	PermissionGrants             []PermissionGrant                                  `json:"permissionGrants,omitempty"`
 }
-

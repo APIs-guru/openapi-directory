@@ -1,52 +1,41 @@
 package operations
 
-
-
-
 type GetDescribeInsightRulesActionEnum string
 
 const (
-    GetDescribeInsightRulesActionEnumDescribeInsightRules GetDescribeInsightRulesActionEnum = "DescribeInsightRules"
+	GetDescribeInsightRulesActionEnumDescribeInsightRules GetDescribeInsightRulesActionEnum = "DescribeInsightRules"
 )
-
-
 
 type GetDescribeInsightRulesVersionEnum string
 
 const (
-    GetDescribeInsightRulesVersionEnumTwoThousandAndTen0801 GetDescribeInsightRulesVersionEnum = "2010-08-01"
+	GetDescribeInsightRulesVersionEnumTwoThousandAndTen0801 GetDescribeInsightRulesVersionEnum = "2010-08-01"
 )
 
-
 type GetDescribeInsightRulesQueryParams struct {
-    Action GetDescribeInsightRulesActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    MaxResults *int64 `queryParam:"style=form,explode=true,name=MaxResults"`
-    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
-    Version GetDescribeInsightRulesVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action     GetDescribeInsightRulesActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	MaxResults *int64                             `queryParam:"style=form,explode=true,name=MaxResults"`
+	NextToken  *string                            `queryParam:"style=form,explode=true,name=NextToken"`
+	Version    GetDescribeInsightRulesVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type GetDescribeInsightRulesHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetDescribeInsightRulesRequest struct {
-    QueryParams GetDescribeInsightRulesQueryParams 
-    Headers GetDescribeInsightRulesHeaders 
-    
+	QueryParams GetDescribeInsightRulesQueryParams
+	Headers     GetDescribeInsightRulesHeaders
 }
 
 type GetDescribeInsightRulesResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

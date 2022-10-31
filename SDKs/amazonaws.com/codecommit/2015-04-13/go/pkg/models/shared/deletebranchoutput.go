@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteBranchOutput struct {
-    DeletedBranch *BranchInfo `json:"deletedBranch,omitempty"`
-    
+	DeletedBranch *BranchInfo `json:"deletedBranch,omitempty"`
 }
-

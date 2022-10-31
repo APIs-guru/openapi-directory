@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartScreenshotSuccess struct {
-    TestID *string `json:"test_id,omitempty"`
-    
+	TestID *string `json:"test_id,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetRegionsResult struct {
-    Regions []Region `json:"regions,omitempty"`
-    
+	Regions []Region `json:"regions,omitempty"`
 }
-

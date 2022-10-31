@@ -1,30 +1,26 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeleteSubContractorPathParams struct {
-    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
-    SubContractorID string `pathParam:"style=simple,explode=false,name=SubContractorId"`
-    
+	EmployerID      string `pathParam:"style=simple,explode=false,name=EmployerId"`
+	SubContractorID string `pathParam:"style=simple,explode=false,name=SubContractorId"`
 }
 
 type DeleteSubContractorHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type DeleteSubContractorRequest struct {
-    PathParams DeleteSubContractorPathParams 
-    Headers DeleteSubContractorHeaders 
-    
+	PathParams DeleteSubContractorPathParams
+	Headers    DeleteSubContractorHeaders
 }
 
 type DeleteSubContractorResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    StatusCode int64 
-    
+	ContentType string
+	ErrorModel  *shared.ErrorModel
+	StatusCode  int64
 }
-

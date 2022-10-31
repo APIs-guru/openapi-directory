@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ActiveDirectoryAuthInfo struct {
-    Items []ActiveDirectory `json:"items"`
-    
+	Items []ActiveDirectory `json:"items"`
 }
-

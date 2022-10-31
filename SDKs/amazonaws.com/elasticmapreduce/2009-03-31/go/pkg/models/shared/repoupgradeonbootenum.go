@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type RepoUpgradeOnBootEnum string
 
 const (
-    RepoUpgradeOnBootEnumSecurity RepoUpgradeOnBootEnum = "SECURITY"
-RepoUpgradeOnBootEnumNone RepoUpgradeOnBootEnum = "NONE"
+	RepoUpgradeOnBootEnumSecurity RepoUpgradeOnBootEnum = "SECURITY"
+	RepoUpgradeOnBootEnumNone     RepoUpgradeOnBootEnum = "NONE"
 )
-
-

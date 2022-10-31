@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type LandlordAccountingInvoiceModel struct {
-    Date *time.Time `json:"Date,omitempty"`
-    InvoiceID *string `json:"InvoiceID,omitempty"`
-    IsMaintenanceInvoice *bool `json:"IsMaintenanceInvoice,omitempty"`
-    
+	Date                 *time.Time `json:"Date,omitempty"`
+	InvoiceID            *string    `json:"InvoiceID,omitempty"`
+	IsMaintenanceInvoice *bool      `json:"IsMaintenanceInvoice,omitempty"`
 }
-

@@ -1,21 +1,15 @@
 package operations
 
-
-
 type TestnetGetAddressTotalSentPathParams struct {
-    Address string `pathParam:"style=simple,explode=false,name=address"`
-    
+	Address string `pathParam:"style=simple,explode=false,name=address"`
 }
 
 type TestnetGetAddressTotalSentRequest struct {
-    PathParams TestnetGetAddressTotalSentPathParams 
-    
+	PathParams TestnetGetAddressTotalSentPathParams
 }
 
 type TestnetGetAddressTotalSentResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetAddressTotalSentResponse *float64 
-    
+	ContentType                 string
+	StatusCode                  int64
+	GetAddressTotalSentResponse *float64
 }
-

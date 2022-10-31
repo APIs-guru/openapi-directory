@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type ArtifactStoreTypeEnum string
 
 const (
-    ArtifactStoreTypeEnumS3 ArtifactStoreTypeEnum = "S3"
+	ArtifactStoreTypeEnumS3 ArtifactStoreTypeEnum = "S3"
 )
-
-

@@ -1,31 +1,27 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type UpdateCustomerPathParams struct {
-    CustomerID int64 `pathParam:"style=simple,explode=false,name=customer_id"`
-    
+	CustomerID int64 `pathParam:"style=simple,explode=false,name=customer_id"`
 }
 
 type UpdateCustomerHeaders struct {
-    XSdsDateFormat *interface{} `header:"style=simple,explode=false,name=X-Sds-Date-Format"`
-    XSdsServiceToken *string `header:"style=simple,explode=false,name=X-Sds-Service-Token"`
-    
+	XSdsDateFormat   *interface{} `header:"style=simple,explode=false,name=X-Sds-Date-Format"`
+	XSdsServiceToken *string      `header:"style=simple,explode=false,name=X-Sds-Service-Token"`
 }
 
 type UpdateCustomerRequest struct {
-    PathParams UpdateCustomerPathParams 
-    Headers UpdateCustomerHeaders 
-    Request shared.UpdateCustomerRequest `request:"mediaType=application/json"`
-    
+	PathParams UpdateCustomerPathParams
+	Headers    UpdateCustomerHeaders
+	Request    shared.UpdateCustomerRequest `request:"mediaType=application/json"`
 }
 
 type UpdateCustomerResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    UpdateCustomerResponse *shared.UpdateCustomerResponse 
-    
+	ContentType            string
+	ErrorResponse          *shared.ErrorResponse
+	StatusCode             int64
+	UpdateCustomerResponse *shared.UpdateCustomerResponse
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeBuildOutput struct {
-    Build *Build `json:"Build,omitempty"`
-    
+	Build *Build `json:"Build,omitempty"`
 }
-

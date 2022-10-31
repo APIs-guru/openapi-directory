@@ -1,12 +1,8 @@
 package shared
 
-
-
 type ListFindingsResponse struct {
-    ListFindingsResults []ListFindingsResult `json:"listFindingsResults,omitempty"`
-    NextPageToken *string `json:"nextPageToken,omitempty"`
-    ReadTime *string `json:"readTime,omitempty"`
-    TotalSize *int32 `json:"totalSize,omitempty"`
-    
+	ListFindingsResults []ListFindingsResult `json:"listFindingsResults,omitempty"`
+	NextPageToken       *string              `json:"nextPageToken,omitempty"`
+	ReadTime            *string              `json:"readTime,omitempty"`
+	TotalSize           *int32               `json:"totalSize,omitempty"`
 }
-

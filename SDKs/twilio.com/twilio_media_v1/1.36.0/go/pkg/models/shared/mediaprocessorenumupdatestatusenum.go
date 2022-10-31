@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type MediaProcessorEnumUpdateStatusEnum string
 
 const (
-    MediaProcessorEnumUpdateStatusEnumEnded MediaProcessorEnumUpdateStatusEnum = "ended"
+	MediaProcessorEnumUpdateStatusEnumEnded MediaProcessorEnumUpdateStatusEnum = "ended"
 )
-
-

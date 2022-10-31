@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type Condition struct {
-    After *time.Time `json:"after,omitempty"`
-    Before *time.Time `json:"before,omitempty"`
-    Equals *AttributeValueList `json:"equals,omitempty"`
-    
+	After  *time.Time          `json:"after,omitempty"`
+	Before *time.Time          `json:"before,omitempty"`
+	Equals *AttributeValueList `json:"equals,omitempty"`
 }
-

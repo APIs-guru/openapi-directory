@@ -1,21 +1,15 @@
 package operations
 
-
-
 type ProtocolDhcpGetStatisticsPathParams struct {
-    AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
-    
+	AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
 }
 
 type ProtocolDhcpGetStatisticsRequest struct {
-    PathParams ProtocolDhcpGetStatisticsPathParams 
-    
+	PathParams ProtocolDhcpGetStatisticsPathParams
 }
 
 type ProtocolDhcpGetStatisticsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    ProtocolDhcpGetStatistics200ApplicationJSONInt32Integers []int32 
-    
+	ContentType                                              string
+	StatusCode                                               int64
+	ProtocolDhcpGetStatistics200ApplicationJSONInt32Integers []int32
 }
-

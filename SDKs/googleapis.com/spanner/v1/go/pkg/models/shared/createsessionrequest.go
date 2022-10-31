@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateSessionRequest struct {
-    Session *Session `json:"session,omitempty"`
-    
+	Session *Session `json:"session,omitempty"`
 }
-

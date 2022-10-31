@@ -1,10 +1,6 @@
 package shared
 
-
-
 type AccountYouTubeChannelLink struct {
-    ChannelID *string `json:"channelId,omitempty"`
-    Status *string `json:"status,omitempty"`
-    
+	ChannelID *string `json:"channelId,omitempty"`
+	Status    *string `json:"status,omitempty"`
 }
-

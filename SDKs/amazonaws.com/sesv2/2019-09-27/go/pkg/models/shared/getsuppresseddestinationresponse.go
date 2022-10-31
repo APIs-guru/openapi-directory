@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetSuppressedDestinationResponse struct {
-    SuppressedDestination SuppressedDestination `json:"SuppressedDestination"`
-    
+	SuppressedDestination SuppressedDestination `json:"SuppressedDestination"`
 }
-

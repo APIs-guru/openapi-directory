@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type FindAllDataExportersSecurity struct {
-    OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
-    
+	OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
 }
 
 type FindAllDataExportersRequest struct {
-    Security FindAllDataExportersSecurity 
-    
+	Security FindAllDataExportersSecurity
 }
 
 type FindAllDataExportersResponse struct {
-    ContentType string 
-    DataExporterConfigs []shared.DataExporterConfig 
-    StatusCode int64 
-    
+	ContentType         string
+	DataExporterConfigs []shared.DataExporterConfig
+	StatusCode          int64
 }
-

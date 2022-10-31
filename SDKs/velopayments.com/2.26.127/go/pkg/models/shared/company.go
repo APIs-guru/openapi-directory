@@ -1,11 +1,7 @@
 package shared
 
-
-
 type Company struct {
-    Name string `json:"name"`
-    OperatingName *string `json:"operatingName,omitempty"`
-    TaxID *string `json:"taxId,omitempty"`
-    
+	Name          string  `json:"name"`
+	OperatingName *string `json:"operatingName,omitempty"`
+	TaxID         *string `json:"taxId,omitempty"`
 }
-

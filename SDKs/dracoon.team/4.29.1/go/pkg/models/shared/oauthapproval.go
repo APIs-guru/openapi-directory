@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type OAuthApproval struct {
-    ClientID string `json:"clientId"`
-    ClientName string `json:"clientName"`
-    ExpiresAt *time.Time `json:"expiresAt,omitempty"`
-    
+	ClientID   string     `json:"clientId"`
+	ClientName string     `json:"clientName"`
+	ExpiresAt  *time.Time `json:"expiresAt,omitempty"`
 }
-

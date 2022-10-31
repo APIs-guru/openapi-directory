@@ -1,98 +1,84 @@
 package operations
 
 import (
-"time"
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+	"time"
+)
+
 var CreateFirewallsServers = []string{
 	"https://api.linode.com/v4",
 }
 
 type CreateFirewallsRequestBodyDevices struct {
-    Linodes []int64 `json:"linodes,omitempty"`
-    
+	Linodes []int64 `json:"linodes,omitempty"`
 }
-
 
 type CreateFirewallsRequestBodyRulesInboundPolicyEnum string
 
 const (
-    CreateFirewallsRequestBodyRulesInboundPolicyEnumAccept CreateFirewallsRequestBodyRulesInboundPolicyEnum = "ACCEPT"
-CreateFirewallsRequestBodyRulesInboundPolicyEnumDrop CreateFirewallsRequestBodyRulesInboundPolicyEnum = "DROP"
+	CreateFirewallsRequestBodyRulesInboundPolicyEnumAccept CreateFirewallsRequestBodyRulesInboundPolicyEnum = "ACCEPT"
+	CreateFirewallsRequestBodyRulesInboundPolicyEnumDrop   CreateFirewallsRequestBodyRulesInboundPolicyEnum = "DROP"
 )
-
-
 
 type CreateFirewallsRequestBodyRulesOutboundPolicyEnum string
 
 const (
-    CreateFirewallsRequestBodyRulesOutboundPolicyEnumAccept CreateFirewallsRequestBodyRulesOutboundPolicyEnum = "ACCEPT"
-CreateFirewallsRequestBodyRulesOutboundPolicyEnumDrop CreateFirewallsRequestBodyRulesOutboundPolicyEnum = "DROP"
+	CreateFirewallsRequestBodyRulesOutboundPolicyEnumAccept CreateFirewallsRequestBodyRulesOutboundPolicyEnum = "ACCEPT"
+	CreateFirewallsRequestBodyRulesOutboundPolicyEnumDrop   CreateFirewallsRequestBodyRulesOutboundPolicyEnum = "DROP"
 )
 
-
 type CreateFirewallsRequestBodyRules struct {
-    Inbound []shared.FirewallRuleConfig `json:"inbound,omitempty"`
-    InboundPolicy *CreateFirewallsRequestBodyRulesInboundPolicyEnum `json:"inbound_policy,omitempty"`
-    Outbound []shared.FirewallRuleConfig `json:"outbound,omitempty"`
-    OutboundPolicy *CreateFirewallsRequestBodyRulesOutboundPolicyEnum `json:"outbound_policy,omitempty"`
-    
+	Inbound        []shared.FirewallRuleConfig                        `json:"inbound,omitempty"`
+	InboundPolicy  *CreateFirewallsRequestBodyRulesInboundPolicyEnum  `json:"inbound_policy,omitempty"`
+	Outbound       []shared.FirewallRuleConfig                        `json:"outbound,omitempty"`
+	OutboundPolicy *CreateFirewallsRequestBodyRulesOutboundPolicyEnum `json:"outbound_policy,omitempty"`
 }
-
 
 type CreateFirewallsRequestBodyStatusEnum string
 
 const (
-    CreateFirewallsRequestBodyStatusEnumEnabled CreateFirewallsRequestBodyStatusEnum = "enabled"
-CreateFirewallsRequestBodyStatusEnumDisabled CreateFirewallsRequestBodyStatusEnum = "disabled"
-CreateFirewallsRequestBodyStatusEnumDeleted CreateFirewallsRequestBodyStatusEnum = "deleted"
+	CreateFirewallsRequestBodyStatusEnumEnabled  CreateFirewallsRequestBodyStatusEnum = "enabled"
+	CreateFirewallsRequestBodyStatusEnumDisabled CreateFirewallsRequestBodyStatusEnum = "disabled"
+	CreateFirewallsRequestBodyStatusEnumDeleted  CreateFirewallsRequestBodyStatusEnum = "deleted"
 )
 
-
 type CreateFirewallsRequestBody struct {
-    Created *time.Time `json:"created,omitempty"`
-    Devices *CreateFirewallsRequestBodyDevices `json:"devices,omitempty"`
-    ID *int64 `json:"id,omitempty"`
-    Label string `json:"label"`
-    Rules CreateFirewallsRequestBodyRules `json:"rules"`
-    Status *CreateFirewallsRequestBodyStatusEnum `json:"status,omitempty"`
-    Tags []string `json:"tags,omitempty"`
-    Updated *time.Time `json:"updated,omitempty"`
-    
+	Created *time.Time                            `json:"created,omitempty"`
+	Devices *CreateFirewallsRequestBodyDevices    `json:"devices,omitempty"`
+	ID      *int64                                `json:"id,omitempty"`
+	Label   string                                `json:"label"`
+	Rules   CreateFirewallsRequestBodyRules       `json:"rules"`
+	Status  *CreateFirewallsRequestBodyStatusEnum `json:"status,omitempty"`
+	Tags    []string                              `json:"tags,omitempty"`
+	Updated *time.Time                            `json:"updated,omitempty"`
 }
 
 type CreateFirewallsSecurityOption1 struct {
-    PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-    
+	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
 }
 
 type CreateFirewallsSecurityOption2 struct {
-    Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-    
+	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
 }
 
 type CreateFirewallsSecurity struct {
-    Option1 *CreateFirewallsSecurityOption1 `security:"option"`
-    Option2 *CreateFirewallsSecurityOption2 `security:"option"`
-    
+	Option1 *CreateFirewallsSecurityOption1 `security:"option"`
+	Option2 *CreateFirewallsSecurityOption2 `security:"option"`
 }
 
 type CreateFirewallsRequest struct {
-    ServerURL *string 
-    Request *CreateFirewallsRequestBody `request:"mediaType=application/json"`
-    Security CreateFirewallsSecurity 
-    
+	ServerURL *string
+	Request   *CreateFirewallsRequestBody `request:"mediaType=application/json"`
+	Security  CreateFirewallsSecurity
 }
 
 type CreateFirewallsDefaultApplicationJSON struct {
-    Errors []shared.ErrorObject `json:"errors,omitempty"`
-    
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateFirewallsResponse struct {
-    ContentType string 
-    Firewall *shared.Firewall 
-    StatusCode int64 
-    CreateFirewallsDefaultApplicationJSONObject *CreateFirewallsDefaultApplicationJSON 
-    
+	ContentType                                 string
+	Firewall                                    *shared.Firewall
+	StatusCode                                  int64
+	CreateFirewallsDefaultApplicationJSONObject *CreateFirewallsDefaultApplicationJSON
 }
-

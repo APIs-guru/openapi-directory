@@ -1,70 +1,61 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type UpdateAccessPolicyPathParams struct {
-    AccessPolicyID string `pathParam:"style=simple,explode=false,name=accessPolicyId"`
-    
+	AccessPolicyID string `pathParam:"style=simple,explode=false,name=accessPolicyId"`
 }
 
 type UpdateAccessPolicyHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type UpdateAccessPolicyRequestBodyAccessPolicyIdentity struct {
-    Group *shared.GroupIdentity `json:"group,omitempty"`
-    IamRole *shared.IamRoleIdentity `json:"iamRole,omitempty"`
-    IamUser *shared.IamUserIdentity `json:"iamUser,omitempty"`
-    User *shared.UserIdentity `json:"user,omitempty"`
-    
+	Group   *shared.GroupIdentity   `json:"group,omitempty"`
+	IamRole *shared.IamRoleIdentity `json:"iamRole,omitempty"`
+	IamUser *shared.IamUserIdentity `json:"iamUser,omitempty"`
+	User    *shared.UserIdentity    `json:"user,omitempty"`
 }
-
 
 type UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnum string
 
 const (
-    UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnumAdministrator UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnum = "ADMINISTRATOR"
-UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnumViewer UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnum = "VIEWER"
+	UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnumAdministrator UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnum = "ADMINISTRATOR"
+	UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnumViewer        UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnum = "VIEWER"
 )
 
-
 type UpdateAccessPolicyRequestBodyAccessPolicyResource struct {
-    Portal *shared.PortalResource `json:"portal,omitempty"`
-    Project *shared.ProjectResource `json:"project,omitempty"`
-    
+	Portal  *shared.PortalResource  `json:"portal,omitempty"`
+	Project *shared.ProjectResource `json:"project,omitempty"`
 }
 
 type UpdateAccessPolicyRequestBody struct {
-    AccessPolicyIdentity UpdateAccessPolicyRequestBodyAccessPolicyIdentity `json:"accessPolicyIdentity"`
-    AccessPolicyPermission UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnum `json:"accessPolicyPermission"`
-    AccessPolicyResource UpdateAccessPolicyRequestBodyAccessPolicyResource `json:"accessPolicyResource"`
-    ClientToken *string `json:"clientToken,omitempty"`
-    
+	AccessPolicyIdentity   UpdateAccessPolicyRequestBodyAccessPolicyIdentity       `json:"accessPolicyIdentity"`
+	AccessPolicyPermission UpdateAccessPolicyRequestBodyAccessPolicyPermissionEnum `json:"accessPolicyPermission"`
+	AccessPolicyResource   UpdateAccessPolicyRequestBodyAccessPolicyResource       `json:"accessPolicyResource"`
+	ClientToken            *string                                                 `json:"clientToken,omitempty"`
 }
 
 type UpdateAccessPolicyRequest struct {
-    PathParams UpdateAccessPolicyPathParams 
-    Headers UpdateAccessPolicyHeaders 
-    Request UpdateAccessPolicyRequestBody `request:"mediaType=application/json"`
-    
+	PathParams UpdateAccessPolicyPathParams
+	Headers    UpdateAccessPolicyHeaders
+	Request    UpdateAccessPolicyRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateAccessPolicyResponse struct {
-    ContentType string 
-    InternalFailureException *interface{} 
-    InvalidRequestException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    UpdateAccessPolicyResponse map[string]interface{} 
-    
+	ContentType                string
+	InternalFailureException   *interface{}
+	InvalidRequestException    *interface{}
+	ResourceNotFoundException  *interface{}
+	StatusCode                 int64
+	ThrottlingException        *interface{}
+	UpdateAccessPolicyResponse map[string]interface{}
 }
-

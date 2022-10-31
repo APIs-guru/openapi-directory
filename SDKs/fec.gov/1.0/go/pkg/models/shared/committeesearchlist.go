@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CommitteeSearchList struct {
-    Results []CommitteeSearch `json:"results,omitempty"`
-    
+	Results []CommitteeSearch `json:"results,omitempty"`
 }
-

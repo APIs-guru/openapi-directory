@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeleteUserPathParams struct {
-    UserID string `pathParam:"style=simple,explode=false,name=UserId"`
-    
+	UserID string `pathParam:"style=simple,explode=false,name=UserId"`
 }
 
 type DeleteUserHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type DeleteUserRequest struct {
-    PathParams DeleteUserPathParams 
-    Headers DeleteUserHeaders 
-    
+	PathParams DeleteUserPathParams
+	Headers    DeleteUserHeaders
 }
 
 type DeleteUserResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    StatusCode int64 
-    
+	ContentType string
+	ErrorModel  *shared.ErrorModel
+	StatusCode  int64
 }
-

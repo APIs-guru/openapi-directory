@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetLocationByIDPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetLocationByIDRequest struct {
-    PathParams GetLocationByIDPathParams 
-    
+	PathParams GetLocationByIDPathParams
 }
 
 type GetLocationByIDResponse struct {
-    ContentType string 
-    Location *shared.Location 
-    StatusCode int64 
-    
+	ContentType string
+	Location    *shared.Location
+	StatusCode  int64
 }
-

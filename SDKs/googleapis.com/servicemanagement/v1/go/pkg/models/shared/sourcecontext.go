@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SourceContext struct {
-    FileName *string `json:"fileName,omitempty"`
-    
+	FileName *string `json:"fileName,omitempty"`
 }
-

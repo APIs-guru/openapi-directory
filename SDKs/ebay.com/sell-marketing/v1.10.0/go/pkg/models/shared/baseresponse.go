@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BaseResponse struct {
-    Warnings []Error `json:"warnings,omitempty"`
-    
+	Warnings []Error `json:"warnings,omitempty"`
 }
-

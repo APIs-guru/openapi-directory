@@ -1,10 +1,9 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type BillingGroupMetadata struct {
-    CreationDate *time.Time `json:"creationDate,omitempty"`
-    
+	CreationDate *time.Time `json:"creationDate,omitempty"`
 }
-

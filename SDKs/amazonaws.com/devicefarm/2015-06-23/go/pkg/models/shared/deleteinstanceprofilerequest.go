@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteInstanceProfileRequest struct {
-    Arn string `json:"arn"`
-    
+	Arn string `json:"arn"`
 }
-

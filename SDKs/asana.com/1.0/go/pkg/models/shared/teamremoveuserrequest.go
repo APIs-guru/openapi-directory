@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TeamRemoveUserRequest struct {
-    User *string `json:"user,omitempty"`
-    
+	User *string `json:"user,omitempty"`
 }
-

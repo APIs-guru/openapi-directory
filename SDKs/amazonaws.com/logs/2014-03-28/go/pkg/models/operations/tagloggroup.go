@@ -1,39 +1,34 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type TagLogGroupXAmzTargetEnum string
 
 const (
-    TagLogGroupXAmzTargetEnumLogs20140328TagLogGroup TagLogGroupXAmzTargetEnum = "Logs_20140328.TagLogGroup"
+	TagLogGroupXAmzTargetEnumLogs20140328TagLogGroup TagLogGroupXAmzTargetEnum = "Logs_20140328.TagLogGroup"
 )
 
-
 type TagLogGroupHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget TagLogGroupXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                   `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                   `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                   `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                   `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                   `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                   `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                   `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        TagLogGroupXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type TagLogGroupRequest struct {
-    Headers TagLogGroupHeaders 
-    Request shared.TagLogGroupRequest `request:"mediaType=application/json"`
-    
+	Headers TagLogGroupHeaders
+	Request shared.TagLogGroupRequest `request:"mediaType=application/json"`
 }
 
 type TagLogGroupResponse struct {
-    ContentType string 
-    InvalidParameterException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    
+	ContentType               string
+	InvalidParameterException *interface{}
+	ResourceNotFoundException *interface{}
+	StatusCode                int64
 }
-

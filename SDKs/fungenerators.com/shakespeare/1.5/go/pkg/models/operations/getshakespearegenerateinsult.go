@@ -1,27 +1,23 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetShakespeareGenerateInsultQueryParams struct {
-    Limit *int64 `queryParam:"style=form,explode=true,name=limit"`
-    
+	Limit *int64 `queryParam:"style=form,explode=true,name=limit"`
 }
 
 type GetShakespeareGenerateInsultSecurity struct {
-    XFungeneratorsAPISecret shared.SchemeXFungeneratorsAPISecret `security:"scheme,type=apiKey,subtype=header"`
-    
+	XFungeneratorsAPISecret shared.SchemeXFungeneratorsAPISecret `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetShakespeareGenerateInsultRequest struct {
-    QueryParams GetShakespeareGenerateInsultQueryParams 
-    Security GetShakespeareGenerateInsultSecurity 
-    
+	QueryParams GetShakespeareGenerateInsultQueryParams
+	Security    GetShakespeareGenerateInsultSecurity
 }
 
 type GetShakespeareGenerateInsultResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

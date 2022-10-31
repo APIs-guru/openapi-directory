@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAccountKeysSecurity struct {
-    BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
-    
+	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
 }
 
 type GetAccountKeysRequest struct {
-    Security GetAccountKeysSecurity 
-    
+	Security GetAccountKeysSecurity
 }
 
 type GetAccountKeysResponse struct {
-    APIKeys []shared.APIKey 
-    ContentType string 
-    StatusCode int64 
-    
+	APIKeys     []shared.APIKey
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,59 +1,52 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeploymentmanagerDeploymentsSetIamPolicyPathParams struct {
-    Project string `pathParam:"style=simple,explode=false,name=project"`
-    Resource string `pathParam:"style=simple,explode=false,name=resource"`
-    
+	Project  string `pathParam:"style=simple,explode=false,name=project"`
+	Resource string `pathParam:"style=simple,explode=false,name=resource"`
 }
 
 type DeploymentmanagerDeploymentsSetIamPolicyQueryParams struct {
-    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
-    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
-    Callback *string `queryParam:"style=form,explode=true,name=callback"`
-    Fields *string `queryParam:"style=form,explode=true,name=fields"`
-    Key *string `queryParam:"style=form,explode=true,name=key"`
-    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
-    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
-    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
-    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
-    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
-    
+	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
+	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
+	Key            *string           `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
+	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
 type DeploymentmanagerDeploymentsSetIamPolicySecurityOption1 struct {
-    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-    
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
 }
 
 type DeploymentmanagerDeploymentsSetIamPolicySecurityOption2 struct {
-    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-    
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
 }
 
 type DeploymentmanagerDeploymentsSetIamPolicySecurity struct {
-    Option1 *DeploymentmanagerDeploymentsSetIamPolicySecurityOption1 `security:"option"`
-    Option2 *DeploymentmanagerDeploymentsSetIamPolicySecurityOption2 `security:"option"`
-    
+	Option1 *DeploymentmanagerDeploymentsSetIamPolicySecurityOption1 `security:"option"`
+	Option2 *DeploymentmanagerDeploymentsSetIamPolicySecurityOption2 `security:"option"`
 }
 
 type DeploymentmanagerDeploymentsSetIamPolicyRequest struct {
-    PathParams DeploymentmanagerDeploymentsSetIamPolicyPathParams 
-    QueryParams DeploymentmanagerDeploymentsSetIamPolicyQueryParams 
-    Request *shared.GlobalSetPolicyRequest `request:"mediaType=application/json"`
-    Security DeploymentmanagerDeploymentsSetIamPolicySecurity 
-    
+	PathParams  DeploymentmanagerDeploymentsSetIamPolicyPathParams
+	QueryParams DeploymentmanagerDeploymentsSetIamPolicyQueryParams
+	Request     *shared.GlobalSetPolicyRequest `request:"mediaType=application/json"`
+	Security    DeploymentmanagerDeploymentsSetIamPolicySecurity
 }
 
 type DeploymentmanagerDeploymentsSetIamPolicyResponse struct {
-    ContentType string 
-    Policy *shared.Policy 
-    StatusCode int64 
-    
+	ContentType string
+	Policy      *shared.Policy
+	StatusCode  int64
 }
-

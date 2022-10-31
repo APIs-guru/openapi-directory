@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BoundingPoly struct {
-    NormalizedVertices []NormalizedVertex `json:"normalizedVertices,omitempty"`
-    
+	NormalizedVertices []NormalizedVertex `json:"normalizedVertices,omitempty"`
 }
-

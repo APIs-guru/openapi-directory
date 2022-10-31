@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetLaunchProfileMemberResponse struct {
-    Member *LaunchProfileMembership `json:"member,omitempty"`
-    
+	Member *LaunchProfileMembership `json:"member,omitempty"`
 }
-

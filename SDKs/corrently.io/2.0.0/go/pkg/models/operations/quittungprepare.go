@@ -1,21 +1,15 @@
 package operations
 
-
-
 type QuittungPrepareRequestBody struct {
-    Account *string `json:"account,omitempty"`
-    
+	Account *string `json:"account,omitempty"`
 }
 
 type QuittungPrepareRequest struct {
-    Request *QuittungPrepareRequestBody `request:"mediaType=application/json"`
-    
+	Request *QuittungPrepareRequestBody `request:"mediaType=application/json"`
 }
 
 type QuittungPrepareResponse struct {
-    ContentType string 
-    StatusCode int64 
-    QuittungPrepare200ApplicationJSONString *string 
-    
+	ContentType                             string
+	StatusCode                              int64
+	QuittungPrepare200ApplicationJSONString *string
 }
-

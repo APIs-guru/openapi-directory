@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdatePolicyResponse struct {
-    Policy *Policy `json:"Policy,omitempty"`
-    
+	Policy *Policy `json:"Policy,omitempty"`
 }
-

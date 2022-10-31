@@ -1,9 +1,5 @@
 package shared
 
-
-
 type WorkloadAltsConfig struct {
-    EnableAlts *bool `json:"enableAlts,omitempty"`
-    
+	EnableAlts *bool `json:"enableAlts,omitempty"`
 }
-

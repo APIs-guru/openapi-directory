@@ -1,28 +1,21 @@
 package operations
 
-
-
 type GetContainersFloatingIpsQueryParams struct {
-    All *bool `queryParam:"style=form,explode=true,name=all"`
-    
+	All *bool `queryParam:"style=form,explode=true,name=all"`
 }
 
 type GetContainersFloatingIpsHeaders struct {
-    XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
-    XAuthToken string `header:"style=simple,explode=false,name=X-Auth-Token"`
-    
+	XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
+	XAuthToken     string `header:"style=simple,explode=false,name=X-Auth-Token"`
 }
 
 type GetContainersFloatingIpsRequest struct {
-    QueryParams GetContainersFloatingIpsQueryParams 
-    Headers GetContainersFloatingIpsHeaders 
-    
+	QueryParams GetContainersFloatingIpsQueryParams
+	Headers     GetContainersFloatingIpsHeaders
 }
 
 type GetContainersFloatingIpsResponse struct {
-    ContentType string 
-    FloatingIps []interface{} 
-    StatusCode int64 
-    
+	ContentType string
+	FloatingIps []interface{}
+	StatusCode  int64
 }
-

@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetScriptsInstancesQueryParams struct {
-    TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
-    
+	TeamID *string `queryParam:"style=form,explode=true,name=teamId"`
 }
 
 type GetScriptsInstancesRequest struct {
-    QueryParams GetScriptsInstancesQueryParams 
-    
+	QueryParams GetScriptsInstancesQueryParams
 }
 
 type GetScriptsInstancesResponse struct {
-    Body []byte 
-    ContentType string 
-    ErrorResponseContent *shared.ErrorResponseContent 
-    ScriptInstanceDetails []shared.ScriptInstanceDetails 
-    StatusCode int64 
-    
+	Body                  []byte
+	ContentType           string
+	ErrorResponseContent  *shared.ErrorResponseContent
+	ScriptInstanceDetails []shared.ScriptInstanceDetails
+	StatusCode            int64
 }
-

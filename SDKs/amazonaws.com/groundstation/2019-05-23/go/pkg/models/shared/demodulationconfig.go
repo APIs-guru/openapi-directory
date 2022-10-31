@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DemodulationConfig struct {
-    UnvalidatedJSON string `json:"unvalidatedJSON"`
-    
+	UnvalidatedJSON string `json:"unvalidatedJSON"`
 }
-

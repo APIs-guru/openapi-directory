@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetRequestedServiceQuotaChangeRequest struct {
-    RequestID string `json:"RequestId"`
-    
+	RequestID string `json:"RequestId"`
 }
-

@@ -1,51 +1,46 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ListTagsForResourceQueryParams struct {
-    MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
-    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
-    
+	MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
+	NextToken  *string `queryParam:"style=form,explode=true,name=NextToken"`
 }
 
 type ListTagsForResourceHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type ListTagsForResourceRequestBody struct {
-    MaxResults *int64 `json:"MaxResults,omitempty"`
-    NextToken *string `json:"NextToken,omitempty"`
-    ResourceArn string `json:"ResourceArn"`
-    
+	MaxResults  *int64  `json:"MaxResults,omitempty"`
+	NextToken   *string `json:"NextToken,omitempty"`
+	ResourceArn string  `json:"ResourceArn"`
 }
 
 type ListTagsForResourceRequest struct {
-    QueryParams ListTagsForResourceQueryParams 
-    Headers ListTagsForResourceHeaders 
-    Request ListTagsForResourceRequestBody `request:"mediaType=application/json"`
-    
+	QueryParams ListTagsForResourceQueryParams
+	Headers     ListTagsForResourceHeaders
+	Request     ListTagsForResourceRequestBody `request:"mediaType=application/json"`
 }
 
 type ListTagsForResourceResponse struct {
-    AccessDeniedException *shared.AccessDeniedException 
-    ContentType string 
-    InternalServiceException *shared.InternalServiceException 
-    InvalidArnException *shared.InvalidArnException 
-    InvalidTaggingRequestException *shared.InvalidTaggingRequestException 
-    LimitExceededException *shared.LimitExceededException 
-    ListTagsForResourceResponse *shared.ListTagsForResourceResponse 
-    ResourceNotFoundException *shared.ResourceNotFoundException 
-    RetryableConflictException *shared.RetryableConflictException 
-    StatusCode int64 
-    ValidationException *shared.ValidationException 
-    
+	AccessDeniedException          *shared.AccessDeniedException
+	ContentType                    string
+	InternalServiceException       *shared.InternalServiceException
+	InvalidArnException            *shared.InvalidArnException
+	InvalidTaggingRequestException *shared.InvalidTaggingRequestException
+	LimitExceededException         *shared.LimitExceededException
+	ListTagsForResourceResponse    *shared.ListTagsForResourceResponse
+	ResourceNotFoundException      *shared.ResourceNotFoundException
+	RetryableConflictException     *shared.RetryableConflictException
+	StatusCode                     int64
+	ValidationException            *shared.ValidationException
 }
-

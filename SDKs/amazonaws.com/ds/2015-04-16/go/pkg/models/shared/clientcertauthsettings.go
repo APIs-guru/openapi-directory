@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ClientCertAuthSettings struct {
-    OcspURL *string `json:"OCSPUrl,omitempty"`
-    
+	OcspURL *string `json:"OCSPUrl,omitempty"`
 }
-

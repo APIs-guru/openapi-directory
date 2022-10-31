@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CancelTaskExecutionRequest struct {
-    TaskExecutionArn string `json:"TaskExecutionArn"`
-    
+	TaskExecutionArn string `json:"TaskExecutionArn"`
 }
-

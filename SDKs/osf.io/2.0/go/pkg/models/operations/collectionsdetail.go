@@ -1,21 +1,15 @@
 package operations
 
-
-
 type CollectionsDetailPathParams struct {
-    CollectionID string `pathParam:"style=simple,explode=false,name=collection_id"`
-    
+	CollectionID string `pathParam:"style=simple,explode=false,name=collection_id"`
 }
 
 type CollectionsDetailRequest struct {
-    PathParams CollectionsDetailPathParams 
-    
+	PathParams CollectionsDetailPathParams
 }
 
 type CollectionsDetailResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

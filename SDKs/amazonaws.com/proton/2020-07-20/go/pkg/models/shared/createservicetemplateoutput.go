@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateServiceTemplateOutput struct {
-    ServiceTemplate ServiceTemplate `json:"serviceTemplate"`
-    
+	ServiceTemplate ServiceTemplate `json:"serviceTemplate"`
 }
-

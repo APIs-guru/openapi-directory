@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type DescribeApplicationStateResult struct {
-    ApplicationStatus *ApplicationStatusEnum `json:"ApplicationStatus,omitempty"`
-    LastUpdatedTime *time.Time `json:"LastUpdatedTime,omitempty"`
-    
+	ApplicationStatus *ApplicationStatusEnum `json:"ApplicationStatus,omitempty"`
+	LastUpdatedTime   *time.Time             `json:"LastUpdatedTime,omitempty"`
 }
-

@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type MembershipGetSecurity struct {
-    Bearer shared.SchemeBearer `security:"scheme,type=oauth2"`
-    
+	Bearer shared.SchemeBearer `security:"scheme,type=oauth2"`
 }
 
 type MembershipGetRequest struct {
-    Security MembershipGetSecurity 
-    
+	Security MembershipGetSecurity
 }
 
 type MembershipGetResponse struct {
-    ContentType string 
-    MemberDtos []shared.MemberDto 
-    ProblemDetails *shared.ProblemDetails 
-    StatusCode int64 
-    
+	ContentType    string
+	MemberDtos     []shared.MemberDto
+	ProblemDetails *shared.ProblemDetails
+	StatusCode     int64
 }
-

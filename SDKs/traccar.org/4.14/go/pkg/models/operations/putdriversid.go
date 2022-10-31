@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PutDriversIDPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type PutDriversIDRequest struct {
-    PathParams PutDriversIDPathParams 
-    Request shared.Driver `request:"mediaType=application/json"`
-    
+	PathParams PutDriversIDPathParams
+	Request    shared.Driver `request:"mediaType=application/json"`
 }
 
 type PutDriversIDResponse struct {
-    ContentType string 
-    Driver *shared.Driver 
-    StatusCode int64 
-    
+	ContentType string
+	Driver      *shared.Driver
+	StatusCode  int64
 }
-

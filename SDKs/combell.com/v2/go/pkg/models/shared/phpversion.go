@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PhpVersion struct {
-    Version *string `json:"version,omitempty"`
-    
+	Version *string `json:"version,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteLunaClientResponse struct {
-    Status string `json:"Status"`
-    
+	Status string `json:"Status"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateCaseResponse struct {
-    CaseID *string `json:"caseId,omitempty"`
-    
+	CaseID *string `json:"caseId,omitempty"`
 }
-

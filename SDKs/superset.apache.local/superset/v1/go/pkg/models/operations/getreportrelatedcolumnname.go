@@ -1,58 +1,49 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetReportRelatedColumnNamePathParams struct {
-    ColumnName string `pathParam:"style=simple,explode=false,name=column_name"`
-    
+	ColumnName string `pathParam:"style=simple,explode=false,name=column_name"`
 }
 
 type GetReportRelatedColumnNameQueryParams struct {
-    Q *shared.GetRelatedSchema `queryParam:"serialization=json,name=q"`
-    
+	Q *shared.GetRelatedSchema `queryParam:"serialization=json,name=q"`
 }
 
 type GetReportRelatedColumnNameSecurity struct {
-    Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
-    
+	Jwt shared.SchemeJwt `security:"scheme,type=http,subtype=bearer"`
 }
 
 type GetReportRelatedColumnNameRequest struct {
-    PathParams GetReportRelatedColumnNamePathParams 
-    QueryParams GetReportRelatedColumnNameQueryParams 
-    Security GetReportRelatedColumnNameSecurity 
-    
+	PathParams  GetReportRelatedColumnNamePathParams
+	QueryParams GetReportRelatedColumnNameQueryParams
+	Security    GetReportRelatedColumnNameSecurity
 }
 
 type GetReportRelatedColumnName400ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportRelatedColumnName401ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportRelatedColumnName404ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportRelatedColumnName500ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
 
 type GetReportRelatedColumnNameResponse struct {
-    ContentType string 
-    GetReportRelatedColumnName400ApplicationJSONObject *GetReportRelatedColumnName400ApplicationJSON 
-    GetReportRelatedColumnName401ApplicationJSONObject *GetReportRelatedColumnName401ApplicationJSON 
-    GetReportRelatedColumnName404ApplicationJSONObject *GetReportRelatedColumnName404ApplicationJSON 
-    GetReportRelatedColumnName500ApplicationJSONObject *GetReportRelatedColumnName500ApplicationJSON 
-    RelatedResponseSchema *shared.RelatedResponseSchema 
-    StatusCode int64 
-    
+	ContentType                                        string
+	GetReportRelatedColumnName400ApplicationJSONObject *GetReportRelatedColumnName400ApplicationJSON
+	GetReportRelatedColumnName401ApplicationJSONObject *GetReportRelatedColumnName401ApplicationJSON
+	GetReportRelatedColumnName404ApplicationJSONObject *GetReportRelatedColumnName404ApplicationJSON
+	GetReportRelatedColumnName500ApplicationJSONObject *GetReportRelatedColumnName500ApplicationJSON
+	RelatedResponseSchema                              *shared.RelatedResponseSchema
+	StatusCode                                         int64
 }
-

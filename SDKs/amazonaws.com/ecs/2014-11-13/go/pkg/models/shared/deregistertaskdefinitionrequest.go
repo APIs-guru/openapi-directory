@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeregisterTaskDefinitionRequest struct {
-    TaskDefinition string `json:"taskDefinition"`
-    
+	TaskDefinition string `json:"taskDefinition"`
 }
-

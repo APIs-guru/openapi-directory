@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type TrainingJobEarlyStoppingTypeEnum string
 
 const (
-    TrainingJobEarlyStoppingTypeEnumOff TrainingJobEarlyStoppingTypeEnum = "Off"
-TrainingJobEarlyStoppingTypeEnumAuto TrainingJobEarlyStoppingTypeEnum = "Auto"
+	TrainingJobEarlyStoppingTypeEnumOff  TrainingJobEarlyStoppingTypeEnum = "Off"
+	TrainingJobEarlyStoppingTypeEnumAuto TrainingJobEarlyStoppingTypeEnum = "Auto"
 )
-
-

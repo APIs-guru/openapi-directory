@@ -1,41 +1,35 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type RemoveMembersForPortfolioPathParams struct {
-    PortfolioGid string `pathParam:"style=simple,explode=false,name=portfolio_gid"`
-    
+	PortfolioGid string `pathParam:"style=simple,explode=false,name=portfolio_gid"`
 }
 
 type RemoveMembersForPortfolioQueryParams struct {
-    OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
-    OptPretty *bool `queryParam:"style=form,explode=true,name=opt_pretty"`
-    
+	OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
+	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
 type RemoveMembersForPortfolioRequestBody struct {
-    Data *shared.RemoveMembersRequest `json:"data,omitempty"`
-    
+	Data *shared.RemoveMembersRequest `json:"data,omitempty"`
 }
 
 type RemoveMembersForPortfolioRequest struct {
-    PathParams RemoveMembersForPortfolioPathParams 
-    QueryParams RemoveMembersForPortfolioQueryParams 
-    Request RemoveMembersForPortfolioRequestBody `request:"mediaType=application/json"`
-    
+	PathParams  RemoveMembersForPortfolioPathParams
+	QueryParams RemoveMembersForPortfolioQueryParams
+	Request     RemoveMembersForPortfolioRequestBody `request:"mediaType=application/json"`
 }
 
 type RemoveMembersForPortfolio200ApplicationJSON struct {
-    Data map[string]interface{} `json:"data,omitempty"`
-    
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveMembersForPortfolioResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    RemoveMembersForPortfolio200ApplicationJSONObject *RemoveMembersForPortfolio200ApplicationJSON 
-    
+	ContentType                                       string
+	ErrorResponse                                     *shared.ErrorResponse
+	StatusCode                                        int64
+	RemoveMembersForPortfolio200ApplicationJSONObject *RemoveMembersForPortfolio200ApplicationJSON
 }
-

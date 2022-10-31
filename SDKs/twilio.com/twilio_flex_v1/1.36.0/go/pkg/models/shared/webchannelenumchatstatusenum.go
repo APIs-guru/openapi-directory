@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type WebChannelEnumChatStatusEnum string
 
 const (
-    WebChannelEnumChatStatusEnumInactive WebChannelEnumChatStatusEnum = "inactive"
+	WebChannelEnumChatStatusEnumInactive WebChannelEnumChatStatusEnum = "inactive"
 )
-
-

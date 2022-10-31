@@ -1,16 +1,14 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeletePermissionsRequest struct {
-    Request shared.Permission `request:"mediaType=application/json"`
-    
+	Request shared.Permission `request:"mediaType=application/json"`
 }
 
 type DeletePermissionsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

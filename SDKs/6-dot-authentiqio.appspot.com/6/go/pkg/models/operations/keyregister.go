@@ -1,24 +1,18 @@
 package operations
 
-
-
 type KeyRegisterRequest struct {
-    Request []byte `request:"mediaType=application/jwt"`
-    
+	Request []byte `request:"mediaType=application/jwt"`
 }
 
 type KeyRegister201ApplicationJSON struct {
-    Secret *string `json:"secret,omitempty"`
-    Status *string `json:"status,omitempty"`
-    
+	Secret *string `json:"secret,omitempty"`
+	Status *string `json:"status,omitempty"`
 }
 
 type KeyRegisterResponse struct {
-    Body []byte 
-    ContentType string 
-    Error *interface{} 
-    StatusCode int64 
-    KeyRegister201ApplicationJSONObject *KeyRegister201ApplicationJSON 
-    
+	Body                                []byte
+	ContentType                         string
+	Error                               *interface{}
+	StatusCode                          int64
+	KeyRegister201ApplicationJSONObject *KeyRegister201ApplicationJSON
 }
-

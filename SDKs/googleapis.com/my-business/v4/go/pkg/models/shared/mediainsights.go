@@ -1,9 +1,5 @@
 package shared
 
-
-
 type MediaInsights struct {
-    ViewCount *string `json:"viewCount,omitempty"`
-    
+	ViewCount *string `json:"viewCount,omitempty"`
 }
-

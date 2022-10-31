@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteThingShadowResponse struct {
-    Payload string `json:"payload"`
-    
+	Payload string `json:"payload"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetServiceInstanceOutput struct {
-    ServiceInstance ServiceInstance `json:"serviceInstance"`
-    
+	ServiceInstance ServiceInstance `json:"serviceInstance"`
 }
-

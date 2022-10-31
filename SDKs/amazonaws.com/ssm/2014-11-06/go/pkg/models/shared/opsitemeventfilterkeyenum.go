@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type OpsItemEventFilterKeyEnum string
 
 const (
-    OpsItemEventFilterKeyEnumOpsItemID OpsItemEventFilterKeyEnum = "OpsItemId"
+	OpsItemEventFilterKeyEnumOpsItemID OpsItemEventFilterKeyEnum = "OpsItemId"
 )
-
-

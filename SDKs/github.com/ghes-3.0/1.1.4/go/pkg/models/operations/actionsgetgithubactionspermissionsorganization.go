@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ActionsGetGithubActionsPermissionsOrganizationPathParams struct {
-    Org string `pathParam:"style=simple,explode=false,name=org"`
-    
+	Org string `pathParam:"style=simple,explode=false,name=org"`
 }
 
 type ActionsGetGithubActionsPermissionsOrganizationRequest struct {
-    PathParams ActionsGetGithubActionsPermissionsOrganizationPathParams 
-    
+	PathParams ActionsGetGithubActionsPermissionsOrganizationPathParams
 }
 
 type ActionsGetGithubActionsPermissionsOrganizationResponse struct {
-    ContentType string 
-    StatusCode int64 
-    ActionsOrganizationPermissions *shared.ActionsOrganizationPermissions 
-    
+	ContentType                    string
+	StatusCode                     int64
+	ActionsOrganizationPermissions *shared.ActionsOrganizationPermissions
 }
-

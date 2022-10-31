@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PutEvaluationsResponse struct {
-    FailedEvaluations []Evaluation `json:"FailedEvaluations,omitempty"`
-    
+	FailedEvaluations []Evaluation `json:"FailedEvaluations,omitempty"`
 }
-

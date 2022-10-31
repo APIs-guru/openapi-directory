@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudRetailV2alphaRemoveControlRequest struct {
-    ControlID *string `json:"controlId,omitempty"`
-    
+	ControlID *string `json:"controlId,omitempty"`
 }
-

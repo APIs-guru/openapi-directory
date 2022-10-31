@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchGetReportGroupsInput struct {
-    ReportGroupArns []string `json:"reportGroupArns"`
-    
+	ReportGroupArns []string `json:"reportGroupArns"`
 }
-

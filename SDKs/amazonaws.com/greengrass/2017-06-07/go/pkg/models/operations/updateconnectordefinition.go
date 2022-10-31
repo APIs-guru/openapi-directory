@@ -1,40 +1,32 @@
 package operations
 
-
-
 type UpdateConnectorDefinitionPathParams struct {
-    ConnectorDefinitionID string `pathParam:"style=simple,explode=false,name=ConnectorDefinitionId"`
-    
+	ConnectorDefinitionID string `pathParam:"style=simple,explode=false,name=ConnectorDefinitionId"`
 }
 
 type UpdateConnectorDefinitionHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type UpdateConnectorDefinitionRequestBody struct {
-    Name *string `json:"Name,omitempty"`
-    
+	Name *string `json:"Name,omitempty"`
 }
 
 type UpdateConnectorDefinitionRequest struct {
-    PathParams UpdateConnectorDefinitionPathParams 
-    Headers UpdateConnectorDefinitionHeaders 
-    Request UpdateConnectorDefinitionRequestBody `request:"mediaType=application/json"`
-    
+	PathParams UpdateConnectorDefinitionPathParams
+	Headers    UpdateConnectorDefinitionHeaders
+	Request    UpdateConnectorDefinitionRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateConnectorDefinitionResponse struct {
-    BadRequestException *interface{} 
-    ContentType string 
-    StatusCode int64 
-    UpdateConnectorDefinitionResponse map[string]interface{} 
-    
+	BadRequestException               *interface{}
+	ContentType                       string
+	StatusCode                        int64
+	UpdateConnectorDefinitionResponse map[string]interface{}
 }
-

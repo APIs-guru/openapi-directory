@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ProjectReference struct {
-    ProjectID *string `json:"projectId,omitempty"`
-    
+	ProjectID *string `json:"projectId,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteEnvironmentRequest struct {
-    EnvironmentID string `json:"environmentId"`
-    
+	EnvironmentID string `json:"environmentId"`
 }
-

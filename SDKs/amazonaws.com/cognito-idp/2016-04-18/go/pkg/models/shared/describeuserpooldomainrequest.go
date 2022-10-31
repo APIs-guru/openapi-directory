@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeUserPoolDomainRequest struct {
-    Domain string `json:"Domain"`
-    
+	Domain string `json:"Domain"`
 }
-

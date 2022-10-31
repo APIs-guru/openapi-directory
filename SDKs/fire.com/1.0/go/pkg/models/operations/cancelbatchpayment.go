@@ -1,20 +1,14 @@
 package operations
 
-
-
 type CancelBatchPaymentPathParams struct {
-    BatchUUID string `pathParam:"style=simple,explode=false,name=batchUuid"`
-    
+	BatchUUID string `pathParam:"style=simple,explode=false,name=batchUuid"`
 }
 
 type CancelBatchPaymentRequest struct {
-    PathParams CancelBatchPaymentPathParams 
-    
+	PathParams CancelBatchPaymentPathParams
 }
 
 type CancelBatchPaymentResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

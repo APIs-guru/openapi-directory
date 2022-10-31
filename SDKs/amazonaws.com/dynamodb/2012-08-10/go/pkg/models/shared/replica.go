@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Replica struct {
-    RegionName *string `json:"RegionName,omitempty"`
-    
+	RegionName *string `json:"RegionName,omitempty"`
 }
-

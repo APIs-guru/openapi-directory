@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AdvertiseByoipCidrRequest struct {
-    Cidr string `json:"Cidr"`
-    
+	Cidr string `json:"Cidr"`
 }
-

@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type AgentsGetAgentsQueryParams struct {
-    Limit *int32 `queryParam:"style=form,explode=true,name=limit"`
-    Offset *int32 `queryParam:"style=form,explode=true,name=offset"`
-    
+	Limit  *int32 `queryParam:"style=form,explode=true,name=limit"`
+	Offset *int32 `queryParam:"style=form,explode=true,name=offset"`
 }
 
 type AgentsGetAgentsRequest struct {
-    QueryParams AgentsGetAgentsQueryParams 
-    
+	QueryParams AgentsGetAgentsQueryParams
 }
 
 type AgentsGetAgentsResponse struct {
-    APIModelsAPIError *shared.APIModelsAPIError 
-    APIPagedResponseBuildSystemSharedDtoAgent *shared.APIPagedResponseBuildSystemSharedDtoAgent 
-    ContentType string 
-    StatusCode int64 
-    
+	APIModelsAPIError                         *shared.APIModelsAPIError
+	APIPagedResponseBuildSystemSharedDtoAgent *shared.APIPagedResponseBuildSystemSharedDtoAgent
+	ContentType                               string
+	StatusCode                                int64
 }
-

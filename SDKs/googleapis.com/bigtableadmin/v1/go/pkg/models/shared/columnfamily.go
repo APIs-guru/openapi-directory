@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ColumnFamily struct {
-    GcRule *GcRule `json:"gcRule,omitempty"`
-    
+	GcRule *GcRule `json:"gcRule,omitempty"`
 }
-

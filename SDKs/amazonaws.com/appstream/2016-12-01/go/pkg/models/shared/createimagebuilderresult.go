@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateImageBuilderResult struct {
-    ImageBuilder *ImageBuilder `json:"ImageBuilder,omitempty"`
-    
+	ImageBuilder *ImageBuilder `json:"ImageBuilder,omitempty"`
 }
-

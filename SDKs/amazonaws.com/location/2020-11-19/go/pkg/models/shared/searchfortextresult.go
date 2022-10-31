@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SearchForTextResult struct {
-    Place Place `json:"Place"`
-    
+	Place Place `json:"Place"`
 }
-

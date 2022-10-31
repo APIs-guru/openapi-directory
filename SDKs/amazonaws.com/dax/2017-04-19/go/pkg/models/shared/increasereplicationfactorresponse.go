@@ -1,9 +1,5 @@
 package shared
 
-
-
 type IncreaseReplicationFactorResponse struct {
-    Cluster *Cluster `json:"Cluster,omitempty"`
-    
+	Cluster *Cluster `json:"Cluster,omitempty"`
 }
-

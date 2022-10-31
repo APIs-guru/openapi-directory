@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type ControlTypeEnum string
 
 const (
-    ControlTypeEnumStandard ControlTypeEnum = "Standard"
-ControlTypeEnumCustom ControlTypeEnum = "Custom"
+	ControlTypeEnumStandard ControlTypeEnum = "Standard"
+	ControlTypeEnumCustom   ControlTypeEnum = "Custom"
 )
-
-

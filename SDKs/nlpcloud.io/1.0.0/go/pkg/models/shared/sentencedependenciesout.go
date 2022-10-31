@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SentenceDependenciesOut struct {
-    SentenceDependencies []SentenceDependencyOut `json:"sentence_dependencies"`
-    
+	SentenceDependencies []SentenceDependencyOut `json:"sentence_dependencies"`
 }
-

@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetNetworkGroupPoliciesPathParams struct {
-    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
-    
+	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
 type GetNetworkGroupPoliciesRequest struct {
-    PathParams GetNetworkGroupPoliciesPathParams 
-    
+	PathParams GetNetworkGroupPoliciesPathParams
 }
 
 type GetNetworkGroupPoliciesResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetNetworkGroupPolicies200ApplicationJSONObject map[string]interface{} 
-    
+	ContentType                                     string
+	StatusCode                                      int64
+	GetNetworkGroupPolicies200ApplicationJSONObject map[string]interface{}
 }
-

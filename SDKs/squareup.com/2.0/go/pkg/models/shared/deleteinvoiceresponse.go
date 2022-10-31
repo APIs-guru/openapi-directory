@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteInvoiceResponse struct {
-    Errors []Error `json:"errors,omitempty"`
-    
+	Errors []Error `json:"errors,omitempty"`
 }
-

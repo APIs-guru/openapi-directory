@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DynamoDbSettings struct {
-    ServiceAccessRoleArn string `json:"ServiceAccessRoleArn"`
-    
+	ServiceAccessRoleArn string `json:"ServiceAccessRoleArn"`
 }
-

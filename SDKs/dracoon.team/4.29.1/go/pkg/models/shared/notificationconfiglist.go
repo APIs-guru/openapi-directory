@@ -1,9 +1,5 @@
 package shared
 
-
-
 type NotificationConfigList struct {
-    Items []NotificationConfig `json:"items"`
-    
+	Items []NotificationConfig `json:"items"`
 }
-

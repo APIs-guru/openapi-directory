@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SampleValue struct {
-    Value string `json:"value"`
-    
+	Value string `json:"value"`
 }
-

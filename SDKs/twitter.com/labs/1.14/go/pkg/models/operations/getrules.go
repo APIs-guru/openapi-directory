@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetRulesQueryParams struct {
-    Ids []string `queryParam:"style=form,explode=true,name=ids"`
-    
+	Ids []string `queryParam:"style=form,explode=true,name=ids"`
 }
 
 type GetRulesRequest struct {
-    QueryParams GetRulesQueryParams 
-    
+	QueryParams GetRulesQueryParams
 }
 
 type GetRulesResponse struct {
-    ContentType string 
-    Error *interface{} 
-    GetRulesResponse *shared.GetRulesResponse 
-    Problem *interface{} 
-    StatusCode int64 
-    
+	ContentType      string
+	Error            *interface{}
+	GetRulesResponse *shared.GetRulesResponse
+	Problem          *interface{}
+	StatusCode       int64
 }
-

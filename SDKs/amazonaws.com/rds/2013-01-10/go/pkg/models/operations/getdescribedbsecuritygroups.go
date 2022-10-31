@@ -1,53 +1,42 @@
 package operations
 
-
-
-
 type GetDescribeDbSecurityGroupsActionEnum string
 
 const (
-    GetDescribeDbSecurityGroupsActionEnumDescribeDbSecurityGroups GetDescribeDbSecurityGroupsActionEnum = "DescribeDBSecurityGroups"
+	GetDescribeDbSecurityGroupsActionEnumDescribeDbSecurityGroups GetDescribeDbSecurityGroupsActionEnum = "DescribeDBSecurityGroups"
 )
-
-
 
 type GetDescribeDbSecurityGroupsVersionEnum string
 
 const (
-    GetDescribeDbSecurityGroupsVersionEnumTwoThousandAndThirteen0110 GetDescribeDbSecurityGroupsVersionEnum = "2013-01-10"
+	GetDescribeDbSecurityGroupsVersionEnumTwoThousandAndThirteen0110 GetDescribeDbSecurityGroupsVersionEnum = "2013-01-10"
 )
 
-
 type GetDescribeDbSecurityGroupsQueryParams struct {
-    Action GetDescribeDbSecurityGroupsActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    DbSecurityGroupName *string `queryParam:"style=form,explode=true,name=DBSecurityGroupName"`
-    Marker *string `queryParam:"style=form,explode=true,name=Marker"`
-    MaxRecords *int64 `queryParam:"style=form,explode=true,name=MaxRecords"`
-    Version GetDescribeDbSecurityGroupsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action              GetDescribeDbSecurityGroupsActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	DbSecurityGroupName *string                                `queryParam:"style=form,explode=true,name=DBSecurityGroupName"`
+	Marker              *string                                `queryParam:"style=form,explode=true,name=Marker"`
+	MaxRecords          *int64                                 `queryParam:"style=form,explode=true,name=MaxRecords"`
+	Version             GetDescribeDbSecurityGroupsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type GetDescribeDbSecurityGroupsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetDescribeDbSecurityGroupsRequest struct {
-    QueryParams GetDescribeDbSecurityGroupsQueryParams 
-    Headers GetDescribeDbSecurityGroupsHeaders 
-    
+	QueryParams GetDescribeDbSecurityGroupsQueryParams
+	Headers     GetDescribeDbSecurityGroupsHeaders
 }
 
 type GetDescribeDbSecurityGroupsResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

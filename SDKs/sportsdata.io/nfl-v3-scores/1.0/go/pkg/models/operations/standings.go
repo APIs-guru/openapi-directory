@@ -1,31 +1,23 @@
 package operations
 
-
-
-
 type StandingsFormatEnum string
 
 const (
-    StandingsFormatEnumXML StandingsFormatEnum = "XML"
-StandingsFormatEnumJSON StandingsFormatEnum = "JSON"
+	StandingsFormatEnumXML  StandingsFormatEnum = "XML"
+	StandingsFormatEnumJSON StandingsFormatEnum = "JSON"
 )
 
-
 type StandingsPathParams struct {
-    Format StandingsFormatEnum `pathParam:"style=simple,explode=false,name=format"`
-    Season string `pathParam:"style=simple,explode=false,name=season"`
-    
+	Format StandingsFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+	Season string              `pathParam:"style=simple,explode=false,name=season"`
 }
 
 type StandingsRequest struct {
-    PathParams StandingsPathParams 
-    
+	PathParams StandingsPathParams
 }
 
 type StandingsResponse struct {
-    ContentType string 
-    Standings []interface{} 
-    StatusCode int64 
-    
+	ContentType string
+	Standings   []interface{}
+	StatusCode  int64
 }
-

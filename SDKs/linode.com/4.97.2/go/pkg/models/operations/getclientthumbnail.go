@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetClientThumbnailPathParams struct {
-    ClientID string `pathParam:"style=simple,explode=false,name=clientId"`
-    
+	ClientID string `pathParam:"style=simple,explode=false,name=clientId"`
 }
 
 type GetClientThumbnailRequest struct {
-    PathParams GetClientThumbnailPathParams 
-    
+	PathParams GetClientThumbnailPathParams
 }
 
 type GetClientThumbnailDefaultApplicationJSON struct {
-    Errors []shared.ErrorObject `json:"errors,omitempty"`
-    
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type GetClientThumbnailResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetClientThumbnail200ImagePngBinaryString []byte 
-    GetClientThumbnailDefaultApplicationJSONObject *GetClientThumbnailDefaultApplicationJSON 
-    
+	ContentType                                    string
+	StatusCode                                     int64
+	GetClientThumbnail200ImagePngBinaryString      []byte
+	GetClientThumbnailDefaultApplicationJSONObject *GetClientThumbnailDefaultApplicationJSON
 }
-

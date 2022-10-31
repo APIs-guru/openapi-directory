@@ -1,42 +1,32 @@
 package shared
 
-
-
-
 type BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnum string
 
 const (
-    BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnumSerialNumber BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnum = "SERIAL_NUMBER"
-BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnumFormattedString BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnum = "FORMATTED_STRING"
+	BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnumSerialNumber    BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnum = "SERIAL_NUMBER"
+	BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnumFormattedString BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnum = "FORMATTED_STRING"
 )
-
-
 
 type BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnum string
 
 const (
-    BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnumFormattedValue BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnum = "FORMATTED_VALUE"
-BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnumUnformattedValue BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnum = "UNFORMATTED_VALUE"
-BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnumFormula BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnum = "FORMULA"
+	BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnumFormattedValue   BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnum = "FORMATTED_VALUE"
+	BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnumUnformattedValue BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnum = "UNFORMATTED_VALUE"
+	BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnumFormula          BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnum = "FORMULA"
 )
-
-
 
 type BatchUpdateValuesByDataFilterRequestValueInputOptionEnum string
 
 const (
-    BatchUpdateValuesByDataFilterRequestValueInputOptionEnumInputValueOptionUnspecified BatchUpdateValuesByDataFilterRequestValueInputOptionEnum = "INPUT_VALUE_OPTION_UNSPECIFIED"
-BatchUpdateValuesByDataFilterRequestValueInputOptionEnumRaw BatchUpdateValuesByDataFilterRequestValueInputOptionEnum = "RAW"
-BatchUpdateValuesByDataFilterRequestValueInputOptionEnumUserEntered BatchUpdateValuesByDataFilterRequestValueInputOptionEnum = "USER_ENTERED"
+	BatchUpdateValuesByDataFilterRequestValueInputOptionEnumInputValueOptionUnspecified BatchUpdateValuesByDataFilterRequestValueInputOptionEnum = "INPUT_VALUE_OPTION_UNSPECIFIED"
+	BatchUpdateValuesByDataFilterRequestValueInputOptionEnumRaw                         BatchUpdateValuesByDataFilterRequestValueInputOptionEnum = "RAW"
+	BatchUpdateValuesByDataFilterRequestValueInputOptionEnumUserEntered                 BatchUpdateValuesByDataFilterRequestValueInputOptionEnum = "USER_ENTERED"
 )
 
-
 type BatchUpdateValuesByDataFilterRequest struct {
-    Data []DataFilterValueRange `json:"data,omitempty"`
-    IncludeValuesInResponse *bool `json:"includeValuesInResponse,omitempty"`
-    ResponseDateTimeRenderOption *BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnum `json:"responseDateTimeRenderOption,omitempty"`
-    ResponseValueRenderOption *BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnum `json:"responseValueRenderOption,omitempty"`
-    ValueInputOption *BatchUpdateValuesByDataFilterRequestValueInputOptionEnum `json:"valueInputOption,omitempty"`
-    
+	Data                         []DataFilterValueRange                                                `json:"data,omitempty"`
+	IncludeValuesInResponse      *bool                                                                 `json:"includeValuesInResponse,omitempty"`
+	ResponseDateTimeRenderOption *BatchUpdateValuesByDataFilterRequestResponseDateTimeRenderOptionEnum `json:"responseDateTimeRenderOption,omitempty"`
+	ResponseValueRenderOption    *BatchUpdateValuesByDataFilterRequestResponseValueRenderOptionEnum    `json:"responseValueRenderOption,omitempty"`
+	ValueInputOption             *BatchUpdateValuesByDataFilterRequestValueInputOptionEnum             `json:"valueInputOption,omitempty"`
 }
-

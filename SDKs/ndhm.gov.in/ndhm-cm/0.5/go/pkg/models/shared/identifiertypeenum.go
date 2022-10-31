@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type IdentifierTypeEnum string
 
 const (
-    IdentifierTypeEnumMobile IdentifierTypeEnum = "MOBILE"
-IdentifierTypeEnumMr IdentifierTypeEnum = "MR"
+	IdentifierTypeEnumMobile IdentifierTypeEnum = "MOBILE"
+	IdentifierTypeEnumMr     IdentifierTypeEnum = "MR"
 )
-
-

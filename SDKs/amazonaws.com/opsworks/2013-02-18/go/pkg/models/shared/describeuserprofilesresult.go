@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeUserProfilesResult struct {
-    UserProfiles []UserProfile `json:"UserProfiles,omitempty"`
-    
+	UserProfiles []UserProfile `json:"UserProfiles,omitempty"`
 }
-

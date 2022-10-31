@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateTestGridProjectResult struct {
-    TestGridProject *TestGridProject `json:"testGridProject,omitempty"`
-    
+	TestGridProject *TestGridProject `json:"testGridProject,omitempty"`
 }
-

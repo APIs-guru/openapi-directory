@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteProjectRequest struct {
-    ProjectArn string `json:"ProjectArn"`
-    
+	ProjectArn string `json:"ProjectArn"`
 }
-

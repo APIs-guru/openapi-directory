@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeProfilingGroupResponse struct {
-    ProfilingGroup ProfilingGroupDescription `json:"profilingGroup"`
-    
+	ProfilingGroup ProfilingGroupDescription `json:"profilingGroup"`
 }
-

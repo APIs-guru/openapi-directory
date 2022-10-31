@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteFlowDefinitionRequest struct {
-    FlowDefinitionName string `json:"FlowDefinitionName"`
-    
+	FlowDefinitionName string `json:"FlowDefinitionName"`
 }
-

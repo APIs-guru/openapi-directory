@@ -1,10 +1,6 @@
 package shared
 
-
-
 type CreateCliTokenResponse struct {
-    CliToken *string `json:"CliToken,omitempty"`
-    WebServerHostname *string `json:"WebServerHostname,omitempty"`
-    
+	CliToken          *string `json:"CliToken,omitempty"`
+	WebServerHostname *string `json:"WebServerHostname,omitempty"`
 }
-

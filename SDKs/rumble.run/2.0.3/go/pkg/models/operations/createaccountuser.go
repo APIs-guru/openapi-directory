@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CreateAccountUserSecurity struct {
-    BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
-    
+	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
 }
 
 type CreateAccountUserRequest struct {
-    Request shared.UserOptions `request:"mediaType=application/json"`
-    Security CreateAccountUserSecurity 
-    
+	Request  shared.UserOptions `request:"mediaType=application/json"`
+	Security CreateAccountUserSecurity
 }
 
 type CreateAccountUserResponse struct {
-    ContentType string 
-    StatusCode int64 
-    User *shared.User 
-    
+	ContentType string
+	StatusCode  int64
+	User        *shared.User
 }
-

@@ -1,20 +1,14 @@
 package shared
 
-
-
-
 type EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum string
 
 const (
-    EnvironmentAssignedTargetingOptionDetailsEnvironmentEnumEnvironmentUnspecified EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum = "ENVIRONMENT_UNSPECIFIED"
-EnvironmentAssignedTargetingOptionDetailsEnvironmentEnumEnvironmentWebOptimized EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum = "ENVIRONMENT_WEB_OPTIMIZED"
-EnvironmentAssignedTargetingOptionDetailsEnvironmentEnumEnvironmentWebNotOptimized EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum = "ENVIRONMENT_WEB_NOT_OPTIMIZED"
-EnvironmentAssignedTargetingOptionDetailsEnvironmentEnumEnvironmentApp EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum = "ENVIRONMENT_APP"
+	EnvironmentAssignedTargetingOptionDetailsEnvironmentEnumEnvironmentUnspecified     EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum = "ENVIRONMENT_UNSPECIFIED"
+	EnvironmentAssignedTargetingOptionDetailsEnvironmentEnumEnvironmentWebOptimized    EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum = "ENVIRONMENT_WEB_OPTIMIZED"
+	EnvironmentAssignedTargetingOptionDetailsEnvironmentEnumEnvironmentWebNotOptimized EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum = "ENVIRONMENT_WEB_NOT_OPTIMIZED"
+	EnvironmentAssignedTargetingOptionDetailsEnvironmentEnumEnvironmentApp             EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum = "ENVIRONMENT_APP"
 )
 
-
 type EnvironmentAssignedTargetingOptionDetails struct {
-    Environment *EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum `json:"environment,omitempty"`
-    
+	Environment *EnvironmentAssignedTargetingOptionDetailsEnvironmentEnum `json:"environment,omitempty"`
 }
-

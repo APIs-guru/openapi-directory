@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetLabelSecurity struct {
-    Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-    
+	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
 }
 
 type GetLabelRequest struct {
-    Security GetLabelSecurity 
-    
+	Security GetLabelSecurity
 }
 
 type GetLabelResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

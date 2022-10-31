@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type LogsGetPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type LogsGetRequest struct {
-    PathParams LogsGetPathParams 
-    
+	PathParams LogsGetPathParams
 }
 
 type LogsGetResponse struct {
-    Body []byte 
-    ContentType string 
-    Log *shared.Log 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	Log         *shared.Log
+	StatusCode  int64
 }
-

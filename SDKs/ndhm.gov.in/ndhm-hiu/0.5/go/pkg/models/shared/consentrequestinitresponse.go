@@ -1,19 +1,17 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ConsentRequestInitResponseConsentRequest struct {
-    ID string `json:"id"`
-    
+	ID string `json:"id"`
 }
 
 type ConsentRequestInitResponse struct {
-    ConsentRequest *ConsentRequestInitResponseConsentRequest `json:"consentRequest,omitempty"`
-    Error *Error `json:"error,omitempty"`
-    RequestID string `json:"requestId"`
-    Resp RequestReference `json:"resp"`
-    Timestamp time.Time `json:"timestamp"`
-    
+	ConsentRequest *ConsentRequestInitResponseConsentRequest `json:"consentRequest,omitempty"`
+	Error          *Error                                    `json:"error,omitempty"`
+	RequestID      string                                    `json:"requestId"`
+	Resp           RequestReference                          `json:"resp"`
+	Timestamp      time.Time                                 `json:"timestamp"`
 }
-

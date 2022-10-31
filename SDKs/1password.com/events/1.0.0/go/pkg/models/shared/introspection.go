@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type Introspection struct {
-    Features []string `json:"Features,omitempty"`
-    IssuedAt *time.Time `json:"IssuedAt,omitempty"`
-    UUID *string `json:"UUID,omitempty"`
-    
+	Features []string   `json:"Features,omitempty"`
+	IssuedAt *time.Time `json:"IssuedAt,omitempty"`
+	UUID     *string    `json:"UUID,omitempty"`
 }
-

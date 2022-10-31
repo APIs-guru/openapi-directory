@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ChangePinRequest struct {
-    Pin string `json:"pin"`
-    
+	Pin string `json:"pin"`
 }
-

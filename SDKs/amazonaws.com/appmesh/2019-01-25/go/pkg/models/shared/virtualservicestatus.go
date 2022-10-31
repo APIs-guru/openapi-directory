@@ -1,9 +1,5 @@
 package shared
 
-
-
 type VirtualServiceStatus struct {
-    Status VirtualServiceStatusCodeEnum `json:"status"`
-    
+	Status VirtualServiceStatusCodeEnum `json:"status"`
 }
-

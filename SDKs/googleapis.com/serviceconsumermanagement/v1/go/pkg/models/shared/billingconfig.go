@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BillingConfig struct {
-    BillingAccount *string `json:"billingAccount,omitempty"`
-    
+	BillingAccount *string `json:"billingAccount,omitempty"`
 }
-

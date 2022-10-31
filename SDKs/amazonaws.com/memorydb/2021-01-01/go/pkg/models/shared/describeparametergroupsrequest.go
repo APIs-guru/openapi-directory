@@ -1,11 +1,7 @@
 package shared
 
-
-
 type DescribeParameterGroupsRequest struct {
-    MaxResults *int64 `json:"MaxResults,omitempty"`
-    NextToken *string `json:"NextToken,omitempty"`
-    ParameterGroupName *string `json:"ParameterGroupName,omitempty"`
-    
+	MaxResults         *int64  `json:"MaxResults,omitempty"`
+	NextToken          *string `json:"NextToken,omitempty"`
+	ParameterGroupName *string `json:"ParameterGroupName,omitempty"`
 }
-

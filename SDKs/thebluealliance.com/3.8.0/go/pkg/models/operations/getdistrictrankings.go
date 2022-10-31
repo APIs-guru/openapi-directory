@@ -1,35 +1,30 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetDistrictRankingsPathParams struct {
-    DistrictKey string `pathParam:"style=simple,explode=false,name=district_key"`
-    
+	DistrictKey string `pathParam:"style=simple,explode=false,name=district_key"`
 }
 
 type GetDistrictRankingsHeaders struct {
-    IfModifiedSince *string `header:"style=simple,explode=false,name=If-Modified-Since"`
-    
+	IfModifiedSince *string `header:"style=simple,explode=false,name=If-Modified-Since"`
 }
 
 type GetDistrictRankingsSecurity struct {
-    APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetDistrictRankingsRequest struct {
-    PathParams GetDistrictRankingsPathParams 
-    Headers GetDistrictRankingsHeaders 
-    Security GetDistrictRankingsSecurity 
-    
+	PathParams GetDistrictRankingsPathParams
+	Headers    GetDistrictRankingsHeaders
+	Security   GetDistrictRankingsSecurity
 }
 
 type GetDistrictRankingsResponse struct {
-    ContentType string 
-    DistrictRankings []shared.DistrictRanking 
-    Headers map[string][]string 
-    StatusCode int64 
-    
+	ContentType      string
+	DistrictRankings []shared.DistrictRanking
+	Headers          map[string][]string
+	StatusCode       int64
 }
-

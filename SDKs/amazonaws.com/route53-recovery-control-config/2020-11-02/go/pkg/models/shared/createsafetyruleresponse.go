@@ -1,10 +1,6 @@
 package shared
 
-
-
 type CreateSafetyRuleResponse struct {
-    AssertionRule *AssertionRule `json:"AssertionRule,omitempty"`
-    GatingRule *GatingRule `json:"GatingRule,omitempty"`
-    
+	AssertionRule *AssertionRule `json:"AssertionRule,omitempty"`
+	GatingRule    *GatingRule    `json:"GatingRule,omitempty"`
 }
-

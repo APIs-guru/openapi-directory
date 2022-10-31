@@ -1,13 +1,12 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAccountResponse struct {
-    Account *shared.Account 
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    
+	Account       *shared.Account
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	StatusCode    int64
 }
-

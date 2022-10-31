@@ -1,10 +1,6 @@
 package operations
 
-
-
 type PatchAnythingResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

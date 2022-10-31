@@ -1,9 +1,5 @@
 package shared
 
-
-
 type MetastoreConfig struct {
-    DataprocMetastoreService *string `json:"dataprocMetastoreService,omitempty"`
-    
+	DataprocMetastoreService *string `json:"dataprocMetastoreService,omitempty"`
 }
-

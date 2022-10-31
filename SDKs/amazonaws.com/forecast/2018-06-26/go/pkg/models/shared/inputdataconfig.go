@@ -1,10 +1,6 @@
 package shared
 
-
-
 type InputDataConfig struct {
-    DatasetGroupArn string `json:"DatasetGroupArn"`
-    SupplementaryFeatures []SupplementaryFeature `json:"SupplementaryFeatures,omitempty"`
-    
+	DatasetGroupArn       string                 `json:"DatasetGroupArn"`
+	SupplementaryFeatures []SupplementaryFeature `json:"SupplementaryFeatures,omitempty"`
 }
-

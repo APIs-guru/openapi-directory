@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Count struct {
-    UpTo *string `json:"upTo,omitempty"`
-    
+	UpTo *string `json:"upTo,omitempty"`
 }
-

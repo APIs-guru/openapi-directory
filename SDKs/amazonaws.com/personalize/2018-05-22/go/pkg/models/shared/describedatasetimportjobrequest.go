@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeDatasetImportJobRequest struct {
-    DatasetImportJobArn string `json:"datasetImportJobArn"`
-    
+	DatasetImportJobArn string `json:"datasetImportJobArn"`
 }
-

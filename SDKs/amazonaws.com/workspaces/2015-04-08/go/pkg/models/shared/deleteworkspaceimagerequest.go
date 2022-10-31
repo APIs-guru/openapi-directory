@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteWorkspaceImageRequest struct {
-    ImageID string `json:"ImageId"`
-    
+	ImageID string `json:"ImageId"`
 }
-

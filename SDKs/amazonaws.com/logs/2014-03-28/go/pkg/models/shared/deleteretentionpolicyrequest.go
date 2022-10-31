@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteRetentionPolicyRequest struct {
-    LogGroupName string `json:"logGroupName"`
-    
+	LogGroupName string `json:"logGroupName"`
 }
-

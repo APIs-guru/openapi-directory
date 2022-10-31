@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudBeyondcorpAppconnectorsV1alphaResolveInstanceConfigResponse struct {
-    InstanceConfig *GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorInstanceConfig `json:"instanceConfig,omitempty"`
-    
+	InstanceConfig *GoogleCloudBeyondcorpAppconnectorsV1alphaAppConnectorInstanceConfig `json:"instanceConfig,omitempty"`
 }
-

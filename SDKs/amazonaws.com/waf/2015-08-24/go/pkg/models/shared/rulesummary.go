@@ -1,10 +1,6 @@
 package shared
 
-
-
 type RuleSummary struct {
-    Name string `json:"Name"`
-    RuleID string `json:"RuleId"`
-    
+	Name   string `json:"Name"`
+	RuleID string `json:"RuleId"`
 }
-

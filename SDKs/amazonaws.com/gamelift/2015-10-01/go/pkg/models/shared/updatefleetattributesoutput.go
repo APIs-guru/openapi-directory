@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateFleetAttributesOutput struct {
-    FleetID *string `json:"FleetId,omitempty"`
-    
+	FleetID *string `json:"FleetId,omitempty"`
 }
-

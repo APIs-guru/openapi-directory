@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CheckDomainTransferabilityResponse struct {
-    Transferability DomainTransferability `json:"Transferability"`
-    
+	Transferability DomainTransferability `json:"Transferability"`
 }
-

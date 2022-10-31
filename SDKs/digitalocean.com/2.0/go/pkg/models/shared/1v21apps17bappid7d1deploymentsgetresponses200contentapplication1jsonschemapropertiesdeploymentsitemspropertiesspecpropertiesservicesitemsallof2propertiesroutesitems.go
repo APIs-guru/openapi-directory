@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Onev21apps1Percent7BappIDPercent7D1deploymentsGetResponses200ContentApplication1jsonSchemaPropertiesDeploymentsItemsPropertiesSpecPropertiesServicesItemsAllOf2PropertiesRoutesItems struct {
-    Path *string `json:"path,omitempty"`
-    
+	Path *string `json:"path,omitempty"`
 }
-

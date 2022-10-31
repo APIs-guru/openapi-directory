@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DcimDeviceBaysUpdatePathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type DcimDeviceBaysUpdateRequest struct {
-    PathParams DcimDeviceBaysUpdatePathParams 
-    Request shared.WritableDeviceBay `request:"mediaType=application/json"`
-    
+	PathParams DcimDeviceBaysUpdatePathParams
+	Request    shared.WritableDeviceBay `request:"mediaType=application/json"`
 }
 
 type DcimDeviceBaysUpdateResponse struct {
-    ContentType string 
-    DeviceBay *shared.DeviceBay 
-    StatusCode int64 
-    
+	ContentType string
+	DeviceBay   *shared.DeviceBay
+	StatusCode  int64
 }
-

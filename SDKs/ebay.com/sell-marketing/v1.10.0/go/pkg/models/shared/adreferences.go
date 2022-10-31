@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AdReferences struct {
-    Ads []AdReference `json:"ads,omitempty"`
-    
+	Ads []AdReference `json:"ads,omitempty"`
 }
-

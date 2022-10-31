@@ -1,14 +1,9 @@
 package shared
 
-
-
-
 type FirewallRuleGroupAssociationStatusEnum string
 
 const (
-    FirewallRuleGroupAssociationStatusEnumComplete FirewallRuleGroupAssociationStatusEnum = "COMPLETE"
-FirewallRuleGroupAssociationStatusEnumDeleting FirewallRuleGroupAssociationStatusEnum = "DELETING"
-FirewallRuleGroupAssociationStatusEnumUpdating FirewallRuleGroupAssociationStatusEnum = "UPDATING"
+	FirewallRuleGroupAssociationStatusEnumComplete FirewallRuleGroupAssociationStatusEnum = "COMPLETE"
+	FirewallRuleGroupAssociationStatusEnumDeleting FirewallRuleGroupAssociationStatusEnum = "DELETING"
+	FirewallRuleGroupAssociationStatusEnumUpdating FirewallRuleGroupAssociationStatusEnum = "UPDATING"
 )
-
-

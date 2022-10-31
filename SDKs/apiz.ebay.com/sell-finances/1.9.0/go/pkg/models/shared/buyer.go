@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Buyer struct {
-    Username *string `json:"username,omitempty"`
-    
+	Username *string `json:"username,omitempty"`
 }
-

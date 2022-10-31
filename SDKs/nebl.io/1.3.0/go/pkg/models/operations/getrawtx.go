@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetRawTxPathParams struct {
-    Txid string `pathParam:"style=simple,explode=false,name=txid"`
-    
+	Txid string `pathParam:"style=simple,explode=false,name=txid"`
 }
 
 type GetRawTxRequest struct {
-    PathParams GetRawTxPathParams 
-    
+	PathParams GetRawTxPathParams
 }
 
 type GetRawTxResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetRawTxResponse *shared.GetRawTxResponse 
-    
+	ContentType      string
+	StatusCode       int64
+	GetRawTxResponse *shared.GetRawTxResponse
 }
-

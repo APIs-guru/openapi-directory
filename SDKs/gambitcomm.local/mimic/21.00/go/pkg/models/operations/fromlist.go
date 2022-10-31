@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type FromListPathParams struct {
-    AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
-    
+	AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
 }
 
 type FromListRequest struct {
-    PathParams FromListPathParams 
-    
+	PathParams FromListPathParams
 }
 
 type FromListResponse struct {
-    ContentType string 
-    IPSources []shared.IPSource 
-    StatusCode int64 
-    
+	ContentType string
+	IPSources   []shared.IPSource
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeConditionalForwardersResult struct {
-    ConditionalForwarders []ConditionalForwarder `json:"ConditionalForwarders,omitempty"`
-    
+	ConditionalForwarders []ConditionalForwarder `json:"ConditionalForwarders,omitempty"`
 }
-

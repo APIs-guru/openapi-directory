@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type StudioLifecycleConfigAppTypeEnum string
 
 const (
-    StudioLifecycleConfigAppTypeEnumJupyterServer StudioLifecycleConfigAppTypeEnum = "JupyterServer"
-StudioLifecycleConfigAppTypeEnumKernelGateway StudioLifecycleConfigAppTypeEnum = "KernelGateway"
+	StudioLifecycleConfigAppTypeEnumJupyterServer StudioLifecycleConfigAppTypeEnum = "JupyterServer"
+	StudioLifecycleConfigAppTypeEnumKernelGateway StudioLifecycleConfigAppTypeEnum = "KernelGateway"
 )
-
-

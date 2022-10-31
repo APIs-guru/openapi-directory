@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DriveExportOptions struct {
-    IncludeAccessInfo *bool `json:"includeAccessInfo,omitempty"`
-    
+	IncludeAccessInfo *bool `json:"includeAccessInfo,omitempty"`
 }
-

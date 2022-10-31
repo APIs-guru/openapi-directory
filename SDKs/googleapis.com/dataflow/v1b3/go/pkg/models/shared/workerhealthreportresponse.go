@@ -1,9 +1,5 @@
 package shared
 
-
-
 type WorkerHealthReportResponse struct {
-    ReportInterval *string `json:"reportInterval,omitempty"`
-    
+	ReportInterval *string `json:"reportInterval,omitempty"`
 }
-

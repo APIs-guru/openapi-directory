@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type SnapshotDefinition struct {
-    BaseTableReference *TableReference `json:"baseTableReference,omitempty"`
-    SnapshotTime *time.Time `json:"snapshotTime,omitempty"`
-    
+	BaseTableReference *TableReference `json:"baseTableReference,omitempty"`
+	SnapshotTime       *time.Time      `json:"snapshotTime,omitempty"`
 }
-

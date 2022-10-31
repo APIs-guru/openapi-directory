@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RemoveAccountFromOrganizationRequest struct {
-    AccountID string `json:"AccountId"`
-    
+	AccountID string `json:"AccountId"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SourceHierarchyDatasets struct {
-    DatasetTemplate *DatasetTemplate `json:"datasetTemplate,omitempty"`
-    
+	DatasetTemplate *DatasetTemplate `json:"datasetTemplate,omitempty"`
 }
-

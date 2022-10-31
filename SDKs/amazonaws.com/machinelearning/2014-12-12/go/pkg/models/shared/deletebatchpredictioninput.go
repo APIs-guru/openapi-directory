@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteBatchPredictionInput struct {
-    BatchPredictionID string `json:"BatchPredictionId"`
-    
+	BatchPredictionID string `json:"BatchPredictionId"`
 }
-

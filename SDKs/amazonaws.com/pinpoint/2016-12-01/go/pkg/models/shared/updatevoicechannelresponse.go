@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateVoiceChannelResponse struct {
-    VoiceChannelResponse VoiceChannelResponse `json:"VoiceChannelResponse"`
-    
+	VoiceChannelResponse VoiceChannelResponse `json:"VoiceChannelResponse"`
 }
-

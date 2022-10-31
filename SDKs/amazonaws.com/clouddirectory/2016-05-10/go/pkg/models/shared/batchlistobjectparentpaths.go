@@ -1,11 +1,7 @@
 package shared
 
-
-
 type BatchListObjectParentPaths struct {
-    MaxResults *int64 `json:"MaxResults,omitempty"`
-    NextToken *string `json:"NextToken,omitempty"`
-    ObjectReference ObjectReference `json:"ObjectReference"`
-    
+	MaxResults      *int64          `json:"MaxResults,omitempty"`
+	NextToken       *string         `json:"NextToken,omitempty"`
+	ObjectReference ObjectReference `json:"ObjectReference"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RenewTokenRequest struct {
-    AccessToken *string `json:"access_token,omitempty"`
-    
+	AccessToken *string `json:"access_token,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListInsightsOngoingStatusFilter struct {
-    Type InsightTypeEnum `json:"Type"`
-    
+	Type InsightTypeEnum `json:"Type"`
 }
-

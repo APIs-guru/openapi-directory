@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AwsSecretsManagerSecretRotationRules struct {
-    AutomaticallyAfterDays *int64 `json:"AutomaticallyAfterDays,omitempty"`
-    
+	AutomaticallyAfterDays *int64 `json:"AutomaticallyAfterDays,omitempty"`
 }
-

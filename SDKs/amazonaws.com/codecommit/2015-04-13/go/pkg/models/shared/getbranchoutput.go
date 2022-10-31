@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetBranchOutput struct {
-    Branch *BranchInfo `json:"branch,omitempty"`
-    
+	Branch *BranchInfo `json:"branch,omitempty"`
 }
-

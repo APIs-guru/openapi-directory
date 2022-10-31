@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type ServiceConversationScopedWebhookEnumMethodEnum string
 
 const (
-    ServiceConversationScopedWebhookEnumMethodEnumGet ServiceConversationScopedWebhookEnumMethodEnum = "GET"
-ServiceConversationScopedWebhookEnumMethodEnumPost ServiceConversationScopedWebhookEnumMethodEnum = "POST"
+	ServiceConversationScopedWebhookEnumMethodEnumGet  ServiceConversationScopedWebhookEnumMethodEnum = "GET"
+	ServiceConversationScopedWebhookEnumMethodEnumPost ServiceConversationScopedWebhookEnumMethodEnum = "POST"
 )
-
-

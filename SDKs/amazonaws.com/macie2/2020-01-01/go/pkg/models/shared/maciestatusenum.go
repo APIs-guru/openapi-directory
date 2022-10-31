@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type MacieStatusEnum string
 
 const (
-    MacieStatusEnumPaused MacieStatusEnum = "PAUSED"
-MacieStatusEnumEnabled MacieStatusEnum = "ENABLED"
+	MacieStatusEnumPaused  MacieStatusEnum = "PAUSED"
+	MacieStatusEnumEnabled MacieStatusEnum = "ENABLED"
 )
-
-

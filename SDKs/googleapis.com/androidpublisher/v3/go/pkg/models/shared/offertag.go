@@ -1,9 +1,5 @@
 package shared
 
-
-
 type OfferTag struct {
-    Tag *string `json:"tag,omitempty"`
-    
+	Tag *string `json:"tag,omitempty"`
 }
-

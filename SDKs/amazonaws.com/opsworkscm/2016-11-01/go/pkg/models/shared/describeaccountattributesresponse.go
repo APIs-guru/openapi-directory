@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeAccountAttributesResponse struct {
-    Attributes []AccountAttribute `json:"Attributes,omitempty"`
-    
+	Attributes []AccountAttribute `json:"Attributes,omitempty"`
 }
-

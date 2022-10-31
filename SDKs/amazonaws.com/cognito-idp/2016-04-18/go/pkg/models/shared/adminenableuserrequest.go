@@ -1,10 +1,6 @@
 package shared
 
-
-
 type AdminEnableUserRequest struct {
-    UserPoolID string `json:"UserPoolId"`
-    Username string `json:"Username"`
-    
+	UserPoolID string `json:"UserPoolId"`
+	Username   string `json:"Username"`
 }
-

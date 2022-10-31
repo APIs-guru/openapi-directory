@@ -1,27 +1,21 @@
 package shared
 
-
-
-
 type ParameterTypeEnum string
 
 const (
-    ParameterTypeEnumTemplate ParameterTypeEnum = "template"
-ParameterTypeEnumInteger ParameterTypeEnum = "integer"
-ParameterTypeEnumBoolean ParameterTypeEnum = "boolean"
-ParameterTypeEnumList ParameterTypeEnum = "list"
-ParameterTypeEnumMap ParameterTypeEnum = "map"
-ParameterTypeEnumTriggerReference ParameterTypeEnum = "triggerReference"
-ParameterTypeEnumTagReference ParameterTypeEnum = "tagReference"
+	ParameterTypeEnumTemplate         ParameterTypeEnum = "template"
+	ParameterTypeEnumInteger          ParameterTypeEnum = "integer"
+	ParameterTypeEnumBoolean          ParameterTypeEnum = "boolean"
+	ParameterTypeEnumList             ParameterTypeEnum = "list"
+	ParameterTypeEnumMap              ParameterTypeEnum = "map"
+	ParameterTypeEnumTriggerReference ParameterTypeEnum = "triggerReference"
+	ParameterTypeEnumTagReference     ParameterTypeEnum = "tagReference"
 )
 
-
 type Parameter struct {
-    Key *string `json:"key,omitempty"`
-    List []Parameter `json:"list,omitempty"`
-    Map []Parameter `json:"map,omitempty"`
-    Type *ParameterTypeEnum `json:"type,omitempty"`
-    Value *string `json:"value,omitempty"`
-    
+	Key   *string            `json:"key,omitempty"`
+	List  []Parameter        `json:"list,omitempty"`
+	Map   []Parameter        `json:"map,omitempty"`
+	Type  *ParameterTypeEnum `json:"type,omitempty"`
+	Value *string            `json:"value,omitempty"`
 }
-

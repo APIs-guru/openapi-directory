@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetInsightResult struct {
-    Insight *Insight `json:"Insight,omitempty"`
-    
+	Insight *Insight `json:"Insight,omitempty"`
 }
-

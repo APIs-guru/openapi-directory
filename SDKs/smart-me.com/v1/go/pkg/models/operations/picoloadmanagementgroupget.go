@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PicoLoadmanagementGroupGetPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type PicoLoadmanagementGroupGetRequest struct {
-    PathParams PicoLoadmanagementGroupGetPathParams 
-    
+	PathParams PicoLoadmanagementGroupGetPathParams
 }
 
 type PicoLoadmanagementGroupGetResponse struct {
-    Body []byte 
-    ContentType string 
-    PicoLoadmanagementGroupDto *shared.PicoLoadmanagementGroupDto 
-    StatusCode int64 
-    
+	Body                       []byte
+	ContentType                string
+	PicoLoadmanagementGroupDto *shared.PicoLoadmanagementGroupDto
+	StatusCode                 int64
 }
-

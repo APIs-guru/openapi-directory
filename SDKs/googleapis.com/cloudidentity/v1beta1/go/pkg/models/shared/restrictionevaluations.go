@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RestrictionEvaluations struct {
-    MemberRestrictionEvaluation *MembershipRoleRestrictionEvaluation `json:"memberRestrictionEvaluation,omitempty"`
-    
+	MemberRestrictionEvaluation *MembershipRoleRestrictionEvaluation `json:"memberRestrictionEvaluation,omitempty"`
 }
-

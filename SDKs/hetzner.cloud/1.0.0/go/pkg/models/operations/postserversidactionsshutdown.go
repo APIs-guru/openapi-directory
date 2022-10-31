@@ -1,60 +1,48 @@
 package operations
 
-
-
 type PostServersIDActionsShutdownPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type PostServersIDActionsShutdownRequest struct {
-    PathParams PostServersIDActionsShutdownPathParams 
-    
+	PathParams PostServersIDActionsShutdownPathParams
 }
 
 type PostServersIDActionsShutdownActionResponseActionError struct {
-    Code string `json:"code"`
-    Message string `json:"message"`
-    
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type PostServersIDActionsShutdownActionResponseActionResources struct {
-    ID int64 `json:"id"`
-    Type string `json:"type"`
-    
+	ID   int64  `json:"id"`
+	Type string `json:"type"`
 }
-
 
 type PostServersIDActionsShutdownActionResponseActionStatusEnum string
 
 const (
-    PostServersIDActionsShutdownActionResponseActionStatusEnumSuccess PostServersIDActionsShutdownActionResponseActionStatusEnum = "success"
-PostServersIDActionsShutdownActionResponseActionStatusEnumRunning PostServersIDActionsShutdownActionResponseActionStatusEnum = "running"
-PostServersIDActionsShutdownActionResponseActionStatusEnumError PostServersIDActionsShutdownActionResponseActionStatusEnum = "error"
+	PostServersIDActionsShutdownActionResponseActionStatusEnumSuccess PostServersIDActionsShutdownActionResponseActionStatusEnum = "success"
+	PostServersIDActionsShutdownActionResponseActionStatusEnumRunning PostServersIDActionsShutdownActionResponseActionStatusEnum = "running"
+	PostServersIDActionsShutdownActionResponseActionStatusEnumError   PostServersIDActionsShutdownActionResponseActionStatusEnum = "error"
 )
 
-
 type PostServersIDActionsShutdownActionResponseAction struct {
-    Command string `json:"command"`
-    Error PostServersIDActionsShutdownActionResponseActionError `json:"error"`
-    Finished string `json:"finished"`
-    ID int64 `json:"id"`
-    Progress float64 `json:"progress"`
-    Resources []PostServersIDActionsShutdownActionResponseActionResources `json:"resources"`
-    Started string `json:"started"`
-    Status PostServersIDActionsShutdownActionResponseActionStatusEnum `json:"status"`
-    
+	Command   string                                                      `json:"command"`
+	Error     PostServersIDActionsShutdownActionResponseActionError       `json:"error"`
+	Finished  string                                                      `json:"finished"`
+	ID        int64                                                       `json:"id"`
+	Progress  float64                                                     `json:"progress"`
+	Resources []PostServersIDActionsShutdownActionResponseActionResources `json:"resources"`
+	Started   string                                                      `json:"started"`
+	Status    PostServersIDActionsShutdownActionResponseActionStatusEnum  `json:"status"`
 }
 
 type PostServersIDActionsShutdownActionResponse struct {
-    Action PostServersIDActionsShutdownActionResponseAction `json:"action"`
-    
+	Action PostServersIDActionsShutdownActionResponseAction `json:"action"`
 }
 
 type PostServersIDActionsShutdownResponse struct {
-    ActionResponse *PostServersIDActionsShutdownActionResponse 
-    ContentType string 
-    StatusCode int64 
-    
+	ActionResponse *PostServersIDActionsShutdownActionResponse
+	ContentType    string
+	StatusCode     int64
 }
-

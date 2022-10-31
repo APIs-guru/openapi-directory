@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteReplicationJobRequest struct {
-    ReplicationJobID string `json:"replicationJobId"`
-    
+	ReplicationJobID string `json:"replicationJobId"`
 }
-

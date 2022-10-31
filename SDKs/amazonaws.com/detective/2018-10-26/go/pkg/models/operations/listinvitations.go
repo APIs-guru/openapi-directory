@@ -1,44 +1,39 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ListInvitationsQueryParams struct {
-    MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
-    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
-    
+	MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
+	NextToken  *string `queryParam:"style=form,explode=true,name=NextToken"`
 }
 
 type ListInvitationsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type ListInvitationsRequestBody struct {
-    MaxResults *int64 `json:"MaxResults,omitempty"`
-    NextToken *string `json:"NextToken,omitempty"`
-    
+	MaxResults *int64  `json:"MaxResults,omitempty"`
+	NextToken  *string `json:"NextToken,omitempty"`
 }
 
 type ListInvitationsRequest struct {
-    QueryParams ListInvitationsQueryParams 
-    Headers ListInvitationsHeaders 
-    Request ListInvitationsRequestBody `request:"mediaType=application/json"`
-    
+	QueryParams ListInvitationsQueryParams
+	Headers     ListInvitationsHeaders
+	Request     ListInvitationsRequestBody `request:"mediaType=application/json"`
 }
 
 type ListInvitationsResponse struct {
-    ContentType string 
-    InternalServerException *interface{} 
-    ListInvitationsResponse *shared.ListInvitationsResponse 
-    StatusCode int64 
-    ValidationException *interface{} 
-    
+	ContentType             string
+	InternalServerException *interface{}
+	ListInvitationsResponse *shared.ListInvitationsResponse
+	StatusCode              int64
+	ValidationException     *interface{}
 }
-

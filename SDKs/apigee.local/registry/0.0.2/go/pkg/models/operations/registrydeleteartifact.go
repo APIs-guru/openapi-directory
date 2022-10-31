@@ -1,21 +1,15 @@
 package operations
 
-
-
 type RegistryDeleteArtifactPathParams struct {
-    Artifact string `pathParam:"style=simple,explode=false,name=artifact"`
-    Project string `pathParam:"style=simple,explode=false,name=project"`
-    
+	Artifact string `pathParam:"style=simple,explode=false,name=artifact"`
+	Project  string `pathParam:"style=simple,explode=false,name=project"`
 }
 
 type RegistryDeleteArtifactRequest struct {
-    PathParams RegistryDeleteArtifactPathParams 
-    
+	PathParams RegistryDeleteArtifactPathParams
 }
 
 type RegistryDeleteArtifactResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

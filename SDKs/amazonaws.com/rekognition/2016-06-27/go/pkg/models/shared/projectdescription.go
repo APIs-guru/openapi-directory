@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ProjectDescription struct {
-    CreationTimestamp *time.Time `json:"CreationTimestamp,omitempty"`
-    ProjectArn *string `json:"ProjectArn,omitempty"`
-    Status *ProjectStatusEnum `json:"Status,omitempty"`
-    
+	CreationTimestamp *time.Time         `json:"CreationTimestamp,omitempty"`
+	ProjectArn        *string            `json:"ProjectArn,omitempty"`
+	Status            *ProjectStatusEnum `json:"Status,omitempty"`
 }
-

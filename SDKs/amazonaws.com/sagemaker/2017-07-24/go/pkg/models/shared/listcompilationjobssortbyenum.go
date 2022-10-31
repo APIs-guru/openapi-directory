@@ -1,14 +1,9 @@
 package shared
 
-
-
-
 type ListCompilationJobsSortByEnum string
 
 const (
-    ListCompilationJobsSortByEnumName ListCompilationJobsSortByEnum = "Name"
-ListCompilationJobsSortByEnumCreationTime ListCompilationJobsSortByEnum = "CreationTime"
-ListCompilationJobsSortByEnumStatus ListCompilationJobsSortByEnum = "Status"
+	ListCompilationJobsSortByEnumName         ListCompilationJobsSortByEnum = "Name"
+	ListCompilationJobsSortByEnumCreationTime ListCompilationJobsSortByEnum = "CreationTime"
+	ListCompilationJobsSortByEnumStatus       ListCompilationJobsSortByEnum = "Status"
 )
-
-

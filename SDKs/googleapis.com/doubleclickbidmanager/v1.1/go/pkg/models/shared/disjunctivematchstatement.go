@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DisjunctiveMatchStatement struct {
-    EventFilters []EventFilter `json:"eventFilters,omitempty"`
-    
+	EventFilters []EventFilter `json:"eventFilters,omitempty"`
 }
-

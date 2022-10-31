@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetAccountResponse struct {
-    Data AccountResource `json:"data"`
-    
+	Data AccountResource `json:"data"`
 }
-

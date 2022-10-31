@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ChangeUserPasswordRequest struct {
-    NewPassword string `json:"newPassword"`
-    OldPassword string `json:"oldPassword"`
-    
+	NewPassword string `json:"newPassword"`
+	OldPassword string `json:"oldPassword"`
 }
-

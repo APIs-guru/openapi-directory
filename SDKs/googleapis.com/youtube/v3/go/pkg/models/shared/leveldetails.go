@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LevelDetails struct {
-    DisplayName *string `json:"displayName,omitempty"`
-    
+	DisplayName *string `json:"displayName,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchRevokePermissionsResponse struct {
-    Failures []BatchPermissionsFailureEntry `json:"Failures,omitempty"`
-    
+	Failures []BatchPermissionsFailureEntry `json:"Failures,omitempty"`
 }
-

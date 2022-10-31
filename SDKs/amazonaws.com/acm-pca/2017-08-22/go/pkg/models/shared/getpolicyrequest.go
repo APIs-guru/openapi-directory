@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetPolicyRequest struct {
-    ResourceArn string `json:"ResourceArn"`
-    
+	ResourceArn string `json:"ResourceArn"`
 }
-

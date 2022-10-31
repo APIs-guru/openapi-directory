@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetDomainRequest struct {
-    DomainName string `json:"domainName"`
-    
+	DomainName string `json:"domainName"`
 }
-

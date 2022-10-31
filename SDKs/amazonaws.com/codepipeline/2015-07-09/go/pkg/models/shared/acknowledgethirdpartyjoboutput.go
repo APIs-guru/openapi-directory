@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AcknowledgeThirdPartyJobOutput struct {
-    Status *JobStatusEnum `json:"status,omitempty"`
-    
+	Status *JobStatusEnum `json:"status,omitempty"`
 }
-

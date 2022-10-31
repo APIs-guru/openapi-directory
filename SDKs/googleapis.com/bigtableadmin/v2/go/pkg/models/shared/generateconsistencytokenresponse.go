@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GenerateConsistencyTokenResponse struct {
-    ConsistencyToken *string `json:"consistencyToken,omitempty"`
-    
+	ConsistencyToken *string `json:"consistencyToken,omitempty"`
 }
-

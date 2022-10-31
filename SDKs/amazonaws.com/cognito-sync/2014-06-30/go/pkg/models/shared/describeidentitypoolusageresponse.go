@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeIdentityPoolUsageResponse struct {
-    IdentityPoolUsage *IdentityPoolUsage `json:"IdentityPoolUsage,omitempty"`
-    
+	IdentityPoolUsage *IdentityPoolUsage `json:"IdentityPoolUsage,omitempty"`
 }
-

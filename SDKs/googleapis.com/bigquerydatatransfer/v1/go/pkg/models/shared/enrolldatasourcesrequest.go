@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EnrollDataSourcesRequest struct {
-    DataSourceIds []string `json:"dataSourceIds,omitempty"`
-    
+	DataSourceIds []string `json:"dataSourceIds,omitempty"`
 }
-

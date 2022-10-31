@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AccessPreviewStatusReason struct {
-    Code AccessPreviewStatusReasonCodeEnum `json:"code"`
-    
+	Code AccessPreviewStatusReasonCodeEnum `json:"code"`
 }
-

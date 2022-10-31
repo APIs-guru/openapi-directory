@@ -1,10 +1,6 @@
 package shared
 
-
-
 type V3DisruptionModesResponse struct {
-    DisruptionModes []V3DisruptionMode `json:"disruption_modes,omitempty"`
-    Status *V3Status `json:"status,omitempty"`
-    
+	DisruptionModes []V3DisruptionMode `json:"disruption_modes,omitempty"`
+	Status          *V3Status          `json:"status,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DebugOptions struct {
-    EnableHotKeyLogging *bool `json:"enableHotKeyLogging,omitempty"`
-    
+	EnableHotKeyLogging *bool `json:"enableHotKeyLogging,omitempty"`
 }
-

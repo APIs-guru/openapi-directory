@@ -1,33 +1,29 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PutPayLineTagPathParams struct {
-    EmployeeID string `pathParam:"style=simple,explode=false,name=EmployeeId"`
-    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
-    PayLineID string `pathParam:"style=simple,explode=false,name=PayLineId"`
-    TagID string `pathParam:"style=simple,explode=false,name=TagId"`
-    
+	EmployeeID string `pathParam:"style=simple,explode=false,name=EmployeeId"`
+	EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
+	PayLineID  string `pathParam:"style=simple,explode=false,name=PayLineId"`
+	TagID      string `pathParam:"style=simple,explode=false,name=TagId"`
 }
 
 type PutPayLineTagHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type PutPayLineTagRequest struct {
-    PathParams PutPayLineTagPathParams 
-    Headers PutPayLineTagHeaders 
-    
+	PathParams PutPayLineTagPathParams
+	Headers    PutPayLineTagHeaders
 }
 
 type PutPayLineTagResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    StatusCode int64 
-    Tag *shared.Tag 
-    
+	ContentType string
+	ErrorModel  *shared.ErrorModel
+	StatusCode  int64
+	Tag         *shared.Tag
 }
-

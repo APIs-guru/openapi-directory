@@ -1,50 +1,39 @@
 package operations
 
-
-
-
 type PostDescribeLifecycleHookTypesActionEnum string
 
 const (
-    PostDescribeLifecycleHookTypesActionEnumDescribeLifecycleHookTypes PostDescribeLifecycleHookTypesActionEnum = "DescribeLifecycleHookTypes"
+	PostDescribeLifecycleHookTypesActionEnumDescribeLifecycleHookTypes PostDescribeLifecycleHookTypesActionEnum = "DescribeLifecycleHookTypes"
 )
-
-
 
 type PostDescribeLifecycleHookTypesVersionEnum string
 
 const (
-    PostDescribeLifecycleHookTypesVersionEnumTwoThousandAndEleven0101 PostDescribeLifecycleHookTypesVersionEnum = "2011-01-01"
+	PostDescribeLifecycleHookTypesVersionEnumTwoThousandAndEleven0101 PostDescribeLifecycleHookTypesVersionEnum = "2011-01-01"
 )
 
-
 type PostDescribeLifecycleHookTypesQueryParams struct {
-    Action PostDescribeLifecycleHookTypesActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostDescribeLifecycleHookTypesVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostDescribeLifecycleHookTypesActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostDescribeLifecycleHookTypesVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostDescribeLifecycleHookTypesHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostDescribeLifecycleHookTypesRequest struct {
-    QueryParams PostDescribeLifecycleHookTypesQueryParams 
-    Headers PostDescribeLifecycleHookTypesHeaders 
-    
+	QueryParams PostDescribeLifecycleHookTypesQueryParams
+	Headers     PostDescribeLifecycleHookTypesHeaders
 }
 
 type PostDescribeLifecycleHookTypesResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

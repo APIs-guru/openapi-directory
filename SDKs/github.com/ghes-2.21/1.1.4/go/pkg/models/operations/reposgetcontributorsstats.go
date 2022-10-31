@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ReposGetContributorsStatsPathParams struct {
-    Owner string `pathParam:"style=simple,explode=false,name=owner"`
-    Repo string `pathParam:"style=simple,explode=false,name=repo"`
-    
+	Owner string `pathParam:"style=simple,explode=false,name=owner"`
+	Repo  string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
 type ReposGetContributorsStatsRequest struct {
-    PathParams ReposGetContributorsStatsPathParams 
-    
+	PathParams ReposGetContributorsStatsPathParams
 }
 
 type ReposGetContributorsStatsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    ContributorActivities []shared.ContributorActivity 
-    ReposGetContributorsStats202ApplicationJSONObject map[string]interface{} 
-    
+	ContentType                                       string
+	StatusCode                                        int64
+	ContributorActivities                             []shared.ContributorActivity
+	ReposGetContributorsStats202ApplicationJSONObject map[string]interface{}
 }
-

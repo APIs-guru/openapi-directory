@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetDomainResult struct {
-    Domain *Domain `json:"domain,omitempty"`
-    
+	Domain *Domain `json:"domain,omitempty"`
 }
-

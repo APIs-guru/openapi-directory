@@ -1,31 +1,23 @@
 package operations
 
-
-
 type DeleteWorkspacePathParams struct {
-    WorkspaceID string `pathParam:"style=simple,explode=false,name=workspace_id"`
-    
+	WorkspaceID string `pathParam:"style=simple,explode=false,name=workspace_id"`
 }
 
 type DeleteWorkspaceRequest struct {
-    PathParams DeleteWorkspacePathParams 
-    
+	PathParams DeleteWorkspacePathParams
 }
 
 type DeleteWorkspace200ApplicationJSONWorkspace struct {
-    ID *string `json:"id,omitempty"`
-    
+	ID *string `json:"id,omitempty"`
 }
 
 type DeleteWorkspace200ApplicationJSON struct {
-    Workspace *DeleteWorkspace200ApplicationJSONWorkspace `json:"workspace,omitempty"`
-    
+	Workspace *DeleteWorkspace200ApplicationJSONWorkspace `json:"workspace,omitempty"`
 }
 
 type DeleteWorkspaceResponse struct {
-    ContentType string 
-    StatusCode int64 
-    DeleteWorkspace200ApplicationJSONObject *DeleteWorkspace200ApplicationJSON 
-    
+	ContentType                             string
+	StatusCode                              int64
+	DeleteWorkspace200ApplicationJSONObject *DeleteWorkspace200ApplicationJSON
 }
-

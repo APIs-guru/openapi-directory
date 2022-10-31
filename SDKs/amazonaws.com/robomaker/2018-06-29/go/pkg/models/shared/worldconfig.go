@@ -1,9 +1,5 @@
 package shared
 
-
-
 type WorldConfig struct {
-    World *string `json:"world,omitempty"`
-    
+	World *string `json:"world,omitempty"`
 }
-

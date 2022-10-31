@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EePlans struct {
-    Plans []EePlanListItem `json:"plans"`
-    
+	Plans []EePlanListItem `json:"plans"`
 }
-

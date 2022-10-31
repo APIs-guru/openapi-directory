@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ListArtifactRulesPathParams struct {
-    ArtifactID string `pathParam:"style=simple,explode=false,name=artifactId"`
-    
+	ArtifactID string `pathParam:"style=simple,explode=false,name=artifactId"`
 }
 
 type ListArtifactRulesRequest struct {
-    PathParams ListArtifactRulesPathParams 
-    
+	PathParams ListArtifactRulesPathParams
 }
 
 type ListArtifactRulesResponse struct {
-    ContentType string 
-    Error *shared.Error 
-    RuleTypes []shared.RuleTypeEnum 
-    StatusCode int64 
-    
+	ContentType string
+	Error       *shared.Error
+	RuleTypes   []shared.RuleTypeEnum
+	StatusCode  int64
 }
-

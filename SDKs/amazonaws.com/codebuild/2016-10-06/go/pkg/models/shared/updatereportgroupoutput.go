@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateReportGroupOutput struct {
-    ReportGroup *ReportGroup `json:"reportGroup,omitempty"`
-    
+	ReportGroup *ReportGroup `json:"reportGroup,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type InstallsListResponse struct {
-    Install []Install `json:"install,omitempty"`
-    
+	Install []Install `json:"install,omitempty"`
 }
-

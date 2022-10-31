@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListData struct {
-    ContinueWatching *ContinueWatchingListData `json:"ContinueWatching,omitempty"`
-    
+	ContinueWatching *ContinueWatchingListData `json:"ContinueWatching,omitempty"`
 }
-

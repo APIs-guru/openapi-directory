@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type TrainProjectPathParams struct {
-    ProjectID string `pathParam:"style=simple,explode=false,name=projectId"`
-    
+	ProjectID string `pathParam:"style=simple,explode=false,name=projectId"`
 }
 
 type TrainProjectHeaders struct {
-    TrainingKey string `header:"style=simple,explode=false,name=Training-Key"`
-    
+	TrainingKey string `header:"style=simple,explode=false,name=Training-Key"`
 }
 
 type TrainProjectRequest struct {
-    PathParams TrainProjectPathParams 
-    Headers TrainProjectHeaders 
-    
+	PathParams TrainProjectPathParams
+	Headers    TrainProjectHeaders
 }
 
 type TrainProjectResponse struct {
-    Body []byte 
-    ContentType string 
-    Iteration *shared.Iteration 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	Iteration   *shared.Iteration
+	StatusCode  int64
 }
-

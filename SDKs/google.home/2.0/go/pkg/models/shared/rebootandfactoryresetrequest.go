@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RebootandFactoryResetRequest struct {
-    Params string `json:"params"`
-    
+	Params string `json:"params"`
 }
-

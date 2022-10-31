@@ -1,21 +1,15 @@
 package shared
 
-
-
-
 type APIWarningCodeEnum string
 
 const (
-    APIWarningCodeEnumSqlapiWarningCodeUnspecified APIWarningCodeEnum = "SQL_API_WARNING_CODE_UNSPECIFIED"
-APIWarningCodeEnumRegionUnreachable APIWarningCodeEnum = "REGION_UNREACHABLE"
-APIWarningCodeEnumMaxResultsExceedsLimit APIWarningCodeEnum = "MAX_RESULTS_EXCEEDS_LIMIT"
+	APIWarningCodeEnumSqlapiWarningCodeUnspecified APIWarningCodeEnum = "SQL_API_WARNING_CODE_UNSPECIFIED"
+	APIWarningCodeEnumRegionUnreachable            APIWarningCodeEnum = "REGION_UNREACHABLE"
+	APIWarningCodeEnumMaxResultsExceedsLimit       APIWarningCodeEnum = "MAX_RESULTS_EXCEEDS_LIMIT"
 )
 
-
 type APIWarning struct {
-    Code *APIWarningCodeEnum `json:"code,omitempty"`
-    Message *string `json:"message,omitempty"`
-    Region *string `json:"region,omitempty"`
-    
+	Code    *APIWarningCodeEnum `json:"code,omitempty"`
+	Message *string             `json:"message,omitempty"`
+	Region  *string             `json:"region,omitempty"`
 }
-

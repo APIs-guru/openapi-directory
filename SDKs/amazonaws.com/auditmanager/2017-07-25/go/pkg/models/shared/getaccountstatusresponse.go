@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetAccountStatusResponse struct {
-    Status *AccountStatusEnum `json:"status,omitempty"`
-    
+	Status *AccountStatusEnum `json:"status,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetDailyMetricsTimeSeriesResponse struct {
-    TimeSeries *TimeSeries `json:"timeSeries,omitempty"`
-    
+	TimeSeries *TimeSeries `json:"timeSeries,omitempty"`
 }
-

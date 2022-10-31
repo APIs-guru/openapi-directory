@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Clustering struct {
-    Fields []string `json:"fields,omitempty"`
-    
+	Fields []string `json:"fields,omitempty"`
 }
-

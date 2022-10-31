@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BillIdentifier struct {
-    Identifier string `json:"identifier"`
-    
+	Identifier string `json:"identifier"`
 }
-

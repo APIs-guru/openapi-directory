@@ -1,26 +1,19 @@
 package operations
 
-
-
 type PostPortfolioAnalysisVolatilityRequest struct {
-    Request map[string]interface{} `request:"mediaType=application/json"`
-    
+	Request map[string]interface{} `request:"mediaType=application/json"`
 }
 
 type PostPortfolioAnalysisVolatility200ApplicationJSONPortfolios struct {
-    PortfolioVolatility float64 `json:"portfolioVolatility"`
-    
+	PortfolioVolatility float64 `json:"portfolioVolatility"`
 }
 
 type PostPortfolioAnalysisVolatility200ApplicationJSON struct {
-    Portfolios []PostPortfolioAnalysisVolatility200ApplicationJSONPortfolios `json:"portfolios"`
-    
+	Portfolios []PostPortfolioAnalysisVolatility200ApplicationJSONPortfolios `json:"portfolios"`
 }
 
 type PostPortfolioAnalysisVolatilityResponse struct {
-    ContentType string 
-    PostPortfolioAnalysisVolatility200ApplicationJSONObject *PostPortfolioAnalysisVolatility200ApplicationJSON 
-    StatusCode int64 
-    
+	ContentType                                             string
+	PostPortfolioAnalysisVolatility200ApplicationJSONObject *PostPortfolioAnalysisVolatility200ApplicationJSON
+	StatusCode                                              int64
 }
-

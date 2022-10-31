@@ -1,30 +1,22 @@
 package shared
 
-
-
-
 type GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnum string
 
 const (
-    GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnumProviderUnspecified GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnum = "PROVIDER_UNSPECIFIED"
-GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnumPhoneSms GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnum = "PHONE_SMS"
+	GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnumProviderUnspecified GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnum = "PROVIDER_UNSPECIFIED"
+	GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnumPhoneSms            GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnum = "PHONE_SMS"
 )
-
-
 
 type GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum string
 
 const (
-    GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnumStateUnspecified GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum = "STATE_UNSPECIFIED"
-GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnumDisabled GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum = "DISABLED"
-GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnumEnabled GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum = "ENABLED"
-GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnumMandatory GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum = "MANDATORY"
+	GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnumStateUnspecified GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum = "STATE_UNSPECIFIED"
+	GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnumDisabled         GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum = "DISABLED"
+	GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnumEnabled          GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum = "ENABLED"
+	GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnumMandatory        GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum = "MANDATORY"
 )
 
-
 type GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfig struct {
-    EnabledProviders []GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnum `json:"enabledProviders,omitempty"`
-    State *GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum `json:"state,omitempty"`
-    
+	EnabledProviders []GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigEnabledProvidersEnum `json:"enabledProviders,omitempty"`
+	State            *GoogleCloudIdentitytoolkitAdminV2MultiFactorAuthConfigStateEnum             `json:"state,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeListenerResponse struct {
-    Listener *Listener `json:"Listener,omitempty"`
-    
+	Listener *Listener `json:"Listener,omitempty"`
 }
-

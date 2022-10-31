@@ -1,13 +1,12 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type LandlordAccountingModel struct {
-    AccountBalance *float64 `json:"AccountBalance,omitempty"`
-    LastPayment *time.Time `json:"LastPayment,omitempty"`
-    PaymentHistory []LandlordAccountingEntryModel `json:"PaymentHistory,omitempty"`
-    Statements []LandlordAccountingInvoiceModel `json:"Statements,omitempty"`
-    
+	AccountBalance *float64                         `json:"AccountBalance,omitempty"`
+	LastPayment    *time.Time                       `json:"LastPayment,omitempty"`
+	PaymentHistory []LandlordAccountingEntryModel   `json:"PaymentHistory,omitempty"`
+	Statements     []LandlordAccountingInvoiceModel `json:"Statements,omitempty"`
 }
-

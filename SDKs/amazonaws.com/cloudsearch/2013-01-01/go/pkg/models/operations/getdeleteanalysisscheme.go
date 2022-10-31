@@ -1,52 +1,41 @@
 package operations
 
-
-
-
 type GetDeleteAnalysisSchemeActionEnum string
 
 const (
-    GetDeleteAnalysisSchemeActionEnumDeleteAnalysisScheme GetDeleteAnalysisSchemeActionEnum = "DeleteAnalysisScheme"
+	GetDeleteAnalysisSchemeActionEnumDeleteAnalysisScheme GetDeleteAnalysisSchemeActionEnum = "DeleteAnalysisScheme"
 )
-
-
 
 type GetDeleteAnalysisSchemeVersionEnum string
 
 const (
-    GetDeleteAnalysisSchemeVersionEnumTwoThousandAndThirteen0101 GetDeleteAnalysisSchemeVersionEnum = "2013-01-01"
+	GetDeleteAnalysisSchemeVersionEnumTwoThousandAndThirteen0101 GetDeleteAnalysisSchemeVersionEnum = "2013-01-01"
 )
 
-
 type GetDeleteAnalysisSchemeQueryParams struct {
-    Action GetDeleteAnalysisSchemeActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    AnalysisSchemeName string `queryParam:"style=form,explode=true,name=AnalysisSchemeName"`
-    DomainName string `queryParam:"style=form,explode=true,name=DomainName"`
-    Version GetDeleteAnalysisSchemeVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action             GetDeleteAnalysisSchemeActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	AnalysisSchemeName string                             `queryParam:"style=form,explode=true,name=AnalysisSchemeName"`
+	DomainName         string                             `queryParam:"style=form,explode=true,name=DomainName"`
+	Version            GetDeleteAnalysisSchemeVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type GetDeleteAnalysisSchemeHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetDeleteAnalysisSchemeRequest struct {
-    QueryParams GetDeleteAnalysisSchemeQueryParams 
-    Headers GetDeleteAnalysisSchemeHeaders 
-    
+	QueryParams GetDeleteAnalysisSchemeQueryParams
+	Headers     GetDeleteAnalysisSchemeHeaders
 }
 
 type GetDeleteAnalysisSchemeResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

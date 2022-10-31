@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SlotDefaultValueSpecification struct {
-    DefaultValueList []SlotDefaultValue `json:"defaultValueList"`
-    
+	DefaultValueList []SlotDefaultValue `json:"defaultValueList"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartMedicalTranscriptionJobResponse struct {
-    MedicalTranscriptionJob *MedicalTranscriptionJob `json:"MedicalTranscriptionJob,omitempty"`
-    
+	MedicalTranscriptionJob *MedicalTranscriptionJob `json:"MedicalTranscriptionJob,omitempty"`
 }
-

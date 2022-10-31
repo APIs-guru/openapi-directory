@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DescribeRulesPackagesRequest struct {
-    Locale *LocaleEnum `json:"locale,omitempty"`
-    RulesPackageArns []string `json:"rulesPackageArns"`
-    
+	Locale           *LocaleEnum `json:"locale,omitempty"`
+	RulesPackageArns []string    `json:"rulesPackageArns"`
 }
-

@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type ChallengeEnumListOrdersEnum string
 
 const (
-    ChallengeEnumListOrdersEnumAsc ChallengeEnumListOrdersEnum = "asc"
-ChallengeEnumListOrdersEnumDesc ChallengeEnumListOrdersEnum = "desc"
+	ChallengeEnumListOrdersEnumAsc  ChallengeEnumListOrdersEnum = "asc"
+	ChallengeEnumListOrdersEnumDesc ChallengeEnumListOrdersEnum = "desc"
 )
-
-

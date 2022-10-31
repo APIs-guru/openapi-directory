@@ -1,22 +1,16 @@
 package operations
 
-
-
 type UserGetMembershipDataByIDPathParams struct {
-    MembershipID int64 `pathParam:"style=simple,explode=false,name=membershipId"`
-    MembershipType int32 `pathParam:"style=simple,explode=false,name=membershipType"`
-    
+	MembershipID   int64 `pathParam:"style=simple,explode=false,name=membershipId"`
+	MembershipType int32 `pathParam:"style=simple,explode=false,name=membershipType"`
 }
 
 type UserGetMembershipDataByIDRequest struct {
-    PathParams UserGetMembershipDataByIDPathParams 
-    
+	PathParams UserGetMembershipDataByIDPathParams
 }
 
 type UserGetMembershipDataByIDResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

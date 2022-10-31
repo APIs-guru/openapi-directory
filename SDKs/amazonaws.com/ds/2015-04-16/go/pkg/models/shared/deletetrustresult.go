@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteTrustResult struct {
-    TrustID *string `json:"TrustId,omitempty"`
-    
+	TrustID *string `json:"TrustId,omitempty"`
 }
-

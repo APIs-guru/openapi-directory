@@ -1,10 +1,6 @@
 package shared
 
-
-
 type LookupAttribute struct {
-    AttributeKey LookupAttributeKeyEnum `json:"AttributeKey"`
-    AttributeValue string `json:"AttributeValue"`
-    
+	AttributeKey   LookupAttributeKeyEnum `json:"AttributeKey"`
+	AttributeValue string                 `json:"AttributeValue"`
 }
-

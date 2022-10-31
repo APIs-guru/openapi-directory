@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TransactionsRefreshResponse struct {
-    RequestID string `json:"request_id"`
-    
+	RequestID string `json:"request_id"`
 }
-

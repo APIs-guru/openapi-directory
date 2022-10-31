@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GenerateDownloadURLRequest struct {
-    VersionID *string `json:"versionId,omitempty"`
-    
+	VersionID *string `json:"versionId,omitempty"`
 }
-

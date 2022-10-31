@@ -1,13 +1,12 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeploymentsGetAllResponse struct {
-    Body []byte 
-    ContentType string 
-    Deployments []shared.Deployment 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	Deployments []shared.Deployment
+	StatusCode  int64
 }
-

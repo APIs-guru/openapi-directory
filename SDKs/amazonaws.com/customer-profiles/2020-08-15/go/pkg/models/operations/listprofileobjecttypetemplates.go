@@ -1,40 +1,36 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ListProfileObjectTypeTemplatesQueryParams struct {
-    MaxResults *int64 `queryParam:"style=form,explode=true,name=max-results"`
-    NextToken *string `queryParam:"style=form,explode=true,name=next-token"`
-    
+	MaxResults *int64  `queryParam:"style=form,explode=true,name=max-results"`
+	NextToken  *string `queryParam:"style=form,explode=true,name=next-token"`
 }
 
 type ListProfileObjectTypeTemplatesHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type ListProfileObjectTypeTemplatesRequest struct {
-    QueryParams ListProfileObjectTypeTemplatesQueryParams 
-    Headers ListProfileObjectTypeTemplatesHeaders 
-    
+	QueryParams ListProfileObjectTypeTemplatesQueryParams
+	Headers     ListProfileObjectTypeTemplatesHeaders
 }
 
 type ListProfileObjectTypeTemplatesResponse struct {
-    AccessDeniedException *interface{} 
-    BadRequestException *interface{} 
-    ContentType string 
-    InternalServerException *interface{} 
-    ListProfileObjectTypeTemplatesResponse *shared.ListProfileObjectTypeTemplatesResponse 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    
+	AccessDeniedException                  *interface{}
+	BadRequestException                    *interface{}
+	ContentType                            string
+	InternalServerException                *interface{}
+	ListProfileObjectTypeTemplatesResponse *shared.ListProfileObjectTypeTemplatesResponse
+	ResourceNotFoundException              *interface{}
+	StatusCode                             int64
+	ThrottlingException                    *interface{}
 }
-

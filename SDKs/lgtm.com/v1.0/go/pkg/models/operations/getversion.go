@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetVersionSecurity struct {
-    AccessToken shared.SchemeAccessToken `security:"scheme,type=http,subtype=bearer"`
-    
+	AccessToken shared.SchemeAccessToken `security:"scheme,type=http,subtype=bearer"`
 }
 
 type GetVersionRequest struct {
-    Security GetVersionSecurity 
-    
+	Security GetVersionSecurity
 }
 
 type GetVersionResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Version *shared.Version 
-    
+	ContentType string
+	StatusCode  int64
+	Version     *shared.Version
 }
-

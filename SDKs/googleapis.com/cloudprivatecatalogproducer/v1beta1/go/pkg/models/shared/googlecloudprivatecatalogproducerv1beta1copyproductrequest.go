@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudPrivatecatalogproducerV1beta1CopyProductRequest struct {
-    DestinationProductName *string `json:"destinationProductName,omitempty"`
-    
+	DestinationProductName *string `json:"destinationProductName,omitempty"`
 }
-

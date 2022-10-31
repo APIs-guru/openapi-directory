@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type Traffic struct {
-    Count int64 `json:"count"`
-    Timestamp time.Time `json:"timestamp"`
-    Uniques int64 `json:"uniques"`
-    
+	Count     int64     `json:"count"`
+	Timestamp time.Time `json:"timestamp"`
+	Uniques   int64     `json:"uniques"`
 }
-

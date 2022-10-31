@@ -1,37 +1,32 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type AvatarsGetBrowserPathParams struct {
-    Code string `pathParam:"style=simple,explode=false,name=code"`
-    
+	Code string `pathParam:"style=simple,explode=false,name=code"`
 }
 
 type AvatarsGetBrowserQueryParams struct {
-    Height *int32 `queryParam:"style=form,explode=true,name=height"`
-    Quality *int32 `queryParam:"style=form,explode=true,name=quality"`
-    Width *int32 `queryParam:"style=form,explode=true,name=width"`
-    
+	Height  *int32 `queryParam:"style=form,explode=true,name=height"`
+	Quality *int32 `queryParam:"style=form,explode=true,name=quality"`
+	Width   *int32 `queryParam:"style=form,explode=true,name=width"`
 }
 
 type AvatarsGetBrowserSecurity struct {
-    Jwt shared.SchemeJwt `security:"scheme,type=apiKey,subtype=header"`
-    Key shared.SchemeKey `security:"scheme,type=apiKey,subtype=header"`
-    Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
-    
+	Jwt     shared.SchemeJwt     `security:"scheme,type=apiKey,subtype=header"`
+	Key     shared.SchemeKey     `security:"scheme,type=apiKey,subtype=header"`
+	Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type AvatarsGetBrowserRequest struct {
-    PathParams AvatarsGetBrowserPathParams 
-    QueryParams AvatarsGetBrowserQueryParams 
-    Security AvatarsGetBrowserSecurity 
-    
+	PathParams  AvatarsGetBrowserPathParams
+	QueryParams AvatarsGetBrowserQueryParams
+	Security    AvatarsGetBrowserSecurity
 }
 
 type AvatarsGetBrowserResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ImportMessagesRequest struct {
-    GcsSource *GcsSource `json:"gcsSource,omitempty"`
-    
+	GcsSource *GcsSource `json:"gcsSource,omitempty"`
 }
-

@@ -1,10 +1,6 @@
 package shared
 
-
-
 type UpdatePullRequestDescriptionInput struct {
-    Description string `json:"description"`
-    PullRequestID string `json:"pullRequestId"`
-    
+	Description   string `json:"description"`
+	PullRequestID string `json:"pullRequestId"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeServerResponse struct {
-    Server DescribedServer `json:"Server"`
-    
+	Server DescribedServer `json:"Server"`
 }
-

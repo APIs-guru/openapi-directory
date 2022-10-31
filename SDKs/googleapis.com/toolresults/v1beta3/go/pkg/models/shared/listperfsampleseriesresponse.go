@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListPerfSampleSeriesResponse struct {
-    PerfSampleSeries []PerfSampleSeries `json:"perfSampleSeries,omitempty"`
-    
+	PerfSampleSeries []PerfSampleSeries `json:"perfSampleSeries,omitempty"`
 }
-

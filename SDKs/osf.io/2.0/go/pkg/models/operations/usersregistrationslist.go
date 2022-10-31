@@ -1,20 +1,14 @@
 package operations
 
-
-
 type UsersRegistrationsListPathParams struct {
-    UserID string `pathParam:"style=simple,explode=false,name=user_id"`
-    
+	UserID string `pathParam:"style=simple,explode=false,name=user_id"`
 }
 
 type UsersRegistrationsListRequest struct {
-    PathParams UsersRegistrationsListPathParams 
-    
+	PathParams UsersRegistrationsListPathParams
 }
 
 type UsersRegistrationsListResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

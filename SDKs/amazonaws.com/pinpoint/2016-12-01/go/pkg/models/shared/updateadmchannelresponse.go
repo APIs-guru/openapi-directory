@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateAdmChannelResponse struct {
-    AdmChannelResponse AdmChannelResponse `json:"ADMChannelResponse"`
-    
+	AdmChannelResponse AdmChannelResponse `json:"ADMChannelResponse"`
 }
-

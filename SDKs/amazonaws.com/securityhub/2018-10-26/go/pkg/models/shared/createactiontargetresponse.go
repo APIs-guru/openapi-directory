@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateActionTargetResponse struct {
-    ActionTargetArn string `json:"ActionTargetArn"`
-    
+	ActionTargetArn string `json:"ActionTargetArn"`
 }
-

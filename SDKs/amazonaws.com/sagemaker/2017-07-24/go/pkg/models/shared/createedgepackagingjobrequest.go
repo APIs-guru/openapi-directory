@@ -1,16 +1,12 @@
 package shared
 
-
-
 type CreateEdgePackagingJobRequest struct {
-    CompilationJobName string `json:"CompilationJobName"`
-    EdgePackagingJobName string `json:"EdgePackagingJobName"`
-    ModelName string `json:"ModelName"`
-    ModelVersion string `json:"ModelVersion"`
-    OutputConfig EdgeOutputConfig `json:"OutputConfig"`
-    ResourceKey *string `json:"ResourceKey,omitempty"`
-    RoleArn string `json:"RoleArn"`
-    Tags []Tag `json:"Tags,omitempty"`
-    
+	CompilationJobName   string           `json:"CompilationJobName"`
+	EdgePackagingJobName string           `json:"EdgePackagingJobName"`
+	ModelName            string           `json:"ModelName"`
+	ModelVersion         string           `json:"ModelVersion"`
+	OutputConfig         EdgeOutputConfig `json:"OutputConfig"`
+	ResourceKey          *string          `json:"ResourceKey,omitempty"`
+	RoleArn              string           `json:"RoleArn"`
+	Tags                 []Tag            `json:"Tags,omitempty"`
 }
-

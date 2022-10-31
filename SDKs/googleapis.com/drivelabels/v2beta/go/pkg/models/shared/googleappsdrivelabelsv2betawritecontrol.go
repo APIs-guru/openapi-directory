@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleAppsDriveLabelsV2betaWriteControl struct {
-    RequiredRevisionID *string `json:"requiredRevisionId,omitempty"`
-    
+	RequiredRevisionID *string `json:"requiredRevisionId,omitempty"`
 }
-

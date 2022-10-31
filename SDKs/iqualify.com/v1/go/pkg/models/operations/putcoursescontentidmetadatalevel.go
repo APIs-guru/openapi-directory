@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PutCoursesContentIDMetadataLevelPathParams struct {
-    ContentID string `pathParam:"style=simple,explode=false,name=contentId"`
-    
+	ContentID string `pathParam:"style=simple,explode=false,name=contentId"`
 }
 
 type PutCoursesContentIDMetadataLevelRequestBody struct {
-    Level *string `json:"level,omitempty"`
-    
+	Level *string `json:"level,omitempty"`
 }
 
 type PutCoursesContentIDMetadataLevelRequest struct {
-    PathParams PutCoursesContentIDMetadataLevelPathParams 
-    Request PutCoursesContentIDMetadataLevelRequestBody `request:"mediaType=application/json"`
-    
+	PathParams PutCoursesContentIDMetadataLevelPathParams
+	Request    PutCoursesContentIDMetadataLevelRequestBody `request:"mediaType=application/json"`
 }
 
 type PutCoursesContentIDMetadataLevelResponse struct {
-    ContentType string 
-    CourseMetaResponse *shared.CourseMetaResponse 
-    Error *shared.Error 
-    StatusCode int64 
-    
+	ContentType        string
+	CourseMetaResponse *shared.CourseMetaResponse
+	Error              *shared.Error
+	StatusCode         int64
 }
-

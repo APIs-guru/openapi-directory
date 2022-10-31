@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetOneGroupPathParams struct {
-    GroupID string `pathParam:"style=simple,explode=false,name=groupId"`
-    
+	GroupID string `pathParam:"style=simple,explode=false,name=groupId"`
 }
 
 type GetOneGroupRequest struct {
-    PathParams GetOneGroupPathParams 
-    
+	PathParams GetOneGroupPathParams
 }
 
 type GetOneGroupResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GeneratedUniversalApk struct {
-    DownloadID *string `json:"downloadId,omitempty"`
-    
+	DownloadID *string `json:"downloadId,omitempty"`
 }
-

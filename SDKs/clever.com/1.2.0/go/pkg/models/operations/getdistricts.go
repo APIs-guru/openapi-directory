@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetDistrictsResponse struct {
-    ContentType string 
-    DistrictsResponse *shared.DistrictsResponse 
-    StatusCode int64 
-    
+	ContentType       string
+	DistrictsResponse *shared.DistrictsResponse
+	StatusCode        int64
 }
-

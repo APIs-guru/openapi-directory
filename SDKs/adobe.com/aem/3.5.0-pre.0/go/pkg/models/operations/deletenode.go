@@ -1,21 +1,15 @@
 package operations
 
-
-
 type DeleteNodePathParams struct {
-    Name string `pathParam:"style=simple,explode=false,name=name"`
-    Path string `pathParam:"style=simple,explode=false,name=path"`
-    
+	Name string `pathParam:"style=simple,explode=false,name=name"`
+	Path string `pathParam:"style=simple,explode=false,name=path"`
 }
 
 type DeleteNodeRequest struct {
-    PathParams DeleteNodePathParams 
-    
+	PathParams DeleteNodePathParams
 }
 
 type DeleteNodeResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

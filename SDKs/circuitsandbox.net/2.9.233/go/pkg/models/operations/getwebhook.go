@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetWebHookSecurity struct {
-    Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-    
+	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
 }
 
 type GetWebHookRequest struct {
-    Security GetWebHookSecurity 
-    
+	Security GetWebHookSecurity
 }
 
 type GetWebHookResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

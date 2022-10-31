@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListCuratedEnvironmentImagesOutput struct {
-    Platforms []EnvironmentPlatform `json:"platforms,omitempty"`
-    
+	Platforms []EnvironmentPlatform `json:"platforms,omitempty"`
 }
-

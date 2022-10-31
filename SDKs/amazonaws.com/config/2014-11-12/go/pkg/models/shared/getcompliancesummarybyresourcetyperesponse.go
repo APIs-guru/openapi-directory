@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetComplianceSummaryByResourceTypeResponse struct {
-    ComplianceSummariesByResourceType []ComplianceSummaryByResourceType `json:"ComplianceSummariesByResourceType,omitempty"`
-    
+	ComplianceSummariesByResourceType []ComplianceSummaryByResourceType `json:"ComplianceSummariesByResourceType,omitempty"`
 }
-

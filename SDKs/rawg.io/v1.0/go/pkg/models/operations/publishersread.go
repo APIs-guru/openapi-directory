@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PublishersReadPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type PublishersReadRequest struct {
-    PathParams PublishersReadPathParams 
-    
+	PathParams PublishersReadPathParams
 }
 
 type PublishersReadResponse struct {
-    ContentType string 
-    PublisherSingle *shared.PublisherSingle 
-    StatusCode int64 
-    
+	ContentType     string
+	PublisherSingle *shared.PublisherSingle
+	StatusCode      int64
 }
-

@@ -1,10 +1,6 @@
 package shared
 
-
-
 type TrialComponentSource struct {
-    SourceArn string `json:"SourceArn"`
-    SourceType *string `json:"SourceType,omitempty"`
-    
+	SourceArn  string  `json:"SourceArn"`
+	SourceType *string `json:"SourceType,omitempty"`
 }
-

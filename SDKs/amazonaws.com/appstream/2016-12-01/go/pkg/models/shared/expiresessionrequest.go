@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ExpireSessionRequest struct {
-    SessionID string `json:"SessionId"`
-    
+	SessionID string `json:"SessionId"`
 }
-

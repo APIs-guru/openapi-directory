@@ -1,19 +1,15 @@
 package shared
 
-
-
 type Certificate struct {
-    CertificateDescription *CertificateDescription `json:"certificateDescription,omitempty"`
-    Config *CertificateConfig `json:"config,omitempty"`
-    CreateTime *string `json:"createTime,omitempty"`
-    Labels map[string]string `json:"labels,omitempty"`
-    Lifetime *string `json:"lifetime,omitempty"`
-    Name *string `json:"name,omitempty"`
-    PemCertificate *string `json:"pemCertificate,omitempty"`
-    PemCertificateChain []string `json:"pemCertificateChain,omitempty"`
-    PemCsr *string `json:"pemCsr,omitempty"`
-    RevocationDetails *RevocationDetails `json:"revocationDetails,omitempty"`
-    UpdateTime *string `json:"updateTime,omitempty"`
-    
+	CertificateDescription *CertificateDescription `json:"certificateDescription,omitempty"`
+	Config                 *CertificateConfig      `json:"config,omitempty"`
+	CreateTime             *string                 `json:"createTime,omitempty"`
+	Labels                 map[string]string       `json:"labels,omitempty"`
+	Lifetime               *string                 `json:"lifetime,omitempty"`
+	Name                   *string                 `json:"name,omitempty"`
+	PemCertificate         *string                 `json:"pemCertificate,omitempty"`
+	PemCertificateChain    []string                `json:"pemCertificateChain,omitempty"`
+	PemCsr                 *string                 `json:"pemCsr,omitempty"`
+	RevocationDetails      *RevocationDetails      `json:"revocationDetails,omitempty"`
+	UpdateTime             *string                 `json:"updateTime,omitempty"`
 }
-

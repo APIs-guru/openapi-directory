@@ -1,41 +1,36 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type DeleteListenerXAmzTargetEnum string
 
 const (
-    DeleteListenerXAmzTargetEnumGlobalAcceleratorV20180706DeleteListener DeleteListenerXAmzTargetEnum = "GlobalAccelerator_V20180706.DeleteListener"
+	DeleteListenerXAmzTargetEnumGlobalAcceleratorV20180706DeleteListener DeleteListenerXAmzTargetEnum = "GlobalAccelerator_V20180706.DeleteListener"
 )
 
-
 type DeleteListenerHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget DeleteListenerXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                      `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                      `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                      `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                      `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                      `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                      `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                      `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        DeleteListenerXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type DeleteListenerRequest struct {
-    Headers DeleteListenerHeaders 
-    Request shared.DeleteListenerRequest `request:"mediaType=application/json"`
-    
+	Headers DeleteListenerHeaders
+	Request shared.DeleteListenerRequest `request:"mediaType=application/json"`
 }
 
 type DeleteListenerResponse struct {
-    AssociatedEndpointGroupFoundException *interface{} 
-    ContentType string 
-    InternalServiceErrorException *interface{} 
-    InvalidArgumentException *interface{} 
-    ListenerNotFoundException *interface{} 
-    StatusCode int64 
-    
+	AssociatedEndpointGroupFoundException *interface{}
+	ContentType                           string
+	InternalServiceErrorException         *interface{}
+	InvalidArgumentException              *interface{}
+	ListenerNotFoundException             *interface{}
+	StatusCode                            int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetDomainSuggestionsResponse struct {
-    SuggestionsList []DomainSuggestion `json:"SuggestionsList,omitempty"`
-    
+	SuggestionsList []DomainSuggestion `json:"SuggestionsList,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StopEntitiesDetectionJobRequest struct {
-    JobID string `json:"JobId"`
-    
+	JobID string `json:"JobId"`
 }
-

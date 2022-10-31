@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAPIVersionResponse struct {
-    APIVersion *shared.APIVersion 
-    ContentType string 
-    StatusCode int64 
-    
+	APIVersion  *shared.APIVersion
+	ContentType string
+	StatusCode  int64
 }
-

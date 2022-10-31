@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateStackResult struct {
-    StackID *string `json:"StackId,omitempty"`
-    
+	StackID *string `json:"StackId,omitempty"`
 }
-

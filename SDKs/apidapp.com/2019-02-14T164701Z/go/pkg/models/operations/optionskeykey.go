@@ -1,22 +1,16 @@
 package operations
 
-
-
 type OptionsKeyKeyPathParams struct {
-    Key string `pathParam:"style=simple,explode=false,name=key"`
-    
+	Key string `pathParam:"style=simple,explode=false,name=key"`
 }
 
 type OptionsKeyKeyRequest struct {
-    PathParams OptionsKeyKeyPathParams 
-    
+	PathParams OptionsKeyKeyPathParams
 }
 
 type OptionsKeyKeyResponse struct {
-    ContentType string 
-    Empty map[string]interface{} 
-    Headers map[string][]string 
-    StatusCode int64 
-    
+	ContentType string
+	Empty       map[string]interface{}
+	Headers     map[string][]string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AlarmNotification struct {
-    NotificationActions []NotificationAction `json:"notificationActions,omitempty"`
-    
+	NotificationActions []NotificationAction `json:"notificationActions,omitempty"`
 }
-

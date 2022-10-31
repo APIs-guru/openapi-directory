@@ -1,14 +1,9 @@
 package shared
 
-
-
 type SchemeBearer struct {
-    APIKey string `security:"name=Authorization"`
-    
+	APIKey string `security:"name=Authorization"`
 }
 
 type Security struct {
-    Bearer SchemeBearer `security:"scheme,type=apiKey,subtype=header"`
-    
+	Bearer SchemeBearer `security:"scheme,type=apiKey,subtype=header"`
 }
-

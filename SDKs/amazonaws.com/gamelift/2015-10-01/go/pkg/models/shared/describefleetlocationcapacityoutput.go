@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeFleetLocationCapacityOutput struct {
-    FleetCapacity *FleetCapacity `json:"FleetCapacity,omitempty"`
-    
+	FleetCapacity *FleetCapacity `json:"FleetCapacity,omitempty"`
 }
-

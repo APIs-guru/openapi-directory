@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeCustomRoutingListenerResponse struct {
-    Listener *CustomRoutingListener `json:"Listener,omitempty"`
-    
+	Listener *CustomRoutingListener `json:"Listener,omitempty"`
 }
-

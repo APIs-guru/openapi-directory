@@ -1,39 +1,32 @@
 package operations
 
-
-
 type DisassociateTrackerConsumerPathParams struct {
-    ConsumerArn string `pathParam:"style=simple,explode=false,name=ConsumerArn"`
-    TrackerName string `pathParam:"style=simple,explode=false,name=TrackerName"`
-    
+	ConsumerArn string `pathParam:"style=simple,explode=false,name=ConsumerArn"`
+	TrackerName string `pathParam:"style=simple,explode=false,name=TrackerName"`
 }
 
 type DisassociateTrackerConsumerHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type DisassociateTrackerConsumerRequest struct {
-    PathParams DisassociateTrackerConsumerPathParams 
-    Headers DisassociateTrackerConsumerHeaders 
-    
+	PathParams DisassociateTrackerConsumerPathParams
+	Headers    DisassociateTrackerConsumerHeaders
 }
 
 type DisassociateTrackerConsumerResponse struct {
-    AccessDeniedException *interface{} 
-    ContentType string 
-    DisassociateTrackerConsumerResponse map[string]interface{} 
-    InternalServerException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    ValidationException *interface{} 
-    
+	AccessDeniedException               *interface{}
+	ContentType                         string
+	DisassociateTrackerConsumerResponse map[string]interface{}
+	InternalServerException             *interface{}
+	ResourceNotFoundException           *interface{}
+	StatusCode                          int64
+	ThrottlingException                 *interface{}
+	ValidationException                 *interface{}
 }
-

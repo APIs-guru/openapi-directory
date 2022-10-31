@@ -1,9 +1,5 @@
 package shared
 
-
-
 type OverrideInlineSource struct {
-    Overrides []QuotaOverride `json:"overrides,omitempty"`
-    
+	Overrides []QuotaOverride `json:"overrides,omitempty"`
 }
-

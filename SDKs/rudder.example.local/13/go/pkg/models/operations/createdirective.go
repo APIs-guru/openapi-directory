@@ -1,46 +1,38 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CreateDirectiveRequest struct {
-    Request *shared.DirectiveNew `request:"mediaType=application/json"`
-    
+	Request *shared.DirectiveNew `request:"mediaType=application/json"`
 }
-
 
 type CreateDirective200ApplicationJSONActionEnum string
 
 const (
-    CreateDirective200ApplicationJSONActionEnumCreateDirective CreateDirective200ApplicationJSONActionEnum = "createDirective"
+	CreateDirective200ApplicationJSONActionEnumCreateDirective CreateDirective200ApplicationJSONActionEnum = "createDirective"
 )
 
-
 type CreateDirective200ApplicationJSONData struct {
-    Directives []shared.Directive `json:"directives"`
-    
+	Directives []shared.Directive `json:"directives"`
 }
-
 
 type CreateDirective200ApplicationJSONResultEnum string
 
 const (
-    CreateDirective200ApplicationJSONResultEnumSuccess CreateDirective200ApplicationJSONResultEnum = "success"
-CreateDirective200ApplicationJSONResultEnumError CreateDirective200ApplicationJSONResultEnum = "error"
+	CreateDirective200ApplicationJSONResultEnumSuccess CreateDirective200ApplicationJSONResultEnum = "success"
+	CreateDirective200ApplicationJSONResultEnumError   CreateDirective200ApplicationJSONResultEnum = "error"
 )
 
-
 type CreateDirective200ApplicationJSON struct {
-    Action CreateDirective200ApplicationJSONActionEnum `json:"action"`
-    Data CreateDirective200ApplicationJSONData `json:"data"`
-    Result CreateDirective200ApplicationJSONResultEnum `json:"result"`
-    
+	Action CreateDirective200ApplicationJSONActionEnum `json:"action"`
+	Data   CreateDirective200ApplicationJSONData       `json:"data"`
+	Result CreateDirective200ApplicationJSONResultEnum `json:"result"`
 }
 
 type CreateDirectiveResponse struct {
-    ContentType string 
-    StatusCode int64 
-    CreateDirective200ApplicationJSONObject *CreateDirective200ApplicationJSON 
-    
+	ContentType                             string
+	StatusCode                              int64
+	CreateDirective200ApplicationJSONObject *CreateDirective200ApplicationJSON
 }
-

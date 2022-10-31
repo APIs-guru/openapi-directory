@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateAssessmentResponse struct {
-    Assessment *Assessment `json:"assessment,omitempty"`
-    
+	Assessment *Assessment `json:"assessment,omitempty"`
 }
-

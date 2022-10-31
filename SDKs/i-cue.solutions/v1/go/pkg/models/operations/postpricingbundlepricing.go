@@ -1,20 +1,14 @@
 package operations
 
-
-
 type PostPricingBundlePricingHeaders struct {
-    Token *string `header:"style=simple,explode=false,name=Token"`
-    
+	Token *string `header:"style=simple,explode=false,name=Token"`
 }
 
 type PostPricingBundlePricingRequest struct {
-    Headers PostPricingBundlePricingHeaders 
-    
+	Headers PostPricingBundlePricingHeaders
 }
 
 type PostPricingBundlePricingResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

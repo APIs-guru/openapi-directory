@@ -1,14 +1,9 @@
 package shared
 
-
-
 type AccountResponseData struct {
-    Account Account `json:"account"`
-    
+	Account Account `json:"account"`
 }
 
 type AccountResponse struct {
-    Data AccountResponseData `json:"data"`
-    
+	Data AccountResponseData `json:"data"`
 }
-

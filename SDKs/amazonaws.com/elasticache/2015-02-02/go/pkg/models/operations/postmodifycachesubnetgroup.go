@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostModifyCacheSubnetGroupActionEnum string
 
 const (
-    PostModifyCacheSubnetGroupActionEnumModifyCacheSubnetGroup PostModifyCacheSubnetGroupActionEnum = "ModifyCacheSubnetGroup"
+	PostModifyCacheSubnetGroupActionEnumModifyCacheSubnetGroup PostModifyCacheSubnetGroupActionEnum = "ModifyCacheSubnetGroup"
 )
-
-
 
 type PostModifyCacheSubnetGroupVersionEnum string
 
 const (
-    PostModifyCacheSubnetGroupVersionEnumTwoThousandAndFifteen0202 PostModifyCacheSubnetGroupVersionEnum = "2015-02-02"
+	PostModifyCacheSubnetGroupVersionEnumTwoThousandAndFifteen0202 PostModifyCacheSubnetGroupVersionEnum = "2015-02-02"
 )
 
-
 type PostModifyCacheSubnetGroupQueryParams struct {
-    Action PostModifyCacheSubnetGroupActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostModifyCacheSubnetGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostModifyCacheSubnetGroupActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostModifyCacheSubnetGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostModifyCacheSubnetGroupHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostModifyCacheSubnetGroupRequest struct {
-    QueryParams PostModifyCacheSubnetGroupQueryParams 
-    Headers PostModifyCacheSubnetGroupHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostModifyCacheSubnetGroupQueryParams
+	Headers     PostModifyCacheSubnetGroupHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostModifyCacheSubnetGroupResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

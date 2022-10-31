@@ -1,32 +1,26 @@
 package shared
 
-
-
-
 type ExecutionStageSummaryKindEnum string
 
 const (
-    ExecutionStageSummaryKindEnumUnknownKind ExecutionStageSummaryKindEnum = "UNKNOWN_KIND"
-ExecutionStageSummaryKindEnumParDoKind ExecutionStageSummaryKindEnum = "PAR_DO_KIND"
-ExecutionStageSummaryKindEnumGroupByKeyKind ExecutionStageSummaryKindEnum = "GROUP_BY_KEY_KIND"
-ExecutionStageSummaryKindEnumFlattenKind ExecutionStageSummaryKindEnum = "FLATTEN_KIND"
-ExecutionStageSummaryKindEnumReadKind ExecutionStageSummaryKindEnum = "READ_KIND"
-ExecutionStageSummaryKindEnumWriteKind ExecutionStageSummaryKindEnum = "WRITE_KIND"
-ExecutionStageSummaryKindEnumConstantKind ExecutionStageSummaryKindEnum = "CONSTANT_KIND"
-ExecutionStageSummaryKindEnumSingletonKind ExecutionStageSummaryKindEnum = "SINGLETON_KIND"
-ExecutionStageSummaryKindEnumShuffleKind ExecutionStageSummaryKindEnum = "SHUFFLE_KIND"
+	ExecutionStageSummaryKindEnumUnknownKind    ExecutionStageSummaryKindEnum = "UNKNOWN_KIND"
+	ExecutionStageSummaryKindEnumParDoKind      ExecutionStageSummaryKindEnum = "PAR_DO_KIND"
+	ExecutionStageSummaryKindEnumGroupByKeyKind ExecutionStageSummaryKindEnum = "GROUP_BY_KEY_KIND"
+	ExecutionStageSummaryKindEnumFlattenKind    ExecutionStageSummaryKindEnum = "FLATTEN_KIND"
+	ExecutionStageSummaryKindEnumReadKind       ExecutionStageSummaryKindEnum = "READ_KIND"
+	ExecutionStageSummaryKindEnumWriteKind      ExecutionStageSummaryKindEnum = "WRITE_KIND"
+	ExecutionStageSummaryKindEnumConstantKind   ExecutionStageSummaryKindEnum = "CONSTANT_KIND"
+	ExecutionStageSummaryKindEnumSingletonKind  ExecutionStageSummaryKindEnum = "SINGLETON_KIND"
+	ExecutionStageSummaryKindEnumShuffleKind    ExecutionStageSummaryKindEnum = "SHUFFLE_KIND"
 )
 
-
 type ExecutionStageSummary struct {
-    ComponentSource []ComponentSource `json:"componentSource,omitempty"`
-    ComponentTransform []ComponentTransform `json:"componentTransform,omitempty"`
-    ID *string `json:"id,omitempty"`
-    InputSource []StageSource `json:"inputSource,omitempty"`
-    Kind *ExecutionStageSummaryKindEnum `json:"kind,omitempty"`
-    Name *string `json:"name,omitempty"`
-    OutputSource []StageSource `json:"outputSource,omitempty"`
-    PrerequisiteStage []string `json:"prerequisiteStage,omitempty"`
-    
+	ComponentSource    []ComponentSource              `json:"componentSource,omitempty"`
+	ComponentTransform []ComponentTransform           `json:"componentTransform,omitempty"`
+	ID                 *string                        `json:"id,omitempty"`
+	InputSource        []StageSource                  `json:"inputSource,omitempty"`
+	Kind               *ExecutionStageSummaryKindEnum `json:"kind,omitempty"`
+	Name               *string                        `json:"name,omitempty"`
+	OutputSource       []StageSource                  `json:"outputSource,omitempty"`
+	PrerequisiteStage  []string                       `json:"prerequisiteStage,omitempty"`
 }
-

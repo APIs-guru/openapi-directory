@@ -1,21 +1,15 @@
 package operations
 
-
-
 type ForumGetForumTagSuggestionsQueryParams struct {
-    Partialtag *string `queryParam:"style=form,explode=true,name=partialtag"`
-    
+	Partialtag *string `queryParam:"style=form,explode=true,name=partialtag"`
 }
 
 type ForumGetForumTagSuggestionsRequest struct {
-    QueryParams ForumGetForumTagSuggestionsQueryParams 
-    
+	QueryParams ForumGetForumTagSuggestionsQueryParams
 }
 
 type ForumGetForumTagSuggestionsResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

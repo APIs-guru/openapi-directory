@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ActivityStartedEventDetails struct {
-    WorkerName *string `json:"workerName,omitempty"`
-    
+	WorkerName *string `json:"workerName,omitempty"`
 }
-

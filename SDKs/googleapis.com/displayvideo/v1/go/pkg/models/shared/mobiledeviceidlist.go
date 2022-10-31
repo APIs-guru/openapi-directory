@@ -1,9 +1,5 @@
 package shared
 
-
-
 type MobileDeviceIDList struct {
-    MobileDeviceIds []string `json:"mobileDeviceIds,omitempty"`
-    
+	MobileDeviceIds []string `json:"mobileDeviceIds,omitempty"`
 }
-

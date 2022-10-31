@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ParameterConstraints struct {
-    Required *bool `json:"Required,omitempty"`
-    
+	Required *bool `json:"Required,omitempty"`
 }
-

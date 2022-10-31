@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ItvVoucherRequest struct {
-    Voucher string `json:"voucher"`
-    
+	Voucher string `json:"voucher"`
 }
-

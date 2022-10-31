@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GuestAttributesValue struct {
-    Items []GuestAttributesEntry `json:"items,omitempty"`
-    
+	Items []GuestAttributesEntry `json:"items,omitempty"`
 }
-

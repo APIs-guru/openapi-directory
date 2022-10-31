@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type SuppliersGetResponse struct {
-    ContentType string 
-    PageResultSupplierQueryDto *shared.PageResultSupplierQueryDto 
-    StatusCode int64 
-    
+	ContentType                string
+	PageResultSupplierQueryDto *shared.PageResultSupplierQueryDto
+	StatusCode                 int64
 }
-

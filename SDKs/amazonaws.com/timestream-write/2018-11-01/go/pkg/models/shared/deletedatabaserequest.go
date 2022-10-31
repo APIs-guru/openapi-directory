@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteDatabaseRequest struct {
-    DatabaseName string `json:"DatabaseName"`
-    
+	DatabaseName string `json:"DatabaseName"`
 }
-

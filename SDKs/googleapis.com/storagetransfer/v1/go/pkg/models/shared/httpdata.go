@@ -1,9 +1,5 @@
 package shared
 
-
-
 type HTTPData struct {
-    ListURL *string `json:"listUrl,omitempty"`
-    
+	ListURL *string `json:"listUrl,omitempty"`
 }
-

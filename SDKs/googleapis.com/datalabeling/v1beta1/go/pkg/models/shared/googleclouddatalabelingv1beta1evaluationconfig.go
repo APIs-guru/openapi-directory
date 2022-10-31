@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudDatalabelingV1beta1EvaluationConfig struct {
-    BoundingBoxEvaluationOptions *GoogleCloudDatalabelingV1beta1BoundingBoxEvaluationOptions `json:"boundingBoxEvaluationOptions,omitempty"`
-    
+	BoundingBoxEvaluationOptions *GoogleCloudDatalabelingV1beta1BoundingBoxEvaluationOptions `json:"boundingBoxEvaluationOptions,omitempty"`
 }
-

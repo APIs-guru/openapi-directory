@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudDocumentaiV1DocumentPageTableTableRow struct {
-    Cells []GoogleCloudDocumentaiV1DocumentPageTableTableCell `json:"cells,omitempty"`
-    
+	Cells []GoogleCloudDocumentaiV1DocumentPageTableTableCell `json:"cells,omitempty"`
 }
-

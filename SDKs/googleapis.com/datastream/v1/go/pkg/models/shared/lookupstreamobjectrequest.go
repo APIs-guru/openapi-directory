@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LookupStreamObjectRequest struct {
-    SourceObjectIdentifier *SourceObjectIdentifier `json:"sourceObjectIdentifier,omitempty"`
-    
+	SourceObjectIdentifier *SourceObjectIdentifier `json:"sourceObjectIdentifier,omitempty"`
 }
-

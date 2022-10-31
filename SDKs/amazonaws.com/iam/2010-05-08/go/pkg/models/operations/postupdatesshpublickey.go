@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostUpdateSSHPublicKeyActionEnum string
 
 const (
-    PostUpdateSSHPublicKeyActionEnumUpdateSSHPublicKey PostUpdateSSHPublicKeyActionEnum = "UpdateSSHPublicKey"
+	PostUpdateSSHPublicKeyActionEnumUpdateSSHPublicKey PostUpdateSSHPublicKeyActionEnum = "UpdateSSHPublicKey"
 )
-
-
 
 type PostUpdateSSHPublicKeyVersionEnum string
 
 const (
-    PostUpdateSSHPublicKeyVersionEnumTwoThousandAndTen0508 PostUpdateSSHPublicKeyVersionEnum = "2010-05-08"
+	PostUpdateSSHPublicKeyVersionEnumTwoThousandAndTen0508 PostUpdateSSHPublicKeyVersionEnum = "2010-05-08"
 )
 
-
 type PostUpdateSSHPublicKeyQueryParams struct {
-    Action PostUpdateSSHPublicKeyActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostUpdateSSHPublicKeyVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostUpdateSSHPublicKeyActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostUpdateSSHPublicKeyVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostUpdateSSHPublicKeyHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostUpdateSSHPublicKeyRequest struct {
-    QueryParams PostUpdateSSHPublicKeyQueryParams 
-    Headers PostUpdateSSHPublicKeyHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostUpdateSSHPublicKeyQueryParams
+	Headers     PostUpdateSSHPublicKeyHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostUpdateSSHPublicKeyResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetBucketAccessKeysRequest struct {
-    BucketName string `json:"bucketName"`
-    
+	BucketName string `json:"bucketName"`
 }
-

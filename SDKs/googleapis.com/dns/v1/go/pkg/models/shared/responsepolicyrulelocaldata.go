@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ResponsePolicyRuleLocalData struct {
-    LocalDatas []ResourceRecordSet `json:"localDatas,omitempty"`
-    
+	LocalDatas []ResourceRecordSet `json:"localDatas,omitempty"`
 }
-

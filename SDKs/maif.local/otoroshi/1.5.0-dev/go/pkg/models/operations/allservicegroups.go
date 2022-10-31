@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type AllServiceGroupsSecurity struct {
-    OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
-    
+	OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
 }
 
 type AllServiceGroupsRequest struct {
-    Security AllServiceGroupsSecurity 
-    
+	Security AllServiceGroupsSecurity
 }
 
 type AllServiceGroupsResponse struct {
-    ContentType string 
-    Groups []shared.Group 
-    StatusCode int64 
-    
+	ContentType string
+	Groups      []shared.Group
+	StatusCode  int64
 }
-

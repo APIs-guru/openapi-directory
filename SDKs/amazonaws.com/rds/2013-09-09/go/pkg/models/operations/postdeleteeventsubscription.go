@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostDeleteEventSubscriptionActionEnum string
 
 const (
-    PostDeleteEventSubscriptionActionEnumDeleteEventSubscription PostDeleteEventSubscriptionActionEnum = "DeleteEventSubscription"
+	PostDeleteEventSubscriptionActionEnumDeleteEventSubscription PostDeleteEventSubscriptionActionEnum = "DeleteEventSubscription"
 )
-
-
 
 type PostDeleteEventSubscriptionVersionEnum string
 
 const (
-    PostDeleteEventSubscriptionVersionEnumTwoThousandAndThirteen0909 PostDeleteEventSubscriptionVersionEnum = "2013-09-09"
+	PostDeleteEventSubscriptionVersionEnumTwoThousandAndThirteen0909 PostDeleteEventSubscriptionVersionEnum = "2013-09-09"
 )
 
-
 type PostDeleteEventSubscriptionQueryParams struct {
-    Action PostDeleteEventSubscriptionActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostDeleteEventSubscriptionVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostDeleteEventSubscriptionActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostDeleteEventSubscriptionVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostDeleteEventSubscriptionHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostDeleteEventSubscriptionRequest struct {
-    QueryParams PostDeleteEventSubscriptionQueryParams 
-    Headers PostDeleteEventSubscriptionHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostDeleteEventSubscriptionQueryParams
+	Headers     PostDeleteEventSubscriptionHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostDeleteEventSubscriptionResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

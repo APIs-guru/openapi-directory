@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type ProvisionedProductPlanTypeEnum string
 
 const (
-    ProvisionedProductPlanTypeEnumCloudformation ProvisionedProductPlanTypeEnum = "CLOUDFORMATION"
+	ProvisionedProductPlanTypeEnumCloudformation ProvisionedProductPlanTypeEnum = "CLOUDFORMATION"
 )
-
-

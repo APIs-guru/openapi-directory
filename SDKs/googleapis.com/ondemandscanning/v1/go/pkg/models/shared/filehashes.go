@@ -1,9 +1,5 @@
 package shared
 
-
-
 type FileHashes struct {
-    FileHash []Hash `json:"fileHash,omitempty"`
-    
+	FileHash []Hash `json:"fileHash,omitempty"`
 }
-

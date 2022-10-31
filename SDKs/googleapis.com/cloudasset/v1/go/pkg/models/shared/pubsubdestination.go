@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PubsubDestination struct {
-    Topic *string `json:"topic,omitempty"`
-    
+	Topic *string `json:"topic,omitempty"`
 }
-

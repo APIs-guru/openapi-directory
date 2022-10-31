@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PutResourcePolicyOutput struct {
-    PolicyID string `json:"policyId"`
-    
+	PolicyID string `json:"policyId"`
 }
-

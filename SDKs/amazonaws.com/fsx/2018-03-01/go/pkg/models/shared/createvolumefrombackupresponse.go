@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateVolumeFromBackupResponse struct {
-    Volume *Volume `json:"Volume,omitempty"`
-    
+	Volume *Volume `json:"Volume,omitempty"`
 }
-

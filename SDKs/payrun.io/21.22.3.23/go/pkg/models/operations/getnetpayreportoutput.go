@@ -1,35 +1,31 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetNetPayReportOutputQueryParams struct {
-    EmployerKey string `queryParam:"style=form,explode=true,name=EmployerKey"`
-    MaxIndex *string `queryParam:"style=form,explode=true,name=MaxIndex"`
-    PayScheduleKey string `queryParam:"style=form,explode=true,name=PayScheduleKey"`
-    StartIndex *string `queryParam:"style=form,explode=true,name=StartIndex"`
-    TaxPeriod *string `queryParam:"style=form,explode=true,name=TaxPeriod"`
-    TaxYear string `queryParam:"style=form,explode=true,name=TaxYear"`
-    
+	EmployerKey    string  `queryParam:"style=form,explode=true,name=EmployerKey"`
+	MaxIndex       *string `queryParam:"style=form,explode=true,name=MaxIndex"`
+	PayScheduleKey string  `queryParam:"style=form,explode=true,name=PayScheduleKey"`
+	StartIndex     *string `queryParam:"style=form,explode=true,name=StartIndex"`
+	TaxPeriod      *string `queryParam:"style=form,explode=true,name=TaxPeriod"`
+	TaxYear        string  `queryParam:"style=form,explode=true,name=TaxYear"`
 }
 
 type GetNetPayReportOutputHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type GetNetPayReportOutputRequest struct {
-    QueryParams GetNetPayReportOutputQueryParams 
-    Headers GetNetPayReportOutputHeaders 
-    
+	QueryParams GetNetPayReportOutputQueryParams
+	Headers     GetNetPayReportOutputHeaders
 }
 
 type GetNetPayReportOutputResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    GetNetPayReportOutput200ApplicationJSONBinaryString []byte 
-    StatusCode int64 
-    
+	ContentType                                         string
+	ErrorModel                                          *shared.ErrorModel
+	GetNetPayReportOutput200ApplicationJSONBinaryString []byte
+	StatusCode                                          int64
 }
-

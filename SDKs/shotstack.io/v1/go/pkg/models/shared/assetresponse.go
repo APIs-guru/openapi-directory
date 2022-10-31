@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AssetResponse struct {
-    Data *AssetResponseData `json:"data,omitempty"`
-    
+	Data *AssetResponseData `json:"data,omitempty"`
 }
-

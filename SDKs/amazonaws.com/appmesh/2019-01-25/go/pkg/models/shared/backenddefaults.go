@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BackendDefaults struct {
-    ClientPolicy *ClientPolicy `json:"clientPolicy,omitempty"`
-    
+	ClientPolicy *ClientPolicy `json:"clientPolicy,omitempty"`
 }
-

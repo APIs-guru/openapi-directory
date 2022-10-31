@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LabelingJobResourceConfig struct {
-    VolumeKmsKeyID *string `json:"VolumeKmsKeyId,omitempty"`
-    
+	VolumeKmsKeyID *string `json:"VolumeKmsKeyId,omitempty"`
 }
-

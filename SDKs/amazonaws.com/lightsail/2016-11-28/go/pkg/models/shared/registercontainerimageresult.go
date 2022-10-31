@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RegisterContainerImageResult struct {
-    ContainerImage *ContainerImage `json:"containerImage,omitempty"`
-    
+	ContainerImage *ContainerImage `json:"containerImage,omitempty"`
 }
-

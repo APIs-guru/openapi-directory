@@ -1,21 +1,18 @@
 package shared
 
 import (
-"time")
-
+	"time"
+)
 
 type HeartbeatResponseStatusEnum string
 
 const (
-    HeartbeatResponseStatusEnumUp HeartbeatResponseStatusEnum = "UP"
-HeartbeatResponseStatusEnumDown HeartbeatResponseStatusEnum = "DOWN"
+	HeartbeatResponseStatusEnumUp   HeartbeatResponseStatusEnum = "UP"
+	HeartbeatResponseStatusEnumDown HeartbeatResponseStatusEnum = "DOWN"
 )
 
-
 type HeartbeatResponse struct {
-    Error *Error `json:"error,omitempty"`
-    Status *HeartbeatResponseStatusEnum `json:"status,omitempty"`
-    Timestamp *time.Time `json:"timestamp,omitempty"`
-    
+	Error     *Error                       `json:"error,omitempty"`
+	Status    *HeartbeatResponseStatusEnum `json:"status,omitempty"`
+	Timestamp *time.Time                   `json:"timestamp,omitempty"`
 }
-

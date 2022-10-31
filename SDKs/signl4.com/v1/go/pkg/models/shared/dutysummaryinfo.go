@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type DutySummaryInfo struct {
-    DutyEnd *time.Time `json:"dutyEnd,omitempty"`
-    DutyID *string `json:"dutyId,omitempty"`
-    DutyStart *time.Time `json:"dutyStart,omitempty"`
-    
+	DutyEnd   *time.Time `json:"dutyEnd,omitempty"`
+	DutyID    *string    `json:"dutyId,omitempty"`
+	DutyStart *time.Time `json:"dutyStart,omitempty"`
 }
-

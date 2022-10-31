@@ -1,44 +1,39 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type DeleteConnectionAliasXAmzTargetEnum string
 
 const (
-    DeleteConnectionAliasXAmzTargetEnumWorkspacesServiceDeleteConnectionAlias DeleteConnectionAliasXAmzTargetEnum = "WorkspacesService.DeleteConnectionAlias"
+	DeleteConnectionAliasXAmzTargetEnumWorkspacesServiceDeleteConnectionAlias DeleteConnectionAliasXAmzTargetEnum = "WorkspacesService.DeleteConnectionAlias"
 )
 
-
 type DeleteConnectionAliasHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget DeleteConnectionAliasXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                             `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                             `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                             `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                             `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                             `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                             `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                             `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        DeleteConnectionAliasXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type DeleteConnectionAliasRequest struct {
-    Headers DeleteConnectionAliasHeaders 
-    Request shared.DeleteConnectionAliasRequest `request:"mediaType=application/json"`
-    
+	Headers DeleteConnectionAliasHeaders
+	Request shared.DeleteConnectionAliasRequest `request:"mediaType=application/json"`
 }
 
 type DeleteConnectionAliasResponse struct {
-    AccessDeniedException *interface{} 
-    ContentType string 
-    DeleteConnectionAliasResult map[string]interface{} 
-    InvalidParameterValuesException *interface{} 
-    InvalidResourceStateException *interface{} 
-    OperationNotSupportedException *interface{} 
-    ResourceAssociatedException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    
+	AccessDeniedException           *interface{}
+	ContentType                     string
+	DeleteConnectionAliasResult     map[string]interface{}
+	InvalidParameterValuesException *interface{}
+	InvalidResourceStateException   *interface{}
+	OperationNotSupportedException  *interface{}
+	ResourceAssociatedException     *interface{}
+	ResourceNotFoundException       *interface{}
+	StatusCode                      int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PublishBatchResponse struct {
-    MessageIds []string `json:"messageIds,omitempty"`
-    
+	MessageIds []string `json:"messageIds,omitempty"`
 }
-

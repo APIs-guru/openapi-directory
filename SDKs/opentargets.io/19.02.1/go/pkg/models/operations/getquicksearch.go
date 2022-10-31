@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetQuickSearchQueryParams struct {
-    Q string `queryParam:"style=form,explode=true,name=q"`
-    Size *string `queryParam:"style=form,explode=true,name=size"`
-    
+	Q    string  `queryParam:"style=form,explode=true,name=q"`
+	Size *string `queryParam:"style=form,explode=true,name=size"`
 }
 
 type GetQuickSearchRequest struct {
-    QueryParams GetQuickSearchQueryParams 
-    
+	QueryParams GetQuickSearchQueryParams
 }
 
 type GetQuickSearchResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

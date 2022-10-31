@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type RemoveOAuthApprovalPathParams struct {
-    ClientID string `pathParam:"style=simple,explode=false,name=client_id"`
-    
+	ClientID string `pathParam:"style=simple,explode=false,name=client_id"`
 }
 
 type RemoveOAuthApprovalHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type RemoveOAuthApprovalRequest struct {
-    PathParams RemoveOAuthApprovalPathParams 
-    Headers RemoveOAuthApprovalHeaders 
-    
+	PathParams RemoveOAuthApprovalPathParams
+	Headers    RemoveOAuthApprovalHeaders
 }
 
 type RemoveOAuthApprovalResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	StatusCode    int64
 }
-

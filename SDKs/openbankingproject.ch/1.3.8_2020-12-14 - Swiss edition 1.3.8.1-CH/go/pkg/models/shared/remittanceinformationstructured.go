@@ -1,23 +1,17 @@
 package shared
 
-
-
-
 type RemittanceInformationStructuredScoRorQrRorIpiEnum string
 
 const (
-    RemittanceInformationStructuredScoRorQrRorIpiEnumScor RemittanceInformationStructuredScoRorQrRorIpiEnum = "SCOR"
-RemittanceInformationStructuredScoRorQrRorIpiEnumQrr RemittanceInformationStructuredScoRorQrRorIpiEnum = "QRR"
-RemittanceInformationStructuredScoRorQrRorIpiEnumIpi RemittanceInformationStructuredScoRorQrRorIpiEnum = "IPI"
+	RemittanceInformationStructuredScoRorQrRorIpiEnumScor RemittanceInformationStructuredScoRorQrRorIpiEnum = "SCOR"
+	RemittanceInformationStructuredScoRorQrRorIpiEnumQrr  RemittanceInformationStructuredScoRorQrRorIpiEnum = "QRR"
+	RemittanceInformationStructuredScoRorQrRorIpiEnumIpi  RemittanceInformationStructuredScoRorQrRorIpiEnum = "IPI"
 )
 
-
 type RemittanceInformationStructured struct {
-    ScoRorQrRorIpi *RemittanceInformationStructuredScoRorQrRorIpiEnum `json:"SCORorQRRorIPI,omitempty"`
-    AdditionalRemittanceInformation *string `json:"additionalRemittanceInformation,omitempty"`
-    Reference string `json:"reference"`
-    ReferenceIssuer *string `json:"referenceIssuer,omitempty"`
-    ReferenceType *string `json:"referenceType,omitempty"`
-    
+	ScoRorQrRorIpi                  *RemittanceInformationStructuredScoRorQrRorIpiEnum `json:"SCORorQRRorIPI,omitempty"`
+	AdditionalRemittanceInformation *string                                            `json:"additionalRemittanceInformation,omitempty"`
+	Reference                       string                                             `json:"reference"`
+	ReferenceIssuer                 *string                                            `json:"referenceIssuer,omitempty"`
+	ReferenceType                   *string                                            `json:"referenceType,omitempty"`
 }
-

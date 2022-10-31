@@ -1,9 +1,5 @@
 package shared
 
-
-
 type NotificationType struct {
-    Type *string `json:"type,omitempty"`
-    
+	Type *string `json:"type,omitempty"`
 }
-

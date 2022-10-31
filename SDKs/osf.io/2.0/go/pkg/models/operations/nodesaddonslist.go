@@ -1,21 +1,15 @@
 package operations
 
-
-
 type NodesAddonsListPathParams struct {
-    NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
-    
+	NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
 }
 
 type NodesAddonsListRequest struct {
-    PathParams NodesAddonsListPathParams 
-    
+	PathParams NodesAddonsListPathParams
 }
 
 type NodesAddonsListResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

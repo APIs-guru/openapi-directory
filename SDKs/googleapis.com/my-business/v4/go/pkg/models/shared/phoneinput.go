@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PhoneInput struct {
-    PhoneNumber *string `json:"phoneNumber,omitempty"`
-    
+	PhoneNumber *string `json:"phoneNumber,omitempty"`
 }
-

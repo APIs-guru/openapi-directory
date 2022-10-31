@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type UtcTimeResponse struct {
-    RequestReceptionTime *time.Time `json:"RequestReceptionTime,omitempty"`
-    ResponseTransmissionTime *time.Time `json:"ResponseTransmissionTime,omitempty"`
-    
+	RequestReceptionTime     *time.Time `json:"RequestReceptionTime,omitempty"`
+	ResponseTransmissionTime *time.Time `json:"ResponseTransmissionTime,omitempty"`
 }
-

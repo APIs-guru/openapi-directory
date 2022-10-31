@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AcceptSharedDirectoryRequest struct {
-    SharedDirectoryID string `json:"SharedDirectoryId"`
-    
+	SharedDirectoryID string `json:"SharedDirectoryId"`
 }
-

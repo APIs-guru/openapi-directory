@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteVirtualInterfaceResponse struct {
-    VirtualInterfaceState *VirtualInterfaceStateEnum `json:"virtualInterfaceState,omitempty"`
-    
+	VirtualInterfaceState *VirtualInterfaceStateEnum `json:"virtualInterfaceState,omitempty"`
 }
-

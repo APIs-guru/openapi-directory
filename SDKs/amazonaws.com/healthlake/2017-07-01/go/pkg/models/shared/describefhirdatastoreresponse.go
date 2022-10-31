@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeFhirDatastoreResponse struct {
-    DatastoreProperties DatastoreProperties `json:"DatastoreProperties"`
-    
+	DatastoreProperties DatastoreProperties `json:"DatastoreProperties"`
 }
-

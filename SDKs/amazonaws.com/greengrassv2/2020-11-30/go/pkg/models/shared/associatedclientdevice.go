@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type AssociatedClientDevice struct {
-    AssociationTimestamp *time.Time `json:"associationTimestamp,omitempty"`
-    ThingName *string `json:"thingName,omitempty"`
-    
+	AssociationTimestamp *time.Time `json:"associationTimestamp,omitempty"`
+	ThingName            *string    `json:"thingName,omitempty"`
 }
-

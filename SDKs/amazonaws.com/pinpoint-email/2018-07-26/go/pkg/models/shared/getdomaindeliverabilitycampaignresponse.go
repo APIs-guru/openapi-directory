@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetDomainDeliverabilityCampaignResponse struct {
-    DomainDeliverabilityCampaign DomainDeliverabilityCampaign `json:"DomainDeliverabilityCampaign"`
-    
+	DomainDeliverabilityCampaign DomainDeliverabilityCampaign `json:"DomainDeliverabilityCampaign"`
 }
-

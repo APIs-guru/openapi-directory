@@ -1,19 +1,13 @@
 package shared
 
-
-
 type SchemeAPIKey struct {
-    APIKey string `security:"name=api_key"`
-    
+	APIKey string `security:"name=api_key"`
 }
 
 type SchemeBasic struct {
-    Authorization string `security:"name=Authorization"`
-    
+	Authorization string `security:"name=Authorization"`
 }
 
 type Security struct {
-    APIKey SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
-    
+	APIKey SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
 }
-

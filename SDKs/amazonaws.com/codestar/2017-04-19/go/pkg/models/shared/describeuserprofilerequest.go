@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeUserProfileRequest struct {
-    UserArn string `json:"userArn"`
-    
+	UserArn string `json:"userArn"`
 }
-

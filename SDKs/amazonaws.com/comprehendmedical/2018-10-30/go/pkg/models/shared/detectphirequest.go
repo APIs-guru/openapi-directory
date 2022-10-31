@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DetectPhiRequest struct {
-    Text string `json:"Text"`
-    
+	Text string `json:"Text"`
 }
-

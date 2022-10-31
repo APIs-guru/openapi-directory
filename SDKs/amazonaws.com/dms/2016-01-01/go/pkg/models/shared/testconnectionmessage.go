@@ -1,10 +1,6 @@
 package shared
 
-
-
 type TestConnectionMessage struct {
-    EndpointArn string `json:"EndpointArn"`
-    ReplicationInstanceArn string `json:"ReplicationInstanceArn"`
-    
+	EndpointArn            string `json:"EndpointArn"`
+	ReplicationInstanceArn string `json:"ReplicationInstanceArn"`
 }
-

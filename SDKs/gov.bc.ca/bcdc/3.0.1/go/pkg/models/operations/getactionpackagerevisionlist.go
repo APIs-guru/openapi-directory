@@ -1,20 +1,14 @@
 package operations
 
-
-
 type GetActionPackageRevisionListQueryParams struct {
-    ID *string `queryParam:"style=form,explode=true,name=id"`
-    
+	ID *string `queryParam:"style=form,explode=true,name=id"`
 }
 
 type GetActionPackageRevisionListRequest struct {
-    QueryParams GetActionPackageRevisionListQueryParams 
-    
+	QueryParams GetActionPackageRevisionListQueryParams
 }
 
 type GetActionPackageRevisionListResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

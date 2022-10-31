@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteKnownHostKeysRequest struct {
-    InstanceName string `json:"instanceName"`
-    
+	InstanceName string `json:"instanceName"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TrackingConfig struct {
-    Autotrack CriticalityEnum `json:"autotrack"`
-    
+	Autotrack CriticalityEnum `json:"autotrack"`
 }
-

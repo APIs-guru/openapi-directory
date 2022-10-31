@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AdvancedMachineFeatures struct {
-    ThreadsPerCore *string `json:"threadsPerCore,omitempty"`
-    
+	ThreadsPerCore *string `json:"threadsPerCore,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ChannelConversionPings struct {
-    Pings []ChannelConversionPing `json:"pings,omitempty"`
-    
+	Pings []ChannelConversionPing `json:"pings,omitempty"`
 }
-

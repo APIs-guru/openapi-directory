@@ -1,60 +1,48 @@
 package shared
 
-
-
-
 type PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum string
 
 const (
-    PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnumExceptionUnspecified PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum = "EXCEPTION_UNSPECIFIED"
-PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnumUnderConstruction PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum = "UNDER_CONSTRUCTION"
-PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnumDependentOnSeason PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum = "DEPENDENT_ON_SEASON"
-PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnumDependentOnDayOfWeek PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnumExceptionUnspecified PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnumUnderConstruction    PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum = "UNDER_CONSTRUCTION"
+	PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnumDependentOnSeason    PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum = "DEPENDENT_ON_SEASON"
+	PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnumDependentOnDayOfWeek PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type PersonalProtectionFaceMaskRequiredExceptionEnum string
 
 const (
-    PersonalProtectionFaceMaskRequiredExceptionEnumExceptionUnspecified PersonalProtectionFaceMaskRequiredExceptionEnum = "EXCEPTION_UNSPECIFIED"
-PersonalProtectionFaceMaskRequiredExceptionEnumUnderConstruction PersonalProtectionFaceMaskRequiredExceptionEnum = "UNDER_CONSTRUCTION"
-PersonalProtectionFaceMaskRequiredExceptionEnumDependentOnSeason PersonalProtectionFaceMaskRequiredExceptionEnum = "DEPENDENT_ON_SEASON"
-PersonalProtectionFaceMaskRequiredExceptionEnumDependentOnDayOfWeek PersonalProtectionFaceMaskRequiredExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	PersonalProtectionFaceMaskRequiredExceptionEnumExceptionUnspecified PersonalProtectionFaceMaskRequiredExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	PersonalProtectionFaceMaskRequiredExceptionEnumUnderConstruction    PersonalProtectionFaceMaskRequiredExceptionEnum = "UNDER_CONSTRUCTION"
+	PersonalProtectionFaceMaskRequiredExceptionEnumDependentOnSeason    PersonalProtectionFaceMaskRequiredExceptionEnum = "DEPENDENT_ON_SEASON"
+	PersonalProtectionFaceMaskRequiredExceptionEnumDependentOnDayOfWeek PersonalProtectionFaceMaskRequiredExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnum string
 
 const (
-    PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnumExceptionUnspecified PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnum = "EXCEPTION_UNSPECIFIED"
-PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnumUnderConstruction PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnum = "UNDER_CONSTRUCTION"
-PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnumDependentOnSeason PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnum = "DEPENDENT_ON_SEASON"
-PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnumDependentOnDayOfWeek PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnumExceptionUnspecified PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnumUnderConstruction    PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnum = "UNDER_CONSTRUCTION"
+	PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnumDependentOnSeason    PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnum = "DEPENDENT_ON_SEASON"
+	PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnumDependentOnDayOfWeek PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type PersonalProtectionProtectiveEquipmentAvailableExceptionEnum string
 
 const (
-    PersonalProtectionProtectiveEquipmentAvailableExceptionEnumExceptionUnspecified PersonalProtectionProtectiveEquipmentAvailableExceptionEnum = "EXCEPTION_UNSPECIFIED"
-PersonalProtectionProtectiveEquipmentAvailableExceptionEnumUnderConstruction PersonalProtectionProtectiveEquipmentAvailableExceptionEnum = "UNDER_CONSTRUCTION"
-PersonalProtectionProtectiveEquipmentAvailableExceptionEnumDependentOnSeason PersonalProtectionProtectiveEquipmentAvailableExceptionEnum = "DEPENDENT_ON_SEASON"
-PersonalProtectionProtectiveEquipmentAvailableExceptionEnumDependentOnDayOfWeek PersonalProtectionProtectiveEquipmentAvailableExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	PersonalProtectionProtectiveEquipmentAvailableExceptionEnumExceptionUnspecified PersonalProtectionProtectiveEquipmentAvailableExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	PersonalProtectionProtectiveEquipmentAvailableExceptionEnumUnderConstruction    PersonalProtectionProtectiveEquipmentAvailableExceptionEnum = "UNDER_CONSTRUCTION"
+	PersonalProtectionProtectiveEquipmentAvailableExceptionEnumDependentOnSeason    PersonalProtectionProtectiveEquipmentAvailableExceptionEnum = "DEPENDENT_ON_SEASON"
+	PersonalProtectionProtectiveEquipmentAvailableExceptionEnumDependentOnDayOfWeek PersonalProtectionProtectiveEquipmentAvailableExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
-
 type PersonalProtection struct {
-    CommonAreasOfferSanitizingItems *bool `json:"commonAreasOfferSanitizingItems,omitempty"`
-    CommonAreasOfferSanitizingItemsException *PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum `json:"commonAreasOfferSanitizingItemsException,omitempty"`
-    FaceMaskRequired *bool `json:"faceMaskRequired,omitempty"`
-    FaceMaskRequiredException *PersonalProtectionFaceMaskRequiredExceptionEnum `json:"faceMaskRequiredException,omitempty"`
-    GuestRoomHygieneKitsAvailable *bool `json:"guestRoomHygieneKitsAvailable,omitempty"`
-    GuestRoomHygieneKitsAvailableException *PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnum `json:"guestRoomHygieneKitsAvailableException,omitempty"`
-    ProtectiveEquipmentAvailable *bool `json:"protectiveEquipmentAvailable,omitempty"`
-    ProtectiveEquipmentAvailableException *PersonalProtectionProtectiveEquipmentAvailableExceptionEnum `json:"protectiveEquipmentAvailableException,omitempty"`
-    
+	CommonAreasOfferSanitizingItems          *bool                                                           `json:"commonAreasOfferSanitizingItems,omitempty"`
+	CommonAreasOfferSanitizingItemsException *PersonalProtectionCommonAreasOfferSanitizingItemsExceptionEnum `json:"commonAreasOfferSanitizingItemsException,omitempty"`
+	FaceMaskRequired                         *bool                                                           `json:"faceMaskRequired,omitempty"`
+	FaceMaskRequiredException                *PersonalProtectionFaceMaskRequiredExceptionEnum                `json:"faceMaskRequiredException,omitempty"`
+	GuestRoomHygieneKitsAvailable            *bool                                                           `json:"guestRoomHygieneKitsAvailable,omitempty"`
+	GuestRoomHygieneKitsAvailableException   *PersonalProtectionGuestRoomHygieneKitsAvailableExceptionEnum   `json:"guestRoomHygieneKitsAvailableException,omitempty"`
+	ProtectiveEquipmentAvailable             *bool                                                           `json:"protectiveEquipmentAvailable,omitempty"`
+	ProtectiveEquipmentAvailableException    *PersonalProtectionProtectiveEquipmentAvailableExceptionEnum    `json:"protectiveEquipmentAvailableException,omitempty"`
 }
-

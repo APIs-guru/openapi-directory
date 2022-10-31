@@ -1,9 +1,5 @@
 package shared
 
-
-
 type IamPolicy struct {
-    PolicyBlob *string `json:"policyBlob,omitempty"`
-    
+	PolicyBlob *string `json:"policyBlob,omitempty"`
 }
-

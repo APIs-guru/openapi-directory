@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteActionResponse struct {
-    ActionArn *string `json:"ActionArn,omitempty"`
-    
+	ActionArn *string `json:"ActionArn,omitempty"`
 }
-

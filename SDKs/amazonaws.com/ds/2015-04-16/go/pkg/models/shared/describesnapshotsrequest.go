@@ -1,12 +1,8 @@
 package shared
 
-
-
 type DescribeSnapshotsRequest struct {
-    DirectoryID *string `json:"DirectoryId,omitempty"`
-    Limit *int64 `json:"Limit,omitempty"`
-    NextToken *string `json:"NextToken,omitempty"`
-    SnapshotIds []string `json:"SnapshotIds,omitempty"`
-    
+	DirectoryID *string  `json:"DirectoryId,omitempty"`
+	Limit       *int64   `json:"Limit,omitempty"`
+	NextToken   *string  `json:"NextToken,omitempty"`
+	SnapshotIds []string `json:"SnapshotIds,omitempty"`
 }
-

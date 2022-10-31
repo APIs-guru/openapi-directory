@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeTunnelResponse struct {
-    Tunnel *Tunnel `json:"tunnel,omitempty"`
-    
+	Tunnel *Tunnel `json:"tunnel,omitempty"`
 }
-

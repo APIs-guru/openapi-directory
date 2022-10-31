@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type FindingActionTypeEnum string
 
 const (
-    FindingActionTypeEnumAwsAPICall FindingActionTypeEnum = "AWS_API_CALL"
+	FindingActionTypeEnumAwsAPICall FindingActionTypeEnum = "AWS_API_CALL"
 )
-
-

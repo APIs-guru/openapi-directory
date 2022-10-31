@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Tax struct {
-    Tax *TaxFields `json:"tax,omitempty"`
-    
+	Tax *TaxFields `json:"tax,omitempty"`
 }
-

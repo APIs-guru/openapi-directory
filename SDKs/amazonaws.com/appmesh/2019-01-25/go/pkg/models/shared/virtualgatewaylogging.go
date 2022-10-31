@@ -1,9 +1,5 @@
 package shared
 
-
-
 type VirtualGatewayLogging struct {
-    AccessLog *VirtualGatewayAccessLog `json:"accessLog,omitempty"`
-    
+	AccessLog *VirtualGatewayAccessLog `json:"accessLog,omitempty"`
 }
-

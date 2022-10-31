@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListDirectoriesResponse struct {
-    Directories []Directory `json:"Directories"`
-    NextToken *string `json:"NextToken,omitempty"`
-    
+	Directories []Directory `json:"Directories"`
+	NextToken   *string     `json:"NextToken,omitempty"`
 }
-

@@ -1,46 +1,41 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ListJobsPathParams struct {
-    AppID string `pathParam:"style=simple,explode=false,name=appId"`
-    BranchName string `pathParam:"style=simple,explode=false,name=branchName"`
-    
+	AppID      string `pathParam:"style=simple,explode=false,name=appId"`
+	BranchName string `pathParam:"style=simple,explode=false,name=branchName"`
 }
 
 type ListJobsQueryParams struct {
-    MaxResults *int64 `queryParam:"style=form,explode=true,name=maxResults"`
-    NextToken *string `queryParam:"style=form,explode=true,name=nextToken"`
-    
+	MaxResults *int64  `queryParam:"style=form,explode=true,name=maxResults"`
+	NextToken  *string `queryParam:"style=form,explode=true,name=nextToken"`
 }
 
 type ListJobsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type ListJobsRequest struct {
-    PathParams ListJobsPathParams 
-    QueryParams ListJobsQueryParams 
-    Headers ListJobsHeaders 
-    
+	PathParams  ListJobsPathParams
+	QueryParams ListJobsQueryParams
+	Headers     ListJobsHeaders
 }
 
 type ListJobsResponse struct {
-    BadRequestException *interface{} 
-    ContentType string 
-    InternalFailureException *interface{} 
-    LimitExceededException *interface{} 
-    ListJobsResult *shared.ListJobsResult 
-    StatusCode int64 
-    UnauthorizedException *interface{} 
-    
+	BadRequestException      *interface{}
+	ContentType              string
+	InternalFailureException *interface{}
+	LimitExceededException   *interface{}
+	ListJobsResult           *shared.ListJobsResult
+	StatusCode               int64
+	UnauthorizedException    *interface{}
 }
-

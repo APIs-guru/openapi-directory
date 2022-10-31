@@ -1,20 +1,14 @@
 package operations
 
-
-
 type UnblockConversationPathParams struct {
-    ConversationID string `pathParam:"style=simple,explode=false,name=conversation_id"`
-    
+	ConversationID string `pathParam:"style=simple,explode=false,name=conversation_id"`
 }
 
 type UnblockConversationRequest struct {
-    PathParams UnblockConversationPathParams 
-    
+	PathParams UnblockConversationPathParams
 }
 
 type UnblockConversationResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

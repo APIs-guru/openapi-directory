@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type DomainDeliverabilityTrackingOption struct {
-    Domain *string `json:"Domain,omitempty"`
-    InboxPlacementTrackingOption *InboxPlacementTrackingOption `json:"InboxPlacementTrackingOption,omitempty"`
-    SubscriptionStartDate *time.Time `json:"SubscriptionStartDate,omitempty"`
-    
+	Domain                       *string                       `json:"Domain,omitempty"`
+	InboxPlacementTrackingOption *InboxPlacementTrackingOption `json:"InboxPlacementTrackingOption,omitempty"`
+	SubscriptionStartDate        *time.Time                    `json:"SubscriptionStartDate,omitempty"`
 }
-

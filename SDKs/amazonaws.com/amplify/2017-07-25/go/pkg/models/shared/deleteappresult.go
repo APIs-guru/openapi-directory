@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteAppResult struct {
-    App App `json:"app"`
-    
+	App App `json:"app"`
 }
-

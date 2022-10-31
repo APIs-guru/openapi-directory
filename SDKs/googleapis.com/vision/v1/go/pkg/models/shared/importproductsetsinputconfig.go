@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ImportProductSetsInputConfig struct {
-    GcsSource *ImportProductSetsGcsSource `json:"gcsSource,omitempty"`
-    
+	GcsSource *ImportProductSetsGcsSource `json:"gcsSource,omitempty"`
 }
-

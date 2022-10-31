@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ValidationResult struct {
-    Openapi string `json:"openapi"`
-    
+	Openapi string `json:"openapi"`
 }
-

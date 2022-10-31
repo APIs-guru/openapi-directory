@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeAddressResult struct {
-    Address *Address `json:"Address,omitempty"`
-    
+	Address *Address `json:"Address,omitempty"`
 }
-

@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ConfigConfigGetHeaders struct {
-    Authorization *string `header:"style=simple,explode=false,name=authorization"`
-    
+	Authorization *string `header:"style=simple,explode=false,name=authorization"`
 }
 
 type ConfigConfigGetRequest struct {
-    Headers ConfigConfigGetHeaders 
-    
+	Headers ConfigConfigGetHeaders
 }
 
 type ConfigConfigGetResponse struct {
-    Config *shared.Config 
-    ContentType string 
-    HTTPValidationError *shared.HTTPValidationError 
-    StatusCode int64 
-    
+	Config              *shared.Config
+	ContentType         string
+	HTTPValidationError *shared.HTTPValidationError
+	StatusCode          int64
 }
-

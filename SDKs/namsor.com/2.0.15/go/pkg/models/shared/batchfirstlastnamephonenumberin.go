@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchFirstLastNamePhoneNumberIn struct {
-    PersonalNamesWithPhoneNumbers []FirstLastNamePhoneNumberIn `json:"personalNamesWithPhoneNumbers,omitempty"`
-    
+	PersonalNamesWithPhoneNumbers []FirstLastNamePhoneNumberIn `json:"personalNamesWithPhoneNumbers,omitempty"`
 }
-

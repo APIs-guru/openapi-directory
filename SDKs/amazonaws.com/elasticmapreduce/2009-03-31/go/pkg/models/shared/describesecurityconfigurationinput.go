@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeSecurityConfigurationInput struct {
-    Name string `json:"Name"`
-    
+	Name string `json:"Name"`
 }
-

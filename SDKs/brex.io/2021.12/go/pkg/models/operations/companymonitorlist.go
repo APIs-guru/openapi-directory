@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CompanyMonitorListSecurity struct {
-    UserKey shared.SchemeUserKey `security:"scheme,type=apiKey,subtype=header"`
-    
+	UserKey shared.SchemeUserKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type CompanyMonitorListRequest struct {
-    Security CompanyMonitorListSecurity 
-    
+	Security CompanyMonitorListSecurity
 }
 
 type CompanyMonitorListResponse struct {
-    CompanyMonitorList200ApplicationJSONAnies []interface{} 
-    CompanyMonitorListDefaultApplicationJSONAny *interface{} 
-    ContentType string 
-    StatusCode int64 
-    
+	CompanyMonitorList200ApplicationJSONAnies   []interface{}
+	CompanyMonitorListDefaultApplicationJSONAny *interface{}
+	ContentType                                 string
+	StatusCode                                  int64
 }
-

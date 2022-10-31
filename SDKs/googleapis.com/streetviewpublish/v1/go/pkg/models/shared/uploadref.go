@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UploadRef struct {
-    UploadURL *string `json:"uploadUrl,omitempty"`
-    
+	UploadURL *string `json:"uploadUrl,omitempty"`
 }
-

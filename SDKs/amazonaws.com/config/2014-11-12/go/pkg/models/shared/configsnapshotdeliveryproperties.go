@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ConfigSnapshotDeliveryProperties struct {
-    DeliveryFrequency *MaximumExecutionFrequencyEnum `json:"deliveryFrequency,omitempty"`
-    
+	DeliveryFrequency *MaximumExecutionFrequencyEnum `json:"deliveryFrequency,omitempty"`
 }
-

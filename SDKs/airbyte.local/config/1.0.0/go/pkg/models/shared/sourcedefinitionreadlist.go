@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SourceDefinitionReadList struct {
-    SourceDefinitions []SourceDefinitionRead `json:"sourceDefinitions"`
-    
+	SourceDefinitions []SourceDefinitionRead `json:"sourceDefinitions"`
 }
-

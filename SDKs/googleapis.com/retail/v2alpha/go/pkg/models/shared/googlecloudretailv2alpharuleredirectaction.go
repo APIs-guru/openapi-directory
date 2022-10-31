@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudRetailV2alphaRuleRedirectAction struct {
-    RedirectURI *string `json:"redirectUri,omitempty"`
-    
+	RedirectURI *string `json:"redirectUri,omitempty"`
 }
-

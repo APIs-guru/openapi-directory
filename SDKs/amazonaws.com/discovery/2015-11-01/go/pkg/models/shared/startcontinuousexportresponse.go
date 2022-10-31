@@ -1,14 +1,13 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type StartContinuousExportResponse struct {
-    DataSource *DataSourceEnum `json:"dataSource,omitempty"`
-    ExportID *string `json:"exportId,omitempty"`
-    S3Bucket *string `json:"s3Bucket,omitempty"`
-    SchemaStorageConfig map[string]string `json:"schemaStorageConfig,omitempty"`
-    StartTime *time.Time `json:"startTime,omitempty"`
-    
+	DataSource          *DataSourceEnum   `json:"dataSource,omitempty"`
+	ExportID            *string           `json:"exportId,omitempty"`
+	S3Bucket            *string           `json:"s3Bucket,omitempty"`
+	SchemaStorageConfig map[string]string `json:"schemaStorageConfig,omitempty"`
+	StartTime           *time.Time        `json:"startTime,omitempty"`
 }
-

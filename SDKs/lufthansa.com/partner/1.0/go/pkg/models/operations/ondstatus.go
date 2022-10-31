@@ -1,36 +1,31 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type OndStatusQueryParams struct {
-    Catalogues *string `queryParam:"style=form,explode=true,name=catalogues"`
-    NewRoutes *string `queryParam:"style=form,explode=true,name=new-routes"`
-    OldRoutes *string `queryParam:"style=form,explode=true,name=old-routes"`
-    
+	Catalogues *string `queryParam:"style=form,explode=true,name=catalogues"`
+	NewRoutes  *string `queryParam:"style=form,explode=true,name=new-routes"`
+	OldRoutes  *string `queryParam:"style=form,explode=true,name=old-routes"`
 }
 
 type OndStatusHeaders struct {
-    Accept string `header:"style=simple,explode=false,name=Accept"`
-    
+	Accept string `header:"style=simple,explode=false,name=Accept"`
 }
 
 type OndStatusSecurity struct {
-    Auth shared.SchemeAuth `security:"scheme,type=oauth2"`
-    
+	Auth shared.SchemeAuth `security:"scheme,type=oauth2"`
 }
 
 type OndStatusRequest struct {
-    QueryParams OndStatusQueryParams 
-    Headers OndStatusHeaders 
-    Security OndStatusSecurity 
-    
+	QueryParams OndStatusQueryParams
+	Headers     OndStatusHeaders
+	Security    OndStatusSecurity
 }
 
 type OndStatusResponse struct {
-    ContentType string 
-    OndStatus200ApplicationJSONString *string 
-    StatusCode int64 
-    
+	ContentType                       string
+	OndStatus200ApplicationJSONString *string
+	StatusCode                        int64
 }
-

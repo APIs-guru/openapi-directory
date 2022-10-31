@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListDashboardsResponse struct {
-    DashboardSummaries []DashboardSummary `json:"dashboardSummaries"`
-    NextToken *string `json:"nextToken,omitempty"`
-    
+	DashboardSummaries []DashboardSummary `json:"dashboardSummaries"`
+	NextToken          *string            `json:"nextToken,omitempty"`
 }
-

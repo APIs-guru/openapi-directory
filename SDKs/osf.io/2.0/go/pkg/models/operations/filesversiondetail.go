@@ -1,22 +1,16 @@
 package operations
 
-
-
 type FilesVersionDetailPathParams struct {
-    FileID string `pathParam:"style=simple,explode=false,name=file_id"`
-    VersionID string `pathParam:"style=simple,explode=false,name=version_id"`
-    
+	FileID    string `pathParam:"style=simple,explode=false,name=file_id"`
+	VersionID string `pathParam:"style=simple,explode=false,name=version_id"`
 }
 
 type FilesVersionDetailRequest struct {
-    PathParams FilesVersionDetailPathParams 
-    
+	PathParams FilesVersionDetailPathParams
 }
 
 type FilesVersionDetailResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

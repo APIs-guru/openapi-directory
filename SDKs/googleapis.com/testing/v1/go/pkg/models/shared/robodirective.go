@@ -1,22 +1,16 @@
 package shared
 
-
-
-
 type RoboDirectiveActionTypeEnum string
 
 const (
-    RoboDirectiveActionTypeEnumActionTypeUnspecified RoboDirectiveActionTypeEnum = "ACTION_TYPE_UNSPECIFIED"
-RoboDirectiveActionTypeEnumSingleClick RoboDirectiveActionTypeEnum = "SINGLE_CLICK"
-RoboDirectiveActionTypeEnumEnterText RoboDirectiveActionTypeEnum = "ENTER_TEXT"
-RoboDirectiveActionTypeEnumIgnore RoboDirectiveActionTypeEnum = "IGNORE"
+	RoboDirectiveActionTypeEnumActionTypeUnspecified RoboDirectiveActionTypeEnum = "ACTION_TYPE_UNSPECIFIED"
+	RoboDirectiveActionTypeEnumSingleClick           RoboDirectiveActionTypeEnum = "SINGLE_CLICK"
+	RoboDirectiveActionTypeEnumEnterText             RoboDirectiveActionTypeEnum = "ENTER_TEXT"
+	RoboDirectiveActionTypeEnumIgnore                RoboDirectiveActionTypeEnum = "IGNORE"
 )
 
-
 type RoboDirective struct {
-    ActionType *RoboDirectiveActionTypeEnum `json:"actionType,omitempty"`
-    InputText *string `json:"inputText,omitempty"`
-    ResourceName *string `json:"resourceName,omitempty"`
-    
+	ActionType   *RoboDirectiveActionTypeEnum `json:"actionType,omitempty"`
+	InputText    *string                      `json:"inputText,omitempty"`
+	ResourceName *string                      `json:"resourceName,omitempty"`
 }
-

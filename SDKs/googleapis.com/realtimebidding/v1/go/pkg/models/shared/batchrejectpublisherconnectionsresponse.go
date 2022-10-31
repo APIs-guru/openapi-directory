@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchRejectPublisherConnectionsResponse struct {
-    PublisherConnections []PublisherConnection `json:"publisherConnections,omitempty"`
-    
+	PublisherConnections []PublisherConnection `json:"publisherConnections,omitempty"`
 }
-

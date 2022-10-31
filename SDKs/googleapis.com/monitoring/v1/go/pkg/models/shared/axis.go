@@ -1,20 +1,14 @@
 package shared
 
-
-
-
 type AxisScaleEnum string
 
 const (
-    AxisScaleEnumScaleUnspecified AxisScaleEnum = "SCALE_UNSPECIFIED"
-AxisScaleEnumLinear AxisScaleEnum = "LINEAR"
-AxisScaleEnumLog10 AxisScaleEnum = "LOG10"
+	AxisScaleEnumScaleUnspecified AxisScaleEnum = "SCALE_UNSPECIFIED"
+	AxisScaleEnumLinear           AxisScaleEnum = "LINEAR"
+	AxisScaleEnumLog10            AxisScaleEnum = "LOG10"
 )
 
-
 type Axis struct {
-    Label *string `json:"label,omitempty"`
-    Scale *AxisScaleEnum `json:"scale,omitempty"`
-    
+	Label *string        `json:"label,omitempty"`
+	Scale *AxisScaleEnum `json:"scale,omitempty"`
 }
-

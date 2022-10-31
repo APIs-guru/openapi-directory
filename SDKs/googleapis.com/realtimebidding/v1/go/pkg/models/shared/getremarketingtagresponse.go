@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetRemarketingTagResponse struct {
-    Snippet *string `json:"snippet,omitempty"`
-    
+	Snippet *string `json:"snippet,omitempty"`
 }
-

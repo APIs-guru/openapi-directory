@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateTaskSetResponse struct {
-    TaskSet *TaskSet `json:"taskSet,omitempty"`
-    
+	TaskSet *TaskSet `json:"taskSet,omitempty"`
 }
-

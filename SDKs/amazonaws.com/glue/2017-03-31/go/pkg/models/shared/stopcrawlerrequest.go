@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StopCrawlerRequest struct {
-    Name string `json:"Name"`
-    
+	Name string `json:"Name"`
 }
-

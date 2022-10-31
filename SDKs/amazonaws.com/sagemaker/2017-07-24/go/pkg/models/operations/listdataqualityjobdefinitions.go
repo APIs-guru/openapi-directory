@@ -1,45 +1,39 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ListDataQualityJobDefinitionsQueryParams struct {
-    MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
-    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
-    
+	MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
+	NextToken  *string `queryParam:"style=form,explode=true,name=NextToken"`
 }
-
 
 type ListDataQualityJobDefinitionsXAmzTargetEnum string
 
 const (
-    ListDataQualityJobDefinitionsXAmzTargetEnumSageMakerListDataQualityJobDefinitions ListDataQualityJobDefinitionsXAmzTargetEnum = "SageMaker.ListDataQualityJobDefinitions"
+	ListDataQualityJobDefinitionsXAmzTargetEnumSageMakerListDataQualityJobDefinitions ListDataQualityJobDefinitionsXAmzTargetEnum = "SageMaker.ListDataQualityJobDefinitions"
 )
 
-
 type ListDataQualityJobDefinitionsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget ListDataQualityJobDefinitionsXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                                     `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                                     `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                                     `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                                     `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                                     `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                                     `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                                     `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        ListDataQualityJobDefinitionsXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type ListDataQualityJobDefinitionsRequest struct {
-    QueryParams ListDataQualityJobDefinitionsQueryParams 
-    Headers ListDataQualityJobDefinitionsHeaders 
-    Request shared.ListDataQualityJobDefinitionsRequest `request:"mediaType=application/json"`
-    
+	QueryParams ListDataQualityJobDefinitionsQueryParams
+	Headers     ListDataQualityJobDefinitionsHeaders
+	Request     shared.ListDataQualityJobDefinitionsRequest `request:"mediaType=application/json"`
 }
 
 type ListDataQualityJobDefinitionsResponse struct {
-    ContentType string 
-    ListDataQualityJobDefinitionsResponse *shared.ListDataQualityJobDefinitionsResponse 
-    StatusCode int64 
-    
+	ContentType                           string
+	ListDataQualityJobDefinitionsResponse *shared.ListDataQualityJobDefinitionsResponse
+	StatusCode                            int64
 }
-

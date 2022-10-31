@@ -1,30 +1,26 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeleteJournalInstructionPathParams struct {
-    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
-    JournalInstructionID string `pathParam:"style=simple,explode=false,name=JournalInstructionId"`
-    
+	EmployerID           string `pathParam:"style=simple,explode=false,name=EmployerId"`
+	JournalInstructionID string `pathParam:"style=simple,explode=false,name=JournalInstructionId"`
 }
 
 type DeleteJournalInstructionHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type DeleteJournalInstructionRequest struct {
-    PathParams DeleteJournalInstructionPathParams 
-    Headers DeleteJournalInstructionHeaders 
-    
+	PathParams DeleteJournalInstructionPathParams
+	Headers    DeleteJournalInstructionHeaders
 }
 
 type DeleteJournalInstructionResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    StatusCode int64 
-    
+	ContentType string
+	ErrorModel  *shared.ErrorModel
+	StatusCode  int64
 }
-

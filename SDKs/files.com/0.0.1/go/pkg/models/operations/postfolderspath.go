@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PostFoldersPathPathParams struct {
-    Path string `pathParam:"style=simple,explode=false,name=path"`
-    
+	Path string `pathParam:"style=simple,explode=false,name=path"`
 }
 
 type PostFoldersPathRequest struct {
-    PathParams PostFoldersPathPathParams 
-    
+	PathParams PostFoldersPathPathParams
 }
 
 type PostFoldersPathResponse struct {
-    ContentType string 
-    FileEntity *shared.FileEntity 
-    StatusCode int64 
-    
+	ContentType string
+	FileEntity  *shared.FileEntity
+	StatusCode  int64
 }
-

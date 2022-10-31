@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartBgpFailoverTestResponse struct {
-    VirtualInterfaceTest *VirtualInterfaceTestHistory `json:"virtualInterfaceTest,omitempty"`
-    
+	VirtualInterfaceTest *VirtualInterfaceTestHistory `json:"virtualInterfaceTest,omitempty"`
 }
-

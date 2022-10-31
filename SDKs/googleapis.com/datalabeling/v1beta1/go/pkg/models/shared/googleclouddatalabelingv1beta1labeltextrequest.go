@@ -1,22 +1,16 @@
 package shared
 
-
-
-
 type GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnum string
 
 const (
-    GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnumFeatureUnspecified GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnum = "FEATURE_UNSPECIFIED"
-GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnumTextClassification GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnum = "TEXT_CLASSIFICATION"
-GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnumTextEntityExtraction GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnum = "TEXT_ENTITY_EXTRACTION"
+	GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnumFeatureUnspecified   GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnum = "FEATURE_UNSPECIFIED"
+	GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnumTextClassification   GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnum = "TEXT_CLASSIFICATION"
+	GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnumTextEntityExtraction GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnum = "TEXT_ENTITY_EXTRACTION"
 )
 
-
 type GoogleCloudDatalabelingV1beta1LabelTextRequest struct {
-    BasicConfig *GoogleCloudDatalabelingV1beta1HumanAnnotationConfig `json:"basicConfig,omitempty"`
-    Feature *GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnum `json:"feature,omitempty"`
-    TextClassificationConfig *GoogleCloudDatalabelingV1beta1TextClassificationConfig `json:"textClassificationConfig,omitempty"`
-    TextEntityExtractionConfig *GoogleCloudDatalabelingV1beta1TextEntityExtractionConfig `json:"textEntityExtractionConfig,omitempty"`
-    
+	BasicConfig                *GoogleCloudDatalabelingV1beta1HumanAnnotationConfig       `json:"basicConfig,omitempty"`
+	Feature                    *GoogleCloudDatalabelingV1beta1LabelTextRequestFeatureEnum `json:"feature,omitempty"`
+	TextClassificationConfig   *GoogleCloudDatalabelingV1beta1TextClassificationConfig    `json:"textClassificationConfig,omitempty"`
+	TextEntityExtractionConfig *GoogleCloudDatalabelingV1beta1TextEntityExtractionConfig  `json:"textEntityExtractionConfig,omitempty"`
 }
-

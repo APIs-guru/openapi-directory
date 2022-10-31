@@ -1,9 +1,5 @@
 package shared
 
-
-
 type IPFilter struct {
-    Cidr *string `json:"Cidr,omitempty"`
-    
+	Cidr *string `json:"Cidr,omitempty"`
 }
-

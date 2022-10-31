@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type RequestTransferActionParamEnum string
 
 const (
-    RequestTransferActionParamEnumTransfer RequestTransferActionParamEnum = "transfer"
+	RequestTransferActionParamEnumTransfer RequestTransferActionParamEnum = "transfer"
 )
-
-

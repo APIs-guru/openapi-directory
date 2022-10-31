@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetAwsOrganizationsAccessStatusOutput struct {
-    AccessStatus *AccessStatusEnum `json:"AccessStatus,omitempty"`
-    
+	AccessStatus *AccessStatusEnum `json:"AccessStatus,omitempty"`
 }
-

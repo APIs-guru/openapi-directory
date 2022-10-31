@@ -1,10 +1,6 @@
 package shared
 
-
-
 type TagResourceRequest struct {
-    ResourceArn string `json:"ResourceArn"`
-    TagList []Tag `json:"TagList"`
-    
+	ResourceArn string `json:"ResourceArn"`
+	TagList     []Tag  `json:"TagList"`
 }
-

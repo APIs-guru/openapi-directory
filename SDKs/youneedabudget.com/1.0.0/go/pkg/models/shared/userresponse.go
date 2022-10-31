@@ -1,14 +1,9 @@
 package shared
 
-
-
 type UserResponseData struct {
-    User User `json:"user"`
-    
+	User User `json:"user"`
 }
 
 type UserResponse struct {
-    Data UserResponseData `json:"data"`
-    
+	Data UserResponseData `json:"data"`
 }
-

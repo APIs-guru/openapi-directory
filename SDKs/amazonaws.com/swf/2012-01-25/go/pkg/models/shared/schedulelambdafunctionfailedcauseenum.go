@@ -1,15 +1,10 @@
 package shared
 
-
-
-
 type ScheduleLambdaFunctionFailedCauseEnum string
 
 const (
-    ScheduleLambdaFunctionFailedCauseEnumIDAlreadyInUse ScheduleLambdaFunctionFailedCauseEnum = "ID_ALREADY_IN_USE"
-ScheduleLambdaFunctionFailedCauseEnumOpenLambdaFunctionsLimitExceeded ScheduleLambdaFunctionFailedCauseEnum = "OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED"
-ScheduleLambdaFunctionFailedCauseEnumLambdaFunctionCreationRateExceeded ScheduleLambdaFunctionFailedCauseEnum = "LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED"
-ScheduleLambdaFunctionFailedCauseEnumLambdaServiceNotAvailableInRegion ScheduleLambdaFunctionFailedCauseEnum = "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION"
+	ScheduleLambdaFunctionFailedCauseEnumIDAlreadyInUse                     ScheduleLambdaFunctionFailedCauseEnum = "ID_ALREADY_IN_USE"
+	ScheduleLambdaFunctionFailedCauseEnumOpenLambdaFunctionsLimitExceeded   ScheduleLambdaFunctionFailedCauseEnum = "OPEN_LAMBDA_FUNCTIONS_LIMIT_EXCEEDED"
+	ScheduleLambdaFunctionFailedCauseEnumLambdaFunctionCreationRateExceeded ScheduleLambdaFunctionFailedCauseEnum = "LAMBDA_FUNCTION_CREATION_RATE_EXCEEDED"
+	ScheduleLambdaFunctionFailedCauseEnumLambdaServiceNotAvailableInRegion  ScheduleLambdaFunctionFailedCauseEnum = "LAMBDA_SERVICE_NOT_AVAILABLE_IN_REGION"
 )
-
-

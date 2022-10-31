@@ -1,38 +1,34 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DescribeEndpointQueryParams struct {
-    EndpointType *string `queryParam:"style=form,explode=true,name=endpointType"`
-    
+	EndpointType *string `queryParam:"style=form,explode=true,name=endpointType"`
 }
 
 type DescribeEndpointHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type DescribeEndpointRequest struct {
-    QueryParams DescribeEndpointQueryParams 
-    Headers DescribeEndpointHeaders 
-    
+	QueryParams DescribeEndpointQueryParams
+	Headers     DescribeEndpointHeaders
 }
 
 type DescribeEndpointResponse struct {
-    ContentType string 
-    DescribeEndpointResponse *shared.DescribeEndpointResponse 
-    InternalFailureException *interface{} 
-    InvalidRequestException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    UnauthorizedException *interface{} 
-    
+	ContentType              string
+	DescribeEndpointResponse *shared.DescribeEndpointResponse
+	InternalFailureException *interface{}
+	InvalidRequestException  *interface{}
+	StatusCode               int64
+	ThrottlingException      *interface{}
+	UnauthorizedException    *interface{}
 }
-

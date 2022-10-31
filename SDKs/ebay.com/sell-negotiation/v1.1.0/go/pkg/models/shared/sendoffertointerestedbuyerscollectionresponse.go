@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SendOfferToInterestedBuyersCollectionResponse struct {
-    Offers []Offer `json:"offers,omitempty"`
-    
+	Offers []Offer `json:"offers,omitempty"`
 }
-

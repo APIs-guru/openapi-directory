@@ -1,33 +1,25 @@
 package operations
 
-
-
 type EnterpriseAdminUpdateUsernameForUserPathParams struct {
-    Username string `pathParam:"style=simple,explode=false,name=username"`
-    
+	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
 
 type EnterpriseAdminUpdateUsernameForUserRequestBody struct {
-    Login string `json:"login"`
-    
+	Login string `json:"login"`
 }
 
 type EnterpriseAdminUpdateUsernameForUserRequest struct {
-    PathParams EnterpriseAdminUpdateUsernameForUserPathParams 
-    Request *EnterpriseAdminUpdateUsernameForUserRequestBody `request:"mediaType=application/json"`
-    
+	PathParams EnterpriseAdminUpdateUsernameForUserPathParams
+	Request    *EnterpriseAdminUpdateUsernameForUserRequestBody `request:"mediaType=application/json"`
 }
 
 type EnterpriseAdminUpdateUsernameForUser202ApplicationJSON struct {
-    Message *string `json:"message,omitempty"`
-    URL *string `json:"url,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
+	URL     *string `json:"url,omitempty"`
 }
 
 type EnterpriseAdminUpdateUsernameForUserResponse struct {
-    ContentType string 
-    StatusCode int64 
-    EnterpriseAdminUpdateUsernameForUser202ApplicationJSONObject *EnterpriseAdminUpdateUsernameForUser202ApplicationJSON 
-    
+	ContentType                                                  string
+	StatusCode                                                   int64
+	EnterpriseAdminUpdateUsernameForUser202ApplicationJSONObject *EnterpriseAdminUpdateUsernameForUser202ApplicationJSON
 }
-

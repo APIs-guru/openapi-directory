@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CrmResponse struct {
-    ForSale *string `json:"for_sale,omitempty"`
-    
+	ForSale *string `json:"for_sale,omitempty"`
 }
-

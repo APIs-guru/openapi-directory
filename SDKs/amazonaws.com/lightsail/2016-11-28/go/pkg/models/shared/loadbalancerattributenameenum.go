@@ -1,14 +1,9 @@
 package shared
 
-
-
-
 type LoadBalancerAttributeNameEnum string
 
 const (
-    LoadBalancerAttributeNameEnumHealthCheckPath LoadBalancerAttributeNameEnum = "HealthCheckPath"
-LoadBalancerAttributeNameEnumSessionStickinessEnabled LoadBalancerAttributeNameEnum = "SessionStickinessEnabled"
-LoadBalancerAttributeNameEnumSessionStickinessLbCookieDurationSeconds LoadBalancerAttributeNameEnum = "SessionStickiness_LB_CookieDurationSeconds"
+	LoadBalancerAttributeNameEnumHealthCheckPath                          LoadBalancerAttributeNameEnum = "HealthCheckPath"
+	LoadBalancerAttributeNameEnumSessionStickinessEnabled                 LoadBalancerAttributeNameEnum = "SessionStickinessEnabled"
+	LoadBalancerAttributeNameEnumSessionStickinessLbCookieDurationSeconds LoadBalancerAttributeNameEnum = "SessionStickiness_LB_CookieDurationSeconds"
 )
-
-

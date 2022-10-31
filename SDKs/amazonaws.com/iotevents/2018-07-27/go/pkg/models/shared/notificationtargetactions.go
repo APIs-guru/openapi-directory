@@ -1,9 +1,5 @@
 package shared
 
-
-
 type NotificationTargetActions struct {
-    LambdaAction *LambdaAction `json:"lambdaAction,omitempty"`
-    
+	LambdaAction *LambdaAction `json:"lambdaAction,omitempty"`
 }
-

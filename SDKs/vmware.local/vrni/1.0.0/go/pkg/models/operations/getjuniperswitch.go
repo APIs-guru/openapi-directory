@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetJuniperSwitchPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetJuniperSwitchSecurity struct {
-    APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetJuniperSwitchRequest struct {
-    PathParams GetJuniperSwitchPathParams 
-    Security GetJuniperSwitchSecurity 
-    
+	PathParams GetJuniperSwitchPathParams
+	Security   GetJuniperSwitchSecurity
 }
 
 type GetJuniperSwitchResponse struct {
-    ContentType string 
-    StatusCode int64 
-    SwitchDataSource *shared.SwitchDataSource 
-    
+	ContentType      string
+	StatusCode       int64
+	SwitchDataSource *shared.SwitchDataSource
 }
-

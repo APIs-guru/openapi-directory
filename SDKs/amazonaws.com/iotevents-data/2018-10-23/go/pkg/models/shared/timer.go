@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type Timer struct {
-    Name string `json:"name"`
-    Timestamp time.Time `json:"timestamp"`
-    
+	Name      string    `json:"name"`
+	Timestamp time.Time `json:"timestamp"`
 }
-

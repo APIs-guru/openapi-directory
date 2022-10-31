@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CheckDomainAvailabilityResponse struct {
-    Availability DomainAvailabilityEnum `json:"Availability"`
-    
+	Availability DomainAvailabilityEnum `json:"Availability"`
 }
-

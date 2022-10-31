@@ -1,35 +1,30 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type EndpointCheckUsersSavedAlbumsQueryParams struct {
-    Ids string `queryParam:"style=form,explode=true,name=ids"`
-    
+	Ids string `queryParam:"style=form,explode=true,name=ids"`
 }
 
 type EndpointCheckUsersSavedAlbumsHeaders struct {
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type EndpointCheckUsersSavedAlbumsSecurity struct {
-    SpotifyAuth shared.SchemeSpotifyAuth `security:"scheme,type=oauth2"`
-    
+	SpotifyAuth shared.SchemeSpotifyAuth `security:"scheme,type=oauth2"`
 }
 
 type EndpointCheckUsersSavedAlbumsRequest struct {
-    QueryParams EndpointCheckUsersSavedAlbumsQueryParams 
-    Headers EndpointCheckUsersSavedAlbumsHeaders 
-    Security EndpointCheckUsersSavedAlbumsSecurity 
-    
+	QueryParams EndpointCheckUsersSavedAlbumsQueryParams
+	Headers     EndpointCheckUsersSavedAlbumsHeaders
+	Security    EndpointCheckUsersSavedAlbumsSecurity
 }
 
 type EndpointCheckUsersSavedAlbumsResponse struct {
-    ContentType string 
-    ErrorResponseObject *shared.ErrorResponseObject 
-    StatusCode int64 
-    EndpointCheckUsersSavedAlbums200ApplicationJSONBooleans []bool 
-    
+	ContentType                                             string
+	ErrorResponseObject                                     *shared.ErrorResponseObject
+	StatusCode                                              int64
+	EndpointCheckUsersSavedAlbums200ApplicationJSONBooleans []bool
 }
-

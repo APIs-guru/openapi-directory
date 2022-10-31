@@ -1,9 +1,5 @@
 package shared
 
-
-
 type HookEdit struct {
-    Hook *HookEditFields `json:"hook,omitempty"`
-    
+	Hook *HookEditFields `json:"hook,omitempty"`
 }
-

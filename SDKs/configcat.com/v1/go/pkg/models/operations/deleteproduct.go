@@ -1,20 +1,14 @@
 package operations
 
-
-
 type DeleteProductPathParams struct {
-    ProductID string `pathParam:"style=simple,explode=false,name=productId"`
-    
+	ProductID string `pathParam:"style=simple,explode=false,name=productId"`
 }
 
 type DeleteProductRequest struct {
-    PathParams DeleteProductPathParams 
-    
+	PathParams DeleteProductPathParams
 }
 
 type DeleteProductResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAllSSHKeysQueryParams struct {
-    Skip *int32 `queryParam:"style=form,explode=true,name=skip"`
-    Take *int32 `queryParam:"style=form,explode=true,name=take"`
-    
+	Skip *int32 `queryParam:"style=form,explode=true,name=skip"`
+	Take *int32 `queryParam:"style=form,explode=true,name=take"`
 }
 
 type GetAllSSHKeysRequest struct {
-    QueryParams GetAllSSHKeysQueryParams 
-    
+	QueryParams GetAllSSHKeysQueryParams
 }
 
 type GetAllSSHKeysResponse struct {
-    ContentType string 
-    Headers map[string][]string 
-    SSHKeyDetails []shared.SSHKeyDetail 
-    StatusCode int64 
-    
+	ContentType   string
+	Headers       map[string][]string
+	SSHKeyDetails []shared.SSHKeyDetail
+	StatusCode    int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeTrustedAdvisorCheckRefreshStatusesResponse struct {
-    Statuses []TrustedAdvisorCheckRefreshStatus `json:"statuses"`
-    
+	Statuses []TrustedAdvisorCheckRefreshStatus `json:"statuses"`
 }
-

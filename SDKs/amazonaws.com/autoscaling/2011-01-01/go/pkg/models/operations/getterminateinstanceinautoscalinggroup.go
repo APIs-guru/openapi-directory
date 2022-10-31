@@ -1,52 +1,41 @@
 package operations
 
-
-
-
 type GetTerminateInstanceInAutoScalingGroupActionEnum string
 
 const (
-    GetTerminateInstanceInAutoScalingGroupActionEnumTerminateInstanceInAutoScalingGroup GetTerminateInstanceInAutoScalingGroupActionEnum = "TerminateInstanceInAutoScalingGroup"
+	GetTerminateInstanceInAutoScalingGroupActionEnumTerminateInstanceInAutoScalingGroup GetTerminateInstanceInAutoScalingGroupActionEnum = "TerminateInstanceInAutoScalingGroup"
 )
-
-
 
 type GetTerminateInstanceInAutoScalingGroupVersionEnum string
 
 const (
-    GetTerminateInstanceInAutoScalingGroupVersionEnumTwoThousandAndEleven0101 GetTerminateInstanceInAutoScalingGroupVersionEnum = "2011-01-01"
+	GetTerminateInstanceInAutoScalingGroupVersionEnumTwoThousandAndEleven0101 GetTerminateInstanceInAutoScalingGroupVersionEnum = "2011-01-01"
 )
 
-
 type GetTerminateInstanceInAutoScalingGroupQueryParams struct {
-    Action GetTerminateInstanceInAutoScalingGroupActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    InstanceID string `queryParam:"style=form,explode=true,name=InstanceId"`
-    ShouldDecrementDesiredCapacity bool `queryParam:"style=form,explode=true,name=ShouldDecrementDesiredCapacity"`
-    Version GetTerminateInstanceInAutoScalingGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action                         GetTerminateInstanceInAutoScalingGroupActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	InstanceID                     string                                            `queryParam:"style=form,explode=true,name=InstanceId"`
+	ShouldDecrementDesiredCapacity bool                                              `queryParam:"style=form,explode=true,name=ShouldDecrementDesiredCapacity"`
+	Version                        GetTerminateInstanceInAutoScalingGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type GetTerminateInstanceInAutoScalingGroupHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetTerminateInstanceInAutoScalingGroupRequest struct {
-    QueryParams GetTerminateInstanceInAutoScalingGroupQueryParams 
-    Headers GetTerminateInstanceInAutoScalingGroupHeaders 
-    
+	QueryParams GetTerminateInstanceInAutoScalingGroupQueryParams
+	Headers     GetTerminateInstanceInAutoScalingGroupHeaders
 }
 
 type GetTerminateInstanceInAutoScalingGroupResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

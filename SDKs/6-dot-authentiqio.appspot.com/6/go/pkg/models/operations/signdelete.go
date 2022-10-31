@@ -1,28 +1,21 @@
 package operations
 
-
-
 type SignDeletePathParams struct {
-    Job string `pathParam:"style=simple,explode=false,name=job"`
-    
+	Job string `pathParam:"style=simple,explode=false,name=job"`
 }
 
 type SignDeleteRequest struct {
-    PathParams SignDeletePathParams 
-    
+	PathParams SignDeletePathParams
 }
 
 type SignDelete200ApplicationJSON struct {
-    Status *string `json:"status,omitempty"`
-    
+	Status *string `json:"status,omitempty"`
 }
 
 type SignDeleteResponse struct {
-    Body []byte 
-    ContentType string 
-    Error *interface{} 
-    StatusCode int64 
-    SignDelete200ApplicationJSONObject *SignDelete200ApplicationJSON 
-    
+	Body                               []byte
+	ContentType                        string
+	Error                              *interface{}
+	StatusCode                         int64
+	SignDelete200ApplicationJSONObject *SignDelete200ApplicationJSON
 }
-

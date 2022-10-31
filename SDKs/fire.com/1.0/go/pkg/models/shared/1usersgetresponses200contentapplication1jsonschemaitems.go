@@ -1,83 +1,68 @@
 package shared
 
-
-
-
 type OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnum string
 
 const (
-    OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnumAndroid OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnum = "Android"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnumIos OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnum = "IOS"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnumOther OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnum = "OTHER"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnumAndroid OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnum = "Android"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnumIos     OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnum = "IOS"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnumOther   OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnum = "OTHER"
 )
-
-
 
 type OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnum string
 
 const (
-    OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnumIPhone OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnum = "iPhone"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnumAndroid OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnum = "Android"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnumOther OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnum = "Other"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnumIPhone  OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnum = "iPhone"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnumAndroid OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnum = "Android"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnumOther   OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnum = "Other"
 )
-
-
 
 type OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnum string
 
 const (
-    OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnumLive OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnum = "LIVE"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnumClosed OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnum = "CLOSED"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnumLocked OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnum = "LOCKED"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnumSmsSent OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnum = "SMS_SENT"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnumLive    OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnum = "LIVE"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnumClosed  OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnum = "CLOSED"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnumLocked  OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnum = "LOCKED"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnumSmsSent OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnum = "SMS_SENT"
 )
 
-
 type OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplication struct {
-    Os *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnum `json:"OS,omitempty"`
-    BusinessUserID *int64 `json:"businessUserId,omitempty"`
-    ClientID *string `json:"clientID,omitempty"`
-    DeviceName *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnum `json:"deviceName,omitempty"`
-    DeviceOsVersion *string `json:"deviceOSVersion,omitempty"`
-    MobileApplicationID *int64 `json:"mobileApplicationId,omitempty"`
-    Status *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnum `json:"status,omitempty"`
-    
+	Os                  *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationOsEnum         `json:"OS,omitempty"`
+	BusinessUserID      *int64                                                                                    `json:"businessUserId,omitempty"`
+	ClientID            *string                                                                                   `json:"clientID,omitempty"`
+	DeviceName          *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationDeviceNameEnum `json:"deviceName,omitempty"`
+	DeviceOsVersion     *string                                                                                   `json:"deviceOSVersion,omitempty"`
+	MobileApplicationID *int64                                                                                    `json:"mobileApplicationId,omitempty"`
+	Status              *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplicationStatusEnum     `json:"status,omitempty"`
 }
-
 
 type OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum string
 
 const (
-    OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnumAdmin OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum = "ADMIN"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnumFullUser OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum = "FULL_USER"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnumReadOnly OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum = "READ_ONLY"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnumCardOnly OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum = "CARD_ONLY"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnumAdmin    OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum = "ADMIN"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnumFullUser OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum = "FULL_USER"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnumReadOnly OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum = "READ_ONLY"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnumCardOnly OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum = "CARD_ONLY"
 )
-
-
 
 type OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum string
 
 const (
-    OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnumLive OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum = "LIVE"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnumClosed OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum = "CLOSED"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnumFrozen OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum = "FROZEN"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnumInviteSent OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum = "INVITE_SENT"
-OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnumSmsCodeSent OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum = "SMS_CODE_SENT"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnumLive        OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum = "LIVE"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnumClosed      OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum = "CLOSED"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnumFrozen      OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum = "FROZEN"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnumInviteSent  OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum = "INVITE_SENT"
+	OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnumSmsCodeSent OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum = "SMS_CODE_SENT"
 )
 
-
 type OneusersGetResponses200ContentApplication1jsonSchemaItems struct {
-    EmailAddress *string `json:"emailAddress,omitempty"`
-    FirstName *string `json:"firstName,omitempty"`
-    ID *int64 `json:"id,omitempty"`
-    LastName *string `json:"lastName,omitempty"`
-    Lastlogin *string `json:"lastlogin,omitempty"`
-    MobileApplicationDetails *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplication `json:"mobileApplicationDetails,omitempty"`
-    MobileNumber *string `json:"mobileNumber,omitempty"`
-    Role *OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum `json:"role,omitempty"`
-    Status *OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum `json:"status,omitempty"`
-    UserCvl *string `json:"userCvl,omitempty"`
-    
+	EmailAddress             *string                                                                     `json:"emailAddress,omitempty"`
+	FirstName                *string                                                                     `json:"firstName,omitempty"`
+	ID                       *int64                                                                      `json:"id,omitempty"`
+	LastName                 *string                                                                     `json:"lastName,omitempty"`
+	Lastlogin                *string                                                                     `json:"lastlogin,omitempty"`
+	MobileApplicationDetails *OneusersGetResponses200ContentApplication1jsonSchemaItemsMobileApplication `json:"mobileApplicationDetails,omitempty"`
+	MobileNumber             *string                                                                     `json:"mobileNumber,omitempty"`
+	Role                     *OneusersGetResponses200ContentApplication1jsonSchemaItemsRoleEnum          `json:"role,omitempty"`
+	Status                   *OneusersGetResponses200ContentApplication1jsonSchemaItemsStatusEnum        `json:"status,omitempty"`
+	UserCvl                  *string                                                                     `json:"userCvl,omitempty"`
 }
-

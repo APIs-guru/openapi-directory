@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostCreateUserGroupActionEnum string
 
 const (
-    PostCreateUserGroupActionEnumCreateUserGroup PostCreateUserGroupActionEnum = "CreateUserGroup"
+	PostCreateUserGroupActionEnumCreateUserGroup PostCreateUserGroupActionEnum = "CreateUserGroup"
 )
-
-
 
 type PostCreateUserGroupVersionEnum string
 
 const (
-    PostCreateUserGroupVersionEnumTwoThousandAndFifteen0202 PostCreateUserGroupVersionEnum = "2015-02-02"
+	PostCreateUserGroupVersionEnumTwoThousandAndFifteen0202 PostCreateUserGroupVersionEnum = "2015-02-02"
 )
 
-
 type PostCreateUserGroupQueryParams struct {
-    Action PostCreateUserGroupActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostCreateUserGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostCreateUserGroupActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostCreateUserGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostCreateUserGroupHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostCreateUserGroupRequest struct {
-    QueryParams PostCreateUserGroupQueryParams 
-    Headers PostCreateUserGroupHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostCreateUserGroupQueryParams
+	Headers     PostCreateUserGroupHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostCreateUserGroupResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

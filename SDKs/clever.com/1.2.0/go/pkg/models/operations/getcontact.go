@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetContactPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetContactRequest struct {
-    PathParams GetContactPathParams 
-    
+	PathParams GetContactPathParams
 }
 
 type GetContactResponse struct {
-    ContentType string 
-    NotFound *shared.NotFound 
-    StatusCode int64 
-    StudentContactResponse *shared.StudentContactResponse 
-    
+	ContentType            string
+	NotFound               *shared.NotFound
+	StatusCode             int64
+	StudentContactResponse *shared.StudentContactResponse
 }
-

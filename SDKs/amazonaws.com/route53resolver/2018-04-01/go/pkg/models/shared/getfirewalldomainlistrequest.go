@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetFirewallDomainListRequest struct {
-    FirewallDomainListID string `json:"FirewallDomainListId"`
-    
+	FirewallDomainListID string `json:"FirewallDomainListId"`
 }
-

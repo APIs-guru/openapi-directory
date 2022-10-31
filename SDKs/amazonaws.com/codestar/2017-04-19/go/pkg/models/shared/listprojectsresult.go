@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListProjectsResult struct {
-    NextToken *string `json:"nextToken,omitempty"`
-    Projects []ProjectSummary `json:"projects"`
-    
+	NextToken *string          `json:"nextToken,omitempty"`
+	Projects  []ProjectSummary `json:"projects"`
 }
-

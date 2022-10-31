@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ReplicasDeleteRequest struct {
-    AbandonInstance *bool `json:"abandonInstance,omitempty"`
-    
+	AbandonInstance *bool `json:"abandonInstance,omitempty"`
 }
-

@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type VehicleGetUlezComplianceQueryParams struct {
-    Vrm string `queryParam:"style=form,explode=true,name=vrm"`
-    
+	Vrm string `queryParam:"style=form,explode=true,name=vrm"`
 }
 
 type VehicleGetUlezComplianceRequest struct {
-    QueryParams VehicleGetUlezComplianceQueryParams 
-    
+	QueryParams VehicleGetUlezComplianceQueryParams
 }
 
 type VehicleGetUlezComplianceResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    TflAPIPresentationEntitiesVehicleMatch *shared.TflAPIPresentationEntitiesVehicleMatch 
-    
+	Body                                   []byte
+	ContentType                            string
+	StatusCode                             int64
+	TflAPIPresentationEntitiesVehicleMatch *shared.TflAPIPresentationEntitiesVehicleMatch
 }
-

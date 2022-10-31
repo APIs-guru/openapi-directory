@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type FunctionResponseTypeEnum string
 
 const (
-    FunctionResponseTypeEnumReportBatchItemFailures FunctionResponseTypeEnum = "ReportBatchItemFailures"
+	FunctionResponseTypeEnumReportBatchItemFailures FunctionResponseTypeEnum = "ReportBatchItemFailures"
 )
-
-

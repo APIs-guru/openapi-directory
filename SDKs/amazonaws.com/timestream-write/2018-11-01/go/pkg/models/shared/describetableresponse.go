@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeTableResponse struct {
-    Table *Table `json:"Table,omitempty"`
-    
+	Table *Table `json:"Table,omitempty"`
 }
-

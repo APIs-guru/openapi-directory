@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ContentModerationDetection struct {
-    ModerationLabel *ModerationLabel `json:"ModerationLabel,omitempty"`
-    Timestamp *int64 `json:"Timestamp,omitempty"`
-    
+	ModerationLabel *ModerationLabel `json:"ModerationLabel,omitempty"`
+	Timestamp       *int64           `json:"Timestamp,omitempty"`
 }
-

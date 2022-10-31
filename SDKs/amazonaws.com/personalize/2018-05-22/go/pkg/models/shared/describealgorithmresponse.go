@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeAlgorithmResponse struct {
-    Algorithm *Algorithm `json:"algorithm,omitempty"`
-    
+	Algorithm *Algorithm `json:"algorithm,omitempty"`
 }
-

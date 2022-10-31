@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetDevicePathParams struct {
-    DeviceID int32 `pathParam:"style=simple,explode=false,name=deviceId"`
-    
+	DeviceID int32 `pathParam:"style=simple,explode=false,name=deviceId"`
 }
 
 type GetDeviceRequest struct {
-    PathParams GetDevicePathParams 
-    
+	PathParams GetDevicePathParams
 }
 
 type GetDeviceResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

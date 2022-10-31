@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DealersGetDealerbyDealerCodePathParams struct {
-    DealerCode string `pathParam:"style=simple,explode=false,name=DealerCode"`
-    
+	DealerCode string `pathParam:"style=simple,explode=false,name=DealerCode"`
 }
 
 type DealersGetDealerbyDealerCodeRequest struct {
-    PathParams DealersGetDealerbyDealerCodePathParams 
-    
+	PathParams DealersGetDealerbyDealerCodePathParams
 }
 
 type DealersGetDealerbyDealerCodeResponse struct {
-    APIModelsAPIError *shared.APIModelsAPIError 
-    Body []byte 
-    ContentType string 
-    DealerDbModelsDealer *shared.DealerDbModelsDealer 
-    StatusCode int64 
-    
+	APIModelsAPIError    *shared.APIModelsAPIError
+	Body                 []byte
+	ContentType          string
+	DealerDbModelsDealer *shared.DealerDbModelsDealer
+	StatusCode           int64
 }
-

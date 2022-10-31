@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CreateRadiusConfigHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type CreateRadiusConfigRequest struct {
-    Headers CreateRadiusConfigHeaders 
-    Request shared.RadiusConfigCreateRequest `request:"mediaType=application/json"`
-    
+	Headers CreateRadiusConfigHeaders
+	Request shared.RadiusConfigCreateRequest `request:"mediaType=application/json"`
 }
 
 type CreateRadiusConfigResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    RadiusConfig *shared.RadiusConfig 
-    StatusCode int64 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	RadiusConfig  *shared.RadiusConfig
+	StatusCode    int64
 }
-

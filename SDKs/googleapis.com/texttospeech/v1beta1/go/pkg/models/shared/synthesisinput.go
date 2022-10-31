@@ -1,10 +1,6 @@
 package shared
 
-
-
 type SynthesisInput struct {
-    Ssml *string `json:"ssml,omitempty"`
-    Text *string `json:"text,omitempty"`
-    
+	Ssml *string `json:"ssml,omitempty"`
+	Text *string `json:"text,omitempty"`
 }
-

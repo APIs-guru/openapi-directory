@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetAppResponse struct {
-    ApplicationResponse ApplicationResponse `json:"ApplicationResponse"`
-    
+	ApplicationResponse ApplicationResponse `json:"ApplicationResponse"`
 }
-

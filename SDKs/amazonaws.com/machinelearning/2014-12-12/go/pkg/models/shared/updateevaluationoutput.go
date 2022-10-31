@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateEvaluationOutput struct {
-    EvaluationID *string `json:"EvaluationId,omitempty"`
-    
+	EvaluationID *string `json:"EvaluationId,omitempty"`
 }
-

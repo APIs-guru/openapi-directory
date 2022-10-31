@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RegisterWebhookWithThirdPartyInput struct {
-    WebhookName *string `json:"webhookName,omitempty"`
-    
+	WebhookName *string `json:"webhookName,omitempty"`
 }
-

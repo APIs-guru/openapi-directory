@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateCodeRepositoryOutput struct {
-    CodeRepositoryArn string `json:"CodeRepositoryArn"`
-    
+	CodeRepositoryArn string `json:"CodeRepositoryArn"`
 }
-

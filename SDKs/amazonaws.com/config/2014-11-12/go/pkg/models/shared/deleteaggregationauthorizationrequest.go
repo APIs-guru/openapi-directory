@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DeleteAggregationAuthorizationRequest struct {
-    AuthorizedAccountID string `json:"AuthorizedAccountId"`
-    AuthorizedAwsRegion string `json:"AuthorizedAwsRegion"`
-    
+	AuthorizedAccountID string `json:"AuthorizedAccountId"`
+	AuthorizedAwsRegion string `json:"AuthorizedAwsRegion"`
 }
-

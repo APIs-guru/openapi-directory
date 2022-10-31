@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartTextDetectionResponse struct {
-    JobID *string `json:"JobId,omitempty"`
-    
+	JobID *string `json:"JobId,omitempty"`
 }
-

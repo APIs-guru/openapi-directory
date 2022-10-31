@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeLocationFsxWindowsRequest struct {
-    LocationArn string `json:"LocationArn"`
-    
+	LocationArn string `json:"LocationArn"`
 }
-

@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetRealmEventsConfigPathParams struct {
-    Realm string `pathParam:"style=simple,explode=false,name=realm"`
-    
+	Realm string `pathParam:"style=simple,explode=false,name=realm"`
 }
 
 type GetRealmEventsConfigRequest struct {
-    PathParams GetRealmEventsConfigPathParams 
-    
+	PathParams GetRealmEventsConfigPathParams
 }
 
 type GetRealmEventsConfigResponse struct {
-    ContentType string 
-    RealmEventsConfigRepresentation *shared.RealmEventsConfigRepresentation 
-    StatusCode int64 
-    
+	ContentType                     string
+	RealmEventsConfigRepresentation *shared.RealmEventsConfigRepresentation
+	StatusCode                      int64
 }
-

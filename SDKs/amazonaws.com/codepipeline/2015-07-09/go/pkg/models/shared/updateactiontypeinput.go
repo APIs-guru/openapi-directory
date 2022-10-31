@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateActionTypeInput struct {
-    ActionType ActionTypeDeclaration `json:"actionType"`
-    
+	ActionType ActionTypeDeclaration `json:"actionType"`
 }
-

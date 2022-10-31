@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetJourneyDateRangeKpiResponse struct {
-    JourneyDateRangeKpiResponse JourneyDateRangeKpiResponse `json:"JourneyDateRangeKpiResponse"`
-    
+	JourneyDateRangeKpiResponse JourneyDateRangeKpiResponse `json:"JourneyDateRangeKpiResponse"`
 }
-

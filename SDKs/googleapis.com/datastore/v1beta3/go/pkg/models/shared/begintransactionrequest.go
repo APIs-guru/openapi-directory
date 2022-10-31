@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BeginTransactionRequest struct {
-    TransactionOptions *TransactionOptions `json:"transactionOptions,omitempty"`
-    
+	TransactionOptions *TransactionOptions `json:"transactionOptions,omitempty"`
 }
-

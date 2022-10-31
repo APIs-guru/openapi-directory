@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateInputResponse struct {
-    InputConfiguration *InputConfiguration `json:"inputConfiguration,omitempty"`
-    
+	InputConfiguration *InputConfiguration `json:"inputConfiguration,omitempty"`
 }
-

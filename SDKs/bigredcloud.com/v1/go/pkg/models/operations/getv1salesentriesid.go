@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetV1SalesEntriesIDPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetV1SalesEntriesIDRequest struct {
-    PathParams GetV1SalesEntriesIDPathParams 
-    
+	PathParams GetV1SalesEntriesIDPathParams
 }
 
 type GetV1SalesEntriesIDResponse struct {
-    ContentType string 
-    SalesEntryDto *shared.SalesEntryDto 
-    StatusCode int64 
-    
+	ContentType   string
+	SalesEntryDto *shared.SalesEntryDto
+	StatusCode    int64
 }
-

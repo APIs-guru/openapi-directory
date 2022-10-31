@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateAccountAssignmentResponse struct {
-    AccountAssignmentCreationStatus *AccountAssignmentOperationStatus `json:"AccountAssignmentCreationStatus,omitempty"`
-    
+	AccountAssignmentCreationStatus *AccountAssignmentOperationStatus `json:"AccountAssignmentCreationStatus,omitempty"`
 }
-

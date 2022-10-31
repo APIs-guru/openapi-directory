@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SendBulkEmailResponse struct {
-    BulkEmailEntryResults []BulkEmailEntryResult `json:"BulkEmailEntryResults"`
-    
+	BulkEmailEntryResults []BulkEmailEntryResult `json:"BulkEmailEntryResults"`
 }
-

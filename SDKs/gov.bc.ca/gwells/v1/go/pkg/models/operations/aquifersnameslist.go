@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type AquifersNamesListQueryParams struct {
-    Search *string `queryParam:"style=form,explode=true,name=search"`
-    
+	Search *string `queryParam:"style=form,explode=true,name=search"`
 }
 
 type AquifersNamesListRequest struct {
-    QueryParams AquifersNamesListQueryParams 
-    
+	QueryParams AquifersNamesListQueryParams
 }
 
 type AquifersNamesListResponse struct {
-    AquiferSerializerBasics []shared.AquiferSerializerBasic 
-    ContentType string 
-    StatusCode int64 
-    
+	AquiferSerializerBasics []shared.AquiferSerializerBasic
+	ContentType             string
+	StatusCode              int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetQualificationTypeRequest struct {
-    QualificationTypeID string `json:"QualificationTypeId"`
-    
+	QualificationTypeID string `json:"QualificationTypeId"`
 }
-

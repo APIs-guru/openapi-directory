@@ -1,28 +1,22 @@
 package shared
 
-
-
-
 type GoogleCloudMlV1AcceleratorConfigTypeEnum string
 
 const (
-    GoogleCloudMlV1AcceleratorConfigTypeEnumAcceleratorTypeUnspecified GoogleCloudMlV1AcceleratorConfigTypeEnum = "ACCELERATOR_TYPE_UNSPECIFIED"
-GoogleCloudMlV1AcceleratorConfigTypeEnumNvidiaTeslaK80 GoogleCloudMlV1AcceleratorConfigTypeEnum = "NVIDIA_TESLA_K80"
-GoogleCloudMlV1AcceleratorConfigTypeEnumNvidiaTeslaP100 GoogleCloudMlV1AcceleratorConfigTypeEnum = "NVIDIA_TESLA_P100"
-GoogleCloudMlV1AcceleratorConfigTypeEnumNvidiaTeslaV100 GoogleCloudMlV1AcceleratorConfigTypeEnum = "NVIDIA_TESLA_V100"
-GoogleCloudMlV1AcceleratorConfigTypeEnumNvidiaTeslaP4 GoogleCloudMlV1AcceleratorConfigTypeEnum = "NVIDIA_TESLA_P4"
-GoogleCloudMlV1AcceleratorConfigTypeEnumNvidiaTeslaT4 GoogleCloudMlV1AcceleratorConfigTypeEnum = "NVIDIA_TESLA_T4"
-GoogleCloudMlV1AcceleratorConfigTypeEnumNvidiaTeslaA100 GoogleCloudMlV1AcceleratorConfigTypeEnum = "NVIDIA_TESLA_A100"
-GoogleCloudMlV1AcceleratorConfigTypeEnumTpuV2 GoogleCloudMlV1AcceleratorConfigTypeEnum = "TPU_V2"
-GoogleCloudMlV1AcceleratorConfigTypeEnumTpuV3 GoogleCloudMlV1AcceleratorConfigTypeEnum = "TPU_V3"
-GoogleCloudMlV1AcceleratorConfigTypeEnumTpuV2Pod GoogleCloudMlV1AcceleratorConfigTypeEnum = "TPU_V2_POD"
-GoogleCloudMlV1AcceleratorConfigTypeEnumTpuV3Pod GoogleCloudMlV1AcceleratorConfigTypeEnum = "TPU_V3_POD"
+	GoogleCloudMlV1AcceleratorConfigTypeEnumAcceleratorTypeUnspecified GoogleCloudMlV1AcceleratorConfigTypeEnum = "ACCELERATOR_TYPE_UNSPECIFIED"
+	GoogleCloudMlV1AcceleratorConfigTypeEnumNvidiaTeslaK80             GoogleCloudMlV1AcceleratorConfigTypeEnum = "NVIDIA_TESLA_K80"
+	GoogleCloudMlV1AcceleratorConfigTypeEnumNvidiaTeslaP100            GoogleCloudMlV1AcceleratorConfigTypeEnum = "NVIDIA_TESLA_P100"
+	GoogleCloudMlV1AcceleratorConfigTypeEnumNvidiaTeslaV100            GoogleCloudMlV1AcceleratorConfigTypeEnum = "NVIDIA_TESLA_V100"
+	GoogleCloudMlV1AcceleratorConfigTypeEnumNvidiaTeslaP4              GoogleCloudMlV1AcceleratorConfigTypeEnum = "NVIDIA_TESLA_P4"
+	GoogleCloudMlV1AcceleratorConfigTypeEnumNvidiaTeslaT4              GoogleCloudMlV1AcceleratorConfigTypeEnum = "NVIDIA_TESLA_T4"
+	GoogleCloudMlV1AcceleratorConfigTypeEnumNvidiaTeslaA100            GoogleCloudMlV1AcceleratorConfigTypeEnum = "NVIDIA_TESLA_A100"
+	GoogleCloudMlV1AcceleratorConfigTypeEnumTpuV2                      GoogleCloudMlV1AcceleratorConfigTypeEnum = "TPU_V2"
+	GoogleCloudMlV1AcceleratorConfigTypeEnumTpuV3                      GoogleCloudMlV1AcceleratorConfigTypeEnum = "TPU_V3"
+	GoogleCloudMlV1AcceleratorConfigTypeEnumTpuV2Pod                   GoogleCloudMlV1AcceleratorConfigTypeEnum = "TPU_V2_POD"
+	GoogleCloudMlV1AcceleratorConfigTypeEnumTpuV3Pod                   GoogleCloudMlV1AcceleratorConfigTypeEnum = "TPU_V3_POD"
 )
 
-
 type GoogleCloudMlV1AcceleratorConfig struct {
-    Count *string `json:"count,omitempty"`
-    Type *GoogleCloudMlV1AcceleratorConfigTypeEnum `json:"type,omitempty"`
-    
+	Count *string                                   `json:"count,omitempty"`
+	Type  *GoogleCloudMlV1AcceleratorConfigTypeEnum `json:"type,omitempty"`
 }
-

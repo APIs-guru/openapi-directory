@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SlackNotificationConfiguration struct {
-    Webhook string `json:"webhook"`
-    
+	Webhook string `json:"webhook"`
 }
-

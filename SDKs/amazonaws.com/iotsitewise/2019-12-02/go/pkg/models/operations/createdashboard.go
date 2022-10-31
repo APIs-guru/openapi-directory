@@ -1,44 +1,40 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CreateDashboardHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type CreateDashboardRequestBody struct {
-    ClientToken *string `json:"clientToken,omitempty"`
-    DashboardDefinition string `json:"dashboardDefinition"`
-    DashboardDescription *string `json:"dashboardDescription,omitempty"`
-    DashboardName string `json:"dashboardName"`
-    ProjectID string `json:"projectId"`
-    Tags map[string]string `json:"tags,omitempty"`
-    
+	ClientToken          *string           `json:"clientToken,omitempty"`
+	DashboardDefinition  string            `json:"dashboardDefinition"`
+	DashboardDescription *string           `json:"dashboardDescription,omitempty"`
+	DashboardName        string            `json:"dashboardName"`
+	ProjectID            string            `json:"projectId"`
+	Tags                 map[string]string `json:"tags,omitempty"`
 }
 
 type CreateDashboardRequest struct {
-    Headers CreateDashboardHeaders 
-    Request CreateDashboardRequestBody `request:"mediaType=application/json"`
-    
+	Headers CreateDashboardHeaders
+	Request CreateDashboardRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateDashboardResponse struct {
-    ContentType string 
-    CreateDashboardResponse *shared.CreateDashboardResponse 
-    InternalFailureException *interface{} 
-    InvalidRequestException *interface{} 
-    LimitExceededException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    
+	ContentType               string
+	CreateDashboardResponse   *shared.CreateDashboardResponse
+	InternalFailureException  *interface{}
+	InvalidRequestException   *interface{}
+	LimitExceededException    *interface{}
+	ResourceNotFoundException *interface{}
+	StatusCode                int64
+	ThrottlingException       *interface{}
 }
-

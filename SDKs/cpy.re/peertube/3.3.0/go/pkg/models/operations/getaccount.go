@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAccountPathParams struct {
-    Name string `pathParam:"style=simple,explode=false,name=name"`
-    
+	Name string `pathParam:"style=simple,explode=false,name=name"`
 }
 
 type GetAccountRequest struct {
-    PathParams GetAccountPathParams 
-    
+	PathParams GetAccountPathParams
 }
 
 type GetAccountResponse struct {
-    Account *shared.Account 
-    ContentType string 
-    StatusCode int64 
-    
+	Account     *shared.Account
+	ContentType string
+	StatusCode  int64
 }
-

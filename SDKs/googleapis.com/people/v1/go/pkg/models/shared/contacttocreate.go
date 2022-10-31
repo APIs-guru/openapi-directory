@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ContactToCreate struct {
-    ContactPerson *Person `json:"contactPerson,omitempty"`
-    
+	ContactPerson *Person `json:"contactPerson,omitempty"`
 }
-

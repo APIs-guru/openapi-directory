@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ColumnWildcard struct {
-    ExcludedColumnNames []string `json:"ExcludedColumnNames,omitempty"`
-    
+	ExcludedColumnNames []string `json:"ExcludedColumnNames,omitempty"`
 }
-

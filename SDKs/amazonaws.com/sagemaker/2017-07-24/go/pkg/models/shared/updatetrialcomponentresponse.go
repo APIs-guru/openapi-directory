@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateTrialComponentResponse struct {
-    TrialComponentArn *string `json:"TrialComponentArn,omitempty"`
-    
+	TrialComponentArn *string `json:"TrialComponentArn,omitempty"`
 }
-

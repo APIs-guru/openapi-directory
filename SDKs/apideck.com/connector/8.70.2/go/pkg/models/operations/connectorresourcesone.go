@@ -1,39 +1,34 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ConnectorResourcesOnePathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    ResourceID string `pathParam:"style=simple,explode=false,name=resource_id"`
-    
+	ID         string `pathParam:"style=simple,explode=false,name=id"`
+	ResourceID string `pathParam:"style=simple,explode=false,name=resource_id"`
 }
 
 type ConnectorResourcesOneHeaders struct {
-    XApideckAppID string `header:"style=simple,explode=false,name=x-apideck-app-id"`
-    
+	XApideckAppID string `header:"style=simple,explode=false,name=x-apideck-app-id"`
 }
 
 type ConnectorResourcesOneSecurity struct {
-    APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type ConnectorResourcesOneRequest struct {
-    PathParams ConnectorResourcesOnePathParams 
-    Headers ConnectorResourcesOneHeaders 
-    Security ConnectorResourcesOneSecurity 
-    
+	PathParams ConnectorResourcesOnePathParams
+	Headers    ConnectorResourcesOneHeaders
+	Security   ConnectorResourcesOneSecurity
 }
 
 type ConnectorResourcesOneResponse struct {
-    ContentType string 
-    GetConnectorResourceResponse *shared.GetConnectorResourceResponse 
-    NotFoundResponse *shared.NotFoundResponse 
-    PaymentRequiredResponse *shared.PaymentRequiredResponse 
-    StatusCode int64 
-    UnauthorizedResponse *shared.UnauthorizedResponse 
-    UnexpectedErrorResponse *shared.UnexpectedErrorResponse 
-    
+	ContentType                  string
+	GetConnectorResourceResponse *shared.GetConnectorResourceResponse
+	NotFoundResponse             *shared.NotFoundResponse
+	PaymentRequiredResponse      *shared.PaymentRequiredResponse
+	StatusCode                   int64
+	UnauthorizedResponse         *shared.UnauthorizedResponse
+	UnexpectedErrorResponse      *shared.UnexpectedErrorResponse
 }
-

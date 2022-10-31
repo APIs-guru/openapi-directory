@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ImportYumArtifactsRequest struct {
-    GcsSource *ImportYumArtifactsGcsSource `json:"gcsSource,omitempty"`
-    
+	GcsSource *ImportYumArtifactsGcsSource `json:"gcsSource,omitempty"`
 }
-

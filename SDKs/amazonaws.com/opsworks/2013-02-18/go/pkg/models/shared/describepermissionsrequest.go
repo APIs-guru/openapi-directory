@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DescribePermissionsRequest struct {
-    IamUserArn *string `json:"IamUserArn,omitempty"`
-    StackID *string `json:"StackId,omitempty"`
-    
+	IamUserArn *string `json:"IamUserArn,omitempty"`
+	StackID    *string `json:"StackId,omitempty"`
 }
-

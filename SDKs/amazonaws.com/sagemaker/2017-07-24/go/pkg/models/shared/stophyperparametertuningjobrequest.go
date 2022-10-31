@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StopHyperParameterTuningJobRequest struct {
-    HyperParameterTuningJobName string `json:"HyperParameterTuningJobName"`
-    
+	HyperParameterTuningJobName string `json:"HyperParameterTuningJobName"`
 }
-

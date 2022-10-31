@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetInstanceStateRequest struct {
-    InstanceName string `json:"instanceName"`
-    
+	InstanceName string `json:"instanceName"`
 }
-

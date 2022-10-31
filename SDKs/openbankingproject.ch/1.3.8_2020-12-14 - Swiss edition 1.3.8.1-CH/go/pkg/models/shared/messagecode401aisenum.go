@@ -1,26 +1,21 @@
 package shared
 
-
-
-
 type MessageCode401AisEnum string
 
 const (
-    MessageCode401AisEnumCertificateInvalid MessageCode401AisEnum = "CERTIFICATE_INVALID"
-MessageCode401AisEnumRoleInvalid MessageCode401AisEnum = "ROLE_INVALID"
-MessageCode401AisEnumCertificateExpired MessageCode401AisEnum = "CERTIFICATE_EXPIRED"
-MessageCode401AisEnumCertificateBlocked MessageCode401AisEnum = "CERTIFICATE_BLOCKED"
-MessageCode401AisEnumCertificateRevoke MessageCode401AisEnum = "CERTIFICATE_REVOKE"
-MessageCode401AisEnumCertificateMissing MessageCode401AisEnum = "CERTIFICATE_MISSING"
-MessageCode401AisEnumSignatureInvalid MessageCode401AisEnum = "SIGNATURE_INVALID"
-MessageCode401AisEnumSignatureMissing MessageCode401AisEnum = "SIGNATURE_MISSING"
-MessageCode401AisEnumCorporateIDInvalid MessageCode401AisEnum = "CORPORATE_ID_INVALID"
-MessageCode401AisEnumPsuCredentialsInvalid MessageCode401AisEnum = "PSU_CREDENTIALS_INVALID"
-MessageCode401AisEnumConsentInvalid MessageCode401AisEnum = "CONSENT_INVALID"
-MessageCode401AisEnumConsentExpired MessageCode401AisEnum = "CONSENT_EXPIRED"
-MessageCode401AisEnumTokenUnknown MessageCode401AisEnum = "TOKEN_UNKNOWN"
-MessageCode401AisEnumTokenInvalid MessageCode401AisEnum = "TOKEN_INVALID"
-MessageCode401AisEnumTokenExpired MessageCode401AisEnum = "TOKEN_EXPIRED"
+	MessageCode401AisEnumCertificateInvalid    MessageCode401AisEnum = "CERTIFICATE_INVALID"
+	MessageCode401AisEnumRoleInvalid           MessageCode401AisEnum = "ROLE_INVALID"
+	MessageCode401AisEnumCertificateExpired    MessageCode401AisEnum = "CERTIFICATE_EXPIRED"
+	MessageCode401AisEnumCertificateBlocked    MessageCode401AisEnum = "CERTIFICATE_BLOCKED"
+	MessageCode401AisEnumCertificateRevoke     MessageCode401AisEnum = "CERTIFICATE_REVOKE"
+	MessageCode401AisEnumCertificateMissing    MessageCode401AisEnum = "CERTIFICATE_MISSING"
+	MessageCode401AisEnumSignatureInvalid      MessageCode401AisEnum = "SIGNATURE_INVALID"
+	MessageCode401AisEnumSignatureMissing      MessageCode401AisEnum = "SIGNATURE_MISSING"
+	MessageCode401AisEnumCorporateIDInvalid    MessageCode401AisEnum = "CORPORATE_ID_INVALID"
+	MessageCode401AisEnumPsuCredentialsInvalid MessageCode401AisEnum = "PSU_CREDENTIALS_INVALID"
+	MessageCode401AisEnumConsentInvalid        MessageCode401AisEnum = "CONSENT_INVALID"
+	MessageCode401AisEnumConsentExpired        MessageCode401AisEnum = "CONSENT_EXPIRED"
+	MessageCode401AisEnumTokenUnknown          MessageCode401AisEnum = "TOKEN_UNKNOWN"
+	MessageCode401AisEnumTokenInvalid          MessageCode401AisEnum = "TOKEN_INVALID"
+	MessageCode401AisEnumTokenExpired          MessageCode401AisEnum = "TOKEN_EXPIRED"
 )
-
-

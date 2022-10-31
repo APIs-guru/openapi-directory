@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetPathParams struct {
-    FirmwareHash string `pathParam:"style=simple,explode=false,name=firmware_hash"`
-    
+	FirmwareHash string `pathParam:"style=simple,explode=false,name=firmware_hash"`
 }
 
 type FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetSecurity struct {
-    APIKeyHeader shared.SchemeAPIKeyHeader `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKeyHeader shared.SchemeAPIKeyHeader `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetRequest struct {
-    PathParams FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetPathParams 
-    Security FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetSecurity 
-    
+	PathParams FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetPathParams
+	Security   FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetSecurity
 }
 
 type FirmwareExpiredCertsFirmwareFirmwareHashExpiredCertsGetResponse struct {
-    ContentType string 
-    ExpiredCerts []shared.ExpiredCert 
-    HTTPValidationError *shared.HTTPValidationError 
-    StatusCode int64 
-    
+	ContentType         string
+	ExpiredCerts        []shared.ExpiredCert
+	HTTPValidationError *shared.HTTPValidationError
+	StatusCode          int64
 }
-

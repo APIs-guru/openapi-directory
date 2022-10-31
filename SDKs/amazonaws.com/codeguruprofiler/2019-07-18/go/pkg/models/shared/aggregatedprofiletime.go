@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type AggregatedProfileTime struct {
-    Period *AggregationPeriodEnum `json:"period,omitempty"`
-    Start *time.Time `json:"start,omitempty"`
-    
+	Period *AggregationPeriodEnum `json:"period,omitempty"`
+	Start  *time.Time             `json:"start,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Concurrency struct {
-    ReservedConcurrentExecutions *int64 `json:"ReservedConcurrentExecutions,omitempty"`
-    
+	ReservedConcurrentExecutions *int64 `json:"ReservedConcurrentExecutions,omitempty"`
 }
-

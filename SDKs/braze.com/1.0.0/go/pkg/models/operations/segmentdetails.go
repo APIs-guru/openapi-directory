@@ -1,20 +1,14 @@
 package operations
 
-
-
 type SegmentDetailsQueryParams struct {
-    SegmentID *string `queryParam:"style=form,explode=true,name=segment_id"`
-    
+	SegmentID *string `queryParam:"style=form,explode=true,name=segment_id"`
 }
 
 type SegmentDetailsRequest struct {
-    QueryParams SegmentDetailsQueryParams 
-    
+	QueryParams SegmentDetailsQueryParams
 }
 
 type SegmentDetailsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Connection struct {
-    Target *PhotoID `json:"target,omitempty"`
-    
+	Target *PhotoID `json:"target,omitempty"`
 }
-

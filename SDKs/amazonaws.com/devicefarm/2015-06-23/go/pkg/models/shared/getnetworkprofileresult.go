@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetNetworkProfileResult struct {
-    NetworkProfile *NetworkProfile `json:"networkProfile,omitempty"`
-    
+	NetworkProfile *NetworkProfile `json:"networkProfile,omitempty"`
 }
-

@@ -1,41 +1,35 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type RemoveItemForPortfolioPathParams struct {
-    PortfolioGid string `pathParam:"style=simple,explode=false,name=portfolio_gid"`
-    
+	PortfolioGid string `pathParam:"style=simple,explode=false,name=portfolio_gid"`
 }
 
 type RemoveItemForPortfolioQueryParams struct {
-    OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
-    OptPretty *bool `queryParam:"style=form,explode=true,name=opt_pretty"`
-    
+	OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
+	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
 type RemoveItemForPortfolioRequestBody struct {
-    Data *shared.PortfolioRemoveItemRequest `json:"data,omitempty"`
-    
+	Data *shared.PortfolioRemoveItemRequest `json:"data,omitempty"`
 }
 
 type RemoveItemForPortfolioRequest struct {
-    PathParams RemoveItemForPortfolioPathParams 
-    QueryParams RemoveItemForPortfolioQueryParams 
-    Request RemoveItemForPortfolioRequestBody `request:"mediaType=application/json"`
-    
+	PathParams  RemoveItemForPortfolioPathParams
+	QueryParams RemoveItemForPortfolioQueryParams
+	Request     RemoveItemForPortfolioRequestBody `request:"mediaType=application/json"`
 }
 
 type RemoveItemForPortfolio200ApplicationJSON struct {
-    Data map[string]interface{} `json:"data,omitempty"`
-    
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type RemoveItemForPortfolioResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    RemoveItemForPortfolio200ApplicationJSONObject *RemoveItemForPortfolio200ApplicationJSON 
-    
+	ContentType                                    string
+	ErrorResponse                                  *shared.ErrorResponse
+	StatusCode                                     int64
+	RemoveItemForPortfolio200ApplicationJSONObject *RemoveItemForPortfolio200ApplicationJSON
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetRateBasedRuleRequest struct {
-    RuleID string `json:"RuleId"`
-    
+	RuleID string `json:"RuleId"`
 }
-

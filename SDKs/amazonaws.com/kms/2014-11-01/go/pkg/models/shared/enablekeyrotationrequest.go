@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EnableKeyRotationRequest struct {
-    KeyID string `json:"KeyId"`
-    
+	KeyID string `json:"KeyId"`
 }
-

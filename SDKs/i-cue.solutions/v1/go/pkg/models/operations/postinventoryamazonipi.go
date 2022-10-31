@@ -1,20 +1,14 @@
 package operations
 
-
-
 type PostInventoryAmazonIpiHeaders struct {
-    Token *string `header:"style=simple,explode=false,name=Token"`
-    
+	Token *string `header:"style=simple,explode=false,name=Token"`
 }
 
 type PostInventoryAmazonIpiRequest struct {
-    Headers PostInventoryAmazonIpiHeaders 
-    
+	Headers PostInventoryAmazonIpiHeaders
 }
 
 type PostInventoryAmazonIpiResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

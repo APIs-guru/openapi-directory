@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudRetailV2alphaModelPageOptimizationConfigCandidate struct {
-    ServingConfigID *string `json:"servingConfigId,omitempty"`
-    
+	ServingConfigID *string `json:"servingConfigId,omitempty"`
 }
-

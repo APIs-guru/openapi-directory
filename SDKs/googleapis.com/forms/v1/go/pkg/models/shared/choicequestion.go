@@ -1,22 +1,16 @@
 package shared
 
-
-
-
 type ChoiceQuestionTypeEnum string
 
 const (
-    ChoiceQuestionTypeEnumChoiceTypeUnspecified ChoiceQuestionTypeEnum = "CHOICE_TYPE_UNSPECIFIED"
-ChoiceQuestionTypeEnumRadio ChoiceQuestionTypeEnum = "RADIO"
-ChoiceQuestionTypeEnumCheckbox ChoiceQuestionTypeEnum = "CHECKBOX"
-ChoiceQuestionTypeEnumDropDown ChoiceQuestionTypeEnum = "DROP_DOWN"
+	ChoiceQuestionTypeEnumChoiceTypeUnspecified ChoiceQuestionTypeEnum = "CHOICE_TYPE_UNSPECIFIED"
+	ChoiceQuestionTypeEnumRadio                 ChoiceQuestionTypeEnum = "RADIO"
+	ChoiceQuestionTypeEnumCheckbox              ChoiceQuestionTypeEnum = "CHECKBOX"
+	ChoiceQuestionTypeEnumDropDown              ChoiceQuestionTypeEnum = "DROP_DOWN"
 )
 
-
 type ChoiceQuestion struct {
-    Options []Option `json:"options,omitempty"`
-    Shuffle *bool `json:"shuffle,omitempty"`
-    Type *ChoiceQuestionTypeEnum `json:"type,omitempty"`
-    
+	Options []Option                `json:"options,omitempty"`
+	Shuffle *bool                   `json:"shuffle,omitempty"`
+	Type    *ChoiceQuestionTypeEnum `json:"type,omitempty"`
 }
-

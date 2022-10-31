@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetRegexMatchSetRequest struct {
-    RegexMatchSetID string `json:"RegexMatchSetId"`
-    
+	RegexMatchSetID string `json:"RegexMatchSetId"`
 }
-

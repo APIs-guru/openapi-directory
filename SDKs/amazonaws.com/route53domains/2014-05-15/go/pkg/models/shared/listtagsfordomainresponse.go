@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListTagsForDomainResponse struct {
-    TagList []Tag `json:"TagList"`
-    
+	TagList []Tag `json:"TagList"`
 }
-

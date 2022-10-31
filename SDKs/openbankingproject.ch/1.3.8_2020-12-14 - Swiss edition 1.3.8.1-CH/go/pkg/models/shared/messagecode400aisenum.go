@@ -1,24 +1,19 @@
 package shared
 
-
-
-
 type MessageCode400AisEnum string
 
 const (
-    MessageCode400AisEnumFormatError MessageCode400AisEnum = "FORMAT_ERROR"
-MessageCode400AisEnumParameterNotConsistent MessageCode400AisEnum = "PARAMETER_NOT_CONSISTENT"
-MessageCode400AisEnumParameterNotSupported MessageCode400AisEnum = "PARAMETER_NOT_SUPPORTED"
-MessageCode400AisEnumServiceInvalid MessageCode400AisEnum = "SERVICE_INVALID"
-MessageCode400AisEnumResourceUnknown MessageCode400AisEnum = "RESOURCE_UNKNOWN"
-MessageCode400AisEnumResourceExpired MessageCode400AisEnum = "RESOURCE_EXPIRED"
-MessageCode400AisEnumResourceBlocked MessageCode400AisEnum = "RESOURCE_BLOCKED"
-MessageCode400AisEnumTimestampInvalid MessageCode400AisEnum = "TIMESTAMP_INVALID"
-MessageCode400AisEnumPeriodInvalid MessageCode400AisEnum = "PERIOD_INVALID"
-MessageCode400AisEnumScaMethodUnknown MessageCode400AisEnum = "SCA_METHOD_UNKNOWN"
-MessageCode400AisEnumScaInvalid MessageCode400AisEnum = "SCA_INVALID"
-MessageCode400AisEnumConsentUnknown MessageCode400AisEnum = "CONSENT_UNKNOWN"
-MessageCode400AisEnumSessionsNotSupported MessageCode400AisEnum = "SESSIONS_NOT_SUPPORTED"
+	MessageCode400AisEnumFormatError            MessageCode400AisEnum = "FORMAT_ERROR"
+	MessageCode400AisEnumParameterNotConsistent MessageCode400AisEnum = "PARAMETER_NOT_CONSISTENT"
+	MessageCode400AisEnumParameterNotSupported  MessageCode400AisEnum = "PARAMETER_NOT_SUPPORTED"
+	MessageCode400AisEnumServiceInvalid         MessageCode400AisEnum = "SERVICE_INVALID"
+	MessageCode400AisEnumResourceUnknown        MessageCode400AisEnum = "RESOURCE_UNKNOWN"
+	MessageCode400AisEnumResourceExpired        MessageCode400AisEnum = "RESOURCE_EXPIRED"
+	MessageCode400AisEnumResourceBlocked        MessageCode400AisEnum = "RESOURCE_BLOCKED"
+	MessageCode400AisEnumTimestampInvalid       MessageCode400AisEnum = "TIMESTAMP_INVALID"
+	MessageCode400AisEnumPeriodInvalid          MessageCode400AisEnum = "PERIOD_INVALID"
+	MessageCode400AisEnumScaMethodUnknown       MessageCode400AisEnum = "SCA_METHOD_UNKNOWN"
+	MessageCode400AisEnumScaInvalid             MessageCode400AisEnum = "SCA_INVALID"
+	MessageCode400AisEnumConsentUnknown         MessageCode400AisEnum = "CONSENT_UNKNOWN"
+	MessageCode400AisEnumSessionsNotSupported   MessageCode400AisEnum = "SESSIONS_NOT_SUPPORTED"
 )
-
-

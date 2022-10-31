@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PartitionValueList struct {
-    Values []string `json:"Values"`
-    
+	Values []string `json:"Values"`
 }
-

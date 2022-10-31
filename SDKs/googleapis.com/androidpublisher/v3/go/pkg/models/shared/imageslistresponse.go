@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ImagesListResponse struct {
-    Images []Image `json:"images,omitempty"`
-    
+	Images []Image `json:"images,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AccountSettings struct {
-    PipelineServiceRoleArn *string `json:"pipelineServiceRoleArn,omitempty"`
-    
+	PipelineServiceRoleArn *string `json:"pipelineServiceRoleArn,omitempty"`
 }
-

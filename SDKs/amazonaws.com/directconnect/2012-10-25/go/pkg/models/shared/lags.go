@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Lags struct {
-    Lags []Lag `json:"lags,omitempty"`
-    
+	Lags []Lag `json:"lags,omitempty"`
 }
-

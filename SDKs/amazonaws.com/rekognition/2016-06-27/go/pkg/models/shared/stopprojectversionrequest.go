@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StopProjectVersionRequest struct {
-    ProjectVersionArn string `json:"ProjectVersionArn"`
-    
+	ProjectVersionArn string `json:"ProjectVersionArn"`
 }
-

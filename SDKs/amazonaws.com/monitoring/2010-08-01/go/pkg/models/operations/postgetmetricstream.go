@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostGetMetricStreamActionEnum string
 
 const (
-    PostGetMetricStreamActionEnumGetMetricStream PostGetMetricStreamActionEnum = "GetMetricStream"
+	PostGetMetricStreamActionEnumGetMetricStream PostGetMetricStreamActionEnum = "GetMetricStream"
 )
-
-
 
 type PostGetMetricStreamVersionEnum string
 
 const (
-    PostGetMetricStreamVersionEnumTwoThousandAndTen0801 PostGetMetricStreamVersionEnum = "2010-08-01"
+	PostGetMetricStreamVersionEnumTwoThousandAndTen0801 PostGetMetricStreamVersionEnum = "2010-08-01"
 )
 
-
 type PostGetMetricStreamQueryParams struct {
-    Action PostGetMetricStreamActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostGetMetricStreamVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostGetMetricStreamActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostGetMetricStreamVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostGetMetricStreamHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostGetMetricStreamRequest struct {
-    QueryParams PostGetMetricStreamQueryParams 
-    Headers PostGetMetricStreamHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostGetMetricStreamQueryParams
+	Headers     PostGetMetricStreamHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostGetMetricStreamResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

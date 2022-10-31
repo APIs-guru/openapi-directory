@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteTableRowRequest struct {
-    TableCellLocation *TableCellLocation `json:"tableCellLocation,omitempty"`
-    
+	TableCellLocation *TableCellLocation `json:"tableCellLocation,omitempty"`
 }
-

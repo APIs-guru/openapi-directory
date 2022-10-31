@@ -1,14 +1,13 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type Evaluation struct {
-    Annotation *string `json:"Annotation,omitempty"`
-    ComplianceResourceID string `json:"ComplianceResourceId"`
-    ComplianceResourceType string `json:"ComplianceResourceType"`
-    ComplianceType ComplianceTypeEnum `json:"ComplianceType"`
-    OrderingTimestamp time.Time `json:"OrderingTimestamp"`
-    
+	Annotation             *string            `json:"Annotation,omitempty"`
+	ComplianceResourceID   string             `json:"ComplianceResourceId"`
+	ComplianceResourceType string             `json:"ComplianceResourceType"`
+	ComplianceType         ComplianceTypeEnum `json:"ComplianceType"`
+	OrderingTimestamp      time.Time          `json:"OrderingTimestamp"`
 }
-

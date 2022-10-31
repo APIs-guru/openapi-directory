@@ -1,31 +1,26 @@
 package shared
 
-
-
-
 type MetricTypeEnum string
 
 const (
-    MetricTypeEnumDynamoDbReadCapacityUtilization MetricTypeEnum = "DynamoDBReadCapacityUtilization"
-MetricTypeEnumDynamoDbWriteCapacityUtilization MetricTypeEnum = "DynamoDBWriteCapacityUtilization"
-MetricTypeEnumAlbRequestCountPerTarget MetricTypeEnum = "ALBRequestCountPerTarget"
-MetricTypeEnumRdsReaderAverageCPUUtilization MetricTypeEnum = "RDSReaderAverageCPUUtilization"
-MetricTypeEnumRdsReaderAverageDatabaseConnections MetricTypeEnum = "RDSReaderAverageDatabaseConnections"
-MetricTypeEnumEc2SpotFleetRequestAverageCPUUtilization MetricTypeEnum = "EC2SpotFleetRequestAverageCPUUtilization"
-MetricTypeEnumEc2SpotFleetRequestAverageNetworkIn MetricTypeEnum = "EC2SpotFleetRequestAverageNetworkIn"
-MetricTypeEnumEc2SpotFleetRequestAverageNetworkOut MetricTypeEnum = "EC2SpotFleetRequestAverageNetworkOut"
-MetricTypeEnumSageMakerVariantInvocationsPerInstance MetricTypeEnum = "SageMakerVariantInvocationsPerInstance"
-MetricTypeEnumEcsServiceAverageCPUUtilization MetricTypeEnum = "ECSServiceAverageCPUUtilization"
-MetricTypeEnumEcsServiceAverageMemoryUtilization MetricTypeEnum = "ECSServiceAverageMemoryUtilization"
-MetricTypeEnumAppStreamAverageCapacityUtilization MetricTypeEnum = "AppStreamAverageCapacityUtilization"
-MetricTypeEnumComprehendInferenceUtilization MetricTypeEnum = "ComprehendInferenceUtilization"
-MetricTypeEnumLambdaProvisionedConcurrencyUtilization MetricTypeEnum = "LambdaProvisionedConcurrencyUtilization"
-MetricTypeEnumCassandraReadCapacityUtilization MetricTypeEnum = "CassandraReadCapacityUtilization"
-MetricTypeEnumCassandraWriteCapacityUtilization MetricTypeEnum = "CassandraWriteCapacityUtilization"
-MetricTypeEnumKafkaBrokerStorageUtilization MetricTypeEnum = "KafkaBrokerStorageUtilization"
-MetricTypeEnumElastiCachePrimaryEngineCPUUtilization MetricTypeEnum = "ElastiCachePrimaryEngineCPUUtilization"
-MetricTypeEnumElastiCacheReplicaEngineCPUUtilization MetricTypeEnum = "ElastiCacheReplicaEngineCPUUtilization"
-MetricTypeEnumElastiCacheDatabaseMemoryUsageCountedForEvictPercentage MetricTypeEnum = "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"
+	MetricTypeEnumDynamoDbReadCapacityUtilization                         MetricTypeEnum = "DynamoDBReadCapacityUtilization"
+	MetricTypeEnumDynamoDbWriteCapacityUtilization                        MetricTypeEnum = "DynamoDBWriteCapacityUtilization"
+	MetricTypeEnumAlbRequestCountPerTarget                                MetricTypeEnum = "ALBRequestCountPerTarget"
+	MetricTypeEnumRdsReaderAverageCPUUtilization                          MetricTypeEnum = "RDSReaderAverageCPUUtilization"
+	MetricTypeEnumRdsReaderAverageDatabaseConnections                     MetricTypeEnum = "RDSReaderAverageDatabaseConnections"
+	MetricTypeEnumEc2SpotFleetRequestAverageCPUUtilization                MetricTypeEnum = "EC2SpotFleetRequestAverageCPUUtilization"
+	MetricTypeEnumEc2SpotFleetRequestAverageNetworkIn                     MetricTypeEnum = "EC2SpotFleetRequestAverageNetworkIn"
+	MetricTypeEnumEc2SpotFleetRequestAverageNetworkOut                    MetricTypeEnum = "EC2SpotFleetRequestAverageNetworkOut"
+	MetricTypeEnumSageMakerVariantInvocationsPerInstance                  MetricTypeEnum = "SageMakerVariantInvocationsPerInstance"
+	MetricTypeEnumEcsServiceAverageCPUUtilization                         MetricTypeEnum = "ECSServiceAverageCPUUtilization"
+	MetricTypeEnumEcsServiceAverageMemoryUtilization                      MetricTypeEnum = "ECSServiceAverageMemoryUtilization"
+	MetricTypeEnumAppStreamAverageCapacityUtilization                     MetricTypeEnum = "AppStreamAverageCapacityUtilization"
+	MetricTypeEnumComprehendInferenceUtilization                          MetricTypeEnum = "ComprehendInferenceUtilization"
+	MetricTypeEnumLambdaProvisionedConcurrencyUtilization                 MetricTypeEnum = "LambdaProvisionedConcurrencyUtilization"
+	MetricTypeEnumCassandraReadCapacityUtilization                        MetricTypeEnum = "CassandraReadCapacityUtilization"
+	MetricTypeEnumCassandraWriteCapacityUtilization                       MetricTypeEnum = "CassandraWriteCapacityUtilization"
+	MetricTypeEnumKafkaBrokerStorageUtilization                           MetricTypeEnum = "KafkaBrokerStorageUtilization"
+	MetricTypeEnumElastiCachePrimaryEngineCPUUtilization                  MetricTypeEnum = "ElastiCachePrimaryEngineCPUUtilization"
+	MetricTypeEnumElastiCacheReplicaEngineCPUUtilization                  MetricTypeEnum = "ElastiCacheReplicaEngineCPUUtilization"
+	MetricTypeEnumElastiCacheDatabaseMemoryUsageCountedForEvictPercentage MetricTypeEnum = "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"
 )
-
-

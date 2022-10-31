@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetVocabularyRequest struct {
-    VocabularyName string `json:"VocabularyName"`
-    
+	VocabularyName string `json:"VocabularyName"`
 }
-

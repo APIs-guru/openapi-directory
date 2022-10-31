@@ -1,38 +1,30 @@
 package operations
 
-
-
 type RemovePagesV1RequestBodyFile struct {
-    Content []byte `multipartForm:"content"`
-    File string `multipartForm:"name=file"`
-    
+	Content []byte `multipartForm:"content"`
+	File    string `multipartForm:"name=file"`
 }
 
 type RemovePagesV1RequestBody struct {
-    File RemovePagesV1RequestBodyFile `multipartForm:"file"`
-    FirstPage *int32 `multipartForm:"name=first_page"`
-    LastPage *int32 `multipartForm:"name=last_page"`
-    
+	File      RemovePagesV1RequestBodyFile `multipartForm:"file"`
+	FirstPage *int32                       `multipartForm:"name=first_page"`
+	LastPage  *int32                       `multipartForm:"name=last_page"`
 }
 
 type RemovePagesV1Request struct {
-    Request RemovePagesV1RequestBody `request:"mediaType=multipart/form-data"`
-    
+	Request RemovePagesV1RequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type RemovePagesV14XxApplicationProblemPlusJSON struct {
-    Errors map[string]interface{} `json:"errors,omitempty"`
-    Status *int64 `json:"status,omitempty"`
-    Title *string `json:"title,omitempty"`
-    Type *string `json:"type,omitempty"`
-    
+	Errors map[string]interface{} `json:"errors,omitempty"`
+	Status *int64                 `json:"status,omitempty"`
+	Title  *string                `json:"title,omitempty"`
+	Type   *string                `json:"type,omitempty"`
 }
 
 type RemovePagesV1Response struct {
-    ContentType string 
-    StatusCode int64 
-    RemovePagesV1200ApplicationPdfBinaryString []byte 
-    RemovePagesV14XxApplicationProblemPlusJSONObject *RemovePagesV14XxApplicationProblemPlusJSON 
-    
+	ContentType                                      string
+	StatusCode                                       int64
+	RemovePagesV1200ApplicationPdfBinaryString       []byte
+	RemovePagesV14XxApplicationProblemPlusJSONObject *RemovePagesV14XxApplicationProblemPlusJSON
 }
-

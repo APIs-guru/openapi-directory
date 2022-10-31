@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetDevicePoolRequest struct {
-    Arn string `json:"arn"`
-    
+	Arn string `json:"arn"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StopNotebookExecutionInput struct {
-    NotebookExecutionID string `json:"NotebookExecutionId"`
-    
+	NotebookExecutionID string `json:"NotebookExecutionId"`
 }
-

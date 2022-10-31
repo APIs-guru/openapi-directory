@@ -1,20 +1,14 @@
 package operations
 
-
-
 type TraceAnythingAnythingPathParams struct {
-    Anything string `pathParam:"style=simple,explode=false,name=anything"`
-    
+	Anything string `pathParam:"style=simple,explode=false,name=anything"`
 }
 
 type TraceAnythingAnythingRequest struct {
-    PathParams TraceAnythingAnythingPathParams 
-    
+	PathParams TraceAnythingAnythingPathParams
 }
 
 type TraceAnythingAnythingResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

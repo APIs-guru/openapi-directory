@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AnnotationSource struct {
-    CloudHealthcareSource *CloudHealthcareSource `json:"cloudHealthcareSource,omitempty"`
-    
+	CloudHealthcareSource *CloudHealthcareSource `json:"cloudHealthcareSource,omitempty"`
 }
-

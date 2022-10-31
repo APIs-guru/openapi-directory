@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetLatestPlatformVersionResponse struct {
-    ComponentVersion *shared.ComponentVersion 
-    ContentType string 
-    StatusCode int64 
-    
+	ComponentVersion *shared.ComponentVersion
+	ContentType      string
+	StatusCode       int64
 }
-

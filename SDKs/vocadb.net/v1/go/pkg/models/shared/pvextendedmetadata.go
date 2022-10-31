@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PvExtendedMetadata struct {
-    JSON *string `json:"json,omitempty"`
-    
+	JSON *string `json:"json,omitempty"`
 }
-

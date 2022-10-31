@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type SchemaDiffTypeEnum string
 
 const (
-    SchemaDiffTypeEnumSyntaxDiff SchemaDiffTypeEnum = "SYNTAX_DIFF"
+	SchemaDiffTypeEnumSyntaxDiff SchemaDiffTypeEnum = "SYNTAX_DIFF"
 )
-
-

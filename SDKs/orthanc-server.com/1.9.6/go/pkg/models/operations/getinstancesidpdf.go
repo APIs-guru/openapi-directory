@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetInstancesIDPdfPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetInstancesIDPdfRequest struct {
-    PathParams GetInstancesIDPdfPathParams 
-    
+	PathParams GetInstancesIDPdfPathParams
 }
 
 type GetInstancesIDPdfResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

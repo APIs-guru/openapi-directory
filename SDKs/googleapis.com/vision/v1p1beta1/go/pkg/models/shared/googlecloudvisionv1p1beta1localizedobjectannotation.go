@@ -1,13 +1,9 @@
 package shared
 
-
-
 type GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation struct {
-    BoundingPoly *GoogleCloudVisionV1p1beta1BoundingPoly `json:"boundingPoly,omitempty"`
-    LanguageCode *string `json:"languageCode,omitempty"`
-    Mid *string `json:"mid,omitempty"`
-    Name *string `json:"name,omitempty"`
-    Score *float32 `json:"score,omitempty"`
-    
+	BoundingPoly *GoogleCloudVisionV1p1beta1BoundingPoly `json:"boundingPoly,omitempty"`
+	LanguageCode *string                                 `json:"languageCode,omitempty"`
+	Mid          *string                                 `json:"mid,omitempty"`
+	Name         *string                                 `json:"name,omitempty"`
+	Score        *float32                                `json:"score,omitempty"`
 }
-

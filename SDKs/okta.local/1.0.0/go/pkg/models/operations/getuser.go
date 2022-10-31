@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetUserPathParams struct {
-    UserID string `pathParam:"style=simple,explode=false,name=userId"`
-    
+	UserID string `pathParam:"style=simple,explode=false,name=userId"`
 }
 
 type GetUserRequest struct {
-    PathParams GetUserPathParams 
-    Request []byte `request:"mediaType=application/octet-stream"`
-    
+	PathParams GetUserPathParams
+	Request    []byte `request:"mediaType=application/octet-stream"`
 }
 
 type GetUserResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

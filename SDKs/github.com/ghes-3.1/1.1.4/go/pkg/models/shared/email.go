@@ -1,12 +1,8 @@
 package shared
 
-
-
 type Email struct {
-    Email string `json:"email"`
-    Primary bool `json:"primary"`
-    Verified bool `json:"verified"`
-    Visibility string `json:"visibility"`
-    
+	Email      string `json:"email"`
+	Primary    bool   `json:"primary"`
+	Verified   bool   `json:"verified"`
+	Visibility string `json:"visibility"`
 }
-

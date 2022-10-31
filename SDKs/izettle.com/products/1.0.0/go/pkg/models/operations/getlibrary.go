@@ -1,49 +1,42 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetLibraryPathParams struct {
-    OrganizationUUID string `pathParam:"style=simple,explode=false,name=organizationUuid"`
-    
+	OrganizationUUID string `pathParam:"style=simple,explode=false,name=organizationUuid"`
 }
 
 type GetLibraryQueryParams struct {
-    All *bool `queryParam:"style=form,explode=true,name=all"`
-    EventLogUUID *string `queryParam:"style=form,explode=true,name=eventLogUuid"`
-    Limit *int32 `queryParam:"style=form,explode=true,name=limit"`
-    Offset *string `queryParam:"style=form,explode=true,name=offset"`
-    
+	All          *bool   `queryParam:"style=form,explode=true,name=all"`
+	EventLogUUID *string `queryParam:"style=form,explode=true,name=eventLogUuid"`
+	Limit        *int32  `queryParam:"style=form,explode=true,name=limit"`
+	Offset       *string `queryParam:"style=form,explode=true,name=offset"`
 }
 
 type GetLibrarySecurityOption1 struct {
-    ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
-    
+	ZettleOauth shared.SchemeZettleOauth `security:"scheme,type=oauth2"`
 }
 
 type GetLibrarySecurityOption2 struct {
-    ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
-    
+	ZettleAPIKey shared.SchemeZettleAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetLibrarySecurity struct {
-    Option1 *GetLibrarySecurityOption1 `security:"option"`
-    Option2 *GetLibrarySecurityOption2 `security:"option"`
-    
+	Option1 *GetLibrarySecurityOption1 `security:"option"`
+	Option2 *GetLibrarySecurityOption2 `security:"option"`
 }
 
 type GetLibraryRequest struct {
-    PathParams GetLibraryPathParams 
-    QueryParams GetLibraryQueryParams 
-    Security GetLibrarySecurity 
-    
+	PathParams  GetLibraryPathParams
+	QueryParams GetLibraryQueryParams
+	Security    GetLibrarySecurity
 }
 
 type GetLibraryResponse struct {
-    ContentType string 
-    Headers map[string][]string 
-    LibraryResponse *shared.LibraryResponse 
-    StatusCode int64 
-    
+	ContentType     string
+	Headers         map[string][]string
+	LibraryResponse *shared.LibraryResponse
+	StatusCode      int64
 }
-

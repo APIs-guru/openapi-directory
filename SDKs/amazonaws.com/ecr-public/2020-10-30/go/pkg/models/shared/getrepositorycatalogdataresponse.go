@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetRepositoryCatalogDataResponse struct {
-    CatalogData *RepositoryCatalogData `json:"catalogData,omitempty"`
-    
+	CatalogData *RepositoryCatalogData `json:"catalogData,omitempty"`
 }
-

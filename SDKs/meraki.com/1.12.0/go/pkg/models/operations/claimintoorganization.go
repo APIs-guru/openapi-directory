@@ -1,44 +1,34 @@
 package operations
 
-
-
 type ClaimIntoOrganizationPathParams struct {
-    OrganizationID string `pathParam:"style=simple,explode=false,name=organizationId"`
-    
+	OrganizationID string `pathParam:"style=simple,explode=false,name=organizationId"`
 }
-
 
 type ClaimIntoOrganizationRequestBodyLicensesModeEnum string
 
 const (
-    ClaimIntoOrganizationRequestBodyLicensesModeEnumAddDevices ClaimIntoOrganizationRequestBodyLicensesModeEnum = "addDevices"
-ClaimIntoOrganizationRequestBodyLicensesModeEnumRenew ClaimIntoOrganizationRequestBodyLicensesModeEnum = "renew"
+	ClaimIntoOrganizationRequestBodyLicensesModeEnumAddDevices ClaimIntoOrganizationRequestBodyLicensesModeEnum = "addDevices"
+	ClaimIntoOrganizationRequestBodyLicensesModeEnumRenew      ClaimIntoOrganizationRequestBodyLicensesModeEnum = "renew"
 )
 
-
 type ClaimIntoOrganizationRequestBodyLicenses struct {
-    Key string `json:"key"`
-    Mode *ClaimIntoOrganizationRequestBodyLicensesModeEnum `json:"mode,omitempty"`
-    
+	Key  string                                            `json:"key"`
+	Mode *ClaimIntoOrganizationRequestBodyLicensesModeEnum `json:"mode,omitempty"`
 }
 
 type ClaimIntoOrganizationRequestBody struct {
-    Licenses []ClaimIntoOrganizationRequestBodyLicenses `json:"licenses,omitempty"`
-    Orders []string `json:"orders,omitempty"`
-    Serials []string `json:"serials,omitempty"`
-    
+	Licenses []ClaimIntoOrganizationRequestBodyLicenses `json:"licenses,omitempty"`
+	Orders   []string                                   `json:"orders,omitempty"`
+	Serials  []string                                   `json:"serials,omitempty"`
 }
 
 type ClaimIntoOrganizationRequest struct {
-    PathParams ClaimIntoOrganizationPathParams 
-    Request *ClaimIntoOrganizationRequestBody `request:"mediaType=application/json"`
-    
+	PathParams ClaimIntoOrganizationPathParams
+	Request    *ClaimIntoOrganizationRequestBody `request:"mediaType=application/json"`
 }
 
 type ClaimIntoOrganizationResponse struct {
-    ContentType string 
-    StatusCode int64 
-    ClaimIntoOrganization200ApplicationJSONObject map[string]interface{} 
-    
+	ContentType                                   string
+	StatusCode                                    int64
+	ClaimIntoOrganization200ApplicationJSONObject map[string]interface{}
 }
-

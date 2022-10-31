@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetParagraphSectionIDPathParams struct {
-    Reference string `pathParam:"style=simple,explode=false,name=reference"`
-    
+	Reference string `pathParam:"style=simple,explode=false,name=reference"`
 }
 
 type GetParagraphSectionIDRequest struct {
-    PathParams GetParagraphSectionIDPathParams 
-    
+	PathParams GetParagraphSectionIDPathParams
 }
 
 type GetParagraphSectionIDResponse struct {
-    Body []byte 
-    ContentType string 
-    ErskineMaySectionOverview *shared.ErskineMaySectionOverview 
-    StatusCode int64 
-    
+	Body                      []byte
+	ContentType               string
+	ErskineMaySectionOverview *shared.ErskineMaySectionOverview
+	StatusCode                int64
 }
-

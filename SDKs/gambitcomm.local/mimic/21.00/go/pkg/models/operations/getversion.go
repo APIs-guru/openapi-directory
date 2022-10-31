@@ -1,11 +1,7 @@
 package operations
 
-
-
 type GetVersionResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetVersion200ApplicationJSONString *string 
-    
+	ContentType                        string
+	StatusCode                         int64
+	GetVersion200ApplicationJSONString *string
 }
-

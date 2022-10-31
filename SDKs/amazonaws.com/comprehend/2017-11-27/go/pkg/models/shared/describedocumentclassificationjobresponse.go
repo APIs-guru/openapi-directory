@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeDocumentClassificationJobResponse struct {
-    DocumentClassificationJobProperties *DocumentClassificationJobProperties `json:"DocumentClassificationJobProperties,omitempty"`
-    
+	DocumentClassificationJobProperties *DocumentClassificationJobProperties `json:"DocumentClassificationJobProperties,omitempty"`
 }
-

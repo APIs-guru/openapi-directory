@@ -1,23 +1,17 @@
 package shared
 
-
-
-
 type ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum string
 
 const (
-    ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnumAPIUnspecified ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum = "API_UNSPECIFIED"
-ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnumAPIPreview ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum = "API_PREVIEW"
-ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnumAPIDevelopment ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum = "API_DEVELOPMENT"
-ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnumAPICurrent ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum = "API_CURRENT"
-ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnumAPIDeprecated ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum = "API_DEPRECATED"
+	ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnumAPIUnspecified ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum = "API_UNSPECIFIED"
+	ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnumAPIPreview     ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum = "API_PREVIEW"
+	ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnumAPIDevelopment ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum = "API_DEVELOPMENT"
+	ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnumAPICurrent     ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum = "API_CURRENT"
+	ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnumAPIDeprecated  ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum = "API_DEPRECATED"
 )
 
-
 type ChromeCrosDpanelAutosettingsProtoPolicyAPILifecycle struct {
-    Description *string `json:"description,omitempty"`
-    EndSupport *GoogleTypeDate `json:"endSupport,omitempty"`
-    PolicyAPILifecycleStage *ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum `json:"policyApiLifecycleStage,omitempty"`
-    
+	Description             *string                                                                         `json:"description,omitempty"`
+	EndSupport              *GoogleTypeDate                                                                 `json:"endSupport,omitempty"`
+	PolicyAPILifecycleStage *ChromeCrosDpanelAutosettingsProtoPolicyAPILifecyclePolicyAPILifecycleStageEnum `json:"policyApiLifecycleStage,omitempty"`
 }
-

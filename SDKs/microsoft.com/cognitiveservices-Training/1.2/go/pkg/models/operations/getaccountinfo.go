@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAccountInfoHeaders struct {
-    TrainingKey string `header:"style=simple,explode=false,name=Training-Key"`
-    
+	TrainingKey string `header:"style=simple,explode=false,name=Training-Key"`
 }
 
 type GetAccountInfoRequest struct {
-    Headers GetAccountInfoHeaders 
-    
+	Headers GetAccountInfoHeaders
 }
 
 type GetAccountInfoResponse struct {
-    Account *shared.Account 
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Account     *shared.Account
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetDatabaseResponse struct {
-    Database *Database `json:"Database,omitempty"`
-    
+	Database *Database `json:"Database,omitempty"`
 }
-

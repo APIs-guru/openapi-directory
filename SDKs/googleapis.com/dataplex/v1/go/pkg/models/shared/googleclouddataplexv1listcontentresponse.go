@@ -1,10 +1,6 @@
 package shared
 
-
-
 type GoogleCloudDataplexV1ListContentResponse struct {
-    Content []GoogleCloudDataplexV1Content `json:"content,omitempty"`
-    NextPageToken *string `json:"nextPageToken,omitempty"`
-    
+	Content       []GoogleCloudDataplexV1Content `json:"content,omitempty"`
+	NextPageToken *string                        `json:"nextPageToken,omitempty"`
 }
-

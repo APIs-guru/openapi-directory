@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetArchitecturesArchitectureNamePathParams struct {
-    ArchitectureName string `pathParam:"style=simple,explode=false,name=architecture_name"`
-    
+	ArchitectureName string `pathParam:"style=simple,explode=false,name=architecture_name"`
 }
 
 type GetArchitecturesArchitectureNameSecurity struct {
-    BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
-    
+	BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
 }
 
 type GetArchitecturesArchitectureNameRequest struct {
-    PathParams GetArchitecturesArchitectureNamePathParams 
-    Security GetArchitecturesArchitectureNameSecurity 
-    
+	PathParams GetArchitecturesArchitectureNamePathParams
+	Security   GetArchitecturesArchitectureNameSecurity
 }
 
 type GetArchitecturesArchitectureNameResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

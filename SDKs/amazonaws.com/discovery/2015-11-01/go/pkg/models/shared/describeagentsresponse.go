@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DescribeAgentsResponse struct {
-    AgentsInfo []AgentInfo `json:"agentsInfo,omitempty"`
-    NextToken *string `json:"nextToken,omitempty"`
-    
+	AgentsInfo []AgentInfo `json:"agentsInfo,omitempty"`
+	NextToken  *string     `json:"nextToken,omitempty"`
 }
-

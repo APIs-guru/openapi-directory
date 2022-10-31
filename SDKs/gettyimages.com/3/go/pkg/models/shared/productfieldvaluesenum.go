@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type ProductFieldValuesEnum string
 
 const (
-    ProductFieldValuesEnumDownloadRequirements ProductFieldValuesEnum = "download_requirements"
+	ProductFieldValuesEnumDownloadRequirements ProductFieldValuesEnum = "download_requirements"
 )
-
-

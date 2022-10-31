@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SegmentDefinition struct {
-    SegmentFilters []SegmentFilter `json:"segmentFilters,omitempty"`
-    
+	SegmentFilters []SegmentFilter `json:"segmentFilters,omitempty"`
 }
-

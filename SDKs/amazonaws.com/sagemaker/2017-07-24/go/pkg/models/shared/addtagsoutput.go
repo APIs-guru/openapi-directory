@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AddTagsOutput struct {
-    Tags []Tag `json:"Tags,omitempty"`
-    
+	Tags []Tag `json:"Tags,omitempty"`
 }
-

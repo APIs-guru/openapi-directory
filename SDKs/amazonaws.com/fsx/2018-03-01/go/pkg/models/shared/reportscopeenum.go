@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type ReportScopeEnum string
 
 const (
-    ReportScopeEnumFailedFilesOnly ReportScopeEnum = "FAILED_FILES_ONLY"
+	ReportScopeEnumFailedFilesOnly ReportScopeEnum = "FAILED_FILES_ONLY"
 )
-
-

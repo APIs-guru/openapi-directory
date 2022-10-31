@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteSnapshotRequest struct {
-    SnapshotName string `json:"SnapshotName"`
-    
+	SnapshotName string `json:"SnapshotName"`
 }
-

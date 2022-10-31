@@ -1,14 +1,9 @@
 package shared
 
-
-
 type PayeeResponseData struct {
-    Payee Payee `json:"payee"`
-    
+	Payee Payee `json:"payee"`
 }
 
 type PayeeResponse struct {
-    Data PayeeResponseData `json:"data"`
-    
+	Data PayeeResponseData `json:"data"`
 }
-

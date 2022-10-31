@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ResumeSessionRequest struct {
-    SessionID string `json:"SessionId"`
-    
+	SessionID string `json:"SessionId"`
 }
-

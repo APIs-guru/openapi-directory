@@ -1,48 +1,43 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ImportBackendAuthPathParams struct {
-    AppID string `pathParam:"style=simple,explode=false,name=appId"`
-    BackendEnvironmentName string `pathParam:"style=simple,explode=false,name=backendEnvironmentName"`
-    
+	AppID                  string `pathParam:"style=simple,explode=false,name=appId"`
+	BackendEnvironmentName string `pathParam:"style=simple,explode=false,name=backendEnvironmentName"`
 }
 
 type ImportBackendAuthHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type ImportBackendAuthRequestBody struct {
-    IdentityPoolID *string `json:"identityPoolId,omitempty"`
-    NativeClientID string `json:"nativeClientId"`
-    UserPoolID string `json:"userPoolId"`
-    WebClientID string `json:"webClientId"`
-    
+	IdentityPoolID *string `json:"identityPoolId,omitempty"`
+	NativeClientID string  `json:"nativeClientId"`
+	UserPoolID     string  `json:"userPoolId"`
+	WebClientID    string  `json:"webClientId"`
 }
 
 type ImportBackendAuthRequest struct {
-    PathParams ImportBackendAuthPathParams 
-    Headers ImportBackendAuthHeaders 
-    Request ImportBackendAuthRequestBody `request:"mediaType=application/json"`
-    
+	PathParams ImportBackendAuthPathParams
+	Headers    ImportBackendAuthHeaders
+	Request    ImportBackendAuthRequestBody `request:"mediaType=application/json"`
 }
 
 type ImportBackendAuthResponse struct {
-    BadRequestException *interface{} 
-    ContentType string 
-    GatewayTimeoutException *interface{} 
-    ImportBackendAuthResponse *shared.ImportBackendAuthResponse 
-    NotFoundException *interface{} 
-    StatusCode int64 
-    TooManyRequestsException *interface{} 
-    
+	BadRequestException       *interface{}
+	ContentType               string
+	GatewayTimeoutException   *interface{}
+	ImportBackendAuthResponse *shared.ImportBackendAuthResponse
+	NotFoundException         *interface{}
+	StatusCode                int64
+	TooManyRequestsException  *interface{}
 }
-

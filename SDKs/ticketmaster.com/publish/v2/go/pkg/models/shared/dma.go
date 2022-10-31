@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Dma struct {
-    ID *int32 `json:"id,omitempty"`
-    
+	ID *int32 `json:"id,omitempty"`
 }
-

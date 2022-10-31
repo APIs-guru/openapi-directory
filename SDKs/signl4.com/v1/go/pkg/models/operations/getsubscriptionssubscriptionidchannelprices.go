@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetSubscriptionsSubscriptionIDChannelPricesPathParams struct {
-    SubscriptionID string `pathParam:"style=simple,explode=false,name=subscriptionId"`
-    
+	SubscriptionID string `pathParam:"style=simple,explode=false,name=subscriptionId"`
 }
 
 type GetSubscriptionsSubscriptionIDChannelPricesRequest struct {
-    PathParams GetSubscriptionsSubscriptionIDChannelPricesPathParams 
-    
+	PathParams GetSubscriptionsSubscriptionIDChannelPricesPathParams
 }
 
 type GetSubscriptionsSubscriptionIDChannelPricesResponse struct {
-    Body []byte 
-    ChannelPriceInfo *shared.ChannelPriceInfo 
-    ContentType string 
-    ErrorResponseContent *shared.ErrorResponseContent 
-    StatusCode int64 
-    
+	Body                 []byte
+	ChannelPriceInfo     *shared.ChannelPriceInfo
+	ContentType          string
+	ErrorResponseContent *shared.ErrorResponseContent
+	StatusCode           int64
 }
-

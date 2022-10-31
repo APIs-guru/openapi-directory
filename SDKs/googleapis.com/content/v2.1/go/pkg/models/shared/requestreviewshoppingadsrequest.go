@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RequestReviewShoppingAdsRequest struct {
-    RegionCode *string `json:"regionCode,omitempty"`
-    
+	RegionCode *string `json:"regionCode,omitempty"`
 }
-

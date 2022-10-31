@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ReplicaConfigurationRequest struct {
-    ReplicaCount *int64 `json:"ReplicaCount,omitempty"`
-    
+	ReplicaCount *int64 `json:"ReplicaCount,omitempty"`
 }
-

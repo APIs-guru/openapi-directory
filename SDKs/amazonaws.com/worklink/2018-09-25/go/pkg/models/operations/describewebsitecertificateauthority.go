@@ -1,40 +1,36 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DescribeWebsiteCertificateAuthorityHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type DescribeWebsiteCertificateAuthorityRequestBody struct {
-    FleetArn string `json:"FleetArn"`
-    WebsiteCaID string `json:"WebsiteCaId"`
-    
+	FleetArn    string `json:"FleetArn"`
+	WebsiteCaID string `json:"WebsiteCaId"`
 }
 
 type DescribeWebsiteCertificateAuthorityRequest struct {
-    Headers DescribeWebsiteCertificateAuthorityHeaders 
-    Request DescribeWebsiteCertificateAuthorityRequestBody `request:"mediaType=application/json"`
-    
+	Headers DescribeWebsiteCertificateAuthorityHeaders
+	Request DescribeWebsiteCertificateAuthorityRequestBody `request:"mediaType=application/json"`
 }
 
 type DescribeWebsiteCertificateAuthorityResponse struct {
-    ContentType string 
-    DescribeWebsiteCertificateAuthorityResponse *shared.DescribeWebsiteCertificateAuthorityResponse 
-    InternalServerErrorException *interface{} 
-    InvalidRequestException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    TooManyRequestsException *interface{} 
-    UnauthorizedException *interface{} 
-    
+	ContentType                                 string
+	DescribeWebsiteCertificateAuthorityResponse *shared.DescribeWebsiteCertificateAuthorityResponse
+	InternalServerErrorException                *interface{}
+	InvalidRequestException                     *interface{}
+	ResourceNotFoundException                   *interface{}
+	StatusCode                                  int64
+	TooManyRequestsException                    *interface{}
+	UnauthorizedException                       *interface{}
 }
-

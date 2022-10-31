@@ -1,9 +1,5 @@
 package shared
 
-
-
 type APICoreResponsesEntitiesResponseAPICoreDtoClickStreamHit struct {
-    Entities []APICoreDtoClickStreamHit `json:"entities,omitempty"`
-    
+	Entities []APICoreDtoClickStreamHit `json:"entities,omitempty"`
 }
-

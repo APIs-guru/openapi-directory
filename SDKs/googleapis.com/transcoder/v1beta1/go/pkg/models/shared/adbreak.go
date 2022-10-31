@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AdBreak struct {
-    StartTimeOffset *string `json:"startTimeOffset,omitempty"`
-    
+	StartTimeOffset *string `json:"startTimeOffset,omitempty"`
 }
-

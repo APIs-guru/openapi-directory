@@ -1,49 +1,43 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PipelinesUpdatePathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type PipelinesUpdateQueryParams struct {
-    Raw *bool `queryParam:"style=form,explode=true,name=raw"`
-    
+	Raw *bool `queryParam:"style=form,explode=true,name=raw"`
 }
 
 type PipelinesUpdateHeaders struct {
-    XApideckAppID string `header:"style=simple,explode=false,name=x-apideck-app-id"`
-    XApideckConsumerID string `header:"style=simple,explode=false,name=x-apideck-consumer-id"`
-    XApideckServiceID *string `header:"style=simple,explode=false,name=x-apideck-service-id"`
-    
+	XApideckAppID      string  `header:"style=simple,explode=false,name=x-apideck-app-id"`
+	XApideckConsumerID string  `header:"style=simple,explode=false,name=x-apideck-consumer-id"`
+	XApideckServiceID  *string `header:"style=simple,explode=false,name=x-apideck-service-id"`
 }
 
 type PipelinesUpdateSecurity struct {
-    APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PipelinesUpdateRequest struct {
-    PathParams PipelinesUpdatePathParams 
-    QueryParams PipelinesUpdateQueryParams 
-    Headers PipelinesUpdateHeaders 
-    Request shared.Pipeline `request:"mediaType=application/json"`
-    Security PipelinesUpdateSecurity 
-    
+	PathParams  PipelinesUpdatePathParams
+	QueryParams PipelinesUpdateQueryParams
+	Headers     PipelinesUpdateHeaders
+	Request     shared.Pipeline `request:"mediaType=application/json"`
+	Security    PipelinesUpdateSecurity
 }
 
 type PipelinesUpdateResponse struct {
-    BadRequestResponse *shared.BadRequestResponse 
-    ContentType string 
-    NotFoundResponse *shared.NotFoundResponse 
-    PaymentRequiredResponse *shared.PaymentRequiredResponse 
-    StatusCode int64 
-    UnauthorizedResponse *shared.UnauthorizedResponse 
-    UnexpectedErrorResponse *shared.UnexpectedErrorResponse 
-    UnprocessableResponse *shared.UnprocessableResponse 
-    UpdatePipelineResponse *shared.UpdatePipelineResponse 
-    
+	BadRequestResponse      *shared.BadRequestResponse
+	ContentType             string
+	NotFoundResponse        *shared.NotFoundResponse
+	PaymentRequiredResponse *shared.PaymentRequiredResponse
+	StatusCode              int64
+	UnauthorizedResponse    *shared.UnauthorizedResponse
+	UnexpectedErrorResponse *shared.UnexpectedErrorResponse
+	UnprocessableResponse   *shared.UnprocessableResponse
+	UpdatePipelineResponse  *shared.UpdatePipelineResponse
 }
-

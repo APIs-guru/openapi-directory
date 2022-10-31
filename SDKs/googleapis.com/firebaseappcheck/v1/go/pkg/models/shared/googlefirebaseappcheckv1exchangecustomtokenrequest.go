@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleFirebaseAppcheckV1ExchangeCustomTokenRequest struct {
-    CustomToken *string `json:"customToken,omitempty"`
-    
+	CustomToken *string `json:"customToken,omitempty"`
 }
-

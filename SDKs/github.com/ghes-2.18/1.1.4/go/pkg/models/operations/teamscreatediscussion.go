@@ -1,36 +1,31 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type TeamsCreateDiscussionPathParams struct {
-    TeamID int64 `pathParam:"style=simple,explode=false,name=team_id"`
-    
+	TeamID int64 `pathParam:"style=simple,explode=false,name=team_id"`
 }
 
 type TeamsCreateDiscussionHeaders struct {
-    Accept string `header:"style=simple,explode=false,name=accept"`
-    
+	Accept string `header:"style=simple,explode=false,name=accept"`
 }
 
 type TeamsCreateDiscussionRequestBody struct {
-    Body string `json:"body"`
-    Private *bool `json:"private,omitempty"`
-    Title string `json:"title"`
-    
+	Body    string `json:"body"`
+	Private *bool  `json:"private,omitempty"`
+	Title   string `json:"title"`
 }
 
 type TeamsCreateDiscussionRequest struct {
-    PathParams TeamsCreateDiscussionPathParams 
-    Headers TeamsCreateDiscussionHeaders 
-    Request *TeamsCreateDiscussionRequestBody `request:"mediaType=application/json"`
-    
+	PathParams TeamsCreateDiscussionPathParams
+	Headers    TeamsCreateDiscussionHeaders
+	Request    *TeamsCreateDiscussionRequestBody `request:"mediaType=application/json"`
 }
 
 type TeamsCreateDiscussionResponse struct {
-    ContentType string 
-    StatusCode int64 
-    TeamDiscussion *shared.TeamDiscussion 
-    
+	ContentType    string
+	StatusCode     int64
+	TeamDiscussion *shared.TeamDiscussion
 }
-

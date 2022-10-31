@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StopCompilationJobRequest struct {
-    CompilationJobName string `json:"CompilationJobName"`
-    
+	CompilationJobName string `json:"CompilationJobName"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type WorkspaceStatus struct {
-    StatusCode WorkspaceStatusCodeEnum `json:"statusCode"`
-    
+	StatusCode WorkspaceStatusCodeEnum `json:"statusCode"`
 }
-

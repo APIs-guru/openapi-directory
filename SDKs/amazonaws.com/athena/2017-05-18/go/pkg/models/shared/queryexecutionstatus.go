@@ -1,13 +1,12 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type QueryExecutionStatus struct {
-    CompletionDateTime *time.Time `json:"CompletionDateTime,omitempty"`
-    State *QueryExecutionStateEnum `json:"State,omitempty"`
-    StateChangeReason *string `json:"StateChangeReason,omitempty"`
-    SubmissionDateTime *time.Time `json:"SubmissionDateTime,omitempty"`
-    
+	CompletionDateTime *time.Time               `json:"CompletionDateTime,omitempty"`
+	State              *QueryExecutionStateEnum `json:"State,omitempty"`
+	StateChangeReason  *string                  `json:"StateChangeReason,omitempty"`
+	SubmissionDateTime *time.Time               `json:"SubmissionDateTime,omitempty"`
 }
-

@@ -1,10 +1,9 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type TimestampStructure struct {
-    Value time.Time `json:"value"`
-    
+	Value time.Time `json:"value"`
 }
-

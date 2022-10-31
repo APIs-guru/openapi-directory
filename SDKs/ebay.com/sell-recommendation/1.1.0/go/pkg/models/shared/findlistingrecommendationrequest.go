@@ -1,9 +1,5 @@
 package shared
 
-
-
 type FindListingRecommendationRequest struct {
-    ListingIds []string `json:"listingIds,omitempty"`
-    
+	ListingIds []string `json:"listingIds,omitempty"`
 }
-

@@ -1,25 +1,22 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ReposCreateCommitSignatureProtectionPathParams struct {
-    Branch string `pathParam:"style=simple,explode=false,name=branch"`
-    Owner string `pathParam:"style=simple,explode=false,name=owner"`
-    Repo string `pathParam:"style=simple,explode=false,name=repo"`
-    
+	Branch string `pathParam:"style=simple,explode=false,name=branch"`
+	Owner  string `pathParam:"style=simple,explode=false,name=owner"`
+	Repo   string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
 type ReposCreateCommitSignatureProtectionRequest struct {
-    PathParams ReposCreateCommitSignatureProtectionPathParams 
-    
+	PathParams ReposCreateCommitSignatureProtectionPathParams
 }
 
 type ReposCreateCommitSignatureProtectionResponse struct {
-    ContentType string 
-    StatusCode int64 
-    BasicError *shared.BasicError 
-    ProtectedBranchAdminEnforced *shared.ProtectedBranchAdminEnforced 
-    
+	ContentType                  string
+	StatusCode                   int64
+	BasicError                   *shared.BasicError
+	ProtectedBranchAdminEnforced *shared.ProtectedBranchAdminEnforced
 }
-

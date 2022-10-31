@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type EstimatedResourceSize struct {
-    EstimatedOn *time.Time `json:"estimatedOn,omitempty"`
-    EstimatedSizeInBytes *float64 `json:"estimatedSizeInBytes,omitempty"`
-    
+	EstimatedOn          *time.Time `json:"estimatedOn,omitempty"`
+	EstimatedSizeInBytes *float64   `json:"estimatedSizeInBytes,omitempty"`
 }
-

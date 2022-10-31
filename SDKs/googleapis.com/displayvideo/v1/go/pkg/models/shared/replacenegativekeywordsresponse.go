@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ReplaceNegativeKeywordsResponse struct {
-    NegativeKeywords []NegativeKeyword `json:"negativeKeywords,omitempty"`
-    
+	NegativeKeywords []NegativeKeyword `json:"negativeKeywords,omitempty"`
 }
-

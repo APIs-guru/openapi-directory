@@ -1,22 +1,16 @@
 package operations
 
-
-
 type ScoresByDatePathParams struct {
-    Date string `pathParam:"style=simple,explode=false,name=date"`
-    Format string `pathParam:"style=simple,explode=false,name=format"`
-    
+	Date   string `pathParam:"style=simple,explode=false,name=date"`
+	Format string `pathParam:"style=simple,explode=false,name=format"`
 }
 
 type ScoresByDateRequest struct {
-    PathParams ScoresByDatePathParams 
-    
+	PathParams ScoresByDatePathParams
 }
 
 type ScoresByDateResponse struct {
-    ContentType string 
-    Scores []interface{} 
-    StatusCode int64 
-    
+	ContentType string
+	Scores      []interface{}
+	StatusCode  int64
 }
-

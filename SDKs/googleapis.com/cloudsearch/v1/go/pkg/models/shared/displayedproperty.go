@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DisplayedProperty struct {
-    PropertyName *string `json:"propertyName,omitempty"`
-    
+	PropertyName *string `json:"propertyName,omitempty"`
 }
-

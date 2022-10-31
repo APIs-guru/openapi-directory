@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeEnvironmentsRequest struct {
-    EnvironmentIds []string `json:"environmentIds"`
-    
+	EnvironmentIds []string `json:"environmentIds"`
 }
-

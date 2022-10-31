@@ -1,32 +1,27 @@
 package shared
 
-
-
-
 type VeevaConnectorOperatorEnum string
 
 const (
-    VeevaConnectorOperatorEnumProjection VeevaConnectorOperatorEnum = "PROJECTION"
-VeevaConnectorOperatorEnumLessThan VeevaConnectorOperatorEnum = "LESS_THAN"
-VeevaConnectorOperatorEnumGreaterThan VeevaConnectorOperatorEnum = "GREATER_THAN"
-VeevaConnectorOperatorEnumContains VeevaConnectorOperatorEnum = "CONTAINS"
-VeevaConnectorOperatorEnumBetween VeevaConnectorOperatorEnum = "BETWEEN"
-VeevaConnectorOperatorEnumLessThanOrEqualTo VeevaConnectorOperatorEnum = "LESS_THAN_OR_EQUAL_TO"
-VeevaConnectorOperatorEnumGreaterThanOrEqualTo VeevaConnectorOperatorEnum = "GREATER_THAN_OR_EQUAL_TO"
-VeevaConnectorOperatorEnumEqualTo VeevaConnectorOperatorEnum = "EQUAL_TO"
-VeevaConnectorOperatorEnumNotEqualTo VeevaConnectorOperatorEnum = "NOT_EQUAL_TO"
-VeevaConnectorOperatorEnumAddition VeevaConnectorOperatorEnum = "ADDITION"
-VeevaConnectorOperatorEnumMultiplication VeevaConnectorOperatorEnum = "MULTIPLICATION"
-VeevaConnectorOperatorEnumDivision VeevaConnectorOperatorEnum = "DIVISION"
-VeevaConnectorOperatorEnumSubtraction VeevaConnectorOperatorEnum = "SUBTRACTION"
-VeevaConnectorOperatorEnumMaskAll VeevaConnectorOperatorEnum = "MASK_ALL"
-VeevaConnectorOperatorEnumMaskFirstN VeevaConnectorOperatorEnum = "MASK_FIRST_N"
-VeevaConnectorOperatorEnumMaskLastN VeevaConnectorOperatorEnum = "MASK_LAST_N"
-VeevaConnectorOperatorEnumValidateNonNull VeevaConnectorOperatorEnum = "VALIDATE_NON_NULL"
-VeevaConnectorOperatorEnumValidateNonZero VeevaConnectorOperatorEnum = "VALIDATE_NON_ZERO"
-VeevaConnectorOperatorEnumValidateNonNegative VeevaConnectorOperatorEnum = "VALIDATE_NON_NEGATIVE"
-VeevaConnectorOperatorEnumValidateNumeric VeevaConnectorOperatorEnum = "VALIDATE_NUMERIC"
-VeevaConnectorOperatorEnumNoOp VeevaConnectorOperatorEnum = "NO_OP"
+	VeevaConnectorOperatorEnumProjection           VeevaConnectorOperatorEnum = "PROJECTION"
+	VeevaConnectorOperatorEnumLessThan             VeevaConnectorOperatorEnum = "LESS_THAN"
+	VeevaConnectorOperatorEnumGreaterThan          VeevaConnectorOperatorEnum = "GREATER_THAN"
+	VeevaConnectorOperatorEnumContains             VeevaConnectorOperatorEnum = "CONTAINS"
+	VeevaConnectorOperatorEnumBetween              VeevaConnectorOperatorEnum = "BETWEEN"
+	VeevaConnectorOperatorEnumLessThanOrEqualTo    VeevaConnectorOperatorEnum = "LESS_THAN_OR_EQUAL_TO"
+	VeevaConnectorOperatorEnumGreaterThanOrEqualTo VeevaConnectorOperatorEnum = "GREATER_THAN_OR_EQUAL_TO"
+	VeevaConnectorOperatorEnumEqualTo              VeevaConnectorOperatorEnum = "EQUAL_TO"
+	VeevaConnectorOperatorEnumNotEqualTo           VeevaConnectorOperatorEnum = "NOT_EQUAL_TO"
+	VeevaConnectorOperatorEnumAddition             VeevaConnectorOperatorEnum = "ADDITION"
+	VeevaConnectorOperatorEnumMultiplication       VeevaConnectorOperatorEnum = "MULTIPLICATION"
+	VeevaConnectorOperatorEnumDivision             VeevaConnectorOperatorEnum = "DIVISION"
+	VeevaConnectorOperatorEnumSubtraction          VeevaConnectorOperatorEnum = "SUBTRACTION"
+	VeevaConnectorOperatorEnumMaskAll              VeevaConnectorOperatorEnum = "MASK_ALL"
+	VeevaConnectorOperatorEnumMaskFirstN           VeevaConnectorOperatorEnum = "MASK_FIRST_N"
+	VeevaConnectorOperatorEnumMaskLastN            VeevaConnectorOperatorEnum = "MASK_LAST_N"
+	VeevaConnectorOperatorEnumValidateNonNull      VeevaConnectorOperatorEnum = "VALIDATE_NON_NULL"
+	VeevaConnectorOperatorEnumValidateNonZero      VeevaConnectorOperatorEnum = "VALIDATE_NON_ZERO"
+	VeevaConnectorOperatorEnumValidateNonNegative  VeevaConnectorOperatorEnum = "VALIDATE_NON_NEGATIVE"
+	VeevaConnectorOperatorEnumValidateNumeric      VeevaConnectorOperatorEnum = "VALIDATE_NUMERIC"
+	VeevaConnectorOperatorEnumNoOp                 VeevaConnectorOperatorEnum = "NO_OP"
 )
-
-

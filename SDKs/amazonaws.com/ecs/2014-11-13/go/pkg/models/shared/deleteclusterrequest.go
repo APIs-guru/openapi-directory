@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteClusterRequest struct {
-    Cluster string `json:"cluster"`
-    
+	Cluster string `json:"cluster"`
 }
-

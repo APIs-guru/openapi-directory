@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ShieldedInstanceConfig struct {
-    EnableIntegrityMonitoring *bool `json:"enableIntegrityMonitoring,omitempty"`
-    EnableSecureBoot *bool `json:"enableSecureBoot,omitempty"`
-    
+	EnableIntegrityMonitoring *bool `json:"enableIntegrityMonitoring,omitempty"`
+	EnableSecureBoot          *bool `json:"enableSecureBoot,omitempty"`
 }
-

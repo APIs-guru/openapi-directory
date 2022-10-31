@@ -1,9 +1,5 @@
 package shared
 
-
-
 type InsertInlineSheetsChartResponse struct {
-    ObjectID *string `json:"objectId,omitempty"`
-    
+	ObjectID *string `json:"objectId,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ByProducts struct {
-    CustomValues map[string]string `json:"customValues,omitempty"`
-    
+	CustomValues map[string]string `json:"customValues,omitempty"`
 }
-

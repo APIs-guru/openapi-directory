@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CategoryTypesGetResponse struct {
-    ContentType string 
-    PageResultCategoryTypeDto *shared.PageResultCategoryTypeDto 
-    StatusCode int64 
-    
+	ContentType               string
+	PageResultCategoryTypeDto *shared.PageResultCategoryTypeDto
+	StatusCode                int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeWorkflowRequest struct {
-    WorkflowID string `json:"WorkflowId"`
-    
+	WorkflowID string `json:"WorkflowId"`
 }
-

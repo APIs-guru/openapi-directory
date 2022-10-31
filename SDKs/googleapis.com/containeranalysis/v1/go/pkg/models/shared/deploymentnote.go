@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeploymentNote struct {
-    ResourceURI []string `json:"resourceUri,omitempty"`
-    
+	ResourceURI []string `json:"resourceUri,omitempty"`
 }
-

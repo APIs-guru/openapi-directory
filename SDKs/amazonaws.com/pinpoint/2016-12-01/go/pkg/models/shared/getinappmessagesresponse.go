@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetInAppMessagesResponse struct {
-    InAppMessagesResponse InAppMessagesResponse `json:"InAppMessagesResponse"`
-    
+	InAppMessagesResponse InAppMessagesResponse `json:"InAppMessagesResponse"`
 }
-

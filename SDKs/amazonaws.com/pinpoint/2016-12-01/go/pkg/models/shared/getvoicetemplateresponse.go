@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetVoiceTemplateResponse struct {
-    VoiceTemplateResponse VoiceTemplateResponse `json:"VoiceTemplateResponse"`
-    
+	VoiceTemplateResponse VoiceTemplateResponse `json:"VoiceTemplateResponse"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EeOffersResponse struct {
-    EligibleOffers []EeOfferItem `json:"eligibleOffers"`
-    
+	EligibleOffers []EeOfferItem `json:"eligibleOffers"`
 }
-

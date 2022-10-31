@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteModelQualityJobDefinitionRequest struct {
-    JobDefinitionName string `json:"JobDefinitionName"`
-    
+	JobDefinitionName string `json:"JobDefinitionName"`
 }
-

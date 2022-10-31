@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PutAdministrationUserLockHeaders struct {
-    Token *string `header:"style=simple,explode=false,name=Token"`
-    
+	Token *string `header:"style=simple,explode=false,name=Token"`
 }
 
 type PutAdministrationUserLockRequests struct {
-    ToggleUserRequest *shared.ToggleUserRequest `request:"mediaType=application/*+json"`
-    ToggleUserRequest1 *shared.ToggleUserRequest `request:"mediaType=application/json"`
-    ToggleUserRequest2 *shared.ToggleUserRequest `request:"mediaType=text/json"`
-    
+	ToggleUserRequest  *shared.ToggleUserRequest `request:"mediaType=application/*+json"`
+	ToggleUserRequest1 *shared.ToggleUserRequest `request:"mediaType=application/json"`
+	ToggleUserRequest2 *shared.ToggleUserRequest `request:"mediaType=text/json"`
 }
 
 type PutAdministrationUserLockRequest struct {
-    Headers PutAdministrationUserLockHeaders 
-    Request *PutAdministrationUserLockRequests 
-    
+	Headers PutAdministrationUserLockHeaders
+	Request *PutAdministrationUserLockRequests
 }
 
 type PutAdministrationUserLockResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

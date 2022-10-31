@@ -1,21 +1,15 @@
 package operations
 
-
-
 type NewsPathParams struct {
-    Format string `pathParam:"style=simple,explode=false,name=format"`
-    
+	Format string `pathParam:"style=simple,explode=false,name=format"`
 }
 
 type NewsRequest struct {
-    PathParams NewsPathParams 
-    
+	PathParams NewsPathParams
 }
 
 type NewsResponse struct {
-    ContentType string 
-    News []interface{} 
-    StatusCode int64 
-    
+	ContentType string
+	News        []interface{}
+	StatusCode  int64
 }
-

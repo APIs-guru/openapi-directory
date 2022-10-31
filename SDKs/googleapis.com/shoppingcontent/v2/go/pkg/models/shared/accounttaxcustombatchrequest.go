@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AccounttaxCustomBatchRequest struct {
-    Entries []AccounttaxCustomBatchRequestEntry `json:"entries,omitempty"`
-    
+	Entries []AccounttaxCustomBatchRequestEntry `json:"entries,omitempty"`
 }
-

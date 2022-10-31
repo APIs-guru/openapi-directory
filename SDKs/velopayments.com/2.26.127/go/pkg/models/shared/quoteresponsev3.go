@@ -1,9 +1,5 @@
 package shared
 
-
-
 type QuoteResponseV3 struct {
-    FxSummaries []QuoteFxSummaryV3 `json:"fxSummaries,omitempty"`
-    
+	FxSummaries []QuoteFxSummaryV3 `json:"fxSummaries,omitempty"`
 }
-

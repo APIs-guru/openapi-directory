@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListEnvironmentAccountConnectionsOutput struct {
-    EnvironmentAccountConnections []EnvironmentAccountConnectionSummary `json:"environmentAccountConnections"`
-    NextToken *string `json:"nextToken,omitempty"`
-    
+	EnvironmentAccountConnections []EnvironmentAccountConnectionSummary `json:"environmentAccountConnections"`
+	NextToken                     *string                               `json:"nextToken,omitempty"`
 }
-

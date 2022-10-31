@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type CanaryRunTimeline struct {
-    Completed *time.Time `json:"Completed,omitempty"`
-    Started *time.Time `json:"Started,omitempty"`
-    
+	Completed *time.Time `json:"Completed,omitempty"`
+	Started   *time.Time `json:"Started,omitempty"`
 }
-

@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type CertificateModeEnum string
 
 const (
-    CertificateModeEnumDefault CertificateModeEnum = "DEFAULT"
-CertificateModeEnumSniOnly CertificateModeEnum = "SNI_ONLY"
+	CertificateModeEnumDefault CertificateModeEnum = "DEFAULT"
+	CertificateModeEnumSniOnly CertificateModeEnum = "SNI_ONLY"
 )
-
-

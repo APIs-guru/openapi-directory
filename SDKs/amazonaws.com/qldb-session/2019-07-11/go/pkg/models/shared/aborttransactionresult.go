@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AbortTransactionResult struct {
-    TimingInformation *TimingInformation `json:"TimingInformation,omitempty"`
-    
+	TimingInformation *TimingInformation `json:"TimingInformation,omitempty"`
 }
-

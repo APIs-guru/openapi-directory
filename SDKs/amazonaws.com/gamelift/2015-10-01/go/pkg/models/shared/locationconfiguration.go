@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LocationConfiguration struct {
-    Location *string `json:"Location,omitempty"`
-    
+	Location *string `json:"Location,omitempty"`
 }
-

@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetVodBackgroundPathParams struct {
-    BackgroundID float64 `pathParam:"style=simple,explode=false,name=background_id"`
-    OndemandID float64 `pathParam:"style=simple,explode=false,name=ondemand_id"`
-    
+	BackgroundID float64 `pathParam:"style=simple,explode=false,name=background_id"`
+	OndemandID   float64 `pathParam:"style=simple,explode=false,name=ondemand_id"`
 }
 
 type GetVodBackgroundRequest struct {
-    PathParams GetVodBackgroundPathParams 
-    
+	PathParams GetVodBackgroundPathParams
 }
 
 type GetVodBackgroundResponse struct {
-    ContentType string 
-    StatusCode int64 
-    LegacyError *shared.LegacyError 
-    Picture *shared.Picture 
-    
+	ContentType string
+	StatusCode  int64
+	LegacyError *shared.LegacyError
+	Picture     *shared.Picture
 }
-

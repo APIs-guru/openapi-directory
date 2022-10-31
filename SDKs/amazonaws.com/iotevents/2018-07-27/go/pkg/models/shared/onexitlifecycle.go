@@ -1,9 +1,5 @@
 package shared
 
-
-
 type OnExitLifecycle struct {
-    Events []Event `json:"events,omitempty"`
-    
+	Events []Event `json:"events,omitempty"`
 }
-

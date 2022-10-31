@@ -1,31 +1,23 @@
 package operations
 
-
-
-
 type BoxScoreFormatEnum string
 
 const (
-    BoxScoreFormatEnumXML BoxScoreFormatEnum = "xml"
-BoxScoreFormatEnumJSON BoxScoreFormatEnum = "json"
+	BoxScoreFormatEnumXML  BoxScoreFormatEnum = "xml"
+	BoxScoreFormatEnumJSON BoxScoreFormatEnum = "json"
 )
 
-
 type BoxScorePathParams struct {
-    Format BoxScoreFormatEnum `pathParam:"style=simple,explode=false,name=format"`
-    Gameid string `pathParam:"style=simple,explode=false,name=gameid"`
-    
+	Format BoxScoreFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+	Gameid string             `pathParam:"style=simple,explode=false,name=gameid"`
 }
 
 type BoxScoreRequest struct {
-    PathParams BoxScorePathParams 
-    
+	PathParams BoxScorePathParams
 }
 
 type BoxScoreResponse struct {
-    BoxScore *interface{} 
-    ContentType string 
-    StatusCode int64 
-    
+	BoxScore    *interface{}
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteApnsVoipChannelResponse struct {
-    ApnsVoipChannelResponse ApnsVoipChannelResponse `json:"APNSVoipChannelResponse"`
-    
+	ApnsVoipChannelResponse ApnsVoipChannelResponse `json:"APNSVoipChannelResponse"`
 }
-

@@ -1,15 +1,14 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type Group struct {
-    DisabledDate *time.Time `json:"DisabledDate,omitempty"`
-    Email *string `json:"Email,omitempty"`
-    EnabledDate *time.Time `json:"EnabledDate,omitempty"`
-    ID *string `json:"Id,omitempty"`
-    Name *string `json:"Name,omitempty"`
-    State *EntityStateEnum `json:"State,omitempty"`
-    
+	DisabledDate *time.Time       `json:"DisabledDate,omitempty"`
+	Email        *string          `json:"Email,omitempty"`
+	EnabledDate  *time.Time       `json:"EnabledDate,omitempty"`
+	ID           *string          `json:"Id,omitempty"`
+	Name         *string          `json:"Name,omitempty"`
+	State        *EntityStateEnum `json:"State,omitempty"`
 }
-

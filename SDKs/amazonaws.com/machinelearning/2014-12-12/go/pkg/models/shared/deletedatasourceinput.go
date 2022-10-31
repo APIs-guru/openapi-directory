@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteDataSourceInput struct {
-    DataSourceID string `json:"DataSourceId"`
-    
+	DataSourceID string `json:"DataSourceId"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateSamplingRuleResult struct {
-    SamplingRuleRecord *SamplingRuleRecord `json:"SamplingRuleRecord,omitempty"`
-    
+	SamplingRuleRecord *SamplingRuleRecord `json:"SamplingRuleRecord,omitempty"`
 }
-

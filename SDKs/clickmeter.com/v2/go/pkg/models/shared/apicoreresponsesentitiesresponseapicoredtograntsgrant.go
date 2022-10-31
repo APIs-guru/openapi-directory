@@ -1,9 +1,5 @@
 package shared
 
-
-
 type APICoreResponsesEntitiesResponseAPICoreDtoGrantsGrant struct {
-    Entities []APICoreDtoGrantsGrant `json:"entities,omitempty"`
-    
+	Entities []APICoreDtoGrantsGrant `json:"entities,omitempty"`
 }
-

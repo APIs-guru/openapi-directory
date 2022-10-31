@@ -1,46 +1,36 @@
 package shared
 
-
-
-
 type WatchErrorTypeEnum string
 
 const (
-    WatchErrorTypeEnumErrorTypeUnspecified WatchErrorTypeEnum = "ERROR_TYPE_UNSPECIFIED"
-WatchErrorTypeEnumProjectNotAuthorized WatchErrorTypeEnum = "PROJECT_NOT_AUTHORIZED"
-WatchErrorTypeEnumNoUserAccess WatchErrorTypeEnum = "NO_USER_ACCESS"
-WatchErrorTypeEnumOtherErrors WatchErrorTypeEnum = "OTHER_ERRORS"
+	WatchErrorTypeEnumErrorTypeUnspecified WatchErrorTypeEnum = "ERROR_TYPE_UNSPECIFIED"
+	WatchErrorTypeEnumProjectNotAuthorized WatchErrorTypeEnum = "PROJECT_NOT_AUTHORIZED"
+	WatchErrorTypeEnumNoUserAccess         WatchErrorTypeEnum = "NO_USER_ACCESS"
+	WatchErrorTypeEnumOtherErrors          WatchErrorTypeEnum = "OTHER_ERRORS"
 )
-
-
 
 type WatchEventTypeEnum string
 
 const (
-    WatchEventTypeEnumEventTypeUnspecified WatchEventTypeEnum = "EVENT_TYPE_UNSPECIFIED"
-WatchEventTypeEnumSchema WatchEventTypeEnum = "SCHEMA"
-WatchEventTypeEnumResponses WatchEventTypeEnum = "RESPONSES"
+	WatchEventTypeEnumEventTypeUnspecified WatchEventTypeEnum = "EVENT_TYPE_UNSPECIFIED"
+	WatchEventTypeEnumSchema               WatchEventTypeEnum = "SCHEMA"
+	WatchEventTypeEnumResponses            WatchEventTypeEnum = "RESPONSES"
 )
-
-
 
 type WatchStateEnum string
 
 const (
-    WatchStateEnumStateUnspecified WatchStateEnum = "STATE_UNSPECIFIED"
-WatchStateEnumActive WatchStateEnum = "ACTIVE"
-WatchStateEnumSuspended WatchStateEnum = "SUSPENDED"
+	WatchStateEnumStateUnspecified WatchStateEnum = "STATE_UNSPECIFIED"
+	WatchStateEnumActive           WatchStateEnum = "ACTIVE"
+	WatchStateEnumSuspended        WatchStateEnum = "SUSPENDED"
 )
 
-
 type Watch struct {
-    CreateTime *string `json:"createTime,omitempty"`
-    ErrorType *WatchErrorTypeEnum `json:"errorType,omitempty"`
-    EventType *WatchEventTypeEnum `json:"eventType,omitempty"`
-    ExpireTime *string `json:"expireTime,omitempty"`
-    ID *string `json:"id,omitempty"`
-    State *WatchStateEnum `json:"state,omitempty"`
-    Target *WatchTarget `json:"target,omitempty"`
-    
+	CreateTime *string             `json:"createTime,omitempty"`
+	ErrorType  *WatchErrorTypeEnum `json:"errorType,omitempty"`
+	EventType  *WatchEventTypeEnum `json:"eventType,omitempty"`
+	ExpireTime *string             `json:"expireTime,omitempty"`
+	ID         *string             `json:"id,omitempty"`
+	State      *WatchStateEnum     `json:"state,omitempty"`
+	Target     *WatchTarget        `json:"target,omitempty"`
 }
-

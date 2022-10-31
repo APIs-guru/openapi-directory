@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetResolverEndpointRequest struct {
-    ResolverEndpointID string `json:"ResolverEndpointId"`
-    
+	ResolverEndpointID string `json:"ResolverEndpointId"`
 }
-

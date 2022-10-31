@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PublicWorkforceTaskPrice struct {
-    AmountInUsd *Usd `json:"AmountInUsd,omitempty"`
-    
+	AmountInUsd *Usd `json:"AmountInUsd,omitempty"`
 }
-

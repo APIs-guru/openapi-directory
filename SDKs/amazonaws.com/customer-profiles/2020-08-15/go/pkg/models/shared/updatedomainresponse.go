@@ -1,17 +1,16 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type UpdateDomainResponse struct {
-    CreatedAt time.Time `json:"CreatedAt"`
-    DeadLetterQueueURL *string `json:"DeadLetterQueueUrl,omitempty"`
-    DefaultEncryptionKey *string `json:"DefaultEncryptionKey,omitempty"`
-    DefaultExpirationDays *int64 `json:"DefaultExpirationDays,omitempty"`
-    DomainName string `json:"DomainName"`
-    LastUpdatedAt time.Time `json:"LastUpdatedAt"`
-    Matching *MatchingResponse `json:"Matching,omitempty"`
-    Tags map[string]string `json:"Tags,omitempty"`
-    
+	CreatedAt             time.Time         `json:"CreatedAt"`
+	DeadLetterQueueURL    *string           `json:"DeadLetterQueueUrl,omitempty"`
+	DefaultEncryptionKey  *string           `json:"DefaultEncryptionKey,omitempty"`
+	DefaultExpirationDays *int64            `json:"DefaultExpirationDays,omitempty"`
+	DomainName            string            `json:"DomainName"`
+	LastUpdatedAt         time.Time         `json:"LastUpdatedAt"`
+	Matching              *MatchingResponse `json:"Matching,omitempty"`
+	Tags                  map[string]string `json:"Tags,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AwsCloudFrontDistributionCacheBehaviors struct {
-    Items []AwsCloudFrontDistributionCacheBehavior `json:"Items,omitempty"`
-    
+	Items []AwsCloudFrontDistributionCacheBehavior `json:"Items,omitempty"`
 }
-

@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DescribeWorkspacesConnectionStatusRequest struct {
-    NextToken *string `json:"NextToken,omitempty"`
-    WorkspaceIds []string `json:"WorkspaceIds,omitempty"`
-    
+	NextToken    *string  `json:"NextToken,omitempty"`
+	WorkspaceIds []string `json:"WorkspaceIds,omitempty"`
 }
-

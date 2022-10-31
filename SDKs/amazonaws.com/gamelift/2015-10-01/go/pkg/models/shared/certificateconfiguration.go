@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CertificateConfiguration struct {
-    CertificateType CertificateTypeEnum `json:"CertificateType"`
-    
+	CertificateType CertificateTypeEnum `json:"CertificateType"`
 }
-

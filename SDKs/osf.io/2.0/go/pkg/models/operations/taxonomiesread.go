@@ -1,21 +1,15 @@
 package operations
 
-
-
 type TaxonomiesReadPathParams struct {
-    TaxonomyID string `pathParam:"style=simple,explode=false,name=taxonomy_id"`
-    
+	TaxonomyID string `pathParam:"style=simple,explode=false,name=taxonomy_id"`
 }
 
 type TaxonomiesReadRequest struct {
-    PathParams TaxonomiesReadPathParams 
-    
+	PathParams TaxonomiesReadPathParams
 }
 
 type TaxonomiesReadResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

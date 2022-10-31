@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GiftCardActivityBlock struct {
-    Reason interface{} `json:"reason"`
-    
+	Reason interface{} `json:"reason"`
 }
-

@@ -1,41 +1,35 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type InsertSectionForProjectPathParams struct {
-    ProjectGid string `pathParam:"style=simple,explode=false,name=project_gid"`
-    
+	ProjectGid string `pathParam:"style=simple,explode=false,name=project_gid"`
 }
 
 type InsertSectionForProjectQueryParams struct {
-    OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
-    OptPretty *bool `queryParam:"style=form,explode=true,name=opt_pretty"`
-    
+	OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
+	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
 type InsertSectionForProjectRequestBody struct {
-    Data *shared.ProjectSectionInsertRequest `json:"data,omitempty"`
-    
+	Data *shared.ProjectSectionInsertRequest `json:"data,omitempty"`
 }
 
 type InsertSectionForProjectRequest struct {
-    PathParams InsertSectionForProjectPathParams 
-    QueryParams InsertSectionForProjectQueryParams 
-    Request InsertSectionForProjectRequestBody `request:"mediaType=application/json"`
-    
+	PathParams  InsertSectionForProjectPathParams
+	QueryParams InsertSectionForProjectQueryParams
+	Request     InsertSectionForProjectRequestBody `request:"mediaType=application/json"`
 }
 
 type InsertSectionForProject200ApplicationJSON struct {
-    Data map[string]interface{} `json:"data,omitempty"`
-    
+	Data map[string]interface{} `json:"data,omitempty"`
 }
 
 type InsertSectionForProjectResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    InsertSectionForProject200ApplicationJSONObject *InsertSectionForProject200ApplicationJSON 
-    
+	ContentType                                     string
+	ErrorResponse                                   *shared.ErrorResponse
+	StatusCode                                      int64
+	InsertSectionForProject200ApplicationJSONObject *InsertSectionForProject200ApplicationJSON
 }
-

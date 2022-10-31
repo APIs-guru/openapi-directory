@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Aws struct {
-    Keypair *string `json:"keypair,omitempty"`
-    
+	Keypair *string `json:"keypair,omitempty"`
 }
-

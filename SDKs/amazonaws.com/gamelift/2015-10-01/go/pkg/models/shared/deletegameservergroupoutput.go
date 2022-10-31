@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteGameServerGroupOutput struct {
-    GameServerGroup *GameServerGroup `json:"GameServerGroup,omitempty"`
-    
+	GameServerGroup *GameServerGroup `json:"GameServerGroup,omitempty"`
 }
-

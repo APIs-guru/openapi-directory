@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetInstancePortStatesRequest struct {
-    InstanceName string `json:"instanceName"`
-    
+	InstanceName string `json:"instanceName"`
 }
-

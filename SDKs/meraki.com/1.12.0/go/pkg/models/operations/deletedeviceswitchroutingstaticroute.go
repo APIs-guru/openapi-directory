@@ -1,21 +1,15 @@
 package operations
 
-
-
 type DeleteDeviceSwitchRoutingStaticRoutePathParams struct {
-    Serial string `pathParam:"style=simple,explode=false,name=serial"`
-    StaticRouteID string `pathParam:"style=simple,explode=false,name=staticRouteId"`
-    
+	Serial        string `pathParam:"style=simple,explode=false,name=serial"`
+	StaticRouteID string `pathParam:"style=simple,explode=false,name=staticRouteId"`
 }
 
 type DeleteDeviceSwitchRoutingStaticRouteRequest struct {
-    PathParams DeleteDeviceSwitchRoutingStaticRoutePathParams 
-    
+	PathParams DeleteDeviceSwitchRoutingStaticRoutePathParams
 }
 
 type DeleteDeviceSwitchRoutingStaticRouteResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

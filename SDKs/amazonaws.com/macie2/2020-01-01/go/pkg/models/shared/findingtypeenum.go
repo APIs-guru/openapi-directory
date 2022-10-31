@@ -1,21 +1,16 @@
 package shared
 
-
-
-
 type FindingTypeEnum string
 
 const (
-    FindingTypeEnumSensitiveDataS3ObjectMultiple FindingTypeEnum = "SensitiveData:S3Object/Multiple"
-FindingTypeEnumSensitiveDataS3ObjectFinancial FindingTypeEnum = "SensitiveData:S3Object/Financial"
-FindingTypeEnumSensitiveDataS3ObjectPersonal FindingTypeEnum = "SensitiveData:S3Object/Personal"
-FindingTypeEnumSensitiveDataS3ObjectCredentials FindingTypeEnum = "SensitiveData:S3Object/Credentials"
-FindingTypeEnumSensitiveDataS3ObjectCustomIdentifier FindingTypeEnum = "SensitiveData:S3Object/CustomIdentifier"
-FindingTypeEnumPolicyIamUserS3BucketPublic FindingTypeEnum = "Policy:IAMUser/S3BucketPublic"
-FindingTypeEnumPolicyIamUserS3BucketSharedExternally FindingTypeEnum = "Policy:IAMUser/S3BucketSharedExternally"
-FindingTypeEnumPolicyIamUserS3BucketReplicatedExternally FindingTypeEnum = "Policy:IAMUser/S3BucketReplicatedExternally"
-FindingTypeEnumPolicyIamUserS3BucketEncryptionDisabled FindingTypeEnum = "Policy:IAMUser/S3BucketEncryptionDisabled"
-FindingTypeEnumPolicyIamUserS3BlockPublicAccessDisabled FindingTypeEnum = "Policy:IAMUser/S3BlockPublicAccessDisabled"
+	FindingTypeEnumSensitiveDataS3ObjectMultiple             FindingTypeEnum = "SensitiveData:S3Object/Multiple"
+	FindingTypeEnumSensitiveDataS3ObjectFinancial            FindingTypeEnum = "SensitiveData:S3Object/Financial"
+	FindingTypeEnumSensitiveDataS3ObjectPersonal             FindingTypeEnum = "SensitiveData:S3Object/Personal"
+	FindingTypeEnumSensitiveDataS3ObjectCredentials          FindingTypeEnum = "SensitiveData:S3Object/Credentials"
+	FindingTypeEnumSensitiveDataS3ObjectCustomIdentifier     FindingTypeEnum = "SensitiveData:S3Object/CustomIdentifier"
+	FindingTypeEnumPolicyIamUserS3BucketPublic               FindingTypeEnum = "Policy:IAMUser/S3BucketPublic"
+	FindingTypeEnumPolicyIamUserS3BucketSharedExternally     FindingTypeEnum = "Policy:IAMUser/S3BucketSharedExternally"
+	FindingTypeEnumPolicyIamUserS3BucketReplicatedExternally FindingTypeEnum = "Policy:IAMUser/S3BucketReplicatedExternally"
+	FindingTypeEnumPolicyIamUserS3BucketEncryptionDisabled   FindingTypeEnum = "Policy:IAMUser/S3BucketEncryptionDisabled"
+	FindingTypeEnumPolicyIamUserS3BlockPublicAccessDisabled  FindingTypeEnum = "Policy:IAMUser/S3BlockPublicAccessDisabled"
 )
-
-

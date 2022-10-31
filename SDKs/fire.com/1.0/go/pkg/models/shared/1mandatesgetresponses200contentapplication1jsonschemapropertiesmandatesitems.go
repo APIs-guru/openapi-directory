@@ -1,83 +1,78 @@
 package shared
 
 import (
-"time")
-
+	"time"
+)
 
 type OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum string
 
 const (
-    OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumAccountDoesNotAcceptDirectDebits OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "ACCOUNT_DOES_NOT_ACCEPT_DIRECT_DEBITS"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumDdic OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "DDIC"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumAccountNotFound OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "ACCOUNT_NOT_FOUND"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumAccountNotLive OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "ACCOUNT_NOT_LIVE"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumCustomerNotFound OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "CUSTOMER_NOT_FOUND"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumBusinessNotLive OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "BUSINESS_NOT_LIVE"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumBusinessNotFull OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "BUSINESS_NOT_FULL"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumPersonalUserNotLive OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "PERSONAL_USER_NOT_LIVE"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumPersonalUserNotFull OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "PERSONAL_USER_NOT_FULL"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumMandateAlreadyExists OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "MANDATE_ALREADY_EXISTS"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumMandateWithDiferentAccount OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "MANDATE_WITH_DIFERENT_ACCOUNT"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumNullMandateReference OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "NULL_MANDATE_REFERENCE"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumInvalidAccountCurrency OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "INVALID_ACCOUNT_CURRENCY"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumInvalidMandateReference OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "INVALID_MANDATE_REFERENCE"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumRequestedByCustomerViaSupport OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "REQUESTED_BY_CUSTOMER_VIA_SUPPORT"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumCustomerAccountClosed OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "CUSTOMER_ACCOUNT_CLOSED"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumCustomerDeceased OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "CUSTOMER_DECEASED"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumAccountTransferred OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "ACCOUNT_TRANSFERRED"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumMandateNotFound OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "MANDATE_NOT_FOUND"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumAccountTransferredToDifferentAccount OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "ACCOUNT_TRANSFERRED_TO_DIFFERENT_ACCOUNT"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumInvalidAccountType OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "INVALID_ACCOUNT_TYPE"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumMandateExpired OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "MANDATE_EXPIRED"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumMandateCancelled OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "MANDATE_CANCELLED"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumRequestedByCustomer OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "REQUESTED_BY_CUSTOMER"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumAccountDoesNotAcceptDirectDebits     OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "ACCOUNT_DOES_NOT_ACCEPT_DIRECT_DEBITS"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumDdic                                 OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "DDIC"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumAccountNotFound                      OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "ACCOUNT_NOT_FOUND"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumAccountNotLive                       OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "ACCOUNT_NOT_LIVE"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumCustomerNotFound                     OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "CUSTOMER_NOT_FOUND"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumBusinessNotLive                      OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "BUSINESS_NOT_LIVE"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumBusinessNotFull                      OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "BUSINESS_NOT_FULL"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumPersonalUserNotLive                  OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "PERSONAL_USER_NOT_LIVE"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumPersonalUserNotFull                  OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "PERSONAL_USER_NOT_FULL"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumMandateAlreadyExists                 OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "MANDATE_ALREADY_EXISTS"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumMandateWithDiferentAccount           OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "MANDATE_WITH_DIFERENT_ACCOUNT"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumNullMandateReference                 OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "NULL_MANDATE_REFERENCE"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumInvalidAccountCurrency               OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "INVALID_ACCOUNT_CURRENCY"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumInvalidMandateReference              OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "INVALID_MANDATE_REFERENCE"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumRequestedByCustomerViaSupport        OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "REQUESTED_BY_CUSTOMER_VIA_SUPPORT"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumCustomerAccountClosed                OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "CUSTOMER_ACCOUNT_CLOSED"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumCustomerDeceased                     OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "CUSTOMER_DECEASED"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumAccountTransferred                   OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "ACCOUNT_TRANSFERRED"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumMandateNotFound                      OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "MANDATE_NOT_FOUND"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumAccountTransferredToDifferentAccount OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "ACCOUNT_TRANSFERRED_TO_DIFFERENT_ACCOUNT"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumInvalidAccountType                   OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "INVALID_ACCOUNT_TYPE"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumMandateExpired                       OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "MANDATE_EXPIRED"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumMandateCancelled                     OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "MANDATE_CANCELLED"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnumRequestedByCustomer                  OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum = "REQUESTED_BY_CUSTOMER"
 )
-
-
 
 type OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum string
 
 const (
-    OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumCreated OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "CREATED"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumLive OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "LIVE"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumRejectRequested OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "REJECT_REQUESTED"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumRejectRecordInProgress OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "REJECT_RECORD_IN_PROGRESS"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumRejectRecorded OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "REJECT_RECORDED"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumRejectFileCreated OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "REJECT_FILE_CREATED"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumRejectFileSent OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "REJECT_FILE_SENT"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumCancelRequested OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "CANCEL_REQUESTED"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumCancelRecordInProgress OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "CANCEL_RECORD_IN_PROGRESS"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumCancelRecorded OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "CANCEL_RECORDED"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumCancelFileCreated OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "CANCEL_FILE_CREATED"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumCancelFileSent OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "CANCEL_FILE_SENT"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumComplete OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "COMPLETE"
-OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumDormant OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "DORMANT"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumCreated                OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "CREATED"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumLive                   OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "LIVE"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumRejectRequested        OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "REJECT_REQUESTED"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumRejectRecordInProgress OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "REJECT_RECORD_IN_PROGRESS"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumRejectRecorded         OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "REJECT_RECORDED"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumRejectFileCreated      OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "REJECT_FILE_CREATED"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumRejectFileSent         OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "REJECT_FILE_SENT"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumCancelRequested        OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "CANCEL_REQUESTED"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumCancelRecordInProgress OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "CANCEL_RECORD_IN_PROGRESS"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumCancelRecorded         OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "CANCEL_RECORDED"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumCancelFileCreated      OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "CANCEL_FILE_CREATED"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumCancelFileSent         OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "CANCEL_FILE_SENT"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumComplete               OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "COMPLETE"
+	OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnumDormant                OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum = "DORMANT"
 )
 
-
 type OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItems struct {
-    Alias *string `json:"alias,omitempty"`
-    Currency *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency `json:"currency,omitempty"`
-    DateCancelled *time.Time `json:"dateCancelled,omitempty"`
-    DateCompleted *time.Time `json:"dateCompleted,omitempty"`
-    DateCreated *time.Time `json:"dateCreated,omitempty"`
-    FireRejectionReason *OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum `json:"fireRejectionReason,omitempty"`
-    LastUpdated *time.Time `json:"lastUpdated,omitempty"`
-    LatestDirectDebitAmount *int64 `json:"latestDirectDebitAmount,omitempty"`
-    LatestDirectDebitDate *time.Time `json:"latestDirectDebitDate,omitempty"`
-    MandateReference *string `json:"mandateReference,omitempty"`
-    MandateUUID *string `json:"mandateUuid,omitempty"`
-    NumberOfDirectDebitCollected *int64 `json:"numberOfDirectDebitCollected,omitempty"`
-    OriginatorAlias *string `json:"originatorAlias,omitempty"`
-    OriginatorLogoURLLarge *string `json:"originatorLogoUrlLarge,omitempty"`
-    OriginatorLogoURLSmall *string `json:"originatorLogoUrlSmall,omitempty"`
-    OriginatorName *string `json:"originatorName,omitempty"`
-    OriginatorReference *string `json:"originatorReference,omitempty"`
-    SchemeCancelReason *string `json:"schemeCancelReason,omitempty"`
-    SchemeCancelReasonCode *string `json:"schemeCancelReasonCode,omitempty"`
-    Status *OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum `json:"status,omitempty"`
-    TargetIcan *int64 `json:"targetIcan,omitempty"`
-    ValueOfDirectDebitCollected *int64 `json:"valueOfDirectDebitCollected,omitempty"`
-    
+	Alias                        *string                                                                                                `json:"alias,omitempty"`
+	Currency                     *OneaccountsGetResponses200ContentApplication1jsonSchemaPropertiesAccountsItemsPropertiesCurrency      `json:"currency,omitempty"`
+	DateCancelled                *time.Time                                                                                             `json:"dateCancelled,omitempty"`
+	DateCompleted                *time.Time                                                                                             `json:"dateCompleted,omitempty"`
+	DateCreated                  *time.Time                                                                                             `json:"dateCreated,omitempty"`
+	FireRejectionReason          *OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsFireRejectionReasonEnum `json:"fireRejectionReason,omitempty"`
+	LastUpdated                  *time.Time                                                                                             `json:"lastUpdated,omitempty"`
+	LatestDirectDebitAmount      *int64                                                                                                 `json:"latestDirectDebitAmount,omitempty"`
+	LatestDirectDebitDate        *time.Time                                                                                             `json:"latestDirectDebitDate,omitempty"`
+	MandateReference             *string                                                                                                `json:"mandateReference,omitempty"`
+	MandateUUID                  *string                                                                                                `json:"mandateUuid,omitempty"`
+	NumberOfDirectDebitCollected *int64                                                                                                 `json:"numberOfDirectDebitCollected,omitempty"`
+	OriginatorAlias              *string                                                                                                `json:"originatorAlias,omitempty"`
+	OriginatorLogoURLLarge       *string                                                                                                `json:"originatorLogoUrlLarge,omitempty"`
+	OriginatorLogoURLSmall       *string                                                                                                `json:"originatorLogoUrlSmall,omitempty"`
+	OriginatorName               *string                                                                                                `json:"originatorName,omitempty"`
+	OriginatorReference          *string                                                                                                `json:"originatorReference,omitempty"`
+	SchemeCancelReason           *string                                                                                                `json:"schemeCancelReason,omitempty"`
+	SchemeCancelReasonCode       *string                                                                                                `json:"schemeCancelReasonCode,omitempty"`
+	Status                       *OnemandatesGetResponses200ContentApplication1jsonSchemaPropertiesMandatesItemsStatusEnum              `json:"status,omitempty"`
+	TargetIcan                   *int64                                                                                                 `json:"targetIcan,omitempty"`
+	ValueOfDirectDebitCollected  *int64                                                                                                 `json:"valueOfDirectDebitCollected,omitempty"`
 }
-

@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type EvaluationResultIdentifier struct {
-    EvaluationResultQualifier *EvaluationResultQualifier `json:"EvaluationResultQualifier,omitempty"`
-    OrderingTimestamp *time.Time `json:"OrderingTimestamp,omitempty"`
-    
+	EvaluationResultQualifier *EvaluationResultQualifier `json:"EvaluationResultQualifier,omitempty"`
+	OrderingTimestamp         *time.Time                 `json:"OrderingTimestamp,omitempty"`
 }
-

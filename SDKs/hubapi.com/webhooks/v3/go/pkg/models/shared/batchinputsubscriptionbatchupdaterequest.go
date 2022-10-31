@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchInputSubscriptionBatchUpdateRequest struct {
-    Inputs []SubscriptionBatchUpdateRequest `json:"inputs"`
-    
+	Inputs []SubscriptionBatchUpdateRequest `json:"inputs"`
 }
-

@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeleteBlobPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type DeleteBlobRequest struct {
-    PathParams DeleteBlobPathParams 
-    
+	PathParams DeleteBlobPathParams
 }
 
 type DeleteBlobResponse struct {
-    ContentType string 
-    ResponseDefaultResource *shared.ResponseDefaultResource 
-    StatusCode int64 
-    
+	ContentType             string
+	ResponseDefaultResource *shared.ResponseDefaultResource
+	StatusCode              int64
 }
-

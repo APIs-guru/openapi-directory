@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SpecialHours struct {
-    SpecialHourPeriods []SpecialHourPeriod `json:"specialHourPeriods,omitempty"`
-    
+	SpecialHourPeriods []SpecialHourPeriod `json:"specialHourPeriods,omitempty"`
 }
-

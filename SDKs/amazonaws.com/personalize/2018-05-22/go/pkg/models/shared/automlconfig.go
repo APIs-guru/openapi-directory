@@ -1,10 +1,6 @@
 package shared
 
-
-
 type AutoMlConfig struct {
-    MetricName *string `json:"metricName,omitempty"`
-    RecipeList []string `json:"recipeList,omitempty"`
-    
+	MetricName *string  `json:"metricName,omitempty"`
+	RecipeList []string `json:"recipeList,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeSolutionResponse struct {
-    Solution *Solution `json:"solution,omitempty"`
-    
+	Solution *Solution `json:"solution,omitempty"`
 }
-

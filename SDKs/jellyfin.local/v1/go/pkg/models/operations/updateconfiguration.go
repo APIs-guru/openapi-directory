@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type UpdateConfigurationRequests struct {
-    ServerConfiguration *shared.ServerConfiguration `request:"mediaType=application/*+json"`
-    ServerConfiguration1 *shared.ServerConfiguration `request:"mediaType=application/json"`
-    ServerConfiguration2 *shared.ServerConfiguration `request:"mediaType=text/json"`
-    
+	ServerConfiguration  *shared.ServerConfiguration `request:"mediaType=application/*+json"`
+	ServerConfiguration1 *shared.ServerConfiguration `request:"mediaType=application/json"`
+	ServerConfiguration2 *shared.ServerConfiguration `request:"mediaType=text/json"`
 }
 
 type UpdateConfigurationSecurity struct {
-    CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
-    
+	CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type UpdateConfigurationRequest struct {
-    Request UpdateConfigurationRequests 
-    Security UpdateConfigurationSecurity 
-    
+	Request  UpdateConfigurationRequests
+	Security UpdateConfigurationSecurity
 }
 
 type UpdateConfigurationResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

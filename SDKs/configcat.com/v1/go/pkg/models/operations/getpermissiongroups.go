@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetPermissionGroupsPathParams struct {
-    ProductID string `pathParam:"style=simple,explode=false,name=productId"`
-    
+	ProductID string `pathParam:"style=simple,explode=false,name=productId"`
 }
 
 type GetPermissionGroupsRequest struct {
-    PathParams GetPermissionGroupsPathParams 
-    
+	PathParams GetPermissionGroupsPathParams
 }
 
 type GetPermissionGroupsResponse struct {
-    ContentType string 
-    PermissionGroupModels []shared.PermissionGroupModel 
-    StatusCode int64 
-    
+	ContentType           string
+	PermissionGroupModels []shared.PermissionGroupModel
+	StatusCode            int64
 }
-

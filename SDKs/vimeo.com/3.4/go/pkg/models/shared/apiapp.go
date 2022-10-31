@@ -1,10 +1,6 @@
 package shared
 
-
-
 type APIApp struct {
-    Name string `json:"name"`
-    URI string `json:"uri"`
-    
+	Name string `json:"name"`
+	URI  string `json:"uri"`
 }
-

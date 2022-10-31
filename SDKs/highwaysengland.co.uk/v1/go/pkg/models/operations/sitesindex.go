@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type SitesIndexPathParams struct {
-    Version string `pathParam:"style=simple,explode=false,name=version"`
-    
+	Version string `pathParam:"style=simple,explode=false,name=version"`
 }
 
 type SitesIndexRequest struct {
-    PathParams SitesIndexPathParams 
-    
+	PathParams SitesIndexPathParams
 }
 
 type SitesIndexResponse struct {
-    ContentType string 
-    SiteResponse *shared.SiteResponse 
-    StatusCode int64 
-    
+	ContentType  string
+	SiteResponse *shared.SiteResponse
+	StatusCode   int64
 }
-

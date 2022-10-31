@@ -1,26 +1,21 @@
 package shared
 
-
-
-
 type DynatraceConnectorOperatorEnum string
 
 const (
-    DynatraceConnectorOperatorEnumProjection DynatraceConnectorOperatorEnum = "PROJECTION"
-DynatraceConnectorOperatorEnumBetween DynatraceConnectorOperatorEnum = "BETWEEN"
-DynatraceConnectorOperatorEnumEqualTo DynatraceConnectorOperatorEnum = "EQUAL_TO"
-DynatraceConnectorOperatorEnumAddition DynatraceConnectorOperatorEnum = "ADDITION"
-DynatraceConnectorOperatorEnumMultiplication DynatraceConnectorOperatorEnum = "MULTIPLICATION"
-DynatraceConnectorOperatorEnumDivision DynatraceConnectorOperatorEnum = "DIVISION"
-DynatraceConnectorOperatorEnumSubtraction DynatraceConnectorOperatorEnum = "SUBTRACTION"
-DynatraceConnectorOperatorEnumMaskAll DynatraceConnectorOperatorEnum = "MASK_ALL"
-DynatraceConnectorOperatorEnumMaskFirstN DynatraceConnectorOperatorEnum = "MASK_FIRST_N"
-DynatraceConnectorOperatorEnumMaskLastN DynatraceConnectorOperatorEnum = "MASK_LAST_N"
-DynatraceConnectorOperatorEnumValidateNonNull DynatraceConnectorOperatorEnum = "VALIDATE_NON_NULL"
-DynatraceConnectorOperatorEnumValidateNonZero DynatraceConnectorOperatorEnum = "VALIDATE_NON_ZERO"
-DynatraceConnectorOperatorEnumValidateNonNegative DynatraceConnectorOperatorEnum = "VALIDATE_NON_NEGATIVE"
-DynatraceConnectorOperatorEnumValidateNumeric DynatraceConnectorOperatorEnum = "VALIDATE_NUMERIC"
-DynatraceConnectorOperatorEnumNoOp DynatraceConnectorOperatorEnum = "NO_OP"
+	DynatraceConnectorOperatorEnumProjection          DynatraceConnectorOperatorEnum = "PROJECTION"
+	DynatraceConnectorOperatorEnumBetween             DynatraceConnectorOperatorEnum = "BETWEEN"
+	DynatraceConnectorOperatorEnumEqualTo             DynatraceConnectorOperatorEnum = "EQUAL_TO"
+	DynatraceConnectorOperatorEnumAddition            DynatraceConnectorOperatorEnum = "ADDITION"
+	DynatraceConnectorOperatorEnumMultiplication      DynatraceConnectorOperatorEnum = "MULTIPLICATION"
+	DynatraceConnectorOperatorEnumDivision            DynatraceConnectorOperatorEnum = "DIVISION"
+	DynatraceConnectorOperatorEnumSubtraction         DynatraceConnectorOperatorEnum = "SUBTRACTION"
+	DynatraceConnectorOperatorEnumMaskAll             DynatraceConnectorOperatorEnum = "MASK_ALL"
+	DynatraceConnectorOperatorEnumMaskFirstN          DynatraceConnectorOperatorEnum = "MASK_FIRST_N"
+	DynatraceConnectorOperatorEnumMaskLastN           DynatraceConnectorOperatorEnum = "MASK_LAST_N"
+	DynatraceConnectorOperatorEnumValidateNonNull     DynatraceConnectorOperatorEnum = "VALIDATE_NON_NULL"
+	DynatraceConnectorOperatorEnumValidateNonZero     DynatraceConnectorOperatorEnum = "VALIDATE_NON_ZERO"
+	DynatraceConnectorOperatorEnumValidateNonNegative DynatraceConnectorOperatorEnum = "VALIDATE_NON_NEGATIVE"
+	DynatraceConnectorOperatorEnumValidateNumeric     DynatraceConnectorOperatorEnum = "VALIDATE_NUMERIC"
+	DynatraceConnectorOperatorEnumNoOp                DynatraceConnectorOperatorEnum = "NO_OP"
 )
-
-

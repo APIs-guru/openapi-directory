@@ -1,11 +1,7 @@
 package shared
 
-
-
 type CreativeClickThroughURL struct {
-    ComputedClickThroughURL *string `json:"computedClickThroughUrl,omitempty"`
-    CustomClickThroughURL *string `json:"customClickThroughUrl,omitempty"`
-    LandingPageID *string `json:"landingPageId,omitempty"`
-    
+	ComputedClickThroughURL *string `json:"computedClickThroughUrl,omitempty"`
+	CustomClickThroughURL   *string `json:"customClickThroughUrl,omitempty"`
+	LandingPageID           *string `json:"landingPageId,omitempty"`
 }
-

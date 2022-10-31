@@ -1,63 +1,55 @@
 package shared
 
 import (
-"time")
-
+	"time"
+)
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnum string
 
 const (
-    Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnumProvisioning Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnum = "provisioning"
-Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnumRunning Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnum = "running"
-Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnumDraining Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnum = "draining"
-Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnumDeleting Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnum = "deleting"
+	Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnumProvisioning Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnum = "provisioning"
+	Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnumRunning      Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnum = "running"
+	Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnumDraining     Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnum = "draining"
+	Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnumDeleting     Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnum = "deleting"
 )
 
-
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatus struct {
-    State *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnum `json:"state,omitempty"`
-    
+	State *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatusStateEnum `json:"state,omitempty"`
 }
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodes struct {
-    CreatedAt *time.Time `json:"created_at,omitempty"`
-    DropletID *string `json:"droplet_id,omitempty"`
-    ID *string `json:"id,omitempty"`
-    Name *string `json:"name,omitempty"`
-    Status *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatus `json:"status,omitempty"`
-    UpdatedAt *time.Time `json:"updated_at,omitempty"`
-    
+	CreatedAt *time.Time                                                                                                                                       `json:"created_at,omitempty"`
+	DropletID *string                                                                                                                                          `json:"droplet_id,omitempty"`
+	ID        *string                                                                                                                                          `json:"id,omitempty"`
+	Name      *string                                                                                                                                          `json:"name,omitempty"`
+	Status    *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodesStatus `json:"status,omitempty"`
+	UpdatedAt *time.Time                                                                                                                                       `json:"updated_at,omitempty"`
 }
-
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnum string
 
 const (
-    Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnumNoSchedule Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnum = "NoSchedule"
-Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnumPreferNoSchedule Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnum = "PreferNoSchedule"
-Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnumNoExecute Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnum = "NoExecute"
+	Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnumNoSchedule       Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnum = "NoSchedule"
+	Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnumPreferNoSchedule Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnum = "PreferNoSchedule"
+	Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnumNoExecute        Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnum = "NoExecute"
 )
 
-
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaints struct {
-    Effect *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnum `json:"effect,omitempty"`
-    Key *string `json:"key,omitempty"`
-    Value *string `json:"value,omitempty"`
-    
+	Effect *Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaintsEffectEnum `json:"effect,omitempty"`
+	Key    *string                                                                                                                                               `json:"key,omitempty"`
+	Value  *string                                                                                                                                               `json:"value,omitempty"`
 }
 
 type Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItems struct {
-    AutoScale *bool `json:"auto_scale,omitempty"`
-    Count int64 `json:"count"`
-    ID *string `json:"id,omitempty"`
-    Labels map[string]interface{} `json:"labels,omitempty"`
-    MaxNodes *int64 `json:"max_nodes,omitempty"`
-    MinNodes *int64 `json:"min_nodes,omitempty"`
-    Name string `json:"name"`
-    Nodes []Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodes `json:"nodes,omitempty"`
-    Size string `json:"size"`
-    Tags []string `json:"tags,omitempty"`
-    Taints []Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaints `json:"taints,omitempty"`
-    
+	AutoScale *bool                                                                                                                                        `json:"auto_scale,omitempty"`
+	Count     int64                                                                                                                                        `json:"count"`
+	ID        *string                                                                                                                                      `json:"id,omitempty"`
+	Labels    map[string]interface{}                                                                                                                       `json:"labels,omitempty"`
+	MaxNodes  *int64                                                                                                                                       `json:"max_nodes,omitempty"`
+	MinNodes  *int64                                                                                                                                       `json:"min_nodes,omitempty"`
+	Name      string                                                                                                                                       `json:"name"`
+	Nodes     []Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsNodes  `json:"nodes,omitempty"`
+	Size      string                                                                                                                                       `json:"size"`
+	Tags      []string                                                                                                                                     `json:"tags,omitempty"`
+	Taints    []Onev21kubernetes1clustersGetResponses200ContentApplication1jsonSchemaAllOf0PropertiesKubernetesClustersItemsPropertiesNodePoolsItemsTaints `json:"taints,omitempty"`
 }
-

@@ -1,10 +1,9 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type UpdateStateMachineOutput struct {
-    UpdateDate time.Time `json:"updateDate"`
-    
+	UpdateDate time.Time `json:"updateDate"`
 }
-

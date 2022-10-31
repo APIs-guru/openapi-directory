@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateOpsMetadataResult struct {
-    OpsMetadataArn *string `json:"OpsMetadataArn,omitempty"`
-    
+	OpsMetadataArn *string `json:"OpsMetadataArn,omitempty"`
 }
-

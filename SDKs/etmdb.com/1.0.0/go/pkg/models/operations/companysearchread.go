@@ -1,20 +1,14 @@
 package operations
 
-
-
 type CompanySearchReadPathParams struct {
-    CompanyName string `pathParam:"style=simple,explode=false,name=company_name"`
-    
+	CompanyName string `pathParam:"style=simple,explode=false,name=company_name"`
 }
 
 type CompanySearchReadRequest struct {
-    PathParams CompanySearchReadPathParams 
-    
+	PathParams CompanySearchReadPathParams
 }
 
 type CompanySearchReadResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

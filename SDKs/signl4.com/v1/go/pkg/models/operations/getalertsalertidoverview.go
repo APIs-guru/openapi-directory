@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAlertsAlertIDOverviewPathParams struct {
-    AlertID string `pathParam:"style=simple,explode=false,name=alertId"`
-    
+	AlertID string `pathParam:"style=simple,explode=false,name=alertId"`
 }
 
 type GetAlertsAlertIDOverviewRequest struct {
-    PathParams GetAlertsAlertIDOverviewPathParams 
-    
+	PathParams GetAlertsAlertIDOverviewPathParams
 }
 
 type GetAlertsAlertIDOverviewResponse struct {
-    Body []byte 
-    ContentType string 
-    ErrorResponseContent *shared.ErrorResponseContent 
-    OverviewAlert *shared.OverviewAlert 
-    StatusCode int64 
-    
+	Body                 []byte
+	ContentType          string
+	ErrorResponseContent *shared.ErrorResponseContent
+	OverviewAlert        *shared.OverviewAlert
+	StatusCode           int64
 }
-

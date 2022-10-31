@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudRecommenderV1beta1RecommenderGenerationConfig struct {
-    Params map[string]interface{} `json:"params,omitempty"`
-    
+	Params map[string]interface{} `json:"params,omitempty"`
 }
-

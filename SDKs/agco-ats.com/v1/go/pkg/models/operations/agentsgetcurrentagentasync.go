@@ -1,14 +1,13 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type AgentsGetCurrentAgentAsyncResponse struct {
-    APIModelsAPIError *shared.APIModelsAPIError 
-    Body []byte 
-    BuildSystemSharedDtoAgent *shared.BuildSystemSharedDtoAgent 
-    ContentType string 
-    StatusCode int64 
-    
+	APIModelsAPIError         *shared.APIModelsAPIError
+	Body                      []byte
+	BuildSystemSharedDtoAgent *shared.BuildSystemSharedDtoAgent
+	ContentType               string
+	StatusCode                int64
 }
-

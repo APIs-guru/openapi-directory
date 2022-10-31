@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Detail struct {
-    Findings []Finding `json:"findings,omitempty"`
-    
+	Findings []Finding `json:"findings,omitempty"`
 }
-

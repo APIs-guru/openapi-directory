@@ -1,54 +1,44 @@
 package operations
 
-
-
 type CreateDiffHTMLUsingGetQueryParams struct {
-    EndRev *string `queryParam:"style=form,explode=true,name=endRev"`
-    PadID *string `queryParam:"style=form,explode=true,name=padID"`
-    StartRev *string `queryParam:"style=form,explode=true,name=startRev"`
-    
+	EndRev   *string `queryParam:"style=form,explode=true,name=endRev"`
+	PadID    *string `queryParam:"style=form,explode=true,name=padID"`
+	StartRev *string `queryParam:"style=form,explode=true,name=startRev"`
 }
 
 type CreateDiffHTMLUsingGetRequest struct {
-    QueryParams CreateDiffHTMLUsingGetQueryParams 
-    
+	QueryParams CreateDiffHTMLUsingGetQueryParams
 }
 
 type CreateDiffHTMLUsingGet200ApplicationJSON struct {
-    Code *int64 `json:"code,omitempty"`
-    Data map[string]interface{} `json:"data,omitempty"`
-    Message *string `json:"message,omitempty"`
-    
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateDiffHTMLUsingGet400ApplicationJSON struct {
-    Code *int64 `json:"code,omitempty"`
-    Data map[string]interface{} `json:"data,omitempty"`
-    Message *string `json:"message,omitempty"`
-    
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateDiffHTMLUsingGet401ApplicationJSON struct {
-    Code *int64 `json:"code,omitempty"`
-    Data map[string]interface{} `json:"data,omitempty"`
-    Message *string `json:"message,omitempty"`
-    
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateDiffHTMLUsingGet500ApplicationJSON struct {
-    Code *int64 `json:"code,omitempty"`
-    Data map[string]interface{} `json:"data,omitempty"`
-    Message *string `json:"message,omitempty"`
-    
+	Code    *int64                 `json:"code,omitempty"`
+	Data    map[string]interface{} `json:"data,omitempty"`
+	Message *string                `json:"message,omitempty"`
 }
 
 type CreateDiffHTMLUsingGetResponse struct {
-    ContentType string 
-    StatusCode int64 
-    CreateDiffHTMLUsingGet200ApplicationJSONObject *CreateDiffHTMLUsingGet200ApplicationJSON 
-    CreateDiffHTMLUsingGet400ApplicationJSONObject *CreateDiffHTMLUsingGet400ApplicationJSON 
-    CreateDiffHTMLUsingGet401ApplicationJSONObject *CreateDiffHTMLUsingGet401ApplicationJSON 
-    CreateDiffHTMLUsingGet500ApplicationJSONObject *CreateDiffHTMLUsingGet500ApplicationJSON 
-    
+	ContentType                                    string
+	StatusCode                                     int64
+	CreateDiffHTMLUsingGet200ApplicationJSONObject *CreateDiffHTMLUsingGet200ApplicationJSON
+	CreateDiffHTMLUsingGet400ApplicationJSONObject *CreateDiffHTMLUsingGet400ApplicationJSON
+	CreateDiffHTMLUsingGet401ApplicationJSONObject *CreateDiffHTMLUsingGet401ApplicationJSON
+	CreateDiffHTMLUsingGet500ApplicationJSONObject *CreateDiffHTMLUsingGet500ApplicationJSON
 }
-

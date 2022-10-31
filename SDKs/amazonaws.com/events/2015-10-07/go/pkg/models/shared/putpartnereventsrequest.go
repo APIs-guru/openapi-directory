@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PutPartnerEventsRequest struct {
-    Entries []PutPartnerEventsRequestEntry `json:"Entries"`
-    
+	Entries []PutPartnerEventsRequestEntry `json:"Entries"`
 }
-

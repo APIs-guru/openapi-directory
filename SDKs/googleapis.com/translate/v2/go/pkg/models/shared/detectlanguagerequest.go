@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DetectLanguageRequest struct {
-    Q []string `json:"q,omitempty"`
-    
+	Q []string `json:"q,omitempty"`
 }
-

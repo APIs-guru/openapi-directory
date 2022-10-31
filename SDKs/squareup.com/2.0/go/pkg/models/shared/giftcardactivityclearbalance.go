@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GiftCardActivityClearBalance struct {
-    Reason interface{} `json:"reason"`
-    
+	Reason interface{} `json:"reason"`
 }
-

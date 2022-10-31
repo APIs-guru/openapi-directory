@@ -1,22 +1,16 @@
 package shared
 
-
-
-
 type AuthorizationCodesSharedModelsValidationFieldTypeEnum string
 
 const (
-    AuthorizationCodesSharedModelsValidationFieldTypeEnumBoolean AuthorizationCodesSharedModelsValidationFieldTypeEnum = "Boolean"
-AuthorizationCodesSharedModelsValidationFieldTypeEnumFloat AuthorizationCodesSharedModelsValidationFieldTypeEnum = "Float"
-AuthorizationCodesSharedModelsValidationFieldTypeEnumInt AuthorizationCodesSharedModelsValidationFieldTypeEnum = "Int"
-AuthorizationCodesSharedModelsValidationFieldTypeEnumStringCaseInsensitive AuthorizationCodesSharedModelsValidationFieldTypeEnum = "StringCaseInsensitive"
-AuthorizationCodesSharedModelsValidationFieldTypeEnumStringCaseSensitive AuthorizationCodesSharedModelsValidationFieldTypeEnum = "StringCaseSensitive"
+	AuthorizationCodesSharedModelsValidationFieldTypeEnumBoolean               AuthorizationCodesSharedModelsValidationFieldTypeEnum = "Boolean"
+	AuthorizationCodesSharedModelsValidationFieldTypeEnumFloat                 AuthorizationCodesSharedModelsValidationFieldTypeEnum = "Float"
+	AuthorizationCodesSharedModelsValidationFieldTypeEnumInt                   AuthorizationCodesSharedModelsValidationFieldTypeEnum = "Int"
+	AuthorizationCodesSharedModelsValidationFieldTypeEnumStringCaseInsensitive AuthorizationCodesSharedModelsValidationFieldTypeEnum = "StringCaseInsensitive"
+	AuthorizationCodesSharedModelsValidationFieldTypeEnumStringCaseSensitive   AuthorizationCodesSharedModelsValidationFieldTypeEnum = "StringCaseSensitive"
 )
 
-
 type AuthorizationCodesSharedModelsValidationField struct {
-    Name string `json:"Name"`
-    Type AuthorizationCodesSharedModelsValidationFieldTypeEnum `json:"Type"`
-    
+	Name string                                                `json:"Name"`
+	Type AuthorizationCodesSharedModelsValidationFieldTypeEnum `json:"Type"`
 }
-

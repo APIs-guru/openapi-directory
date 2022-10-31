@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AddJobFlowStepsOutput struct {
-    StepIds []string `json:"StepIds,omitempty"`
-    
+	StepIds []string `json:"StepIds,omitempty"`
 }
-

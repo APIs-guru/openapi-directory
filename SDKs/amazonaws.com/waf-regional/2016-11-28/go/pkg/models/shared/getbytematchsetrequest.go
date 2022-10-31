@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetByteMatchSetRequest struct {
-    ByteMatchSetID string `json:"ByteMatchSetId"`
-    
+	ByteMatchSetID string `json:"ByteMatchSetId"`
 }
-

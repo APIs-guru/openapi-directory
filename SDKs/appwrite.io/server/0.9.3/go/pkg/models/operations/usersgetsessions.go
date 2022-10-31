@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type UsersGetSessionsPathParams struct {
-    UserID string `pathParam:"style=simple,explode=false,name=userId"`
-    
+	UserID string `pathParam:"style=simple,explode=false,name=userId"`
 }
 
 type UsersGetSessionsSecurity struct {
-    Key shared.SchemeKey `security:"scheme,type=apiKey,subtype=header"`
-    Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
-    
+	Key     shared.SchemeKey     `security:"scheme,type=apiKey,subtype=header"`
+	Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type UsersGetSessionsRequest struct {
-    PathParams UsersGetSessionsPathParams 
-    Security UsersGetSessionsSecurity 
-    
+	PathParams UsersGetSessionsPathParams
+	Security   UsersGetSessionsSecurity
 }
 
 type UsersGetSessionsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    SessionList *shared.SessionList 
-    
+	ContentType string
+	StatusCode  int64
+	SessionList *shared.SessionList
 }
-

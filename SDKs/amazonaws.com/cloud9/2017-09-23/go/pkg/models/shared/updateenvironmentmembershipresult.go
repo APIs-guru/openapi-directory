@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateEnvironmentMembershipResult struct {
-    Membership *EnvironmentMember `json:"membership,omitempty"`
-    
+	Membership *EnvironmentMember `json:"membership,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateVirtualNodeOutput struct {
-    VirtualNode *VirtualNodeData `json:"virtualNode,omitempty"`
-    
+	VirtualNode *VirtualNodeData `json:"virtualNode,omitempty"`
 }
-

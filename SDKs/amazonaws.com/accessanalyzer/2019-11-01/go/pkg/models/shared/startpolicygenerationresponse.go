@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartPolicyGenerationResponse struct {
-    JobID string `json:"jobId"`
-    
+	JobID string `json:"jobId"`
 }
-

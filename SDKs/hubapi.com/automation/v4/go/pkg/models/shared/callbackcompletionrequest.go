@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CallbackCompletionRequest struct {
-    OutputFields map[string]string `json:"outputFields"`
-    
+	OutputFields map[string]string `json:"outputFields"`
 }
-

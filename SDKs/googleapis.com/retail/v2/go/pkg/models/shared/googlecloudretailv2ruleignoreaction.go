@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudRetailV2RuleIgnoreAction struct {
-    IgnoreTerms []string `json:"ignoreTerms,omitempty"`
-    
+	IgnoreTerms []string `json:"ignoreTerms,omitempty"`
 }
-

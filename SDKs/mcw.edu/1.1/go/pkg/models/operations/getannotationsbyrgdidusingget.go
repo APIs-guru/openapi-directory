@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetAnnotationsByRgdIDUsingGetPathParams struct {
-    RgdID int32 `pathParam:"style=simple,explode=false,name=rgdId"`
-    
+	RgdID int32 `pathParam:"style=simple,explode=false,name=rgdId"`
 }
 
 type GetAnnotationsByRgdIDUsingGetRequest struct {
-    PathParams GetAnnotationsByRgdIDUsingGetPathParams 
-    
+	PathParams GetAnnotationsByRgdIDUsingGetPathParams
 }
 
 type GetAnnotationsByRgdIDUsingGetResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

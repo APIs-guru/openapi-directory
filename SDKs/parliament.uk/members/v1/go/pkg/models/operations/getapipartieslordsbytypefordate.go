@@ -1,24 +1,21 @@
 package operations
 
 import (
-"time"
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+	"time"
+)
 
 type GetAPIPartiesLordsByTypeForDatePathParams struct {
-    ForDate time.Time `pathParam:"style=simple,explode=false,name=forDate"`
-    
+	ForDate time.Time `pathParam:"style=simple,explode=false,name=forDate"`
 }
 
 type GetAPIPartiesLordsByTypeForDateRequest struct {
-    PathParams GetAPIPartiesLordsByTypeForDatePathParams 
-    
+	PathParams GetAPIPartiesLordsByTypeForDatePathParams
 }
 
 type GetAPIPartiesLordsByTypeForDateResponse struct {
-    Body []byte 
-    ContentType string 
-    LordsByTypeMembersServiceSearchResult *shared.LordsByTypeMembersServiceSearchResult 
-    StatusCode int64 
-    
+	Body                                  []byte
+	ContentType                           string
+	LordsByTypeMembersServiceSearchResult *shared.LordsByTypeMembersServiceSearchResult
+	StatusCode                            int64
 }
-

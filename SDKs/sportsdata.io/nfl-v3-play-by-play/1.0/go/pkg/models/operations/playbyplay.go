@@ -1,33 +1,25 @@
 package operations
 
-
-
-
 type PlayByPlayFormatEnum string
 
 const (
-    PlayByPlayFormatEnumXML PlayByPlayFormatEnum = "XML"
-PlayByPlayFormatEnumJSON PlayByPlayFormatEnum = "JSON"
+	PlayByPlayFormatEnumXML  PlayByPlayFormatEnum = "XML"
+	PlayByPlayFormatEnumJSON PlayByPlayFormatEnum = "JSON"
 )
 
-
 type PlayByPlayPathParams struct {
-    Format PlayByPlayFormatEnum `pathParam:"style=simple,explode=false,name=format"`
-    Hometeam string `pathParam:"style=simple,explode=false,name=hometeam"`
-    Season string `pathParam:"style=simple,explode=false,name=season"`
-    Week string `pathParam:"style=simple,explode=false,name=week"`
-    
+	Format   PlayByPlayFormatEnum `pathParam:"style=simple,explode=false,name=format"`
+	Hometeam string               `pathParam:"style=simple,explode=false,name=hometeam"`
+	Season   string               `pathParam:"style=simple,explode=false,name=season"`
+	Week     string               `pathParam:"style=simple,explode=false,name=week"`
 }
 
 type PlayByPlayRequest struct {
-    PathParams PlayByPlayPathParams 
-    
+	PathParams PlayByPlayPathParams
 }
 
 type PlayByPlayResponse struct {
-    ContentType string 
-    PlayByPlay *interface{} 
-    StatusCode int64 
-    
+	ContentType string
+	PlayByPlay  *interface{}
+	StatusCode  int64
 }
-

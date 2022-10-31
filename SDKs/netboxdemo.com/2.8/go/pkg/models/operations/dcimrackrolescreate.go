@@ -1,17 +1,15 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DcimRackRolesCreateRequest struct {
-    Request shared.RackRole `request:"mediaType=application/json"`
-    
+	Request shared.RackRole `request:"mediaType=application/json"`
 }
 
 type DcimRackRolesCreateResponse struct {
-    ContentType string 
-    RackRole *shared.RackRole 
-    StatusCode int64 
-    
+	ContentType string
+	RackRole    *shared.RackRole
+	StatusCode  int64
 }
-

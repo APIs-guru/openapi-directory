@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetTlskeyHeaders struct {
-    XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
-    XAuthToken string `header:"style=simple,explode=false,name=X-Auth-Token"`
-    
+	XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
+	XAuthToken     string `header:"style=simple,explode=false,name=X-Auth-Token"`
 }
 
 type GetTlskeyRequest struct {
-    Headers GetTlskeyHeaders 
-    
+	Headers GetTlskeyHeaders
 }
 
 type GetTlskeyResponse struct {
-    Certificate *shared.Certificate 
-    ContentType string 
-    StatusCode int64 
-    
+	Certificate *shared.Certificate
+	ContentType string
+	StatusCode  int64
 }
-

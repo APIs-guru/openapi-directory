@@ -1,34 +1,26 @@
 package shared
 
-
-
-
 type GoogleCloudApigeeV1MetricAggregationAggregationEnum string
 
 const (
-    GoogleCloudApigeeV1MetricAggregationAggregationEnumAggregationFunctionUnspecified GoogleCloudApigeeV1MetricAggregationAggregationEnum = "AGGREGATION_FUNCTION_UNSPECIFIED"
-GoogleCloudApigeeV1MetricAggregationAggregationEnumAvg GoogleCloudApigeeV1MetricAggregationAggregationEnum = "AVG"
-GoogleCloudApigeeV1MetricAggregationAggregationEnumSum GoogleCloudApigeeV1MetricAggregationAggregationEnum = "SUM"
-GoogleCloudApigeeV1MetricAggregationAggregationEnumMin GoogleCloudApigeeV1MetricAggregationAggregationEnum = "MIN"
-GoogleCloudApigeeV1MetricAggregationAggregationEnumMax GoogleCloudApigeeV1MetricAggregationAggregationEnum = "MAX"
-GoogleCloudApigeeV1MetricAggregationAggregationEnumCountDistinct GoogleCloudApigeeV1MetricAggregationAggregationEnum = "COUNT_DISTINCT"
+	GoogleCloudApigeeV1MetricAggregationAggregationEnumAggregationFunctionUnspecified GoogleCloudApigeeV1MetricAggregationAggregationEnum = "AGGREGATION_FUNCTION_UNSPECIFIED"
+	GoogleCloudApigeeV1MetricAggregationAggregationEnumAvg                            GoogleCloudApigeeV1MetricAggregationAggregationEnum = "AVG"
+	GoogleCloudApigeeV1MetricAggregationAggregationEnumSum                            GoogleCloudApigeeV1MetricAggregationAggregationEnum = "SUM"
+	GoogleCloudApigeeV1MetricAggregationAggregationEnumMin                            GoogleCloudApigeeV1MetricAggregationAggregationEnum = "MIN"
+	GoogleCloudApigeeV1MetricAggregationAggregationEnumMax                            GoogleCloudApigeeV1MetricAggregationAggregationEnum = "MAX"
+	GoogleCloudApigeeV1MetricAggregationAggregationEnumCountDistinct                  GoogleCloudApigeeV1MetricAggregationAggregationEnum = "COUNT_DISTINCT"
 )
-
-
 
 type GoogleCloudApigeeV1MetricAggregationOrderEnum string
 
 const (
-    GoogleCloudApigeeV1MetricAggregationOrderEnumOrderUnspecified GoogleCloudApigeeV1MetricAggregationOrderEnum = "ORDER_UNSPECIFIED"
-GoogleCloudApigeeV1MetricAggregationOrderEnumAscending GoogleCloudApigeeV1MetricAggregationOrderEnum = "ASCENDING"
-GoogleCloudApigeeV1MetricAggregationOrderEnumDescending GoogleCloudApigeeV1MetricAggregationOrderEnum = "DESCENDING"
+	GoogleCloudApigeeV1MetricAggregationOrderEnumOrderUnspecified GoogleCloudApigeeV1MetricAggregationOrderEnum = "ORDER_UNSPECIFIED"
+	GoogleCloudApigeeV1MetricAggregationOrderEnumAscending        GoogleCloudApigeeV1MetricAggregationOrderEnum = "ASCENDING"
+	GoogleCloudApigeeV1MetricAggregationOrderEnumDescending       GoogleCloudApigeeV1MetricAggregationOrderEnum = "DESCENDING"
 )
 
-
 type GoogleCloudApigeeV1MetricAggregation struct {
-    Aggregation *GoogleCloudApigeeV1MetricAggregationAggregationEnum `json:"aggregation,omitempty"`
-    Name *string `json:"name,omitempty"`
-    Order *GoogleCloudApigeeV1MetricAggregationOrderEnum `json:"order,omitempty"`
-    
+	Aggregation *GoogleCloudApigeeV1MetricAggregationAggregationEnum `json:"aggregation,omitempty"`
+	Name        *string                                              `json:"name,omitempty"`
+	Order       *GoogleCloudApigeeV1MetricAggregationOrderEnum       `json:"order,omitempty"`
 }
-

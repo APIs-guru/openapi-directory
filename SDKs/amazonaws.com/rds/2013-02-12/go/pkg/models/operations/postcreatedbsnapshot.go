@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostCreateDbSnapshotActionEnum string
 
 const (
-    PostCreateDbSnapshotActionEnumCreateDbSnapshot PostCreateDbSnapshotActionEnum = "CreateDBSnapshot"
+	PostCreateDbSnapshotActionEnumCreateDbSnapshot PostCreateDbSnapshotActionEnum = "CreateDBSnapshot"
 )
-
-
 
 type PostCreateDbSnapshotVersionEnum string
 
 const (
-    PostCreateDbSnapshotVersionEnumTwoThousandAndThirteen0212 PostCreateDbSnapshotVersionEnum = "2013-02-12"
+	PostCreateDbSnapshotVersionEnumTwoThousandAndThirteen0212 PostCreateDbSnapshotVersionEnum = "2013-02-12"
 )
 
-
 type PostCreateDbSnapshotQueryParams struct {
-    Action PostCreateDbSnapshotActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostCreateDbSnapshotVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostCreateDbSnapshotActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostCreateDbSnapshotVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostCreateDbSnapshotHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostCreateDbSnapshotRequest struct {
-    QueryParams PostCreateDbSnapshotQueryParams 
-    Headers PostCreateDbSnapshotHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostCreateDbSnapshotQueryParams
+	Headers     PostCreateDbSnapshotHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostCreateDbSnapshotResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UploadYumArtifactMediaResponse struct {
-    Operation *Operation `json:"operation,omitempty"`
-    
+	Operation *Operation `json:"operation,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RollbackRequest struct {
-    Transaction *string `json:"transaction,omitempty"`
-    
+	Transaction *string `json:"transaction,omitempty"`
 }
-

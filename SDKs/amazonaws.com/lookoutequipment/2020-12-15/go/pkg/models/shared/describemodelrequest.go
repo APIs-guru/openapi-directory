@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeModelRequest struct {
-    ModelName string `json:"ModelName"`
-    
+	ModelName string `json:"ModelName"`
 }
-

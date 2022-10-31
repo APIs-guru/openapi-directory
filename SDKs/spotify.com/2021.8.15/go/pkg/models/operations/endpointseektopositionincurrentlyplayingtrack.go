@@ -1,35 +1,30 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type EndpointSeekToPositionInCurrentlyPlayingTrackQueryParams struct {
-    DeviceID *string `queryParam:"style=form,explode=true,name=device_id"`
-    PositionMs int32 `queryParam:"style=form,explode=true,name=position_ms"`
-    
+	DeviceID   *string `queryParam:"style=form,explode=true,name=device_id"`
+	PositionMs int32   `queryParam:"style=form,explode=true,name=position_ms"`
 }
 
 type EndpointSeekToPositionInCurrentlyPlayingTrackHeaders struct {
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type EndpointSeekToPositionInCurrentlyPlayingTrackSecurity struct {
-    SpotifyAuth shared.SchemeSpotifyAuth `security:"scheme,type=oauth2"`
-    
+	SpotifyAuth shared.SchemeSpotifyAuth `security:"scheme,type=oauth2"`
 }
 
 type EndpointSeekToPositionInCurrentlyPlayingTrackRequest struct {
-    QueryParams EndpointSeekToPositionInCurrentlyPlayingTrackQueryParams 
-    Headers EndpointSeekToPositionInCurrentlyPlayingTrackHeaders 
-    Security EndpointSeekToPositionInCurrentlyPlayingTrackSecurity 
-    
+	QueryParams EndpointSeekToPositionInCurrentlyPlayingTrackQueryParams
+	Headers     EndpointSeekToPositionInCurrentlyPlayingTrackHeaders
+	Security    EndpointSeekToPositionInCurrentlyPlayingTrackSecurity
 }
 
 type EndpointSeekToPositionInCurrentlyPlayingTrackResponse struct {
-    ContentType string 
-    ErrorResponseObject *shared.ErrorResponseObject 
-    StatusCode int64 
-    
+	ContentType         string
+	ErrorResponseObject *shared.ErrorResponseObject
+	StatusCode          int64
 }
-

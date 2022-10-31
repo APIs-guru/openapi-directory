@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteModelRequest struct {
-    ModelName string `json:"ModelName"`
-    
+	ModelName string `json:"ModelName"`
 }
-

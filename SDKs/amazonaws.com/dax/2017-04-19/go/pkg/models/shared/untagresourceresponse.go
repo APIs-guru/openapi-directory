@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UntagResourceResponse struct {
-    Tags []Tag `json:"Tags,omitempty"`
-    
+	Tags []Tag `json:"Tags,omitempty"`
 }
-

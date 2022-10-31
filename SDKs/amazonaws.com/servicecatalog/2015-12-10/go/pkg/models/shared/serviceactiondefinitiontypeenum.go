@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type ServiceActionDefinitionTypeEnum string
 
 const (
-    ServiceActionDefinitionTypeEnumSsmAutomation ServiceActionDefinitionTypeEnum = "SSM_AUTOMATION"
+	ServiceActionDefinitionTypeEnumSsmAutomation ServiceActionDefinitionTypeEnum = "SSM_AUTOMATION"
 )
-
-

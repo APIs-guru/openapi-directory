@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GistsUnstarPathParams struct {
-    GistID string `pathParam:"style=simple,explode=false,name=gist_id"`
-    
+	GistID string `pathParam:"style=simple,explode=false,name=gist_id"`
 }
 
 type GistsUnstarRequest struct {
-    PathParams GistsUnstarPathParams 
-    
+	PathParams GistsUnstarPathParams
 }
 
 type GistsUnstarResponse struct {
-    ContentType string 
-    StatusCode int64 
-    BasicError *shared.BasicError 
-    
+	ContentType string
+	StatusCode  int64
+	BasicError  *shared.BasicError
 }
-

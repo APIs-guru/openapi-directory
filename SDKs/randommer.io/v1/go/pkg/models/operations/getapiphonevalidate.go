@@ -1,27 +1,20 @@
 package operations
 
-
-
 type GetAPIPhoneValidateQueryParams struct {
-    CountryCode *string `queryParam:"style=form,explode=true,name=CountryCode"`
-    Telephone string `queryParam:"style=form,explode=true,name=telephone"`
-    
+	CountryCode *string `queryParam:"style=form,explode=true,name=CountryCode"`
+	Telephone   string  `queryParam:"style=form,explode=true,name=telephone"`
 }
 
 type GetAPIPhoneValidateHeaders struct {
-    XAPIKey *string `header:"style=simple,explode=false,name=X-Api-Key"`
-    
+	XAPIKey *string `header:"style=simple,explode=false,name=X-Api-Key"`
 }
 
 type GetAPIPhoneValidateRequest struct {
-    QueryParams GetAPIPhoneValidateQueryParams 
-    Headers GetAPIPhoneValidateHeaders 
-    
+	QueryParams GetAPIPhoneValidateQueryParams
+	Headers     GetAPIPhoneValidateHeaders
 }
 
 type GetAPIPhoneValidateResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

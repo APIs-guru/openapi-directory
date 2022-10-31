@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CategoryStats struct {
-    TopCategoryStats []SingleCategoryStats `json:"topCategoryStats,omitempty"`
-    
+	TopCategoryStats []SingleCategoryStats `json:"topCategoryStats,omitempty"`
 }
-

@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetOrganizationLicensesOverviewPathParams struct {
-    OrganizationID string `pathParam:"style=simple,explode=false,name=organizationId"`
-    
+	OrganizationID string `pathParam:"style=simple,explode=false,name=organizationId"`
 }
 
 type GetOrganizationLicensesOverviewRequest struct {
-    PathParams GetOrganizationLicensesOverviewPathParams 
-    
+	PathParams GetOrganizationLicensesOverviewPathParams
 }
 
 type GetOrganizationLicensesOverviewResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetOrganizationLicensesOverview200ApplicationJSONObject map[string]interface{} 
-    
+	ContentType                                             string
+	StatusCode                                              int64
+	GetOrganizationLicensesOverview200ApplicationJSONObject map[string]interface{}
 }
-

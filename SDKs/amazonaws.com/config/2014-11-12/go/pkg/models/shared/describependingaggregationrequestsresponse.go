@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DescribePendingAggregationRequestsResponse struct {
-    NextToken *string `json:"NextToken,omitempty"`
-    PendingAggregationRequests []PendingAggregationRequest `json:"PendingAggregationRequests,omitempty"`
-    
+	NextToken                  *string                     `json:"NextToken,omitempty"`
+	PendingAggregationRequests []PendingAggregationRequest `json:"PendingAggregationRequests,omitempty"`
 }
-

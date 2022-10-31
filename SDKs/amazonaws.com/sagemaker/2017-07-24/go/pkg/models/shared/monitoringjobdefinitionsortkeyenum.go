@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type MonitoringJobDefinitionSortKeyEnum string
 
 const (
-    MonitoringJobDefinitionSortKeyEnumName MonitoringJobDefinitionSortKeyEnum = "Name"
-MonitoringJobDefinitionSortKeyEnumCreationTime MonitoringJobDefinitionSortKeyEnum = "CreationTime"
+	MonitoringJobDefinitionSortKeyEnumName         MonitoringJobDefinitionSortKeyEnum = "Name"
+	MonitoringJobDefinitionSortKeyEnumCreationTime MonitoringJobDefinitionSortKeyEnum = "CreationTime"
 )
-
-

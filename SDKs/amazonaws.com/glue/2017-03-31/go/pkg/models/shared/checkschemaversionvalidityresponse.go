@@ -1,10 +1,6 @@
 package shared
 
-
-
 type CheckSchemaVersionValidityResponse struct {
-    Error *string `json:"Error,omitempty"`
-    Valid *bool `json:"Valid,omitempty"`
-    
+	Error *string `json:"Error,omitempty"`
+	Valid *bool   `json:"Valid,omitempty"`
 }
-

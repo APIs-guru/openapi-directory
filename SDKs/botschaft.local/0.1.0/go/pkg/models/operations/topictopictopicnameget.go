@@ -1,36 +1,31 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type TopicTopicTopicNameGetPathParams struct {
-    TopicName string `pathParam:"style=simple,explode=false,name=topic_name"`
-    
+	TopicName string `pathParam:"style=simple,explode=false,name=topic_name"`
 }
 
 type TopicTopicTopicNameGetQueryParams struct {
-    Base64Message *string `queryParam:"style=form,explode=true,name=base64_message"`
-    Message *string `queryParam:"style=form,explode=true,name=message"`
-    
+	Base64Message *string `queryParam:"style=form,explode=true,name=base64_message"`
+	Message       *string `queryParam:"style=form,explode=true,name=message"`
 }
 
 type TopicTopicTopicNameGetHeaders struct {
-    Authorization *string `header:"style=simple,explode=false,name=authorization"`
-    
+	Authorization *string `header:"style=simple,explode=false,name=authorization"`
 }
 
 type TopicTopicTopicNameGetRequest struct {
-    PathParams TopicTopicTopicNameGetPathParams 
-    QueryParams TopicTopicTopicNameGetQueryParams 
-    Headers TopicTopicTopicNameGetHeaders 
-    
+	PathParams  TopicTopicTopicNameGetPathParams
+	QueryParams TopicTopicTopicNameGetQueryParams
+	Headers     TopicTopicTopicNameGetHeaders
 }
 
 type TopicTopicTopicNameGetResponse struct {
-    ContentType string 
-    HTTPValidationError *shared.HTTPValidationError 
-    StatusCode int64 
-    TopicTopicTopicNameGet200ApplicationJSONAny *interface{} 
-    
+	ContentType                                 string
+	HTTPValidationError                         *shared.HTTPValidationError
+	StatusCode                                  int64
+	TopicTopicTopicNameGet200ApplicationJSONAny *interface{}
 }
-

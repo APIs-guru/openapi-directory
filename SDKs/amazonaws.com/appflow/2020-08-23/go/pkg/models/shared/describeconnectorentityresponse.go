@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeConnectorEntityResponse struct {
-    ConnectorEntityFields []ConnectorEntityField `json:"connectorEntityFields"`
-    
+	ConnectorEntityFields []ConnectorEntityField `json:"connectorEntityFields"`
 }
-

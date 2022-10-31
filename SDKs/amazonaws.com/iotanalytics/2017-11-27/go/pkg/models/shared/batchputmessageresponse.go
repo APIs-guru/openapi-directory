@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchPutMessageResponse struct {
-    BatchPutMessageErrorEntries []BatchPutMessageErrorEntry `json:"batchPutMessageErrorEntries,omitempty"`
-    
+	BatchPutMessageErrorEntries []BatchPutMessageErrorEntry `json:"batchPutMessageErrorEntries,omitempty"`
 }
-

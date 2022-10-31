@@ -1,43 +1,34 @@
 package operations
 
-
-
-
 type TagResource20200531OperationEnum string
 
 const (
-    TagResource20200531OperationEnumTag TagResource20200531OperationEnum = "Tag"
+	TagResource20200531OperationEnumTag TagResource20200531OperationEnum = "Tag"
 )
 
-
 type TagResource20200531QueryParams struct {
-    Operation TagResource20200531OperationEnum `queryParam:"style=form,explode=true,name=Operation"`
-    Resource string `queryParam:"style=form,explode=true,name=Resource"`
-    
+	Operation TagResource20200531OperationEnum `queryParam:"style=form,explode=true,name=Operation"`
+	Resource  string                           `queryParam:"style=form,explode=true,name=Resource"`
 }
 
 type TagResource20200531Headers struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type TagResource20200531Request struct {
-    QueryParams TagResource20200531QueryParams 
-    Headers TagResource20200531Headers 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams TagResource20200531QueryParams
+	Headers     TagResource20200531Headers
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type TagResource20200531Response struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

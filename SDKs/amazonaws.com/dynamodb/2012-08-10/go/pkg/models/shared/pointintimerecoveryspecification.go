@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PointInTimeRecoverySpecification struct {
-    PointInTimeRecoveryEnabled bool `json:"PointInTimeRecoveryEnabled"`
-    
+	PointInTimeRecoveryEnabled bool `json:"PointInTimeRecoveryEnabled"`
 }
-

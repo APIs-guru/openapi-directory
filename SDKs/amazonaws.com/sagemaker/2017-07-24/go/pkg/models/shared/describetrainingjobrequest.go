@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeTrainingJobRequest struct {
-    TrainingJobName string `json:"TrainingJobName"`
-    
+	TrainingJobName string `json:"TrainingJobName"`
 }
-

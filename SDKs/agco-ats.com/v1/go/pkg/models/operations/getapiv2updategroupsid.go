@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAPIV2UpdateGroupsIDPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=ID"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=ID"`
 }
 
 type GetAPIV2UpdateGroupsIDRequest struct {
-    PathParams GetAPIV2UpdateGroupsIDPathParams 
-    
+	PathParams GetAPIV2UpdateGroupsIDPathParams
 }
 
 type GetAPIV2UpdateGroupsIDResponse struct {
-    APIModelsAPIError *shared.APIModelsAPIError 
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    UpdateSystemModelsUpdateGroup *shared.UpdateSystemModelsUpdateGroup 
-    
+	APIModelsAPIError             *shared.APIModelsAPIError
+	Body                          []byte
+	ContentType                   string
+	StatusCode                    int64
+	UpdateSystemModelsUpdateGroup *shared.UpdateSystemModelsUpdateGroup
 }
-

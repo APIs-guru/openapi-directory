@@ -1,31 +1,27 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type SlackGetSlackGetQueryParams struct {
-    Base64Message *string `queryParam:"style=form,explode=true,name=base64_message"`
-    Channel string `queryParam:"style=form,explode=true,name=channel"`
-    Message *string `queryParam:"style=form,explode=true,name=message"`
-    
+	Base64Message *string `queryParam:"style=form,explode=true,name=base64_message"`
+	Channel       string  `queryParam:"style=form,explode=true,name=channel"`
+	Message       *string `queryParam:"style=form,explode=true,name=message"`
 }
 
 type SlackGetSlackGetHeaders struct {
-    Authorization *string `header:"style=simple,explode=false,name=authorization"`
-    
+	Authorization *string `header:"style=simple,explode=false,name=authorization"`
 }
 
 type SlackGetSlackGetRequest struct {
-    QueryParams SlackGetSlackGetQueryParams 
-    Headers SlackGetSlackGetHeaders 
-    
+	QueryParams SlackGetSlackGetQueryParams
+	Headers     SlackGetSlackGetHeaders
 }
 
 type SlackGetSlackGetResponse struct {
-    ContentType string 
-    HTTPValidationError *shared.HTTPValidationError 
-    StatusCode int64 
-    SlackGetSlackGet200ApplicationJSONAny *interface{} 
-    
+	ContentType                           string
+	HTTPValidationError                   *shared.HTTPValidationError
+	StatusCode                            int64
+	SlackGetSlackGet200ApplicationJSONAny *interface{}
 }
-

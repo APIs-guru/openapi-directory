@@ -1,17 +1,15 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DcimInterfaceConnectionsCreateRequest struct {
-    Request shared.WritableInterfaceConnection `request:"mediaType=application/json"`
-    
+	Request shared.WritableInterfaceConnection `request:"mediaType=application/json"`
 }
 
 type DcimInterfaceConnectionsCreateResponse struct {
-    ContentType string 
-    InterfaceConnection *shared.InterfaceConnection 
-    StatusCode int64 
-    
+	ContentType         string
+	InterfaceConnection *shared.InterfaceConnection
+	StatusCode          int64
 }
-

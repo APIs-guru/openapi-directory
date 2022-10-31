@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type NavigatePathParams struct {
-    SectionID int32 `pathParam:"style=simple,explode=false,name=sectionId"`
-    Step int32 `pathParam:"style=simple,explode=false,name=step"`
-    
+	SectionID int32 `pathParam:"style=simple,explode=false,name=sectionId"`
+	Step      int32 `pathParam:"style=simple,explode=false,name=step"`
 }
 
 type NavigateRequest struct {
-    PathParams NavigatePathParams 
-    
+	PathParams NavigatePathParams
 }
 
 type NavigateResponse struct {
-    Body []byte 
-    ContentType string 
-    ErskineMaySectionOverview *shared.ErskineMaySectionOverview 
-    StatusCode int64 
-    
+	Body                      []byte
+	ContentType               string
+	ErskineMaySectionOverview *shared.ErskineMaySectionOverview
+	StatusCode                int64
 }
-

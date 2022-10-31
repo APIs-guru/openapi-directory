@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SpotSetUpdate struct {
-    Delete *bool `json:"delete,omitempty"`
-    
+	Delete *bool `json:"delete,omitempty"`
 }
-

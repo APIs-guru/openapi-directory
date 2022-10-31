@@ -1,9 +1,5 @@
 package shared
 
-
-
 type WebAppIcon struct {
-    ImageData *string `json:"imageData,omitempty"`
-    
+	ImageData *string `json:"imageData,omitempty"`
 }
-

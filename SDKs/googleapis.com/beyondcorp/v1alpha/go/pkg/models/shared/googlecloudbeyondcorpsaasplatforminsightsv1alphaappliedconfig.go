@@ -1,27 +1,21 @@
 package shared
 
-
-
-
 type GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum string
 
 const (
-    GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnumAggregationUnspecified GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum = "AGGREGATION_UNSPECIFIED"
-GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnumHourly GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum = "HOURLY"
-GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnumDaily GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum = "DAILY"
-GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnumWeekly GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum = "WEEKLY"
-GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnumMonthly GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum = "MONTHLY"
-GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnumCustomDateRange GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum = "CUSTOM_DATE_RANGE"
+	GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnumAggregationUnspecified GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum = "AGGREGATION_UNSPECIFIED"
+	GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnumHourly                 GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum = "HOURLY"
+	GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnumDaily                  GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum = "DAILY"
+	GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnumWeekly                 GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum = "WEEKLY"
+	GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnumMonthly                GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum = "MONTHLY"
+	GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnumCustomDateRange        GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum = "CUSTOM_DATE_RANGE"
 )
 
-
 type GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfig struct {
-    Aggregation *GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum `json:"aggregation,omitempty"`
-    CustomGrouping *GoogleCloudBeyondcorpSaasplatformInsightsV1alphaCustomGrouping `json:"customGrouping,omitempty"`
-    EndTime *string `json:"endTime,omitempty"`
-    FieldFilter *string `json:"fieldFilter,omitempty"`
-    Group *string `json:"group,omitempty"`
-    StartTime *string `json:"startTime,omitempty"`
-    
+	Aggregation    *GoogleCloudBeyondcorpSaasplatformInsightsV1alphaAppliedConfigAggregationEnum `json:"aggregation,omitempty"`
+	CustomGrouping *GoogleCloudBeyondcorpSaasplatformInsightsV1alphaCustomGrouping               `json:"customGrouping,omitempty"`
+	EndTime        *string                                                                       `json:"endTime,omitempty"`
+	FieldFilter    *string                                                                       `json:"fieldFilter,omitempty"`
+	Group          *string                                                                       `json:"group,omitempty"`
+	StartTime      *string                                                                       `json:"startTime,omitempty"`
 }
-

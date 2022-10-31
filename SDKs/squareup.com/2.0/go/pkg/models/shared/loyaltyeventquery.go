@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LoyaltyEventQuery struct {
-    Filter *LoyaltyEventFilter `json:"filter,omitempty"`
-    
+	Filter *LoyaltyEventFilter `json:"filter,omitempty"`
 }
-

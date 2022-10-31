@@ -1,38 +1,34 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DescribeSecurityProfilePathParams struct {
-    SecurityProfileName string `pathParam:"style=simple,explode=false,name=securityProfileName"`
-    
+	SecurityProfileName string `pathParam:"style=simple,explode=false,name=securityProfileName"`
 }
 
 type DescribeSecurityProfileHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type DescribeSecurityProfileRequest struct {
-    PathParams DescribeSecurityProfilePathParams 
-    Headers DescribeSecurityProfileHeaders 
-    
+	PathParams DescribeSecurityProfilePathParams
+	Headers    DescribeSecurityProfileHeaders
 }
 
 type DescribeSecurityProfileResponse struct {
-    ContentType string 
-    DescribeSecurityProfileResponse *shared.DescribeSecurityProfileResponse 
-    InternalFailureException *interface{} 
-    InvalidRequestException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    
+	ContentType                     string
+	DescribeSecurityProfileResponse *shared.DescribeSecurityProfileResponse
+	InternalFailureException        *interface{}
+	InvalidRequestException         *interface{}
+	ResourceNotFoundException       *interface{}
+	StatusCode                      int64
+	ThrottlingException             *interface{}
 }
-

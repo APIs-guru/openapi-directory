@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PepMonitorListSecurity struct {
-    UserKey shared.SchemeUserKey `security:"scheme,type=apiKey,subtype=header"`
-    
+	UserKey shared.SchemeUserKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PepMonitorListRequest struct {
-    Security PepMonitorListSecurity 
-    
+	Security PepMonitorListSecurity
 }
 
 type PepMonitorListResponse struct {
-    ContentType string 
-    PepMonitorList200ApplicationJSONAnies []interface{} 
-    PepMonitorListDefaultApplicationJSONAny *interface{} 
-    StatusCode int64 
-    
+	ContentType                             string
+	PepMonitorList200ApplicationJSONAnies   []interface{}
+	PepMonitorListDefaultApplicationJSONAny *interface{}
+	StatusCode                              int64
 }
-

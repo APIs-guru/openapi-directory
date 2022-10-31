@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartBackfillJobResponse struct {
-    Object *StreamObject `json:"object,omitempty"`
-    
+	Object *StreamObject `json:"object,omitempty"`
 }
-

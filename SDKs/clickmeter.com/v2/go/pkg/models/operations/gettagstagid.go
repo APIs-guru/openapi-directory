@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetTagsTagIDPathParams struct {
-    TagID int64 `pathParam:"style=simple,explode=false,name=tagId"`
-    
+	TagID int64 `pathParam:"style=simple,explode=false,name=tagId"`
 }
 
 type GetTagsTagIDRequest struct {
-    PathParams GetTagsTagIDPathParams 
-    
+	PathParams GetTagsTagIDPathParams
 }
 
 type GetTagsTagIDResponse struct {
-    APICoreDtoTagsTag *shared.APICoreDtoTagsTag 
-    ContentType string 
-    StatusCode int64 
-    
+	APICoreDtoTagsTag *shared.APICoreDtoTagsTag
+	ContentType       string
+	StatusCode        int64
 }
-

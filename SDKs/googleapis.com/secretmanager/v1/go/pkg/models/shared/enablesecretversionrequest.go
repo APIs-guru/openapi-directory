@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EnableSecretVersionRequest struct {
-    Etag *string `json:"etag,omitempty"`
-    
+	Etag *string `json:"etag,omitempty"`
 }
-

@@ -1,10 +1,6 @@
 package shared
 
-
-
 type GoogleCloudDialogflowV2IntentFollowupIntentInfo struct {
-    FollowupIntentName *string `json:"followupIntentName,omitempty"`
-    ParentFollowupIntentName *string `json:"parentFollowupIntentName,omitempty"`
-    
+	FollowupIntentName       *string `json:"followupIntentName,omitempty"`
+	ParentFollowupIntentName *string `json:"parentFollowupIntentName,omitempty"`
 }
-

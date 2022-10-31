@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteAppResponse struct {
-    ApplicationResponse ApplicationResponse `json:"ApplicationResponse"`
-    
+	ApplicationResponse ApplicationResponse `json:"ApplicationResponse"`
 }
-

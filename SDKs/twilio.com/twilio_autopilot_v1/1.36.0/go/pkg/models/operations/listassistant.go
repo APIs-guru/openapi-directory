@@ -1,49 +1,44 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var ListAssistantServers = []string{
 	"https://autopilot.twilio.com",
 }
 
 type ListAssistantQueryParams struct {
-    PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
-    
+	PageSize *int64 `queryParam:"style=form,explode=true,name=PageSize"`
 }
 
 type ListAssistantSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type ListAssistantRequest struct {
-    ServerURL *string 
-    QueryParams ListAssistantQueryParams 
-    Security ListAssistantSecurity 
-    
+	ServerURL   *string
+	QueryParams ListAssistantQueryParams
+	Security    ListAssistantSecurity
 }
 
 type ListAssistantListAssistantResponseMeta struct {
-    FirstPageURL *string `json:"first_page_url,omitempty"`
-    Key *string `json:"key,omitempty"`
-    NextPageURL *string `json:"next_page_url,omitempty"`
-    Page *int64 `json:"page,omitempty"`
-    PageSize *int64 `json:"page_size,omitempty"`
-    PreviousPageURL *string `json:"previous_page_url,omitempty"`
-    URL *string `json:"url,omitempty"`
-    
+	FirstPageURL    *string `json:"first_page_url,omitempty"`
+	Key             *string `json:"key,omitempty"`
+	NextPageURL     *string `json:"next_page_url,omitempty"`
+	Page            *int64  `json:"page,omitempty"`
+	PageSize        *int64  `json:"page_size,omitempty"`
+	PreviousPageURL *string `json:"previous_page_url,omitempty"`
+	URL             *string `json:"url,omitempty"`
 }
 
 type ListAssistantListAssistantResponse struct {
-    Assistants []shared.AutopilotV1Assistant `json:"assistants,omitempty"`
-    Meta *ListAssistantListAssistantResponseMeta `json:"meta,omitempty"`
-    
+	Assistants []shared.AutopilotV1Assistant           `json:"assistants,omitempty"`
+	Meta       *ListAssistantListAssistantResponseMeta `json:"meta,omitempty"`
 }
 
 type ListAssistantResponse struct {
-    ContentType string 
-    ListAssistantResponse *ListAssistantListAssistantResponse 
-    StatusCode int64 
-    
+	ContentType           string
+	ListAssistantResponse *ListAssistantListAssistantResponse
+	StatusCode            int64
 }
-

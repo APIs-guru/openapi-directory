@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeRoleAliasResponse struct {
-    RoleAliasDescription *RoleAliasDescription `json:"roleAliasDescription,omitempty"`
-    
+	RoleAliasDescription *RoleAliasDescription `json:"roleAliasDescription,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchGetProjectsInput struct {
-    Names []string `json:"names"`
-    
+	Names []string `json:"names"`
 }
-

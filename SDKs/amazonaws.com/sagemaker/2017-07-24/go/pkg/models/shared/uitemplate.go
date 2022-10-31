@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UITemplate struct {
-    Content string `json:"Content"`
-    
+	Content string `json:"Content"`
 }
-

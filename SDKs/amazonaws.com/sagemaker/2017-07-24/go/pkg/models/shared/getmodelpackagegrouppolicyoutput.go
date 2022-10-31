@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetModelPackageGroupPolicyOutput struct {
-    ResourcePolicy string `json:"ResourcePolicy"`
-    
+	ResourcePolicy string `json:"ResourcePolicy"`
 }
-

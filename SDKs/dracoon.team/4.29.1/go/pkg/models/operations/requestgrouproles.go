@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type RequestGroupRolesPathParams struct {
-    GroupID int64 `pathParam:"style=simple,explode=false,name=group_id"`
-    
+	GroupID int64 `pathParam:"style=simple,explode=false,name=group_id"`
 }
 
 type RequestGroupRolesHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type RequestGroupRolesRequest struct {
-    PathParams RequestGroupRolesPathParams 
-    Headers RequestGroupRolesHeaders 
-    
+	PathParams RequestGroupRolesPathParams
+	Headers    RequestGroupRolesHeaders
 }
 
 type RequestGroupRolesResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    RoleList *shared.RoleList 
-    StatusCode int64 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	RoleList      *shared.RoleList
+	StatusCode    int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribePipelineRequest struct {
-    PipelineName string `json:"PipelineName"`
-    
+	PipelineName string `json:"PipelineName"`
 }
-

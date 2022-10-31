@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteDirectoryConfigRequest struct {
-    DirectoryName string `json:"DirectoryName"`
-    
+	DirectoryName string `json:"DirectoryName"`
 }
-

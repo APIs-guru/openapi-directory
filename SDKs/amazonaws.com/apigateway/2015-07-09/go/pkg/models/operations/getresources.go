@@ -1,46 +1,41 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetResourcesPathParams struct {
-    RestapiID string `pathParam:"style=simple,explode=false,name=restapi_id"`
-    
+	RestapiID string `pathParam:"style=simple,explode=false,name=restapi_id"`
 }
 
 type GetResourcesQueryParams struct {
-    Embed []string `queryParam:"style=form,explode=true,name=embed"`
-    Limit *int64 `queryParam:"style=form,explode=true,name=limit"`
-    Position *string `queryParam:"style=form,explode=true,name=position"`
-    
+	Embed    []string `queryParam:"style=form,explode=true,name=embed"`
+	Limit    *int64   `queryParam:"style=form,explode=true,name=limit"`
+	Position *string  `queryParam:"style=form,explode=true,name=position"`
 }
 
 type GetResourcesHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetResourcesRequest struct {
-    PathParams GetResourcesPathParams 
-    QueryParams GetResourcesQueryParams 
-    Headers GetResourcesHeaders 
-    
+	PathParams  GetResourcesPathParams
+	QueryParams GetResourcesQueryParams
+	Headers     GetResourcesHeaders
 }
 
 type GetResourcesResponse struct {
-    BadRequestException *interface{} 
-    ContentType string 
-    NotFoundException *interface{} 
-    Resources *shared.Resources 
-    StatusCode int64 
-    TooManyRequestsException *interface{} 
-    UnauthorizedException *interface{} 
-    
+	BadRequestException      *interface{}
+	ContentType              string
+	NotFoundException        *interface{}
+	Resources                *shared.Resources
+	StatusCode               int64
+	TooManyRequestsException *interface{}
+	UnauthorizedException    *interface{}
 }
-

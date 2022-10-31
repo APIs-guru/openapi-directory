@@ -1,52 +1,46 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ListTargetsForPolicyQueryParams struct {
-    MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
-    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
-    
+	MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
+	NextToken  *string `queryParam:"style=form,explode=true,name=NextToken"`
 }
-
 
 type ListTargetsForPolicyXAmzTargetEnum string
 
 const (
-    ListTargetsForPolicyXAmzTargetEnumAwsOrganizationsV20161128ListTargetsForPolicy ListTargetsForPolicyXAmzTargetEnum = "AWSOrganizationsV20161128.ListTargetsForPolicy"
+	ListTargetsForPolicyXAmzTargetEnumAwsOrganizationsV20161128ListTargetsForPolicy ListTargetsForPolicyXAmzTargetEnum = "AWSOrganizationsV20161128.ListTargetsForPolicy"
 )
 
-
 type ListTargetsForPolicyHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget ListTargetsForPolicyXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                            `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                            `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                            `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                            `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                            `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                            `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                            `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        ListTargetsForPolicyXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type ListTargetsForPolicyRequest struct {
-    QueryParams ListTargetsForPolicyQueryParams 
-    Headers ListTargetsForPolicyHeaders 
-    Request shared.ListTargetsForPolicyRequest `request:"mediaType=application/json"`
-    
+	QueryParams ListTargetsForPolicyQueryParams
+	Headers     ListTargetsForPolicyHeaders
+	Request     shared.ListTargetsForPolicyRequest `request:"mediaType=application/json"`
 }
 
 type ListTargetsForPolicyResponse struct {
-    AwsOrganizationsNotInUseException *interface{} 
-    AccessDeniedException *interface{} 
-    ContentType string 
-    InvalidInputException *interface{} 
-    ListTargetsForPolicyResponse *shared.ListTargetsForPolicyResponse 
-    PolicyNotFoundException *interface{} 
-    ServiceException *interface{} 
-    StatusCode int64 
-    TooManyRequestsException *interface{} 
-    UnsupportedAPIEndpointException *interface{} 
-    
+	AwsOrganizationsNotInUseException *interface{}
+	AccessDeniedException             *interface{}
+	ContentType                       string
+	InvalidInputException             *interface{}
+	ListTargetsForPolicyResponse      *shared.ListTargetsForPolicyResponse
+	PolicyNotFoundException           *interface{}
+	ServiceException                  *interface{}
+	StatusCode                        int64
+	TooManyRequestsException          *interface{}
+	UnsupportedAPIEndpointException   *interface{}
 }
-

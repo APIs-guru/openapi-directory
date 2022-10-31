@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetRandomPasswordResponse struct {
-    RandomPassword *string `json:"RandomPassword,omitempty"`
-    
+	RandomPassword *string `json:"RandomPassword,omitempty"`
 }
-

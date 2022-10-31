@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UnmergeCellsRequest struct {
-    Range *GridRange `json:"range,omitempty"`
-    
+	Range *GridRange `json:"range,omitempty"`
 }
-

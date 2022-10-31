@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetProfileQueryParams struct {
-    ID *string `queryParam:"style=form,explode=true,name=id"`
-    Service *string `queryParam:"style=form,explode=true,name=service"`
-    
+	ID      *string `queryParam:"style=form,explode=true,name=id"`
+	Service *string `queryParam:"style=form,explode=true,name=service"`
 }
 
 type GetProfileRequest struct {
-    QueryParams GetProfileQueryParams 
-    
+	QueryParams GetProfileQueryParams
 }
 
 type GetProfileResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

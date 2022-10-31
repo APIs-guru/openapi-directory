@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RegisterTargetWithMaintenanceWindowResult struct {
-    WindowTargetID *string `json:"WindowTargetId,omitempty"`
-    
+	WindowTargetID *string `json:"WindowTargetId,omitempty"`
 }
-

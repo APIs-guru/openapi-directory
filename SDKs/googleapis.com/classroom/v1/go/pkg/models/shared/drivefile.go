@@ -1,12 +1,8 @@
 package shared
 
-
-
 type DriveFile struct {
-    AlternateLink *string `json:"alternateLink,omitempty"`
-    ID *string `json:"id,omitempty"`
-    ThumbnailURL *string `json:"thumbnailUrl,omitempty"`
-    Title *string `json:"title,omitempty"`
-    
+	AlternateLink *string `json:"alternateLink,omitempty"`
+	ID            *string `json:"id,omitempty"`
+	ThumbnailURL  *string `json:"thumbnailUrl,omitempty"`
+	Title         *string `json:"title,omitempty"`
 }
-

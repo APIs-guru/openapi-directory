@@ -1,31 +1,23 @@
 package operations
 
-
-
-
 type UpcomingDfsSlatesByCompetitionFormatEnum string
 
 const (
-    UpcomingDfsSlatesByCompetitionFormatEnumJSON UpcomingDfsSlatesByCompetitionFormatEnum = "json"
-UpcomingDfsSlatesByCompetitionFormatEnumXML UpcomingDfsSlatesByCompetitionFormatEnum = "xml"
+	UpcomingDfsSlatesByCompetitionFormatEnumJSON UpcomingDfsSlatesByCompetitionFormatEnum = "json"
+	UpcomingDfsSlatesByCompetitionFormatEnumXML  UpcomingDfsSlatesByCompetitionFormatEnum = "xml"
 )
 
-
 type UpcomingDfsSlatesByCompetitionPathParams struct {
-    CompetitionID string `pathParam:"style=simple,explode=false,name=competitionId"`
-    Format UpcomingDfsSlatesByCompetitionFormatEnum `pathParam:"style=simple,explode=false,name=format"`
-    
+	CompetitionID string                                   `pathParam:"style=simple,explode=false,name=competitionId"`
+	Format        UpcomingDfsSlatesByCompetitionFormatEnum `pathParam:"style=simple,explode=false,name=format"`
 }
 
 type UpcomingDfsSlatesByCompetitionRequest struct {
-    PathParams UpcomingDfsSlatesByCompetitionPathParams 
-    
+	PathParams UpcomingDfsSlatesByCompetitionPathParams
 }
 
 type UpcomingDfsSlatesByCompetitionResponse struct {
-    ContentType string 
-    DfsSlates []interface{} 
-    StatusCode int64 
-    
+	ContentType string
+	DfsSlates   []interface{}
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type VirtualGatewayListenerTLSSdsCertificate struct {
-    SecretName string `json:"secretName"`
-    
+	SecretName string `json:"secretName"`
 }
-

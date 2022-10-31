@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SupportedFieldTypeDetails struct {
-    V1 FieldTypeDetails `json:"v1"`
-    
+	V1 FieldTypeDetails `json:"v1"`
 }
-

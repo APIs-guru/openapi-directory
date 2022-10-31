@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeAssessmentRunsRequest struct {
-    AssessmentRunArns []string `json:"assessmentRunArns"`
-    
+	AssessmentRunArns []string `json:"assessmentRunArns"`
 }
-

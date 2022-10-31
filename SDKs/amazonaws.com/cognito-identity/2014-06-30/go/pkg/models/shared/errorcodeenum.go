@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type ErrorCodeEnum string
 
 const (
-    ErrorCodeEnumAccessDenied ErrorCodeEnum = "AccessDenied"
-ErrorCodeEnumInternalServerError ErrorCodeEnum = "InternalServerError"
+	ErrorCodeEnumAccessDenied        ErrorCodeEnum = "AccessDenied"
+	ErrorCodeEnumInternalServerError ErrorCodeEnum = "InternalServerError"
 )
-
-

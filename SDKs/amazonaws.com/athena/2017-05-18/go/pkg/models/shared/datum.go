@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Datum struct {
-    VarCharValue *string `json:"VarCharValue,omitempty"`
-    
+	VarCharValue *string `json:"VarCharValue,omitempty"`
 }
-

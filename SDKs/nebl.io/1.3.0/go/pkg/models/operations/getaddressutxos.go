@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAddressUtxosPathParams struct {
-    Address string `pathParam:"style=simple,explode=false,name=address"`
-    
+	Address string `pathParam:"style=simple,explode=false,name=address"`
 }
 
 type GetAddressUtxosRequest struct {
-    PathParams GetAddressUtxosPathParams 
-    
+	PathParams GetAddressUtxosPathParams
 }
 
 type GetAddressUtxosResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetAddressUtxosResponse []shared.GetAddressUtxosResponse 
-    
+	ContentType             string
+	StatusCode              int64
+	GetAddressUtxosResponse []shared.GetAddressUtxosResponse
 }
-

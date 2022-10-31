@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EventDetailSettingsURL struct {
-    EventDetailsURL string `json:"eventDetailsUrl"`
-    
+	EventDetailsURL string `json:"eventDetailsUrl"`
 }
-

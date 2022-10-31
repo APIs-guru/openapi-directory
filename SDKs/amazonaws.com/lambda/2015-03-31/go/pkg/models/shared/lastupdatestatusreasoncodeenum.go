@@ -1,21 +1,16 @@
 package shared
 
-
-
-
 type LastUpdateStatusReasonCodeEnum string
 
 const (
-    LastUpdateStatusReasonCodeEnumEniLimitExceeded LastUpdateStatusReasonCodeEnum = "EniLimitExceeded"
-LastUpdateStatusReasonCodeEnumInsufficientRolePermissions LastUpdateStatusReasonCodeEnum = "InsufficientRolePermissions"
-LastUpdateStatusReasonCodeEnumInvalidConfiguration LastUpdateStatusReasonCodeEnum = "InvalidConfiguration"
-LastUpdateStatusReasonCodeEnumInternalError LastUpdateStatusReasonCodeEnum = "InternalError"
-LastUpdateStatusReasonCodeEnumSubnetOutOfIPAddresses LastUpdateStatusReasonCodeEnum = "SubnetOutOfIPAddresses"
-LastUpdateStatusReasonCodeEnumInvalidSubnet LastUpdateStatusReasonCodeEnum = "InvalidSubnet"
-LastUpdateStatusReasonCodeEnumInvalidSecurityGroup LastUpdateStatusReasonCodeEnum = "InvalidSecurityGroup"
-LastUpdateStatusReasonCodeEnumImageDeleted LastUpdateStatusReasonCodeEnum = "ImageDeleted"
-LastUpdateStatusReasonCodeEnumImageAccessDenied LastUpdateStatusReasonCodeEnum = "ImageAccessDenied"
-LastUpdateStatusReasonCodeEnumInvalidImage LastUpdateStatusReasonCodeEnum = "InvalidImage"
+	LastUpdateStatusReasonCodeEnumEniLimitExceeded            LastUpdateStatusReasonCodeEnum = "EniLimitExceeded"
+	LastUpdateStatusReasonCodeEnumInsufficientRolePermissions LastUpdateStatusReasonCodeEnum = "InsufficientRolePermissions"
+	LastUpdateStatusReasonCodeEnumInvalidConfiguration        LastUpdateStatusReasonCodeEnum = "InvalidConfiguration"
+	LastUpdateStatusReasonCodeEnumInternalError               LastUpdateStatusReasonCodeEnum = "InternalError"
+	LastUpdateStatusReasonCodeEnumSubnetOutOfIPAddresses      LastUpdateStatusReasonCodeEnum = "SubnetOutOfIPAddresses"
+	LastUpdateStatusReasonCodeEnumInvalidSubnet               LastUpdateStatusReasonCodeEnum = "InvalidSubnet"
+	LastUpdateStatusReasonCodeEnumInvalidSecurityGroup        LastUpdateStatusReasonCodeEnum = "InvalidSecurityGroup"
+	LastUpdateStatusReasonCodeEnumImageDeleted                LastUpdateStatusReasonCodeEnum = "ImageDeleted"
+	LastUpdateStatusReasonCodeEnumImageAccessDenied           LastUpdateStatusReasonCodeEnum = "ImageAccessDenied"
+	LastUpdateStatusReasonCodeEnumInvalidImage                LastUpdateStatusReasonCodeEnum = "InvalidImage"
 )
-
-

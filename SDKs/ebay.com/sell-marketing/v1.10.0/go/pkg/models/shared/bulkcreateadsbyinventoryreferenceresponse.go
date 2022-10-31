@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BulkCreateAdsByInventoryReferenceResponse struct {
-    Responses []CreateAdsByInventoryReferenceResponse `json:"responses,omitempty"`
-    
+	Responses []CreateAdsByInventoryReferenceResponse `json:"responses,omitempty"`
 }
-

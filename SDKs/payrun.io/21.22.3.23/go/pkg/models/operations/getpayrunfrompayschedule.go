@@ -1,32 +1,28 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetPayRunFromPaySchedulePathParams struct {
-    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
-    PayRunID string `pathParam:"style=simple,explode=false,name=PayRunId"`
-    PayScheduleID string `pathParam:"style=simple,explode=false,name=PayScheduleId"`
-    
+	EmployerID    string `pathParam:"style=simple,explode=false,name=EmployerId"`
+	PayRunID      string `pathParam:"style=simple,explode=false,name=PayRunId"`
+	PayScheduleID string `pathParam:"style=simple,explode=false,name=PayScheduleId"`
 }
 
 type GetPayRunFromPayScheduleHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type GetPayRunFromPayScheduleRequest struct {
-    PathParams GetPayRunFromPaySchedulePathParams 
-    Headers GetPayRunFromPayScheduleHeaders 
-    
+	PathParams GetPayRunFromPaySchedulePathParams
+	Headers    GetPayRunFromPayScheduleHeaders
 }
 
 type GetPayRunFromPayScheduleResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    PayRun *shared.PayRun 
-    StatusCode int64 
-    
+	ContentType string
+	ErrorModel  *shared.ErrorModel
+	PayRun      *shared.PayRun
+	StatusCode  int64
 }
-

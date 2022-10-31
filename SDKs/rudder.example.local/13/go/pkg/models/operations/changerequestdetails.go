@@ -1,51 +1,42 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ChangeRequestDetailsPathParams struct {
-    ChangeRequestID int64 `pathParam:"style=simple,explode=false,name=changeRequestId"`
-    
+	ChangeRequestID int64 `pathParam:"style=simple,explode=false,name=changeRequestId"`
 }
 
 type ChangeRequestDetailsRequest struct {
-    PathParams ChangeRequestDetailsPathParams 
-    
+	PathParams ChangeRequestDetailsPathParams
 }
-
 
 type ChangeRequestDetails200ApplicationJSONActionEnum string
 
 const (
-    ChangeRequestDetails200ApplicationJSONActionEnumChangeRequestDetails ChangeRequestDetails200ApplicationJSONActionEnum = "changeRequestDetails"
+	ChangeRequestDetails200ApplicationJSONActionEnumChangeRequestDetails ChangeRequestDetails200ApplicationJSONActionEnum = "changeRequestDetails"
 )
 
-
 type ChangeRequestDetails200ApplicationJSONData struct {
-    Rules []shared.ChangeRequest `json:"rules"`
-    
+	Rules []shared.ChangeRequest `json:"rules"`
 }
-
 
 type ChangeRequestDetails200ApplicationJSONResultEnum string
 
 const (
-    ChangeRequestDetails200ApplicationJSONResultEnumSuccess ChangeRequestDetails200ApplicationJSONResultEnum = "success"
-ChangeRequestDetails200ApplicationJSONResultEnumError ChangeRequestDetails200ApplicationJSONResultEnum = "error"
+	ChangeRequestDetails200ApplicationJSONResultEnumSuccess ChangeRequestDetails200ApplicationJSONResultEnum = "success"
+	ChangeRequestDetails200ApplicationJSONResultEnumError   ChangeRequestDetails200ApplicationJSONResultEnum = "error"
 )
 
-
 type ChangeRequestDetails200ApplicationJSON struct {
-    Action ChangeRequestDetails200ApplicationJSONActionEnum `json:"action"`
-    Data ChangeRequestDetails200ApplicationJSONData `json:"data"`
-    Result ChangeRequestDetails200ApplicationJSONResultEnum `json:"result"`
-    
+	Action ChangeRequestDetails200ApplicationJSONActionEnum `json:"action"`
+	Data   ChangeRequestDetails200ApplicationJSONData       `json:"data"`
+	Result ChangeRequestDetails200ApplicationJSONResultEnum `json:"result"`
 }
 
 type ChangeRequestDetailsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    ChangeRequestDetails200ApplicationJSONObject *ChangeRequestDetails200ApplicationJSON 
-    
+	ContentType                                  string
+	StatusCode                                   int64
+	ChangeRequestDetails200ApplicationJSONObject *ChangeRequestDetails200ApplicationJSON
 }
-

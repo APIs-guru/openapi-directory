@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ImportTransactionsPathParams struct {
-    BudgetID string `pathParam:"style=simple,explode=false,name=budget_id"`
-    
+	BudgetID string `pathParam:"style=simple,explode=false,name=budget_id"`
 }
 
 type ImportTransactionsRequest struct {
-    PathParams ImportTransactionsPathParams 
-    
+	PathParams ImportTransactionsPathParams
 }
 
 type ImportTransactionsResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    TransactionsImportResponse *shared.TransactionsImportResponse 
-    
+	ContentType                string
+	ErrorResponse              *shared.ErrorResponse
+	StatusCode                 int64
+	TransactionsImportResponse *shared.TransactionsImportResponse
 }
-

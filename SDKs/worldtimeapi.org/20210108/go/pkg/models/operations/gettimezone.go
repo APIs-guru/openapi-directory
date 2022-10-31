@@ -1,11 +1,7 @@
 package operations
 
-
-
 type GetTimezoneResponse struct {
-    ContentType string 
-    ListJSONResponse []string 
-    StatusCode int64 
-    
+	ContentType      string
+	ListJSONResponse []string
+	StatusCode       int64
 }
-

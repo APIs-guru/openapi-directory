@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RemoveHeldAccountsRequest struct {
-    AccountIds []string `json:"accountIds,omitempty"`
-    
+	AccountIds []string `json:"accountIds,omitempty"`
 }
-

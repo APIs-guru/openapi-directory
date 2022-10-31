@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type UserSetupProgress struct {
-    CompletedSteps []string `json:"completedSteps,omitempty"`
-    Timestamp *time.Time `json:"timestamp,omitempty"`
-    UserID *string `json:"userId,omitempty"`
-    
+	CompletedSteps []string   `json:"completedSteps,omitempty"`
+	Timestamp      *time.Time `json:"timestamp,omitempty"`
+	UserID         *string    `json:"userId,omitempty"`
 }
-

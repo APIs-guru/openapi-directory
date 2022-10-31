@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudDataplexV1ActionFailedSecurityPolicyApply struct {
-    Asset *string `json:"asset,omitempty"`
-    
+	Asset *string `json:"asset,omitempty"`
 }
-

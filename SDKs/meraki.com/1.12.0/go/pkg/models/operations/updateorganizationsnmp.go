@@ -1,51 +1,40 @@
 package operations
 
-
-
 type UpdateOrganizationSnmpPathParams struct {
-    OrganizationID string `pathParam:"style=simple,explode=false,name=organizationId"`
-    
+	OrganizationID string `pathParam:"style=simple,explode=false,name=organizationId"`
 }
-
 
 type UpdateOrganizationSnmpRequestBodyV3AuthModeEnum string
 
 const (
-    UpdateOrganizationSnmpRequestBodyV3AuthModeEnumMd5 UpdateOrganizationSnmpRequestBodyV3AuthModeEnum = "MD5"
-UpdateOrganizationSnmpRequestBodyV3AuthModeEnumSha UpdateOrganizationSnmpRequestBodyV3AuthModeEnum = "SHA"
+	UpdateOrganizationSnmpRequestBodyV3AuthModeEnumMd5 UpdateOrganizationSnmpRequestBodyV3AuthModeEnum = "MD5"
+	UpdateOrganizationSnmpRequestBodyV3AuthModeEnumSha UpdateOrganizationSnmpRequestBodyV3AuthModeEnum = "SHA"
 )
-
-
 
 type UpdateOrganizationSnmpRequestBodyV3PrivModeEnum string
 
 const (
-    UpdateOrganizationSnmpRequestBodyV3PrivModeEnumDes UpdateOrganizationSnmpRequestBodyV3PrivModeEnum = "DES"
-UpdateOrganizationSnmpRequestBodyV3PrivModeEnumAes128 UpdateOrganizationSnmpRequestBodyV3PrivModeEnum = "AES128"
+	UpdateOrganizationSnmpRequestBodyV3PrivModeEnumDes    UpdateOrganizationSnmpRequestBodyV3PrivModeEnum = "DES"
+	UpdateOrganizationSnmpRequestBodyV3PrivModeEnumAes128 UpdateOrganizationSnmpRequestBodyV3PrivModeEnum = "AES128"
 )
 
-
 type UpdateOrganizationSnmpRequestBody struct {
-    PeerIps []string `json:"peerIps,omitempty"`
-    V2cEnabled *bool `json:"v2cEnabled,omitempty"`
-    V3AuthMode *UpdateOrganizationSnmpRequestBodyV3AuthModeEnum `json:"v3AuthMode,omitempty"`
-    V3AuthPass *string `json:"v3AuthPass,omitempty"`
-    V3Enabled *bool `json:"v3Enabled,omitempty"`
-    V3PrivMode *UpdateOrganizationSnmpRequestBodyV3PrivModeEnum `json:"v3PrivMode,omitempty"`
-    V3PrivPass *string `json:"v3PrivPass,omitempty"`
-    
+	PeerIps    []string                                         `json:"peerIps,omitempty"`
+	V2cEnabled *bool                                            `json:"v2cEnabled,omitempty"`
+	V3AuthMode *UpdateOrganizationSnmpRequestBodyV3AuthModeEnum `json:"v3AuthMode,omitempty"`
+	V3AuthPass *string                                          `json:"v3AuthPass,omitempty"`
+	V3Enabled  *bool                                            `json:"v3Enabled,omitempty"`
+	V3PrivMode *UpdateOrganizationSnmpRequestBodyV3PrivModeEnum `json:"v3PrivMode,omitempty"`
+	V3PrivPass *string                                          `json:"v3PrivPass,omitempty"`
 }
 
 type UpdateOrganizationSnmpRequest struct {
-    PathParams UpdateOrganizationSnmpPathParams 
-    Request *UpdateOrganizationSnmpRequestBody `request:"mediaType=application/json"`
-    
+	PathParams UpdateOrganizationSnmpPathParams
+	Request    *UpdateOrganizationSnmpRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateOrganizationSnmpResponse struct {
-    ContentType string 
-    StatusCode int64 
-    UpdateOrganizationSnmp200ApplicationJSONObject map[string]interface{} 
-    
+	ContentType                                    string
+	StatusCode                                     int64
+	UpdateOrganizationSnmp200ApplicationJSONObject map[string]interface{}
 }
-

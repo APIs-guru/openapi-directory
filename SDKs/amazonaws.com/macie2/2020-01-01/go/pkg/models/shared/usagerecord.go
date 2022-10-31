@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type UsageRecord struct {
-    AccountID *string `json:"accountId,omitempty"`
-    FreeTrialStartDate *time.Time `json:"freeTrialStartDate,omitempty"`
-    Usage []UsageByAccount `json:"usage,omitempty"`
-    
+	AccountID          *string          `json:"accountId,omitempty"`
+	FreeTrialStartDate *time.Time       `json:"freeTrialStartDate,omitempty"`
+	Usage              []UsageByAccount `json:"usage,omitempty"`
 }
-

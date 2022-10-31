@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CountriesList struct {
-    Countries []Country `json:"countries,omitempty"`
-    
+	Countries []Country `json:"countries,omitempty"`
 }
-

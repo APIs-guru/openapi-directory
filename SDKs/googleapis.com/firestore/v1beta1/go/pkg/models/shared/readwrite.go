@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ReadWrite struct {
-    RetryTransaction *string `json:"retryTransaction,omitempty"`
-    
+	RetryTransaction *string `json:"retryTransaction,omitempty"`
 }
-

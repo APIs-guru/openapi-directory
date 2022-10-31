@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ConnectionsList struct {
-    Connections []string `json:"Connections,omitempty"`
-    
+	Connections []string `json:"Connections,omitempty"`
 }
-

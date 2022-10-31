@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetTeamsTeamIDMembershipsPathParams struct {
-    TeamID string `pathParam:"style=simple,explode=false,name=teamId"`
-    
+	TeamID string `pathParam:"style=simple,explode=false,name=teamId"`
 }
 
 type GetTeamsTeamIDMembershipsRequest struct {
-    PathParams GetTeamsTeamIDMembershipsPathParams 
-    
+	PathParams GetTeamsTeamIDMembershipsPathParams
 }
 
 type GetTeamsTeamIDMembershipsResponse struct {
-    Body []byte 
-    ContentType string 
-    ErrorResponseContent *shared.ErrorResponseContent 
-    InvitedUserInfos []shared.InvitedUserInfo 
-    StatusCode int64 
-    
+	Body                 []byte
+	ContentType          string
+	ErrorResponseContent *shared.ErrorResponseContent
+	InvitedUserInfos     []shared.InvitedUserInfo
+	StatusCode           int64
 }
-

@@ -1,10 +1,6 @@
 package shared
 
-
-
 type PutDestinationPolicyRequest struct {
-    AccessPolicy string `json:"accessPolicy"`
-    DestinationName string `json:"destinationName"`
-    
+	AccessPolicy    string `json:"accessPolicy"`
+	DestinationName string `json:"destinationName"`
 }
-

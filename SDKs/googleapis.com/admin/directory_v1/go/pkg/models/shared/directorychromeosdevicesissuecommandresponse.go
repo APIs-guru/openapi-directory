@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DirectoryChromeosdevicesIssueCommandResponse struct {
-    CommandID *string `json:"commandId,omitempty"`
-    
+	CommandID *string `json:"commandId,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteSizeConstraintSetResponse struct {
-    ChangeToken *string `json:"ChangeToken,omitempty"`
-    
+	ChangeToken *string `json:"ChangeToken,omitempty"`
 }
-

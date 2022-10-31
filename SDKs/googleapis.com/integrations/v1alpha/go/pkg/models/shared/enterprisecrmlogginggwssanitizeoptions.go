@@ -1,49 +1,39 @@
 package shared
 
-
-
-
 type EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum string
 
 const (
-    EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnumLogTypeUnspecified EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum = "LOG_TYPE_UNSPECIFIED"
-EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnumGws EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum = "GWS"
-EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnumGts EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum = "GTS"
-EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnumAll EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum = "ALL"
+	EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnumLogTypeUnspecified EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum = "LOG_TYPE_UNSPECIFIED"
+	EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnumGws                EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum = "GWS"
+	EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnumGts                EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum = "GTS"
+	EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnumAll                EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum = "ALL"
 )
-
-
 
 type EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum string
 
 const (
-    EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnumPrivacyTypeUnspecified EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum = "PRIVACY_TYPE_UNSPECIFIED"
-EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnumNotPii EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum = "NOT_PII"
-EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnumPii EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum = "PII"
-EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnumSpii EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum = "SPII"
-EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnumUnsure EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum = "UNSURE"
+	EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnumPrivacyTypeUnspecified EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum = "PRIVACY_TYPE_UNSPECIFIED"
+	EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnumNotPii                 EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum = "NOT_PII"
+	EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnumPii                    EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum = "PII"
+	EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnumSpii                   EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum = "SPII"
+	EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnumUnsure                 EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum = "UNSURE"
 )
-
-
 
 type EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum string
 
 const (
-    EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumSanitizeTypeUnspecified EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "SANITIZE_TYPE_UNSPECIFIED"
-EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumScrub EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "SCRUB"
-EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumAnonymize EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "ANONYMIZE"
-EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumAnonymizeLimitedRepeatable EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "ANONYMIZE_LIMITED_REPEATABLE"
-EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumObfuscate EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "OBFUSCATE"
-EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumEncrypt EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "ENCRYPT"
-EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumDoNotSanitize EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "DO_NOT_SANITIZE"
+	EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumSanitizeTypeUnspecified    EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "SANITIZE_TYPE_UNSPECIFIED"
+	EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumScrub                      EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "SCRUB"
+	EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumAnonymize                  EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "ANONYMIZE"
+	EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumAnonymizeLimitedRepeatable EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "ANONYMIZE_LIMITED_REPEATABLE"
+	EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumObfuscate                  EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "OBFUSCATE"
+	EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumEncrypt                    EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "ENCRYPT"
+	EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnumDoNotSanitize              EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum = "DO_NOT_SANITIZE"
 )
 
-
 type EnterpriseCrmLoggingGwsSanitizeOptions struct {
-    IsAlreadySanitized *bool `json:"isAlreadySanitized,omitempty"`
-    LogType []EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum `json:"logType,omitempty"`
-    Privacy *EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum `json:"privacy,omitempty"`
-    SanitizeType *EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum `json:"sanitizeType,omitempty"`
-    
+	IsAlreadySanitized *bool                                                   `json:"isAlreadySanitized,omitempty"`
+	LogType            []EnterpriseCrmLoggingGwsSanitizeOptionsLogTypeEnum     `json:"logType,omitempty"`
+	Privacy            *EnterpriseCrmLoggingGwsSanitizeOptionsPrivacyEnum      `json:"privacy,omitempty"`
+	SanitizeType       *EnterpriseCrmLoggingGwsSanitizeOptionsSanitizeTypeEnum `json:"sanitizeType,omitempty"`
 }
-

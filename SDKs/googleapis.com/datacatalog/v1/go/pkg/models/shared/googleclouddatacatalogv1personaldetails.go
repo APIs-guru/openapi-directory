@@ -1,10 +1,6 @@
 package shared
 
-
-
 type GoogleCloudDatacatalogV1PersonalDetails struct {
-    StarTime *string `json:"starTime,omitempty"`
-    Starred *bool `json:"starred,omitempty"`
-    
+	StarTime *string `json:"starTime,omitempty"`
+	Starred  *bool   `json:"starred,omitempty"`
 }
-

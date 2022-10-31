@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TaskList struct {
-    Name string `json:"name"`
-    
+	Name string `json:"name"`
 }
-

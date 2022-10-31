@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetIdentityPoolRolesInput struct {
-    IdentityPoolID string `json:"IdentityPoolId"`
-    
+	IdentityPoolID string `json:"IdentityPoolId"`
 }
-

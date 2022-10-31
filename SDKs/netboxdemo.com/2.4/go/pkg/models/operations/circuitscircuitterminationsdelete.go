@@ -1,20 +1,14 @@
 package operations
 
-
-
 type CircuitsCircuitTerminationsDeletePathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type CircuitsCircuitTerminationsDeleteRequest struct {
-    PathParams CircuitsCircuitTerminationsDeletePathParams 
-    
+	PathParams CircuitsCircuitTerminationsDeletePathParams
 }
 
 type CircuitsCircuitTerminationsDeleteResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

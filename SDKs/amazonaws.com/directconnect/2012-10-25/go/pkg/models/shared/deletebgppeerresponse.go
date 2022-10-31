@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteBgpPeerResponse struct {
-    VirtualInterface *VirtualInterface `json:"virtualInterface,omitempty"`
-    
+	VirtualInterface *VirtualInterface `json:"virtualInterface,omitempty"`
 }
-

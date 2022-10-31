@@ -1,35 +1,30 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetEventPredictionsPathParams struct {
-    EventKey string `pathParam:"style=simple,explode=false,name=event_key"`
-    
+	EventKey string `pathParam:"style=simple,explode=false,name=event_key"`
 }
 
 type GetEventPredictionsHeaders struct {
-    IfModifiedSince *string `header:"style=simple,explode=false,name=If-Modified-Since"`
-    
+	IfModifiedSince *string `header:"style=simple,explode=false,name=If-Modified-Since"`
 }
 
 type GetEventPredictionsSecurity struct {
-    APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetEventPredictionsRequest struct {
-    PathParams GetEventPredictionsPathParams 
-    Headers GetEventPredictionsHeaders 
-    Security GetEventPredictionsSecurity 
-    
+	PathParams GetEventPredictionsPathParams
+	Headers    GetEventPredictionsHeaders
+	Security   GetEventPredictionsSecurity
 }
 
 type GetEventPredictionsResponse struct {
-    ContentType string 
-    EventPredictions map[string]interface{} 
-    Headers map[string][]string 
-    StatusCode int64 
-    
+	ContentType      string
+	EventPredictions map[string]interface{}
+	Headers          map[string][]string
+	StatusCode       int64
 }
-

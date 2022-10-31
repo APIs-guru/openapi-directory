@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RequestPhoneVerificationResponse struct {
-    VerificationID *string `json:"verificationId,omitempty"`
-    
+	VerificationID *string `json:"verificationId,omitempty"`
 }
-

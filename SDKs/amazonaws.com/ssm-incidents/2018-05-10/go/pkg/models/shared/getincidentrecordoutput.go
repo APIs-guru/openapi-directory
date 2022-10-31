@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetIncidentRecordOutput struct {
-    IncidentRecord IncidentRecord `json:"incidentRecord"`
-    
+	IncidentRecord IncidentRecord `json:"incidentRecord"`
 }
-

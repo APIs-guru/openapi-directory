@@ -1,47 +1,42 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeletePathParams struct {
-    AdvertiserID string `pathParam:"style=simple,explode=false,name=advertiserId"`
-    KeywordValue string `pathParam:"style=simple,explode=false,name=keywordValue"`
-    NegativeKeywordListID string `pathParam:"style=simple,explode=false,name=negativeKeywordListId"`
-    
+	AdvertiserID          string `pathParam:"style=simple,explode=false,name=advertiserId"`
+	KeywordValue          string `pathParam:"style=simple,explode=false,name=keywordValue"`
+	NegativeKeywordListID string `pathParam:"style=simple,explode=false,name=negativeKeywordListId"`
 }
 
 type DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteQueryParams struct {
-    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
-    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
-    Callback *string `queryParam:"style=form,explode=true,name=callback"`
-    Fields *string `queryParam:"style=form,explode=true,name=fields"`
-    Key *string `queryParam:"style=form,explode=true,name=key"`
-    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
-    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
-    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
-    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
-    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
-    
+	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
+	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
+	Key            *string           `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
+	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
 type DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteSecurity struct {
-    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-    
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
 }
 
 type DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteRequest struct {
-    PathParams DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeletePathParams 
-    QueryParams DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteQueryParams 
-    Security DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteSecurity 
-    
+	PathParams  DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeletePathParams
+	QueryParams DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteQueryParams
+	Security    DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteSecurity
 }
 
 type DisplayvideoAdvertisersNegativeKeywordListsNegativeKeywordsDeleteResponse struct {
-    ContentType string 
-    Empty map[string]interface{} 
-    StatusCode int64 
-    
+	ContentType string
+	Empty       map[string]interface{}
+	StatusCode  int64
 }
-

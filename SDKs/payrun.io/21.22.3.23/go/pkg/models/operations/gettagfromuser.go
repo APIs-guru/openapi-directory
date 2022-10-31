@@ -1,31 +1,27 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetTagFromUserPathParams struct {
-    TagID string `pathParam:"style=simple,explode=false,name=TagId"`
-    UserID string `pathParam:"style=simple,explode=false,name=UserId"`
-    
+	TagID  string `pathParam:"style=simple,explode=false,name=TagId"`
+	UserID string `pathParam:"style=simple,explode=false,name=UserId"`
 }
 
 type GetTagFromUserHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type GetTagFromUserRequest struct {
-    PathParams GetTagFromUserPathParams 
-    Headers GetTagFromUserHeaders 
-    
+	PathParams GetTagFromUserPathParams
+	Headers    GetTagFromUserHeaders
 }
 
 type GetTagFromUserResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    StatusCode int64 
-    Tag *shared.Tag 
-    
+	ContentType string
+	ErrorModel  *shared.ErrorModel
+	StatusCode  int64
+	Tag         *shared.Tag
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateDeploymentGroupOutput struct {
-    HooksNotCleanedUp []AutoScalingGroup `json:"hooksNotCleanedUp,omitempty"`
-    
+	HooksNotCleanedUp []AutoScalingGroup `json:"hooksNotCleanedUp,omitempty"`
 }
-

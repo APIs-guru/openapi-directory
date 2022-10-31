@@ -1,21 +1,15 @@
 package operations
 
-
-
 type SessionIDDeletePathParams struct {
-    SessionID string `pathParam:"style=simple,explode=false,name=session_id"`
-    
+	SessionID string `pathParam:"style=simple,explode=false,name=session_id"`
 }
 
 type SessionIDDeleteRequest struct {
-    PathParams SessionIDDeletePathParams 
-    
+	PathParams SessionIDDeletePathParams
 }
 
 type SessionIDDeleteResponse struct {
-    ContentType string 
-    StatusCode int64 
-    ProblemDetail *interface{} 
-    
+	ContentType   string
+	StatusCode    int64
+	ProblemDetail *interface{}
 }
-

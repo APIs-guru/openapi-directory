@@ -1,77 +1,63 @@
 package shared
 
-
-
-
 type SearchAnalyticsQueryRequestAggregationTypeEnum string
 
 const (
-    SearchAnalyticsQueryRequestAggregationTypeEnumAuto SearchAnalyticsQueryRequestAggregationTypeEnum = "AUTO"
-SearchAnalyticsQueryRequestAggregationTypeEnumByProperty SearchAnalyticsQueryRequestAggregationTypeEnum = "BY_PROPERTY"
-SearchAnalyticsQueryRequestAggregationTypeEnumByPage SearchAnalyticsQueryRequestAggregationTypeEnum = "BY_PAGE"
+	SearchAnalyticsQueryRequestAggregationTypeEnumAuto       SearchAnalyticsQueryRequestAggregationTypeEnum = "AUTO"
+	SearchAnalyticsQueryRequestAggregationTypeEnumByProperty SearchAnalyticsQueryRequestAggregationTypeEnum = "BY_PROPERTY"
+	SearchAnalyticsQueryRequestAggregationTypeEnumByPage     SearchAnalyticsQueryRequestAggregationTypeEnum = "BY_PAGE"
 )
-
-
 
 type SearchAnalyticsQueryRequestDataStateEnum string
 
 const (
-    SearchAnalyticsQueryRequestDataStateEnumDataStateUnspecified SearchAnalyticsQueryRequestDataStateEnum = "DATA_STATE_UNSPECIFIED"
-SearchAnalyticsQueryRequestDataStateEnumFinal SearchAnalyticsQueryRequestDataStateEnum = "FINAL"
-SearchAnalyticsQueryRequestDataStateEnumAll SearchAnalyticsQueryRequestDataStateEnum = "ALL"
+	SearchAnalyticsQueryRequestDataStateEnumDataStateUnspecified SearchAnalyticsQueryRequestDataStateEnum = "DATA_STATE_UNSPECIFIED"
+	SearchAnalyticsQueryRequestDataStateEnumFinal                SearchAnalyticsQueryRequestDataStateEnum = "FINAL"
+	SearchAnalyticsQueryRequestDataStateEnumAll                  SearchAnalyticsQueryRequestDataStateEnum = "ALL"
 )
-
-
 
 type SearchAnalyticsQueryRequestDimensionsEnum string
 
 const (
-    SearchAnalyticsQueryRequestDimensionsEnumDate SearchAnalyticsQueryRequestDimensionsEnum = "DATE"
-SearchAnalyticsQueryRequestDimensionsEnumQuery SearchAnalyticsQueryRequestDimensionsEnum = "QUERY"
-SearchAnalyticsQueryRequestDimensionsEnumPage SearchAnalyticsQueryRequestDimensionsEnum = "PAGE"
-SearchAnalyticsQueryRequestDimensionsEnumCountry SearchAnalyticsQueryRequestDimensionsEnum = "COUNTRY"
-SearchAnalyticsQueryRequestDimensionsEnumDevice SearchAnalyticsQueryRequestDimensionsEnum = "DEVICE"
-SearchAnalyticsQueryRequestDimensionsEnumSearchAppearance SearchAnalyticsQueryRequestDimensionsEnum = "SEARCH_APPEARANCE"
+	SearchAnalyticsQueryRequestDimensionsEnumDate             SearchAnalyticsQueryRequestDimensionsEnum = "DATE"
+	SearchAnalyticsQueryRequestDimensionsEnumQuery            SearchAnalyticsQueryRequestDimensionsEnum = "QUERY"
+	SearchAnalyticsQueryRequestDimensionsEnumPage             SearchAnalyticsQueryRequestDimensionsEnum = "PAGE"
+	SearchAnalyticsQueryRequestDimensionsEnumCountry          SearchAnalyticsQueryRequestDimensionsEnum = "COUNTRY"
+	SearchAnalyticsQueryRequestDimensionsEnumDevice           SearchAnalyticsQueryRequestDimensionsEnum = "DEVICE"
+	SearchAnalyticsQueryRequestDimensionsEnumSearchAppearance SearchAnalyticsQueryRequestDimensionsEnum = "SEARCH_APPEARANCE"
 )
-
-
 
 type SearchAnalyticsQueryRequestSearchTypeEnum string
 
 const (
-    SearchAnalyticsQueryRequestSearchTypeEnumWeb SearchAnalyticsQueryRequestSearchTypeEnum = "WEB"
-SearchAnalyticsQueryRequestSearchTypeEnumImage SearchAnalyticsQueryRequestSearchTypeEnum = "IMAGE"
-SearchAnalyticsQueryRequestSearchTypeEnumVideo SearchAnalyticsQueryRequestSearchTypeEnum = "VIDEO"
-SearchAnalyticsQueryRequestSearchTypeEnumNews SearchAnalyticsQueryRequestSearchTypeEnum = "NEWS"
-SearchAnalyticsQueryRequestSearchTypeEnumDiscover SearchAnalyticsQueryRequestSearchTypeEnum = "DISCOVER"
-SearchAnalyticsQueryRequestSearchTypeEnumGoogleNews SearchAnalyticsQueryRequestSearchTypeEnum = "GOOGLE_NEWS"
+	SearchAnalyticsQueryRequestSearchTypeEnumWeb        SearchAnalyticsQueryRequestSearchTypeEnum = "WEB"
+	SearchAnalyticsQueryRequestSearchTypeEnumImage      SearchAnalyticsQueryRequestSearchTypeEnum = "IMAGE"
+	SearchAnalyticsQueryRequestSearchTypeEnumVideo      SearchAnalyticsQueryRequestSearchTypeEnum = "VIDEO"
+	SearchAnalyticsQueryRequestSearchTypeEnumNews       SearchAnalyticsQueryRequestSearchTypeEnum = "NEWS"
+	SearchAnalyticsQueryRequestSearchTypeEnumDiscover   SearchAnalyticsQueryRequestSearchTypeEnum = "DISCOVER"
+	SearchAnalyticsQueryRequestSearchTypeEnumGoogleNews SearchAnalyticsQueryRequestSearchTypeEnum = "GOOGLE_NEWS"
 )
-
-
 
 type SearchAnalyticsQueryRequestTypeEnum string
 
 const (
-    SearchAnalyticsQueryRequestTypeEnumWeb SearchAnalyticsQueryRequestTypeEnum = "WEB"
-SearchAnalyticsQueryRequestTypeEnumImage SearchAnalyticsQueryRequestTypeEnum = "IMAGE"
-SearchAnalyticsQueryRequestTypeEnumVideo SearchAnalyticsQueryRequestTypeEnum = "VIDEO"
-SearchAnalyticsQueryRequestTypeEnumNews SearchAnalyticsQueryRequestTypeEnum = "NEWS"
-SearchAnalyticsQueryRequestTypeEnumDiscover SearchAnalyticsQueryRequestTypeEnum = "DISCOVER"
-SearchAnalyticsQueryRequestTypeEnumGoogleNews SearchAnalyticsQueryRequestTypeEnum = "GOOGLE_NEWS"
+	SearchAnalyticsQueryRequestTypeEnumWeb        SearchAnalyticsQueryRequestTypeEnum = "WEB"
+	SearchAnalyticsQueryRequestTypeEnumImage      SearchAnalyticsQueryRequestTypeEnum = "IMAGE"
+	SearchAnalyticsQueryRequestTypeEnumVideo      SearchAnalyticsQueryRequestTypeEnum = "VIDEO"
+	SearchAnalyticsQueryRequestTypeEnumNews       SearchAnalyticsQueryRequestTypeEnum = "NEWS"
+	SearchAnalyticsQueryRequestTypeEnumDiscover   SearchAnalyticsQueryRequestTypeEnum = "DISCOVER"
+	SearchAnalyticsQueryRequestTypeEnumGoogleNews SearchAnalyticsQueryRequestTypeEnum = "GOOGLE_NEWS"
 )
 
-
 type SearchAnalyticsQueryRequest struct {
-    AggregationType *SearchAnalyticsQueryRequestAggregationTypeEnum `json:"aggregationType,omitempty"`
-    DataState *SearchAnalyticsQueryRequestDataStateEnum `json:"dataState,omitempty"`
-    DimensionFilterGroups []APIDimensionFilterGroup `json:"dimensionFilterGroups,omitempty"`
-    Dimensions []SearchAnalyticsQueryRequestDimensionsEnum `json:"dimensions,omitempty"`
-    EndDate *string `json:"endDate,omitempty"`
-    RowLimit *int32 `json:"rowLimit,omitempty"`
-    SearchType *SearchAnalyticsQueryRequestSearchTypeEnum `json:"searchType,omitempty"`
-    StartDate *string `json:"startDate,omitempty"`
-    StartRow *int32 `json:"startRow,omitempty"`
-    Type *SearchAnalyticsQueryRequestTypeEnum `json:"type,omitempty"`
-    
+	AggregationType       *SearchAnalyticsQueryRequestAggregationTypeEnum `json:"aggregationType,omitempty"`
+	DataState             *SearchAnalyticsQueryRequestDataStateEnum       `json:"dataState,omitempty"`
+	DimensionFilterGroups []APIDimensionFilterGroup                       `json:"dimensionFilterGroups,omitempty"`
+	Dimensions            []SearchAnalyticsQueryRequestDimensionsEnum     `json:"dimensions,omitempty"`
+	EndDate               *string                                         `json:"endDate,omitempty"`
+	RowLimit              *int32                                          `json:"rowLimit,omitempty"`
+	SearchType            *SearchAnalyticsQueryRequestSearchTypeEnum      `json:"searchType,omitempty"`
+	StartDate             *string                                         `json:"startDate,omitempty"`
+	StartRow              *int32                                          `json:"startRow,omitempty"`
+	Type                  *SearchAnalyticsQueryRequestTypeEnum            `json:"type,omitempty"`
 }
-

@@ -1,21 +1,18 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ShutdownApplicationSecurity struct {
-    CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
-    
+	CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type ShutdownApplicationRequest struct {
-    Security ShutdownApplicationSecurity 
-    
+	Security ShutdownApplicationSecurity
 }
 
 type ShutdownApplicationResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

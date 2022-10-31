@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetEmployersHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type GetEmployersRequest struct {
-    Headers GetEmployersHeaders 
-    
+	Headers GetEmployersHeaders
 }
 
 type GetEmployersResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    LinkCollection *shared.LinkCollection 
-    StatusCode int64 
-    
+	ContentType    string
+	ErrorModel     *shared.ErrorModel
+	LinkCollection *shared.LinkCollection
+	StatusCode     int64
 }
-

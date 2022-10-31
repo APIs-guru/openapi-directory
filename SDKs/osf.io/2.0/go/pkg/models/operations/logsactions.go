@@ -1,10 +1,6 @@
 package operations
 
-
-
 type LogsActionsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

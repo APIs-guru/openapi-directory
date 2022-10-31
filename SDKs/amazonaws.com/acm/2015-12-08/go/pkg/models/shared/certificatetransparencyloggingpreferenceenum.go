@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type CertificateTransparencyLoggingPreferenceEnum string
 
 const (
-    CertificateTransparencyLoggingPreferenceEnumEnabled CertificateTransparencyLoggingPreferenceEnum = "ENABLED"
-CertificateTransparencyLoggingPreferenceEnumDisabled CertificateTransparencyLoggingPreferenceEnum = "DISABLED"
+	CertificateTransparencyLoggingPreferenceEnumEnabled  CertificateTransparencyLoggingPreferenceEnum = "ENABLED"
+	CertificateTransparencyLoggingPreferenceEnumDisabled CertificateTransparencyLoggingPreferenceEnum = "DISABLED"
 )
-
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeviceTierSet struct {
-    DeviceTiers []DeviceTier `json:"deviceTiers,omitempty"`
-    
+	DeviceTiers []DeviceTier `json:"deviceTiers,omitempty"`
 }
-

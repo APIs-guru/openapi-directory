@@ -1,20 +1,14 @@
 package operations
 
-
-
 type GetExportPdfBelegeBelegUUIDPathParams struct {
-    BelegUUID string `pathParam:"style=simple,explode=false,name=belegUuid"`
-    
+	BelegUUID string `pathParam:"style=simple,explode=false,name=belegUuid"`
 }
 
 type GetExportPdfBelegeBelegUUIDRequest struct {
-    PathParams GetExportPdfBelegeBelegUUIDPathParams 
-    
+	PathParams GetExportPdfBelegeBelegUUIDPathParams
 }
 
 type GetExportPdfBelegeBelegUUIDResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

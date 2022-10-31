@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EncryptionConfig struct {
-    KmsKeyName *string `json:"kmsKeyName,omitempty"`
-    
+	KmsKeyName *string `json:"kmsKeyName,omitempty"`
 }
-

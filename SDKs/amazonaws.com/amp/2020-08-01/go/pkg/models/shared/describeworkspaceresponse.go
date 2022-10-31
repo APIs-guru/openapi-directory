@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeWorkspaceResponse struct {
-    Workspace WorkspaceDescription `json:"workspace"`
-    
+	Workspace WorkspaceDescription `json:"workspace"`
 }
-

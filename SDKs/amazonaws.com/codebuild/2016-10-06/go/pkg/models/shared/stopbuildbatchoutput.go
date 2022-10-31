@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StopBuildBatchOutput struct {
-    BuildBatch *BuildBatch `json:"buildBatch,omitempty"`
-    
+	BuildBatch *BuildBatch `json:"buildBatch,omitempty"`
 }
-

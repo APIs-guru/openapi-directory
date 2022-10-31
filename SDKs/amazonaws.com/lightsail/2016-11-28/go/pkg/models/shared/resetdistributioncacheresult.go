@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ResetDistributionCacheResult struct {
-    CreateTime *time.Time `json:"createTime,omitempty"`
-    Operation *Operation `json:"operation,omitempty"`
-    Status *string `json:"status,omitempty"`
-    
+	CreateTime *time.Time `json:"createTime,omitempty"`
+	Operation  *Operation `json:"operation,omitempty"`
+	Status     *string    `json:"status,omitempty"`
 }
-

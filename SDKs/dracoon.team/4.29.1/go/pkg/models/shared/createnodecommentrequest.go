@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateNodeCommentRequest struct {
-    Text string `json:"text"`
-    
+	Text string `json:"text"`
 }
-

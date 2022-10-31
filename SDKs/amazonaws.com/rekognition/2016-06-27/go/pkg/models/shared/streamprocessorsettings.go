@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StreamProcessorSettings struct {
-    FaceSearch *FaceSearchSettings `json:"FaceSearch,omitempty"`
-    
+	FaceSearch *FaceSearchSettings `json:"FaceSearch,omitempty"`
 }
-

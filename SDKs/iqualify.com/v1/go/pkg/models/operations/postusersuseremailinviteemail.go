@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PostUsersUserEmailInviteEmailPathParams struct {
-    UserEmail string `pathParam:"style=simple,explode=false,name=userEmail"`
-    
+	UserEmail string `pathParam:"style=simple,explode=false,name=userEmail"`
 }
 
 type PostUsersUserEmailInviteEmailRequest struct {
-    PathParams PostUsersUserEmailInviteEmailPathParams 
-    
+	PathParams PostUsersUserEmailInviteEmailPathParams
 }
 
 type PostUsersUserEmailInviteEmailResponse struct {
-    ContentType string 
-    Error *shared.Error 
-    StatusCode int64 
-    
+	ContentType string
+	Error       *shared.Error
+	StatusCode  int64
 }
-

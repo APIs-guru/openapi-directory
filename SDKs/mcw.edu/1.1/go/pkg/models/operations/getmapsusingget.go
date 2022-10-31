@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetMapsUsingGetPathParams struct {
-    SpeciesTypeKey int32 `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
-    
+	SpeciesTypeKey int32 `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
 }
 
 type GetMapsUsingGetRequest struct {
-    PathParams GetMapsUsingGetPathParams 
-    
+	PathParams GetMapsUsingGetPathParams
 }
 
 type GetMapsUsingGetResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

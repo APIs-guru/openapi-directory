@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PutInstancePublicPortsResult struct {
-    Operation *Operation `json:"operation,omitempty"`
-    
+	Operation *Operation `json:"operation,omitempty"`
 }
-

@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type SavedShowObject struct {
-    AddedAt *time.Time `json:"added_at,omitempty"`
-    Show *SimplifiedShowObject `json:"show,omitempty"`
-    
+	AddedAt *time.Time            `json:"added_at,omitempty"`
+	Show    *SimplifiedShowObject `json:"show,omitempty"`
 }
-

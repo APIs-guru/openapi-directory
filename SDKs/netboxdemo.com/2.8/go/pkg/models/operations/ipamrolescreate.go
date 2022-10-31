@@ -1,17 +1,15 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type IpamRolesCreateRequest struct {
-    Request shared.Role `request:"mediaType=application/json"`
-    
+	Request shared.Role `request:"mediaType=application/json"`
 }
 
 type IpamRolesCreateResponse struct {
-    ContentType string 
-    Role *shared.Role 
-    StatusCode int64 
-    
+	ContentType string
+	Role        *shared.Role
+	StatusCode  int64
 }
-

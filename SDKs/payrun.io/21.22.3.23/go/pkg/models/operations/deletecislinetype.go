@@ -1,30 +1,26 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeleteCisLineTypePathParams struct {
-    CisLineTypeID string `pathParam:"style=simple,explode=false,name=CisLineTypeId"`
-    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
-    
+	CisLineTypeID string `pathParam:"style=simple,explode=false,name=CisLineTypeId"`
+	EmployerID    string `pathParam:"style=simple,explode=false,name=EmployerId"`
 }
 
 type DeleteCisLineTypeHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type DeleteCisLineTypeRequest struct {
-    PathParams DeleteCisLineTypePathParams 
-    Headers DeleteCisLineTypeHeaders 
-    
+	PathParams DeleteCisLineTypePathParams
+	Headers    DeleteCisLineTypeHeaders
 }
 
 type DeleteCisLineTypeResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    StatusCode int64 
-    
+	ContentType string
+	ErrorModel  *shared.ErrorModel
+	StatusCode  int64
 }
-

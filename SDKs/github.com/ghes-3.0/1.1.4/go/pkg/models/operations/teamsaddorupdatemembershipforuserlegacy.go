@@ -1,39 +1,33 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type TeamsAddOrUpdateMembershipForUserLegacyPathParams struct {
-    TeamID int64 `pathParam:"style=simple,explode=false,name=team_id"`
-    Username string `pathParam:"style=simple,explode=false,name=username"`
-    
+	TeamID   int64  `pathParam:"style=simple,explode=false,name=team_id"`
+	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
-
 
 type TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnum string
 
 const (
-    TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnumMember TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnum = "member"
-TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnumMaintainer TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnum = "maintainer"
+	TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnumMember     TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnum = "member"
+	TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnumMaintainer TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnum = "maintainer"
 )
 
-
 type TeamsAddOrUpdateMembershipForUserLegacyRequestBody struct {
-    Role *TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnum `json:"role,omitempty"`
-    
+	Role *TeamsAddOrUpdateMembershipForUserLegacyRequestBodyRoleEnum `json:"role,omitempty"`
 }
 
 type TeamsAddOrUpdateMembershipForUserLegacyRequest struct {
-    PathParams TeamsAddOrUpdateMembershipForUserLegacyPathParams 
-    Request *TeamsAddOrUpdateMembershipForUserLegacyRequestBody `request:"mediaType=application/json"`
-    
+	PathParams TeamsAddOrUpdateMembershipForUserLegacyPathParams
+	Request    *TeamsAddOrUpdateMembershipForUserLegacyRequestBody `request:"mediaType=application/json"`
 }
 
 type TeamsAddOrUpdateMembershipForUserLegacyResponse struct {
-    ContentType string 
-    StatusCode int64 
-    BasicError *shared.BasicError 
-    TeamMembership *shared.TeamMembership 
-    
+	ContentType    string
+	StatusCode     int64
+	BasicError     *shared.BasicError
+	TeamMembership *shared.TeamMembership
 }
-

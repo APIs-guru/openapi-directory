@@ -1,1069 +1,965 @@
 package operations
 
 import (
-"time")
+	"time"
+)
 
 type GetUnsecuredSmeLoansHeaders struct {
-    IfModifiedSince *string `header:"style=simple,explode=false,name=If-Modified-Since"`
-    IfNoneMatch *string `header:"style=simple,explode=false,name=If-None-Match"`
-    
+	IfModifiedSince *string `header:"style=simple,explode=false,name=If-Modified-Since"`
+	IfNoneMatch     *string `header:"style=simple,explode=false,name=If-None-Match"`
 }
 
 type GetUnsecuredSmeLoansRequest struct {
-    Headers GetUnsecuredSmeLoansHeaders 
-    
+	Headers GetUnsecuredSmeLoansHeaders
 }
-
 
 type GetUnsecuredSmeLoans400ErrorObjectDescriptionEnum string
 
 const (
-    GetUnsecuredSmeLoans400ErrorObjectDescriptionEnumYouHaveSentARequestWhichCouldNotBeUnderstood GetUnsecuredSmeLoans400ErrorObjectDescriptionEnum = "You have sent a request which could not be understood."
+	GetUnsecuredSmeLoans400ErrorObjectDescriptionEnumYouHaveSentARequestWhichCouldNotBeUnderstood GetUnsecuredSmeLoans400ErrorObjectDescriptionEnum = "You have sent a request which could not be understood."
 )
-
-
 
 type GetUnsecuredSmeLoans400ErrorObjectStatusEnum string
 
 const (
-    GetUnsecuredSmeLoans400ErrorObjectStatusEnumFourHundred GetUnsecuredSmeLoans400ErrorObjectStatusEnum = "400"
+	GetUnsecuredSmeLoans400ErrorObjectStatusEnumFourHundred GetUnsecuredSmeLoans400ErrorObjectStatusEnum = "400"
 )
-
-
 
 type GetUnsecuredSmeLoans400ErrorObjectTitleEnum string
 
 const (
-    GetUnsecuredSmeLoans400ErrorObjectTitleEnumBadRequest GetUnsecuredSmeLoans400ErrorObjectTitleEnum = "Bad request"
+	GetUnsecuredSmeLoans400ErrorObjectTitleEnumBadRequest GetUnsecuredSmeLoans400ErrorObjectTitleEnum = "Bad request"
 )
 
-
 type GetUnsecuredSmeLoans400ErrorObject struct {
-    Description GetUnsecuredSmeLoans400ErrorObjectDescriptionEnum `json:"description"`
-    Status GetUnsecuredSmeLoans400ErrorObjectStatusEnum `json:"status"`
-    Title GetUnsecuredSmeLoans400ErrorObjectTitleEnum `json:"title"`
-    
+	Description GetUnsecuredSmeLoans400ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetUnsecuredSmeLoans400ErrorObjectStatusEnum      `json:"status"`
+	Title       GetUnsecuredSmeLoans400ErrorObjectTitleEnum       `json:"title"`
 }
-
 
 type GetUnsecuredSmeLoans408ErrorObjectDescriptionEnum string
 
 const (
-    GetUnsecuredSmeLoans408ErrorObjectDescriptionEnumYourClientHasFailedToSubmitARequestAndATimeoutHasOccurred GetUnsecuredSmeLoans408ErrorObjectDescriptionEnum = "Your client has failed to submit a request, and a timeout has occurred."
+	GetUnsecuredSmeLoans408ErrorObjectDescriptionEnumYourClientHasFailedToSubmitARequestAndATimeoutHasOccurred GetUnsecuredSmeLoans408ErrorObjectDescriptionEnum = "Your client has failed to submit a request, and a timeout has occurred."
 )
-
-
 
 type GetUnsecuredSmeLoans408ErrorObjectStatusEnum string
 
 const (
-    GetUnsecuredSmeLoans408ErrorObjectStatusEnumFourHundredAndEight GetUnsecuredSmeLoans408ErrorObjectStatusEnum = "408"
+	GetUnsecuredSmeLoans408ErrorObjectStatusEnumFourHundredAndEight GetUnsecuredSmeLoans408ErrorObjectStatusEnum = "408"
 )
-
-
 
 type GetUnsecuredSmeLoans408ErrorObjectTitleEnum string
 
 const (
-    GetUnsecuredSmeLoans408ErrorObjectTitleEnumClientTimeout GetUnsecuredSmeLoans408ErrorObjectTitleEnum = "Client timeout"
+	GetUnsecuredSmeLoans408ErrorObjectTitleEnumClientTimeout GetUnsecuredSmeLoans408ErrorObjectTitleEnum = "Client timeout"
 )
 
-
 type GetUnsecuredSmeLoans408ErrorObject struct {
-    Description GetUnsecuredSmeLoans408ErrorObjectDescriptionEnum `json:"description"`
-    Status GetUnsecuredSmeLoans408ErrorObjectStatusEnum `json:"status"`
-    Title GetUnsecuredSmeLoans408ErrorObjectTitleEnum `json:"title"`
-    
+	Description GetUnsecuredSmeLoans408ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetUnsecuredSmeLoans408ErrorObjectStatusEnum      `json:"status"`
+	Title       GetUnsecuredSmeLoans408ErrorObjectTitleEnum       `json:"title"`
 }
-
 
 type GetUnsecuredSmeLoans429ErrorObjectDescriptionEnum string
 
 const (
-    GetUnsecuredSmeLoans429ErrorObjectDescriptionEnumYouHaveRequestedThisResourceTooOftenSlowDown GetUnsecuredSmeLoans429ErrorObjectDescriptionEnum = "You have requested this resource too often. Slow down."
+	GetUnsecuredSmeLoans429ErrorObjectDescriptionEnumYouHaveRequestedThisResourceTooOftenSlowDown GetUnsecuredSmeLoans429ErrorObjectDescriptionEnum = "You have requested this resource too often. Slow down."
 )
-
-
 
 type GetUnsecuredSmeLoans429ErrorObjectStatusEnum string
 
 const (
-    GetUnsecuredSmeLoans429ErrorObjectStatusEnumFourHundredAndTwentyNine GetUnsecuredSmeLoans429ErrorObjectStatusEnum = "429"
+	GetUnsecuredSmeLoans429ErrorObjectStatusEnumFourHundredAndTwentyNine GetUnsecuredSmeLoans429ErrorObjectStatusEnum = "429"
 )
-
-
 
 type GetUnsecuredSmeLoans429ErrorObjectTitleEnum string
 
 const (
-    GetUnsecuredSmeLoans429ErrorObjectTitleEnumTooManyRequests GetUnsecuredSmeLoans429ErrorObjectTitleEnum = "Too many requests"
+	GetUnsecuredSmeLoans429ErrorObjectTitleEnumTooManyRequests GetUnsecuredSmeLoans429ErrorObjectTitleEnum = "Too many requests"
 )
 
-
 type GetUnsecuredSmeLoans429ErrorObject struct {
-    Description GetUnsecuredSmeLoans429ErrorObjectDescriptionEnum `json:"description"`
-    Status GetUnsecuredSmeLoans429ErrorObjectStatusEnum `json:"status"`
-    Title GetUnsecuredSmeLoans429ErrorObjectTitleEnum `json:"title"`
-    
+	Description GetUnsecuredSmeLoans429ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetUnsecuredSmeLoans429ErrorObjectStatusEnum      `json:"status"`
+	Title       GetUnsecuredSmeLoans429ErrorObjectTitleEnum       `json:"title"`
 }
-
 
 type GetUnsecuredSmeLoans500ErrorObjectDescriptionEnum string
 
 const (
-    GetUnsecuredSmeLoans500ErrorObjectDescriptionEnumAnErrorOccurredOnTheServerNoFurtherInformationIsAvailable GetUnsecuredSmeLoans500ErrorObjectDescriptionEnum = "An error occurred on the server. No further information is available."
+	GetUnsecuredSmeLoans500ErrorObjectDescriptionEnumAnErrorOccurredOnTheServerNoFurtherInformationIsAvailable GetUnsecuredSmeLoans500ErrorObjectDescriptionEnum = "An error occurred on the server. No further information is available."
 )
-
-
 
 type GetUnsecuredSmeLoans500ErrorObjectStatusEnum string
 
 const (
-    GetUnsecuredSmeLoans500ErrorObjectStatusEnumFiveHundred GetUnsecuredSmeLoans500ErrorObjectStatusEnum = "500"
+	GetUnsecuredSmeLoans500ErrorObjectStatusEnumFiveHundred GetUnsecuredSmeLoans500ErrorObjectStatusEnum = "500"
 )
-
-
 
 type GetUnsecuredSmeLoans500ErrorObjectTitleEnum string
 
 const (
-    GetUnsecuredSmeLoans500ErrorObjectTitleEnumInternalServerError GetUnsecuredSmeLoans500ErrorObjectTitleEnum = "Internal server error"
+	GetUnsecuredSmeLoans500ErrorObjectTitleEnumInternalServerError GetUnsecuredSmeLoans500ErrorObjectTitleEnum = "Internal server error"
 )
 
-
 type GetUnsecuredSmeLoans500ErrorObject struct {
-    Description GetUnsecuredSmeLoans500ErrorObjectDescriptionEnum `json:"description"`
-    Status GetUnsecuredSmeLoans500ErrorObjectStatusEnum `json:"status"`
-    Title GetUnsecuredSmeLoans500ErrorObjectTitleEnum `json:"title"`
-    
+	Description GetUnsecuredSmeLoans500ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetUnsecuredSmeLoans500ErrorObjectStatusEnum      `json:"status"`
+	Title       GetUnsecuredSmeLoans500ErrorObjectTitleEnum       `json:"title"`
 }
-
 
 type GetUnsecuredSmeLoans503ErrorObjectDescriptionEnum string
 
 const (
-    GetUnsecuredSmeLoans503ErrorObjectDescriptionEnumTheServiceIsTemporarilyUnavailable GetUnsecuredSmeLoans503ErrorObjectDescriptionEnum = "The service is temporarily unavailable."
+	GetUnsecuredSmeLoans503ErrorObjectDescriptionEnumTheServiceIsTemporarilyUnavailable GetUnsecuredSmeLoans503ErrorObjectDescriptionEnum = "The service is temporarily unavailable."
 )
-
-
 
 type GetUnsecuredSmeLoans503ErrorObjectStatusEnum string
 
 const (
-    GetUnsecuredSmeLoans503ErrorObjectStatusEnumFiveHundredAndThree GetUnsecuredSmeLoans503ErrorObjectStatusEnum = "503"
+	GetUnsecuredSmeLoans503ErrorObjectStatusEnumFiveHundredAndThree GetUnsecuredSmeLoans503ErrorObjectStatusEnum = "503"
 )
-
-
 
 type GetUnsecuredSmeLoans503ErrorObjectTitleEnum string
 
 const (
-    GetUnsecuredSmeLoans503ErrorObjectTitleEnumServiceTemporarilyUnavailable GetUnsecuredSmeLoans503ErrorObjectTitleEnum = "Service temporarily unavailable"
+	GetUnsecuredSmeLoans503ErrorObjectTitleEnumServiceTemporarilyUnavailable GetUnsecuredSmeLoans503ErrorObjectTitleEnum = "Service temporarily unavailable"
 )
 
-
 type GetUnsecuredSmeLoans503ErrorObject struct {
-    Description GetUnsecuredSmeLoans503ErrorObjectDescriptionEnum `json:"description"`
-    Status GetUnsecuredSmeLoans503ErrorObjectStatusEnum `json:"status"`
-    Title GetUnsecuredSmeLoans503ErrorObjectTitleEnum `json:"title"`
-    
+	Description GetUnsecuredSmeLoans503ErrorObjectDescriptionEnum `json:"description"`
+	Status      GetUnsecuredSmeLoans503ErrorObjectStatusEnum      `json:"status"`
+	Title       GetUnsecuredSmeLoans503ErrorObjectTitleEnum       `json:"title"`
 }
 
 type GetUnsecuredSmeLoansErrorObject struct {
-    Description string `json:"description"`
-    Status string `json:"status"`
-    Title string `json:"title"`
-    
+	Description string `json:"description"`
+	Status      string `json:"status"`
+	Title       string `json:"title"`
 }
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumCashDeposit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "CashDeposit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumDeposit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "Deposit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumDirectDebit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "DirectDebit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumInitialDeposit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "InitialDeposit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumInternetLogon GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "InternetLogon"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumMobileLogon GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "MobileLogon"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumRegularDeposit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "RegularDeposit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumCashDeposit    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "CashDeposit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumDeposit        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "Deposit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumDirectDebit    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "DirectDebit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumInitialDeposit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "InitialDeposit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumInternetLogon  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "InternetLogon"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumMobileLogon    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "MobileLogon"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnumRegularDeposit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum = "RegularDeposit"
 )
 
-
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetail struct {
-    BenefitDescription *string `json:"BenefitDescription,omitempty"`
-    BenefitID *string `json:"BenefitID,omitempty"`
-    BenefitName *string `json:"BenefitName,omitempty"`
-    BenefitType *string `json:"BenefitType,omitempty"`
-    BenefitValue *string `json:"BenefitValue,omitempty"`
-    Counter *int64 `json:"Counter,omitempty"`
-    CriteriaType []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum `json:"CriteriaType,omitempty"`
-    DefaultToAccounts *bool `json:"DefaultToAccounts,omitempty"`
-    MaximumCriteria *string `json:"MaximumCriteria,omitempty"`
-    MinimumCriteria *string `json:"MinimumCriteria,omitempty"`
-    PromotionEndDate *string `json:"PromotionEndDate,omitempty"`
-    PromotionStartDate *string `json:"PromotionStartDate,omitempty"`
-    
+	BenefitDescription *string                                                                                                                               `json:"BenefitDescription,omitempty"`
+	BenefitID          *string                                                                                                                               `json:"BenefitID,omitempty"`
+	BenefitName        *string                                                                                                                               `json:"BenefitName,omitempty"`
+	BenefitType        *string                                                                                                                               `json:"BenefitType,omitempty"`
+	BenefitValue       *string                                                                                                                               `json:"BenefitValue,omitempty"`
+	Counter            *int64                                                                                                                                `json:"Counter,omitempty"`
+	CriteriaType       []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetailCriteriaTypeEnum `json:"CriteriaType,omitempty"`
+	DefaultToAccounts  *bool                                                                                                                                 `json:"DefaultToAccounts,omitempty"`
+	MaximumCriteria    *string                                                                                                                               `json:"MaximumCriteria,omitempty"`
+	MinimumCriteria    *string                                                                                                                               `json:"MinimumCriteria,omitempty"`
+	PromotionEndDate   *string                                                                                                                               `json:"PromotionEndDate,omitempty"`
+	PromotionStartDate *string                                                                                                                               `json:"PromotionStartDate,omitempty"`
 }
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItem struct {
-    BenefitDetail []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetail `json:"BenefitDetail,omitempty"`
-    DateOfChange *string `json:"DateOfChange,omitempty"`
-    LengthPromotionalInDays *int64 `json:"LengthPromotionalInDays,omitempty"`
-    StartPromotionOrFutureTerms *string `json:"StartPromotionOrFutureTerms,omitempty"`
-    StopPromotionOrFutureTerms *string `json:"StopPromotionOrFutureTerms,omitempty"`
-    
+	BenefitDetail               []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItemBenefitDetail `json:"BenefitDetail,omitempty"`
+	DateOfChange                *string                                                                                                               `json:"DateOfChange,omitempty"`
+	LengthPromotionalInDays     *int64                                                                                                                `json:"LengthPromotionalInDays,omitempty"`
+	StartPromotionOrFutureTerms *string                                                                                                               `json:"StartPromotionOrFutureTerms,omitempty"`
+	StopPromotionOrFutureTerms  *string                                                                                                               `json:"StopPromotionOrFutureTerms,omitempty"`
 }
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnumFutureMultipleTerms GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum = "FutureMultipleTerms"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnumPromotional GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum = "Promotional"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnumRegular GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum = "Regular"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnumFutureMultipleTerms GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum = "FutureMultipleTerms"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnumPromotional         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum = "Promotional"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnumRegular             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum = "Regular"
 )
 
-
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroup struct {
-    BenefitItem GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItem `json:"BenefitItem"`
-    BenefitSubType *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum `json:"BenefitSubType,omitempty"`
-    
+	BenefitItem    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitItem         `json:"BenefitItem"`
+	BenefitSubType *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroupBenefitSubTypeEnum `json:"BenefitSubType,omitempty"`
 }
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefits struct {
-    Benefit bool `json:"Benefit"`
-    BenefitGroup []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroup `json:"BenefitGroup,omitempty"`
-    
+	Benefit      bool                                                                                          `json:"Benefit"`
+	BenefitGroup []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefitsBenefitGroup `json:"BenefitGroup,omitempty"`
 }
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumBranch GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "Branch"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumMobileBankingApp GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "MobileBankingApp"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumOnline GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "Online"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumPhone GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "Phone"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumPost GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "Post"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumPostOffice GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "PostOffice"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumText GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "Text"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumBranch           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "Branch"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumMobileBankingApp GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "MobileBankingApp"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumOnline           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "Online"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumPhone            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "Phone"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumPost             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "Post"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumPostOffice       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "PostOffice"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnumText             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum = "Text"
 )
-
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumAnyBusinessCustomer GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "AnyBusinessCustomer"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumBusinessOnly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "BusinessOnly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumCreditCard GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "CreditCard"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumCreditScoring GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "CreditScoring"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumEmailAddress GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "EmailAddress"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumExistingCustomers GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "ExistingCustomers"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumIDAndV GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "IdAndV"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumMortgage GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "Mortgage"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumNoArrearsOnLoan GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "NoArrearsOnLoan"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumNoCustomerInArrears GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "NoCustomerInArrears"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumNoOverOverdraftThirtyDays GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "NoOverOverdraftThirtyDays"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumNoSoleUkAccountOrBankrupt GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "NoSoleUkAccountOrBankrupt"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumNtb GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "NTB"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumNtbBusiness GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "NTBBusiness"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumSoleStudentAccount GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "SoleStudentAccount"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumSoleUkAccount GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "SoleUkAccount"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumStudentsOnly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "StudentsOnly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumTwoMonthsOfCourseStart GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "TwoMonthsOfCourseStart"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumUcasFulltimeTwoYears GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "UCASFulltimeTwoYears"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumAnyBusinessCustomer       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "AnyBusinessCustomer"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumBusinessOnly              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "BusinessOnly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumCreditCard                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "CreditCard"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumCreditScoring             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "CreditScoring"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumEmailAddress              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "EmailAddress"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumExistingCustomers         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "ExistingCustomers"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumIDAndV                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "IdAndV"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumMortgage                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "Mortgage"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumNoArrearsOnLoan           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "NoArrearsOnLoan"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumNoCustomerInArrears       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "NoCustomerInArrears"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumNoOverOverdraftThirtyDays GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "NoOverOverdraftThirtyDays"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumNoSoleUkAccountOrBankrupt GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "NoSoleUkAccountOrBankrupt"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumNtb                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "NTB"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumNtbBusiness               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "NTBBusiness"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumSoleStudentAccount        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "SoleStudentAccount"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumSoleUkAccount             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "SoleUkAccount"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumStudentsOnly              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "StudentsOnly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumTwoMonthsOfCourseStart    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "TwoMonthsOfCourseStart"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnumUcasFulltimeTwoYears      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum = "UCASFulltimeTwoYears"
 )
-
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnumExistingCustomers GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnum = "ExistingCustomers"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnumNewCustomersOnly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnum = "NewCustomersOnly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnumSwitchersOnly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnum = "SwitchersOnly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnumStartUp GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnum = "StartUp"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnumExistingCustomers GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnum = "ExistingCustomers"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnumNewCustomersOnly  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnum = "NewCustomersOnly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnumSwitchersOnly     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnum = "SwitchersOnly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnumStartUp           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnum = "StartUp"
 )
-
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnumAcademicTerm GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum = "AcademicTerm"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnumHalfYearly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum = "HalfYearly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnumMonthly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum = "Monthly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnumQuarterly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum = "Quarterly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnumWeekly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum = "Weekly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnumYearly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum = "Yearly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnumAcademicTerm GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum = "AcademicTerm"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnumHalfYearly   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum = "HalfYearly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnumMonthly      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum = "Monthly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnumQuarterly    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum = "Quarterly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnumWeekly       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum = "Weekly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnumYearly       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum = "Yearly"
 )
-
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumUk GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "UK"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumEea GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "EEA"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumEu GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "EU"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumEfta GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "EFTA"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumGbEng GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "GB - ENG"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumGbNir GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "GB - NIR"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumGbSct GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "GB - SCT"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumGbWls GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "GB - WLS"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumIrl GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "IRL"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumUk    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "UK"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumEea   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "EEA"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumEu    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "EU"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumEfta  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "EFTA"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumGbEng GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "GB - ENG"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumGbNir GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "GB - NIR"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumGbSct GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "GB - SCT"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumGbWls GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "GB - WLS"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnumIrl   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum = "IRL"
 )
-
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnumJoint GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum = "Joint"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnumSoleIncome GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum = "SoleIncome"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnumSoleOrJoint GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum = "SoleOrJoint"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnumTurnover GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum = "Turnover"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnumJoint       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum = "Joint"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnumSoleIncome  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum = "SoleIncome"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnumSoleOrJoint GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum = "SoleOrJoint"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnumTurnover    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum = "Turnover"
 )
 
-
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibility struct {
-    AgeRestricted bool `json:"AgeRestricted"`
-    AnnualBusinessTurnover *string `json:"AnnualBusinessTurnover,omitempty"`
-    AnnualBusinessTurnoverCurrency *string `json:"AnnualBusinessTurnoverCurrency,omitempty"`
-    Description string `json:"Description"`
-    EligibilityName *string `json:"EligibilityName,omitempty"`
-    EligibilityNotes *string `json:"EligibilityNotes,omitempty"`
-    EligibilityType *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum `json:"EligibilityType,omitempty"`
-    IncomeCondition *string `json:"IncomeCondition,omitempty"`
-    IncomeTurnoverRelated bool `json:"IncomeTurnoverRelated"`
-    MarketingEligibility []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnum `json:"MarketingEligibility,omitempty"`
-    MaxNumberOfAccounts *string `json:"MaxNumberOfAccounts,omitempty"`
-    MaximumAge *int64 `json:"MaximumAge,omitempty"`
-    MaximumAgeToOpen *int64 `json:"MaximumAgeToOpen,omitempty"`
-    MaximumOpeningAmount *bool `json:"MaximumOpeningAmount,omitempty"`
-    MinIncomeTurnoverPaidIntoAccount *int64 `json:"MinIncomeTurnoverPaidIntoAccount,omitempty"`
-    MinimumAge *int64 `json:"MinimumAge,omitempty"`
-    MinimumDeposit *bool `json:"MinimumDeposit,omitempty"`
-    MinimumIncomeFrequency *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum `json:"MinimumIncomeFrequency,omitempty"`
-    MinimumIncomeTurnoverAmount *string `json:"MinimumIncomeTurnoverAmount,omitempty"`
-    MinimumIncomeTurnoverCurrency *string `json:"MinimumIncomeTurnoverCurrency,omitempty"`
-    MinimumOperatingBalance *string `json:"MinimumOperatingBalance,omitempty"`
-    MinimumOperatingBalanceCurrency *string `json:"MinimumOperatingBalanceCurrency,omitempty"`
-    MinimumOperatingBalanceExists *bool `json:"MinimumOperatingBalanceExists,omitempty"`
-    OpeningDepositMaximumAmount *string `json:"OpeningDepositMaximumAmount,omitempty"`
-    OpeningDepositMaximumCurrency *string `json:"OpeningDepositMaximumCurrency,omitempty"`
-    OpeningDepositMinimum *string `json:"OpeningDepositMinimum,omitempty"`
-    OpeningDepositMinimumCurrency *string `json:"OpeningDepositMinimumCurrency,omitempty"`
-    OtherFinancialHoldingRequired bool `json:"OtherFinancialHoldingRequired"`
-    PreviousBankruptcy bool `json:"PreviousBankruptcy"`
-    ResidencyRestricted bool `json:"ResidencyRestricted"`
-    ResidencyRestrictedRegion *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum `json:"ResidencyRestrictedRegion,omitempty"`
-    SingleJointIncome *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum `json:"SingleJointIncome,omitempty"`
-    ThirdSectorOrganisations bool `json:"ThirdSectorOrganisations"`
-    
+	AgeRestricted                    bool                                                                                                             `json:"AgeRestricted"`
+	AnnualBusinessTurnover           *string                                                                                                          `json:"AnnualBusinessTurnover,omitempty"`
+	AnnualBusinessTurnoverCurrency   *string                                                                                                          `json:"AnnualBusinessTurnoverCurrency,omitempty"`
+	Description                      string                                                                                                           `json:"Description"`
+	EligibilityName                  *string                                                                                                          `json:"EligibilityName,omitempty"`
+	EligibilityNotes                 *string                                                                                                          `json:"EligibilityNotes,omitempty"`
+	EligibilityType                  *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityEligibilityTypeEnum           `json:"EligibilityType,omitempty"`
+	IncomeCondition                  *string                                                                                                          `json:"IncomeCondition,omitempty"`
+	IncomeTurnoverRelated            bool                                                                                                             `json:"IncomeTurnoverRelated"`
+	MarketingEligibility             []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMarketingEligibilityEnum     `json:"MarketingEligibility,omitempty"`
+	MaxNumberOfAccounts              *string                                                                                                          `json:"MaxNumberOfAccounts,omitempty"`
+	MaximumAge                       *int64                                                                                                           `json:"MaximumAge,omitempty"`
+	MaximumAgeToOpen                 *int64                                                                                                           `json:"MaximumAgeToOpen,omitempty"`
+	MaximumOpeningAmount             *bool                                                                                                            `json:"MaximumOpeningAmount,omitempty"`
+	MinIncomeTurnoverPaidIntoAccount *int64                                                                                                           `json:"MinIncomeTurnoverPaidIntoAccount,omitempty"`
+	MinimumAge                       *int64                                                                                                           `json:"MinimumAge,omitempty"`
+	MinimumDeposit                   *bool                                                                                                            `json:"MinimumDeposit,omitempty"`
+	MinimumIncomeFrequency           *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityMinimumIncomeFrequencyEnum    `json:"MinimumIncomeFrequency,omitempty"`
+	MinimumIncomeTurnoverAmount      *string                                                                                                          `json:"MinimumIncomeTurnoverAmount,omitempty"`
+	MinimumIncomeTurnoverCurrency    *string                                                                                                          `json:"MinimumIncomeTurnoverCurrency,omitempty"`
+	MinimumOperatingBalance          *string                                                                                                          `json:"MinimumOperatingBalance,omitempty"`
+	MinimumOperatingBalanceCurrency  *string                                                                                                          `json:"MinimumOperatingBalanceCurrency,omitempty"`
+	MinimumOperatingBalanceExists    *bool                                                                                                            `json:"MinimumOperatingBalanceExists,omitempty"`
+	OpeningDepositMaximumAmount      *string                                                                                                          `json:"OpeningDepositMaximumAmount,omitempty"`
+	OpeningDepositMaximumCurrency    *string                                                                                                          `json:"OpeningDepositMaximumCurrency,omitempty"`
+	OpeningDepositMinimum            *string                                                                                                          `json:"OpeningDepositMinimum,omitempty"`
+	OpeningDepositMinimumCurrency    *string                                                                                                          `json:"OpeningDepositMinimumCurrency,omitempty"`
+	OtherFinancialHoldingRequired    bool                                                                                                             `json:"OtherFinancialHoldingRequired"`
+	PreviousBankruptcy               bool                                                                                                             `json:"PreviousBankruptcy"`
+	ResidencyRestricted              bool                                                                                                             `json:"ResidencyRestricted"`
+	ResidencyRestrictedRegion        *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilityResidencyRestrictedRegionEnum `json:"ResidencyRestrictedRegion,omitempty"`
+	SingleJointIncome                *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibilitySingleJointIncomeEnum         `json:"SingleJointIncome,omitempty"`
+	ThirdSectorOrganisations         bool                                                                                                             `json:"ThirdSectorOrganisations"`
 }
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumAcademicTerm GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "AcademicTerm"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumAccountClosing GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "AccountClosing"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumAccountOpening GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "AccountOpening"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumAtTimeOfLoanRepayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "AtTimeOfLoanRepayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumChargingPeriod GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "ChargingPeriod"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumDaily GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "Daily"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumEveryFiveBusinessDays GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "EveryFiveBusinessDays"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumItem GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "Item"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumMonthly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "Monthly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumOnAccountAnniversary GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "OnAccountAnniversary"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumPerHour GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "PerHour"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumPerOccurrence GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "PerOccurrence"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumPerSheet GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "PerSheet"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumPerTransactionAmount GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "PerTransactionAmount"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumPerTransactionPercentage GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "PerTransactionPercentage"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumQuarterly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "Quarterly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumSixMonthly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "SixMonthly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumStartOfLoan GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "StartOfLoan"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumStatementMonthly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "StatementMonthly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumWeekly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "Weekly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumYearly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "Yearly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumAcademicTerm             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "AcademicTerm"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumAccountClosing           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "AccountClosing"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumAccountOpening           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "AccountOpening"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumAtTimeOfLoanRepayment    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "AtTimeOfLoanRepayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumChargingPeriod           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "ChargingPeriod"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumDaily                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "Daily"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumEveryFiveBusinessDays    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "EveryFiveBusinessDays"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumItem                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "Item"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumMonthly                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "Monthly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumOnAccountAnniversary     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "OnAccountAnniversary"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumPerHour                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "PerHour"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumPerOccurrence            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "PerOccurrence"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumPerSheet                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "PerSheet"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumPerTransactionAmount     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "PerTransactionAmount"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumPerTransactionPercentage GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "PerTransactionPercentage"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumQuarterly                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "Quarterly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumSixMonthly               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "SixMonthly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumStartOfLoan              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "StartOfLoan"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumStatementMonthly         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "StatementMonthly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumWeekly                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "Weekly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnumYearly                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum = "Yearly"
 )
 
-
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetails struct {
-    FeeAmount *string `json:"FeeAmount,omitempty"`
-    FeeFrequency GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum `json:"FeeFrequency"`
-    FeeHigherTier *int64 `json:"FeeHigherTier,omitempty"`
-    FeeLowerTier *int64 `json:"FeeLowerTier,omitempty"`
-    FeeMax *string `json:"FeeMax,omitempty"`
-    FeeMin *string `json:"FeeMin,omitempty"`
-    FeeRate *string `json:"FeeRate,omitempty"`
-    FeesAndChargesNotes *string `json:"FeesAndChargesNotes,omitempty"`
-    Negotiable bool `json:"Negotiable"`
-    RepresentativeRate *string `json:"RepresentativeRate,omitempty"`
-    
+	FeeAmount           *string                                                                                                                                   `json:"FeeAmount,omitempty"`
+	FeeFrequency        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetailsFeeFrequencyEnum `json:"FeeFrequency"`
+	FeeHigherTier       *int64                                                                                                                                    `json:"FeeHigherTier,omitempty"`
+	FeeLowerTier        *int64                                                                                                                                    `json:"FeeLowerTier,omitempty"`
+	FeeMax              *string                                                                                                                                   `json:"FeeMax,omitempty"`
+	FeeMin              *string                                                                                                                                   `json:"FeeMin,omitempty"`
+	FeeRate             *string                                                                                                                                   `json:"FeeRate,omitempty"`
+	FeesAndChargesNotes *string                                                                                                                                   `json:"FeesAndChargesNotes,omitempty"`
+	Negotiable          bool                                                                                                                                      `json:"Negotiable"`
+	RepresentativeRate  *string                                                                                                                                   `json:"RepresentativeRate,omitempty"`
 }
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOther GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "Other"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmDonation GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMDonation"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmDeposAtmPaidIn GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMDeposATMPaidIn"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportCertBalance GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportCertBalance"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroadConVisaCredit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroadConVisaCredit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroadConVisaDebit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroadConVisaDebit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmCardnetEnvIn GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMCardnetEnvIn"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmCashGroupAtmCreditCard GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMCashGroupATMCreditCard"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmCashNonGroupAtmCredittcard GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMCashNonGroupATMCredittcard"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmCashGroupAtmDebitCard GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMCashGroupATMDebitCard"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmCashNonGroupAtmDebitcard GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMCashNonGroupATMDebitcard"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmConGroupAtm GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMConGroupATM"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroad GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroad"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmForeignCashDebCard GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMForeignCashDebCard"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroadGoldVisaDebit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroadGoldVisaDebit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmSpainCashCard GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMSpainCashCard"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmSpainDebitCard GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMSpainDebitCard"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmSpainConversionDebitCard GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMSpainConversionDebitCard"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmSpainConversionCashCard GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMSpainConversionCashCard"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmNonSterlingWithdrawal GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMNonSterlingWithdrawal"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroadVisaCredit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroadVisaCredit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroadVisaDebit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroadVisaDebit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroadConVisaGoldDebit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroadConVisaGoldDebit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmWidthdrawCash GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMWidthdrawCash"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsOnLineAncilliary GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSOnLineAncilliary"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsBatch GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSBatch"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsOnLineFile GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSOnLineFile"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsFileItem GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSFileItem"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsOnLineSetup GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSOnLineSetup "
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsItem GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSItem"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsItemInterbranch GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSItemInterbranch"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsBulkBatch GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSBulkBatch"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsOnLineOverlimit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSOnLineOverlimit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsOnLinePayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSOnLinePayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsRecallItem GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSRecallItem"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsOnLineService GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSOnLineService"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsBulkInternet GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSBulkInternet"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelDirDebSmartCard GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELDirDebSmartCard"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelDirDebWebInit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELDirDebWebInit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsteLirDebWebInit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELirDebWebInit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelDirDebOverlimit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELDirDebOverlimit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelDirDebPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELDirDebPayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelDirDebService GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELDirDebService"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelDirDebAncilliary GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELDirDebAncilliary"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsDirectItemProfile GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSDirectItemProfile"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelAncilliary GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELAncilliary"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelSmartCard GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELSmartCard"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelFile GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELFile"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelSetup GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELSetup "
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelOverlimit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELOverlimit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELPayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelService GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELService"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutBranch GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutBranch"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsCancellation GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSCancellation"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutOnlineDepositAcc GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutOnlineDepositAcc"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsIn GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSIn"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutInterBank GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutInterBank"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsInterBank GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSInterBank"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutPost GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutPost"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutInterBranch GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutInterBranch"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOut GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOut"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutOnline GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutOnline"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapSandForeignPay GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSandForeignPay"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutManual GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutManual"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCardCardReplacement GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CardCardReplacement"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDraftsCounter GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DraftsCounter"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDraftsBankers GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DraftsBankers"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDraftsIntlPayableAbroad GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DraftsIntlPayableAbroad"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDraftsLostStolen GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DraftsLostStolen"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCardPersonalisedCard GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CardPersonalisedCard"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDraftsIntlStoppedCancelled GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DraftsIntlStoppedCancelled"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumEuroChqXLess GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "EuroChqXLess"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumEuroChqXPlus GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "EuroChqXPlus"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumFpsOutFutureDated GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "FPSOutFutureDated"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumFpsOutImmediate GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "FPSOutImmediate"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumFpsOut GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "FPSOut"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumFpsOutOwn GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "FPSOutOwn"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumFpsInBranch GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "FPSInBranch"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumFpsukPayUrgent GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "FPSUKPayUrgent"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalArticlesReport GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalArticlesReport"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalSealing GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalSealing"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalBondAndGuarantee GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalBondAndGuarantee"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalCourtOrder GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalCourtOrder"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalCoSearch GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalCoSearch"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalDepositAssignment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalDepositAssignment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalGuaranteePrep GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalGuaranteePrep"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalLifePolicyPrepCo GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalLifePolicyPrepCo"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalLifePolicyPrepPersonal GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalLifePolicyPrepPersonal"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalPriorityPariPassu GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalPriorityPariPassu"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalSubordinationAgreement GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalSubordinationAgreement"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDirDebDirectDebitAdmin GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DirDebDirectDebitAdmin"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDirDebDirectDebitCancel GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DirDebDirectDebitCancel"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayBibForeignLimit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayBIBForeignLimit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayCreditTransCust GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayCreditTransCust"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayCreditTransNonCust GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayCreditTransNonCust"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayUrgentPaymentForeign GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayUrgentPaymentForeign"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayExpressMoneyMover GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayExpressMoneyMover"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayEeaPayUrgent GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayEEAPayUrgent"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayIrishPayUrgent GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayIrishPayUrgent"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayEeaPay GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayEEAPay"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignIn1CPlus GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignIn1CPlus"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignPaymentInUkAcc GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignPaymentInUKAcc"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignCharge GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignCharge"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignCancellation GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignCancellation"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignStandardEuEuroBic GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignStandardEUEuroBIC"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayFxFeeRate GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayFXFeeRate"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignInternet GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignInternet"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeign GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeign"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignInbound GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignInbound"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayFxPaymentOut GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayFXPaymentOut"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignInSub1C GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignInSub1C"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayFxRate GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayFXRate"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignStandardEuEuroNoBic GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignStandardEUEuroNoBIC"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayFxPaymentOutIr GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayFXPaymentOutIR"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayFxFee GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayFXFee"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayPurchaseNonSterling GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayPurchaseNonSterling"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayPostPaymentForeign GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayPostPaymentForeign"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayPurchaseRateNonSterling GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayPurchaseRateNonSterling"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayPaymentTracing GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayPaymentTracing"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayStandardMoneyMover GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayStandardMoneyMover"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayMt101Transaction GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayMT101Transaction"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayTransNonSterling GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayTransNonSterling"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayTransRateNonSterling GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayTransRateNonSterling"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignUrgentEuEuroBic GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignUrgentEUEuroBIC"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignUrgentEuEuroNoBic GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignUrgentEUEuroNoBIC"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayUrgentPaymentGroup GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayUrgentPaymentGroup"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayUrgentPaymentUk GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayUrgentPaymentUK"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayUsaPayUrgent GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayUSAPayUrgent"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayCurrencyPurchase GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayCurrencyPurchase"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayWorldpayPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayWorldpayPayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayCurrencyWithdraw GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayCurrencyWithdraw"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayBankDetailsWrong GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayBankDetailsWrong"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayForeignBcnr GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayForeignBCNR"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayForeignRecall GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayForeignRecall"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvGeneralInq GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvGeneralInq"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvOldInstruction GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvOldInstruction"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayPaymentRecall GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayPaymentRecall"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayReturnDebitXvLess GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayReturnDebitXVLess"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayReturnDebitXvPlus GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayReturnDebitXVPlus"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayStopPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayStopPayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayStandingOrdUnpaid GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayStandingOrdUnpaid"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepAccess GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepAccess"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepDeedMedium GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepDeedMedium"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepingEnvelope GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepingEnvelope"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepingInspection GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepingInspection"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepingLargeItem GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepingLargeItem"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepMultipleItems GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepMultipleItems"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepingParcel GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepingParcel"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepDeedSmall GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepDeedSmall"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepOneItem GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepOneItem"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepSafeCustody GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepSafeCustody"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLoanArrangementFeePc GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LoanArrangementFeePC"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLoanArrangement GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LoanArrangement"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLoanEarlyRepayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LoanEarlyRepayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLoanLatePayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LoanLatePayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLoanSmeUnsecuredLoan GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LoanSMEUnsecuredLoan"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLoanTieredArrangement GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LoanTieredArrangement"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumNightSafeNightSafeBankOpen GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "NightSafeNightSafeBankOpen"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumNightSafeCreditSub5K GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "NightSafeCreditSub5K"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumNightSafeNightSafe GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "NightSafeNightSafe"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumNightSafeNightSafePaidIn GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "NightSafeNightSafePaidIn"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOverdraftAnnualReview GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OverdraftAnnualReview"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOverdraftTempOverdraft GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OverdraftTempOverdraft"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOverdraftUnauthorisedBorrowing GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OverdraftUnauthorisedBorrowing"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumPoPostOfficeCounterCredit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "POPostOfficeCounterCredit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumPoPostOfficeCashCredit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "POPostOfficeCashCredit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumPoPostOfficeCashOut GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "POPostOfficeCashOut"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumPoPostOfficeWithdrawal GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "POPostOfficeWithdrawal"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqBookTheftLossAllStopped GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqBookTheftLossAllStopped"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqIssuedCurrencyAcc GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqIssuedCurrencyAcc"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqCopy GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqCopy"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqDraft GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqDraft"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqIn GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqIn"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqDraftSterling GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqDraftSterling"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqOutIssued GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqOutIssued"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqSpecialChqPresentation GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqSpecialChqPresentation"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqCounterCheque GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqCounterCheque"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqChequeswithStatement GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqChequeswithStatement"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqStopped GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqStopped"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqTrans GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqTrans"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqDraftFx GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqDraftFX"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignCourier GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignCourier"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignNegTenThou GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignNegTenThou"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignNegHundred GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignNegHundred"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChequeForeignBankDivi GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChequeForeignBankDivi"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignNegFiftyThou GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignNegFiftyThou"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqPensionCheque GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqPensionCheque"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChequeForeignOtherDivi GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChequeForeignOtherDivi"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignNegFiveThou GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignNegFiveThou"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignNegMax GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignNegMax"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignGbpmmdPlus GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignGBPMMDPlus"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqGiftCheque GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqGiftCheque"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqCounterLodgement GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqCounterLodgement"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqCashDropLodgement GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqCashDropLodgement"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqChequePhotocopy GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqChequePhotocopy"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqPostOfficeCredit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqPostOfficeCredit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqPostOfficeChequeCollected GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqPostOfficeChequeCollected"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqChequeRetrieval GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqChequeRetrieval"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqReconcilliationPerTrans GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqReconcilliationPerTrans"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqSpecialPresentationCount GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqSpecialPresentationCount"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqSpecialPresentationPtt GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqSpecialPresentationPTT"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqUnpaidCharge GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqUnpaidCharge"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqUnpaidTransIn GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqUnpaidTransIn"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqUnpaidTransOut GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqUnpaidTransOut"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqUnpaidCheque GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqUnpaidCheque"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportAuditLetter GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportAuditLetter"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportFaxAdviceAdditional GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportFAXAdviceAdditional"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportTelAdviceAdditional GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportTelAdviceAdditional"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportCreditHistory GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportCreditHistory"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportCertInterestDuplicate GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportCertInterestDuplicate"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportCertInterest GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportCertInterest"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportCreditHistoryAdditionalInYear GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportCreditHistoryAdditionalInYear"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportForeignStatusEnqElec GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportForeignStatusEnqElec"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportForeignStatusEnq GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportForeignStatusEnq"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportCashBackorInterestAnal GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportCashBackorInterestAnal"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementChqDaily GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementChqDaily"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementChqFortnightly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementChqFortnightly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementChqMonthly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementChqMonthly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementChqWeekly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementChqWeekly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementAndDiviChq GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementAndDiviChq"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportReference GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportReference"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportReferralItem GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportReferralItem"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementByAtm GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementByATM"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementByBranch GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementByBranch"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementCopyRegular GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementCopyRegular"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatusEnquiry GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatusEnquiry"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementFrequent GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementFrequent"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementMonthly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementMonthly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementCopy1 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementCopy1"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementToBranch GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementToBranch"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportSmsTextMiniStatementorAlert GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportSMSTextMiniStatementorAlert"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementFortnightly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementFortnightly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportSmsTextMiniStatementWoM GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportSMSTextMiniStatementWoM"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportSmsTextAlertBalance GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportSMSTextAlertBalance"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportSmsTextAlert GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportSMSTextAlert"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportTaxCert GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportTaxCert"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportWeeklyStatement GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportWeeklyStatement"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportTextMessageBanking GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportTextMessageBanking"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaCancellation GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPACancellation"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaBranch GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPABranch"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaCredit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPACredit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaDirectDebit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPADirectDebit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaIn GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPAIn"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaEuro GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPAEuro"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaOut GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPAOut"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaUnpaid GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPAUnpaid"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaWinbitsAnnualService GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPAWinbitsAnnual Service"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaWinbitsTransaction GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPAWinbitsTransaction"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransBillPaymentBranch GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransBillPaymentBranch"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransBillCollect GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransBillCollect"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTelephoneBillPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTelephoneBillPayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransBankPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransBankPayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransBillPaymentTelephone GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransBillPaymentTelephone"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransCorrespondentBankFee GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransCorrespondentBankFee"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransCreditTransferUkDifferent GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransCreditTransferUKDifferent"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransCreditTransferUkSame GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransCreditTransferUKSame"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransCredit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransCredit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransCreditTransfer GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransCreditTransfer"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransBranchCredit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransBranchCredit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransDebit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransDebit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransDebCardDeb GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransDebCardDeb"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransUkDirDeb GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransUKDirDeb"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransManualDeb GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransManualDeb"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransBuyForeignWithGbp GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransBuyForeignWithGBP"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransGoodValueReq GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransGoodValueReq"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransSwiftOutUkForeign GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransSWIFTOutUKForeign"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransInconpleteInstruction GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransInconpleteInstruction"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransManualEntries GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransManualEntries"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransManualTrans GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransManualTrans"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransNonSterling GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransNonSterling"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransPosSaleForeign GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransPOSSaleForeign"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransPriPaymentPost GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransPriPaymentPost"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransPosSaleUk GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransPOSSaleUK"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransReturnPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransReturnPayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransReconciliationPerTrans GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransReconciliationPerTrans"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransStandingOrdAdmin GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransStandingOrdAdmin"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransStandingOrd GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransStandingOrd"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransStandingOrdManPay GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransStandingOrdManPay"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTravellersChqOtherBank GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTravellersChqOtherBank"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTelBusiPriPaymentForeignToUkAcc GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTelBusiPriPaymentForeignToUKAcc"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTeleItem GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTeleItem"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTelBusiPriPaymentToGrpAcc GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTelBusiPriPaymentToGrpAcc"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTravellersChqRate GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTravellersChqRate"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTransferExGroup GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTransferExGroup"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransUnauthorisedPaidTrans GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransUnauthorisedPaidTrans"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransUrgentPaymentPostal GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransUrgentPaymentPostal"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransUnpaidTrans GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransUnpaidTrans"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTelBusiPriPaymentToNonGrpAcc GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTelBusiPriPaymentToNonGrpAcc"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransSwiftOutNonEeaSterling GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransSWIFTOutNonEEASterling"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAutoAutoCredit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "AutoAutoCredit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAutoAutomatedEntries GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "AutoAutomatedEntries"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAutoAutoCreditPhoneInet GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "AutoAutoCreditPhoneInet"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAutoAutomatedTrans GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "AutoAutomatedTrans"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAutoDebitCardCommercial GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "AutoDebitCardCommercial"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAutoFpsAutoCredit GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "AutoFPSAutoCredit"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumVisaConvertAbroadForeign GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "VisaConvertAbroadForeign"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumVisaBureauDeChange GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "VisaBureauDeChange"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumVisaTravellersChqorCurrency GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "VisaTravellersChqorCurrency"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineInternetBillPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineInternetBillPayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineBusinessOnlineEuroPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineBusinessOnlineEuroPayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineBusinessOnlineUrgentEuroPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineBusinessOnlineUrgentEuroPayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineBusinessOnlineForeignPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineBusinessOnlineForeignPayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineInterbankTransfer GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineInterbankTransfer"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineInterbankPerTransfer GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineInterbankPerTransfer"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineInterbranchTransfer GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineInterbranchTransfer"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineInterbranchPerTransfer GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineInterbranchPerTransfer"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineSubscriptionMonthly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineSubscriptionMonthly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineBankingPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineBankingPayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineBankingSubscription GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineBankingSubscription"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePosSale GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePOSSale"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePersonalCustAncillarys GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePersonalCustAncillarys"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePersonalCustService GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePersonalCustService"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePersonalCustOverlimits GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePersonalCustOverlimits"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineReplacementCardReader GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineReplacementCardReader"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePersonalCustSetUp GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePersonalCustSetUp"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePersonalCustTransaction GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePersonalCustTransaction"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePaymentinGbPtoUk GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePaymentinGBPtoUK"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineUrgentPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineUrgentPayment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePaymentinUsDtoUs GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePaymentinUSDtoUS"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineBulkDirectDebSterling GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineBulkDirectDebSterling"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqSent GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqSent"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqSelf GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqSelf"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqEncashment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqEncashment"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignFxInwardsCust GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignFXInwardsCust"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignFxTransfersRoi GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignFXTransfersROI"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignFxForwardTrans GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignFXForwardTrans"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignFxTransfersBoi GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignFXTransfersBOI"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignExMaintenance GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignExMaintenance"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignFxInwardsNonCust GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignFXInwardsNonCust"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignFxOutwards GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignFXOutwards"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignPurchase GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignPurchase"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignStatusRep GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignStatusRep"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqDraft GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqDraft"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqCLess GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqCLess"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqMLess GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqMLess"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqOther GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqOther"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqMPlus GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqMPlus"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqCcc GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqCCC"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCAccountFee GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCAccountFee"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCAccountFeeMonthly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCAccountFeeMonthly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCAccountFeeQuarterly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCAccountFeeQuarterly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCBalanceHandling GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCBalanceHandling"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCFixedTariff GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCFixedTariff"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCBusiDepAccBreakage GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCBusiDepAccBreakage"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCMonitorDaily GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCMonitorDaily"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCManagementFee GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCManagementFee"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCMinimumMonthlyFee GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCMinimumMonthlyFee"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCMonitorMonthly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCMonitorMonthly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCMonitorWeekly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCMonitorWeekly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCSecurityFee GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCSecurityFee"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCmt940AccountFirst GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCMT940AccountFirst"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCmt940AccountSubsequent GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCMT940AccountSubsequent"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCOther GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCOther"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCoinHandling GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCoinHandling"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashIn GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashIn"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashInNotUs GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashInNotUs"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashOut GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashOut"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashX GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashX"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterForeignCashMax GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterForeignCashMax"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterForeignNoteHandling GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterForeignNoteHandling"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterForeignCashOut GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterForeignCashOut"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashFeeRate GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashFeeRate"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterForeignCashOutTx GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterForeignCashOutTx"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCounterLodgement GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCounterLodgement"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashDropLodgement GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashDropLodgement"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterNotesLodged GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterNotesLodged"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterNotesOut GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterNotesOut"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashInOwn GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashInOwn"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterPaidTrans GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterPaidTrans"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashFeePercent GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashFeePercent"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOther                                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "Other"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmDonation                           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMDonation"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmDeposAtmPaidIn                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMDeposATMPaidIn"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportCertBalance                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportCertBalance"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroadConVisaCredit                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroadConVisaCredit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroadConVisaDebit                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroadConVisaDebit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmCardnetEnvIn                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMCardnetEnvIn"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmCashGroupAtmCreditCard             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMCashGroupATMCreditCard"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmCashNonGroupAtmCredittcard         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMCashNonGroupATMCredittcard"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmCashGroupAtmDebitCard              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMCashGroupATMDebitCard"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmCashNonGroupAtmDebitcard           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMCashNonGroupATMDebitcard"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmConGroupAtm                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMConGroupATM"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroad                             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroad"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmForeignCashDebCard                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMForeignCashDebCard"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroadGoldVisaDebit                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroadGoldVisaDebit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmSpainCashCard                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMSpainCashCard"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmSpainDebitCard                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMSpainDebitCard"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmSpainConversionDebitCard           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMSpainConversionDebitCard"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmSpainConversionCashCard            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMSpainConversionCashCard"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmNonSterlingWithdrawal              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMNonSterlingWithdrawal"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroadVisaCredit                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroadVisaCredit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroadVisaDebit                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroadVisaDebit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmAbroadConVisaGoldDebit             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMAbroadConVisaGoldDebit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAtmWidthdrawCash                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ATMWidthdrawCash"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsOnLineAncilliary                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSOnLineAncilliary"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsBatch                             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSBatch"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsOnLineFile                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSOnLineFile"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsFileItem                          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSFileItem"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsOnLineSetup                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSOnLineSetup "
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsItem                              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSItem"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsItemInterbranch                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSItemInterbranch"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsBulkBatch                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSBulkBatch"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsOnLineOverlimit                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSOnLineOverlimit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsOnLinePayment                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSOnLinePayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsRecallItem                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSRecallItem"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsOnLineService                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSOnLineService"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsBulkInternet                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSBulkInternet"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelDirDebSmartCard                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELDirDebSmartCard"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelDirDebWebInit                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELDirDebWebInit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsteLirDebWebInit                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELirDebWebInit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelDirDebOverlimit                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELDirDebOverlimit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelDirDebPayment                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELDirDebPayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelDirDebService                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELDirDebService"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelDirDebAncilliary               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELDirDebAncilliary"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacsDirectItemProfile                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSDirectItemProfile"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelAncilliary                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELAncilliary"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelSmartCard                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELSmartCard"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelFile                           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELFile"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelSetup                          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELSetup "
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelOverlimit                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELOverlimit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelPayment                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELPayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumBacstelService                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "BACSTELService"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutBranch                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutBranch"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsCancellation                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSCancellation"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutOnlineDepositAcc              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutOnlineDepositAcc"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsIn                               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSIn"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutInterBank                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutInterBank"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsInterBank                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSInterBank"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutPost                          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutPost"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutInterBranch                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutInterBranch"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOut                              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOut"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutOnline                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutOnline"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapSandForeignPay                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSandForeignPay"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChapsOutManual                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CHAPSOutManual"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCardCardReplacement                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CardCardReplacement"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDraftsCounter                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DraftsCounter"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDraftsBankers                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DraftsBankers"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDraftsIntlPayableAbroad               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DraftsIntlPayableAbroad"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDraftsLostStolen                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DraftsLostStolen"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCardPersonalisedCard                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CardPersonalisedCard"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDraftsIntlStoppedCancelled            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DraftsIntlStoppedCancelled"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumEuroChqXLess                          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "EuroChqXLess"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumEuroChqXPlus                          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "EuroChqXPlus"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumFpsOutFutureDated                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "FPSOutFutureDated"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumFpsOutImmediate                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "FPSOutImmediate"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumFpsOut                                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "FPSOut"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumFpsOutOwn                             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "FPSOutOwn"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumFpsInBranch                           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "FPSInBranch"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumFpsukPayUrgent                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "FPSUKPayUrgent"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalArticlesReport                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalArticlesReport"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalSealing                          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalSealing"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalBondAndGuarantee                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalBondAndGuarantee"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalCourtOrder                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalCourtOrder"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalCoSearch                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalCoSearch"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalDepositAssignment                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalDepositAssignment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalGuaranteePrep                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalGuaranteePrep"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalLifePolicyPrepCo                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalLifePolicyPrepCo"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalLifePolicyPrepPersonal           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalLifePolicyPrepPersonal"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalPriorityPariPassu                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalPriorityPariPassu"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLegalSubordinationAgreement           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LegalSubordinationAgreement"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDirDebDirectDebitAdmin                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DirDebDirectDebitAdmin"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumDirDebDirectDebitCancel               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "DirDebDirectDebitCancel"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayBibForeignLimit                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayBIBForeignLimit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayCreditTransCust                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayCreditTransCust"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayCreditTransNonCust             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayCreditTransNonCust"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayUrgentPaymentForeign           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayUrgentPaymentForeign"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayExpressMoneyMover              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayExpressMoneyMover"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayEeaPayUrgent                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayEEAPayUrgent"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayIrishPayUrgent                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayIrishPayUrgent"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayEeaPay                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayEEAPay"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignIn1CPlus                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignIn1CPlus"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignPaymentInUkAcc          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignPaymentInUKAcc"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignCharge                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignCharge"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignCancellation            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignCancellation"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignStandardEuEuroBic       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignStandardEUEuroBIC"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayFxFeeRate                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayFXFeeRate"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignInternet                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignInternet"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeign                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeign"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignInbound                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignInbound"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayFxPaymentOut                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayFXPaymentOut"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignInSub1C                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignInSub1C"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayFxRate                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayFXRate"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignStandardEuEuroNoBic     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignStandardEUEuroNoBIC"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayFxPaymentOutIr                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayFXPaymentOutIR"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayFxFee                          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayFXFee"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayPurchaseNonSterling            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayPurchaseNonSterling"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayPostPaymentForeign             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayPostPaymentForeign"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayPurchaseRateNonSterling        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayPurchaseRateNonSterling"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayPaymentTracing                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayPaymentTracing"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayStandardMoneyMover             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayStandardMoneyMover"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayMt101Transaction               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayMT101Transaction"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayTransNonSterling               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayTransNonSterling"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayTransRateNonSterling           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayTransRateNonSterling"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignUrgentEuEuroBic         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignUrgentEUEuroBIC"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayForeignUrgentEuEuroNoBic       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayForeignUrgentEUEuroNoBIC"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayUrgentPaymentGroup             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayUrgentPaymentGroup"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayUrgentPaymentUk                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayUrgentPaymentUK"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayUsaPayUrgent                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayUSAPayUrgent"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayCurrencyPurchase               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayCurrencyPurchase"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayWorldpayPayment                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayWorldpayPayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumIntlPayCurrencyWithdraw               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "IntlPayCurrencyWithdraw"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayBankDetailsWrong                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayBankDetailsWrong"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayForeignBcnr                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayForeignBCNR"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayForeignRecall                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayForeignRecall"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvGeneralInq                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvGeneralInq"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvOldInstruction                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvOldInstruction"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayPaymentRecall                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayPaymentRecall"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayReturnDebitXvLess               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayReturnDebitXVLess"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayReturnDebitXvPlus               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayReturnDebitXVPlus"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayStopPayment                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayStopPayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumInvPayStandingOrdUnpaid               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "InvPayStandingOrdUnpaid"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepAccess                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepAccess"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepDeedMedium                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepDeedMedium"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepingEnvelope                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepingEnvelope"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepingInspection                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepingInspection"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepingLargeItem                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepingLargeItem"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepMultipleItems                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepMultipleItems"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepingParcel                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepingParcel"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepDeedSmall                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepDeedSmall"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepOneItem                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepOneItem"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSafeKeepSafeCustody                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SafeKeepSafeCustody"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLoanArrangementFeePc                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LoanArrangementFeePC"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLoanArrangement                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LoanArrangement"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLoanEarlyRepayment                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LoanEarlyRepayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLoanLatePayment                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LoanLatePayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLoanSmeUnsecuredLoan                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LoanSMEUnsecuredLoan"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumLoanTieredArrangement                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "LoanTieredArrangement"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumNightSafeNightSafeBankOpen            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "NightSafeNightSafeBankOpen"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumNightSafeCreditSub5K                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "NightSafeCreditSub5K"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumNightSafeNightSafe                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "NightSafeNightSafe"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumNightSafeNightSafePaidIn              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "NightSafeNightSafePaidIn"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOverdraftAnnualReview                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OverdraftAnnualReview"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOverdraftTempOverdraft                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OverdraftTempOverdraft"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOverdraftUnauthorisedBorrowing        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OverdraftUnauthorisedBorrowing"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumPoPostOfficeCounterCredit             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "POPostOfficeCounterCredit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumPoPostOfficeCashCredit                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "POPostOfficeCashCredit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumPoPostOfficeCashOut                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "POPostOfficeCashOut"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumPoPostOfficeWithdrawal                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "POPostOfficeWithdrawal"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqBookTheftLossAllStopped            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqBookTheftLossAllStopped"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqIssuedCurrencyAcc                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqIssuedCurrencyAcc"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqCopy                               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqCopy"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqDraft                              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqDraft"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqIn                                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqIn"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqDraftSterling                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqDraftSterling"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqOutIssued                          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqOutIssued"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqSpecialChqPresentation             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqSpecialChqPresentation"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqCounterCheque                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqCounterCheque"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqChequeswithStatement               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqChequeswithStatement"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqStopped                            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqStopped"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqTrans                              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqTrans"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqDraftFx                            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqDraftFX"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignCourier                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignCourier"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignNegTenThou                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignNegTenThou"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignNegHundred                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignNegHundred"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChequeForeignBankDivi                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChequeForeignBankDivi"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignNegFiftyThou                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignNegFiftyThou"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqPensionCheque                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqPensionCheque"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChequeForeignOtherDivi                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChequeForeignOtherDivi"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignNegFiveThou                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignNegFiveThou"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignNegMax                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignNegMax"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqForeignGbpmmdPlus                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqForeignGBPMMDPlus"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqGiftCheque                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqGiftCheque"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqCounterLodgement                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqCounterLodgement"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqCashDropLodgement                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqCashDropLodgement"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqChequePhotocopy                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqChequePhotocopy"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqPostOfficeCredit                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqPostOfficeCredit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqPostOfficeChequeCollected          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqPostOfficeChequeCollected"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqChequeRetrieval                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqChequeRetrieval"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqReconcilliationPerTrans            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqReconcilliationPerTrans"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqSpecialPresentationCount           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqSpecialPresentationCount"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqSpecialPresentationPtt             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqSpecialPresentationPTT"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqUnpaidCharge                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqUnpaidCharge"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqUnpaidTransIn                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqUnpaidTransIn"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqUnpaidTransOut                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqUnpaidTransOut"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumChqUnpaidCheque                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ChqUnpaidCheque"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportAuditLetter                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportAuditLetter"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportFaxAdviceAdditional             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportFAXAdviceAdditional"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportTelAdviceAdditional             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportTelAdviceAdditional"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportCreditHistory                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportCreditHistory"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportCertInterestDuplicate           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportCertInterestDuplicate"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportCertInterest                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportCertInterest"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportCreditHistoryAdditionalInYear   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportCreditHistoryAdditionalInYear"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportForeignStatusEnqElec            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportForeignStatusEnqElec"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportForeignStatusEnq                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportForeignStatusEnq"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportCashBackorInterestAnal          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportCashBackorInterestAnal"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementChqDaily               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementChqDaily"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementChqFortnightly         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementChqFortnightly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementChqMonthly             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementChqMonthly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementChqWeekly              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementChqWeekly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementAndDiviChq             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementAndDiviChq"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportReference                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportReference"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportReferralItem                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportReferralItem"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementByAtm                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementByATM"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementByBranch               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementByBranch"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementCopyRegular            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementCopyRegular"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatusEnquiry                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatusEnquiry"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementFrequent               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementFrequent"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementMonthly                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementMonthly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementCopy1                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementCopy1"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementToBranch               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementToBranch"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportSmsTextMiniStatementorAlert     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportSMSTextMiniStatementorAlert"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportStatementFortnightly            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportStatementFortnightly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportSmsTextMiniStatementWoM         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportSMSTextMiniStatementWoM"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportSmsTextAlertBalance             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportSMSTextAlertBalance"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportSmsTextAlert                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportSMSTextAlert"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportTaxCert                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportTaxCert"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportWeeklyStatement                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportWeeklyStatement"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumReportTextMessageBanking              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ReportTextMessageBanking"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaCancellation                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPACancellation"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaBranch                            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPABranch"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaCredit                            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPACredit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaDirectDebit                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPADirectDebit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaIn                                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPAIn"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaEuro                              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPAEuro"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaOut                               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPAOut"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaUnpaid                            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPAUnpaid"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaWinbitsAnnualService              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPAWinbitsAnnual Service"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumSepaWinbitsTransaction                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "SEPAWinbitsTransaction"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransBillPaymentBranch                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransBillPaymentBranch"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransBillCollect                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransBillCollect"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTelephoneBillPayment             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTelephoneBillPayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransBankPayment                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransBankPayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransBillPaymentTelephone             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransBillPaymentTelephone"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransCorrespondentBankFee             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransCorrespondentBankFee"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransCreditTransferUkDifferent        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransCreditTransferUKDifferent"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransCreditTransferUkSame             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransCreditTransferUKSame"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransCredit                           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransCredit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransCreditTransfer                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransCreditTransfer"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransBranchCredit                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransBranchCredit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransDebit                            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransDebit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransDebCardDeb                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransDebCardDeb"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransUkDirDeb                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransUKDirDeb"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransManualDeb                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransManualDeb"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransBuyForeignWithGbp                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransBuyForeignWithGBP"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransGoodValueReq                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransGoodValueReq"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransSwiftOutUkForeign                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransSWIFTOutUKForeign"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransInconpleteInstruction            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransInconpleteInstruction"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransManualEntries                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransManualEntries"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransManualTrans                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransManualTrans"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransNonSterling                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransNonSterling"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransPosSaleForeign                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransPOSSaleForeign"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransPriPaymentPost                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransPriPaymentPost"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransPosSaleUk                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransPOSSaleUK"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransReturnPayment                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransReturnPayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransReconciliationPerTrans           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransReconciliationPerTrans"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransStandingOrdAdmin                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransStandingOrdAdmin"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransStandingOrd                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransStandingOrd"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransStandingOrdManPay                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransStandingOrdManPay"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTravellersChqOtherBank           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTravellersChqOtherBank"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTelBusiPriPaymentForeignToUkAcc  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTelBusiPriPaymentForeignToUKAcc"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTeleItem                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTeleItem"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTelBusiPriPaymentToGrpAcc        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTelBusiPriPaymentToGrpAcc"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTravellersChqRate                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTravellersChqRate"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTransferExGroup                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTransferExGroup"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransUnauthorisedPaidTrans            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransUnauthorisedPaidTrans"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransUrgentPaymentPostal              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransUrgentPaymentPostal"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransUnpaidTrans                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransUnpaidTrans"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransTelBusiPriPaymentToNonGrpAcc     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransTelBusiPriPaymentToNonGrpAcc"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumTransSwiftOutNonEeaSterling           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "TransSWIFTOutNonEEASterling"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAutoAutoCredit                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "AutoAutoCredit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAutoAutomatedEntries                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "AutoAutomatedEntries"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAutoAutoCreditPhoneInet               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "AutoAutoCreditPhoneInet"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAutoAutomatedTrans                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "AutoAutomatedTrans"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAutoDebitCardCommercial               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "AutoDebitCardCommercial"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumAutoFpsAutoCredit                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "AutoFPSAutoCredit"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumVisaConvertAbroadForeign              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "VisaConvertAbroadForeign"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumVisaBureauDeChange                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "VisaBureauDeChange"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumVisaTravellersChqorCurrency           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "VisaTravellersChqorCurrency"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineInternetBillPayment             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineInternetBillPayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineBusinessOnlineEuroPayment       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineBusinessOnlineEuroPayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineBusinessOnlineUrgentEuroPayment GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineBusinessOnlineUrgentEuroPayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineBusinessOnlineForeignPayment    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineBusinessOnlineForeignPayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineInterbankTransfer               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineInterbankTransfer"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineInterbankPerTransfer            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineInterbankPerTransfer"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineInterbranchTransfer             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineInterbranchTransfer"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineInterbranchPerTransfer          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineInterbranchPerTransfer"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineSubscriptionMonthly             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineSubscriptionMonthly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineBankingPayment                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineBankingPayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineBankingSubscription             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineBankingSubscription"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePosSale                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePOSSale"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePersonalCustAncillarys          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePersonalCustAncillarys"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePersonalCustService             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePersonalCustService"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePersonalCustOverlimits          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePersonalCustOverlimits"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineReplacementCardReader           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineReplacementCardReader"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePersonalCustSetUp               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePersonalCustSetUp"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePersonalCustTransaction         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePersonalCustTransaction"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePaymentinGbPtoUk                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePaymentinGBPtoUK"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineUrgentPayment                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineUrgentPayment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlinePaymentinUsDtoUs                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlinePaymentinUSDtoUS"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumOnlineBulkDirectDebSterling           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "OnlineBulkDirectDebSterling"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqSent                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqSent"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqSelf                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqSelf"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqEncashment                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqEncashment"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignFxInwardsCust                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignFXInwardsCust"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignFxTransfersRoi                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignFXTransfersROI"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignFxForwardTrans                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignFXForwardTrans"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignFxTransfersBoi                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignFXTransfersBOI"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignExMaintenance                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignExMaintenance"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignFxInwardsNonCust               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignFXInwardsNonCust"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignFxOutwards                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignFXOutwards"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignPurchase                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignPurchase"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignStatusRep                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignStatusRep"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqDraft                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqDraft"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqCLess                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqCLess"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqMLess                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqMLess"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqOther                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqOther"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqMPlus                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqMPlus"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumForeignChqCcc                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ForeignChqCCC"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCAccountFee                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCAccountFee"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCAccountFeeMonthly             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCAccountFeeMonthly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCAccountFeeQuarterly           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCAccountFeeQuarterly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCBalanceHandling               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCBalanceHandling"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCFixedTariff                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCFixedTariff"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCBusiDepAccBreakage            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCBusiDepAccBreakage"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCMonitorDaily                  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCMonitorDaily"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCManagementFee                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCManagementFee"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCMinimumMonthlyFee             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCMinimumMonthlyFee"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCMonitorMonthly                GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCMonitorMonthly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCMonitorWeekly                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCMonitorWeekly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCSecurityFee                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCSecurityFee"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCmt940AccountFirst             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCMT940AccountFirst"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCmt940AccountSubsequent        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCMT940AccountSubsequent"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumServiceCOther                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "ServiceCOther"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCoinHandling                   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCoinHandling"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashIn                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashIn"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashInNotUs                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashInNotUs"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashOut                        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashOut"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashX                          GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashX"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterForeignCashMax                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterForeignCashMax"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterForeignNoteHandling            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterForeignNoteHandling"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterForeignCashOut                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterForeignCashOut"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashFeeRate                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashFeeRate"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterForeignCashOutTx               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterForeignCashOutTx"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCounterLodgement               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCounterLodgement"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashDropLodgement              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashDropLodgement"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterNotesLodged                    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterNotesLodged"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterNotesOut                       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterNotesOut"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashInOwn                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashInOwn"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterPaidTrans                      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterPaidTrans"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnumCounterCashFeePercent                 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum = "CounterCashFeePercent"
 )
 
-
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetail struct {
-    DateOfChange *string `json:"DateOfChange,omitempty"`
-    FeeSubDetails GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetails `json:"FeeSubDetails"`
-    FeeType GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum `json:"FeeType"`
-    LengthPromotionalInDays *int64 `json:"LengthPromotionalInDays,omitempty"`
-    Other *string `json:"Other,omitempty"`
-    StartPromotionOrFutureTerms *string `json:"StartPromotionOrFutureTerms,omitempty"`
-    StopPromotionOrFutureTerms *string `json:"StopPromotionOrFutureTerms,omitempty"`
-    
+	DateOfChange                *string                                                                                                                   `json:"DateOfChange,omitempty"`
+	FeeSubDetails               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeSubDetails `json:"FeeSubDetails"`
+	FeeType                     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetailFeeTypeEnum   `json:"FeeType"`
+	LengthPromotionalInDays     *int64                                                                                                                    `json:"LengthPromotionalInDays,omitempty"`
+	Other                       *string                                                                                                                   `json:"Other,omitempty"`
+	StartPromotionOrFutureTerms *string                                                                                                                   `json:"StartPromotionOrFutureTerms,omitempty"`
+	StopPromotionOrFutureTerms  *string                                                                                                                   `json:"StopPromotionOrFutureTerms,omitempty"`
 }
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnumFutureMultipleTerms GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnum = "FutureMultipleTerms"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnumPromotional GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnum = "Promotional"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnumRegular GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnum = "Regular"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnumFutureMultipleTerms GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnum = "FutureMultipleTerms"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnumPromotional         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnum = "Promotional"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnumRegular             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnum = "Regular"
 )
 
-
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetails struct {
-    FeeDetail GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetail `json:"FeeDetail"`
-    FeeSubType GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnum `json:"FeeSubType"`
-    
+	FeeDetail  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeDetail      `json:"FeeDetail"`
+	FeeSubType GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetailsFeeSubTypeEnum `json:"FeeSubType"`
 }
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFees struct {
-    DateOfChange *string `json:"DateOfChange,omitempty"`
-    FeeDetails []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetails `json:"FeeDetails"`
-    FeeHigherTier *int64 `json:"FeeHigherTier,omitempty"`
-    FeeLowerTier *int64 `json:"FeeLowerTier,omitempty"`
-    LengthPromotionalInDays *int64 `json:"LengthPromotionalInDays,omitempty"`
-    StartPromotionOrFutureTerms *string `json:"StartPromotionOrFutureTerms,omitempty"`
-    StopPromotionOrFutureTerms *string `json:"StopPromotionOrFutureTerms,omitempty"`
-    
+	DateOfChange                *string                                                                                               `json:"DateOfChange,omitempty"`
+	FeeDetails                  []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFeesFeeDetails `json:"FeeDetails"`
+	FeeHigherTier               *int64                                                                                                `json:"FeeHigherTier,omitempty"`
+	FeeLowerTier                *int64                                                                                                `json:"FeeLowerTier,omitempty"`
+	LengthPromotionalInDays     *int64                                                                                                `json:"LengthPromotionalInDays,omitempty"`
+	StartPromotionOrFutureTerms *string                                                                                               `json:"StartPromotionOrFutureTerms,omitempty"`
+	StopPromotionOrFutureTerms  *string                                                                                               `json:"StopPromotionOrFutureTerms,omitempty"`
 }
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnumFutureMultipleTerms GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnum = "FutureMultipleTerms"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnumPromotional GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnum = "Promotional"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnumRegular GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnum = "Regular"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnumFutureMultipleTerms GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnum = "FutureMultipleTerms"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnumPromotional         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnum = "Promotional"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnumRegular             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnum = "Regular"
 )
 
-
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndCharges struct {
-    Fees GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFees `json:"Fees"`
-    ProductState GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnum `json:"ProductState"`
-    
+	Fees         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesFees             `json:"Fees"`
+	ProductState GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndChargesProductStateEnum `json:"ProductState"`
 }
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnumOneYear GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum = "1 year"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnumTwoYears GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum = "2 years"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnumThreeYears GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum = "3 years"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnumFourYears GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum = "4 years"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnumFiveYears GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum = "5 years"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnumOneYear    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum = "1 year"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnumTwoYears   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum = "2 years"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnumThreeYears GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum = "3 years"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnumFourYears  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum = "4 years"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnumFiveYears  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum = "5 years"
 )
-
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnumApr GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnum = "APR"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnumAer GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnum = "AER"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnumGross GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnum = "Gross"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnumNet GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnum = "Net"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnumRepApr GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnum = "RepApr"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnumApr    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnum = "APR"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnumAer    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnum = "AER"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnumGross  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnum = "Gross"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnumNet    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnum = "Net"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnumRepApr GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnum = "RepApr"
 )
-
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumDaily GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Daily"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumFlexible GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Flexible"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumFortnightly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Fortnightly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumHalfYearly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "HalfYearly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumMonthly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Monthly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumQuarterly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Quarterly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumWeekly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Weekly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumYearly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Yearly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumDaily       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Daily"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumFlexible    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Flexible"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumFortnightly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Fortnightly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumHalfYearly  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "HalfYearly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumMonthly     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Monthly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumQuarterly   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Quarterly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumWeekly      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Weekly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnumYearly      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum = "Yearly"
 )
-
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumPound5000 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "£5000"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumPound10000 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "£10000"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumPound15000 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "£15000"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumPound20000 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "£20000"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumPound25000 GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "£25000"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumOther GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "Other"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumTierMaximum GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "TierMaximum"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumTierMinimum GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "TierMinimum"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumPound5000   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "£5000"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumPound10000  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "£10000"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumPound15000  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "£15000"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumPound20000  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "£20000"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumPound25000  GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "£25000"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumOther       GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "Other"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumTierMaximum GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "TierMaximum"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnumTierMinimum GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum = "TierMinimum"
 )
 
-
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricing struct {
-    IndicativeRate string `json:"IndicativeRate"`
-    LoanLengthIncrement GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum `json:"LoanLengthIncrement"`
-    LoanLengthIncrementLower int64 `json:"LoanLengthIncrementLower"`
-    LoanLengthIncrementUpper int64 `json:"LoanLengthIncrementUpper"`
-    LoanSizeBandLower string `json:"LoanSizeBandLower"`
-    LoanSizeBandUpper string `json:"LoanSizeBandUpper"`
-    Negotiable bool `json:"Negotiable"`
-    RateComparisonType *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnum `json:"RateComparisonType,omitempty"`
-    RepaymentFrequency []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum `json:"RepaymentFrequency"`
-    SizeIncrement GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum `json:"SizeIncrement"`
-    
+	IndicativeRate           string                                                                                                             `json:"IndicativeRate"`
+	LoanLengthIncrement      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingLoanLengthIncrementEnum  `json:"LoanLengthIncrement"`
+	LoanLengthIncrementLower int64                                                                                                              `json:"LoanLengthIncrementLower"`
+	LoanLengthIncrementUpper int64                                                                                                              `json:"LoanLengthIncrementUpper"`
+	LoanSizeBandLower        string                                                                                                             `json:"LoanSizeBandLower"`
+	LoanSizeBandUpper        string                                                                                                             `json:"LoanSizeBandUpper"`
+	Negotiable               bool                                                                                                               `json:"Negotiable"`
+	RateComparisonType       *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRateComparisonTypeEnum  `json:"RateComparisonType,omitempty"`
+	RepaymentFrequency       []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingRepaymentFrequencyEnum `json:"RepaymentFrequency"`
+	SizeIncrement            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricingSizeIncrementEnum        `json:"SizeIncrement"`
 }
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnumFutureMultipleTerms GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnum = "FutureMultipleTerms"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnumPromotional GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnum = "Promotional"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnumRegular GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnum = "Regular"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnumFutureMultipleTerms GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnum = "FutureMultipleTerms"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnumPromotional         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnum = "Promotional"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnumRegular             GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnum = "Regular"
 )
 
-
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItem struct {
-    CcaRegulatedEntity bool `json:"CCARegulatedEntity"`
-    DateOfChange *string `json:"DateOfChange,omitempty"`
-    IsALowInterestRepaymentStartPossible bool `json:"IsALowInterestRepaymentStartPossible"`
-    IsThisAnInterestOnlyLoan bool `json:"IsThisAnInterestOnlyLoan"`
-    LengthPromotionalInDays *int64 `json:"LengthPromotionalInDays,omitempty"`
-    LoanPricing []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricing `json:"LoanPricing,omitempty"`
-    ProductState GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnum `json:"ProductState"`
-    StartPromotionOrFutureTerms *string `json:"StartPromotionOrFutureTerms,omitempty"`
-    StopPromotionOrFutureTerms *string `json:"StopPromotionOrFutureTerms,omitempty"`
-    WillTheLoanBePaidInTrancheDrawdowns bool `json:"WillTheLoanBePaidInTrancheDrawdowns"`
-    
+	CcaRegulatedEntity                   bool                                                                                            `json:"CCARegulatedEntity"`
+	DateOfChange                         *string                                                                                         `json:"DateOfChange,omitempty"`
+	IsALowInterestRepaymentStartPossible bool                                                                                            `json:"IsALowInterestRepaymentStartPossible"`
+	IsThisAnInterestOnlyLoan             bool                                                                                            `json:"IsThisAnInterestOnlyLoan"`
+	LengthPromotionalInDays              *int64                                                                                          `json:"LengthPromotionalInDays,omitempty"`
+	LoanPricing                          []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemLoanPricing    `json:"LoanPricing,omitempty"`
+	ProductState                         GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItemProductStateEnum `json:"ProductState"`
+	StartPromotionOrFutureTerms          *string                                                                                         `json:"StartPromotionOrFutureTerms,omitempty"`
+	StopPromotionOrFutureTerms           *string                                                                                         `json:"StopPromotionOrFutureTerms,omitempty"`
+	WillTheLoanBePaidInTrancheDrawdowns  bool                                                                                            `json:"WillTheLoanBePaidInTrancheDrawdowns"`
 }
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnumUk GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum = "UK"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnumEu GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum = "EU"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnumUk GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum = "UK"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnumEu GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum = "EU"
 )
 
-
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrand struct {
-    TrademarkID string `json:"TrademarkID"`
-    TrademarkIpoCode GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum `json:"TrademarkIPOCode"`
-    
+	TrademarkID      string                                                                                                       `json:"TrademarkID"`
+	TrademarkIpoCode GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrandTrademarkIpoCodeEnum `json:"TrademarkIPOCode"`
 }
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisationOrganisationName struct {
-    LegalName string `json:"LegalName"`
-    
+	LegalName string `json:"LegalName"`
 }
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisation struct {
-    Bic *string `json:"BIC,omitempty"`
-    Lei *string `json:"LEI,omitempty"`
-    OrganisationName GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisationOrganisationName `json:"OrganisationName"`
-    
+	Bic              *string                                                                                                               `json:"BIC,omitempty"`
+	Lei              *string                                                                                                               `json:"LEI,omitempty"`
+	OrganisationName GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisationOrganisationName `json:"OrganisationName"`
 }
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation struct {
-    Brand GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrand `json:"Brand"`
-    ParentOrganisation GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisation `json:"ParentOrganisation"`
-    
+	Brand              GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationBrand              `json:"Brand"`
+	ParentOrganisation GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisationParentOrganisation `json:"ParentOrganisation"`
 }
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumAgricultureSector GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "AgricultureSector"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumAllSegmentsCorporate GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "AllSegmentsCorporate"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumCorporate GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "Corporate"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumFixedGroup GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "FixedGroup"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumFlexibleBusinessLoan GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "FlexibleBusinessLoan"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumGovernmentScheme GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "GovernmentScheme"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumNewCustomersOnly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "NewCustomersOnly"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumSmallLoan GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "SmallLoan"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumSpecialisedSector GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "SpecialisedSector"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumSwitchersOnly GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "SwitchersOnly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumAgricultureSector    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "AgricultureSector"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumAllSegmentsCorporate GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "AllSegmentsCorporate"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumCorporate            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "Corporate"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumFixedGroup           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "FixedGroup"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumFlexibleBusinessLoan GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "FlexibleBusinessLoan"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumGovernmentScheme     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "GovernmentScheme"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumNewCustomersOnly     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "NewCustomersOnly"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumSmallLoan            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "SmallLoan"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumSpecialisedSector    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "SpecialisedSector"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnumSwitchersOnly        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum = "SwitchersOnly"
 )
-
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnumFlexibleBusinessLoan GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnum = "FlexibleBusinessLoan"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnumSmallBusinessLoan GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnum = "SmallBusinessLoan"
-GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnumSmeUnsecuredLoan GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnum = "SmeUnsecuredLoan"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnumFlexibleBusinessLoan GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnum = "FlexibleBusinessLoan"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnumSmallBusinessLoan    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnum = "SmallBusinessLoan"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnumSmeUnsecuredLoan     GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnum = "SmeUnsecuredLoan"
 )
 
-
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONData struct {
-    ArrearsTreatment *string `json:"ArrearsTreatment,omitempty"`
-    Benefits GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefits `json:"Benefits"`
-    Currency []string `json:"Currency"`
-    CustomerAccessChannels []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum `json:"CustomerAccessChannels"`
-    Eligibility GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibility `json:"Eligibility"`
-    FeesAndCharges []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndCharges `json:"FeesAndCharges"`
-    LoanItem []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItem `json:"LoanItem"`
-    MaximumLoanAmount string `json:"MaximumLoanAmount"`
-    MaximumLoanTerm int64 `json:"MaximumLoanTerm"`
-    MinimumLoanAmount string `json:"MinimumLoanAmount"`
-    MinimumLoanTerm int64 `json:"MinimumLoanTerm"`
-    Organisation GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation `json:"Organisation"`
-    PaymentHoliday bool `json:"PaymentHoliday"`
-    ProductDescription string `json:"ProductDescription"`
-    ProductIdentifier string `json:"ProductIdentifier"`
-    ProductName string `json:"ProductName"`
-    ProductSegment []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum `json:"ProductSegment"`
-    ProductTypeName GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnum `json:"ProductTypeName"`
-    ProductURL []string `json:"ProductURL"`
-    TsandCs []string `json:"TsandCs"`
-    
+	ArrearsTreatment       *string                                                                                             `json:"ArrearsTreatment,omitempty"`
+	Benefits               GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataBenefits                     `json:"Benefits"`
+	Currency               []string                                                                                            `json:"Currency"`
+	CustomerAccessChannels []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataCustomerAccessChannelsEnum `json:"CustomerAccessChannels"`
+	Eligibility            GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataEligibility                  `json:"Eligibility"`
+	FeesAndCharges         []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataFeesAndCharges             `json:"FeesAndCharges"`
+	LoanItem               []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataLoanItem                   `json:"LoanItem"`
+	MaximumLoanAmount      string                                                                                              `json:"MaximumLoanAmount"`
+	MaximumLoanTerm        int64                                                                                               `json:"MaximumLoanTerm"`
+	MinimumLoanAmount      string                                                                                              `json:"MinimumLoanAmount"`
+	MinimumLoanTerm        int64                                                                                               `json:"MinimumLoanTerm"`
+	Organisation           GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataOrganisation                 `json:"Organisation"`
+	PaymentHoliday         bool                                                                                                `json:"PaymentHoliday"`
+	ProductDescription     string                                                                                              `json:"ProductDescription"`
+	ProductIdentifier      string                                                                                              `json:"ProductIdentifier"`
+	ProductName            string                                                                                              `json:"ProductName"`
+	ProductSegment         []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductSegmentEnum         `json:"ProductSegment"`
+	ProductTypeName        GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONDataProductTypeNameEnum          `json:"ProductTypeName"`
+	ProductURL             []string                                                                                            `json:"ProductURL"`
+	TsandCs                []string                                                                                            `json:"TsandCs"`
 }
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnumUseOfTheApIsAndAnyRelatedDataWillBeSubjectToTheTermsOfTheOpenLicenceAndSubjectToTermsAndConditions GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnumUseOfTheApIsAndAnyRelatedDataWillBeSubjectToTheTermsOfTheOpenLicenceAndSubjectToTermsAndConditions GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum = "Use of the APIs and any related data will be subject to the terms of the Open Licence and subject to terms and conditions"
 )
-
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnumHTTPSWwwOpenbankingOrgUkOpenLicence GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum = "https://www.openbanking.org.uk/open-licence"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnumHTTPSWwwOpenbankingOrgUkOpenLicence GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum = "https://www.openbanking.org.uk/open-licence"
 )
-
-
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum string
 
 const (
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnumHTTPSWwwOpenbankingOrgUkTerms GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum = "https://www.openbanking.org.uk/terms"
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnumHTTPSWwwOpenbankingOrgUkTerms GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum = "https://www.openbanking.org.uk/terms"
 )
 
-
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData struct {
-    Agreement GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum `json:"Agreement"`
-    LastUpdated time.Time `json:"LastUpdated"`
-    License GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum `json:"License"`
-    TermsOfUse GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum `json:"TermsOfUse"`
-    TotalResults int64 `json:"TotalResults"`
-    
+	Agreement    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataAgreementEnum  `json:"Agreement"`
+	LastUpdated  time.Time                                                                                 `json:"LastUpdated"`
+	License      GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataLicenseEnum    `json:"License"`
+	TermsOfUse   GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaDataTermsOfUseEnum `json:"TermsOfUse"`
+	TotalResults int64                                                                                     `json:"TotalResults"`
 }
 
 type GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSON struct {
-    Data []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONData `json:"data"`
-    Meta GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData `json:"meta"`
-    
+	Data []GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONData   `json:"data"`
+	Meta GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONMetaData `json:"meta"`
 }
 
 type GetUnsecuredSmeLoansResponse struct {
-    FourHundredErrorObject *GetUnsecuredSmeLoans400ErrorObject 
-    FourHundredAndEightErrorObject *GetUnsecuredSmeLoans408ErrorObject 
-    FourHundredAndTwentyNineErrorObject *GetUnsecuredSmeLoans429ErrorObject 
-    FiveHundredErrorObject *GetUnsecuredSmeLoans500ErrorObject 
-    FiveHundredAndThreeErrorObject *GetUnsecuredSmeLoans503ErrorObject 
-    ContentType string 
-    ErrorObject *GetUnsecuredSmeLoansErrorObject 
-    GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONObject *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSON 
-    Headers map[string][]string 
-    StatusCode int64 
-    
+	FourHundredErrorObject                                                    *GetUnsecuredSmeLoans400ErrorObject
+	FourHundredAndEightErrorObject                                            *GetUnsecuredSmeLoans408ErrorObject
+	FourHundredAndTwentyNineErrorObject                                       *GetUnsecuredSmeLoans429ErrorObject
+	FiveHundredErrorObject                                                    *GetUnsecuredSmeLoans500ErrorObject
+	FiveHundredAndThreeErrorObject                                            *GetUnsecuredSmeLoans503ErrorObject
+	ContentType                                                               string
+	ErrorObject                                                               *GetUnsecuredSmeLoansErrorObject
+	GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSONObject *GetUnsecuredSmeLoans200ApplicationPrsOpenbankingOpendataV13PlusJSON
+	Headers                                                                   map[string][]string
+	StatusCode                                                                int64
 }
-

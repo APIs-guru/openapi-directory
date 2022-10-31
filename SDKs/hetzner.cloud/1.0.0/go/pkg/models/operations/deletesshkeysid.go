@@ -1,20 +1,14 @@
 package operations
 
-
-
 type DeleteSSHKeysIDPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type DeleteSSHKeysIDRequest struct {
-    PathParams DeleteSSHKeysIDPathParams 
-    
+	PathParams DeleteSSHKeysIDPathParams
 }
 
 type DeleteSSHKeysIDResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

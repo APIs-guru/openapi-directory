@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BoundariesQuery struct {
-    Ids []string `json:"ids"`
-    
+	Ids []string `json:"ids"`
 }
-

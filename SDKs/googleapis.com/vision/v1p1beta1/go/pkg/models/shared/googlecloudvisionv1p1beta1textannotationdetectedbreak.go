@@ -1,23 +1,17 @@
 package shared
 
-
-
-
 type GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum string
 
 const (
-    GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnumUnknown GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum = "UNKNOWN"
-GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnumSpace GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum = "SPACE"
-GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnumSureSpace GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum = "SURE_SPACE"
-GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnumEolSureSpace GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum = "EOL_SURE_SPACE"
-GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnumHyphen GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum = "HYPHEN"
-GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnumLineBreak GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum = "LINE_BREAK"
+	GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnumUnknown      GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum = "UNKNOWN"
+	GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnumSpace        GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum = "SPACE"
+	GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnumSureSpace    GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum = "SURE_SPACE"
+	GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnumEolSureSpace GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum = "EOL_SURE_SPACE"
+	GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnumHyphen       GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum = "HYPHEN"
+	GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnumLineBreak    GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum = "LINE_BREAK"
 )
 
-
 type GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreak struct {
-    IsPrefix *bool `json:"isPrefix,omitempty"`
-    Type *GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum `json:"type,omitempty"`
-    
+	IsPrefix *bool                                                          `json:"isPrefix,omitempty"`
+	Type     *GoogleCloudVisionV1p1beta1TextAnnotationDetectedBreakTypeEnum `json:"type,omitempty"`
 }
-

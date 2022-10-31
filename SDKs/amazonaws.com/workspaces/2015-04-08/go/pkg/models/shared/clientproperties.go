@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ClientProperties struct {
-    ReconnectEnabled *ReconnectEnumEnum `json:"ReconnectEnabled,omitempty"`
-    
+	ReconnectEnabled *ReconnectEnumEnum `json:"ReconnectEnabled,omitempty"`
 }
-

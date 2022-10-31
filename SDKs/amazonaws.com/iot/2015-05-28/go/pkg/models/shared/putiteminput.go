@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PutItemInput struct {
-    TableName string `json:"tableName"`
-    
+	TableName string `json:"tableName"`
 }
-

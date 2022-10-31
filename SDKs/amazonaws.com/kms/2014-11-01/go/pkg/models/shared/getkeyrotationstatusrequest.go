@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetKeyRotationStatusRequest struct {
-    KeyID string `json:"KeyId"`
-    
+	KeyID string `json:"KeyId"`
 }
-

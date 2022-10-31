@@ -1,13 +1,12 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type IdentityDescription struct {
-    CreationDate *time.Time `json:"CreationDate,omitempty"`
-    IdentityID *string `json:"IdentityId,omitempty"`
-    LastModifiedDate *time.Time `json:"LastModifiedDate,omitempty"`
-    Logins []string `json:"Logins,omitempty"`
-    
+	CreationDate     *time.Time `json:"CreationDate,omitempty"`
+	IdentityID       *string    `json:"IdentityId,omitempty"`
+	LastModifiedDate *time.Time `json:"LastModifiedDate,omitempty"`
+	Logins           []string   `json:"Logins,omitempty"`
 }
-

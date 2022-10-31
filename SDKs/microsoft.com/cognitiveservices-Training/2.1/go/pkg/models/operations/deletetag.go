@@ -1,27 +1,20 @@
 package operations
 
-
-
 type DeleteTagPathParams struct {
-    ProjectID string `pathParam:"style=simple,explode=false,name=projectId"`
-    TagID string `pathParam:"style=simple,explode=false,name=tagId"`
-    
+	ProjectID string `pathParam:"style=simple,explode=false,name=projectId"`
+	TagID     string `pathParam:"style=simple,explode=false,name=tagId"`
 }
 
 type DeleteTagHeaders struct {
-    TrainingKey string `header:"style=simple,explode=false,name=Training-Key"`
-    
+	TrainingKey string `header:"style=simple,explode=false,name=Training-Key"`
 }
 
 type DeleteTagRequest struct {
-    PathParams DeleteTagPathParams 
-    Headers DeleteTagHeaders 
-    
+	PathParams DeleteTagPathParams
+	Headers    DeleteTagHeaders
 }
 
 type DeleteTagResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListCategoriesResponse struct {
-    Data []CategoryResource `json:"data"`
-    
+	Data []CategoryResource `json:"data"`
 }
-

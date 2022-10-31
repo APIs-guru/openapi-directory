@@ -1,39 +1,35 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var UpdateSupportingDocumentServers = []string{
 	"https://trusthub.twilio.com",
 }
 
 type UpdateSupportingDocumentPathParams struct {
-    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
-    
+	Sid string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
 type UpdateSupportingDocumentUpdateSupportingDocumentRequest struct {
-    Attributes *interface{} `form:"name=Attributes"`
-    FriendlyName *string `form:"name=FriendlyName"`
-    
+	Attributes   *interface{} `form:"name=Attributes"`
+	FriendlyName *string      `form:"name=FriendlyName"`
 }
 
 type UpdateSupportingDocumentSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type UpdateSupportingDocumentRequest struct {
-    ServerURL *string 
-    PathParams UpdateSupportingDocumentPathParams 
-    Request *UpdateSupportingDocumentUpdateSupportingDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
-    Security UpdateSupportingDocumentSecurity 
-    
+	ServerURL  *string
+	PathParams UpdateSupportingDocumentPathParams
+	Request    *UpdateSupportingDocumentUpdateSupportingDocumentRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Security   UpdateSupportingDocumentSecurity
 }
 
 type UpdateSupportingDocumentResponse struct {
-    ContentType string 
-    StatusCode int64 
-    TrusthubV1SupportingDocument *shared.TrusthubV1SupportingDocument 
-    
+	ContentType                  string
+	StatusCode                   int64
+	TrusthubV1SupportingDocument *shared.TrusthubV1SupportingDocument
 }
-

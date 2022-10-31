@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteContactChannelRequest struct {
-    ContactChannelID string `json:"ContactChannelId"`
-    
+	ContactChannelID string `json:"ContactChannelId"`
 }
-

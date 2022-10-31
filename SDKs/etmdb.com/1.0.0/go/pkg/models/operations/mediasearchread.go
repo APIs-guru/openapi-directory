@@ -1,20 +1,14 @@
 package operations
 
-
-
 type MediaSearchReadPathParams struct {
-    MovieTitle string `pathParam:"style=simple,explode=false,name=movie_title"`
-    
+	MovieTitle string `pathParam:"style=simple,explode=false,name=movie_title"`
 }
 
 type MediaSearchReadRequest struct {
-    PathParams MediaSearchReadPathParams 
-    
+	PathParams MediaSearchReadPathParams
 }
 
 type MediaSearchReadResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

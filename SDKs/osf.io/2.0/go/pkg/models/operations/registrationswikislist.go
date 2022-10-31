@@ -1,21 +1,15 @@
 package operations
 
-
-
 type RegistrationsWikisListPathParams struct {
-    RegistrationID string `pathParam:"style=simple,explode=false,name=registration_id"`
-    
+	RegistrationID string `pathParam:"style=simple,explode=false,name=registration_id"`
 }
 
 type RegistrationsWikisListRequest struct {
-    PathParams RegistrationsWikisListPathParams 
-    
+	PathParams RegistrationsWikisListPathParams
 }
 
 type RegistrationsWikisListResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

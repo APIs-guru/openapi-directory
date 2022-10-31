@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartBlueprintRunResponse struct {
-    RunID *string `json:"RunId,omitempty"`
-    
+	RunID *string `json:"RunId,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeProblemRequest struct {
-    ProblemID string `json:"ProblemId"`
-    
+	ProblemID string `json:"ProblemId"`
 }
-

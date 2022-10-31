@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AddDataSourceRequest struct {
-    DataSource *DataSource `json:"dataSource,omitempty"`
-    
+	DataSource *DataSource `json:"dataSource,omitempty"`
 }
-

@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetTokenBalanceHeaders struct {
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type GetTokenBalanceRequest struct {
-    Headers GetTokenBalanceHeaders 
-    Request shared.GetTokenBalanceRequest `request:"mediaType=application/json"`
-    
+	Headers GetTokenBalanceHeaders
+	Request shared.GetTokenBalanceRequest `request:"mediaType=application/json"`
 }
 
 type GetTokenBalanceResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetTokenBalance *shared.GetTokenBalance 
-    
+	ContentType     string
+	StatusCode      int64
+	GetTokenBalance *shared.GetTokenBalance
 }
-

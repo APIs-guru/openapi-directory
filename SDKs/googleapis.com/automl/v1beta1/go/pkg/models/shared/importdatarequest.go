@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ImportDataRequest struct {
-    InputConfig *InputConfig `json:"inputConfig,omitempty"`
-    
+	InputConfig *InputConfig `json:"inputConfig,omitempty"`
 }
-

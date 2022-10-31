@@ -1,38 +1,31 @@
 package operations
 
-
-
 type DisableImportFindingsForProductPathParams struct {
-    ProductSubscriptionArn string `pathParam:"style=simple,explode=false,name=ProductSubscriptionArn"`
-    
+	ProductSubscriptionArn string `pathParam:"style=simple,explode=false,name=ProductSubscriptionArn"`
 }
 
 type DisableImportFindingsForProductHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type DisableImportFindingsForProductRequest struct {
-    PathParams DisableImportFindingsForProductPathParams 
-    Headers DisableImportFindingsForProductHeaders 
-    
+	PathParams DisableImportFindingsForProductPathParams
+	Headers    DisableImportFindingsForProductHeaders
 }
 
 type DisableImportFindingsForProductResponse struct {
-    ContentType string 
-    DisableImportFindingsForProductResponse map[string]interface{} 
-    InternalException *interface{} 
-    InvalidAccessException *interface{} 
-    InvalidInputException *interface{} 
-    LimitExceededException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    
+	ContentType                             string
+	DisableImportFindingsForProductResponse map[string]interface{}
+	InternalException                       *interface{}
+	InvalidAccessException                  *interface{}
+	InvalidInputException                   *interface{}
+	LimitExceededException                  *interface{}
+	ResourceNotFoundException               *interface{}
+	StatusCode                              int64
 }
-

@@ -1,14 +1,10 @@
 package shared
 
-
-
 type GroupAssetsRequest struct {
-    CompareDuration *string `json:"compareDuration,omitempty"`
-    Filter *string `json:"filter,omitempty"`
-    GroupBy *string `json:"groupBy,omitempty"`
-    PageSize *int32 `json:"pageSize,omitempty"`
-    PageToken *string `json:"pageToken,omitempty"`
-    ReadTime *string `json:"readTime,omitempty"`
-    
+	CompareDuration *string `json:"compareDuration,omitempty"`
+	Filter          *string `json:"filter,omitempty"`
+	GroupBy         *string `json:"groupBy,omitempty"`
+	PageSize        *int32  `json:"pageSize,omitempty"`
+	PageToken       *string `json:"pageToken,omitempty"`
+	ReadTime        *string `json:"readTime,omitempty"`
 }
-

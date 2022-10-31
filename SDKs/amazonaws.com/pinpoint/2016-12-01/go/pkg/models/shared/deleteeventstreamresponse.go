@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteEventStreamResponse struct {
-    EventStream EventStream `json:"EventStream"`
-    
+	EventStream EventStream `json:"EventStream"`
 }
-

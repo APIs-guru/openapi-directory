@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetHealthQueryParams struct {
-    Bundles *bool `queryParam:"style=form,explode=true,name=bundles"`
-    Plugins *bool `queryParam:"style=form,explode=true,name=plugins"`
-    
+	Bundles *bool `queryParam:"style=form,explode=true,name=bundles"`
+	Plugins *bool `queryParam:"style=form,explode=true,name=plugins"`
 }
 
 type GetHealthRequest struct {
-    QueryParams GetHealthQueryParams 
-    
+	QueryParams GetHealthQueryParams
 }
 
 type GetHealthResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,15 +1,10 @@
 package shared
 
-
-
-
 type StartTimerFailedCauseEnum string
 
 const (
-    StartTimerFailedCauseEnumTimerIDAlreadyInUse StartTimerFailedCauseEnum = "TIMER_ID_ALREADY_IN_USE"
-StartTimerFailedCauseEnumOpenTimersLimitExceeded StartTimerFailedCauseEnum = "OPEN_TIMERS_LIMIT_EXCEEDED"
-StartTimerFailedCauseEnumTimerCreationRateExceeded StartTimerFailedCauseEnum = "TIMER_CREATION_RATE_EXCEEDED"
-StartTimerFailedCauseEnumOperationNotPermitted StartTimerFailedCauseEnum = "OPERATION_NOT_PERMITTED"
+	StartTimerFailedCauseEnumTimerIDAlreadyInUse       StartTimerFailedCauseEnum = "TIMER_ID_ALREADY_IN_USE"
+	StartTimerFailedCauseEnumOpenTimersLimitExceeded   StartTimerFailedCauseEnum = "OPEN_TIMERS_LIMIT_EXCEEDED"
+	StartTimerFailedCauseEnumTimerCreationRateExceeded StartTimerFailedCauseEnum = "TIMER_CREATION_RATE_EXCEEDED"
+	StartTimerFailedCauseEnumOperationNotPermitted     StartTimerFailedCauseEnum = "OPERATION_NOT_PERMITTED"
 )
-
-

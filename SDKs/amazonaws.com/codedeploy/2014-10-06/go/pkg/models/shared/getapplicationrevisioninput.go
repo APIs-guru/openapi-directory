@@ -1,10 +1,6 @@
 package shared
 
-
-
 type GetApplicationRevisionInput struct {
-    ApplicationName string `json:"applicationName"`
-    Revision RevisionLocation `json:"revision"`
-    
+	ApplicationName string           `json:"applicationName"`
+	Revision        RevisionLocation `json:"revision"`
 }
-

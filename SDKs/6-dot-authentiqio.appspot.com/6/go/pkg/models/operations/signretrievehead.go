@@ -1,22 +1,16 @@
 package operations
 
-
-
 type SignRetrieveHeadPathParams struct {
-    Job string `pathParam:"style=simple,explode=false,name=job"`
-    
+	Job string `pathParam:"style=simple,explode=false,name=job"`
 }
 
 type SignRetrieveHeadRequest struct {
-    PathParams SignRetrieveHeadPathParams 
-    
+	PathParams SignRetrieveHeadPathParams
 }
 
 type SignRetrieveHeadResponse struct {
-    Body []byte 
-    ContentType string 
-    Error *interface{} 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	Error       *interface{}
+	StatusCode  int64
 }
-

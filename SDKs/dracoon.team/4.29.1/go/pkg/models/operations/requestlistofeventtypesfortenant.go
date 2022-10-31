@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type RequestListOfEventTypesForTenantHeaders struct {
-    XSdsServiceToken *string `header:"style=simple,explode=false,name=X-Sds-Service-Token"`
-    
+	XSdsServiceToken *string `header:"style=simple,explode=false,name=X-Sds-Service-Token"`
 }
 
 type RequestListOfEventTypesForTenantRequest struct {
-    Headers RequestListOfEventTypesForTenantHeaders 
-    
+	Headers RequestListOfEventTypesForTenantHeaders
 }
 
 type RequestListOfEventTypesForTenantResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    EventTypeList *shared.EventTypeList 
-    StatusCode int64 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	EventTypeList *shared.EventTypeList
+	StatusCode    int64
 }
-

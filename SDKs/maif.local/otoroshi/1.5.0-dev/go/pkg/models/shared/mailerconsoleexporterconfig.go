@@ -1,17 +1,11 @@
 package shared
 
-
-
-
 type MailerConsoleExporterConfigTypeEnum string
 
 const (
-    MailerConsoleExporterConfigTypeEnumGeneric MailerConsoleExporterConfigTypeEnum = "generic"
+	MailerConsoleExporterConfigTypeEnumGeneric MailerConsoleExporterConfigTypeEnum = "generic"
 )
 
-
 type MailerConsoleExporterConfig struct {
-    Type *MailerConsoleExporterConfigTypeEnum `json:"type,omitempty"`
-    
+	Type *MailerConsoleExporterConfigTypeEnum `json:"type,omitempty"`
 }
-

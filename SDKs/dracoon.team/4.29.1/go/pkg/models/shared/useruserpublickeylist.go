@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UserUserPublicKeyList struct {
-    Items []UserUserPublicKey `json:"items"`
-    
+	Items []UserUserPublicKey `json:"items"`
 }
-

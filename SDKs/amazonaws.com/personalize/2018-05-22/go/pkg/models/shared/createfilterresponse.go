@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateFilterResponse struct {
-    FilterArn *string `json:"filterArn,omitempty"`
-    
+	FilterArn *string `json:"filterArn,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteResolverRuleRequest struct {
-    ResolverRuleID string `json:"ResolverRuleId"`
-    
+	ResolverRuleID string `json:"ResolverRuleId"`
 }
-

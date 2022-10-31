@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetQueriesIDModalityPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetQueriesIDModalityRequest struct {
-    PathParams GetQueriesIDModalityPathParams 
-    
+	PathParams GetQueriesIDModalityPathParams
 }
 
 type GetQueriesIDModalityResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

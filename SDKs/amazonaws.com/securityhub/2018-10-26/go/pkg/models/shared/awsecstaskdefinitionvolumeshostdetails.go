@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AwsEcsTaskDefinitionVolumesHostDetails struct {
-    SourcePath *string `json:"SourcePath,omitempty"`
-    
+	SourcePath *string `json:"SourcePath,omitempty"`
 }
-

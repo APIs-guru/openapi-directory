@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAdministrationPlanningLevelsHeaders struct {
-    Token *string `header:"style=simple,explode=false,name=Token"`
-    
+	Token *string `header:"style=simple,explode=false,name=Token"`
 }
 
 type GetAdministrationPlanningLevelsRequest struct {
-    Headers GetAdministrationPlanningLevelsHeaders 
-    
+	Headers GetAdministrationPlanningLevelsHeaders
 }
 
 type GetAdministrationPlanningLevelsResponse struct {
-    Body []byte 
-    ContentType string 
-    PlanningLevelInfoResponses []shared.PlanningLevelInfoResponse 
-    StatusCode int64 
-    
+	Body                       []byte
+	ContentType                string
+	PlanningLevelInfoResponses []shared.PlanningLevelInfoResponse
+	StatusCode                 int64
 }
-

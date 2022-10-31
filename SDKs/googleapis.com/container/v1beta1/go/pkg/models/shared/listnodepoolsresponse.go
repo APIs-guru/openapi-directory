@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListNodePoolsResponse struct {
-    NodePools []NodePool `json:"nodePools,omitempty"`
-    
+	NodePools []NodePool `json:"nodePools,omitempty"`
 }
-

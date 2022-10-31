@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleSecuritySafebrowsingV4ThreatEntryMetadata struct {
-    Entries []GoogleSecuritySafebrowsingV4ThreatEntryMetadataMetadataEntry `json:"entries,omitempty"`
-    
+	Entries []GoogleSecuritySafebrowsingV4ThreatEntryMetadataMetadataEntry `json:"entries,omitempty"`
 }
-

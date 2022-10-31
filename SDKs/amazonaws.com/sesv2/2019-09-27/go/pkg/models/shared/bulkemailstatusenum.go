@@ -1,25 +1,20 @@
 package shared
 
-
-
-
 type BulkEmailStatusEnum string
 
 const (
-    BulkEmailStatusEnumSuccess BulkEmailStatusEnum = "SUCCESS"
-BulkEmailStatusEnumMessageRejected BulkEmailStatusEnum = "MESSAGE_REJECTED"
-BulkEmailStatusEnumMailFromDomainNotVerified BulkEmailStatusEnum = "MAIL_FROM_DOMAIN_NOT_VERIFIED"
-BulkEmailStatusEnumConfigurationSetNotFound BulkEmailStatusEnum = "CONFIGURATION_SET_NOT_FOUND"
-BulkEmailStatusEnumTemplateNotFound BulkEmailStatusEnum = "TEMPLATE_NOT_FOUND"
-BulkEmailStatusEnumAccountSuspended BulkEmailStatusEnum = "ACCOUNT_SUSPENDED"
-BulkEmailStatusEnumAccountThrottled BulkEmailStatusEnum = "ACCOUNT_THROTTLED"
-BulkEmailStatusEnumAccountDailyQuotaExceeded BulkEmailStatusEnum = "ACCOUNT_DAILY_QUOTA_EXCEEDED"
-BulkEmailStatusEnumInvalidSendingPoolName BulkEmailStatusEnum = "INVALID_SENDING_POOL_NAME"
-BulkEmailStatusEnumAccountSendingPaused BulkEmailStatusEnum = "ACCOUNT_SENDING_PAUSED"
-BulkEmailStatusEnumConfigurationSetSendingPaused BulkEmailStatusEnum = "CONFIGURATION_SET_SENDING_PAUSED"
-BulkEmailStatusEnumInvalidParameter BulkEmailStatusEnum = "INVALID_PARAMETER"
-BulkEmailStatusEnumTransientFailure BulkEmailStatusEnum = "TRANSIENT_FAILURE"
-BulkEmailStatusEnumFailed BulkEmailStatusEnum = "FAILED"
+	BulkEmailStatusEnumSuccess                       BulkEmailStatusEnum = "SUCCESS"
+	BulkEmailStatusEnumMessageRejected               BulkEmailStatusEnum = "MESSAGE_REJECTED"
+	BulkEmailStatusEnumMailFromDomainNotVerified     BulkEmailStatusEnum = "MAIL_FROM_DOMAIN_NOT_VERIFIED"
+	BulkEmailStatusEnumConfigurationSetNotFound      BulkEmailStatusEnum = "CONFIGURATION_SET_NOT_FOUND"
+	BulkEmailStatusEnumTemplateNotFound              BulkEmailStatusEnum = "TEMPLATE_NOT_FOUND"
+	BulkEmailStatusEnumAccountSuspended              BulkEmailStatusEnum = "ACCOUNT_SUSPENDED"
+	BulkEmailStatusEnumAccountThrottled              BulkEmailStatusEnum = "ACCOUNT_THROTTLED"
+	BulkEmailStatusEnumAccountDailyQuotaExceeded     BulkEmailStatusEnum = "ACCOUNT_DAILY_QUOTA_EXCEEDED"
+	BulkEmailStatusEnumInvalidSendingPoolName        BulkEmailStatusEnum = "INVALID_SENDING_POOL_NAME"
+	BulkEmailStatusEnumAccountSendingPaused          BulkEmailStatusEnum = "ACCOUNT_SENDING_PAUSED"
+	BulkEmailStatusEnumConfigurationSetSendingPaused BulkEmailStatusEnum = "CONFIGURATION_SET_SENDING_PAUSED"
+	BulkEmailStatusEnumInvalidParameter              BulkEmailStatusEnum = "INVALID_PARAMETER"
+	BulkEmailStatusEnumTransientFailure              BulkEmailStatusEnum = "TRANSIENT_FAILURE"
+	BulkEmailStatusEnumFailed                        BulkEmailStatusEnum = "FAILED"
 )
-
-

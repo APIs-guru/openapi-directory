@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetBudgetSettingsByIDPathParams struct {
-    BudgetID string `pathParam:"style=simple,explode=false,name=budget_id"`
-    
+	BudgetID string `pathParam:"style=simple,explode=false,name=budget_id"`
 }
 
 type GetBudgetSettingsByIDRequest struct {
-    PathParams GetBudgetSettingsByIDPathParams 
-    
+	PathParams GetBudgetSettingsByIDPathParams
 }
 
 type GetBudgetSettingsByIDResponse struct {
-    BudgetSettingsResponse *shared.BudgetSettingsResponse 
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    
+	BudgetSettingsResponse *shared.BudgetSettingsResponse
+	ContentType            string
+	ErrorResponse          *shared.ErrorResponse
+	StatusCode             int64
 }
-

@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CreateAndPreserveKeyPairHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type CreateAndPreserveKeyPairRequest struct {
-    Headers CreateAndPreserveKeyPairHeaders 
-    Request shared.CreateKeyPairRequest `request:"mediaType=application/json"`
-    
+	Headers CreateAndPreserveKeyPairHeaders
+	Request shared.CreateKeyPairRequest `request:"mediaType=application/json"`
 }
 
 type CreateAndPreserveKeyPairResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	StatusCode    int64
 }
-

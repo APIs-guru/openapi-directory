@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeClientPropertiesRequest struct {
-    ResourceIds []string `json:"ResourceIds"`
-    
+	ResourceIds []string `json:"ResourceIds"`
 }
-

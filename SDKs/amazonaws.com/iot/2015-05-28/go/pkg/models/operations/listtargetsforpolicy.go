@@ -1,48 +1,43 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ListTargetsForPolicyPathParams struct {
-    PolicyName string `pathParam:"style=simple,explode=false,name=policyName"`
-    
+	PolicyName string `pathParam:"style=simple,explode=false,name=policyName"`
 }
 
 type ListTargetsForPolicyQueryParams struct {
-    Marker *string `queryParam:"style=form,explode=true,name=marker"`
-    PageSize *int64 `queryParam:"style=form,explode=true,name=pageSize"`
-    
+	Marker   *string `queryParam:"style=form,explode=true,name=marker"`
+	PageSize *int64  `queryParam:"style=form,explode=true,name=pageSize"`
 }
 
 type ListTargetsForPolicyHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type ListTargetsForPolicyRequest struct {
-    PathParams ListTargetsForPolicyPathParams 
-    QueryParams ListTargetsForPolicyQueryParams 
-    Headers ListTargetsForPolicyHeaders 
-    
+	PathParams  ListTargetsForPolicyPathParams
+	QueryParams ListTargetsForPolicyQueryParams
+	Headers     ListTargetsForPolicyHeaders
 }
 
 type ListTargetsForPolicyResponse struct {
-    ContentType string 
-    InternalFailureException *interface{} 
-    InvalidRequestException *interface{} 
-    LimitExceededException *interface{} 
-    ListTargetsForPolicyResponse *shared.ListTargetsForPolicyResponse 
-    ResourceNotFoundException *interface{} 
-    ServiceUnavailableException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    UnauthorizedException *interface{} 
-    
+	ContentType                  string
+	InternalFailureException     *interface{}
+	InvalidRequestException      *interface{}
+	LimitExceededException       *interface{}
+	ListTargetsForPolicyResponse *shared.ListTargetsForPolicyResponse
+	ResourceNotFoundException    *interface{}
+	ServiceUnavailableException  *interface{}
+	StatusCode                   int64
+	ThrottlingException          *interface{}
+	UnauthorizedException        *interface{}
 }
-

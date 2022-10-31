@@ -1,10 +1,6 @@
 package shared
 
-
-
 type OutputLocation struct {
-    S3Bucket *string `json:"s3Bucket,omitempty"`
-    S3Prefix *string `json:"s3Prefix,omitempty"`
-    
+	S3Bucket *string `json:"s3Bucket,omitempty"`
+	S3Prefix *string `json:"s3Prefix,omitempty"`
 }
-

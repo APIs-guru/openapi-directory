@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateFooterResponse struct {
-    FooterID *string `json:"footerId,omitempty"`
-    
+	FooterID *string `json:"footerId,omitempty"`
 }
-

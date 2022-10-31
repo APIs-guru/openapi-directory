@@ -1,25 +1,22 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetVehicleDetailsByRegistrationNumberHeaders struct {
-    XCorrelationID *string `header:"style=simple,explode=false,name=X-Correlation-Id"`
-    XAPIKey string `header:"style=simple,explode=false,name=x-api-key"`
-    
+	XCorrelationID *string `header:"style=simple,explode=false,name=X-Correlation-Id"`
+	XAPIKey        string  `header:"style=simple,explode=false,name=x-api-key"`
 }
 
 type GetVehicleDetailsByRegistrationNumberRequest struct {
-    Headers GetVehicleDetailsByRegistrationNumberHeaders 
-    Request shared.VehicleRequest `request:"mediaType=application/json"`
-    
+	Headers GetVehicleDetailsByRegistrationNumberHeaders
+	Request shared.VehicleRequest `request:"mediaType=application/json"`
 }
 
 type GetVehicleDetailsByRegistrationNumberResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    Vehicle *shared.Vehicle 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	StatusCode    int64
+	Vehicle       *shared.Vehicle
 }
-

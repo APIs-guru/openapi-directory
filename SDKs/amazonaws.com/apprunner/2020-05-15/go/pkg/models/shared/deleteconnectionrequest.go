@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteConnectionRequest struct {
-    ConnectionArn string `json:"ConnectionArn"`
-    
+	ConnectionArn string `json:"ConnectionArn"`
 }
-

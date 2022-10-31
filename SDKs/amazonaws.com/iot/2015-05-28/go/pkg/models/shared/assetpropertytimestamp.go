@@ -1,10 +1,6 @@
 package shared
 
-
-
 type AssetPropertyTimestamp struct {
-    OffsetInNanos *string `json:"offsetInNanos,omitempty"`
-    TimeInSeconds string `json:"timeInSeconds"`
-    
+	OffsetInNanos *string `json:"offsetInNanos,omitempty"`
+	TimeInSeconds string  `json:"timeInSeconds"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ValidateMatchmakingRuleSetInput struct {
-    RuleSetBody string `json:"RuleSetBody"`
-    
+	RuleSetBody string `json:"RuleSetBody"`
 }
-

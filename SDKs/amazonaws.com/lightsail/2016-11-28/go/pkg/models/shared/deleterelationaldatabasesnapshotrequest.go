@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteRelationalDatabaseSnapshotRequest struct {
-    RelationalDatabaseSnapshotName string `json:"relationalDatabaseSnapshotName"`
-    
+	RelationalDatabaseSnapshotName string `json:"relationalDatabaseSnapshotName"`
 }
-

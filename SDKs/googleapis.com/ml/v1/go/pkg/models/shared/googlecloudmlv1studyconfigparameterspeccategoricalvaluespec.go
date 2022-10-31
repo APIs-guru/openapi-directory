@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudMlV1StudyConfigParameterSpecCategoricalValueSpec struct {
-    Values []string `json:"values,omitempty"`
-    
+	Values []string `json:"values,omitempty"`
 }
-

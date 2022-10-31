@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GlueDataCatalogConfiguration struct {
-    DatabaseArn string `json:"DatabaseARN"`
-    
+	DatabaseArn string `json:"DatabaseARN"`
 }
-

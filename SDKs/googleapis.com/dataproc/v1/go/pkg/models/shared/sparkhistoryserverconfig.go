@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SparkHistoryServerConfig struct {
-    DataprocCluster *string `json:"dataprocCluster,omitempty"`
-    
+	DataprocCluster *string `json:"dataprocCluster,omitempty"`
 }
-

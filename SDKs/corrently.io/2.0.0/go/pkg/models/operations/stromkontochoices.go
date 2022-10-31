@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type StromkontoChoicesQueryParams struct {
-    Account *string `queryParam:"style=form,explode=true,name=account"`
-    
+	Account *string `queryParam:"style=form,explode=true,name=account"`
 }
 
 type StromkontoChoicesRequest struct {
-    QueryParams StromkontoChoicesQueryParams 
-    
+	QueryParams StromkontoChoicesQueryParams
 }
 
 type StromkontoChoicesResponse struct {
-    Balances []shared.Balance 
-    ContentType string 
-    StatusCode int64 
-    
+	Balances    []shared.Balance
+	ContentType string
+	StatusCode  int64
 }
-

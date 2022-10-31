@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeUserImportJobResponse struct {
-    UserImportJob *UserImportJobType `json:"UserImportJob,omitempty"`
-    
+	UserImportJob *UserImportJobType `json:"UserImportJob,omitempty"`
 }
-

@@ -1,10 +1,6 @@
 package shared
 
-
-
 type SnsTopicPublishAction struct {
-    Payload *Payload `json:"payload,omitempty"`
-    TargetArn string `json:"targetArn"`
-    
+	Payload   *Payload `json:"payload,omitempty"`
+	TargetArn string   `json:"targetArn"`
 }
-

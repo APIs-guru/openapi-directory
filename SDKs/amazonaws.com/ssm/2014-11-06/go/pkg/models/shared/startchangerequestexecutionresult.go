@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartChangeRequestExecutionResult struct {
-    AutomationExecutionID *string `json:"AutomationExecutionId,omitempty"`
-    
+	AutomationExecutionID *string `json:"AutomationExecutionId,omitempty"`
 }
-

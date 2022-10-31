@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetSSHKeysPathParams struct {
-    DomainName string `pathParam:"style=simple,explode=false,name=domainName"`
-    
+	DomainName string `pathParam:"style=simple,explode=false,name=domainName"`
 }
 
 type GetSSHKeysQueryParams struct {
-    DomainName string `queryParam:"style=form,explode=true,name=domain_name"`
-    
+	DomainName string `queryParam:"style=form,explode=true,name=domain_name"`
 }
 
 type GetSSHKeysRequest struct {
-    PathParams GetSSHKeysPathParams 
-    QueryParams GetSSHKeysQueryParams 
-    
+	PathParams  GetSSHKeysPathParams
+	QueryParams GetSSHKeysQueryParams
 }
 
 type GetSSHKeysResponse struct {
-    ContentType string 
-    SSHKeys []shared.SSHKey 
-    StatusCode int64 
-    
+	ContentType string
+	SSHKeys     []shared.SSHKey
+	StatusCode  int64
 }
-

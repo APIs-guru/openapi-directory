@@ -1,24 +1,19 @@
 package shared
 
-
-
-
 type DecisionTypeEnum string
 
 const (
-    DecisionTypeEnumScheduleActivityTask DecisionTypeEnum = "ScheduleActivityTask"
-DecisionTypeEnumRequestCancelActivityTask DecisionTypeEnum = "RequestCancelActivityTask"
-DecisionTypeEnumCompleteWorkflowExecution DecisionTypeEnum = "CompleteWorkflowExecution"
-DecisionTypeEnumFailWorkflowExecution DecisionTypeEnum = "FailWorkflowExecution"
-DecisionTypeEnumCancelWorkflowExecution DecisionTypeEnum = "CancelWorkflowExecution"
-DecisionTypeEnumContinueAsNewWorkflowExecution DecisionTypeEnum = "ContinueAsNewWorkflowExecution"
-DecisionTypeEnumRecordMarker DecisionTypeEnum = "RecordMarker"
-DecisionTypeEnumStartTimer DecisionTypeEnum = "StartTimer"
-DecisionTypeEnumCancelTimer DecisionTypeEnum = "CancelTimer"
-DecisionTypeEnumSignalExternalWorkflowExecution DecisionTypeEnum = "SignalExternalWorkflowExecution"
-DecisionTypeEnumRequestCancelExternalWorkflowExecution DecisionTypeEnum = "RequestCancelExternalWorkflowExecution"
-DecisionTypeEnumStartChildWorkflowExecution DecisionTypeEnum = "StartChildWorkflowExecution"
-DecisionTypeEnumScheduleLambdaFunction DecisionTypeEnum = "ScheduleLambdaFunction"
+	DecisionTypeEnumScheduleActivityTask                   DecisionTypeEnum = "ScheduleActivityTask"
+	DecisionTypeEnumRequestCancelActivityTask              DecisionTypeEnum = "RequestCancelActivityTask"
+	DecisionTypeEnumCompleteWorkflowExecution              DecisionTypeEnum = "CompleteWorkflowExecution"
+	DecisionTypeEnumFailWorkflowExecution                  DecisionTypeEnum = "FailWorkflowExecution"
+	DecisionTypeEnumCancelWorkflowExecution                DecisionTypeEnum = "CancelWorkflowExecution"
+	DecisionTypeEnumContinueAsNewWorkflowExecution         DecisionTypeEnum = "ContinueAsNewWorkflowExecution"
+	DecisionTypeEnumRecordMarker                           DecisionTypeEnum = "RecordMarker"
+	DecisionTypeEnumStartTimer                             DecisionTypeEnum = "StartTimer"
+	DecisionTypeEnumCancelTimer                            DecisionTypeEnum = "CancelTimer"
+	DecisionTypeEnumSignalExternalWorkflowExecution        DecisionTypeEnum = "SignalExternalWorkflowExecution"
+	DecisionTypeEnumRequestCancelExternalWorkflowExecution DecisionTypeEnum = "RequestCancelExternalWorkflowExecution"
+	DecisionTypeEnumStartChildWorkflowExecution            DecisionTypeEnum = "StartChildWorkflowExecution"
+	DecisionTypeEnumScheduleLambdaFunction                 DecisionTypeEnum = "ScheduleLambdaFunction"
 )
-
-

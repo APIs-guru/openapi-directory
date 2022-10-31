@@ -1,25 +1,22 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PatchOfferingsOfferingIDChannelsChannelIDPathParams struct {
-    ChannelID string `pathParam:"style=simple,explode=false,name=channelId"`
-    OfferingID string `pathParam:"style=simple,explode=false,name=offeringId"`
-    
+	ChannelID  string `pathParam:"style=simple,explode=false,name=channelId"`
+	OfferingID string `pathParam:"style=simple,explode=false,name=offeringId"`
 }
 
 type PatchOfferingsOfferingIDChannelsChannelIDRequest struct {
-    PathParams PatchOfferingsOfferingIDChannelsChannelIDPathParams 
-    Request shared.Channel `request:"mediaType=application/json"`
-    
+	PathParams PatchOfferingsOfferingIDChannelsChannelIDPathParams
+	Request    shared.Channel `request:"mediaType=application/json"`
 }
 
 type PatchOfferingsOfferingIDChannelsChannelIDResponse struct {
-    ChannelResponse *shared.ChannelResponse 
-    ContentType string 
-    Error *shared.Error 
-    StatusCode int64 
-    
+	ChannelResponse *shared.ChannelResponse
+	ContentType     string
+	Error           *shared.Error
+	StatusCode      int64
 }
-

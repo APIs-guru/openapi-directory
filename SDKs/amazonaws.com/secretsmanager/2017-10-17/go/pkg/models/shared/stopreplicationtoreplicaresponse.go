@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StopReplicationToReplicaResponse struct {
-    Arn *string `json:"ARN,omitempty"`
-    
+	Arn *string `json:"ARN,omitempty"`
 }
-

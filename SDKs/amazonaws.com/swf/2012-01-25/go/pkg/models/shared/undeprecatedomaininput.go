@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UndeprecateDomainInput struct {
-    Name string `json:"name"`
-    
+	Name string `json:"name"`
 }
-

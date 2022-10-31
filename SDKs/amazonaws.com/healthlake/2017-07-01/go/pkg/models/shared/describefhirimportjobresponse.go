@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeFhirImportJobResponse struct {
-    ImportJobProperties ImportJobProperties `json:"ImportJobProperties"`
-    
+	ImportJobProperties ImportJobProperties `json:"ImportJobProperties"`
 }
-

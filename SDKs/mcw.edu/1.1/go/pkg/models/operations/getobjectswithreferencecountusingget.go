@@ -1,22 +1,16 @@
 package operations
 
-
-
 type GetObjectsWithReferenceCountUsingGetPathParams struct {
-    DateYyyymmdd string `pathParam:"style=simple,explode=false,name=dateYYYYMMDD"`
-    SpeciesTypeKey int32 `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
-    
+	DateYyyymmdd   string `pathParam:"style=simple,explode=false,name=dateYYYYMMDD"`
+	SpeciesTypeKey int32  `pathParam:"style=simple,explode=false,name=speciesTypeKey"`
 }
 
 type GetObjectsWithReferenceCountUsingGetRequest struct {
-    PathParams GetObjectsWithReferenceCountUsingGetPathParams 
-    
+	PathParams GetObjectsWithReferenceCountUsingGetPathParams
 }
 
 type GetObjectsWithReferenceCountUsingGetResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,38 +1,34 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var CreateFunctionServers = []string{
 	"https://serverless.twilio.com",
 }
 
 type CreateFunctionPathParams struct {
-    ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
-    
+	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
 type CreateFunctionCreateFunctionRequest struct {
-    FriendlyName string `form:"name=FriendlyName"`
-    
+	FriendlyName string `form:"name=FriendlyName"`
 }
 
 type CreateFunctionSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type CreateFunctionRequest struct {
-    ServerURL *string 
-    PathParams CreateFunctionPathParams 
-    Request *CreateFunctionCreateFunctionRequest `request:"mediaType=application/x-www-form-urlencoded"`
-    Security CreateFunctionSecurity 
-    
+	ServerURL  *string
+	PathParams CreateFunctionPathParams
+	Request    *CreateFunctionCreateFunctionRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Security   CreateFunctionSecurity
 }
 
 type CreateFunctionResponse struct {
-    ContentType string 
-    StatusCode int64 
-    ServerlessV1ServiceFunction *shared.ServerlessV1ServiceFunction 
-    
+	ContentType                 string
+	StatusCode                  int64
+	ServerlessV1ServiceFunction *shared.ServerlessV1ServiceFunction
 }
-

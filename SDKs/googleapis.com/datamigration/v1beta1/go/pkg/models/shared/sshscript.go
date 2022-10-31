@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SSHScript struct {
-    Script *string `json:"script,omitempty"`
-    
+	Script *string `json:"script,omitempty"`
 }
-

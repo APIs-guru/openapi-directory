@@ -1,38 +1,34 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetReportDefinitionPathParams struct {
-    ReportID string `pathParam:"style=simple,explode=false,name=reportId"`
-    
+	ReportID string `pathParam:"style=simple,explode=false,name=reportId"`
 }
 
 type GetReportDefinitionHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type GetReportDefinitionRequest struct {
-    PathParams GetReportDefinitionPathParams 
-    Headers GetReportDefinitionHeaders 
-    
+	PathParams GetReportDefinitionPathParams
+	Headers    GetReportDefinitionHeaders
 }
 
 type GetReportDefinitionResponse struct {
-    AccessDeniedException *interface{} 
-    ContentType string 
-    GetReportDefinitionResult *shared.GetReportDefinitionResult 
-    InternalServerException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    ValidationException *interface{} 
-    
+	AccessDeniedException     *interface{}
+	ContentType               string
+	GetReportDefinitionResult *shared.GetReportDefinitionResult
+	InternalServerException   *interface{}
+	StatusCode                int64
+	ThrottlingException       *interface{}
+	ValidationException       *interface{}
 }
-

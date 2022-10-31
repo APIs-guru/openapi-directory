@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateRoutingControlResponse struct {
-    RoutingControl *RoutingControl `json:"RoutingControl,omitempty"`
-    
+	RoutingControl *RoutingControl `json:"RoutingControl,omitempty"`
 }
-

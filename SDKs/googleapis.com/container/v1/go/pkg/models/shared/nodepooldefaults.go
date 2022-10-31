@@ -1,9 +1,5 @@
 package shared
 
-
-
 type NodePoolDefaults struct {
-    NodeConfigDefaults *NodeConfigDefaults `json:"nodeConfigDefaults,omitempty"`
-    
+	NodeConfigDefaults *NodeConfigDefaults `json:"nodeConfigDefaults,omitempty"`
 }
-

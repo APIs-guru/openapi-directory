@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetAgentPathParams struct {
-    Name string `pathParam:"style=simple,explode=false,name=name"`
-    Runmode string `pathParam:"style=simple,explode=false,name=runmode"`
-    
+	Name    string `pathParam:"style=simple,explode=false,name=name"`
+	Runmode string `pathParam:"style=simple,explode=false,name=runmode"`
 }
 
 type GetAgentRequest struct {
-    PathParams GetAgentPathParams 
-    
+	PathParams GetAgentPathParams
 }
 
 type GetAgentResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

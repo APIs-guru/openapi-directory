@@ -1,10 +1,9 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type PutApprovalResultOutput struct {
-    ApprovedAt *time.Time `json:"approvedAt,omitempty"`
-    
+	ApprovedAt *time.Time `json:"approvedAt,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RefreshSchemasResponse struct {
-    RefreshSchemasStatus *RefreshSchemasStatus `json:"RefreshSchemasStatus,omitempty"`
-    
+	RefreshSchemasStatus *RefreshSchemasStatus `json:"RefreshSchemasStatus,omitempty"`
 }
-

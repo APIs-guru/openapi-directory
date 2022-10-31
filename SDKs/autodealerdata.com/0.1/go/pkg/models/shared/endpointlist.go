@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EndpointList struct {
-    EndPoints []string `json:"endPoints,omitempty"`
-    
+	EndPoints []string `json:"endPoints,omitempty"`
 }
-

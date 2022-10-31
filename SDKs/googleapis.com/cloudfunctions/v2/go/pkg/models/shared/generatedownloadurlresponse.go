@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GenerateDownloadURLResponse struct {
-    DownloadURL *string `json:"downloadUrl,omitempty"`
-    
+	DownloadURL *string `json:"downloadUrl,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StopTriggerResponse struct {
-    Name *string `json:"Name,omitempty"`
-    
+	Name *string `json:"Name,omitempty"`
 }
-

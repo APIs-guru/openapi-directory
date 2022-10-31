@@ -1,44 +1,39 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type LedgerAccountsAllQueryParams struct {
-    Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
-    Limit *int64 `queryParam:"style=form,explode=true,name=limit"`
-    Raw *bool `queryParam:"style=form,explode=true,name=raw"`
-    
+	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
+	Limit  *int64  `queryParam:"style=form,explode=true,name=limit"`
+	Raw    *bool   `queryParam:"style=form,explode=true,name=raw"`
 }
 
 type LedgerAccountsAllHeaders struct {
-    XApideckAppID string `header:"style=simple,explode=false,name=x-apideck-app-id"`
-    XApideckConsumerID string `header:"style=simple,explode=false,name=x-apideck-consumer-id"`
-    XApideckServiceID *string `header:"style=simple,explode=false,name=x-apideck-service-id"`
-    
+	XApideckAppID      string  `header:"style=simple,explode=false,name=x-apideck-app-id"`
+	XApideckConsumerID string  `header:"style=simple,explode=false,name=x-apideck-consumer-id"`
+	XApideckServiceID  *string `header:"style=simple,explode=false,name=x-apideck-service-id"`
 }
 
 type LedgerAccountsAllSecurity struct {
-    APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type LedgerAccountsAllRequest struct {
-    QueryParams LedgerAccountsAllQueryParams 
-    Headers LedgerAccountsAllHeaders 
-    Security LedgerAccountsAllSecurity 
-    
+	QueryParams LedgerAccountsAllQueryParams
+	Headers     LedgerAccountsAllHeaders
+	Security    LedgerAccountsAllSecurity
 }
 
 type LedgerAccountsAllResponse struct {
-    BadRequestResponse *shared.BadRequestResponse 
-    ContentType string 
-    GetLedgerAccountsResponse *shared.GetLedgerAccountsResponse 
-    NotFoundResponse *shared.NotFoundResponse 
-    PaymentRequiredResponse *shared.PaymentRequiredResponse 
-    StatusCode int64 
-    UnauthorizedResponse *shared.UnauthorizedResponse 
-    UnexpectedErrorResponse *shared.UnexpectedErrorResponse 
-    UnprocessableResponse *shared.UnprocessableResponse 
-    
+	BadRequestResponse        *shared.BadRequestResponse
+	ContentType               string
+	GetLedgerAccountsResponse *shared.GetLedgerAccountsResponse
+	NotFoundResponse          *shared.NotFoundResponse
+	PaymentRequiredResponse   *shared.PaymentRequiredResponse
+	StatusCode                int64
+	UnauthorizedResponse      *shared.UnauthorizedResponse
+	UnexpectedErrorResponse   *shared.UnexpectedErrorResponse
+	UnprocessableResponse     *shared.UnprocessableResponse
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BetSlipResponse struct {
-    Betslip []Betslipbet `json:"betslip,omitempty"`
-    
+	Betslip []Betslipbet `json:"betslip,omitempty"`
 }
-

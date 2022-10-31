@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetOfferingsOfferingIDAssessmentsPathParams struct {
-    OfferingID string `pathParam:"style=simple,explode=false,name=offeringId"`
-    
+	OfferingID string `pathParam:"style=simple,explode=false,name=offeringId"`
 }
 
 type GetOfferingsOfferingIDAssessmentsRequest struct {
-    PathParams GetOfferingsOfferingIDAssessmentsPathParams 
-    
+	PathParams GetOfferingsOfferingIDAssessmentsPathParams
 }
 
 type GetOfferingsOfferingIDAssessmentsResponse struct {
-    AssessmentResponses []shared.AssessmentResponse 
-    ContentType string 
-    Error *shared.Error 
-    StatusCode int64 
-    
+	AssessmentResponses []shared.AssessmentResponse
+	ContentType         string
+	Error               *shared.Error
+	StatusCode          int64
 }
-

@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetShakespeareGenerateNameQueryParams struct {
-    Limit *int64 `queryParam:"style=form,explode=true,name=limit"`
-    Variation *string `queryParam:"style=form,explode=true,name=variation"`
-    
+	Limit     *int64  `queryParam:"style=form,explode=true,name=limit"`
+	Variation *string `queryParam:"style=form,explode=true,name=variation"`
 }
 
 type GetShakespeareGenerateNameSecurity struct {
-    XFungeneratorsAPISecret shared.SchemeXFungeneratorsAPISecret `security:"scheme,type=apiKey,subtype=header"`
-    
+	XFungeneratorsAPISecret shared.SchemeXFungeneratorsAPISecret `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type GetShakespeareGenerateNameRequest struct {
-    QueryParams GetShakespeareGenerateNameQueryParams 
-    Security GetShakespeareGenerateNameSecurity 
-    
+	QueryParams GetShakespeareGenerateNameQueryParams
+	Security    GetShakespeareGenerateNameSecurity
 }
 
 type GetShakespeareGenerateNameResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

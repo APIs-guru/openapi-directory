@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeTrialComponentRequest struct {
-    TrialComponentName string `json:"TrialComponentName"`
-    
+	TrialComponentName string `json:"TrialComponentName"`
 }
-

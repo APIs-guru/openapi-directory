@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateFootnoteResponse struct {
-    FootnoteID *string `json:"footnoteId,omitempty"`
-    
+	FootnoteID *string `json:"footnoteId,omitempty"`
 }
-

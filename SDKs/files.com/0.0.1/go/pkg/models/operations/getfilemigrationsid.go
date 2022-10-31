@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetFileMigrationsIDPathParams struct {
-    ID int32 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int32 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetFileMigrationsIDRequest struct {
-    PathParams GetFileMigrationsIDPathParams 
-    
+	PathParams GetFileMigrationsIDPathParams
 }
 
 type GetFileMigrationsIDResponse struct {
-    ContentType string 
-    FileMigrationEntity *shared.FileMigrationEntity 
-    StatusCode int64 
-    
+	ContentType         string
+	FileMigrationEntity *shared.FileMigrationEntity
+	StatusCode          int64
 }
-

@@ -1,32 +1,24 @@
 package shared
 
-
-
-
 type BuildSystemSharedDtoParameterDirectionEnum string
 
 const (
-    BuildSystemSharedDtoParameterDirectionEnumInput BuildSystemSharedDtoParameterDirectionEnum = "Input"
-BuildSystemSharedDtoParameterDirectionEnumOutput BuildSystemSharedDtoParameterDirectionEnum = "Output"
+	BuildSystemSharedDtoParameterDirectionEnumInput  BuildSystemSharedDtoParameterDirectionEnum = "Input"
+	BuildSystemSharedDtoParameterDirectionEnumOutput BuildSystemSharedDtoParameterDirectionEnum = "Output"
 )
-
-
 
 type BuildSystemSharedDtoParameterTypeEnum string
 
 const (
-    BuildSystemSharedDtoParameterTypeEnumString BuildSystemSharedDtoParameterTypeEnum = "String"
-BuildSystemSharedDtoParameterTypeEnumBoolean BuildSystemSharedDtoParameterTypeEnum = "Boolean"
-BuildSystemSharedDtoParameterTypeEnumInteger BuildSystemSharedDtoParameterTypeEnum = "Integer"
-BuildSystemSharedDtoParameterTypeEnumFloat BuildSystemSharedDtoParameterTypeEnum = "Float"
-BuildSystemSharedDtoParameterTypeEnumStringDictionary BuildSystemSharedDtoParameterTypeEnum = "StringDictionary"
+	BuildSystemSharedDtoParameterTypeEnumString           BuildSystemSharedDtoParameterTypeEnum = "String"
+	BuildSystemSharedDtoParameterTypeEnumBoolean          BuildSystemSharedDtoParameterTypeEnum = "Boolean"
+	BuildSystemSharedDtoParameterTypeEnumInteger          BuildSystemSharedDtoParameterTypeEnum = "Integer"
+	BuildSystemSharedDtoParameterTypeEnumFloat            BuildSystemSharedDtoParameterTypeEnum = "Float"
+	BuildSystemSharedDtoParameterTypeEnumStringDictionary BuildSystemSharedDtoParameterTypeEnum = "StringDictionary"
 )
 
-
 type BuildSystemSharedDtoParameter struct {
-    Direction *BuildSystemSharedDtoParameterDirectionEnum `json:"Direction,omitempty"`
-    Name *string `json:"Name,omitempty"`
-    Type *BuildSystemSharedDtoParameterTypeEnum `json:"Type,omitempty"`
-    
+	Direction *BuildSystemSharedDtoParameterDirectionEnum `json:"Direction,omitempty"`
+	Name      *string                                     `json:"Name,omitempty"`
+	Type      *BuildSystemSharedDtoParameterTypeEnum      `json:"Type,omitempty"`
 }
-

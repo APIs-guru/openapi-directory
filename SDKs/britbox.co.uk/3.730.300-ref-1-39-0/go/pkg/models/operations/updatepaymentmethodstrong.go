@@ -1,35 +1,30 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type UpdatePaymentMethodStrongPathParams struct {
-    Platform string `pathParam:"style=simple,explode=false,name=platform"`
-    
+	Platform string `pathParam:"style=simple,explode=false,name=platform"`
 }
 
 type UpdatePaymentMethodStrongQueryParams struct {
-    Lang *string `queryParam:"style=form,explode=true,name=lang"`
-    
+	Lang *string `queryParam:"style=form,explode=true,name=lang"`
 }
 
 type UpdatePaymentMethodStrongSecurity struct {
-    AccountAuth shared.SchemeAccountAuth `security:"scheme,type=oauth2"`
-    
+	AccountAuth shared.SchemeAccountAuth `security:"scheme,type=oauth2"`
 }
 
 type UpdatePaymentMethodStrongRequest struct {
-    PathParams UpdatePaymentMethodStrongPathParams 
-    QueryParams UpdatePaymentMethodStrongQueryParams 
-    Request shared.ItvUpdatePaymentStrongRequest `request:"mediaType=application/json"`
-    Security UpdatePaymentMethodStrongSecurity 
-    
+	PathParams  UpdatePaymentMethodStrongPathParams
+	QueryParams UpdatePaymentMethodStrongQueryParams
+	Request     shared.ItvUpdatePaymentStrongRequest `request:"mediaType=application/json"`
+	Security    UpdatePaymentMethodStrongSecurity
 }
 
 type UpdatePaymentMethodStrongResponse struct {
-    ContentType string 
-    ServiceError *shared.ServiceError 
-    StatusCode int64 
-    
+	ContentType  string
+	ServiceError *shared.ServiceError
+	StatusCode   int64
 }
-

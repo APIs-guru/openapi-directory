@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CodeSigningPolicies struct {
-    UntrustedArtifactOnDeployment *CodeSigningPolicyEnum `json:"UntrustedArtifactOnDeployment,omitempty"`
-    
+	UntrustedArtifactOnDeployment *CodeSigningPolicyEnum `json:"UntrustedArtifactOnDeployment,omitempty"`
 }
-

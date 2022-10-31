@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DocumentUploadStatusGUIDList struct {
-    Ids []string `json:"ids"`
-    
+	Ids []string `json:"ids"`
 }
-

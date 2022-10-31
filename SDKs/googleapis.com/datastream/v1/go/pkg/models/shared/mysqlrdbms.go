@@ -1,9 +1,5 @@
 package shared
 
-
-
 type MysqlRdbms struct {
-    MysqlDatabases []MysqlDatabase `json:"mysqlDatabases,omitempty"`
-    
+	MysqlDatabases []MysqlDatabase `json:"mysqlDatabases,omitempty"`
 }
-

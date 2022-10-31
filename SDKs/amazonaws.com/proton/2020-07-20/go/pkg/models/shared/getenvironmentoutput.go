@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetEnvironmentOutput struct {
-    Environment Environment `json:"environment"`
-    
+	Environment Environment `json:"environment"`
 }
-

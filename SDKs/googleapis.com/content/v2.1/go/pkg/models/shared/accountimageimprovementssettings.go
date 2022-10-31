@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AccountImageImprovementsSettings struct {
-    AllowAutomaticImageImprovements *bool `json:"allowAutomaticImageImprovements,omitempty"`
-    
+	AllowAutomaticImageImprovements *bool `json:"allowAutomaticImageImprovements,omitempty"`
 }
-

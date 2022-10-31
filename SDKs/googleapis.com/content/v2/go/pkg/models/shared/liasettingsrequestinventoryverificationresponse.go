@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LiasettingsRequestInventoryVerificationResponse struct {
-    Kind *string `json:"kind,omitempty"`
-    
+	Kind *string `json:"kind,omitempty"`
 }
-

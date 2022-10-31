@@ -1,17 +1,15 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type AppDeviceIDRequest struct {
-    Request shared.AppDeviceIDRequest `request:"mediaType=application/json"`
-    
+	Request shared.AppDeviceIDRequest `request:"mediaType=application/json"`
 }
 
 type AppDeviceIDResponse struct {
-    ContentType string 
-    Example11 *shared.Example11 
-    StatusCode int64 
-    
+	ContentType string
+	Example11   *shared.Example11
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type VerifyTrustResult struct {
-    TrustID *string `json:"TrustId,omitempty"`
-    
+	TrustID *string `json:"TrustId,omitempty"`
 }
-

@@ -1,31 +1,25 @@
 package shared
 
-
-
-
 type GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum string
 
 const (
-    GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumFeatureUnspecified GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "FEATURE_UNSPECIFIED"
-GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumLabelDetection GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "LABEL_DETECTION"
-GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumShotChangeDetection GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "SHOT_CHANGE_DETECTION"
-GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumExplicitContentDetection GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "EXPLICIT_CONTENT_DETECTION"
-GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumFaceDetection GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "FACE_DETECTION"
-GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumSpeechTranscription GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "SPEECH_TRANSCRIPTION"
-GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumTextDetection GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "TEXT_DETECTION"
-GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumObjectTracking GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "OBJECT_TRACKING"
-GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumLogoRecognition GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "LOGO_RECOGNITION"
-GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumPersonDetection GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "PERSON_DETECTION"
+	GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumFeatureUnspecified       GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "FEATURE_UNSPECIFIED"
+	GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumLabelDetection           GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "LABEL_DETECTION"
+	GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumShotChangeDetection      GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "SHOT_CHANGE_DETECTION"
+	GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumExplicitContentDetection GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "EXPLICIT_CONTENT_DETECTION"
+	GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumFaceDetection            GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "FACE_DETECTION"
+	GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumSpeechTranscription      GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "SPEECH_TRANSCRIPTION"
+	GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumTextDetection            GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "TEXT_DETECTION"
+	GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumObjectTracking           GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "OBJECT_TRACKING"
+	GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumLogoRecognition          GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "LOGO_RECOGNITION"
+	GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnumPersonDetection          GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum = "PERSON_DETECTION"
 )
 
-
 type GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequest struct {
-    Features []GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum `json:"features,omitempty"`
-    InputContent *string `json:"inputContent,omitempty"`
-    InputURI *string `json:"inputUri,omitempty"`
-    LocationID *string `json:"locationId,omitempty"`
-    OutputURI *string `json:"outputUri,omitempty"`
-    VideoContext *GoogleCloudVideointelligenceV1p1beta1VideoContext `json:"videoContext,omitempty"`
-    
+	Features     []GoogleCloudVideointelligenceV1p1beta1AnnotateVideoRequestFeaturesEnum `json:"features,omitempty"`
+	InputContent *string                                                                 `json:"inputContent,omitempty"`
+	InputURI     *string                                                                 `json:"inputUri,omitempty"`
+	LocationID   *string                                                                 `json:"locationId,omitempty"`
+	OutputURI    *string                                                                 `json:"outputUri,omitempty"`
+	VideoContext *GoogleCloudVideointelligenceV1p1beta1VideoContext                      `json:"videoContext,omitempty"`
 }
-

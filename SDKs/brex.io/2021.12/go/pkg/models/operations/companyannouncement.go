@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CompanyAnnouncementPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type CompanyAnnouncementSecurity struct {
-    UserKey shared.SchemeUserKey `security:"scheme,type=apiKey,subtype=header"`
-    
+	UserKey shared.SchemeUserKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type CompanyAnnouncementRequest struct {
-    PathParams CompanyAnnouncementPathParams 
-    Security CompanyAnnouncementSecurity 
-    
+	PathParams CompanyAnnouncementPathParams
+	Security   CompanyAnnouncementSecurity
 }
 
 type CompanyAnnouncementResponse struct {
-    CompanyAnnouncement200ApplicationJSONAnies []interface{} 
-    CompanyAnnouncementDefaultApplicationJSONAny *interface{} 
-    ContentType string 
-    StatusCode int64 
-    
+	CompanyAnnouncement200ApplicationJSONAnies   []interface{}
+	CompanyAnnouncementDefaultApplicationJSONAny *interface{}
+	ContentType                                  string
+	StatusCode                                   int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GameSessionQueueDestination struct {
-    DestinationArn *string `json:"DestinationArn,omitempty"`
-    
+	DestinationArn *string `json:"DestinationArn,omitempty"`
 }
-

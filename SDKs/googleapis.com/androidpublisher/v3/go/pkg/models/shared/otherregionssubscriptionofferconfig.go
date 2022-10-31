@@ -1,9 +1,5 @@
 package shared
 
-
-
 type OtherRegionsSubscriptionOfferConfig struct {
-    OtherRegionsNewSubscriberAvailability *bool `json:"otherRegionsNewSubscriberAvailability,omitempty"`
-    
+	OtherRegionsNewSubscriberAvailability *bool `json:"otherRegionsNewSubscriberAvailability,omitempty"`
 }
-

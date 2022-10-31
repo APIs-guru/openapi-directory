@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetEndpointsQueryParams struct {
-    Openapi *bool `queryParam:"style=form,explode=true,name=openapi"`
-    
+	Openapi *bool `queryParam:"style=form,explode=true,name=openapi"`
 }
 
 type GetEndpointsRequest struct {
-    QueryParams GetEndpointsQueryParams 
-    
+	QueryParams GetEndpointsQueryParams
 }
 
 type GetEndpointsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Endpoint *shared.Endpoint 
-    
+	ContentType string
+	StatusCode  int64
+	Endpoint    *shared.Endpoint
 }
-

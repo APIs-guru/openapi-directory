@@ -1,25 +1,22 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ReposCompareCommitsPathParams struct {
-    Basehead string `pathParam:"style=simple,explode=false,name=basehead"`
-    Owner string `pathParam:"style=simple,explode=false,name=owner"`
-    Repo string `pathParam:"style=simple,explode=false,name=repo"`
-    
+	Basehead string `pathParam:"style=simple,explode=false,name=basehead"`
+	Owner    string `pathParam:"style=simple,explode=false,name=owner"`
+	Repo     string `pathParam:"style=simple,explode=false,name=repo"`
 }
 
 type ReposCompareCommitsRequest struct {
-    PathParams ReposCompareCommitsPathParams 
-    
+	PathParams ReposCompareCommitsPathParams
 }
 
 type ReposCompareCommitsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    BasicError *shared.BasicError 
-    CommitComparison *shared.CommitComparison 
-    
+	ContentType      string
+	StatusCode       int64
+	BasicError       *shared.BasicError
+	CommitComparison *shared.CommitComparison
 }
-

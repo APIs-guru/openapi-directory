@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PutRepositoryTriggersOutput struct {
-    ConfigurationID *string `json:"configurationId,omitempty"`
-    
+	ConfigurationID *string `json:"configurationId,omitempty"`
 }
-

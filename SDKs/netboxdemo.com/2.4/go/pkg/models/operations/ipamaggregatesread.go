@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type IpamAggregatesReadPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type IpamAggregatesReadRequest struct {
-    PathParams IpamAggregatesReadPathParams 
-    
+	PathParams IpamAggregatesReadPathParams
 }
 
 type IpamAggregatesReadResponse struct {
-    Aggregate *shared.Aggregate 
-    ContentType string 
-    StatusCode int64 
-    
+	Aggregate   *shared.Aggregate
+	ContentType string
+	StatusCode  int64
 }
-

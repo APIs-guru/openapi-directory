@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AcknowledgeTaskRequest struct {
-    ScheduleTime *string `json:"scheduleTime,omitempty"`
-    
+	ScheduleTime *string `json:"scheduleTime,omitempty"`
 }
-

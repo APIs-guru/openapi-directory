@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EgressFilter struct {
-    Type EgressFilterTypeEnum `json:"type"`
-    
+	Type EgressFilterTypeEnum `json:"type"`
 }
-

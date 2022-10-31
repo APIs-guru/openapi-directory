@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListAccessControlRulesRequest struct {
-    OrganizationID string `json:"OrganizationId"`
-    
+	OrganizationID string `json:"OrganizationId"`
 }
-

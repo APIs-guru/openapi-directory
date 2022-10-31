@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LetsEncryptConfig struct {
-    Enabled *bool `json:"enabled,omitempty"`
-    
+	Enabled *bool `json:"enabled,omitempty"`
 }
-

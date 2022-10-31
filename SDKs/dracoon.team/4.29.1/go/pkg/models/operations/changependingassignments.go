@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ChangePendingAssignmentsHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type ChangePendingAssignmentsRequest struct {
-    Headers ChangePendingAssignmentsHeaders 
-    Request shared.PendingAssignmentsRequest `request:"mediaType=application/json"`
-    
+	Headers ChangePendingAssignmentsHeaders
+	Request shared.PendingAssignmentsRequest `request:"mediaType=application/json"`
 }
 
 type ChangePendingAssignmentsResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	StatusCode    int64
 }
-

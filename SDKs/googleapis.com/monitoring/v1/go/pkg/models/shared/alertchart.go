@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AlertChart struct {
-    Name *string `json:"name,omitempty"`
-    
+	Name *string `json:"name,omitempty"`
 }
-

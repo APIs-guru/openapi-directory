@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ResolveCustomerRequest struct {
-    RegistrationToken string `json:"RegistrationToken"`
-    
+	RegistrationToken string `json:"RegistrationToken"`
 }
-

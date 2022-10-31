@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ImportCatalogToGlueRequest struct {
-    CatalogID *string `json:"CatalogId,omitempty"`
-    
+	CatalogID *string `json:"CatalogId,omitempty"`
 }
-

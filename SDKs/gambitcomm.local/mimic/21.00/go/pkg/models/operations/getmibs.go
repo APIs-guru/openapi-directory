@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetMibsPathParams struct {
-    AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
-    
+	AgentNum int32 `pathParam:"style=simple,explode=false,name=agentNum"`
 }
 
 type GetMibsRequest struct {
-    PathParams GetMibsPathParams 
-    
+	PathParams GetMibsPathParams
 }
 
 type GetMibsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Triplets []shared.Triplet 
-    
+	ContentType string
+	StatusCode  int64
+	Triplets    []shared.Triplet
 }
-

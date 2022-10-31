@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RemoveNotificationChannelResponse struct {
-    NotificationConfiguration *NotificationConfiguration `json:"notificationConfiguration,omitempty"`
-    
+	NotificationConfiguration *NotificationConfiguration `json:"notificationConfiguration,omitempty"`
 }
-

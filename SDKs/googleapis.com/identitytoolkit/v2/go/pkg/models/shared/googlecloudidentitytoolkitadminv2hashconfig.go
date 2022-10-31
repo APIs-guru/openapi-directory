@@ -1,34 +1,28 @@
 package shared
 
-
-
-
 type GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum string
 
 const (
-    GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumHashAlgorithmUnspecified GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "HASH_ALGORITHM_UNSPECIFIED"
-GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumHmacSha256 GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "HMAC_SHA256"
-GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumHmacSha1 GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "HMAC_SHA1"
-GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumHmacMd5 GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "HMAC_MD5"
-GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumScrypt GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "SCRYPT"
-GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumPbkdfSha1 GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "PBKDF_SHA1"
-GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumMd5 GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "MD5"
-GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumHmacSha512 GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "HMAC_SHA512"
-GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumSha1 GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "SHA1"
-GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumBcrypt GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "BCRYPT"
-GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumPbkdf2Sha256 GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "PBKDF2_SHA256"
-GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumSha256 GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "SHA256"
-GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumSha512 GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "SHA512"
-GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumStandardScrypt GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "STANDARD_SCRYPT"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumHashAlgorithmUnspecified GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "HASH_ALGORITHM_UNSPECIFIED"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumHmacSha256               GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "HMAC_SHA256"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumHmacSha1                 GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "HMAC_SHA1"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumHmacMd5                  GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "HMAC_MD5"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumScrypt                   GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "SCRYPT"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumPbkdfSha1                GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "PBKDF_SHA1"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumMd5                      GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "MD5"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumHmacSha512               GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "HMAC_SHA512"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumSha1                     GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "SHA1"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumBcrypt                   GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "BCRYPT"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumPbkdf2Sha256             GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "PBKDF2_SHA256"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumSha256                   GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "SHA256"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumSha512                   GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "SHA512"
+	GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnumStandardScrypt           GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum = "STANDARD_SCRYPT"
 )
 
-
 type GoogleCloudIdentitytoolkitAdminV2HashConfig struct {
-    Algorithm *GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum `json:"algorithm,omitempty"`
-    MemoryCost *int32 `json:"memoryCost,omitempty"`
-    Rounds *int32 `json:"rounds,omitempty"`
-    SaltSeparator *string `json:"saltSeparator,omitempty"`
-    SignerKey *string `json:"signerKey,omitempty"`
-    
+	Algorithm     *GoogleCloudIdentitytoolkitAdminV2HashConfigAlgorithmEnum `json:"algorithm,omitempty"`
+	MemoryCost    *int32                                                    `json:"memoryCost,omitempty"`
+	Rounds        *int32                                                    `json:"rounds,omitempty"`
+	SaltSeparator *string                                                   `json:"saltSeparator,omitempty"`
+	SignerKey     *string                                                   `json:"signerKey,omitempty"`
 }
-

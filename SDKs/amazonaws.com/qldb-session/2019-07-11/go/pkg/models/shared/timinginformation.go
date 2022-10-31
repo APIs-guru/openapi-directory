@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TimingInformation struct {
-    ProcessingTimeMilliseconds *int64 `json:"ProcessingTimeMilliseconds,omitempty"`
-    
+	ProcessingTimeMilliseconds *int64 `json:"ProcessingTimeMilliseconds,omitempty"`
 }
-

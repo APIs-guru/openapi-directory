@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetStreamingSessionStreamResponse struct {
-    Stream *StreamingSessionStream `json:"stream,omitempty"`
-    
+	Stream *StreamingSessionStream `json:"stream,omitempty"`
 }
-

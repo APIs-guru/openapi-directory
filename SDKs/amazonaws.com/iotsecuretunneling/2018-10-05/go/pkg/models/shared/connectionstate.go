@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ConnectionState struct {
-    LastUpdatedAt *time.Time `json:"lastUpdatedAt,omitempty"`
-    Status *ConnectionStatusEnum `json:"status,omitempty"`
-    
+	LastUpdatedAt *time.Time            `json:"lastUpdatedAt,omitempty"`
+	Status        *ConnectionStatusEnum `json:"status,omitempty"`
 }
-

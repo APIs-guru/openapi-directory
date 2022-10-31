@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeLocationObjectStorageRequest struct {
-    LocationArn string `json:"LocationArn"`
-    
+	LocationArn string `json:"LocationArn"`
 }
-

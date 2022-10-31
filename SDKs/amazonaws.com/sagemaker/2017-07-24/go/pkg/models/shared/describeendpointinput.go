@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeEndpointInput struct {
-    EndpointName string `json:"EndpointName"`
-    
+	EndpointName string `json:"EndpointName"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RegionMapInputValue struct {
-    SseKmsKeyID *string `json:"sseKmsKeyId,omitempty"`
-    
+	SseKmsKeyID *string `json:"sseKmsKeyId,omitempty"`
 }
-

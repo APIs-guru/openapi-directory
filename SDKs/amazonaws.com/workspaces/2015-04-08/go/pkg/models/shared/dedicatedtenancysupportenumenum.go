@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type DedicatedTenancySupportEnumEnum string
 
 const (
-    DedicatedTenancySupportEnumEnumEnabled DedicatedTenancySupportEnumEnum = "ENABLED"
+	DedicatedTenancySupportEnumEnumEnabled DedicatedTenancySupportEnumEnum = "ENABLED"
 )
-
-

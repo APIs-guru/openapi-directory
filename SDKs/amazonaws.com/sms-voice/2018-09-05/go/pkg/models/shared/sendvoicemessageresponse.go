@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SendVoiceMessageResponse struct {
-    MessageID *string `json:"MessageId,omitempty"`
-    
+	MessageID *string `json:"MessageId,omitempty"`
 }
-

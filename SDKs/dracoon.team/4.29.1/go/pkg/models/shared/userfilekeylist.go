@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UserFileKeyList struct {
-    Items []UserFileKey `json:"items,omitempty"`
-    
+	Items []UserFileKey `json:"items,omitempty"`
 }
-

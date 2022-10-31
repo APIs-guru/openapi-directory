@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ImportProductSetsGcsSource struct {
-    CsvFileURI *string `json:"csvFileUri,omitempty"`
-    
+	CsvFileURI *string `json:"csvFileUri,omitempty"`
 }
-

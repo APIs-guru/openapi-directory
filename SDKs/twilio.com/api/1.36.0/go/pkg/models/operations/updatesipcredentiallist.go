@@ -1,39 +1,35 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var UpdateSipCredentialListServers = []string{
 	"https://api.twilio.com",
 }
 
 type UpdateSipCredentialListPathParams struct {
-    AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
-    Sid string `pathParam:"style=simple,explode=false,name=Sid"`
-    
+	AccountSid string `pathParam:"style=simple,explode=false,name=AccountSid"`
+	Sid        string `pathParam:"style=simple,explode=false,name=Sid"`
 }
 
 type UpdateSipCredentialListUpdateSipCredentialListRequest struct {
-    FriendlyName string `form:"name=FriendlyName"`
-    
+	FriendlyName string `form:"name=FriendlyName"`
 }
 
 type UpdateSipCredentialListSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type UpdateSipCredentialListRequest struct {
-    ServerURL *string 
-    PathParams UpdateSipCredentialListPathParams 
-    Request *UpdateSipCredentialListUpdateSipCredentialListRequest `request:"mediaType=application/x-www-form-urlencoded"`
-    Security UpdateSipCredentialListSecurity 
-    
+	ServerURL  *string
+	PathParams UpdateSipCredentialListPathParams
+	Request    *UpdateSipCredentialListUpdateSipCredentialListRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Security   UpdateSipCredentialListSecurity
 }
 
 type UpdateSipCredentialListResponse struct {
-    ContentType string 
-    StatusCode int64 
-    APIV2010AccountSipSipCredentialList *shared.APIV2010AccountSipSipCredentialList 
-    
+	ContentType                         string
+	StatusCode                          int64
+	APIV2010AccountSipSipCredentialList *shared.APIV2010AccountSipSipCredentialList
 }
-

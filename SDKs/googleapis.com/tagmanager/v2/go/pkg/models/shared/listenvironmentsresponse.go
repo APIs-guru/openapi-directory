@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListEnvironmentsResponse struct {
-    Environment []Environment `json:"environment,omitempty"`
-    NextPageToken *string `json:"nextPageToken,omitempty"`
-    
+	Environment   []Environment `json:"environment,omitempty"`
+	NextPageToken *string       `json:"nextPageToken,omitempty"`
 }
-

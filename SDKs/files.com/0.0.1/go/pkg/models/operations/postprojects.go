@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PostProjectsRequestBody struct {
-    GlobalAccess string `multipartForm:"name=global_access"`
-    
+	GlobalAccess string `multipartForm:"name=global_access"`
 }
 
 type PostProjectsRequest struct {
-    Request PostProjectsRequestBody `request:"mediaType=multipart/form-data"`
-    
+	Request PostProjectsRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type PostProjectsResponse struct {
-    ContentType string 
-    ProjectEntity *shared.ProjectEntity 
-    StatusCode int64 
-    
+	ContentType   string
+	ProjectEntity *shared.ProjectEntity
+	StatusCode    int64
 }
-

@@ -1,47 +1,41 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type SetDataRetrievalPolicyPathParams struct {
-    AccountID string `pathParam:"style=simple,explode=false,name=accountId"`
-    
+	AccountID string `pathParam:"style=simple,explode=false,name=accountId"`
 }
 
 type SetDataRetrievalPolicyHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type SetDataRetrievalPolicyRequestBodyPolicy struct {
-    Rules []shared.DataRetrievalRule `json:"Rules,omitempty"`
-    
+	Rules []shared.DataRetrievalRule `json:"Rules,omitempty"`
 }
 
 type SetDataRetrievalPolicyRequestBody struct {
-    Policy *SetDataRetrievalPolicyRequestBodyPolicy `json:"Policy,omitempty"`
-    
+	Policy *SetDataRetrievalPolicyRequestBodyPolicy `json:"Policy,omitempty"`
 }
 
 type SetDataRetrievalPolicyRequest struct {
-    PathParams SetDataRetrievalPolicyPathParams 
-    Headers SetDataRetrievalPolicyHeaders 
-    Request SetDataRetrievalPolicyRequestBody `request:"mediaType=application/json"`
-    
+	PathParams SetDataRetrievalPolicyPathParams
+	Headers    SetDataRetrievalPolicyHeaders
+	Request    SetDataRetrievalPolicyRequestBody `request:"mediaType=application/json"`
 }
 
 type SetDataRetrievalPolicyResponse struct {
-    ContentType string 
-    InvalidParameterValueException *interface{} 
-    MissingParameterValueException *interface{} 
-    ServiceUnavailableException *interface{} 
-    StatusCode int64 
-    
+	ContentType                    string
+	InvalidParameterValueException *interface{}
+	MissingParameterValueException *interface{}
+	ServiceUnavailableException    *interface{}
+	StatusCode                     int64
 }
-

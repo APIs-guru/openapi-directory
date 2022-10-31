@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type DeleteApplicationSnapshotRequest struct {
-    ApplicationName string `json:"ApplicationName"`
-    SnapshotCreationTimestamp time.Time `json:"SnapshotCreationTimestamp"`
-    SnapshotName string `json:"SnapshotName"`
-    
+	ApplicationName           string    `json:"ApplicationName"`
+	SnapshotCreationTimestamp time.Time `json:"SnapshotCreationTimestamp"`
+	SnapshotName              string    `json:"SnapshotName"`
 }
-

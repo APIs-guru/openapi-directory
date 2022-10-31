@@ -1,30 +1,22 @@
 package operations
 
-
-
-
 type CurrentSeasonFormatEnum string
 
 const (
-    CurrentSeasonFormatEnumXML CurrentSeasonFormatEnum = "XML"
-CurrentSeasonFormatEnumJSON CurrentSeasonFormatEnum = "JSON"
+	CurrentSeasonFormatEnumXML  CurrentSeasonFormatEnum = "XML"
+	CurrentSeasonFormatEnumJSON CurrentSeasonFormatEnum = "JSON"
 )
 
-
 type CurrentSeasonPathParams struct {
-    Format CurrentSeasonFormatEnum `pathParam:"style=simple,explode=false,name=format"`
-    
+	Format CurrentSeasonFormatEnum `pathParam:"style=simple,explode=false,name=format"`
 }
 
 type CurrentSeasonRequest struct {
-    PathParams CurrentSeasonPathParams 
-    
+	PathParams CurrentSeasonPathParams
 }
 
 type CurrentSeasonResponse struct {
-    ContentType string 
-    CurrentSeason200ApplicationJSONInteger *int64 
-    StatusCode int64 
-    
+	ContentType                            string
+	CurrentSeason200ApplicationJSONInteger *int64
+	StatusCode                             int64
 }
-

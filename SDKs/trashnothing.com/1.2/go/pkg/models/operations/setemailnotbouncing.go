@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type SetEmailNotBouncingResponse struct {
-    ContentType string 
-    CurrentUser *shared.CurrentUser 
-    StatusCode int64 
-    
+	ContentType string
+	CurrentUser *shared.CurrentUser
+	StatusCode  int64
 }
-

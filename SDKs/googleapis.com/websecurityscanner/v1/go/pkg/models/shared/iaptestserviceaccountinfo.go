@@ -1,9 +1,5 @@
 package shared
 
-
-
 type IapTestServiceAccountInfo struct {
-    TargetAudienceClientID *string `json:"targetAudienceClientId,omitempty"`
-    
+	TargetAudienceClientID *string `json:"targetAudienceClientId,omitempty"`
 }
-

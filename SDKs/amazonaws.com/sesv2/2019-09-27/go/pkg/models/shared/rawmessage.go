@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RawMessage struct {
-    Data string `json:"Data"`
-    
+	Data string `json:"Data"`
 }
-

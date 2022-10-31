@@ -1,9 +1,5 @@
 package shared
 
-
-
 type OneordersGetResponses404ContentApplication1jsonSchema struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
-

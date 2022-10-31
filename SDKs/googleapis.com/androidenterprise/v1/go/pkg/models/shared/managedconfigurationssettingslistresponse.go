@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ManagedConfigurationsSettingsListResponse struct {
-    ManagedConfigurationsSettings []ManagedConfigurationsSettings `json:"managedConfigurationsSettings,omitempty"`
-    
+	ManagedConfigurationsSettings []ManagedConfigurationsSettings `json:"managedConfigurationsSettings,omitempty"`
 }
-

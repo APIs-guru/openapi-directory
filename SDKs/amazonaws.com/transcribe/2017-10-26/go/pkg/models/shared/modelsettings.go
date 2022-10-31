@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ModelSettings struct {
-    LanguageModelName *string `json:"LanguageModelName,omitempty"`
-    
+	LanguageModelName *string `json:"LanguageModelName,omitempty"`
 }
-

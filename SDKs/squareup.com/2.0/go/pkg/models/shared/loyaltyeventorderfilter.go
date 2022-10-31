@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LoyaltyEventOrderFilter struct {
-    OrderID string `json:"order_id"`
-    
+	OrderID string `json:"order_id"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListTagsForResourceOutput struct {
-    Tags []Tag `json:"Tags,omitempty"`
-    
+	Tags []Tag `json:"Tags,omitempty"`
 }
-

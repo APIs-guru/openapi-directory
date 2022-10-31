@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetWinProbabilityDataQueryParams struct {
-    GameID int64 `queryParam:"style=form,explode=true,name=gameId"`
-    
+	GameID int64 `queryParam:"style=form,explode=true,name=gameId"`
 }
 
 type GetWinProbabilityDataRequest struct {
-    QueryParams GetWinProbabilityDataQueryParams 
-    
+	QueryParams GetWinProbabilityDataQueryParams
 }
 
 type GetWinProbabilityDataResponse struct {
-    ContentType string 
-    PlayWps []shared.PlayWp 
-    StatusCode int64 
-    
+	ContentType string
+	PlayWps     []shared.PlayWp
+	StatusCode  int64
 }
-

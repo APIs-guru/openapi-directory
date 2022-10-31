@@ -1,17 +1,15 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PairwithSpeakerRequest struct {
-    Request shared.PairwithSpeakerRequest `request:"mediaType=application/json"`
-    
+	Request shared.PairwithSpeakerRequest `request:"mediaType=application/json"`
 }
 
 type PairwithSpeakerResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

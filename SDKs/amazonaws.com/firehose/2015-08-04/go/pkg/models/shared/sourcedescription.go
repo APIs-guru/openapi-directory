@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SourceDescription struct {
-    KinesisStreamSourceDescription *KinesisStreamSourceDescription `json:"KinesisStreamSourceDescription,omitempty"`
-    
+	KinesisStreamSourceDescription *KinesisStreamSourceDescription `json:"KinesisStreamSourceDescription,omitempty"`
 }
-

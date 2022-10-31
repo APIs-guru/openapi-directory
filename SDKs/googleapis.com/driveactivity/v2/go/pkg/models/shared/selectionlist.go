@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SelectionList struct {
-    Values []Selection `json:"values,omitempty"`
-    
+	Values []Selection `json:"values,omitempty"`
 }
-

@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostDeleteGroupActionEnum string
 
 const (
-    PostDeleteGroupActionEnumDeleteGroup PostDeleteGroupActionEnum = "DeleteGroup"
+	PostDeleteGroupActionEnumDeleteGroup PostDeleteGroupActionEnum = "DeleteGroup"
 )
-
-
 
 type PostDeleteGroupVersionEnum string
 
 const (
-    PostDeleteGroupVersionEnumTwoThousandAndTen0508 PostDeleteGroupVersionEnum = "2010-05-08"
+	PostDeleteGroupVersionEnumTwoThousandAndTen0508 PostDeleteGroupVersionEnum = "2010-05-08"
 )
 
-
 type PostDeleteGroupQueryParams struct {
-    Action PostDeleteGroupActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostDeleteGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostDeleteGroupActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostDeleteGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostDeleteGroupHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostDeleteGroupRequest struct {
-    QueryParams PostDeleteGroupQueryParams 
-    Headers PostDeleteGroupHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostDeleteGroupQueryParams
+	Headers     PostDeleteGroupHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostDeleteGroupResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudRetailV2betaRuleFilterAction struct {
-    Filter *string `json:"filter,omitempty"`
-    
+	Filter *string `json:"filter,omitempty"`
 }
-

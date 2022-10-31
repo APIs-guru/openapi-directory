@@ -1,38 +1,33 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type UpdateSSHKeyPathParams struct {
-    SSHKeyIdentifier interface{} `pathParam:"style=simple,explode=false,name=ssh_key_identifier"`
-    
+	SSHKeyIdentifier interface{} `pathParam:"style=simple,explode=false,name=ssh_key_identifier"`
 }
 
 type UpdateSSHKeyRequestBody struct {
-    Name *string `json:"name,omitempty"`
-    
+	Name *string `json:"name,omitempty"`
 }
 
 type UpdateSSHKeyRequest struct {
-    PathParams UpdateSSHKeyPathParams 
-    Request UpdateSSHKeyRequestBody `request:"mediaType=application/json"`
-    
+	PathParams UpdateSSHKeyPathParams
+	Request    UpdateSSHKeyRequestBody `request:"mediaType=application/json"`
 }
 
 type UpdateSSHKey401ApplicationJSON struct {
-    ID string `json:"id"`
-    Message string `json:"message"`
-    RequestID *string `json:"request_id,omitempty"`
-    
+	ID        string  `json:"id"`
+	Message   string  `json:"message"`
+	RequestID *string `json:"request_id,omitempty"`
 }
 
 type UpdateSSHKeyResponse struct {
-    ContentType string 
-    Headers map[string][]string 
-    StatusCode int64 
-    UpdateSSHKey200ApplicationJSONAny *interface{} 
-    UpdateSSHKey401ApplicationJSONObject *UpdateSSHKey401ApplicationJSON 
-    Onev211ClicksGetResponses401ContentApplication1jsonSchema *shared.Onev211ClicksGetResponses401ContentApplication1jsonSchema 
-    
+	ContentType                                               string
+	Headers                                                   map[string][]string
+	StatusCode                                                int64
+	UpdateSSHKey200ApplicationJSONAny                         *interface{}
+	UpdateSSHKey401ApplicationJSONObject                      *UpdateSSHKey401ApplicationJSON
+	Onev211ClicksGetResponses401ContentApplication1jsonSchema *shared.Onev211ClicksGetResponses401ContentApplication1jsonSchema
 }
-

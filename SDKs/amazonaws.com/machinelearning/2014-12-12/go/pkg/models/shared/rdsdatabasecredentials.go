@@ -1,10 +1,6 @@
 package shared
 
-
-
 type RdsDatabaseCredentials struct {
-    Password string `json:"Password"`
-    Username string `json:"Username"`
-    
+	Password string `json:"Password"`
+	Username string `json:"Username"`
 }
-

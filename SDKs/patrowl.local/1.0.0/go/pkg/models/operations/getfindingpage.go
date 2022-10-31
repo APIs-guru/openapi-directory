@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetFindingPagePathParams struct {
-    ScanID int64 `pathParam:"style=simple,explode=false,name=scanId"`
-    
+	ScanID int64 `pathParam:"style=simple,explode=false,name=scanId"`
 }
 
 type GetFindingPageRequest struct {
-    PathParams GetFindingPagePathParams 
-    
+	PathParams GetFindingPagePathParams
 }
 
 type GetFindingPageResponse struct {
-    ContentType string 
-    Findings []shared.Findings 
-    StatusCode int64 
-    
+	ContentType string
+	Findings    []shared.Findings
+	StatusCode  int64
 }
-

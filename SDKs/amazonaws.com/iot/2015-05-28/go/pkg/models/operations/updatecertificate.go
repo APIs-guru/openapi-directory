@@ -1,58 +1,48 @@
 package operations
 
-
-
 type UpdateCertificatePathParams struct {
-    CertificateID string `pathParam:"style=simple,explode=false,name=certificateId"`
-    
+	CertificateID string `pathParam:"style=simple,explode=false,name=certificateId"`
 }
-
 
 type UpdateCertificateNewStatusEnum string
 
 const (
-    UpdateCertificateNewStatusEnumActive UpdateCertificateNewStatusEnum = "ACTIVE"
-UpdateCertificateNewStatusEnumInactive UpdateCertificateNewStatusEnum = "INACTIVE"
-UpdateCertificateNewStatusEnumRevoked UpdateCertificateNewStatusEnum = "REVOKED"
-UpdateCertificateNewStatusEnumPendingTransfer UpdateCertificateNewStatusEnum = "PENDING_TRANSFER"
-UpdateCertificateNewStatusEnumRegisterInactive UpdateCertificateNewStatusEnum = "REGISTER_INACTIVE"
-UpdateCertificateNewStatusEnumPendingActivation UpdateCertificateNewStatusEnum = "PENDING_ACTIVATION"
+	UpdateCertificateNewStatusEnumActive            UpdateCertificateNewStatusEnum = "ACTIVE"
+	UpdateCertificateNewStatusEnumInactive          UpdateCertificateNewStatusEnum = "INACTIVE"
+	UpdateCertificateNewStatusEnumRevoked           UpdateCertificateNewStatusEnum = "REVOKED"
+	UpdateCertificateNewStatusEnumPendingTransfer   UpdateCertificateNewStatusEnum = "PENDING_TRANSFER"
+	UpdateCertificateNewStatusEnumRegisterInactive  UpdateCertificateNewStatusEnum = "REGISTER_INACTIVE"
+	UpdateCertificateNewStatusEnumPendingActivation UpdateCertificateNewStatusEnum = "PENDING_ACTIVATION"
 )
 
-
 type UpdateCertificateQueryParams struct {
-    NewStatus UpdateCertificateNewStatusEnum `queryParam:"style=form,explode=true,name=newStatus"`
-    
+	NewStatus UpdateCertificateNewStatusEnum `queryParam:"style=form,explode=true,name=newStatus"`
 }
 
 type UpdateCertificateHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type UpdateCertificateRequest struct {
-    PathParams UpdateCertificatePathParams 
-    QueryParams UpdateCertificateQueryParams 
-    Headers UpdateCertificateHeaders 
-    
+	PathParams  UpdateCertificatePathParams
+	QueryParams UpdateCertificateQueryParams
+	Headers     UpdateCertificateHeaders
 }
 
 type UpdateCertificateResponse struct {
-    CertificateStateException *interface{} 
-    ContentType string 
-    InternalFailureException *interface{} 
-    InvalidRequestException *interface{} 
-    ResourceNotFoundException *interface{} 
-    ServiceUnavailableException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    UnauthorizedException *interface{} 
-    
+	CertificateStateException   *interface{}
+	ContentType                 string
+	InternalFailureException    *interface{}
+	InvalidRequestException     *interface{}
+	ResourceNotFoundException   *interface{}
+	ServiceUnavailableException *interface{}
+	StatusCode                  int64
+	ThrottlingException         *interface{}
+	UnauthorizedException       *interface{}
 }
-

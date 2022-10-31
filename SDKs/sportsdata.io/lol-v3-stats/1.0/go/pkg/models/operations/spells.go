@@ -1,30 +1,22 @@
 package operations
 
-
-
-
 type SpellsFormatEnum string
 
 const (
-    SpellsFormatEnumXML SpellsFormatEnum = "xml"
-SpellsFormatEnumJSON SpellsFormatEnum = "json"
+	SpellsFormatEnumXML  SpellsFormatEnum = "xml"
+	SpellsFormatEnumJSON SpellsFormatEnum = "json"
 )
 
-
 type SpellsPathParams struct {
-    Format SpellsFormatEnum `pathParam:"style=simple,explode=false,name=format"`
-    
+	Format SpellsFormatEnum `pathParam:"style=simple,explode=false,name=format"`
 }
 
 type SpellsRequest struct {
-    PathParams SpellsPathParams 
-    
+	PathParams SpellsPathParams
 }
 
 type SpellsResponse struct {
-    ContentType string 
-    Spells []interface{} 
-    StatusCode int64 
-    
+	ContentType string
+	Spells      []interface{}
+	StatusCode  int64
 }
-

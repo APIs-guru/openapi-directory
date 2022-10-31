@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeStudioInput struct {
-    StudioID string `json:"StudioId"`
-    
+	StudioID string `json:"StudioId"`
 }
-

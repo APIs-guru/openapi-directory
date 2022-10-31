@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchAssociateServiceActionWithProvisioningArtifactOutput struct {
-    FailedServiceActionAssociations []FailedServiceActionAssociation `json:"FailedServiceActionAssociations,omitempty"`
-    
+	FailedServiceActionAssociations []FailedServiceActionAssociation `json:"FailedServiceActionAssociations,omitempty"`
 }
-

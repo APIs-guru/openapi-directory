@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RefreshTokenPayload struct {
-    RefreshToken string `json:"refreshToken"`
-    
+	RefreshToken string `json:"refreshToken"`
 }
-

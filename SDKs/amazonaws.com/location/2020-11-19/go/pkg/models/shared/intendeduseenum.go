@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type IntendedUseEnum string
 
 const (
-    IntendedUseEnumSingleUse IntendedUseEnum = "SingleUse"
-IntendedUseEnumStorage IntendedUseEnum = "Storage"
+	IntendedUseEnumSingleUse IntendedUseEnum = "SingleUse"
+	IntendedUseEnumStorage   IntendedUseEnum = "Storage"
 )
-
-

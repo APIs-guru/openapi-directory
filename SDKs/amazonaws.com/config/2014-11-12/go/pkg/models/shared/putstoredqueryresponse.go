@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PutStoredQueryResponse struct {
-    QueryArn *string `json:"QueryArn,omitempty"`
-    
+	QueryArn *string `json:"QueryArn,omitempty"`
 }
-

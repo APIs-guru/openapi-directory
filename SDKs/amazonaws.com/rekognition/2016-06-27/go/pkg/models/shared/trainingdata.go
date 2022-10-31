@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TrainingData struct {
-    Assets []Asset `json:"Assets,omitempty"`
-    
+	Assets []Asset `json:"Assets,omitempty"`
 }
-

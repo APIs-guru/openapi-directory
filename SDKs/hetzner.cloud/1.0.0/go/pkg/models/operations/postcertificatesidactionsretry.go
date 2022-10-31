@@ -1,60 +1,48 @@
 package operations
 
-
-
 type PostCertificatesIDActionsRetryPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type PostCertificatesIDActionsRetryRequest struct {
-    PathParams PostCertificatesIDActionsRetryPathParams 
-    
+	PathParams PostCertificatesIDActionsRetryPathParams
 }
 
 type PostCertificatesIDActionsRetryActionResponseActionError struct {
-    Code string `json:"code"`
-    Message string `json:"message"`
-    
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type PostCertificatesIDActionsRetryActionResponseActionResources struct {
-    ID int64 `json:"id"`
-    Type string `json:"type"`
-    
+	ID   int64  `json:"id"`
+	Type string `json:"type"`
 }
-
 
 type PostCertificatesIDActionsRetryActionResponseActionStatusEnum string
 
 const (
-    PostCertificatesIDActionsRetryActionResponseActionStatusEnumSuccess PostCertificatesIDActionsRetryActionResponseActionStatusEnum = "success"
-PostCertificatesIDActionsRetryActionResponseActionStatusEnumRunning PostCertificatesIDActionsRetryActionResponseActionStatusEnum = "running"
-PostCertificatesIDActionsRetryActionResponseActionStatusEnumError PostCertificatesIDActionsRetryActionResponseActionStatusEnum = "error"
+	PostCertificatesIDActionsRetryActionResponseActionStatusEnumSuccess PostCertificatesIDActionsRetryActionResponseActionStatusEnum = "success"
+	PostCertificatesIDActionsRetryActionResponseActionStatusEnumRunning PostCertificatesIDActionsRetryActionResponseActionStatusEnum = "running"
+	PostCertificatesIDActionsRetryActionResponseActionStatusEnumError   PostCertificatesIDActionsRetryActionResponseActionStatusEnum = "error"
 )
 
-
 type PostCertificatesIDActionsRetryActionResponseAction struct {
-    Command string `json:"command"`
-    Error PostCertificatesIDActionsRetryActionResponseActionError `json:"error"`
-    Finished string `json:"finished"`
-    ID int64 `json:"id"`
-    Progress float64 `json:"progress"`
-    Resources []PostCertificatesIDActionsRetryActionResponseActionResources `json:"resources"`
-    Started string `json:"started"`
-    Status PostCertificatesIDActionsRetryActionResponseActionStatusEnum `json:"status"`
-    
+	Command   string                                                        `json:"command"`
+	Error     PostCertificatesIDActionsRetryActionResponseActionError       `json:"error"`
+	Finished  string                                                        `json:"finished"`
+	ID        int64                                                         `json:"id"`
+	Progress  float64                                                       `json:"progress"`
+	Resources []PostCertificatesIDActionsRetryActionResponseActionResources `json:"resources"`
+	Started   string                                                        `json:"started"`
+	Status    PostCertificatesIDActionsRetryActionResponseActionStatusEnum  `json:"status"`
 }
 
 type PostCertificatesIDActionsRetryActionResponse struct {
-    Action PostCertificatesIDActionsRetryActionResponseAction `json:"action"`
-    
+	Action PostCertificatesIDActionsRetryActionResponseAction `json:"action"`
 }
 
 type PostCertificatesIDActionsRetryResponse struct {
-    ActionResponse *PostCertificatesIDActionsRetryActionResponse 
-    ContentType string 
-    StatusCode int64 
-    
+	ActionResponse *PostCertificatesIDActionsRetryActionResponse
+	ContentType    string
+	StatusCode     int64
 }
-

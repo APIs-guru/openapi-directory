@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RebootRequest struct {
-    WorkspaceID string `json:"WorkspaceId"`
-    
+	WorkspaceID string `json:"WorkspaceId"`
 }
-

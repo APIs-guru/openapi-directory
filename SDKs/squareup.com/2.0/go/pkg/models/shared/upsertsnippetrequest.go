@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpsertSnippetRequest struct {
-    Snippet Snippet `json:"snippet"`
-    
+	Snippet Snippet `json:"snippet"`
 }
-

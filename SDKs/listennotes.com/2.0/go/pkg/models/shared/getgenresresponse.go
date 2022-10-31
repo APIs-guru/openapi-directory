@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetGenresResponse struct {
-    Genres []Genre `json:"genres"`
-    
+	Genres []Genre `json:"genres"`
 }
-

@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type UserAPIGetMessagePathParams struct {
-    MessageID int32 `pathParam:"style=simple,explode=false,name=messageId"`
-    
+	MessageID int32 `pathParam:"style=simple,explode=false,name=messageId"`
 }
 
 type UserAPIGetMessageRequest struct {
-    PathParams UserAPIGetMessagePathParams 
-    
+	PathParams UserAPIGetMessagePathParams
 }
 
 type UserAPIGetMessageResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    UserMessageContract *shared.UserMessageContract 
-    
+	Body                []byte
+	ContentType         string
+	StatusCode          int64
+	UserMessageContract *shared.UserMessageContract
 }
-

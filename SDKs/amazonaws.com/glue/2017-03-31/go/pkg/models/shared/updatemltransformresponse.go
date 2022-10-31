@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateMlTransformResponse struct {
-    TransformID *string `json:"TransformId,omitempty"`
-    
+	TransformID *string `json:"TransformId,omitempty"`
 }
-

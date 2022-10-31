@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AirbyteCatalog struct {
-    Streams []AirbyteStreamAndConfiguration `json:"streams"`
-    
+	Streams []AirbyteStreamAndConfiguration `json:"streams"`
 }
-

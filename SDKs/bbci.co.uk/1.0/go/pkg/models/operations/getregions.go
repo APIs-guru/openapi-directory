@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetRegionsQueryParams struct {
-    Lang shared.LangEnum `queryParam:"style=form,explode=true,name=lang"`
-    
+	Lang shared.LangEnum `queryParam:"style=form,explode=true,name=lang"`
 }
 
 type GetRegionsRequest struct {
-    QueryParams GetRegionsQueryParams 
-    
+	QueryParams GetRegionsQueryParams
 }
 
 type GetRegionsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Ibl *interface{} 
-    
+	ContentType string
+	StatusCode  int64
+	Ibl         *interface{}
 }
-

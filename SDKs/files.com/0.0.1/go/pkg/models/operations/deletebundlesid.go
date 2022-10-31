@@ -1,20 +1,14 @@
 package operations
 
-
-
 type DeleteBundlesIDPathParams struct {
-    ID int32 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int32 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type DeleteBundlesIDRequest struct {
-    PathParams DeleteBundlesIDPathParams 
-    
+	PathParams DeleteBundlesIDPathParams
 }
 
 type DeleteBundlesIDResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

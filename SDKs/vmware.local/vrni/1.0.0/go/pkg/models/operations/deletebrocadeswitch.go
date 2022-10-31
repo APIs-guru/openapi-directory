@@ -1,27 +1,23 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeleteBrocadeSwitchPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type DeleteBrocadeSwitchSecurity struct {
-    APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKeyAuth shared.SchemeAPIKeyAuth `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type DeleteBrocadeSwitchRequest struct {
-    PathParams DeleteBrocadeSwitchPathParams 
-    Security DeleteBrocadeSwitchSecurity 
-    
+	PathParams DeleteBrocadeSwitchPathParams
+	Security   DeleteBrocadeSwitchSecurity
 }
 
 type DeleteBrocadeSwitchResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,18 +1,16 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CreateDocumentSubmissionRequest struct {
-    Request shared.DocumentSubmission `request:"mediaType=application/json"`
-    
+	Request shared.DocumentSubmission `request:"mediaType=application/json"`
 }
 
 type CreateDocumentSubmissionResponse struct {
-    ContentType string 
-    DocumentSubmissionResult *shared.DocumentSubmissionResult 
-    ErrorModels []interface{} 
-    StatusCode int64 
-    
+	ContentType              string
+	DocumentSubmissionResult *shared.DocumentSubmissionResult
+	ErrorModels              []interface{}
+	StatusCode               int64
 }
-

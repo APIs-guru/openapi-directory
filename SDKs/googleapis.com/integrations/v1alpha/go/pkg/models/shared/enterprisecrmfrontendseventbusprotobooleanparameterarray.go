@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EnterpriseCrmFrontendsEventbusProtoBooleanParameterArray struct {
-    BooleanValues []bool `json:"booleanValues,omitempty"`
-    
+	BooleanValues []bool `json:"booleanValues,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UndeleteAlertRequest struct {
-    CustomerID *string `json:"customerId,omitempty"`
-    
+	CustomerID *string `json:"customerId,omitempty"`
 }
-

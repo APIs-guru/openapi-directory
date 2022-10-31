@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DescribeLoggingConfigurationResponse struct {
-    FirewallArn *string `json:"FirewallArn,omitempty"`
-    LoggingConfiguration *LoggingConfiguration `json:"LoggingConfiguration,omitempty"`
-    
+	FirewallArn          *string               `json:"FirewallArn,omitempty"`
+	LoggingConfiguration *LoggingConfiguration `json:"LoggingConfiguration,omitempty"`
 }
-

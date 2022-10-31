@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RemoveProductFromProductSetRequest struct {
-    Product *string `json:"product,omitempty"`
-    
+	Product *string `json:"product,omitempty"`
 }
-

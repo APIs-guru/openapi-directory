@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetCelebrityInfoRequest struct {
-    ID string `json:"Id"`
-    
+	ID string `json:"Id"`
 }
-

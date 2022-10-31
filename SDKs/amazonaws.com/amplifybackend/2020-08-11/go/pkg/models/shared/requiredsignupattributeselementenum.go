@@ -1,28 +1,23 @@
 package shared
 
-
-
-
 type RequiredSignUpAttributesElementEnum string
 
 const (
-    RequiredSignUpAttributesElementEnumAddress RequiredSignUpAttributesElementEnum = "ADDRESS"
-RequiredSignUpAttributesElementEnumBirthdate RequiredSignUpAttributesElementEnum = "BIRTHDATE"
-RequiredSignUpAttributesElementEnumEmail RequiredSignUpAttributesElementEnum = "EMAIL"
-RequiredSignUpAttributesElementEnumFamilyName RequiredSignUpAttributesElementEnum = "FAMILY_NAME"
-RequiredSignUpAttributesElementEnumGender RequiredSignUpAttributesElementEnum = "GENDER"
-RequiredSignUpAttributesElementEnumGivenName RequiredSignUpAttributesElementEnum = "GIVEN_NAME"
-RequiredSignUpAttributesElementEnumLocale RequiredSignUpAttributesElementEnum = "LOCALE"
-RequiredSignUpAttributesElementEnumMiddleName RequiredSignUpAttributesElementEnum = "MIDDLE_NAME"
-RequiredSignUpAttributesElementEnumName RequiredSignUpAttributesElementEnum = "NAME"
-RequiredSignUpAttributesElementEnumNickname RequiredSignUpAttributesElementEnum = "NICKNAME"
-RequiredSignUpAttributesElementEnumPhoneNumber RequiredSignUpAttributesElementEnum = "PHONE_NUMBER"
-RequiredSignUpAttributesElementEnumPicture RequiredSignUpAttributesElementEnum = "PICTURE"
-RequiredSignUpAttributesElementEnumPreferredUsername RequiredSignUpAttributesElementEnum = "PREFERRED_USERNAME"
-RequiredSignUpAttributesElementEnumProfile RequiredSignUpAttributesElementEnum = "PROFILE"
-RequiredSignUpAttributesElementEnumUpdatedAt RequiredSignUpAttributesElementEnum = "UPDATED_AT"
-RequiredSignUpAttributesElementEnumWebsite RequiredSignUpAttributesElementEnum = "WEBSITE"
-RequiredSignUpAttributesElementEnumZoneInfo RequiredSignUpAttributesElementEnum = "ZONE_INFO"
+	RequiredSignUpAttributesElementEnumAddress           RequiredSignUpAttributesElementEnum = "ADDRESS"
+	RequiredSignUpAttributesElementEnumBirthdate         RequiredSignUpAttributesElementEnum = "BIRTHDATE"
+	RequiredSignUpAttributesElementEnumEmail             RequiredSignUpAttributesElementEnum = "EMAIL"
+	RequiredSignUpAttributesElementEnumFamilyName        RequiredSignUpAttributesElementEnum = "FAMILY_NAME"
+	RequiredSignUpAttributesElementEnumGender            RequiredSignUpAttributesElementEnum = "GENDER"
+	RequiredSignUpAttributesElementEnumGivenName         RequiredSignUpAttributesElementEnum = "GIVEN_NAME"
+	RequiredSignUpAttributesElementEnumLocale            RequiredSignUpAttributesElementEnum = "LOCALE"
+	RequiredSignUpAttributesElementEnumMiddleName        RequiredSignUpAttributesElementEnum = "MIDDLE_NAME"
+	RequiredSignUpAttributesElementEnumName              RequiredSignUpAttributesElementEnum = "NAME"
+	RequiredSignUpAttributesElementEnumNickname          RequiredSignUpAttributesElementEnum = "NICKNAME"
+	RequiredSignUpAttributesElementEnumPhoneNumber       RequiredSignUpAttributesElementEnum = "PHONE_NUMBER"
+	RequiredSignUpAttributesElementEnumPicture           RequiredSignUpAttributesElementEnum = "PICTURE"
+	RequiredSignUpAttributesElementEnumPreferredUsername RequiredSignUpAttributesElementEnum = "PREFERRED_USERNAME"
+	RequiredSignUpAttributesElementEnumProfile           RequiredSignUpAttributesElementEnum = "PROFILE"
+	RequiredSignUpAttributesElementEnumUpdatedAt         RequiredSignUpAttributesElementEnum = "UPDATED_AT"
+	RequiredSignUpAttributesElementEnumWebsite           RequiredSignUpAttributesElementEnum = "WEBSITE"
+	RequiredSignUpAttributesElementEnumZoneInfo          RequiredSignUpAttributesElementEnum = "ZONE_INFO"
 )
-
-

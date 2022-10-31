@@ -1,21 +1,15 @@
 package operations
 
-
-
 type UserGetBungieNetUserByIDPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type UserGetBungieNetUserByIDRequest struct {
-    PathParams UserGetBungieNetUserByIDPathParams 
-    
+	PathParams UserGetBungieNetUserByIDPathParams
 }
 
 type UserGetBungieNetUserByIDResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

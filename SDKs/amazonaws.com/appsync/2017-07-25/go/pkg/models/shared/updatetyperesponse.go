@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateTypeResponse struct {
-    Type *Type `json:"type,omitempty"`
-    
+	Type *Type `json:"type,omitempty"`
 }
-

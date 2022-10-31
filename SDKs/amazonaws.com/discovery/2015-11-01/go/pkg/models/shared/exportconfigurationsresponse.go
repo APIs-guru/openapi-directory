@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ExportConfigurationsResponse struct {
-    ExportID *string `json:"exportId,omitempty"`
-    
+	ExportID *string `json:"exportId,omitempty"`
 }
-

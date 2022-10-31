@@ -1,37 +1,28 @@
 package shared
 
-
-
 type SchemeAPIKey struct {
-    APIKey string `security:"name=api_key"`
-    
+	APIKey string `security:"name=api_key"`
 }
 
 type SchemeAPISecret struct {
-    APIKey string `security:"name=api_secret"`
-    
+	APIKey string `security:"name=api_secret"`
 }
 
 type SchemeAPISig struct {
-    APIKey string `security:"name=sig"`
-    
+	APIKey string `security:"name=sig"`
 }
 
 type SecurityOption1 struct {
-    APIKey SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
-    APISecret SchemeAPISecret `security:"scheme,type=apiKey,subtype=query"`
-    
+	APIKey    SchemeAPIKey    `security:"scheme,type=apiKey,subtype=query"`
+	APISecret SchemeAPISecret `security:"scheme,type=apiKey,subtype=query"`
 }
 
 type SecurityOption2 struct {
-    APIKey SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
-    APISig SchemeAPISig `security:"scheme,type=apiKey,subtype=query"`
-    
+	APIKey SchemeAPIKey `security:"scheme,type=apiKey,subtype=query"`
+	APISig SchemeAPISig `security:"scheme,type=apiKey,subtype=query"`
 }
 
 type Security struct {
-    Option1 *SecurityOption1 `security:"option"`
-    Option2 *SecurityOption2 `security:"option"`
-    
+	Option1 *SecurityOption1 `security:"option"`
+	Option2 *SecurityOption2 `security:"option"`
 }
-

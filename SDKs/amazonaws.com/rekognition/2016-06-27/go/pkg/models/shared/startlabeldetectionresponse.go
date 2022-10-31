@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StartLabelDetectionResponse struct {
-    JobID *string `json:"JobId,omitempty"`
-    
+	JobID *string `json:"JobId,omitempty"`
 }
-

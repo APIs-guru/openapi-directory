@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostCreateClusterSubnetGroupActionEnum string
 
 const (
-    PostCreateClusterSubnetGroupActionEnumCreateClusterSubnetGroup PostCreateClusterSubnetGroupActionEnum = "CreateClusterSubnetGroup"
+	PostCreateClusterSubnetGroupActionEnumCreateClusterSubnetGroup PostCreateClusterSubnetGroupActionEnum = "CreateClusterSubnetGroup"
 )
-
-
 
 type PostCreateClusterSubnetGroupVersionEnum string
 
 const (
-    PostCreateClusterSubnetGroupVersionEnumTwoThousandAndTwelve1201 PostCreateClusterSubnetGroupVersionEnum = "2012-12-01"
+	PostCreateClusterSubnetGroupVersionEnumTwoThousandAndTwelve1201 PostCreateClusterSubnetGroupVersionEnum = "2012-12-01"
 )
 
-
 type PostCreateClusterSubnetGroupQueryParams struct {
-    Action PostCreateClusterSubnetGroupActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostCreateClusterSubnetGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostCreateClusterSubnetGroupActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostCreateClusterSubnetGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostCreateClusterSubnetGroupHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostCreateClusterSubnetGroupRequest struct {
-    QueryParams PostCreateClusterSubnetGroupQueryParams 
-    Headers PostCreateClusterSubnetGroupHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostCreateClusterSubnetGroupQueryParams
+	Headers     PostCreateClusterSubnetGroupHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostCreateClusterSubnetGroupResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

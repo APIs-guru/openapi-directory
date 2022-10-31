@@ -1,9 +1,5 @@
 package shared
 
-
-
 type MetricWindow struct {
-    Tumbling *TumblingWindow `json:"tumbling,omitempty"`
-    
+	Tumbling *TumblingWindow `json:"tumbling,omitempty"`
 }
-

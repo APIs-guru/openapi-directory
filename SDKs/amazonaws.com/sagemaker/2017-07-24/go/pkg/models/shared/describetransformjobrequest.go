@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeTransformJobRequest struct {
-    TransformJobName string `json:"TransformJobName"`
-    
+	TransformJobName string `json:"TransformJobName"`
 }
-

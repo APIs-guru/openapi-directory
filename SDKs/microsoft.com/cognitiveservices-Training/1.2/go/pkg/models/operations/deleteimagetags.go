@@ -1,33 +1,25 @@
 package operations
 
-
-
 type DeleteImageTagsPathParams struct {
-    ProjectID string `pathParam:"style=simple,explode=false,name=projectId"`
-    
+	ProjectID string `pathParam:"style=simple,explode=false,name=projectId"`
 }
 
 type DeleteImageTagsQueryParams struct {
-    ImageIds []string `queryParam:"style=form,explode=false,name=imageIds"`
-    TagIds []string `queryParam:"style=form,explode=false,name=tagIds"`
-    
+	ImageIds []string `queryParam:"style=form,explode=false,name=imageIds"`
+	TagIds   []string `queryParam:"style=form,explode=false,name=tagIds"`
 }
 
 type DeleteImageTagsHeaders struct {
-    TrainingKey string `header:"style=simple,explode=false,name=Training-Key"`
-    
+	TrainingKey string `header:"style=simple,explode=false,name=Training-Key"`
 }
 
 type DeleteImageTagsRequest struct {
-    PathParams DeleteImageTagsPathParams 
-    QueryParams DeleteImageTagsQueryParams 
-    Headers DeleteImageTagsHeaders 
-    
+	PathParams  DeleteImageTagsPathParams
+	QueryParams DeleteImageTagsQueryParams
+	Headers     DeleteImageTagsHeaders
 }
 
 type DeleteImageTagsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

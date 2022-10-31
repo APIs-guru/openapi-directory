@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetXSSMatchSetRequest struct {
-    XSSMatchSetID string `json:"XssMatchSetId"`
-    
+	XSSMatchSetID string `json:"XssMatchSetId"`
 }
-

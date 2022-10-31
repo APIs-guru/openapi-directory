@@ -1,19 +1,17 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type HiuConsentNotificationEventNotification struct {
-    ConsentArtefacts []ConsentArtefactReference `json:"consentArtefacts,omitempty"`
-    ConsentRequestID string `json:"consentRequestId"`
-    Status ConsentStatusEnum `json:"status"`
-    
+	ConsentArtefacts []ConsentArtefactReference `json:"consentArtefacts,omitempty"`
+	ConsentRequestID string                     `json:"consentRequestId"`
+	Status           ConsentStatusEnum          `json:"status"`
 }
 
 type HiuConsentNotificationEvent struct {
-    Notification HiuConsentNotificationEventNotification `json:"notification"`
-    RequestID string `json:"requestId"`
-    Timestamp time.Time `json:"timestamp"`
-    
+	Notification HiuConsentNotificationEventNotification `json:"notification"`
+	RequestID    string                                  `json:"requestId"`
+	Timestamp    time.Time                               `json:"timestamp"`
 }
-

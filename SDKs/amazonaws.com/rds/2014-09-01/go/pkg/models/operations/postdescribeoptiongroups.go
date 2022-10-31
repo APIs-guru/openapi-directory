@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostDescribeOptionGroupsActionEnum string
 
 const (
-    PostDescribeOptionGroupsActionEnumDescribeOptionGroups PostDescribeOptionGroupsActionEnum = "DescribeOptionGroups"
+	PostDescribeOptionGroupsActionEnumDescribeOptionGroups PostDescribeOptionGroupsActionEnum = "DescribeOptionGroups"
 )
-
-
 
 type PostDescribeOptionGroupsVersionEnum string
 
 const (
-    PostDescribeOptionGroupsVersionEnumTwoThousandAndFourteen0901 PostDescribeOptionGroupsVersionEnum = "2014-09-01"
+	PostDescribeOptionGroupsVersionEnumTwoThousandAndFourteen0901 PostDescribeOptionGroupsVersionEnum = "2014-09-01"
 )
 
-
 type PostDescribeOptionGroupsQueryParams struct {
-    Action PostDescribeOptionGroupsActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostDescribeOptionGroupsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostDescribeOptionGroupsActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostDescribeOptionGroupsVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostDescribeOptionGroupsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostDescribeOptionGroupsRequest struct {
-    QueryParams PostDescribeOptionGroupsQueryParams 
-    Headers PostDescribeOptionGroupsHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostDescribeOptionGroupsQueryParams
+	Headers     PostDescribeOptionGroupsHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostDescribeOptionGroupsResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

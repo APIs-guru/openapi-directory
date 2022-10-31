@@ -1,20 +1,14 @@
 package operations
 
-
-
 type DeleteRealmPathParams struct {
-    Realm string `pathParam:"style=simple,explode=false,name=realm"`
-    
+	Realm string `pathParam:"style=simple,explode=false,name=realm"`
 }
 
 type DeleteRealmRequest struct {
-    PathParams DeleteRealmPathParams 
-    
+	PathParams DeleteRealmPathParams
 }
 
 type DeleteRealmResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

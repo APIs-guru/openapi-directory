@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetJobUnlockCodeResult struct {
-    UnlockCode *string `json:"UnlockCode,omitempty"`
-    
+	UnlockCode *string `json:"UnlockCode,omitempty"`
 }
-

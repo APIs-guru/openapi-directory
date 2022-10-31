@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteWorkforceRequest struct {
-    WorkforceName string `json:"WorkforceName"`
-    
+	WorkforceName string `json:"WorkforceName"`
 }
-

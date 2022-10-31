@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateUserProfileResponse struct {
-    UserProfileArn *string `json:"UserProfileArn,omitempty"`
-    
+	UserProfileArn *string `json:"UserProfileArn,omitempty"`
 }
-

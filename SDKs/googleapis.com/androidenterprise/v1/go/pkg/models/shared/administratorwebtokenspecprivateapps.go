@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AdministratorWebTokenSpecPrivateApps struct {
-    Enabled *bool `json:"enabled,omitempty"`
-    
+	Enabled *bool `json:"enabled,omitempty"`
 }
-

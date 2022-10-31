@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetSolutionMetricsRequest struct {
-    SolutionVersionArn string `json:"solutionVersionArn"`
-    
+	SolutionVersionArn string `json:"solutionVersionArn"`
 }
-

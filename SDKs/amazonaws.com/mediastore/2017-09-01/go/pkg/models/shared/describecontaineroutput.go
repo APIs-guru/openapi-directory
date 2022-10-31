@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeContainerOutput struct {
-    Container *Container `json:"Container,omitempty"`
-    
+	Container *Container `json:"Container,omitempty"`
 }
-

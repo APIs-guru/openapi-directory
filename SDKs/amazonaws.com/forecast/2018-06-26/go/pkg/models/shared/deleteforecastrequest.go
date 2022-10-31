@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteForecastRequest struct {
-    ForecastArn string `json:"ForecastArn"`
-    
+	ForecastArn string `json:"ForecastArn"`
 }
-

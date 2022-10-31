@@ -1,15 +1,10 @@
 package shared
 
-
-
-
 type IncomingPhoneNumberLocalEnumAddressRequirementEnum string
 
 const (
-    IncomingPhoneNumberLocalEnumAddressRequirementEnumNone IncomingPhoneNumberLocalEnumAddressRequirementEnum = "none"
-IncomingPhoneNumberLocalEnumAddressRequirementEnumAny IncomingPhoneNumberLocalEnumAddressRequirementEnum = "any"
-IncomingPhoneNumberLocalEnumAddressRequirementEnumLocal IncomingPhoneNumberLocalEnumAddressRequirementEnum = "local"
-IncomingPhoneNumberLocalEnumAddressRequirementEnumForeign IncomingPhoneNumberLocalEnumAddressRequirementEnum = "foreign"
+	IncomingPhoneNumberLocalEnumAddressRequirementEnumNone    IncomingPhoneNumberLocalEnumAddressRequirementEnum = "none"
+	IncomingPhoneNumberLocalEnumAddressRequirementEnumAny     IncomingPhoneNumberLocalEnumAddressRequirementEnum = "any"
+	IncomingPhoneNumberLocalEnumAddressRequirementEnumLocal   IncomingPhoneNumberLocalEnumAddressRequirementEnum = "local"
+	IncomingPhoneNumberLocalEnumAddressRequirementEnumForeign IncomingPhoneNumberLocalEnumAddressRequirementEnum = "foreign"
 )
-
-

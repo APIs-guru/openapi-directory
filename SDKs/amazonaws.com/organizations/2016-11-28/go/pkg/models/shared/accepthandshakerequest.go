@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AcceptHandshakeRequest struct {
-    HandshakeID string `json:"HandshakeId"`
-    
+	HandshakeID string `json:"HandshakeId"`
 }
-

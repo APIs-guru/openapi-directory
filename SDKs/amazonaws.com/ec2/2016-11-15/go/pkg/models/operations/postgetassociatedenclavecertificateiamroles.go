@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostGetAssociatedEnclaveCertificateIamRolesActionEnum string
 
 const (
-    PostGetAssociatedEnclaveCertificateIamRolesActionEnumGetAssociatedEnclaveCertificateIamRoles PostGetAssociatedEnclaveCertificateIamRolesActionEnum = "GetAssociatedEnclaveCertificateIamRoles"
+	PostGetAssociatedEnclaveCertificateIamRolesActionEnumGetAssociatedEnclaveCertificateIamRoles PostGetAssociatedEnclaveCertificateIamRolesActionEnum = "GetAssociatedEnclaveCertificateIamRoles"
 )
-
-
 
 type PostGetAssociatedEnclaveCertificateIamRolesVersionEnum string
 
 const (
-    PostGetAssociatedEnclaveCertificateIamRolesVersionEnumTwoThousandAndSixteen1115 PostGetAssociatedEnclaveCertificateIamRolesVersionEnum = "2016-11-15"
+	PostGetAssociatedEnclaveCertificateIamRolesVersionEnumTwoThousandAndSixteen1115 PostGetAssociatedEnclaveCertificateIamRolesVersionEnum = "2016-11-15"
 )
 
-
 type PostGetAssociatedEnclaveCertificateIamRolesQueryParams struct {
-    Action PostGetAssociatedEnclaveCertificateIamRolesActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostGetAssociatedEnclaveCertificateIamRolesVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostGetAssociatedEnclaveCertificateIamRolesActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostGetAssociatedEnclaveCertificateIamRolesVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostGetAssociatedEnclaveCertificateIamRolesHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostGetAssociatedEnclaveCertificateIamRolesRequest struct {
-    QueryParams PostGetAssociatedEnclaveCertificateIamRolesQueryParams 
-    Headers PostGetAssociatedEnclaveCertificateIamRolesHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostGetAssociatedEnclaveCertificateIamRolesQueryParams
+	Headers     PostGetAssociatedEnclaveCertificateIamRolesHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostGetAssociatedEnclaveCertificateIamRolesResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

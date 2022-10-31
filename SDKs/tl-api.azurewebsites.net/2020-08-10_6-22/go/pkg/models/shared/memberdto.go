@@ -1,9 +1,5 @@
 package shared
 
-
-
 type MemberDto struct {
-    Name *string `json:"name,omitempty"`
-    
+	Name *string `json:"name,omitempty"`
 }
-

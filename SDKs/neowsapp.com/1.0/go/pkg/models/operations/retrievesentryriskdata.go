@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type RetrieveSentryRiskDataQueryParams struct {
-    IsActive *bool `queryParam:"style=form,explode=true,name=is_active"`
-    Page *int32 `queryParam:"style=form,explode=true,name=page"`
-    Size *int32 `queryParam:"style=form,explode=true,name=size"`
-    
+	IsActive *bool  `queryParam:"style=form,explode=true,name=is_active"`
+	Page     *int32 `queryParam:"style=form,explode=true,name=page"`
+	Size     *int32 `queryParam:"style=form,explode=true,name=size"`
 }
 
 type RetrieveSentryRiskDataRequest struct {
-    QueryParams RetrieveSentryRiskDataQueryParams 
-    
+	QueryParams RetrieveSentryRiskDataQueryParams
 }
 
 type RetrieveSentryRiskDataResponse struct {
-    ContentType string 
-    SentryObjectPagingDto *shared.SentryObjectPagingDto 
-    StatusCode int64 
-    
+	ContentType           string
+	SentryObjectPagingDto *shared.SentryObjectPagingDto
+	StatusCode            int64
 }
-

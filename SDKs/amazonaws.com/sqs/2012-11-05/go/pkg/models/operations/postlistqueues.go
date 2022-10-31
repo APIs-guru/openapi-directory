@@ -1,53 +1,42 @@
 package operations
 
-
-
-
 type PostListQueuesActionEnum string
 
 const (
-    PostListQueuesActionEnumListQueues PostListQueuesActionEnum = "ListQueues"
+	PostListQueuesActionEnumListQueues PostListQueuesActionEnum = "ListQueues"
 )
-
-
 
 type PostListQueuesVersionEnum string
 
 const (
-    PostListQueuesVersionEnumTwoThousandAndTwelve1105 PostListQueuesVersionEnum = "2012-11-05"
+	PostListQueuesVersionEnumTwoThousandAndTwelve1105 PostListQueuesVersionEnum = "2012-11-05"
 )
 
-
 type PostListQueuesQueryParams struct {
-    Action PostListQueuesActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    MaxResults *string `queryParam:"style=form,explode=true,name=MaxResults"`
-    NextToken *string `queryParam:"style=form,explode=true,name=NextToken"`
-    Version PostListQueuesVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action     PostListQueuesActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	MaxResults *string                   `queryParam:"style=form,explode=true,name=MaxResults"`
+	NextToken  *string                   `queryParam:"style=form,explode=true,name=NextToken"`
+	Version    PostListQueuesVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostListQueuesHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostListQueuesRequest struct {
-    QueryParams PostListQueuesQueryParams 
-    Headers PostListQueuesHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostListQueuesQueryParams
+	Headers     PostListQueuesHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostListQueuesResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

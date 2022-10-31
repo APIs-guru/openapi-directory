@@ -1,29 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetItvProfileQueryParams struct {
-    Lang *string `queryParam:"style=form,explode=true,name=lang"`
-    
+	Lang *string `queryParam:"style=form,explode=true,name=lang"`
 }
 
 type GetItvProfileSecurity struct {
-    AccountAuth shared.SchemeAccountAuth `security:"scheme,type=oauth2"`
-    
+	AccountAuth shared.SchemeAccountAuth `security:"scheme,type=oauth2"`
 }
 
 type GetItvProfileRequest struct {
-    QueryParams GetItvProfileQueryParams 
-    Security GetItvProfileSecurity 
-    
+	QueryParams GetItvProfileQueryParams
+	Security    GetItvProfileSecurity
 }
 
 type GetItvProfileResponse struct {
-    ContentType string 
-    GetItvProfile200ApplicationJSONObject map[string]interface{} 
-    ServiceError *shared.ServiceError 
-    StatusCode int64 
-    
+	ContentType                           string
+	GetItvProfile200ApplicationJSONObject map[string]interface{}
+	ServiceError                          *shared.ServiceError
+	StatusCode                            int64
 }
-

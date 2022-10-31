@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListInvitationsResponse struct {
-    Invitations []Invitation `json:"invitations,omitempty"`
-    NextPageToken *string `json:"nextPageToken,omitempty"`
-    
+	Invitations   []Invitation `json:"invitations,omitempty"`
+	NextPageToken *string      `json:"nextPageToken,omitempty"`
 }
-

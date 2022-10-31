@@ -1,20 +1,14 @@
 package operations
 
-
-
 type TraceDelayDelayPathParams struct {
-    Delay int64 `pathParam:"style=simple,explode=false,name=delay"`
-    
+	Delay int64 `pathParam:"style=simple,explode=false,name=delay"`
 }
 
 type TraceDelayDelayRequest struct {
-    PathParams TraceDelayDelayPathParams 
-    
+	PathParams TraceDelayDelayPathParams
 }
 
 type TraceDelayDelayResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

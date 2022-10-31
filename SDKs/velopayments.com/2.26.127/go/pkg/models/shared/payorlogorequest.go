@@ -1,15 +1,10 @@
 package shared
 
-
-
 type PayorLogoRequestLogo struct {
-    Content []byte `multipartForm:"content"`
-    Logo string `multipartForm:"name=logo"`
-    
+	Content []byte `multipartForm:"content"`
+	Logo    string `multipartForm:"name=logo"`
 }
 
 type PayorLogoRequest struct {
-    Logo *PayorLogoRequestLogo `multipartForm:"file"`
-    
+	Logo *PayorLogoRequestLogo `multipartForm:"file"`
 }
-

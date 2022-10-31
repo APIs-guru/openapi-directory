@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetRecordResponse struct {
-    Record []FeatureValue `json:"Record,omitempty"`
-    
+	Record []FeatureValue `json:"Record,omitempty"`
 }
-

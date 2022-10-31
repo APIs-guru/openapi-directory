@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TflAPIPresentationEntitiesTimetablesDisambiguation struct {
-    DisambiguationOptions []TflAPIPresentationEntitiesTimetablesDisambiguationOption `json:"disambiguationOptions,omitempty"`
-    
+	DisambiguationOptions []TflAPIPresentationEntitiesTimetablesDisambiguationOption `json:"disambiguationOptions,omitempty"`
 }
-

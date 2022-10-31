@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateEnvironmentTemplateOutput struct {
-    EnvironmentTemplate EnvironmentTemplate `json:"environmentTemplate"`
-    
+	EnvironmentTemplate EnvironmentTemplate `json:"environmentTemplate"`
 }
-

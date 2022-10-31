@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeLayersResult struct {
-    Layers []Layer `json:"Layers,omitempty"`
-    
+	Layers []Layer `json:"Layers,omitempty"`
 }
-

@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostCreateTransitGatewayRouteActionEnum string
 
 const (
-    PostCreateTransitGatewayRouteActionEnumCreateTransitGatewayRoute PostCreateTransitGatewayRouteActionEnum = "CreateTransitGatewayRoute"
+	PostCreateTransitGatewayRouteActionEnumCreateTransitGatewayRoute PostCreateTransitGatewayRouteActionEnum = "CreateTransitGatewayRoute"
 )
-
-
 
 type PostCreateTransitGatewayRouteVersionEnum string
 
 const (
-    PostCreateTransitGatewayRouteVersionEnumTwoThousandAndSixteen1115 PostCreateTransitGatewayRouteVersionEnum = "2016-11-15"
+	PostCreateTransitGatewayRouteVersionEnumTwoThousandAndSixteen1115 PostCreateTransitGatewayRouteVersionEnum = "2016-11-15"
 )
 
-
 type PostCreateTransitGatewayRouteQueryParams struct {
-    Action PostCreateTransitGatewayRouteActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostCreateTransitGatewayRouteVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostCreateTransitGatewayRouteActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostCreateTransitGatewayRouteVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostCreateTransitGatewayRouteHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostCreateTransitGatewayRouteRequest struct {
-    QueryParams PostCreateTransitGatewayRouteQueryParams 
-    Headers PostCreateTransitGatewayRouteHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostCreateTransitGatewayRouteQueryParams
+	Headers     PostCreateTransitGatewayRouteHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostCreateTransitGatewayRouteResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

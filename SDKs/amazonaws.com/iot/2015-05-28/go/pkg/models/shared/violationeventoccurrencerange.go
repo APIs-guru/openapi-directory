@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ViolationEventOccurrenceRange struct {
-    EndTime time.Time `json:"endTime"`
-    StartTime time.Time `json:"startTime"`
-    
+	EndTime   time.Time `json:"endTime"`
+	StartTime time.Time `json:"startTime"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetLogRecordRequest struct {
-    LogRecordPointer string `json:"logRecordPointer"`
-    
+	LogRecordPointer string `json:"logRecordPointer"`
 }
-

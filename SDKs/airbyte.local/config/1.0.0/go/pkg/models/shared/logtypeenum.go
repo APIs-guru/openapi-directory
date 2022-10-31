@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type LogTypeEnum string
 
 const (
-    LogTypeEnumServer LogTypeEnum = "server"
-LogTypeEnumScheduler LogTypeEnum = "scheduler"
+	LogTypeEnumServer    LogTypeEnum = "server"
+	LogTypeEnumScheduler LogTypeEnum = "scheduler"
 )
-
-

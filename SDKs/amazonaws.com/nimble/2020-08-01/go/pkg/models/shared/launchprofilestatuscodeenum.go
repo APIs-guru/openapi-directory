@@ -1,24 +1,19 @@
 package shared
 
-
-
-
 type LaunchProfileStatusCodeEnum string
 
 const (
-    LaunchProfileStatusCodeEnumLaunchProfileCreated LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_CREATED"
-LaunchProfileStatusCodeEnumLaunchProfileUpdated LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_UPDATED"
-LaunchProfileStatusCodeEnumLaunchProfileDeleted LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_DELETED"
-LaunchProfileStatusCodeEnumLaunchProfileCreateInProgress LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_CREATE_IN_PROGRESS"
-LaunchProfileStatusCodeEnumLaunchProfileUpdateInProgress LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_UPDATE_IN_PROGRESS"
-LaunchProfileStatusCodeEnumLaunchProfileDeleteInProgress LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_DELETE_IN_PROGRESS"
-LaunchProfileStatusCodeEnumInternalError LaunchProfileStatusCodeEnum = "INTERNAL_ERROR"
-LaunchProfileStatusCodeEnumStreamingImageNotFound LaunchProfileStatusCodeEnum = "STREAMING_IMAGE_NOT_FOUND"
-LaunchProfileStatusCodeEnumStreamingImageNotReady LaunchProfileStatusCodeEnum = "STREAMING_IMAGE_NOT_READY"
-LaunchProfileStatusCodeEnumLaunchProfileWithStreamSessionsNotDeleted LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED"
-LaunchProfileStatusCodeEnumEncryptionKeyAccessDenied LaunchProfileStatusCodeEnum = "ENCRYPTION_KEY_ACCESS_DENIED"
-LaunchProfileStatusCodeEnumEncryptionKeyNotFound LaunchProfileStatusCodeEnum = "ENCRYPTION_KEY_NOT_FOUND"
-LaunchProfileStatusCodeEnumInvalidSubnetsProvided LaunchProfileStatusCodeEnum = "INVALID_SUBNETS_PROVIDED"
+	LaunchProfileStatusCodeEnumLaunchProfileCreated                      LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_CREATED"
+	LaunchProfileStatusCodeEnumLaunchProfileUpdated                      LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_UPDATED"
+	LaunchProfileStatusCodeEnumLaunchProfileDeleted                      LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_DELETED"
+	LaunchProfileStatusCodeEnumLaunchProfileCreateInProgress             LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_CREATE_IN_PROGRESS"
+	LaunchProfileStatusCodeEnumLaunchProfileUpdateInProgress             LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_UPDATE_IN_PROGRESS"
+	LaunchProfileStatusCodeEnumLaunchProfileDeleteInProgress             LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_DELETE_IN_PROGRESS"
+	LaunchProfileStatusCodeEnumInternalError                             LaunchProfileStatusCodeEnum = "INTERNAL_ERROR"
+	LaunchProfileStatusCodeEnumStreamingImageNotFound                    LaunchProfileStatusCodeEnum = "STREAMING_IMAGE_NOT_FOUND"
+	LaunchProfileStatusCodeEnumStreamingImageNotReady                    LaunchProfileStatusCodeEnum = "STREAMING_IMAGE_NOT_READY"
+	LaunchProfileStatusCodeEnumLaunchProfileWithStreamSessionsNotDeleted LaunchProfileStatusCodeEnum = "LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED"
+	LaunchProfileStatusCodeEnumEncryptionKeyAccessDenied                 LaunchProfileStatusCodeEnum = "ENCRYPTION_KEY_ACCESS_DENIED"
+	LaunchProfileStatusCodeEnumEncryptionKeyNotFound                     LaunchProfileStatusCodeEnum = "ENCRYPTION_KEY_NOT_FOUND"
+	LaunchProfileStatusCodeEnumInvalidSubnetsProvided                    LaunchProfileStatusCodeEnum = "INVALID_SUBNETS_PROVIDED"
 )
-
-

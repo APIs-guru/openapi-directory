@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeTagsRequest struct {
-    ResourceArns []string `json:"resourceArns"`
-    
+	ResourceArns []string `json:"resourceArns"`
 }
-

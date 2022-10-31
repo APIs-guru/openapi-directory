@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AnthosVMMembershipSpec struct {
-    SubfeaturesSpec []AnthosVMSubFeatureSpec `json:"subfeaturesSpec,omitempty"`
-    
+	SubfeaturesSpec []AnthosVMSubFeatureSpec `json:"subfeaturesSpec,omitempty"`
 }
-

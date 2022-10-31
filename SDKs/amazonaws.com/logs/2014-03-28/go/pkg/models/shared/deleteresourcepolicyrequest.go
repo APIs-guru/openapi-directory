@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteResourcePolicyRequest struct {
-    PolicyName *string `json:"policyName,omitempty"`
-    
+	PolicyName *string `json:"policyName,omitempty"`
 }
-

@@ -1,17 +1,15 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type VirtualizationInterfacesCreateRequest struct {
-    Request shared.WritableInterface `request:"mediaType=application/json"`
-    
+	Request shared.WritableInterface `request:"mediaType=application/json"`
 }
 
 type VirtualizationInterfacesCreateResponse struct {
-    ContentType string 
-    Interface *shared.Interface 
-    StatusCode int64 
-    
+	ContentType string
+	Interface   *shared.Interface
+	StatusCode  int64
 }
-

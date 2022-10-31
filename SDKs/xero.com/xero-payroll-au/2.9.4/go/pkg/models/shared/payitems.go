@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PayItems struct {
-    PayItems *PayItem `json:"PayItems,omitempty"`
-    
+	PayItems *PayItem `json:"PayItems,omitempty"`
 }
-

@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListAssociatedAssetsResponse struct {
-    AssetSummaries []AssociatedAssetsSummary `json:"assetSummaries"`
-    NextToken *string `json:"nextToken,omitempty"`
-    
+	AssetSummaries []AssociatedAssetsSummary `json:"assetSummaries"`
+	NextToken      *string                   `json:"nextToken,omitempty"`
 }
-

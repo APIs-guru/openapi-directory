@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TagResourceResult struct {
-    Tags map[string]string `json:"Tags,omitempty"`
-    
+	Tags map[string]string `json:"Tags,omitempty"`
 }
-

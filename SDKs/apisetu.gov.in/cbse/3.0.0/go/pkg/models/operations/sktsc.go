@@ -1,219 +1,177 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type SktscRequestBodyCertificateParameters struct {
-    FullName string `json:"FullName"`
-    Rollno string `json:"rollno"`
-    Year string `json:"year"`
-    
+	FullName string `json:"FullName"`
+	Rollno   string `json:"rollno"`
+	Year     string `json:"year"`
 }
-
 
 type SktscRequestBodyFormatEnum string
 
 const (
-    SktscRequestBodyFormatEnumPdf SktscRequestBodyFormatEnum = "pdf"
+	SktscRequestBodyFormatEnumPdf SktscRequestBodyFormatEnum = "pdf"
 )
 
-
 type SktscRequestBody struct {
-    CertificateParameters *SktscRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
-    ConsentArtifact *interface{} `json:"consentArtifact,omitempty"`
-    Format SktscRequestBodyFormatEnum `json:"format"`
-    TxnID string `json:"txnId"`
-    
+	CertificateParameters *SktscRequestBodyCertificateParameters `json:"certificateParameters,omitempty"`
+	ConsentArtifact       *interface{}                           `json:"consentArtifact,omitempty"`
+	Format                SktscRequestBodyFormatEnum             `json:"format"`
+	TxnID                 string                                 `json:"txnId"`
 }
 
 type SktscSecurity struct {
-    APIKey shared.SchemeAPIKey `security:"scheme,type=apiKey,subtype=header"`
-    ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
-    
+	APIKey   shared.SchemeAPIKey   `security:"scheme,type=apiKey,subtype=header"`
+	ClientID shared.SchemeClientID `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type SktscRequest struct {
-    Request *SktscRequestBody `request:"mediaType=application/json"`
-    Security SktscSecurity 
-    
+	Request  *SktscRequestBody `request:"mediaType=application/json"`
+	Security SktscSecurity
 }
-
 
 type Sktsc400ApplicationJSONErrorEnum string
 
 const (
-    Sktsc400ApplicationJSONErrorEnumMissingParameter Sktsc400ApplicationJSONErrorEnum = "missing_parameter"
-Sktsc400ApplicationJSONErrorEnumInvalidParameter Sktsc400ApplicationJSONErrorEnum = "invalid_parameter"
-Sktsc400ApplicationJSONErrorEnumInvalidFormat Sktsc400ApplicationJSONErrorEnum = "invalid_format"
-Sktsc400ApplicationJSONErrorEnumInvalidTxnid Sktsc400ApplicationJSONErrorEnum = "invalid_txnid"
-Sktsc400ApplicationJSONErrorEnumInvalidConsentid Sktsc400ApplicationJSONErrorEnum = "invalid_consentid"
+	Sktsc400ApplicationJSONErrorEnumMissingParameter Sktsc400ApplicationJSONErrorEnum = "missing_parameter"
+	Sktsc400ApplicationJSONErrorEnumInvalidParameter Sktsc400ApplicationJSONErrorEnum = "invalid_parameter"
+	Sktsc400ApplicationJSONErrorEnumInvalidFormat    Sktsc400ApplicationJSONErrorEnum = "invalid_format"
+	Sktsc400ApplicationJSONErrorEnumInvalidTxnid     Sktsc400ApplicationJSONErrorEnum = "invalid_txnid"
+	Sktsc400ApplicationJSONErrorEnumInvalidConsentid Sktsc400ApplicationJSONErrorEnum = "invalid_consentid"
 )
-
-
 
 type Sktsc400ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sktsc400ApplicationJSONErrorDescriptionEnumPleaseProvideAllMandatoryParameters Sktsc400ApplicationJSONErrorDescriptionEnum = "Please provide all mandatory parameters"
-Sktsc400ApplicationJSONErrorDescriptionEnumBadRequest Sktsc400ApplicationJSONErrorDescriptionEnum = "Bad request"
-Sktsc400ApplicationJSONErrorDescriptionEnumTheFormatParameterIsInvalid Sktsc400ApplicationJSONErrorDescriptionEnum = "The format parameter is invalid"
-Sktsc400ApplicationJSONErrorDescriptionEnumTheTxnIDParameterMustBeInUUIDFormat Sktsc400ApplicationJSONErrorDescriptionEnum = "The txnId parameter must be in UUID format"
-Sktsc400ApplicationJSONErrorDescriptionEnumTheConsentIDParameterMustBeInUUIDFormat Sktsc400ApplicationJSONErrorDescriptionEnum = "The consentId parameter must be in UUID format"
+	Sktsc400ApplicationJSONErrorDescriptionEnumPleaseProvideAllMandatoryParameters     Sktsc400ApplicationJSONErrorDescriptionEnum = "Please provide all mandatory parameters"
+	Sktsc400ApplicationJSONErrorDescriptionEnumBadRequest                              Sktsc400ApplicationJSONErrorDescriptionEnum = "Bad request"
+	Sktsc400ApplicationJSONErrorDescriptionEnumTheFormatParameterIsInvalid             Sktsc400ApplicationJSONErrorDescriptionEnum = "The format parameter is invalid"
+	Sktsc400ApplicationJSONErrorDescriptionEnumTheTxnIDParameterMustBeInUUIDFormat     Sktsc400ApplicationJSONErrorDescriptionEnum = "The txnId parameter must be in UUID format"
+	Sktsc400ApplicationJSONErrorDescriptionEnumTheConsentIDParameterMustBeInUUIDFormat Sktsc400ApplicationJSONErrorDescriptionEnum = "The consentId parameter must be in UUID format"
 )
 
-
 type Sktsc400ApplicationJSON struct {
-    Error *Sktsc400ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sktsc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sktsc400ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc400ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
-
 
 type Sktsc401ApplicationJSONErrorEnum string
 
 const (
-    Sktsc401ApplicationJSONErrorEnumInvalidAuthentication Sktsc401ApplicationJSONErrorEnum = "invalid_authentication"
-Sktsc401ApplicationJSONErrorEnumInvalidAuthorization Sktsc401ApplicationJSONErrorEnum = "invalid_authorization"
+	Sktsc401ApplicationJSONErrorEnumInvalidAuthentication Sktsc401ApplicationJSONErrorEnum = "invalid_authentication"
+	Sktsc401ApplicationJSONErrorEnumInvalidAuthorization  Sktsc401ApplicationJSONErrorEnum = "invalid_authorization"
 )
-
-
 
 type Sktsc401ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sktsc401ApplicationJSONErrorDescriptionEnumAuthenticationFailed Sktsc401ApplicationJSONErrorDescriptionEnum = "Authentication failed"
-Sktsc401ApplicationJSONErrorDescriptionEnumYouAreNotAuthorizedToUseThisAPI Sktsc401ApplicationJSONErrorDescriptionEnum = "You are not authorized to use this API"
+	Sktsc401ApplicationJSONErrorDescriptionEnumAuthenticationFailed            Sktsc401ApplicationJSONErrorDescriptionEnum = "Authentication failed"
+	Sktsc401ApplicationJSONErrorDescriptionEnumYouAreNotAuthorizedToUseThisAPI Sktsc401ApplicationJSONErrorDescriptionEnum = "You are not authorized to use this API"
 )
 
-
 type Sktsc401ApplicationJSON struct {
-    Error *Sktsc401ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sktsc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sktsc401ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc401ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
-
 
 type Sktsc404ApplicationJSONErrorEnum string
 
 const (
-    Sktsc404ApplicationJSONErrorEnumRecordNotFound Sktsc404ApplicationJSONErrorEnum = "record_not_found"
-Sktsc404ApplicationJSONErrorEnumURLNotFound Sktsc404ApplicationJSONErrorEnum = "url_not_found"
+	Sktsc404ApplicationJSONErrorEnumRecordNotFound Sktsc404ApplicationJSONErrorEnum = "record_not_found"
+	Sktsc404ApplicationJSONErrorEnumURLNotFound    Sktsc404ApplicationJSONErrorEnum = "url_not_found"
 )
-
-
 
 type Sktsc404ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sktsc404ApplicationJSONErrorDescriptionEnumNoRecordFound Sktsc404ApplicationJSONErrorDescriptionEnum = "No record found"
-Sktsc404ApplicationJSONErrorDescriptionEnumYourApiurlOrPathIsIncorrect Sktsc404ApplicationJSONErrorDescriptionEnum = "Your API url or path is incorrect"
+	Sktsc404ApplicationJSONErrorDescriptionEnumNoRecordFound               Sktsc404ApplicationJSONErrorDescriptionEnum = "No record found"
+	Sktsc404ApplicationJSONErrorDescriptionEnumYourApiurlOrPathIsIncorrect Sktsc404ApplicationJSONErrorDescriptionEnum = "Your API url or path is incorrect"
 )
 
-
 type Sktsc404ApplicationJSON struct {
-    Error *Sktsc404ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sktsc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sktsc404ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc404ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
-
 
 type Sktsc500ApplicationJSONErrorEnum string
 
 const (
-    Sktsc500ApplicationJSONErrorEnumInternalServerError Sktsc500ApplicationJSONErrorEnum = "internal_server_error"
+	Sktsc500ApplicationJSONErrorEnumInternalServerError Sktsc500ApplicationJSONErrorEnum = "internal_server_error"
 )
-
-
 
 type Sktsc500ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sktsc500ApplicationJSONErrorDescriptionEnumInternalServerError Sktsc500ApplicationJSONErrorDescriptionEnum = "Internal server error"
+	Sktsc500ApplicationJSONErrorDescriptionEnumInternalServerError Sktsc500ApplicationJSONErrorDescriptionEnum = "Internal server error"
 )
 
-
 type Sktsc500ApplicationJSON struct {
-    Error *Sktsc500ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sktsc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sktsc500ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc500ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
-
 
 type Sktsc502ApplicationJSONErrorEnum string
 
 const (
-    Sktsc502ApplicationJSONErrorEnumBadGatewy Sktsc502ApplicationJSONErrorEnum = "bad_gatewy"
+	Sktsc502ApplicationJSONErrorEnumBadGatewy Sktsc502ApplicationJSONErrorEnum = "bad_gatewy"
 )
-
-
 
 type Sktsc502ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sktsc502ApplicationJSONErrorDescriptionEnumPublisherServiceReturnedAnInvalidResponse Sktsc502ApplicationJSONErrorDescriptionEnum = "Publisher service returned an invalid response"
+	Sktsc502ApplicationJSONErrorDescriptionEnumPublisherServiceReturnedAnInvalidResponse Sktsc502ApplicationJSONErrorDescriptionEnum = "Publisher service returned an invalid response"
 )
 
-
 type Sktsc502ApplicationJSON struct {
-    Error *Sktsc502ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sktsc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sktsc502ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc502ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
-
 
 type Sktsc503ApplicationJSONErrorEnum string
 
 const (
-    Sktsc503ApplicationJSONErrorEnumServiceUnavailable Sktsc503ApplicationJSONErrorEnum = "service_unavailable"
+	Sktsc503ApplicationJSONErrorEnumServiceUnavailable Sktsc503ApplicationJSONErrorEnum = "service_unavailable"
 )
-
-
 
 type Sktsc503ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sktsc503ApplicationJSONErrorDescriptionEnumPublisherServiceIsTemporarilyUnavailable Sktsc503ApplicationJSONErrorDescriptionEnum = "Publisher service is temporarily unavailable"
+	Sktsc503ApplicationJSONErrorDescriptionEnumPublisherServiceIsTemporarilyUnavailable Sktsc503ApplicationJSONErrorDescriptionEnum = "Publisher service is temporarily unavailable"
 )
 
-
 type Sktsc503ApplicationJSON struct {
-    Error *Sktsc503ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sktsc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sktsc503ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc503ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
-
 
 type Sktsc504ApplicationJSONErrorEnum string
 
 const (
-    Sktsc504ApplicationJSONErrorEnumGatewayTimeout Sktsc504ApplicationJSONErrorEnum = "gateway_timeout"
+	Sktsc504ApplicationJSONErrorEnumGatewayTimeout Sktsc504ApplicationJSONErrorEnum = "gateway_timeout"
 )
-
-
 
 type Sktsc504ApplicationJSONErrorDescriptionEnum string
 
 const (
-    Sktsc504ApplicationJSONErrorDescriptionEnumPublisherServiceDidNotRespondInTime Sktsc504ApplicationJSONErrorDescriptionEnum = "Publisher service did not respond in time"
+	Sktsc504ApplicationJSONErrorDescriptionEnumPublisherServiceDidNotRespondInTime Sktsc504ApplicationJSONErrorDescriptionEnum = "Publisher service did not respond in time"
 )
 
-
 type Sktsc504ApplicationJSON struct {
-    Error *Sktsc504ApplicationJSONErrorEnum `json:"error,omitempty"`
-    ErrorDescription *Sktsc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
-    
+	Error            *Sktsc504ApplicationJSONErrorEnum            `json:"error,omitempty"`
+	ErrorDescription *Sktsc504ApplicationJSONErrorDescriptionEnum `json:"errorDescription,omitempty"`
 }
 
 type SktscResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Sktsc400ApplicationJSONObject *Sktsc400ApplicationJSON 
-    Sktsc401ApplicationJSONObject *Sktsc401ApplicationJSON 
-    Sktsc404ApplicationJSONObject *Sktsc404ApplicationJSON 
-    Sktsc500ApplicationJSONObject *Sktsc500ApplicationJSON 
-    Sktsc502ApplicationJSONObject *Sktsc502ApplicationJSON 
-    Sktsc503ApplicationJSONObject *Sktsc503ApplicationJSON 
-    Sktsc504ApplicationJSONObject *Sktsc504ApplicationJSON 
-    
+	ContentType                   string
+	StatusCode                    int64
+	Sktsc400ApplicationJSONObject *Sktsc400ApplicationJSON
+	Sktsc401ApplicationJSONObject *Sktsc401ApplicationJSON
+	Sktsc404ApplicationJSONObject *Sktsc404ApplicationJSON
+	Sktsc500ApplicationJSONObject *Sktsc500ApplicationJSON
+	Sktsc502ApplicationJSONObject *Sktsc502ApplicationJSON
+	Sktsc503ApplicationJSONObject *Sktsc503ApplicationJSON
+	Sktsc504ApplicationJSONObject *Sktsc504ApplicationJSON
 }
-

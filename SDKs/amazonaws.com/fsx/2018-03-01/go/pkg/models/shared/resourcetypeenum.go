@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type ResourceTypeEnum string
 
 const (
-    ResourceTypeEnumFileSystem ResourceTypeEnum = "FILE_SYSTEM"
-ResourceTypeEnumVolume ResourceTypeEnum = "VOLUME"
+	ResourceTypeEnumFileSystem ResourceTypeEnum = "FILE_SYSTEM"
+	ResourceTypeEnumVolume     ResourceTypeEnum = "VOLUME"
 )
-
-

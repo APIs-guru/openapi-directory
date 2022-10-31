@@ -1,43 +1,38 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type UpdateDirectoryConfigXAmzTargetEnum string
 
 const (
-    UpdateDirectoryConfigXAmzTargetEnumPhotonAdminProxyServiceUpdateDirectoryConfig UpdateDirectoryConfigXAmzTargetEnum = "PhotonAdminProxyService.UpdateDirectoryConfig"
+	UpdateDirectoryConfigXAmzTargetEnumPhotonAdminProxyServiceUpdateDirectoryConfig UpdateDirectoryConfigXAmzTargetEnum = "PhotonAdminProxyService.UpdateDirectoryConfig"
 )
 
-
 type UpdateDirectoryConfigHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget UpdateDirectoryConfigXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                             `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                             `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                             `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                             `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                             `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                             `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                             `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        UpdateDirectoryConfigXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type UpdateDirectoryConfigRequest struct {
-    Headers UpdateDirectoryConfigHeaders 
-    Request shared.UpdateDirectoryConfigRequest `request:"mediaType=application/json"`
-    
+	Headers UpdateDirectoryConfigHeaders
+	Request shared.UpdateDirectoryConfigRequest `request:"mediaType=application/json"`
 }
 
 type UpdateDirectoryConfigResponse struct {
-    ConcurrentModificationException *interface{} 
-    ContentType string 
-    InvalidRoleException *interface{} 
-    OperationNotPermittedException *interface{} 
-    ResourceInUseException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    UpdateDirectoryConfigResult *shared.UpdateDirectoryConfigResult 
-    
+	ConcurrentModificationException *interface{}
+	ContentType                     string
+	InvalidRoleException            *interface{}
+	OperationNotPermittedException  *interface{}
+	ResourceInUseException          *interface{}
+	ResourceNotFoundException       *interface{}
+	StatusCode                      int64
+	UpdateDirectoryConfigResult     *shared.UpdateDirectoryConfigResult
 }
-

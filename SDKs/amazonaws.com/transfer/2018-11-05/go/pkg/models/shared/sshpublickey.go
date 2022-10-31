@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type SSHPublicKey struct {
-    DateImported time.Time `json:"DateImported"`
-    SSHPublicKeyBody string `json:"SshPublicKeyBody"`
-    SSHPublicKeyID string `json:"SshPublicKeyId"`
-    
+	DateImported     time.Time `json:"DateImported"`
+	SSHPublicKeyBody string    `json:"SshPublicKeyBody"`
+	SSHPublicKeyID   string    `json:"SshPublicKeyId"`
 }
-

@@ -1,31 +1,27 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PostForecastHistoryAndForecastHeaders struct {
-    Token *string `header:"style=simple,explode=false,name=Token"`
-    
+	Token *string `header:"style=simple,explode=false,name=Token"`
 }
 
 type PostForecastHistoryAndForecastRequests struct {
-    PlanningLevelRequest *shared.PlanningLevelRequest `request:"mediaType=application/*+json"`
-    PlanningLevelRequest1 *shared.PlanningLevelRequest `request:"mediaType=application/json"`
-    PlanningLevelRequest2 *shared.PlanningLevelRequest `request:"mediaType=text/json"`
-    
+	PlanningLevelRequest  *shared.PlanningLevelRequest `request:"mediaType=application/*+json"`
+	PlanningLevelRequest1 *shared.PlanningLevelRequest `request:"mediaType=application/json"`
+	PlanningLevelRequest2 *shared.PlanningLevelRequest `request:"mediaType=text/json"`
 }
 
 type PostForecastHistoryAndForecastRequest struct {
-    Headers PostForecastHistoryAndForecastHeaders 
-    Request *PostForecastHistoryAndForecastRequests 
-    
+	Headers PostForecastHistoryAndForecastHeaders
+	Request *PostForecastHistoryAndForecastRequests
 }
 
 type PostForecastHistoryAndForecastResponse struct {
-    Body []byte 
-    ContentType string 
-    HistoryAndForecastResponse *shared.HistoryAndForecastResponse 
-    StatusCode int64 
-    
+	Body                       []byte
+	ContentType                string
+	HistoryAndForecastResponse *shared.HistoryAndForecastResponse
+	StatusCode                 int64
 }
-

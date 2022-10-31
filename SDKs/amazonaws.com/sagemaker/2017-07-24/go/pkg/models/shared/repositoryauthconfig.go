@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RepositoryAuthConfig struct {
-    RepositoryCredentialsProviderArn string `json:"RepositoryCredentialsProviderArn"`
-    
+	RepositoryCredentialsProviderArn string `json:"RepositoryCredentialsProviderArn"`
 }
-

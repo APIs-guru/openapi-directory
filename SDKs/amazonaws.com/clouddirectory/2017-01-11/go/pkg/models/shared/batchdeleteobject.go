@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchDeleteObject struct {
-    ObjectReference ObjectReference `json:"ObjectReference"`
-    
+	ObjectReference ObjectReference `json:"ObjectReference"`
 }
-

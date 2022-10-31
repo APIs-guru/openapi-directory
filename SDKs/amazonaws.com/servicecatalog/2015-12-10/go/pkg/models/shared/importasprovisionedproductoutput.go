@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ImportAsProvisionedProductOutput struct {
-    RecordDetail *RecordDetail `json:"RecordDetail,omitempty"`
-    
+	RecordDetail *RecordDetail `json:"RecordDetail,omitempty"`
 }
-

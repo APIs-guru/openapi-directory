@@ -1,17 +1,15 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type EmailSendSalesInvoiceRequest struct {
-    Request shared.SalesInvoiceEmailInfoDto `request:"mediaType=application/json"`
-    
+	Request shared.SalesInvoiceEmailInfoDto `request:"mediaType=application/json"`
 }
 
 type EmailSendSalesInvoiceResponse struct {
-    ContentType string 
-    EmailSendSalesInvoice200ApplicationJSONObject map[string]interface{} 
-    StatusCode int64 
-    
+	ContentType                                   string
+	EmailSendSalesInvoice200ApplicationJSONObject map[string]interface{}
+	StatusCode                                    int64
 }
-

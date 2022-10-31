@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeFhirExportJobResponse struct {
-    ExportJobProperties ExportJobProperties `json:"ExportJobProperties"`
-    
+	ExportJobProperties ExportJobProperties `json:"ExportJobProperties"`
 }
-

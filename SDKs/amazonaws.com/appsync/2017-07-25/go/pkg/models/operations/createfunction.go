@@ -1,57 +1,51 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CreateFunctionPathParams struct {
-    APIID string `pathParam:"style=simple,explode=false,name=apiId"`
-    
+	APIID string `pathParam:"style=simple,explode=false,name=apiId"`
 }
 
 type CreateFunctionHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type CreateFunctionRequestBodySyncConfig struct {
-    ConflictDetection *shared.ConflictDetectionTypeEnum `json:"conflictDetection,omitempty"`
-    ConflictHandler *shared.ConflictHandlerTypeEnum `json:"conflictHandler,omitempty"`
-    LambdaConflictHandlerConfig *shared.LambdaConflictHandlerConfig `json:"lambdaConflictHandlerConfig,omitempty"`
-    
+	ConflictDetection           *shared.ConflictDetectionTypeEnum   `json:"conflictDetection,omitempty"`
+	ConflictHandler             *shared.ConflictHandlerTypeEnum     `json:"conflictHandler,omitempty"`
+	LambdaConflictHandlerConfig *shared.LambdaConflictHandlerConfig `json:"lambdaConflictHandlerConfig,omitempty"`
 }
 
 type CreateFunctionRequestBody struct {
-    DataSourceName string `json:"dataSourceName"`
-    Description *string `json:"description,omitempty"`
-    FunctionVersion string `json:"functionVersion"`
-    Name string `json:"name"`
-    RequestMappingTemplate *string `json:"requestMappingTemplate,omitempty"`
-    ResponseMappingTemplate *string `json:"responseMappingTemplate,omitempty"`
-    SyncConfig *CreateFunctionRequestBodySyncConfig `json:"syncConfig,omitempty"`
-    
+	DataSourceName          string                               `json:"dataSourceName"`
+	Description             *string                              `json:"description,omitempty"`
+	FunctionVersion         string                               `json:"functionVersion"`
+	Name                    string                               `json:"name"`
+	RequestMappingTemplate  *string                              `json:"requestMappingTemplate,omitempty"`
+	ResponseMappingTemplate *string                              `json:"responseMappingTemplate,omitempty"`
+	SyncConfig              *CreateFunctionRequestBodySyncConfig `json:"syncConfig,omitempty"`
 }
 
 type CreateFunctionRequest struct {
-    PathParams CreateFunctionPathParams 
-    Headers CreateFunctionHeaders 
-    Request CreateFunctionRequestBody `request:"mediaType=application/json"`
-    
+	PathParams CreateFunctionPathParams
+	Headers    CreateFunctionHeaders
+	Request    CreateFunctionRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateFunctionResponse struct {
-    ConcurrentModificationException *interface{} 
-    ContentType string 
-    CreateFunctionResponse *shared.CreateFunctionResponse 
-    InternalFailureException *interface{} 
-    NotFoundException *interface{} 
-    StatusCode int64 
-    UnauthorizedException *interface{} 
-    
+	ConcurrentModificationException *interface{}
+	ContentType                     string
+	CreateFunctionResponse          *shared.CreateFunctionResponse
+	InternalFailureException        *interface{}
+	NotFoundException               *interface{}
+	StatusCode                      int64
+	UnauthorizedException           *interface{}
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ManagedPropertyBundle struct {
-    ManagedProperty []ManagedProperty `json:"managedProperty,omitempty"`
-    
+	ManagedProperty []ManagedProperty `json:"managedProperty,omitempty"`
 }
-

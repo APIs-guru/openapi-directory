@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ItvPlans struct {
-    Plans []ItvPlanListItem `json:"plans"`
-    
+	Plans []ItvPlanListItem `json:"plans"`
 }
-

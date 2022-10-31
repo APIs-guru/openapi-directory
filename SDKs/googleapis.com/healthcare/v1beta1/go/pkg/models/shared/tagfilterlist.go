@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TagFilterList struct {
-    Tags []string `json:"tags,omitempty"`
-    
+	Tags []string `json:"tags,omitempty"`
 }
-

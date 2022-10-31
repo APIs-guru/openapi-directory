@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetQueryExecutionInput struct {
-    QueryExecutionID string `json:"QueryExecutionId"`
-    
+	QueryExecutionID string `json:"QueryExecutionId"`
 }
-

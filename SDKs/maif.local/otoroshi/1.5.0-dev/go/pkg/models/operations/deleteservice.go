@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DeleteServicePathParams struct {
-    ServiceID string `pathParam:"style=simple,explode=false,name=serviceId"`
-    
+	ServiceID string `pathParam:"style=simple,explode=false,name=serviceId"`
 }
 
 type DeleteServiceSecurity struct {
-    OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
-    
+	OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
 }
 
 type DeleteServiceRequest struct {
-    PathParams DeleteServicePathParams 
-    Security DeleteServiceSecurity 
-    
+	PathParams DeleteServicePathParams
+	Security   DeleteServiceSecurity
 }
 
 type DeleteServiceResponse struct {
-    ContentType string 
-    Deleted *shared.Deleted 
-    StatusCode int64 
-    
+	ContentType string
+	Deleted     *shared.Deleted
+	StatusCode  int64
 }
-

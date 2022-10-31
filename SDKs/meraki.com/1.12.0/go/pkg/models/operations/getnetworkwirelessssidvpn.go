@@ -1,22 +1,16 @@
 package operations
 
-
-
 type GetNetworkWirelessSsidVpnPathParams struct {
-    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
-    Number string `pathParam:"style=simple,explode=false,name=number"`
-    
+	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
+	Number    string `pathParam:"style=simple,explode=false,name=number"`
 }
 
 type GetNetworkWirelessSsidVpnRequest struct {
-    PathParams GetNetworkWirelessSsidVpnPathParams 
-    
+	PathParams GetNetworkWirelessSsidVpnPathParams
 }
 
 type GetNetworkWirelessSsidVpnResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetNetworkWirelessSsidVpn200ApplicationJSONObject map[string]interface{} 
-    
+	ContentType                                       string
+	StatusCode                                        int64
+	GetNetworkWirelessSsidVpn200ApplicationJSONObject map[string]interface{}
 }
-

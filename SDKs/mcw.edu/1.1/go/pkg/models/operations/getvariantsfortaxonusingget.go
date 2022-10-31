@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetVariantsForTaxonUsingGetPathParams struct {
-    TaxonID string `pathParam:"style=simple,explode=false,name=taxonId"`
-    
+	TaxonID string `pathParam:"style=simple,explode=false,name=taxonId"`
 }
 
 type GetVariantsForTaxonUsingGetRequest struct {
-    PathParams GetVariantsForTaxonUsingGetPathParams 
-    
+	PathParams GetVariantsForTaxonUsingGetPathParams
 }
 
 type GetVariantsForTaxonUsingGetResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

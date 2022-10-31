@@ -1,12 +1,8 @@
 package shared
 
-
-
 type Group struct {
-    FilterExpression *string `json:"FilterExpression,omitempty"`
-    GroupArn *string `json:"GroupARN,omitempty"`
-    GroupName *string `json:"GroupName,omitempty"`
-    InsightsConfiguration *InsightsConfiguration `json:"InsightsConfiguration,omitempty"`
-    
+	FilterExpression      *string                `json:"FilterExpression,omitempty"`
+	GroupArn              *string                `json:"GroupARN,omitempty"`
+	GroupName             *string                `json:"GroupName,omitempty"`
+	InsightsConfiguration *InsightsConfiguration `json:"InsightsConfiguration,omitempty"`
 }
-

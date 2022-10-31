@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type DependentHostedNumberOrderEnumVerificationTypeEnum string
 
 const (
-    DependentHostedNumberOrderEnumVerificationTypeEnumPhoneCall DependentHostedNumberOrderEnumVerificationTypeEnum = "phone-call"
-DependentHostedNumberOrderEnumVerificationTypeEnumPhoneBill DependentHostedNumberOrderEnumVerificationTypeEnum = "phone-bill"
+	DependentHostedNumberOrderEnumVerificationTypeEnumPhoneCall DependentHostedNumberOrderEnumVerificationTypeEnum = "phone-call"
+	DependentHostedNumberOrderEnumVerificationTypeEnumPhoneBill DependentHostedNumberOrderEnumVerificationTypeEnum = "phone-bill"
 )
-
-

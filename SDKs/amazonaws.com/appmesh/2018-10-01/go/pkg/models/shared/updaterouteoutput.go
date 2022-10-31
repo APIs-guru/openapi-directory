@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateRouteOutput struct {
-    Route *RouteData `json:"route,omitempty"`
-    
+	Route *RouteData `json:"route,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CustomBiddingScriptRef struct {
-    ResourceName *string `json:"resourceName,omitempty"`
-    
+	ResourceName *string `json:"resourceName,omitempty"`
 }
-

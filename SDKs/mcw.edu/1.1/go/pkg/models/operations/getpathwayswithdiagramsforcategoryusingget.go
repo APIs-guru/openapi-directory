@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetPathwaysWithDiagramsForCategoryUsingGetPathParams struct {
-    Category string `pathParam:"style=simple,explode=false,name=category"`
-    
+	Category string `pathParam:"style=simple,explode=false,name=category"`
 }
 
 type GetPathwaysWithDiagramsForCategoryUsingGetRequest struct {
-    PathParams GetPathwaysWithDiagramsForCategoryUsingGetPathParams 
-    
+	PathParams GetPathwaysWithDiagramsForCategoryUsingGetPathParams
 }
 
 type GetPathwaysWithDiagramsForCategoryUsingGetResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

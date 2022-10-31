@@ -1,33 +1,25 @@
 package operations
 
-
-
 type DeleteContainersNameOrIDPathParams struct {
-    NameOrID string `pathParam:"style=simple,explode=false,name=name_or_id"`
-    
+	NameOrID string `pathParam:"style=simple,explode=false,name=name_or_id"`
 }
 
 type DeleteContainersNameOrIDQueryParams struct {
-    Force *bool `queryParam:"style=form,explode=true,name=force"`
-    
+	Force *bool `queryParam:"style=form,explode=true,name=force"`
 }
 
 type DeleteContainersNameOrIDHeaders struct {
-    XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
-    XAuthToken string `header:"style=simple,explode=false,name=X-Auth-Token"`
-    
+	XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
+	XAuthToken     string `header:"style=simple,explode=false,name=X-Auth-Token"`
 }
 
 type DeleteContainersNameOrIDRequest struct {
-    PathParams DeleteContainersNameOrIDPathParams 
-    QueryParams DeleteContainersNameOrIDQueryParams 
-    Headers DeleteContainersNameOrIDHeaders 
-    
+	PathParams  DeleteContainersNameOrIDPathParams
+	QueryParams DeleteContainersNameOrIDQueryParams
+	Headers     DeleteContainersNameOrIDHeaders
 }
 
 type DeleteContainersNameOrIDResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

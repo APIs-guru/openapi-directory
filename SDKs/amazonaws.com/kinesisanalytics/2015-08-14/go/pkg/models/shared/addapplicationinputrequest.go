@@ -1,11 +1,7 @@
 package shared
 
-
-
 type AddApplicationInputRequest struct {
-    ApplicationName string `json:"ApplicationName"`
-    CurrentApplicationVersionID int64 `json:"CurrentApplicationVersionId"`
-    Input Input `json:"Input"`
-    
+	ApplicationName             string `json:"ApplicationName"`
+	CurrentApplicationVersionID int64  `json:"CurrentApplicationVersionId"`
+	Input                       Input  `json:"Input"`
 }
-

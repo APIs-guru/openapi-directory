@@ -1,30 +1,22 @@
 package operations
 
-
-
-
 type GetEsStateNameMediaTypeExtensionMediaTypeExtensionEnum string
 
 const (
-    GetEsStateNameMediaTypeExtensionMediaTypeExtensionEnumDotJSON GetEsStateNameMediaTypeExtensionMediaTypeExtensionEnum = ".json"
+	GetEsStateNameMediaTypeExtensionMediaTypeExtensionEnumDotJSON GetEsStateNameMediaTypeExtensionMediaTypeExtensionEnum = ".json"
 )
 
-
 type GetEsStateNameMediaTypeExtensionPathParams struct {
-    MediaTypeExtension GetEsStateNameMediaTypeExtensionMediaTypeExtensionEnum `pathParam:"style=simple,explode=false,name=mediaTypeExtension"`
-    StateName string `pathParam:"style=simple,explode=false,name=stateName"`
-    
+	MediaTypeExtension GetEsStateNameMediaTypeExtensionMediaTypeExtensionEnum `pathParam:"style=simple,explode=false,name=mediaTypeExtension"`
+	StateName          string                                                 `pathParam:"style=simple,explode=false,name=stateName"`
 }
 
 type GetEsStateNameMediaTypeExtensionRequest struct {
-    PathParams GetEsStateNameMediaTypeExtensionPathParams 
-    
+	PathParams GetEsStateNameMediaTypeExtensionPathParams
 }
 
 type GetEsStateNameMediaTypeExtensionResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

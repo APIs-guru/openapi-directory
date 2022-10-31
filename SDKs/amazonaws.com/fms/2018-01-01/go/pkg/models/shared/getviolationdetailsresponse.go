@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetViolationDetailsResponse struct {
-    ViolationDetail *ViolationDetail `json:"ViolationDetail,omitempty"`
-    
+	ViolationDetail *ViolationDetail `json:"ViolationDetail,omitempty"`
 }
-

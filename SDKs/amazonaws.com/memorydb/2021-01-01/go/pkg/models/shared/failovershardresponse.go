@@ -1,9 +1,5 @@
 package shared
 
-
-
 type FailoverShardResponse struct {
-    Cluster *Cluster `json:"Cluster,omitempty"`
-    
+	Cluster *Cluster `json:"Cluster,omitempty"`
 }
-

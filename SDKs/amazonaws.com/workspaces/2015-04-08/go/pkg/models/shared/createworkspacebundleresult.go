@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateWorkspaceBundleResult struct {
-    WorkspaceBundle *WorkspaceBundle `json:"WorkspaceBundle,omitempty"`
-    
+	WorkspaceBundle *WorkspaceBundle `json:"WorkspaceBundle,omitempty"`
 }
-

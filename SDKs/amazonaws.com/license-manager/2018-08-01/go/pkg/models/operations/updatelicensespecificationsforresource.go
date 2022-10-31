@@ -1,45 +1,40 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type UpdateLicenseSpecificationsForResourceXAmzTargetEnum string
 
 const (
-    UpdateLicenseSpecificationsForResourceXAmzTargetEnumAwsLicenseManagerUpdateLicenseSpecificationsForResource UpdateLicenseSpecificationsForResourceXAmzTargetEnum = "AWSLicenseManager.UpdateLicenseSpecificationsForResource"
+	UpdateLicenseSpecificationsForResourceXAmzTargetEnumAwsLicenseManagerUpdateLicenseSpecificationsForResource UpdateLicenseSpecificationsForResourceXAmzTargetEnum = "AWSLicenseManager.UpdateLicenseSpecificationsForResource"
 )
 
-
 type UpdateLicenseSpecificationsForResourceHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget UpdateLicenseSpecificationsForResourceXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                                              `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                                              `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                                              `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                                              `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                                              `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                                              `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                                              `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        UpdateLicenseSpecificationsForResourceXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type UpdateLicenseSpecificationsForResourceRequest struct {
-    Headers UpdateLicenseSpecificationsForResourceHeaders 
-    Request shared.UpdateLicenseSpecificationsForResourceRequest `request:"mediaType=application/json"`
-    
+	Headers UpdateLicenseSpecificationsForResourceHeaders
+	Request shared.UpdateLicenseSpecificationsForResourceRequest `request:"mediaType=application/json"`
 }
 
 type UpdateLicenseSpecificationsForResourceResponse struct {
-    AccessDeniedException *interface{} 
-    AuthorizationException *interface{} 
-    ContentType string 
-    InvalidParameterValueException *interface{} 
-    InvalidResourceStateException *interface{} 
-    LicenseUsageException *interface{} 
-    RateLimitExceededException *interface{} 
-    ServerInternalException *interface{} 
-    StatusCode int64 
-    UpdateLicenseSpecificationsForResourceResponse map[string]interface{} 
-    
+	AccessDeniedException                          *interface{}
+	AuthorizationException                         *interface{}
+	ContentType                                    string
+	InvalidParameterValueException                 *interface{}
+	InvalidResourceStateException                  *interface{}
+	LicenseUsageException                          *interface{}
+	RateLimitExceededException                     *interface{}
+	ServerInternalException                        *interface{}
+	StatusCode                                     int64
+	UpdateLicenseSpecificationsForResourceResponse map[string]interface{}
 }
-

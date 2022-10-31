@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DestinationReadList struct {
-    Destinations []DestinationRead `json:"destinations"`
-    
+	Destinations []DestinationRead `json:"destinations"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateEmbeddedObjectPositionResponse struct {
-    Position *EmbeddedObjectPosition `json:"position,omitempty"`
-    
+	Position *EmbeddedObjectPosition `json:"position,omitempty"`
 }
-

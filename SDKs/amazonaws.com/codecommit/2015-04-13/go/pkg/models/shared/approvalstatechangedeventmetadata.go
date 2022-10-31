@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ApprovalStateChangedEventMetadata struct {
-    ApprovalStatus *ApprovalStateEnum `json:"approvalStatus,omitempty"`
-    RevisionID *string `json:"revisionId,omitempty"`
-    
+	ApprovalStatus *ApprovalStateEnum `json:"approvalStatus,omitempty"`
+	RevisionID     *string            `json:"revisionId,omitempty"`
 }
-

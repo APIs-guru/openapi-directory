@@ -1,17 +1,15 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAnnotationsUsingPostRequest struct {
-    Request *shared.AnnotationRequest `request:"mediaType=application/json"`
-    
+	Request *shared.AnnotationRequest `request:"mediaType=application/json"`
 }
 
 type GetAnnotationsUsingPostResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

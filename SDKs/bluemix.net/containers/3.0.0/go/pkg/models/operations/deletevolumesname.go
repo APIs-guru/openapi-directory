@@ -1,27 +1,20 @@
 package operations
 
-
-
 type DeleteVolumesNamePathParams struct {
-    Name string `pathParam:"style=simple,explode=false,name=name"`
-    
+	Name string `pathParam:"style=simple,explode=false,name=name"`
 }
 
 type DeleteVolumesNameHeaders struct {
-    XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
-    XAuthToken string `header:"style=simple,explode=false,name=X-Auth-Token"`
-    
+	XAuthProjectID string `header:"style=simple,explode=false,name=X-Auth-Project-Id"`
+	XAuthToken     string `header:"style=simple,explode=false,name=X-Auth-Token"`
 }
 
 type DeleteVolumesNameRequest struct {
-    PathParams DeleteVolumesNamePathParams 
-    Headers DeleteVolumesNameHeaders 
-    
+	PathParams DeleteVolumesNamePathParams
+	Headers    DeleteVolumesNameHeaders
 }
 
 type DeleteVolumesNameResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

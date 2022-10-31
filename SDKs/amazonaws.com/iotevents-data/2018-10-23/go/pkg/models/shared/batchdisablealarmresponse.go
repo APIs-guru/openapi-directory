@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchDisableAlarmResponse struct {
-    ErrorEntries []BatchAlarmActionErrorEntry `json:"errorEntries,omitempty"`
-    
+	ErrorEntries []BatchAlarmActionErrorEntry `json:"errorEntries,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RootStorage struct {
-    Capacity *string `json:"Capacity,omitempty"`
-    
+	Capacity *string `json:"Capacity,omitempty"`
 }
-

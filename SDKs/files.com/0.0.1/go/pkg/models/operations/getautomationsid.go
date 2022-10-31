@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetAutomationsIDPathParams struct {
-    ID int32 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int32 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetAutomationsIDRequest struct {
-    PathParams GetAutomationsIDPathParams 
-    
+	PathParams GetAutomationsIDPathParams
 }
 
 type GetAutomationsIDResponse struct {
-    AutomationEntity *shared.AutomationEntity 
-    ContentType string 
-    StatusCode int64 
-    
+	AutomationEntity *shared.AutomationEntity
+	ContentType      string
+	StatusCode       int64
 }
-

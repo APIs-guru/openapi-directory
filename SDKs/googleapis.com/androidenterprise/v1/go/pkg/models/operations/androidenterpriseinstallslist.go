@@ -1,47 +1,42 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type AndroidenterpriseInstallsListPathParams struct {
-    DeviceID string `pathParam:"style=simple,explode=false,name=deviceId"`
-    EnterpriseID string `pathParam:"style=simple,explode=false,name=enterpriseId"`
-    UserID string `pathParam:"style=simple,explode=false,name=userId"`
-    
+	DeviceID     string `pathParam:"style=simple,explode=false,name=deviceId"`
+	EnterpriseID string `pathParam:"style=simple,explode=false,name=enterpriseId"`
+	UserID       string `pathParam:"style=simple,explode=false,name=userId"`
 }
 
 type AndroidenterpriseInstallsListQueryParams struct {
-    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
-    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
-    Callback *string `queryParam:"style=form,explode=true,name=callback"`
-    Fields *string `queryParam:"style=form,explode=true,name=fields"`
-    Key *string `queryParam:"style=form,explode=true,name=key"`
-    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
-    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
-    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
-    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
-    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
-    
+	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
+	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
+	Key            *string           `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
+	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
 type AndroidenterpriseInstallsListSecurity struct {
-    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-    
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
 }
 
 type AndroidenterpriseInstallsListRequest struct {
-    PathParams AndroidenterpriseInstallsListPathParams 
-    QueryParams AndroidenterpriseInstallsListQueryParams 
-    Security AndroidenterpriseInstallsListSecurity 
-    
+	PathParams  AndroidenterpriseInstallsListPathParams
+	QueryParams AndroidenterpriseInstallsListQueryParams
+	Security    AndroidenterpriseInstallsListSecurity
 }
 
 type AndroidenterpriseInstallsListResponse struct {
-    ContentType string 
-    InstallsListResponse *shared.InstallsListResponse 
-    StatusCode int64 
-    
+	ContentType          string
+	InstallsListResponse *shared.InstallsListResponse
+	StatusCode           int64
 }
-

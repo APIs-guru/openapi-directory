@@ -1,148 +1,130 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ObWriteInternationalStandingOrderResponse7DataCharges struct {
-    Amount ObActiveOrHistoricCurrencyAndAmount `json:"Amount"`
-    ChargeBearer ObChargeBearerType1CodeEnum `json:"ChargeBearer"`
-    Type string `json:"Type"`
-    
+	Amount       ObActiveOrHistoricCurrencyAndAmount `json:"Amount"`
+	ChargeBearer ObChargeBearerType1CodeEnum         `json:"ChargeBearer"`
+	Type         string                              `json:"Type"`
 }
 
 type ObWriteInternationalStandingOrderResponse7DataInitiationCreditor struct {
-    Name *string `json:"Name,omitempty"`
-    PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`
-    
+	Name          *string           `json:"Name,omitempty"`
+	PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`
 }
 
 type ObWriteInternationalStandingOrderResponse7DataInitiationCreditorAccount struct {
-    Identification string `json:"Identification"`
-    Name string `json:"Name"`
-    SchemeName string `json:"SchemeName"`
-    SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
-    
+	Identification          string  `json:"Identification"`
+	Name                    string  `json:"Name"`
+	SchemeName              string  `json:"SchemeName"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteInternationalStandingOrderResponse7DataInitiationCreditorAgent struct {
-    Identification *string `json:"Identification,omitempty"`
-    Name *string `json:"Name,omitempty"`
-    PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`
-    SchemeName *string `json:"SchemeName,omitempty"`
-    
+	Identification *string           `json:"Identification,omitempty"`
+	Name           *string           `json:"Name,omitempty"`
+	PostalAddress  *ObPostalAddress6 `json:"PostalAddress,omitempty"`
+	SchemeName     *string           `json:"SchemeName,omitempty"`
 }
 
 type ObWriteInternationalStandingOrderResponse7DataInitiationDebtorAccount struct {
-    Identification string `json:"Identification"`
-    Name *string `json:"Name,omitempty"`
-    SchemeName string `json:"SchemeName"`
-    SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
-    
+	Identification          string  `json:"Identification"`
+	Name                    *string `json:"Name,omitempty"`
+	SchemeName              string  `json:"SchemeName"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteInternationalStandingOrderResponse7DataInitiationInstructedAmount struct {
-    Amount string `json:"Amount"`
-    Currency string `json:"Currency"`
-    
+	Amount   string `json:"Amount"`
+	Currency string `json:"Currency"`
 }
 
 type ObWriteInternationalStandingOrderResponse7DataInitiation struct {
-    ChargeBearer *ObChargeBearerType1CodeEnum `json:"ChargeBearer,omitempty"`
-    Creditor *ObWriteInternationalStandingOrderResponse7DataInitiationCreditor `json:"Creditor,omitempty"`
-    CreditorAccount ObWriteInternationalStandingOrderResponse7DataInitiationCreditorAccount `json:"CreditorAccount"`
-    CreditorAgent *ObWriteInternationalStandingOrderResponse7DataInitiationCreditorAgent `json:"CreditorAgent,omitempty"`
-    CurrencyOfTransfer string `json:"CurrencyOfTransfer"`
-    DebtorAccount *ObWriteInternationalStandingOrderResponse7DataInitiationDebtorAccount `json:"DebtorAccount,omitempty"`
-    DestinationCountryCode *string `json:"DestinationCountryCode,omitempty"`
-    ExtendedPurpose *string `json:"ExtendedPurpose,omitempty"`
-    FinalPaymentDateTime *time.Time `json:"FinalPaymentDateTime,omitempty"`
-    FirstPaymentDateTime time.Time `json:"FirstPaymentDateTime"`
-    Frequency string `json:"Frequency"`
-    InstructedAmount ObWriteInternationalStandingOrderResponse7DataInitiationInstructedAmount `json:"InstructedAmount"`
-    NumberOfPayments *string `json:"NumberOfPayments,omitempty"`
-    Purpose *string `json:"Purpose,omitempty"`
-    Reference *string `json:"Reference,omitempty"`
-    SupplementaryData map[string]interface{} `json:"SupplementaryData,omitempty"`
-    
+	ChargeBearer           *ObChargeBearerType1CodeEnum                                             `json:"ChargeBearer,omitempty"`
+	Creditor               *ObWriteInternationalStandingOrderResponse7DataInitiationCreditor        `json:"Creditor,omitempty"`
+	CreditorAccount        ObWriteInternationalStandingOrderResponse7DataInitiationCreditorAccount  `json:"CreditorAccount"`
+	CreditorAgent          *ObWriteInternationalStandingOrderResponse7DataInitiationCreditorAgent   `json:"CreditorAgent,omitempty"`
+	CurrencyOfTransfer     string                                                                   `json:"CurrencyOfTransfer"`
+	DebtorAccount          *ObWriteInternationalStandingOrderResponse7DataInitiationDebtorAccount   `json:"DebtorAccount,omitempty"`
+	DestinationCountryCode *string                                                                  `json:"DestinationCountryCode,omitempty"`
+	ExtendedPurpose        *string                                                                  `json:"ExtendedPurpose,omitempty"`
+	FinalPaymentDateTime   *time.Time                                                               `json:"FinalPaymentDateTime,omitempty"`
+	FirstPaymentDateTime   time.Time                                                                `json:"FirstPaymentDateTime"`
+	Frequency              string                                                                   `json:"Frequency"`
+	InstructedAmount       ObWriteInternationalStandingOrderResponse7DataInitiationInstructedAmount `json:"InstructedAmount"`
+	NumberOfPayments       *string                                                                  `json:"NumberOfPayments,omitempty"`
+	Purpose                *string                                                                  `json:"Purpose,omitempty"`
+	Reference              *string                                                                  `json:"Reference,omitempty"`
+	SupplementaryData      map[string]interface{}                                                   `json:"SupplementaryData,omitempty"`
 }
-
 
 type ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnum string
 
 const (
-    ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnumAuthorised ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnum = "Authorised"
-ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnumAwaitingFurtherAuthorisation ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnum = "AwaitingFurtherAuthorisation"
-ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnumRejected ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnum = "Rejected"
+	ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnumAuthorised                   ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnum = "Authorised"
+	ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnumAwaitingFurtherAuthorisation ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnum = "AwaitingFurtherAuthorisation"
+	ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnumRejected                     ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnum = "Rejected"
 )
 
-
 type ObWriteInternationalStandingOrderResponse7DataMultiAuthorisation struct {
-    ExpirationDateTime *time.Time `json:"ExpirationDateTime,omitempty"`
-    LastUpdateDateTime *time.Time `json:"LastUpdateDateTime,omitempty"`
-    NumberReceived *int64 `json:"NumberReceived,omitempty"`
-    NumberRequired *int64 `json:"NumberRequired,omitempty"`
-    Status ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnum `json:"Status"`
-    
+	ExpirationDateTime *time.Time                                                                 `json:"ExpirationDateTime,omitempty"`
+	LastUpdateDateTime *time.Time                                                                 `json:"LastUpdateDateTime,omitempty"`
+	NumberReceived     *int64                                                                     `json:"NumberReceived,omitempty"`
+	NumberRequired     *int64                                                                     `json:"NumberRequired,omitempty"`
+	Status             ObWriteInternationalStandingOrderResponse7DataMultiAuthorisationStatusEnum `json:"Status"`
 }
 
 type ObWriteInternationalStandingOrderResponse7DataRefundAccount struct {
-    Identification string `json:"Identification"`
-    Name string `json:"Name"`
-    SchemeName string `json:"SchemeName"`
-    SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
-    
+	Identification          string  `json:"Identification"`
+	Name                    string  `json:"Name"`
+	SchemeName              string  `json:"SchemeName"`
+	SecondaryIdentification *string `json:"SecondaryIdentification,omitempty"`
 }
 
 type ObWriteInternationalStandingOrderResponse7DataRefundAgent struct {
-    Identification *string `json:"Identification,omitempty"`
-    Name *string `json:"Name,omitempty"`
-    PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`
-    SchemeName *string `json:"SchemeName,omitempty"`
-    
+	Identification *string           `json:"Identification,omitempty"`
+	Name           *string           `json:"Name,omitempty"`
+	PostalAddress  *ObPostalAddress6 `json:"PostalAddress,omitempty"`
+	SchemeName     *string           `json:"SchemeName,omitempty"`
 }
 
 type ObWriteInternationalStandingOrderResponse7DataRefundCreditor struct {
-    Name *string `json:"Name,omitempty"`
-    PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`
-    
+	Name          *string           `json:"Name,omitempty"`
+	PostalAddress *ObPostalAddress6 `json:"PostalAddress,omitempty"`
 }
 
 type ObWriteInternationalStandingOrderResponse7DataRefund struct {
-    Account ObWriteInternationalStandingOrderResponse7DataRefundAccount `json:"Account"`
-    Agent *ObWriteInternationalStandingOrderResponse7DataRefundAgent `json:"Agent,omitempty"`
-    Creditor *ObWriteInternationalStandingOrderResponse7DataRefundCreditor `json:"Creditor,omitempty"`
-    
+	Account  ObWriteInternationalStandingOrderResponse7DataRefundAccount   `json:"Account"`
+	Agent    *ObWriteInternationalStandingOrderResponse7DataRefundAgent    `json:"Agent,omitempty"`
+	Creditor *ObWriteInternationalStandingOrderResponse7DataRefundCreditor `json:"Creditor,omitempty"`
 }
-
 
 type ObWriteInternationalStandingOrderResponse7DataStatusEnum string
 
 const (
-    ObWriteInternationalStandingOrderResponse7DataStatusEnumCancelled ObWriteInternationalStandingOrderResponse7DataStatusEnum = "Cancelled"
-ObWriteInternationalStandingOrderResponse7DataStatusEnumInitiationCompleted ObWriteInternationalStandingOrderResponse7DataStatusEnum = "InitiationCompleted"
-ObWriteInternationalStandingOrderResponse7DataStatusEnumInitiationFailed ObWriteInternationalStandingOrderResponse7DataStatusEnum = "InitiationFailed"
-ObWriteInternationalStandingOrderResponse7DataStatusEnumInitiationPending ObWriteInternationalStandingOrderResponse7DataStatusEnum = "InitiationPending"
+	ObWriteInternationalStandingOrderResponse7DataStatusEnumCancelled           ObWriteInternationalStandingOrderResponse7DataStatusEnum = "Cancelled"
+	ObWriteInternationalStandingOrderResponse7DataStatusEnumInitiationCompleted ObWriteInternationalStandingOrderResponse7DataStatusEnum = "InitiationCompleted"
+	ObWriteInternationalStandingOrderResponse7DataStatusEnumInitiationFailed    ObWriteInternationalStandingOrderResponse7DataStatusEnum = "InitiationFailed"
+	ObWriteInternationalStandingOrderResponse7DataStatusEnumInitiationPending   ObWriteInternationalStandingOrderResponse7DataStatusEnum = "InitiationPending"
 )
 
-
 type ObWriteInternationalStandingOrderResponse7Data struct {
-    Charges []ObWriteInternationalStandingOrderResponse7DataCharges `json:"Charges,omitempty"`
-    ConsentID string `json:"ConsentId"`
-    CreationDateTime time.Time `json:"CreationDateTime"`
-    Debtor *ObCashAccountDebtor4 `json:"Debtor,omitempty"`
-    Initiation ObWriteInternationalStandingOrderResponse7DataInitiation `json:"Initiation"`
-    InternationalStandingOrderID string `json:"InternationalStandingOrderId"`
-    MultiAuthorisation *ObWriteInternationalStandingOrderResponse7DataMultiAuthorisation `json:"MultiAuthorisation,omitempty"`
-    Refund *ObWriteInternationalStandingOrderResponse7DataRefund `json:"Refund,omitempty"`
-    Status ObWriteInternationalStandingOrderResponse7DataStatusEnum `json:"Status"`
-    StatusUpdateDateTime time.Time `json:"StatusUpdateDateTime"`
-    
+	Charges                      []ObWriteInternationalStandingOrderResponse7DataCharges           `json:"Charges,omitempty"`
+	ConsentID                    string                                                            `json:"ConsentId"`
+	CreationDateTime             time.Time                                                         `json:"CreationDateTime"`
+	Debtor                       *ObCashAccountDebtor4                                             `json:"Debtor,omitempty"`
+	Initiation                   ObWriteInternationalStandingOrderResponse7DataInitiation          `json:"Initiation"`
+	InternationalStandingOrderID string                                                            `json:"InternationalStandingOrderId"`
+	MultiAuthorisation           *ObWriteInternationalStandingOrderResponse7DataMultiAuthorisation `json:"MultiAuthorisation,omitempty"`
+	Refund                       *ObWriteInternationalStandingOrderResponse7DataRefund             `json:"Refund,omitempty"`
+	Status                       ObWriteInternationalStandingOrderResponse7DataStatusEnum          `json:"Status"`
+	StatusUpdateDateTime         time.Time                                                         `json:"StatusUpdateDateTime"`
 }
 
 type ObWriteInternationalStandingOrderResponse7 struct {
-    Data ObWriteInternationalStandingOrderResponse7Data `json:"Data"`
-    Links *Links `json:"Links,omitempty"`
-    Meta *Meta `json:"Meta,omitempty"`
-    
+	Data  ObWriteInternationalStandingOrderResponse7Data `json:"Data"`
+	Links *Links                                         `json:"Links,omitempty"`
+	Meta  *Meta                                          `json:"Meta,omitempty"`
 }
-

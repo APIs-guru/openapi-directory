@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TflAPIPresentationEntitiesAccidentStatsVehicle struct {
-    Type *string `json:"type,omitempty"`
-    
+	Type *string `json:"type,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteLunaClientRequest struct {
-    ClientArn string `json:"ClientArn"`
-    
+	ClientArn string `json:"ClientArn"`
 }
-

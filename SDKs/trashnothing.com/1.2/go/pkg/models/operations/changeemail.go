@@ -1,20 +1,14 @@
 package operations
 
-
-
 type ChangeEmailRequestBody struct {
-    Address string `multipartForm:"name=address"`
-    
+	Address string `multipartForm:"name=address"`
 }
 
 type ChangeEmailRequest struct {
-    Request ChangeEmailRequestBody `request:"mediaType=multipart/form-data"`
-    
+	Request ChangeEmailRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 type ChangeEmailResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

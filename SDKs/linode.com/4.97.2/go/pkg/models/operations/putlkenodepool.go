@@ -1,41 +1,35 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PutLkeNodePoolPathParams struct {
-    ClusterID int64 `pathParam:"style=simple,explode=false,name=clusterId"`
-    PoolID int64 `pathParam:"style=simple,explode=false,name=poolId"`
-    
+	ClusterID int64 `pathParam:"style=simple,explode=false,name=clusterId"`
+	PoolID    int64 `pathParam:"style=simple,explode=false,name=poolId"`
 }
 
 type PutLkeNodePoolSecurityOption1 struct {
-    PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-    
+	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
 }
 
 type PutLkeNodePoolSecurityOption2 struct {
-    Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-    
+	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
 }
 
 type PutLkeNodePoolSecurity struct {
-    Option1 *PutLkeNodePoolSecurityOption1 `security:"option"`
-    Option2 *PutLkeNodePoolSecurityOption2 `security:"option"`
-    
+	Option1 *PutLkeNodePoolSecurityOption1 `security:"option"`
+	Option2 *PutLkeNodePoolSecurityOption2 `security:"option"`
 }
 
 type PutLkeNodePoolRequest struct {
-    PathParams PutLkeNodePoolPathParams 
-    Request *interface{} `request:"mediaType=application/json"`
-    Security PutLkeNodePoolSecurity 
-    
+	PathParams PutLkeNodePoolPathParams
+	Request    *interface{} `request:"mediaType=application/json"`
+	Security   PutLkeNodePoolSecurity
 }
 
 type PutLkeNodePoolResponse struct {
-    ContentType string 
-    LkeNodePool *shared.LkeNodePool 
-    StatusCode int64 
-    
+	ContentType string
+	LkeNodePool *shared.LkeNodePool
+	StatusCode  int64
 }
-

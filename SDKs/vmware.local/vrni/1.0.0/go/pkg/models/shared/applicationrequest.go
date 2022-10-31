@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ApplicationRequest struct {
-    Name *string `json:"name,omitempty"`
-    
+	Name *string `json:"name,omitempty"`
 }
-

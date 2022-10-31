@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostCreateCapacityReservationActionEnum string
 
 const (
-    PostCreateCapacityReservationActionEnumCreateCapacityReservation PostCreateCapacityReservationActionEnum = "CreateCapacityReservation"
+	PostCreateCapacityReservationActionEnumCreateCapacityReservation PostCreateCapacityReservationActionEnum = "CreateCapacityReservation"
 )
-
-
 
 type PostCreateCapacityReservationVersionEnum string
 
 const (
-    PostCreateCapacityReservationVersionEnumTwoThousandAndSixteen1115 PostCreateCapacityReservationVersionEnum = "2016-11-15"
+	PostCreateCapacityReservationVersionEnumTwoThousandAndSixteen1115 PostCreateCapacityReservationVersionEnum = "2016-11-15"
 )
 
-
 type PostCreateCapacityReservationQueryParams struct {
-    Action PostCreateCapacityReservationActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostCreateCapacityReservationVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostCreateCapacityReservationActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostCreateCapacityReservationVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostCreateCapacityReservationHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostCreateCapacityReservationRequest struct {
-    QueryParams PostCreateCapacityReservationQueryParams 
-    Headers PostCreateCapacityReservationHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostCreateCapacityReservationQueryParams
+	Headers     PostCreateCapacityReservationHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostCreateCapacityReservationResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,20 +1,14 @@
 package operations
 
-
-
 type DeleteGeofencesIDPathParams struct {
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type DeleteGeofencesIDRequest struct {
-    PathParams DeleteGeofencesIDPathParams 
-    
+	PathParams DeleteGeofencesIDPathParams
 }
 
 type DeleteGeofencesIDResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

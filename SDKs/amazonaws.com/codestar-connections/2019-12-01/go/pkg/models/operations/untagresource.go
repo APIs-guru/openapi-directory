@@ -1,39 +1,34 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type UntagResourceXAmzTargetEnum string
 
 const (
-    UntagResourceXAmzTargetEnumComAmazonawsCodestarConnectionsCodeStarConnections20191201UntagResource UntagResourceXAmzTargetEnum = "com.amazonaws.codestar.connections.CodeStar_connections_20191201.UntagResource"
+	UntagResourceXAmzTargetEnumComAmazonawsCodestarConnectionsCodeStarConnections20191201UntagResource UntagResourceXAmzTargetEnum = "com.amazonaws.codestar.connections.CodeStar_connections_20191201.UntagResource"
 )
 
-
 type UntagResourceHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget UntagResourceXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                     `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                     `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                     `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                     `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                     `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                     `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                     `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        UntagResourceXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type UntagResourceRequest struct {
-    Headers UntagResourceHeaders 
-    Request shared.UntagResourceInput `request:"mediaType=application/json"`
-    
+	Headers UntagResourceHeaders
+	Request shared.UntagResourceInput `request:"mediaType=application/json"`
 }
 
 type UntagResourceResponse struct {
-    ContentType string 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    UntagResourceOutput map[string]interface{} 
-    
+	ContentType               string
+	ResourceNotFoundException *interface{}
+	StatusCode                int64
+	UntagResourceOutput       map[string]interface{}
 }
-

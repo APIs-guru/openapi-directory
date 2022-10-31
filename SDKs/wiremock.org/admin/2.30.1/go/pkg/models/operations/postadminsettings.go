@@ -1,20 +1,14 @@
 package operations
 
-
-
 type PostAdminSettingsRequestBody struct {
-    FixedDelay *float64 `json:"fixedDelay,omitempty"`
-    
+	FixedDelay *float64 `json:"fixedDelay,omitempty"`
 }
 
 type PostAdminSettingsRequest struct {
-    Request PostAdminSettingsRequestBody `request:"mediaType=application/json"`
-    
+	Request PostAdminSettingsRequestBody `request:"mediaType=application/json"`
 }
 
 type PostAdminSettingsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

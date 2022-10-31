@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type VatAnalysisTypesGetResponse struct {
-    ContentType string 
-    PageResultVatAnalysisTypeDto *shared.PageResultVatAnalysisTypeDto 
-    StatusCode int64 
-    
+	ContentType                  string
+	PageResultVatAnalysisTypeDto *shared.PageResultVatAnalysisTypeDto
+	StatusCode                   int64
 }
-

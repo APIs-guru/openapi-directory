@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetRealmAuthenticationFormActionProvidersPathParams struct {
-    Realm string `pathParam:"style=simple,explode=false,name=realm"`
-    
+	Realm string `pathParam:"style=simple,explode=false,name=realm"`
 }
 
 type GetRealmAuthenticationFormActionProvidersRequest struct {
-    PathParams GetRealmAuthenticationFormActionProvidersPathParams 
-    
+	PathParams GetRealmAuthenticationFormActionProvidersPathParams
 }
 
 type GetRealmAuthenticationFormActionProvidersResponse struct {
-    ContentType string 
-    GetRealmAuthenticationFormActionProviders2XxApplicationJSONObjects []map[string]interface{} 
-    StatusCode int64 
-    
+	ContentType                                                        string
+	GetRealmAuthenticationFormActionProviders2XxApplicationJSONObjects []map[string]interface{}
+	StatusCode                                                         int64
 }
-

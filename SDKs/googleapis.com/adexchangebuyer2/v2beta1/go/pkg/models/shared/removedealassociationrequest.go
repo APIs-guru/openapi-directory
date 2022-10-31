@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RemoveDealAssociationRequest struct {
-    Association *CreativeDealAssociation `json:"association,omitempty"`
-    
+	Association *CreativeDealAssociation `json:"association,omitempty"`
 }
-

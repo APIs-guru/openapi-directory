@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PutOrganizationConfigRuleResponse struct {
-    OrganizationConfigRuleArn *string `json:"OrganizationConfigRuleArn,omitempty"`
-    
+	OrganizationConfigRuleArn *string `json:"OrganizationConfigRuleArn,omitempty"`
 }
-

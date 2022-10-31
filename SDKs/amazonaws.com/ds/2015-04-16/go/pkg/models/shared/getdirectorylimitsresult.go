@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetDirectoryLimitsResult struct {
-    DirectoryLimits *DirectoryLimits `json:"DirectoryLimits,omitempty"`
-    
+	DirectoryLimits *DirectoryLimits `json:"DirectoryLimits,omitempty"`
 }
-

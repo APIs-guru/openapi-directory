@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListServiceBindingsResponse struct {
-    NextPageToken *string `json:"nextPageToken,omitempty"`
-    ServiceBindings []ServiceBinding `json:"serviceBindings,omitempty"`
-    
+	NextPageToken   *string          `json:"nextPageToken,omitempty"`
+	ServiceBindings []ServiceBinding `json:"serviceBindings,omitempty"`
 }
-

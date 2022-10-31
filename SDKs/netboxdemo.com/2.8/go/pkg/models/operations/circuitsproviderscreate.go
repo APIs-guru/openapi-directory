@@ -1,17 +1,15 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CircuitsProvidersCreateRequest struct {
-    Request shared.Provider `request:"mediaType=application/json"`
-    
+	Request shared.Provider `request:"mediaType=application/json"`
 }
 
 type CircuitsProvidersCreateResponse struct {
-    ContentType string 
-    Provider *shared.Provider 
-    StatusCode int64 
-    
+	ContentType string
+	Provider    *shared.Provider
+	StatusCode  int64
 }
-

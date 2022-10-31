@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetDiskSnapshotRequest struct {
-    DiskSnapshotName string `json:"diskSnapshotName"`
-    
+	DiskSnapshotName string `json:"diskSnapshotName"`
 }
-

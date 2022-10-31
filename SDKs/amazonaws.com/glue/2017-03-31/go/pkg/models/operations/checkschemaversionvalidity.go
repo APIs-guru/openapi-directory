@@ -1,41 +1,36 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type CheckSchemaVersionValidityXAmzTargetEnum string
 
 const (
-    CheckSchemaVersionValidityXAmzTargetEnumAwsGlueCheckSchemaVersionValidity CheckSchemaVersionValidityXAmzTargetEnum = "AWSGlue.CheckSchemaVersionValidity"
+	CheckSchemaVersionValidityXAmzTargetEnumAwsGlueCheckSchemaVersionValidity CheckSchemaVersionValidityXAmzTargetEnum = "AWSGlue.CheckSchemaVersionValidity"
 )
 
-
 type CheckSchemaVersionValidityHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget CheckSchemaVersionValidityXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                                  `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                                  `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                                  `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                                  `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                                  `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                                  `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                                  `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        CheckSchemaVersionValidityXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type CheckSchemaVersionValidityRequest struct {
-    Headers CheckSchemaVersionValidityHeaders 
-    Request shared.CheckSchemaVersionValidityInput `request:"mediaType=application/json"`
-    
+	Headers CheckSchemaVersionValidityHeaders
+	Request shared.CheckSchemaVersionValidityInput `request:"mediaType=application/json"`
 }
 
 type CheckSchemaVersionValidityResponse struct {
-    AccessDeniedException *interface{} 
-    CheckSchemaVersionValidityResponse *shared.CheckSchemaVersionValidityResponse 
-    ContentType string 
-    InternalServiceException *interface{} 
-    InvalidInputException *interface{} 
-    StatusCode int64 
-    
+	AccessDeniedException              *interface{}
+	CheckSchemaVersionValidityResponse *shared.CheckSchemaVersionValidityResponse
+	ContentType                        string
+	InternalServiceException           *interface{}
+	InvalidInputException              *interface{}
+	StatusCode                         int64
 }
-

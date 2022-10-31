@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostRegisterTransitGatewayMulticastGroupMembersActionEnum string
 
 const (
-    PostRegisterTransitGatewayMulticastGroupMembersActionEnumRegisterTransitGatewayMulticastGroupMembers PostRegisterTransitGatewayMulticastGroupMembersActionEnum = "RegisterTransitGatewayMulticastGroupMembers"
+	PostRegisterTransitGatewayMulticastGroupMembersActionEnumRegisterTransitGatewayMulticastGroupMembers PostRegisterTransitGatewayMulticastGroupMembersActionEnum = "RegisterTransitGatewayMulticastGroupMembers"
 )
-
-
 
 type PostRegisterTransitGatewayMulticastGroupMembersVersionEnum string
 
 const (
-    PostRegisterTransitGatewayMulticastGroupMembersVersionEnumTwoThousandAndSixteen1115 PostRegisterTransitGatewayMulticastGroupMembersVersionEnum = "2016-11-15"
+	PostRegisterTransitGatewayMulticastGroupMembersVersionEnumTwoThousandAndSixteen1115 PostRegisterTransitGatewayMulticastGroupMembersVersionEnum = "2016-11-15"
 )
 
-
 type PostRegisterTransitGatewayMulticastGroupMembersQueryParams struct {
-    Action PostRegisterTransitGatewayMulticastGroupMembersActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostRegisterTransitGatewayMulticastGroupMembersVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostRegisterTransitGatewayMulticastGroupMembersActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostRegisterTransitGatewayMulticastGroupMembersVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostRegisterTransitGatewayMulticastGroupMembersHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostRegisterTransitGatewayMulticastGroupMembersRequest struct {
-    QueryParams PostRegisterTransitGatewayMulticastGroupMembersQueryParams 
-    Headers PostRegisterTransitGatewayMulticastGroupMembersHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostRegisterTransitGatewayMulticastGroupMembersQueryParams
+	Headers     PostRegisterTransitGatewayMulticastGroupMembersHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostRegisterTransitGatewayMulticastGroupMembersResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,21 +1,15 @@
 package operations
 
-
-
 type UserContentDefinitionsDeleteUserContentDefinitionPathParams struct {
-    UserContentDefinitionID int32 `pathParam:"style=simple,explode=false,name=userContentDefinitionID"`
-    
+	UserContentDefinitionID int32 `pathParam:"style=simple,explode=false,name=userContentDefinitionID"`
 }
 
 type UserContentDefinitionsDeleteUserContentDefinitionRequest struct {
-    PathParams UserContentDefinitionsDeleteUserContentDefinitionPathParams 
-    
+	PathParams UserContentDefinitionsDeleteUserContentDefinitionPathParams
 }
 
 type UserContentDefinitionsDeleteUserContentDefinitionResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

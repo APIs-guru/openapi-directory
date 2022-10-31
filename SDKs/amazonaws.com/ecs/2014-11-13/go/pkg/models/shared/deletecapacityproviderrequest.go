@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteCapacityProviderRequest struct {
-    CapacityProvider string `json:"capacityProvider"`
-    
+	CapacityProvider string `json:"capacityProvider"`
 }
-

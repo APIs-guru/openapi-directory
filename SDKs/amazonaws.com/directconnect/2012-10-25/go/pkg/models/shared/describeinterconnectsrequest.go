@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeInterconnectsRequest struct {
-    InterconnectID *string `json:"interconnectId,omitempty"`
-    
+	InterconnectID *string `json:"interconnectId,omitempty"`
 }
-

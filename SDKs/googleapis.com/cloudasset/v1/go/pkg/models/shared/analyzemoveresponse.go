@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AnalyzeMoveResponse struct {
-    MoveAnalysis []MoveAnalysis `json:"moveAnalysis,omitempty"`
-    
+	MoveAnalysis []MoveAnalysis `json:"moveAnalysis,omitempty"`
 }
-

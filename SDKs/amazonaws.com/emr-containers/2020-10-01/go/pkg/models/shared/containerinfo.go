@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ContainerInfo struct {
-    EksInfo *EksInfo `json:"eksInfo,omitempty"`
-    
+	EksInfo *EksInfo `json:"eksInfo,omitempty"`
 }
-

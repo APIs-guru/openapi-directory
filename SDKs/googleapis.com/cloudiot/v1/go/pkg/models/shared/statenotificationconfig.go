@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StateNotificationConfig struct {
-    PubsubTopicName *string `json:"pubsubTopicName,omitempty"`
-    
+	PubsubTopicName *string `json:"pubsubTopicName,omitempty"`
 }
-

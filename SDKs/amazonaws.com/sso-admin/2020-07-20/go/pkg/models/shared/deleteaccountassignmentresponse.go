@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteAccountAssignmentResponse struct {
-    AccountAssignmentDeletionStatus *AccountAssignmentOperationStatus `json:"AccountAssignmentDeletionStatus,omitempty"`
-    
+	AccountAssignmentDeletionStatus *AccountAssignmentOperationStatus `json:"AccountAssignmentDeletionStatus,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateScheduledAuditResponse struct {
-    ScheduledAuditArn *string `json:"scheduledAuditArn,omitempty"`
-    
+	ScheduledAuditArn *string `json:"scheduledAuditArn,omitempty"`
 }
-

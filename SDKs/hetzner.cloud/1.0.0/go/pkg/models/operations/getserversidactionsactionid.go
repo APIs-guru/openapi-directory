@@ -1,61 +1,49 @@
 package operations
 
-
-
 type GetServersIDActionsActionIDPathParams struct {
-    ActionID int64 `pathParam:"style=simple,explode=false,name=action_id"`
-    ID int64 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ActionID int64 `pathParam:"style=simple,explode=false,name=action_id"`
+	ID       int64 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type GetServersIDActionsActionIDRequest struct {
-    PathParams GetServersIDActionsActionIDPathParams 
-    
+	PathParams GetServersIDActionsActionIDPathParams
 }
 
 type GetServersIDActionsActionIDActionResponseActionError struct {
-    Code string `json:"code"`
-    Message string `json:"message"`
-    
+	Code    string `json:"code"`
+	Message string `json:"message"`
 }
 
 type GetServersIDActionsActionIDActionResponseActionResources struct {
-    ID int64 `json:"id"`
-    Type string `json:"type"`
-    
+	ID   int64  `json:"id"`
+	Type string `json:"type"`
 }
-
 
 type GetServersIDActionsActionIDActionResponseActionStatusEnum string
 
 const (
-    GetServersIDActionsActionIDActionResponseActionStatusEnumSuccess GetServersIDActionsActionIDActionResponseActionStatusEnum = "success"
-GetServersIDActionsActionIDActionResponseActionStatusEnumRunning GetServersIDActionsActionIDActionResponseActionStatusEnum = "running"
-GetServersIDActionsActionIDActionResponseActionStatusEnumError GetServersIDActionsActionIDActionResponseActionStatusEnum = "error"
+	GetServersIDActionsActionIDActionResponseActionStatusEnumSuccess GetServersIDActionsActionIDActionResponseActionStatusEnum = "success"
+	GetServersIDActionsActionIDActionResponseActionStatusEnumRunning GetServersIDActionsActionIDActionResponseActionStatusEnum = "running"
+	GetServersIDActionsActionIDActionResponseActionStatusEnumError   GetServersIDActionsActionIDActionResponseActionStatusEnum = "error"
 )
 
-
 type GetServersIDActionsActionIDActionResponseAction struct {
-    Command string `json:"command"`
-    Error GetServersIDActionsActionIDActionResponseActionError `json:"error"`
-    Finished string `json:"finished"`
-    ID int64 `json:"id"`
-    Progress float64 `json:"progress"`
-    Resources []GetServersIDActionsActionIDActionResponseActionResources `json:"resources"`
-    Started string `json:"started"`
-    Status GetServersIDActionsActionIDActionResponseActionStatusEnum `json:"status"`
-    
+	Command   string                                                     `json:"command"`
+	Error     GetServersIDActionsActionIDActionResponseActionError       `json:"error"`
+	Finished  string                                                     `json:"finished"`
+	ID        int64                                                      `json:"id"`
+	Progress  float64                                                    `json:"progress"`
+	Resources []GetServersIDActionsActionIDActionResponseActionResources `json:"resources"`
+	Started   string                                                     `json:"started"`
+	Status    GetServersIDActionsActionIDActionResponseActionStatusEnum  `json:"status"`
 }
 
 type GetServersIDActionsActionIDActionResponse struct {
-    Action GetServersIDActionsActionIDActionResponseAction `json:"action"`
-    
+	Action GetServersIDActionsActionIDActionResponseAction `json:"action"`
 }
 
 type GetServersIDActionsActionIDResponse struct {
-    ActionResponse *GetServersIDActionsActionIDActionResponse 
-    ContentType string 
-    StatusCode int64 
-    
+	ActionResponse *GetServersIDActionsActionIDActionResponse
+	ContentType    string
+	StatusCode     int64
 }
-

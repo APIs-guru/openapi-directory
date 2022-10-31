@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchProperNounCategorizedOut struct {
-    ProperNouns []ProperNounCategorizedOut `json:"properNouns,omitempty"`
-    
+	ProperNouns []ProperNounCategorizedOut `json:"properNouns,omitempty"`
 }
-

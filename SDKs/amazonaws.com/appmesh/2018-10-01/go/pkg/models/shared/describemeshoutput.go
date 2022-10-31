@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeMeshOutput struct {
-    Mesh *MeshData `json:"mesh,omitempty"`
-    
+	Mesh *MeshData `json:"mesh,omitempty"`
 }
-

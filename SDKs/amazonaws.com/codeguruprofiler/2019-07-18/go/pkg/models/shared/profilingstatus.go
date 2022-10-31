@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ProfilingStatus struct {
-    LatestAgentOrchestratedAt *time.Time `json:"latestAgentOrchestratedAt,omitempty"`
-    LatestAgentProfileReportedAt *time.Time `json:"latestAgentProfileReportedAt,omitempty"`
-    LatestAggregatedProfile *AggregatedProfileTime `json:"latestAggregatedProfile,omitempty"`
-    
+	LatestAgentOrchestratedAt    *time.Time             `json:"latestAgentOrchestratedAt,omitempty"`
+	LatestAgentProfileReportedAt *time.Time             `json:"latestAgentProfileReportedAt,omitempty"`
+	LatestAggregatedProfile      *AggregatedProfileTime `json:"latestAggregatedProfile,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type WebAuthn struct {
-    RpID *string `json:"rpId,omitempty"`
-    
+	RpID *string `json:"rpId,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TextExtractionModelMetadata struct {
-    ModelHint *string `json:"modelHint,omitempty"`
-    
+	ModelHint *string `json:"modelHint,omitempty"`
 }
-

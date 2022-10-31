@@ -1,19 +1,13 @@
 package shared
 
-
-
-
 type CreateFooterRequestTypeEnum string
 
 const (
-    CreateFooterRequestTypeEnumHeaderFooterTypeUnspecified CreateFooterRequestTypeEnum = "HEADER_FOOTER_TYPE_UNSPECIFIED"
-CreateFooterRequestTypeEnumDefault CreateFooterRequestTypeEnum = "DEFAULT"
+	CreateFooterRequestTypeEnumHeaderFooterTypeUnspecified CreateFooterRequestTypeEnum = "HEADER_FOOTER_TYPE_UNSPECIFIED"
+	CreateFooterRequestTypeEnumDefault                     CreateFooterRequestTypeEnum = "DEFAULT"
 )
 
-
 type CreateFooterRequest struct {
-    SectionBreakLocation *Location `json:"sectionBreakLocation,omitempty"`
-    Type *CreateFooterRequestTypeEnum `json:"type,omitempty"`
-    
+	SectionBreakLocation *Location                    `json:"sectionBreakLocation,omitempty"`
+	Type                 *CreateFooterRequestTypeEnum `json:"type,omitempty"`
 }
-

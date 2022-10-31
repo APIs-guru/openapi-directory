@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleFirebaseAppcheckV1betaExchangeSafetyNetTokenRequest struct {
-    SafetyNetToken *string `json:"safetyNetToken,omitempty"`
-    
+	SafetyNetToken *string `json:"safetyNetToken,omitempty"`
 }
-

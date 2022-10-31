@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AwsIamUserPolicy struct {
-    PolicyName *string `json:"PolicyName,omitempty"`
-    
+	PolicyName *string `json:"PolicyName,omitempty"`
 }
-

@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ActionRevision struct {
-    Created time.Time `json:"created"`
-    RevisionChangeID string `json:"revisionChangeId"`
-    RevisionID string `json:"revisionId"`
-    
+	Created          time.Time `json:"created"`
+	RevisionChangeID string    `json:"revisionChangeId"`
+	RevisionID       string    `json:"revisionId"`
 }
-

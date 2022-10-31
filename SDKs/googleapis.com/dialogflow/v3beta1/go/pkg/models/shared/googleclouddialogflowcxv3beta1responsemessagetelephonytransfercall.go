@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GoogleCloudDialogflowCxV3beta1ResponseMessageTelephonyTransferCall struct {
-    PhoneNumber *string `json:"phoneNumber,omitempty"`
-    
+	PhoneNumber *string `json:"phoneNumber,omitempty"`
 }
-

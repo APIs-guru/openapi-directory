@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateAttributeGroupResponse struct {
-    AttributeGroup *AttributeGroup `json:"attributeGroup,omitempty"`
-    
+	AttributeGroup *AttributeGroup `json:"attributeGroup,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DocumentSubmissionResult struct {
-    GUID *string `json:"guid,omitempty"`
-    
+	GUID *string `json:"guid,omitempty"`
 }
-

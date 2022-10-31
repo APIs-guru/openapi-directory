@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type UnsubscribeDownloadSharePathParams struct {
-    ShareID int64 `pathParam:"style=simple,explode=false,name=share_id"`
-    
+	ShareID int64 `pathParam:"style=simple,explode=false,name=share_id"`
 }
 
 type UnsubscribeDownloadShareHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type UnsubscribeDownloadShareRequest struct {
-    PathParams UnsubscribeDownloadSharePathParams 
-    Headers UnsubscribeDownloadShareHeaders 
-    
+	PathParams UnsubscribeDownloadSharePathParams
+	Headers    UnsubscribeDownloadShareHeaders
 }
 
 type UnsubscribeDownloadShareResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	StatusCode    int64
 }
-

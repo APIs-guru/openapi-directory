@@ -1,42 +1,37 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type DeleteRepositoryPolicyXAmzTargetEnum string
 
 const (
-    DeleteRepositoryPolicyXAmzTargetEnumSpencerFrontendServiceDeleteRepositoryPolicy DeleteRepositoryPolicyXAmzTargetEnum = "SpencerFrontendService.DeleteRepositoryPolicy"
+	DeleteRepositoryPolicyXAmzTargetEnumSpencerFrontendServiceDeleteRepositoryPolicy DeleteRepositoryPolicyXAmzTargetEnum = "SpencerFrontendService.DeleteRepositoryPolicy"
 )
 
-
 type DeleteRepositoryPolicyHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget DeleteRepositoryPolicyXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                              `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                              `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                              `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                              `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                              `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                              `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                              `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        DeleteRepositoryPolicyXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type DeleteRepositoryPolicyRequest struct {
-    Headers DeleteRepositoryPolicyHeaders 
-    Request shared.DeleteRepositoryPolicyRequest `request:"mediaType=application/json"`
-    
+	Headers DeleteRepositoryPolicyHeaders
+	Request shared.DeleteRepositoryPolicyRequest `request:"mediaType=application/json"`
 }
 
 type DeleteRepositoryPolicyResponse struct {
-    ContentType string 
-    DeleteRepositoryPolicyResponse *shared.DeleteRepositoryPolicyResponse 
-    InvalidParameterException *interface{} 
-    RepositoryNotFoundException *interface{} 
-    RepositoryPolicyNotFoundException *interface{} 
-    ServerException *interface{} 
-    StatusCode int64 
-    
+	ContentType                       string
+	DeleteRepositoryPolicyResponse    *shared.DeleteRepositoryPolicyResponse
+	InvalidParameterException         *interface{}
+	RepositoryNotFoundException       *interface{}
+	RepositoryPolicyNotFoundException *interface{}
+	ServerException                   *interface{}
+	StatusCode                        int64
 }
-

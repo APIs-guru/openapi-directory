@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateModelQualityJobDefinitionResponse struct {
-    JobDefinitionArn string `json:"JobDefinitionArn"`
-    
+	JobDefinitionArn string `json:"JobDefinitionArn"`
 }
-

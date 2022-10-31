@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetJobResult struct {
-    Job Job `json:"job"`
-    
+	Job Job `json:"job"`
 }
-

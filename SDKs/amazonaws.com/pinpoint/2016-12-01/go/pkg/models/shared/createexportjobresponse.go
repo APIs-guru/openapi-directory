@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateExportJobResponse struct {
-    ExportJobResponse ExportJobResponse `json:"ExportJobResponse"`
-    
+	ExportJobResponse ExportJobResponse `json:"ExportJobResponse"`
 }
-

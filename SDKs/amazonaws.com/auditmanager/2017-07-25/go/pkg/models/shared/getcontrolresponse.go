@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetControlResponse struct {
-    Control *Control `json:"control,omitempty"`
-    
+	Control *Control `json:"control,omitempty"`
 }
-

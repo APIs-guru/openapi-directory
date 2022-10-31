@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TestInternetDownloadSpeedRequest struct {
-    URL string `json:"url"`
-    
+	URL string `json:"url"`
 }
-

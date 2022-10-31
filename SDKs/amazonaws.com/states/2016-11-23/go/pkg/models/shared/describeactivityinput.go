@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeActivityInput struct {
-    ActivityArn string `json:"activityArn"`
-    
+	ActivityArn string `json:"activityArn"`
 }
-

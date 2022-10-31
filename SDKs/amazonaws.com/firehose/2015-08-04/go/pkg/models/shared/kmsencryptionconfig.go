@@ -1,9 +1,5 @@
 package shared
 
-
-
 type KmsEncryptionConfig struct {
-    AwskmsKeyArn string `json:"AWSKMSKeyARN"`
-    
+	AwskmsKeyArn string `json:"AWSKMSKeyARN"`
 }
-

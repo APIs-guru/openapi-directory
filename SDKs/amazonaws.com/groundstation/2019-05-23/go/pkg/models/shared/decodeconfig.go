@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DecodeConfig struct {
-    UnvalidatedJSON string `json:"unvalidatedJSON"`
-    
+	UnvalidatedJSON string `json:"unvalidatedJSON"`
 }
-

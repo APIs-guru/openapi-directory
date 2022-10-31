@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AccountActionRequiredException struct {
-    Message *string `json:"message,omitempty"`
-    
+	Message *string `json:"message,omitempty"`
 }
-

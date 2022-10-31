@@ -1,9 +1,5 @@
 package shared
 
-
-
 type OutputSerialization struct {
-    Csv *CsvOutput `json:"csv,omitempty"`
-    
+	Csv *CsvOutput `json:"csv,omitempty"`
 }
-

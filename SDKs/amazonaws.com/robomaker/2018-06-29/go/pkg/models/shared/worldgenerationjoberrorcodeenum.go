@@ -1,17 +1,12 @@
 package shared
 
-
-
-
 type WorldGenerationJobErrorCodeEnum string
 
 const (
-    WorldGenerationJobErrorCodeEnumInternalServiceError WorldGenerationJobErrorCodeEnum = "InternalServiceError"
-WorldGenerationJobErrorCodeEnumLimitExceeded WorldGenerationJobErrorCodeEnum = "LimitExceeded"
-WorldGenerationJobErrorCodeEnumResourceNotFound WorldGenerationJobErrorCodeEnum = "ResourceNotFound"
-WorldGenerationJobErrorCodeEnumRequestThrottled WorldGenerationJobErrorCodeEnum = "RequestThrottled"
-WorldGenerationJobErrorCodeEnumInvalidInput WorldGenerationJobErrorCodeEnum = "InvalidInput"
-WorldGenerationJobErrorCodeEnumAllWorldGenerationFailed WorldGenerationJobErrorCodeEnum = "AllWorldGenerationFailed"
+	WorldGenerationJobErrorCodeEnumInternalServiceError     WorldGenerationJobErrorCodeEnum = "InternalServiceError"
+	WorldGenerationJobErrorCodeEnumLimitExceeded            WorldGenerationJobErrorCodeEnum = "LimitExceeded"
+	WorldGenerationJobErrorCodeEnumResourceNotFound         WorldGenerationJobErrorCodeEnum = "ResourceNotFound"
+	WorldGenerationJobErrorCodeEnumRequestThrottled         WorldGenerationJobErrorCodeEnum = "RequestThrottled"
+	WorldGenerationJobErrorCodeEnumInvalidInput             WorldGenerationJobErrorCodeEnum = "InvalidInput"
+	WorldGenerationJobErrorCodeEnumAllWorldGenerationFailed WorldGenerationJobErrorCodeEnum = "AllWorldGenerationFailed"
 )
-
-

@@ -1,44 +1,34 @@
 package operations
 
-
-
 type PostPortfolioAnalysisFactorExposuresRequestBodyFactors struct {
-    FactorReturns []float64 `json:"factorReturns"`
-    
+	FactorReturns []float64 `json:"factorReturns"`
 }
 
 type PostPortfolioAnalysisFactorExposuresRequestBodyPortfolios struct {
-    PortfolioReturns []float64 `json:"portfolioReturns"`
-    
+	PortfolioReturns []float64 `json:"portfolioReturns"`
 }
 
 type PostPortfolioAnalysisFactorExposuresRequestBody struct {
-    Factors []PostPortfolioAnalysisFactorExposuresRequestBodyFactors `json:"factors,omitempty"`
-    Portfolios []PostPortfolioAnalysisFactorExposuresRequestBodyPortfolios `json:"portfolios"`
-    
+	Factors    []PostPortfolioAnalysisFactorExposuresRequestBodyFactors    `json:"factors,omitempty"`
+	Portfolios []PostPortfolioAnalysisFactorExposuresRequestBodyPortfolios `json:"portfolios"`
 }
 
 type PostPortfolioAnalysisFactorExposuresRequest struct {
-    Request PostPortfolioAnalysisFactorExposuresRequestBody `request:"mediaType=application/json"`
-    
+	Request PostPortfolioAnalysisFactorExposuresRequestBody `request:"mediaType=application/json"`
 }
 
 type PostPortfolioAnalysisFactorExposures200ApplicationJSONPortfolios struct {
-    PortfolioAlpha float64 `json:"portfolioAlpha"`
-    PortfolioBetas []float64 `json:"portfolioBetas"`
-    PortfolioRSquared float64 `json:"portfolioRSquared"`
-    
+	PortfolioAlpha    float64   `json:"portfolioAlpha"`
+	PortfolioBetas    []float64 `json:"portfolioBetas"`
+	PortfolioRSquared float64   `json:"portfolioRSquared"`
 }
 
 type PostPortfolioAnalysisFactorExposures200ApplicationJSON struct {
-    Portfolios []PostPortfolioAnalysisFactorExposures200ApplicationJSONPortfolios `json:"portfolios"`
-    
+	Portfolios []PostPortfolioAnalysisFactorExposures200ApplicationJSONPortfolios `json:"portfolios"`
 }
 
 type PostPortfolioAnalysisFactorExposuresResponse struct {
-    ContentType string 
-    PostPortfolioAnalysisFactorExposures200ApplicationJSONObject *PostPortfolioAnalysisFactorExposures200ApplicationJSON 
-    StatusCode int64 
-    
+	ContentType                                                  string
+	PostPortfolioAnalysisFactorExposures200ApplicationJSONObject *PostPortfolioAnalysisFactorExposures200ApplicationJSON
+	StatusCode                                                   int64
 }
-

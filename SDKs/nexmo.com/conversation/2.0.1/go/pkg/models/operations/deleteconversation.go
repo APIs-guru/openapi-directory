@@ -1,21 +1,15 @@
 package operations
 
-
-
 type DeleteConversationPathParams struct {
-    ConversationID string `pathParam:"style=simple,explode=false,name=conversation_id"`
-    
+	ConversationID string `pathParam:"style=simple,explode=false,name=conversation_id"`
 }
 
 type DeleteConversationRequest struct {
-    PathParams DeleteConversationPathParams 
-    
+	PathParams DeleteConversationPathParams
 }
 
 type DeleteConversationResponse struct {
-    ContentType string 
-    StatusCode int64 
-    DeleteConversation200ApplicationJSONObject map[string]interface{} 
-    
+	ContentType                                string
+	StatusCode                                 int64
+	DeleteConversation200ApplicationJSONObject map[string]interface{}
 }
-

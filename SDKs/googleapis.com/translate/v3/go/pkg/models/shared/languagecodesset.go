@@ -1,9 +1,5 @@
 package shared
 
-
-
 type LanguageCodesSet struct {
-    LanguageCodes []string `json:"languageCodes,omitempty"`
-    
+	LanguageCodes []string `json:"languageCodes,omitempty"`
 }
-

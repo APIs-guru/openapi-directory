@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type CostEstimationTimeRange struct {
-    EndTime *time.Time `json:"EndTime,omitempty"`
-    StartTime *time.Time `json:"StartTime,omitempty"`
-    
+	EndTime   *time.Time `json:"EndTime,omitempty"`
+	StartTime *time.Time `json:"StartTime,omitempty"`
 }
-

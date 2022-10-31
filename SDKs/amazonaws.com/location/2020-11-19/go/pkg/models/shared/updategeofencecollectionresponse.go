@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type UpdateGeofenceCollectionResponse struct {
-    CollectionArn string `json:"CollectionArn"`
-    CollectionName string `json:"CollectionName"`
-    UpdateTime time.Time `json:"UpdateTime"`
-    
+	CollectionArn  string    `json:"CollectionArn"`
+	CollectionName string    `json:"CollectionName"`
+	UpdateTime     time.Time `json:"UpdateTime"`
 }
-

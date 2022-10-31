@@ -1,30 +1,26 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type RequestPublicUploadShareInfoPathParams struct {
-    AccessKey string `pathParam:"style=simple,explode=false,name=access_key"`
-    
+	AccessKey string `pathParam:"style=simple,explode=false,name=access_key"`
 }
 
 type RequestPublicUploadShareInfoHeaders struct {
-    XSdsDateFormat *interface{} `header:"style=simple,explode=false,name=X-Sds-Date-Format"`
-    XSdsSharePassword *string `header:"style=simple,explode=false,name=X-Sds-Share-Password"`
-    
+	XSdsDateFormat    *interface{} `header:"style=simple,explode=false,name=X-Sds-Date-Format"`
+	XSdsSharePassword *string      `header:"style=simple,explode=false,name=X-Sds-Share-Password"`
 }
 
 type RequestPublicUploadShareInfoRequest struct {
-    PathParams RequestPublicUploadShareInfoPathParams 
-    Headers RequestPublicUploadShareInfoHeaders 
-    
+	PathParams RequestPublicUploadShareInfoPathParams
+	Headers    RequestPublicUploadShareInfoHeaders
 }
 
 type RequestPublicUploadShareInfoResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    PublicUploadShare *shared.PublicUploadShare 
-    StatusCode int64 
-    
+	ContentType       string
+	ErrorResponse     *shared.ErrorResponse
+	PublicUploadShare *shared.PublicUploadShare
+	StatusCode        int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type IPSet struct {
-    Definition []string `json:"Definition"`
-    
+	Definition []string `json:"Definition"`
 }
-

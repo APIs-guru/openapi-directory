@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CancelExportTaskRequest struct {
-    TaskID string `json:"taskId"`
-    
+	TaskID string `json:"taskId"`
 }
-

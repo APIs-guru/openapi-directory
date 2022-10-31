@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SnsDestination struct {
-    TopicArn *string `json:"TopicArn,omitempty"`
-    
+	TopicArn *string `json:"TopicArn,omitempty"`
 }
-

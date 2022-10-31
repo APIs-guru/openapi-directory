@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostDeleteReceiptFilterActionEnum string
 
 const (
-    PostDeleteReceiptFilterActionEnumDeleteReceiptFilter PostDeleteReceiptFilterActionEnum = "DeleteReceiptFilter"
+	PostDeleteReceiptFilterActionEnumDeleteReceiptFilter PostDeleteReceiptFilterActionEnum = "DeleteReceiptFilter"
 )
-
-
 
 type PostDeleteReceiptFilterVersionEnum string
 
 const (
-    PostDeleteReceiptFilterVersionEnumTwoThousandAndTen1201 PostDeleteReceiptFilterVersionEnum = "2010-12-01"
+	PostDeleteReceiptFilterVersionEnumTwoThousandAndTen1201 PostDeleteReceiptFilterVersionEnum = "2010-12-01"
 )
 
-
 type PostDeleteReceiptFilterQueryParams struct {
-    Action PostDeleteReceiptFilterActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostDeleteReceiptFilterVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostDeleteReceiptFilterActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostDeleteReceiptFilterVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostDeleteReceiptFilterHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostDeleteReceiptFilterRequest struct {
-    QueryParams PostDeleteReceiptFilterQueryParams 
-    Headers PostDeleteReceiptFilterHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostDeleteReceiptFilterQueryParams
+	Headers     PostDeleteReceiptFilterHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostDeleteReceiptFilterResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

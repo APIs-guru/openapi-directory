@@ -1,9 +1,5 @@
 package shared
 
-
-
 type VpcConfiguration struct {
-    VpcID string `json:"vpcId"`
-    
+	VpcID string `json:"vpcId"`
 }
-

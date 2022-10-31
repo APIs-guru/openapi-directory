@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribePlacementResponse struct {
-    Placement PlacementDescription `json:"placement"`
-    
+	Placement PlacementDescription `json:"placement"`
 }
-

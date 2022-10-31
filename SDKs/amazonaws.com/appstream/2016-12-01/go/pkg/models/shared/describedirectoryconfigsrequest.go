@@ -1,11 +1,7 @@
 package shared
 
-
-
 type DescribeDirectoryConfigsRequest struct {
-    DirectoryNames []string `json:"DirectoryNames,omitempty"`
-    MaxResults *int64 `json:"MaxResults,omitempty"`
-    NextToken *string `json:"NextToken,omitempty"`
-    
+	DirectoryNames []string `json:"DirectoryNames,omitempty"`
+	MaxResults     *int64   `json:"MaxResults,omitempty"`
+	NextToken      *string  `json:"NextToken,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UserInfo struct {
-    Email *string `json:"email,omitempty"`
-    
+	Email *string `json:"email,omitempty"`
 }
-

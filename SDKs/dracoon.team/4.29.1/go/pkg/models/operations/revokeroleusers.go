@@ -1,30 +1,26 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type RevokeRoleUsersPathParams struct {
-    RoleID int32 `pathParam:"style=simple,explode=false,name=role_id"`
-    
+	RoleID int32 `pathParam:"style=simple,explode=false,name=role_id"`
 }
 
 type RevokeRoleUsersHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type RevokeRoleUsersRequest struct {
-    PathParams RevokeRoleUsersPathParams 
-    Headers RevokeRoleUsersHeaders 
-    Request shared.UserIds `request:"mediaType=application/json"`
-    
+	PathParams RevokeRoleUsersPathParams
+	Headers    RevokeRoleUsersHeaders
+	Request    shared.UserIds `request:"mediaType=application/json"`
 }
 
 type RevokeRoleUsersResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    RoleUserList *shared.RoleUserList 
-    StatusCode int64 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	RoleUserList  *shared.RoleUserList
+	StatusCode    int64
 }
-

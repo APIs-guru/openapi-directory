@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PutAttributesResponse struct {
-    Attributes []Attribute `json:"attributes,omitempty"`
-    
+	Attributes []Attribute `json:"attributes,omitempty"`
 }
-

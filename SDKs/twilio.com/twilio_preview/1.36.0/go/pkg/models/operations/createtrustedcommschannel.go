@@ -1,38 +1,34 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var CreateTrustedCommsChannelServers = []string{
 	"https://preview.twilio.com",
 }
 
 type CreateTrustedCommsChannelPathParams struct {
-    BrandedChannelSid string `pathParam:"style=simple,explode=false,name=BrandedChannelSid"`
-    
+	BrandedChannelSid string `pathParam:"style=simple,explode=false,name=BrandedChannelSid"`
 }
 
 type CreateTrustedCommsChannelCreateTrustedCommsChannelRequest struct {
-    PhoneNumberSid string `form:"name=PhoneNumberSid"`
-    
+	PhoneNumberSid string `form:"name=PhoneNumberSid"`
 }
 
 type CreateTrustedCommsChannelSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type CreateTrustedCommsChannelRequest struct {
-    ServerURL *string 
-    PathParams CreateTrustedCommsChannelPathParams 
-    Request *CreateTrustedCommsChannelCreateTrustedCommsChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
-    Security CreateTrustedCommsChannelSecurity 
-    
+	ServerURL  *string
+	PathParams CreateTrustedCommsChannelPathParams
+	Request    *CreateTrustedCommsChannelCreateTrustedCommsChannelRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Security   CreateTrustedCommsChannelSecurity
 }
 
 type CreateTrustedCommsChannelResponse struct {
-    ContentType string 
-    StatusCode int64 
-    PreviewTrustedCommsBrandedChannelChannel *shared.PreviewTrustedCommsBrandedChannelChannel 
-    
+	ContentType                              string
+	StatusCode                               int64
+	PreviewTrustedCommsBrandedChannelChannel *shared.PreviewTrustedCommsBrandedChannelChannel
 }
-

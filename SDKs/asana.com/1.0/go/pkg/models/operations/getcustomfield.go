@@ -1,35 +1,30 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetCustomFieldPathParams struct {
-    CustomFieldGid string `pathParam:"style=simple,explode=false,name=custom_field_gid"`
-    
+	CustomFieldGid string `pathParam:"style=simple,explode=false,name=custom_field_gid"`
 }
 
 type GetCustomFieldQueryParams struct {
-    OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
-    OptPretty *bool `queryParam:"style=form,explode=true,name=opt_pretty"`
-    
+	OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
+	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
 type GetCustomFieldRequest struct {
-    PathParams GetCustomFieldPathParams 
-    QueryParams GetCustomFieldQueryParams 
-    
+	PathParams  GetCustomFieldPathParams
+	QueryParams GetCustomFieldQueryParams
 }
 
 type GetCustomField200ApplicationJSON struct {
-    Data *shared.CustomFieldResponse `json:"data,omitempty"`
-    
+	Data *shared.CustomFieldResponse `json:"data,omitempty"`
 }
 
 type GetCustomFieldResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    GetCustomField200ApplicationJSONObject *GetCustomField200ApplicationJSON 
-    
+	ContentType                            string
+	ErrorResponse                          *shared.ErrorResponse
+	StatusCode                             int64
+	GetCustomField200ApplicationJSONObject *GetCustomField200ApplicationJSON
 }
-

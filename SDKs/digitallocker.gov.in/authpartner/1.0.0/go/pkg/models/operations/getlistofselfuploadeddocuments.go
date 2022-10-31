@@ -1,43 +1,37 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetListOfSelfUploadedDocumentsSecurity struct {
-    BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
-    
+	BearerAuth shared.SchemeBearerAuth `security:"scheme,type=http,subtype=bearer"`
 }
 
 type GetListOfSelfUploadedDocumentsRequest struct {
-    Security GetListOfSelfUploadedDocumentsSecurity 
-    
+	Security GetListOfSelfUploadedDocumentsSecurity
 }
 
 type GetListOfSelfUploadedDocuments401ApplicationJSON struct {
-    Error *string `json:"error,omitempty"`
-    ErrorDescription *string `json:"error_description,omitempty"`
-    
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetListOfSelfUploadedDocuments404ApplicationJSON struct {
-    Error *string `json:"error,omitempty"`
-    ErrorDescription *string `json:"error_description,omitempty"`
-    
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetListOfSelfUploadedDocuments500ApplicationJSON struct {
-    Error *string `json:"error,omitempty"`
-    ErrorDescription *string `json:"error_description,omitempty"`
-    
+	Error            *string `json:"error,omitempty"`
+	ErrorDescription *string `json:"error_description,omitempty"`
 }
 
 type GetListOfSelfUploadedDocumentsResponse struct {
-    ContentType string 
-    GetListOfSelfUploadedDocuments401ApplicationJSONObject *GetListOfSelfUploadedDocuments401ApplicationJSON 
-    GetListOfSelfUploadedDocuments404ApplicationJSONObject *GetListOfSelfUploadedDocuments404ApplicationJSON 
-    GetListOfSelfUploadedDocuments500ApplicationJSONObject *GetListOfSelfUploadedDocuments500ApplicationJSON 
-    Sample *interface{} 
-    StatusCode int64 
-    
+	ContentType                                            string
+	GetListOfSelfUploadedDocuments401ApplicationJSONObject *GetListOfSelfUploadedDocuments401ApplicationJSON
+	GetListOfSelfUploadedDocuments404ApplicationJSONObject *GetListOfSelfUploadedDocuments404ApplicationJSON
+	GetListOfSelfUploadedDocuments500ApplicationJSONObject *GetListOfSelfUploadedDocuments500ApplicationJSON
+	Sample                                                 *interface{}
+	StatusCode                                             int64
 }
-

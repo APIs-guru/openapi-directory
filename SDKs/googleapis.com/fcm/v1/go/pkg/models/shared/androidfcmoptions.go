@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AndroidFcmOptions struct {
-    AnalyticsLabel *string `json:"analyticsLabel,omitempty"`
-    
+	AnalyticsLabel *string `json:"analyticsLabel,omitempty"`
 }
-

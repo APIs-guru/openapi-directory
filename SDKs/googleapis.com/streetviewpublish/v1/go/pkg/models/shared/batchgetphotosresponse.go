@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchGetPhotosResponse struct {
-    Results []PhotoResponse `json:"results,omitempty"`
-    
+	Results []PhotoResponse `json:"results,omitempty"`
 }
-

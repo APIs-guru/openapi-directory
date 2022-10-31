@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetExpressionForTaxonUsingGetPathParams struct {
-    TaxonID string `pathParam:"style=simple,explode=false,name=taxonId"`
-    
+	TaxonID string `pathParam:"style=simple,explode=false,name=taxonId"`
 }
 
 type GetExpressionForTaxonUsingGetRequest struct {
-    PathParams GetExpressionForTaxonUsingGetPathParams 
-    
+	PathParams GetExpressionForTaxonUsingGetPathParams
 }
 
 type GetExpressionForTaxonUsingGetResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

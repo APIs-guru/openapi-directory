@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateOrganizationResponse struct {
-    Organization *Organization `json:"Organization,omitempty"`
-    
+	Organization *Organization `json:"Organization,omitempty"`
 }
-

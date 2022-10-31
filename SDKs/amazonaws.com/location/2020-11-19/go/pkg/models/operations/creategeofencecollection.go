@@ -1,54 +1,48 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CreateGeofenceCollectionHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
-
 
 type CreateGeofenceCollectionRequestBodyPricingPlanEnum string
 
 const (
-    CreateGeofenceCollectionRequestBodyPricingPlanEnumRequestBasedUsage CreateGeofenceCollectionRequestBodyPricingPlanEnum = "RequestBasedUsage"
-CreateGeofenceCollectionRequestBodyPricingPlanEnumMobileAssetTracking CreateGeofenceCollectionRequestBodyPricingPlanEnum = "MobileAssetTracking"
-CreateGeofenceCollectionRequestBodyPricingPlanEnumMobileAssetManagement CreateGeofenceCollectionRequestBodyPricingPlanEnum = "MobileAssetManagement"
+	CreateGeofenceCollectionRequestBodyPricingPlanEnumRequestBasedUsage     CreateGeofenceCollectionRequestBodyPricingPlanEnum = "RequestBasedUsage"
+	CreateGeofenceCollectionRequestBodyPricingPlanEnumMobileAssetTracking   CreateGeofenceCollectionRequestBodyPricingPlanEnum = "MobileAssetTracking"
+	CreateGeofenceCollectionRequestBodyPricingPlanEnumMobileAssetManagement CreateGeofenceCollectionRequestBodyPricingPlanEnum = "MobileAssetManagement"
 )
 
-
 type CreateGeofenceCollectionRequestBody struct {
-    CollectionName string `json:"CollectionName"`
-    Description *string `json:"Description,omitempty"`
-    KmsKeyID *string `json:"KmsKeyId,omitempty"`
-    PricingPlan CreateGeofenceCollectionRequestBodyPricingPlanEnum `json:"PricingPlan"`
-    PricingPlanDataSource *string `json:"PricingPlanDataSource,omitempty"`
-    Tags map[string]string `json:"Tags,omitempty"`
-    
+	CollectionName        string                                             `json:"CollectionName"`
+	Description           *string                                            `json:"Description,omitempty"`
+	KmsKeyID              *string                                            `json:"KmsKeyId,omitempty"`
+	PricingPlan           CreateGeofenceCollectionRequestBodyPricingPlanEnum `json:"PricingPlan"`
+	PricingPlanDataSource *string                                            `json:"PricingPlanDataSource,omitempty"`
+	Tags                  map[string]string                                  `json:"Tags,omitempty"`
 }
 
 type CreateGeofenceCollectionRequest struct {
-    Headers CreateGeofenceCollectionHeaders 
-    Request CreateGeofenceCollectionRequestBody `request:"mediaType=application/json"`
-    
+	Headers CreateGeofenceCollectionHeaders
+	Request CreateGeofenceCollectionRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateGeofenceCollectionResponse struct {
-    AccessDeniedException *interface{} 
-    ConflictException *interface{} 
-    ContentType string 
-    CreateGeofenceCollectionResponse *shared.CreateGeofenceCollectionResponse 
-    InternalServerException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    ValidationException *interface{} 
-    
+	AccessDeniedException            *interface{}
+	ConflictException                *interface{}
+	ContentType                      string
+	CreateGeofenceCollectionResponse *shared.CreateGeofenceCollectionResponse
+	InternalServerException          *interface{}
+	StatusCode                       int64
+	ThrottlingException              *interface{}
+	ValidationException              *interface{}
 }
-

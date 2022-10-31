@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DeleteAccountSettingRequest struct {
-    Name SettingNameEnum `json:"name"`
-    PrincipalArn *string `json:"principalArn,omitempty"`
-    
+	Name         SettingNameEnum `json:"name"`
+	PrincipalArn *string         `json:"principalArn,omitempty"`
 }
-

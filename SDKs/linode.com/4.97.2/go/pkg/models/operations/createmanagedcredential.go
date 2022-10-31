@@ -1,50 +1,43 @@
 package operations
 
 import (
-"time"
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+	"time"
+)
 
 type CreateManagedCredentialRequestBody struct {
-    ID *int64 `json:"id,omitempty"`
-    Label string `json:"label"`
-    LastDecrypted *time.Time `json:"last_decrypted,omitempty"`
-    Password string `json:"password"`
-    Username *string `json:"username,omitempty"`
-    
+	ID            *int64     `json:"id,omitempty"`
+	Label         string     `json:"label"`
+	LastDecrypted *time.Time `json:"last_decrypted,omitempty"`
+	Password      string     `json:"password"`
+	Username      *string    `json:"username,omitempty"`
 }
 
 type CreateManagedCredentialSecurityOption1 struct {
-    PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
-    
+	PersonalAccessToken shared.SchemePersonalAccessToken `security:"scheme,type=http,subtype=bearer"`
 }
 
 type CreateManagedCredentialSecurityOption2 struct {
-    Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
-    
+	Oauth shared.SchemeOauth `security:"scheme,type=oauth2"`
 }
 
 type CreateManagedCredentialSecurity struct {
-    Option1 *CreateManagedCredentialSecurityOption1 `security:"option"`
-    Option2 *CreateManagedCredentialSecurityOption2 `security:"option"`
-    
+	Option1 *CreateManagedCredentialSecurityOption1 `security:"option"`
+	Option2 *CreateManagedCredentialSecurityOption2 `security:"option"`
 }
 
 type CreateManagedCredentialRequest struct {
-    Request *CreateManagedCredentialRequestBody `request:"mediaType=application/json"`
-    Security CreateManagedCredentialSecurity 
-    
+	Request  *CreateManagedCredentialRequestBody `request:"mediaType=application/json"`
+	Security CreateManagedCredentialSecurity
 }
 
 type CreateManagedCredentialDefaultApplicationJSON struct {
-    Errors []shared.ErrorObject `json:"errors,omitempty"`
-    
+	Errors []shared.ErrorObject `json:"errors,omitempty"`
 }
 
 type CreateManagedCredentialResponse struct {
-    ContentType string 
-    ManagedCredential *shared.ManagedCredential 
-    StatusCode int64 
-    CreateManagedCredentialDefaultApplicationJSONObject *CreateManagedCredentialDefaultApplicationJSON 
-    
+	ContentType                                         string
+	ManagedCredential                                   *shared.ManagedCredential
+	StatusCode                                          int64
+	CreateManagedCredentialDefaultApplicationJSONObject *CreateManagedCredentialDefaultApplicationJSON
 }
-

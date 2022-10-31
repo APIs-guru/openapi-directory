@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SentimentAnalysisSettings struct {
-    DetectSentiment bool `json:"detectSentiment"`
-    
+	DetectSentiment bool `json:"detectSentiment"`
 }
-

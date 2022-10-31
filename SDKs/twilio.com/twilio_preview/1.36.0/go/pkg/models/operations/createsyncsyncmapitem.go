@@ -1,40 +1,36 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
+
 var CreateSyncSyncMapItemServers = []string{
 	"https://preview.twilio.com",
 }
 
 type CreateSyncSyncMapItemPathParams struct {
-    MapSid string `pathParam:"style=simple,explode=false,name=MapSid"`
-    ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
-    
+	MapSid     string `pathParam:"style=simple,explode=false,name=MapSid"`
+	ServiceSid string `pathParam:"style=simple,explode=false,name=ServiceSid"`
 }
 
 type CreateSyncSyncMapItemCreateSyncSyncMapItemRequest struct {
-    Data interface{} `form:"name=Data"`
-    Key string `form:"name=Key"`
-    
+	Data interface{} `form:"name=Data"`
+	Key  string      `form:"name=Key"`
 }
 
 type CreateSyncSyncMapItemSecurity struct {
-    AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
-    
+	AccountSidAuthToken shared.SchemeAccountSidAuthToken `security:"scheme,type=http,subtype=basic"`
 }
 
 type CreateSyncSyncMapItemRequest struct {
-    ServerURL *string 
-    PathParams CreateSyncSyncMapItemPathParams 
-    Request *CreateSyncSyncMapItemCreateSyncSyncMapItemRequest `request:"mediaType=application/x-www-form-urlencoded"`
-    Security CreateSyncSyncMapItemSecurity 
-    
+	ServerURL  *string
+	PathParams CreateSyncSyncMapItemPathParams
+	Request    *CreateSyncSyncMapItemCreateSyncSyncMapItemRequest `request:"mediaType=application/x-www-form-urlencoded"`
+	Security   CreateSyncSyncMapItemSecurity
 }
 
 type CreateSyncSyncMapItemResponse struct {
-    ContentType string 
-    StatusCode int64 
-    PreviewSyncServiceSyncMapSyncMapItem *shared.PreviewSyncServiceSyncMapSyncMapItem 
-    
+	ContentType                          string
+	StatusCode                           int64
+	PreviewSyncServiceSyncMapSyncMapItem *shared.PreviewSyncServiceSyncMapSyncMapItem
 }
-

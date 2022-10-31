@@ -1,10 +1,6 @@
 package shared
 
-
-
 type GetAccessTokenRequest struct {
-    Token string `json:"Token"`
-    TokenProperties []string `json:"TokenProperties,omitempty"`
-    
+	Token           string   `json:"Token"`
+	TokenProperties []string `json:"TokenProperties,omitempty"`
 }
-

@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type EnterpriseAdminGetMaintenanceStatusResponse struct {
-    ContentType string 
-    StatusCode int64 
-    MaintenanceStatus *shared.MaintenanceStatus 
-    
+	ContentType       string
+	StatusCode        int64
+	MaintenanceStatus *shared.MaintenanceStatus
 }
-

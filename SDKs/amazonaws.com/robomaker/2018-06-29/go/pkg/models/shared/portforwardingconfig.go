@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PortForwardingConfig struct {
-    PortMappings []PortMapping `json:"portMappings,omitempty"`
-    
+	PortMappings []PortMapping `json:"portMappings,omitempty"`
 }
-

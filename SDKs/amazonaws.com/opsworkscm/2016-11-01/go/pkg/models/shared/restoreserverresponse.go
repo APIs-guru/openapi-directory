@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RestoreServerResponse struct {
-    Server *Server `json:"Server,omitempty"`
-    
+	Server *Server `json:"Server,omitempty"`
 }
-

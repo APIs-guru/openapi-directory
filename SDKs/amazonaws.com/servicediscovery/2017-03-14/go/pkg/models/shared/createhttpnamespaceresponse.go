@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateHTTPNamespaceResponse struct {
-    OperationID *string `json:"OperationId,omitempty"`
-    
+	OperationID *string `json:"OperationId,omitempty"`
 }
-

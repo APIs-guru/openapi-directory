@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetAPITokenStatusHeaders struct {
-    APIKey *string `header:"style=simple,explode=false,name=api_key"`
-    
+	APIKey *string `header:"style=simple,explode=false,name=api_key"`
 }
 
 type GetAPITokenStatusRequest struct {
-    Headers GetAPITokenStatusHeaders 
-    
+	Headers GetAPITokenStatusHeaders
 }
 
 type GetAPITokenStatusResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

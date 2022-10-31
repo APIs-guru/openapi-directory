@@ -1,36 +1,31 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ApplicationsUpdateKeyCredentialsPathParams struct {
-    ApplicationObjectID string `pathParam:"style=simple,explode=false,name=applicationObjectId"`
-    TenantID string `pathParam:"style=simple,explode=false,name=tenantID"`
-    
+	ApplicationObjectID string `pathParam:"style=simple,explode=false,name=applicationObjectId"`
+	TenantID            string `pathParam:"style=simple,explode=false,name=tenantID"`
 }
 
 type ApplicationsUpdateKeyCredentialsQueryParams struct {
-    APIVersion string `queryParam:"style=form,explode=true,name=api-version"`
-    
+	APIVersion string `queryParam:"style=form,explode=true,name=api-version"`
 }
 
 type ApplicationsUpdateKeyCredentialsRequests struct {
-    KeyCredentialsUpdateParameters *shared.KeyCredentialsUpdateParameters `request:"mediaType=application/json"`
-    KeyCredentialsUpdateParameters1 *shared.KeyCredentialsUpdateParameters `request:"mediaType=text/json"`
-    
+	KeyCredentialsUpdateParameters  *shared.KeyCredentialsUpdateParameters `request:"mediaType=application/json"`
+	KeyCredentialsUpdateParameters1 *shared.KeyCredentialsUpdateParameters `request:"mediaType=text/json"`
 }
 
 type ApplicationsUpdateKeyCredentialsRequest struct {
-    PathParams ApplicationsUpdateKeyCredentialsPathParams 
-    QueryParams ApplicationsUpdateKeyCredentialsQueryParams 
-    Request ApplicationsUpdateKeyCredentialsRequests 
-    
+	PathParams  ApplicationsUpdateKeyCredentialsPathParams
+	QueryParams ApplicationsUpdateKeyCredentialsQueryParams
+	Request     ApplicationsUpdateKeyCredentialsRequests
 }
 
 type ApplicationsUpdateKeyCredentialsResponse struct {
-    ContentType string 
-    GraphError *shared.GraphError 
-    StatusCode int64 
-    
+	ContentType string
+	GraphError  *shared.GraphError
+	StatusCode  int64
 }
-

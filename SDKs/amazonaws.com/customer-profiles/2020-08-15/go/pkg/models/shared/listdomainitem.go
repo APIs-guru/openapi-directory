@@ -1,13 +1,12 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ListDomainItem struct {
-    CreatedAt time.Time `json:"CreatedAt"`
-    DomainName string `json:"DomainName"`
-    LastUpdatedAt time.Time `json:"LastUpdatedAt"`
-    Tags map[string]string `json:"Tags,omitempty"`
-    
+	CreatedAt     time.Time         `json:"CreatedAt"`
+	DomainName    string            `json:"DomainName"`
+	LastUpdatedAt time.Time         `json:"LastUpdatedAt"`
+	Tags          map[string]string `json:"Tags,omitempty"`
 }
-

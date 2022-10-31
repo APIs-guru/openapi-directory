@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostCopyOptionGroupActionEnum string
 
 const (
-    PostCopyOptionGroupActionEnumCopyOptionGroup PostCopyOptionGroupActionEnum = "CopyOptionGroup"
+	PostCopyOptionGroupActionEnumCopyOptionGroup PostCopyOptionGroupActionEnum = "CopyOptionGroup"
 )
-
-
 
 type PostCopyOptionGroupVersionEnum string
 
 const (
-    PostCopyOptionGroupVersionEnumTwoThousandAndFourteen0901 PostCopyOptionGroupVersionEnum = "2014-09-01"
+	PostCopyOptionGroupVersionEnumTwoThousandAndFourteen0901 PostCopyOptionGroupVersionEnum = "2014-09-01"
 )
 
-
 type PostCopyOptionGroupQueryParams struct {
-    Action PostCopyOptionGroupActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostCopyOptionGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostCopyOptionGroupActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostCopyOptionGroupVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostCopyOptionGroupHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostCopyOptionGroupRequest struct {
-    QueryParams PostCopyOptionGroupQueryParams 
-    Headers PostCopyOptionGroupHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostCopyOptionGroupQueryParams
+	Headers     PostCopyOptionGroupHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostCopyOptionGroupResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

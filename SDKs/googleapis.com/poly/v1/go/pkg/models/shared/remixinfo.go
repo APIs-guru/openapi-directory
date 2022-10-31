@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RemixInfo struct {
-    SourceAsset []string `json:"sourceAsset,omitempty"`
-    
+	SourceAsset []string `json:"sourceAsset,omitempty"`
 }
-

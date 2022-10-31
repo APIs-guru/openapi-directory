@@ -1,31 +1,25 @@
 package shared
 
-
-
-
 type GoogleCloudVisionV1p2beta1FeatureTypeEnum string
 
 const (
-    GoogleCloudVisionV1p2beta1FeatureTypeEnumTypeUnspecified GoogleCloudVisionV1p2beta1FeatureTypeEnum = "TYPE_UNSPECIFIED"
-GoogleCloudVisionV1p2beta1FeatureTypeEnumFaceDetection GoogleCloudVisionV1p2beta1FeatureTypeEnum = "FACE_DETECTION"
-GoogleCloudVisionV1p2beta1FeatureTypeEnumLandmarkDetection GoogleCloudVisionV1p2beta1FeatureTypeEnum = "LANDMARK_DETECTION"
-GoogleCloudVisionV1p2beta1FeatureTypeEnumLogoDetection GoogleCloudVisionV1p2beta1FeatureTypeEnum = "LOGO_DETECTION"
-GoogleCloudVisionV1p2beta1FeatureTypeEnumLabelDetection GoogleCloudVisionV1p2beta1FeatureTypeEnum = "LABEL_DETECTION"
-GoogleCloudVisionV1p2beta1FeatureTypeEnumTextDetection GoogleCloudVisionV1p2beta1FeatureTypeEnum = "TEXT_DETECTION"
-GoogleCloudVisionV1p2beta1FeatureTypeEnumDocumentTextDetection GoogleCloudVisionV1p2beta1FeatureTypeEnum = "DOCUMENT_TEXT_DETECTION"
-GoogleCloudVisionV1p2beta1FeatureTypeEnumSafeSearchDetection GoogleCloudVisionV1p2beta1FeatureTypeEnum = "SAFE_SEARCH_DETECTION"
-GoogleCloudVisionV1p2beta1FeatureTypeEnumImageProperties GoogleCloudVisionV1p2beta1FeatureTypeEnum = "IMAGE_PROPERTIES"
-GoogleCloudVisionV1p2beta1FeatureTypeEnumCropHints GoogleCloudVisionV1p2beta1FeatureTypeEnum = "CROP_HINTS"
-GoogleCloudVisionV1p2beta1FeatureTypeEnumWebDetection GoogleCloudVisionV1p2beta1FeatureTypeEnum = "WEB_DETECTION"
-GoogleCloudVisionV1p2beta1FeatureTypeEnumProductSearch GoogleCloudVisionV1p2beta1FeatureTypeEnum = "PRODUCT_SEARCH"
-GoogleCloudVisionV1p2beta1FeatureTypeEnumObjectLocalization GoogleCloudVisionV1p2beta1FeatureTypeEnum = "OBJECT_LOCALIZATION"
+	GoogleCloudVisionV1p2beta1FeatureTypeEnumTypeUnspecified       GoogleCloudVisionV1p2beta1FeatureTypeEnum = "TYPE_UNSPECIFIED"
+	GoogleCloudVisionV1p2beta1FeatureTypeEnumFaceDetection         GoogleCloudVisionV1p2beta1FeatureTypeEnum = "FACE_DETECTION"
+	GoogleCloudVisionV1p2beta1FeatureTypeEnumLandmarkDetection     GoogleCloudVisionV1p2beta1FeatureTypeEnum = "LANDMARK_DETECTION"
+	GoogleCloudVisionV1p2beta1FeatureTypeEnumLogoDetection         GoogleCloudVisionV1p2beta1FeatureTypeEnum = "LOGO_DETECTION"
+	GoogleCloudVisionV1p2beta1FeatureTypeEnumLabelDetection        GoogleCloudVisionV1p2beta1FeatureTypeEnum = "LABEL_DETECTION"
+	GoogleCloudVisionV1p2beta1FeatureTypeEnumTextDetection         GoogleCloudVisionV1p2beta1FeatureTypeEnum = "TEXT_DETECTION"
+	GoogleCloudVisionV1p2beta1FeatureTypeEnumDocumentTextDetection GoogleCloudVisionV1p2beta1FeatureTypeEnum = "DOCUMENT_TEXT_DETECTION"
+	GoogleCloudVisionV1p2beta1FeatureTypeEnumSafeSearchDetection   GoogleCloudVisionV1p2beta1FeatureTypeEnum = "SAFE_SEARCH_DETECTION"
+	GoogleCloudVisionV1p2beta1FeatureTypeEnumImageProperties       GoogleCloudVisionV1p2beta1FeatureTypeEnum = "IMAGE_PROPERTIES"
+	GoogleCloudVisionV1p2beta1FeatureTypeEnumCropHints             GoogleCloudVisionV1p2beta1FeatureTypeEnum = "CROP_HINTS"
+	GoogleCloudVisionV1p2beta1FeatureTypeEnumWebDetection          GoogleCloudVisionV1p2beta1FeatureTypeEnum = "WEB_DETECTION"
+	GoogleCloudVisionV1p2beta1FeatureTypeEnumProductSearch         GoogleCloudVisionV1p2beta1FeatureTypeEnum = "PRODUCT_SEARCH"
+	GoogleCloudVisionV1p2beta1FeatureTypeEnumObjectLocalization    GoogleCloudVisionV1p2beta1FeatureTypeEnum = "OBJECT_LOCALIZATION"
 )
 
-
 type GoogleCloudVisionV1p2beta1Feature struct {
-    MaxResults *int32 `json:"maxResults,omitempty"`
-    Model *string `json:"model,omitempty"`
-    Type *GoogleCloudVisionV1p2beta1FeatureTypeEnum `json:"type,omitempty"`
-    
+	MaxResults *int32                                     `json:"maxResults,omitempty"`
+	Model      *string                                    `json:"model,omitempty"`
+	Type       *GoogleCloudVisionV1p2beta1FeatureTypeEnum `json:"type,omitempty"`
 }
-

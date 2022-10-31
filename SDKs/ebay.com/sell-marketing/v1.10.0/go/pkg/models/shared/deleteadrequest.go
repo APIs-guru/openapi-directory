@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteAdRequest struct {
-    ListingID *string `json:"listingId,omitempty"`
-    
+	ListingID *string `json:"listingId,omitempty"`
 }
-

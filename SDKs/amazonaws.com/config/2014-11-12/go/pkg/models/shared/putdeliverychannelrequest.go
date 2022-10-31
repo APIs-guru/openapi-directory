@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PutDeliveryChannelRequest struct {
-    DeliveryChannel DeliveryChannel `json:"DeliveryChannel"`
-    
+	DeliveryChannel DeliveryChannel `json:"DeliveryChannel"`
 }
-

@@ -1,37 +1,33 @@
 package operations
 
 import (
-"time")
+	"time"
+)
 
 type PoolListPoolUsageMetricsQueryParams struct {
-    DollarFilter *string `queryParam:"style=form,explode=true,name=$filter"`
-    APIVersion string `queryParam:"style=form,explode=true,name=api-version"`
-    Endtime *time.Time `queryParam:"style=form,explode=true,name=endtime"`
-    Maxresults *int32 `queryParam:"style=form,explode=true,name=maxresults"`
-    Starttime *time.Time `queryParam:"style=form,explode=true,name=starttime"`
-    Timeout *int32 `queryParam:"style=form,explode=true,name=timeout"`
-    
+	DollarFilter *string    `queryParam:"style=form,explode=true,name=$filter"`
+	APIVersion   string     `queryParam:"style=form,explode=true,name=api-version"`
+	Endtime      *time.Time `queryParam:"style=form,explode=true,name=endtime"`
+	Maxresults   *int32     `queryParam:"style=form,explode=true,name=maxresults"`
+	Starttime    *time.Time `queryParam:"style=form,explode=true,name=starttime"`
+	Timeout      *int32     `queryParam:"style=form,explode=true,name=timeout"`
 }
 
 type PoolListPoolUsageMetricsHeaders struct {
-    ClientRequestID *string `header:"style=simple,explode=false,name=client-request-id"`
-    OcpDate *string `header:"style=simple,explode=false,name=ocp-date"`
-    ReturnClientRequestID *bool `header:"style=simple,explode=false,name=return-client-request-id"`
-    
+	ClientRequestID       *string `header:"style=simple,explode=false,name=client-request-id"`
+	OcpDate               *string `header:"style=simple,explode=false,name=ocp-date"`
+	ReturnClientRequestID *bool   `header:"style=simple,explode=false,name=return-client-request-id"`
 }
 
 type PoolListPoolUsageMetricsRequest struct {
-    QueryParams PoolListPoolUsageMetricsQueryParams 
-    Headers PoolListPoolUsageMetricsHeaders 
-    
+	QueryParams PoolListPoolUsageMetricsQueryParams
+	Headers     PoolListPoolUsageMetricsHeaders
 }
 
 type PoolListPoolUsageMetricsResponse struct {
-    BatchError *interface{} 
-    ContentType string 
-    Headers map[string][]string 
-    PoolListPoolUsageMetricsResult *interface{} 
-    StatusCode int64 
-    
+	BatchError                     *interface{}
+	ContentType                    string
+	Headers                        map[string][]string
+	PoolListPoolUsageMetricsResult *interface{}
+	StatusCode                     int64
 }
-

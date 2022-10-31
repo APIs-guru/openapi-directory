@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CheckIfUserIsFollowingPathParams struct {
-    FollowUserID float64 `pathParam:"style=simple,explode=false,name=follow_user_id"`
-    UserID float64 `pathParam:"style=simple,explode=false,name=user_id"`
-    
+	FollowUserID float64 `pathParam:"style=simple,explode=false,name=follow_user_id"`
+	UserID       float64 `pathParam:"style=simple,explode=false,name=user_id"`
 }
 
 type CheckIfUserIsFollowingRequest struct {
-    PathParams CheckIfUserIsFollowingPathParams 
-    
+	PathParams CheckIfUserIsFollowingPathParams
 }
 
 type CheckIfUserIsFollowingResponse struct {
-    ContentType string 
-    StatusCode int64 
-    LegacyError *shared.LegacyError 
-    
+	ContentType string
+	StatusCode  int64
+	LegacyError *shared.LegacyError
 }
-

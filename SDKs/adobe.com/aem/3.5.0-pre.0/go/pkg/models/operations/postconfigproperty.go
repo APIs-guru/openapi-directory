@@ -1,20 +1,14 @@
 package operations
 
-
-
 type PostConfigPropertyPathParams struct {
-    ConfigNodeName string `pathParam:"style=simple,explode=false,name=configNodeName"`
-    
+	ConfigNodeName string `pathParam:"style=simple,explode=false,name=configNodeName"`
 }
 
 type PostConfigPropertyRequest struct {
-    PathParams PostConfigPropertyPathParams 
-    
+	PathParams PostConfigPropertyPathParams
 }
 
 type PostConfigPropertyResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

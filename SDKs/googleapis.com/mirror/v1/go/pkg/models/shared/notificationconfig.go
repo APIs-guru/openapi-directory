@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type NotificationConfig struct {
-    DeliveryTime *time.Time `json:"deliveryTime,omitempty"`
-    Level *string `json:"level,omitempty"`
-    
+	DeliveryTime *time.Time `json:"deliveryTime,omitempty"`
+	Level        *string    `json:"level,omitempty"`
 }
-

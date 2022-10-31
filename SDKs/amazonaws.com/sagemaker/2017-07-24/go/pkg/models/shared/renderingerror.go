@@ -1,10 +1,6 @@
 package shared
 
-
-
 type RenderingError struct {
-    Code string `json:"Code"`
-    Message string `json:"Message"`
-    
+	Code    string `json:"Code"`
+	Message string `json:"Message"`
 }
-

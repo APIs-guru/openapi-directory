@@ -1,10 +1,6 @@
 package shared
 
-
-
 type AddRulesResponse struct {
-    Data []Rule `json:"data"`
-    Meta RulesResponseMetadata `json:"meta"`
-    
+	Data []Rule                `json:"data"`
+	Meta RulesResponseMetadata `json:"meta"`
 }
-

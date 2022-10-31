@@ -1,9 +1,5 @@
 package shared
 
-
-
 type SseConfiguration struct {
-    KmsEncryptionConfig KmsEncryptionConfig `json:"KmsEncryptionConfig"`
-    
+	KmsEncryptionConfig KmsEncryptionConfig `json:"KmsEncryptionConfig"`
 }
-

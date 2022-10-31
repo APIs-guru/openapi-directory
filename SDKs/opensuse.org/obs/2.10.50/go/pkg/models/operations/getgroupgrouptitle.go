@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetGroupGroupTitlePathParams struct {
-    GroupTitle string `pathParam:"style=simple,explode=false,name=group_title"`
-    
+	GroupTitle string `pathParam:"style=simple,explode=false,name=group_title"`
 }
 
 type GetGroupGroupTitleSecurity struct {
-    BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
-    
+	BasicAuthentication shared.SchemeBasicAuthentication `security:"scheme,type=http,subtype=basic"`
 }
 
 type GetGroupGroupTitleRequest struct {
-    PathParams GetGroupGroupTitlePathParams 
-    Security GetGroupGroupTitleSecurity 
-    
+	PathParams GetGroupGroupTitlePathParams
+	Security   GetGroupGroupTitleSecurity
 }
 
 type GetGroupGroupTitleResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

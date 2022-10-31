@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeStreamSummaryInput struct {
-    StreamName string `json:"StreamName"`
-    
+	StreamName string `json:"StreamName"`
 }
-

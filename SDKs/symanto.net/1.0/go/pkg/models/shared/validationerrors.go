@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ValidationErrors struct {
-    Detail []ValidationError `json:"detail,omitempty"`
-    
+	Detail []ValidationError `json:"detail,omitempty"`
 }
-

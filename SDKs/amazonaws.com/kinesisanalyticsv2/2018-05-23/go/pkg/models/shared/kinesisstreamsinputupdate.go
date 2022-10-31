@@ -1,9 +1,5 @@
 package shared
 
-
-
 type KinesisStreamsInputUpdate struct {
-    ResourceArnUpdate string `json:"ResourceARNUpdate"`
-    
+	ResourceArnUpdate string `json:"ResourceARNUpdate"`
 }
-

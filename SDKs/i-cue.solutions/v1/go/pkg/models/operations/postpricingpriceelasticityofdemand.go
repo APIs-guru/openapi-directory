@@ -1,20 +1,14 @@
 package operations
 
-
-
 type PostPricingPriceElasticityOfDemandHeaders struct {
-    Token *string `header:"style=simple,explode=false,name=Token"`
-    
+	Token *string `header:"style=simple,explode=false,name=Token"`
 }
 
 type PostPricingPriceElasticityOfDemandRequest struct {
-    Headers PostPricingPriceElasticityOfDemandHeaders 
-    
+	Headers PostPricingPriceElasticityOfDemandHeaders
 }
 
 type PostPricingPriceElasticityOfDemandResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

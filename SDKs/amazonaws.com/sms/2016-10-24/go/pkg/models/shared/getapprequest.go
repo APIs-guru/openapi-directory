@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetAppRequest struct {
-    AppID *string `json:"appId,omitempty"`
-    
+	AppID *string `json:"appId,omitempty"`
 }
-

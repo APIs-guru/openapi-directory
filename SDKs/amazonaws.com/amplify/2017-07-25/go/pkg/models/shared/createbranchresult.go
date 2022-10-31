@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateBranchResult struct {
-    Branch Branch `json:"branch"`
-    
+	Branch Branch `json:"branch"`
 }
-

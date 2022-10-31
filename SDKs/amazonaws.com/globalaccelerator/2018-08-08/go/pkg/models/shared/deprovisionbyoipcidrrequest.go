@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeprovisionByoipCidrRequest struct {
-    Cidr string `json:"Cidr"`
-    
+	Cidr string `json:"Cidr"`
 }
-

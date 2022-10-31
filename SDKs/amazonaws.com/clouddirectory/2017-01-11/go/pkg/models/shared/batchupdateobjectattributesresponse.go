@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchUpdateObjectAttributesResponse struct {
-    ObjectIdentifier *string `json:"ObjectIdentifier,omitempty"`
-    
+	ObjectIdentifier *string `json:"ObjectIdentifier,omitempty"`
 }
-

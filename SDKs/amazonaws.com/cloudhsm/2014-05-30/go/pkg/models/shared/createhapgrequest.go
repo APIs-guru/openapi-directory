@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateHapgRequest struct {
-    Label string `json:"Label"`
-    
+	Label string `json:"Label"`
 }
-

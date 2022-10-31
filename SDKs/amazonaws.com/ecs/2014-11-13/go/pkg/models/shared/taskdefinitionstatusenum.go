@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type TaskDefinitionStatusEnum string
 
 const (
-    TaskDefinitionStatusEnumActive TaskDefinitionStatusEnum = "ACTIVE"
-TaskDefinitionStatusEnumInactive TaskDefinitionStatusEnum = "INACTIVE"
+	TaskDefinitionStatusEnumActive   TaskDefinitionStatusEnum = "ACTIVE"
+	TaskDefinitionStatusEnumInactive TaskDefinitionStatusEnum = "INACTIVE"
 )
-
-

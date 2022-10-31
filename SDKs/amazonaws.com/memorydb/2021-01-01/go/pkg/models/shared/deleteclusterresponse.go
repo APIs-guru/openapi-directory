@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteClusterResponse struct {
-    Cluster *Cluster `json:"Cluster,omitempty"`
-    
+	Cluster *Cluster `json:"Cluster,omitempty"`
 }
-

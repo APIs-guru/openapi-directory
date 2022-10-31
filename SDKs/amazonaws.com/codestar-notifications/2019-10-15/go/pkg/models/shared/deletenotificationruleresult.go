@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteNotificationRuleResult struct {
-    Arn *string `json:"Arn,omitempty"`
-    
+	Arn *string `json:"Arn,omitempty"`
 }
-

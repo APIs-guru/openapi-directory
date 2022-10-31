@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type DescribeWebsiteCertificateAuthorityResponse struct {
-    Certificate *string `json:"Certificate,omitempty"`
-    CreatedTime *time.Time `json:"CreatedTime,omitempty"`
-    DisplayName *string `json:"DisplayName,omitempty"`
-    
+	Certificate *string    `json:"Certificate,omitempty"`
+	CreatedTime *time.Time `json:"CreatedTime,omitempty"`
+	DisplayName *string    `json:"DisplayName,omitempty"`
 }
-

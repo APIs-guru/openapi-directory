@@ -1,20 +1,14 @@
 package operations
 
-
-
 type DeleteConfigPathParams struct {
-    ConfigID string `pathParam:"style=simple,explode=false,name=configId"`
-    
+	ConfigID string `pathParam:"style=simple,explode=false,name=configId"`
 }
 
 type DeleteConfigRequest struct {
-    PathParams DeleteConfigPathParams 
-    
+	PathParams DeleteConfigPathParams
 }
 
 type DeleteConfigResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

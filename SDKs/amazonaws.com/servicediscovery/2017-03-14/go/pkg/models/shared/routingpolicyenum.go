@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type RoutingPolicyEnum string
 
 const (
-    RoutingPolicyEnumMultivalue RoutingPolicyEnum = "MULTIVALUE"
-RoutingPolicyEnumWeighted RoutingPolicyEnum = "WEIGHTED"
+	RoutingPolicyEnumMultivalue RoutingPolicyEnum = "MULTIVALUE"
+	RoutingPolicyEnumWeighted   RoutingPolicyEnum = "WEIGHTED"
 )
-
-

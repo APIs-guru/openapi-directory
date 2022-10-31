@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteStoredQueryRequest struct {
-    QueryName string `json:"QueryName"`
-    
+	QueryName string `json:"QueryName"`
 }
-

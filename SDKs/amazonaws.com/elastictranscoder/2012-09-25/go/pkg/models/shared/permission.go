@@ -1,11 +1,7 @@
 package shared
 
-
-
 type Permission struct {
-    Access []string `json:"Access,omitempty"`
-    Grantee *string `json:"Grantee,omitempty"`
-    GranteeType *string `json:"GranteeType,omitempty"`
-    
+	Access      []string `json:"Access,omitempty"`
+	Grantee     *string  `json:"Grantee,omitempty"`
+	GranteeType *string  `json:"GranteeType,omitempty"`
 }
-

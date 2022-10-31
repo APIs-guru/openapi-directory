@@ -1,21 +1,15 @@
 package operations
 
-
-
 type NodesForksListPathParams struct {
-    NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
-    
+	NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
 }
 
 type NodesForksListRequest struct {
-    PathParams NodesForksListPathParams 
-    
+	PathParams NodesForksListPathParams
 }
 
 type NodesForksListResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

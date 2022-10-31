@@ -1,9 +1,5 @@
 package shared
 
-
-
 type MobileDeviceAction struct {
-    Action *string `json:"action,omitempty"`
-    
+	Action *string `json:"action,omitempty"`
 }
-

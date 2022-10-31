@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AggregateResponse struct {
-    Bucket []AggregateBucket `json:"bucket,omitempty"`
-    
+	Bucket []AggregateBucket `json:"bucket,omitempty"`
 }
-

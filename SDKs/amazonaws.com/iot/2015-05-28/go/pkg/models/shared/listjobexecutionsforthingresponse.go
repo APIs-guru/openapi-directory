@@ -1,10 +1,6 @@
 package shared
 
-
-
 type ListJobExecutionsForThingResponse struct {
-    ExecutionSummaries []JobExecutionSummaryForThing `json:"executionSummaries,omitempty"`
-    NextToken *string `json:"nextToken,omitempty"`
-    
+	ExecutionSummaries []JobExecutionSummaryForThing `json:"executionSummaries,omitempty"`
+	NextToken          *string                       `json:"nextToken,omitempty"`
 }
-

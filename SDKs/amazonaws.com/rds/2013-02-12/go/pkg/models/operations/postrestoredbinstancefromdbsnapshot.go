@@ -1,51 +1,40 @@
 package operations
 
-
-
-
 type PostRestoreDbInstanceFromDbSnapshotActionEnum string
 
 const (
-    PostRestoreDbInstanceFromDbSnapshotActionEnumRestoreDbInstanceFromDbSnapshot PostRestoreDbInstanceFromDbSnapshotActionEnum = "RestoreDBInstanceFromDBSnapshot"
+	PostRestoreDbInstanceFromDbSnapshotActionEnumRestoreDbInstanceFromDbSnapshot PostRestoreDbInstanceFromDbSnapshotActionEnum = "RestoreDBInstanceFromDBSnapshot"
 )
-
-
 
 type PostRestoreDbInstanceFromDbSnapshotVersionEnum string
 
 const (
-    PostRestoreDbInstanceFromDbSnapshotVersionEnumTwoThousandAndThirteen0212 PostRestoreDbInstanceFromDbSnapshotVersionEnum = "2013-02-12"
+	PostRestoreDbInstanceFromDbSnapshotVersionEnumTwoThousandAndThirteen0212 PostRestoreDbInstanceFromDbSnapshotVersionEnum = "2013-02-12"
 )
 
-
 type PostRestoreDbInstanceFromDbSnapshotQueryParams struct {
-    Action PostRestoreDbInstanceFromDbSnapshotActionEnum `queryParam:"style=form,explode=true,name=Action"`
-    Version PostRestoreDbInstanceFromDbSnapshotVersionEnum `queryParam:"style=form,explode=true,name=Version"`
-    
+	Action  PostRestoreDbInstanceFromDbSnapshotActionEnum  `queryParam:"style=form,explode=true,name=Action"`
+	Version PostRestoreDbInstanceFromDbSnapshotVersionEnum `queryParam:"style=form,explode=true,name=Version"`
 }
 
 type PostRestoreDbInstanceFromDbSnapshotHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type PostRestoreDbInstanceFromDbSnapshotRequest struct {
-    QueryParams PostRestoreDbInstanceFromDbSnapshotQueryParams 
-    Headers PostRestoreDbInstanceFromDbSnapshotHeaders 
-    Request []byte `request:"mediaType=text/xml"`
-    
+	QueryParams PostRestoreDbInstanceFromDbSnapshotQueryParams
+	Headers     PostRestoreDbInstanceFromDbSnapshotHeaders
+	Request     []byte `request:"mediaType=text/xml"`
 }
 
 type PostRestoreDbInstanceFromDbSnapshotResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,11 +1,7 @@
 package shared
 
-
-
 type MoneyObject struct {
-    CurrencyCode string `json:"currencyCode"`
-    Value string `json:"value"`
-    ValueInBaseUnits int64 `json:"valueInBaseUnits"`
-    
+	CurrencyCode     string `json:"currencyCode"`
+	Value            string `json:"value"`
+	ValueInBaseUnits int64  `json:"valueInBaseUnits"`
 }
-

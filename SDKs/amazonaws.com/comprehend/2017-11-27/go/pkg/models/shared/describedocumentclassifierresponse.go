@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeDocumentClassifierResponse struct {
-    DocumentClassifierProperties *DocumentClassifierProperties `json:"DocumentClassifierProperties,omitempty"`
-    
+	DocumentClassifierProperties *DocumentClassifierProperties `json:"DocumentClassifierProperties,omitempty"`
 }
-

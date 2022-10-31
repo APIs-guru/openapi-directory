@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetDeviceApplianceDhcpSubnetsPathParams struct {
-    Serial string `pathParam:"style=simple,explode=false,name=serial"`
-    
+	Serial string `pathParam:"style=simple,explode=false,name=serial"`
 }
 
 type GetDeviceApplianceDhcpSubnetsRequest struct {
-    PathParams GetDeviceApplianceDhcpSubnetsPathParams 
-    
+	PathParams GetDeviceApplianceDhcpSubnetsPathParams
 }
 
 type GetDeviceApplianceDhcpSubnetsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetDeviceApplianceDhcpSubnets200ApplicationJSONObject map[string]interface{} 
-    
+	ContentType                                           string
+	StatusCode                                            int64
+	GetDeviceApplianceDhcpSubnets200ApplicationJSONObject map[string]interface{}
 }
-

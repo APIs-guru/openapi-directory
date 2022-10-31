@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DatabaseConfig struct {
-    MachineType *string `json:"machineType,omitempty"`
-    
+	MachineType *string `json:"machineType,omitempty"`
 }
-

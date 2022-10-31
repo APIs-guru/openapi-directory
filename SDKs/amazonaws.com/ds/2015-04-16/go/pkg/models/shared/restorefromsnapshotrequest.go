@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RestoreFromSnapshotRequest struct {
-    SnapshotID string `json:"SnapshotId"`
-    
+	SnapshotID string `json:"SnapshotId"`
 }
-

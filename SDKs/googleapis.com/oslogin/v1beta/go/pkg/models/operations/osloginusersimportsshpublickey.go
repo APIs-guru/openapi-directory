@@ -1,70 +1,61 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type OsloginUsersImportSSHPublicKeyPathParams struct {
-    Parent string `pathParam:"style=simple,explode=false,name=parent"`
-    
+	Parent string `pathParam:"style=simple,explode=false,name=parent"`
 }
-
 
 type OsloginUsersImportSSHPublicKeyViewEnum string
 
 const (
-    OsloginUsersImportSSHPublicKeyViewEnumLoginProfileViewUnspecified OsloginUsersImportSSHPublicKeyViewEnum = "LOGIN_PROFILE_VIEW_UNSPECIFIED"
-OsloginUsersImportSSHPublicKeyViewEnumBasic OsloginUsersImportSSHPublicKeyViewEnum = "BASIC"
-OsloginUsersImportSSHPublicKeyViewEnumSecurityKey OsloginUsersImportSSHPublicKeyViewEnum = "SECURITY_KEY"
+	OsloginUsersImportSSHPublicKeyViewEnumLoginProfileViewUnspecified OsloginUsersImportSSHPublicKeyViewEnum = "LOGIN_PROFILE_VIEW_UNSPECIFIED"
+	OsloginUsersImportSSHPublicKeyViewEnumBasic                       OsloginUsersImportSSHPublicKeyViewEnum = "BASIC"
+	OsloginUsersImportSSHPublicKeyViewEnumSecurityKey                 OsloginUsersImportSSHPublicKeyViewEnum = "SECURITY_KEY"
 )
 
-
 type OsloginUsersImportSSHPublicKeyQueryParams struct {
-    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
-    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
-    Callback *string `queryParam:"style=form,explode=true,name=callback"`
-    Fields *string `queryParam:"style=form,explode=true,name=fields"`
-    Key *string `queryParam:"style=form,explode=true,name=key"`
-    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
-    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
-    ProjectID *string `queryParam:"style=form,explode=true,name=projectId"`
-    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
-    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
-    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
-    View *OsloginUsersImportSSHPublicKeyViewEnum `queryParam:"style=form,explode=true,name=view"`
-    
+	DollarXgafv    *shared.XgafvEnum                       `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string                                 `queryParam:"style=form,explode=true,name=access_token"`
+	Alt            *shared.AltEnum                         `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string                                 `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string                                 `queryParam:"style=form,explode=true,name=fields"`
+	Key            *string                                 `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string                                 `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool                                   `queryParam:"style=form,explode=true,name=prettyPrint"`
+	ProjectID      *string                                 `queryParam:"style=form,explode=true,name=projectId"`
+	QuotaUser      *string                                 `queryParam:"style=form,explode=true,name=quotaUser"`
+	UploadType     *string                                 `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string                                 `queryParam:"style=form,explode=true,name=upload_protocol"`
+	View           *OsloginUsersImportSSHPublicKeyViewEnum `queryParam:"style=form,explode=true,name=view"`
 }
 
 type OsloginUsersImportSSHPublicKeySecurityOption1 struct {
-    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-    
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
 }
 
 type OsloginUsersImportSSHPublicKeySecurityOption2 struct {
-    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-    
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
 }
 
 type OsloginUsersImportSSHPublicKeySecurity struct {
-    Option1 *OsloginUsersImportSSHPublicKeySecurityOption1 `security:"option"`
-    Option2 *OsloginUsersImportSSHPublicKeySecurityOption2 `security:"option"`
-    
+	Option1 *OsloginUsersImportSSHPublicKeySecurityOption1 `security:"option"`
+	Option2 *OsloginUsersImportSSHPublicKeySecurityOption2 `security:"option"`
 }
 
 type OsloginUsersImportSSHPublicKeyRequest struct {
-    PathParams OsloginUsersImportSSHPublicKeyPathParams 
-    QueryParams OsloginUsersImportSSHPublicKeyQueryParams 
-    Request *shared.SSHPublicKey `request:"mediaType=application/json"`
-    Security OsloginUsersImportSSHPublicKeySecurity 
-    
+	PathParams  OsloginUsersImportSSHPublicKeyPathParams
+	QueryParams OsloginUsersImportSSHPublicKeyQueryParams
+	Request     *shared.SSHPublicKey `request:"mediaType=application/json"`
+	Security    OsloginUsersImportSSHPublicKeySecurity
 }
 
 type OsloginUsersImportSSHPublicKeyResponse struct {
-    ContentType string 
-    ImportSSHPublicKeyResponse *shared.ImportSSHPublicKeyResponse 
-    StatusCode int64 
-    
+	ContentType                string
+	ImportSSHPublicKeyResponse *shared.ImportSSHPublicKeyResponse
+	StatusCode                 int64
 }
-

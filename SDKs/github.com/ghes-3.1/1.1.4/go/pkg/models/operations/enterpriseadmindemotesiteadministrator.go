@@ -1,20 +1,14 @@
 package operations
 
-
-
 type EnterpriseAdminDemoteSiteAdministratorPathParams struct {
-    Username string `pathParam:"style=simple,explode=false,name=username"`
-    
+	Username string `pathParam:"style=simple,explode=false,name=username"`
 }
 
 type EnterpriseAdminDemoteSiteAdministratorRequest struct {
-    PathParams EnterpriseAdminDemoteSiteAdministratorPathParams 
-    
+	PathParams EnterpriseAdminDemoteSiteAdministratorPathParams
 }
 
 type EnterpriseAdminDemoteSiteAdministratorResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,25 +1,19 @@
 package operations
 
-
-
 type GetAPIV1EnvironmentsEnvironmentIDLogsPathParams struct {
-    EnvironmentID string `pathParam:"style=simple,explode=false,name=environmentId"`
-    
+	EnvironmentID string `pathParam:"style=simple,explode=false,name=environmentId"`
 }
 
 type GetAPIV1EnvironmentsEnvironmentIDLogsRequest struct {
-    PathParams GetAPIV1EnvironmentsEnvironmentIDLogsPathParams 
-    
+	PathParams GetAPIV1EnvironmentsEnvironmentIDLogsPathParams
 }
 
 type GetAPIV1EnvironmentsEnvironmentIDLogsResponse struct {
-    Body []byte 
-    ContentType string 
-    GetAPIV1EnvironmentsEnvironmentIDLogs200ApplicationJSONString *string 
-    GetAPIV1EnvironmentsEnvironmentIDLogs200TextJSONString *string 
-    GetAPIV1EnvironmentsEnvironmentIDLogs200TextPlainString *string 
-    ProblemDetails map[string]interface{} 
-    StatusCode int64 
-    
+	Body                                                          []byte
+	ContentType                                                   string
+	GetAPIV1EnvironmentsEnvironmentIDLogs200ApplicationJSONString *string
+	GetAPIV1EnvironmentsEnvironmentIDLogs200TextJSONString        *string
+	GetAPIV1EnvironmentsEnvironmentIDLogs200TextPlainString       *string
+	ProblemDetails                                                map[string]interface{}
+	StatusCode                                                    int64
 }
-

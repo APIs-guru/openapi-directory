@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Address struct {
-    AddressDefinition string `json:"AddressDefinition"`
-    
+	AddressDefinition string `json:"AddressDefinition"`
 }
-

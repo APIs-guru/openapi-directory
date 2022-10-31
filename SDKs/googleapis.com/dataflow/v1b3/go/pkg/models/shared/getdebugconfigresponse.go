@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetDebugConfigResponse struct {
-    Config *string `json:"config,omitempty"`
-    
+	Config *string `json:"config,omitempty"`
 }
-

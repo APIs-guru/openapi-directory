@@ -1,10 +1,6 @@
 package operations
 
-
-
 type PostToolsShutdownResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

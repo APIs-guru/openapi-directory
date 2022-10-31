@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ScenarioConfig struct {
-    EstimateDuration *string `json:"estimateDuration,omitempty"`
-    
+	EstimateDuration *string `json:"estimateDuration,omitempty"`
 }
-

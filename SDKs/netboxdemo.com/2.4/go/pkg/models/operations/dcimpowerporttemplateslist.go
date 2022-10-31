@@ -1,33 +1,29 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DcimPowerPortTemplatesListQueryParams struct {
-    DevicetypeID *string `queryParam:"style=form,explode=true,name=devicetype_id"`
-    Limit *int64 `queryParam:"style=form,explode=true,name=limit"`
-    Name *string `queryParam:"style=form,explode=true,name=name"`
-    Offset *int64 `queryParam:"style=form,explode=true,name=offset"`
-    
+	DevicetypeID *string `queryParam:"style=form,explode=true,name=devicetype_id"`
+	Limit        *int64  `queryParam:"style=form,explode=true,name=limit"`
+	Name         *string `queryParam:"style=form,explode=true,name=name"`
+	Offset       *int64  `queryParam:"style=form,explode=true,name=offset"`
 }
 
 type DcimPowerPortTemplatesListRequest struct {
-    QueryParams DcimPowerPortTemplatesListQueryParams 
-    
+	QueryParams DcimPowerPortTemplatesListQueryParams
 }
 
 type DcimPowerPortTemplatesList200ApplicationJSON struct {
-    Count int64 `json:"count"`
-    Next *string `json:"next,omitempty"`
-    Previous *string `json:"previous,omitempty"`
-    Results []shared.PowerPortTemplate `json:"results"`
-    
+	Count    int64                      `json:"count"`
+	Next     *string                    `json:"next,omitempty"`
+	Previous *string                    `json:"previous,omitempty"`
+	Results  []shared.PowerPortTemplate `json:"results"`
 }
 
 type DcimPowerPortTemplatesListResponse struct {
-    ContentType string 
-    StatusCode int64 
-    DcimPowerPortTemplatesList200ApplicationJSONObject *DcimPowerPortTemplatesList200ApplicationJSON 
-    
+	ContentType                                        string
+	StatusCode                                         int64
+	DcimPowerPortTemplatesList200ApplicationJSONObject *DcimPowerPortTemplatesList200ApplicationJSON
 }
-

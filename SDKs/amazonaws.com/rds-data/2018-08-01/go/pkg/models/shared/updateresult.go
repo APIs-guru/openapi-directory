@@ -1,9 +1,5 @@
 package shared
 
-
-
 type UpdateResult struct {
-    GeneratedFields []Field `json:"generatedFields,omitempty"`
-    
+	GeneratedFields []Field `json:"generatedFields,omitempty"`
 }
-

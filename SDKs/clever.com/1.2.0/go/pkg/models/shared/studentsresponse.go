@@ -1,9 +1,5 @@
 package shared
 
-
-
 type StudentsResponse struct {
-    Data []StudentResponse `json:"data,omitempty"`
-    
+	Data []StudentResponse `json:"data,omitempty"`
 }
-

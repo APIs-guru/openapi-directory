@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeStackSummaryResult struct {
-    StackSummary *StackSummary `json:"StackSummary,omitempty"`
-    
+	StackSummary *StackSummary `json:"StackSummary,omitempty"`
 }
-

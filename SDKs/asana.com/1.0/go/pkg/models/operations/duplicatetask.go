@@ -1,41 +1,35 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type DuplicateTaskPathParams struct {
-    TaskGid string `pathParam:"style=simple,explode=false,name=task_gid"`
-    
+	TaskGid string `pathParam:"style=simple,explode=false,name=task_gid"`
 }
 
 type DuplicateTaskQueryParams struct {
-    OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
-    OptPretty *bool `queryParam:"style=form,explode=true,name=opt_pretty"`
-    
+	OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
+	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
 type DuplicateTaskRequestBody struct {
-    Data *shared.TaskDuplicateRequest `json:"data,omitempty"`
-    
+	Data *shared.TaskDuplicateRequest `json:"data,omitempty"`
 }
 
 type DuplicateTaskRequest struct {
-    PathParams DuplicateTaskPathParams 
-    QueryParams DuplicateTaskQueryParams 
-    Request DuplicateTaskRequestBody `request:"mediaType=application/json"`
-    
+	PathParams  DuplicateTaskPathParams
+	QueryParams DuplicateTaskQueryParams
+	Request     DuplicateTaskRequestBody `request:"mediaType=application/json"`
 }
 
 type DuplicateTask201ApplicationJSON struct {
-    Data *shared.JobResponse `json:"data,omitempty"`
-    
+	Data *shared.JobResponse `json:"data,omitempty"`
 }
 
 type DuplicateTaskResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    DuplicateTask201ApplicationJSONObject *DuplicateTask201ApplicationJSON 
-    
+	ContentType                           string
+	ErrorResponse                         *shared.ErrorResponse
+	StatusCode                            int64
+	DuplicateTask201ApplicationJSONObject *DuplicateTask201ApplicationJSON
 }
-

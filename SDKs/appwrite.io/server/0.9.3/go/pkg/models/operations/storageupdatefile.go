@@ -1,37 +1,32 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type StorageUpdateFilePathParams struct {
-    FileID string `pathParam:"style=simple,explode=false,name=fileId"`
-    
+	FileID string `pathParam:"style=simple,explode=false,name=fileId"`
 }
 
 type StorageUpdateFileRequestBody struct {
-    Read []string `json:"read"`
-    Write []string `json:"write"`
-    
+	Read  []string `json:"read"`
+	Write []string `json:"write"`
 }
 
 type StorageUpdateFileSecurity struct {
-    Jwt shared.SchemeJwt `security:"scheme,type=apiKey,subtype=header"`
-    Key shared.SchemeKey `security:"scheme,type=apiKey,subtype=header"`
-    Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
-    
+	Jwt     shared.SchemeJwt     `security:"scheme,type=apiKey,subtype=header"`
+	Key     shared.SchemeKey     `security:"scheme,type=apiKey,subtype=header"`
+	Project shared.SchemeProject `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type StorageUpdateFileRequest struct {
-    PathParams StorageUpdateFilePathParams 
-    Request *StorageUpdateFileRequestBody `request:"mediaType=application/json"`
-    Security StorageUpdateFileSecurity 
-    
+	PathParams StorageUpdateFilePathParams
+	Request    *StorageUpdateFileRequestBody `request:"mediaType=application/json"`
+	Security   StorageUpdateFileSecurity
 }
 
 type StorageUpdateFileResponse struct {
-    ContentType string 
-    StatusCode int64 
-    File *shared.File 
-    
+	ContentType string
+	StatusCode  int64
+	File        *shared.File
 }
-

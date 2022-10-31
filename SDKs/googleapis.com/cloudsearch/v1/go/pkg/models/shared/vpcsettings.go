@@ -1,9 +1,5 @@
 package shared
 
-
-
 type VpcSettings struct {
-    Project *string `json:"project,omitempty"`
-    
+	Project *string `json:"project,omitempty"`
 }
-

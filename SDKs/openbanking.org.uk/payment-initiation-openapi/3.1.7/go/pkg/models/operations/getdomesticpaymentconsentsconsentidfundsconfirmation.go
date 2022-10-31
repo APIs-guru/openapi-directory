@@ -1,41 +1,36 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetDomesticPaymentConsentsConsentIDFundsConfirmationPathParams struct {
-    ConsentID string `pathParam:"style=simple,explode=false,name=ConsentId"`
-    
+	ConsentID string `pathParam:"style=simple,explode=false,name=ConsentId"`
 }
 
 type GetDomesticPaymentConsentsConsentIDFundsConfirmationHeaders struct {
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    XCustomerUserAgent *string `header:"style=simple,explode=false,name=x-customer-user-agent"`
-    XFapiAuthDate *string `header:"style=simple,explode=false,name=x-fapi-auth-date"`
-    XFapiCustomerIPAddress *string `header:"style=simple,explode=false,name=x-fapi-customer-ip-address"`
-    XFapiInteractionID *string `header:"style=simple,explode=false,name=x-fapi-interaction-id"`
-    
+	Authorization          string  `header:"style=simple,explode=false,name=Authorization"`
+	XCustomerUserAgent     *string `header:"style=simple,explode=false,name=x-customer-user-agent"`
+	XFapiAuthDate          *string `header:"style=simple,explode=false,name=x-fapi-auth-date"`
+	XFapiCustomerIPAddress *string `header:"style=simple,explode=false,name=x-fapi-customer-ip-address"`
+	XFapiInteractionID     *string `header:"style=simple,explode=false,name=x-fapi-interaction-id"`
 }
 
 type GetDomesticPaymentConsentsConsentIDFundsConfirmationSecurity struct {
-    PsuoAuth2Security shared.SchemePsuoAuth2Security `security:"scheme,type=oauth2"`
-    
+	PsuoAuth2Security shared.SchemePsuoAuth2Security `security:"scheme,type=oauth2"`
 }
 
 type GetDomesticPaymentConsentsConsentIDFundsConfirmationRequest struct {
-    PathParams GetDomesticPaymentConsentsConsentIDFundsConfirmationPathParams 
-    Headers GetDomesticPaymentConsentsConsentIDFundsConfirmationHeaders 
-    Security GetDomesticPaymentConsentsConsentIDFundsConfirmationSecurity 
-    
+	PathParams GetDomesticPaymentConsentsConsentIDFundsConfirmationPathParams
+	Headers    GetDomesticPaymentConsentsConsentIDFundsConfirmationHeaders
+	Security   GetDomesticPaymentConsentsConsentIDFundsConfirmationSecurity
 }
 
 type GetDomesticPaymentConsentsConsentIDFundsConfirmationResponse struct {
-    Body []byte 
-    ContentType string 
-    Headers map[string][]string 
-    ObErrorResponse1 *shared.ObErrorResponse1 
-    ObWriteFundsConfirmationResponse1 *shared.ObWriteFundsConfirmationResponse1 
-    StatusCode int64 
-    
+	Body                              []byte
+	ContentType                       string
+	Headers                           map[string][]string
+	ObErrorResponse1                  *shared.ObErrorResponse1
+	ObWriteFundsConfirmationResponse1 *shared.ObWriteFundsConfirmationResponse1
+	StatusCode                        int64
 }
-

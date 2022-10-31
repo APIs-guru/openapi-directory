@@ -1,40 +1,35 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type CancelStepsXAmzTargetEnum string
 
 const (
-    CancelStepsXAmzTargetEnumElasticMapReduceCancelSteps CancelStepsXAmzTargetEnum = "ElasticMapReduce.CancelSteps"
+	CancelStepsXAmzTargetEnumElasticMapReduceCancelSteps CancelStepsXAmzTargetEnum = "ElasticMapReduce.CancelSteps"
 )
 
-
 type CancelStepsHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget CancelStepsXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                   `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                   `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                   `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                   `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                   `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                   `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                   `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        CancelStepsXAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type CancelStepsRequest struct {
-    Headers CancelStepsHeaders 
-    Request shared.CancelStepsInput `request:"mediaType=application/json"`
-    
+	Headers CancelStepsHeaders
+	Request shared.CancelStepsInput `request:"mediaType=application/json"`
 }
 
 type CancelStepsResponse struct {
-    CancelStepsOutput *shared.CancelStepsOutput 
-    ContentType string 
-    InternalServerError *interface{} 
-    InvalidRequestException *interface{} 
-    StatusCode int64 
-    
+	CancelStepsOutput       *shared.CancelStepsOutput
+	ContentType             string
+	InternalServerError     *interface{}
+	InvalidRequestException *interface{}
+	StatusCode              int64
 }
-

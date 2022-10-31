@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DescribeDatastoreResponse struct {
-    Datastore *Datastore `json:"datastore,omitempty"`
-    Statistics *DatastoreStatistics `json:"statistics,omitempty"`
-    
+	Datastore  *Datastore           `json:"datastore,omitempty"`
+	Statistics *DatastoreStatistics `json:"statistics,omitempty"`
 }
-

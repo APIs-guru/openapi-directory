@@ -1,17 +1,12 @@
 package shared
 
-
-
-
 type StreamingSessionStreamStatusCodeEnum string
 
 const (
-    StreamingSessionStreamStatusCodeEnumStreamCreateInProgress StreamingSessionStreamStatusCodeEnum = "STREAM_CREATE_IN_PROGRESS"
-StreamingSessionStreamStatusCodeEnumStreamReady StreamingSessionStreamStatusCodeEnum = "STREAM_READY"
-StreamingSessionStreamStatusCodeEnumStreamDeleteInProgress StreamingSessionStreamStatusCodeEnum = "STREAM_DELETE_IN_PROGRESS"
-StreamingSessionStreamStatusCodeEnumStreamDeleted StreamingSessionStreamStatusCodeEnum = "STREAM_DELETED"
-StreamingSessionStreamStatusCodeEnumInternalError StreamingSessionStreamStatusCodeEnum = "INTERNAL_ERROR"
-StreamingSessionStreamStatusCodeEnumNetworkConnectionError StreamingSessionStreamStatusCodeEnum = "NETWORK_CONNECTION_ERROR"
+	StreamingSessionStreamStatusCodeEnumStreamCreateInProgress StreamingSessionStreamStatusCodeEnum = "STREAM_CREATE_IN_PROGRESS"
+	StreamingSessionStreamStatusCodeEnumStreamReady            StreamingSessionStreamStatusCodeEnum = "STREAM_READY"
+	StreamingSessionStreamStatusCodeEnumStreamDeleteInProgress StreamingSessionStreamStatusCodeEnum = "STREAM_DELETE_IN_PROGRESS"
+	StreamingSessionStreamStatusCodeEnumStreamDeleted          StreamingSessionStreamStatusCodeEnum = "STREAM_DELETED"
+	StreamingSessionStreamStatusCodeEnumInternalError          StreamingSessionStreamStatusCodeEnum = "INTERNAL_ERROR"
+	StreamingSessionStreamStatusCodeEnumNetworkConnectionError StreamingSessionStreamStatusCodeEnum = "NETWORK_CONNECTION_ERROR"
 )
-
-

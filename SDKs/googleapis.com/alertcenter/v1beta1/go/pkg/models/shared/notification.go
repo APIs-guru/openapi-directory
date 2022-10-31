@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Notification struct {
-    CloudPubsubTopic *CloudPubsubTopic `json:"cloudPubsubTopic,omitempty"`
-    
+	CloudPubsubTopic *CloudPubsubTopic `json:"cloudPubsubTopic,omitempty"`
 }
-

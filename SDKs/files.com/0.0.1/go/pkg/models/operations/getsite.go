@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetSiteResponse struct {
-    ContentType string 
-    SiteEntity *shared.SiteEntity 
-    StatusCode int64 
-    
+	ContentType string
+	SiteEntity  *shared.SiteEntity
+	StatusCode  int64
 }
-

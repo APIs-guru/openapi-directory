@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ErrorResponse struct {
-    Error ErrorDetail `json:"error"`
-    
+	Error ErrorDetail `json:"error"`
 }
-

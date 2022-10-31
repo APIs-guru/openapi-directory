@@ -1,10 +1,6 @@
 package shared
 
-
-
 type DescribeAccessResponse struct {
-    Access DescribedAccess `json:"Access"`
-    ServerID string `json:"ServerId"`
-    
+	Access   DescribedAccess `json:"Access"`
+	ServerID string          `json:"ServerId"`
 }
-

@@ -1,112 +1,92 @@
 package shared
 
-
-
-
 type LivingAreaAccessibilityAdaCompliantUnitExceptionEnum string
 
 const (
-    LivingAreaAccessibilityAdaCompliantUnitExceptionEnumExceptionUnspecified LivingAreaAccessibilityAdaCompliantUnitExceptionEnum = "EXCEPTION_UNSPECIFIED"
-LivingAreaAccessibilityAdaCompliantUnitExceptionEnumUnderConstruction LivingAreaAccessibilityAdaCompliantUnitExceptionEnum = "UNDER_CONSTRUCTION"
-LivingAreaAccessibilityAdaCompliantUnitExceptionEnumDependentOnSeason LivingAreaAccessibilityAdaCompliantUnitExceptionEnum = "DEPENDENT_ON_SEASON"
-LivingAreaAccessibilityAdaCompliantUnitExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityAdaCompliantUnitExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	LivingAreaAccessibilityAdaCompliantUnitExceptionEnumExceptionUnspecified LivingAreaAccessibilityAdaCompliantUnitExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	LivingAreaAccessibilityAdaCompliantUnitExceptionEnumUnderConstruction    LivingAreaAccessibilityAdaCompliantUnitExceptionEnum = "UNDER_CONSTRUCTION"
+	LivingAreaAccessibilityAdaCompliantUnitExceptionEnumDependentOnSeason    LivingAreaAccessibilityAdaCompliantUnitExceptionEnum = "DEPENDENT_ON_SEASON"
+	LivingAreaAccessibilityAdaCompliantUnitExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityAdaCompliantUnitExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnum string
 
 const (
-    LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnumExceptionUnspecified LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnum = "EXCEPTION_UNSPECIFIED"
-LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnumUnderConstruction LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnum = "UNDER_CONSTRUCTION"
-LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnumDependentOnSeason LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnum = "DEPENDENT_ON_SEASON"
-LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnumExceptionUnspecified LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnumUnderConstruction    LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnum = "UNDER_CONSTRUCTION"
+	LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnumDependentOnSeason    LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnum = "DEPENDENT_ON_SEASON"
+	LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnum string
 
 const (
-    LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnumExceptionUnspecified LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnum = "EXCEPTION_UNSPECIFIED"
-LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnumUnderConstruction LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnum = "UNDER_CONSTRUCTION"
-LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnumDependentOnSeason LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnum = "DEPENDENT_ON_SEASON"
-LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnumExceptionUnspecified LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnumUnderConstruction    LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnum = "UNDER_CONSTRUCTION"
+	LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnumDependentOnSeason    LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnum = "DEPENDENT_ON_SEASON"
+	LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type LivingAreaAccessibilityHearingAccessibleUnitExceptionEnum string
 
 const (
-    LivingAreaAccessibilityHearingAccessibleUnitExceptionEnumExceptionUnspecified LivingAreaAccessibilityHearingAccessibleUnitExceptionEnum = "EXCEPTION_UNSPECIFIED"
-LivingAreaAccessibilityHearingAccessibleUnitExceptionEnumUnderConstruction LivingAreaAccessibilityHearingAccessibleUnitExceptionEnum = "UNDER_CONSTRUCTION"
-LivingAreaAccessibilityHearingAccessibleUnitExceptionEnumDependentOnSeason LivingAreaAccessibilityHearingAccessibleUnitExceptionEnum = "DEPENDENT_ON_SEASON"
-LivingAreaAccessibilityHearingAccessibleUnitExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityHearingAccessibleUnitExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	LivingAreaAccessibilityHearingAccessibleUnitExceptionEnumExceptionUnspecified LivingAreaAccessibilityHearingAccessibleUnitExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	LivingAreaAccessibilityHearingAccessibleUnitExceptionEnumUnderConstruction    LivingAreaAccessibilityHearingAccessibleUnitExceptionEnum = "UNDER_CONSTRUCTION"
+	LivingAreaAccessibilityHearingAccessibleUnitExceptionEnumDependentOnSeason    LivingAreaAccessibilityHearingAccessibleUnitExceptionEnum = "DEPENDENT_ON_SEASON"
+	LivingAreaAccessibilityHearingAccessibleUnitExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityHearingAccessibleUnitExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnum string
 
 const (
-    LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnumExceptionUnspecified LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnum = "EXCEPTION_UNSPECIFIED"
-LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnumUnderConstruction LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnum = "UNDER_CONSTRUCTION"
-LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnumDependentOnSeason LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnum = "DEPENDENT_ON_SEASON"
-LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnumExceptionUnspecified LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnumUnderConstruction    LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnum = "UNDER_CONSTRUCTION"
+	LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnumDependentOnSeason    LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnum = "DEPENDENT_ON_SEASON"
+	LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnum string
 
 const (
-    LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnumExceptionUnspecified LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnum = "EXCEPTION_UNSPECIFIED"
-LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnumUnderConstruction LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnum = "UNDER_CONSTRUCTION"
-LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnumDependentOnSeason LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnum = "DEPENDENT_ON_SEASON"
-LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnumExceptionUnspecified LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnumUnderConstruction    LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnum = "UNDER_CONSTRUCTION"
+	LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnumDependentOnSeason    LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnum = "DEPENDENT_ON_SEASON"
+	LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnum string
 
 const (
-    LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnumExceptionUnspecified LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnum = "EXCEPTION_UNSPECIFIED"
-LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnumUnderConstruction LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnum = "UNDER_CONSTRUCTION"
-LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnumDependentOnSeason LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnum = "DEPENDENT_ON_SEASON"
-LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnumExceptionUnspecified LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnumUnderConstruction    LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnum = "UNDER_CONSTRUCTION"
+	LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnumDependentOnSeason    LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnum = "DEPENDENT_ON_SEASON"
+	LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
-
-
 
 type LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum string
 
 const (
-    LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnumExceptionUnspecified LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum = "EXCEPTION_UNSPECIFIED"
-LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnumUnderConstruction LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum = "UNDER_CONSTRUCTION"
-LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnumDependentOnSeason LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum = "DEPENDENT_ON_SEASON"
-LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
+	LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnumExceptionUnspecified LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum = "EXCEPTION_UNSPECIFIED"
+	LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnumUnderConstruction    LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum = "UNDER_CONSTRUCTION"
+	LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnumDependentOnSeason    LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum = "DEPENDENT_ON_SEASON"
+	LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnumDependentOnDayOfWeek LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum = "DEPENDENT_ON_DAY_OF_WEEK"
 )
 
-
 type LivingAreaAccessibility struct {
-    AdaCompliantUnit *bool `json:"adaCompliantUnit,omitempty"`
-    AdaCompliantUnitException *LivingAreaAccessibilityAdaCompliantUnitExceptionEnum `json:"adaCompliantUnitException,omitempty"`
-    HearingAccessibleDoorbell *bool `json:"hearingAccessibleDoorbell,omitempty"`
-    HearingAccessibleDoorbellException *LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnum `json:"hearingAccessibleDoorbellException,omitempty"`
-    HearingAccessibleFireAlarm *bool `json:"hearingAccessibleFireAlarm,omitempty"`
-    HearingAccessibleFireAlarmException *LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnum `json:"hearingAccessibleFireAlarmException,omitempty"`
-    HearingAccessibleUnit *bool `json:"hearingAccessibleUnit,omitempty"`
-    HearingAccessibleUnitException *LivingAreaAccessibilityHearingAccessibleUnitExceptionEnum `json:"hearingAccessibleUnitException,omitempty"`
-    MobilityAccessibleBathtub *bool `json:"mobilityAccessibleBathtub,omitempty"`
-    MobilityAccessibleBathtubException *LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnum `json:"mobilityAccessibleBathtubException,omitempty"`
-    MobilityAccessibleShower *bool `json:"mobilityAccessibleShower,omitempty"`
-    MobilityAccessibleShowerException *LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnum `json:"mobilityAccessibleShowerException,omitempty"`
-    MobilityAccessibleToilet *bool `json:"mobilityAccessibleToilet,omitempty"`
-    MobilityAccessibleToiletException *LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnum `json:"mobilityAccessibleToiletException,omitempty"`
-    MobilityAccessibleUnit *bool `json:"mobilityAccessibleUnit,omitempty"`
-    MobilityAccessibleUnitException *LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum `json:"mobilityAccessibleUnitException,omitempty"`
-    
+	AdaCompliantUnit                    *bool                                                           `json:"adaCompliantUnit,omitempty"`
+	AdaCompliantUnitException           *LivingAreaAccessibilityAdaCompliantUnitExceptionEnum           `json:"adaCompliantUnitException,omitempty"`
+	HearingAccessibleDoorbell           *bool                                                           `json:"hearingAccessibleDoorbell,omitempty"`
+	HearingAccessibleDoorbellException  *LivingAreaAccessibilityHearingAccessibleDoorbellExceptionEnum  `json:"hearingAccessibleDoorbellException,omitempty"`
+	HearingAccessibleFireAlarm          *bool                                                           `json:"hearingAccessibleFireAlarm,omitempty"`
+	HearingAccessibleFireAlarmException *LivingAreaAccessibilityHearingAccessibleFireAlarmExceptionEnum `json:"hearingAccessibleFireAlarmException,omitempty"`
+	HearingAccessibleUnit               *bool                                                           `json:"hearingAccessibleUnit,omitempty"`
+	HearingAccessibleUnitException      *LivingAreaAccessibilityHearingAccessibleUnitExceptionEnum      `json:"hearingAccessibleUnitException,omitempty"`
+	MobilityAccessibleBathtub           *bool                                                           `json:"mobilityAccessibleBathtub,omitempty"`
+	MobilityAccessibleBathtubException  *LivingAreaAccessibilityMobilityAccessibleBathtubExceptionEnum  `json:"mobilityAccessibleBathtubException,omitempty"`
+	MobilityAccessibleShower            *bool                                                           `json:"mobilityAccessibleShower,omitempty"`
+	MobilityAccessibleShowerException   *LivingAreaAccessibilityMobilityAccessibleShowerExceptionEnum   `json:"mobilityAccessibleShowerException,omitempty"`
+	MobilityAccessibleToilet            *bool                                                           `json:"mobilityAccessibleToilet,omitempty"`
+	MobilityAccessibleToiletException   *LivingAreaAccessibilityMobilityAccessibleToiletExceptionEnum   `json:"mobilityAccessibleToiletException,omitempty"`
+	MobilityAccessibleUnit              *bool                                                           `json:"mobilityAccessibleUnit,omitempty"`
+	MobilityAccessibleUnitException     *LivingAreaAccessibilityMobilityAccessibleUnitExceptionEnum     `json:"mobilityAccessibleUnitException,omitempty"`
 }
-

@@ -1,100 +1,93 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum string
 
 const (
-    DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeUnspecified DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_UNSPECIFIED"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeChannel DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CHANNEL"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeAppCategory DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_APP_CATEGORY"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeApp DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_APP"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeURL DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_URL"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeDayAndTime DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_DAY_AND_TIME"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeAgeRange DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_AGE_RANGE"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeRegionalLocationList DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_REGIONAL_LOCATION_LIST"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeProximityLocationList DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_PROXIMITY_LOCATION_LIST"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeGender DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_GENDER"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeVideoPlayerSize DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_VIDEO_PLAYER_SIZE"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeUserRewardedContent DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_USER_REWARDED_CONTENT"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeParentalStatus DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_PARENTAL_STATUS"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeContentInstreamPosition DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CONTENT_INSTREAM_POSITION"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeContentOutstreamPosition DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeDeviceType DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_DEVICE_TYPE"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeAudienceGroup DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_AUDIENCE_GROUP"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeBrowser DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_BROWSER"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeHouseholdIncome DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_HOUSEHOLD_INCOME"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeOnScreenPosition DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_ON_SCREEN_POSITION"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeThirdPartyVerifier DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_THIRD_PARTY_VERIFIER"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeDigitalContentLabelExclusion DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeSensitiveCategoryExclusion DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeEnvironment DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_ENVIRONMENT"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeCarrierAndIsp DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CARRIER_AND_ISP"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeOperatingSystem DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_OPERATING_SYSTEM"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeDeviceMakeModel DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_DEVICE_MAKE_MODEL"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeKeyword DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_KEYWORD"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeNegativeKeywordList DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_NEGATIVE_KEYWORD_LIST"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeViewability DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_VIEWABILITY"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeCategory DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CATEGORY"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeInventorySource DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_INVENTORY_SOURCE"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeLanguage DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_LANGUAGE"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeAuthorizedSellerStatus DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_AUTHORIZED_SELLER_STATUS"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeGeoRegion DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_GEO_REGION"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeInventorySourceGroup DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_INVENTORY_SOURCE_GROUP"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeExchange DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_EXCHANGE"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeSubExchange DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_SUB_EXCHANGE"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypePoi DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_POI"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeBusinessChain DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_BUSINESS_CHAIN"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeContentDuration DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CONTENT_DURATION"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeContentStreamType DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CONTENT_STREAM_TYPE"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeNativeContentPosition DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_NATIVE_CONTENT_POSITION"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeOmid DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_OMID"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeAudioContentType DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
-DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeContentGenre DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CONTENT_GENRE"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeUnspecified                  DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_UNSPECIFIED"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeChannel                      DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CHANNEL"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeAppCategory                  DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_APP_CATEGORY"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeApp                          DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_APP"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeURL                          DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_URL"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeDayAndTime                   DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_DAY_AND_TIME"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeAgeRange                     DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_AGE_RANGE"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeRegionalLocationList         DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_REGIONAL_LOCATION_LIST"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeProximityLocationList        DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_PROXIMITY_LOCATION_LIST"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeGender                       DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_GENDER"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeVideoPlayerSize              DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_VIDEO_PLAYER_SIZE"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeUserRewardedContent          DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_USER_REWARDED_CONTENT"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeParentalStatus               DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_PARENTAL_STATUS"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeContentInstreamPosition      DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CONTENT_INSTREAM_POSITION"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeContentOutstreamPosition     DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeDeviceType                   DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_DEVICE_TYPE"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeAudienceGroup                DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_AUDIENCE_GROUP"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeBrowser                      DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_BROWSER"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeHouseholdIncome              DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_HOUSEHOLD_INCOME"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeOnScreenPosition             DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_ON_SCREEN_POSITION"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeThirdPartyVerifier           DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_THIRD_PARTY_VERIFIER"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeDigitalContentLabelExclusion DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeSensitiveCategoryExclusion   DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeEnvironment                  DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_ENVIRONMENT"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeCarrierAndIsp                DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CARRIER_AND_ISP"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeOperatingSystem              DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_OPERATING_SYSTEM"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeDeviceMakeModel              DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_DEVICE_MAKE_MODEL"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeKeyword                      DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_KEYWORD"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeNegativeKeywordList          DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_NEGATIVE_KEYWORD_LIST"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeViewability                  DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_VIEWABILITY"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeCategory                     DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CATEGORY"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeInventorySource              DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_INVENTORY_SOURCE"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeLanguage                     DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_LANGUAGE"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeAuthorizedSellerStatus       DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_AUTHORIZED_SELLER_STATUS"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeGeoRegion                    DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_GEO_REGION"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeInventorySourceGroup         DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_INVENTORY_SOURCE_GROUP"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeExchange                     DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_EXCHANGE"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeSubExchange                  DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_SUB_EXCHANGE"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypePoi                          DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_POI"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeBusinessChain                DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_BUSINESS_CHAIN"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeContentDuration              DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CONTENT_DURATION"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeContentStreamType            DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CONTENT_STREAM_TYPE"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeNativeContentPosition        DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_NATIVE_CONTENT_POSITION"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeOmid                         DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_OMID"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeAudioContentType             DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_AUDIO_CONTENT_TYPE"
+	DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnumTargetingTypeContentGenre                 DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum = "TARGETING_TYPE_CONTENT_GENRE"
 )
 
-
 type DisplayvideoTargetingTypesTargetingOptionsGetPathParams struct {
-    TargetingOptionID string `pathParam:"style=simple,explode=false,name=targetingOptionId"`
-    TargetingType DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum `pathParam:"style=simple,explode=false,name=targetingType"`
-    
+	TargetingOptionID string                                                         `pathParam:"style=simple,explode=false,name=targetingOptionId"`
+	TargetingType     DisplayvideoTargetingTypesTargetingOptionsGetTargetingTypeEnum `pathParam:"style=simple,explode=false,name=targetingType"`
 }
 
 type DisplayvideoTargetingTypesTargetingOptionsGetQueryParams struct {
-    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
-    AdvertiserID *string `queryParam:"style=form,explode=true,name=advertiserId"`
-    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
-    Callback *string `queryParam:"style=form,explode=true,name=callback"`
-    Fields *string `queryParam:"style=form,explode=true,name=fields"`
-    Key *string `queryParam:"style=form,explode=true,name=key"`
-    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
-    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
-    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
-    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
-    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
-    
+	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
+	AdvertiserID   *string           `queryParam:"style=form,explode=true,name=advertiserId"`
+	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
+	Key            *string           `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
+	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
 type DisplayvideoTargetingTypesTargetingOptionsGetSecurity struct {
-    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-    
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
 }
 
 type DisplayvideoTargetingTypesTargetingOptionsGetRequest struct {
-    PathParams DisplayvideoTargetingTypesTargetingOptionsGetPathParams 
-    QueryParams DisplayvideoTargetingTypesTargetingOptionsGetQueryParams 
-    Security DisplayvideoTargetingTypesTargetingOptionsGetSecurity 
-    
+	PathParams  DisplayvideoTargetingTypesTargetingOptionsGetPathParams
+	QueryParams DisplayvideoTargetingTypesTargetingOptionsGetQueryParams
+	Security    DisplayvideoTargetingTypesTargetingOptionsGetSecurity
 }
 
 type DisplayvideoTargetingTypesTargetingOptionsGetResponse struct {
-    ContentType string 
-    StatusCode int64 
-    TargetingOption *shared.TargetingOption 
-    
+	ContentType     string
+	StatusCode      int64
+	TargetingOption *shared.TargetingOption
 }
-

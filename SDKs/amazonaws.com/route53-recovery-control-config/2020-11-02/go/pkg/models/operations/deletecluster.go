@@ -1,39 +1,32 @@
 package operations
 
-
-
 type DeleteClusterPathParams struct {
-    ClusterArn string `pathParam:"style=simple,explode=false,name=ClusterArn"`
-    
+	ClusterArn string `pathParam:"style=simple,explode=false,name=ClusterArn"`
 }
 
 type DeleteClusterHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type DeleteClusterRequest struct {
-    PathParams DeleteClusterPathParams 
-    Headers DeleteClusterHeaders 
-    
+	PathParams DeleteClusterPathParams
+	Headers    DeleteClusterHeaders
 }
 
 type DeleteClusterResponse struct {
-    AccessDeniedException *interface{} 
-    ConflictException *interface{} 
-    ContentType string 
-    DeleteClusterResponse map[string]interface{} 
-    InternalServerException *interface{} 
-    ResourceNotFoundException *interface{} 
-    StatusCode int64 
-    ThrottlingException *interface{} 
-    ValidationException *interface{} 
-    
+	AccessDeniedException     *interface{}
+	ConflictException         *interface{}
+	ContentType               string
+	DeleteClusterResponse     map[string]interface{}
+	InternalServerException   *interface{}
+	ResourceNotFoundException *interface{}
+	StatusCode                int64
+	ThrottlingException       *interface{}
+	ValidationException       *interface{}
 }
-

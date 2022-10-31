@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ZendeskMetadata struct {
-    OAuthScopes []string `json:"oAuthScopes,omitempty"`
-    
+	OAuthScopes []string `json:"oAuthScopes,omitempty"`
 }
-

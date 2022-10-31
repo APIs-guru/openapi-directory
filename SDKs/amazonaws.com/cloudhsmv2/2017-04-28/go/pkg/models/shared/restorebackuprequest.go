@@ -1,9 +1,5 @@
 package shared
 
-
-
 type RestoreBackupRequest struct {
-    BackupID string `json:"BackupId"`
-    
+	BackupID string `json:"BackupId"`
 }
-

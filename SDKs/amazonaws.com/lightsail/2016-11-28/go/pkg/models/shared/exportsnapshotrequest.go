@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ExportSnapshotRequest struct {
-    SourceSnapshotName string `json:"sourceSnapshotName"`
-    
+	SourceSnapshotName string `json:"sourceSnapshotName"`
 }
-

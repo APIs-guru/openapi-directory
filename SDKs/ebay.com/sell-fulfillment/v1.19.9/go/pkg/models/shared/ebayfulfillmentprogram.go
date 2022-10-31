@@ -1,9 +1,5 @@
 package shared
 
-
-
 type EbayFulfillmentProgram struct {
-    FulfilledBy *string `json:"fulfilledBy,omitempty"`
-    
+	FulfilledBy *string `json:"fulfilledBy,omitempty"`
 }
-

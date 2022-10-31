@@ -1,9 +1,5 @@
 package shared
 
-
-
 type VoiceV1DialingPermissionsDialingPermissionsCountryDialingPermissionsHrsPrefixes struct {
-    Prefix *string `json:"prefix,omitempty"`
-    
+	Prefix *string `json:"prefix,omitempty"`
 }
-

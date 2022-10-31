@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DirectoryNotEnabledException struct {
-    Message *string `json:"Message,omitempty"`
-    
+	Message *string `json:"Message,omitempty"`
 }
-

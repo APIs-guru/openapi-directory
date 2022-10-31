@@ -1,12 +1,8 @@
 package shared
 
-
-
 type GoogleCloudDialogflowV2HumanAgentHandoffConfigSalesforceLiveAgentConfig struct {
-    ButtonID *string `json:"buttonId,omitempty"`
-    DeploymentID *string `json:"deploymentId,omitempty"`
-    EndpointDomain *string `json:"endpointDomain,omitempty"`
-    OrganizationID *string `json:"organizationId,omitempty"`
-    
+	ButtonID       *string `json:"buttonId,omitempty"`
+	DeploymentID   *string `json:"deploymentId,omitempty"`
+	EndpointDomain *string `json:"endpointDomain,omitempty"`
+	OrganizationID *string `json:"organizationId,omitempty"`
 }
-

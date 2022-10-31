@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ResourceSelector struct {
-    FullResourceName *string `json:"fullResourceName,omitempty"`
-    
+	FullResourceName *string `json:"fullResourceName,omitempty"`
 }
-

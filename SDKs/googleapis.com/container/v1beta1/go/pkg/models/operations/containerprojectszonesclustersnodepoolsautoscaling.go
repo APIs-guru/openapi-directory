@@ -1,49 +1,44 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type ContainerProjectsZonesClustersNodePoolsAutoscalingPathParams struct {
-    ClusterID string `pathParam:"style=simple,explode=false,name=clusterId"`
-    NodePoolID string `pathParam:"style=simple,explode=false,name=nodePoolId"`
-    ProjectID string `pathParam:"style=simple,explode=false,name=projectId"`
-    Zone string `pathParam:"style=simple,explode=false,name=zone"`
-    
+	ClusterID  string `pathParam:"style=simple,explode=false,name=clusterId"`
+	NodePoolID string `pathParam:"style=simple,explode=false,name=nodePoolId"`
+	ProjectID  string `pathParam:"style=simple,explode=false,name=projectId"`
+	Zone       string `pathParam:"style=simple,explode=false,name=zone"`
 }
 
 type ContainerProjectsZonesClustersNodePoolsAutoscalingQueryParams struct {
-    DollarXgafv *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
-    AccessToken *string `queryParam:"style=form,explode=true,name=access_token"`
-    Alt *shared.AltEnum `queryParam:"style=form,explode=true,name=alt"`
-    Callback *string `queryParam:"style=form,explode=true,name=callback"`
-    Fields *string `queryParam:"style=form,explode=true,name=fields"`
-    Key *string `queryParam:"style=form,explode=true,name=key"`
-    OauthToken *string `queryParam:"style=form,explode=true,name=oauth_token"`
-    PrettyPrint *bool `queryParam:"style=form,explode=true,name=prettyPrint"`
-    QuotaUser *string `queryParam:"style=form,explode=true,name=quotaUser"`
-    UploadType *string `queryParam:"style=form,explode=true,name=uploadType"`
-    UploadProtocol *string `queryParam:"style=form,explode=true,name=upload_protocol"`
-    
+	DollarXgafv    *shared.XgafvEnum `queryParam:"style=form,explode=true,name=$.xgafv"`
+	AccessToken    *string           `queryParam:"style=form,explode=true,name=access_token"`
+	Alt            *shared.AltEnum   `queryParam:"style=form,explode=true,name=alt"`
+	Callback       *string           `queryParam:"style=form,explode=true,name=callback"`
+	Fields         *string           `queryParam:"style=form,explode=true,name=fields"`
+	Key            *string           `queryParam:"style=form,explode=true,name=key"`
+	OauthToken     *string           `queryParam:"style=form,explode=true,name=oauth_token"`
+	PrettyPrint    *bool             `queryParam:"style=form,explode=true,name=prettyPrint"`
+	QuotaUser      *string           `queryParam:"style=form,explode=true,name=quotaUser"`
+	UploadType     *string           `queryParam:"style=form,explode=true,name=uploadType"`
+	UploadProtocol *string           `queryParam:"style=form,explode=true,name=upload_protocol"`
 }
 
 type ContainerProjectsZonesClustersNodePoolsAutoscalingSecurity struct {
-    Oauth2 shared.SchemeOauth2 `security:"scheme,type=oauth2"`
-    Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
-    
+	Oauth2  shared.SchemeOauth2  `security:"scheme,type=oauth2"`
+	Oauth2c shared.SchemeOauth2c `security:"scheme,type=oauth2"`
 }
 
 type ContainerProjectsZonesClustersNodePoolsAutoscalingRequest struct {
-    PathParams ContainerProjectsZonesClustersNodePoolsAutoscalingPathParams 
-    QueryParams ContainerProjectsZonesClustersNodePoolsAutoscalingQueryParams 
-    Request *shared.SetNodePoolAutoscalingRequest `request:"mediaType=application/json"`
-    Security ContainerProjectsZonesClustersNodePoolsAutoscalingSecurity 
-    
+	PathParams  ContainerProjectsZonesClustersNodePoolsAutoscalingPathParams
+	QueryParams ContainerProjectsZonesClustersNodePoolsAutoscalingQueryParams
+	Request     *shared.SetNodePoolAutoscalingRequest `request:"mediaType=application/json"`
+	Security    ContainerProjectsZonesClustersNodePoolsAutoscalingSecurity
 }
 
 type ContainerProjectsZonesClustersNodePoolsAutoscalingResponse struct {
-    ContentType string 
-    Operation *shared.Operation 
-    StatusCode int64 
-    
+	ContentType string
+	Operation   *shared.Operation
+	StatusCode  int64
 }
-

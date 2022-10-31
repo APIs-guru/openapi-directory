@@ -1,41 +1,36 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type GetWebAclxAmzTargetEnum string
 
 const (
-    GetWebAclxAmzTargetEnumAwswaf20150824GetWebACL GetWebAclxAmzTargetEnum = "AWSWAF_20150824.GetWebACL"
+	GetWebAclxAmzTargetEnumAwswaf20150824GetWebACL GetWebAclxAmzTargetEnum = "AWSWAF_20150824.GetWebACL"
 )
 
-
 type GetWebACLHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    XAmzTarget GetWebAclxAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
-    
+	XAmzAlgorithm     *string                 `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string                 `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string                 `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string                 `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string                 `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string                 `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string                 `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
+	XAmzTarget        GetWebAclxAmzTargetEnum `header:"style=simple,explode=false,name=X-Amz-Target"`
 }
 
 type GetWebACLRequest struct {
-    Headers GetWebACLHeaders 
-    Request shared.GetWebACLRequest `request:"mediaType=application/json"`
-    
+	Headers GetWebACLHeaders
+	Request shared.GetWebACLRequest `request:"mediaType=application/json"`
 }
 
 type GetWebACLResponse struct {
-    ContentType string 
-    GetWebACLResponse *shared.GetWebACLResponse 
-    StatusCode int64 
-    WafInternalErrorException *interface{} 
-    WafInvalidAccountException *interface{} 
-    WafNonexistentItemException *interface{} 
-    
+	ContentType                 string
+	GetWebACLResponse           *shared.GetWebACLResponse
+	StatusCode                  int64
+	WafInternalErrorException   *interface{}
+	WafInvalidAccountException  *interface{}
+	WafNonexistentItemException *interface{}
 }
-

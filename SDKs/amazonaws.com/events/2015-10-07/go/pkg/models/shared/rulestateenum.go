@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type RuleStateEnum string
 
 const (
-    RuleStateEnumEnabled RuleStateEnum = "ENABLED"
-RuleStateEnumDisabled RuleStateEnum = "DISABLED"
+	RuleStateEnumEnabled  RuleStateEnum = "ENABLED"
+	RuleStateEnumDisabled RuleStateEnum = "DISABLED"
 )
-
-

@@ -1,22 +1,16 @@
 package operations
 
-
-
 type CreateEventNotificationHeaders struct {
-    XFapiFinancialID string `header:"style=simple,explode=false,name=x-fapi-financial-id"`
-    XFapiInteractionID *string `header:"style=simple,explode=false,name=x-fapi-interaction-id"`
-    
+	XFapiFinancialID   string  `header:"style=simple,explode=false,name=x-fapi-financial-id"`
+	XFapiInteractionID *string `header:"style=simple,explode=false,name=x-fapi-interaction-id"`
 }
 
 type CreateEventNotificationRequest struct {
-    Headers CreateEventNotificationHeaders 
-    Request string `request:"mediaType=application/jwt"`
-    
+	Headers CreateEventNotificationHeaders
+	Request string `request:"mediaType=application/jwt"`
 }
 
 type CreateEventNotificationResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateEnvironmentMembershipResult struct {
-    Membership EnvironmentMember `json:"membership"`
-    
+	Membership EnvironmentMember `json:"membership"`
 }
-

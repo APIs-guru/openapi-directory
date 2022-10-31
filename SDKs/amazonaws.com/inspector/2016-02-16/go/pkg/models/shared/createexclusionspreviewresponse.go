@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateExclusionsPreviewResponse struct {
-    PreviewToken string `json:"previewToken"`
-    
+	PreviewToken string `json:"previewToken"`
 }
-

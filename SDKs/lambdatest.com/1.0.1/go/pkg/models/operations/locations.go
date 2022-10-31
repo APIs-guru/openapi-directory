@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type LocationsSecurity struct {
-    BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
-    
+	BasicAuth shared.SchemeBasicAuth `security:"scheme,type=http,subtype=basic"`
 }
 
 type LocationsRequest struct {
-    Security LocationsSecurity 
-    
+	Security LocationsSecurity
 }
 
 type LocationsResponse struct {
-    AccessDenied *interface{} 
-    ContentType string 
-    StatusCode int64 
-    Locations *shared.Locations 
-    
+	AccessDenied *interface{}
+	ContentType  string
+	StatusCode   int64
+	Locations    *shared.Locations
 }
-

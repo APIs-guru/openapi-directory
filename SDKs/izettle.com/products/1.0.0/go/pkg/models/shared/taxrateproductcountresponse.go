@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TaxRateProductCountResponse struct {
-    Counts []TaxRateProductCount `json:"counts,omitempty"`
-    
+	Counts []TaxRateProductCount `json:"counts,omitempty"`
 }
-

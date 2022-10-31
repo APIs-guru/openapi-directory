@@ -1,20 +1,14 @@
 package shared
 
-
-
-
 type UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum string
 
 const (
-    UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnumRequired UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum = "Required"
-UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnumIncludeByDefault UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum = "IncludeByDefault"
-UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnumExcludeByDefault UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum = "ExcludeByDefault"
+	UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnumRequired         UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum = "Required"
+	UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnumIncludeByDefault UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum = "IncludeByDefault"
+	UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnumExcludeByDefault UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum = "ExcludeByDefault"
 )
 
-
 type UpdateSystemModelsAvailableSubscription struct {
-    PackageType *UpdateSystemModelsPackageType `json:"PackageType,omitempty"`
-    SubscriptionType *UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum `json:"SubscriptionType,omitempty"`
-    
+	PackageType      *UpdateSystemModelsPackageType                               `json:"PackageType,omitempty"`
+	SubscriptionType *UpdateSystemModelsAvailableSubscriptionSubscriptionTypeEnum `json:"SubscriptionType,omitempty"`
 }
-

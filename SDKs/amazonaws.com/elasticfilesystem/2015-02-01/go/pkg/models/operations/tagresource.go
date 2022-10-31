@@ -1,43 +1,38 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type TagResourcePathParams struct {
-    ResourceID string `pathParam:"style=simple,explode=false,name=ResourceId"`
-    
+	ResourceID string `pathParam:"style=simple,explode=false,name=ResourceId"`
 }
 
 type TagResourceHeaders struct {
-    XAmzAlgorithm *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
-    XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
-    XAmzCredential *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
-    XAmzDate *string `header:"style=simple,explode=false,name=X-Amz-Date"`
-    XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
-    XAmzSignature *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
-    XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
-    
+	XAmzAlgorithm     *string `header:"style=simple,explode=false,name=X-Amz-Algorithm"`
+	XAmzContentSha256 *string `header:"style=simple,explode=false,name=X-Amz-Content-Sha256"`
+	XAmzCredential    *string `header:"style=simple,explode=false,name=X-Amz-Credential"`
+	XAmzDate          *string `header:"style=simple,explode=false,name=X-Amz-Date"`
+	XAmzSecurityToken *string `header:"style=simple,explode=false,name=X-Amz-Security-Token"`
+	XAmzSignature     *string `header:"style=simple,explode=false,name=X-Amz-Signature"`
+	XAmzSignedHeaders *string `header:"style=simple,explode=false,name=X-Amz-SignedHeaders"`
 }
 
 type TagResourceRequestBody struct {
-    Tags []shared.Tag `json:"Tags"`
-    
+	Tags []shared.Tag `json:"Tags"`
 }
 
 type TagResourceRequest struct {
-    PathParams TagResourcePathParams 
-    Headers TagResourceHeaders 
-    Request TagResourceRequestBody `request:"mediaType=application/json"`
-    
+	PathParams TagResourcePathParams
+	Headers    TagResourceHeaders
+	Request    TagResourceRequestBody `request:"mediaType=application/json"`
 }
 
 type TagResourceResponse struct {
-    AccessPointNotFound *interface{} 
-    BadRequest *interface{} 
-    ContentType string 
-    FileSystemNotFound *interface{} 
-    InternalServerError *interface{} 
-    StatusCode int64 
-    
+	AccessPointNotFound *interface{}
+	BadRequest          *interface{}
+	ContentType         string
+	FileSystemNotFound  *interface{}
+	InternalServerError *interface{}
+	StatusCode          int64
 }
-

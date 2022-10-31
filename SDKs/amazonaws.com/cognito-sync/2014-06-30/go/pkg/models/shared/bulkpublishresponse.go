@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BulkPublishResponse struct {
-    IdentityPoolID *string `json:"IdentityPoolId,omitempty"`
-    
+	IdentityPoolID *string `json:"IdentityPoolId,omitempty"`
 }
-

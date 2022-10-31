@@ -1,30 +1,25 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
-
+	"openapi/pkg/models/shared"
+)
 
 type GetLanguagesFilterEnum string
 
 const (
-    GetLanguagesFilterEnumTexttracks GetLanguagesFilterEnum = "texttracks"
+	GetLanguagesFilterEnumTexttracks GetLanguagesFilterEnum = "texttracks"
 )
 
-
 type GetLanguagesQueryParams struct {
-    Filter *GetLanguagesFilterEnum `queryParam:"style=form,explode=true,name=filter"`
-    
+	Filter *GetLanguagesFilterEnum `queryParam:"style=form,explode=true,name=filter"`
 }
 
 type GetLanguagesRequest struct {
-    QueryParams GetLanguagesQueryParams 
-    
+	QueryParams GetLanguagesQueryParams
 }
 
 type GetLanguagesResponse struct {
-    ContentType string 
-    StatusCode int64 
-    Languages []shared.Language 
-    
+	ContentType string
+	StatusCode  int64
+	Languages   []shared.Language
 }
-

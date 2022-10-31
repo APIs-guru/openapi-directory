@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DealServingMetadata struct {
-    DealPauseStatus *DealPauseStatus `json:"dealPauseStatus,omitempty"`
-    
+	DealPauseStatus *DealPauseStatus `json:"dealPauseStatus,omitempty"`
 }
-

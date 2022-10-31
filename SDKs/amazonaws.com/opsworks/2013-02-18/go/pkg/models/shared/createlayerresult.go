@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateLayerResult struct {
-    LayerID *string `json:"LayerId,omitempty"`
-    
+	LayerID *string `json:"LayerId,omitempty"`
 }
-

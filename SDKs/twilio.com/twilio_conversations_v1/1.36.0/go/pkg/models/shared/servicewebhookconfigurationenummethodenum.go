@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type ServiceWebhookConfigurationEnumMethodEnum string
 
 const (
-    ServiceWebhookConfigurationEnumMethodEnumGet ServiceWebhookConfigurationEnumMethodEnum = "GET"
-ServiceWebhookConfigurationEnumMethodEnumPost ServiceWebhookConfigurationEnumMethodEnum = "POST"
+	ServiceWebhookConfigurationEnumMethodEnumGet  ServiceWebhookConfigurationEnumMethodEnum = "GET"
+	ServiceWebhookConfigurationEnumMethodEnumPost ServiceWebhookConfigurationEnumMethodEnum = "POST"
 )
-
-

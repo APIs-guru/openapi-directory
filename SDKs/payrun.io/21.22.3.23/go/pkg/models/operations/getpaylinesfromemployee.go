@@ -1,31 +1,27 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetPayLinesFromEmployeePathParams struct {
-    EmployeeID string `pathParam:"style=simple,explode=false,name=EmployeeId"`
-    EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
-    
+	EmployeeID string `pathParam:"style=simple,explode=false,name=EmployeeId"`
+	EmployerID string `pathParam:"style=simple,explode=false,name=EmployerId"`
 }
 
 type GetPayLinesFromEmployeeHeaders struct {
-    APIVersion string `header:"style=simple,explode=false,name=Api-Version"`
-    Authorization string `header:"style=simple,explode=false,name=Authorization"`
-    
+	APIVersion    string `header:"style=simple,explode=false,name=Api-Version"`
+	Authorization string `header:"style=simple,explode=false,name=Authorization"`
 }
 
 type GetPayLinesFromEmployeeRequest struct {
-    PathParams GetPayLinesFromEmployeePathParams 
-    Headers GetPayLinesFromEmployeeHeaders 
-    
+	PathParams GetPayLinesFromEmployeePathParams
+	Headers    GetPayLinesFromEmployeeHeaders
 }
 
 type GetPayLinesFromEmployeeResponse struct {
-    ContentType string 
-    ErrorModel *shared.ErrorModel 
-    LinkCollection *shared.LinkCollection 
-    StatusCode int64 
-    
+	ContentType    string
+	ErrorModel     *shared.ErrorModel
+	LinkCollection *shared.LinkCollection
+	StatusCode     int64
 }
-

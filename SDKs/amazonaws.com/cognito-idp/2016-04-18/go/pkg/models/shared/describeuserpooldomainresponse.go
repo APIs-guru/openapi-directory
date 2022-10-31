@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeUserPoolDomainResponse struct {
-    DomainDescription *DomainDescriptionType `json:"DomainDescription,omitempty"`
-    
+	DomainDescription *DomainDescriptionType `json:"DomainDescription,omitempty"`
 }
-

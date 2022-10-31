@@ -1,9 +1,5 @@
 package shared
 
-
-
 type AwsRdsDbSubnetGroupSubnetAvailabilityZone struct {
-    Name *string `json:"Name,omitempty"`
-    
+	Name *string `json:"Name,omitempty"`
 }
-

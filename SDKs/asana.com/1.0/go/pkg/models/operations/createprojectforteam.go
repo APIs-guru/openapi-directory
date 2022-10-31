@@ -1,41 +1,35 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CreateProjectForTeamPathParams struct {
-    TeamGid string `pathParam:"style=simple,explode=false,name=team_gid"`
-    
+	TeamGid string `pathParam:"style=simple,explode=false,name=team_gid"`
 }
 
 type CreateProjectForTeamQueryParams struct {
-    OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
-    OptPretty *bool `queryParam:"style=form,explode=true,name=opt_pretty"`
-    
+	OptFields []string `queryParam:"style=form,explode=false,name=opt_fields"`
+	OptPretty *bool    `queryParam:"style=form,explode=true,name=opt_pretty"`
 }
 
 type CreateProjectForTeamRequestBody struct {
-    Data *shared.ProjectRequest `json:"data,omitempty"`
-    
+	Data *shared.ProjectRequest `json:"data,omitempty"`
 }
 
 type CreateProjectForTeamRequest struct {
-    PathParams CreateProjectForTeamPathParams 
-    QueryParams CreateProjectForTeamQueryParams 
-    Request CreateProjectForTeamRequestBody `request:"mediaType=application/json"`
-    
+	PathParams  CreateProjectForTeamPathParams
+	QueryParams CreateProjectForTeamQueryParams
+	Request     CreateProjectForTeamRequestBody `request:"mediaType=application/json"`
 }
 
 type CreateProjectForTeam201ApplicationJSON struct {
-    Data *shared.ProjectResponse `json:"data,omitempty"`
-    
+	Data *shared.ProjectResponse `json:"data,omitempty"`
 }
 
 type CreateProjectForTeamResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    StatusCode int64 
-    CreateProjectForTeam201ApplicationJSONObject *CreateProjectForTeam201ApplicationJSON 
-    
+	ContentType                                  string
+	ErrorResponse                                *shared.ErrorResponse
+	StatusCode                                   int64
+	CreateProjectForTeam201ApplicationJSONObject *CreateProjectForTeam201ApplicationJSON
 }
-

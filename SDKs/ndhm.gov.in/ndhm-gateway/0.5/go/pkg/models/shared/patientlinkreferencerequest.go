@@ -1,20 +1,18 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type PatientLinkReferenceRequestPatient struct {
-    CareContexts []CareContext `json:"careContexts"`
-    ID string `json:"id"`
-    ReferenceNumber string `json:"referenceNumber"`
-    
+	CareContexts    []CareContext `json:"careContexts"`
+	ID              string        `json:"id"`
+	ReferenceNumber string        `json:"referenceNumber"`
 }
 
 type PatientLinkReferenceRequest struct {
-    Patient PatientLinkReferenceRequestPatient `json:"patient"`
-    RequestID string `json:"requestId"`
-    Timestamp time.Time `json:"timestamp"`
-    TransactionID string `json:"transactionId"`
-    
+	Patient       PatientLinkReferenceRequestPatient `json:"patient"`
+	RequestID     string                             `json:"requestId"`
+	Timestamp     time.Time                          `json:"timestamp"`
+	TransactionID string                             `json:"transactionId"`
 }
-

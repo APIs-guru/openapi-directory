@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetAdminRequestsQueryParams struct {
-    Limit *string `queryParam:"style=form,explode=true,name=limit"`
-    Since *string `queryParam:"style=form,explode=true,name=since"`
-    
+	Limit *string `queryParam:"style=form,explode=true,name=limit"`
+	Since *string `queryParam:"style=form,explode=true,name=since"`
 }
 
 type GetAdminRequestsRequest struct {
-    QueryParams GetAdminRequestsQueryParams 
-    
+	QueryParams GetAdminRequestsQueryParams
 }
 
 type GetAdminRequestsResponse struct {
-    ContentType string 
-    StatusCode int64 
-    
+	ContentType string
+	StatusCode  int64
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DsseAttestationNote struct {
-    Hint *DsseHint `json:"hint,omitempty"`
-    
+	Hint *DsseHint `json:"hint,omitempty"`
 }
-

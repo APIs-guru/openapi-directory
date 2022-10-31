@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetRequestedServiceQuotaChangeResponse struct {
-    RequestedQuota *RequestedServiceQuotaChange `json:"RequestedQuota,omitempty"`
-    
+	RequestedQuota *RequestedServiceQuotaChange `json:"RequestedQuota,omitempty"`
 }
-

@@ -1,38 +1,33 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type GetTimesheetsQueryParams struct {
-    Order *string `queryParam:"style=form,explode=true,name=order"`
-    Page *int64 `queryParam:"style=form,explode=true,name=page"`
-    Where *string `queryParam:"style=form,explode=true,name=where"`
-    
+	Order *string `queryParam:"style=form,explode=true,name=order"`
+	Page  *int64  `queryParam:"style=form,explode=true,name=page"`
+	Where *string `queryParam:"style=form,explode=true,name=where"`
 }
 
 type GetTimesheetsHeaders struct {
-    IfModifiedSince *string `header:"style=simple,explode=false,name=If-Modified-Since"`
-    XeroTenantID string `header:"style=simple,explode=false,name=Xero-Tenant-Id"`
-    
+	IfModifiedSince *string `header:"style=simple,explode=false,name=If-Modified-Since"`
+	XeroTenantID    string  `header:"style=simple,explode=false,name=Xero-Tenant-Id"`
 }
 
 type GetTimesheetsSecurity struct {
-    OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
-    
+	OAuth2 shared.SchemeOAuth2 `security:"scheme,type=oauth2"`
 }
 
 type GetTimesheetsRequest struct {
-    QueryParams GetTimesheetsQueryParams 
-    Headers GetTimesheetsHeaders 
-    Security GetTimesheetsSecurity 
-    
+	QueryParams GetTimesheetsQueryParams
+	Headers     GetTimesheetsHeaders
+	Security    GetTimesheetsSecurity
 }
 
 type GetTimesheetsResponse struct {
-    APIException *shared.APIException 
-    ContentType string 
-    StatusCode int64 
-    Timesheets *shared.Timesheets 
-    
+	APIException *shared.APIException
+	ContentType  string
+	StatusCode   int64
+	Timesheets   *shared.Timesheets
 }
-

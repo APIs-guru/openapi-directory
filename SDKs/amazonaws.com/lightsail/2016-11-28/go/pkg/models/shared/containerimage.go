@@ -1,12 +1,11 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type ContainerImage struct {
-    CreatedAt *time.Time `json:"createdAt,omitempty"`
-    Digest *string `json:"digest,omitempty"`
-    Image *string `json:"image,omitempty"`
-    
+	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	Digest    *string    `json:"digest,omitempty"`
+	Image     *string    `json:"image,omitempty"`
 }
-

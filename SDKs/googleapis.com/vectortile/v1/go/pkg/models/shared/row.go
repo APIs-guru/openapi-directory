@@ -1,9 +1,5 @@
 package shared
 
-
-
 type Row struct {
-    AltitudeDiffs []int32 `json:"altitudeDiffs,omitempty"`
-    
+	AltitudeDiffs []int32 `json:"altitudeDiffs,omitempty"`
 }
-

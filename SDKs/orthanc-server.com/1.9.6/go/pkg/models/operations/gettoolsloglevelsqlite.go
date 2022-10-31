@@ -1,11 +1,7 @@
 package operations
 
-
-
 type GetToolsLogLevelSqliteResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

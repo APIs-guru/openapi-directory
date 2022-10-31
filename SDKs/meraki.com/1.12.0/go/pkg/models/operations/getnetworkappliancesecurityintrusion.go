@@ -1,21 +1,15 @@
 package operations
 
-
-
 type GetNetworkApplianceSecurityIntrusionPathParams struct {
-    NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
-    
+	NetworkID string `pathParam:"style=simple,explode=false,name=networkId"`
 }
 
 type GetNetworkApplianceSecurityIntrusionRequest struct {
-    PathParams GetNetworkApplianceSecurityIntrusionPathParams 
-    
+	PathParams GetNetworkApplianceSecurityIntrusionPathParams
 }
 
 type GetNetworkApplianceSecurityIntrusionResponse struct {
-    ContentType string 
-    StatusCode int64 
-    GetNetworkApplianceSecurityIntrusion200ApplicationJSONObject map[string]interface{} 
-    
+	ContentType                                                  string
+	StatusCode                                                   int64
+	GetNetworkApplianceSecurityIntrusion200ApplicationJSONObject map[string]interface{}
 }
-

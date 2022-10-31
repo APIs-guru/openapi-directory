@@ -1,40 +1,34 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type AlbumAPIGetUserCollectionsPathParams struct {
-    ID int32 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int32 `pathParam:"style=simple,explode=false,name=id"`
 }
-
 
 type AlbumAPIGetUserCollectionsLanguagePreferenceEnum string
 
 const (
-    AlbumAPIGetUserCollectionsLanguagePreferenceEnumDefault AlbumAPIGetUserCollectionsLanguagePreferenceEnum = "Default"
-AlbumAPIGetUserCollectionsLanguagePreferenceEnumJapanese AlbumAPIGetUserCollectionsLanguagePreferenceEnum = "Japanese"
-AlbumAPIGetUserCollectionsLanguagePreferenceEnumRomaji AlbumAPIGetUserCollectionsLanguagePreferenceEnum = "Romaji"
-AlbumAPIGetUserCollectionsLanguagePreferenceEnumEnglish AlbumAPIGetUserCollectionsLanguagePreferenceEnum = "English"
+	AlbumAPIGetUserCollectionsLanguagePreferenceEnumDefault  AlbumAPIGetUserCollectionsLanguagePreferenceEnum = "Default"
+	AlbumAPIGetUserCollectionsLanguagePreferenceEnumJapanese AlbumAPIGetUserCollectionsLanguagePreferenceEnum = "Japanese"
+	AlbumAPIGetUserCollectionsLanguagePreferenceEnumRomaji   AlbumAPIGetUserCollectionsLanguagePreferenceEnum = "Romaji"
+	AlbumAPIGetUserCollectionsLanguagePreferenceEnumEnglish  AlbumAPIGetUserCollectionsLanguagePreferenceEnum = "English"
 )
 
-
 type AlbumAPIGetUserCollectionsQueryParams struct {
-    LanguagePreference *AlbumAPIGetUserCollectionsLanguagePreferenceEnum `queryParam:"style=form,explode=true,name=languagePreference"`
-    
+	LanguagePreference *AlbumAPIGetUserCollectionsLanguagePreferenceEnum `queryParam:"style=form,explode=true,name=languagePreference"`
 }
 
 type AlbumAPIGetUserCollectionsRequest struct {
-    PathParams AlbumAPIGetUserCollectionsPathParams 
-    QueryParams AlbumAPIGetUserCollectionsQueryParams 
-    
+	PathParams  AlbumAPIGetUserCollectionsPathParams
+	QueryParams AlbumAPIGetUserCollectionsQueryParams
 }
 
 type AlbumAPIGetUserCollectionsResponse struct {
-    AlbumForUserForAPIContracts []shared.AlbumForUserForAPIContract 
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	AlbumForUserForAPIContracts []shared.AlbumForUserForAPIContract
+	Body                        []byte
+	ContentType                 string
+	StatusCode                  int64
 }
-

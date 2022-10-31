@@ -1,12 +1,8 @@
 package shared
 
-
-
 type Document struct {
-    CreateTime *string `json:"createTime,omitempty"`
-    Fields map[string]Value `json:"fields,omitempty"`
-    Name *string `json:"name,omitempty"`
-    UpdateTime *string `json:"updateTime,omitempty"`
-    
+	CreateTime *string          `json:"createTime,omitempty"`
+	Fields     map[string]Value `json:"fields,omitempty"`
+	Name       *string          `json:"name,omitempty"`
+	UpdateTime *string          `json:"updateTime,omitempty"`
 }
-

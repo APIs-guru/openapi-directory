@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListOfferingsRequest struct {
-    NextToken *string `json:"nextToken,omitempty"`
-    
+	NextToken *string `json:"nextToken,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateEndpointResponse struct {
-    EndpointArn *string `json:"EndpointArn,omitempty"`
-    
+	EndpointArn *string `json:"EndpointArn,omitempty"`
 }
-

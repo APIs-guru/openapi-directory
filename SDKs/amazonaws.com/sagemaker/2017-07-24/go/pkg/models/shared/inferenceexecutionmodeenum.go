@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type InferenceExecutionModeEnum string
 
 const (
-    InferenceExecutionModeEnumSerial InferenceExecutionModeEnum = "Serial"
-InferenceExecutionModeEnumDirect InferenceExecutionModeEnum = "Direct"
+	InferenceExecutionModeEnumSerial InferenceExecutionModeEnum = "Serial"
+	InferenceExecutionModeEnumDirect InferenceExecutionModeEnum = "Direct"
 )
-
-

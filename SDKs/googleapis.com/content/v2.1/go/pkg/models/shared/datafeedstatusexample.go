@@ -1,11 +1,7 @@
 package shared
 
-
-
 type DatafeedStatusExample struct {
-    ItemID *string `json:"itemId,omitempty"`
-    LineNumber *string `json:"lineNumber,omitempty"`
-    Value *string `json:"value,omitempty"`
-    
+	ItemID     *string `json:"itemId,omitempty"`
+	LineNumber *string `json:"lineNumber,omitempty"`
+	Value      *string `json:"value,omitempty"`
 }
-

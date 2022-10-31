@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetCertificatesResult struct {
-    Certificates []CertificateSummary `json:"certificates,omitempty"`
-    
+	Certificates []CertificateSummary `json:"certificates,omitempty"`
 }
-

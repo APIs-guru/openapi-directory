@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ClassifyTextResponse struct {
-    Categories []ClassificationCategory `json:"categories,omitempty"`
-    
+	Categories []ClassificationCategory `json:"categories,omitempty"`
 }
-

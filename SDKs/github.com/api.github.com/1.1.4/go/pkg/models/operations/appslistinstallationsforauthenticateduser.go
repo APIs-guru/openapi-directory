@@ -1,38 +1,33 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type AppsListInstallationsForAuthenticatedUserQueryParams struct {
-    Page *int64 `queryParam:"style=form,explode=true,name=page"`
-    PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
-    
+	Page    *int64 `queryParam:"style=form,explode=true,name=page"`
+	PerPage *int64 `queryParam:"style=form,explode=true,name=per_page"`
 }
 
 type AppsListInstallationsForAuthenticatedUserRequest struct {
-    QueryParams AppsListInstallationsForAuthenticatedUserQueryParams 
-    
+	QueryParams AppsListInstallationsForAuthenticatedUserQueryParams
 }
 
 type AppsListInstallationsForAuthenticatedUser200ApplicationJSON struct {
-    Installations []shared.Installation `json:"installations"`
-    TotalCount int64 `json:"total_count"`
-    
+	Installations []shared.Installation `json:"installations"`
+	TotalCount    int64                 `json:"total_count"`
 }
 
 type AppsListInstallationsForAuthenticatedUser415ApplicationJSON struct {
-    DocumentationURL string `json:"documentation_url"`
-    Message string `json:"message"`
-    
+	DocumentationURL string `json:"documentation_url"`
+	Message          string `json:"message"`
 }
 
 type AppsListInstallationsForAuthenticatedUserResponse struct {
-    ContentType string 
-    Headers map[string][]string 
-    StatusCode int64 
-    AppsListInstallationsForAuthenticatedUser200ApplicationJSONObject *AppsListInstallationsForAuthenticatedUser200ApplicationJSON 
-    AppsListInstallationsForAuthenticatedUser415ApplicationJSONObject *AppsListInstallationsForAuthenticatedUser415ApplicationJSON 
-    BasicError *shared.BasicError 
-    
+	ContentType                                                       string
+	Headers                                                           map[string][]string
+	StatusCode                                                        int64
+	AppsListInstallationsForAuthenticatedUser200ApplicationJSONObject *AppsListInstallationsForAuthenticatedUser200ApplicationJSON
+	AppsListInstallationsForAuthenticatedUser415ApplicationJSONObject *AppsListInstallationsForAuthenticatedUser415ApplicationJSON
+	BasicError                                                        *shared.BasicError
 }
-

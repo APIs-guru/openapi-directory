@@ -1,13 +1,8 @@
 package shared
 
-
-
-
 type DatasetActionTypeEnum string
 
 const (
-    DatasetActionTypeEnumQuery DatasetActionTypeEnum = "QUERY"
-DatasetActionTypeEnumContainer DatasetActionTypeEnum = "CONTAINER"
+	DatasetActionTypeEnumQuery     DatasetActionTypeEnum = "QUERY"
+	DatasetActionTypeEnumContainer DatasetActionTypeEnum = "CONTAINER"
 )
-
-

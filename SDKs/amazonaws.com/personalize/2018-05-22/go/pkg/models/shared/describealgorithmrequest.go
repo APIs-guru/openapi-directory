@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeAlgorithmRequest struct {
-    AlgorithmArn string `json:"algorithmArn"`
-    
+	AlgorithmArn string `json:"algorithmArn"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetTableMetadataOutput struct {
-    TableMetadata *TableMetadata `json:"TableMetadata,omitempty"`
-    
+	TableMetadata *TableMetadata `json:"TableMetadata,omitempty"`
 }
-

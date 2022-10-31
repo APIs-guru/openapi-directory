@@ -1,11 +1,10 @@
 package shared
 
 import (
-"time")
+	"time"
+)
 
 type CreateTestGridURLResult struct {
-    Expires *time.Time `json:"expires,omitempty"`
-    URL *string `json:"url,omitempty"`
-    
+	Expires *time.Time `json:"expires,omitempty"`
+	URL     *string    `json:"url,omitempty"`
 }
-

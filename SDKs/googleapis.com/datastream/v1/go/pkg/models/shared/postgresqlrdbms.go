@@ -1,9 +1,5 @@
 package shared
 
-
-
 type PostgresqlRdbms struct {
-    PostgresqlSchemas []PostgresqlSchema `json:"postgresqlSchemas,omitempty"`
-    
+	PostgresqlSchemas []PostgresqlSchema `json:"postgresqlSchemas,omitempty"`
 }
-

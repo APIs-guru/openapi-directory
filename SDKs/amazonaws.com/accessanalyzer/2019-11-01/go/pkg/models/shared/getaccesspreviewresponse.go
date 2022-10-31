@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetAccessPreviewResponse struct {
-    AccessPreview AccessPreview `json:"accessPreview"`
-    
+	AccessPreview AccessPreview `json:"accessPreview"`
 }
-

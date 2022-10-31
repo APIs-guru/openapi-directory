@@ -1,11 +1,7 @@
 package shared
 
-
-
 type StartupConfigurationDto struct {
-    MetadataCountryCode *string `json:"MetadataCountryCode,omitempty"`
-    PreferredMetadataLanguage *string `json:"PreferredMetadataLanguage,omitempty"`
-    UICulture *string `json:"UICulture,omitempty"`
-    
+	MetadataCountryCode       *string `json:"MetadataCountryCode,omitempty"`
+	PreferredMetadataLanguage *string `json:"PreferredMetadataLanguage,omitempty"`
+	UICulture                 *string `json:"UICulture,omitempty"`
 }
-

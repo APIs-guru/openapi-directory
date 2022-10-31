@@ -1,9 +1,5 @@
 package shared
 
-
-
 type TerminateWorkspacesResult struct {
-    FailedRequests []FailedWorkspaceChangeRequest `json:"FailedRequests,omitempty"`
-    
+	FailedRequests []FailedWorkspaceChangeRequest `json:"FailedRequests,omitempty"`
 }
-

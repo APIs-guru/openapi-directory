@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DeleteTestGridProjectRequest struct {
-    ProjectArn string `json:"projectArn"`
-    
+	ProjectArn string `json:"projectArn"`
 }
-

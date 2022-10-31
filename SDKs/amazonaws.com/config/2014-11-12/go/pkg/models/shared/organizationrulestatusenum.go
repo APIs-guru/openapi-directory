@@ -1,20 +1,15 @@
 package shared
 
-
-
-
 type OrganizationRuleStatusEnum string
 
 const (
-    OrganizationRuleStatusEnumCreateSuccessful OrganizationRuleStatusEnum = "CREATE_SUCCESSFUL"
-OrganizationRuleStatusEnumCreateInProgress OrganizationRuleStatusEnum = "CREATE_IN_PROGRESS"
-OrganizationRuleStatusEnumCreateFailed OrganizationRuleStatusEnum = "CREATE_FAILED"
-OrganizationRuleStatusEnumDeleteSuccessful OrganizationRuleStatusEnum = "DELETE_SUCCESSFUL"
-OrganizationRuleStatusEnumDeleteFailed OrganizationRuleStatusEnum = "DELETE_FAILED"
-OrganizationRuleStatusEnumDeleteInProgress OrganizationRuleStatusEnum = "DELETE_IN_PROGRESS"
-OrganizationRuleStatusEnumUpdateSuccessful OrganizationRuleStatusEnum = "UPDATE_SUCCESSFUL"
-OrganizationRuleStatusEnumUpdateInProgress OrganizationRuleStatusEnum = "UPDATE_IN_PROGRESS"
-OrganizationRuleStatusEnumUpdateFailed OrganizationRuleStatusEnum = "UPDATE_FAILED"
+	OrganizationRuleStatusEnumCreateSuccessful OrganizationRuleStatusEnum = "CREATE_SUCCESSFUL"
+	OrganizationRuleStatusEnumCreateInProgress OrganizationRuleStatusEnum = "CREATE_IN_PROGRESS"
+	OrganizationRuleStatusEnumCreateFailed     OrganizationRuleStatusEnum = "CREATE_FAILED"
+	OrganizationRuleStatusEnumDeleteSuccessful OrganizationRuleStatusEnum = "DELETE_SUCCESSFUL"
+	OrganizationRuleStatusEnumDeleteFailed     OrganizationRuleStatusEnum = "DELETE_FAILED"
+	OrganizationRuleStatusEnumDeleteInProgress OrganizationRuleStatusEnum = "DELETE_IN_PROGRESS"
+	OrganizationRuleStatusEnumUpdateSuccessful OrganizationRuleStatusEnum = "UPDATE_SUCCESSFUL"
+	OrganizationRuleStatusEnumUpdateInProgress OrganizationRuleStatusEnum = "UPDATE_IN_PROGRESS"
+	OrganizationRuleStatusEnumUpdateFailed     OrganizationRuleStatusEnum = "UPDATE_FAILED"
 )
-
-

@@ -1,24 +1,21 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CreateS3ConfigHeaders struct {
-    XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
-    
+	XSdsAuthToken *string `header:"style=simple,explode=false,name=X-Sds-Auth-Token"`
 }
 
 type CreateS3ConfigRequest struct {
-    Headers CreateS3ConfigHeaders 
-    Request shared.S3ConfigCreateRequest `request:"mediaType=application/json"`
-    
+	Headers CreateS3ConfigHeaders
+	Request shared.S3ConfigCreateRequest `request:"mediaType=application/json"`
 }
 
 type CreateS3ConfigResponse struct {
-    ContentType string 
-    ErrorResponse *shared.ErrorResponse 
-    S3Config *shared.S3Config 
-    StatusCode int64 
-    
+	ContentType   string
+	ErrorResponse *shared.ErrorResponse
+	S3Config      *shared.S3Config
+	StatusCode    int64
 }
-

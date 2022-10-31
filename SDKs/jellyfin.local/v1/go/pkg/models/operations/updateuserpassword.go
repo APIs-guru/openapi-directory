@@ -1,36 +1,31 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type UpdateUserPasswordPathParams struct {
-    UserID string `pathParam:"style=simple,explode=false,name=userId"`
-    
+	UserID string `pathParam:"style=simple,explode=false,name=userId"`
 }
 
 type UpdateUserPasswordRequests struct {
-    UpdateUserPassword *shared.UpdateUserPassword `request:"mediaType=application/*+json"`
-    UpdateUserPassword1 *shared.UpdateUserPassword `request:"mediaType=application/json"`
-    UpdateUserPassword2 *shared.UpdateUserPassword `request:"mediaType=text/json"`
-    
+	UpdateUserPassword  *shared.UpdateUserPassword `request:"mediaType=application/*+json"`
+	UpdateUserPassword1 *shared.UpdateUserPassword `request:"mediaType=application/json"`
+	UpdateUserPassword2 *shared.UpdateUserPassword `request:"mediaType=text/json"`
 }
 
 type UpdateUserPasswordSecurity struct {
-    CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
-    
+	CustomAuthentication shared.SchemeCustomAuthentication `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type UpdateUserPasswordRequest struct {
-    PathParams UpdateUserPasswordPathParams 
-    Request UpdateUserPasswordRequests 
-    Security UpdateUserPasswordSecurity 
-    
+	PathParams UpdateUserPasswordPathParams
+	Request    UpdateUserPasswordRequests
+	Security   UpdateUserPasswordSecurity
 }
 
 type UpdateUserPasswordResponse struct {
-    ContentType string 
-    ProblemDetails map[string]interface{} 
-    StatusCode int64 
-    
+	ContentType    string
+	ProblemDetails map[string]interface{}
+	StatusCode     int64
 }
-

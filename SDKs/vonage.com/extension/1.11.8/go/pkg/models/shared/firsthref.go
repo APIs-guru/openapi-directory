@@ -1,9 +1,5 @@
 package shared
 
-
-
 type FirstHref struct {
-    Href *string `json:"href,omitempty"`
-    
+	Href *string `json:"href,omitempty"`
 }
-

@@ -1,22 +1,19 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type FindAllGlobalJwtVerifiersSecurity struct {
-    OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
-    
+	OtoroshiAuth shared.SchemeOtoroshiAuth `security:"scheme,type=http,subtype=basic"`
 }
 
 type FindAllGlobalJwtVerifiersRequest struct {
-    Security FindAllGlobalJwtVerifiersSecurity 
-    
+	Security FindAllGlobalJwtVerifiersSecurity
 }
 
 type FindAllGlobalJwtVerifiersResponse struct {
-    ContentType string 
-    GlobalJwtVerifiers []shared.GlobalJwtVerifier 
-    StatusCode int64 
-    
+	ContentType        string
+	GlobalJwtVerifiers []shared.GlobalJwtVerifier
+	StatusCode         int64
 }
-

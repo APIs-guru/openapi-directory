@@ -1,11 +1,7 @@
 package shared
 
-
-
 type AwsEcsClusterConfigurationExecuteCommandConfigurationDetails struct {
-    KmsKeyID *string `json:"KmsKeyId,omitempty"`
-    LogConfiguration *AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails `json:"LogConfiguration,omitempty"`
-    Logging *string `json:"Logging,omitempty"`
-    
+	KmsKeyID         *string                                                                       `json:"KmsKeyId,omitempty"`
+	LogConfiguration *AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails `json:"LogConfiguration,omitempty"`
+	Logging          *string                                                                       `json:"Logging,omitempty"`
 }
-

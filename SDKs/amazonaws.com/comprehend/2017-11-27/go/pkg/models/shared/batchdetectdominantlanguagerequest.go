@@ -1,9 +1,5 @@
 package shared
 
-
-
 type BatchDetectDominantLanguageRequest struct {
-    TextList []string `json:"TextList"`
-    
+	TextList []string `json:"TextList"`
 }
-

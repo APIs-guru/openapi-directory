@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListTagsForResourceResponse struct {
-    Tags []Tag `json:"Tags"`
-    
+	Tags []Tag `json:"Tags"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GenerateConnectManifestResponse struct {
-    Manifest []ConnectAgentResource `json:"manifest,omitempty"`
-    
+	Manifest []ConnectAgentResource `json:"manifest,omitempty"`
 }
-

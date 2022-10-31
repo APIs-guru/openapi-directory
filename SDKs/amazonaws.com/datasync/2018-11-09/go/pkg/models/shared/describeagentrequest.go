@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeAgentRequest struct {
-    AgentArn string `json:"AgentArn"`
-    
+	AgentArn string `json:"AgentArn"`
 }
-

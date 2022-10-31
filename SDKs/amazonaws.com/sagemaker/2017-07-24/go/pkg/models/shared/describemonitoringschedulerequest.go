@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeMonitoringScheduleRequest struct {
-    MonitoringScheduleName string `json:"MonitoringScheduleName"`
-    
+	MonitoringScheduleName string `json:"MonitoringScheduleName"`
 }
-

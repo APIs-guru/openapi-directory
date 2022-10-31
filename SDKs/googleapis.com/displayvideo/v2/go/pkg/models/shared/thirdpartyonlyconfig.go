@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ThirdPartyOnlyConfig struct {
-    PixelOrderIDReportingEnabled *bool `json:"pixelOrderIdReportingEnabled,omitempty"`
-    
+	PixelOrderIDReportingEnabled *bool `json:"pixelOrderIdReportingEnabled,omitempty"`
 }
-

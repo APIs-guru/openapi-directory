@@ -1,10 +1,6 @@
 package shared
 
-
-
 type CaptureContentTypeHeader struct {
-    CsvContentTypes []string `json:"CsvContentTypes,omitempty"`
-    JSONContentTypes []string `json:"JsonContentTypes,omitempty"`
-    
+	CsvContentTypes  []string `json:"CsvContentTypes,omitempty"`
+	JSONContentTypes []string `json:"JsonContentTypes,omitempty"`
 }
-

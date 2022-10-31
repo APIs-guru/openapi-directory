@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateProtectionResponse struct {
-    ProtectionID *string `json:"ProtectionId,omitempty"`
-    
+	ProtectionID *string `json:"ProtectionId,omitempty"`
 }
-

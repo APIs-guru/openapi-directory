@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GooglePrivacyDlpV2DocumentLocation struct {
-    FileOffset *string `json:"fileOffset,omitempty"`
-    
+	FileOffset *string `json:"fileOffset,omitempty"`
 }
-

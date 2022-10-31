@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeAuthorizerResponse struct {
-    AuthorizerDescription *AuthorizerDescription `json:"authorizerDescription,omitempty"`
-    
+	AuthorizerDescription *AuthorizerDescription `json:"authorizerDescription,omitempty"`
 }
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateWorkflowResponse struct {
-    Name *string `json:"Name,omitempty"`
-    
+	Name *string `json:"Name,omitempty"`
 }
-

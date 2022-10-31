@@ -1,14 +1,9 @@
 package shared
 
-
-
 type PartnerStoreCodeStore struct {
-    Code *string `json:"code,omitempty"`
-    
+	Code *string `json:"code,omitempty"`
 }
 
 type PartnerStoreCode struct {
-    Store *PartnerStoreCodeStore `json:"store,omitempty"`
-    
+	Store *PartnerStoreCodeStore `json:"store,omitempty"`
 }
-

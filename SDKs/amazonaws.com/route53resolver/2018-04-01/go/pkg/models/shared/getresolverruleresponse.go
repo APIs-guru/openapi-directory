@@ -1,9 +1,5 @@
 package shared
 
-
-
 type GetResolverRuleResponse struct {
-    ResolverRule *ResolverRule `json:"ResolverRule,omitempty"`
-    
+	ResolverRule *ResolverRule `json:"ResolverRule,omitempty"`
 }
-

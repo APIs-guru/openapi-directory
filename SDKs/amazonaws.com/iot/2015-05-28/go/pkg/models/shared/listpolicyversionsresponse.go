@@ -1,9 +1,5 @@
 package shared
 
-
-
 type ListPolicyVersionsResponse struct {
-    PolicyVersions []PolicyVersion `json:"policyVersions,omitempty"`
-    
+	PolicyVersions []PolicyVersion `json:"policyVersions,omitempty"`
 }
-

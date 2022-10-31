@@ -1,37 +1,32 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type PreprocessingBinarizeRequestBodyImageFile struct {
-    Content []byte `multipartForm:"content"`
-    ImageFile string `multipartForm:"name=imageFile"`
-    
+	Content   []byte `multipartForm:"content"`
+	ImageFile string `multipartForm:"name=imageFile"`
 }
 
 type PreprocessingBinarizeRequestBody struct {
-    ImageFile PreprocessingBinarizeRequestBodyImageFile `multipartForm:"file"`
-    
+	ImageFile PreprocessingBinarizeRequestBodyImageFile `multipartForm:"file"`
 }
 
 type PreprocessingBinarizeSecurity struct {
-    Apikey shared.SchemeApikey `security:"scheme,type=apiKey,subtype=header"`
-    
+	Apikey shared.SchemeApikey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type PreprocessingBinarizeRequest struct {
-    Request PreprocessingBinarizeRequestBody `request:"mediaType=multipart/form-data"`
-    Security PreprocessingBinarizeSecurity 
-    
+	Request  PreprocessingBinarizeRequestBody `request:"mediaType=multipart/form-data"`
+	Security PreprocessingBinarizeSecurity
 }
 
 type PreprocessingBinarizeResponse struct {
-    ContentType string 
-    PreprocessingBinarize200ApplicationJSONByteString *string 
-    PreprocessingBinarize200ApplicationXMLByteString *string 
-    PreprocessingBinarize200TextJSONByteString *string 
-    PreprocessingBinarize200TextXMLByteString *string 
-    StatusCode int64 
-    
+	ContentType                                       string
+	PreprocessingBinarize200ApplicationJSONByteString *string
+	PreprocessingBinarize200ApplicationXMLByteString  *string
+	PreprocessingBinarize200TextJSONByteString        *string
+	PreprocessingBinarize200TextXMLByteString         *string
+	StatusCode                                        int64
 }
-

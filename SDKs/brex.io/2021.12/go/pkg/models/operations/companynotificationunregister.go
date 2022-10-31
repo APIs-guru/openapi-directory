@@ -1,28 +1,24 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CompanyNotificationUnregisterPathParams struct {
-    ID string `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID string `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type CompanyNotificationUnregisterSecurity struct {
-    UserKey shared.SchemeUserKey `security:"scheme,type=apiKey,subtype=header"`
-    
+	UserKey shared.SchemeUserKey `security:"scheme,type=apiKey,subtype=header"`
 }
 
 type CompanyNotificationUnregisterRequest struct {
-    PathParams CompanyNotificationUnregisterPathParams 
-    Security CompanyNotificationUnregisterSecurity 
-    
+	PathParams CompanyNotificationUnregisterPathParams
+	Security   CompanyNotificationUnregisterSecurity
 }
 
 type CompanyNotificationUnregisterResponse struct {
-    CompanyNotificationUnregisterDefaultApplicationJSONAny *interface{} 
-    ContentType string 
-    StatusCode int64 
-    
+	CompanyNotificationUnregisterDefaultApplicationJSONAny *interface{}
+	ContentType                                            string
+	StatusCode                                             int64
 }
-

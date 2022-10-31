@@ -1,21 +1,15 @@
 package shared
 
-
-
-
 type ListAssetsResultStateChangeEnum string
 
 const (
-    ListAssetsResultStateChangeEnumUnused ListAssetsResultStateChangeEnum = "UNUSED"
-ListAssetsResultStateChangeEnumAdded ListAssetsResultStateChangeEnum = "ADDED"
-ListAssetsResultStateChangeEnumRemoved ListAssetsResultStateChangeEnum = "REMOVED"
-ListAssetsResultStateChangeEnumActive ListAssetsResultStateChangeEnum = "ACTIVE"
+	ListAssetsResultStateChangeEnumUnused  ListAssetsResultStateChangeEnum = "UNUSED"
+	ListAssetsResultStateChangeEnumAdded   ListAssetsResultStateChangeEnum = "ADDED"
+	ListAssetsResultStateChangeEnumRemoved ListAssetsResultStateChangeEnum = "REMOVED"
+	ListAssetsResultStateChangeEnumActive  ListAssetsResultStateChangeEnum = "ACTIVE"
 )
 
-
 type ListAssetsResult struct {
-    Asset *Asset `json:"asset,omitempty"`
-    StateChange *ListAssetsResultStateChangeEnum `json:"stateChange,omitempty"`
-    
+	Asset       *Asset                           `json:"asset,omitempty"`
+	StateChange *ListAssetsResultStateChangeEnum `json:"stateChange,omitempty"`
 }
-

@@ -1,12 +1,11 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type CitiesDrillersListResponse struct {
-    CityLists []shared.CityList 
-    ContentType string 
-    StatusCode int64 
-    
+	CityLists   []shared.CityList
+	ContentType string
+	StatusCode  int64
 }
-

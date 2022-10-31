@@ -1,22 +1,16 @@
 package operations
 
-
-
 type RecipeZapRecipePathParams struct {
-    ID int32 `pathParam:"style=simple,explode=false,name=id"`
-    
+	ID int32 `pathParam:"style=simple,explode=false,name=id"`
 }
 
 type RecipeZapRecipeRequest struct {
-    PathParams RecipeZapRecipePathParams 
-    
+	PathParams RecipeZapRecipePathParams
 }
 
 type RecipeZapRecipeResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    SystemObject map[string]interface{} 
-    
+	Body         []byte
+	ContentType  string
+	StatusCode   int64
+	SystemObject map[string]interface{}
 }
-

@@ -1,21 +1,15 @@
 package operations
 
-
-
 type NodesCitationListPathParams struct {
-    NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
-    
+	NodeID string `pathParam:"style=simple,explode=false,name=node_id"`
 }
 
 type NodesCitationListRequest struct {
-    PathParams NodesCitationListPathParams 
-    
+	PathParams NodesCitationListPathParams
 }
 
 type NodesCitationListResponse struct {
-    Body []byte 
-    ContentType string 
-    StatusCode int64 
-    
+	Body        []byte
+	ContentType string
+	StatusCode  int64
 }
-

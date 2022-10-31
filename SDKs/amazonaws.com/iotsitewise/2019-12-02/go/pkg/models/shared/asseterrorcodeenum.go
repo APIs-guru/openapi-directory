@@ -1,12 +1,7 @@
 package shared
 
-
-
-
 type AssetErrorCodeEnum string
 
 const (
-    AssetErrorCodeEnumInternalFailure AssetErrorCodeEnum = "INTERNAL_FAILURE"
+	AssetErrorCodeEnumInternalFailure AssetErrorCodeEnum = "INTERNAL_FAILURE"
 )
-
-

@@ -1,9 +1,5 @@
 package shared
 
-
-
 type DescribeServiceResponse struct {
-    Service Service `json:"Service"`
-    
+	Service Service `json:"Service"`
 }
-

@@ -1,23 +1,20 @@
 package operations
 
 import (
-"openapi/pkg/models/shared")
+	"openapi/pkg/models/shared"
+)
 
 type WellsTagsListQueryParams struct {
-    Ordering *string `queryParam:"style=form,explode=true,name=ordering"`
-    Search *string `queryParam:"style=form,explode=true,name=search"`
-    
+	Ordering *string `queryParam:"style=form,explode=true,name=ordering"`
+	Search   *string `queryParam:"style=form,explode=true,name=search"`
 }
 
 type WellsTagsListRequest struct {
-    QueryParams WellsTagsListQueryParams 
-    
+	QueryParams WellsTagsListQueryParams
 }
 
 type WellsTagsListResponse struct {
-    ContentType string 
-    StatusCode int64 
-    WellTagSearches []shared.WellTagSearch 
-    
+	ContentType     string
+	StatusCode      int64
+	WellTagSearches []shared.WellTagSearch
 }
-

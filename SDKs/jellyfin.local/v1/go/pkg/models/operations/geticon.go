@@ -1,22 +1,16 @@
 package operations
 
-
-
 type GetIconPathParams struct {
-    FileName string `pathParam:"style=simple,explode=false,name=fileName"`
-    
+	FileName string `pathParam:"style=simple,explode=false,name=fileName"`
 }
 
 type GetIconRequest struct {
-    PathParams GetIconPathParams 
-    
+	PathParams GetIconPathParams
 }
 
 type GetIconResponse struct {
-    ContentType string 
-    GetIcon200ImageWildcardBinaryString []byte 
-    ProblemDetails map[string]interface{} 
-    StatusCode int64 
-    
+	ContentType                         string
+	GetIcon200ImageWildcardBinaryString []byte
+	ProblemDetails                      map[string]interface{}
+	StatusCode                          int64
 }
-

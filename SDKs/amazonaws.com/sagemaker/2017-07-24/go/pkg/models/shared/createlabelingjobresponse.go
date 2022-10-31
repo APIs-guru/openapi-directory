@@ -1,9 +1,5 @@
 package shared
 
-
-
 type CreateLabelingJobResponse struct {
-    LabelingJobArn string `json:"LabelingJobArn"`
-    
+	LabelingJobArn string `json:"LabelingJobArn"`
 }
-
