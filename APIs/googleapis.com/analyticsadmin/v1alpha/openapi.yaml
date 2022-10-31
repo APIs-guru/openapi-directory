@@ -2231,7 +2231,7 @@ components:
             - EXCLUDE_PERMANENTLY
           type: string
         filterClauses:
-          description: Required. Immutable. null Filter clauses that define the Audience. All clauses will be AND’ed together.
+          description: Required. Immutable. Unordered list. Filter clauses that define the Audience. All clauses will be AND’ed together.
           items:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaAudienceFilterClause"
           type: array

@@ -197,7 +197,7 @@ paths:
         - spaces
   "/v1/{parent}/members":
     get:
-      description: Lists human memberships in a space for joined members. Requires [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts).
+      description: Lists memberships in a space. Requires [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts).
       operationId: chat.spaces.members.list
       parameters:
         - description: "Required. The resource name of the space for which to fetch a membership list. Format: spaces/{space}"
@@ -831,6 +831,12 @@ components:
       properties:
         function:
           description: Apps Script function to invoke when the containing element is clicked/activated.
+          type: string
+        interaction:
+          description: Optional. Required when opening a [dialog](https://developers.google.com/chat/how-tos/dialogs). What to do in response to an interaction with a user, such as a user clicking button on a card message. If unspecified, the app responds by executing an `action` - like opening a link or running a function - as normal. By specifying an `interaction`, the app can respond in special interactive ways. For example, by setting `interaction` to `OPEN_DIALOG`, the app can open a [dialog](https://developers.google.com/chat/how-tos/dialogs). When specified, a loading indicator is not shown. Supported by Chat apps, but not Google Workspace Add-ons. If specified for an add-on, the entire card is stripped and nothing is shown in the client.
+          enum:
+            - INTERACTION_UNSPECIFIED
+            - OPEN_DIALOG
           type: string
         loadIndicator:
           description: Specifies the loading indicator that the action displays while making the call to the action.

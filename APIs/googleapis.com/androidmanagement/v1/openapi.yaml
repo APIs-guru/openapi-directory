@@ -1127,7 +1127,7 @@ components:
           description: The display name of the app.
           type: string
         events:
-          description: List of app events. The most recent 20 events are stored in the list.
+          description: The list of app events which have occurred in the last 30 hours.
           items:
             $ref: "#/components/schemas/ApplicationEvent"
           type: array

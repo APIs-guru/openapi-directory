@@ -40,6 +40,7 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - conversations.visitor_identification.tokens.create
+        - private_apps_legacy: []
       summary: Generate a token
       tags:
         - Generate
@@ -173,6 +174,10 @@ components:
             conversations.visitor_identification.tokens.create: Fetch identification tokens for authenticated website visitors interacting with the HubSpot chat widget
           tokenUrl: https://api.hubapi.com/oauth/v1/token
       type: oauth2
+    private_apps_legacy:
+      in: header
+      name: private-app-legacy
+      type: apiKey
 x-hubspot-available-client-libraries:
   - PHP
   - Node

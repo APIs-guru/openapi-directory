@@ -1113,6 +1113,9 @@ components:
         cloudauditlogging:
           $ref: "#/components/schemas/CloudAuditLoggingFeatureSpec"
           description: Cloud Audit Logging-specific spec.
+        fleetobservability:
+          $ref: "#/components/schemas/FleetObservabilityFeatureSpec"
+          description: FleetObservability feature spec.
         multiclusteringress:
           $ref: "#/components/schemas/MultiClusterIngressFeatureSpec"
           description: Multicluster Ingress-specific spec.
@@ -1126,6 +1129,9 @@ components:
         appdevexperience:
           $ref: "#/components/schemas/AppDevExperienceFeatureState"
           description: Appdevexperience specific state.
+        fleetobservability:
+          $ref: "#/components/schemas/FleetObservabilityFeatureState"
+          description: FleetObservability feature state.
         servicemesh:
           $ref: "#/components/schemas/ServiceMeshFeatureState"
           description: Service Mesh-specific state.
@@ -1700,6 +1706,17 @@ components:
           $ref: "#/components/schemas/FeatureResourceState"
           description: Output only. State of the Feature resource itself.
           readOnly: true
+        scopeSpecs:
+          additionalProperties:
+            $ref: "#/components/schemas/ScopeFeatureSpec"
+          description: "Optional. Scope-specific configuration for this Feature. If this Feature does not support any per-Scope configuration, this field may be unused. The keys indicate which Scope the configuration is for, in the form: `projects/{p}/locations/global/scopes/{s}` Where {p} is the project, {s} is a valid Scope in this project. {p} WILL match the Feature's project. {p} will always be returned as the project number, but the project ID is also accepted during input. If the same Scope is specified in the map twice (using the project ID form, and the project number form), exactly ONE of the entries will be saved, with no guarantees as to which. For this reason, it is recommended the same format be used for all entries when mutating a Feature."
+          type: object
+        scopeStates:
+          additionalProperties:
+            $ref: "#/components/schemas/ScopeFeatureState"
+          description: "Output only. Scope-specific Feature status. If this Feature does report any per-Scope status, this field may be unused. The keys indicate which Scope the state is for, in the form: `projects/{p}/locations/global/scopes/{s}` Where {p} is the project, {s} is a valid Scope in this project. {p} WILL match the Feature's project."
+          readOnly: true
+          type: object
         spec:
           $ref: "#/components/schemas/CommonFeatureSpec"
           description: Optional. Hub-wide Feature configuration. If this Feature does not support any Hub-wide configuration, this field may be unused.
@@ -1807,6 +1824,22 @@ components:
             - UPDATING
           readOnly: true
           type: string
+      type: object
+    FleetObservabilityFeatureSpec:
+      description: "**Fleet Observability**: The Hub-wide input for the FleetObservability feature."
+      properties: {}
+      type: object
+    FleetObservabilityFeatureState:
+      description: "**FleetObservability**: An empty state left as an example Hub-wide Feature state."
+      properties: {}
+      type: object
+    FleetObservabilityMembershipSpec:
+      description: "**FleetObservability**: The membership-specific input for FleetObservability feature."
+      properties: {}
+      type: object
+    FleetObservabilityMembershipState:
+      description: "**FleetObservability**: An empty state left as an example membership-specific Feature state."
+      properties: {}
       type: object
     GenerateConnectManifestResponse:
       description: GenerateConnectManifestResponse contains manifest information for installing/upgrading a Connect agent.
@@ -2215,6 +2248,9 @@ components:
         configmanagement:
           $ref: "#/components/schemas/ConfigManagementMembershipSpec"
           description: Config Management-specific spec.
+        fleetobservability:
+          $ref: "#/components/schemas/FleetObservabilityMembershipSpec"
+          description: Fleet observability membership spec
         identityservice:
           $ref: "#/components/schemas/IdentityServiceMembershipSpec"
           description: Identity Service-specific spec.
@@ -2240,6 +2276,9 @@ components:
         configmanagement:
           $ref: "#/components/schemas/ConfigManagementMembershipState"
           description: Config Management-specific state.
+        fleetobservability:
+          $ref: "#/components/schemas/FleetObservabilityMembershipState"
+          description: Fleet observability membership state.
         identityservice:
           $ref: "#/components/schemas/IdentityServiceMembershipState"
           description: Identity Service-specific state.
@@ -2478,9 +2517,6 @@ components:
     PolicyControllerMembershipState:
       description: "**Policy Controller**: State for a single cluster."
       properties:
-        clusterName:
-          description: The user-defined name for the cluster used by ClusterSelectors to group clusters together. This should match Membership's membership_name, unless the user installed PC on the cluster manually prior to enabling the PC hub feature. Unique within a Policy Controller installation.
-          type: string
         componentStates:
           additionalProperties:
             $ref: "#/components/schemas/PolicyControllerOnClusterState"
@@ -2562,6 +2598,18 @@ components:
         v1beta1Crd:
           description: Optional. Use `apiextensions/v1beta1` instead of `apiextensions/v1` for CustomResourceDefinition resources. This option should be set for clusters with Kubernetes apiserver versions <1.16.
           type: boolean
+      type: object
+    ScopeFeatureSpec:
+      description: ScopeFeatureSpec contains feature specs for a fleet scope.
+      properties: {}
+      type: object
+    ScopeFeatureState:
+      description: ScopeFeatureState contains Scope-wide Feature status information.
+      properties:
+        state:
+          $ref: "#/components/schemas/FeatureState"
+          description: Output only. The "running state" of the Feature in this Scope.
+          readOnly: true
       type: object
     ServiceMeshAnalysisMessage:
       description: AnalysisMessage is a single message produced by an analyzer, and it used to communicate to the end user about the state of their Service Mesh configuration.

@@ -70,6 +70,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Record
@@ -122,6 +123,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Record
@@ -147,6 +149,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -165,6 +168,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -193,6 +197,7 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.read
+        - private_apps_legacy: []
       tags:
         - Marketing_Events_External
   /marketing/v3/marketing-events/events/upsert:
@@ -215,6 +220,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -245,6 +251,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -279,6 +286,7 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.read
+        - private_apps_legacy: []
       tags:
         - Marketing_Events_External
     patch:
@@ -315,6 +323,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -346,6 +355,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -379,6 +389,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -418,6 +429,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -458,6 +470,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -498,6 +511,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -1417,3 +1431,12 @@ components:
             crm.objects.marketing_events.write: Write marketing events
           tokenUrl: https://api.hubapi.com/oauth/v1/token
       type: oauth2
+    private_apps_legacy:
+      in: header
+      name: private-app-legacy
+      type: apiKey
+x-hubspot-available-client-libraries:
+  - PHP
+  - Node
+  - Python
+  - Ruby
