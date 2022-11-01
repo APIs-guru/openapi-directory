@@ -55,6 +55,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/Media"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.readonly
       tags:
         - media
     parameters:
@@ -123,6 +132,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Empty"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
       tags:
         - spaces
     get:
@@ -144,9 +158,13 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/chat.memberships
+            - https://www.googleapis.com/auth/chat.messages
           Oauth2c:
-            - https://www.googleapis.com/auth/chat.memberships
+            - https://www.googleapis.com/auth/chat.messages
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.readonly
       tags:
         - spaces
     parameters:
@@ -193,6 +211,11 @@ paths:
               schema:
                 $ref: "#/components/schemas/Message"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
       tags:
         - spaces
   "/v1/{parent}/members":
@@ -301,6 +324,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/Message"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages
+        - Oauth2:
+            - https://www.googleapis.com/auth/chat.messages.create
+          Oauth2c:
+            - https://www.googleapis.com/auth/chat.messages.create
       tags:
         - spaces
   "/v1/{parent}/webhooks":
@@ -1910,6 +1942,9 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
+            https://www.googleapis.com/auth/chat.messages: View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
+            https://www.googleapis.com/auth/chat.messages.create: Compose and send messages in Google Chat
+            https://www.googleapis.com/auth/chat.messages.readonly: view messages and reactions in Google Chat
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -1918,5 +1953,8 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/chat.memberships: View, add, and remove members from conversations in Google Chat
+            https://www.googleapis.com/auth/chat.messages: View, compose, send, update, and delete messages, and add, view, and delete reactions to messages.
+            https://www.googleapis.com/auth/chat.messages.create: Compose and send messages in Google Chat
+            https://www.googleapis.com/auth/chat.messages.readonly: view messages and reactions in Google Chat
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

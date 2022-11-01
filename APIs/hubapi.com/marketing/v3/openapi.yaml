@@ -26,7 +26,7 @@ paths:
   "/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create":
     post:
       description: Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids.
-      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create
+      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create_create
       parameters:
         - description: The id of the marketing event
           explode: false
@@ -79,7 +79,7 @@ paths:
   "/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create":
     post:
       description: "Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. If contact is not present it will be automatically created. If you set params "
-      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create
+      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create_createByEmail
       parameters:
         - description: The id of the marketing event
           explode: false
@@ -156,7 +156,7 @@ paths:
         - Marketing_Events_External
   /marketing/v3/marketing-events/events/delete:
     post:
-      operationId: post-/marketing/v3/marketing-events/events/delete_archive
+      operationId: post-/marketing/v3/marketing-events/events/delete_archiveBatch
       requestBody:
         content:
           application/json:
@@ -396,7 +396,7 @@ paths:
         - Marketing_Events_External
   "/marketing/v3/marketing-events/events/{externalEventId}/complete":
     post:
-      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/complete
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/complete_complete
       parameters:
         - explode: false
           in: path

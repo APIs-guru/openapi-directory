@@ -126,6 +126,7 @@ paths:
     x-twilio:
       defaultOutputProperties:
         - user_sid
+      mountName: user_info
       pathType: instance
   /v1/well-known/openid-configuration:
     description: "TODO: Resource-level docs"

@@ -136,6 +136,7 @@ paths:
       defaultOutputProperties:
         - sid
         - status
+      mountName: esim_profiles
       pathType: list
   "/v1/ESimProfiles/{Sid}":
     description: eSIM Profiles that can be loaded onto consumer eUICC SIMs
@@ -166,6 +167,7 @@ paths:
       defaultOutputProperties:
         - sid
         - status
+      mountName: esim_profiles
       pathType: instance
   /v1/Fleets:
     description: Configure shared settings inherited by all Super SIMs assigned to the Fleet

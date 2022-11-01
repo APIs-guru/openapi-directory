@@ -1000,9 +1000,9 @@ paths:
     servers:
       - url: https://voice.twilio.com
     x-twilio:
-      className: highrisk_special_prefix
       defaultOutputProperties:
         - prefix
+      mountName: highrisk_special_prefixes
       parent: /DialingPermissions/Countries/{IsoCode}
       pathType: list
   /v1/IpRecords:
