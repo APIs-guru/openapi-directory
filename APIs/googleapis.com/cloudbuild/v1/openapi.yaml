@@ -3021,40 +3021,6 @@ components:
           description: The URI of the repo. Either uri or repository can be specified and is required.
           type: string
       type: object
-    GoogleDevtoolsCloudbuildV2OperationMetadata:
-      description: Represents the metadata of the long-running operation.
-      properties:
-        apiVersion:
-          description: Output only. API version used to start the operation.
-          readOnly: true
-          type: string
-        createTime:
-          description: Output only. The time the operation was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        endTime:
-          description: Output only. The time the operation finished running.
-          format: google-datetime
-          readOnly: true
-          type: string
-        requestedCancellation:
-          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
-          readOnly: true
-          type: boolean
-        statusMessage:
-          description: Output only. Human-readable status of the operation, if any.
-          readOnly: true
-          type: string
-        target:
-          description: Output only. Server-defined resource path for the target of the operation.
-          readOnly: true
-          type: string
-        verb:
-          description: Output only. Name of the verb executed by the operation.
-          readOnly: true
-          type: string
-      type: object
     HTTPDelivery:
       description: HTTPDelivery is the delivery configuration for an HTTP notification.
       properties:
@@ -3576,40 +3542,6 @@ components:
           description: Source to build against this trigger. Branch and tag names cannot consist of regular expressions.
         triggerId:
           description: Required. ID of the trigger.
-          type: string
-      type: object
-    RunWorkflowCustomOperationMetadata:
-      description: Represents the custom metadata of the RunWorkflow long-running operation.
-      properties:
-        apiVersion:
-          description: Output only. API version used to start the operation.
-          readOnly: true
-          type: string
-        createTime:
-          description: Output only. The time the operation was created.
-          format: google-datetime
-          readOnly: true
-          type: string
-        endTime:
-          description: Output only. The time the operation finished running.
-          format: google-datetime
-          readOnly: true
-          type: string
-        pipelineRunId:
-          description: Output only. ID of the pipeline run created by RunWorkflow.
-          readOnly: true
-          type: string
-        requestedCancellation:
-          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
-          readOnly: true
-          type: boolean
-        target:
-          description: Output only. Server-defined resource path for the target of the operation.
-          readOnly: true
-          type: string
-        verb:
-          description: Output only. Name of the verb executed by the operation.
-          readOnly: true
           type: string
       type: object
     SMTPDelivery:

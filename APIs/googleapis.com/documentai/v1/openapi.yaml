@@ -2467,12 +2467,6 @@ components:
     GoogleCloudDocumentaiV1EntityTypeMetadata:
       description: Metadata about an entity type.
       properties:
-        humanReviewLabelingMetadata:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1HumanReviewLabelingMetadata"
-          description: Human review labeling config on the property.
-        humanReviewMetadata:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1HumanReviewValidationMetadata"
-          description: Human review config on the entity type.
         inactive:
           description: Whether the entity type should be considered as "inactive".
           type: boolean
@@ -2512,13 +2506,6 @@ components:
           description: The URI prefix.
           type: string
       type: object
-    GoogleCloudDocumentaiV1HumanReviewLabelingMetadata:
-      description: Metadata for human review labeling config.
-      properties:
-        enableNormalizationEditing:
-          description: Whether to enable normalization editing.
-          type: boolean
-      type: object
     GoogleCloudDocumentaiV1HumanReviewStatus:
       description: The status of human review on a processed document.
       properties:
@@ -2537,17 +2524,6 @@ components:
         stateMessage:
           description: A message providing more details about the human review state.
           type: string
-      type: object
-    GoogleCloudDocumentaiV1HumanReviewValidationMetadata:
-      description: Metadata for Human Review config.
-      properties:
-        confidenceThreshold:
-          description: The confidence threshold if human review validation is enabled.
-          format: float
-          type: number
-        enableValidation:
-          description: Whether to enable human review validation.
-          type: boolean
       type: object
     GoogleCloudDocumentaiV1ListProcessorTypesResponse:
       description: Response message for list processor types.
@@ -2718,6 +2694,9 @@ components:
         displayName:
           description: The display name of the processor version.
           type: string
+        documentSchema:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentSchema"
+          description: The schema of the processor version. Describes the output.
         googleManaged:
           description: Denotes that this ProcessorVersion is managed by google.
           type: boolean
@@ -2757,12 +2736,6 @@ components:
     GoogleCloudDocumentaiV1PropertyMetadata:
       description: Metadata about a property.
       properties:
-        humanReviewLabelingMetadata:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1HumanReviewLabelingMetadata"
-          description: Human review labeling config on the property.
-        humanReviewMetadata:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1HumanReviewValidationMetadata"
-          description: Human review validation config on the property.
         inactive:
           description: Whether the property should be considered as "inactive".
           type: boolean

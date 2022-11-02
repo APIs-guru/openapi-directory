@@ -427,7 +427,7 @@ paths:
         - labels
   "/v2beta/{parent}/locks":
     get:
-      description: Lists the Locks on a Label.
+      description: Lists the LabelLocks on a Label.
       operationId: drivelabels.labels.revisions.locks.list
       parameters:
         - description: "Required. Label on which Locks are applied. Format: labels/{label}"
@@ -1779,10 +1779,6 @@ components:
           type: string
         name:
           description: Output only. Resource name of this LabelLock.
-          readOnly: true
-          type: string
-        policyUri:
-          description: Output only. A URI referring to the policy that created this Lock.
           readOnly: true
           type: string
         state:

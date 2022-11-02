@@ -19,12 +19,11 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://documentai.googleapis.com/$discovery/rest?version=v1beta3
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: documentai
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/document-ai/docs/
 tags:
@@ -4346,12 +4345,6 @@ components:
     GoogleCloudDocumentaiV1beta3EntityTypeMetadata:
       description: Metadata about an entity type.
       properties:
-        humanReviewLabelingMetadata:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3HumanReviewLabelingMetadata"
-          description: Human review labeling config on the property.
-        humanReviewMetadata:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3HumanReviewValidationMetadata"
-          description: Human review config on the entity type.
         inactive:
           description: Whether the entity type should be considered as "inactive".
           type: boolean
@@ -4391,13 +4384,6 @@ components:
           description: The URI prefix.
           type: string
       type: object
-    GoogleCloudDocumentaiV1beta3HumanReviewLabelingMetadata:
-      description: Metadata for human review labeling config.
-      properties:
-        enableNormalizationEditing:
-          description: Whether to enable normalization editing.
-          type: boolean
-      type: object
     GoogleCloudDocumentaiV1beta3HumanReviewStatus:
       description: The status of human review on a processed document.
       properties:
@@ -4416,17 +4402,6 @@ components:
         stateMessage:
           description: A message providing more details about the human review state.
           type: string
-      type: object
-    GoogleCloudDocumentaiV1beta3HumanReviewValidationMetadata:
-      description: Metadata for Human Review config.
-      properties:
-        confidenceThreshold:
-          description: The confidence threshold if human review validation is enabled.
-          format: float
-          type: number
-        enableValidation:
-          description: Whether to enable human review validation.
-          type: boolean
       type: object
     GoogleCloudDocumentaiV1beta3ListProcessorTypesResponse:
       description: Response message for list processor types.
@@ -4603,6 +4578,9 @@ components:
         displayName:
           description: The display name of the processor version.
           type: string
+        documentSchema:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3DocumentSchema"
+          description: The schema of the processor version. Describes the output.
         googleManaged:
           description: Denotes that this ProcessorVersion is managed by google.
           type: boolean
@@ -4642,12 +4620,6 @@ components:
     GoogleCloudDocumentaiV1beta3PropertyMetadata:
       description: Metadata about a property.
       properties:
-        humanReviewLabelingMetadata:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3HumanReviewLabelingMetadata"
-          description: Human review labeling config on the property.
-        humanReviewMetadata:
-          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta3HumanReviewValidationMetadata"
-          description: Human review validation config on the property.
         inactive:
           description: Whether the property should be considered as "inactive".
           type: boolean

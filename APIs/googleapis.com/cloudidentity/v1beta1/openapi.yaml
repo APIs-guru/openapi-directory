@@ -13,17 +13,15 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Cloud Identity API
   version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://cloudidentity.googleapis.com/$discovery/rest?version=v1beta1
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: cloudidentity
 externalDocs:
@@ -1927,6 +1925,18 @@ components:
           description: Output only. Build number of the device.
           readOnly: true
           type: string
+        clientTypes:
+          description: List of the clients the device is reporting to.
+          items:
+            enum:
+              - CLIENT_TYPE_UNSPECIFIED
+              - DRIVE_FS
+              - FUNDAMENTAL
+              - ENDPOINT_VERIFICATION
+              - WINDOWS_ADVANCED
+              - GOOGLE_CREDENTIALS_PROVIDER_FOR_WINDOWS
+            type: string
+          type: array
         compromisedState:
           description: Output only. Represents whether the Device is compromised.
           enum:
@@ -1977,6 +1987,9 @@ components:
           $ref: "#/components/schemas/EndpointVerificationSpecificAttributes"
           description: Output only. Attributes specific to Endpoint Verification devices.
           readOnly: true
+        hostname:
+          description: Host name of the device.
+          type: string
         imei:
           description: Output only. IMEI number of device if GSM device; empty otherwise.
           readOnly: true
@@ -3374,5 +3387,3 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
-source:
-  url: {}

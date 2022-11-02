@@ -568,6 +568,7 @@ components:
             - RESTRICTION_TYPE_UNSPECIFIED
             - ALLOW_ALL_GCP_RESOURCES
             - ALLOW_COMPLIANT_RESOURCES
+            - APPEND_COMPLIANT_RESOURCES
           type: string
       type: object
     GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesResponse:
@@ -782,6 +783,7 @@ components:
           enum:
             - PARTNER_UNSPECIFIED
             - LOCAL_CONTROLS_BY_S3NS
+            - SOVEREIGN_CONTROLS_BY_T_SYSTEMS
           type: string
         provisionedResourcesParent:
           description: "Input only. The parent resource for the resources managed by this Assured Workload. May be either empty or a folder resource which is a child of the Workload parent. If not specified all resources are created under the parent organization. Format: folders/{folder_id}"
