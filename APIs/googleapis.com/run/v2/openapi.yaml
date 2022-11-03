@@ -1787,18 +1787,6 @@ components:
           $ref: "#/components/schemas/GoogleCloudRunV2TaskAttemptResult"
           description: Output only. Result of the last attempt of this Task.
           readOnly: true
-        launchStage:
-          description: Set the launch stage to a preview stage on write to allow use of preview features in that stage. On read, describes whether the resource uses preview features. Launch Stages are defined at [Google Cloud Platform Launch Stages](https://cloud.google.com/terms/launch-stages).
-          enum:
-            - LAUNCH_STAGE_UNSPECIFIED
-            - UNIMPLEMENTED
-            - PRELAUNCH
-            - EARLY_ACCESS
-            - ALPHA
-            - BETA
-            - GA
-            - DEPRECATED
-          type: string
         maxRetries:
           description: Number of retries allowed per Task, before marking this Task failed.
           format: int32

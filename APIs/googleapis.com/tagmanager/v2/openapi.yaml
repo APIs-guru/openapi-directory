@@ -2861,6 +2861,11 @@ components:
         tagManagerUrl:
           description: Auto generated link to the tag manager UI
           type: string
+        taggingServerUrls:
+          description: The URLs of the cloud environment for the GTM Container. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update
+          items:
+            type: string
+          type: array
         usageContext:
           description: "List of Usage Contexts for the Container. Valid values include: web, android, or ios. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update"
           items:

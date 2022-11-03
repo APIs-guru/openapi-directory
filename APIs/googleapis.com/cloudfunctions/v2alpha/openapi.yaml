@@ -1412,7 +1412,7 @@ components:
           type: array
       type: object
     ServiceConfig:
-      description: "Describes the Service being deployed. Currently Supported : Cloud Run (fully managed)."
+      description: "Describes the Service being deployed. Currently Supported : Cloud Run (fully managed). Next tag: 23"
       properties:
         allTrafficOnLatestRevision:
           description: Whether 100% of traffic is routed to the latest revision. On CreateFunction and UpdateFunction, when set to true, the revision being deployed will serve 100% of traffic, ignoring any traffic split settings, if any. On GetFunction, true will be returned if the latest revision is serving 100% of traffic.

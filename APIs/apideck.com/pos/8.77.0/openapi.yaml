@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: POS API
-  version: 8.76.0
+  version: 8.77.0
   x-apideck-api: pos
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -2474,9 +2474,12 @@ paths:
                     ],
                     modifiers: [
                       {
+                        id: '12345',
                         name: 'New York Strip Steak - no cheese',
                         amount: 27500,
-                        currency: 'USD'
+                        currency: 'USD',
+                        alternate_name: 'Modifier New',
+                        modifier_group_id: '123'
                       }
                     ]
                   }
@@ -2862,9 +2865,12 @@ paths:
                     ],
                     modifiers: [
                       {
+                        id: '12345',
                         name: 'New York Strip Steak - no cheese',
                         amount: 27500,
-                        currency: 'USD'
+                        currency: 'USD',
+                        alternate_name: 'Modifier New',
+                        modifier_group_id: '123'
                       }
                     ]
                   }
@@ -3149,9 +3155,12 @@ paths:
                     ],
                     modifiers: [
                       {
+                        id: '12345',
                         name: 'New York Strip Steak - no cheese',
                         amount: 27500,
-                        currency: 'USD'
+                        currency: 'USD',
+                        alternate_name: 'Modifier New',
+                        modifier_group_id: '123'
                       }
                     ]
                   }
@@ -7609,18 +7618,32 @@ components:
                 description: Customizable options – toppings, add-ons, or special requests – create item modifiers. Modifiers that are applied to items will display on your customers’ digital receipts
                 items:
                   properties:
+                    alternate_name:
+                      example: Modifier New
+                      title: Alternate name
+                      type: string
                     amount:
                       example: 27500
                       title: Amount (in cents)
                       type: integer
                     currency:
                       $ref: "#/components/schemas/Currency"
+                    id:
+                      example: "12345"
+                      type: string
+                    modifier_group_id:
+                      example: "123"
+                      title: Modifier group ID
+                      type: string
                     name:
                       example: New York Strip Steak - no cheese
                       type: string
                   x-apideck-weights:
+                    alternate_name: medium
                     amount: medium
                     currency: medium
+                    id: medium
+                    modifier_group_id: medium
                     name: medium
                 type: array
               name:
