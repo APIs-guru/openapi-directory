@@ -8,7 +8,7 @@ info:
     url: https://developer.nexmo.com/
   description: The Messages API consolidates and normalises exchanges across all messaging channels. It allows you to use a single API to interact with our various channels such as SMS, MMS, WhatsApp, Viber and Facebook Messenger
   title: Messages API
-  version: 1.2.3
+  version: 1.3.0
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/messages-olympus.yml
@@ -452,16 +452,34 @@ components:
           type: object
           x-tab-id: Audio
     Context:
-      description: This is only present for the Inbound Message where the user is quoting another message. It provides information about the quoted message.
+      description: |
+        This is only present for the Inbound Message where the user is quoting another message, or for a `product` message where the user has selected the 'Message Business' 
+        option. It provides information about the quoted message and/or the product message being responded to. 
       properties:
         message_from:
-          description: The phone number of the **original sender** of the message being replied to in the [E.164](https://en.wikipedia.org/wiki/E.164) format.
+          description: The phone number of the **original sender** of the message being quoted in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Not present in a `context` object which is the result of a user selecting 'Message Business' in a `product` message.
           example: "447700900000"
           type: string
         message_uuid:
-          description: The UUID of the message being replied to
+          description: The UUID of the message being quoted. Not present in a `context` object which is the result of a user selecting 'Message Business' in a `product` message.
           example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
           type: string
+        whatsapp_referred_product:
+          description: |
+            An object containing details of a product from a `product` message being quoted or replied to using the 'Message Business' option.
+          properties:
+            catalog_id:
+              description: The ID of the catalog associated with the product from the `product` message being quoted or replied to using the 'Message Business' option.
+              example: "1267260820787549"
+              type: string
+            product_retailer_id:
+              description: The ID of the product from the `product` message being quoted or replied to using the 'Message Business' option.
+              example: r07qei73l7
+              type: string
+          required:
+            - catalog_id
+            - product_retailer_id
+          type: object
       required:
         - message_uuid
         - message_from
@@ -943,6 +961,52 @@ components:
       description: The UUID of the message
       example: aaaaaaaa-bbbb-cccc-dddd-0123456789ab
       type: string
+    Order:
+      allOf:
+        - $ref: "#/components/schemas/baseMessageType"
+        - properties:
+            message_type:
+              description: The type of message to send.
+              enum:
+                - order
+              example: order
+              type: string
+            order:
+              properties:
+                catalog_id:
+                  description: The ID of the catalog containing the products in this order.
+                  example: "2806150799683508"
+                  type: string
+                product_items:
+                  items:
+                    properties:
+                      currency:
+                        description: The currency code representing the currency for this specific item.
+                        example: USD
+                        type: string
+                      item_price:
+                        description: The unit price for this specific item.
+                        example: "9.99"
+                        type: string
+                      product_retailer_id:
+                        description: The ID of the specific product being ordered.
+                        example: pk1v7rudbg
+                        type: string
+                      quantity:
+                        description: The quantity ordered for this specific item.
+                        example: "1"
+                        type: string
+                    type: object
+                  type: array
+              required:
+                - catalog_id
+                - product_items
+              type: object
+          required:
+            - order
+          title: Order
+          type: object
+          x-tab-id: Order
     Profile:
       properties:
         name:
@@ -1720,6 +1784,9 @@ x-webhooks:
                       - allOf:
                           - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
                           - $ref: "#/components/schemas/Reply"
+                      - allOf:
+                          - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
+                          - $ref: "#/components/schemas/Order"
                       - allOf:
                           - $ref: "#/components/schemas/inboundWhatsAppMessageCommon"
                           - $ref: "#/components/schemas/Unsupported"
