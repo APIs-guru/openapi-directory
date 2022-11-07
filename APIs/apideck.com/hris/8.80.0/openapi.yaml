@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 8.77.0
+  version: 8.80.0
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -335,7 +335,7 @@ tags:
     name: Time Off Requests
     x-apideck-model:
       $ref: "#/components/schemas/TimeOffRequest"
-    x-apideck-resource-id: TimeOffRequests
+    x-apideck-resource-id: time-off-requests
 paths:
   /hris/companies:
     get:
@@ -2961,7 +2961,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: TimeOffRequests
+          example: time-off-requests
           type: string
         service:
           description: Apideck ID of service provider
@@ -3713,7 +3713,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: TimeOffRequests
+          example: time-off-requests
           type: string
         service:
           description: Apideck ID of service provider
@@ -4922,7 +4922,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: TimeOffRequests
+          example: time-off-requests
           type: string
         service:
           description: Apideck ID of service provider
@@ -4961,7 +4961,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: TimeOffRequests
+          example: time-off-requests
           type: string
         service:
           description: Apideck ID of service provider
@@ -6038,7 +6038,7 @@ components:
           type: string
         resource:
           description: Unified API resource name
-          example: TimeOffRequests
+          example: time-off-requests
           type: string
         service:
           description: Apideck ID of service provider

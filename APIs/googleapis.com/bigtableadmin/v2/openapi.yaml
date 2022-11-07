@@ -102,6 +102,7 @@ paths:
               - SCHEMA_VIEW
               - REPLICATION_VIEW
               - ENCRYPTION_VIEW
+              - STATS_VIEW
               - FULL
             type: string
       responses:
@@ -155,16 +156,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates a pending or completed Cloud Bigtable Backup.
-      operationId: bigtableadmin.projects.instances.clusters.backups.patch
+      description: Updates a specified table.
+      operationId: bigtableadmin.projects.instances.tables.patch
       parameters:
-        - description: A globally unique identifier for the backup which cannot be changed. Values are of the form `projects/{project}/instances/{instance}/clusters/{cluster}/ backups/_a-zA-Z0-9*` The final segment of the name must be between 1 and 50 characters in length. The backup is stored in the cluster identified by the prefix of the backup name of the form `projects/{project}/instances/{instance}/clusters/{cluster}`.
+        - description: "The unique name of the table. Values are of the form `projects/{project}/instances/{instance}/tables/_a-zA-Z0-9*`. Views: `NAME_ONLY`, `SCHEMA_VIEW`, `REPLICATION_VIEW`, `STATS_VIEW`, `FULL`"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Required. A mask specifying which fields (e.g. `expire_time`) in the Backup resource should be updated. This mask is relative to the Backup resource, not to the request message. The field mask must always be specified; this prevents any future fields from being erased accidentally by clients that do not know about them.
+        - description: "Required. The list of fields to update. A mask specifying which fields (e.g. `change_stream_config`) in the `table` field should be updated. This mask is relative to the `table` field, not to the request message. The wildcard (*) path is currently not supported. Currently UpdateTable is only supported for the following fields: * `change_stream_config` * `change_stream_config.retention_period` * `deletion_protection` If `column_families` is set in `update_mask`, it will return an UNIMPLEMENTED error."
           in: query
           name: updateMask
           schema:
@@ -173,13 +174,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Backup"
+              $ref: "#/components/schemas/Table"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Backup"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -1406,6 +1407,7 @@ paths:
               - SCHEMA_VIEW
               - REPLICATION_VIEW
               - ENCRYPTION_VIEW
+              - STATS_VIEW
               - FULL
             type: string
       responses:
@@ -1513,10 +1515,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create a new table by restoring from a completed backup. The new table must be in the same project as the instance containing the backup. The returned table long-running operation can be used to track the progress of the operation, and to cancel it. The metadata field type is RestoreTableMetadata. The response type is Table, if successful.
+      description: Create a new table by restoring from a completed backup. The returned table long-running operation can be used to track the progress of the operation, and to cancel it. The metadata field type is RestoreTableMetadata. The response type is Table, if successful.
       operationId: bigtableadmin.projects.instances.tables.restore
       parameters:
-        - description: Required. The name of the instance in which to create the restored table. This instance must be in the same project as the source backup. Values are of the form `projects//instances/`.
+        - description: Required. The name of the instance in which to create the restored table. Values are of the form `projects//instances/`.
           in: path
           name: parent
           required: true
@@ -2072,6 +2074,25 @@ components:
         gcRule:
           $ref: "#/components/schemas/GcRule"
           description: "Garbage collection rule specified as a protobuf. Must serialize to at most 500 bytes. NOTE: Garbage collection executes opportunistically in the background, and so it's possible for reads to return a cell even if it matches the active GC expression for its family."
+        stats:
+          $ref: "#/components/schemas/ColumnFamilyStats"
+          description: Only available with STATS_VIEW, this includes summary statistics about column family contents. For statistics over an entire table, see TableStats above.
+      type: object
+    ColumnFamilyStats:
+      description: Approximate statistics related to a single column family within a table. This information may change rapidly, interpreting these values at a point in time may already preset out-of-date information. Everything below is approximate, unless otherwise specified.
+      properties:
+        averageCellsPerColumn:
+          description: 'How many cells are present per column qualifier in this column family, averaged over all rows containing any column in the column family. e.g. For column family "family" in a table with 3 rows: * A row with 3 cells in "family:col" and 1 cell in "other:col" (3 cells / 1 column in "family") * A row with 1 cell in "family:col", 7 cells in "family:other_col", and 7 cells in "other:data" (8 cells / 2 columns in "family") * A row with 3 cells in "other:col" (0 columns in "family", "family" not present) would report (3 + 8 + 0)/(1 + 2 + 0) = 3.66 in this field.'
+          format: double
+          type: number
+        averageColumnsPerRow:
+          description: 'How many column qualifiers are present in this column family, averaged over all rows in the table. e.g. For column family "family" in a table with 3 rows: * A row with cells in "family:col" and "other:col" (1 column in "family") * A row with cells in "family:col", "family:other_col", and "other:data" (2 columns in "family") * A row with cells in "other:col" (0 columns in "family", "family" not present) would report (1 + 2 + 0)/3 = 1.5 in this field.'
+          format: double
+          type: number
+        logicalDataBytes:
+          description: How much space the data in the column family occupies. This is roughly how many bytes would be needed to read the contents of the entire column family (e.g. by streaming all contents out).
+          format: int64
+          type: string
       type: object
     CopyBackupMetadata:
       description: Metadata type for the google.longrunning.Operation returned by CopyBackup.
@@ -2759,8 +2780,11 @@ components:
         columnFamilies:
           additionalProperties:
             $ref: "#/components/schemas/ColumnFamily"
-          description: "The column families configured for this table, mapped by column family ID. Views: `SCHEMA_VIEW`, `FULL`"
+          description: "The column families configured for this table, mapped by column family ID. Views: `SCHEMA_VIEW`, `STATS_VIEW`, `FULL`"
           type: object
+        deletionProtection:
+          description: "Set to true to make the table protected against data loss. i.e. deleting the following resources through Admin APIs are prohibited: - The table. - The column families in the table. - The instance containing the table. Note one can still delete the data stored in the table through Data APIs."
+          type: boolean
         granularity:
           description: "Immutable. The granularity (i.e. `MILLIS`) at which timestamps are stored in this table. Timestamps not matching the granularity will be rejected. If unspecified at creation time, the value will be set to `MILLIS`. Views: `SCHEMA_VIEW`, `FULL`."
           enum:
@@ -2768,12 +2792,15 @@ components:
             - MILLIS
           type: string
         name:
-          description: "The unique name of the table. Values are of the form `projects/{project}/instances/{instance}/tables/_a-zA-Z0-9*`. Views: `NAME_ONLY`, `SCHEMA_VIEW`, `REPLICATION_VIEW`, `FULL`"
+          description: "The unique name of the table. Values are of the form `projects/{project}/instances/{instance}/tables/_a-zA-Z0-9*`. Views: `NAME_ONLY`, `SCHEMA_VIEW`, `REPLICATION_VIEW`, `STATS_VIEW`, `FULL`"
           type: string
         restoreInfo:
           $ref: "#/components/schemas/RestoreInfo"
           description: Output only. If this table was restored from another data source (e.g. a backup), this field will be populated with information about the restore.
           readOnly: true
+        stats:
+          $ref: "#/components/schemas/TableStats"
+          description: Only available with STATS_VIEW, this includes summary statistics about the entire table contents. For statistics about a specific column family, see ColumnFamilyStats in the mapped ColumnFamily collection above.
       type: object
     TableProgress:
       description: Progress info for copying a table's data to the new cluster.
@@ -2793,6 +2820,26 @@ components:
             - COPYING
             - COMPLETED
             - CANCELLED
+          type: string
+      type: object
+    TableStats:
+      description: "Approximate statistics related to a table. These statistics are calculated infrequently, while simultaneously, data in the table can change rapidly. Thus the values reported here (e.g. row count) are very likely out-of date, even the instant they are received in this API. Thus, only treat these values as approximate. IMPORTANT: Everything below is approximate, unless otherwise specified."
+      properties:
+        averageCellsPerColumn:
+          description: 'How many cells are present per column (column family, column qualifier) combinations, averaged over all columns in all rows in the table. e.g. A table with 2 rows: * A row with 3 cells in "family:col" and 1 cell in "other:col" (4 cells / 2 columns) * A row with 1 cell in "family:col", 7 cells in "family:other_col", and 7 cells in "other:data" (15 cells / 3 columns) would report (4 + 15)/(2 + 3) = 3.8 in this field.'
+          format: double
+          type: number
+        averageColumnsPerRow:
+          description: 'How many (column family, column qualifier) combinations are present per row in the table, averaged over all rows in the table. e.g. A table with 2 rows: * A row with cells in "family:col" and "other:col" (2 distinct columns) * A row with cells in "family:col", "family:other_col", and "other:data" (3 distinct columns) would report (2 + 3)/2 = 2.5 in this field.'
+          format: double
+          type: number
+        logicalDataBytes:
+          description: This is roughly how many bytes would be needed to read the entire table (e.g. by streaming all contents out).
+          format: int64
+          type: string
+        rowCount:
+          description: How many rows are in the table.
+          format: int64
           type: string
       type: object
     TestIamPermissionsRequest:
@@ -2872,6 +2919,21 @@ components:
           description: The request that prompted the initiation of this UpdateInstance operation.
         requestTime:
           description: The time at which the original request was received.
+          format: google-datetime
+          type: string
+      type: object
+    UpdateTableMetadata:
+      description: Metadata type for the operation returned by UpdateTable.
+      properties:
+        endTime:
+          description: If set, the time at which this operation finished or was canceled.
+          format: google-datetime
+          type: string
+        name:
+          description: The name of the table being updated.
+          type: string
+        startTime:
+          description: The time at which this operation started.
           format: google-datetime
           type: string
       type: object

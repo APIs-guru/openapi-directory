@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Webhook API
-  version: 8.77.0
+  version: 8.80.0
   x-apideck-api: webhook
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -349,6 +349,68 @@ paths:
               console.error(error)
             }
       x-graphql-field-name: eventLogs
+  "/webhook/w/{id}/{serviceId}":
+    post:
+      description: Resolve a webhook based on lookup_id and then execute it
+      operationId: webhooksResolve
+      parameters:
+        - $ref: "#/components/parameters/lookupIdToken"
+        - $ref: "#/components/parameters/serviceId"
+        - $ref: "#/components/parameters/downstreamEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: "#/components/schemas/ResolveWebhookEventRequest"
+                - $ref: "#/components/schemas/ResolveWebhookEventsRequest"
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/ResolveWebhookResponse"
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "402":
+          $ref: "#/components/responses/PaymentRequiredResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableResponse"
+        default:
+          $ref: "#/components/responses/UnexpectedErrorResponse"
+      security:
+        - apiKey: []
+      summary: Resolve and Execute a connection webhook
+      tags:
+        - Webhooks
+      x-apideck-api: webhook
+      x-codeSamples:
+        - label: Node
+          lang: TypeScript
+          source: |
+            import { Apideck } from '@apideck/node'
+
+            const apideck = new Apideck({
+              apiKey: 'REPLACE_WITH_API_KEY'
+            })
+
+            const params = {
+              id: '5006fbf8-d74b-4c47-9530-b5437ec4b2c8',
+              serviceId: 'factorialhr',
+              webhooksResolve: {}
+            }
+
+            try {
+              const { data } = await apideck.webhook.webhooksResolve(params)
+              console.log('API called successfully', data)
+            } catch (error) {
+              console.error(error)
+            }
+      x-graphql-exclude: true
+      x-internal: true
+      x-sdk-exclude: true
   /webhook/webhooks:
     get:
       description: List webhooks
@@ -656,7 +718,7 @@ paths:
 
             const params = {
               id: 'id_example',
-              serviceId: 'serviceId_example',
+              serviceId: 'factorialhr',
               webhooksExecute: {}
             }
 
@@ -719,7 +781,7 @@ paths:
 
             const params = {
               id: 'id_example',
-              serviceId: 'serviceId_example',
+              serviceId: 'factorialhr',
               webhooksShortExecute: {}
             }
 
@@ -757,8 +819,9 @@ components:
         type: string
     downstreamEventType:
       description: The name of downstream event when connector does not supply in body or header
+      example: Employees::Events::EmployeeCreated
       in: query
-      name: e_t
+      name: e
       schema:
         type: string
     filter:
@@ -787,12 +850,22 @@ components:
         type: integer
     lookupId:
       description: Unique identifier to used to look up consumer/connection when receiving connector events from downstream.
+      example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA3NWUwNmEzLTUwNzUtNDY3Yi1hNTk5LWVkNmM5YTg5NTYyOCJ9._ppKdmBaCB2RHjBTifMNP2xKNeLBfNPim2CiHSUd0Zg
       in: query
       name: l_id
       schema:
         type: string
+    lookupIdToken:
+      description: JWT Webhook token that represents the connection lookupId. Signed so we know source came from us
+      example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk2MDAwYzIzLWI1NmItNGRlOC1iZmEzLTMxNTAzMTE3YzBmNyJ9.rAXnsmZ4O7eF0aDwdflkxAJQwMUfWs5989WfmspNZ6Q
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
     serviceId:
       description: Service provider ID.
+      example: factorialhr
       in: path
       name: serviceId
       required: true
@@ -866,6 +939,12 @@ components:
           schema:
             $ref: "#/components/schemas/PaymentRequiredResponse"
       description: Payment Required
+    ResolveWebhookResponse:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ResolveWebhookResponse"
+      description: Resolve Webhook
     UnauthorizedResponse:
       content:
         application/json:
@@ -1044,7 +1123,7 @@ components:
           example: 200
           type: integer
         timestamp:
-          description: ISO Dtae time webhook event was received
+          description: ISO Datetime webhook event was received
           example: 2021-10-01T08:26:28.039Z
           type: string
       required:
@@ -1261,6 +1340,40 @@ components:
           type: string
       type: object
       x-apideck-schema-id: PaymentRequired
+    ResolveWebhookEventRequest:
+      additionalProperties: true
+      type: object
+      x-apideck-schema-id: ResolveWebhookEventRequest
+    ResolveWebhookEventsRequest:
+      items:
+        additionalProperties: true
+        type: object
+      type: array
+      x-apideck-schema-id: ResolveWebhookEventRequest
+    ResolveWebhookResponse:
+      properties:
+        request_id:
+          description: UUID of the request received
+          example: c6af9ac6-7b61-11e6-9a41-93e8deadbeef
+          type: string
+        status:
+          description: HTTP Response Status
+          example: OK
+          type: string
+        status_code:
+          description: HTTP Response Status Code
+          example: 200
+          type: integer
+        timestamp:
+          description: ISO Datetime webhook event was received
+          example: 2021-10-01T08:26:28.039Z
+          type: string
+      required:
+        - status_code
+        - status
+        - data
+      type: object
+      x-apideck-schema-id: ResolveWebhookResponse
     ServiceId:
       description: Service provider identifier
       example: close
@@ -1362,6 +1475,7 @@ components:
         - project-management
         - expense-management
         - calendar
+        - procurement
       example: crm
       type: string
       x-apideck-enum-id: unified_api

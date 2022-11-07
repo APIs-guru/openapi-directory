@@ -164,7 +164,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Vault API
-  version: 8.77.0
+  version: 8.80.0
   x-apideck-api: vault
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -3137,6 +3137,7 @@ components:
         - project-management
         - expense-management
         - calendar
+        - procurement
       example: crm
       type: string
       x-apideck-enum-id: unified_api
@@ -3218,7 +3219,7 @@ components:
           type: string
         execute_url:
           description: The URL the downstream is sending to when the event is triggered
-          example: https://unify.apideck.com/webhook/webhooks/{webhookToken}/x/factorialhr?l_id={lookupId}&e_t={downstreamEventType}
+          example: https://unify.apideck.com/webhook/w/{lookupIdToken}/{serviceId}?e={downstreamEventType}
           type: string
         unify_event_types:
           description: The list of Unify Events this connection is subscribed to
