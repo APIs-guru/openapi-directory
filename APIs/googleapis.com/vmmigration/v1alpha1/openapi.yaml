@@ -1638,7 +1638,7 @@ components:
         inventoryTags:
           additionalProperties:
             type: string
-          description: AWS resource tags to limit the scope of the source inventory.
+          description: "Deprecated: AWS resource tags to limit the scope of the source inventory. Use inventory_tag_list instead."
           type: object
         migrationResourcesUserTags:
           additionalProperties:
@@ -1680,6 +1680,15 @@ components:
     AwsVmDetails:
       description: AwsVmDetails describes a VM in AWS.
       properties:
+        architecture:
+          description: The CPU architecture.
+          enum:
+            - VM_ARCHITECTURE_UNSPECIFIED
+            - I386
+            - X86_64
+            - ARM64
+            - X86_64_MAC
+          type: string
         bootOption:
           description: The VM Boot Option.
           enum:
@@ -1738,6 +1747,13 @@ components:
             type: string
           description: The tags of the VM.
           type: object
+        virtualizationType:
+          description: The virtualization type.
+          enum:
+            - VM_VIRTUALIZATION_TYPE_UNSPECIFIED
+            - HVM
+            - PARAVIRTUAL
+          type: string
         vmId:
           description: The VM ID in AWS.
           type: string
@@ -2803,7 +2819,7 @@ components:
           format: int32
           type: integer
         progressPercent:
-          description: The current progress in percentage of this cycle.
+          description: The current progress in percentage of this cycle. Was replaced by 'steps' field, which breaks down the cycle progression more accurately.
           format: int32
           type: integer
         startTime:
@@ -2811,7 +2827,7 @@ components:
           format: google-datetime
           type: string
         state:
-          description: State of the MigratingVm.
+          description: State of the ReplicationCycle.
           enum:
             - STATE_UNSPECIFIED
             - RUNNING

@@ -14,17 +14,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Container Analysis API
   version: v1alpha1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://containeranalysis.googleapis.com/$discovery/rest?version=v1alpha1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: containeranalysis
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/container-analysis/api/reference/rest/
 tags:
@@ -1562,7 +1565,7 @@ components:
       description: Optional arguments to enable specific features of builds.
       properties:
         diskSizeGb:
-          description: Requested disk size for the VM that runs the build. Note that this is *NOT* "disk free"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 1000GB; builds that request more than the maximum are rejected with an error.
+          description: Requested disk size for the VM that runs the build. Note that this is *NOT* "disk free"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 2000GB; builds that request more than the maximum are rejected with an error.
           format: int64
           type: string
         dynamicSubstitutions:
@@ -3951,3 +3954,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

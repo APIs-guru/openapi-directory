@@ -4315,6 +4315,9 @@ components:
         autoRenewEnabled:
           description: If the subscription is currently set to auto-renew, e.g. the user has not canceled the subscription
           type: boolean
+        priceChangeDetails:
+          $ref: "#/components/schemas/SubscriptionItemPriceChangeDetails"
+          description: The information of the last price change for the item since subscription signup.
       type: object
     BasePlan:
       description: A single base plan for a subscription.
@@ -5176,6 +5179,21 @@ components:
           format: int64
           type: string
       type: object
+    OfferDetails:
+      description: Offer details information related to a purchase line item.
+      properties:
+        basePlanId:
+          description: The base plan ID. Present for all base plan and offers.
+          type: string
+        offerId:
+          description: The offer ID. Only present for discounted offers.
+          type: string
+        offerTags:
+          description: The latest offer tags associated with the offer. It includes tags inherited from the base plan.
+          items:
+            type: string
+          type: array
+      type: object
     OfferTag:
       description: Represents a custom tag specified for base plans and subscription offers.
       properties:
@@ -5555,6 +5573,32 @@ components:
           format: int64
           type: string
       type: object
+    SubscriptionItemPriceChangeDetails:
+      description: Price change related information of a subscription item.
+      properties:
+        expectedNewPriceChargeTime:
+          description: The renewal time at which the price change will become effective for the user. This is subject to change(to a future time) due to cases where the renewal time shifts like pause.
+          format: google-datetime
+          type: string
+        newPrice:
+          $ref: "#/components/schemas/Money"
+          description: New recurring price for the subscription item.
+        priceChangeMode:
+          description: Price change mode specifies how the subscription item price is changing.
+          enum:
+            - PRICE_CHANGE_MODE_UNSPECIFIED
+            - PRICE_DECREASE
+            - PRICE_INCREASE
+          type: string
+        priceChangeState:
+          description: State the price change is currently in.
+          enum:
+            - PRICE_CHANGE_STATE_UNSPECIFIED
+            - OUTSTANDING
+            - CONFIRMED
+            - APPLIED
+          type: string
+      type: object
     SubscriptionListing:
       description: The consumer-visible metadata of a subscription.
       properties:
@@ -5770,6 +5814,9 @@ components:
           description: Time at which the subscription expired or will expire unless the access is extended (ex. renews).
           format: google-datetime
           type: string
+        offerDetails:
+          $ref: "#/components/schemas/OfferDetails"
+          description: The offer details for this item.
         prepaidPlan:
           $ref: "#/components/schemas/PrepaidPlan"
           description: The item is prepaid.

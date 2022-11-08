@@ -219,7 +219,7 @@ paths:
           name: deviceType
           schema:
             type: string
-        - description: If true, attribute suggestions are enabled and provided in response.
+        - description: If true, attribute suggestions are enabled and provided in response. This field is only available for "cloud-retail" dataset.
           in: query
           name: enableAttributeSuggestions
           schema:
@@ -2321,7 +2321,7 @@ components:
         attributeResults:
           additionalProperties:
             $ref: "#/components/schemas/GoogleCloudRetailV2alphaCompleteQueryResponseAttributeResult"
-          description: "A map of matched attribute suggestions. Current supported keys: * `brands` * `categories`"
+          description: 'A map of matched attribute suggestions. This field is only available for "cloud-retail" dataset. Current supported keys: * `brands` * `categories`'
           type: object
         attributionToken:
           description: A unique complete token. This should be included in the UserEvent.completion_detail for search events resulting from this completion, which enables accurate attribution of complete model performance.
@@ -3701,7 +3701,7 @@ components:
           type: string
       type: object
     GoogleCloudRetailV2alphaRuleTwowaySynonymsAction:
-      description: 'Creates a set of terms that will be treated as synonyms of each other. Example: synonyms of "sneakers" and "shoes". * "sneakers" will use a synonym of "shoes". * "shoes" will use a synonym of "sneakers".'
+      description: 'Creates a set of terms that will be treated as synonyms of each other. Example: synonyms of "sneakers" and "shoes": * "sneakers" will use a synonym of "shoes". * "shoes" will use a synonym of "sneakers".'
       properties:
         synonyms:
           description: Defines a set of synonyms. Can specify up to 100 synonyms. Must specify at least 2 synonyms.

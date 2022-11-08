@@ -2432,6 +2432,7 @@ components:
             - VOICE_WEB_AFFINITY
             - SKILLSSTACK_AFFINITY
             - WHOSTORY_AFFINITY
+            - PHOTOS_PARTNER_SHARING_EMAIL_ONLY
           type: string
         containerId:
           description: The ID of the container
@@ -2723,6 +2724,9 @@ components:
     AppsPeopleOzExternalMergedpeopleapiConnectionReminder:
       description: Contact-level people-prompts settings and contact-level connection reminders. Part of go/people-prompts.
       properties:
+        contactPromptSettings:
+          $ref: "#/components/schemas/SocialGraphApiProtoContactPromptSettings"
+          description: Contains the Contact level settings that will affect all reminders.
         metadata:
           $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
         prompt:
@@ -2992,7 +2996,7 @@ components:
           type: string
       type: object
     AppsPeopleOzExternalMergedpeopleapiEmailCertificate:
-      description: Under development. Represents a hosted S/MIME certificate config for use with Gmail. See //caribou/smime/proto/certificate_status.proto. There can be zero or more certificates associated with an email address, be it profile email or contact email.
+      description: Represents a hosted S/MIME certificate config for use with Gmail. See //caribou/smime/proto/certificate_status.proto. There can be zero or more certificates associated with an email address, be it profile email or contact email.
       properties:
         configurationName:
           description: The name of this certificate configuration. Examples could be "High security level" or "For domain emails only".
@@ -5611,7 +5615,10 @@ components:
     AssistantApiAppControlSupport:
       properties:
         enabled:
-          type: boolean
+          enum:
+            - DEFAULT_DISABLED
+            - ENABLED_WITH_SMART_DICTATION
+          type: string
       type: object
     AssistantApiAppIntegrationsSettings:
       description: Contains the app privacy bits used for App Integrations implicit request. (go/app-privacy-settings-for-implicit-requests)
@@ -5842,6 +5849,8 @@ components:
               - ACTIVE_EDGE_SENSITIVITY
               - ADAPTIVE_BATTERY
               - ADAPTIVE_BRIGHTNESS
+              - ADAPTIVE_CHARGING
+              - ADAPTIVE_CONNECTIVITY
               - ADD_BLUETOOTH_DEVICE
               - ADD_DEVICE
               - ADD_FINGERPRINT
@@ -5860,6 +5869,7 @@ components:
               - ASSISTANT_LANGUAGE
               - ASSISTANT_VOICE_MATCH
               - AUTO_ROTATE
+              - AUTO_ROTATE_FACE_DETECTION
               - BATTERY_LEVEL
               - BATTERY_LOW
               - BATTERY_PERCENTAGE
@@ -5869,10 +5879,13 @@ components:
               - BIOMETRIC
               - BLUETOOTH
               - BRIGHTNESS_LEVEL
+              - BUBBLES
               - CALL_VOLUME
               - CAMERA_DOUBLE_TWIST
               - CAST
               - COLOR_INVERSION
+              - CHARGING_SOUNDS_AND_VIBRATION
+              - CHARGING_STATE
               - CONTACTLESS_PAYMENTS
               - DATA_ROAMING
               - DATA_SAVER
@@ -5883,6 +5896,7 @@ components:
               - DISPLAY_SIZE
               - DO_NOT_DISTURB
               - DOUBLE_TAP_CHECK_PHONE
+              - EMERGENCY_ALERTS
               - EMERGENCY_INFORMATION
               - ETHERNET_TETHERING
               - FACTORY_RESET
@@ -5891,14 +5905,22 @@ components:
               - FONT_SIZE
               - FREE_UP_SPACE
               - GESTURES
+              - HAPTIC_FEEDBACK_VIBRATION
+              - HEADS_UP
               - HOT_SPOT
               - HOTSPOT_TETHERING
               - HOT_WORD
+              - IMPROVE_LOCATION_ACCURACY
               - JUMP_TO_CAMERA
               - KEYBOARD_SHORTCUTS
               - LIFT_CHECK_PHONE
               - LOCATION
+              - LOCATION_BLUETOOTH_SCANNING
+              - LOCATION_WIFI_SCANNING
               - LOCK_SCREEN
+              - LOCK_SCREEN_DEVICE_CONTROLS
+              - LOCK_SCREEN_WALLET
+              - MAGNIFICATION
               - MAGNIFY_BUTTON
               - MAGNIFY_TRIPLE_TAP
               - MANIFY_BUTTON
@@ -5915,16 +5937,24 @@ components:
               - NIGHT_LIGHT_SWITCH
               - NIGHT_MODE
               - NOTIFICATION_BADGE
+              - NOTIFICATION_ON_SCREEN
+              - NOTIFY_FOR_PUBLIC_NETWORKS
+              - ONEHANDED_MODE
               - PASSWORD
               - PERSONALIZATION
               - PICTURE_IN_PICTURE
+              - POINTER_SPEED
               - POWER_MENU
               - REMINDERS
               - REQUIRE_DEVICE_UNLOCK_FOR_NFC
               - RINGTONE
               - RING_VOLUME
+              - SCREEN_LOCKING_SOUND
+              - SCREEN_MAGNIFICATION
               - SCREEN_TIMEOUT
               - SELECT_TO_SPEAK
+              - SET_TIME_AUTOMATICALLY
+              - SET_TIME_ZONE_AUTOMATICALLY
               - SETTINGS
               - SIM
               - SPEECH_RATE
@@ -5932,9 +5962,11 @@ components:
               - SWIPE_FOR_NOTIFICATION
               - SWITCH_ACCESS
               - SYSTEM_UPDATE
+              - TALKBACK_PASSWORDS
               - TEXT_TO_SPEECH
               - USB_TETHERING
               - VERBOSE_TTS
+              - VIBRATE
               - VIBRATION_MODE
               - VOICE
               - VOLUME_LEVEL
@@ -6046,7 +6078,7 @@ components:
           type: boolean
       type: object
     AssistantApiCoreTypesAndroidAppInfo:
-      description: "The android app information of the provider. Like, Spotify. Next ID: 15 LINT.IfChange"
+      description: "The android app information of the provider. Like, Spotify. Next ID: 16 LINT.IfChange"
       properties:
         accountType:
           type: string
@@ -6091,6 +6123,9 @@ components:
           type: string
         shortcutId:
           description: "Id of the app's Android shortcut to be launched by Assistant. The client is expected to use the Android LauncherApps API to execute this shortcut which in turn will open the app. For example, Whatsapp may create an Android shortcut for a frequently messaged contact with an id \"contact_123\". This field will contain that id and the client can execute it to open up the chat with that particular contact. If this field is set, the package_name field must also be set since both will be used by the LauncherApps API for execution. If this field is set, the intent related fields will be ignored and not used as a fallback. Design: go/shortcut-id-in-provider-open-clientop This field should only be set for devices with Android API level >= 25 (since that is the version from which the LauncherApps startShortcut API is available)"
+          type: string
+        targetClass:
+          description: The fully qualified target class name of the provider, like "com.example.myapp.GetOrderService".
           type: string
         versionName:
           description: 'The android app version name, like "4.1.091.05.40d", "11.2.7.21.alpha". Android Docs: https://developer.android.com/reference/android/content/pm/PackageInfo#versionName'
@@ -7577,10 +7612,14 @@ components:
           type: boolean
       type: object
     AssistantApiLoggingOnlyData:
-      description: Data which is produced for logging and debugging. Servers MUST NOT use this for any other purposes, such as branching on it.
+      description: "Data which is produced for logging and debugging. Servers MUST NOT use this for any other purposes, such as branching on it. Next ID: 14"
       properties:
         acpVersion:
           description: A user-readable string describing the ACP version (go/acp-version) of the client app used by the user to originate the conversation.
+          type: string
+        androidId:
+          description: Random identifier assigned to Android mobile devices. Older logs may have previously stored other kinds of android IDs in this field, but all current logs should use the GServices Id. See go/androidids.
+          format: int64
           type: string
         appVersion:
           description: A user-readable string describing the version of the client app used by the user to originate the conversation.
@@ -9536,7 +9575,7 @@ components:
           $ref: "#/components/schemas/AssistantApiSignInMethod"
           description: Which kind of sign in the client supports.
         sleepSensingSupported:
-          description: "Whether the client can monitor sleep. This allows us to show sleep CUJ realted information: go/TwilightDesign Use for development only, see the same field in DeviceCapabilities.SoftwareCapabilities.SelinaCapabilities."
+          description: "Whether the client can monitor sleep. This allows us to show sleep CUJ related information: go/TwilightDesign Use for development only, see the same field in DeviceCapabilities.SoftwareCapabilities.SelinaCapabilities."
           type: boolean
         smartspaceCrossDeviceTimerSupported:
           description: Whether the client supports smart space cross-device timers. (go/ss-x-device-timer)
@@ -10365,6 +10404,11 @@ components:
             format: int32
             type: integer
           type: array
+        devicesAfterPromoters:
+          description: DeviceInfo for devices after the filters and promoters. - When device targeting is only configured for single target, these are ambiguous devices that would have been the output of Lumos. Downstream may perform extra check before disambiguation dialog. For example, Media Initiation checks playability for devices. The output here is before the check. - When configured for multi-target, these are just the target devices. For privacy consideration, we may only log device id field inside.
+          items:
+            $ref: "#/components/schemas/AssistantLogsDeviceInfoLog"
+          type: array
         finalTargetDevice:
           $ref: "#/components/schemas/AssistantLogsDeviceInfoLog"
           description: the final targeted device selected by playability filter or DeviceSelectionDialog
@@ -10718,6 +10762,7 @@ components:
             - SAME_NAME_DEVICE_PROMOTER
             - PHONE_TARGETING_PROMOTER
             - TRAITS_PROMOTER
+            - DEVICE_TYPE_PROMOTER
           type: string
         isRemote:
           type: boolean
@@ -11103,6 +11148,7 @@ components:
             - SAME_NAME_DEVICE_PROMOTER
             - PHONE_TARGETING_PROMOTER
             - TRAITS_PROMOTER
+            - DEVICE_TYPE_PROMOTER
           type: string
       type: object
     AssistantLogsMediaCapabilities:
@@ -11352,12 +11398,19 @@ components:
           type: string
       type: object
     AssistantLogsTargetDeviceLog:
-      description: "Represents the case where the library successfully selects the target device. It could be one or multiple devices. Next ID: 3"
+      description: "Represents the case where the library successfully selects the target device. It could be one or multiple devices. Next ID: 4"
       properties:
         devices:
           items:
             $ref: "#/components/schemas/AssistantLogsDeviceInfoLog"
           type: array
+        lowConfidenceReason:
+          enum:
+            - UNKNOWN_REASON
+            - LOCAL_FALLBACK
+            - STOP_PLAYBACK_ON_PAUSED_PHONE
+            - SINGLE_NEARBY_DEVICE
+          type: string
         resultConfidenceLevel:
           enum:
             - UNKNOWN
@@ -11366,7 +11419,7 @@ components:
           type: string
       type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 30"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 33"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
@@ -11405,6 +11458,10 @@ components:
           description: Assistant User Interaction Score which is aggregated using intent name from exp laelaps.
           format: double
           type: number
+        kscorerRank:
+          description: The rank order of the interpretation as determined by kscorer. The kscorer-determined dominant interpretation, if any, gets a rank of 0. The remaining N interpretations get a rank of 1 through N.
+          format: int32
+          type: integer
         maskCandidateLevelFeatures:
           description: This feature is always false / no-op in serving time. In training time, this feature may be set true on specific examples for weighted training where when this signal is true, only cross-intent level features are used for training and other candidate level features are masked (set as missing).
           type: boolean
@@ -11444,6 +11501,21 @@ components:
           description: Cosine similarity between predicted query-to-term model and intent-type-based salient terms. This is intended to be used as a backoff to pq2t_vs_qibst_cosine if it is missing.
           format: double
           type: number
+        predictedIntentConfidence:
+          description: Intent confidence predicted by the AssistantVerticalClassifier QRewrite servlet.
+          format: float
+          type: number
+        searchDispatch:
+          description: The determination made by the SearchDispatchingConfig as to whether and how this interpretation should be dispatched to Search.
+          enum:
+            - UNKNOWN
+            - NONE
+            - BRIDGE_API
+            - FULFILL_INTENT
+            - EMIT_ONLY
+            - COUNTERFACTUAL_LOG_ONLY
+            - CAPACITY_ACCOUNTING
+          type: string
         topHypothesisConfidence:
           description: "Average of per-word confidence for top speech recognition hypothesis. The value is from RecognizerHypothesisLog: http://google3/logs/proto/speech/service/recognizer_log.proto?l=848&rcl=281400256"
           format: float
@@ -11766,7 +11838,7 @@ components:
           type: array
       type: object
     AssistantVerticalsHomeautomationProtoHomeAutomation_MetaData:
-      description: "Next ID: 40"
+      description: "Next ID: 42"
       properties:
         actionProjectConfigs:
           description: Custom actions that this item supports.
@@ -11824,6 +11896,17 @@ components:
           description: Other agent id + foreign id pairs associated with the device. This can be used to represent a group of devices (e.g. Sonos' bonded zone) as a single device, or a device that comes in through different sync flows (e.g. Newman with a Nest camera).
           items:
             $ref: "#/components/schemas/AssistantVerticalsHomeautomationProtoAgentDeviceId"
+          type: array
+        otherDeviceSources:
+          description: Additional device sources. This can be the result of the device being merged with other devices with a different source.
+          items:
+            enum:
+              - UNKNOWN
+              - CLOUD_SYNC
+              - ASSISTANT_SETTING_OOBE
+              - LOCAL_SYNC
+              - CHIP_SYNC
+            type: string
           type: array
         parentNode:
           description: LINT.IfChange(home_graph_single_parent) At the moment, we just have a single string. In future this will expand with additional metadata from client or cloud execution data store. In today's 'tree' HomeGraph each object has a single parent. In the future this may have a mesh for complex cases -- zones, doors, etc -- so we make this a repeated element today. LINT.ThenChange(//depot/google3/assistant/assistant_server/settings/user_defined_actions/footprints/footprint_accessor.cc:home_graph_single_parent)
@@ -11891,6 +11974,10 @@ components:
             type: string
           description: Only present for an AoGH device. HGS Device ID of a target device and the signal strength (RSSI in dB, higher is better) between that target device and the AoGH device. If this map is empty, there are no target devices reachable by this AoGH device.
           type: object
+        tdssUpdateTimestamp:
+          description: The timestamp at which the TDSS map was last updated. This information is used to help determine which hub would be preferred if multiple hubs report the same reach-ability for a device.
+          format: google-datetime
+          type: string
         traitRoutingHints:
           description: For SHED devices, some traits can only be executed on 3P cloud, e.g. "action.devices.traits.MediaInitiation", "action.devices.traits.Channel" go/shed-per-trait-routing
           items:
@@ -12707,7 +12794,6 @@ components:
               - LTG_CANDIDATE
               - NOSUBINDEX
               - BASE
-              - CSEINDEX
               - CSEINDEX_EXTENDED
               - DAILY
               - TIMBIT_PROTECTED
@@ -12715,7 +12801,6 @@ components:
               - LANDFILL2
               - LANDFILL3
               - LANDFILL_BLOGSEARCH
-              - LANDFILL_CSE
               - LANDFILL_SOCIAL
               - INSTANT
               - UNIFIED_LANDFILL
@@ -12731,6 +12816,7 @@ components:
               - UNIFIED_ZEPPELIN_HIGH_QUALITY
               - ASIANREGIONAL
               - EMEAREGIONAL
+              - CSEINDEX
               - BASEREGIONAL
               - BLACKHOLE
               - XBASE
@@ -12749,6 +12835,7 @@ components:
               - ZEPPELIN_STAGING
               - PULSAR
               - TIMBIT
+              - LANDFILL_CSE
               - UNIFIED_ZEPPELIN
             type: string
           type: array
@@ -13029,7 +13116,7 @@ components:
           type: string
       type: object
     CompositeDocQualitySignals:
-      description: This field should hold all new quality online signals (after 02/05/10). Quality offline signals, which are loaded by Signal API, should be stored in doc_attachments.
+      description: "Note: This is a misleading name as of 2022/10/14. The field is still set and has meaningful data, but no longer holds quality signals. All the data are freshness-related and they're not particularly sensitive."
       properties:
         lastSignificantUpdate:
           $ref: "#/components/schemas/QualityTimebasedLastSignificantUpdate"
@@ -16465,7 +16552,7 @@ components:
           format: int32
           type: integer
         parsedName:
-          description: "The parsed_name field contains one or more names of an address component. Its actual contents depends on where in the Geo/Google stack you are reading a feature: 1. When an address is initially parsed via a feed or other raw input and structured as an AddressProto, parsed_name should contain the set of names that corresponds to the (possibly normalized) raw text from the raw input. In MapFacts, the address component may be linked to an actual feature via feature_id. Any address formatting directly from MapFacts should follow links to retrieve names when possible. The parsed_name contents may be formatted directly if the address component is unlinked following the same rules as selecting and formatting the name of a feature. The cached parsed_name is regularly refreshed from the linked feature with the minimal set of names for address components (usually just a single, preferred name, in the local language). 2. In serving systems, the names of linked features may be denormalized into the parsed_name field to facilitate quicker address formatting or for simple data filtering (e.g. finding all geocodes in California by name). If reading a feature from such a system, the parsed_name field could contain multiple names in multiple languages that reflect a cached copy of the names associated with the linked features. Formatting of such names should follow the same rules as selecting and formatting the name of a feature itself."
+          description: "The parsed_name field contains one or more names of an address component. Its actual contents depends on where in the Geo/Google stack you are reading a feature: 1. When an address is initially parsed via a feed or other raw input and structured as an AddressProto, parsed_name should contain the set of names that corresponds to the (possibly normalized) raw text from the raw input. 2. In MapFacts, the address component may be linked to an actual feature via feature_id. Any address formatting directly from MapFacts should follow links to retrieve names when possible. The parsed_name contents may be formatted directly if the address component is unlinked following the same rules as selecting and formatting the name of a feature. The cached parsed_name is regularly refreshed from the linked feature with the minimal set of names for address components (usually just a single, preferred name, in the local language, plus a Latin-script name: go/story-of-ac-names). 3. In serving systems, the names of linked features may be denormalized into the parsed_name field to facilitate quicker address formatting or for simple data filtering (e.g. finding all geocodes in California by name). If reading a feature from such a system, the parsed_name field could contain multiple names in multiple languages that reflect a cached copy of the names associated with the linked features. Formatting of such names should follow the same rules as selecting and formatting the name of a feature itself."
           items:
             $ref: "#/components/schemas/GeostoreNameProto"
           type: array
@@ -17227,6 +17314,7 @@ components:
             - PROVIDER_GOOGLE_UGC_QUALITY_CHAINS
             - PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY
             - PROVIDER_GOOGLE_GEO_LDE
+            - PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -17744,6 +17832,8 @@ components:
             - PROVIDER_EVINY
             - PROVIDER_MASTERCARD
             - PROVIDER_VATTENFALL
+            - PROVIDER_VIETGIS
+            - PROVIDER_UNITE
           type: string
         rawMetadata:
           description: For every key that is used in raw_data from this source, there must be a corresponding entry in raw_metadata that describes this key.
@@ -19845,6 +19935,7 @@ components:
             - PROVIDER_GOOGLE_UGC_QUALITY_CHAINS
             - PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY
             - PROVIDER_GOOGLE_GEO_LDE
+            - PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -20362,6 +20453,8 @@ components:
             - PROVIDER_EVINY
             - PROVIDER_MASTERCARD
             - PROVIDER_VATTENFALL
+            - PROVIDER_VIETGIS
+            - PROVIDER_UNITE
           type: string
       type: object
     GeostoreIntersectionGroupProto:
@@ -20996,6 +21089,7 @@ components:
             - PROVIDER_GOOGLE_UGC_QUALITY_CHAINS
             - PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY
             - PROVIDER_GOOGLE_GEO_LDE
+            - PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -21513,6 +21607,8 @@ components:
             - PROVIDER_EVINY
             - PROVIDER_MASTERCARD
             - PROVIDER_VATTENFALL
+            - PROVIDER_VIETGIS
+            - PROVIDER_UNITE
           type: string
         sourceDataset:
           type: string
@@ -22328,6 +22424,7 @@ components:
             - PROVIDER_GOOGLE_UGC_QUALITY_CHAINS
             - PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY
             - PROVIDER_GOOGLE_GEO_LDE
+            - PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -22845,6 +22942,8 @@ components:
             - PROVIDER_EVINY
             - PROVIDER_MASTERCARD
             - PROVIDER_VATTENFALL
+            - PROVIDER_VIETGIS
+            - PROVIDER_UNITE
           type: string
       type: object
     GeostoreRankDetailsProto:
@@ -26006,6 +26105,14 @@ components:
         cloudAiDocument:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1Document"
           description: Document AI format to save the structured content, including OCR.
+        contentCategory:
+          description: Indicates the category (image, audio, video etc.) of the original content.
+          enum:
+            - CONTENT_CATEGORY_UNSPECIFIED
+            - CONTENT_CATEGORY_IMAGE
+            - CONTENT_CATEGORY_AUDIO
+            - CONTENT_CATEGORY_VIDEO
+          type: string
         createTime:
           description: Output only. The time when the document is created.
           format: google-datetime
@@ -26792,6 +26899,13 @@ components:
         requireTotalSize:
           description: "Optional. Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size. Enabling this flag may adversely impact performance. Hint: If this is used with pagination, set this flag on the initial query but set this to false on subsequent page calls (keep the total count locally). Defaults to false."
           type: boolean
+        totalResultSize:
+          description: Optional. Controls if the search document request requires the return of a total size of matched documents. See SearchDocumentsResponse.total_size.
+          enum:
+            - TOTAL_RESULT_SIZE_UNSPECIFIED
+            - ESTIMATED_SIZE
+            - ACTUAL_SIZE
+          type: string
       type: object
     GoogleCloudContentwarehouseV1SearchDocumentsResponse:
       description: Response message for DocumentService.SearchDocuments.
@@ -28011,14 +28125,7 @@ components:
       type: object
     GoogleInternalAppsWaldoV1alphaInactive:
       description: The status indicating that no other status applies.
-      properties:
-        nextCommitmentStatus:
-          $ref: "#/components/schemas/GoogleInternalAppsWaldoV1alphaUserStatus"
-          description: The status type of the next change which is considered a commitment. The status will be an empty instance of the corresponding type, no additional data will be provided.
-        nextCommitmentTime:
-          description: The time when the user will start having a status of InMeeting, DoNotDisturb or short OutOfOffice.
-          format: google-datetime
-          type: string
+      properties: {}
       type: object
     GoogleInternalAppsWaldoV1alphaLocalTimeContext:
       description: Context which helps to determine the user's local time.
@@ -28047,6 +28154,13 @@ components:
           description: The closest time when the user will be available after this OOO block. This might be different from the end of the OOO block in Calendar, since the OOO block might end on Friday evening, and then the user is outside working hours.
           format: google-datetime
           type: string
+        committedUntil:
+          description: The time when the user will stop being committed, i.e., when their status will be neither of InMeeting, DoNotDisturb or OutOfOffice < Xh. Note that if this OOO block is large (>Xh), committed_until will be the end of this block, not including any meetings or focus time following it.
+          format: google-datetime
+          type: string
+        committedUntilIsMixed:
+          description: Whether the status of the user until committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).
+          type: boolean
         eventSummary:
           description: The summary of the corresponding OOO block in Calendar. This is entered by the user, so we return it "as is" - no i18n.
           type: string
@@ -28068,6 +28182,16 @@ components:
           type: string
         startTime:
           description: Starting point of the range, inclusive.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleInternalAppsWaldoV1alphaUpcomingCommitmentContext:
+      properties:
+        nextCommitmentStatus:
+          $ref: "#/components/schemas/GoogleInternalAppsWaldoV1alphaUserStatus"
+          description: The status type of the commitment above. The status will be an empty instance of the corresponding type, no additional data will be provided.
+        nextCommitmentTime:
+          description: The most relevant upcoming commitment (InMeeting, DoNotDisturb or OutOfOffice). In most cases this will be the next closest commitment event, but if there is a large OOO in less than 24h it will take precedence over earlier events.
           format: google-datetime
           type: string
       type: object
@@ -28113,6 +28237,9 @@ components:
         localTime:
           $ref: "#/components/schemas/GoogleInternalAppsWaldoV1alphaLocalTimeContext"
           description: Helps to determine the user's local time by providing their current time zone.
+        upcomingCommitmentContext:
+          $ref: "#/components/schemas/GoogleInternalAppsWaldoV1alphaUpcomingCommitmentContext"
+          description: Information about upcoming events.
         upcomingOoo:
           $ref: "#/components/schemas/GoogleInternalAppsWaldoV1alphaUpcomingOooContext"
           description: Set if user has upcoming OOO.
@@ -29822,10 +29949,12 @@ components:
             - THUMBNAIL_TYPE_ORIGINAL
             - THUMBNAIL_TYPE_ORIGINAL_HQ
             - THUMBNAIL_TYPE_FAVICON_16
+            - THUMBNAIL_TYPE_FAVICON_28
             - THUMBNAIL_TYPE_FAVICON_32
             - THUMBNAIL_TYPE_FAVICON_64
             - THUMBNAIL_TYPE_FAVICON_ORIGINAL
             - THUMBNAIL_TYPE_FAVICON_16_DARK
+            - THUMBNAIL_TYPE_FAVICON_28_DARK
             - THUMBNAIL_TYPE_FAVICON_32_DARK
             - THUMBNAIL_TYPE_FAVICON_64_DARK
             - THUMBNAIL_TYPE_FAVICON_ORIGINAL_DARK
@@ -30022,7 +30151,7 @@ components:
           type: integer
       type: object
     ImageData:
-      description: "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 127"
+      description: "This defines the per-doc data which is extracted from thumbnails and propagated over to indexing. It contains all information that can be used for restricts. Next tag id: 128"
       properties:
         adaboostImageFeaturePorn:
           description: "Warning: adaboost_image_feature_porn* and imageFeaturePorn fields are DEPRECATED in favor of brain_porn_scores. Please do not use them. Contact safesearch@ for transition advice."
@@ -30090,6 +30219,9 @@ components:
         deepCrop:
           $ref: "#/components/schemas/DeepCropIndexing"
           description: DeepCrop based cropping information. See go/creatism/deepcrop for details.
+        deepImageEngagingness:
+          $ref: "#/components/schemas/ImageRepositoryDeepImageEngagingnessOutput"
+          description: Productionized Deep Image Engagingness score.
         deepTags:
           $ref: "#/components/schemas/CommerceDatastoreImageDeepTags"
           description: VSS generated deep tags for shopping images.
@@ -30413,10 +30545,12 @@ components:
             - THUMBNAIL_TYPE_ORIGINAL
             - THUMBNAIL_TYPE_ORIGINAL_HQ
             - THUMBNAIL_TYPE_FAVICON_16
+            - THUMBNAIL_TYPE_FAVICON_28
             - THUMBNAIL_TYPE_FAVICON_32
             - THUMBNAIL_TYPE_FAVICON_64
             - THUMBNAIL_TYPE_FAVICON_ORIGINAL
             - THUMBNAIL_TYPE_FAVICON_16_DARK
+            - THUMBNAIL_TYPE_FAVICON_28_DARK
             - THUMBNAIL_TYPE_FAVICON_32_DARK
             - THUMBNAIL_TYPE_FAVICON_64_DARK
             - THUMBNAIL_TYPE_FAVICON_ORIGINAL_DARK
@@ -31378,6 +31512,13 @@ components:
             - NUM_STATE_TYPES
           type: string
       type: object
+    ImageRepositoryDeepImageEngagingnessOutput:
+      properties:
+        score:
+          description: DeepImageEngagingness score.
+          format: float
+          type: number
+      type: object
     ImageRepositoryFileTruncationInfo:
       description: Describes our knowledge about whether a stored file is truncated with respect to its original file online.
       properties:
@@ -31630,12 +31771,17 @@ components:
           type: string
       type: object
     ImageRepositoryUnwantedContent:
-      description: To indicate whether the image is to be deleted from the repository due to legal reasons.
+      description: To indicate whether the image or video is to be deleted from the repository due to legal reasons or hidden from search results.
       properties:
         deletionReason:
           enum:
             - OTHER
             - CP
+          type: string
+        hideReason:
+          enum:
+            - UNKNOWN
+            - NCEI
           type: string
       type: object
     ImageRepositoryVenomProcessingInfo:
@@ -36179,7 +36325,7 @@ components:
           type: string
       type: object
     KnowledgeAnswersIntentQueryParsingSignals:
-      description: "Parsing-related signals. Only horizontal signals should appear directly as fields on this message. Each domain should create their own extension for anything that they need to propagate down stream from AQUA. Note that this proto is not the same as the Superroot proto ParsingSignals (http://google3/knowledge/proto/scoring-signals.proto), which is a Superroot-specific signal used in Scoring. Next ID: 4"
+      description: "Parsing-related signals. Only horizontal signals should appear directly as fields on this message. Each domain should create their own extension for anything that they need to propagate down stream from AQUA. Note that this proto is not the same as the Superroot proto ParsingSignals (http://google3/knowledge/proto/scoring-signals.proto), which is a Superroot-specific signal used in Scoring. Next ID: 5"
       properties:
         calibratedParsingScore:
           description: A parsing score that is independently calibrated by each parser/IG, used by pre-fulfillment ranker, see http://go/prefulfillment-ranker.
@@ -36188,6 +36334,10 @@ components:
         qrewriteCallPathInfo:
           $ref: "#/components/schemas/NlpLoggingQRewriteClientCallPathInfo"
           description: This proto holds the complete call path info of the QRewrite client (e.g. the QUS's phase like "RBT","QBT"; the QUS's candidate type like "Identity"; and the ACE's candidate type like "FuzzyMatcher").
+        qrewriteCallPathInfoFingerprint:
+          description: This proto holds the fingerprint of the call path info of QRewrite client (e.g. the QUS's phase like "RBT","QBT"; the QUS's candidate type like "Identity"; and the ACE's candidate type like "FuzzyMatcher").
+          format: uint64
+          type: string
         source:
           description: The parser that calibrated the parsing score below.
           enum:
@@ -37063,7 +37213,7 @@ components:
           type: array
       type: object
     KnowledgeAnswersValueType:
-      description: "Specifies the allowed type(s) that a value can have, e.g. for a Slot. For example, having both entity_type and string_type present in a ValueType field of a Slot means that the Slot can take _either_ an an EntityType _or_ StringType as a value, and nothing else. It may be helpful to think of this proto as being called something like AllAllowedValueTypes. Next tag id: 24 LINT.IfChange"
+      description: "Specifies the allowed type(s) that a value can have, e.g. for a Slot. For example, having both entity_type and string_type present in a ValueType field of a Slot means that the Slot can take _either_ an an EntityType _or_ StringType as a value, and nothing else. It may be helpful to think of this proto as being called something like AllAllowedValueTypes. Next tag id: 25 LINT.IfChange"
       properties:
         anyType:
           $ref: "#/components/schemas/KnowledgeAnswersAnyType"
@@ -37085,6 +37235,14 @@ components:
           $ref: "#/components/schemas/KnowledgeAnswersDurationType"
         entityType:
           $ref: "#/components/schemas/KnowledgeAnswersEntityType"
+        inputCompositionConfig:
+          description: When specified on a slot's type, restricts composition based on the enum value. This does not mean anything when the value type is to be interpreted as an output_type.
+          enum:
+            - UNSPECIFIED_COMPOSITION
+            - ALL_COMPOSITION
+            - PRIMITIVES_ONLY_COMPOSITION
+            - PRIMITIVES_AND_OPERATORS_OF_PRIMITIVES_COMPOSITION
+          type: string
         measurementType:
           $ref: "#/components/schemas/KnowledgeAnswersMeasurementType"
         normalizedStringType:
@@ -37330,6 +37488,9 @@ components:
           description: (Mandatory) Coordinates of the location for which weather is requested.
         locationName:
           description: The name to display. If specified it will override the formatted address of "feature_id".
+          type: string
+        mid:
+          description: MID corresponding to the location from feature_id.
           type: string
         timezone:
           description: The timezone to display the current conditions observation time. Optional and will override the timezone of "feature_id".
@@ -38415,7 +38576,7 @@ components:
           type: string
       type: object
     MapsQualitySpecialWordsFlags:
-      description: "Flags that describe the information about a special word. If you add another flag please add it to the special words implemenation in google3/maps/quality/internal/special_words.cc. -- Next available id: 20 --"
+      description: "Flags that describe the information about a special word. If you add another flag please add it to the special words implemenation in google3/maps/quality/internal/special_words.cc. -- Next available id: 21 --"
       properties:
         isCommonWord:
           description: "Common words E.g.: center, park, etc."
@@ -38425,6 +38586,9 @@ components:
           type: boolean
         isDirectionalModifier:
           description: "Directional modifier. E.g.: north, south, etc."
+          type: boolean
+        isDistanceMarker:
+          description: An affix that indicates distance marker on a route, e.g., 'km'.
           type: boolean
         isForbiddenWord:
           description: Whether geo paths are forbidden to contain this word.
@@ -38887,9 +39051,15 @@ components:
           items:
             $ref: "#/components/schemas/MustangReposWwwSnippetsSnippetCandidate"
           type: array
+        displaySnippet:
+          $ref: "#/components/schemas/QualityPreviewRanklabSnippet"
+          description: Snippet features for the final chosen snippet. This field is firstly populated by Muppet, and then overwriten by Superroot if SnippetBrain is triggered.
         documentLanguage:
           description: locale of the document.
           type: string
+        originalQueryTermCoverages:
+          $ref: "#/components/schemas/QualityPreviewSnippetQueryTermCoverageFeatures"
+          description: Original query term coverage in titles and / or snippets.
         queryLanguage:
           description: locale of the query,
           type: string
@@ -38902,7 +39072,7 @@ components:
           format: float
           type: number
         snippets:
-          description: Snippet features for ranklab models, generated only by snippets scorer v2. In production, only the data for chosen snippet will be recorded.
+          description: Snippet features for Muppet snippet candidates. In production, only the data for chosen snippet will be recorded.
           items:
             $ref: "#/components/schemas/QualityPreviewRanklabSnippet"
           type: array
@@ -42393,7 +42563,7 @@ components:
           description: The position of the result, if it can't be expressed as a pointproto.
       type: object
     NlpSemanticParsingLocalLocation:
-      description: 'There are a few types of locations: - Basic locations are sequences of location elements which can be either actual locations or modifiers. E.g., "Mountain View CA 94040" may be the sequence "Mountain View" (an actual location), "CA" (an actual location, and "94040" (a numeric modifier). - Compound locations: these are two locations combined by a joiner. E.g., "Target in Mountain View CA 94040" has the joiner "in" and two basic locations ("Target", and "Mountain View CA 94040"). Note that the definition is recursive, e.g., "Parking garage near Target in Mountain View". - Vicinity location: indicates an area around a certain location. The area can be defined by time or space. E.g., "within 1 hour of Palo Alto", "10 blocks from Union Square", "a few miles from here". Next ID: 14'
+      description: 'There are a few types of locations: - Basic locations are sequences of location elements which can be either actual locations or modifiers. E.g., "Mountain View CA 94040" may be the sequence "Mountain View" (an actual location), "CA" (an actual location, and "94040" (a numeric modifier). - Compound locations: these are two locations combined by a joiner. E.g., "Target in Mountain View CA 94040" has the joiner "in" and two basic locations ("Target", and "Mountain View CA 94040"). Note that the definition is recursive, e.g., "Parking garage near Target in Mountain View". - Vicinity location: indicates an area around a certain location. The area can be defined by time or space. E.g., "within 1 hour of Palo Alto", "10 blocks from Union Square", "a few miles from here". Next ID: 14 LINT.IfChange()'
       properties:
         basicLocation:
           $ref: "#/components/schemas/NlpSemanticParsingLocalBasicLocation"
@@ -42502,7 +42672,7 @@ components:
           $ref: "#/components/schemas/NlpSemanticParsingLocalVisitHistoryConstraint"
       type: object
     NlpSemanticParsingLocalLocationElement:
-      description: "Next ID: 26"
+      description: "Next ID: 26 LINT.IfChange"
       properties:
         aliasIcon:
           description: For elements with a NICKNAME alias location, this field will hold all matching alias icons, which are used in search to resolve the location.
@@ -46834,7 +47004,7 @@ components:
           type: string
       type: object
     PerDocData:
-      description: "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 217"
+      description: "=========================================================================== # Make sure you read the comments in the bottom before you add any new field. NB: As noted in the comments, this protocol buffer is used in both indexing and serving. In mustang serving implementations we only decode perdocdata during the search phase, and so this protocol should only contain data used during search. See mustang/repos_www/attachments.proto:{MustangBasicInfo,MustangContentInfo} for protocols used during search and/or docinfo. Next available tag deprecated, use this (and look for commented out fields): blaze-bin/net/proto_compiler/protocol-compiler --freetags \\ indexer/perdocdata/perdocdata.proto Next tag: 218"
       properties:
         BlogData:
           $ref: "#/components/schemas/BlogPerDocData"
@@ -47198,6 +47368,10 @@ components:
         spamMuppetSignals:
           $ref: "#/components/schemas/SpamMuppetjoinsMuppetSignals"
           description: Contains hacked site signals which will be used in query time joins. As of Oct'19, the field is stored in a separate corpus. It'll only be populated for in-flight requests between retrieve and full-score in perdocdata. So no extra storage is needed on muppet side.
+        spambrainTotalDocSpamScore:
+          description: The document total spam score identified by spambrain, going from 0 to 1.
+          format: float
+          type: number
         spamrank:
           description: The spamrank measures the likelihood that this document links to known spammers. Its value is between 0 and 65535.
           format: int32
@@ -48941,16 +49115,6 @@ components:
     PornFlagData:
       description: "A protocol buffer to store the url, referer and porn flag for a url. and an optional image score. Next available tag id: 51."
       properties:
-        adaboostContentScore:
-          description: "Content score - computed on the image pixel data only. Additionally, we store a version and minor version number of the model which was used to compute this score. Note: these fields are copies of adaboost_image_feature_porn* in ImageData."
-          format: float
-          type: number
-        adaboostContentScoreMinorVersion:
-          format: int32
-          type: integer
-        adaboostContentScoreVersion:
-          format: int32
-          type: integer
         coclickBrainScores:
           $ref: "#/components/schemas/ImageSafesearchContentBrainPornAnnotation"
           description: "Aggregated brain_porn_scores for navboost co-clicked images. Historical: this signal is deprecated and no longer populated as of 2020-12-01. Refer to b/172897542 for more information."
@@ -48974,21 +49138,9 @@ components:
         finalViolenceScoreVersion:
           description: A string that indicates the version of SafeSearch classifier used to compute final_violence_score.
           type: string
-        imageStats:
-          description: PornStatsImage is repeated even though we use only a single version, to help with rolling out new versions with miminum risk. Multiple versions should exist only for a short window of time. Once the new version is rolled out, the data for older versions should no longer be generated.
-          items:
-            $ref: "#/components/schemas/PornStatsImage"
-          type: array
         internalSignals:
           $ref: "#/components/schemas/SafesearchInternalImageSignals"
           description: A proto that stores SafeSearch internal signals that are not exported to clients. SafeSearch team does not provide any guarantees about the presence or the semantics of these signals in the future.
-        largestFaceFrac:
-          description: largest face, scaled by 1000 This field is same as ImageData.largest_face_frac.
-          format: float
-          type: number
-        largestFaceFraction:
-          format: int32
-          type: integer
         numberFaces:
           description: number of faces
           format: int32
@@ -49003,24 +49155,12 @@ components:
         offensiveSymbolDetection:
           $ref: "#/components/schemas/ImageSafesearchContentOffensiveSymbolDetection"
           description: QuimbyCongas-based detection of offensive symbols in the image (currently swastika and Nazi yellow badge).
-        overallPornScore:
-          description: Overall porn score that determines the porn restricts used during image search retrieval.
-          format: float
-          type: number
         photodnaHash:
           description: Binary version of the PhotoDNA hash (144 bytes long). If not set (has_photodna_hash() == false) it means that it was not computed, if empty (has_photodna_hash() == true && photodna_hash() == "") it means that the computation failed (cannot be computed for images smaller than 50 x 50).
           format: byte
           type: string
         pornWithHighConfidence:
           description: This field is set to true when we are pretty confident that the image is porn (with higher precision than the img_porn_moderate restrict). In particular, it means that the image might be demoted for non-porn queries when SafeSearch is Off.
-          type: boolean
-        propAnyPornFlag:
-          description: OR of the prop_porn_flag and prop_softporn_flag.
-          type: boolean
-        propPornFlag:
-          description: Text classifier properties for the referrer page.
-          type: boolean
-        propSoftpornFlag:
           type: boolean
         qbstOffensiveScore:
           description: QBST-based image offensive score, Navboost based
@@ -49047,45 +49187,12 @@ components:
           description: Starburst-based score predicting sexualization level of the image.
           format: float
           type: number
-        textStats:
-          description: PornStatsText is repeated even though we use only a single version, to help with rolling out new versions with miminum risk. Multiple versions should exist only for a short window of time. Once the new version is rolled out, the data for older versions should no longer be generated.
-          items:
-            $ref: "#/components/schemas/PornStatsText"
-          type: array
         url:
           description: url of the image
           type: string
         urlPornScores:
           $ref: "#/components/schemas/ClassifierPornAggregatedUrlPornScores"
           description: Information about the URL porn scores for image URLs associated with this image.
-      type: object
-    PornStatsImage:
-      description: Site aggregated image content signals are captured in this protocol buffer. This is versioned. Not all fields are present in each version. It is important to document all the fields that are used in each version here.
-      properties:
-        imageCount:
-          description: image content score data
-          format: uint64
-          type: string
-        siteKey:
-          type: string
-        version:
-          format: uint64
-          type: string
-      type: object
-    PornStatsText:
-      description: Site aggregated text signals are captured in this protocol buffer. This is versioned. Not all fields are present in each version. It is important to document all the fields that are used in each version here.
-      properties:
-        anyPornPageCount:
-          format: uint64
-          type: string
-        pageCount:
-          format: uint64
-          type: string
-        siteKey:
-          type: string
-        version:
-          format: uint64
-          type: string
       type: object
     PostalAddress:
       description: "Next free ID: 32"
@@ -49541,7 +49648,7 @@ components:
           type: number
       type: object
     QualityActionsReminder:
-      description: "Next id: 30"
+      description: "Next id: 32"
       properties:
         archived:
           description: OPTIONAL. True if the reminder is archived. Not present implies false.
@@ -49993,6 +50100,10 @@ components:
         description:
           description: OPTIONAL. Full-length description of the reminder.
           type: string
+        documentAssignmentSource:
+          $ref: "#/components/schemas/QualityActionsReminderDocument"
+        dynamiteGroupAssignmentSource:
+          $ref: "#/components/schemas/QualityActionsReminderDynamiteGroup"
         id:
           description: DEPRECATED. Use `client_id` or `server_id` instead.
           type: string
@@ -50033,6 +50144,14 @@ components:
           description: OPTIONAL. The last updated time of this reminder. This field is propagated only for the reminders fetched from ARIS (go/aris-dd).
           format: google-datetime
           type: string
+      type: object
+    QualityActionsReminderDocument:
+      description: Message representing a Document (i.e. Google Docs, Sheets, Slides) This is currently only used to indicate the existence of said document and can be later extended to include more document information as needed.
+      properties: {}
+      type: object
+    QualityActionsReminderDynamiteGroup:
+      description: Message representing a Dynamite Group (AKA Google Chat space) This is currently only used to indicate the existence of said group and can be later extended to include more group information as needed.
+      properties: {}
       type: object
     QualityActionsReminderLocation:
       description: "A representation of reminder-triggering locations. They may be specific, resolved locations, non-specific location groups, or personal aliases. Next id: 12"
@@ -50260,6 +50379,101 @@ components:
           items:
             type: string
           type: array
+      type: object
+    QualityCalypsoAppsUniversalAuLiveOpDetail:
+      description: "Contains the needed information for serving a single LiveOp/LiveEvent on AU. Next ID: 9"
+      properties:
+        countryLevelScheduleInformation:
+          additionalProperties:
+            $ref: "#/components/schemas/QualityCalypsoAppsUniversalAuLiveOpEvent"
+          description: Key is country, and value is the schedule information in that country.
+          type: object
+        defaultFormatInformation:
+          $ref: "#/components/schemas/QualityCalypsoAppsUniversalAuLiveOpFormat"
+          description: Fallback option for the LiveOp format. We will try en-US -> en -> any locale and get the first one that is available.
+        defaultScheduleInformation:
+          $ref: "#/components/schemas/QualityCalypsoAppsUniversalAuLiveOpEvent"
+          description: Fallback option for the LiveOp event scheduling information. Will use earliest start time and last end time from PDC LiveOps data dump.
+        eventId:
+          description: android
+          type: string
+        eventType:
+          description: "[REQUIRED] type of live op event."
+          enum:
+            - TYPE_UNKNOWN
+            - MAJOR_UPDATE
+            - SALE
+            - EVENT
+            - CROSSOVER
+            - PRE_REG_UPDATE
+            - LOYALTY
+            - FIRST_PARTY_PROMOTION
+            - AUTO_GENERATED_SALE
+            - NEW_RELEASE
+            - IAP_SKU_SALE
+            - OFFER
+            - IAP_SKU_DEALS
+          type: string
+        eventUrl:
+          description: ios
+          type: string
+        localeLevelFormatInformation:
+          additionalProperties:
+            $ref: "#/components/schemas/QualityCalypsoAppsUniversalAuLiveOpFormat"
+          description: Key is locale, and value is the format information for that locale.
+          type: object
+        priority:
+          type: string
+      type: object
+    QualityCalypsoAppsUniversalAuLiveOpEvent:
+      description: "Contains the schedule for a single live-op event. Next ID: 4"
+      properties:
+        endTimestampMillis:
+          description: "[REQUIRED] End time in UTC for the live-op event."
+          format: int64
+          type: string
+        previewTimestampMillis:
+          description: If specified, a live-op event must be shown only after this preview-time (in UTC). Otherwise, the event can be shown at any time as long as its before the end time.
+          format: int64
+          type: string
+        startTimestampMillis:
+          description: "[REQUIRED] Start time in UTC for the live-op event."
+          format: int64
+          type: string
+      type: object
+    QualityCalypsoAppsUniversalAuLiveOpFormat:
+      description: "Contains the format information for a single LiveOp/LiveEvent. Next ID: 10"
+      properties:
+        deeplink:
+          type: string
+        description:
+          type: string
+        eyebrow:
+          description: iOS only, kind of event type
+          type: string
+        imageUrl:
+          type: string
+        squareImageUrl:
+          type: string
+        status:
+          description: iOS only, sort of start schedule
+          type: string
+        title:
+          type: string
+        videoId:
+          type: string
+        videoUrl:
+          type: string
+      type: object
+    QualityCalypsoAppsUniversalAuLiveOpsDetailInfo:
+      description: Stores all possible LiveOps/LiveEvents that are eligible to be shown for an app.
+      properties:
+        liveOpEvents:
+          items:
+            $ref: "#/components/schemas/QualityCalypsoAppsUniversalAuLiveOpDetail"
+          type: array
+        packageName:
+          type: string
       type: object
     QualityCopiaFireflySiteSignal:
       description: Proto message containing site-level signal for search stack. Because firefly_stats.proto depends on "//segindexer:compositedoc_proto", we cannot make perdocdata contain it.
@@ -51076,6 +51290,10 @@ components:
         lastLongestClicks:
           format: double
           type: number
+        unicornClicks:
+          description: The subset of clicks that are associated with an event from a Unicorn user.
+          format: double
+          type: number
         unsquashedClicks:
           description: This is not being populated for the current format - instead two instances of CrapsClickSignals (squashed/unsquashed) are used. We are migrating to the new format where this field will be populated.
           format: double
@@ -51302,7 +51520,7 @@ components:
           type: integer
       type: object
     QualityNsrNsrData:
-      description: "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 48"
+      description: "NOTE: When adding a new field to be propagated to Raffia check if NsrPatternSignalSpec needs to be updated. Next ID: 50"
       properties:
         articleScore:
           description: Score from article classification of the site.
@@ -51311,10 +51529,10 @@ components:
         articleScoreV2:
           format: float
           type: number
-        chard:
+        chardEncoded:
           description: "Site-level chard score: site quality predictor based on content."
-          format: float
-          type: number
+          format: int32
+          type: integer
         chardVariance:
           format: float
           type: number
@@ -51392,6 +51610,11 @@ components:
           description: Fractional signals.
           format: float
           type: number
+        priorAdjustedNsr:
+          description: NSR - prior. Estimate of whether the site is above/below average NSR in its slice.
+          items:
+            $ref: "#/components/schemas/QualityNsrVersionedFloatSignal"
+          type: array
         secondarySiteChunk:
           description: Secondary NSR sitechunk. When present, it provides more granular chunking than primary sitechunks (see quality/nsr/util/sitechunker.h for details).
           type: string
@@ -51803,12 +52026,15 @@ components:
           type: array
       type: object
     QualityPreviewChosenSnippetInfo:
-      description: "Information for chosen snippet. Next ID: 7"
+      description: "Information for chosen snippet. Next ID: 8"
       properties:
         isVulgar:
           description: Whether this snippet is a vulgar candidate.
           type: boolean
         leadingTextType:
+          type: string
+        snippetHtml:
+          description: The rendered snippet html.
           type: string
         snippetType:
           enum:
@@ -51827,7 +52053,7 @@ components:
             - PEREGRINE
           type: string
         source:
-          description: "Source of the chosen snippet, decided in PORC. String value of quality.porc.TextSnippetCandidate.TextSnippetSource defined at google3/quality/porc/proto/text_snippet.proto Note: This field is only populated and used in offline pipeline."
+          description: Source of the chosen snippet, decided in PORC. String value of quality.porc.TextSnippetCandidate.TextSnippetSource defined at google3/quality/porc/proto/text_snippet.proto
           type: string
         tidbits:
           items:
@@ -51858,7 +52084,7 @@ components:
           type: string
       type: object
     QualityPreviewRanklabSnippet:
-      description: Snippet candidate related information and signal scores.
+      description: "Snippet candidate related information and signal scores. Next ID: 11"
       properties:
         brainFeatures:
           $ref: "#/components/schemas/QualityPreviewSnippetBrainFeatures"
@@ -51866,6 +52092,16 @@ components:
           $ref: "#/components/schemas/QualityPreviewSnippetDocumentFeatures"
         experimentalFeatures:
           $ref: "#/components/schemas/QualityPreviewSnippetExperimentalFeatures"
+        finalScore:
+          description: The final score of this candidate.
+          format: float
+          type: number
+        isMuppetSelectedSnippet:
+          description: Is this the candidate chosen by Muppet scorer.
+          type: boolean
+        originalQueryTermCoverageFeatures:
+          $ref: "#/components/schemas/QualityPreviewSnippetQueryTermCoverageFeatures"
+          description: Query term (original terms only) coverage features.
         qualityFeatures:
           $ref: "#/components/schemas/QualityPreviewSnippetQualityFeatures"
         queryFeatures:
@@ -51873,6 +52109,7 @@ components:
           description: Core set of snippet features.
         queryTermCoverageFeatures:
           $ref: "#/components/schemas/QualityPreviewSnippetQueryTermCoverageFeatures"
+          description: Query term (including synonyms) coverage features.
         snippetInfo:
           $ref: "#/components/schemas/QualityPreviewChosenSnippetInfo"
           description: Information to identify current chosen snippet.
@@ -52558,7 +52795,7 @@ components:
           type: string
       type: object
     QualityQrewritePersonalContactData:
-      description: "Contact metadata Next Id: 35"
+      description: "Contact metadata Next Id: 36"
       properties:
         accountProvenance:
           $ref: "#/components/schemas/QualityQrewriteAccountProvenance"
@@ -52608,6 +52845,11 @@ components:
         isVisibleToGuestsRelationship:
           description: If the lookup was done using relationship which is visible to guests. This value will only be set if lookup was done using relationship. E.g. user has a guest relationship (doctor) -> (John) And user says "call doctor", then this value will be true.
           type: boolean
+        lookupNameSource:
+          enum:
+            - UNKNOWN
+            - SPELLING
+          type: string
         matchSignal:
           $ref: "#/components/schemas/AssistantVerticalsCommonContactMatchSignal"
           description: Populate only if AlternateSource is not NONE.
@@ -53237,8 +53479,12 @@ components:
           type: integer
       type: object
     QualityShoppingShoppingAttachment:
-      description: "This proto is a lightweight version of ShoppingAnnotation in docjoin attachment. We're doing a deep copy of protos defined in ShoppingAnnotation so that we can control individual fields that will sit in Muppet. Data here will be used for scoring organic shopping web results and previews. Many shopping related signals, e.g., product review score, are also served from this attachment. Next ID: 20"
+      description: "This proto is a lightweight version of ShoppingAnnotation in docjoin attachment. We're doing a deep copy of protos defined in ShoppingAnnotation so that we can control individual fields that will sit in Muppet. Data here will be used for scoring organic shopping web results and previews. Many shopping related signals, e.g., product review score, are also served from this attachment. Next ID: 21"
       properties:
+        datasetModelArticleScore:
+          description: Score from the blockbert article classifier model. go/article-understanding-project
+          format: int32
+          type: integer
         datasetModelBuyingGuideScore:
           format: int32
           type: integer
@@ -54340,8 +54586,10 @@ components:
           type: string
       type: object
     RepositoryAnnotationsRdfaRdfaRichSnippetsApplication:
-      description: "This structure holds data for application information for rich snippets Next ID: 48"
+      description: "This structure holds data for application information for rich snippets Next ID: 51"
       properties:
+        appTypeData:
+          $ref: "#/components/schemas/RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationAppTypeData"
         applicationUrl:
           description: Fields for internal use
           type: string
@@ -54406,6 +54654,9 @@ components:
           type: string
         lastUpdated:
           type: string
+        liveOpDetails:
+          $ref: "#/components/schemas/QualityCalypsoAppsUniversalAuLiveOpsDetailInfo"
+          description: Unified proto for android LiveOps and iOS LiveEvents.
         marketplace:
           description: Market Android or itunes
           type: string
@@ -54445,6 +54696,8 @@ components:
         price:
           description: Price
           type: string
+        rankData:
+          $ref: "#/components/schemas/RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationRankData"
         rating:
           description: Ratings and reviews Either for this version only or for all versions to be displayed.
           type: string
@@ -54499,6 +54752,12 @@ components:
         version:
           type: string
       type: object
+    RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationAppTypeData:
+      properties:
+        playStoreAppType:
+          description: Top level app category type (GAME or APPLICATION). Copied from playwright.
+          type: string
+      type: object
     RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationCountryPrice:
       properties:
         countryCode:
@@ -54509,6 +54768,32 @@ components:
         price:
           description: Price string converted from double value in a standard currency unit, like '199.35' or '1400'.
           type: string
+      type: object
+    RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationRank:
+      properties:
+        appStoreLink:
+          type: string
+        categoryId:
+          type: string
+        categoryName:
+          type: string
+        chartType:
+          type: string
+        rank:
+          format: int64
+          type: string
+      type: object
+    RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationRankData:
+      properties:
+        playwrightCategoryId:
+          description: Copied from the category_id field from Playwright docs. It helps decide which category to show in app ranking info.
+          items:
+            type: string
+          type: array
+        rank:
+          items:
+            $ref: "#/components/schemas/RepositoryAnnotationsRdfaRdfaRichSnippetsApplicationRank"
+          type: array
       type: object
     RepositoryWebrefAggregatedEntityNameScores:
       description: "Represents the aggregated score of the entities for a given name, aggregated over all sources. Next available tag: 3."
@@ -56989,7 +57274,7 @@ components:
           description: This name is a generated compound name to pass primary pruning.
           type: boolean
         isCompoundRetrievalKey:
-          description: Indicates special compound retrieval keys, like "Compound $mid1 $mid2", see repository/webref/universal/util/compound-retrieval.h
+          description: Indicates special compound retrieval keys, like "Compound $mid1 $mid2"
           type: boolean
         isDictionaryTerm:
           description: This is set to true if the entity corresponds to a dictionary term.
@@ -59721,11 +60006,6 @@ components:
           description: "The docid of the document. "
           format: uint64
           type: string
-        fieldOfStudyEntity:
-          description: A set of entities from /collection/field_of_studies in knowledge graph schema (http://shortn/_ldBsa14lo8).
-          items:
-            $ref: "#/components/schemas/ResearchScienceSearchSourceUrlDocjoinInfoWebrefEntityInfo"
-          type: array
         indexTier:
           description: "Index tiers (BASE, UNIFIED_ZEPPELIN, etc) that the document belongs to. NOTE: Each document may belong to multiple tiers. NOTE: The original data type is an enum CompositeDoc::SubIndexType. However we don't want to depend on segindexer/compositedoc.proto because the proto is too large. Instead, we use CompositeDoc::SubIndexType_Name( subindexid) to convert into a string representation. To convert string back to CompositeDoc::SubIndexType, use CompositeDoc::SubIndexType_Parse."
           items:
@@ -59771,12 +60051,23 @@ components:
         url:
           description: "The url of the document. "
           type: string
+        webrefEntity:
+          description: A set of entities copied from WebRefEntities on cDoc.
+          items:
+            $ref: "#/components/schemas/ResearchScienceSearchSourceUrlDocjoinInfoWebrefEntityInfo"
+          type: array
       type: object
     ResearchScienceSearchSourceUrlDocjoinInfoWebrefEntityInfo:
       description: The mid and description of a WebRefEntity.
       properties:
         description:
           description: The English description of the mid from the KG.
+          type: string
+        entityType:
+          enum:
+            - UNKNOWN
+            - FIELD_OF_STUDY
+            - GEO
           type: string
         mid:
           description: The KG identifier of the WebrefEntity.
@@ -61627,10 +61918,17 @@ components:
           type: string
       type: object
     ShoppingWebentityShoppingAnnotationProductRating:
-      description: "Information about a rating provided for a product. This can represent an aggregated rating if count is set. Next Id: 4"
+      description: "Information about a rating provided for a product. This can represent an aggregated rating if count is set. Next Id: 7"
       properties:
         count:
           description: Number of ratings/reviews aggregated to create this product rating. If there are no ratings yet, this field will be explicitly set to zero, so whether this field is set should be checked using has_count.
+          format: int64
+          type: string
+        maxValueMillis:
+          format: int64
+          type: string
+        minValueMillis:
+          description: The lower and upper bounds of the rating values that could be submitted for the product. (Note that it is not the min/max ratings submitted for the product, it is the min/max that can hypothetically be submitted.)
           format: int64
           type: string
         source:
@@ -61642,6 +61940,10 @@ components:
           description: The value of this rating normalized between 0 and 5. This will not be set if count is set to 0.
           format: double
           type: number
+        valueMillis:
+          description: The non-normalized aggregated value of the ratings for this product.
+          format: int64
+          type: string
       type: object
     ShoppingWebentityShoppingAnnotationSoriVersionId:
       description: Versioning Information used for Logging Purposes. See go/sori-logjoining.
@@ -62266,6 +62568,16 @@ components:
           format: google-datetime
           type: string
       type: object
+    SocialGraphApiProtoContactPromptSettings:
+      properties:
+        contactActiveState:
+          description: Indicates if any reminders are active for entire contact. This will affect both connection reminders and date reminders such as birthday reminders. This is required.
+          enum:
+            - UNKNOWN_ACTIVE_STATE
+            - ACTIVE
+            - DISABLED
+          type: string
+      type: object
     SocialGraphApiProtoContactState:
       description: Contact state and related metadata. See go/fbs-contacts-trash.
       properties:
@@ -62477,6 +62789,13 @@ components:
     SocialGraphApiProtoPrompt:
       description: Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)
       properties:
+        activeState:
+          description: Indicates if this prompt is active regardless of its reccurrence date, dismiss date or notification triggers. This is required.
+          enum:
+            - UNKNOWN_ACTIVE_STATE
+            - ACTIVE
+            - DISABLED
+          type: string
         content:
           $ref: "#/components/schemas/SocialGraphApiProtoPromptContent"
         lastDismissDate:
@@ -62504,7 +62823,7 @@ components:
           type: string
       type: object
     SocialGraphApiProtoPromptContent:
-      description: Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService)
+      description: Used in PeopleAPI layers + FBS/ContactsService (not in ProfileService) and in Custard response to client apps that read Prompts.
       properties:
         title:
           description: Title of prompt/spark being sent.
@@ -63250,7 +63569,7 @@ components:
           type: boolean
       type: object
     StorageGraphBfgPolicyMetadata:
-      description: "Metadata about data governance policies. For more context, see go/ke-triple-dg-policy-and-metadata. If any attribute is not set, then there's no specific restrictions associated with the missing attribute. For example, if `availability_start_timestamp` is not set, the data won't be embargoed automatically; if `availability_end_timestamp` is not set, they won't expire automatically. Next ID: 8 LINT.IfChange"
+      description: Metadata about data governance policies. For more context, see go/ke-triple-dg-policy-and-metadata. If any attribute is not set, then there's no specific restrictions associated with the missing attribute. For example, if `availability_start_timestamp` is not set, the data won't be embargoed automatically; if `availability_end_timestamp` is not set, they won't expire automatically. LINT.IfChange
       properties:
         availabilityEndTimestamp:
           description: "Timestamp after which data with this policy cannot be used. This value must be strictly larger/later than availability_start_time, if both are set. WARNING: This field is WIP and please do not populate it without reading go/ke-dg-tape and consulting ke-data-governance@."
@@ -63270,6 +63589,21 @@ components:
           items:
             $ref: "#/components/schemas/KeGovernanceTypedRegions"
           type: array
+        lmsIsEditorial:
+          description: The following attributes with `lms_` prefix are for supporting LMS restrictions. See go/lms-online-restrictions for details.
+          type: boolean
+        lmsRegionsAllowed:
+          $ref: "#/components/schemas/KeGovernanceTypedRegions"
+        lmsRegionsDisallowed:
+          $ref: "#/components/schemas/KeGovernanceTypedRegions"
+        lmsRequiresAttribution:
+          type: boolean
+        lmsRequiresFirstPartyOnly:
+          type: boolean
+        lmsRequiresLink:
+          type: boolean
+        lmsRequiresShareAlike:
+          type: boolean
         policySourceType:
           description: Policy metadata are VERTICAL by default. Vertical policy makers / providers does not need to set this field explicitly.
           enum:
@@ -64016,7 +64350,7 @@ components:
           type: integer
       type: object
     TravelFlightsAirlineConfig:
-      description: "Next ID: 26"
+      description: "Next ID: 27"
       properties:
         adwordsCid:
           description: Populated using airlines_company_ids.csv for AdWords company map
@@ -64088,6 +64422,9 @@ components:
         names:
           $ref: "#/components/schemas/TravelFlightsNameCatalogProto"
           description: EasyJet/イージージェット
+        passengerAssistanceUrls:
+          $ref: "#/components/schemas/TravelFlightsNameCatalogProto"
+          description: Default url for passenger assistance information.
         popularity:
           description: Number of flights with this airline over the next 180 days.
           format: int32
@@ -65754,9 +66091,16 @@ components:
               - DETAILS_PAGE_AQUALITY_UNKNOWN_EVENT_LEVEL
               - DETAILS_PAGE_AQUALITY_FAILED_EVENT_LEVEL
               - DETAILS_PAGE_AQUALITY_PASSED_EVENT_LEVEL
+              - INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS
+              - INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL
               - PTP_CLUSTER_SERP_P13N_RANKING_EVENT_LEVEL
               - BROAD_INTENT_REWEIGHTING_EVENT_LEVEL
               - QUERY_DEPENDENT_SNIPPET_EVENT_LEVEL
+              - TRUSTED_ENTITY_L1_AND_ATTRIBUTE_SEARCH_QUERY_EVENT
+              - TRUSTED_ENTITY_L2_L3_SEARCH_QUERY_EVENT
+              - EXPANDED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
+              - COLLAPSED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
+              - BROAD_INTENT_GAMES_TIMESPENT_EVENT_LEVEL
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - RESERVED_4
               - RESERVED_5
@@ -66360,6 +66704,7 @@ components:
               - PLAY_STORE_IAP_SALES_APP_12
               - PLAY_STORE_IAP_SALES_APP_13
               - PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE
+              - PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE_EAP_PARTNER_APPS
               - CROSS_DEVICE_INSTALL_OPTIONS_FETCHED_IN_SESSION
               - CROSS_DEVICE_INSTALL_OPTIONS_ITEM_FIELDS_TRIGGERED
               - PAIRED_DEVICE_COMPATIBILITY_CHECKED_IN_SESSION
@@ -66447,6 +66792,7 @@ components:
               - PLAY_PASS_SPLASH_PAGE_FOR_PARENT_SESSION_LEVEL
               - PLAY_PASS_SPLASH_PAGE_FOR_UNICORN_SESSION_LEVEL
               - REVIEW_SUBMITTED_SESSION_LEVEL
+              - REVIEW_TOPIC_FILTER_SELECTED_SESSION_LEVEL
               - PLAY_SEARCH_GENERAL_QUERY_PAGINATION_SESSION_LEVEL
               - IN_CART_EXCHANGE_OPTIONS_ELIGIBLE_SESSION_LEVEL
               - PLAY_SEARCH_MULTINAV_PAGINATION_SESSION_LEVEL
@@ -66496,6 +66842,8 @@ components:
               - INLINE_DETAILS_TQUALITY_CHECK_FAIL_SESSION_LEVEL
               - INLINE_DETAILS_AQUALITY_CHECK_PASS_SESSION_LEVEL
               - INLINE_DETAILS_AQUALITY_CHECK_FAIL_SESSION_LEVEL
+              - INLINE_DETAILS_CALLER_AQUALITY_CHECK_PASS_SESSION_LEVEL
+              - INLINE_DETAILS_CALLER_AQUALITY_CHECK_FAIL_SESSION_LEVEL
               - INLINE_DETAILS_IS_INLINE_URL_SESSION_LEVEL
               - SENT_EMAIL_ENTER_GRACE_PERIOD_SESSION_LEVEL
               - SENT_EMAIL_ENTER_SUSPENDED_PERIOD_SESSION_LEVEL
@@ -66584,9 +66932,67 @@ components:
               - SHOULD_SEE_NOW_CONTENT_LIVE_OPS_GH_K2
               - SHOULD_SEE_NOW_CONTENT_LIVE_OPS_GH_K3_4
               - SHOULD_SEE_NOW_CONTENT_LIVE_OPS_GH_GTE_K5
+              - SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_AH_K1
+              - SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_AH_K2
+              - SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_AH_K3_4
+              - SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_AH_GTE_K5
+              - SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_GH_K1
+              - SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_GH_K2
+              - SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_GH_K3_4
+              - SHOULD_SEE_NOW_CONTENT_PRE_REGISTRATION_GH_GTE_K5
+              - SHOULD_NOT_SEE_TOP_NOW_CONTENT_AH
+              - SHOULD_SEE_TOP_NOW_CONTENT_AH_K1
+              - SHOULD_SEE_TOP_NOW_CONTENT_AH_K2
+              - SHOULD_SEE_TOP_NOW_CONTENT_AH_K3_4
+              - SHOULD_SEE_TOP_NOW_CONTENT_AH_GTE_K5
+              - SHOULD_NOT_SEE_TOP_NOW_CONTENT_GH
+              - SHOULD_SEE_TOP_NOW_CONTENT_GH_K1
+              - SHOULD_SEE_TOP_NOW_CONTENT_GH_K2
+              - SHOULD_SEE_TOP_NOW_CONTENT_GH_K3_4
+              - SHOULD_SEE_TOP_NOW_CONTENT_GH_GTE_K5
+              - SHOULD_SEE_TOP_NOW_CONTENT_NEW_RELEASE_AH_K1
+              - SHOULD_SEE_TOP_NOW_CONTENT_NEW_RELEASE_AH_K2
+              - SHOULD_SEE_TOP_NOW_CONTENT_NEW_RELEASE_AH_K3_4
+              - SHOULD_SEE_TOP_NOW_CONTENT_NEW_RELEASE_AH_GTE_K5
+              - SHOULD_SEE_TOP_NOW_CONTENT_NEW_RELEASE_GH_K1
+              - SHOULD_SEE_TOP_NOW_CONTENT_NEW_RELEASE_GH_K2
+              - SHOULD_SEE_TOP_NOW_CONTENT_NEW_RELEASE_GH_K3_4
+              - SHOULD_SEE_TOP_NOW_CONTENT_NEW_RELEASE_GH_GTE_K5
+              - SHOULD_SEE_TOP_NOW_CONTENT_EDITORIAL_AH_K1
+              - SHOULD_SEE_TOP_NOW_CONTENT_EDITORIAL_AH_K2
+              - SHOULD_SEE_TOP_NOW_CONTENT_EDITORIAL_AH_K3_4
+              - SHOULD_SEE_TOP_NOW_CONTENT_EDITORIAL_AH_GTE_K5
+              - SHOULD_SEE_TOP_NOW_CONTENT_EDITORIAL_GH_K1
+              - SHOULD_SEE_TOP_NOW_CONTENT_EDITORIAL_GH_K2
+              - SHOULD_SEE_TOP_NOW_CONTENT_EDITORIAL_GH_K3_4
+              - SHOULD_SEE_TOP_NOW_CONTENT_EDITORIAL_GH_GTE_K5
+              - SHOULD_SEE_TOP_NOW_CONTENT_LIVE_OPS_AH_K1
+              - SHOULD_SEE_TOP_NOW_CONTENT_LIVE_OPS_AH_K2
+              - SHOULD_SEE_TOP_NOW_CONTENT_LIVE_OPS_AH_K3_4
+              - SHOULD_SEE_TOP_NOW_CONTENT_LIVE_OPS_AH_GTE_K5
+              - SHOULD_SEE_TOP_NOW_CONTENT_LIVE_OPS_GH_K1
+              - SHOULD_SEE_TOP_NOW_CONTENT_LIVE_OPS_GH_K2
+              - SHOULD_SEE_TOP_NOW_CONTENT_LIVE_OPS_GH_K3_4
+              - SHOULD_SEE_TOP_NOW_CONTENT_LIVE_OPS_GH_GTE_K5
+              - SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_AH_K1
+              - SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_AH_K2
+              - SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_AH_K3_4
+              - SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_AH_GTE_K5
+              - SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_GH_K1
+              - SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_GH_K2
+              - SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_GH_K3_4
+              - SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_GH_GTE_K5
               - LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_SESSION_LEVEL
               - WALLET_WELLBEING_ALERT_SESSION_LEVEL
               - BROAD_INTENT_REWEIGHTING_SESSION_LEVEL
+              - DYNASTY_DEVICE_HANDOFF_SESSION_LEVEL
+              - TRUSTED_ENTITY_L1_AND_ATTRIBUTE_SEARCH_QUERY_SESSION
+              - TRUSTED_ENTITY_L2_L3_SEARCH_QUERY_SESSION
+              - EXPANDED_DEV_SUCCESS_CLUSTER_SESSION_LEVEL
+              - COLLAPSED_DEV_SUCCESS_CLUSTER_SESSION_LEVEL
+              - DOWNLOAD_COUNT_ELIGIBLE
+              - PLANOGRAM_MERCH_AMERICAS_GAMES_PAYPAL_SESSION_LEVEL
+              - BROAD_INTENT_GAMES_TIMESPENT_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - SHOULD_SEE_LIVE_OP_CLUSTER_USER_LEVEL
               - CART_ABANDONMENT_USER_LEVEL
@@ -66924,6 +67330,7 @@ components:
               - NOVEL_TOPIC_CLUSTER_ELIGIBLE_USER_LEVEL_V2
               - NOVEL_TOPIC_CLUSTER_ELIGIBLE_USER_LEVEL_V3
               - NOVEL_TOPIC_CLUSTER_IMPRESSED_AT_USER_LEVEL
+              - NOVEL_TOPIC_CLUSTER_ELIGIBLE_USER_LEVEL_V4
               - IPS_ITEM_LEVEL_RECS_REMOVED_USER_LEVEL
               - ALLOWLIST_EXPANSION_FOR_P13N_LIVEOPS_USER_LEVEL
               - SURVEY_RECS_LIST_AT_USER_LEVEL
@@ -66931,6 +67338,10 @@ components:
               - ALLOWLIST_EXPANSION_FOR_P13N_NOTIFICATIONS_USER_LEVEL
               - GROWTH_COFFEE_CARD_IN_PURCHASE_FLOW_USER_LEVEL
               - GROWTH_COFFEE_CARD_IN_PURCHASE_FLOW_SERVER_USER_LEVEL
+              - GROWTH_CORPUS_WIDE_STAMP_CARD_PURCHASE_FLOW_CLIENT_USER_LEVEL
+              - GROWTH_CORPUS_WIDE_STAMP_CARD_PURCHASE_FLOW_SERVER_USER_LEVEL
+              - GROWTH_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_USER_LEVEL
+              - LOYALTY_PURCHASE_QUEST_GAMES_HOME_USER_LEVEL
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL_V2
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_WITH_EXISTING_FOP_USER_LEVEL
@@ -66951,6 +67362,67 @@ components:
               - LINK_BIOMETRICS_USER_LEVEL
               - POST_SUCCESS_ADD_BACKUP_FLOW_USER_LEVEL
               - SKIP_CHECK_MARK_SCREEN_WITH_BACKUP_FLOW_USER_LEVEL
+              - IS_ELIGIBLE_FOR_ONE_CLICK_BACKUP_FOP_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_INVALID_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_0_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_1_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_2_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_3_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_4_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_5_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_6_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_7_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_8_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_9_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_10_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_11_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_12_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_13_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_14_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_15_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_16_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_17_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_18_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_19_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_20_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_21_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_22_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_23_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_24_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_25_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_26_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_27_USER_LEVEL
+              - PREPERIOD_PAGE_VISIT_28D_FREQUENCY_28_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_INVALID_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_0_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_1_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_2_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_3_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_4_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_5_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_6_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_7_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_8_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_9_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_10_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_11_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_12_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_13_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_14_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_15_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_16_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_17_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_18_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_19_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_20_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_21_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_22_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_23_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_24_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_25_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_26_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_27_USER_LEVEL
+              - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_28_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -67022,6 +67494,7 @@ components:
             - GAME_GRAPHIC_STYLE
             - GAME_THEME_SETTING
             - GAME_CONNECTIVITY
+            - GAME_DIMENSIONAL_PLANES
             - ACCESSIBLITY
             - ASSISTANT
             - CHROMEBOOK_COMPATIBILITY
@@ -69321,6 +69794,7 @@ components:
             - ASR_TRANSCRIPT
             - COMMENT
             - GENERATIVE_ASR_V2
+            - SUMMARY_SEGMENT
           type: string
         contextText:
           description: Context text from ASR of long duration, used for longT5 models.
@@ -69419,6 +69893,11 @@ components:
           description: Average score of description quality.
           format: float
           type: number
+        furballUrl:
+          description: Furball URL(s) of the rating score (may have been rated more than once)
+          items:
+            type: string
+          type: array
       type: object
     VideoContentSearchVideoAnchorScoreInfo:
       description: "Message to contain scoring / debugging information. If you want to add information which is not directly used in the final VideoAnchor data, it should be put here. Next ID: 25"
@@ -69568,6 +70047,7 @@ components:
             - ASR_TRANSCRIPT
             - COMMENT
             - GENERATIVE_ASR_V2
+            - SUMMARY_SEGMENT
           type: string
         entityGroupInfo:
           $ref: "#/components/schemas/VideoContentSearchEntityGroupInfo"
@@ -69629,6 +70109,7 @@ components:
               - ASR_TRANSCRIPT
               - COMMENT
               - GENERATIVE_ASR_V2
+              - SUMMARY_SEGMENT
             type: string
           type: array
         predictedQuerylessTocUsefulness:
@@ -75639,10 +76120,12 @@ components:
             - THUMBNAIL_TYPE_ORIGINAL
             - THUMBNAIL_TYPE_ORIGINAL_HQ
             - THUMBNAIL_TYPE_FAVICON_16
+            - THUMBNAIL_TYPE_FAVICON_28
             - THUMBNAIL_TYPE_FAVICON_32
             - THUMBNAIL_TYPE_FAVICON_64
             - THUMBNAIL_TYPE_FAVICON_ORIGINAL
             - THUMBNAIL_TYPE_FAVICON_16_DARK
+            - THUMBNAIL_TYPE_FAVICON_28_DARK
             - THUMBNAIL_TYPE_FAVICON_32_DARK
             - THUMBNAIL_TYPE_FAVICON_64_DARK
             - THUMBNAIL_TYPE_FAVICON_ORIGINAL_DARK
@@ -75721,10 +76204,12 @@ components:
             - THUMBNAIL_TYPE_ORIGINAL
             - THUMBNAIL_TYPE_ORIGINAL_HQ
             - THUMBNAIL_TYPE_FAVICON_16
+            - THUMBNAIL_TYPE_FAVICON_28
             - THUMBNAIL_TYPE_FAVICON_32
             - THUMBNAIL_TYPE_FAVICON_64
             - THUMBNAIL_TYPE_FAVICON_ORIGINAL
             - THUMBNAIL_TYPE_FAVICON_16_DARK
+            - THUMBNAIL_TYPE_FAVICON_28_DARK
             - THUMBNAIL_TYPE_FAVICON_32_DARK
             - THUMBNAIL_TYPE_FAVICON_64_DARK
             - THUMBNAIL_TYPE_FAVICON_ORIGINAL_DARK
@@ -76300,7 +76785,7 @@ components:
           type: string
       type: object
     YoutubeCommentsClusteringMiniStanza:
-      description: "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 74"
+      description: "Intended to be simpler to work with than the ExportedStanza it's derived from See documentation: https://g3doc.corp.google.com/company/teams/youtube/community_intelligence/eng_resources/data_sources.md#ministanza Next available: 75"
       properties:
         ansibleScores:
           additionalProperties:
@@ -76626,6 +77111,9 @@ components:
         textQualityScores:
           $ref: "#/components/schemas/YoutubeCommentsRankingYouTubeCommentTextQualityAnnotation"
           description: Predicted probability of the comment being flagged based on the text.
+        textQualityScores2:
+          $ref: "#/components/schemas/YoutubeCommentsRankingYouTubeCommentTextQualityAnnotation"
+          description: Predicted probability of the comment being flagged based on the text. For testing the new annotation process only.
         videoId:
           description: The video this comment belongs to.
           type: string

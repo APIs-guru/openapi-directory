@@ -2021,6 +2021,9 @@ paths:
       tags:
         - Time Off Requests
       x-apideck-api: hris
+      x-apideck-gotchas:
+        - connector: bamboohr
+          description: BambooHR requires start_date and end_date parameters to successfully retrieve time off requests. These optional Unify parameters can be sent as filters[start_date] and filters[end_date]. If there are not present, they are sent to BambooHR with the default values of '1900-01-01' & '2100-12-31' respectively.
       x-codeSamples:
         - label: Node
           lang: TypeScript
@@ -2096,7 +2099,7 @@ paths:
                 start_date: '2022-04-01',
                 end_date: '2022-04-01',
                 request_date: '2022-03-21',
-                request_type: 'vacaction',
+                request_type: 'vacation',
                 approval_date: '2022-03-21',
                 units: 'hours',
                 amount: 3.5,
@@ -2272,7 +2275,7 @@ paths:
                 start_date: '2022-04-01',
                 end_date: '2022-04-01',
                 request_date: '2022-03-21',
-                request_type: 'vacaction',
+                request_type: 'vacation',
                 approval_date: '2022-03-21',
                 units: 'hours',
                 amount: 3.5,
@@ -5723,14 +5726,14 @@ components:
         request_type:
           description: The type of request
           enum:
-            - vacaction
+            - vacation
             - sick
             - personal
             - jury_duty
             - volunteer
             - bereavement
             - other
-          example: vacaction
+          example: vacation
           type: string
           x-apideck-enum-id: time-off-requests.type
           x-graphql-type-name: TimeOffRequestType
@@ -5769,17 +5772,34 @@ components:
           $ref: "#/components/schemas/UpdatedBy"
       type: object
       x-apideck-weights:
+        amount: medium
+        approval_date: medium
         created_at: medium
         created_by: edge-case
+        description: medium
+        employee_id: high
+        end_date: high
         id: high
+        notes: low
+        policy_id: low
+        request_date: medium
+        request_type: medium
+        start_date: high
+        status: high
+        units: medium
         updated_at: medium
         updated_by: edge-case
     TimeOffRequestsFilter:
       additionalProperties: false
       example:
+        employee_id: "1234"
         end_date: 2022-04-21
         start_date: 2022-04-08
       properties:
+        employee_id:
+          description: Employee ID
+          example: "1234"
+          type: string
         end_date:
           description: End date
           example: 2022-04-21
