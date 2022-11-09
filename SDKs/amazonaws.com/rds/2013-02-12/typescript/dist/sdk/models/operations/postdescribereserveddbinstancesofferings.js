@@ -1,0 +1,133 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+export var PostDescribeReservedDbInstancesOfferingsActionEnum;
+(function (PostDescribeReservedDbInstancesOfferingsActionEnum) {
+    PostDescribeReservedDbInstancesOfferingsActionEnum["DescribeReservedDbInstancesOfferings"] = "DescribeReservedDBInstancesOfferings";
+})(PostDescribeReservedDbInstancesOfferingsActionEnum || (PostDescribeReservedDbInstancesOfferingsActionEnum = {}));
+export var PostDescribeReservedDbInstancesOfferingsVersionEnum;
+(function (PostDescribeReservedDbInstancesOfferingsVersionEnum) {
+    PostDescribeReservedDbInstancesOfferingsVersionEnum["TwoThousandAndThirteen0212"] = "2013-02-12";
+})(PostDescribeReservedDbInstancesOfferingsVersionEnum || (PostDescribeReservedDbInstancesOfferingsVersionEnum = {}));
+var PostDescribeReservedDbInstancesOfferingsQueryParams = /** @class */ (function (_super) {
+    __extends(PostDescribeReservedDbInstancesOfferingsQueryParams, _super);
+    function PostDescribeReservedDbInstancesOfferingsQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        __metadata("design:type", String)
+    ], PostDescribeReservedDbInstancesOfferingsQueryParams.prototype, "action", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Marker" }),
+        __metadata("design:type", String)
+    ], PostDescribeReservedDbInstancesOfferingsQueryParams.prototype, "marker", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" }),
+        __metadata("design:type", String)
+    ], PostDescribeReservedDbInstancesOfferingsQueryParams.prototype, "maxRecords", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        __metadata("design:type", String)
+    ], PostDescribeReservedDbInstancesOfferingsQueryParams.prototype, "version", void 0);
+    return PostDescribeReservedDbInstancesOfferingsQueryParams;
+}(SpeakeasyBase));
+export { PostDescribeReservedDbInstancesOfferingsQueryParams };
+var PostDescribeReservedDbInstancesOfferingsHeaders = /** @class */ (function (_super) {
+    __extends(PostDescribeReservedDbInstancesOfferingsHeaders, _super);
+    function PostDescribeReservedDbInstancesOfferingsHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], PostDescribeReservedDbInstancesOfferingsHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], PostDescribeReservedDbInstancesOfferingsHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], PostDescribeReservedDbInstancesOfferingsHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], PostDescribeReservedDbInstancesOfferingsHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], PostDescribeReservedDbInstancesOfferingsHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], PostDescribeReservedDbInstancesOfferingsHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], PostDescribeReservedDbInstancesOfferingsHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return PostDescribeReservedDbInstancesOfferingsHeaders;
+}(SpeakeasyBase));
+export { PostDescribeReservedDbInstancesOfferingsHeaders };
+var PostDescribeReservedDbInstancesOfferingsRequest = /** @class */ (function (_super) {
+    __extends(PostDescribeReservedDbInstancesOfferingsRequest, _super);
+    function PostDescribeReservedDbInstancesOfferingsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", PostDescribeReservedDbInstancesOfferingsQueryParams)
+    ], PostDescribeReservedDbInstancesOfferingsRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", PostDescribeReservedDbInstancesOfferingsHeaders)
+    ], PostDescribeReservedDbInstancesOfferingsRequest.prototype, "headers", void 0);
+    __decorate([
+        Metadata({ data: "request, media_type=text/xml" }),
+        __metadata("design:type", Uint8Array)
+    ], PostDescribeReservedDbInstancesOfferingsRequest.prototype, "request", void 0);
+    return PostDescribeReservedDbInstancesOfferingsRequest;
+}(SpeakeasyBase));
+export { PostDescribeReservedDbInstancesOfferingsRequest };
+var PostDescribeReservedDbInstancesOfferingsResponse = /** @class */ (function (_super) {
+    __extends(PostDescribeReservedDbInstancesOfferingsResponse, _super);
+    function PostDescribeReservedDbInstancesOfferingsResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Uint8Array)
+    ], PostDescribeReservedDbInstancesOfferingsResponse.prototype, "body", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], PostDescribeReservedDbInstancesOfferingsResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], PostDescribeReservedDbInstancesOfferingsResponse.prototype, "statusCode", void 0);
+    return PostDescribeReservedDbInstancesOfferingsResponse;
+}(SpeakeasyBase));
+export { PostDescribeReservedDbInstancesOfferingsResponse };

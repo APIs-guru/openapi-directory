@@ -1,0 +1,80 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+
+
+export class CancelQuantumTaskPathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=quantumTaskArn" })
+  quantumTaskArn: string;
+}
+
+
+export class CancelQuantumTaskHeaders extends SpeakeasyBase {
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  xAmzAlgorithm?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  xAmzContentSha256?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  xAmzCredential?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  xAmzDate?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  xAmzSecurityToken?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  xAmzSignature?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  xAmzSignedHeaders?: string;
+}
+
+
+export class CancelQuantumTaskRequestBody extends SpeakeasyBase {
+  @Metadata({ data: "json, name=clientToken" })
+  clientToken: string;
+}
+
+
+export class CancelQuantumTaskRequest extends SpeakeasyBase {
+  @Metadata()
+  pathParams: CancelQuantumTaskPathParams;
+
+  @Metadata()
+  headers: CancelQuantumTaskHeaders;
+
+  @Metadata({ data: "request, media_type=application/json" })
+  request: CancelQuantumTaskRequestBody;
+}
+
+
+export class CancelQuantumTaskResponse extends SpeakeasyBase {
+  @Metadata()
+  accessDeniedException?: any;
+
+  @Metadata()
+  cancelQuantumTaskResponse?: shared.CancelQuantumTaskResponse;
+
+  @Metadata()
+  conflictException?: any;
+
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  internalServiceException?: any;
+
+  @Metadata()
+  resourceNotFoundException?: any;
+
+  @Metadata()
+  statusCode: number;
+
+  @Metadata()
+  throttlingException?: any;
+
+  @Metadata()
+  validationException?: any;
+}

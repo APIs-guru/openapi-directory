@@ -1,0 +1,12 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+export declare class VoiceV1DialingPermissionsDialingPermissionsCountryInstance extends SpeakeasyBase {
+    continent?: string;
+    countryCodes?: string[];
+    highRiskSpecialNumbersEnabled?: boolean;
+    highRiskTollfraudNumbersEnabled?: boolean;
+    isoCode?: string;
+    links?: Map<string, any>;
+    lowRiskNumbersEnabled?: boolean;
+    name?: string;
+    url?: string;
+}

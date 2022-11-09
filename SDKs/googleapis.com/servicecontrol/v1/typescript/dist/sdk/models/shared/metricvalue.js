@@ -1,0 +1,75 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { Distribution } from "./distribution";
+import { Money } from "./money";
+// MetricValue
+/**
+ * Represents a single metric value.
+**/
+var MetricValue = /** @class */ (function (_super) {
+    __extends(MetricValue, _super);
+    function MetricValue() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=boolValue" }),
+        __metadata("design:type", Boolean)
+    ], MetricValue.prototype, "boolValue", void 0);
+    __decorate([
+        Metadata({ data: "json, name=distributionValue" }),
+        __metadata("design:type", Distribution)
+    ], MetricValue.prototype, "distributionValue", void 0);
+    __decorate([
+        Metadata({ data: "json, name=doubleValue" }),
+        __metadata("design:type", Number)
+    ], MetricValue.prototype, "doubleValue", void 0);
+    __decorate([
+        Metadata({ data: "json, name=endTime" }),
+        __metadata("design:type", String)
+    ], MetricValue.prototype, "endTime", void 0);
+    __decorate([
+        Metadata({ data: "json, name=int64Value" }),
+        __metadata("design:type", String)
+    ], MetricValue.prototype, "int64Value", void 0);
+    __decorate([
+        Metadata({ data: "json, name=labels" }),
+        __metadata("design:type", Map)
+    ], MetricValue.prototype, "labels", void 0);
+    __decorate([
+        Metadata({ data: "json, name=moneyValue" }),
+        __metadata("design:type", Money)
+    ], MetricValue.prototype, "moneyValue", void 0);
+    __decorate([
+        Metadata({ data: "json, name=startTime" }),
+        __metadata("design:type", String)
+    ], MetricValue.prototype, "startTime", void 0);
+    __decorate([
+        Metadata({ data: "json, name=stringValue" }),
+        __metadata("design:type", String)
+    ], MetricValue.prototype, "stringValue", void 0);
+    return MetricValue;
+}(SpeakeasyBase));
+export { MetricValue };

@@ -1,0 +1,15 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+import { Tag } from "./tag";
+
+
+export class CopyBackupToRegionRequest extends SpeakeasyBase {
+  @Metadata({ data: "json, name=BackupId" })
+  backupId: string;
+
+  @Metadata({ data: "json, name=DestinationRegion" })
+  destinationRegion: string;
+
+  @Metadata({ data: "json, name=TagList", elemType: shared.Tag })
+  tagList?: Tag[];
+}

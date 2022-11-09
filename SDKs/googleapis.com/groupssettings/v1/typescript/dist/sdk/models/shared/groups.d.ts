@@ -1,0 +1,68 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+/**
+ * JSON template for Group resource
+**/
+export declare class Groups extends SpeakeasyBase {
+    allowExternalMembers?: string;
+    allowGoogleCommunication?: string;
+    allowWebPosting?: string;
+    archiveOnly?: string;
+    customFooterText?: string;
+    customReplyTo?: string;
+    customRolesEnabledForSettingsToBeMerged?: string;
+    defaultMessageDenyNotificationText?: string;
+    defaultSender?: string;
+    description?: string;
+    email?: string;
+    enableCollaborativeInbox?: string;
+    favoriteRepliesOnTop?: string;
+    includeCustomFooter?: string;
+    includeInGlobalAddressList?: string;
+    isArchived?: string;
+    kind?: string;
+    maxMessageBytes?: number;
+    membersCanPostAsTheGroup?: string;
+    messageDisplayFont?: string;
+    messageModerationLevel?: string;
+    name?: string;
+    primaryLanguage?: string;
+    replyTo?: string;
+    sendMessageDenyNotification?: string;
+    showInGroupDirectory?: string;
+    spamModerationLevel?: string;
+    whoCanAdd?: string;
+    whoCanAddReferences?: string;
+    whoCanApproveMembers?: string;
+    whoCanApproveMessages?: string;
+    whoCanAssignTopics?: string;
+    whoCanAssistContent?: string;
+    whoCanBanUsers?: string;
+    whoCanContactOwner?: string;
+    whoCanDeleteAnyPost?: string;
+    whoCanDeleteTopics?: string;
+    whoCanDiscoverGroup?: string;
+    whoCanEnterFreeFormTags?: string;
+    whoCanHideAbuse?: string;
+    whoCanInvite?: string;
+    whoCanJoin?: string;
+    whoCanLeaveGroup?: string;
+    whoCanLockTopics?: string;
+    whoCanMakeTopicsSticky?: string;
+    whoCanMarkDuplicate?: string;
+    whoCanMarkFavoriteReplyOnAnyTopic?: string;
+    whoCanMarkFavoriteReplyOnOwnTopic?: string;
+    whoCanMarkNoResponseNeeded?: string;
+    whoCanModerateContent?: string;
+    whoCanModerateMembers?: string;
+    whoCanModifyMembers?: string;
+    whoCanModifyTagsAndCategories?: string;
+    whoCanMoveTopicsIn?: string;
+    whoCanMoveTopicsOut?: string;
+    whoCanPostAnnouncements?: string;
+    whoCanPostMessage?: string;
+    whoCanTakeTopics?: string;
+    whoCanUnassignTopic?: string;
+    whoCanUnmarkFavoriteReplyOnAnyTopic?: string;
+    whoCanViewGroup?: string;
+    whoCanViewMembership?: string;
+}

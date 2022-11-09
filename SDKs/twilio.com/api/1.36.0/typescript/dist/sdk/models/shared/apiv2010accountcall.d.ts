@@ -1,0 +1,30 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { CallEnumStatusEnum } from "./callenumstatusenum";
+export declare class ApiV2010AccountCall extends SpeakeasyBase {
+    accountSid?: string;
+    answeredBy?: string;
+    apiVersion?: string;
+    callerName?: string;
+    dateCreated?: string;
+    dateUpdated?: string;
+    direction?: string;
+    duration?: string;
+    endTime?: string;
+    forwardedFrom?: string;
+    from?: string;
+    fromFormatted?: string;
+    groupSid?: string;
+    parentCallSid?: string;
+    phoneNumberSid?: string;
+    price?: string;
+    priceUnit?: string;
+    queueTime?: string;
+    sid?: string;
+    startTime?: string;
+    status?: CallEnumStatusEnum;
+    subresourceUris?: Map<string, any>;
+    to?: string;
+    toFormatted?: string;
+    trunkSid?: string;
+    uri?: string;
+}

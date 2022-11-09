@@ -1,0 +1,8 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+export declare class SourceRecreate extends SpeakeasyBase {
+    connectionConfiguration: any;
+    name: string;
+    sourceDefinitionId: string;
+    sourceId: string;
+    workspaceId: string;
+}

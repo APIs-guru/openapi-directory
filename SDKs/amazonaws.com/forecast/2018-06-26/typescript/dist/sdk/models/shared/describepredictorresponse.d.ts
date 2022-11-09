@@ -1,0 +1,34 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { AutoMlOverrideStrategyEnum } from "./automloverridestrategyenum";
+import { EncryptionConfig } from "./encryptionconfig";
+import { EvaluationParameters } from "./evaluationparameters";
+import { FeaturizationConfig } from "./featurizationconfig";
+import { HyperParameterTuningJobConfig } from "./hyperparametertuningjobconfig";
+import { InputDataConfig } from "./inputdataconfig";
+import { OptimizationMetricEnum } from "./optimizationmetricenum";
+import { PredictorExecutionDetails } from "./predictorexecutiondetails";
+export declare class DescribePredictorResponse extends SpeakeasyBase {
+    algorithmArn?: string;
+    autoMlAlgorithmArns?: string[];
+    autoMlOverrideStrategy?: AutoMlOverrideStrategyEnum;
+    creationTime?: Date;
+    datasetImportJobArns?: string[];
+    encryptionConfig?: EncryptionConfig;
+    estimatedTimeRemainingInMinutes?: number;
+    evaluationParameters?: EvaluationParameters;
+    featurizationConfig?: FeaturizationConfig;
+    forecastHorizon?: number;
+    forecastTypes?: string[];
+    hpoConfig?: HyperParameterTuningJobConfig;
+    inputDataConfig?: InputDataConfig;
+    lastModificationTime?: Date;
+    message?: string;
+    optimizationMetric?: OptimizationMetricEnum;
+    performAutoMl?: boolean;
+    performHpo?: boolean;
+    predictorArn?: string;
+    predictorExecutionDetails?: PredictorExecutionDetails;
+    predictorName?: string;
+    status?: string;
+    trainingParameters?: Map<string, string>;
+}

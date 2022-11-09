@@ -1,0 +1,41 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { OntapDeploymentTypeEnum } from "./ontapdeploymenttypeenum";
+import { DiskIopsConfiguration } from "./diskiopsconfiguration";
+import { FileSystemEndpoints } from "./filesystemendpoints";
+
+
+// OntapFileSystemConfiguration
+/** 
+ * Configuration for the FSx for NetApp ONTAP file system.
+**/
+export class OntapFileSystemConfiguration extends SpeakeasyBase {
+  @Metadata({ data: "json, name=AutomaticBackupRetentionDays" })
+  automaticBackupRetentionDays?: number;
+
+  @Metadata({ data: "json, name=DailyAutomaticBackupStartTime" })
+  dailyAutomaticBackupStartTime?: string;
+
+  @Metadata({ data: "json, name=DeploymentType" })
+  deploymentType?: OntapDeploymentTypeEnum;
+
+  @Metadata({ data: "json, name=DiskIopsConfiguration" })
+  diskIopsConfiguration?: DiskIopsConfiguration;
+
+  @Metadata({ data: "json, name=EndpointIpAddressRange" })
+  endpointIpAddressRange?: string;
+
+  @Metadata({ data: "json, name=Endpoints" })
+  endpoints?: FileSystemEndpoints;
+
+  @Metadata({ data: "json, name=PreferredSubnetId" })
+  preferredSubnetId?: string;
+
+  @Metadata({ data: "json, name=RouteTableIds" })
+  routeTableIds?: string[];
+
+  @Metadata({ data: "json, name=ThroughputCapacity" })
+  throughputCapacity?: number;
+
+  @Metadata({ data: "json, name=WeeklyMaintenanceStartTime" })
+  weeklyMaintenanceStartTime?: string;
+}

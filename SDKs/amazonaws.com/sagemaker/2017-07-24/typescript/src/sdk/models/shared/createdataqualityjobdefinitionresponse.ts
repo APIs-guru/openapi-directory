@@ -1,0 +1,7 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+
+export class CreateDataQualityJobDefinitionResponse extends SpeakeasyBase {
+  @Metadata({ data: "json, name=JobDefinitionArn" })
+  jobDefinitionArn: string;
+}

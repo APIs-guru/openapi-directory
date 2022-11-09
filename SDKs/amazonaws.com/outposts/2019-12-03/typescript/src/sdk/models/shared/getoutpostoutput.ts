@@ -1,0 +1,8 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { Outpost } from "./outpost";
+
+
+export class GetOutpostOutput extends SpeakeasyBase {
+  @Metadata({ data: "json, name=Outpost" })
+  outpost?: Outpost;
+}

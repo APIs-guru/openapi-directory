@@ -1,0 +1,67 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { AssetFamilyEnum } from "./assetfamilyenum";
+import { AssetTypeEnum } from "./assettypeenum";
+var Channel = /** @class */ (function (_super) {
+    __extends(Channel, _super);
+    function Channel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=AssetChangeType" }),
+        __metadata("design:type", String)
+    ], Channel.prototype, "assetChangeType", void 0);
+    __decorate([
+        Metadata({ data: "json, name=AssetFamily" }),
+        __metadata("design:type", String)
+    ], Channel.prototype, "assetFamily", void 0);
+    __decorate([
+        Metadata({ data: "json, name=AssetType" }),
+        __metadata("design:type", String)
+    ], Channel.prototype, "assetType", void 0);
+    __decorate([
+        Metadata({ data: "json, name=ChannelId" }),
+        __metadata("design:type", Number)
+    ], Channel.prototype, "channelId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=CreateDateUtc" }),
+        __metadata("design:type", Date)
+    ], Channel.prototype, "createDateUtc", void 0);
+    __decorate([
+        Metadata({ data: "json, name=Metadata" }),
+        __metadata("design:type", String)
+    ], Channel.prototype, "metadata", void 0);
+    __decorate([
+        Metadata({ data: "json, name=NotificationCount" }),
+        __metadata("design:type", Number)
+    ], Channel.prototype, "notificationCount", void 0);
+    __decorate([
+        Metadata({ data: "json, name=OldestChangeNotificationDateUtc" }),
+        __metadata("design:type", Date)
+    ], Channel.prototype, "oldestChangeNotificationDateUtc", void 0);
+    return Channel;
+}(SpeakeasyBase));
+export { Channel };

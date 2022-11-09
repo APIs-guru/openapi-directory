@@ -1,0 +1,149 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+var GetListDeadLetterSourceQueuesPathParams = /** @class */ (function (_super) {
+    __extends(GetListDeadLetterSourceQueuesPathParams, _super);
+    function GetListDeadLetterSourceQueuesPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=AccountNumber" }),
+        __metadata("design:type", Number)
+    ], GetListDeadLetterSourceQueuesPathParams.prototype, "accountNumber", void 0);
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=QueueName" }),
+        __metadata("design:type", String)
+    ], GetListDeadLetterSourceQueuesPathParams.prototype, "queueName", void 0);
+    return GetListDeadLetterSourceQueuesPathParams;
+}(SpeakeasyBase));
+export { GetListDeadLetterSourceQueuesPathParams };
+export var GetListDeadLetterSourceQueuesActionEnum;
+(function (GetListDeadLetterSourceQueuesActionEnum) {
+    GetListDeadLetterSourceQueuesActionEnum["ListDeadLetterSourceQueues"] = "ListDeadLetterSourceQueues";
+})(GetListDeadLetterSourceQueuesActionEnum || (GetListDeadLetterSourceQueuesActionEnum = {}));
+export var GetListDeadLetterSourceQueuesVersionEnum;
+(function (GetListDeadLetterSourceQueuesVersionEnum) {
+    GetListDeadLetterSourceQueuesVersionEnum["TwoThousandAndTwelve1105"] = "2012-11-05";
+})(GetListDeadLetterSourceQueuesVersionEnum || (GetListDeadLetterSourceQueuesVersionEnum = {}));
+var GetListDeadLetterSourceQueuesQueryParams = /** @class */ (function (_super) {
+    __extends(GetListDeadLetterSourceQueuesQueryParams, _super);
+    function GetListDeadLetterSourceQueuesQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        __metadata("design:type", String)
+    ], GetListDeadLetterSourceQueuesQueryParams.prototype, "action", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
+        __metadata("design:type", Number)
+    ], GetListDeadLetterSourceQueuesQueryParams.prototype, "maxResults", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
+        __metadata("design:type", String)
+    ], GetListDeadLetterSourceQueuesQueryParams.prototype, "nextToken", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        __metadata("design:type", String)
+    ], GetListDeadLetterSourceQueuesQueryParams.prototype, "version", void 0);
+    return GetListDeadLetterSourceQueuesQueryParams;
+}(SpeakeasyBase));
+export { GetListDeadLetterSourceQueuesQueryParams };
+var GetListDeadLetterSourceQueuesHeaders = /** @class */ (function (_super) {
+    __extends(GetListDeadLetterSourceQueuesHeaders, _super);
+    function GetListDeadLetterSourceQueuesHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], GetListDeadLetterSourceQueuesHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], GetListDeadLetterSourceQueuesHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], GetListDeadLetterSourceQueuesHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], GetListDeadLetterSourceQueuesHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], GetListDeadLetterSourceQueuesHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], GetListDeadLetterSourceQueuesHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], GetListDeadLetterSourceQueuesHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return GetListDeadLetterSourceQueuesHeaders;
+}(SpeakeasyBase));
+export { GetListDeadLetterSourceQueuesHeaders };
+var GetListDeadLetterSourceQueuesRequest = /** @class */ (function (_super) {
+    __extends(GetListDeadLetterSourceQueuesRequest, _super);
+    function GetListDeadLetterSourceQueuesRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetListDeadLetterSourceQueuesPathParams)
+    ], GetListDeadLetterSourceQueuesRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetListDeadLetterSourceQueuesQueryParams)
+    ], GetListDeadLetterSourceQueuesRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetListDeadLetterSourceQueuesHeaders)
+    ], GetListDeadLetterSourceQueuesRequest.prototype, "headers", void 0);
+    return GetListDeadLetterSourceQueuesRequest;
+}(SpeakeasyBase));
+export { GetListDeadLetterSourceQueuesRequest };
+var GetListDeadLetterSourceQueuesResponse = /** @class */ (function (_super) {
+    __extends(GetListDeadLetterSourceQueuesResponse, _super);
+    function GetListDeadLetterSourceQueuesResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Uint8Array)
+    ], GetListDeadLetterSourceQueuesResponse.prototype, "body", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetListDeadLetterSourceQueuesResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetListDeadLetterSourceQueuesResponse.prototype, "statusCode", void 0);
+    return GetListDeadLetterSourceQueuesResponse;
+}(SpeakeasyBase));
+export { GetListDeadLetterSourceQueuesResponse };

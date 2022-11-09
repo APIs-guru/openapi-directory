@@ -1,0 +1,82 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+export enum GetDeregisterInstanceEventNotificationAttributesActionEnum {
+    DeregisterInstanceEventNotificationAttributes = "DeregisterInstanceEventNotificationAttributes"
+}
+
+
+// GetDeregisterInstanceEventNotificationAttributesInstanceTagAttribute
+/** 
+ * Information about the tag keys to deregister for the current Region. You can either specify individual tag keys or deregister all tag keys in the current Region. You must specify either <code>IncludeAllTagsOfInstance</code> or <code>InstanceTagKeys</code> in the request
+**/
+export class GetDeregisterInstanceEventNotificationAttributesInstanceTagAttribute extends SpeakeasyBase {
+  @Metadata({ data: "queryParam, name=IncludeAllTagsOfInstance" })
+  includeAllTagsOfInstance?: boolean;
+
+  @Metadata({ data: "queryParam, name=InstanceTagKeys" })
+  instanceTagKeys?: string[];
+}
+
+export enum GetDeregisterInstanceEventNotificationAttributesVersionEnum {
+    TwoThousandAndSixteen1115 = "2016-11-15"
+}
+
+
+export class GetDeregisterInstanceEventNotificationAttributesQueryParams extends SpeakeasyBase {
+  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  action: GetDeregisterInstanceEventNotificationAttributesActionEnum;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  dryRun?: boolean;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=InstanceTagAttribute" })
+  instanceTagAttribute?: GetDeregisterInstanceEventNotificationAttributesInstanceTagAttribute;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  version: GetDeregisterInstanceEventNotificationAttributesVersionEnum;
+}
+
+
+export class GetDeregisterInstanceEventNotificationAttributesHeaders extends SpeakeasyBase {
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  xAmzAlgorithm?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  xAmzContentSha256?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  xAmzCredential?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  xAmzDate?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  xAmzSecurityToken?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  xAmzSignature?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  xAmzSignedHeaders?: string;
+}
+
+
+export class GetDeregisterInstanceEventNotificationAttributesRequest extends SpeakeasyBase {
+  @Metadata()
+  queryParams: GetDeregisterInstanceEventNotificationAttributesQueryParams;
+
+  @Metadata()
+  headers: GetDeregisterInstanceEventNotificationAttributesHeaders;
+}
+
+
+export class GetDeregisterInstanceEventNotificationAttributesResponse extends SpeakeasyBase {
+  @Metadata()
+  body?: Uint8Array;
+
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  statusCode: number;
+}

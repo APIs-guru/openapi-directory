@@ -1,0 +1,25 @@
+
+
+export enum QueueAttributeNameEnum {
+    All = "All"
+,    Policy = "Policy"
+,    VisibilityTimeout = "VisibilityTimeout"
+,    MaximumMessageSize = "MaximumMessageSize"
+,    MessageRetentionPeriod = "MessageRetentionPeriod"
+,    ApproximateNumberOfMessages = "ApproximateNumberOfMessages"
+,    ApproximateNumberOfMessagesNotVisible = "ApproximateNumberOfMessagesNotVisible"
+,    CreatedTimestamp = "CreatedTimestamp"
+,    LastModifiedTimestamp = "LastModifiedTimestamp"
+,    QueueArn = "QueueArn"
+,    ApproximateNumberOfMessagesDelayed = "ApproximateNumberOfMessagesDelayed"
+,    DelaySeconds = "DelaySeconds"
+,    ReceiveMessageWaitTimeSeconds = "ReceiveMessageWaitTimeSeconds"
+,    RedrivePolicy = "RedrivePolicy"
+,    FifoQueue = "FifoQueue"
+,    ContentBasedDeduplication = "ContentBasedDeduplication"
+,    KmsMasterKeyId = "KmsMasterKeyId"
+,    KmsDataKeyReusePeriodSeconds = "KmsDataKeyReusePeriodSeconds"
+,    DeduplicationScope = "DeduplicationScope"
+,    FifoThroughputLimit = "FifoThroughputLimit"
+,    RedriveAllowPolicy = "RedriveAllowPolicy"
+}

@@ -1,0 +1,34 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    IdentitytoolkitAccountsMfaEnrollmentFinalize(req: operations.IdentitytoolkitAccountsMfaEnrollmentFinalizeRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitAccountsMfaEnrollmentFinalizeResponse>;
+    IdentitytoolkitAccountsMfaEnrollmentStart(req: operations.IdentitytoolkitAccountsMfaEnrollmentStartRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitAccountsMfaEnrollmentStartResponse>;
+    IdentitytoolkitAccountsMfaEnrollmentWithdraw(req: operations.IdentitytoolkitAccountsMfaEnrollmentWithdrawRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitAccountsMfaEnrollmentWithdrawResponse>;
+    IdentitytoolkitAccountsMfaSignInFinalize(req: operations.IdentitytoolkitAccountsMfaSignInFinalizeRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitAccountsMfaSignInFinalizeResponse>;
+    IdentitytoolkitAccountsMfaSignInStart(req: operations.IdentitytoolkitAccountsMfaSignInStartRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitAccountsMfaSignInStartResponse>;
+    IdentitytoolkitDefaultSupportedIdpsList(req: operations.IdentitytoolkitDefaultSupportedIdpsListRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitDefaultSupportedIdpsListResponse>;
+    IdentitytoolkitProjectsIdentityPlatformInitializeAuth(req: operations.IdentitytoolkitProjectsIdentityPlatformInitializeAuthRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsIdentityPlatformInitializeAuthResponse>;
+    IdentitytoolkitProjectsTenantsCreate(req: operations.IdentitytoolkitProjectsTenantsCreateRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsCreateResponse>;
+    IdentitytoolkitProjectsTenantsDefaultSupportedIdpConfigsCreate(req: operations.IdentitytoolkitProjectsTenantsDefaultSupportedIdpConfigsCreateRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsDefaultSupportedIdpConfigsCreateResponse>;
+    IdentitytoolkitProjectsTenantsDefaultSupportedIdpConfigsList(req: operations.IdentitytoolkitProjectsTenantsDefaultSupportedIdpConfigsListRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsDefaultSupportedIdpConfigsListResponse>;
+    IdentitytoolkitProjectsTenantsGetIamPolicy(req: operations.IdentitytoolkitProjectsTenantsGetIamPolicyRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsGetIamPolicyResponse>;
+    IdentitytoolkitProjectsTenantsInboundSamlConfigsCreate(req: operations.IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsInboundSamlConfigsCreateResponse>;
+    IdentitytoolkitProjectsTenantsInboundSamlConfigsList(req: operations.IdentitytoolkitProjectsTenantsInboundSamlConfigsListRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsInboundSamlConfigsListResponse>;
+    IdentitytoolkitProjectsTenantsList(req: operations.IdentitytoolkitProjectsTenantsListRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsListResponse>;
+    IdentitytoolkitProjectsTenantsOauthIdpConfigsCreate(req: operations.IdentitytoolkitProjectsTenantsOauthIdpConfigsCreateRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsOauthIdpConfigsCreateResponse>;
+    IdentitytoolkitProjectsTenantsOauthIdpConfigsDelete(req: operations.IdentitytoolkitProjectsTenantsOauthIdpConfigsDeleteRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsOauthIdpConfigsDeleteResponse>;
+    IdentitytoolkitProjectsTenantsOauthIdpConfigsGet(req: operations.IdentitytoolkitProjectsTenantsOauthIdpConfigsGetRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsOauthIdpConfigsGetResponse>;
+    IdentitytoolkitProjectsTenantsOauthIdpConfigsList(req: operations.IdentitytoolkitProjectsTenantsOauthIdpConfigsListRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsOauthIdpConfigsListResponse>;
+    IdentitytoolkitProjectsTenantsOauthIdpConfigsPatch(req: operations.IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsOauthIdpConfigsPatchResponse>;
+    IdentitytoolkitProjectsTenantsSetIamPolicy(req: operations.IdentitytoolkitProjectsTenantsSetIamPolicyRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsSetIamPolicyResponse>;
+    IdentitytoolkitProjectsTenantsTestIamPermissions(req: operations.IdentitytoolkitProjectsTenantsTestIamPermissionsRequest, config?: AxiosRequestConfig): Promise<operations.IdentitytoolkitProjectsTenantsTestIamPermissionsResponse>;
+}
+export {};

@@ -1,0 +1,7 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+/**
+ * Request message for SecretManagerService.EnableSecretVersion.
+**/
+export declare class EnableSecretVersionRequest extends SpeakeasyBase {
+    etag?: string;
+}

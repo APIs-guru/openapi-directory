@@ -1,0 +1,100 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+import { PayeeAddress2 } from "./payeeaddress2";
+import { Challenge2 } from "./challenge2";
+import { Company2 } from "./company2";
+import { Individual2 } from "./individual2";
+import { OnboardedStatusEnum } from "./onboardedstatusenum";
+import { PayeeTypeEnum } from "./payeetypeenum";
+import { PayeePayorRef } from "./payeepayorref";
+import { WatchlistStatus2Enum } from "./watchliststatus2enum";
+
+
+export class PayeeDetailResponse2 extends SpeakeasyBase {
+  @Metadata({ data: "json, name=acceptTermsAndConditionsTimestamp" })
+  acceptTermsAndConditionsTimestamp?: Date;
+
+  @Metadata({ data: "json, name=address" })
+  address?: PayeeAddress2;
+
+  @Metadata({ data: "json, name=cellphoneNumber" })
+  cellphoneNumber?: string;
+
+  @Metadata({ data: "json, name=challenge" })
+  challenge?: Challenge2;
+
+  @Metadata({ data: "json, name=company" })
+  company?: Company2;
+
+  @Metadata({ data: "json, name=country" })
+  country?: string;
+
+  @Metadata({ data: "json, name=created" })
+  created?: Date;
+
+  @Metadata({ data: "json, name=disabled" })
+  disabled?: boolean;
+
+  @Metadata({ data: "json, name=disabledComment" })
+  disabledComment?: string;
+
+  @Metadata({ data: "json, name=disabledUpdatedTimestamp" })
+  disabledUpdatedTimestamp?: Date;
+
+  @Metadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @Metadata({ data: "json, name=email" })
+  email?: string;
+
+  @Metadata({ data: "json, name=enhancedKycCompleted" })
+  enhancedKycCompleted?: boolean;
+
+  @Metadata({ data: "json, name=gracePeriodEndDate" })
+  gracePeriodEndDate?: Date;
+
+  @Metadata({ data: "json, name=individual" })
+  individual?: Individual2;
+
+  @Metadata({ data: "json, name=kycCompletedTimestamp" })
+  kycCompletedTimestamp?: string;
+
+  @Metadata({ data: "json, name=language" })
+  language?: string;
+
+  @Metadata({ data: "json, name=marketingOptInDecision" })
+  marketingOptInDecision?: boolean;
+
+  @Metadata({ data: "json, name=marketingOptInTimestamp" })
+  marketingOptInTimestamp?: string;
+
+  @Metadata({ data: "json, name=onboardedStatus" })
+  onboardedStatus?: OnboardedStatusEnum;
+
+  @Metadata({ data: "json, name=pausePayment" })
+  pausePayment?: boolean;
+
+  @Metadata({ data: "json, name=pausePaymentTimestamp" })
+  pausePaymentTimestamp?: string;
+
+  @Metadata({ data: "json, name=payeeId" })
+  payeeId?: string;
+
+  @Metadata({ data: "json, name=payeeType" })
+  payeeType?: PayeeTypeEnum;
+
+  @Metadata({ data: "json, name=payorRefs", elemType: shared.PayeePayorRef })
+  payorRefs?: PayeePayorRef[];
+
+  @Metadata({ data: "json, name=watchlistOverrideComment" })
+  watchlistOverrideComment?: string;
+
+  @Metadata({ data: "json, name=watchlistOverrideExpiresAtTimestamp" })
+  watchlistOverrideExpiresAtTimestamp?: Date;
+
+  @Metadata({ data: "json, name=watchlistStatus" })
+  watchlistStatus?: WatchlistStatus2Enum;
+
+  @Metadata({ data: "json, name=watchlistStatusUpdatedTimestamp" })
+  watchlistStatusUpdatedTimestamp?: string;
+}

@@ -1,0 +1,37 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CreateDataset(req: operations.CreateDatasetRequest, config?: AxiosRequestConfig): Promise<operations.CreateDatasetResponse>;
+    CreateInferenceScheduler(req: operations.CreateInferenceSchedulerRequest, config?: AxiosRequestConfig): Promise<operations.CreateInferenceSchedulerResponse>;
+    CreateModel(req: operations.CreateModelRequest, config?: AxiosRequestConfig): Promise<operations.CreateModelResponse>;
+    DeleteDataset(req: operations.DeleteDatasetRequest, config?: AxiosRequestConfig): Promise<operations.DeleteDatasetResponse>;
+    DeleteInferenceScheduler(req: operations.DeleteInferenceSchedulerRequest, config?: AxiosRequestConfig): Promise<operations.DeleteInferenceSchedulerResponse>;
+    DeleteModel(req: operations.DeleteModelRequest, config?: AxiosRequestConfig): Promise<operations.DeleteModelResponse>;
+    DescribeDataIngestionJob(req: operations.DescribeDataIngestionJobRequest, config?: AxiosRequestConfig): Promise<operations.DescribeDataIngestionJobResponse>;
+    DescribeDataset(req: operations.DescribeDatasetRequest, config?: AxiosRequestConfig): Promise<operations.DescribeDatasetResponse>;
+    DescribeInferenceScheduler(req: operations.DescribeInferenceSchedulerRequest, config?: AxiosRequestConfig): Promise<operations.DescribeInferenceSchedulerResponse>;
+    DescribeModel(req: operations.DescribeModelRequest, config?: AxiosRequestConfig): Promise<operations.DescribeModelResponse>;
+    ListDataIngestionJobs(req: operations.ListDataIngestionJobsRequest, config?: AxiosRequestConfig): Promise<operations.ListDataIngestionJobsResponse>;
+    ListDatasets(req: operations.ListDatasetsRequest, config?: AxiosRequestConfig): Promise<operations.ListDatasetsResponse>;
+    ListInferenceExecutions(req: operations.ListInferenceExecutionsRequest, config?: AxiosRequestConfig): Promise<operations.ListInferenceExecutionsResponse>;
+    ListInferenceSchedulers(req: operations.ListInferenceSchedulersRequest, config?: AxiosRequestConfig): Promise<operations.ListInferenceSchedulersResponse>;
+    ListModels(req: operations.ListModelsRequest, config?: AxiosRequestConfig): Promise<operations.ListModelsResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    StartDataIngestionJob(req: operations.StartDataIngestionJobRequest, config?: AxiosRequestConfig): Promise<operations.StartDataIngestionJobResponse>;
+    StartInferenceScheduler(req: operations.StartInferenceSchedulerRequest, config?: AxiosRequestConfig): Promise<operations.StartInferenceSchedulerResponse>;
+    StopInferenceScheduler(req: operations.StopInferenceSchedulerRequest, config?: AxiosRequestConfig): Promise<operations.StopInferenceSchedulerResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+    UpdateInferenceScheduler(req: operations.UpdateInferenceSchedulerRequest, config?: AxiosRequestConfig): Promise<operations.UpdateInferenceSchedulerResponse>;
+}
+export {};

@@ -1,0 +1,109 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+export var UPDATECONFIGURATIONWEBHOOK_SERVERS = [
+    "https://conversations.twilio.com",
+];
+var UpdateConfigurationWebhookUpdateConfigurationWebhookRequest = /** @class */ (function (_super) {
+    __extends(UpdateConfigurationWebhookUpdateConfigurationWebhookRequest, _super);
+    function UpdateConfigurationWebhookUpdateConfigurationWebhookRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "form, name=Filters;" }),
+        __metadata("design:type", Array)
+    ], UpdateConfigurationWebhookUpdateConfigurationWebhookRequest.prototype, "filters", void 0);
+    __decorate([
+        Metadata({ data: "form, name=Method;" }),
+        __metadata("design:type", String)
+    ], UpdateConfigurationWebhookUpdateConfigurationWebhookRequest.prototype, "method", void 0);
+    __decorate([
+        Metadata({ data: "form, name=PostWebhookUrl;" }),
+        __metadata("design:type", String)
+    ], UpdateConfigurationWebhookUpdateConfigurationWebhookRequest.prototype, "postWebhookUrl", void 0);
+    __decorate([
+        Metadata({ data: "form, name=PreWebhookUrl;" }),
+        __metadata("design:type", String)
+    ], UpdateConfigurationWebhookUpdateConfigurationWebhookRequest.prototype, "preWebhookUrl", void 0);
+    __decorate([
+        Metadata({ data: "form, name=Target;" }),
+        __metadata("design:type", String)
+    ], UpdateConfigurationWebhookUpdateConfigurationWebhookRequest.prototype, "target", void 0);
+    return UpdateConfigurationWebhookUpdateConfigurationWebhookRequest;
+}(SpeakeasyBase));
+export { UpdateConfigurationWebhookUpdateConfigurationWebhookRequest };
+var UpdateConfigurationWebhookSecurity = /** @class */ (function (_super) {
+    __extends(UpdateConfigurationWebhookSecurity, _super);
+    function UpdateConfigurationWebhookSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeAccountSidAuthToken)
+    ], UpdateConfigurationWebhookSecurity.prototype, "accountSidAuthToken", void 0);
+    return UpdateConfigurationWebhookSecurity;
+}(SpeakeasyBase));
+export { UpdateConfigurationWebhookSecurity };
+var UpdateConfigurationWebhookRequest = /** @class */ (function (_super) {
+    __extends(UpdateConfigurationWebhookRequest, _super);
+    function UpdateConfigurationWebhookRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], UpdateConfigurationWebhookRequest.prototype, "serverUrl", void 0);
+    __decorate([
+        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        __metadata("design:type", UpdateConfigurationWebhookUpdateConfigurationWebhookRequest)
+    ], UpdateConfigurationWebhookRequest.prototype, "request", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", UpdateConfigurationWebhookSecurity)
+    ], UpdateConfigurationWebhookRequest.prototype, "security", void 0);
+    return UpdateConfigurationWebhookRequest;
+}(SpeakeasyBase));
+export { UpdateConfigurationWebhookRequest };
+var UpdateConfigurationWebhookResponse = /** @class */ (function (_super) {
+    __extends(UpdateConfigurationWebhookResponse, _super);
+    function UpdateConfigurationWebhookResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], UpdateConfigurationWebhookResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], UpdateConfigurationWebhookResponse.prototype, "statusCode", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.ConversationsV1ConfigurationConfigurationWebhook)
+    ], UpdateConfigurationWebhookResponse.prototype, "conversationsV1ConfigurationConfigurationWebhook", void 0);
+    return UpdateConfigurationWebhookResponse;
+}(SpeakeasyBase));
+export { UpdateConfigurationWebhookResponse };

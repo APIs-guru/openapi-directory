@@ -1,0 +1,36 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CreateContainer(req: operations.CreateContainerRequest, config?: AxiosRequestConfig): Promise<operations.CreateContainerResponse>;
+    DeleteContainer(req: operations.DeleteContainerRequest, config?: AxiosRequestConfig): Promise<operations.DeleteContainerResponse>;
+    DeleteContainerPolicy(req: operations.DeleteContainerPolicyRequest, config?: AxiosRequestConfig): Promise<operations.DeleteContainerPolicyResponse>;
+    DeleteCorsPolicy(req: operations.DeleteCorsPolicyRequest, config?: AxiosRequestConfig): Promise<operations.DeleteCorsPolicyResponse>;
+    DeleteLifecyclePolicy(req: operations.DeleteLifecyclePolicyRequest, config?: AxiosRequestConfig): Promise<operations.DeleteLifecyclePolicyResponse>;
+    DeleteMetricPolicy(req: operations.DeleteMetricPolicyRequest, config?: AxiosRequestConfig): Promise<operations.DeleteMetricPolicyResponse>;
+    DescribeContainer(req: operations.DescribeContainerRequest, config?: AxiosRequestConfig): Promise<operations.DescribeContainerResponse>;
+    GetContainerPolicy(req: operations.GetContainerPolicyRequest, config?: AxiosRequestConfig): Promise<operations.GetContainerPolicyResponse>;
+    GetCorsPolicy(req: operations.GetCorsPolicyRequest, config?: AxiosRequestConfig): Promise<operations.GetCorsPolicyResponse>;
+    GetLifecyclePolicy(req: operations.GetLifecyclePolicyRequest, config?: AxiosRequestConfig): Promise<operations.GetLifecyclePolicyResponse>;
+    GetMetricPolicy(req: operations.GetMetricPolicyRequest, config?: AxiosRequestConfig): Promise<operations.GetMetricPolicyResponse>;
+    ListContainers(req: operations.ListContainersRequest, config?: AxiosRequestConfig): Promise<operations.ListContainersResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    PutContainerPolicy(req: operations.PutContainerPolicyRequest, config?: AxiosRequestConfig): Promise<operations.PutContainerPolicyResponse>;
+    PutCorsPolicy(req: operations.PutCorsPolicyRequest, config?: AxiosRequestConfig): Promise<operations.PutCorsPolicyResponse>;
+    PutLifecyclePolicy(req: operations.PutLifecyclePolicyRequest, config?: AxiosRequestConfig): Promise<operations.PutLifecyclePolicyResponse>;
+    PutMetricPolicy(req: operations.PutMetricPolicyRequest, config?: AxiosRequestConfig): Promise<operations.PutMetricPolicyResponse>;
+    StartAccessLogging(req: operations.StartAccessLoggingRequest, config?: AxiosRequestConfig): Promise<operations.StartAccessLoggingResponse>;
+    StopAccessLogging(req: operations.StopAccessLoggingRequest, config?: AxiosRequestConfig): Promise<operations.StopAccessLoggingResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+}
+export {};

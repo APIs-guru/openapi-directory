@@ -1,0 +1,7 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { ResourceTypeEnum } from "./resourcetypeenum";
+export declare class CreateResourceRequest extends SpeakeasyBase {
+    name: string;
+    organizationId: string;
+    type: ResourceTypeEnum;
+}

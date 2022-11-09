@@ -1,0 +1,113 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+export var CREATESIPCREDENTIALLISTMAPPING_SERVERS = [
+    "https://api.twilio.com",
+];
+var CreateSipCredentialListMappingPathParams = /** @class */ (function (_super) {
+    __extends(CreateSipCredentialListMappingPathParams, _super);
+    function CreateSipCredentialListMappingPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=AccountSid" }),
+        __metadata("design:type", String)
+    ], CreateSipCredentialListMappingPathParams.prototype, "accountSid", void 0);
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=DomainSid" }),
+        __metadata("design:type", String)
+    ], CreateSipCredentialListMappingPathParams.prototype, "domainSid", void 0);
+    return CreateSipCredentialListMappingPathParams;
+}(SpeakeasyBase));
+export { CreateSipCredentialListMappingPathParams };
+var CreateSipCredentialListMappingCreateSipCredentialListMappingRequest = /** @class */ (function (_super) {
+    __extends(CreateSipCredentialListMappingCreateSipCredentialListMappingRequest, _super);
+    function CreateSipCredentialListMappingCreateSipCredentialListMappingRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "form, name=CredentialListSid;" }),
+        __metadata("design:type", String)
+    ], CreateSipCredentialListMappingCreateSipCredentialListMappingRequest.prototype, "credentialListSid", void 0);
+    return CreateSipCredentialListMappingCreateSipCredentialListMappingRequest;
+}(SpeakeasyBase));
+export { CreateSipCredentialListMappingCreateSipCredentialListMappingRequest };
+var CreateSipCredentialListMappingSecurity = /** @class */ (function (_super) {
+    __extends(CreateSipCredentialListMappingSecurity, _super);
+    function CreateSipCredentialListMappingSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeAccountSidAuthToken)
+    ], CreateSipCredentialListMappingSecurity.prototype, "accountSidAuthToken", void 0);
+    return CreateSipCredentialListMappingSecurity;
+}(SpeakeasyBase));
+export { CreateSipCredentialListMappingSecurity };
+var CreateSipCredentialListMappingRequest = /** @class */ (function (_super) {
+    __extends(CreateSipCredentialListMappingRequest, _super);
+    function CreateSipCredentialListMappingRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], CreateSipCredentialListMappingRequest.prototype, "serverUrl", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", CreateSipCredentialListMappingPathParams)
+    ], CreateSipCredentialListMappingRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata({ data: "request, media_type=application/x-www-form-urlencoded" }),
+        __metadata("design:type", CreateSipCredentialListMappingCreateSipCredentialListMappingRequest)
+    ], CreateSipCredentialListMappingRequest.prototype, "request", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", CreateSipCredentialListMappingSecurity)
+    ], CreateSipCredentialListMappingRequest.prototype, "security", void 0);
+    return CreateSipCredentialListMappingRequest;
+}(SpeakeasyBase));
+export { CreateSipCredentialListMappingRequest };
+var CreateSipCredentialListMappingResponse = /** @class */ (function (_super) {
+    __extends(CreateSipCredentialListMappingResponse, _super);
+    function CreateSipCredentialListMappingResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], CreateSipCredentialListMappingResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], CreateSipCredentialListMappingResponse.prototype, "statusCode", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.ApiV2010AccountSipSipDomainSipCredentialListMapping)
+    ], CreateSipCredentialListMappingResponse.prototype, "apiV2010AccountSipSipDomainSipCredentialListMapping", void 0);
+    return CreateSipCredentialListMappingResponse;
+}(SpeakeasyBase));
+export { CreateSipCredentialListMappingResponse };

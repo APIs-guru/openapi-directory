@@ -1,0 +1,20 @@
+export var ErrorCodeEnum;
+(function (ErrorCodeEnum) {
+    ErrorCodeEnum["SubnetNotFound"] = "SubnetNotFound";
+    ErrorCodeEnum["SecurityGroupNotFound"] = "SecurityGroupNotFound";
+    ErrorCodeEnum["EniLimitReached"] = "EniLimitReached";
+    ErrorCodeEnum["IpNotAvailable"] = "IpNotAvailable";
+    ErrorCodeEnum["AccessDenied"] = "AccessDenied";
+    ErrorCodeEnum["OperationNotPermitted"] = "OperationNotPermitted";
+    ErrorCodeEnum["VpcIdNotFound"] = "VpcIdNotFound";
+    ErrorCodeEnum["Unknown"] = "Unknown";
+    ErrorCodeEnum["NodeCreationFailure"] = "NodeCreationFailure";
+    ErrorCodeEnum["PodEvictionFailure"] = "PodEvictionFailure";
+    ErrorCodeEnum["InsufficientFreeAddresses"] = "InsufficientFreeAddresses";
+    ErrorCodeEnum["ClusterUnreachable"] = "ClusterUnreachable";
+    ErrorCodeEnum["InsufficientNumberOfReplicas"] = "InsufficientNumberOfReplicas";
+    ErrorCodeEnum["ConfigurationConflict"] = "ConfigurationConflict";
+    ErrorCodeEnum["AdmissionRequestDenied"] = "AdmissionRequestDenied";
+    ErrorCodeEnum["UnsupportedAddonModification"] = "UnsupportedAddonModification";
+    ErrorCodeEnum["K8sResourceNotFound"] = "K8sResourceNotFound";
+})(ErrorCodeEnum || (ErrorCodeEnum = {}));

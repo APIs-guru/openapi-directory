@@ -1,0 +1,125 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+var AppointmentInitialModel = /** @class */ (function (_super) {
+    __extends(AppointmentInitialModel, _super);
+    function AppointmentInitialModel() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=bookedBy" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "bookedBy", void 0);
+    __decorate([
+        Metadata({ data: "json, name=bookingWindowId" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "bookingWindowId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=calendarId" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "calendarId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=customerId" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "customerId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=customerMessage" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "customerMessage", void 0);
+    __decorate([
+        Metadata({ data: "json, name=email" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "email", void 0);
+    __decorate([
+        Metadata({ data: "json, name=endDateTime" }),
+        __metadata("design:type", Date)
+    ], AppointmentInitialModel.prototype, "endDateTime", void 0);
+    __decorate([
+        Metadata({ data: "json, name=groupSize" }),
+        __metadata("design:type", Number)
+    ], AppointmentInitialModel.prototype, "groupSize", void 0);
+    __decorate([
+        Metadata({ data: "json, name=location" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "location", void 0);
+    __decorate([
+        Metadata({ data: "json, name=locationId" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "locationId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "name", void 0);
+    __decorate([
+        Metadata({ data: "json, name=notes" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "notes", void 0);
+    __decorate([
+        Metadata({ data: "json, name=phone" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "phone", void 0);
+    __decorate([
+        Metadata({ data: "json, name=phoneType" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "phoneType", void 0);
+    __decorate([
+        Metadata({ data: "json, name=resourceGroupId" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "resourceGroupId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=resourceId" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "resourceId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=resourceIds" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "resourceIds", void 0);
+    __decorate([
+        Metadata({ data: "json, name=serviceAllocationId" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "serviceAllocationId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=serviceId" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "serviceId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=startDateTime" }),
+        __metadata("design:type", Date)
+    ], AppointmentInitialModel.prototype, "startDateTime", void 0);
+    __decorate([
+        Metadata({ data: "json, name=timezoneName" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "timezoneName", void 0);
+    __decorate([
+        Metadata({ data: "json, name=travelAppointmentId" }),
+        __metadata("design:type", String)
+    ], AppointmentInitialModel.prototype, "travelAppointmentId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=travelTimeMins" }),
+        __metadata("design:type", Number)
+    ], AppointmentInitialModel.prototype, "travelTimeMins", void 0);
+    return AppointmentInitialModel;
+}(SpeakeasyBase));
+export { AppointmentInitialModel };

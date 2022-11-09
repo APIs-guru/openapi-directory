@@ -1,0 +1,97 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+export var FETCHENTITY_SERVERS = [
+    "https://verify.twilio.com",
+];
+var FetchEntityPathParams = /** @class */ (function (_super) {
+    __extends(FetchEntityPathParams, _super);
+    function FetchEntityPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=Identity" }),
+        __metadata("design:type", String)
+    ], FetchEntityPathParams.prototype, "identity", void 0);
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=ServiceSid" }),
+        __metadata("design:type", String)
+    ], FetchEntityPathParams.prototype, "serviceSid", void 0);
+    return FetchEntityPathParams;
+}(SpeakeasyBase));
+export { FetchEntityPathParams };
+var FetchEntitySecurity = /** @class */ (function (_super) {
+    __extends(FetchEntitySecurity, _super);
+    function FetchEntitySecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeAccountSidAuthToken)
+    ], FetchEntitySecurity.prototype, "accountSidAuthToken", void 0);
+    return FetchEntitySecurity;
+}(SpeakeasyBase));
+export { FetchEntitySecurity };
+var FetchEntityRequest = /** @class */ (function (_super) {
+    __extends(FetchEntityRequest, _super);
+    function FetchEntityRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], FetchEntityRequest.prototype, "serverUrl", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", FetchEntityPathParams)
+    ], FetchEntityRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", FetchEntitySecurity)
+    ], FetchEntityRequest.prototype, "security", void 0);
+    return FetchEntityRequest;
+}(SpeakeasyBase));
+export { FetchEntityRequest };
+var FetchEntityResponse = /** @class */ (function (_super) {
+    __extends(FetchEntityResponse, _super);
+    function FetchEntityResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], FetchEntityResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], FetchEntityResponse.prototype, "statusCode", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.VerifyV2ServiceEntity)
+    ], FetchEntityResponse.prototype, "verifyV2ServiceEntity", void 0);
+    return FetchEntityResponse;
+}(SpeakeasyBase));
+export { FetchEntityResponse };

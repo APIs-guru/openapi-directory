@@ -1,0 +1,36 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    AddNotificationChannel(req: operations.AddNotificationChannelRequest, config?: AxiosRequestConfig): Promise<operations.AddNotificationChannelResponse>;
+    DescribeAccountHealth(req: operations.DescribeAccountHealthRequest, config?: AxiosRequestConfig): Promise<operations.DescribeAccountHealthResponse>;
+    DescribeAccountOverview(req: operations.DescribeAccountOverviewRequest, config?: AxiosRequestConfig): Promise<operations.DescribeAccountOverviewResponse>;
+    DescribeAnomaly(req: operations.DescribeAnomalyRequest, config?: AxiosRequestConfig): Promise<operations.DescribeAnomalyResponse>;
+    DescribeFeedback(req: operations.DescribeFeedbackRequest, config?: AxiosRequestConfig): Promise<operations.DescribeFeedbackResponse>;
+    DescribeInsight(req: operations.DescribeInsightRequest, config?: AxiosRequestConfig): Promise<operations.DescribeInsightResponse>;
+    DescribeResourceCollectionHealth(req: operations.DescribeResourceCollectionHealthRequest, config?: AxiosRequestConfig): Promise<operations.DescribeResourceCollectionHealthResponse>;
+    DescribeServiceIntegration(req: operations.DescribeServiceIntegrationRequest, config?: AxiosRequestConfig): Promise<operations.DescribeServiceIntegrationResponse>;
+    GetCostEstimation(req: operations.GetCostEstimationRequest, config?: AxiosRequestConfig): Promise<operations.GetCostEstimationResponse>;
+    GetResourceCollection(req: operations.GetResourceCollectionRequest, config?: AxiosRequestConfig): Promise<operations.GetResourceCollectionResponse>;
+    ListAnomaliesForInsight(req: operations.ListAnomaliesForInsightRequest, config?: AxiosRequestConfig): Promise<operations.ListAnomaliesForInsightResponse>;
+    ListEvents(req: operations.ListEventsRequest, config?: AxiosRequestConfig): Promise<operations.ListEventsResponse>;
+    ListInsights(req: operations.ListInsightsRequest, config?: AxiosRequestConfig): Promise<operations.ListInsightsResponse>;
+    ListNotificationChannels(req: operations.ListNotificationChannelsRequest, config?: AxiosRequestConfig): Promise<operations.ListNotificationChannelsResponse>;
+    ListRecommendations(req: operations.ListRecommendationsRequest, config?: AxiosRequestConfig): Promise<operations.ListRecommendationsResponse>;
+    PutFeedback(req: operations.PutFeedbackRequest, config?: AxiosRequestConfig): Promise<operations.PutFeedbackResponse>;
+    RemoveNotificationChannel(req: operations.RemoveNotificationChannelRequest, config?: AxiosRequestConfig): Promise<operations.RemoveNotificationChannelResponse>;
+    SearchInsights(req: operations.SearchInsightsRequest, config?: AxiosRequestConfig): Promise<operations.SearchInsightsResponse>;
+    StartCostEstimation(req: operations.StartCostEstimationRequest, config?: AxiosRequestConfig): Promise<operations.StartCostEstimationResponse>;
+    UpdateResourceCollection(req: operations.UpdateResourceCollectionRequest, config?: AxiosRequestConfig): Promise<operations.UpdateResourceCollectionResponse>;
+    UpdateServiceIntegration(req: operations.UpdateServiceIntegrationRequest, config?: AxiosRequestConfig): Promise<operations.UpdateServiceIntegrationResponse>;
+}
+export {};

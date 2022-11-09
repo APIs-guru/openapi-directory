@@ -1,0 +1,81 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+export const CREATEMESSAGE_SERVERS = [
+	"https://ip-messaging.twilio.com",
+];
+
+
+
+export class CreateMessagePathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=ChannelSid" })
+  channelSid: string;
+
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=ServiceSid" })
+  serviceSid: string;
+}
+
+
+export class CreateMessageHeaders extends SpeakeasyBase {
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Twilio-Webhook-Enabled" })
+  xTwilioWebhookEnabled?: shared.MessageEnumWebhookEnabledTypeEnum;
+}
+
+
+export class CreateMessageCreateMessageRequest extends SpeakeasyBase {
+  @Metadata({ data: "form, name=Attributes;" })
+  attributes?: string;
+
+  @Metadata({ data: "form, name=Body;" })
+  body?: string;
+
+  @Metadata({ data: "form, name=DateCreated;" })
+  dateCreated?: Date;
+
+  @Metadata({ data: "form, name=DateUpdated;" })
+  dateUpdated?: Date;
+
+  @Metadata({ data: "form, name=From;" })
+  from?: string;
+
+  @Metadata({ data: "form, name=LastUpdatedBy;" })
+  lastUpdatedBy?: string;
+
+  @Metadata({ data: "form, name=MediaSid;" })
+  mediaSid?: string;
+}
+
+
+export class CreateMessageSecurity extends SpeakeasyBase {
+  @Metadata({ data: "security, scheme=true;type=http;subtype=basic" })
+  accountSidAuthToken: shared.SchemeAccountSidAuthToken;
+}
+
+
+export class CreateMessageRequest extends SpeakeasyBase {
+  @Metadata()
+  serverUrl?: string;
+
+  @Metadata()
+  pathParams: CreateMessagePathParams;
+
+  @Metadata()
+  headers: CreateMessageHeaders;
+
+  @Metadata({ data: "request, media_type=application/x-www-form-urlencoded" })
+  request?: CreateMessageCreateMessageRequest;
+
+  @Metadata()
+  security: CreateMessageSecurity;
+}
+
+
+export class CreateMessageResponse extends SpeakeasyBase {
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  statusCode: number;
+
+  @Metadata()
+  ipMessagingV2ServiceChannelMessage?: shared.IpMessagingV2ServiceChannelMessage;
+}

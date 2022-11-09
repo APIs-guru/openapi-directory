@@ -1,0 +1,27 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+export declare class ListDistributionsByCachePolicyId20200531PathParams extends SpeakeasyBase {
+    cachePolicyId: string;
+}
+export declare class ListDistributionsByCachePolicyId20200531QueryParams extends SpeakeasyBase {
+    marker?: string;
+    maxItems?: string;
+}
+export declare class ListDistributionsByCachePolicyId20200531Headers extends SpeakeasyBase {
+    xAmzAlgorithm?: string;
+    xAmzContentSha256?: string;
+    xAmzCredential?: string;
+    xAmzDate?: string;
+    xAmzSecurityToken?: string;
+    xAmzSignature?: string;
+    xAmzSignedHeaders?: string;
+}
+export declare class ListDistributionsByCachePolicyId20200531Request extends SpeakeasyBase {
+    pathParams: ListDistributionsByCachePolicyId20200531PathParams;
+    queryParams: ListDistributionsByCachePolicyId20200531QueryParams;
+    headers: ListDistributionsByCachePolicyId20200531Headers;
+}
+export declare class ListDistributionsByCachePolicyId20200531Response extends SpeakeasyBase {
+    body?: Uint8Array;
+    contentType: string;
+    statusCode: number;
+}

@@ -1,0 +1,27 @@
+export var ExportableVolumeFieldEnum;
+(function (ExportableVolumeFieldEnum) {
+    ExportableVolumeFieldEnum["AccountId"] = "AccountId";
+    ExportableVolumeFieldEnum["VolumeArn"] = "VolumeArn";
+    ExportableVolumeFieldEnum["Finding"] = "Finding";
+    ExportableVolumeFieldEnum["UtilizationMetricsVolumeReadOpsPerSecondMaximum"] = "UtilizationMetricsVolumeReadOpsPerSecondMaximum";
+    ExportableVolumeFieldEnum["UtilizationMetricsVolumeWriteOpsPerSecondMaximum"] = "UtilizationMetricsVolumeWriteOpsPerSecondMaximum";
+    ExportableVolumeFieldEnum["UtilizationMetricsVolumeReadBytesPerSecondMaximum"] = "UtilizationMetricsVolumeReadBytesPerSecondMaximum";
+    ExportableVolumeFieldEnum["UtilizationMetricsVolumeWriteBytesPerSecondMaximum"] = "UtilizationMetricsVolumeWriteBytesPerSecondMaximum";
+    ExportableVolumeFieldEnum["LookbackPeriodInDays"] = "LookbackPeriodInDays";
+    ExportableVolumeFieldEnum["CurrentConfigurationVolumeType"] = "CurrentConfigurationVolumeType";
+    ExportableVolumeFieldEnum["CurrentConfigurationVolumeBaselineIops"] = "CurrentConfigurationVolumeBaselineIOPS";
+    ExportableVolumeFieldEnum["CurrentConfigurationVolumeBaselineThroughput"] = "CurrentConfigurationVolumeBaselineThroughput";
+    ExportableVolumeFieldEnum["CurrentConfigurationVolumeBurstIops"] = "CurrentConfigurationVolumeBurstIOPS";
+    ExportableVolumeFieldEnum["CurrentConfigurationVolumeBurstThroughput"] = "CurrentConfigurationVolumeBurstThroughput";
+    ExportableVolumeFieldEnum["CurrentConfigurationVolumeSize"] = "CurrentConfigurationVolumeSize";
+    ExportableVolumeFieldEnum["CurrentMonthlyPrice"] = "CurrentMonthlyPrice";
+    ExportableVolumeFieldEnum["RecommendationOptionsConfigurationVolumeType"] = "RecommendationOptionsConfigurationVolumeType";
+    ExportableVolumeFieldEnum["RecommendationOptionsConfigurationVolumeBaselineIops"] = "RecommendationOptionsConfigurationVolumeBaselineIOPS";
+    ExportableVolumeFieldEnum["RecommendationOptionsConfigurationVolumeBaselineThroughput"] = "RecommendationOptionsConfigurationVolumeBaselineThroughput";
+    ExportableVolumeFieldEnum["RecommendationOptionsConfigurationVolumeBurstIops"] = "RecommendationOptionsConfigurationVolumeBurstIOPS";
+    ExportableVolumeFieldEnum["RecommendationOptionsConfigurationVolumeBurstThroughput"] = "RecommendationOptionsConfigurationVolumeBurstThroughput";
+    ExportableVolumeFieldEnum["RecommendationOptionsConfigurationVolumeSize"] = "RecommendationOptionsConfigurationVolumeSize";
+    ExportableVolumeFieldEnum["RecommendationOptionsMonthlyPrice"] = "RecommendationOptionsMonthlyPrice";
+    ExportableVolumeFieldEnum["RecommendationOptionsPerformanceRisk"] = "RecommendationOptionsPerformanceRisk";
+    ExportableVolumeFieldEnum["LastRefreshTimestamp"] = "LastRefreshTimestamp";
+})(ExportableVolumeFieldEnum || (ExportableVolumeFieldEnum = {}));

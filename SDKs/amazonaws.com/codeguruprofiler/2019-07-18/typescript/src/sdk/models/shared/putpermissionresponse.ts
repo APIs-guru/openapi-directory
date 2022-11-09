@@ -1,0 +1,14 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+
+// PutPermissionResponse
+/** 
+ * The structure representing the <code>putPermissionResponse</code>.
+**/
+export class PutPermissionResponse extends SpeakeasyBase {
+  @Metadata({ data: "json, name=policy" })
+  policy: string;
+
+  @Metadata({ data: "json, name=revisionId" })
+  revisionId: string;
+}

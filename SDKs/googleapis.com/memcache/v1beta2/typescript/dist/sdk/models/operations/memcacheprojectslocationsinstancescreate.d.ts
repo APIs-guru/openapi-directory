@@ -1,0 +1,34 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+export declare class MemcacheProjectsLocationsInstancesCreatePathParams extends SpeakeasyBase {
+    parent: string;
+}
+export declare class MemcacheProjectsLocationsInstancesCreateQueryParams extends SpeakeasyBase {
+    dollarXgafv?: shared.XgafvEnum;
+    accessToken?: string;
+    alt?: shared.AltEnum;
+    callback?: string;
+    fields?: string;
+    instanceId?: string;
+    key?: string;
+    oauthToken?: string;
+    prettyPrint?: boolean;
+    quotaUser?: string;
+    uploadType?: string;
+    uploadProtocol?: string;
+}
+export declare class MemcacheProjectsLocationsInstancesCreateSecurity extends SpeakeasyBase {
+    oauth2: shared.SchemeOauth2;
+    oauth2c: shared.SchemeOauth2c;
+}
+export declare class MemcacheProjectsLocationsInstancesCreateRequest extends SpeakeasyBase {
+    pathParams: MemcacheProjectsLocationsInstancesCreatePathParams;
+    queryParams: MemcacheProjectsLocationsInstancesCreateQueryParams;
+    request?: shared.Instance;
+    security: MemcacheProjectsLocationsInstancesCreateSecurity;
+}
+export declare class MemcacheProjectsLocationsInstancesCreateResponse extends SpeakeasyBase {
+    contentType: string;
+    operation?: shared.Operation;
+    statusCode: number;
+}

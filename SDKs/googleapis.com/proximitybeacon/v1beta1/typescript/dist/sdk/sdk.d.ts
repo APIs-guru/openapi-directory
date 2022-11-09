@@ -1,0 +1,30 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    ProximitybeaconBeaconinfoGetforobserved(req: operations.ProximitybeaconBeaconinfoGetforobservedRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconinfoGetforobservedResponse>;
+    ProximitybeaconBeaconsActivate(req: operations.ProximitybeaconBeaconsActivateRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconsActivateResponse>;
+    ProximitybeaconBeaconsAttachmentsBatchDelete(req: operations.ProximitybeaconBeaconsAttachmentsBatchDeleteRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconsAttachmentsBatchDeleteResponse>;
+    ProximitybeaconBeaconsAttachmentsCreate(req: operations.ProximitybeaconBeaconsAttachmentsCreateRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconsAttachmentsCreateResponse>;
+    ProximitybeaconBeaconsAttachmentsDelete(req: operations.ProximitybeaconBeaconsAttachmentsDeleteRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconsAttachmentsDeleteResponse>;
+    ProximitybeaconBeaconsAttachmentsList(req: operations.ProximitybeaconBeaconsAttachmentsListRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconsAttachmentsListResponse>;
+    ProximitybeaconBeaconsDeactivate(req: operations.ProximitybeaconBeaconsDeactivateRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconsDeactivateResponse>;
+    ProximitybeaconBeaconsDecommission(req: operations.ProximitybeaconBeaconsDecommissionRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconsDecommissionResponse>;
+    ProximitybeaconBeaconsDelete(req: operations.ProximitybeaconBeaconsDeleteRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconsDeleteResponse>;
+    ProximitybeaconBeaconsDiagnosticsList(req: operations.ProximitybeaconBeaconsDiagnosticsListRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconsDiagnosticsListResponse>;
+    ProximitybeaconBeaconsGet(req: operations.ProximitybeaconBeaconsGetRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconsGetResponse>;
+    ProximitybeaconBeaconsList(req: operations.ProximitybeaconBeaconsListRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconsListResponse>;
+    ProximitybeaconBeaconsRegister(req: operations.ProximitybeaconBeaconsRegisterRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconsRegisterResponse>;
+    ProximitybeaconBeaconsUpdate(req: operations.ProximitybeaconBeaconsUpdateRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconBeaconsUpdateResponse>;
+    ProximitybeaconGetEidparams(req: operations.ProximitybeaconGetEidparamsRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconGetEidparamsResponse>;
+    ProximitybeaconNamespacesList(req: operations.ProximitybeaconNamespacesListRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconNamespacesListResponse>;
+    ProximitybeaconNamespacesUpdate(req: operations.ProximitybeaconNamespacesUpdateRequest, config?: AxiosRequestConfig): Promise<operations.ProximitybeaconNamespacesUpdateResponse>;
+}
+export {};

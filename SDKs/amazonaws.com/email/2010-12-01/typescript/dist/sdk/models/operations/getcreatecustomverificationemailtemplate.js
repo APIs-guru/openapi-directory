@@ -1,0 +1,145 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+export var GetCreateCustomVerificationEmailTemplateActionEnum;
+(function (GetCreateCustomVerificationEmailTemplateActionEnum) {
+    GetCreateCustomVerificationEmailTemplateActionEnum["CreateCustomVerificationEmailTemplate"] = "CreateCustomVerificationEmailTemplate";
+})(GetCreateCustomVerificationEmailTemplateActionEnum || (GetCreateCustomVerificationEmailTemplateActionEnum = {}));
+export var GetCreateCustomVerificationEmailTemplateVersionEnum;
+(function (GetCreateCustomVerificationEmailTemplateVersionEnum) {
+    GetCreateCustomVerificationEmailTemplateVersionEnum["TwoThousandAndTen1201"] = "2010-12-01";
+})(GetCreateCustomVerificationEmailTemplateVersionEnum || (GetCreateCustomVerificationEmailTemplateVersionEnum = {}));
+var GetCreateCustomVerificationEmailTemplateQueryParams = /** @class */ (function (_super) {
+    __extends(GetCreateCustomVerificationEmailTemplateQueryParams, _super);
+    function GetCreateCustomVerificationEmailTemplateQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateQueryParams.prototype, "action", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=FailureRedirectionURL" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateQueryParams.prototype, "failureRedirectionUrl", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=FromEmailAddress" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateQueryParams.prototype, "fromEmailAddress", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=SuccessRedirectionURL" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateQueryParams.prototype, "successRedirectionUrl", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=TemplateContent" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateQueryParams.prototype, "templateContent", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=TemplateName" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateQueryParams.prototype, "templateName", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=TemplateSubject" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateQueryParams.prototype, "templateSubject", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateQueryParams.prototype, "version", void 0);
+    return GetCreateCustomVerificationEmailTemplateQueryParams;
+}(SpeakeasyBase));
+export { GetCreateCustomVerificationEmailTemplateQueryParams };
+var GetCreateCustomVerificationEmailTemplateHeaders = /** @class */ (function (_super) {
+    __extends(GetCreateCustomVerificationEmailTemplateHeaders, _super);
+    function GetCreateCustomVerificationEmailTemplateHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return GetCreateCustomVerificationEmailTemplateHeaders;
+}(SpeakeasyBase));
+export { GetCreateCustomVerificationEmailTemplateHeaders };
+var GetCreateCustomVerificationEmailTemplateRequest = /** @class */ (function (_super) {
+    __extends(GetCreateCustomVerificationEmailTemplateRequest, _super);
+    function GetCreateCustomVerificationEmailTemplateRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetCreateCustomVerificationEmailTemplateQueryParams)
+    ], GetCreateCustomVerificationEmailTemplateRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetCreateCustomVerificationEmailTemplateHeaders)
+    ], GetCreateCustomVerificationEmailTemplateRequest.prototype, "headers", void 0);
+    return GetCreateCustomVerificationEmailTemplateRequest;
+}(SpeakeasyBase));
+export { GetCreateCustomVerificationEmailTemplateRequest };
+var GetCreateCustomVerificationEmailTemplateResponse = /** @class */ (function (_super) {
+    __extends(GetCreateCustomVerificationEmailTemplateResponse, _super);
+    function GetCreateCustomVerificationEmailTemplateResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Uint8Array)
+    ], GetCreateCustomVerificationEmailTemplateResponse.prototype, "body", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetCreateCustomVerificationEmailTemplateResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetCreateCustomVerificationEmailTemplateResponse.prototype, "statusCode", void 0);
+    return GetCreateCustomVerificationEmailTemplateResponse;
+}(SpeakeasyBase));
+export { GetCreateCustomVerificationEmailTemplateResponse };

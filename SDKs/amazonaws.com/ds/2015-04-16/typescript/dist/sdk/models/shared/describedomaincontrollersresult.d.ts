@@ -1,0 +1,6 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { DomainController } from "./domaincontroller";
+export declare class DescribeDomainControllersResult extends SpeakeasyBase {
+    domainControllers?: DomainController[];
+    nextToken?: string;
+}

@@ -1,0 +1,122 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var GetDataflowEndpointGroupPathParams = /** @class */ (function (_super) {
+    __extends(GetDataflowEndpointGroupPathParams, _super);
+    function GetDataflowEndpointGroupPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=dataflowEndpointGroupId" }),
+        __metadata("design:type", String)
+    ], GetDataflowEndpointGroupPathParams.prototype, "dataflowEndpointGroupId", void 0);
+    return GetDataflowEndpointGroupPathParams;
+}(SpeakeasyBase));
+export { GetDataflowEndpointGroupPathParams };
+var GetDataflowEndpointGroupHeaders = /** @class */ (function (_super) {
+    __extends(GetDataflowEndpointGroupHeaders, _super);
+    function GetDataflowEndpointGroupHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], GetDataflowEndpointGroupHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], GetDataflowEndpointGroupHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], GetDataflowEndpointGroupHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], GetDataflowEndpointGroupHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], GetDataflowEndpointGroupHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], GetDataflowEndpointGroupHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], GetDataflowEndpointGroupHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return GetDataflowEndpointGroupHeaders;
+}(SpeakeasyBase));
+export { GetDataflowEndpointGroupHeaders };
+var GetDataflowEndpointGroupRequest = /** @class */ (function (_super) {
+    __extends(GetDataflowEndpointGroupRequest, _super);
+    function GetDataflowEndpointGroupRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetDataflowEndpointGroupPathParams)
+    ], GetDataflowEndpointGroupRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetDataflowEndpointGroupHeaders)
+    ], GetDataflowEndpointGroupRequest.prototype, "headers", void 0);
+    return GetDataflowEndpointGroupRequest;
+}(SpeakeasyBase));
+export { GetDataflowEndpointGroupRequest };
+var GetDataflowEndpointGroupResponse = /** @class */ (function (_super) {
+    __extends(GetDataflowEndpointGroupResponse, _super);
+    function GetDataflowEndpointGroupResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetDataflowEndpointGroupResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Object)
+    ], GetDataflowEndpointGroupResponse.prototype, "dependencyException", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.GetDataflowEndpointGroupResponse)
+    ], GetDataflowEndpointGroupResponse.prototype, "getDataflowEndpointGroupResponse", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Object)
+    ], GetDataflowEndpointGroupResponse.prototype, "invalidParameterException", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Object)
+    ], GetDataflowEndpointGroupResponse.prototype, "resourceNotFoundException", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetDataflowEndpointGroupResponse.prototype, "statusCode", void 0);
+    return GetDataflowEndpointGroupResponse;
+}(SpeakeasyBase));
+export { GetDataflowEndpointGroupResponse };

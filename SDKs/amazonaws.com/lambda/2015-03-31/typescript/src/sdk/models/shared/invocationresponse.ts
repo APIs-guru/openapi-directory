@@ -1,0 +1,10 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+
+export class InvocationResponse extends SpeakeasyBase {
+  @Metadata({ data: "json, name=Payload" })
+  payload?: string;
+
+  @Metadata({ data: "json, name=StatusCode" })
+  statusCode?: number;
+}

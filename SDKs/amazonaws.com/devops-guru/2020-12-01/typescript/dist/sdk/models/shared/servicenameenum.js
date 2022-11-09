@@ -1,0 +1,28 @@
+export var ServiceNameEnum;
+(function (ServiceNameEnum) {
+    ServiceNameEnum["ApiGateway"] = "API_GATEWAY";
+    ServiceNameEnum["ApplicationElb"] = "APPLICATION_ELB";
+    ServiceNameEnum["AutoScalingGroup"] = "AUTO_SCALING_GROUP";
+    ServiceNameEnum["CloudFront"] = "CLOUD_FRONT";
+    ServiceNameEnum["DynamoDb"] = "DYNAMO_DB";
+    ServiceNameEnum["Ec2"] = "EC2";
+    ServiceNameEnum["Ecs"] = "ECS";
+    ServiceNameEnum["Eks"] = "EKS";
+    ServiceNameEnum["ElasticBeanstalk"] = "ELASTIC_BEANSTALK";
+    ServiceNameEnum["ElastiCache"] = "ELASTI_CACHE";
+    ServiceNameEnum["Elb"] = "ELB";
+    ServiceNameEnum["Es"] = "ES";
+    ServiceNameEnum["Kinesis"] = "KINESIS";
+    ServiceNameEnum["Lambda"] = "LAMBDA";
+    ServiceNameEnum["NatGateway"] = "NAT_GATEWAY";
+    ServiceNameEnum["NetworkElb"] = "NETWORK_ELB";
+    ServiceNameEnum["Rds"] = "RDS";
+    ServiceNameEnum["Redshift"] = "REDSHIFT";
+    ServiceNameEnum["Route53"] = "ROUTE_53";
+    ServiceNameEnum["S3"] = "S3";
+    ServiceNameEnum["SageMaker"] = "SAGE_MAKER";
+    ServiceNameEnum["Sns"] = "SNS";
+    ServiceNameEnum["Sqs"] = "SQS";
+    ServiceNameEnum["StepFunctions"] = "STEP_FUNCTIONS";
+    ServiceNameEnum["Swf"] = "SWF";
+})(ServiceNameEnum || (ServiceNameEnum = {}));

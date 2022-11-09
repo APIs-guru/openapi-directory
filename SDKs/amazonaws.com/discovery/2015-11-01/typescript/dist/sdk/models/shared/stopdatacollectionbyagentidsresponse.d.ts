@@ -1,0 +1,5 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { AgentConfigurationStatus } from "./agentconfigurationstatus";
+export declare class StopDataCollectionByAgentIdsResponse extends SpeakeasyBase {
+    agentsConfigurationStatus?: AgentConfigurationStatus[];
+}

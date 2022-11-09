@@ -1,0 +1,23 @@
+export var MetricTypeEnum;
+(function (MetricTypeEnum) {
+    MetricTypeEnum["DynamoDbReadCapacityUtilization"] = "DynamoDBReadCapacityUtilization";
+    MetricTypeEnum["DynamoDbWriteCapacityUtilization"] = "DynamoDBWriteCapacityUtilization";
+    MetricTypeEnum["AlbRequestCountPerTarget"] = "ALBRequestCountPerTarget";
+    MetricTypeEnum["RdsReaderAverageCpuUtilization"] = "RDSReaderAverageCPUUtilization";
+    MetricTypeEnum["RdsReaderAverageDatabaseConnections"] = "RDSReaderAverageDatabaseConnections";
+    MetricTypeEnum["Ec2SpotFleetRequestAverageCpuUtilization"] = "EC2SpotFleetRequestAverageCPUUtilization";
+    MetricTypeEnum["Ec2SpotFleetRequestAverageNetworkIn"] = "EC2SpotFleetRequestAverageNetworkIn";
+    MetricTypeEnum["Ec2SpotFleetRequestAverageNetworkOut"] = "EC2SpotFleetRequestAverageNetworkOut";
+    MetricTypeEnum["SageMakerVariantInvocationsPerInstance"] = "SageMakerVariantInvocationsPerInstance";
+    MetricTypeEnum["EcsServiceAverageCpuUtilization"] = "ECSServiceAverageCPUUtilization";
+    MetricTypeEnum["EcsServiceAverageMemoryUtilization"] = "ECSServiceAverageMemoryUtilization";
+    MetricTypeEnum["AppStreamAverageCapacityUtilization"] = "AppStreamAverageCapacityUtilization";
+    MetricTypeEnum["ComprehendInferenceUtilization"] = "ComprehendInferenceUtilization";
+    MetricTypeEnum["LambdaProvisionedConcurrencyUtilization"] = "LambdaProvisionedConcurrencyUtilization";
+    MetricTypeEnum["CassandraReadCapacityUtilization"] = "CassandraReadCapacityUtilization";
+    MetricTypeEnum["CassandraWriteCapacityUtilization"] = "CassandraWriteCapacityUtilization";
+    MetricTypeEnum["KafkaBrokerStorageUtilization"] = "KafkaBrokerStorageUtilization";
+    MetricTypeEnum["ElastiCachePrimaryEngineCpuUtilization"] = "ElastiCachePrimaryEngineCPUUtilization";
+    MetricTypeEnum["ElastiCacheReplicaEngineCpuUtilization"] = "ElastiCacheReplicaEngineCPUUtilization";
+    MetricTypeEnum["ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"] = "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage";
+})(MetricTypeEnum || (MetricTypeEnum = {}));

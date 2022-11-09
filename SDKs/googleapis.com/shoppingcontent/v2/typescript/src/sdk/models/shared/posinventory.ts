@@ -1,0 +1,36 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { Price } from "./price";
+
+
+// PosInventory
+/** 
+ * The absolute quantity of an item available at the given store.
+**/
+export class PosInventory extends SpeakeasyBase {
+  @Metadata({ data: "json, name=contentLanguage" })
+  contentLanguage?: string;
+
+  @Metadata({ data: "json, name=gtin" })
+  gtin?: string;
+
+  @Metadata({ data: "json, name=itemId" })
+  itemId?: string;
+
+  @Metadata({ data: "json, name=kind" })
+  kind?: string;
+
+  @Metadata({ data: "json, name=price" })
+  price?: Price;
+
+  @Metadata({ data: "json, name=quantity" })
+  quantity?: string;
+
+  @Metadata({ data: "json, name=storeCode" })
+  storeCode?: string;
+
+  @Metadata({ data: "json, name=targetCountry" })
+  targetCountry?: string;
+
+  @Metadata({ data: "json, name=timestamp" })
+  timestamp?: string;
+}

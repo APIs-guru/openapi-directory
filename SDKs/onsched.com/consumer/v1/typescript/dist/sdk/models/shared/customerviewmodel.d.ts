@@ -1,0 +1,37 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+export declare class CustomerViewModel extends SpeakeasyBase {
+    birthdate?: string;
+    businessName?: string;
+    companyName?: string;
+    createdBy?: string;
+    createdOn?: string;
+    deletedStatus?: boolean;
+    deletedTime?: string;
+    disabled?: boolean;
+    email?: string;
+    emailInfo?: boolean;
+    emailPromotion?: boolean;
+    firstname?: string;
+    gender?: string;
+    groupId?: string;
+    id?: string;
+    inviteEmailSent?: string;
+    lastVisitDate?: string;
+    lastname?: string;
+    latitude?: string;
+    locationId?: string;
+    longitude?: string;
+    modifiedBy?: string;
+    modifiedOn?: string;
+    name?: string;
+    notificationType?: string;
+    objectName?: string;
+    registeredBy?: string;
+    registrationDate?: string;
+    resourceId?: string;
+    stripeCustomerId?: string;
+    subscriptionId?: string;
+    verificationDate?: string;
+    verifiedBy?: string;
+    welcomeEmailSent?: string;
+}

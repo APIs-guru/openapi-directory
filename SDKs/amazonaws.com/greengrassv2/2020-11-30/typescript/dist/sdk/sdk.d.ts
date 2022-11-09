@@ -1,0 +1,38 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    BatchAssociateClientDeviceWithCoreDevice(req: operations.BatchAssociateClientDeviceWithCoreDeviceRequest, config?: AxiosRequestConfig): Promise<operations.BatchAssociateClientDeviceWithCoreDeviceResponse>;
+    BatchDisassociateClientDeviceFromCoreDevice(req: operations.BatchDisassociateClientDeviceFromCoreDeviceRequest, config?: AxiosRequestConfig): Promise<operations.BatchDisassociateClientDeviceFromCoreDeviceResponse>;
+    CancelDeployment(req: operations.CancelDeploymentRequest, config?: AxiosRequestConfig): Promise<operations.CancelDeploymentResponse>;
+    CreateComponentVersion(req: operations.CreateComponentVersionRequest, config?: AxiosRequestConfig): Promise<operations.CreateComponentVersionResponse>;
+    CreateDeployment(req: operations.CreateDeploymentRequest, config?: AxiosRequestConfig): Promise<operations.CreateDeploymentResponse>;
+    DeleteComponent(req: operations.DeleteComponentRequest, config?: AxiosRequestConfig): Promise<operations.DeleteComponentResponse>;
+    DeleteCoreDevice(req: operations.DeleteCoreDeviceRequest, config?: AxiosRequestConfig): Promise<operations.DeleteCoreDeviceResponse>;
+    DescribeComponent(req: operations.DescribeComponentRequest, config?: AxiosRequestConfig): Promise<operations.DescribeComponentResponse>;
+    GetComponent(req: operations.GetComponentRequest, config?: AxiosRequestConfig): Promise<operations.GetComponentResponse>;
+    GetComponentVersionArtifact(req: operations.GetComponentVersionArtifactRequest, config?: AxiosRequestConfig): Promise<operations.GetComponentVersionArtifactResponse>;
+    GetCoreDevice(req: operations.GetCoreDeviceRequest, config?: AxiosRequestConfig): Promise<operations.GetCoreDeviceResponse>;
+    GetDeployment(req: operations.GetDeploymentRequest, config?: AxiosRequestConfig): Promise<operations.GetDeploymentResponse>;
+    ListClientDevicesAssociatedWithCoreDevice(req: operations.ListClientDevicesAssociatedWithCoreDeviceRequest, config?: AxiosRequestConfig): Promise<operations.ListClientDevicesAssociatedWithCoreDeviceResponse>;
+    ListComponentVersions(req: operations.ListComponentVersionsRequest, config?: AxiosRequestConfig): Promise<operations.ListComponentVersionsResponse>;
+    ListComponents(req: operations.ListComponentsRequest, config?: AxiosRequestConfig): Promise<operations.ListComponentsResponse>;
+    ListCoreDevices(req: operations.ListCoreDevicesRequest, config?: AxiosRequestConfig): Promise<operations.ListCoreDevicesResponse>;
+    ListDeployments(req: operations.ListDeploymentsRequest, config?: AxiosRequestConfig): Promise<operations.ListDeploymentsResponse>;
+    ListEffectiveDeployments(req: operations.ListEffectiveDeploymentsRequest, config?: AxiosRequestConfig): Promise<operations.ListEffectiveDeploymentsResponse>;
+    ListInstalledComponents(req: operations.ListInstalledComponentsRequest, config?: AxiosRequestConfig): Promise<operations.ListInstalledComponentsResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    ResolveComponentCandidates(req: operations.ResolveComponentCandidatesRequest, config?: AxiosRequestConfig): Promise<operations.ResolveComponentCandidatesResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+}
+export {};

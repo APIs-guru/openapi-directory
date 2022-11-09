@@ -1,0 +1,72 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { EncryptionConfiguration } from "./encryptionconfiguration";
+import { ImageScanningConfiguration } from "./imagescanningconfiguration";
+import { ImageTagMutabilityEnum } from "./imagetagmutabilityenum";
+// Repository
+/**
+ * An object representing a repository.
+**/
+var Repository = /** @class */ (function (_super) {
+    __extends(Repository, _super);
+    function Repository() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=createdAt" }),
+        __metadata("design:type", Date)
+    ], Repository.prototype, "createdAt", void 0);
+    __decorate([
+        Metadata({ data: "json, name=encryptionConfiguration" }),
+        __metadata("design:type", EncryptionConfiguration)
+    ], Repository.prototype, "encryptionConfiguration", void 0);
+    __decorate([
+        Metadata({ data: "json, name=imageScanningConfiguration" }),
+        __metadata("design:type", ImageScanningConfiguration)
+    ], Repository.prototype, "imageScanningConfiguration", void 0);
+    __decorate([
+        Metadata({ data: "json, name=imageTagMutability" }),
+        __metadata("design:type", String)
+    ], Repository.prototype, "imageTagMutability", void 0);
+    __decorate([
+        Metadata({ data: "json, name=registryId" }),
+        __metadata("design:type", String)
+    ], Repository.prototype, "registryId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=repositoryArn" }),
+        __metadata("design:type", String)
+    ], Repository.prototype, "repositoryArn", void 0);
+    __decorate([
+        Metadata({ data: "json, name=repositoryName" }),
+        __metadata("design:type", String)
+    ], Repository.prototype, "repositoryName", void 0);
+    __decorate([
+        Metadata({ data: "json, name=repositoryUri" }),
+        __metadata("design:type", String)
+    ], Repository.prototype, "repositoryUri", void 0);
+    return Repository;
+}(SpeakeasyBase));
+export { Repository };

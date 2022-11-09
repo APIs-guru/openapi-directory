@@ -1,0 +1,20 @@
+export var FlowExecutionEventTypeEnum;
+(function (FlowExecutionEventTypeEnum) {
+    FlowExecutionEventTypeEnum["ExecutionStarted"] = "EXECUTION_STARTED";
+    FlowExecutionEventTypeEnum["ExecutionFailed"] = "EXECUTION_FAILED";
+    FlowExecutionEventTypeEnum["ExecutionAborted"] = "EXECUTION_ABORTED";
+    FlowExecutionEventTypeEnum["ExecutionSucceeded"] = "EXECUTION_SUCCEEDED";
+    FlowExecutionEventTypeEnum["StepStarted"] = "STEP_STARTED";
+    FlowExecutionEventTypeEnum["StepFailed"] = "STEP_FAILED";
+    FlowExecutionEventTypeEnum["StepSucceeded"] = "STEP_SUCCEEDED";
+    FlowExecutionEventTypeEnum["ActivityScheduled"] = "ACTIVITY_SCHEDULED";
+    FlowExecutionEventTypeEnum["ActivityStarted"] = "ACTIVITY_STARTED";
+    FlowExecutionEventTypeEnum["ActivityFailed"] = "ACTIVITY_FAILED";
+    FlowExecutionEventTypeEnum["ActivitySucceeded"] = "ACTIVITY_SUCCEEDED";
+    FlowExecutionEventTypeEnum["StartFlowExecutionTask"] = "START_FLOW_EXECUTION_TASK";
+    FlowExecutionEventTypeEnum["ScheduleNextReadyStepsTask"] = "SCHEDULE_NEXT_READY_STEPS_TASK";
+    FlowExecutionEventTypeEnum["ThingActionTask"] = "THING_ACTION_TASK";
+    FlowExecutionEventTypeEnum["ThingActionTaskFailed"] = "THING_ACTION_TASK_FAILED";
+    FlowExecutionEventTypeEnum["ThingActionTaskSucceeded"] = "THING_ACTION_TASK_SUCCEEDED";
+    FlowExecutionEventTypeEnum["AcknowledgeTaskMessage"] = "ACKNOWLEDGE_TASK_MESSAGE";
+})(FlowExecutionEventTypeEnum || (FlowExecutionEventTypeEnum = {}));

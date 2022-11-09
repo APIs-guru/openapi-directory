@@ -1,0 +1,53 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { AppEngineHttpTarget } from "./appenginehttptarget";
+import { HttpTarget } from "./httptarget";
+import { RateLimits } from "./ratelimits";
+import { RetryConfig } from "./retryconfig";
+import { QueueStats } from "./queuestats";
+
+export enum QueueStateEnum {
+    StateUnspecified = "STATE_UNSPECIFIED"
+,    Running = "RUNNING"
+,    Paused = "PAUSED"
+,    Disabled = "DISABLED"
+}
+
+
+// Queue
+/** 
+ * A queue is a container of related tasks. Queues are configured to manage how those tasks are dispatched. Configurable properties include rate limits, retry options, target types, and others.
+**/
+export class Queue extends SpeakeasyBase {
+  @Metadata({ data: "json, name=appEngineHttpTarget" })
+  appEngineHttpTarget?: AppEngineHttpTarget;
+
+  @Metadata({ data: "json, name=httpTarget" })
+  httpTarget?: HttpTarget;
+
+  @Metadata({ data: "json, name=name" })
+  name?: string;
+
+  @Metadata({ data: "json, name=pullTarget" })
+  pullTarget?: Map<string, any>;
+
+  @Metadata({ data: "json, name=purgeTime" })
+  purgeTime?: string;
+
+  @Metadata({ data: "json, name=rateLimits" })
+  rateLimits?: RateLimits;
+
+  @Metadata({ data: "json, name=retryConfig" })
+  retryConfig?: RetryConfig;
+
+  @Metadata({ data: "json, name=state" })
+  state?: QueueStateEnum;
+
+  @Metadata({ data: "json, name=stats" })
+  stats?: QueueStats;
+
+  @Metadata({ data: "json, name=taskTtl" })
+  taskTtl?: string;
+
+  @Metadata({ data: "json, name=tombstoneTtl" })
+  tombstoneTtl?: string;
+}

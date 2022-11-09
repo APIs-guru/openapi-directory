@@ -1,0 +1,113 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+export var FETCHWIRELESSUSAGE_SERVERS = [
+    "https://preview.twilio.com",
+];
+var FetchWirelessUsagePathParams = /** @class */ (function (_super) {
+    __extends(FetchWirelessUsagePathParams, _super);
+    function FetchWirelessUsagePathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=SimSid" }),
+        __metadata("design:type", String)
+    ], FetchWirelessUsagePathParams.prototype, "simSid", void 0);
+    return FetchWirelessUsagePathParams;
+}(SpeakeasyBase));
+export { FetchWirelessUsagePathParams };
+var FetchWirelessUsageQueryParams = /** @class */ (function (_super) {
+    __extends(FetchWirelessUsageQueryParams, _super);
+    function FetchWirelessUsageQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=End" }),
+        __metadata("design:type", String)
+    ], FetchWirelessUsageQueryParams.prototype, "end", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Start" }),
+        __metadata("design:type", String)
+    ], FetchWirelessUsageQueryParams.prototype, "start", void 0);
+    return FetchWirelessUsageQueryParams;
+}(SpeakeasyBase));
+export { FetchWirelessUsageQueryParams };
+var FetchWirelessUsageSecurity = /** @class */ (function (_super) {
+    __extends(FetchWirelessUsageSecurity, _super);
+    function FetchWirelessUsageSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeAccountSidAuthToken)
+    ], FetchWirelessUsageSecurity.prototype, "accountSidAuthToken", void 0);
+    return FetchWirelessUsageSecurity;
+}(SpeakeasyBase));
+export { FetchWirelessUsageSecurity };
+var FetchWirelessUsageRequest = /** @class */ (function (_super) {
+    __extends(FetchWirelessUsageRequest, _super);
+    function FetchWirelessUsageRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], FetchWirelessUsageRequest.prototype, "serverUrl", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", FetchWirelessUsagePathParams)
+    ], FetchWirelessUsageRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", FetchWirelessUsageQueryParams)
+    ], FetchWirelessUsageRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", FetchWirelessUsageSecurity)
+    ], FetchWirelessUsageRequest.prototype, "security", void 0);
+    return FetchWirelessUsageRequest;
+}(SpeakeasyBase));
+export { FetchWirelessUsageRequest };
+var FetchWirelessUsageResponse = /** @class */ (function (_super) {
+    __extends(FetchWirelessUsageResponse, _super);
+    function FetchWirelessUsageResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], FetchWirelessUsageResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], FetchWirelessUsageResponse.prototype, "statusCode", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.PreviewWirelessSimUsage)
+    ], FetchWirelessUsageResponse.prototype, "previewWirelessSimUsage", void 0);
+    return FetchWirelessUsageResponse;
+}(SpeakeasyBase));
+export { FetchWirelessUsageResponse };

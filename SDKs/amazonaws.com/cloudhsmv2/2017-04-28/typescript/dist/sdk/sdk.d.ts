@@ -1,0 +1,30 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CopyBackupToRegion(req: operations.CopyBackupToRegionRequest, config?: AxiosRequestConfig): Promise<operations.CopyBackupToRegionResponse>;
+    CreateCluster(req: operations.CreateClusterRequest, config?: AxiosRequestConfig): Promise<operations.CreateClusterResponse>;
+    CreateHsm(req: operations.CreateHsmRequest, config?: AxiosRequestConfig): Promise<operations.CreateHsmResponse>;
+    DeleteBackup(req: operations.DeleteBackupRequest, config?: AxiosRequestConfig): Promise<operations.DeleteBackupResponse>;
+    DeleteCluster(req: operations.DeleteClusterRequest, config?: AxiosRequestConfig): Promise<operations.DeleteClusterResponse>;
+    DeleteHsm(req: operations.DeleteHsmRequest, config?: AxiosRequestConfig): Promise<operations.DeleteHsmResponse>;
+    DescribeBackups(req: operations.DescribeBackupsRequest, config?: AxiosRequestConfig): Promise<operations.DescribeBackupsResponse>;
+    DescribeClusters(req: operations.DescribeClustersRequest, config?: AxiosRequestConfig): Promise<operations.DescribeClustersResponse>;
+    InitializeCluster(req: operations.InitializeClusterRequest, config?: AxiosRequestConfig): Promise<operations.InitializeClusterResponse>;
+    ListTags(req: operations.ListTagsRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsResponse>;
+    ModifyBackupAttributes(req: operations.ModifyBackupAttributesRequest, config?: AxiosRequestConfig): Promise<operations.ModifyBackupAttributesResponse>;
+    ModifyCluster(req: operations.ModifyClusterRequest, config?: AxiosRequestConfig): Promise<operations.ModifyClusterResponse>;
+    RestoreBackup(req: operations.RestoreBackupRequest, config?: AxiosRequestConfig): Promise<operations.RestoreBackupResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+}
+export {};

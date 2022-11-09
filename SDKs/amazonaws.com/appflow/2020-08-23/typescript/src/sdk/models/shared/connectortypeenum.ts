@@ -1,0 +1,26 @@
+
+
+export enum ConnectorTypeEnum {
+    Salesforce = "Salesforce"
+,    Singular = "Singular"
+,    Slack = "Slack"
+,    Redshift = "Redshift"
+,    S3 = "S3"
+,    Marketo = "Marketo"
+,    Googleanalytics = "Googleanalytics"
+,    Zendesk = "Zendesk"
+,    Servicenow = "Servicenow"
+,    Datadog = "Datadog"
+,    Trendmicro = "Trendmicro"
+,    Snowflake = "Snowflake"
+,    Dynatrace = "Dynatrace"
+,    Infornexus = "Infornexus"
+,    Amplitude = "Amplitude"
+,    Veeva = "Veeva"
+,    EventBridge = "EventBridge"
+,    LookoutMetrics = "LookoutMetrics"
+,    Upsolver = "Upsolver"
+,    Honeycode = "Honeycode"
+,    CustomerProfiles = "CustomerProfiles"
+,    SapoData = "SAPOData"
+}

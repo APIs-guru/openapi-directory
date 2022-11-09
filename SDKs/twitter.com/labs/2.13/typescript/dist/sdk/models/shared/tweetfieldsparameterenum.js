@@ -1,0 +1,21 @@
+export var TweetFieldsParameterEnum;
+(function (TweetFieldsParameterEnum) {
+    TweetFieldsParameterEnum["Id"] = "id";
+    TweetFieldsParameterEnum["CreatedAt"] = "created_at";
+    TweetFieldsParameterEnum["Text"] = "text";
+    TweetFieldsParameterEnum["AuthorId"] = "author_id";
+    TweetFieldsParameterEnum["InReplyToUserId"] = "in_reply_to_user_id";
+    TweetFieldsParameterEnum["ReferencedTweets"] = "referenced_tweets";
+    TweetFieldsParameterEnum["Attachments"] = "attachments";
+    TweetFieldsParameterEnum["Withheld"] = "withheld";
+    TweetFieldsParameterEnum["Geo"] = "geo";
+    TweetFieldsParameterEnum["Entities"] = "entities";
+    TweetFieldsParameterEnum["PublicMetrics"] = "public_metrics";
+    TweetFieldsParameterEnum["PossiblySensitive"] = "possibly_sensitive";
+    TweetFieldsParameterEnum["Source"] = "source";
+    TweetFieldsParameterEnum["Lang"] = "lang";
+    TweetFieldsParameterEnum["ContextAnnotations"] = "context_annotations";
+    TweetFieldsParameterEnum["NonPublicMetrics"] = "non_public_metrics";
+    TweetFieldsParameterEnum["PromotedMetrics"] = "promoted_metrics";
+    TweetFieldsParameterEnum["OrganicMetrics"] = "organic_metrics";
+})(TweetFieldsParameterEnum || (TweetFieldsParameterEnum = {}));

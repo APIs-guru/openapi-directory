@@ -1,0 +1,38 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { PostcodeTypeEnum } from "./postcodetypeenum";
+export declare class Address extends SpeakeasyBase {
+    administrativeCounty?: string;
+    buildingName?: string;
+    buildingNumber?: string;
+    country?: string;
+    county?: string;
+    deliveryPointSuffix?: string;
+    departmentName?: string;
+    dependentLocality?: string;
+    dependentThoroughfare?: string;
+    district?: string;
+    doubleDependentLocality?: string;
+    eastings?: number;
+    latitude?: number;
+    line1?: string;
+    line2?: string;
+    line3?: string;
+    longitude?: number;
+    northings?: number;
+    organisationName?: string;
+    poBox?: string;
+    postTown?: string;
+    postalCounty?: string;
+    postcode?: string;
+    postcodeInward?: string;
+    postcodeOutward?: string;
+    postcodeType?: PostcodeTypeEnum;
+    premise?: string;
+    suOrganisationIndicator?: string;
+    subBuildingName?: string;
+    thoroughfare?: string;
+    traditionalCounty?: string;
+    udprn?: number;
+    umprn?: string;
+    ward?: string;
+}

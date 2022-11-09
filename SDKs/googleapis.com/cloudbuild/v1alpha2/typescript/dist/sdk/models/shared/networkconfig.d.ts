@@ -1,0 +1,7 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+/**
+ * Network describes the network configuration for a `WorkerPool`.
+**/
+export declare class NetworkConfig extends SpeakeasyBase {
+    peeredNetwork?: string;
+}

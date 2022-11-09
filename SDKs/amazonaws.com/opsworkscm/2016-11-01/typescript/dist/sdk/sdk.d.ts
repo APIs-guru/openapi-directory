@@ -1,0 +1,34 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    AssociateNode(req: operations.AssociateNodeRequest, config?: AxiosRequestConfig): Promise<operations.AssociateNodeResponse>;
+    CreateBackup(req: operations.CreateBackupRequest, config?: AxiosRequestConfig): Promise<operations.CreateBackupResponse>;
+    CreateServer(req: operations.CreateServerRequest, config?: AxiosRequestConfig): Promise<operations.CreateServerResponse>;
+    DeleteBackup(req: operations.DeleteBackupRequest, config?: AxiosRequestConfig): Promise<operations.DeleteBackupResponse>;
+    DeleteServer(req: operations.DeleteServerRequest, config?: AxiosRequestConfig): Promise<operations.DeleteServerResponse>;
+    DescribeAccountAttributes(req: operations.DescribeAccountAttributesRequest, config?: AxiosRequestConfig): Promise<operations.DescribeAccountAttributesResponse>;
+    DescribeBackups(req: operations.DescribeBackupsRequest, config?: AxiosRequestConfig): Promise<operations.DescribeBackupsResponse>;
+    DescribeEvents(req: operations.DescribeEventsRequest, config?: AxiosRequestConfig): Promise<operations.DescribeEventsResponse>;
+    DescribeNodeAssociationStatus(req: operations.DescribeNodeAssociationStatusRequest, config?: AxiosRequestConfig): Promise<operations.DescribeNodeAssociationStatusResponse>;
+    DescribeServers(req: operations.DescribeServersRequest, config?: AxiosRequestConfig): Promise<operations.DescribeServersResponse>;
+    DisassociateNode(req: operations.DisassociateNodeRequest, config?: AxiosRequestConfig): Promise<operations.DisassociateNodeResponse>;
+    ExportServerEngineAttribute(req: operations.ExportServerEngineAttributeRequest, config?: AxiosRequestConfig): Promise<operations.ExportServerEngineAttributeResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    RestoreServer(req: operations.RestoreServerRequest, config?: AxiosRequestConfig): Promise<operations.RestoreServerResponse>;
+    StartMaintenance(req: operations.StartMaintenanceRequest, config?: AxiosRequestConfig): Promise<operations.StartMaintenanceResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+    UpdateServer(req: operations.UpdateServerRequest, config?: AxiosRequestConfig): Promise<operations.UpdateServerResponse>;
+    UpdateServerEngineAttributes(req: operations.UpdateServerEngineAttributesRequest, config?: AxiosRequestConfig): Promise<operations.UpdateServerEngineAttributesResponse>;
+}
+export {};

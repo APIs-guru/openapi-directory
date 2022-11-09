@@ -1,0 +1,30 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CurrentSeason(req: operations.CurrentSeasonRequest, config?: AxiosRequestConfig): Promise<operations.CurrentSeasonResponse>;
+    DfsSlates(req: operations.DfsSlatesRequest, config?: AxiosRequestConfig): Promise<operations.DfsSlatesResponse>;
+    Injuries(req: operations.InjuriesRequest, config?: AxiosRequestConfig): Promise<operations.InjuriesResponse>;
+    InjuriesHistorical(req: operations.InjuriesHistoricalRequest, config?: AxiosRequestConfig): Promise<operations.InjuriesHistoricalResponse>;
+    Leaderboard(req: operations.LeaderboardRequest, config?: AxiosRequestConfig): Promise<operations.LeaderboardResponse>;
+    News(req: operations.NewsRequest, config?: AxiosRequestConfig): Promise<operations.NewsResponse>;
+    NewsByDate(req: operations.NewsByDateRequest, config?: AxiosRequestConfig): Promise<operations.NewsByDateResponse>;
+    NewsByPlayer(req: operations.NewsByPlayerRequest, config?: AxiosRequestConfig): Promise<operations.NewsByPlayerResponse>;
+    Player(req: operations.PlayerRequest, config?: AxiosRequestConfig): Promise<operations.PlayerResponse>;
+    PlayerSeasonStatsWWorldGolfRankings(req: operations.PlayerSeasonStatsWWorldGolfRankingsRequest, config?: AxiosRequestConfig): Promise<operations.PlayerSeasonStatsWWorldGolfRankingsResponse>;
+    PlayerTournamentProjectedStatsWDraftkingsSalaries(req: operations.PlayerTournamentProjectedStatsWDraftkingsSalariesRequest, config?: AxiosRequestConfig): Promise<operations.PlayerTournamentProjectedStatsWDraftkingsSalariesResponse>;
+    PlayerTournamentStatsByPlayer(req: operations.PlayerTournamentStatsByPlayerRequest, config?: AxiosRequestConfig): Promise<operations.PlayerTournamentStatsByPlayerResponse>;
+    Players(req: operations.PlayersRequest, config?: AxiosRequestConfig): Promise<operations.PlayersResponse>;
+    Schedule(req: operations.ScheduleRequest, config?: AxiosRequestConfig): Promise<operations.ScheduleResponse>;
+    ScheduleBySeason(req: operations.ScheduleBySeasonRequest, config?: AxiosRequestConfig): Promise<operations.ScheduleBySeasonResponse>;
+}
+export {};

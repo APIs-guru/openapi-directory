@@ -1,0 +1,24 @@
+export var QueueAttributeNameEnum;
+(function (QueueAttributeNameEnum) {
+    QueueAttributeNameEnum["All"] = "All";
+    QueueAttributeNameEnum["Policy"] = "Policy";
+    QueueAttributeNameEnum["VisibilityTimeout"] = "VisibilityTimeout";
+    QueueAttributeNameEnum["MaximumMessageSize"] = "MaximumMessageSize";
+    QueueAttributeNameEnum["MessageRetentionPeriod"] = "MessageRetentionPeriod";
+    QueueAttributeNameEnum["ApproximateNumberOfMessages"] = "ApproximateNumberOfMessages";
+    QueueAttributeNameEnum["ApproximateNumberOfMessagesNotVisible"] = "ApproximateNumberOfMessagesNotVisible";
+    QueueAttributeNameEnum["CreatedTimestamp"] = "CreatedTimestamp";
+    QueueAttributeNameEnum["LastModifiedTimestamp"] = "LastModifiedTimestamp";
+    QueueAttributeNameEnum["QueueArn"] = "QueueArn";
+    QueueAttributeNameEnum["ApproximateNumberOfMessagesDelayed"] = "ApproximateNumberOfMessagesDelayed";
+    QueueAttributeNameEnum["DelaySeconds"] = "DelaySeconds";
+    QueueAttributeNameEnum["ReceiveMessageWaitTimeSeconds"] = "ReceiveMessageWaitTimeSeconds";
+    QueueAttributeNameEnum["RedrivePolicy"] = "RedrivePolicy";
+    QueueAttributeNameEnum["FifoQueue"] = "FifoQueue";
+    QueueAttributeNameEnum["ContentBasedDeduplication"] = "ContentBasedDeduplication";
+    QueueAttributeNameEnum["KmsMasterKeyId"] = "KmsMasterKeyId";
+    QueueAttributeNameEnum["KmsDataKeyReusePeriodSeconds"] = "KmsDataKeyReusePeriodSeconds";
+    QueueAttributeNameEnum["DeduplicationScope"] = "DeduplicationScope";
+    QueueAttributeNameEnum["FifoThroughputLimit"] = "FifoThroughputLimit";
+    QueueAttributeNameEnum["RedriveAllowPolicy"] = "RedriveAllowPolicy";
+})(QueueAttributeNameEnum || (QueueAttributeNameEnum = {}));

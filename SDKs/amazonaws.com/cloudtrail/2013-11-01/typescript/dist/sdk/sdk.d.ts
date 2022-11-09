@@ -1,0 +1,33 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    AddTags(req: operations.AddTagsRequest, config?: AxiosRequestConfig): Promise<operations.AddTagsResponse>;
+    CreateTrail(req: operations.CreateTrailRequest, config?: AxiosRequestConfig): Promise<operations.CreateTrailResponse>;
+    DeleteTrail(req: operations.DeleteTrailRequest, config?: AxiosRequestConfig): Promise<operations.DeleteTrailResponse>;
+    DescribeTrails(req: operations.DescribeTrailsRequest, config?: AxiosRequestConfig): Promise<operations.DescribeTrailsResponse>;
+    GetEventSelectors(req: operations.GetEventSelectorsRequest, config?: AxiosRequestConfig): Promise<operations.GetEventSelectorsResponse>;
+    GetInsightSelectors(req: operations.GetInsightSelectorsRequest, config?: AxiosRequestConfig): Promise<operations.GetInsightSelectorsResponse>;
+    GetTrail(req: operations.GetTrailRequest, config?: AxiosRequestConfig): Promise<operations.GetTrailResponse>;
+    GetTrailStatus(req: operations.GetTrailStatusRequest, config?: AxiosRequestConfig): Promise<operations.GetTrailStatusResponse>;
+    ListPublicKeys(req: operations.ListPublicKeysRequest, config?: AxiosRequestConfig): Promise<operations.ListPublicKeysResponse>;
+    ListTags(req: operations.ListTagsRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsResponse>;
+    ListTrails(req: operations.ListTrailsRequest, config?: AxiosRequestConfig): Promise<operations.ListTrailsResponse>;
+    LookupEvents(req: operations.LookupEventsRequest, config?: AxiosRequestConfig): Promise<operations.LookupEventsResponse>;
+    PutEventSelectors(req: operations.PutEventSelectorsRequest, config?: AxiosRequestConfig): Promise<operations.PutEventSelectorsResponse>;
+    PutInsightSelectors(req: operations.PutInsightSelectorsRequest, config?: AxiosRequestConfig): Promise<operations.PutInsightSelectorsResponse>;
+    RemoveTags(req: operations.RemoveTagsRequest, config?: AxiosRequestConfig): Promise<operations.RemoveTagsResponse>;
+    StartLogging(req: operations.StartLoggingRequest, config?: AxiosRequestConfig): Promise<operations.StartLoggingResponse>;
+    StopLogging(req: operations.StopLoggingRequest, config?: AxiosRequestConfig): Promise<operations.StopLoggingResponse>;
+    UpdateTrail(req: operations.UpdateTrailRequest, config?: AxiosRequestConfig): Promise<operations.UpdateTrailResponse>;
+}
+export {};

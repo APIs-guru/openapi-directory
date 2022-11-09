@@ -1,0 +1,66 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var GetResourcesInput = /** @class */ (function (_super) {
+    __extends(GetResourcesInput, _super);
+    function GetResourcesInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=ExcludeCompliantResources" }),
+        __metadata("design:type", Boolean)
+    ], GetResourcesInput.prototype, "excludeCompliantResources", void 0);
+    __decorate([
+        Metadata({ data: "json, name=IncludeComplianceDetails" }),
+        __metadata("design:type", Boolean)
+    ], GetResourcesInput.prototype, "includeComplianceDetails", void 0);
+    __decorate([
+        Metadata({ data: "json, name=PaginationToken" }),
+        __metadata("design:type", String)
+    ], GetResourcesInput.prototype, "paginationToken", void 0);
+    __decorate([
+        Metadata({ data: "json, name=ResourceARNList" }),
+        __metadata("design:type", Array)
+    ], GetResourcesInput.prototype, "resourceArnList", void 0);
+    __decorate([
+        Metadata({ data: "json, name=ResourceTypeFilters" }),
+        __metadata("design:type", Array)
+    ], GetResourcesInput.prototype, "resourceTypeFilters", void 0);
+    __decorate([
+        Metadata({ data: "json, name=ResourcesPerPage" }),
+        __metadata("design:type", Number)
+    ], GetResourcesInput.prototype, "resourcesPerPage", void 0);
+    __decorate([
+        Metadata({ data: "json, name=TagFilters", elemType: shared.TagFilter }),
+        __metadata("design:type", Array)
+    ], GetResourcesInput.prototype, "tagFilters", void 0);
+    __decorate([
+        Metadata({ data: "json, name=TagsPerPage" }),
+        __metadata("design:type", Number)
+    ], GetResourcesInput.prototype, "tagsPerPage", void 0);
+    return GetResourcesInput;
+}(SpeakeasyBase));
+export { GetResourcesInput };

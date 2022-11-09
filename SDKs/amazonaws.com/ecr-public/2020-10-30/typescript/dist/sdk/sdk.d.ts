@@ -1,0 +1,38 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    BatchCheckLayerAvailability(req: operations.BatchCheckLayerAvailabilityRequest, config?: AxiosRequestConfig): Promise<operations.BatchCheckLayerAvailabilityResponse>;
+    BatchDeleteImage(req: operations.BatchDeleteImageRequest, config?: AxiosRequestConfig): Promise<operations.BatchDeleteImageResponse>;
+    CompleteLayerUpload(req: operations.CompleteLayerUploadRequest, config?: AxiosRequestConfig): Promise<operations.CompleteLayerUploadResponse>;
+    CreateRepository(req: operations.CreateRepositoryRequest, config?: AxiosRequestConfig): Promise<operations.CreateRepositoryResponse>;
+    DeleteRepository(req: operations.DeleteRepositoryRequest, config?: AxiosRequestConfig): Promise<operations.DeleteRepositoryResponse>;
+    DeleteRepositoryPolicy(req: operations.DeleteRepositoryPolicyRequest, config?: AxiosRequestConfig): Promise<operations.DeleteRepositoryPolicyResponse>;
+    DescribeImageTags(req: operations.DescribeImageTagsRequest, config?: AxiosRequestConfig): Promise<operations.DescribeImageTagsResponse>;
+    DescribeImages(req: operations.DescribeImagesRequest, config?: AxiosRequestConfig): Promise<operations.DescribeImagesResponse>;
+    DescribeRegistries(req: operations.DescribeRegistriesRequest, config?: AxiosRequestConfig): Promise<operations.DescribeRegistriesResponse>;
+    DescribeRepositories(req: operations.DescribeRepositoriesRequest, config?: AxiosRequestConfig): Promise<operations.DescribeRepositoriesResponse>;
+    GetAuthorizationToken(req: operations.GetAuthorizationTokenRequest, config?: AxiosRequestConfig): Promise<operations.GetAuthorizationTokenResponse>;
+    GetRegistryCatalogData(req: operations.GetRegistryCatalogDataRequest, config?: AxiosRequestConfig): Promise<operations.GetRegistryCatalogDataResponse>;
+    GetRepositoryCatalogData(req: operations.GetRepositoryCatalogDataRequest, config?: AxiosRequestConfig): Promise<operations.GetRepositoryCatalogDataResponse>;
+    GetRepositoryPolicy(req: operations.GetRepositoryPolicyRequest, config?: AxiosRequestConfig): Promise<operations.GetRepositoryPolicyResponse>;
+    InitiateLayerUpload(req: operations.InitiateLayerUploadRequest, config?: AxiosRequestConfig): Promise<operations.InitiateLayerUploadResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    PutImage(req: operations.PutImageRequest, config?: AxiosRequestConfig): Promise<operations.PutImageResponse>;
+    PutRegistryCatalogData(req: operations.PutRegistryCatalogDataRequest, config?: AxiosRequestConfig): Promise<operations.PutRegistryCatalogDataResponse>;
+    PutRepositoryCatalogData(req: operations.PutRepositoryCatalogDataRequest, config?: AxiosRequestConfig): Promise<operations.PutRepositoryCatalogDataResponse>;
+    SetRepositoryPolicy(req: operations.SetRepositoryPolicyRequest, config?: AxiosRequestConfig): Promise<operations.SetRepositoryPolicyResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+    UploadLayerPart(req: operations.UploadLayerPartRequest, config?: AxiosRequestConfig): Promise<operations.UploadLayerPartResponse>;
+}
+export {};

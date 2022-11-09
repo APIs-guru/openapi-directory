@@ -1,0 +1,35 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CreateSink(req: operations.CreateSinkRequest, config?: AxiosRequestConfig): Promise<operations.CreateSinkResponse>;
+    CreateSinkTest(req: operations.CreateSinkTestRequest, config?: AxiosRequestConfig): Promise<operations.CreateSinkTestResponse>;
+    CreateSinkValidate(req: operations.CreateSinkValidateRequest, config?: AxiosRequestConfig): Promise<operations.CreateSinkValidateResponse>;
+    CreateSubscribedEvent(req: operations.CreateSubscribedEventRequest, config?: AxiosRequestConfig): Promise<operations.CreateSubscribedEventResponse>;
+    CreateSubscription(req: operations.CreateSubscriptionRequest, config?: AxiosRequestConfig): Promise<operations.CreateSubscriptionResponse>;
+    DeleteSink(req: operations.DeleteSinkRequest, config?: AxiosRequestConfig): Promise<operations.DeleteSinkResponse>;
+    DeleteSubscribedEvent(req: operations.DeleteSubscribedEventRequest, config?: AxiosRequestConfig): Promise<operations.DeleteSubscribedEventResponse>;
+    DeleteSubscription(req: operations.DeleteSubscriptionRequest, config?: AxiosRequestConfig): Promise<operations.DeleteSubscriptionResponse>;
+    FetchEventType(req: operations.FetchEventTypeRequest, config?: AxiosRequestConfig): Promise<operations.FetchEventTypeResponse>;
+    FetchSchema(req: operations.FetchSchemaRequest, config?: AxiosRequestConfig): Promise<operations.FetchSchemaResponse>;
+    FetchSchemaVersion(req: operations.FetchSchemaVersionRequest, config?: AxiosRequestConfig): Promise<operations.FetchSchemaVersionResponse>;
+    FetchSink(req: operations.FetchSinkRequest, config?: AxiosRequestConfig): Promise<operations.FetchSinkResponse>;
+    FetchSubscribedEvent(req: operations.FetchSubscribedEventRequest, config?: AxiosRequestConfig): Promise<operations.FetchSubscribedEventResponse>;
+    FetchSubscription(req: operations.FetchSubscriptionRequest, config?: AxiosRequestConfig): Promise<operations.FetchSubscriptionResponse>;
+    ListEventType(req: operations.ListEventTypeRequest, config?: AxiosRequestConfig): Promise<operations.ListEventTypeResponse>;
+    ListSchemaVersion(req: operations.ListSchemaVersionRequest, config?: AxiosRequestConfig): Promise<operations.ListSchemaVersionResponse>;
+    ListSink(req: operations.ListSinkRequest, config?: AxiosRequestConfig): Promise<operations.ListSinkResponse>;
+    ListSubscribedEvent(req: operations.ListSubscribedEventRequest, config?: AxiosRequestConfig): Promise<operations.ListSubscribedEventResponse>;
+    ListSubscription(req: operations.ListSubscriptionRequest, config?: AxiosRequestConfig): Promise<operations.ListSubscriptionResponse>;
+    UpdateSink(req: operations.UpdateSinkRequest, config?: AxiosRequestConfig): Promise<operations.UpdateSinkResponse>;
+    UpdateSubscribedEvent(req: operations.UpdateSubscribedEventRequest, config?: AxiosRequestConfig): Promise<operations.UpdateSubscribedEventResponse>;
+    UpdateSubscription(req: operations.UpdateSubscriptionRequest, config?: AxiosRequestConfig): Promise<operations.UpdateSubscriptionResponse>;
+}
+export {};

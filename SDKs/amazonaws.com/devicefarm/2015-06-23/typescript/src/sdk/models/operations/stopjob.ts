@@ -1,0 +1,66 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+
+export enum StopJobXAmzTargetEnum {
+    DeviceFarm20150623StopJob = "DeviceFarm_20150623.StopJob"
+}
+
+
+export class StopJobHeaders extends SpeakeasyBase {
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  xAmzAlgorithm?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  xAmzContentSha256?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  xAmzCredential?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  xAmzDate?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  xAmzSecurityToken?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  xAmzSignature?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  xAmzSignedHeaders?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  xAmzTarget: StopJobXAmzTargetEnum;
+}
+
+
+export class StopJobRequest extends SpeakeasyBase {
+  @Metadata()
+  headers: StopJobHeaders;
+
+  @Metadata({ data: "request, media_type=application/json" })
+  request: shared.StopJobRequest;
+}
+
+
+export class StopJobResponse extends SpeakeasyBase {
+  @Metadata()
+  argumentException?: any;
+
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  limitExceededException?: any;
+
+  @Metadata()
+  notFoundException?: any;
+
+  @Metadata()
+  serviceAccountException?: any;
+
+  @Metadata()
+  statusCode: number;
+
+  @Metadata()
+  stopJobResult?: shared.StopJobResult;
+}

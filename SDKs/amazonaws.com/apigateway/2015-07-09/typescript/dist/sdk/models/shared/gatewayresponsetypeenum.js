@@ -1,0 +1,24 @@
+export var GatewayResponseTypeEnum;
+(function (GatewayResponseTypeEnum) {
+    GatewayResponseTypeEnum["Default4Xx"] = "DEFAULT_4XX";
+    GatewayResponseTypeEnum["Default5Xx"] = "DEFAULT_5XX";
+    GatewayResponseTypeEnum["ResourceNotFound"] = "RESOURCE_NOT_FOUND";
+    GatewayResponseTypeEnum["Unauthorized"] = "UNAUTHORIZED";
+    GatewayResponseTypeEnum["InvalidApiKey"] = "INVALID_API_KEY";
+    GatewayResponseTypeEnum["AccessDenied"] = "ACCESS_DENIED";
+    GatewayResponseTypeEnum["AuthorizerFailure"] = "AUTHORIZER_FAILURE";
+    GatewayResponseTypeEnum["AuthorizerConfigurationError"] = "AUTHORIZER_CONFIGURATION_ERROR";
+    GatewayResponseTypeEnum["InvalidSignature"] = "INVALID_SIGNATURE";
+    GatewayResponseTypeEnum["ExpiredToken"] = "EXPIRED_TOKEN";
+    GatewayResponseTypeEnum["MissingAuthenticationToken"] = "MISSING_AUTHENTICATION_TOKEN";
+    GatewayResponseTypeEnum["IntegrationFailure"] = "INTEGRATION_FAILURE";
+    GatewayResponseTypeEnum["IntegrationTimeout"] = "INTEGRATION_TIMEOUT";
+    GatewayResponseTypeEnum["ApiConfigurationError"] = "API_CONFIGURATION_ERROR";
+    GatewayResponseTypeEnum["UnsupportedMediaType"] = "UNSUPPORTED_MEDIA_TYPE";
+    GatewayResponseTypeEnum["BadRequestParameters"] = "BAD_REQUEST_PARAMETERS";
+    GatewayResponseTypeEnum["BadRequestBody"] = "BAD_REQUEST_BODY";
+    GatewayResponseTypeEnum["RequestTooLarge"] = "REQUEST_TOO_LARGE";
+    GatewayResponseTypeEnum["Throttled"] = "THROTTLED";
+    GatewayResponseTypeEnum["QuotaExceeded"] = "QUOTA_EXCEEDED";
+    GatewayResponseTypeEnum["WafFiltered"] = "WAF_FILTERED";
+})(GatewayResponseTypeEnum || (GatewayResponseTypeEnum = {}));

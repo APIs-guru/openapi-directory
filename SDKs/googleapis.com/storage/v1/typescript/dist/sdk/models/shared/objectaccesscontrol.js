@@ -1,0 +1,109 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+// ObjectAccessControlProjectTeam
+/**
+ * The project team associated with the entity, if any.
+**/
+var ObjectAccessControlProjectTeam = /** @class */ (function (_super) {
+    __extends(ObjectAccessControlProjectTeam, _super);
+    function ObjectAccessControlProjectTeam() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=projectNumber" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControlProjectTeam.prototype, "projectNumber", void 0);
+    __decorate([
+        Metadata({ data: "json, name=team" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControlProjectTeam.prototype, "team", void 0);
+    return ObjectAccessControlProjectTeam;
+}(SpeakeasyBase));
+export { ObjectAccessControlProjectTeam };
+// ObjectAccessControl
+/**
+ * An access-control entry.
+**/
+var ObjectAccessControl = /** @class */ (function (_super) {
+    __extends(ObjectAccessControl, _super);
+    function ObjectAccessControl() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=bucket" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControl.prototype, "bucket", void 0);
+    __decorate([
+        Metadata({ data: "json, name=domain" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControl.prototype, "domain", void 0);
+    __decorate([
+        Metadata({ data: "json, name=email" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControl.prototype, "email", void 0);
+    __decorate([
+        Metadata({ data: "json, name=entity" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControl.prototype, "entity", void 0);
+    __decorate([
+        Metadata({ data: "json, name=entityId" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControl.prototype, "entityId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=etag" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControl.prototype, "etag", void 0);
+    __decorate([
+        Metadata({ data: "json, name=generation" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControl.prototype, "generation", void 0);
+    __decorate([
+        Metadata({ data: "json, name=id" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControl.prototype, "id", void 0);
+    __decorate([
+        Metadata({ data: "json, name=kind" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControl.prototype, "kind", void 0);
+    __decorate([
+        Metadata({ data: "json, name=object" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControl.prototype, "object", void 0);
+    __decorate([
+        Metadata({ data: "json, name=projectTeam" }),
+        __metadata("design:type", ObjectAccessControlProjectTeam)
+    ], ObjectAccessControl.prototype, "projectTeam", void 0);
+    __decorate([
+        Metadata({ data: "json, name=role" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControl.prototype, "role", void 0);
+    __decorate([
+        Metadata({ data: "json, name=selfLink" }),
+        __metadata("design:type", String)
+    ], ObjectAccessControl.prototype, "selfLink", void 0);
+    return ObjectAccessControl;
+}(SpeakeasyBase));
+export { ObjectAccessControl };

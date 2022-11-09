@@ -1,0 +1,66 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+
+export enum DescribeServicesXAmzTargetEnum {
+    AmazonEc2ContainerServiceV20141113DescribeServices = "AmazonEC2ContainerServiceV20141113.DescribeServices"
+}
+
+
+export class DescribeServicesHeaders extends SpeakeasyBase {
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  xAmzAlgorithm?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  xAmzContentSha256?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  xAmzCredential?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  xAmzDate?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  xAmzSecurityToken?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  xAmzSignature?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  xAmzSignedHeaders?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  xAmzTarget: DescribeServicesXAmzTargetEnum;
+}
+
+
+export class DescribeServicesRequest extends SpeakeasyBase {
+  @Metadata()
+  headers: DescribeServicesHeaders;
+
+  @Metadata({ data: "request, media_type=application/json" })
+  request: shared.DescribeServicesRequest;
+}
+
+
+export class DescribeServicesResponse extends SpeakeasyBase {
+  @Metadata()
+  clientException?: any;
+
+  @Metadata()
+  clusterNotFoundException?: any;
+
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  describeServicesResponse?: shared.DescribeServicesResponse;
+
+  @Metadata()
+  invalidParameterException?: any;
+
+  @Metadata()
+  serverException?: any;
+
+  @Metadata()
+  statusCode: number;
+}

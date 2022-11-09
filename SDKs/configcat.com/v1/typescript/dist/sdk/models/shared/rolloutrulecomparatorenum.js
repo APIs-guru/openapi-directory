@@ -1,0 +1,21 @@
+export var RolloutRuleComparatorEnum;
+(function (RolloutRuleComparatorEnum) {
+    RolloutRuleComparatorEnum["IsOneOf"] = "isOneOf";
+    RolloutRuleComparatorEnum["IsNotOneOf"] = "isNotOneOf";
+    RolloutRuleComparatorEnum["Contains"] = "contains";
+    RolloutRuleComparatorEnum["DoesNotContain"] = "doesNotContain";
+    RolloutRuleComparatorEnum["SemVerIsOneOf"] = "semVerIsOneOf";
+    RolloutRuleComparatorEnum["SemVerIsNotOneOf"] = "semVerIsNotOneOf";
+    RolloutRuleComparatorEnum["SemVerLess"] = "semVerLess";
+    RolloutRuleComparatorEnum["SemVerLessOrEquals"] = "semVerLessOrEquals";
+    RolloutRuleComparatorEnum["SemVerGreater"] = "semVerGreater";
+    RolloutRuleComparatorEnum["SemVerGreaterOrEquals"] = "semVerGreaterOrEquals";
+    RolloutRuleComparatorEnum["NumberEquals"] = "numberEquals";
+    RolloutRuleComparatorEnum["NumberDoesNotEqual"] = "numberDoesNotEqual";
+    RolloutRuleComparatorEnum["NumberLess"] = "numberLess";
+    RolloutRuleComparatorEnum["NumberLessOrEquals"] = "numberLessOrEquals";
+    RolloutRuleComparatorEnum["NumberGreater"] = "numberGreater";
+    RolloutRuleComparatorEnum["NumberGreaterOrEquals"] = "numberGreaterOrEquals";
+    RolloutRuleComparatorEnum["SensitiveIsOneOf"] = "sensitiveIsOneOf";
+    RolloutRuleComparatorEnum["SensitiveIsNotOneOf"] = "sensitiveIsNotOneOf";
+})(RolloutRuleComparatorEnum || (RolloutRuleComparatorEnum = {}));

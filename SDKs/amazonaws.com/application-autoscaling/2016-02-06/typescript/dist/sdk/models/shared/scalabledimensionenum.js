@@ -1,0 +1,22 @@
+export var ScalableDimensionEnum;
+(function (ScalableDimensionEnum) {
+    ScalableDimensionEnum["EcsServiceDesiredCount"] = "ecs:service:DesiredCount";
+    ScalableDimensionEnum["Ec2SpotFleetRequestTargetCapacity"] = "ec2:spot-fleet-request:TargetCapacity";
+    ScalableDimensionEnum["ElasticmapreduceInstancegroupInstanceCount"] = "elasticmapreduce:instancegroup:InstanceCount";
+    ScalableDimensionEnum["AppstreamFleetDesiredCapacity"] = "appstream:fleet:DesiredCapacity";
+    ScalableDimensionEnum["DynamodbTableReadCapacityUnits"] = "dynamodb:table:ReadCapacityUnits";
+    ScalableDimensionEnum["DynamodbTableWriteCapacityUnits"] = "dynamodb:table:WriteCapacityUnits";
+    ScalableDimensionEnum["DynamodbIndexReadCapacityUnits"] = "dynamodb:index:ReadCapacityUnits";
+    ScalableDimensionEnum["DynamodbIndexWriteCapacityUnits"] = "dynamodb:index:WriteCapacityUnits";
+    ScalableDimensionEnum["RdsClusterReadReplicaCount"] = "rds:cluster:ReadReplicaCount";
+    ScalableDimensionEnum["SagemakerVariantDesiredInstanceCount"] = "sagemaker:variant:DesiredInstanceCount";
+    ScalableDimensionEnum["CustomResourceResourceTypeProperty"] = "custom-resource:ResourceType:Property";
+    ScalableDimensionEnum["ComprehendDocumentClassifierEndpointDesiredInferenceUnits"] = "comprehend:document-classifier-endpoint:DesiredInferenceUnits";
+    ScalableDimensionEnum["ComprehendEntityRecognizerEndpointDesiredInferenceUnits"] = "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits";
+    ScalableDimensionEnum["LambdaFunctionProvisionedConcurrency"] = "lambda:function:ProvisionedConcurrency";
+    ScalableDimensionEnum["CassandraTableReadCapacityUnits"] = "cassandra:table:ReadCapacityUnits";
+    ScalableDimensionEnum["CassandraTableWriteCapacityUnits"] = "cassandra:table:WriteCapacityUnits";
+    ScalableDimensionEnum["KafkaBrokerStorageVolumeSize"] = "kafka:broker-storage:VolumeSize";
+    ScalableDimensionEnum["ElasticacheReplicationGroupNodeGroups"] = "elasticache:replication-group:NodeGroups";
+    ScalableDimensionEnum["ElasticacheReplicationGroupReplicas"] = "elasticache:replication-group:Replicas";
+})(ScalableDimensionEnum || (ScalableDimensionEnum = {}));

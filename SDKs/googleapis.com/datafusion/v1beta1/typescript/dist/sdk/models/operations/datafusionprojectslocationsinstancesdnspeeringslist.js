@@ -1,0 +1,154 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var DatafusionProjectsLocationsInstancesDnsPeeringsListPathParams = /** @class */ (function (_super) {
+    __extends(DatafusionProjectsLocationsInstancesDnsPeeringsListPathParams, _super);
+    function DatafusionProjectsLocationsInstancesDnsPeeringsListPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        __metadata("design:type", String)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListPathParams.prototype, "parent", void 0);
+    return DatafusionProjectsLocationsInstancesDnsPeeringsListPathParams;
+}(SpeakeasyBase));
+export { DatafusionProjectsLocationsInstancesDnsPeeringsListPathParams };
+var DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams = /** @class */ (function (_super) {
+    __extends(DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams, _super);
+    function DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        __metadata("design:type", String)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams.prototype, "dollarXgafv", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        __metadata("design:type", String)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams.prototype, "accessToken", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        __metadata("design:type", String)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams.prototype, "alt", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        __metadata("design:type", String)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams.prototype, "callback", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        __metadata("design:type", String)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams.prototype, "fields", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        __metadata("design:type", String)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams.prototype, "key", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        __metadata("design:type", String)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams.prototype, "oauthToken", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        __metadata("design:type", Number)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams.prototype, "pageSize", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        __metadata("design:type", String)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams.prototype, "pageToken", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        __metadata("design:type", Boolean)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams.prototype, "prettyPrint", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        __metadata("design:type", String)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams.prototype, "quotaUser", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        __metadata("design:type", String)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams.prototype, "uploadType", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        __metadata("design:type", String)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams.prototype, "uploadProtocol", void 0);
+    return DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams;
+}(SpeakeasyBase));
+export { DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams };
+var DatafusionProjectsLocationsInstancesDnsPeeringsListSecurity = /** @class */ (function (_super) {
+    __extends(DatafusionProjectsLocationsInstancesDnsPeeringsListSecurity, _super);
+    function DatafusionProjectsLocationsInstancesDnsPeeringsListSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListSecurity.prototype, "oauth2", void 0);
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2c)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListSecurity.prototype, "oauth2c", void 0);
+    return DatafusionProjectsLocationsInstancesDnsPeeringsListSecurity;
+}(SpeakeasyBase));
+export { DatafusionProjectsLocationsInstancesDnsPeeringsListSecurity };
+var DatafusionProjectsLocationsInstancesDnsPeeringsListRequest = /** @class */ (function (_super) {
+    __extends(DatafusionProjectsLocationsInstancesDnsPeeringsListRequest, _super);
+    function DatafusionProjectsLocationsInstancesDnsPeeringsListRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", DatafusionProjectsLocationsInstancesDnsPeeringsListPathParams)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", DatafusionProjectsLocationsInstancesDnsPeeringsListQueryParams)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", DatafusionProjectsLocationsInstancesDnsPeeringsListSecurity)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListRequest.prototype, "security", void 0);
+    return DatafusionProjectsLocationsInstancesDnsPeeringsListRequest;
+}(SpeakeasyBase));
+export { DatafusionProjectsLocationsInstancesDnsPeeringsListRequest };
+var DatafusionProjectsLocationsInstancesDnsPeeringsListResponse = /** @class */ (function (_super) {
+    __extends(DatafusionProjectsLocationsInstancesDnsPeeringsListResponse, _super);
+    function DatafusionProjectsLocationsInstancesDnsPeeringsListResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.ListDnsPeeringsResponse)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListResponse.prototype, "listDnsPeeringsResponse", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], DatafusionProjectsLocationsInstancesDnsPeeringsListResponse.prototype, "statusCode", void 0);
+    return DatafusionProjectsLocationsInstancesDnsPeeringsListResponse;
+}(SpeakeasyBase));
+export { DatafusionProjectsLocationsInstancesDnsPeeringsListResponse };

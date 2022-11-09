@@ -1,0 +1,10 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+
+export class AssociateVirtualInterfaceRequest extends SpeakeasyBase {
+  @Metadata({ data: "json, name=connectionId" })
+  connectionId: string;
+
+  @Metadata({ data: "json, name=virtualInterfaceId" })
+  virtualInterfaceId: string;
+}

@@ -1,0 +1,58 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+// SubnetGroup
+/**
+ * <p>Represents the output of one of the following operations:</p> <ul> <li> <p>CreateSubnetGroup</p> </li> <li> <p>UpdateSubnetGroup</p> </li> </ul> <p>A subnet group is a collection of subnets (typically private) that you can designate for your clusters running in an Amazon Virtual Private Cloud (VPC) environment.</p>
+**/
+var SubnetGroup = /** @class */ (function (_super) {
+    __extends(SubnetGroup, _super);
+    function SubnetGroup() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=ARN" }),
+        __metadata("design:type", String)
+    ], SubnetGroup.prototype, "arn", void 0);
+    __decorate([
+        Metadata({ data: "json, name=Description" }),
+        __metadata("design:type", String)
+    ], SubnetGroup.prototype, "description", void 0);
+    __decorate([
+        Metadata({ data: "json, name=Name" }),
+        __metadata("design:type", String)
+    ], SubnetGroup.prototype, "name", void 0);
+    __decorate([
+        Metadata({ data: "json, name=Subnets", elemType: shared.Subnet }),
+        __metadata("design:type", Array)
+    ], SubnetGroup.prototype, "subnets", void 0);
+    __decorate([
+        Metadata({ data: "json, name=VpcId" }),
+        __metadata("design:type", String)
+    ], SubnetGroup.prototype, "vpcId", void 0);
+    return SubnetGroup;
+}(SpeakeasyBase));
+export { SubnetGroup };

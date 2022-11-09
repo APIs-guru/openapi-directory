@@ -1,0 +1,26 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+import { GoogleCloudDialogflowV2beta1FulfillmentFeature } from "./googleclouddialogflowv2beta1fulfillmentfeature";
+import { GoogleCloudDialogflowV2beta1FulfillmentGenericWebService } from "./googleclouddialogflowv2beta1fulfillmentgenericwebservice";
+
+
+// GoogleCloudDialogflowV2beta1Fulfillment
+/** 
+ * By default, your agent responds to a matched intent with a static response. As an alternative, you can provide a more dynamic response by using fulfillment. When you enable fulfillment for an intent, Dialogflow responds to that intent by calling a service that you define. For example, if an end-user wants to schedule a haircut on Friday, your service can check your database and respond to the end-user with availability information for Friday. For more information, see the [fulfillment guide](https://cloud.google.com/dialogflow/docs/fulfillment-overview).
+**/
+export class GoogleCloudDialogflowV2beta1Fulfillment extends SpeakeasyBase {
+  @Metadata({ data: "json, name=displayName" })
+  displayName?: string;
+
+  @Metadata({ data: "json, name=enabled" })
+  enabled?: boolean;
+
+  @Metadata({ data: "json, name=features", elemType: shared.GoogleCloudDialogflowV2beta1FulfillmentFeature })
+  features?: GoogleCloudDialogflowV2beta1FulfillmentFeature[];
+
+  @Metadata({ data: "json, name=genericWebService" })
+  genericWebService?: GoogleCloudDialogflowV2beta1FulfillmentGenericWebService;
+
+  @Metadata({ data: "json, name=name" })
+  name?: string;
+}

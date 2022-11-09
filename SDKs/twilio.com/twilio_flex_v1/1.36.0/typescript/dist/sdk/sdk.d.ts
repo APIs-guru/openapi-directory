@@ -1,0 +1,38 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CreateChannel(req: operations.CreateChannelRequest, config?: AxiosRequestConfig): Promise<operations.CreateChannelResponse>;
+    CreateFlexFlow(req: operations.CreateFlexFlowRequest, config?: AxiosRequestConfig): Promise<operations.CreateFlexFlowResponse>;
+    CreateInteraction(req: operations.CreateInteractionRequest, config?: AxiosRequestConfig): Promise<operations.CreateInteractionResponse>;
+    CreateInteractionChannelInvite(req: operations.CreateInteractionChannelInviteRequest, config?: AxiosRequestConfig): Promise<operations.CreateInteractionChannelInviteResponse>;
+    CreateInteractionChannelParticipant(req: operations.CreateInteractionChannelParticipantRequest, config?: AxiosRequestConfig): Promise<operations.CreateInteractionChannelParticipantResponse>;
+    CreateWebChannel(req: operations.CreateWebChannelRequest, config?: AxiosRequestConfig): Promise<operations.CreateWebChannelResponse>;
+    DeleteChannel(req: operations.DeleteChannelRequest, config?: AxiosRequestConfig): Promise<operations.DeleteChannelResponse>;
+    DeleteFlexFlow(req: operations.DeleteFlexFlowRequest, config?: AxiosRequestConfig): Promise<operations.DeleteFlexFlowResponse>;
+    DeleteWebChannel(req: operations.DeleteWebChannelRequest, config?: AxiosRequestConfig): Promise<operations.DeleteWebChannelResponse>;
+    FetchChannel(req: operations.FetchChannelRequest, config?: AxiosRequestConfig): Promise<operations.FetchChannelResponse>;
+    FetchConfiguration(req: operations.FetchConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.FetchConfigurationResponse>;
+    FetchFlexFlow(req: operations.FetchFlexFlowRequest, config?: AxiosRequestConfig): Promise<operations.FetchFlexFlowResponse>;
+    FetchInteraction(req: operations.FetchInteractionRequest, config?: AxiosRequestConfig): Promise<operations.FetchInteractionResponse>;
+    FetchInteractionChannel(req: operations.FetchInteractionChannelRequest, config?: AxiosRequestConfig): Promise<operations.FetchInteractionChannelResponse>;
+    FetchWebChannel(req: operations.FetchWebChannelRequest, config?: AxiosRequestConfig): Promise<operations.FetchWebChannelResponse>;
+    ListChannel(req: operations.ListChannelRequest, config?: AxiosRequestConfig): Promise<operations.ListChannelResponse>;
+    ListFlexFlow(req: operations.ListFlexFlowRequest, config?: AxiosRequestConfig): Promise<operations.ListFlexFlowResponse>;
+    ListInteractionChannel(req: operations.ListInteractionChannelRequest, config?: AxiosRequestConfig): Promise<operations.ListInteractionChannelResponse>;
+    ListInteractionChannelInvite(req: operations.ListInteractionChannelInviteRequest, config?: AxiosRequestConfig): Promise<operations.ListInteractionChannelInviteResponse>;
+    ListInteractionChannelParticipant(req: operations.ListInteractionChannelParticipantRequest, config?: AxiosRequestConfig): Promise<operations.ListInteractionChannelParticipantResponse>;
+    ListWebChannel(req: operations.ListWebChannelRequest, config?: AxiosRequestConfig): Promise<operations.ListWebChannelResponse>;
+    UpdateFlexFlow(req: operations.UpdateFlexFlowRequest, config?: AxiosRequestConfig): Promise<operations.UpdateFlexFlowResponse>;
+    UpdateInteractionChannel(req: operations.UpdateInteractionChannelRequest, config?: AxiosRequestConfig): Promise<operations.UpdateInteractionChannelResponse>;
+    UpdateInteractionChannelParticipant(req: operations.UpdateInteractionChannelParticipantRequest, config?: AxiosRequestConfig): Promise<operations.UpdateInteractionChannelParticipantResponse>;
+    UpdateWebChannel(req: operations.UpdateWebChannelRequest, config?: AxiosRequestConfig): Promise<operations.UpdateWebChannelResponse>;
+}
+export {};

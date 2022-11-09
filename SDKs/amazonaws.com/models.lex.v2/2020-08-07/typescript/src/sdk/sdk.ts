@@ -1,0 +1,4257 @@
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { MatchContentType } from "../internal/utils/contenttype";
+import * as operations from "./models/operations";
+import { ParamsSerializerOptions } from "axios";
+import { GetQueryParamSerializer } from "../internal/utils/queryparams";
+import { SerializeRequestBody } from "../internal/utils/requestbody";
+import FormData from 'form-data';
+import {GetHeadersFromRequest} from "../internal/utils/headers";
+import { CreateSecurityClient } from "../internal/utils/security";
+import * as utils from "../internal/utils/utils";
+import { Security } from "./models/shared";
+
+type OptsFunc = (sdk: SDK) => void;
+
+const Servers = [
+  "http://models-v2-lex.{region}.amazonaws.com",
+  "https://models-v2-lex.{region}.amazonaws.com",
+  "http://models-v2-lex.{region}.amazonaws.com.cn",
+  "https://models-v2-lex.{region}.amazonaws.com.cn",
+] as const;
+
+export function WithServerURL(
+  serverURL: string,
+  params?: Map<string, string>
+): OptsFunc {
+  return (sdk: SDK) => {
+    if (params != null) {
+      serverURL = utils.ReplaceParameters(serverURL, params);
+    }
+    sdk.serverURL = serverURL;
+  };
+}
+
+export function WithClient(client: AxiosInstance): OptsFunc {
+  return (sdk: SDK) => {
+    sdk.defaultClient = client;
+  };
+}
+
+export function WithSecurity(security: Security): OptsFunc {
+  if (!(security instanceof utils.SpeakeasyBase)) {
+    security = new Security(security);
+  }
+  return (sdk: SDK) => {
+    sdk.security = security;
+  };
+}
+
+// SDK Documentation: https://docs.aws.amazon.com/models-v2-lex/ - Amazon Web Services documentation
+export class SDK {
+  defaultClient?: AxiosInstance;
+  securityClient?: AxiosInstance;
+  security?: any;
+  serverURL: string;
+
+  constructor(...opts: OptsFunc[]) {
+    opts.forEach((o) => o(this));
+    if (this.serverURL == "") {
+      this.serverURL = Servers[0];
+    }
+
+    if (!this.defaultClient) {
+      this.defaultClient = axios.create({ baseURL: this.serverURL });
+    }
+
+    if (!this.securityClient) {
+      if (this.security) {
+        this.securityClient = CreateSecurityClient(
+          this.defaultClient,
+          this.security
+        );
+      } else {
+        this.securityClient = this.defaultClient;
+      }
+    }
+  }
+  
+  // BuildBotLocale - Builds a bot, its intents, and its slot types into a specific locale. A bot can be built into multiple locales. At runtime the locale is used to choose a specific build of the bot.
+  BuildBotLocale(
+    req: operations.BuildBotLocaleRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.BuildBotLocaleResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.BuildBotLocaleRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .post(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.BuildBotLocaleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.buildBotLocaleResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // CreateBot - Creates an Amazon Lex conversational bot. 
+  CreateBot(
+    req: operations.CreateBotRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.CreateBotResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.CreateBotRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = baseURL.replace(/\/$/, "") + "/bots/";
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.CreateBotResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.createBotResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // CreateBotAlias - <p>Creates an alias for the specified version of a bot. Use an alias to enable you to change the version of a bot without updating applications that use the bot.</p> <p>For example, you can create an alias called "PROD" that your applications use to call the Amazon Lex bot. </p>
+  CreateBotAlias(
+    req: operations.CreateBotAliasRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.CreateBotAliasResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.CreateBotAliasRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botaliases/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.CreateBotAliasResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.createBotAliasResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // CreateBotLocale - Creates a locale in the bot. The locale contains the intents and slot types that the bot uses in conversations with users in the specified language and locale. You must add a locale to a bot before you can add intents and slot types to the bot.
+  CreateBotLocale(
+    req: operations.CreateBotLocaleRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.CreateBotLocaleResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.CreateBotLocaleRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.CreateBotLocaleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.createBotLocaleResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // CreateBotVersion - <p>Creates a new version of the bot based on the <code>DRAFT</code> version. If the <code>DRAFT</code> version of this resource hasn't changed since you created the last version, Amazon Lex doesn't create a new version, it returns the last created version.</p> <p>When you create the first version of a bot, Amazon Lex sets the version to 1. Subsequent versions increment by 1.</p>
+  CreateBotVersion(
+    req: operations.CreateBotVersionRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.CreateBotVersionResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.CreateBotVersionRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.CreateBotVersionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.createBotVersionResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // CreateExport - <p>Creates a zip archive containing the contents of a bot or a bot locale. The archive contains a directory structure that contains JSON files that define the bot.</p> <p>You can create an archive that contains the complete definition of a bot, or you can specify that the archive contain only the definition of a single bot locale.</p> <p>For more information about exporting bots, and about the structure of the export archive, see <a href="https://docs.aws.amazon.com/lexv2/latest/dg/importing-exporting.html"> Importing and exporting bots </a> </p>
+  CreateExport(
+    req: operations.CreateExportRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.CreateExportResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.CreateExportRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = baseURL.replace(/\/$/, "") + "/exports/";
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.CreateExportResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.createExportResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // CreateIntent - <p>Creates an intent.</p> <p>To define the interaction between the user and your bot, you define one or more intents. For example, for a pizza ordering bot you would create an <code>OrderPizza</code> intent.</p> <p>When you create an intent, you must provide a name. You can optionally provide the following:</p> <ul> <li> <p>Sample utterances. For example, "I want to order a pizza" and "Can I order a pizza." You can't provide utterances for built-in intents.</p> </li> <li> <p>Information to be gathered. You specify slots for the information that you bot requests from the user. You can specify standard slot types, such as date and time, or custom slot types for your application.</p> </li> <li> <p>How the intent is fulfilled. You can provide a Lambda function or configure the intent to return the intent information to your client application. If you use a Lambda function, Amazon Lex invokes the function when all of the intent information is available.</p> </li> <li> <p>A confirmation prompt to send to the user to confirm an intent. For example, "Shall I order your pizza?"</p> </li> <li> <p>A conclusion statement to send to the user after the intent is fulfilled. For example, "I ordered your pizza."</p> </li> <li> <p>A follow-up prompt that asks the user for additional activity. For example, "Do you want a drink with your pizza?"</p> </li> </ul>
+  CreateIntent(
+    req: operations.CreateIntentRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.CreateIntentResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.CreateIntentRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.CreateIntentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.createIntentResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // CreateResourcePolicy - Creates a new resource policy with the specified policy statements.
+  CreateResourcePolicy(
+    req: operations.CreateResourcePolicyRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.CreateResourcePolicyResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.CreateResourcePolicyRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/policy/{resourceArn}/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.CreateResourcePolicyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.createResourcePolicyResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // CreateResourcePolicyStatement - <p>Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created.</p> <p>You can't create a resource policy statement that allows cross-account access.</p>
+  CreateResourcePolicyStatement(
+    req: operations.CreateResourcePolicyStatementRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.CreateResourcePolicyStatementResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.CreateResourcePolicyStatementRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/policy/{resourceArn}/statements/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.CreateResourcePolicyStatementResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.createResourcePolicyStatementResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+          case 486:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // CreateSlot - Creates a slot in an intent. A slot is a variable needed to fulfill an intent. For example, an <code>OrderPizza</code> intent might need slots for size, crust, and number of pizzas. For each slot, you define one or more utterances that Amazon Lex uses to elicit a response from the user. 
+  CreateSlot(
+    req: operations.CreateSlotRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.CreateSlotResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.CreateSlotRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.CreateSlotResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.createSlotResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // CreateSlotType - <p>Creates a custom slot type</p> <p> To create a custom slot type, specify a name for the slot type and a set of enumeration values, the values that a slot of this type can assume. </p>
+  CreateSlotType(
+    req: operations.CreateSlotTypeRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.CreateSlotTypeResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.CreateSlotTypeRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.CreateSlotTypeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.createSlotTypeResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // CreateUploadUrl - Gets a pre-signed S3 write URL that you use to upload the zip archive when importing a bot or a bot locale. 
+  CreateUploadUrl(
+    req: operations.CreateUploadUrlRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.CreateUploadUrlResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.CreateUploadUrlRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = baseURL.replace(/\/$/, "") + "/createuploadurl/";
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .post(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.CreateUploadUrlResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.createUploadUrlResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DeleteBot - <p>Deletes all versions of a bot, including the <code>Draft</code> version. To delete a specific version, use the <code>DeleteBotVersion</code> operation.</p> <p>When you delete a bot, all of the resources contained in the bot are also deleted. Deleting a bot removes all locales, intents, slot, and slot types defined for the bot.</p> <p>If a bot has an alias, the <code>DeleteBot</code> operation returns a <code>ResourceInUseException</code> exception. If you want to delete the bot and the alias, set the <code>skipResourceInUseCheck</code> parameter to <code>true</code>.</p>
+  DeleteBot(
+    req: operations.DeleteBotRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DeleteBotResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteBotRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    return client
+      .delete(url, {
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteBotResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.deleteBotResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DeleteBotAlias - Deletes the specified bot alias.
+  DeleteBotAlias(
+    req: operations.DeleteBotAliasRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DeleteBotAliasResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteBotAliasRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botaliases/{botAliasId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    return client
+      .delete(url, {
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteBotAliasResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.deleteBotAliasResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DeleteBotLocale - <p>Removes a locale from a bot.</p> <p>When you delete a locale, all intents, slots, and slot types defined for the locale are also deleted.</p>
+  DeleteBotLocale(
+    req: operations.DeleteBotLocaleRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DeleteBotLocaleResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteBotLocaleRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .delete(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteBotLocaleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.deleteBotLocaleResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DeleteBotVersion - Deletes a specific version of a bot. To delete all version of a bot, use the <a>DeleteBot</a> operation.
+  DeleteBotVersion(
+    req: operations.DeleteBotVersionRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DeleteBotVersionResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteBotVersionRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    return client
+      .delete(url, {
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteBotVersionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.deleteBotVersionResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DeleteExport - Removes a previous export and the associated files stored in an S3 bucket.
+  DeleteExport(
+    req: operations.DeleteExportRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DeleteExportResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteExportRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/exports/{exportId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .delete(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteExportResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.deleteExportResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DeleteImport - Removes a previous import and the associated file stored in an S3 bucket.
+  DeleteImport(
+    req: operations.DeleteImportRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DeleteImportResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteImportRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/imports/{importId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .delete(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteImportResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.deleteImportResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DeleteIntent - <p>Removes the specified intent.</p> <p>Deleting an intent also deletes the slots associated with the intent.</p>
+  DeleteIntent(
+    req: operations.DeleteIntentRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DeleteIntentResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteIntentRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .delete(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteIntentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 204:
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DeleteResourcePolicy - Removes an existing policy from a bot or bot alias. If the resource doesn't have a policy attached, Amazon Lex returns an exception.
+  DeleteResourcePolicy(
+    req: operations.DeleteResourcePolicyRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DeleteResourcePolicyResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteResourcePolicyRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/policy/{resourceArn}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    return client
+      .delete(url, {
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteResourcePolicyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 204:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.deleteResourcePolicyResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DeleteResourcePolicyStatement - Deletes a policy statement from a resource policy. If you delete the last statement from a policy, the policy is deleted. If you specify a statement ID that doesn't exist in the policy, or if the bot or bot alias doesn't have a policy attached, Amazon Lex returns an exception.
+  DeleteResourcePolicyStatement(
+    req: operations.DeleteResourcePolicyStatementRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DeleteResourcePolicyStatementResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteResourcePolicyStatementRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/policy/{resourceArn}/statements/{statementId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    return client
+      .delete(url, {
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteResourcePolicyStatementResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 204:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.deleteResourcePolicyStatementResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DeleteSlot - Deletes the specified slot from an intent.
+  DeleteSlot(
+    req: operations.DeleteSlotRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DeleteSlotResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteSlotRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/{slotId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .delete(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteSlotResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 204:
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DeleteSlotType - <p>Deletes a slot type from a bot locale.</p> <p>If a slot is using the slot type, Amazon Lex throws a <code>ResourceInUseException</code> exception. To avoid the exception, set the <code>skipResourceInUseCheck</code> parameter to <code>true</code>.</p>
+  DeleteSlotType(
+    req: operations.DeleteSlotTypeRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DeleteSlotTypeResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DeleteSlotTypeRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/{slotTypeId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    return client
+      .delete(url, {
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DeleteSlotTypeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 204:
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DescribeBot - Provides metadata information about a bot. 
+  DescribeBot(
+    req: operations.DescribeBotRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DescribeBotResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DescribeBotRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DescribeBotResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.describeBotResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DescribeBotAlias - Get information about a specific bot alias.
+  DescribeBotAlias(
+    req: operations.DescribeBotAliasRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DescribeBotAliasResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DescribeBotAliasRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botaliases/{botAliasId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DescribeBotAliasResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.describeBotAliasResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DescribeBotLocale - Describes the settings that a bot has for a specific locale. 
+  DescribeBotLocale(
+    req: operations.DescribeBotLocaleRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DescribeBotLocaleResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DescribeBotLocaleRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DescribeBotLocaleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.describeBotLocaleResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DescribeBotVersion - Provides metadata about a version of a bot.
+  DescribeBotVersion(
+    req: operations.DescribeBotVersionRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DescribeBotVersionResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DescribeBotVersionRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DescribeBotVersionResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.describeBotVersionResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DescribeExport - Gets information about a specific export.
+  DescribeExport(
+    req: operations.DescribeExportRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DescribeExportResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DescribeExportRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/exports/{exportId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DescribeExportResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.describeExportResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DescribeImport - Gets information about a specific import.
+  DescribeImport(
+    req: operations.DescribeImportRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DescribeImportResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DescribeImportRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/imports/{importId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DescribeImportResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.describeImportResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DescribeIntent - Returns metadata about an intent.
+  DescribeIntent(
+    req: operations.DescribeIntentRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DescribeIntentResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DescribeIntentRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DescribeIntentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.describeIntentResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DescribeResourcePolicy - Gets the resource policy and policy revision for a bot or bot alias.
+  DescribeResourcePolicy(
+    req: operations.DescribeResourcePolicyRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DescribeResourcePolicyResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DescribeResourcePolicyRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/policy/{resourceArn}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DescribeResourcePolicyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.describeResourcePolicyResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DescribeSlot - Gets metadata information about a slot.
+  DescribeSlot(
+    req: operations.DescribeSlotRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DescribeSlotResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DescribeSlotRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/{slotId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DescribeSlotResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.describeSlotResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // DescribeSlotType - Gets metadata information about a slot type.
+  DescribeSlotType(
+    req: operations.DescribeSlotTypeRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.DescribeSlotTypeResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.DescribeSlotTypeRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/{slotTypeId}/", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.DescribeSlotTypeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.describeSlotTypeResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // ListBotAliases - Gets a list of aliases for the specified bot.
+  ListBotAliases(
+    req: operations.ListBotAliasesRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.ListBotAliasesResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.ListBotAliasesRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botaliases/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.ListBotAliasesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.listBotAliasesResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // ListBotLocales - Gets a list of locales for the specified bot.
+  ListBotLocales(
+    req: operations.ListBotLocalesRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.ListBotLocalesResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.ListBotLocalesRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.ListBotLocalesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.listBotLocalesResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // ListBotVersions - <p>Gets information about all of the versions of a bot.</p> <p>The <code>ListBotVersions</code> operation returns a summary of each version of a bot. For example, if a bot has three numbered versions, the <code>ListBotVersions</code> operation returns for summaries, one for each numbered version and one for the <code>DRAFT</code> version.</p> <p>The <code>ListBotVersions</code> operation always returns at least one version, the <code>DRAFT</code> version.</p>
+  ListBotVersions(
+    req: operations.ListBotVersionsRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.ListBotVersionsResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.ListBotVersionsRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.ListBotVersionsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.listBotVersionsResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // ListBots - Gets a list of available bots.
+  ListBots(
+    req: operations.ListBotsRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.ListBotsResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.ListBotsRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = baseURL.replace(/\/$/, "") + "/bots/";
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.ListBotsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.listBotsResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // ListBuiltInIntents - <p>Gets a list of built-in intents provided by Amazon Lex that you can use in your bot. </p> <p>To use a built-in intent as a the base for your own intent, include the built-in intent signature in the <code>parentIntentSignature</code> parameter when you call the <code>CreateIntent</code> operation. For more information, see <a>CreateIntent</a>.</p>
+  ListBuiltInIntents(
+    req: operations.ListBuiltInIntentsRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.ListBuiltInIntentsResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.ListBuiltInIntentsRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/builtins/locales/{localeId}/intents/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.ListBuiltInIntentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.listBuiltInIntentsResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // ListBuiltInSlotTypes - Gets a list of built-in slot types that meet the specified criteria.
+  ListBuiltInSlotTypes(
+    req: operations.ListBuiltInSlotTypesRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.ListBuiltInSlotTypesResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.ListBuiltInSlotTypesRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/builtins/locales/{localeId}/slottypes/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.ListBuiltInSlotTypesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.listBuiltInSlotTypesResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // ListExports - Lists the exports for a bot or bot locale. Exports are kept in the list for 7 days.
+  ListExports(
+    req: operations.ListExportsRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.ListExportsResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.ListExportsRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = baseURL.replace(/\/$/, "") + "/exports/";
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.ListExportsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.listExportsResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // ListImports - Lists the imports for a bot or bot locale. Imports are kept in the list for 7 days.
+  ListImports(
+    req: operations.ListImportsRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.ListImportsResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.ListImportsRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = baseURL.replace(/\/$/, "") + "/imports/";
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.ListImportsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.listImportsResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // ListIntents - Get a list of intents that meet the specified criteria.
+  ListIntents(
+    req: operations.ListIntentsRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.ListIntentsResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.ListIntentsRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.ListIntentsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.listIntentsResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // ListSlotTypes - Gets a list of slot types that match the specified criteria.
+  ListSlotTypes(
+    req: operations.ListSlotTypesRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.ListSlotTypesResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.ListSlotTypesRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.ListSlotTypesResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.listSlotTypesResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // ListSlots - Gets a list of slots that match the specified criteria.
+  ListSlots(
+    req: operations.ListSlotsRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.ListSlotsResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.ListSlotsRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.ListSlotsResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.listSlotsResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // ListTagsForResource - Gets a list of tags associated with a resource. Only bots, bot aliases, and bot channels can have tags associated with them.
+  ListTagsForResource(
+    req: operations.ListTagsForResourceRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.ListTagsForResourceResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.ListTagsForResourceRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/tags/{resourceARN}", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    return client
+      .get(url, {
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.ListTagsForResourceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.listTagsForResourceResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // StartImport - Starts importing a bot or bot locale from a zip archive that you uploaded to an S3 bucket.
+  StartImport(
+    req: operations.StartImportRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.StartImportResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.StartImportRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = baseURL.replace(/\/$/, "") + "/imports/";
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.StartImportResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.startImportResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // TagResource - Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced with the new value.
+  TagResource(
+    req: operations.TagResourceRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.TagResourceResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.TagResourceRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/tags/{resourceARN}", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .post(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.TagResourceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.tagResourceResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // UntagResource - Removes tags from a bot, bot alias, or bot channel.
+  UntagResource(
+    req: operations.UntagResourceRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.UntagResourceResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.UntagResourceRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/tags/{resourceARN}#tagKeys", req.pathParams);
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    return client
+      .delete(url, {
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.UntagResourceResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.untagResourceResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // UpdateBot - Updates the configuration of an existing bot. 
+  UpdateBot(
+    req: operations.UpdateBotRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.UpdateBotResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.UpdateBotRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.UpdateBotResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.updateBotResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // UpdateBotAlias - Updates the configuration of an existing bot alias.
+  UpdateBotAlias(
+    req: operations.UpdateBotAliasRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.UpdateBotAliasResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.UpdateBotAliasRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botaliases/{botAliasId}/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.UpdateBotAliasResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.updateBotAliasResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // UpdateBotLocale - Updates the settings that a bot has for a specific locale.
+  UpdateBotLocale(
+    req: operations.UpdateBotLocaleRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.UpdateBotLocaleResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.UpdateBotLocaleRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.UpdateBotLocaleResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.updateBotLocaleResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // UpdateExport - <p>Updates the password used to protect an export zip archive.</p> <p>The password is not required. If you don't supply a password, Amazon Lex generates a zip file that is not protected by a password. This is the archive that is available at the pre-signed S3 URL provided by the operation.</p>
+  UpdateExport(
+    req: operations.UpdateExportRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.UpdateExportResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.UpdateExportRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/exports/{exportId}/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.UpdateExportResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.updateExportResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // UpdateIntent - Updates the settings for an intent.
+  UpdateIntent(
+    req: operations.UpdateIntentRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.UpdateIntentResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.UpdateIntentRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.UpdateIntentResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.updateIntentResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // UpdateResourcePolicy - Replaces the existing resource policy for a bot or bot alias with a new one. If the policy doesn't exist, Amazon Lex returns an exception.
+  UpdateResourcePolicy(
+    req: operations.UpdateResourcePolicyRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.UpdateResourcePolicyResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.UpdateResourcePolicyRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/policy/{resourceArn}/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let qpSerializer: ParamsSerializerOptions = GetQueryParamSerializer(req.queryParams);
+
+    const requestConfig: AxiosRequestConfig = {
+      ...config,
+      params: req.queryParams,
+      paramsSerializer: qpSerializer,
+    };
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...requestConfig,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.UpdateResourcePolicyResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.updateResourcePolicyResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.resourceNotFoundException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // UpdateSlot - Updates the settings for a slot.
+  UpdateSlot(
+    req: operations.UpdateSlotRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.UpdateSlotResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.UpdateSlotRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/{slotId}/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.UpdateSlotResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 200:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.updateSlotResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+  
+  // UpdateSlotType - Updates the configuration of an existing slot type.
+  UpdateSlotType(
+    req: operations.UpdateSlotTypeRequest,
+    config?: AxiosRequestConfig
+  ): Promise<operations.UpdateSlotTypeResponse> {
+    if (!(req instanceof utils.SpeakeasyBase)) {
+      req = new operations.UpdateSlotTypeRequest(req);
+    }
+    
+    let baseURL: string = this.serverURL;
+    const url: string = utils.GenerateURL(baseURL, "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/{slotTypeId}/", req.pathParams);
+    
+    let [reqBodyHeaders, reqBody]: [object, any] = [{}, {}];
+
+    try {
+      [reqBodyHeaders, reqBody] = SerializeRequestBody(req);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        throw new Error(`Error serializing request body, cause: ${e.message}`);
+      }
+    }
+    
+    const client: AxiosInstance = this.securityClient!;const headers = { ...GetHeadersFromRequest(req.headers), ...reqBodyHeaders, ...config?.headers};
+    
+    let body: any;
+    if (reqBody instanceof FormData) body = reqBody;
+    else body = {...reqBody};
+    
+    if (body == null || Object.keys(body).length === 0) throw new Error("request body is required");
+    
+    return client
+      .put(url, body, {
+        headers: headers,
+        ...config,
+      })
+      .then((httpRes: AxiosResponse) => {
+        const contentType: string = httpRes?.headers?.["content-type"] ?? "";
+
+        if (httpRes?.status == null) throw new Error(`status code not found in response: ${httpRes}`);
+        let res: operations.UpdateSlotTypeResponse = {statusCode: httpRes.status, contentType: contentType};
+        switch (httpRes?.status) {
+          case 202:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.updateSlotTypeResponse = httpRes?.data;
+            }
+            break;
+          case 480:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.throttlingException = httpRes?.data;
+            }
+            break;
+          case 481:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.serviceQuotaExceededException = httpRes?.data;
+            }
+            break;
+          case 482:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.validationException = httpRes?.data;
+            }
+            break;
+          case 483:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.preconditionFailedException = httpRes?.data;
+            }
+            break;
+          case 484:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.conflictException = httpRes?.data;
+            }
+            break;
+          case 485:
+            if (MatchContentType(contentType, `application/json`)) {
+                res.internalServerException = httpRes?.data;
+            }
+            break;
+        }
+
+        return res;
+      })
+      .catch((error: AxiosError) => {throw error});
+  }
+
+}

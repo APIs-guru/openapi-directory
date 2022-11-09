@@ -1,0 +1,33 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CreateEngagement(req: operations.CreateEngagementRequest, config?: AxiosRequestConfig): Promise<operations.CreateEngagementResponse>;
+    CreateExecution(req: operations.CreateExecutionRequest, config?: AxiosRequestConfig): Promise<operations.CreateExecutionResponse>;
+    DeleteEngagement(req: operations.DeleteEngagementRequest, config?: AxiosRequestConfig): Promise<operations.DeleteEngagementResponse>;
+    DeleteExecution(req: operations.DeleteExecutionRequest, config?: AxiosRequestConfig): Promise<operations.DeleteExecutionResponse>;
+    DeleteFlow(req: operations.DeleteFlowRequest, config?: AxiosRequestConfig): Promise<operations.DeleteFlowResponse>;
+    FetchEngagement(req: operations.FetchEngagementRequest, config?: AxiosRequestConfig): Promise<operations.FetchEngagementResponse>;
+    FetchEngagementContext(req: operations.FetchEngagementContextRequest, config?: AxiosRequestConfig): Promise<operations.FetchEngagementContextResponse>;
+    FetchExecution(req: operations.FetchExecutionRequest, config?: AxiosRequestConfig): Promise<operations.FetchExecutionResponse>;
+    FetchExecutionContext(req: operations.FetchExecutionContextRequest, config?: AxiosRequestConfig): Promise<operations.FetchExecutionContextResponse>;
+    FetchExecutionStep(req: operations.FetchExecutionStepRequest, config?: AxiosRequestConfig): Promise<operations.FetchExecutionStepResponse>;
+    FetchExecutionStepContext(req: operations.FetchExecutionStepContextRequest, config?: AxiosRequestConfig): Promise<operations.FetchExecutionStepContextResponse>;
+    FetchFlow(req: operations.FetchFlowRequest, config?: AxiosRequestConfig): Promise<operations.FetchFlowResponse>;
+    FetchStep(req: operations.FetchStepRequest, config?: AxiosRequestConfig): Promise<operations.FetchStepResponse>;
+    FetchStepContext(req: operations.FetchStepContextRequest, config?: AxiosRequestConfig): Promise<operations.FetchStepContextResponse>;
+    ListEngagement(req: operations.ListEngagementRequest, config?: AxiosRequestConfig): Promise<operations.ListEngagementResponse>;
+    ListExecution(req: operations.ListExecutionRequest, config?: AxiosRequestConfig): Promise<operations.ListExecutionResponse>;
+    ListExecutionStep(req: operations.ListExecutionStepRequest, config?: AxiosRequestConfig): Promise<operations.ListExecutionStepResponse>;
+    ListFlow(req: operations.ListFlowRequest, config?: AxiosRequestConfig): Promise<operations.ListFlowResponse>;
+    ListStep(req: operations.ListStepRequest, config?: AxiosRequestConfig): Promise<operations.ListStepResponse>;
+    UpdateExecution(req: operations.UpdateExecutionRequest, config?: AxiosRequestConfig): Promise<operations.UpdateExecutionResponse>;
+}
+export {};

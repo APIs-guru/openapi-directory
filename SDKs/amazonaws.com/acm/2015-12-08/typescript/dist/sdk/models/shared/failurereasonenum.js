@@ -1,0 +1,20 @@
+export var FailureReasonEnum;
+(function (FailureReasonEnum) {
+    FailureReasonEnum["NoAvailableContacts"] = "NO_AVAILABLE_CONTACTS";
+    FailureReasonEnum["AdditionalVerificationRequired"] = "ADDITIONAL_VERIFICATION_REQUIRED";
+    FailureReasonEnum["DomainNotAllowed"] = "DOMAIN_NOT_ALLOWED";
+    FailureReasonEnum["InvalidPublicDomain"] = "INVALID_PUBLIC_DOMAIN";
+    FailureReasonEnum["DomainValidationDenied"] = "DOMAIN_VALIDATION_DENIED";
+    FailureReasonEnum["CaaError"] = "CAA_ERROR";
+    FailureReasonEnum["PcaLimitExceeded"] = "PCA_LIMIT_EXCEEDED";
+    FailureReasonEnum["PcaInvalidArn"] = "PCA_INVALID_ARN";
+    FailureReasonEnum["PcaInvalidState"] = "PCA_INVALID_STATE";
+    FailureReasonEnum["PcaRequestFailed"] = "PCA_REQUEST_FAILED";
+    FailureReasonEnum["PcaNameConstraintsValidation"] = "PCA_NAME_CONSTRAINTS_VALIDATION";
+    FailureReasonEnum["PcaResourceNotFound"] = "PCA_RESOURCE_NOT_FOUND";
+    FailureReasonEnum["PcaInvalidArgs"] = "PCA_INVALID_ARGS";
+    FailureReasonEnum["PcaInvalidDuration"] = "PCA_INVALID_DURATION";
+    FailureReasonEnum["PcaAccessDenied"] = "PCA_ACCESS_DENIED";
+    FailureReasonEnum["SlrNotFound"] = "SLR_NOT_FOUND";
+    FailureReasonEnum["Other"] = "OTHER";
+})(FailureReasonEnum || (FailureReasonEnum = {}));

@@ -1,0 +1,36 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CreateCluster(req: operations.CreateClusterRequest, config?: AxiosRequestConfig): Promise<operations.CreateClusterResponse>;
+    CreateParameterGroup(req: operations.CreateParameterGroupRequest, config?: AxiosRequestConfig): Promise<operations.CreateParameterGroupResponse>;
+    CreateSubnetGroup(req: operations.CreateSubnetGroupRequest, config?: AxiosRequestConfig): Promise<operations.CreateSubnetGroupResponse>;
+    DecreaseReplicationFactor(req: operations.DecreaseReplicationFactorRequest, config?: AxiosRequestConfig): Promise<operations.DecreaseReplicationFactorResponse>;
+    DeleteCluster(req: operations.DeleteClusterRequest, config?: AxiosRequestConfig): Promise<operations.DeleteClusterResponse>;
+    DeleteParameterGroup(req: operations.DeleteParameterGroupRequest, config?: AxiosRequestConfig): Promise<operations.DeleteParameterGroupResponse>;
+    DeleteSubnetGroup(req: operations.DeleteSubnetGroupRequest, config?: AxiosRequestConfig): Promise<operations.DeleteSubnetGroupResponse>;
+    DescribeClusters(req: operations.DescribeClustersRequest, config?: AxiosRequestConfig): Promise<operations.DescribeClustersResponse>;
+    DescribeDefaultParameters(req: operations.DescribeDefaultParametersRequest, config?: AxiosRequestConfig): Promise<operations.DescribeDefaultParametersResponse>;
+    DescribeEvents(req: operations.DescribeEventsRequest, config?: AxiosRequestConfig): Promise<operations.DescribeEventsResponse>;
+    DescribeParameterGroups(req: operations.DescribeParameterGroupsRequest, config?: AxiosRequestConfig): Promise<operations.DescribeParameterGroupsResponse>;
+    DescribeParameters(req: operations.DescribeParametersRequest, config?: AxiosRequestConfig): Promise<operations.DescribeParametersResponse>;
+    DescribeSubnetGroups(req: operations.DescribeSubnetGroupsRequest, config?: AxiosRequestConfig): Promise<operations.DescribeSubnetGroupsResponse>;
+    IncreaseReplicationFactor(req: operations.IncreaseReplicationFactorRequest, config?: AxiosRequestConfig): Promise<operations.IncreaseReplicationFactorResponse>;
+    ListTags(req: operations.ListTagsRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsResponse>;
+    RebootNode(req: operations.RebootNodeRequest, config?: AxiosRequestConfig): Promise<operations.RebootNodeResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+    UpdateCluster(req: operations.UpdateClusterRequest, config?: AxiosRequestConfig): Promise<operations.UpdateClusterResponse>;
+    UpdateParameterGroup(req: operations.UpdateParameterGroupRequest, config?: AxiosRequestConfig): Promise<operations.UpdateParameterGroupResponse>;
+    UpdateSubnetGroup(req: operations.UpdateSubnetGroupRequest, config?: AxiosRequestConfig): Promise<operations.UpdateSubnetGroupResponse>;
+}
+export {};

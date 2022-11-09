@@ -1,0 +1,72 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+
+
+export class ListRepositoriesQueryParams extends SpeakeasyBase {
+  @Metadata({ data: "queryParam, style=form;explode=true;name=nextToken" })
+  nextToken?: string;
+}
+
+export enum ListRepositoriesXAmzTargetEnum {
+    CodeCommit20150413ListRepositories = "CodeCommit_20150413.ListRepositories"
+}
+
+
+export class ListRepositoriesHeaders extends SpeakeasyBase {
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  xAmzAlgorithm?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  xAmzContentSha256?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  xAmzCredential?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  xAmzDate?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  xAmzSecurityToken?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  xAmzSignature?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  xAmzSignedHeaders?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  xAmzTarget: ListRepositoriesXAmzTargetEnum;
+}
+
+
+export class ListRepositoriesRequest extends SpeakeasyBase {
+  @Metadata()
+  queryParams: ListRepositoriesQueryParams;
+
+  @Metadata()
+  headers: ListRepositoriesHeaders;
+
+  @Metadata({ data: "request, media_type=application/json" })
+  request: shared.ListRepositoriesInput;
+}
+
+
+export class ListRepositoriesResponse extends SpeakeasyBase {
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  invalidContinuationTokenException?: any;
+
+  @Metadata()
+  invalidOrderException?: any;
+
+  @Metadata()
+  invalidSortByException?: any;
+
+  @Metadata()
+  listRepositoriesOutput?: shared.ListRepositoriesOutput;
+
+  @Metadata()
+  statusCode: number;
+}

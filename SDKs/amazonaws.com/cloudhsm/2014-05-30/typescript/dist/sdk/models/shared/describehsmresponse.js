@@ -1,0 +1,123 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { HsmStatusEnum } from "./hsmstatusenum";
+import { SubscriptionTypeEnum } from "./subscriptiontypeenum";
+// DescribeHsmResponse
+/**
+ * Contains the output of the <a>DescribeHsm</a> operation.
+**/
+var DescribeHsmResponse = /** @class */ (function (_super) {
+    __extends(DescribeHsmResponse, _super);
+    function DescribeHsmResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=AvailabilityZone" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "availabilityZone", void 0);
+    __decorate([
+        Metadata({ data: "json, name=EniId" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "eniId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=EniIp" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "eniIp", void 0);
+    __decorate([
+        Metadata({ data: "json, name=HsmArn" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "hsmArn", void 0);
+    __decorate([
+        Metadata({ data: "json, name=HsmType" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "hsmType", void 0);
+    __decorate([
+        Metadata({ data: "json, name=IamRoleArn" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "iamRoleArn", void 0);
+    __decorate([
+        Metadata({ data: "json, name=Partitions" }),
+        __metadata("design:type", Array)
+    ], DescribeHsmResponse.prototype, "partitions", void 0);
+    __decorate([
+        Metadata({ data: "json, name=SerialNumber" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "serialNumber", void 0);
+    __decorate([
+        Metadata({ data: "json, name=ServerCertLastUpdated" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "serverCertLastUpdated", void 0);
+    __decorate([
+        Metadata({ data: "json, name=ServerCertUri" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "serverCertUri", void 0);
+    __decorate([
+        Metadata({ data: "json, name=SoftwareVersion" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "softwareVersion", void 0);
+    __decorate([
+        Metadata({ data: "json, name=SshKeyLastUpdated" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "sshKeyLastUpdated", void 0);
+    __decorate([
+        Metadata({ data: "json, name=SshPublicKey" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "sshPublicKey", void 0);
+    __decorate([
+        Metadata({ data: "json, name=Status" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "status", void 0);
+    __decorate([
+        Metadata({ data: "json, name=StatusDetails" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "statusDetails", void 0);
+    __decorate([
+        Metadata({ data: "json, name=SubnetId" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "subnetId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=SubscriptionEndDate" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "subscriptionEndDate", void 0);
+    __decorate([
+        Metadata({ data: "json, name=SubscriptionStartDate" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "subscriptionStartDate", void 0);
+    __decorate([
+        Metadata({ data: "json, name=SubscriptionType" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "subscriptionType", void 0);
+    __decorate([
+        Metadata({ data: "json, name=VendorName" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "vendorName", void 0);
+    __decorate([
+        Metadata({ data: "json, name=VpcId" }),
+        __metadata("design:type", String)
+    ], DescribeHsmResponse.prototype, "vpcId", void 0);
+    return DescribeHsmResponse;
+}(SpeakeasyBase));
+export { DescribeHsmResponse };

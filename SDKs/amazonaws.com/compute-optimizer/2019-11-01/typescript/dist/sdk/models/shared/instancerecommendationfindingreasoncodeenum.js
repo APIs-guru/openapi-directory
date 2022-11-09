@@ -1,0 +1,19 @@
+export var InstanceRecommendationFindingReasonCodeEnum;
+(function (InstanceRecommendationFindingReasonCodeEnum) {
+    InstanceRecommendationFindingReasonCodeEnum["CpuOverprovisioned"] = "CPUOverprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["CpuUnderprovisioned"] = "CPUUnderprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["MemoryOverprovisioned"] = "MemoryOverprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["MemoryUnderprovisioned"] = "MemoryUnderprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["EbsThroughputOverprovisioned"] = "EBSThroughputOverprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["EbsThroughputUnderprovisioned"] = "EBSThroughputUnderprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["EbsiopsOverprovisioned"] = "EBSIOPSOverprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["EbsiopsUnderprovisioned"] = "EBSIOPSUnderprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["NetworkBandwidthOverprovisioned"] = "NetworkBandwidthOverprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["NetworkBandwidthUnderprovisioned"] = "NetworkBandwidthUnderprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["NetworkPpsOverprovisioned"] = "NetworkPPSOverprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["NetworkPpsUnderprovisioned"] = "NetworkPPSUnderprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["DiskIopsOverprovisioned"] = "DiskIOPSOverprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["DiskIopsUnderprovisioned"] = "DiskIOPSUnderprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["DiskThroughputOverprovisioned"] = "DiskThroughputOverprovisioned";
+    InstanceRecommendationFindingReasonCodeEnum["DiskThroughputUnderprovisioned"] = "DiskThroughputUnderprovisioned";
+})(InstanceRecommendationFindingReasonCodeEnum || (InstanceRecommendationFindingReasonCodeEnum = {}));

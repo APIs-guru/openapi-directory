@@ -1,0 +1,35 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { AllowedUse } from "./alloweduse";
+import { ImageSearchItemDisplaySize } from "./imagesearchitemdisplaysize";
+import { Keyword } from "./keyword";
+import { Download } from "./download";
+import { MaxDimensions } from "./maxdimensions";
+import { ReferralDestination } from "./referraldestination";
+export declare class ImageSearchItemCreative extends SpeakeasyBase {
+    allowedUse?: AllowedUse;
+    alternativeIds?: Map<string, string>;
+    artist?: string;
+    assetFamily?: string;
+    callForImage?: boolean;
+    caption?: string;
+    collectionCode?: string;
+    collectionId?: number;
+    collectionName?: string;
+    colorType?: string;
+    copyright?: string;
+    dateCameraShot?: Date;
+    dateCreated?: Date;
+    displaySizes?: ImageSearchItemDisplaySize[];
+    downloadProduct?: string;
+    graphicalStyle?: string;
+    id?: string;
+    keywords?: Keyword[];
+    largestDownloads?: Download[];
+    licenseModel?: string;
+    maxDimensions?: MaxDimensions;
+    orientation?: string;
+    qualityRank?: number;
+    referralDestinations?: ReferralDestination[];
+    title?: string;
+    uriOembed?: string;
+}

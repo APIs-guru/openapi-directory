@@ -1,0 +1,30 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    AddTagsToCertificate(req: operations.AddTagsToCertificateRequest, config?: AxiosRequestConfig): Promise<operations.AddTagsToCertificateResponse>;
+    DeleteCertificate(req: operations.DeleteCertificateRequest, config?: AxiosRequestConfig): Promise<operations.DeleteCertificateResponse>;
+    DescribeCertificate(req: operations.DescribeCertificateRequest, config?: AxiosRequestConfig): Promise<operations.DescribeCertificateResponse>;
+    ExportCertificate(req: operations.ExportCertificateRequest, config?: AxiosRequestConfig): Promise<operations.ExportCertificateResponse>;
+    GetAccountConfiguration(req: operations.GetAccountConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.GetAccountConfigurationResponse>;
+    GetCertificate(req: operations.GetCertificateRequest, config?: AxiosRequestConfig): Promise<operations.GetCertificateResponse>;
+    ImportCertificate(req: operations.ImportCertificateRequest, config?: AxiosRequestConfig): Promise<operations.ImportCertificateResponse>;
+    ListCertificates(req: operations.ListCertificatesRequest, config?: AxiosRequestConfig): Promise<operations.ListCertificatesResponse>;
+    ListTagsForCertificate(req: operations.ListTagsForCertificateRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForCertificateResponse>;
+    PutAccountConfiguration(req: operations.PutAccountConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.PutAccountConfigurationResponse>;
+    RemoveTagsFromCertificate(req: operations.RemoveTagsFromCertificateRequest, config?: AxiosRequestConfig): Promise<operations.RemoveTagsFromCertificateResponse>;
+    RenewCertificate(req: operations.RenewCertificateRequest, config?: AxiosRequestConfig): Promise<operations.RenewCertificateResponse>;
+    RequestCertificate(req: operations.RequestCertificateRequest, config?: AxiosRequestConfig): Promise<operations.RequestCertificateResponse>;
+    ResendValidationEmail(req: operations.ResendValidationEmailRequest, config?: AxiosRequestConfig): Promise<operations.ResendValidationEmailResponse>;
+    UpdateCertificateOptions(req: operations.UpdateCertificateOptionsRequest, config?: AxiosRequestConfig): Promise<operations.UpdateCertificateOptionsResponse>;
+}
+export {};

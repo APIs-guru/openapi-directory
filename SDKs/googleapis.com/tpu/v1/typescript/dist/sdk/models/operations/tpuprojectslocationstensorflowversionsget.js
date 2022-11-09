@@ -1,0 +1,146 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var TpuProjectsLocationsTensorflowVersionsGetPathParams = /** @class */ (function (_super) {
+    __extends(TpuProjectsLocationsTensorflowVersionsGetPathParams, _super);
+    function TpuProjectsLocationsTensorflowVersionsGetPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=name" }),
+        __metadata("design:type", String)
+    ], TpuProjectsLocationsTensorflowVersionsGetPathParams.prototype, "name", void 0);
+    return TpuProjectsLocationsTensorflowVersionsGetPathParams;
+}(SpeakeasyBase));
+export { TpuProjectsLocationsTensorflowVersionsGetPathParams };
+var TpuProjectsLocationsTensorflowVersionsGetQueryParams = /** @class */ (function (_super) {
+    __extends(TpuProjectsLocationsTensorflowVersionsGetQueryParams, _super);
+    function TpuProjectsLocationsTensorflowVersionsGetQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        __metadata("design:type", String)
+    ], TpuProjectsLocationsTensorflowVersionsGetQueryParams.prototype, "dollarXgafv", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        __metadata("design:type", String)
+    ], TpuProjectsLocationsTensorflowVersionsGetQueryParams.prototype, "accessToken", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        __metadata("design:type", String)
+    ], TpuProjectsLocationsTensorflowVersionsGetQueryParams.prototype, "alt", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        __metadata("design:type", String)
+    ], TpuProjectsLocationsTensorflowVersionsGetQueryParams.prototype, "callback", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        __metadata("design:type", String)
+    ], TpuProjectsLocationsTensorflowVersionsGetQueryParams.prototype, "fields", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        __metadata("design:type", String)
+    ], TpuProjectsLocationsTensorflowVersionsGetQueryParams.prototype, "key", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        __metadata("design:type", String)
+    ], TpuProjectsLocationsTensorflowVersionsGetQueryParams.prototype, "oauthToken", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        __metadata("design:type", Boolean)
+    ], TpuProjectsLocationsTensorflowVersionsGetQueryParams.prototype, "prettyPrint", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        __metadata("design:type", String)
+    ], TpuProjectsLocationsTensorflowVersionsGetQueryParams.prototype, "quotaUser", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        __metadata("design:type", String)
+    ], TpuProjectsLocationsTensorflowVersionsGetQueryParams.prototype, "uploadType", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        __metadata("design:type", String)
+    ], TpuProjectsLocationsTensorflowVersionsGetQueryParams.prototype, "uploadProtocol", void 0);
+    return TpuProjectsLocationsTensorflowVersionsGetQueryParams;
+}(SpeakeasyBase));
+export { TpuProjectsLocationsTensorflowVersionsGetQueryParams };
+var TpuProjectsLocationsTensorflowVersionsGetSecurity = /** @class */ (function (_super) {
+    __extends(TpuProjectsLocationsTensorflowVersionsGetSecurity, _super);
+    function TpuProjectsLocationsTensorflowVersionsGetSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2)
+    ], TpuProjectsLocationsTensorflowVersionsGetSecurity.prototype, "oauth2", void 0);
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2c)
+    ], TpuProjectsLocationsTensorflowVersionsGetSecurity.prototype, "oauth2c", void 0);
+    return TpuProjectsLocationsTensorflowVersionsGetSecurity;
+}(SpeakeasyBase));
+export { TpuProjectsLocationsTensorflowVersionsGetSecurity };
+var TpuProjectsLocationsTensorflowVersionsGetRequest = /** @class */ (function (_super) {
+    __extends(TpuProjectsLocationsTensorflowVersionsGetRequest, _super);
+    function TpuProjectsLocationsTensorflowVersionsGetRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", TpuProjectsLocationsTensorflowVersionsGetPathParams)
+    ], TpuProjectsLocationsTensorflowVersionsGetRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", TpuProjectsLocationsTensorflowVersionsGetQueryParams)
+    ], TpuProjectsLocationsTensorflowVersionsGetRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", TpuProjectsLocationsTensorflowVersionsGetSecurity)
+    ], TpuProjectsLocationsTensorflowVersionsGetRequest.prototype, "security", void 0);
+    return TpuProjectsLocationsTensorflowVersionsGetRequest;
+}(SpeakeasyBase));
+export { TpuProjectsLocationsTensorflowVersionsGetRequest };
+var TpuProjectsLocationsTensorflowVersionsGetResponse = /** @class */ (function (_super) {
+    __extends(TpuProjectsLocationsTensorflowVersionsGetResponse, _super);
+    function TpuProjectsLocationsTensorflowVersionsGetResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], TpuProjectsLocationsTensorflowVersionsGetResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], TpuProjectsLocationsTensorflowVersionsGetResponse.prototype, "statusCode", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.TensorFlowVersion)
+    ], TpuProjectsLocationsTensorflowVersionsGetResponse.prototype, "tensorFlowVersion", void 0);
+    return TpuProjectsLocationsTensorflowVersionsGetResponse;
+}(SpeakeasyBase));
+export { TpuProjectsLocationsTensorflowVersionsGetResponse };

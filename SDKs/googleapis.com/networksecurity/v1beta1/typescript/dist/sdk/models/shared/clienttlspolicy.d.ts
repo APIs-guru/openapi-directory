@@ -1,0 +1,16 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { GoogleCloudNetworksecurityV1beta1CertificateProvider } from "./googlecloudnetworksecurityv1beta1certificateprovider";
+import { ValidationCa } from "./validationca";
+/**
+ * ClientTlsPolicy is a resource that specifies how a client should authenticate connections to backends of a service. This resource itself does not affect configuration unless it is attached to a backend service resource.
+**/
+export declare class ClientTlsPolicy extends SpeakeasyBase {
+    clientCertificate?: GoogleCloudNetworksecurityV1beta1CertificateProvider;
+    createTime?: string;
+    description?: string;
+    labels?: Map<string, string>;
+    name?: string;
+    serverValidationCa?: ValidationCa[];
+    sni?: string;
+    updateTime?: string;
+}

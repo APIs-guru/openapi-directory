@@ -1,0 +1,34 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    ActivatePipeline(req: operations.ActivatePipelineRequest, config?: AxiosRequestConfig): Promise<operations.ActivatePipelineResponse>;
+    AddTags(req: operations.AddTagsRequest, config?: AxiosRequestConfig): Promise<operations.AddTagsResponse>;
+    CreatePipeline(req: operations.CreatePipelineRequest, config?: AxiosRequestConfig): Promise<operations.CreatePipelineResponse>;
+    DeactivatePipeline(req: operations.DeactivatePipelineRequest, config?: AxiosRequestConfig): Promise<operations.DeactivatePipelineResponse>;
+    DeletePipeline(req: operations.DeletePipelineRequest, config?: AxiosRequestConfig): Promise<operations.DeletePipelineResponse>;
+    DescribeObjects(req: operations.DescribeObjectsRequest, config?: AxiosRequestConfig): Promise<operations.DescribeObjectsResponse>;
+    DescribePipelines(req: operations.DescribePipelinesRequest, config?: AxiosRequestConfig): Promise<operations.DescribePipelinesResponse>;
+    EvaluateExpression(req: operations.EvaluateExpressionRequest, config?: AxiosRequestConfig): Promise<operations.EvaluateExpressionResponse>;
+    GetPipelineDefinition(req: operations.GetPipelineDefinitionRequest, config?: AxiosRequestConfig): Promise<operations.GetPipelineDefinitionResponse>;
+    ListPipelines(req: operations.ListPipelinesRequest, config?: AxiosRequestConfig): Promise<operations.ListPipelinesResponse>;
+    PollForTask(req: operations.PollForTaskRequest, config?: AxiosRequestConfig): Promise<operations.PollForTaskResponse>;
+    PutPipelineDefinition(req: operations.PutPipelineDefinitionRequest, config?: AxiosRequestConfig): Promise<operations.PutPipelineDefinitionResponse>;
+    QueryObjects(req: operations.QueryObjectsRequest, config?: AxiosRequestConfig): Promise<operations.QueryObjectsResponse>;
+    RemoveTags(req: operations.RemoveTagsRequest, config?: AxiosRequestConfig): Promise<operations.RemoveTagsResponse>;
+    ReportTaskProgress(req: operations.ReportTaskProgressRequest, config?: AxiosRequestConfig): Promise<operations.ReportTaskProgressResponse>;
+    ReportTaskRunnerHeartbeat(req: operations.ReportTaskRunnerHeartbeatRequest, config?: AxiosRequestConfig): Promise<operations.ReportTaskRunnerHeartbeatResponse>;
+    SetStatus(req: operations.SetStatusRequest, config?: AxiosRequestConfig): Promise<operations.SetStatusResponse>;
+    SetTaskStatus(req: operations.SetTaskStatusRequest, config?: AxiosRequestConfig): Promise<operations.SetTaskStatusResponse>;
+    ValidatePipelineDefinition(req: operations.ValidatePipelineDefinitionRequest, config?: AxiosRequestConfig): Promise<operations.ValidatePipelineDefinitionResponse>;
+}
+export {};

@@ -1,0 +1,8 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+/**
+ * The request for FirestoreAdmin.ExportDocuments.
+**/
+export declare class GoogleFirestoreAdminV1beta2ExportDocumentsRequest extends SpeakeasyBase {
+    collectionIds?: string[];
+    outputUriPrefix?: string;
+}

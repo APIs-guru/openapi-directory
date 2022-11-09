@@ -1,0 +1,26 @@
+export var PiiEntityTypeEnum;
+(function (PiiEntityTypeEnum) {
+    PiiEntityTypeEnum["BankAccountNumber"] = "BANK_ACCOUNT_NUMBER";
+    PiiEntityTypeEnum["BankRouting"] = "BANK_ROUTING";
+    PiiEntityTypeEnum["CreditDebitNumber"] = "CREDIT_DEBIT_NUMBER";
+    PiiEntityTypeEnum["CreditDebitCvv"] = "CREDIT_DEBIT_CVV";
+    PiiEntityTypeEnum["CreditDebitExpiry"] = "CREDIT_DEBIT_EXPIRY";
+    PiiEntityTypeEnum["Pin"] = "PIN";
+    PiiEntityTypeEnum["Email"] = "EMAIL";
+    PiiEntityTypeEnum["Address"] = "ADDRESS";
+    PiiEntityTypeEnum["Name"] = "NAME";
+    PiiEntityTypeEnum["Phone"] = "PHONE";
+    PiiEntityTypeEnum["Ssn"] = "SSN";
+    PiiEntityTypeEnum["DateTime"] = "DATE_TIME";
+    PiiEntityTypeEnum["PassportNumber"] = "PASSPORT_NUMBER";
+    PiiEntityTypeEnum["DriverId"] = "DRIVER_ID";
+    PiiEntityTypeEnum["Url"] = "URL";
+    PiiEntityTypeEnum["Age"] = "AGE";
+    PiiEntityTypeEnum["Username"] = "USERNAME";
+    PiiEntityTypeEnum["Password"] = "PASSWORD";
+    PiiEntityTypeEnum["AwsAccessKey"] = "AWS_ACCESS_KEY";
+    PiiEntityTypeEnum["AwsSecretKey"] = "AWS_SECRET_KEY";
+    PiiEntityTypeEnum["IpAddress"] = "IP_ADDRESS";
+    PiiEntityTypeEnum["MacAddress"] = "MAC_ADDRESS";
+    PiiEntityTypeEnum["All"] = "ALL";
+})(PiiEntityTypeEnum || (PiiEntityTypeEnum = {}));

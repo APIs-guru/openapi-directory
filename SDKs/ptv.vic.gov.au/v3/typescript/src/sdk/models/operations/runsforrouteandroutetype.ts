@@ -1,0 +1,63 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+
+
+export class RunsForRouteAndRouteTypePathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=route_id" })
+  routeId: number;
+
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=route_type" })
+  routeType: number;
+}
+
+export enum RunsForRouteAndRouteTypeExpandEnum {
+    All = "All"
+,    VehicleDescriptor = "VehicleDescriptor"
+,    VehiclePosition = "VehiclePosition"
+,    None = "None"
+}
+
+
+export class RunsForRouteAndRouteTypeQueryParams extends SpeakeasyBase {
+  @Metadata({ data: "queryParam, style=form;explode=true;name=date_utc" })
+  dateUtc?: Date;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=devid" })
+  devid?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=expand" })
+  expand: RunsForRouteAndRouteTypeExpandEnum[];
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=signature" })
+  signature?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  token?: string;
+}
+
+
+export class RunsForRouteAndRouteTypeRequest extends SpeakeasyBase {
+  @Metadata()
+  pathParams: RunsForRouteAndRouteTypePathParams;
+
+  @Metadata()
+  queryParams: RunsForRouteAndRouteTypeQueryParams;
+}
+
+
+export class RunsForRouteAndRouteTypeResponse extends SpeakeasyBase {
+  @Metadata()
+  body?: Uint8Array;
+
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  statusCode: number;
+
+  @Metadata()
+  v3ErrorResponse?: shared.V3ErrorResponse;
+
+  @Metadata()
+  v3RunsResponse?: shared.V3RunsResponse;
+}

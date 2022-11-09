@@ -1,0 +1,7 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+export declare class UpdateComponentRequest extends SpeakeasyBase {
+    componentName: string;
+    newComponentName?: string;
+    resourceGroupName: string;
+    resourceList?: string[];
+}

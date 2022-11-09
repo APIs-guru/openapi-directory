@@ -1,0 +1,26 @@
+export var AwsRegionEnum;
+(function (AwsRegionEnum) {
+    AwsRegionEnum["AfSouth1"] = "af-south-1";
+    AwsRegionEnum["ApEast1"] = "ap-east-1";
+    AwsRegionEnum["ApSouth1"] = "ap-south-1";
+    AwsRegionEnum["ApSoutheast1"] = "ap-southeast-1";
+    AwsRegionEnum["ApSoutheast2"] = "ap-southeast-2";
+    AwsRegionEnum["ApNortheast1"] = "ap-northeast-1";
+    AwsRegionEnum["ApNortheast2"] = "ap-northeast-2";
+    AwsRegionEnum["ApNortheast3"] = "ap-northeast-3";
+    AwsRegionEnum["CaCentral1"] = "ca-central-1";
+    AwsRegionEnum["EuCentral1"] = "eu-central-1";
+    AwsRegionEnum["EuWest1"] = "eu-west-1";
+    AwsRegionEnum["EuWest2"] = "eu-west-2";
+    AwsRegionEnum["EuWest3"] = "eu-west-3";
+    AwsRegionEnum["EuNorth1"] = "eu-north-1";
+    AwsRegionEnum["EuSouth1"] = "eu-south-1";
+    AwsRegionEnum["MeSouth1"] = "me-south-1";
+    AwsRegionEnum["SaEast1"] = "sa-east-1";
+    AwsRegionEnum["UsEast1"] = "us-east-1";
+    AwsRegionEnum["UsEast2"] = "us-east-2";
+    AwsRegionEnum["UsWest1"] = "us-west-1";
+    AwsRegionEnum["UsWest2"] = "us-west-2";
+    AwsRegionEnum["CnNorth1"] = "cn-north-1";
+    AwsRegionEnum["CnNorthwest1"] = "cn-northwest-1";
+})(AwsRegionEnum || (AwsRegionEnum = {}));

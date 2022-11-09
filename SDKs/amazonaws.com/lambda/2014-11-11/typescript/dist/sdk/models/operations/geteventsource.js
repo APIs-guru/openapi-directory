@@ -1,0 +1,122 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var GetEventSourcePathParams = /** @class */ (function (_super) {
+    __extends(GetEventSourcePathParams, _super);
+    function GetEventSourcePathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=UUID" }),
+        __metadata("design:type", String)
+    ], GetEventSourcePathParams.prototype, "uuid", void 0);
+    return GetEventSourcePathParams;
+}(SpeakeasyBase));
+export { GetEventSourcePathParams };
+var GetEventSourceHeaders = /** @class */ (function (_super) {
+    __extends(GetEventSourceHeaders, _super);
+    function GetEventSourceHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], GetEventSourceHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], GetEventSourceHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], GetEventSourceHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], GetEventSourceHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], GetEventSourceHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], GetEventSourceHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], GetEventSourceHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return GetEventSourceHeaders;
+}(SpeakeasyBase));
+export { GetEventSourceHeaders };
+var GetEventSourceRequest = /** @class */ (function (_super) {
+    __extends(GetEventSourceRequest, _super);
+    function GetEventSourceRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetEventSourcePathParams)
+    ], GetEventSourceRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetEventSourceHeaders)
+    ], GetEventSourceRequest.prototype, "headers", void 0);
+    return GetEventSourceRequest;
+}(SpeakeasyBase));
+export { GetEventSourceRequest };
+var GetEventSourceResponse = /** @class */ (function (_super) {
+    __extends(GetEventSourceResponse, _super);
+    function GetEventSourceResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetEventSourceResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.EventSourceConfiguration)
+    ], GetEventSourceResponse.prototype, "eventSourceConfiguration", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.InvalidParameterValueException)
+    ], GetEventSourceResponse.prototype, "invalidParameterValueException", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.ResourceNotFoundException)
+    ], GetEventSourceResponse.prototype, "resourceNotFoundException", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.ServiceException)
+    ], GetEventSourceResponse.prototype, "serviceException", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetEventSourceResponse.prototype, "statusCode", void 0);
+    return GetEventSourceResponse;
+}(SpeakeasyBase));
+export { GetEventSourceResponse };

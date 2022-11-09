@@ -1,0 +1,28 @@
+export var DataSetTypeEnum;
+(function (DataSetTypeEnum) {
+    DataSetTypeEnum["CustomerSubscriberHourlyMonthlySubscriptions"] = "customer_subscriber_hourly_monthly_subscriptions";
+    DataSetTypeEnum["CustomerSubscriberAnnualSubscriptions"] = "customer_subscriber_annual_subscriptions";
+    DataSetTypeEnum["DailyBusinessUsageByInstanceType"] = "daily_business_usage_by_instance_type";
+    DataSetTypeEnum["DailyBusinessFees"] = "daily_business_fees";
+    DataSetTypeEnum["DailyBusinessFreeTrialConversions"] = "daily_business_free_trial_conversions";
+    DataSetTypeEnum["DailyBusinessNewInstances"] = "daily_business_new_instances";
+    DataSetTypeEnum["DailyBusinessNewProductSubscribers"] = "daily_business_new_product_subscribers";
+    DataSetTypeEnum["DailyBusinessCanceledProductSubscribers"] = "daily_business_canceled_product_subscribers";
+    DataSetTypeEnum["MonthlyRevenueBillingAndRevenueData"] = "monthly_revenue_billing_and_revenue_data";
+    DataSetTypeEnum["MonthlyRevenueAnnualSubscriptions"] = "monthly_revenue_annual_subscriptions";
+    DataSetTypeEnum["MonthlyRevenueFieldDemonstrationUsage"] = "monthly_revenue_field_demonstration_usage";
+    DataSetTypeEnum["MonthlyRevenueFlexiblePaymentSchedule"] = "monthly_revenue_flexible_payment_schedule";
+    DataSetTypeEnum["DisbursedAmountByProduct"] = "disbursed_amount_by_product";
+    DataSetTypeEnum["DisbursedAmountByProductWithUncollectedFunds"] = "disbursed_amount_by_product_with_uncollected_funds";
+    DataSetTypeEnum["DisbursedAmountByInstanceHours"] = "disbursed_amount_by_instance_hours";
+    DataSetTypeEnum["DisbursedAmountByCustomerGeo"] = "disbursed_amount_by_customer_geo";
+    DataSetTypeEnum["DisbursedAmountByAgeOfUncollectedFunds"] = "disbursed_amount_by_age_of_uncollected_funds";
+    DataSetTypeEnum["DisbursedAmountByAgeOfDisbursedFunds"] = "disbursed_amount_by_age_of_disbursed_funds";
+    DataSetTypeEnum["DisbursedAmountByAgeOfPastDueFunds"] = "disbursed_amount_by_age_of_past_due_funds";
+    DataSetTypeEnum["DisbursedAmountByUncollectedFundsBreakdown"] = "disbursed_amount_by_uncollected_funds_breakdown";
+    DataSetTypeEnum["CustomerProfileByIndustry"] = "customer_profile_by_industry";
+    DataSetTypeEnum["CustomerProfileByRevenue"] = "customer_profile_by_revenue";
+    DataSetTypeEnum["CustomerProfileByGeography"] = "customer_profile_by_geography";
+    DataSetTypeEnum["SalesCompensationBilledRevenue"] = "sales_compensation_billed_revenue";
+    DataSetTypeEnum["UsSalesAndUseTaxRecords"] = "us_sales_and_use_tax_records";
+})(DataSetTypeEnum || (DataSetTypeEnum = {}));

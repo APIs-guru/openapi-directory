@@ -1,0 +1,135 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+export enum MitreAttackAdditionalTacticsEnum {
+    TacticUnspecified = "TACTIC_UNSPECIFIED"
+,    Reconnaissance = "RECONNAISSANCE"
+,    ResourceDevelopment = "RESOURCE_DEVELOPMENT"
+,    InitialAccess = "INITIAL_ACCESS"
+,    Execution = "EXECUTION"
+,    Persistence = "PERSISTENCE"
+,    PrivilegeEscalation = "PRIVILEGE_ESCALATION"
+,    DefenseEvasion = "DEFENSE_EVASION"
+,    CredentialAccess = "CREDENTIAL_ACCESS"
+,    Discovery = "DISCOVERY"
+,    LateralMovement = "LATERAL_MOVEMENT"
+,    Collection = "COLLECTION"
+,    CommandAndControl = "COMMAND_AND_CONTROL"
+,    Exfiltration = "EXFILTRATION"
+,    Impact = "IMPACT"
+}
+
+export enum MitreAttackAdditionalTechniquesEnum {
+    TechniqueUnspecified = "TECHNIQUE_UNSPECIFIED"
+,    ActiveScanning = "ACTIVE_SCANNING"
+,    ScanningIpBlocks = "SCANNING_IP_BLOCKS"
+,    IngressToolTransfer = "INGRESS_TOOL_TRANSFER"
+,    NativeApi = "NATIVE_API"
+,    SharedModules = "SHARED_MODULES"
+,    CommandAndScriptingInterpreter = "COMMAND_AND_SCRIPTING_INTERPRETER"
+,    UnixShell = "UNIX_SHELL"
+,    ResourceHijacking = "RESOURCE_HIJACKING"
+,    Proxy = "PROXY"
+,    ExternalProxy = "EXTERNAL_PROXY"
+,    MultiHopProxy = "MULTI_HOP_PROXY"
+,    DynamicResolution = "DYNAMIC_RESOLUTION"
+,    UnsecuredCredentials = "UNSECURED_CREDENTIALS"
+,    ValidAccounts = "VALID_ACCOUNTS"
+,    LocalAccounts = "LOCAL_ACCOUNTS"
+,    CloudAccounts = "CLOUD_ACCOUNTS"
+,    NetworkDenialOfService = "NETWORK_DENIAL_OF_SERVICE"
+,    PermissionGroupsDiscovery = "PERMISSION_GROUPS_DISCOVERY"
+,    CloudGroups = "CLOUD_GROUPS"
+,    ExfiltrationOverWebService = "EXFILTRATION_OVER_WEB_SERVICE"
+,    ExfiltrationToCloudStorage = "EXFILTRATION_TO_CLOUD_STORAGE"
+,    AccountManipulation = "ACCOUNT_MANIPULATION"
+,    SshAuthorizedKeys = "SSH_AUTHORIZED_KEYS"
+,    CreateOrModifySystemProcess = "CREATE_OR_MODIFY_SYSTEM_PROCESS"
+,    StealWebSessionCookie = "STEAL_WEB_SESSION_COOKIE"
+,    ModifyCloudComputeInfrastructure = "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE"
+,    ExploitPublicFacingApplication = "EXPLOIT_PUBLIC_FACING_APPLICATION"
+,    ModifyAuthenticationProcess = "MODIFY_AUTHENTICATION_PROCESS"
+,    DataDestruction = "DATA_DESTRUCTION"
+,    DomainPolicyModification = "DOMAIN_POLICY_MODIFICATION"
+,    ImpairDefenses = "IMPAIR_DEFENSES"
+,    NetworkServiceDiscovery = "NETWORK_SERVICE_DISCOVERY"
+,    AccessTokenManipulation = "ACCESS_TOKEN_MANIPULATION"
+,    AbuseElevationControlMechanism = "ABUSE_ELEVATION_CONTROL_MECHANISM"
+}
+
+export enum MitreAttackPrimaryTacticEnum {
+    TacticUnspecified = "TACTIC_UNSPECIFIED"
+,    Reconnaissance = "RECONNAISSANCE"
+,    ResourceDevelopment = "RESOURCE_DEVELOPMENT"
+,    InitialAccess = "INITIAL_ACCESS"
+,    Execution = "EXECUTION"
+,    Persistence = "PERSISTENCE"
+,    PrivilegeEscalation = "PRIVILEGE_ESCALATION"
+,    DefenseEvasion = "DEFENSE_EVASION"
+,    CredentialAccess = "CREDENTIAL_ACCESS"
+,    Discovery = "DISCOVERY"
+,    LateralMovement = "LATERAL_MOVEMENT"
+,    Collection = "COLLECTION"
+,    CommandAndControl = "COMMAND_AND_CONTROL"
+,    Exfiltration = "EXFILTRATION"
+,    Impact = "IMPACT"
+}
+
+export enum MitreAttackPrimaryTechniquesEnum {
+    TechniqueUnspecified = "TECHNIQUE_UNSPECIFIED"
+,    ActiveScanning = "ACTIVE_SCANNING"
+,    ScanningIpBlocks = "SCANNING_IP_BLOCKS"
+,    IngressToolTransfer = "INGRESS_TOOL_TRANSFER"
+,    NativeApi = "NATIVE_API"
+,    SharedModules = "SHARED_MODULES"
+,    CommandAndScriptingInterpreter = "COMMAND_AND_SCRIPTING_INTERPRETER"
+,    UnixShell = "UNIX_SHELL"
+,    ResourceHijacking = "RESOURCE_HIJACKING"
+,    Proxy = "PROXY"
+,    ExternalProxy = "EXTERNAL_PROXY"
+,    MultiHopProxy = "MULTI_HOP_PROXY"
+,    DynamicResolution = "DYNAMIC_RESOLUTION"
+,    UnsecuredCredentials = "UNSECURED_CREDENTIALS"
+,    ValidAccounts = "VALID_ACCOUNTS"
+,    LocalAccounts = "LOCAL_ACCOUNTS"
+,    CloudAccounts = "CLOUD_ACCOUNTS"
+,    NetworkDenialOfService = "NETWORK_DENIAL_OF_SERVICE"
+,    PermissionGroupsDiscovery = "PERMISSION_GROUPS_DISCOVERY"
+,    CloudGroups = "CLOUD_GROUPS"
+,    ExfiltrationOverWebService = "EXFILTRATION_OVER_WEB_SERVICE"
+,    ExfiltrationToCloudStorage = "EXFILTRATION_TO_CLOUD_STORAGE"
+,    AccountManipulation = "ACCOUNT_MANIPULATION"
+,    SshAuthorizedKeys = "SSH_AUTHORIZED_KEYS"
+,    CreateOrModifySystemProcess = "CREATE_OR_MODIFY_SYSTEM_PROCESS"
+,    StealWebSessionCookie = "STEAL_WEB_SESSION_COOKIE"
+,    ModifyCloudComputeInfrastructure = "MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE"
+,    ExploitPublicFacingApplication = "EXPLOIT_PUBLIC_FACING_APPLICATION"
+,    ModifyAuthenticationProcess = "MODIFY_AUTHENTICATION_PROCESS"
+,    DataDestruction = "DATA_DESTRUCTION"
+,    DomainPolicyModification = "DOMAIN_POLICY_MODIFICATION"
+,    ImpairDefenses = "IMPAIR_DEFENSES"
+,    NetworkServiceDiscovery = "NETWORK_SERVICE_DISCOVERY"
+,    AccessTokenManipulation = "ACCESS_TOKEN_MANIPULATION"
+,    AbuseElevationControlMechanism = "ABUSE_ELEVATION_CONTROL_MECHANISM"
+}
+
+
+// MitreAttack
+/** 
+ * MITRE ATT&CK tactics and techniques related to this finding. See: https://attack.mitre.org
+**/
+export class MitreAttack extends SpeakeasyBase {
+  @Metadata({ data: "json, name=additionalTactics" })
+  additionalTactics?: MitreAttackAdditionalTacticsEnum[];
+
+  @Metadata({ data: "json, name=additionalTechniques" })
+  additionalTechniques?: MitreAttackAdditionalTechniquesEnum[];
+
+  @Metadata({ data: "json, name=primaryTactic" })
+  primaryTactic?: MitreAttackPrimaryTacticEnum;
+
+  @Metadata({ data: "json, name=primaryTechniques" })
+  primaryTechniques?: MitreAttackPrimaryTechniquesEnum[];
+
+  @Metadata({ data: "json, name=version" })
+  version?: string;
+}

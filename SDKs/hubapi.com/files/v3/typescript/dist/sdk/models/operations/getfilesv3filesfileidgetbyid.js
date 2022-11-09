@@ -1,0 +1,150 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var GetFilesV3FilesFileIdGetByIdPathParams = /** @class */ (function (_super) {
+    __extends(GetFilesV3FilesFileIdGetByIdPathParams, _super);
+    function GetFilesV3FilesFileIdGetByIdPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=fileId" }),
+        __metadata("design:type", String)
+    ], GetFilesV3FilesFileIdGetByIdPathParams.prototype, "fileId", void 0);
+    return GetFilesV3FilesFileIdGetByIdPathParams;
+}(SpeakeasyBase));
+export { GetFilesV3FilesFileIdGetByIdPathParams };
+var GetFilesV3FilesFileIdGetByIdQueryParams = /** @class */ (function (_super) {
+    __extends(GetFilesV3FilesFileIdGetByIdQueryParams, _super);
+    function GetFilesV3FilesFileIdGetByIdQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=properties" }),
+        __metadata("design:type", Array)
+    ], GetFilesV3FilesFileIdGetByIdQueryParams.prototype, "properties", void 0);
+    return GetFilesV3FilesFileIdGetByIdQueryParams;
+}(SpeakeasyBase));
+export { GetFilesV3FilesFileIdGetByIdQueryParams };
+var GetFilesV3FilesFileIdGetByIdSecurityOption1 = /** @class */ (function (_super) {
+    __extends(GetFilesV3FilesFileIdGetByIdSecurityOption1, _super);
+    function GetFilesV3FilesFileIdGetByIdSecurityOption1() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2Legacy)
+    ], GetFilesV3FilesFileIdGetByIdSecurityOption1.prototype, "oauth2Legacy", void 0);
+    return GetFilesV3FilesFileIdGetByIdSecurityOption1;
+}(SpeakeasyBase));
+export { GetFilesV3FilesFileIdGetByIdSecurityOption1 };
+var GetFilesV3FilesFileIdGetByIdSecurityOption2 = /** @class */ (function (_super) {
+    __extends(GetFilesV3FilesFileIdGetByIdSecurityOption2, _super);
+    function GetFilesV3FilesFileIdGetByIdSecurityOption2() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=apiKey;subtype=query" }),
+        __metadata("design:type", shared.SchemeHapikey)
+    ], GetFilesV3FilesFileIdGetByIdSecurityOption2.prototype, "hapikey", void 0);
+    return GetFilesV3FilesFileIdGetByIdSecurityOption2;
+}(SpeakeasyBase));
+export { GetFilesV3FilesFileIdGetByIdSecurityOption2 };
+var GetFilesV3FilesFileIdGetByIdSecurityOption3 = /** @class */ (function (_super) {
+    __extends(GetFilesV3FilesFileIdGetByIdSecurityOption3, _super);
+    function GetFilesV3FilesFileIdGetByIdSecurityOption3() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2Legacy)
+    ], GetFilesV3FilesFileIdGetByIdSecurityOption3.prototype, "oauth2Legacy", void 0);
+    return GetFilesV3FilesFileIdGetByIdSecurityOption3;
+}(SpeakeasyBase));
+export { GetFilesV3FilesFileIdGetByIdSecurityOption3 };
+var GetFilesV3FilesFileIdGetByIdSecurity = /** @class */ (function (_super) {
+    __extends(GetFilesV3FilesFileIdGetByIdSecurity, _super);
+    function GetFilesV3FilesFileIdGetByIdSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, option=true" }),
+        __metadata("design:type", GetFilesV3FilesFileIdGetByIdSecurityOption1)
+    ], GetFilesV3FilesFileIdGetByIdSecurity.prototype, "option1", void 0);
+    __decorate([
+        Metadata({ data: "security, option=true" }),
+        __metadata("design:type", GetFilesV3FilesFileIdGetByIdSecurityOption2)
+    ], GetFilesV3FilesFileIdGetByIdSecurity.prototype, "option2", void 0);
+    __decorate([
+        Metadata({ data: "security, option=true" }),
+        __metadata("design:type", GetFilesV3FilesFileIdGetByIdSecurityOption3)
+    ], GetFilesV3FilesFileIdGetByIdSecurity.prototype, "option3", void 0);
+    return GetFilesV3FilesFileIdGetByIdSecurity;
+}(SpeakeasyBase));
+export { GetFilesV3FilesFileIdGetByIdSecurity };
+var GetFilesV3FilesFileIdGetByIdRequest = /** @class */ (function (_super) {
+    __extends(GetFilesV3FilesFileIdGetByIdRequest, _super);
+    function GetFilesV3FilesFileIdGetByIdRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetFilesV3FilesFileIdGetByIdPathParams)
+    ], GetFilesV3FilesFileIdGetByIdRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetFilesV3FilesFileIdGetByIdQueryParams)
+    ], GetFilesV3FilesFileIdGetByIdRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetFilesV3FilesFileIdGetByIdSecurity)
+    ], GetFilesV3FilesFileIdGetByIdRequest.prototype, "security", void 0);
+    return GetFilesV3FilesFileIdGetByIdRequest;
+}(SpeakeasyBase));
+export { GetFilesV3FilesFileIdGetByIdRequest };
+var GetFilesV3FilesFileIdGetByIdResponse = /** @class */ (function (_super) {
+    __extends(GetFilesV3FilesFileIdGetByIdResponse, _super);
+    function GetFilesV3FilesFileIdGetByIdResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Uint8Array)
+    ], GetFilesV3FilesFileIdGetByIdResponse.prototype, "body", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetFilesV3FilesFileIdGetByIdResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.File)
+    ], GetFilesV3FilesFileIdGetByIdResponse.prototype, "file", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetFilesV3FilesFileIdGetByIdResponse.prototype, "statusCode", void 0);
+    return GetFilesV3FilesFileIdGetByIdResponse;
+}(SpeakeasyBase));
+export { GetFilesV3FilesFileIdGetByIdResponse };

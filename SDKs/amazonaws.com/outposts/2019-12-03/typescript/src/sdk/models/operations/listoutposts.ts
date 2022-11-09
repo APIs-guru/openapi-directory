@@ -1,0 +1,74 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+
+
+export class ListOutpostsQueryParams extends SpeakeasyBase {
+  @Metadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZoneFilter" })
+  availabilityZoneFilter?: string[];
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=AvailabilityZoneIdFilter" })
+  availabilityZoneIdFilter?: string[];
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=LifeCycleStatusFilter" })
+  lifeCycleStatusFilter?: string[];
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" })
+  maxResults?: number;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" })
+  nextToken?: string;
+}
+
+
+export class ListOutpostsHeaders extends SpeakeasyBase {
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  xAmzAlgorithm?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  xAmzContentSha256?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  xAmzCredential?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  xAmzDate?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  xAmzSecurityToken?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  xAmzSignature?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  xAmzSignedHeaders?: string;
+}
+
+
+export class ListOutpostsRequest extends SpeakeasyBase {
+  @Metadata()
+  queryParams: ListOutpostsQueryParams;
+
+  @Metadata()
+  headers: ListOutpostsHeaders;
+}
+
+
+export class ListOutpostsResponse extends SpeakeasyBase {
+  @Metadata()
+  accessDeniedException?: any;
+
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  internalServerException?: any;
+
+  @Metadata()
+  listOutpostsOutput?: shared.ListOutpostsOutput;
+
+  @Metadata()
+  statusCode: number;
+
+  @Metadata()
+  validationException?: any;
+}

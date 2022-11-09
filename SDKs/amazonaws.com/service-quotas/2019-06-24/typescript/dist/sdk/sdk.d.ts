@@ -1,0 +1,34 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    AssociateServiceQuotaTemplate(req: operations.AssociateServiceQuotaTemplateRequest, config?: AxiosRequestConfig): Promise<operations.AssociateServiceQuotaTemplateResponse>;
+    DeleteServiceQuotaIncreaseRequestFromTemplate(req: operations.DeleteServiceQuotaIncreaseRequestFromTemplateRequest, config?: AxiosRequestConfig): Promise<operations.DeleteServiceQuotaIncreaseRequestFromTemplateResponse>;
+    DisassociateServiceQuotaTemplate(req: operations.DisassociateServiceQuotaTemplateRequest, config?: AxiosRequestConfig): Promise<operations.DisassociateServiceQuotaTemplateResponse>;
+    GetAwsDefaultServiceQuota(req: operations.GetAwsDefaultServiceQuotaRequest, config?: AxiosRequestConfig): Promise<operations.GetAwsDefaultServiceQuotaResponse>;
+    GetAssociationForServiceQuotaTemplate(req: operations.GetAssociationForServiceQuotaTemplateRequest, config?: AxiosRequestConfig): Promise<operations.GetAssociationForServiceQuotaTemplateResponse>;
+    GetRequestedServiceQuotaChange(req: operations.GetRequestedServiceQuotaChangeRequest, config?: AxiosRequestConfig): Promise<operations.GetRequestedServiceQuotaChangeResponse>;
+    GetServiceQuota(req: operations.GetServiceQuotaRequest, config?: AxiosRequestConfig): Promise<operations.GetServiceQuotaResponse>;
+    GetServiceQuotaIncreaseRequestFromTemplate(req: operations.GetServiceQuotaIncreaseRequestFromTemplateRequest, config?: AxiosRequestConfig): Promise<operations.GetServiceQuotaIncreaseRequestFromTemplateResponse>;
+    ListAwsDefaultServiceQuotas(req: operations.ListAwsDefaultServiceQuotasRequest, config?: AxiosRequestConfig): Promise<operations.ListAwsDefaultServiceQuotasResponse>;
+    ListRequestedServiceQuotaChangeHistory(req: operations.ListRequestedServiceQuotaChangeHistoryRequest, config?: AxiosRequestConfig): Promise<operations.ListRequestedServiceQuotaChangeHistoryResponse>;
+    ListRequestedServiceQuotaChangeHistoryByQuota(req: operations.ListRequestedServiceQuotaChangeHistoryByQuotaRequest, config?: AxiosRequestConfig): Promise<operations.ListRequestedServiceQuotaChangeHistoryByQuotaResponse>;
+    ListServiceQuotaIncreaseRequestsInTemplate(req: operations.ListServiceQuotaIncreaseRequestsInTemplateRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceQuotaIncreaseRequestsInTemplateResponse>;
+    ListServiceQuotas(req: operations.ListServiceQuotasRequest, config?: AxiosRequestConfig): Promise<operations.ListServiceQuotasResponse>;
+    ListServices(req: operations.ListServicesRequest, config?: AxiosRequestConfig): Promise<operations.ListServicesResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    PutServiceQuotaIncreaseRequestIntoTemplate(req: operations.PutServiceQuotaIncreaseRequestIntoTemplateRequest, config?: AxiosRequestConfig): Promise<operations.PutServiceQuotaIncreaseRequestIntoTemplateResponse>;
+    RequestServiceQuotaIncrease(req: operations.RequestServiceQuotaIncreaseRequest, config?: AxiosRequestConfig): Promise<operations.RequestServiceQuotaIncreaseResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+}
+export {};

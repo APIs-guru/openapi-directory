@@ -1,0 +1,32 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+export declare class Investigation extends SpeakeasyBase {
+    childDocuments?: Map<string, any>;
+    assay?: string;
+    documentUuid?: string;
+    effectendpoint?: string;
+    endpoint?: string;
+    endpointcategory?: string;
+    err?: number;
+    errQualifier?: string;
+    guidance?: string;
+    investigation?: string;
+    loQualifier?: string;
+    loValue?: number;
+    name?: string;
+    ownerName?: string;
+    publicname?: string;
+    reference?: string;
+    referenceOwner?: string;
+    referenceYear?: string;
+    resulttype?: string;
+    sUuid?: string;
+    studyResultType?: string;
+    substanceType?: string;
+    textValue?: string;
+    topcategory?: string;
+    typeS?: string;
+    unit?: string;
+    upQualifier?: string;
+    upValue?: number;
+    updated?: string;
+}

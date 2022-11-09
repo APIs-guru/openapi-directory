@@ -1,0 +1,38 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+export declare class AssetServiceNow extends SpeakeasyBase {
+    addressesExtra?: string;
+    addressesScope?: string;
+    alive?: boolean;
+    assetId: string;
+    comments?: string;
+    detectedBy?: string;
+    domains?: string;
+    firstDiscovered?: string;
+    hwProduct?: string;
+    hwVendor?: string;
+    hwVersion?: string;
+    ipAddress?: string;
+    lastDiscovered?: string;
+    lastUpdated?: string;
+    lowestRtt?: number;
+    lowestTtl?: number;
+    macAddress?: string;
+    macManufacturer?: string;
+    macVendors?: string;
+    macs?: string;
+    name?: string;
+    newestMacAge?: string;
+    organization?: string;
+    osProduct?: string;
+    osVendor?: string;
+    osVersion?: string;
+    serviceCount?: number;
+    serviceCountArp?: number;
+    serviceCountIcmp?: number;
+    serviceCountTcp?: number;
+    serviceCountUdp?: number;
+    site?: string;
+    sysClassName?: string;
+    tags?: string;
+    type?: string;
+}

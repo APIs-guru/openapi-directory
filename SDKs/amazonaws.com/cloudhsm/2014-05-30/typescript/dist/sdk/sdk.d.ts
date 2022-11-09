@@ -1,0 +1,35 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    AddTagsToResource(req: operations.AddTagsToResourceRequest, config?: AxiosRequestConfig): Promise<operations.AddTagsToResourceResponse>;
+    CreateHapg(req: operations.CreateHapgRequest, config?: AxiosRequestConfig): Promise<operations.CreateHapgResponse>;
+    CreateHsm(req: operations.CreateHsmRequest, config?: AxiosRequestConfig): Promise<operations.CreateHsmResponse>;
+    CreateLunaClient(req: operations.CreateLunaClientRequest, config?: AxiosRequestConfig): Promise<operations.CreateLunaClientResponse>;
+    DeleteHapg(req: operations.DeleteHapgRequest, config?: AxiosRequestConfig): Promise<operations.DeleteHapgResponse>;
+    DeleteHsm(req: operations.DeleteHsmRequest, config?: AxiosRequestConfig): Promise<operations.DeleteHsmResponse>;
+    DeleteLunaClient(req: operations.DeleteLunaClientRequest, config?: AxiosRequestConfig): Promise<operations.DeleteLunaClientResponse>;
+    DescribeHapg(req: operations.DescribeHapgRequest, config?: AxiosRequestConfig): Promise<operations.DescribeHapgResponse>;
+    DescribeHsm(req: operations.DescribeHsmRequest, config?: AxiosRequestConfig): Promise<operations.DescribeHsmResponse>;
+    DescribeLunaClient(req: operations.DescribeLunaClientRequest, config?: AxiosRequestConfig): Promise<operations.DescribeLunaClientResponse>;
+    GetConfig(req: operations.GetConfigRequest, config?: AxiosRequestConfig): Promise<operations.GetConfigResponse>;
+    ListAvailableZones(req: operations.ListAvailableZonesRequest, config?: AxiosRequestConfig): Promise<operations.ListAvailableZonesResponse>;
+    ListHapgs(req: operations.ListHapgsRequest, config?: AxiosRequestConfig): Promise<operations.ListHapgsResponse>;
+    ListHsms(req: operations.ListHsmsRequest, config?: AxiosRequestConfig): Promise<operations.ListHsmsResponse>;
+    ListLunaClients(req: operations.ListLunaClientsRequest, config?: AxiosRequestConfig): Promise<operations.ListLunaClientsResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    ModifyHapg(req: operations.ModifyHapgRequest, config?: AxiosRequestConfig): Promise<operations.ModifyHapgResponse>;
+    ModifyHsm(req: operations.ModifyHsmRequest, config?: AxiosRequestConfig): Promise<operations.ModifyHsmResponse>;
+    ModifyLunaClient(req: operations.ModifyLunaClientRequest, config?: AxiosRequestConfig): Promise<operations.ModifyLunaClientResponse>;
+    RemoveTagsFromResource(req: operations.RemoveTagsFromResourceRequest, config?: AxiosRequestConfig): Promise<operations.RemoveTagsFromResourceResponse>;
+}
+export {};

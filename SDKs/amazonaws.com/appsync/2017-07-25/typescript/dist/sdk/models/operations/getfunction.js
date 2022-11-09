@@ -1,0 +1,126 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var GetFunctionPathParams = /** @class */ (function (_super) {
+    __extends(GetFunctionPathParams, _super);
+    function GetFunctionPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=apiId" }),
+        __metadata("design:type", String)
+    ], GetFunctionPathParams.prototype, "apiId", void 0);
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=functionId" }),
+        __metadata("design:type", String)
+    ], GetFunctionPathParams.prototype, "functionId", void 0);
+    return GetFunctionPathParams;
+}(SpeakeasyBase));
+export { GetFunctionPathParams };
+var GetFunctionHeaders = /** @class */ (function (_super) {
+    __extends(GetFunctionHeaders, _super);
+    function GetFunctionHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], GetFunctionHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], GetFunctionHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], GetFunctionHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], GetFunctionHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], GetFunctionHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], GetFunctionHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], GetFunctionHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return GetFunctionHeaders;
+}(SpeakeasyBase));
+export { GetFunctionHeaders };
+var GetFunctionRequest = /** @class */ (function (_super) {
+    __extends(GetFunctionRequest, _super);
+    function GetFunctionRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetFunctionPathParams)
+    ], GetFunctionRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetFunctionHeaders)
+    ], GetFunctionRequest.prototype, "headers", void 0);
+    return GetFunctionRequest;
+}(SpeakeasyBase));
+export { GetFunctionRequest };
+var GetFunctionResponse = /** @class */ (function (_super) {
+    __extends(GetFunctionResponse, _super);
+    function GetFunctionResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Object)
+    ], GetFunctionResponse.prototype, "concurrentModificationException", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetFunctionResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.GetFunctionResponse)
+    ], GetFunctionResponse.prototype, "getFunctionResponse", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Object)
+    ], GetFunctionResponse.prototype, "notFoundException", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetFunctionResponse.prototype, "statusCode", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Object)
+    ], GetFunctionResponse.prototype, "unauthorizedException", void 0);
+    return GetFunctionResponse;
+}(SpeakeasyBase));
+export { GetFunctionResponse };

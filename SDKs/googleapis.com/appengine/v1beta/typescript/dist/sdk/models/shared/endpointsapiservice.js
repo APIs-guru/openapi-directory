@@ -1,0 +1,59 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+export var EndpointsApiServiceRolloutStrategyEnum;
+(function (EndpointsApiServiceRolloutStrategyEnum) {
+    EndpointsApiServiceRolloutStrategyEnum["UnspecifiedRolloutStrategy"] = "UNSPECIFIED_ROLLOUT_STRATEGY";
+    EndpointsApiServiceRolloutStrategyEnum["Fixed"] = "FIXED";
+    EndpointsApiServiceRolloutStrategyEnum["Managed"] = "MANAGED";
+})(EndpointsApiServiceRolloutStrategyEnum || (EndpointsApiServiceRolloutStrategyEnum = {}));
+// EndpointsApiService
+/**
+ * Google Cloud Endpoints (https://cloud.google.com/endpoints) configuration. The Endpoints API Service provides tooling for serving Open API and gRPC endpoints via an NGINX proxy. Only valid for App Engine Flexible environment deployments.The fields here refer to the name and configuration ID of a "service" resource in the Service Management API (https://cloud.google.com/service-management/overview).
+**/
+var EndpointsApiService = /** @class */ (function (_super) {
+    __extends(EndpointsApiService, _super);
+    function EndpointsApiService() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=configId" }),
+        __metadata("design:type", String)
+    ], EndpointsApiService.prototype, "configId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=disableTraceSampling" }),
+        __metadata("design:type", Boolean)
+    ], EndpointsApiService.prototype, "disableTraceSampling", void 0);
+    __decorate([
+        Metadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], EndpointsApiService.prototype, "name", void 0);
+    __decorate([
+        Metadata({ data: "json, name=rolloutStrategy" }),
+        __metadata("design:type", String)
+    ], EndpointsApiService.prototype, "rolloutStrategy", void 0);
+    return EndpointsApiService;
+}(SpeakeasyBase));
+export { EndpointsApiService };

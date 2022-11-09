@@ -1,0 +1,25 @@
+export var ExportableLambdaFunctionFieldEnum;
+(function (ExportableLambdaFunctionFieldEnum) {
+    ExportableLambdaFunctionFieldEnum["AccountId"] = "AccountId";
+    ExportableLambdaFunctionFieldEnum["FunctionArn"] = "FunctionArn";
+    ExportableLambdaFunctionFieldEnum["FunctionVersion"] = "FunctionVersion";
+    ExportableLambdaFunctionFieldEnum["Finding"] = "Finding";
+    ExportableLambdaFunctionFieldEnum["FindingReasonCodes"] = "FindingReasonCodes";
+    ExportableLambdaFunctionFieldEnum["NumberOfInvocations"] = "NumberOfInvocations";
+    ExportableLambdaFunctionFieldEnum["UtilizationMetricsDurationMaximum"] = "UtilizationMetricsDurationMaximum";
+    ExportableLambdaFunctionFieldEnum["UtilizationMetricsDurationAverage"] = "UtilizationMetricsDurationAverage";
+    ExportableLambdaFunctionFieldEnum["UtilizationMetricsMemoryMaximum"] = "UtilizationMetricsMemoryMaximum";
+    ExportableLambdaFunctionFieldEnum["UtilizationMetricsMemoryAverage"] = "UtilizationMetricsMemoryAverage";
+    ExportableLambdaFunctionFieldEnum["LookbackPeriodInDays"] = "LookbackPeriodInDays";
+    ExportableLambdaFunctionFieldEnum["CurrentConfigurationMemorySize"] = "CurrentConfigurationMemorySize";
+    ExportableLambdaFunctionFieldEnum["CurrentConfigurationTimeout"] = "CurrentConfigurationTimeout";
+    ExportableLambdaFunctionFieldEnum["CurrentCostTotal"] = "CurrentCostTotal";
+    ExportableLambdaFunctionFieldEnum["CurrentCostAverage"] = "CurrentCostAverage";
+    ExportableLambdaFunctionFieldEnum["RecommendationOptionsConfigurationMemorySize"] = "RecommendationOptionsConfigurationMemorySize";
+    ExportableLambdaFunctionFieldEnum["RecommendationOptionsCostLow"] = "RecommendationOptionsCostLow";
+    ExportableLambdaFunctionFieldEnum["RecommendationOptionsCostHigh"] = "RecommendationOptionsCostHigh";
+    ExportableLambdaFunctionFieldEnum["RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"] = "RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound";
+    ExportableLambdaFunctionFieldEnum["RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"] = "RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound";
+    ExportableLambdaFunctionFieldEnum["RecommendationOptionsProjectedUtilizationMetricsDurationExpected"] = "RecommendationOptionsProjectedUtilizationMetricsDurationExpected";
+    ExportableLambdaFunctionFieldEnum["LastRefreshTimestamp"] = "LastRefreshTimestamp";
+})(ExportableLambdaFunctionFieldEnum || (ExportableLambdaFunctionFieldEnum = {}));

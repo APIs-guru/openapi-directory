@@ -1,0 +1,27 @@
+
+
+export enum AccountTypeEnum {
+    Bank = "BANK"
+,    Current = "CURRENT"
+,    Currliab = "CURRLIAB"
+,    Depreciatn = "DEPRECIATN"
+,    Directcosts = "DIRECTCOSTS"
+,    Equity = "EQUITY"
+,    Expense = "EXPENSE"
+,    Fixed = "FIXED"
+,    Inventory = "INVENTORY"
+,    Liability = "LIABILITY"
+,    Noncurrent = "NONCURRENT"
+,    Otherincome = "OTHERINCOME"
+,    Overheads = "OVERHEADS"
+,    Prepayment = "PREPAYMENT"
+,    Revenue = "REVENUE"
+,    Sales = "SALES"
+,    Termliab = "TERMLIAB"
+,    Paygliability = "PAYGLIABILITY"
+,    Payg = "PAYG"
+,    Superannuationexpense = "SUPERANNUATIONEXPENSE"
+,    Superannuationliability = "SUPERANNUATIONLIABILITY"
+,    Wagesexpense = "WAGESEXPENSE"
+,    Wagespayableliability = "WAGESPAYABLELIABILITY"
+}

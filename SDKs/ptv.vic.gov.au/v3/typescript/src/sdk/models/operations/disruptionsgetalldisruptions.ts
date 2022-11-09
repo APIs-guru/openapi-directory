@@ -1,0 +1,52 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+
+export enum DisruptionsGetAllDisruptionsDisruptionStatusEnum {
+    Current = "current"
+,    Planned = "planned"
+}
+
+
+export class DisruptionsGetAllDisruptionsQueryParams extends SpeakeasyBase {
+  @Metadata({ data: "queryParam, style=form;explode=true;name=devid" })
+  devid?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=disruption_modes" })
+  disruptionModes?: number[];
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=disruption_status" })
+  disruptionStatus?: DisruptionsGetAllDisruptionsDisruptionStatusEnum;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=route_types" })
+  routeTypes?: number[];
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=signature" })
+  signature?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=token" })
+  token?: string;
+}
+
+
+export class DisruptionsGetAllDisruptionsRequest extends SpeakeasyBase {
+  @Metadata()
+  queryParams: DisruptionsGetAllDisruptionsQueryParams;
+}
+
+
+export class DisruptionsGetAllDisruptionsResponse extends SpeakeasyBase {
+  @Metadata()
+  body?: Uint8Array;
+
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  statusCode: number;
+
+  @Metadata()
+  v3DisruptionsResponse?: shared.V3DisruptionsResponse;
+
+  @Metadata()
+  v3ErrorResponse?: shared.V3ErrorResponse;
+}

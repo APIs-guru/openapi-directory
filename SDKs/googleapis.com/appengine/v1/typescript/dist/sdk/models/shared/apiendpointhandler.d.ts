@@ -1,0 +1,7 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+/**
+ * Uses Google Cloud Endpoints to handle requests.
+**/
+export declare class ApiEndpointHandler extends SpeakeasyBase {
+    scriptPath?: string;
+}

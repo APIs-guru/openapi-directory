@@ -1,0 +1,35 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CreateCluster(req: operations.CreateClusterRequest, config?: AxiosRequestConfig): Promise<operations.CreateClusterResponse>;
+    CreateControlPanel(req: operations.CreateControlPanelRequest, config?: AxiosRequestConfig): Promise<operations.CreateControlPanelResponse>;
+    CreateRoutingControl(req: operations.CreateRoutingControlRequest, config?: AxiosRequestConfig): Promise<operations.CreateRoutingControlResponse>;
+    CreateSafetyRule(req: operations.CreateSafetyRuleRequest, config?: AxiosRequestConfig): Promise<operations.CreateSafetyRuleResponse>;
+    DeleteCluster(req: operations.DeleteClusterRequest, config?: AxiosRequestConfig): Promise<operations.DeleteClusterResponse>;
+    DeleteControlPanel(req: operations.DeleteControlPanelRequest, config?: AxiosRequestConfig): Promise<operations.DeleteControlPanelResponse>;
+    DeleteRoutingControl(req: operations.DeleteRoutingControlRequest, config?: AxiosRequestConfig): Promise<operations.DeleteRoutingControlResponse>;
+    DeleteSafetyRule(req: operations.DeleteSafetyRuleRequest, config?: AxiosRequestConfig): Promise<operations.DeleteSafetyRuleResponse>;
+    DescribeCluster(req: operations.DescribeClusterRequest, config?: AxiosRequestConfig): Promise<operations.DescribeClusterResponse>;
+    DescribeControlPanel(req: operations.DescribeControlPanelRequest, config?: AxiosRequestConfig): Promise<operations.DescribeControlPanelResponse>;
+    DescribeRoutingControl(req: operations.DescribeRoutingControlRequest, config?: AxiosRequestConfig): Promise<operations.DescribeRoutingControlResponse>;
+    DescribeSafetyRule(req: operations.DescribeSafetyRuleRequest, config?: AxiosRequestConfig): Promise<operations.DescribeSafetyRuleResponse>;
+    ListAssociatedRoute53HealthChecks(req: operations.ListAssociatedRoute53HealthChecksRequest, config?: AxiosRequestConfig): Promise<operations.ListAssociatedRoute53HealthChecksResponse>;
+    ListClusters(req: operations.ListClustersRequest, config?: AxiosRequestConfig): Promise<operations.ListClustersResponse>;
+    ListControlPanels(req: operations.ListControlPanelsRequest, config?: AxiosRequestConfig): Promise<operations.ListControlPanelsResponse>;
+    ListRoutingControls(req: operations.ListRoutingControlsRequest, config?: AxiosRequestConfig): Promise<operations.ListRoutingControlsResponse>;
+    ListSafetyRules(req: operations.ListSafetyRulesRequest, config?: AxiosRequestConfig): Promise<operations.ListSafetyRulesResponse>;
+    UpdateControlPanel(req: operations.UpdateControlPanelRequest, config?: AxiosRequestConfig): Promise<operations.UpdateControlPanelResponse>;
+    UpdateRoutingControl(req: operations.UpdateRoutingControlRequest, config?: AxiosRequestConfig): Promise<operations.UpdateRoutingControlResponse>;
+    UpdateSafetyRule(req: operations.UpdateSafetyRuleRequest, config?: AxiosRequestConfig): Promise<operations.UpdateSafetyRuleResponse>;
+}
+export {};

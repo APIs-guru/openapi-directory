@@ -1,0 +1,33 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    GetAuth(req: operations.GetAuthRequest, config?: AxiosRequestConfig): Promise<operations.GetAuthResponse>;
+    GetBelegeBelegUuid(req: operations.GetBelegeBelegUuidRequest, config?: AxiosRequestConfig): Promise<operations.GetBelegeBelegUuidResponse>;
+    GetExportCsvRegistrierkassenRegistrierkasseUuidBelege(req: operations.GetExportCsvRegistrierkassenRegistrierkasseUuidBelegeRequest, config?: AxiosRequestConfig): Promise<operations.GetExportCsvRegistrierkassenRegistrierkasseUuidBelegeResponse>;
+    GetExportDep131RegistrierkassenRegistrierkasseUuidBelege(req: operations.GetExportDep131RegistrierkassenRegistrierkasseUuidBelegeRequest, config?: AxiosRequestConfig): Promise<operations.GetExportDep131RegistrierkassenRegistrierkasseUuidBelegeResponse>;
+    GetExportDep7RegistrierkassenRegistrierkasseUuidBelege(req: operations.GetExportDep7RegistrierkassenRegistrierkasseUuidBelegeRequest, config?: AxiosRequestConfig): Promise<operations.GetExportDep7RegistrierkassenRegistrierkasseUuidBelegeResponse>;
+    GetExportGobdRegistrierkassenRegistrierkasseUuid(req: operations.GetExportGobdRegistrierkassenRegistrierkasseUuidRequest, config?: AxiosRequestConfig): Promise<operations.GetExportGobdRegistrierkassenRegistrierkasseUuidResponse>;
+    GetExportHtmlBelegeBelegUuid(req: operations.GetExportHtmlBelegeBelegUuidRequest, config?: AxiosRequestConfig): Promise<operations.GetExportHtmlBelegeBelegUuidResponse>;
+    GetExportPdfBelegeBelegUuid(req: operations.GetExportPdfBelegeBelegUuidRequest, config?: AxiosRequestConfig): Promise<operations.GetExportPdfBelegeBelegUuidResponse>;
+    GetExportQrBelegeBelegUuid(req: operations.GetExportQrBelegeBelegUuidRequest, config?: AxiosRequestConfig): Promise<operations.GetExportQrBelegeBelegUuidResponse>;
+    GetExportThermalPrintBelegeBelegUuid(req: operations.GetExportThermalPrintBelegeBelegUuidRequest, config?: AxiosRequestConfig): Promise<operations.GetExportThermalPrintBelegeBelegUuidResponse>;
+    GetExportXlsRegistrierkassenRegistrierkasseUuidBelege(req: operations.GetExportXlsRegistrierkassenRegistrierkasseUuidBelegeRequest, config?: AxiosRequestConfig): Promise<operations.GetExportXlsRegistrierkassenRegistrierkasseUuidBelegeResponse>;
+    AddBeleg(req: operations.AddBelegRequest, config?: AxiosRequestConfig): Promise<operations.AddBelegResponse>;
+    CreateAbschluss(req: operations.CreateAbschlussRequest, config?: AxiosRequestConfig): Promise<operations.CreateAbschlussResponse>;
+    GetBeleg(req: operations.GetBelegRequest, config?: AxiosRequestConfig): Promise<operations.GetBelegResponse>;
+    GetBelege(req: operations.GetBelegeRequest, config?: AxiosRequestConfig): Promise<operations.GetBelegeResponse>;
+    GetDep(req: operations.GetDepRequest, config?: AxiosRequestConfig): Promise<operations.GetDepResponse>;
+    GetMonatsbelege(req: operations.GetMonatsbelegeRequest, config?: AxiosRequestConfig): Promise<operations.GetMonatsbelegeResponse>;
+    GetRegistrierkasse(req: operations.GetRegistrierkasseRequest, config?: AxiosRequestConfig): Promise<operations.GetRegistrierkasseResponse>;
+}
+export {};

@@ -1,0 +1,37 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    AssociateCustomDomain(req: operations.AssociateCustomDomainRequest, config?: AxiosRequestConfig): Promise<operations.AssociateCustomDomainResponse>;
+    CreateAutoScalingConfiguration(req: operations.CreateAutoScalingConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.CreateAutoScalingConfigurationResponse>;
+    CreateConnection(req: operations.CreateConnectionRequest, config?: AxiosRequestConfig): Promise<operations.CreateConnectionResponse>;
+    CreateService(req: operations.CreateServiceRequest, config?: AxiosRequestConfig): Promise<operations.CreateServiceResponse>;
+    DeleteAutoScalingConfiguration(req: operations.DeleteAutoScalingConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.DeleteAutoScalingConfigurationResponse>;
+    DeleteConnection(req: operations.DeleteConnectionRequest, config?: AxiosRequestConfig): Promise<operations.DeleteConnectionResponse>;
+    DeleteService(req: operations.DeleteServiceRequest, config?: AxiosRequestConfig): Promise<operations.DeleteServiceResponse>;
+    DescribeAutoScalingConfiguration(req: operations.DescribeAutoScalingConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.DescribeAutoScalingConfigurationResponse>;
+    DescribeCustomDomains(req: operations.DescribeCustomDomainsRequest, config?: AxiosRequestConfig): Promise<operations.DescribeCustomDomainsResponse>;
+    DescribeService(req: operations.DescribeServiceRequest, config?: AxiosRequestConfig): Promise<operations.DescribeServiceResponse>;
+    DisassociateCustomDomain(req: operations.DisassociateCustomDomainRequest, config?: AxiosRequestConfig): Promise<operations.DisassociateCustomDomainResponse>;
+    ListAutoScalingConfigurations(req: operations.ListAutoScalingConfigurationsRequest, config?: AxiosRequestConfig): Promise<operations.ListAutoScalingConfigurationsResponse>;
+    ListConnections(req: operations.ListConnectionsRequest, config?: AxiosRequestConfig): Promise<operations.ListConnectionsResponse>;
+    ListOperations(req: operations.ListOperationsRequest, config?: AxiosRequestConfig): Promise<operations.ListOperationsResponse>;
+    ListServices(req: operations.ListServicesRequest, config?: AxiosRequestConfig): Promise<operations.ListServicesResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    PauseService(req: operations.PauseServiceRequest, config?: AxiosRequestConfig): Promise<operations.PauseServiceResponse>;
+    ResumeService(req: operations.ResumeServiceRequest, config?: AxiosRequestConfig): Promise<operations.ResumeServiceResponse>;
+    StartDeployment(req: operations.StartDeploymentRequest, config?: AxiosRequestConfig): Promise<operations.StartDeploymentResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+    UpdateService(req: operations.UpdateServiceRequest, config?: AxiosRequestConfig): Promise<operations.UpdateServiceResponse>;
+}
+export {};

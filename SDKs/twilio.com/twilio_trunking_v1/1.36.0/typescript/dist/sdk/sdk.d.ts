@@ -1,0 +1,37 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CreateCredentialList(req: operations.CreateCredentialListRequest, config?: AxiosRequestConfig): Promise<operations.CreateCredentialListResponse>;
+    CreateIpAccessControlList(req: operations.CreateIpAccessControlListRequest, config?: AxiosRequestConfig): Promise<operations.CreateIpAccessControlListResponse>;
+    CreateOriginationUrl(req: operations.CreateOriginationUrlRequest, config?: AxiosRequestConfig): Promise<operations.CreateOriginationUrlResponse>;
+    CreatePhoneNumber(req: operations.CreatePhoneNumberRequest, config?: AxiosRequestConfig): Promise<operations.CreatePhoneNumberResponse>;
+    CreateTrunk(req: operations.CreateTrunkRequest, config?: AxiosRequestConfig): Promise<operations.CreateTrunkResponse>;
+    DeleteCredentialList(req: operations.DeleteCredentialListRequest, config?: AxiosRequestConfig): Promise<operations.DeleteCredentialListResponse>;
+    DeleteIpAccessControlList(req: operations.DeleteIpAccessControlListRequest, config?: AxiosRequestConfig): Promise<operations.DeleteIpAccessControlListResponse>;
+    DeleteOriginationUrl(req: operations.DeleteOriginationUrlRequest, config?: AxiosRequestConfig): Promise<operations.DeleteOriginationUrlResponse>;
+    DeletePhoneNumber(req: operations.DeletePhoneNumberRequest, config?: AxiosRequestConfig): Promise<operations.DeletePhoneNumberResponse>;
+    DeleteTrunk(req: operations.DeleteTrunkRequest, config?: AxiosRequestConfig): Promise<operations.DeleteTrunkResponse>;
+    FetchCredentialList(req: operations.FetchCredentialListRequest, config?: AxiosRequestConfig): Promise<operations.FetchCredentialListResponse>;
+    FetchIpAccessControlList(req: operations.FetchIpAccessControlListRequest, config?: AxiosRequestConfig): Promise<operations.FetchIpAccessControlListResponse>;
+    FetchOriginationUrl(req: operations.FetchOriginationUrlRequest, config?: AxiosRequestConfig): Promise<operations.FetchOriginationUrlResponse>;
+    FetchPhoneNumber(req: operations.FetchPhoneNumberRequest, config?: AxiosRequestConfig): Promise<operations.FetchPhoneNumberResponse>;
+    FetchRecording(req: operations.FetchRecordingRequest, config?: AxiosRequestConfig): Promise<operations.FetchRecordingResponse>;
+    FetchTrunk(req: operations.FetchTrunkRequest, config?: AxiosRequestConfig): Promise<operations.FetchTrunkResponse>;
+    ListCredentialList(req: operations.ListCredentialListRequest, config?: AxiosRequestConfig): Promise<operations.ListCredentialListResponse>;
+    ListIpAccessControlList(req: operations.ListIpAccessControlListRequest, config?: AxiosRequestConfig): Promise<operations.ListIpAccessControlListResponse>;
+    ListOriginationUrl(req: operations.ListOriginationUrlRequest, config?: AxiosRequestConfig): Promise<operations.ListOriginationUrlResponse>;
+    ListPhoneNumber(req: operations.ListPhoneNumberRequest, config?: AxiosRequestConfig): Promise<operations.ListPhoneNumberResponse>;
+    ListTrunk(req: operations.ListTrunkRequest, config?: AxiosRequestConfig): Promise<operations.ListTrunkResponse>;
+    UpdateOriginationUrl(req: operations.UpdateOriginationUrlRequest, config?: AxiosRequestConfig): Promise<operations.UpdateOriginationUrlResponse>;
+    UpdateRecording(req: operations.UpdateRecordingRequest, config?: AxiosRequestConfig): Promise<operations.UpdateRecordingResponse>;
+    UpdateTrunk(req: operations.UpdateTrunkRequest, config?: AxiosRequestConfig): Promise<operations.UpdateTrunkResponse>;
+}
+export {};

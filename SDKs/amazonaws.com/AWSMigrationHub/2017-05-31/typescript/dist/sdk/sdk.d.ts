@@ -1,0 +1,32 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    AssociateCreatedArtifact(req: operations.AssociateCreatedArtifactRequest, config?: AxiosRequestConfig): Promise<operations.AssociateCreatedArtifactResponse>;
+    AssociateDiscoveredResource(req: operations.AssociateDiscoveredResourceRequest, config?: AxiosRequestConfig): Promise<operations.AssociateDiscoveredResourceResponse>;
+    CreateProgressUpdateStream(req: operations.CreateProgressUpdateStreamRequest, config?: AxiosRequestConfig): Promise<operations.CreateProgressUpdateStreamResponse>;
+    DeleteProgressUpdateStream(req: operations.DeleteProgressUpdateStreamRequest, config?: AxiosRequestConfig): Promise<operations.DeleteProgressUpdateStreamResponse>;
+    DescribeApplicationState(req: operations.DescribeApplicationStateRequest, config?: AxiosRequestConfig): Promise<operations.DescribeApplicationStateResponse>;
+    DescribeMigrationTask(req: operations.DescribeMigrationTaskRequest, config?: AxiosRequestConfig): Promise<operations.DescribeMigrationTaskResponse>;
+    DisassociateCreatedArtifact(req: operations.DisassociateCreatedArtifactRequest, config?: AxiosRequestConfig): Promise<operations.DisassociateCreatedArtifactResponse>;
+    DisassociateDiscoveredResource(req: operations.DisassociateDiscoveredResourceRequest, config?: AxiosRequestConfig): Promise<operations.DisassociateDiscoveredResourceResponse>;
+    ImportMigrationTask(req: operations.ImportMigrationTaskRequest, config?: AxiosRequestConfig): Promise<operations.ImportMigrationTaskResponse>;
+    ListApplicationStates(req: operations.ListApplicationStatesRequest, config?: AxiosRequestConfig): Promise<operations.ListApplicationStatesResponse>;
+    ListCreatedArtifacts(req: operations.ListCreatedArtifactsRequest, config?: AxiosRequestConfig): Promise<operations.ListCreatedArtifactsResponse>;
+    ListDiscoveredResources(req: operations.ListDiscoveredResourcesRequest, config?: AxiosRequestConfig): Promise<operations.ListDiscoveredResourcesResponse>;
+    ListMigrationTasks(req: operations.ListMigrationTasksRequest, config?: AxiosRequestConfig): Promise<operations.ListMigrationTasksResponse>;
+    ListProgressUpdateStreams(req: operations.ListProgressUpdateStreamsRequest, config?: AxiosRequestConfig): Promise<operations.ListProgressUpdateStreamsResponse>;
+    NotifyApplicationState(req: operations.NotifyApplicationStateRequest, config?: AxiosRequestConfig): Promise<operations.NotifyApplicationStateResponse>;
+    NotifyMigrationTaskState(req: operations.NotifyMigrationTaskStateRequest, config?: AxiosRequestConfig): Promise<operations.NotifyMigrationTaskStateResponse>;
+    PutResourceAttributes(req: operations.PutResourceAttributesRequest, config?: AxiosRequestConfig): Promise<operations.PutResourceAttributesResponse>;
+}
+export {};

@@ -1,0 +1,38 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CreateIdentityPool(req: operations.CreateIdentityPoolRequest, config?: AxiosRequestConfig): Promise<operations.CreateIdentityPoolResponse>;
+    DeleteIdentities(req: operations.DeleteIdentitiesRequest, config?: AxiosRequestConfig): Promise<operations.DeleteIdentitiesResponse>;
+    DeleteIdentityPool(req: operations.DeleteIdentityPoolRequest, config?: AxiosRequestConfig): Promise<operations.DeleteIdentityPoolResponse>;
+    DescribeIdentity(req: operations.DescribeIdentityRequest, config?: AxiosRequestConfig): Promise<operations.DescribeIdentityResponse>;
+    DescribeIdentityPool(req: operations.DescribeIdentityPoolRequest, config?: AxiosRequestConfig): Promise<operations.DescribeIdentityPoolResponse>;
+    GetCredentialsForIdentity(req: operations.GetCredentialsForIdentityRequest, config?: AxiosRequestConfig): Promise<operations.GetCredentialsForIdentityResponse>;
+    GetId(req: operations.GetIdRequest, config?: AxiosRequestConfig): Promise<operations.GetIdResponse>;
+    GetIdentityPoolRoles(req: operations.GetIdentityPoolRolesRequest, config?: AxiosRequestConfig): Promise<operations.GetIdentityPoolRolesResponse>;
+    GetOpenIdToken(req: operations.GetOpenIdTokenRequest, config?: AxiosRequestConfig): Promise<operations.GetOpenIdTokenResponse>;
+    GetOpenIdTokenForDeveloperIdentity(req: operations.GetOpenIdTokenForDeveloperIdentityRequest, config?: AxiosRequestConfig): Promise<operations.GetOpenIdTokenForDeveloperIdentityResponse>;
+    GetPrincipalTagAttributeMap(req: operations.GetPrincipalTagAttributeMapRequest, config?: AxiosRequestConfig): Promise<operations.GetPrincipalTagAttributeMapResponse>;
+    ListIdentities(req: operations.ListIdentitiesRequest, config?: AxiosRequestConfig): Promise<operations.ListIdentitiesResponse>;
+    ListIdentityPools(req: operations.ListIdentityPoolsRequest, config?: AxiosRequestConfig): Promise<operations.ListIdentityPoolsResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    LookupDeveloperIdentity(req: operations.LookupDeveloperIdentityRequest, config?: AxiosRequestConfig): Promise<operations.LookupDeveloperIdentityResponse>;
+    MergeDeveloperIdentities(req: operations.MergeDeveloperIdentitiesRequest, config?: AxiosRequestConfig): Promise<operations.MergeDeveloperIdentitiesResponse>;
+    SetIdentityPoolRoles(req: operations.SetIdentityPoolRolesRequest, config?: AxiosRequestConfig): Promise<operations.SetIdentityPoolRolesResponse>;
+    SetPrincipalTagAttributeMap(req: operations.SetPrincipalTagAttributeMapRequest, config?: AxiosRequestConfig): Promise<operations.SetPrincipalTagAttributeMapResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UnlinkDeveloperIdentity(req: operations.UnlinkDeveloperIdentityRequest, config?: AxiosRequestConfig): Promise<operations.UnlinkDeveloperIdentityResponse>;
+    UnlinkIdentity(req: operations.UnlinkIdentityRequest, config?: AxiosRequestConfig): Promise<operations.UnlinkIdentityResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+    UpdateIdentityPool(req: operations.UpdateIdentityPoolRequest, config?: AxiosRequestConfig): Promise<operations.UpdateIdentityPoolResponse>;
+}
+export {};

@@ -1,0 +1,26 @@
+export var UpdateParamTypeEnum;
+(function (UpdateParamTypeEnum) {
+    UpdateParamTypeEnum["Version"] = "Version";
+    UpdateParamTypeEnum["PlatformVersion"] = "PlatformVersion";
+    UpdateParamTypeEnum["EndpointPrivateAccess"] = "EndpointPrivateAccess";
+    UpdateParamTypeEnum["EndpointPublicAccess"] = "EndpointPublicAccess";
+    UpdateParamTypeEnum["ClusterLogging"] = "ClusterLogging";
+    UpdateParamTypeEnum["DesiredSize"] = "DesiredSize";
+    UpdateParamTypeEnum["LabelsToAdd"] = "LabelsToAdd";
+    UpdateParamTypeEnum["LabelsToRemove"] = "LabelsToRemove";
+    UpdateParamTypeEnum["TaintsToAdd"] = "TaintsToAdd";
+    UpdateParamTypeEnum["TaintsToRemove"] = "TaintsToRemove";
+    UpdateParamTypeEnum["MaxSize"] = "MaxSize";
+    UpdateParamTypeEnum["MinSize"] = "MinSize";
+    UpdateParamTypeEnum["ReleaseVersion"] = "ReleaseVersion";
+    UpdateParamTypeEnum["PublicAccessCidrs"] = "PublicAccessCidrs";
+    UpdateParamTypeEnum["LaunchTemplateName"] = "LaunchTemplateName";
+    UpdateParamTypeEnum["LaunchTemplateVersion"] = "LaunchTemplateVersion";
+    UpdateParamTypeEnum["IdentityProviderConfig"] = "IdentityProviderConfig";
+    UpdateParamTypeEnum["EncryptionConfig"] = "EncryptionConfig";
+    UpdateParamTypeEnum["AddonVersion"] = "AddonVersion";
+    UpdateParamTypeEnum["ServiceAccountRoleArn"] = "ServiceAccountRoleArn";
+    UpdateParamTypeEnum["ResolveConflicts"] = "ResolveConflicts";
+    UpdateParamTypeEnum["MaxUnavailable"] = "MaxUnavailable";
+    UpdateParamTypeEnum["MaxUnavailablePercentage"] = "MaxUnavailablePercentage";
+})(UpdateParamTypeEnum || (UpdateParamTypeEnum = {}));

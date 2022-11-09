@@ -1,0 +1,83 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+
+
+export class GamesPlayersGetPathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=playerId" })
+  playerId: string;
+}
+
+
+export class GamesPlayersGetQueryParams extends SpeakeasyBase {
+  @Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" })
+  dollarXgafv?: shared.XgafvEnum;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=access_token" })
+  accessToken?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  alt?: shared.AltEnum;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=callback" })
+  callback?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  fields?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  key?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=language" })
+  language?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  oauthToken?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=playerIdConsistencyToken" })
+  playerIdConsistencyToken?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  prettyPrint?: boolean;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  quotaUser?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" })
+  uploadType?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" })
+  uploadProtocol?: string;
+}
+
+
+export class GamesPlayersGetSecurity extends SpeakeasyBase {
+  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2: shared.SchemeOauth2;
+
+  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2c: shared.SchemeOauth2c;
+}
+
+
+export class GamesPlayersGetRequest extends SpeakeasyBase {
+  @Metadata()
+  pathParams: GamesPlayersGetPathParams;
+
+  @Metadata()
+  queryParams: GamesPlayersGetQueryParams;
+
+  @Metadata()
+  security: GamesPlayersGetSecurity;
+}
+
+
+export class GamesPlayersGetResponse extends SpeakeasyBase {
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  player?: shared.Player;
+
+  @Metadata()
+  statusCode: number;
+}

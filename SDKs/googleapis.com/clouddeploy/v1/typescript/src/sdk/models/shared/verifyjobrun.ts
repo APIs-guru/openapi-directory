@@ -1,0 +1,31 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+export enum VerifyJobRunFailureCauseEnum {
+    FailureCauseUnspecified = "FAILURE_CAUSE_UNSPECIFIED"
+,    CloudBuildUnavailable = "CLOUD_BUILD_UNAVAILABLE"
+,    ExecutionFailed = "EXECUTION_FAILED"
+,    DeadlineExceeded = "DEADLINE_EXCEEDED"
+,    VerificationConfigNotFound = "VERIFICATION_CONFIG_NOT_FOUND"
+}
+
+
+// VerifyJobRun
+/** 
+ * VerifyJobRun contains information specific to a verify `JobRun`.
+**/
+export class VerifyJobRun extends SpeakeasyBase {
+  @Metadata({ data: "json, name=artifactUri" })
+  artifactUri?: string;
+
+  @Metadata({ data: "json, name=build" })
+  build?: string;
+
+  @Metadata({ data: "json, name=eventLogPath" })
+  eventLogPath?: string;
+
+  @Metadata({ data: "json, name=failureCause" })
+  failureCause?: VerifyJobRunFailureCauseEnum;
+
+  @Metadata({ data: "json, name=failureMessage" })
+  failureMessage?: string;
+}

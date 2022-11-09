@@ -1,0 +1,19 @@
+export var JobLogEventEnum;
+(function (JobLogEventEnum) {
+    JobLogEventEnum["JobStart"] = "JOB_START";
+    JobLogEventEnum["ServerSkipped"] = "SERVER_SKIPPED";
+    JobLogEventEnum["CleanupStart"] = "CLEANUP_START";
+    JobLogEventEnum["CleanupEnd"] = "CLEANUP_END";
+    JobLogEventEnum["CleanupFail"] = "CLEANUP_FAIL";
+    JobLogEventEnum["SnapshotStart"] = "SNAPSHOT_START";
+    JobLogEventEnum["SnapshotEnd"] = "SNAPSHOT_END";
+    JobLogEventEnum["SnapshotFail"] = "SNAPSHOT_FAIL";
+    JobLogEventEnum["UsingPreviousSnapshot"] = "USING_PREVIOUS_SNAPSHOT";
+    JobLogEventEnum["ConversionStart"] = "CONVERSION_START";
+    JobLogEventEnum["ConversionEnd"] = "CONVERSION_END";
+    JobLogEventEnum["ConversionFail"] = "CONVERSION_FAIL";
+    JobLogEventEnum["LaunchStart"] = "LAUNCH_START";
+    JobLogEventEnum["LaunchFailed"] = "LAUNCH_FAILED";
+    JobLogEventEnum["JobCancel"] = "JOB_CANCEL";
+    JobLogEventEnum["JobEnd"] = "JOB_END";
+})(JobLogEventEnum || (JobLogEventEnum = {}));

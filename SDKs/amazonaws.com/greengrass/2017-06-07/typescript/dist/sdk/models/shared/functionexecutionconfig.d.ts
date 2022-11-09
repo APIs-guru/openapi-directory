@@ -1,0 +1,10 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { FunctionIsolationModeEnum } from "./functionisolationmodeenum";
+import { FunctionRunAsConfig } from "./functionrunasconfig";
+/**
+ * Configuration information that specifies how a Lambda function runs.
+**/
+export declare class FunctionExecutionConfig extends SpeakeasyBase {
+    isolationMode?: FunctionIsolationModeEnum;
+    runAs?: FunctionRunAsConfig;
+}

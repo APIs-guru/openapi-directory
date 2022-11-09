@@ -1,0 +1,33 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    AssociateTeamMember(req: operations.AssociateTeamMemberRequest, config?: AxiosRequestConfig): Promise<operations.AssociateTeamMemberResponse>;
+    CreateProject(req: operations.CreateProjectRequest, config?: AxiosRequestConfig): Promise<operations.CreateProjectResponse>;
+    CreateUserProfile(req: operations.CreateUserProfileRequest, config?: AxiosRequestConfig): Promise<operations.CreateUserProfileResponse>;
+    DeleteProject(req: operations.DeleteProjectRequest, config?: AxiosRequestConfig): Promise<operations.DeleteProjectResponse>;
+    DeleteUserProfile(req: operations.DeleteUserProfileRequest, config?: AxiosRequestConfig): Promise<operations.DeleteUserProfileResponse>;
+    DescribeProject(req: operations.DescribeProjectRequest, config?: AxiosRequestConfig): Promise<operations.DescribeProjectResponse>;
+    DescribeUserProfile(req: operations.DescribeUserProfileRequest, config?: AxiosRequestConfig): Promise<operations.DescribeUserProfileResponse>;
+    DisassociateTeamMember(req: operations.DisassociateTeamMemberRequest, config?: AxiosRequestConfig): Promise<operations.DisassociateTeamMemberResponse>;
+    ListProjects(req: operations.ListProjectsRequest, config?: AxiosRequestConfig): Promise<operations.ListProjectsResponse>;
+    ListResources(req: operations.ListResourcesRequest, config?: AxiosRequestConfig): Promise<operations.ListResourcesResponse>;
+    ListTagsForProject(req: operations.ListTagsForProjectRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForProjectResponse>;
+    ListTeamMembers(req: operations.ListTeamMembersRequest, config?: AxiosRequestConfig): Promise<operations.ListTeamMembersResponse>;
+    ListUserProfiles(req: operations.ListUserProfilesRequest, config?: AxiosRequestConfig): Promise<operations.ListUserProfilesResponse>;
+    TagProject(req: operations.TagProjectRequest, config?: AxiosRequestConfig): Promise<operations.TagProjectResponse>;
+    UntagProject(req: operations.UntagProjectRequest, config?: AxiosRequestConfig): Promise<operations.UntagProjectResponse>;
+    UpdateProject(req: operations.UpdateProjectRequest, config?: AxiosRequestConfig): Promise<operations.UpdateProjectResponse>;
+    UpdateTeamMember(req: operations.UpdateTeamMemberRequest, config?: AxiosRequestConfig): Promise<operations.UpdateTeamMemberResponse>;
+    UpdateUserProfile(req: operations.UpdateUserProfileRequest, config?: AxiosRequestConfig): Promise<operations.UpdateUserProfileResponse>;
+}
+export {};

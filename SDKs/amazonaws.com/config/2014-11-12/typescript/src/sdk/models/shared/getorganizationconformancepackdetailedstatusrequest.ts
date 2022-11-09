@@ -1,0 +1,17 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { OrganizationResourceDetailedStatusFilters } from "./organizationresourcedetailedstatusfilters";
+
+
+export class GetOrganizationConformancePackDetailedStatusRequest extends SpeakeasyBase {
+  @Metadata({ data: "json, name=Filters" })
+  filters?: OrganizationResourceDetailedStatusFilters;
+
+  @Metadata({ data: "json, name=Limit" })
+  limit?: number;
+
+  @Metadata({ data: "json, name=NextToken" })
+  nextToken?: string;
+
+  @Metadata({ data: "json, name=OrganizationConformancePackName" })
+  organizationConformancePackName: string;
+}

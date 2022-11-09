@@ -1,0 +1,16 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { Environment } from "./environment";
+import { RobotSoftwareSuite } from "./robotsoftwaresuite";
+import { Source } from "./source";
+export declare class DescribeRobotApplicationResponse extends SpeakeasyBase {
+    arn?: string;
+    environment?: Environment;
+    imageDigest?: string;
+    lastUpdatedAt?: Date;
+    name?: string;
+    revisionId?: string;
+    robotSoftwareSuite?: RobotSoftwareSuite;
+    sources?: Source[];
+    tags?: Map<string, string>;
+    version?: string;
+}

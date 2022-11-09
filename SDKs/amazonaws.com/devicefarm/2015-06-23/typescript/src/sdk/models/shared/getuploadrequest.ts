@@ -1,0 +1,11 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+
+// GetUploadRequest
+/** 
+ * Represents a request to the get upload operation.
+**/
+export class GetUploadRequest extends SpeakeasyBase {
+  @Metadata({ data: "json, name=arn" })
+  arn: string;
+}

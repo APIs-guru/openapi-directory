@@ -1,0 +1,70 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+
+export class AcceptAdministratorInvitationHeaders extends SpeakeasyBase {
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  xAmzAlgorithm?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  xAmzContentSha256?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  xAmzCredential?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  xAmzDate?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  xAmzSecurityToken?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  xAmzSignature?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  xAmzSignedHeaders?: string;
+}
+
+
+export class AcceptAdministratorInvitationRequestBody extends SpeakeasyBase {
+  @Metadata({ data: "json, name=AdministratorId" })
+  administratorId: string;
+
+  @Metadata({ data: "json, name=InvitationId" })
+  invitationId: string;
+}
+
+
+export class AcceptAdministratorInvitationRequest extends SpeakeasyBase {
+  @Metadata()
+  headers: AcceptAdministratorInvitationHeaders;
+
+  @Metadata({ data: "request, media_type=application/json" })
+  request: AcceptAdministratorInvitationRequestBody;
+}
+
+
+export class AcceptAdministratorInvitationResponse extends SpeakeasyBase {
+  @Metadata()
+  acceptAdministratorInvitationResponse?: Map<string, any>;
+
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  internalException?: any;
+
+  @Metadata()
+  invalidAccessException?: any;
+
+  @Metadata()
+  invalidInputException?: any;
+
+  @Metadata()
+  limitExceededException?: any;
+
+  @Metadata()
+  resourceNotFoundException?: any;
+
+  @Metadata()
+  statusCode: number;
+}

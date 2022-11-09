@@ -1,0 +1,12 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { GooglePrivacyDlpV2HotwordRule } from "./googleprivacydlpv2hotwordrule";
+
+
+// GooglePrivacyDlpV2DetectionRule
+/** 
+ * Deprecated; use `InspectionRuleSet` instead. Rule for modifying a `CustomInfoType` to alter behavior under certain circumstances, depending on the specific details of the rule. Not supported for the `surrogate_type` custom infoType.
+**/
+export class GooglePrivacyDlpV2DetectionRule extends SpeakeasyBase {
+  @Metadata({ data: "json, name=hotwordRule" })
+  hotwordRule?: GooglePrivacyDlpV2HotwordRule;
+}

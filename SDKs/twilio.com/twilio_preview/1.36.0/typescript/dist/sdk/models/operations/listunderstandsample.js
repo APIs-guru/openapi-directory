@@ -1,0 +1,169 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+export var LISTUNDERSTANDSAMPLE_SERVERS = [
+    "https://preview.twilio.com",
+];
+var ListUnderstandSamplePathParams = /** @class */ (function (_super) {
+    __extends(ListUnderstandSamplePathParams, _super);
+    function ListUnderstandSamplePathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=AssistantSid" }),
+        __metadata("design:type", String)
+    ], ListUnderstandSamplePathParams.prototype, "assistantSid", void 0);
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=TaskSid" }),
+        __metadata("design:type", String)
+    ], ListUnderstandSamplePathParams.prototype, "taskSid", void 0);
+    return ListUnderstandSamplePathParams;
+}(SpeakeasyBase));
+export { ListUnderstandSamplePathParams };
+var ListUnderstandSampleQueryParams = /** @class */ (function (_super) {
+    __extends(ListUnderstandSampleQueryParams, _super);
+    function ListUnderstandSampleQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Language" }),
+        __metadata("design:type", String)
+    ], ListUnderstandSampleQueryParams.prototype, "language", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=PageSize" }),
+        __metadata("design:type", Number)
+    ], ListUnderstandSampleQueryParams.prototype, "pageSize", void 0);
+    return ListUnderstandSampleQueryParams;
+}(SpeakeasyBase));
+export { ListUnderstandSampleQueryParams };
+var ListUnderstandSampleSecurity = /** @class */ (function (_super) {
+    __extends(ListUnderstandSampleSecurity, _super);
+    function ListUnderstandSampleSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeAccountSidAuthToken)
+    ], ListUnderstandSampleSecurity.prototype, "accountSidAuthToken", void 0);
+    return ListUnderstandSampleSecurity;
+}(SpeakeasyBase));
+export { ListUnderstandSampleSecurity };
+var ListUnderstandSampleRequest = /** @class */ (function (_super) {
+    __extends(ListUnderstandSampleRequest, _super);
+    function ListUnderstandSampleRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], ListUnderstandSampleRequest.prototype, "serverUrl", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", ListUnderstandSamplePathParams)
+    ], ListUnderstandSampleRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", ListUnderstandSampleQueryParams)
+    ], ListUnderstandSampleRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", ListUnderstandSampleSecurity)
+    ], ListUnderstandSampleRequest.prototype, "security", void 0);
+    return ListUnderstandSampleRequest;
+}(SpeakeasyBase));
+export { ListUnderstandSampleRequest };
+var ListUnderstandSampleListUnderstandSampleResponseMeta = /** @class */ (function (_super) {
+    __extends(ListUnderstandSampleListUnderstandSampleResponseMeta, _super);
+    function ListUnderstandSampleListUnderstandSampleResponseMeta() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=first_page_url" }),
+        __metadata("design:type", String)
+    ], ListUnderstandSampleListUnderstandSampleResponseMeta.prototype, "firstPageUrl", void 0);
+    __decorate([
+        Metadata({ data: "json, name=key" }),
+        __metadata("design:type", String)
+    ], ListUnderstandSampleListUnderstandSampleResponseMeta.prototype, "key", void 0);
+    __decorate([
+        Metadata({ data: "json, name=next_page_url" }),
+        __metadata("design:type", String)
+    ], ListUnderstandSampleListUnderstandSampleResponseMeta.prototype, "nextPageUrl", void 0);
+    __decorate([
+        Metadata({ data: "json, name=page" }),
+        __metadata("design:type", Number)
+    ], ListUnderstandSampleListUnderstandSampleResponseMeta.prototype, "page", void 0);
+    __decorate([
+        Metadata({ data: "json, name=page_size" }),
+        __metadata("design:type", Number)
+    ], ListUnderstandSampleListUnderstandSampleResponseMeta.prototype, "pageSize", void 0);
+    __decorate([
+        Metadata({ data: "json, name=previous_page_url" }),
+        __metadata("design:type", String)
+    ], ListUnderstandSampleListUnderstandSampleResponseMeta.prototype, "previousPageUrl", void 0);
+    __decorate([
+        Metadata({ data: "json, name=url" }),
+        __metadata("design:type", String)
+    ], ListUnderstandSampleListUnderstandSampleResponseMeta.prototype, "url", void 0);
+    return ListUnderstandSampleListUnderstandSampleResponseMeta;
+}(SpeakeasyBase));
+export { ListUnderstandSampleListUnderstandSampleResponseMeta };
+var ListUnderstandSampleListUnderstandSampleResponse = /** @class */ (function (_super) {
+    __extends(ListUnderstandSampleListUnderstandSampleResponse, _super);
+    function ListUnderstandSampleListUnderstandSampleResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=meta" }),
+        __metadata("design:type", ListUnderstandSampleListUnderstandSampleResponseMeta)
+    ], ListUnderstandSampleListUnderstandSampleResponse.prototype, "meta", void 0);
+    __decorate([
+        Metadata({ data: "json, name=samples", elemType: shared.PreviewUnderstandAssistantTaskSample }),
+        __metadata("design:type", Array)
+    ], ListUnderstandSampleListUnderstandSampleResponse.prototype, "samples", void 0);
+    return ListUnderstandSampleListUnderstandSampleResponse;
+}(SpeakeasyBase));
+export { ListUnderstandSampleListUnderstandSampleResponse };
+var ListUnderstandSampleResponse = /** @class */ (function (_super) {
+    __extends(ListUnderstandSampleResponse, _super);
+    function ListUnderstandSampleResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], ListUnderstandSampleResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", ListUnderstandSampleListUnderstandSampleResponse)
+    ], ListUnderstandSampleResponse.prototype, "listUnderstandSampleResponse", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], ListUnderstandSampleResponse.prototype, "statusCode", void 0);
+    return ListUnderstandSampleResponse;
+}(SpeakeasyBase));
+export { ListUnderstandSampleResponse };

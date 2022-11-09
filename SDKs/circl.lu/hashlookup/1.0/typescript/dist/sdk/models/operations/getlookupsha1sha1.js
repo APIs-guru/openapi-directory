@@ -1,0 +1,65 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+var GetLookupSha1Sha1PathParams = /** @class */ (function (_super) {
+    __extends(GetLookupSha1Sha1PathParams, _super);
+    function GetLookupSha1Sha1PathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=sha1" }),
+        __metadata("design:type", String)
+    ], GetLookupSha1Sha1PathParams.prototype, "sha1", void 0);
+    return GetLookupSha1Sha1PathParams;
+}(SpeakeasyBase));
+export { GetLookupSha1Sha1PathParams };
+var GetLookupSha1Sha1Request = /** @class */ (function (_super) {
+    __extends(GetLookupSha1Sha1Request, _super);
+    function GetLookupSha1Sha1Request() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetLookupSha1Sha1PathParams)
+    ], GetLookupSha1Sha1Request.prototype, "pathParams", void 0);
+    return GetLookupSha1Sha1Request;
+}(SpeakeasyBase));
+export { GetLookupSha1Sha1Request };
+var GetLookupSha1Sha1Response = /** @class */ (function (_super) {
+    __extends(GetLookupSha1Sha1Response, _super);
+    function GetLookupSha1Sha1Response() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetLookupSha1Sha1Response.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetLookupSha1Sha1Response.prototype, "statusCode", void 0);
+    return GetLookupSha1Sha1Response;
+}(SpeakeasyBase));
+export { GetLookupSha1Sha1Response };

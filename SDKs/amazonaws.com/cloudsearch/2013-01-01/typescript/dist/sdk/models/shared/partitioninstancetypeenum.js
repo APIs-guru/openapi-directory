@@ -1,0 +1,20 @@
+export var PartitionInstanceTypeEnum;
+(function (PartitionInstanceTypeEnum) {
+    PartitionInstanceTypeEnum["SearchM1Small"] = "search.m1.small";
+    PartitionInstanceTypeEnum["SearchM1Large"] = "search.m1.large";
+    PartitionInstanceTypeEnum["SearchM2Xlarge"] = "search.m2.xlarge";
+    PartitionInstanceTypeEnum["SearchM22xlarge"] = "search.m2.2xlarge";
+    PartitionInstanceTypeEnum["SearchM3Medium"] = "search.m3.medium";
+    PartitionInstanceTypeEnum["SearchM3Large"] = "search.m3.large";
+    PartitionInstanceTypeEnum["SearchM3Xlarge"] = "search.m3.xlarge";
+    PartitionInstanceTypeEnum["SearchM32xlarge"] = "search.m3.2xlarge";
+    PartitionInstanceTypeEnum["SearchSmall"] = "search.small";
+    PartitionInstanceTypeEnum["SearchMedium"] = "search.medium";
+    PartitionInstanceTypeEnum["SearchLarge"] = "search.large";
+    PartitionInstanceTypeEnum["SearchXlarge"] = "search.xlarge";
+    PartitionInstanceTypeEnum["Search2xlarge"] = "search.2xlarge";
+    PartitionInstanceTypeEnum["SearchPreviousgenerationSmall"] = "search.previousgeneration.small";
+    PartitionInstanceTypeEnum["SearchPreviousgenerationLarge"] = "search.previousgeneration.large";
+    PartitionInstanceTypeEnum["SearchPreviousgenerationXlarge"] = "search.previousgeneration.xlarge";
+    PartitionInstanceTypeEnum["SearchPreviousgeneration2xlarge"] = "search.previousgeneration.2xlarge";
+})(PartitionInstanceTypeEnum || (PartitionInstanceTypeEnum = {}));

@@ -1,0 +1,34 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CancelJob(req: operations.CancelJobRequest, config?: AxiosRequestConfig): Promise<operations.CancelJobResponse>;
+    CreateComputeEnvironment(req: operations.CreateComputeEnvironmentRequest, config?: AxiosRequestConfig): Promise<operations.CreateComputeEnvironmentResponse>;
+    CreateJobQueue(req: operations.CreateJobQueueRequest, config?: AxiosRequestConfig): Promise<operations.CreateJobQueueResponse>;
+    DeleteComputeEnvironment(req: operations.DeleteComputeEnvironmentRequest, config?: AxiosRequestConfig): Promise<operations.DeleteComputeEnvironmentResponse>;
+    DeleteJobQueue(req: operations.DeleteJobQueueRequest, config?: AxiosRequestConfig): Promise<operations.DeleteJobQueueResponse>;
+    DeregisterJobDefinition(req: operations.DeregisterJobDefinitionRequest, config?: AxiosRequestConfig): Promise<operations.DeregisterJobDefinitionResponse>;
+    DescribeComputeEnvironments(req: operations.DescribeComputeEnvironmentsRequest, config?: AxiosRequestConfig): Promise<operations.DescribeComputeEnvironmentsResponse>;
+    DescribeJobDefinitions(req: operations.DescribeJobDefinitionsRequest, config?: AxiosRequestConfig): Promise<operations.DescribeJobDefinitionsResponse>;
+    DescribeJobQueues(req: operations.DescribeJobQueuesRequest, config?: AxiosRequestConfig): Promise<operations.DescribeJobQueuesResponse>;
+    DescribeJobs(req: operations.DescribeJobsRequest, config?: AxiosRequestConfig): Promise<operations.DescribeJobsResponse>;
+    ListJobs(req: operations.ListJobsRequest, config?: AxiosRequestConfig): Promise<operations.ListJobsResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    RegisterJobDefinition(req: operations.RegisterJobDefinitionRequest, config?: AxiosRequestConfig): Promise<operations.RegisterJobDefinitionResponse>;
+    SubmitJob(req: operations.SubmitJobRequest, config?: AxiosRequestConfig): Promise<operations.SubmitJobResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    TerminateJob(req: operations.TerminateJobRequest, config?: AxiosRequestConfig): Promise<operations.TerminateJobResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+    UpdateComputeEnvironment(req: operations.UpdateComputeEnvironmentRequest, config?: AxiosRequestConfig): Promise<operations.UpdateComputeEnvironmentResponse>;
+    UpdateJobQueue(req: operations.UpdateJobQueueRequest, config?: AxiosRequestConfig): Promise<operations.UpdateJobQueueResponse>;
+}
+export {};

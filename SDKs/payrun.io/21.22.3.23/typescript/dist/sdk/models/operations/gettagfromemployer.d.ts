@@ -1,0 +1,20 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+export declare class GetTagFromEmployerPathParams extends SpeakeasyBase {
+    employerId: string;
+    tagId: string;
+}
+export declare class GetTagFromEmployerHeaders extends SpeakeasyBase {
+    apiVersion: string;
+    authorization: string;
+}
+export declare class GetTagFromEmployerRequest extends SpeakeasyBase {
+    pathParams: GetTagFromEmployerPathParams;
+    headers: GetTagFromEmployerHeaders;
+}
+export declare class GetTagFromEmployerResponse extends SpeakeasyBase {
+    contentType: string;
+    errorModel?: shared.ErrorModel;
+    statusCode: number;
+    tag?: shared.Tag;
+}

@@ -1,0 +1,33 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+export declare class EventarcProjectsLocationsTriggersSetIamPolicyPathParams extends SpeakeasyBase {
+    resource: string;
+}
+export declare class EventarcProjectsLocationsTriggersSetIamPolicyQueryParams extends SpeakeasyBase {
+    dollarXgafv?: shared.XgafvEnum;
+    accessToken?: string;
+    alt?: shared.AltEnum;
+    callback?: string;
+    fields?: string;
+    key?: string;
+    oauthToken?: string;
+    prettyPrint?: boolean;
+    quotaUser?: string;
+    uploadType?: string;
+    uploadProtocol?: string;
+}
+export declare class EventarcProjectsLocationsTriggersSetIamPolicySecurity extends SpeakeasyBase {
+    oauth2: shared.SchemeOauth2;
+    oauth2c: shared.SchemeOauth2c;
+}
+export declare class EventarcProjectsLocationsTriggersSetIamPolicyRequest extends SpeakeasyBase {
+    pathParams: EventarcProjectsLocationsTriggersSetIamPolicyPathParams;
+    queryParams: EventarcProjectsLocationsTriggersSetIamPolicyQueryParams;
+    request?: shared.SetIamPolicyRequest;
+    security: EventarcProjectsLocationsTriggersSetIamPolicySecurity;
+}
+export declare class EventarcProjectsLocationsTriggersSetIamPolicyResponse extends SpeakeasyBase {
+    contentType: string;
+    policy?: shared.Policy;
+    statusCode: number;
+}

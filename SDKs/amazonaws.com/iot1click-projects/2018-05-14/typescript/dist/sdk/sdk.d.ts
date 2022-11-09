@@ -1,0 +1,31 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    AssociateDeviceWithPlacement(req: operations.AssociateDeviceWithPlacementRequest, config?: AxiosRequestConfig): Promise<operations.AssociateDeviceWithPlacementResponse>;
+    CreatePlacement(req: operations.CreatePlacementRequest, config?: AxiosRequestConfig): Promise<operations.CreatePlacementResponse>;
+    CreateProject(req: operations.CreateProjectRequest, config?: AxiosRequestConfig): Promise<operations.CreateProjectResponse>;
+    DeletePlacement(req: operations.DeletePlacementRequest, config?: AxiosRequestConfig): Promise<operations.DeletePlacementResponse>;
+    DeleteProject(req: operations.DeleteProjectRequest, config?: AxiosRequestConfig): Promise<operations.DeleteProjectResponse>;
+    DescribePlacement(req: operations.DescribePlacementRequest, config?: AxiosRequestConfig): Promise<operations.DescribePlacementResponse>;
+    DescribeProject(req: operations.DescribeProjectRequest, config?: AxiosRequestConfig): Promise<operations.DescribeProjectResponse>;
+    DisassociateDeviceFromPlacement(req: operations.DisassociateDeviceFromPlacementRequest, config?: AxiosRequestConfig): Promise<operations.DisassociateDeviceFromPlacementResponse>;
+    GetDevicesInPlacement(req: operations.GetDevicesInPlacementRequest, config?: AxiosRequestConfig): Promise<operations.GetDevicesInPlacementResponse>;
+    ListPlacements(req: operations.ListPlacementsRequest, config?: AxiosRequestConfig): Promise<operations.ListPlacementsResponse>;
+    ListProjects(req: operations.ListProjectsRequest, config?: AxiosRequestConfig): Promise<operations.ListProjectsResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+    UpdatePlacement(req: operations.UpdatePlacementRequest, config?: AxiosRequestConfig): Promise<operations.UpdatePlacementResponse>;
+    UpdateProject(req: operations.UpdateProjectRequest, config?: AxiosRequestConfig): Promise<operations.UpdateProjectResponse>;
+}
+export {};

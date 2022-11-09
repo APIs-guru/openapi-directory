@@ -1,0 +1,96 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+export declare enum PropertyValueSourceEnum {
+    Import = "IMPORT",
+    Api = "API",
+    Form = "FORM",
+    Analytics = "ANALYTICS",
+    Migration = "MIGRATION",
+    Salesforce = "SALESFORCE",
+    Integration = "INTEGRATION",
+    ContactsWeb = "CONTACTS_WEB",
+    WalIncremental = "WAL_INCREMENTAL",
+    Task = "TASK",
+    Email = "EMAIL",
+    Workflows = "WORKFLOWS",
+    Calculated = "CALCULATED",
+    Social = "SOCIAL",
+    BatchUpdate = "BATCH_UPDATE",
+    Signals = "SIGNALS",
+    Biden = "BIDEN",
+    Default = "DEFAULT",
+    Companies = "COMPANIES",
+    Deals = "DEALS",
+    Assists = "ASSISTS",
+    Presentations = "PRESENTATIONS",
+    Tally = "TALLY",
+    Sidekick = "SIDEKICK",
+    CrmUi = "CRM_UI",
+    MergeContacts = "MERGE_CONTACTS",
+    PortalUserAssociator = "PORTAL_USER_ASSOCIATOR",
+    IntegrationsPlatform = "INTEGRATIONS_PLATFORM",
+    BccToCrm = "BCC_TO_CRM",
+    ForwardToCrm = "FORWARD_TO_CRM",
+    Engagements = "ENGAGEMENTS",
+    Sales = "SALES",
+    Heisenberg = "HEISENBERG",
+    Leadin = "LEADIN",
+    GmailIntegration = "GMAIL_INTEGRATION",
+    Academy = "ACADEMY",
+    SalesMessages = "SALES_MESSAGES",
+    AvatarsService = "AVATARS_SERVICE",
+    MergeCompanies = "MERGE_COMPANIES",
+    Sequences = "SEQUENCES",
+    CompanyFamilies = "COMPANY_FAMILIES",
+    MobileIos = "MOBILE_IOS",
+    MobileAndroid = "MOBILE_ANDROID",
+    Contacts = "CONTACTS",
+    Associations = "ASSOCIATIONS",
+    Extension = "EXTENSION",
+    Success = "SUCCESS",
+    Bot = "BOT",
+    IntegrationsSync = "INTEGRATIONS_SYNC",
+    AutomationPlatform = "AUTOMATION_PLATFORM",
+    Conversations = "CONVERSATIONS",
+    EmailIntegration = "EMAIL_INTEGRATION",
+    ContentMembership = "CONTENT_MEMBERSHIP",
+    Quotes = "QUOTES",
+    BetAssignment = "BET_ASSIGNMENT",
+    Quotas = "QUOTAS",
+    BetCrmConnector = "BET_CRM_CONNECTOR",
+    Meetings = "MEETINGS",
+    MergeObjects = "MERGE_OBJECTS",
+    RecyclingBin = "RECYCLING_BIN",
+    Ads = "ADS",
+    AiGroup = "AI_GROUP",
+    Communicator = "COMMUNICATOR",
+    Settings = "SETTINGS",
+    PropertySettings = "PROPERTY_SETTINGS",
+    PipelineSettings = "PIPELINE_SETTINGS",
+    CompanyInsights = "COMPANY_INSIGHTS",
+    BehavioralEvents = "BEHAVIORAL_EVENTS",
+    Payments = "PAYMENTS",
+    Goals = "GOALS",
+    PortalObjectSync = "PORTAL_OBJECT_SYNC",
+    Approvals = "APPROVALS",
+    FileManager = "FILE_MANAGER",
+    Marketplace = "MARKETPLACE",
+    InternalProcessing = "INTERNAL_PROCESSING",
+    Forecasting = "FORECASTING",
+    SlackIntegration = "SLACK_INTEGRATION",
+    CrmUiBulkAction = "CRM_UI_BULK_ACTION",
+    WorkflowContactDeleteAction = "WORKFLOW_CONTACT_DELETE_ACTION"
+}
+export declare class PropertyValue extends SpeakeasyBase {
+    name: string;
+    requestId: string;
+    selectedByUser: boolean;
+    selectedByUserTimestamp: number;
+    source: PropertyValueSourceEnum;
+    sourceId: string;
+    sourceLabel: string;
+    sourceMetadata: string;
+    sourceVid: number[];
+    timestamp: number;
+    updatedByUserId?: number;
+    value: string;
+}

@@ -1,0 +1,12 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+import { DomainSummary } from "./domainsummary";
+
+
+export class ListDomainsResponse extends SpeakeasyBase {
+  @Metadata({ data: "json, name=Domains", elemType: shared.DomainSummary })
+  domains?: DomainSummary[];
+
+  @Metadata({ data: "json, name=NextToken" })
+  nextToken?: string;
+}

@@ -1,0 +1,158 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var MetastoreProjectsLocationsServicesBackupsCreatePathParams = /** @class */ (function (_super) {
+    __extends(MetastoreProjectsLocationsServicesBackupsCreatePathParams, _super);
+    function MetastoreProjectsLocationsServicesBackupsCreatePathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=parent" }),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreatePathParams.prototype, "parent", void 0);
+    return MetastoreProjectsLocationsServicesBackupsCreatePathParams;
+}(SpeakeasyBase));
+export { MetastoreProjectsLocationsServicesBackupsCreatePathParams };
+var MetastoreProjectsLocationsServicesBackupsCreateQueryParams = /** @class */ (function (_super) {
+    __extends(MetastoreProjectsLocationsServicesBackupsCreateQueryParams, _super);
+    function MetastoreProjectsLocationsServicesBackupsCreateQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "dollarXgafv", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "accessToken", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "alt", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=backupId" }),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "backupId", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "callback", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "fields", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "key", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "oauthToken", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        __metadata("design:type", Boolean)
+    ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "prettyPrint", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "quotaUser", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=requestId" }),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "requestId", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "uploadType", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreateQueryParams.prototype, "uploadProtocol", void 0);
+    return MetastoreProjectsLocationsServicesBackupsCreateQueryParams;
+}(SpeakeasyBase));
+export { MetastoreProjectsLocationsServicesBackupsCreateQueryParams };
+var MetastoreProjectsLocationsServicesBackupsCreateSecurity = /** @class */ (function (_super) {
+    __extends(MetastoreProjectsLocationsServicesBackupsCreateSecurity, _super);
+    function MetastoreProjectsLocationsServicesBackupsCreateSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2)
+    ], MetastoreProjectsLocationsServicesBackupsCreateSecurity.prototype, "oauth2", void 0);
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2c)
+    ], MetastoreProjectsLocationsServicesBackupsCreateSecurity.prototype, "oauth2c", void 0);
+    return MetastoreProjectsLocationsServicesBackupsCreateSecurity;
+}(SpeakeasyBase));
+export { MetastoreProjectsLocationsServicesBackupsCreateSecurity };
+var MetastoreProjectsLocationsServicesBackupsCreateRequest = /** @class */ (function (_super) {
+    __extends(MetastoreProjectsLocationsServicesBackupsCreateRequest, _super);
+    function MetastoreProjectsLocationsServicesBackupsCreateRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", MetastoreProjectsLocationsServicesBackupsCreatePathParams)
+    ], MetastoreProjectsLocationsServicesBackupsCreateRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", MetastoreProjectsLocationsServicesBackupsCreateQueryParams)
+    ], MetastoreProjectsLocationsServicesBackupsCreateRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", shared.Backup)
+    ], MetastoreProjectsLocationsServicesBackupsCreateRequest.prototype, "request", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", MetastoreProjectsLocationsServicesBackupsCreateSecurity)
+    ], MetastoreProjectsLocationsServicesBackupsCreateRequest.prototype, "security", void 0);
+    return MetastoreProjectsLocationsServicesBackupsCreateRequest;
+}(SpeakeasyBase));
+export { MetastoreProjectsLocationsServicesBackupsCreateRequest };
+var MetastoreProjectsLocationsServicesBackupsCreateResponse = /** @class */ (function (_super) {
+    __extends(MetastoreProjectsLocationsServicesBackupsCreateResponse, _super);
+    function MetastoreProjectsLocationsServicesBackupsCreateResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], MetastoreProjectsLocationsServicesBackupsCreateResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.Operation)
+    ], MetastoreProjectsLocationsServicesBackupsCreateResponse.prototype, "operation", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], MetastoreProjectsLocationsServicesBackupsCreateResponse.prototype, "statusCode", void 0);
+    return MetastoreProjectsLocationsServicesBackupsCreateResponse;
+}(SpeakeasyBase));
+export { MetastoreProjectsLocationsServicesBackupsCreateResponse };

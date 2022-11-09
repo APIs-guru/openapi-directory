@@ -1,0 +1,37 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+import { SimplifiedAlbumObject } from "./simplifiedalbumobject";
+
+
+// NewReleasesObjectAlbums
+/** 
+ * https://developer.spotify.com/documentation/web-api/reference/#object-pagingobject - Find more info on the official Spotify Web API Reference
+**/
+export class NewReleasesObjectAlbums extends SpeakeasyBase {
+  @Metadata({ data: "json, name=href" })
+  href?: string;
+
+  @Metadata({ data: "json, name=items", elemType: shared.SimplifiedAlbumObject })
+  items?: SimplifiedAlbumObject[];
+
+  @Metadata({ data: "json, name=limit" })
+  limit?: number;
+
+  @Metadata({ data: "json, name=next" })
+  next?: string;
+
+  @Metadata({ data: "json, name=offset" })
+  offset?: number;
+
+  @Metadata({ data: "json, name=previous" })
+  previous?: string;
+
+  @Metadata({ data: "json, name=total" })
+  total?: number;
+}
+
+
+export class NewReleasesObject extends SpeakeasyBase {
+  @Metadata({ data: "json, name=albums" })
+  albums?: NewReleasesObjectAlbums;
+}

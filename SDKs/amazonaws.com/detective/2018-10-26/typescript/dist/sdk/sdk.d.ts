@@ -1,0 +1,30 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    AcceptInvitation(req: operations.AcceptInvitationRequest, config?: AxiosRequestConfig): Promise<operations.AcceptInvitationResponse>;
+    CreateGraph(req: operations.CreateGraphRequest, config?: AxiosRequestConfig): Promise<operations.CreateGraphResponse>;
+    CreateMembers(req: operations.CreateMembersRequest, config?: AxiosRequestConfig): Promise<operations.CreateMembersResponse>;
+    DeleteGraph(req: operations.DeleteGraphRequest, config?: AxiosRequestConfig): Promise<operations.DeleteGraphResponse>;
+    DeleteMembers(req: operations.DeleteMembersRequest, config?: AxiosRequestConfig): Promise<operations.DeleteMembersResponse>;
+    DisassociateMembership(req: operations.DisassociateMembershipRequest, config?: AxiosRequestConfig): Promise<operations.DisassociateMembershipResponse>;
+    GetMembers(req: operations.GetMembersRequest, config?: AxiosRequestConfig): Promise<operations.GetMembersResponse>;
+    ListGraphs(req: operations.ListGraphsRequest, config?: AxiosRequestConfig): Promise<operations.ListGraphsResponse>;
+    ListInvitations(req: operations.ListInvitationsRequest, config?: AxiosRequestConfig): Promise<operations.ListInvitationsResponse>;
+    ListMembers(req: operations.ListMembersRequest, config?: AxiosRequestConfig): Promise<operations.ListMembersResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    RejectInvitation(req: operations.RejectInvitationRequest, config?: AxiosRequestConfig): Promise<operations.RejectInvitationResponse>;
+    StartMonitoringMember(req: operations.StartMonitoringMemberRequest, config?: AxiosRequestConfig): Promise<operations.StartMonitoringMemberResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+}
+export {};

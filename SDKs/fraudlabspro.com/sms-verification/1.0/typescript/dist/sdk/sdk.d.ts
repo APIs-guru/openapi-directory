@@ -1,0 +1,15 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    GetV1VerificationResult(req: operations.GetV1VerificationResultRequest, config?: AxiosRequestConfig): Promise<operations.GetV1VerificationResultResponse>;
+    PostV1VerificationSend(req: operations.PostV1VerificationSendRequest, config?: AxiosRequestConfig): Promise<operations.PostV1VerificationSendResponse>;
+}
+export {};

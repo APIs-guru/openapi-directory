@@ -1,0 +1,72 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+export enum GetDisableTransitGatewayRouteTablePropagationActionEnum {
+    DisableTransitGatewayRouteTablePropagation = "DisableTransitGatewayRouteTablePropagation"
+}
+
+export enum GetDisableTransitGatewayRouteTablePropagationVersionEnum {
+    TwoThousandAndSixteen1115 = "2016-11-15"
+}
+
+
+export class GetDisableTransitGatewayRouteTablePropagationQueryParams extends SpeakeasyBase {
+  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  action: GetDisableTransitGatewayRouteTablePropagationActionEnum;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  dryRun?: boolean;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayAttachmentId" })
+  transitGatewayAttachmentId: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayRouteTableId" })
+  transitGatewayRouteTableId: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  version: GetDisableTransitGatewayRouteTablePropagationVersionEnum;
+}
+
+
+export class GetDisableTransitGatewayRouteTablePropagationHeaders extends SpeakeasyBase {
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  xAmzAlgorithm?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  xAmzContentSha256?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  xAmzCredential?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  xAmzDate?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  xAmzSecurityToken?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  xAmzSignature?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  xAmzSignedHeaders?: string;
+}
+
+
+export class GetDisableTransitGatewayRouteTablePropagationRequest extends SpeakeasyBase {
+  @Metadata()
+  queryParams: GetDisableTransitGatewayRouteTablePropagationQueryParams;
+
+  @Metadata()
+  headers: GetDisableTransitGatewayRouteTablePropagationHeaders;
+}
+
+
+export class GetDisableTransitGatewayRouteTablePropagationResponse extends SpeakeasyBase {
+  @Metadata()
+  body?: Uint8Array;
+
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  statusCode: number;
+}

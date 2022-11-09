@@ -1,0 +1,16 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+export declare enum PlayersFormatEnum {
+    Xml = "xml",
+    Json = "json"
+}
+export declare class PlayersPathParams extends SpeakeasyBase {
+    format: PlayersFormatEnum;
+}
+export declare class PlayersRequest extends SpeakeasyBase {
+    pathParams: PlayersPathParams;
+}
+export declare class PlayersResponse extends SpeakeasyBase {
+    contentType: string;
+    players?: any[];
+    statusCode: number;
+}

@@ -1,0 +1,125 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+export var GetDisassociateIamInstanceProfileActionEnum;
+(function (GetDisassociateIamInstanceProfileActionEnum) {
+    GetDisassociateIamInstanceProfileActionEnum["DisassociateIamInstanceProfile"] = "DisassociateIamInstanceProfile";
+})(GetDisassociateIamInstanceProfileActionEnum || (GetDisassociateIamInstanceProfileActionEnum = {}));
+export var GetDisassociateIamInstanceProfileVersionEnum;
+(function (GetDisassociateIamInstanceProfileVersionEnum) {
+    GetDisassociateIamInstanceProfileVersionEnum["TwoThousandAndSixteen1115"] = "2016-11-15";
+})(GetDisassociateIamInstanceProfileVersionEnum || (GetDisassociateIamInstanceProfileVersionEnum = {}));
+var GetDisassociateIamInstanceProfileQueryParams = /** @class */ (function (_super) {
+    __extends(GetDisassociateIamInstanceProfileQueryParams, _super);
+    function GetDisassociateIamInstanceProfileQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        __metadata("design:type", String)
+    ], GetDisassociateIamInstanceProfileQueryParams.prototype, "action", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=AssociationId" }),
+        __metadata("design:type", String)
+    ], GetDisassociateIamInstanceProfileQueryParams.prototype, "associationId", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        __metadata("design:type", String)
+    ], GetDisassociateIamInstanceProfileQueryParams.prototype, "version", void 0);
+    return GetDisassociateIamInstanceProfileQueryParams;
+}(SpeakeasyBase));
+export { GetDisassociateIamInstanceProfileQueryParams };
+var GetDisassociateIamInstanceProfileHeaders = /** @class */ (function (_super) {
+    __extends(GetDisassociateIamInstanceProfileHeaders, _super);
+    function GetDisassociateIamInstanceProfileHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], GetDisassociateIamInstanceProfileHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], GetDisassociateIamInstanceProfileHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], GetDisassociateIamInstanceProfileHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], GetDisassociateIamInstanceProfileHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], GetDisassociateIamInstanceProfileHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], GetDisassociateIamInstanceProfileHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], GetDisassociateIamInstanceProfileHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return GetDisassociateIamInstanceProfileHeaders;
+}(SpeakeasyBase));
+export { GetDisassociateIamInstanceProfileHeaders };
+var GetDisassociateIamInstanceProfileRequest = /** @class */ (function (_super) {
+    __extends(GetDisassociateIamInstanceProfileRequest, _super);
+    function GetDisassociateIamInstanceProfileRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetDisassociateIamInstanceProfileQueryParams)
+    ], GetDisassociateIamInstanceProfileRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetDisassociateIamInstanceProfileHeaders)
+    ], GetDisassociateIamInstanceProfileRequest.prototype, "headers", void 0);
+    return GetDisassociateIamInstanceProfileRequest;
+}(SpeakeasyBase));
+export { GetDisassociateIamInstanceProfileRequest };
+var GetDisassociateIamInstanceProfileResponse = /** @class */ (function (_super) {
+    __extends(GetDisassociateIamInstanceProfileResponse, _super);
+    function GetDisassociateIamInstanceProfileResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Uint8Array)
+    ], GetDisassociateIamInstanceProfileResponse.prototype, "body", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetDisassociateIamInstanceProfileResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetDisassociateIamInstanceProfileResponse.prototype, "statusCode", void 0);
+    return GetDisassociateIamInstanceProfileResponse;
+}(SpeakeasyBase));
+export { GetDisassociateIamInstanceProfileResponse };

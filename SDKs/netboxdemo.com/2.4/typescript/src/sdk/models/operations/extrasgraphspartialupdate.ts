@@ -1,0 +1,29 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+
+
+export class ExtrasGraphsPartialUpdatePathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=id" })
+  id: number;
+}
+
+
+export class ExtrasGraphsPartialUpdateRequest extends SpeakeasyBase {
+  @Metadata()
+  pathParams: ExtrasGraphsPartialUpdatePathParams;
+
+  @Metadata({ data: "request, media_type=application/json" })
+  request: shared.WritableGraph;
+}
+
+
+export class ExtrasGraphsPartialUpdateResponse extends SpeakeasyBase {
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  graph?: shared.Graph;
+
+  @Metadata()
+  statusCode: number;
+}

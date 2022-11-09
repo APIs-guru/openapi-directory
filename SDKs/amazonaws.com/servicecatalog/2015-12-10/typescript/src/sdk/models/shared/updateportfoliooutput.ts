@@ -1,0 +1,13 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+import { PortfolioDetail } from "./portfoliodetail";
+import { Tag } from "./tag";
+
+
+export class UpdatePortfolioOutput extends SpeakeasyBase {
+  @Metadata({ data: "json, name=PortfolioDetail" })
+  portfolioDetail?: PortfolioDetail;
+
+  @Metadata({ data: "json, name=Tags", elemType: shared.Tag })
+  tags?: Tag[];
+}

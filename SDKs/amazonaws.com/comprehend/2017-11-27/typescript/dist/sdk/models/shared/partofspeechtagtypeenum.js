@@ -1,0 +1,21 @@
+export var PartOfSpeechTagTypeEnum;
+(function (PartOfSpeechTagTypeEnum) {
+    PartOfSpeechTagTypeEnum["Adj"] = "ADJ";
+    PartOfSpeechTagTypeEnum["Adp"] = "ADP";
+    PartOfSpeechTagTypeEnum["Adv"] = "ADV";
+    PartOfSpeechTagTypeEnum["Aux"] = "AUX";
+    PartOfSpeechTagTypeEnum["Conj"] = "CONJ";
+    PartOfSpeechTagTypeEnum["Cconj"] = "CCONJ";
+    PartOfSpeechTagTypeEnum["Det"] = "DET";
+    PartOfSpeechTagTypeEnum["Intj"] = "INTJ";
+    PartOfSpeechTagTypeEnum["Noun"] = "NOUN";
+    PartOfSpeechTagTypeEnum["Num"] = "NUM";
+    PartOfSpeechTagTypeEnum["O"] = "O";
+    PartOfSpeechTagTypeEnum["Part"] = "PART";
+    PartOfSpeechTagTypeEnum["Pron"] = "PRON";
+    PartOfSpeechTagTypeEnum["Propn"] = "PROPN";
+    PartOfSpeechTagTypeEnum["Punct"] = "PUNCT";
+    PartOfSpeechTagTypeEnum["Sconj"] = "SCONJ";
+    PartOfSpeechTagTypeEnum["Sym"] = "SYM";
+    PartOfSpeechTagTypeEnum["Verb"] = "VERB";
+})(PartOfSpeechTagTypeEnum || (PartOfSpeechTagTypeEnum = {}));

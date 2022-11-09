@@ -1,0 +1,137 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+export var GetCopyClusterSnapshotActionEnum;
+(function (GetCopyClusterSnapshotActionEnum) {
+    GetCopyClusterSnapshotActionEnum["CopyClusterSnapshot"] = "CopyClusterSnapshot";
+})(GetCopyClusterSnapshotActionEnum || (GetCopyClusterSnapshotActionEnum = {}));
+export var GetCopyClusterSnapshotVersionEnum;
+(function (GetCopyClusterSnapshotVersionEnum) {
+    GetCopyClusterSnapshotVersionEnum["TwoThousandAndTwelve1201"] = "2012-12-01";
+})(GetCopyClusterSnapshotVersionEnum || (GetCopyClusterSnapshotVersionEnum = {}));
+var GetCopyClusterSnapshotQueryParams = /** @class */ (function (_super) {
+    __extends(GetCopyClusterSnapshotQueryParams, _super);
+    function GetCopyClusterSnapshotQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        __metadata("design:type", String)
+    ], GetCopyClusterSnapshotQueryParams.prototype, "action", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=ManualSnapshotRetentionPeriod" }),
+        __metadata("design:type", Number)
+    ], GetCopyClusterSnapshotQueryParams.prototype, "manualSnapshotRetentionPeriod", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=SourceSnapshotClusterIdentifier" }),
+        __metadata("design:type", String)
+    ], GetCopyClusterSnapshotQueryParams.prototype, "sourceSnapshotClusterIdentifier", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=SourceSnapshotIdentifier" }),
+        __metadata("design:type", String)
+    ], GetCopyClusterSnapshotQueryParams.prototype, "sourceSnapshotIdentifier", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=TargetSnapshotIdentifier" }),
+        __metadata("design:type", String)
+    ], GetCopyClusterSnapshotQueryParams.prototype, "targetSnapshotIdentifier", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        __metadata("design:type", String)
+    ], GetCopyClusterSnapshotQueryParams.prototype, "version", void 0);
+    return GetCopyClusterSnapshotQueryParams;
+}(SpeakeasyBase));
+export { GetCopyClusterSnapshotQueryParams };
+var GetCopyClusterSnapshotHeaders = /** @class */ (function (_super) {
+    __extends(GetCopyClusterSnapshotHeaders, _super);
+    function GetCopyClusterSnapshotHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], GetCopyClusterSnapshotHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], GetCopyClusterSnapshotHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], GetCopyClusterSnapshotHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], GetCopyClusterSnapshotHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], GetCopyClusterSnapshotHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], GetCopyClusterSnapshotHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], GetCopyClusterSnapshotHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return GetCopyClusterSnapshotHeaders;
+}(SpeakeasyBase));
+export { GetCopyClusterSnapshotHeaders };
+var GetCopyClusterSnapshotRequest = /** @class */ (function (_super) {
+    __extends(GetCopyClusterSnapshotRequest, _super);
+    function GetCopyClusterSnapshotRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetCopyClusterSnapshotQueryParams)
+    ], GetCopyClusterSnapshotRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetCopyClusterSnapshotHeaders)
+    ], GetCopyClusterSnapshotRequest.prototype, "headers", void 0);
+    return GetCopyClusterSnapshotRequest;
+}(SpeakeasyBase));
+export { GetCopyClusterSnapshotRequest };
+var GetCopyClusterSnapshotResponse = /** @class */ (function (_super) {
+    __extends(GetCopyClusterSnapshotResponse, _super);
+    function GetCopyClusterSnapshotResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Uint8Array)
+    ], GetCopyClusterSnapshotResponse.prototype, "body", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetCopyClusterSnapshotResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetCopyClusterSnapshotResponse.prototype, "statusCode", void 0);
+    return GetCopyClusterSnapshotResponse;
+}(SpeakeasyBase));
+export { GetCopyClusterSnapshotResponse };

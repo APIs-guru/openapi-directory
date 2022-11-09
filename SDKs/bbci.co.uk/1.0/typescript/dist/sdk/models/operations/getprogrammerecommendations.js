@@ -1,0 +1,98 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var GetProgrammeRecommendationsPathParams = /** @class */ (function (_super) {
+    __extends(GetProgrammeRecommendationsPathParams, _super);
+    function GetProgrammeRecommendationsPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=pid" }),
+        __metadata("design:type", String)
+    ], GetProgrammeRecommendationsPathParams.prototype, "pid", void 0);
+    return GetProgrammeRecommendationsPathParams;
+}(SpeakeasyBase));
+export { GetProgrammeRecommendationsPathParams };
+var GetProgrammeRecommendationsQueryParams = /** @class */ (function (_super) {
+    __extends(GetProgrammeRecommendationsQueryParams, _super);
+    function GetProgrammeRecommendationsQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=availability" }),
+        __metadata("design:type", String)
+    ], GetProgrammeRecommendationsQueryParams.prototype, "availability", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=page" }),
+        __metadata("design:type", Number)
+    ], GetProgrammeRecommendationsQueryParams.prototype, "page", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=per_page" }),
+        __metadata("design:type", Number)
+    ], GetProgrammeRecommendationsQueryParams.prototype, "perPage", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=rights" }),
+        __metadata("design:type", String)
+    ], GetProgrammeRecommendationsQueryParams.prototype, "rights", void 0);
+    return GetProgrammeRecommendationsQueryParams;
+}(SpeakeasyBase));
+export { GetProgrammeRecommendationsQueryParams };
+var GetProgrammeRecommendationsRequest = /** @class */ (function (_super) {
+    __extends(GetProgrammeRecommendationsRequest, _super);
+    function GetProgrammeRecommendationsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetProgrammeRecommendationsPathParams)
+    ], GetProgrammeRecommendationsRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetProgrammeRecommendationsQueryParams)
+    ], GetProgrammeRecommendationsRequest.prototype, "queryParams", void 0);
+    return GetProgrammeRecommendationsRequest;
+}(SpeakeasyBase));
+export { GetProgrammeRecommendationsRequest };
+var GetProgrammeRecommendationsResponse = /** @class */ (function (_super) {
+    __extends(GetProgrammeRecommendationsResponse, _super);
+    function GetProgrammeRecommendationsResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetProgrammeRecommendationsResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetProgrammeRecommendationsResponse.prototype, "statusCode", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Object)
+    ], GetProgrammeRecommendationsResponse.prototype, "ibl", void 0);
+    return GetProgrammeRecommendationsResponse;
+}(SpeakeasyBase));
+export { GetProgrammeRecommendationsResponse };

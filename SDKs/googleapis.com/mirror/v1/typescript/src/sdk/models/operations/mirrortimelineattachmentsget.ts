@@ -1,0 +1,68 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+
+
+export class MirrorTimelineAttachmentsGetPathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=attachmentId" })
+  attachmentId: string;
+
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=itemId" })
+  itemId: string;
+}
+
+
+export class MirrorTimelineAttachmentsGetQueryParams extends SpeakeasyBase {
+  @Metadata({ data: "queryParam, style=form;explode=true;name=alt" })
+  alt?: shared.AltEnum;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=fields" })
+  fields?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=key" })
+  key?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" })
+  oauthToken?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" })
+  prettyPrint?: boolean;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" })
+  quotaUser?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=userIp" })
+  userIp?: string;
+}
+
+
+export class MirrorTimelineAttachmentsGetSecurity extends SpeakeasyBase {
+  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2: shared.SchemeOauth2;
+
+  @Metadata({ data: "security, scheme=true;type=oauth2" })
+  oauth2c: shared.SchemeOauth2c;
+}
+
+
+export class MirrorTimelineAttachmentsGetRequest extends SpeakeasyBase {
+  @Metadata()
+  pathParams: MirrorTimelineAttachmentsGetPathParams;
+
+  @Metadata()
+  queryParams: MirrorTimelineAttachmentsGetQueryParams;
+
+  @Metadata()
+  security: MirrorTimelineAttachmentsGetSecurity;
+}
+
+
+export class MirrorTimelineAttachmentsGetResponse extends SpeakeasyBase {
+  @Metadata()
+  body?: Uint8Array;
+
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  statusCode: number;
+}

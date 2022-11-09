@@ -1,0 +1,31 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { Campaign } from "./campaign";
+import { ExtendedAttribute } from "./extendedattribute";
+import { Language } from "./language";
+import { Source } from "./source";
+export declare class MediaItem extends SpeakeasyBase {
+    campaigns?: Campaign[];
+    createdBy?: string;
+    customAttributionUrl?: string;
+    customPreviewUrl?: string;
+    customThumbnailUrl?: string;
+    dateContentAuthored?: Date;
+    dateContentPublished?: Date;
+    dateContentReviewed?: Date;
+    dateContentUpdated?: Date;
+    dateSyndicationCaptured?: Date;
+    dateSyndicationUpdated?: Date;
+    dateSyndicationVisible?: Date;
+    description?: string;
+    extendedAttributes?: ExtendedAttribute[];
+    externalGuid?: string;
+    foreignSyndicationApiUrl?: string;
+    hash?: string;
+    id?: number;
+    language?: Language;
+    mediaType?: string;
+    name?: string;
+    source?: Source;
+    sourceUrl?: string;
+    targetUrl?: string;
+}

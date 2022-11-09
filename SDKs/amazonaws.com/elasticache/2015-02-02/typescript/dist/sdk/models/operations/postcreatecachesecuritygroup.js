@@ -1,0 +1,125 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+export var PostCreateCacheSecurityGroupActionEnum;
+(function (PostCreateCacheSecurityGroupActionEnum) {
+    PostCreateCacheSecurityGroupActionEnum["CreateCacheSecurityGroup"] = "CreateCacheSecurityGroup";
+})(PostCreateCacheSecurityGroupActionEnum || (PostCreateCacheSecurityGroupActionEnum = {}));
+export var PostCreateCacheSecurityGroupVersionEnum;
+(function (PostCreateCacheSecurityGroupVersionEnum) {
+    PostCreateCacheSecurityGroupVersionEnum["TwoThousandAndFifteen0202"] = "2015-02-02";
+})(PostCreateCacheSecurityGroupVersionEnum || (PostCreateCacheSecurityGroupVersionEnum = {}));
+var PostCreateCacheSecurityGroupQueryParams = /** @class */ (function (_super) {
+    __extends(PostCreateCacheSecurityGroupQueryParams, _super);
+    function PostCreateCacheSecurityGroupQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        __metadata("design:type", String)
+    ], PostCreateCacheSecurityGroupQueryParams.prototype, "action", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        __metadata("design:type", String)
+    ], PostCreateCacheSecurityGroupQueryParams.prototype, "version", void 0);
+    return PostCreateCacheSecurityGroupQueryParams;
+}(SpeakeasyBase));
+export { PostCreateCacheSecurityGroupQueryParams };
+var PostCreateCacheSecurityGroupHeaders = /** @class */ (function (_super) {
+    __extends(PostCreateCacheSecurityGroupHeaders, _super);
+    function PostCreateCacheSecurityGroupHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], PostCreateCacheSecurityGroupHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], PostCreateCacheSecurityGroupHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], PostCreateCacheSecurityGroupHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], PostCreateCacheSecurityGroupHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], PostCreateCacheSecurityGroupHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], PostCreateCacheSecurityGroupHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], PostCreateCacheSecurityGroupHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return PostCreateCacheSecurityGroupHeaders;
+}(SpeakeasyBase));
+export { PostCreateCacheSecurityGroupHeaders };
+var PostCreateCacheSecurityGroupRequest = /** @class */ (function (_super) {
+    __extends(PostCreateCacheSecurityGroupRequest, _super);
+    function PostCreateCacheSecurityGroupRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", PostCreateCacheSecurityGroupQueryParams)
+    ], PostCreateCacheSecurityGroupRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", PostCreateCacheSecurityGroupHeaders)
+    ], PostCreateCacheSecurityGroupRequest.prototype, "headers", void 0);
+    __decorate([
+        Metadata({ data: "request, media_type=text/xml" }),
+        __metadata("design:type", Uint8Array)
+    ], PostCreateCacheSecurityGroupRequest.prototype, "request", void 0);
+    return PostCreateCacheSecurityGroupRequest;
+}(SpeakeasyBase));
+export { PostCreateCacheSecurityGroupRequest };
+var PostCreateCacheSecurityGroupResponse = /** @class */ (function (_super) {
+    __extends(PostCreateCacheSecurityGroupResponse, _super);
+    function PostCreateCacheSecurityGroupResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Uint8Array)
+    ], PostCreateCacheSecurityGroupResponse.prototype, "body", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], PostCreateCacheSecurityGroupResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], PostCreateCacheSecurityGroupResponse.prototype, "statusCode", void 0);
+    return PostCreateCacheSecurityGroupResponse;
+}(SpeakeasyBase));
+export { PostCreateCacheSecurityGroupResponse };

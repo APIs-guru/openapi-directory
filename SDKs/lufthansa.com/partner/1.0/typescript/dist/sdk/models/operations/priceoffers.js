@@ -1,0 +1,114 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var PriceOffersPathParams = /** @class */ (function (_super) {
+    __extends(PriceOffersPathParams, _super);
+    function PriceOffersPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=destination" }),
+        __metadata("design:type", String)
+    ], PriceOffersPathParams.prototype, "destination", void 0);
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=origin" }),
+        __metadata("design:type", String)
+    ], PriceOffersPathParams.prototype, "origin", void 0);
+    return PriceOffersPathParams;
+}(SpeakeasyBase));
+export { PriceOffersPathParams };
+var PriceOffersQueryParams = /** @class */ (function (_super) {
+    __extends(PriceOffersQueryParams, _super);
+    function PriceOffersQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=departureDate" }),
+        __metadata("design:type", String)
+    ], PriceOffersQueryParams.prototype, "departureDate", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=returnDate" }),
+        __metadata("design:type", String)
+    ], PriceOffersQueryParams.prototype, "returnDate", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=service" }),
+        __metadata("design:type", String)
+    ], PriceOffersQueryParams.prototype, "service", void 0);
+    return PriceOffersQueryParams;
+}(SpeakeasyBase));
+export { PriceOffersQueryParams };
+var PriceOffersSecurity = /** @class */ (function (_super) {
+    __extends(PriceOffersSecurity, _super);
+    function PriceOffersSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeAuth)
+    ], PriceOffersSecurity.prototype, "auth", void 0);
+    return PriceOffersSecurity;
+}(SpeakeasyBase));
+export { PriceOffersSecurity };
+var PriceOffersRequest = /** @class */ (function (_super) {
+    __extends(PriceOffersRequest, _super);
+    function PriceOffersRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", PriceOffersPathParams)
+    ], PriceOffersRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", PriceOffersQueryParams)
+    ], PriceOffersRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", PriceOffersSecurity)
+    ], PriceOffersRequest.prototype, "security", void 0);
+    return PriceOffersRequest;
+}(SpeakeasyBase));
+export { PriceOffersRequest };
+var PriceOffersResponse = /** @class */ (function (_super) {
+    __extends(PriceOffersResponse, _super);
+    function PriceOffersResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], PriceOffersResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], PriceOffersResponse.prototype, "priceOffers200ApplicationJsonString", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], PriceOffersResponse.prototype, "statusCode", void 0);
+    return PriceOffersResponse;
+}(SpeakeasyBase));
+export { PriceOffersResponse };

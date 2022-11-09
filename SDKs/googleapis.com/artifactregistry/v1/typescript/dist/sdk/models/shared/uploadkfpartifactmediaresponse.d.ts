@@ -1,0 +1,8 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { Operation } from "./operation";
+/**
+ * The response to upload an artifact.
+**/
+export declare class UploadKfpArtifactMediaResponse extends SpeakeasyBase {
+    operation?: Operation;
+}

@@ -1,0 +1,35 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    AddApplicationCloudWatchLoggingOption(req: operations.AddApplicationCloudWatchLoggingOptionRequest, config?: AxiosRequestConfig): Promise<operations.AddApplicationCloudWatchLoggingOptionResponse>;
+    AddApplicationInput(req: operations.AddApplicationInputRequest, config?: AxiosRequestConfig): Promise<operations.AddApplicationInputResponse>;
+    AddApplicationInputProcessingConfiguration(req: operations.AddApplicationInputProcessingConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.AddApplicationInputProcessingConfigurationResponse>;
+    AddApplicationOutput(req: operations.AddApplicationOutputRequest, config?: AxiosRequestConfig): Promise<operations.AddApplicationOutputResponse>;
+    AddApplicationReferenceDataSource(req: operations.AddApplicationReferenceDataSourceRequest, config?: AxiosRequestConfig): Promise<operations.AddApplicationReferenceDataSourceResponse>;
+    CreateApplication(req: operations.CreateApplicationRequest, config?: AxiosRequestConfig): Promise<operations.CreateApplicationResponse>;
+    DeleteApplication(req: operations.DeleteApplicationRequest, config?: AxiosRequestConfig): Promise<operations.DeleteApplicationResponse>;
+    DeleteApplicationCloudWatchLoggingOption(req: operations.DeleteApplicationCloudWatchLoggingOptionRequest, config?: AxiosRequestConfig): Promise<operations.DeleteApplicationCloudWatchLoggingOptionResponse>;
+    DeleteApplicationInputProcessingConfiguration(req: operations.DeleteApplicationInputProcessingConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.DeleteApplicationInputProcessingConfigurationResponse>;
+    DeleteApplicationOutput(req: operations.DeleteApplicationOutputRequest, config?: AxiosRequestConfig): Promise<operations.DeleteApplicationOutputResponse>;
+    DeleteApplicationReferenceDataSource(req: operations.DeleteApplicationReferenceDataSourceRequest, config?: AxiosRequestConfig): Promise<operations.DeleteApplicationReferenceDataSourceResponse>;
+    DescribeApplication(req: operations.DescribeApplicationRequest, config?: AxiosRequestConfig): Promise<operations.DescribeApplicationResponse>;
+    DiscoverInputSchema(req: operations.DiscoverInputSchemaRequest, config?: AxiosRequestConfig): Promise<operations.DiscoverInputSchemaResponse>;
+    ListApplications(req: operations.ListApplicationsRequest, config?: AxiosRequestConfig): Promise<operations.ListApplicationsResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    StartApplication(req: operations.StartApplicationRequest, config?: AxiosRequestConfig): Promise<operations.StartApplicationResponse>;
+    StopApplication(req: operations.StopApplicationRequest, config?: AxiosRequestConfig): Promise<operations.StopApplicationResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+    UpdateApplication(req: operations.UpdateApplicationRequest, config?: AxiosRequestConfig): Promise<operations.UpdateApplicationResponse>;
+}
+export {};

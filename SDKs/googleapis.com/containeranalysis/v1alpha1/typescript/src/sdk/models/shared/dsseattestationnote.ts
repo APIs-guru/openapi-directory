@@ -1,0 +1,12 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { DsseHint } from "./dssehint";
+
+
+// DsseAttestationNote
+/** 
+ * A note describing an attestation
+**/
+export class DsseAttestationNote extends SpeakeasyBase {
+  @Metadata({ data: "json, name=hint" })
+  hint?: DsseHint;
+}

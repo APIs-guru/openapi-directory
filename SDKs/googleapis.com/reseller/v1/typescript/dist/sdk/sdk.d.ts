@@ -1,0 +1,30 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    ResellerCustomersGet(req: operations.ResellerCustomersGetRequest, config?: AxiosRequestConfig): Promise<operations.ResellerCustomersGetResponse>;
+    ResellerCustomersInsert(req: operations.ResellerCustomersInsertRequest, config?: AxiosRequestConfig): Promise<operations.ResellerCustomersInsertResponse>;
+    ResellerCustomersPatch(req: operations.ResellerCustomersPatchRequest, config?: AxiosRequestConfig): Promise<operations.ResellerCustomersPatchResponse>;
+    ResellerCustomersUpdate(req: operations.ResellerCustomersUpdateRequest, config?: AxiosRequestConfig): Promise<operations.ResellerCustomersUpdateResponse>;
+    ResellerResellernotifyGetwatchdetails(req: operations.ResellerResellernotifyGetwatchdetailsRequest, config?: AxiosRequestConfig): Promise<operations.ResellerResellernotifyGetwatchdetailsResponse>;
+    ResellerResellernotifyRegister(req: operations.ResellerResellernotifyRegisterRequest, config?: AxiosRequestConfig): Promise<operations.ResellerResellernotifyRegisterResponse>;
+    ResellerResellernotifyUnregister(req: operations.ResellerResellernotifyUnregisterRequest, config?: AxiosRequestConfig): Promise<operations.ResellerResellernotifyUnregisterResponse>;
+    ResellerSubscriptionsActivate(req: operations.ResellerSubscriptionsActivateRequest, config?: AxiosRequestConfig): Promise<operations.ResellerSubscriptionsActivateResponse>;
+    ResellerSubscriptionsChangePlan(req: operations.ResellerSubscriptionsChangePlanRequest, config?: AxiosRequestConfig): Promise<operations.ResellerSubscriptionsChangePlanResponse>;
+    ResellerSubscriptionsChangeRenewalSettings(req: operations.ResellerSubscriptionsChangeRenewalSettingsRequest, config?: AxiosRequestConfig): Promise<operations.ResellerSubscriptionsChangeRenewalSettingsResponse>;
+    ResellerSubscriptionsChangeSeats(req: operations.ResellerSubscriptionsChangeSeatsRequest, config?: AxiosRequestConfig): Promise<operations.ResellerSubscriptionsChangeSeatsResponse>;
+    ResellerSubscriptionsDelete(req: operations.ResellerSubscriptionsDeleteRequest, config?: AxiosRequestConfig): Promise<operations.ResellerSubscriptionsDeleteResponse>;
+    ResellerSubscriptionsGet(req: operations.ResellerSubscriptionsGetRequest, config?: AxiosRequestConfig): Promise<operations.ResellerSubscriptionsGetResponse>;
+    ResellerSubscriptionsInsert(req: operations.ResellerSubscriptionsInsertRequest, config?: AxiosRequestConfig): Promise<operations.ResellerSubscriptionsInsertResponse>;
+    ResellerSubscriptionsList(req: operations.ResellerSubscriptionsListRequest, config?: AxiosRequestConfig): Promise<operations.ResellerSubscriptionsListResponse>;
+    ResellerSubscriptionsStartPaidService(req: operations.ResellerSubscriptionsStartPaidServiceRequest, config?: AxiosRequestConfig): Promise<operations.ResellerSubscriptionsStartPaidServiceResponse>;
+    ResellerSubscriptionsSuspend(req: operations.ResellerSubscriptionsSuspendRequest, config?: AxiosRequestConfig): Promise<operations.ResellerSubscriptionsSuspendResponse>;
+}
+export {};

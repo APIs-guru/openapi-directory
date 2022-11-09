@@ -1,0 +1,30 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+export declare class Organization extends SpeakeasyBase {
+    assetCount?: number;
+    clientId?: string;
+    createdAt?: number;
+    deactivatedAt?: number;
+    description?: string;
+    downloadToken?: string;
+    downloadTokenCreatedAt?: number;
+    expirationAssetsOffline?: number;
+    expirationAssetsStale?: number;
+    expirationScans?: number;
+    exportToken?: string;
+    exportTokenCounter?: number;
+    exportTokenCreatedAt?: number;
+    exportTokenLastUsedAt?: number;
+    exportTokenLastUsedBy?: string;
+    id: string;
+    inactive?: boolean;
+    name: string;
+    parentId?: string;
+    permanent?: boolean;
+    project?: boolean;
+    serviceCount?: number;
+    serviceCountArp?: number;
+    serviceCountIcmp?: number;
+    serviceCountTcp?: number;
+    serviceCountUdp?: number;
+    updatedAt?: number;
+}

@@ -1,0 +1,12 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+import { OtaUpdateSummary } from "./otaupdatesummary";
+
+
+export class ListOtaUpdatesResponse extends SpeakeasyBase {
+  @Metadata({ data: "json, name=nextToken" })
+  nextToken?: string;
+
+  @Metadata({ data: "json, name=otaUpdates", elemType: shared.OtaUpdateSummary })
+  otaUpdates?: OtaUpdateSummary[];
+}

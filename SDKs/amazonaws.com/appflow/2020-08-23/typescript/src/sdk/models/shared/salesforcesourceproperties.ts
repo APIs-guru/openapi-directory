@@ -1,0 +1,17 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+
+// SalesforceSourceProperties
+/** 
+ *  The properties that are applied when Salesforce is being used as a source. 
+**/
+export class SalesforceSourceProperties extends SpeakeasyBase {
+  @Metadata({ data: "json, name=enableDynamicFieldUpdate" })
+  enableDynamicFieldUpdate?: boolean;
+
+  @Metadata({ data: "json, name=includeDeletedRecords" })
+  includeDeletedRecords?: boolean;
+
+  @Metadata({ data: "json, name=object" })
+  object: string;
+}

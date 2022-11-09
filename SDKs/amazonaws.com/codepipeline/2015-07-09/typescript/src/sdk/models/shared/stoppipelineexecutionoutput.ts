@@ -1,0 +1,7 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+
+export class StopPipelineExecutionOutput extends SpeakeasyBase {
+  @Metadata({ data: "json, name=pipelineExecutionId" })
+  pipelineExecutionId?: string;
+}

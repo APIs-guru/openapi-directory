@@ -1,0 +1,27 @@
+export var DeploymentJobErrorCodeEnum;
+(function (DeploymentJobErrorCodeEnum) {
+    DeploymentJobErrorCodeEnum["ResourceNotFound"] = "ResourceNotFound";
+    DeploymentJobErrorCodeEnum["EnvironmentSetupError"] = "EnvironmentSetupError";
+    DeploymentJobErrorCodeEnum["EtagMismatch"] = "EtagMismatch";
+    DeploymentJobErrorCodeEnum["FailureThresholdBreached"] = "FailureThresholdBreached";
+    DeploymentJobErrorCodeEnum["RobotDeploymentAborted"] = "RobotDeploymentAborted";
+    DeploymentJobErrorCodeEnum["RobotDeploymentNoResponse"] = "RobotDeploymentNoResponse";
+    DeploymentJobErrorCodeEnum["RobotAgentConnectionTimeout"] = "RobotAgentConnectionTimeout";
+    DeploymentJobErrorCodeEnum["GreengrassDeploymentFailed"] = "GreengrassDeploymentFailed";
+    DeploymentJobErrorCodeEnum["InvalidGreengrassGroup"] = "InvalidGreengrassGroup";
+    DeploymentJobErrorCodeEnum["MissingRobotArchitecture"] = "MissingRobotArchitecture";
+    DeploymentJobErrorCodeEnum["MissingRobotApplicationArchitecture"] = "MissingRobotApplicationArchitecture";
+    DeploymentJobErrorCodeEnum["MissingRobotDeploymentResource"] = "MissingRobotDeploymentResource";
+    DeploymentJobErrorCodeEnum["GreengrassGroupVersionDoesNotExist"] = "GreengrassGroupVersionDoesNotExist";
+    DeploymentJobErrorCodeEnum["LambdaDeleted"] = "LambdaDeleted";
+    DeploymentJobErrorCodeEnum["ExtractingBundleFailure"] = "ExtractingBundleFailure";
+    DeploymentJobErrorCodeEnum["PreLaunchFileFailure"] = "PreLaunchFileFailure";
+    DeploymentJobErrorCodeEnum["PostLaunchFileFailure"] = "PostLaunchFileFailure";
+    DeploymentJobErrorCodeEnum["BadPermissionError"] = "BadPermissionError";
+    DeploymentJobErrorCodeEnum["DownloadConditionFailed"] = "DownloadConditionFailed";
+    DeploymentJobErrorCodeEnum["BadLambdaAssociated"] = "BadLambdaAssociated";
+    DeploymentJobErrorCodeEnum["InternalServerError"] = "InternalServerError";
+    DeploymentJobErrorCodeEnum["RobotApplicationDoesNotExist"] = "RobotApplicationDoesNotExist";
+    DeploymentJobErrorCodeEnum["DeploymentFleetDoesNotExist"] = "DeploymentFleetDoesNotExist";
+    DeploymentJobErrorCodeEnum["FleetDeploymentTimeout"] = "FleetDeploymentTimeout";
+})(DeploymentJobErrorCodeEnum || (DeploymentJobErrorCodeEnum = {}));

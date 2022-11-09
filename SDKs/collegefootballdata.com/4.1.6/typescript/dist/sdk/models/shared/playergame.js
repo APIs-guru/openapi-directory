@@ -1,0 +1,134 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var PlayerGameTeamsCategoriesTypesAthletes = /** @class */ (function (_super) {
+    __extends(PlayerGameTeamsCategoriesTypesAthletes, _super);
+    function PlayerGameTeamsCategoriesTypesAthletes() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=id" }),
+        __metadata("design:type", Number)
+    ], PlayerGameTeamsCategoriesTypesAthletes.prototype, "id", void 0);
+    __decorate([
+        Metadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], PlayerGameTeamsCategoriesTypesAthletes.prototype, "name", void 0);
+    __decorate([
+        Metadata({ data: "json, name=stat" }),
+        __metadata("design:type", String)
+    ], PlayerGameTeamsCategoriesTypesAthletes.prototype, "stat", void 0);
+    return PlayerGameTeamsCategoriesTypesAthletes;
+}(SpeakeasyBase));
+export { PlayerGameTeamsCategoriesTypesAthletes };
+var PlayerGameTeamsCategoriesTypes = /** @class */ (function (_super) {
+    __extends(PlayerGameTeamsCategoriesTypes, _super);
+    function PlayerGameTeamsCategoriesTypes() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=athletes", elemType: shared.PlayerGameTeamsCategoriesTypesAthletes }),
+        __metadata("design:type", Array)
+    ], PlayerGameTeamsCategoriesTypes.prototype, "athletes", void 0);
+    __decorate([
+        Metadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], PlayerGameTeamsCategoriesTypes.prototype, "name", void 0);
+    return PlayerGameTeamsCategoriesTypes;
+}(SpeakeasyBase));
+export { PlayerGameTeamsCategoriesTypes };
+var PlayerGameTeamsCategories = /** @class */ (function (_super) {
+    __extends(PlayerGameTeamsCategories, _super);
+    function PlayerGameTeamsCategories() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], PlayerGameTeamsCategories.prototype, "name", void 0);
+    __decorate([
+        Metadata({ data: "json, name=types", elemType: shared.PlayerGameTeamsCategoriesTypes }),
+        __metadata("design:type", Array)
+    ], PlayerGameTeamsCategories.prototype, "types", void 0);
+    return PlayerGameTeamsCategories;
+}(SpeakeasyBase));
+export { PlayerGameTeamsCategories };
+var PlayerGameTeamsSchool = /** @class */ (function (_super) {
+    __extends(PlayerGameTeamsSchool, _super);
+    function PlayerGameTeamsSchool() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=conference" }),
+        __metadata("design:type", String)
+    ], PlayerGameTeamsSchool.prototype, "conference", void 0);
+    __decorate([
+        Metadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], PlayerGameTeamsSchool.prototype, "name", void 0);
+    return PlayerGameTeamsSchool;
+}(SpeakeasyBase));
+export { PlayerGameTeamsSchool };
+var PlayerGameTeams = /** @class */ (function (_super) {
+    __extends(PlayerGameTeams, _super);
+    function PlayerGameTeams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=categories", elemType: shared.PlayerGameTeamsCategories }),
+        __metadata("design:type", Array)
+    ], PlayerGameTeams.prototype, "categories", void 0);
+    __decorate([
+        Metadata({ data: "json, name=homeAway" }),
+        __metadata("design:type", Boolean)
+    ], PlayerGameTeams.prototype, "homeAway", void 0);
+    __decorate([
+        Metadata({ data: "json, name=points" }),
+        __metadata("design:type", Number)
+    ], PlayerGameTeams.prototype, "points", void 0);
+    __decorate([
+        Metadata({ data: "json, name=school" }),
+        __metadata("design:type", PlayerGameTeamsSchool)
+    ], PlayerGameTeams.prototype, "school", void 0);
+    return PlayerGameTeams;
+}(SpeakeasyBase));
+export { PlayerGameTeams };
+var PlayerGame = /** @class */ (function (_super) {
+    __extends(PlayerGame, _super);
+    function PlayerGame() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=id" }),
+        __metadata("design:type", Number)
+    ], PlayerGame.prototype, "id", void 0);
+    __decorate([
+        Metadata({ data: "json, name=teams", elemType: shared.PlayerGameTeams }),
+        __metadata("design:type", Array)
+    ], PlayerGame.prototype, "teams", void 0);
+    return PlayerGame;
+}(SpeakeasyBase));
+export { PlayerGame };

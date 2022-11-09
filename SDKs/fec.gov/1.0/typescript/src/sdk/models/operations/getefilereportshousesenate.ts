@@ -1,0 +1,56 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+
+
+export class GetEfileReportsHouseSenateQueryParams extends SpeakeasyBase {
+  @Metadata({ data: "queryParam, style=form;explode=true;name=api_key" })
+  apiKey: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=committee_id" })
+  committeeId?: string[];
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=file_number" })
+  fileNumber?: number[];
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=max_receipt_date" })
+  maxReceiptDate?: Date;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=min_receipt_date" })
+  minReceiptDate?: Date;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=page" })
+  page?: number;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=per_page" })
+  perPage?: number;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=sort" })
+  sort?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_hide_null" })
+  sortHideNull?: boolean;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_null_only" })
+  sortNullOnly?: boolean;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=sort_nulls_last" })
+  sortNullsLast?: boolean;
+}
+
+
+export class GetEfileReportsHouseSenateRequest extends SpeakeasyBase {
+  @Metadata()
+  queryParams: GetEfileReportsHouseSenateQueryParams;
+}
+
+
+export class GetEfileReportsHouseSenateResponse extends SpeakeasyBase {
+  @Metadata()
+  baseF3FilingPage?: shared.BaseF3FilingPage;
+
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  statusCode: number;
+}

@@ -1,0 +1,133 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+export var PostDescribeClientVpnRoutesActionEnum;
+(function (PostDescribeClientVpnRoutesActionEnum) {
+    PostDescribeClientVpnRoutesActionEnum["DescribeClientVpnRoutes"] = "DescribeClientVpnRoutes";
+})(PostDescribeClientVpnRoutesActionEnum || (PostDescribeClientVpnRoutesActionEnum = {}));
+export var PostDescribeClientVpnRoutesVersionEnum;
+(function (PostDescribeClientVpnRoutesVersionEnum) {
+    PostDescribeClientVpnRoutesVersionEnum["TwoThousandAndSixteen1115"] = "2016-11-15";
+})(PostDescribeClientVpnRoutesVersionEnum || (PostDescribeClientVpnRoutesVersionEnum = {}));
+var PostDescribeClientVpnRoutesQueryParams = /** @class */ (function (_super) {
+    __extends(PostDescribeClientVpnRoutesQueryParams, _super);
+    function PostDescribeClientVpnRoutesQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        __metadata("design:type", String)
+    ], PostDescribeClientVpnRoutesQueryParams.prototype, "action", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=MaxResults" }),
+        __metadata("design:type", String)
+    ], PostDescribeClientVpnRoutesQueryParams.prototype, "maxResults", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=NextToken" }),
+        __metadata("design:type", String)
+    ], PostDescribeClientVpnRoutesQueryParams.prototype, "nextToken", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        __metadata("design:type", String)
+    ], PostDescribeClientVpnRoutesQueryParams.prototype, "version", void 0);
+    return PostDescribeClientVpnRoutesQueryParams;
+}(SpeakeasyBase));
+export { PostDescribeClientVpnRoutesQueryParams };
+var PostDescribeClientVpnRoutesHeaders = /** @class */ (function (_super) {
+    __extends(PostDescribeClientVpnRoutesHeaders, _super);
+    function PostDescribeClientVpnRoutesHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], PostDescribeClientVpnRoutesHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], PostDescribeClientVpnRoutesHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], PostDescribeClientVpnRoutesHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], PostDescribeClientVpnRoutesHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], PostDescribeClientVpnRoutesHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], PostDescribeClientVpnRoutesHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], PostDescribeClientVpnRoutesHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return PostDescribeClientVpnRoutesHeaders;
+}(SpeakeasyBase));
+export { PostDescribeClientVpnRoutesHeaders };
+var PostDescribeClientVpnRoutesRequest = /** @class */ (function (_super) {
+    __extends(PostDescribeClientVpnRoutesRequest, _super);
+    function PostDescribeClientVpnRoutesRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", PostDescribeClientVpnRoutesQueryParams)
+    ], PostDescribeClientVpnRoutesRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", PostDescribeClientVpnRoutesHeaders)
+    ], PostDescribeClientVpnRoutesRequest.prototype, "headers", void 0);
+    __decorate([
+        Metadata({ data: "request, media_type=text/xml" }),
+        __metadata("design:type", Uint8Array)
+    ], PostDescribeClientVpnRoutesRequest.prototype, "request", void 0);
+    return PostDescribeClientVpnRoutesRequest;
+}(SpeakeasyBase));
+export { PostDescribeClientVpnRoutesRequest };
+var PostDescribeClientVpnRoutesResponse = /** @class */ (function (_super) {
+    __extends(PostDescribeClientVpnRoutesResponse, _super);
+    function PostDescribeClientVpnRoutesResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Uint8Array)
+    ], PostDescribeClientVpnRoutesResponse.prototype, "body", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], PostDescribeClientVpnRoutesResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], PostDescribeClientVpnRoutesResponse.prototype, "statusCode", void 0);
+    return PostDescribeClientVpnRoutesResponse;
+}(SpeakeasyBase));
+export { PostDescribeClientVpnRoutesResponse };

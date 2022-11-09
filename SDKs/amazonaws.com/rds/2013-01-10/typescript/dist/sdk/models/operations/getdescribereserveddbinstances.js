@@ -1,0 +1,157 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+export var GetDescribeReservedDbInstancesActionEnum;
+(function (GetDescribeReservedDbInstancesActionEnum) {
+    GetDescribeReservedDbInstancesActionEnum["DescribeReservedDbInstances"] = "DescribeReservedDBInstances";
+})(GetDescribeReservedDbInstancesActionEnum || (GetDescribeReservedDbInstancesActionEnum = {}));
+export var GetDescribeReservedDbInstancesVersionEnum;
+(function (GetDescribeReservedDbInstancesVersionEnum) {
+    GetDescribeReservedDbInstancesVersionEnum["TwoThousandAndThirteen0110"] = "2013-01-10";
+})(GetDescribeReservedDbInstancesVersionEnum || (GetDescribeReservedDbInstancesVersionEnum = {}));
+var GetDescribeReservedDbInstancesQueryParams = /** @class */ (function (_super) {
+    __extends(GetDescribeReservedDbInstancesQueryParams, _super);
+    function GetDescribeReservedDbInstancesQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Action" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesQueryParams.prototype, "action", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=DBInstanceClass" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesQueryParams.prototype, "dbInstanceClass", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Duration" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesQueryParams.prototype, "duration", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Marker" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesQueryParams.prototype, "marker", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=MaxRecords" }),
+        __metadata("design:type", Number)
+    ], GetDescribeReservedDbInstancesQueryParams.prototype, "maxRecords", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=MultiAZ" }),
+        __metadata("design:type", Boolean)
+    ], GetDescribeReservedDbInstancesQueryParams.prototype, "multiAz", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=OfferingType" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesQueryParams.prototype, "offeringType", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=ProductDescription" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesQueryParams.prototype, "productDescription", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=ReservedDBInstanceId" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesQueryParams.prototype, "reservedDbInstanceId", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=ReservedDBInstancesOfferingId" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesQueryParams.prototype, "reservedDbInstancesOfferingId", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=Version" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesQueryParams.prototype, "version", void 0);
+    return GetDescribeReservedDbInstancesQueryParams;
+}(SpeakeasyBase));
+export { GetDescribeReservedDbInstancesQueryParams };
+var GetDescribeReservedDbInstancesHeaders = /** @class */ (function (_super) {
+    __extends(GetDescribeReservedDbInstancesHeaders, _super);
+    function GetDescribeReservedDbInstancesHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return GetDescribeReservedDbInstancesHeaders;
+}(SpeakeasyBase));
+export { GetDescribeReservedDbInstancesHeaders };
+var GetDescribeReservedDbInstancesRequest = /** @class */ (function (_super) {
+    __extends(GetDescribeReservedDbInstancesRequest, _super);
+    function GetDescribeReservedDbInstancesRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetDescribeReservedDbInstancesQueryParams)
+    ], GetDescribeReservedDbInstancesRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetDescribeReservedDbInstancesHeaders)
+    ], GetDescribeReservedDbInstancesRequest.prototype, "headers", void 0);
+    return GetDescribeReservedDbInstancesRequest;
+}(SpeakeasyBase));
+export { GetDescribeReservedDbInstancesRequest };
+var GetDescribeReservedDbInstancesResponse = /** @class */ (function (_super) {
+    __extends(GetDescribeReservedDbInstancesResponse, _super);
+    function GetDescribeReservedDbInstancesResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Uint8Array)
+    ], GetDescribeReservedDbInstancesResponse.prototype, "body", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetDescribeReservedDbInstancesResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetDescribeReservedDbInstancesResponse.prototype, "statusCode", void 0);
+    return GetDescribeReservedDbInstancesResponse;
+}(SpeakeasyBase));
+export { GetDescribeReservedDbInstancesResponse };

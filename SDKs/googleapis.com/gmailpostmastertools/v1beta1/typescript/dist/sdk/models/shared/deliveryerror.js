@@ -1,0 +1,69 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+export var DeliveryErrorErrorClassEnum;
+(function (DeliveryErrorErrorClassEnum) {
+    DeliveryErrorErrorClassEnum["DeliveryErrorClassUnspecified"] = "DELIVERY_ERROR_CLASS_UNSPECIFIED";
+    DeliveryErrorErrorClassEnum["PermanentError"] = "PERMANENT_ERROR";
+    DeliveryErrorErrorClassEnum["TemporaryError"] = "TEMPORARY_ERROR";
+})(DeliveryErrorErrorClassEnum || (DeliveryErrorErrorClassEnum = {}));
+export var DeliveryErrorErrorTypeEnum;
+(function (DeliveryErrorErrorTypeEnum) {
+    DeliveryErrorErrorTypeEnum["DeliveryErrorTypeUnspecified"] = "DELIVERY_ERROR_TYPE_UNSPECIFIED";
+    DeliveryErrorErrorTypeEnum["RateLimitExceeded"] = "RATE_LIMIT_EXCEEDED";
+    DeliveryErrorErrorTypeEnum["SuspectedSpam"] = "SUSPECTED_SPAM";
+    DeliveryErrorErrorTypeEnum["ContentSpammy"] = "CONTENT_SPAMMY";
+    DeliveryErrorErrorTypeEnum["BadAttachment"] = "BAD_ATTACHMENT";
+    DeliveryErrorErrorTypeEnum["BadDmarcPolicy"] = "BAD_DMARC_POLICY";
+    DeliveryErrorErrorTypeEnum["LowIpReputation"] = "LOW_IP_REPUTATION";
+    DeliveryErrorErrorTypeEnum["LowDomainReputation"] = "LOW_DOMAIN_REPUTATION";
+    DeliveryErrorErrorTypeEnum["IpInRbl"] = "IP_IN_RBL";
+    DeliveryErrorErrorTypeEnum["DomainInRbl"] = "DOMAIN_IN_RBL";
+    DeliveryErrorErrorTypeEnum["BadPtrRecord"] = "BAD_PTR_RECORD";
+})(DeliveryErrorErrorTypeEnum || (DeliveryErrorErrorTypeEnum = {}));
+// DeliveryError
+/**
+ * Metric on a particular delivery error type.
+**/
+var DeliveryError = /** @class */ (function (_super) {
+    __extends(DeliveryError, _super);
+    function DeliveryError() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=errorClass" }),
+        __metadata("design:type", String)
+    ], DeliveryError.prototype, "errorClass", void 0);
+    __decorate([
+        Metadata({ data: "json, name=errorRatio" }),
+        __metadata("design:type", Number)
+    ], DeliveryError.prototype, "errorRatio", void 0);
+    __decorate([
+        Metadata({ data: "json, name=errorType" }),
+        __metadata("design:type", String)
+    ], DeliveryError.prototype, "errorType", void 0);
+    return DeliveryError;
+}(SpeakeasyBase));
+export { DeliveryError };

@@ -1,0 +1,60 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+
+export enum GetChangeTokenStatusXAmzTargetEnum {
+    Awswaf20150824GetChangeTokenStatus = "AWSWAF_20150824.GetChangeTokenStatus"
+}
+
+
+export class GetChangeTokenStatusHeaders extends SpeakeasyBase {
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  xAmzAlgorithm?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  xAmzContentSha256?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  xAmzCredential?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  xAmzDate?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  xAmzSecurityToken?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  xAmzSignature?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  xAmzSignedHeaders?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Target" })
+  xAmzTarget: GetChangeTokenStatusXAmzTargetEnum;
+}
+
+
+export class GetChangeTokenStatusRequest extends SpeakeasyBase {
+  @Metadata()
+  headers: GetChangeTokenStatusHeaders;
+
+  @Metadata({ data: "request, media_type=application/json" })
+  request: shared.GetChangeTokenStatusRequest;
+}
+
+
+export class GetChangeTokenStatusResponse extends SpeakeasyBase {
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  getChangeTokenStatusResponse?: shared.GetChangeTokenStatusResponse;
+
+  @Metadata()
+  statusCode: number;
+
+  @Metadata()
+  wafInternalErrorException?: any;
+
+  @Metadata()
+  wafNonexistentItemException?: any;
+}

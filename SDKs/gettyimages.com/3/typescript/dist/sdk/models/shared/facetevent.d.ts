@@ -1,0 +1,6 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+export declare class FacetEvent extends SpeakeasyBase {
+    date?: Date;
+    id?: number;
+    name?: string;
+}

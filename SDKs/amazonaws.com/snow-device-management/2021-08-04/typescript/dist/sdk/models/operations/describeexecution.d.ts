@@ -1,0 +1,29 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+export declare class DescribeExecutionPathParams extends SpeakeasyBase {
+    managedDeviceId: string;
+    taskId: string;
+}
+export declare class DescribeExecutionHeaders extends SpeakeasyBase {
+    xAmzAlgorithm?: string;
+    xAmzContentSha256?: string;
+    xAmzCredential?: string;
+    xAmzDate?: string;
+    xAmzSecurityToken?: string;
+    xAmzSignature?: string;
+    xAmzSignedHeaders?: string;
+}
+export declare class DescribeExecutionRequest extends SpeakeasyBase {
+    pathParams: DescribeExecutionPathParams;
+    headers: DescribeExecutionHeaders;
+}
+export declare class DescribeExecutionResponse extends SpeakeasyBase {
+    accessDeniedException?: any;
+    contentType: string;
+    describeExecutionOutput?: shared.DescribeExecutionOutput;
+    internalServerException?: any;
+    resourceNotFoundException?: any;
+    statusCode: number;
+    throttlingException?: any;
+    validationException?: any;
+}

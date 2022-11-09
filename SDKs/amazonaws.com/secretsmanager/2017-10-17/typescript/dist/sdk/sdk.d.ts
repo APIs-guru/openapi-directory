@@ -1,0 +1,37 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CancelRotateSecret(req: operations.CancelRotateSecretRequest, config?: AxiosRequestConfig): Promise<operations.CancelRotateSecretResponse>;
+    CreateSecret(req: operations.CreateSecretRequest, config?: AxiosRequestConfig): Promise<operations.CreateSecretResponse>;
+    DeleteResourcePolicy(req: operations.DeleteResourcePolicyRequest, config?: AxiosRequestConfig): Promise<operations.DeleteResourcePolicyResponse>;
+    DeleteSecret(req: operations.DeleteSecretRequest, config?: AxiosRequestConfig): Promise<operations.DeleteSecretResponse>;
+    DescribeSecret(req: operations.DescribeSecretRequest, config?: AxiosRequestConfig): Promise<operations.DescribeSecretResponse>;
+    GetRandomPassword(req: operations.GetRandomPasswordRequest, config?: AxiosRequestConfig): Promise<operations.GetRandomPasswordResponse>;
+    GetResourcePolicy(req: operations.GetResourcePolicyRequest, config?: AxiosRequestConfig): Promise<operations.GetResourcePolicyResponse>;
+    GetSecretValue(req: operations.GetSecretValueRequest, config?: AxiosRequestConfig): Promise<operations.GetSecretValueResponse>;
+    ListSecretVersionIds(req: operations.ListSecretVersionIdsRequest, config?: AxiosRequestConfig): Promise<operations.ListSecretVersionIdsResponse>;
+    ListSecrets(req: operations.ListSecretsRequest, config?: AxiosRequestConfig): Promise<operations.ListSecretsResponse>;
+    PutResourcePolicy(req: operations.PutResourcePolicyRequest, config?: AxiosRequestConfig): Promise<operations.PutResourcePolicyResponse>;
+    PutSecretValue(req: operations.PutSecretValueRequest, config?: AxiosRequestConfig): Promise<operations.PutSecretValueResponse>;
+    RemoveRegionsFromReplication(req: operations.RemoveRegionsFromReplicationRequest, config?: AxiosRequestConfig): Promise<operations.RemoveRegionsFromReplicationResponse>;
+    ReplicateSecretToRegions(req: operations.ReplicateSecretToRegionsRequest, config?: AxiosRequestConfig): Promise<operations.ReplicateSecretToRegionsResponse>;
+    RestoreSecret(req: operations.RestoreSecretRequest, config?: AxiosRequestConfig): Promise<operations.RestoreSecretResponse>;
+    RotateSecret(req: operations.RotateSecretRequest, config?: AxiosRequestConfig): Promise<operations.RotateSecretResponse>;
+    StopReplicationToReplica(req: operations.StopReplicationToReplicaRequest, config?: AxiosRequestConfig): Promise<operations.StopReplicationToReplicaResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+    UpdateSecret(req: operations.UpdateSecretRequest, config?: AxiosRequestConfig): Promise<operations.UpdateSecretResponse>;
+    UpdateSecretVersionStage(req: operations.UpdateSecretVersionStageRequest, config?: AxiosRequestConfig): Promise<operations.UpdateSecretVersionStageResponse>;
+    ValidateResourcePolicy(req: operations.ValidateResourcePolicyRequest, config?: AxiosRequestConfig): Promise<operations.ValidateResourcePolicyResponse>;
+}
+export {};

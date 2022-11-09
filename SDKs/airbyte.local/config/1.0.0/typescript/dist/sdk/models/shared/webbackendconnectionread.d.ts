@@ -1,0 +1,30 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { DestinationRead } from "./destinationread";
+import { JobStatusEnum } from "./jobstatusenum";
+import { NamespaceDefinitionTypeEnum } from "./namespacedefinitiontypeenum";
+import { OperationRead } from "./operationread";
+import { ResourceRequirements } from "./resourcerequirements";
+import { ConnectionSchedule } from "./connectionschedule";
+import { SourceRead } from "./sourceread";
+import { ConnectionStatusEnum } from "./connectionstatusenum";
+import { AirbyteCatalog } from "./airbytecatalog";
+export declare class WebBackendConnectionRead extends SpeakeasyBase {
+    connectionId: string;
+    destination: DestinationRead;
+    destinationId: string;
+    isSyncing: boolean;
+    latestSyncJobCreatedAt?: number;
+    latestSyncJobStatus?: JobStatusEnum;
+    name: string;
+    namespaceDefinition?: NamespaceDefinitionTypeEnum;
+    namespaceFormat?: string;
+    operationIds?: string[];
+    operations?: OperationRead[];
+    prefix?: string;
+    resourceRequirements?: ResourceRequirements;
+    schedule?: ConnectionSchedule;
+    source: SourceRead;
+    sourceId: string;
+    status: ConnectionStatusEnum;
+    syncCatalog: AirbyteCatalog;
+}

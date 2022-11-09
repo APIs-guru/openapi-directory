@@ -1,0 +1,66 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+export enum PostAddTagsToResourceActionEnum {
+    AddTagsToResource = "AddTagsToResource"
+}
+
+export enum PostAddTagsToResourceVersionEnum {
+    TwoThousandAndThirteen0909 = "2013-09-09"
+}
+
+
+export class PostAddTagsToResourceQueryParams extends SpeakeasyBase {
+  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  action: PostAddTagsToResourceActionEnum;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  version: PostAddTagsToResourceVersionEnum;
+}
+
+
+export class PostAddTagsToResourceHeaders extends SpeakeasyBase {
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  xAmzAlgorithm?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  xAmzContentSha256?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  xAmzCredential?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  xAmzDate?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  xAmzSecurityToken?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  xAmzSignature?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  xAmzSignedHeaders?: string;
+}
+
+
+export class PostAddTagsToResourceRequest extends SpeakeasyBase {
+  @Metadata()
+  queryParams: PostAddTagsToResourceQueryParams;
+
+  @Metadata()
+  headers: PostAddTagsToResourceHeaders;
+
+  @Metadata({ data: "request, media_type=text/xml" })
+  request?: Uint8Array;
+}
+
+
+export class PostAddTagsToResourceResponse extends SpeakeasyBase {
+  @Metadata()
+  body?: Uint8Array;
+
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  statusCode: number;
+}

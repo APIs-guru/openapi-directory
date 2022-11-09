@@ -1,0 +1,62 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import { GoogleCloudIdentitytoolkitV2AutoRetrievalInfo } from "./googlecloudidentitytoolkitv2autoretrievalinfo";
+// GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo
+/**
+ * App Verification info for a StartMfa request.
+**/
+var GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo = /** @class */ (function (_super) {
+    __extends(GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo, _super);
+    function GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=autoRetrievalInfo" }),
+        __metadata("design:type", GoogleCloudIdentitytoolkitV2AutoRetrievalInfo)
+    ], GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo.prototype, "autoRetrievalInfo", void 0);
+    __decorate([
+        Metadata({ data: "json, name=iosReceipt" }),
+        __metadata("design:type", String)
+    ], GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo.prototype, "iosReceipt", void 0);
+    __decorate([
+        Metadata({ data: "json, name=iosSecret" }),
+        __metadata("design:type", String)
+    ], GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo.prototype, "iosSecret", void 0);
+    __decorate([
+        Metadata({ data: "json, name=phoneNumber" }),
+        __metadata("design:type", String)
+    ], GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo.prototype, "phoneNumber", void 0);
+    __decorate([
+        Metadata({ data: "json, name=recaptchaToken" }),
+        __metadata("design:type", String)
+    ], GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo.prototype, "recaptchaToken", void 0);
+    __decorate([
+        Metadata({ data: "json, name=safetyNetToken" }),
+        __metadata("design:type", String)
+    ], GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo.prototype, "safetyNetToken", void 0);
+    return GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo;
+}(SpeakeasyBase));
+export { GoogleCloudIdentitytoolkitV2StartMfaPhoneRequestInfo };

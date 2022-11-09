@@ -1,0 +1,30 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+export declare const UPDATECHANNELWEBHOOK_SERVERS: string[];
+export declare class UpdateChannelWebhookPathParams extends SpeakeasyBase {
+    channelSid: string;
+    serviceSid: string;
+    sid: string;
+}
+export declare class UpdateChannelWebhookUpdateChannelWebhookRequest extends SpeakeasyBase {
+    configurationFilters?: string[];
+    configurationFlowSid?: string;
+    configurationMethod?: shared.ChannelWebhookEnumMethodEnum;
+    configurationRetryCount?: number;
+    configurationTriggers?: string[];
+    configurationUrl?: string;
+}
+export declare class UpdateChannelWebhookSecurity extends SpeakeasyBase {
+    accountSidAuthToken: shared.SchemeAccountSidAuthToken;
+}
+export declare class UpdateChannelWebhookRequest extends SpeakeasyBase {
+    serverUrl?: string;
+    pathParams: UpdateChannelWebhookPathParams;
+    request?: UpdateChannelWebhookUpdateChannelWebhookRequest;
+    security: UpdateChannelWebhookSecurity;
+}
+export declare class UpdateChannelWebhookResponse extends SpeakeasyBase {
+    contentType: string;
+    statusCode: number;
+    chatV2ServiceChannelChannelWebhook?: shared.ChatV2ServiceChannelChannelWebhook;
+}

@@ -1,0 +1,7 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+/**
+ * Config for EXPLICIT_CONTENT_DETECTION.
+**/
+export declare class GoogleCloudVideointelligenceV1p1beta1ExplicitContentDetectionConfig extends SpeakeasyBase {
+    model?: string;
+}

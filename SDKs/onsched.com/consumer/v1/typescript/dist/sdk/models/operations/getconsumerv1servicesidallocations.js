@@ -1,0 +1,105 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+var GetConsumerV1ServicesIdAllocationsPathParams = /** @class */ (function (_super) {
+    __extends(GetConsumerV1ServicesIdAllocationsPathParams, _super);
+    function GetConsumerV1ServicesIdAllocationsPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        __metadata("design:type", String)
+    ], GetConsumerV1ServicesIdAllocationsPathParams.prototype, "id", void 0);
+    return GetConsumerV1ServicesIdAllocationsPathParams;
+}(SpeakeasyBase));
+export { GetConsumerV1ServicesIdAllocationsPathParams };
+var GetConsumerV1ServicesIdAllocationsQueryParams = /** @class */ (function (_super) {
+    __extends(GetConsumerV1ServicesIdAllocationsQueryParams, _super);
+    function GetConsumerV1ServicesIdAllocationsQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=endDate" }),
+        __metadata("design:type", Date)
+    ], GetConsumerV1ServicesIdAllocationsQueryParams.prototype, "endDate", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        __metadata("design:type", Number)
+    ], GetConsumerV1ServicesIdAllocationsQueryParams.prototype, "limit", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=locationId" }),
+        __metadata("design:type", String)
+    ], GetConsumerV1ServicesIdAllocationsQueryParams.prototype, "locationId", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        __metadata("design:type", Number)
+    ], GetConsumerV1ServicesIdAllocationsQueryParams.prototype, "offset", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=resourceId" }),
+        __metadata("design:type", String)
+    ], GetConsumerV1ServicesIdAllocationsQueryParams.prototype, "resourceId", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=startDate" }),
+        __metadata("design:type", Date)
+    ], GetConsumerV1ServicesIdAllocationsQueryParams.prototype, "startDate", void 0);
+    return GetConsumerV1ServicesIdAllocationsQueryParams;
+}(SpeakeasyBase));
+export { GetConsumerV1ServicesIdAllocationsQueryParams };
+var GetConsumerV1ServicesIdAllocationsRequest = /** @class */ (function (_super) {
+    __extends(GetConsumerV1ServicesIdAllocationsRequest, _super);
+    function GetConsumerV1ServicesIdAllocationsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetConsumerV1ServicesIdAllocationsPathParams)
+    ], GetConsumerV1ServicesIdAllocationsRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetConsumerV1ServicesIdAllocationsQueryParams)
+    ], GetConsumerV1ServicesIdAllocationsRequest.prototype, "queryParams", void 0);
+    return GetConsumerV1ServicesIdAllocationsRequest;
+}(SpeakeasyBase));
+export { GetConsumerV1ServicesIdAllocationsRequest };
+var GetConsumerV1ServicesIdAllocationsResponse = /** @class */ (function (_super) {
+    __extends(GetConsumerV1ServicesIdAllocationsResponse, _super);
+    function GetConsumerV1ServicesIdAllocationsResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetConsumerV1ServicesIdAllocationsResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Map)
+    ], GetConsumerV1ServicesIdAllocationsResponse.prototype, "serviceAllocationListViewModel", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetConsumerV1ServicesIdAllocationsResponse.prototype, "statusCode", void 0);
+    return GetConsumerV1ServicesIdAllocationsResponse;
+}(SpeakeasyBase));
+export { GetConsumerV1ServicesIdAllocationsResponse };

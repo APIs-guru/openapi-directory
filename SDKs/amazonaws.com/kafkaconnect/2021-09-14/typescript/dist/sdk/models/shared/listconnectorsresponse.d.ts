@@ -1,0 +1,6 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { ConnectorSummary } from "./connectorsummary";
+export declare class ListConnectorsResponse extends SpeakeasyBase {
+    connectors?: ConnectorSummary[];
+    nextToken?: string;
+}

@@ -1,0 +1,25 @@
+
+
+export enum ObExternalPermissions1CodeEnum {
+    ReadAccountsBasic = "ReadAccountsBasic"
+,    ReadAccountsDetail = "ReadAccountsDetail"
+,    ReadBalances = "ReadBalances"
+,    ReadBeneficiariesBasic = "ReadBeneficiariesBasic"
+,    ReadBeneficiariesDetail = "ReadBeneficiariesDetail"
+,    ReadDirectDebits = "ReadDirectDebits"
+,    ReadOffers = "ReadOffers"
+,    ReadPan = "ReadPAN"
+,    ReadParty = "ReadParty"
+,    ReadPartyPsu = "ReadPartyPSU"
+,    ReadProducts = "ReadProducts"
+,    ReadScheduledPaymentsBasic = "ReadScheduledPaymentsBasic"
+,    ReadScheduledPaymentsDetail = "ReadScheduledPaymentsDetail"
+,    ReadStandingOrdersBasic = "ReadStandingOrdersBasic"
+,    ReadStandingOrdersDetail = "ReadStandingOrdersDetail"
+,    ReadStatementsBasic = "ReadStatementsBasic"
+,    ReadStatementsDetail = "ReadStatementsDetail"
+,    ReadTransactionsBasic = "ReadTransactionsBasic"
+,    ReadTransactionsCredits = "ReadTransactionsCredits"
+,    ReadTransactionsDebits = "ReadTransactionsDebits"
+,    ReadTransactionsDetail = "ReadTransactionsDetail"
+}

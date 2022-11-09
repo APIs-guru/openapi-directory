@@ -1,0 +1,31 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    GetCreateDomain(req: operations.GetCreateDomainRequest, config?: AxiosRequestConfig): Promise<operations.GetCreateDomainResponse>;
+    GetDeleteDomain(req: operations.GetDeleteDomainRequest, config?: AxiosRequestConfig): Promise<operations.GetDeleteDomainResponse>;
+    GetDomainMetadata(req: operations.GetDomainMetadataRequest, config?: AxiosRequestConfig): Promise<operations.GetDomainMetadataResponse>;
+    GetGetAttributes(req: operations.GetGetAttributesRequest, config?: AxiosRequestConfig): Promise<operations.GetGetAttributesResponse>;
+    GetListDomains(req: operations.GetListDomainsRequest, config?: AxiosRequestConfig): Promise<operations.GetListDomainsResponse>;
+    GetSelect(req: operations.GetSelectRequest, config?: AxiosRequestConfig): Promise<operations.GetSelectResponse>;
+    PostBatchDeleteAttributes(req: operations.PostBatchDeleteAttributesRequest, config?: AxiosRequestConfig): Promise<operations.PostBatchDeleteAttributesResponse>;
+    PostBatchPutAttributes(req: operations.PostBatchPutAttributesRequest, config?: AxiosRequestConfig): Promise<operations.PostBatchPutAttributesResponse>;
+    PostCreateDomain(req: operations.PostCreateDomainRequest, config?: AxiosRequestConfig): Promise<operations.PostCreateDomainResponse>;
+    PostDeleteAttributes(req: operations.PostDeleteAttributesRequest, config?: AxiosRequestConfig): Promise<operations.PostDeleteAttributesResponse>;
+    PostDeleteDomain(req: operations.PostDeleteDomainRequest, config?: AxiosRequestConfig): Promise<operations.PostDeleteDomainResponse>;
+    PostDomainMetadata(req: operations.PostDomainMetadataRequest, config?: AxiosRequestConfig): Promise<operations.PostDomainMetadataResponse>;
+    PostGetAttributes(req: operations.PostGetAttributesRequest, config?: AxiosRequestConfig): Promise<operations.PostGetAttributesResponse>;
+    PostListDomains(req: operations.PostListDomainsRequest, config?: AxiosRequestConfig): Promise<operations.PostListDomainsResponse>;
+    PostPutAttributes(req: operations.PostPutAttributesRequest, config?: AxiosRequestConfig): Promise<operations.PostPutAttributesResponse>;
+    PostSelect(req: operations.PostSelectRequest, config?: AxiosRequestConfig): Promise<operations.PostSelectResponse>;
+}
+export {};

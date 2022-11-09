@@ -1,0 +1,11 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+
+// LicenseAssignmentInsert
+/** 
+ * Representation of a license assignment.
+**/
+export class LicenseAssignmentInsert extends SpeakeasyBase {
+  @Metadata({ data: "json, name=userId" })
+  userId?: string;
+}

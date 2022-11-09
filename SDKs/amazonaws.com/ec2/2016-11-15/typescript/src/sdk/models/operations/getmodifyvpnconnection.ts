@@ -1,0 +1,78 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+export enum GetModifyVpnConnectionActionEnum {
+    ModifyVpnConnection = "ModifyVpnConnection"
+}
+
+export enum GetModifyVpnConnectionVersionEnum {
+    TwoThousandAndSixteen1115 = "2016-11-15"
+}
+
+
+export class GetModifyVpnConnectionQueryParams extends SpeakeasyBase {
+  @Metadata({ data: "queryParam, style=form;explode=true;name=Action" })
+  action: GetModifyVpnConnectionActionEnum;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=CustomerGatewayId" })
+  customerGatewayId?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=DryRun" })
+  dryRun?: boolean;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=TransitGatewayId" })
+  transitGatewayId?: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=Version" })
+  version: GetModifyVpnConnectionVersionEnum;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=VpnConnectionId" })
+  vpnConnectionId: string;
+
+  @Metadata({ data: "queryParam, style=form;explode=true;name=VpnGatewayId" })
+  vpnGatewayId?: string;
+}
+
+
+export class GetModifyVpnConnectionHeaders extends SpeakeasyBase {
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  xAmzAlgorithm?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  xAmzContentSha256?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  xAmzCredential?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  xAmzDate?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  xAmzSecurityToken?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  xAmzSignature?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  xAmzSignedHeaders?: string;
+}
+
+
+export class GetModifyVpnConnectionRequest extends SpeakeasyBase {
+  @Metadata()
+  queryParams: GetModifyVpnConnectionQueryParams;
+
+  @Metadata()
+  headers: GetModifyVpnConnectionHeaders;
+}
+
+
+export class GetModifyVpnConnectionResponse extends SpeakeasyBase {
+  @Metadata()
+  body?: Uint8Array;
+
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  statusCode: number;
+}

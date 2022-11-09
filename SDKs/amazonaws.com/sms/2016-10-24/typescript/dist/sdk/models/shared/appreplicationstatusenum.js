@@ -1,0 +1,19 @@
+export var AppReplicationStatusEnum;
+(function (AppReplicationStatusEnum) {
+    AppReplicationStatusEnum["ReadyForConfiguration"] = "READY_FOR_CONFIGURATION";
+    AppReplicationStatusEnum["ConfigurationInProgress"] = "CONFIGURATION_IN_PROGRESS";
+    AppReplicationStatusEnum["ConfigurationInvalid"] = "CONFIGURATION_INVALID";
+    AppReplicationStatusEnum["ReadyForReplication"] = "READY_FOR_REPLICATION";
+    AppReplicationStatusEnum["ValidationInProgress"] = "VALIDATION_IN_PROGRESS";
+    AppReplicationStatusEnum["ReplicationPending"] = "REPLICATION_PENDING";
+    AppReplicationStatusEnum["ReplicationInProgress"] = "REPLICATION_IN_PROGRESS";
+    AppReplicationStatusEnum["Replicated"] = "REPLICATED";
+    AppReplicationStatusEnum["PartiallyReplicated"] = "PARTIALLY_REPLICATED";
+    AppReplicationStatusEnum["DeltaReplicationInProgress"] = "DELTA_REPLICATION_IN_PROGRESS";
+    AppReplicationStatusEnum["DeltaReplicated"] = "DELTA_REPLICATED";
+    AppReplicationStatusEnum["DeltaReplicationFailed"] = "DELTA_REPLICATION_FAILED";
+    AppReplicationStatusEnum["ReplicationFailed"] = "REPLICATION_FAILED";
+    AppReplicationStatusEnum["ReplicationStopping"] = "REPLICATION_STOPPING";
+    AppReplicationStatusEnum["ReplicationStopFailed"] = "REPLICATION_STOP_FAILED";
+    AppReplicationStatusEnum["ReplicationStopped"] = "REPLICATION_STOPPED";
+})(AppReplicationStatusEnum || (AppReplicationStatusEnum = {}));

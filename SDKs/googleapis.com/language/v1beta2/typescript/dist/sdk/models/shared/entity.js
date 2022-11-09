@@ -1,0 +1,79 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+import { Sentiment } from "./sentiment";
+export var EntityTypeEnum;
+(function (EntityTypeEnum) {
+    EntityTypeEnum["Unknown"] = "UNKNOWN";
+    EntityTypeEnum["Person"] = "PERSON";
+    EntityTypeEnum["Location"] = "LOCATION";
+    EntityTypeEnum["Organization"] = "ORGANIZATION";
+    EntityTypeEnum["Event"] = "EVENT";
+    EntityTypeEnum["WorkOfArt"] = "WORK_OF_ART";
+    EntityTypeEnum["ConsumerGood"] = "CONSUMER_GOOD";
+    EntityTypeEnum["Other"] = "OTHER";
+    EntityTypeEnum["PhoneNumber"] = "PHONE_NUMBER";
+    EntityTypeEnum["Address"] = "ADDRESS";
+    EntityTypeEnum["Date"] = "DATE";
+    EntityTypeEnum["Number"] = "NUMBER";
+    EntityTypeEnum["Price"] = "PRICE";
+})(EntityTypeEnum || (EntityTypeEnum = {}));
+// Entity
+/**
+ * Represents a phrase in the text that is a known entity, such as a person, an organization, or location. The API associates information, such as salience and mentions, with entities.
+**/
+var Entity = /** @class */ (function (_super) {
+    __extends(Entity, _super);
+    function Entity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=mentions", elemType: shared.EntityMention }),
+        __metadata("design:type", Array)
+    ], Entity.prototype, "mentions", void 0);
+    __decorate([
+        Metadata({ data: "json, name=metadata" }),
+        __metadata("design:type", Map)
+    ], Entity.prototype, "metadata", void 0);
+    __decorate([
+        Metadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], Entity.prototype, "name", void 0);
+    __decorate([
+        Metadata({ data: "json, name=salience" }),
+        __metadata("design:type", Number)
+    ], Entity.prototype, "salience", void 0);
+    __decorate([
+        Metadata({ data: "json, name=sentiment" }),
+        __metadata("design:type", Sentiment)
+    ], Entity.prototype, "sentiment", void 0);
+    __decorate([
+        Metadata({ data: "json, name=type" }),
+        __metadata("design:type", String)
+    ], Entity.prototype, "type", void 0);
+    return Entity;
+}(SpeakeasyBase));
+export { Entity };

@@ -1,0 +1,76 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+import { Links } from "./links";
+import { BoardPermissions } from "./boardpermissions";
+var BoardDetail = /** @class */ (function (_super) {
+    __extends(BoardDetail, _super);
+    function BoardDetail() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=asset_count" }),
+        __metadata("design:type", Number)
+    ], BoardDetail.prototype, "assetCount", void 0);
+    __decorate([
+        Metadata({ data: "json, name=assets", elemType: shared.Asset }),
+        __metadata("design:type", Array)
+    ], BoardDetail.prototype, "assets", void 0);
+    __decorate([
+        Metadata({ data: "json, name=comment_count" }),
+        __metadata("design:type", Number)
+    ], BoardDetail.prototype, "commentCount", void 0);
+    __decorate([
+        Metadata({ data: "json, name=date_created" }),
+        __metadata("design:type", Date)
+    ], BoardDetail.prototype, "dateCreated", void 0);
+    __decorate([
+        Metadata({ data: "json, name=date_last_updated" }),
+        __metadata("design:type", Date)
+    ], BoardDetail.prototype, "dateLastUpdated", void 0);
+    __decorate([
+        Metadata({ data: "json, name=description" }),
+        __metadata("design:type", String)
+    ], BoardDetail.prototype, "description", void 0);
+    __decorate([
+        Metadata({ data: "json, name=id" }),
+        __metadata("design:type", String)
+    ], BoardDetail.prototype, "id", void 0);
+    __decorate([
+        Metadata({ data: "json, name=links" }),
+        __metadata("design:type", Links)
+    ], BoardDetail.prototype, "links", void 0);
+    __decorate([
+        Metadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], BoardDetail.prototype, "name", void 0);
+    __decorate([
+        Metadata({ data: "json, name=permissions" }),
+        __metadata("design:type", BoardPermissions)
+    ], BoardDetail.prototype, "permissions", void 0);
+    return BoardDetail;
+}(SpeakeasyBase));
+export { BoardDetail };

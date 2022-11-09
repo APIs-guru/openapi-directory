@@ -1,0 +1,169 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+export var LISTWORKERRESERVATION_SERVERS = [
+    "https://taskrouter.twilio.com",
+];
+var ListWorkerReservationPathParams = /** @class */ (function (_super) {
+    __extends(ListWorkerReservationPathParams, _super);
+    function ListWorkerReservationPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=WorkerSid" }),
+        __metadata("design:type", String)
+    ], ListWorkerReservationPathParams.prototype, "workerSid", void 0);
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=WorkspaceSid" }),
+        __metadata("design:type", String)
+    ], ListWorkerReservationPathParams.prototype, "workspaceSid", void 0);
+    return ListWorkerReservationPathParams;
+}(SpeakeasyBase));
+export { ListWorkerReservationPathParams };
+var ListWorkerReservationQueryParams = /** @class */ (function (_super) {
+    __extends(ListWorkerReservationQueryParams, _super);
+    function ListWorkerReservationQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=PageSize" }),
+        __metadata("design:type", Number)
+    ], ListWorkerReservationQueryParams.prototype, "pageSize", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=ReservationStatus" }),
+        __metadata("design:type", String)
+    ], ListWorkerReservationQueryParams.prototype, "reservationStatus", void 0);
+    return ListWorkerReservationQueryParams;
+}(SpeakeasyBase));
+export { ListWorkerReservationQueryParams };
+var ListWorkerReservationSecurity = /** @class */ (function (_super) {
+    __extends(ListWorkerReservationSecurity, _super);
+    function ListWorkerReservationSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=http;subtype=basic" }),
+        __metadata("design:type", shared.SchemeAccountSidAuthToken)
+    ], ListWorkerReservationSecurity.prototype, "accountSidAuthToken", void 0);
+    return ListWorkerReservationSecurity;
+}(SpeakeasyBase));
+export { ListWorkerReservationSecurity };
+var ListWorkerReservationRequest = /** @class */ (function (_super) {
+    __extends(ListWorkerReservationRequest, _super);
+    function ListWorkerReservationRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], ListWorkerReservationRequest.prototype, "serverUrl", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", ListWorkerReservationPathParams)
+    ], ListWorkerReservationRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", ListWorkerReservationQueryParams)
+    ], ListWorkerReservationRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", ListWorkerReservationSecurity)
+    ], ListWorkerReservationRequest.prototype, "security", void 0);
+    return ListWorkerReservationRequest;
+}(SpeakeasyBase));
+export { ListWorkerReservationRequest };
+var ListWorkerReservationListWorkerReservationResponseMeta = /** @class */ (function (_super) {
+    __extends(ListWorkerReservationListWorkerReservationResponseMeta, _super);
+    function ListWorkerReservationListWorkerReservationResponseMeta() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=first_page_url" }),
+        __metadata("design:type", String)
+    ], ListWorkerReservationListWorkerReservationResponseMeta.prototype, "firstPageUrl", void 0);
+    __decorate([
+        Metadata({ data: "json, name=key" }),
+        __metadata("design:type", String)
+    ], ListWorkerReservationListWorkerReservationResponseMeta.prototype, "key", void 0);
+    __decorate([
+        Metadata({ data: "json, name=next_page_url" }),
+        __metadata("design:type", String)
+    ], ListWorkerReservationListWorkerReservationResponseMeta.prototype, "nextPageUrl", void 0);
+    __decorate([
+        Metadata({ data: "json, name=page" }),
+        __metadata("design:type", Number)
+    ], ListWorkerReservationListWorkerReservationResponseMeta.prototype, "page", void 0);
+    __decorate([
+        Metadata({ data: "json, name=page_size" }),
+        __metadata("design:type", Number)
+    ], ListWorkerReservationListWorkerReservationResponseMeta.prototype, "pageSize", void 0);
+    __decorate([
+        Metadata({ data: "json, name=previous_page_url" }),
+        __metadata("design:type", String)
+    ], ListWorkerReservationListWorkerReservationResponseMeta.prototype, "previousPageUrl", void 0);
+    __decorate([
+        Metadata({ data: "json, name=url" }),
+        __metadata("design:type", String)
+    ], ListWorkerReservationListWorkerReservationResponseMeta.prototype, "url", void 0);
+    return ListWorkerReservationListWorkerReservationResponseMeta;
+}(SpeakeasyBase));
+export { ListWorkerReservationListWorkerReservationResponseMeta };
+var ListWorkerReservationListWorkerReservationResponse = /** @class */ (function (_super) {
+    __extends(ListWorkerReservationListWorkerReservationResponse, _super);
+    function ListWorkerReservationListWorkerReservationResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=meta" }),
+        __metadata("design:type", ListWorkerReservationListWorkerReservationResponseMeta)
+    ], ListWorkerReservationListWorkerReservationResponse.prototype, "meta", void 0);
+    __decorate([
+        Metadata({ data: "json, name=reservations", elemType: shared.TaskrouterV1WorkspaceWorkerWorkerReservation }),
+        __metadata("design:type", Array)
+    ], ListWorkerReservationListWorkerReservationResponse.prototype, "reservations", void 0);
+    return ListWorkerReservationListWorkerReservationResponse;
+}(SpeakeasyBase));
+export { ListWorkerReservationListWorkerReservationResponse };
+var ListWorkerReservationResponse = /** @class */ (function (_super) {
+    __extends(ListWorkerReservationResponse, _super);
+    function ListWorkerReservationResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], ListWorkerReservationResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", ListWorkerReservationListWorkerReservationResponse)
+    ], ListWorkerReservationResponse.prototype, "listWorkerReservationResponse", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], ListWorkerReservationResponse.prototype, "statusCode", void 0);
+    return ListWorkerReservationResponse;
+}(SpeakeasyBase));
+export { ListWorkerReservationResponse };

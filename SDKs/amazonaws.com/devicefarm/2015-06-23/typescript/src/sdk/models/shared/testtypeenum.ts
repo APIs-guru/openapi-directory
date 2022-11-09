@@ -1,0 +1,25 @@
+
+
+export enum TestTypeEnum {
+    BuiltinFuzz = "BUILTIN_FUZZ"
+,    BuiltinExplorer = "BUILTIN_EXPLORER"
+,    WebPerformanceProfile = "WEB_PERFORMANCE_PROFILE"
+,    AppiumJavaJunit = "APPIUM_JAVA_JUNIT"
+,    AppiumJavaTestng = "APPIUM_JAVA_TESTNG"
+,    AppiumPython = "APPIUM_PYTHON"
+,    AppiumNode = "APPIUM_NODE"
+,    AppiumRuby = "APPIUM_RUBY"
+,    AppiumWebJavaJunit = "APPIUM_WEB_JAVA_JUNIT"
+,    AppiumWebJavaTestng = "APPIUM_WEB_JAVA_TESTNG"
+,    AppiumWebPython = "APPIUM_WEB_PYTHON"
+,    AppiumWebNode = "APPIUM_WEB_NODE"
+,    AppiumWebRuby = "APPIUM_WEB_RUBY"
+,    Calabash = "CALABASH"
+,    Instrumentation = "INSTRUMENTATION"
+,    Uiautomation = "UIAUTOMATION"
+,    Uiautomator = "UIAUTOMATOR"
+,    Xctest = "XCTEST"
+,    XctestUi = "XCTEST_UI"
+,    RemoteAccessRecord = "REMOTE_ACCESS_RECORD"
+,    RemoteAccessReplay = "REMOTE_ACCESS_REPLAY"
+}

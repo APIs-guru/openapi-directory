@@ -1,0 +1,154 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var DoubleclickbidmanagerReportsListreportsPathParams = /** @class */ (function (_super) {
+    __extends(DoubleclickbidmanagerReportsListreportsPathParams, _super);
+    function DoubleclickbidmanagerReportsListreportsPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=queryId" }),
+        __metadata("design:type", String)
+    ], DoubleclickbidmanagerReportsListreportsPathParams.prototype, "queryId", void 0);
+    return DoubleclickbidmanagerReportsListreportsPathParams;
+}(SpeakeasyBase));
+export { DoubleclickbidmanagerReportsListreportsPathParams };
+var DoubleclickbidmanagerReportsListreportsQueryParams = /** @class */ (function (_super) {
+    __extends(DoubleclickbidmanagerReportsListreportsQueryParams, _super);
+    function DoubleclickbidmanagerReportsListreportsQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=$.xgafv" }),
+        __metadata("design:type", String)
+    ], DoubleclickbidmanagerReportsListreportsQueryParams.prototype, "dollarXgafv", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=access_token" }),
+        __metadata("design:type", String)
+    ], DoubleclickbidmanagerReportsListreportsQueryParams.prototype, "accessToken", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=alt" }),
+        __metadata("design:type", String)
+    ], DoubleclickbidmanagerReportsListreportsQueryParams.prototype, "alt", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=callback" }),
+        __metadata("design:type", String)
+    ], DoubleclickbidmanagerReportsListreportsQueryParams.prototype, "callback", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=fields" }),
+        __metadata("design:type", String)
+    ], DoubleclickbidmanagerReportsListreportsQueryParams.prototype, "fields", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=key" }),
+        __metadata("design:type", String)
+    ], DoubleclickbidmanagerReportsListreportsQueryParams.prototype, "key", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=oauth_token" }),
+        __metadata("design:type", String)
+    ], DoubleclickbidmanagerReportsListreportsQueryParams.prototype, "oauthToken", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=pageSize" }),
+        __metadata("design:type", Number)
+    ], DoubleclickbidmanagerReportsListreportsQueryParams.prototype, "pageSize", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=pageToken" }),
+        __metadata("design:type", String)
+    ], DoubleclickbidmanagerReportsListreportsQueryParams.prototype, "pageToken", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=prettyPrint" }),
+        __metadata("design:type", Boolean)
+    ], DoubleclickbidmanagerReportsListreportsQueryParams.prototype, "prettyPrint", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=quotaUser" }),
+        __metadata("design:type", String)
+    ], DoubleclickbidmanagerReportsListreportsQueryParams.prototype, "quotaUser", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=uploadType" }),
+        __metadata("design:type", String)
+    ], DoubleclickbidmanagerReportsListreportsQueryParams.prototype, "uploadType", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=upload_protocol" }),
+        __metadata("design:type", String)
+    ], DoubleclickbidmanagerReportsListreportsQueryParams.prototype, "uploadProtocol", void 0);
+    return DoubleclickbidmanagerReportsListreportsQueryParams;
+}(SpeakeasyBase));
+export { DoubleclickbidmanagerReportsListreportsQueryParams };
+var DoubleclickbidmanagerReportsListreportsSecurity = /** @class */ (function (_super) {
+    __extends(DoubleclickbidmanagerReportsListreportsSecurity, _super);
+    function DoubleclickbidmanagerReportsListreportsSecurity() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2)
+    ], DoubleclickbidmanagerReportsListreportsSecurity.prototype, "oauth2", void 0);
+    __decorate([
+        Metadata({ data: "security, scheme=true;type=oauth2" }),
+        __metadata("design:type", shared.SchemeOauth2c)
+    ], DoubleclickbidmanagerReportsListreportsSecurity.prototype, "oauth2c", void 0);
+    return DoubleclickbidmanagerReportsListreportsSecurity;
+}(SpeakeasyBase));
+export { DoubleclickbidmanagerReportsListreportsSecurity };
+var DoubleclickbidmanagerReportsListreportsRequest = /** @class */ (function (_super) {
+    __extends(DoubleclickbidmanagerReportsListreportsRequest, _super);
+    function DoubleclickbidmanagerReportsListreportsRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", DoubleclickbidmanagerReportsListreportsPathParams)
+    ], DoubleclickbidmanagerReportsListreportsRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", DoubleclickbidmanagerReportsListreportsQueryParams)
+    ], DoubleclickbidmanagerReportsListreportsRequest.prototype, "queryParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", DoubleclickbidmanagerReportsListreportsSecurity)
+    ], DoubleclickbidmanagerReportsListreportsRequest.prototype, "security", void 0);
+    return DoubleclickbidmanagerReportsListreportsRequest;
+}(SpeakeasyBase));
+export { DoubleclickbidmanagerReportsListreportsRequest };
+var DoubleclickbidmanagerReportsListreportsResponse = /** @class */ (function (_super) {
+    __extends(DoubleclickbidmanagerReportsListreportsResponse, _super);
+    function DoubleclickbidmanagerReportsListreportsResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], DoubleclickbidmanagerReportsListreportsResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.ListReportsResponse)
+    ], DoubleclickbidmanagerReportsListreportsResponse.prototype, "listReportsResponse", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], DoubleclickbidmanagerReportsListreportsResponse.prototype, "statusCode", void 0);
+    return DoubleclickbidmanagerReportsListreportsResponse;
+}(SpeakeasyBase));
+export { DoubleclickbidmanagerReportsListreportsResponse };

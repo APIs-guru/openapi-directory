@@ -1,0 +1,13 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+
+export class TaxRateUpdateRequest extends SpeakeasyBase {
+  @Metadata({ data: "json, name=default" })
+  default?: boolean;
+
+  @Metadata({ data: "json, name=label" })
+  label?: string;
+
+  @Metadata({ data: "json, name=percentage" })
+  percentage?: number;
+}

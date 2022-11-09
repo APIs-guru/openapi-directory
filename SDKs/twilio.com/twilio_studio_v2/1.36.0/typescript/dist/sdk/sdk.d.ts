@@ -1,0 +1,32 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CreateExecution(req: operations.CreateExecutionRequest, config?: AxiosRequestConfig): Promise<operations.CreateExecutionResponse>;
+    CreateFlow(req: operations.CreateFlowRequest, config?: AxiosRequestConfig): Promise<operations.CreateFlowResponse>;
+    DeleteExecution(req: operations.DeleteExecutionRequest, config?: AxiosRequestConfig): Promise<operations.DeleteExecutionResponse>;
+    DeleteFlow(req: operations.DeleteFlowRequest, config?: AxiosRequestConfig): Promise<operations.DeleteFlowResponse>;
+    FetchExecution(req: operations.FetchExecutionRequest, config?: AxiosRequestConfig): Promise<operations.FetchExecutionResponse>;
+    FetchExecutionContext(req: operations.FetchExecutionContextRequest, config?: AxiosRequestConfig): Promise<operations.FetchExecutionContextResponse>;
+    FetchExecutionStep(req: operations.FetchExecutionStepRequest, config?: AxiosRequestConfig): Promise<operations.FetchExecutionStepResponse>;
+    FetchExecutionStepContext(req: operations.FetchExecutionStepContextRequest, config?: AxiosRequestConfig): Promise<operations.FetchExecutionStepContextResponse>;
+    FetchFlow(req: operations.FetchFlowRequest, config?: AxiosRequestConfig): Promise<operations.FetchFlowResponse>;
+    FetchFlowRevision(req: operations.FetchFlowRevisionRequest, config?: AxiosRequestConfig): Promise<operations.FetchFlowRevisionResponse>;
+    FetchTestUser(req: operations.FetchTestUserRequest, config?: AxiosRequestConfig): Promise<operations.FetchTestUserResponse>;
+    ListExecution(req: operations.ListExecutionRequest, config?: AxiosRequestConfig): Promise<operations.ListExecutionResponse>;
+    ListExecutionStep(req: operations.ListExecutionStepRequest, config?: AxiosRequestConfig): Promise<operations.ListExecutionStepResponse>;
+    ListFlow(req: operations.ListFlowRequest, config?: AxiosRequestConfig): Promise<operations.ListFlowResponse>;
+    ListFlowRevision(req: operations.ListFlowRevisionRequest, config?: AxiosRequestConfig): Promise<operations.ListFlowRevisionResponse>;
+    UpdateExecution(req: operations.UpdateExecutionRequest, config?: AxiosRequestConfig): Promise<operations.UpdateExecutionResponse>;
+    UpdateFlow(req: operations.UpdateFlowRequest, config?: AxiosRequestConfig): Promise<operations.UpdateFlowResponse>;
+    UpdateFlowValidate(req: operations.UpdateFlowValidateRequest, config?: AxiosRequestConfig): Promise<operations.UpdateFlowValidateResponse>;
+    UpdateTestUser(req: operations.UpdateTestUserRequest, config?: AxiosRequestConfig): Promise<operations.UpdateTestUserResponse>;
+}
+export {};

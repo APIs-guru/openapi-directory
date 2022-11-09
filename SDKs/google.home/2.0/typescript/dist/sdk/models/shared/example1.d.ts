@@ -1,0 +1,37 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { Aogh } from "./aogh";
+import { Audio } from "./audio";
+import { BuildInfo } from "./buildinfo";
+import { Detail } from "./detail";
+import { DeviceInfo } from "./deviceinfo";
+import { Multizone } from "./multizone";
+import { Net } from "./net";
+import { NightModeParams } from "./nightmodeparams";
+import { Opencast } from "./opencast";
+import { OptIn } from "./optin";
+import { Proxy } from "./proxy";
+import { Settings } from "./settings";
+import { Setup } from "./setup";
+import { Sign } from "./sign";
+import { UserEq } from "./usereq";
+import { Wifi } from "./wifi";
+export declare class Example1 extends SpeakeasyBase {
+    aogh: Aogh;
+    audio: Audio;
+    buildInfo: BuildInfo;
+    detail: Detail;
+    deviceInfo: DeviceInfo;
+    multizone: Multizone;
+    name: string;
+    net: Net;
+    nightModeParams: NightModeParams;
+    opencast: Opencast;
+    optIn: OptIn;
+    proxy: Proxy;
+    settings: Settings;
+    setup: Setup;
+    sign: Sign;
+    userEq: UserEq;
+    version: number;
+    wifi: Wifi;
+}

@@ -1,0 +1,36 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    DescribeEntitiesDetectionV2Job(req: operations.DescribeEntitiesDetectionV2JobRequest, config?: AxiosRequestConfig): Promise<operations.DescribeEntitiesDetectionV2JobResponse>;
+    DescribeIcd10CmInferenceJob(req: operations.DescribeIcd10CmInferenceJobRequest, config?: AxiosRequestConfig): Promise<operations.DescribeIcd10CmInferenceJobResponse>;
+    DescribePhiDetectionJob(req: operations.DescribePhiDetectionJobRequest, config?: AxiosRequestConfig): Promise<operations.DescribePhiDetectionJobResponse>;
+    DescribeRxNormInferenceJob(req: operations.DescribeRxNormInferenceJobRequest, config?: AxiosRequestConfig): Promise<operations.DescribeRxNormInferenceJobResponse>;
+    DetectEntities(req: operations.DetectEntitiesRequest, config?: AxiosRequestConfig): Promise<operations.DetectEntitiesResponse>;
+    DetectEntitiesV2(req: operations.DetectEntitiesV2Request, config?: AxiosRequestConfig): Promise<operations.DetectEntitiesV2Response>;
+    DetectPhi(req: operations.DetectPhiRequest, config?: AxiosRequestConfig): Promise<operations.DetectPhiResponse>;
+    InferIcd10Cm(req: operations.InferIcd10CmRequest, config?: AxiosRequestConfig): Promise<operations.InferIcd10CmResponse>;
+    InferRxNorm(req: operations.InferRxNormRequest, config?: AxiosRequestConfig): Promise<operations.InferRxNormResponse>;
+    ListEntitiesDetectionV2Jobs(req: operations.ListEntitiesDetectionV2JobsRequest, config?: AxiosRequestConfig): Promise<operations.ListEntitiesDetectionV2JobsResponse>;
+    ListIcd10CmInferenceJobs(req: operations.ListIcd10CmInferenceJobsRequest, config?: AxiosRequestConfig): Promise<operations.ListIcd10CmInferenceJobsResponse>;
+    ListPhiDetectionJobs(req: operations.ListPhiDetectionJobsRequest, config?: AxiosRequestConfig): Promise<operations.ListPhiDetectionJobsResponse>;
+    ListRxNormInferenceJobs(req: operations.ListRxNormInferenceJobsRequest, config?: AxiosRequestConfig): Promise<operations.ListRxNormInferenceJobsResponse>;
+    StartEntitiesDetectionV2Job(req: operations.StartEntitiesDetectionV2JobRequest, config?: AxiosRequestConfig): Promise<operations.StartEntitiesDetectionV2JobResponse>;
+    StartIcd10CmInferenceJob(req: operations.StartIcd10CmInferenceJobRequest, config?: AxiosRequestConfig): Promise<operations.StartIcd10CmInferenceJobResponse>;
+    StartPhiDetectionJob(req: operations.StartPhiDetectionJobRequest, config?: AxiosRequestConfig): Promise<operations.StartPhiDetectionJobResponse>;
+    StartRxNormInferenceJob(req: operations.StartRxNormInferenceJobRequest, config?: AxiosRequestConfig): Promise<operations.StartRxNormInferenceJobResponse>;
+    StopEntitiesDetectionV2Job(req: operations.StopEntitiesDetectionV2JobRequest, config?: AxiosRequestConfig): Promise<operations.StopEntitiesDetectionV2JobResponse>;
+    StopIcd10CmInferenceJob(req: operations.StopIcd10CmInferenceJobRequest, config?: AxiosRequestConfig): Promise<operations.StopIcd10CmInferenceJobResponse>;
+    StopPhiDetectionJob(req: operations.StopPhiDetectionJobRequest, config?: AxiosRequestConfig): Promise<operations.StopPhiDetectionJobResponse>;
+    StopRxNormInferenceJob(req: operations.StopRxNormInferenceJobRequest, config?: AxiosRequestConfig): Promise<operations.StopRxNormInferenceJobResponse>;
+}
+export {};

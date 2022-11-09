@@ -1,0 +1,8 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { RecordFormatTypeEnum } from "./recordformattypeenum";
+/**
+ * Describes the data format when records are written to the destination. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html">Configuring Application Output</a>.
+**/
+export declare class DestinationSchema extends SpeakeasyBase {
+    recordFormatType: RecordFormatTypeEnum;
+}

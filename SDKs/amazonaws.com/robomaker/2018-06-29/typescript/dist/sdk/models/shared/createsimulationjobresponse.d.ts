@@ -1,0 +1,31 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { ComputeResponse } from "./computeresponse";
+import { DataSource } from "./datasource";
+import { FailureBehaviorEnum } from "./failurebehaviorenum";
+import { SimulationJobErrorCodeEnum } from "./simulationjoberrorcodeenum";
+import { LoggingConfig } from "./loggingconfig";
+import { OutputLocation } from "./outputlocation";
+import { RobotApplicationConfig } from "./robotapplicationconfig";
+import { SimulationApplicationConfig } from "./simulationapplicationconfig";
+import { SimulationJobStatusEnum } from "./simulationjobstatusenum";
+import { VpcConfigResponse } from "./vpcconfigresponse";
+export declare class CreateSimulationJobResponse extends SpeakeasyBase {
+    arn?: string;
+    clientRequestToken?: string;
+    compute?: ComputeResponse;
+    dataSources?: DataSource[];
+    failureBehavior?: FailureBehaviorEnum;
+    failureCode?: SimulationJobErrorCodeEnum;
+    iamRole?: string;
+    lastStartedAt?: Date;
+    lastUpdatedAt?: Date;
+    loggingConfig?: LoggingConfig;
+    maxJobDurationInSeconds?: number;
+    outputLocation?: OutputLocation;
+    robotApplications?: RobotApplicationConfig[];
+    simulationApplications?: SimulationApplicationConfig[];
+    simulationTimeMillis?: number;
+    status?: SimulationJobStatusEnum;
+    tags?: Map<string, string>;
+    vpcConfig?: VpcConfigResponse;
+}

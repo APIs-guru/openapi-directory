@@ -1,0 +1,21 @@
+export var RelationshipTypeEnum;
+(function (RelationshipTypeEnum) {
+    RelationshipTypeEnum["Every"] = "EVERY";
+    RelationshipTypeEnum["WithDosage"] = "WITH_DOSAGE";
+    RelationshipTypeEnum["AdministeredVia"] = "ADMINISTERED_VIA";
+    RelationshipTypeEnum["For"] = "FOR";
+    RelationshipTypeEnum["Negative"] = "NEGATIVE";
+    RelationshipTypeEnum["Overlap"] = "OVERLAP";
+    RelationshipTypeEnum["Dosage"] = "DOSAGE";
+    RelationshipTypeEnum["RouteOrMode"] = "ROUTE_OR_MODE";
+    RelationshipTypeEnum["Form"] = "FORM";
+    RelationshipTypeEnum["Frequency"] = "FREQUENCY";
+    RelationshipTypeEnum["Duration"] = "DURATION";
+    RelationshipTypeEnum["Strength"] = "STRENGTH";
+    RelationshipTypeEnum["Rate"] = "RATE";
+    RelationshipTypeEnum["Acuity"] = "ACUITY";
+    RelationshipTypeEnum["TestValue"] = "TEST_VALUE";
+    RelationshipTypeEnum["TestUnits"] = "TEST_UNITS";
+    RelationshipTypeEnum["Direction"] = "DIRECTION";
+    RelationshipTypeEnum["SystemOrganSite"] = "SYSTEM_ORGAN_SITE";
+})(RelationshipTypeEnum || (RelationshipTypeEnum = {}));

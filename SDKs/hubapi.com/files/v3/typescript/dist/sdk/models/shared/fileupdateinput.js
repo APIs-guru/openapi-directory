@@ -1,0 +1,66 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+export var FileUpdateInputAccessEnum;
+(function (FileUpdateInputAccessEnum) {
+    FileUpdateInputAccessEnum["PublicIndexable"] = "PUBLIC_INDEXABLE";
+    FileUpdateInputAccessEnum["PublicNotIndexable"] = "PUBLIC_NOT_INDEXABLE";
+    FileUpdateInputAccessEnum["HiddenIndexable"] = "HIDDEN_INDEXABLE";
+    FileUpdateInputAccessEnum["HiddenNotIndexable"] = "HIDDEN_NOT_INDEXABLE";
+    FileUpdateInputAccessEnum["HiddenPrivate"] = "HIDDEN_PRIVATE";
+    FileUpdateInputAccessEnum["Private"] = "PRIVATE";
+})(FileUpdateInputAccessEnum || (FileUpdateInputAccessEnum = {}));
+// FileUpdateInput
+/**
+ * Object for updating files.
+**/
+var FileUpdateInput = /** @class */ (function (_super) {
+    __extends(FileUpdateInput, _super);
+    function FileUpdateInput() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=access" }),
+        __metadata("design:type", String)
+    ], FileUpdateInput.prototype, "access", void 0);
+    __decorate([
+        Metadata({ data: "json, name=isUsableInContent" }),
+        __metadata("design:type", Boolean)
+    ], FileUpdateInput.prototype, "isUsableInContent", void 0);
+    __decorate([
+        Metadata({ data: "json, name=name" }),
+        __metadata("design:type", String)
+    ], FileUpdateInput.prototype, "name", void 0);
+    __decorate([
+        Metadata({ data: "json, name=parentFolderId" }),
+        __metadata("design:type", String)
+    ], FileUpdateInput.prototype, "parentFolderId", void 0);
+    __decorate([
+        Metadata({ data: "json, name=parentFolderPath" }),
+        __metadata("design:type", String)
+    ], FileUpdateInput.prototype, "parentFolderPath", void 0);
+    return FileUpdateInput;
+}(SpeakeasyBase));
+export { FileUpdateInput };

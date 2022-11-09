@@ -1,0 +1,40 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+import { GoogleCloudPolicysimulatorV1BindingExplanation } from "./googlecloudpolicysimulatorv1bindingexplanation";
+import { GoogleIamV1Policy } from "./googleiamv1policy";
+
+export enum GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnum {
+    AccessStateUnspecified = "ACCESS_STATE_UNSPECIFIED"
+,    Granted = "GRANTED"
+,    NotGranted = "NOT_GRANTED"
+,    UnknownConditional = "UNKNOWN_CONDITIONAL"
+,    UnknownInfoDenied = "UNKNOWN_INFO_DENIED"
+}
+
+export enum GoogleCloudPolicysimulatorV1ExplainedPolicyRelevanceEnum {
+    HeuristicRelevanceUnspecified = "HEURISTIC_RELEVANCE_UNSPECIFIED"
+,    Normal = "NORMAL"
+,    High = "HIGH"
+}
+
+
+// GoogleCloudPolicysimulatorV1ExplainedPolicy
+/** 
+ * Details about how a specific IAM Policy contributed to the access check.
+**/
+export class GoogleCloudPolicysimulatorV1ExplainedPolicy extends SpeakeasyBase {
+  @Metadata({ data: "json, name=access" })
+  access?: GoogleCloudPolicysimulatorV1ExplainedPolicyAccessEnum;
+
+  @Metadata({ data: "json, name=bindingExplanations", elemType: shared.GoogleCloudPolicysimulatorV1BindingExplanation })
+  bindingExplanations?: GoogleCloudPolicysimulatorV1BindingExplanation[];
+
+  @Metadata({ data: "json, name=fullResourceName" })
+  fullResourceName?: string;
+
+  @Metadata({ data: "json, name=policy" })
+  policy?: GoogleIamV1Policy;
+
+  @Metadata({ data: "json, name=relevance" })
+  relevance?: GoogleCloudPolicysimulatorV1ExplainedPolicyRelevanceEnum;
+}

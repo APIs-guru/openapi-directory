@@ -1,0 +1,106 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var GetTagFromHolidaySchemeRevisionPathParams = /** @class */ (function (_super) {
+    __extends(GetTagFromHolidaySchemeRevisionPathParams, _super);
+    function GetTagFromHolidaySchemeRevisionPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=EffectiveDate" }),
+        __metadata("design:type", Date)
+    ], GetTagFromHolidaySchemeRevisionPathParams.prototype, "effectiveDate", void 0);
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=EmployerId" }),
+        __metadata("design:type", String)
+    ], GetTagFromHolidaySchemeRevisionPathParams.prototype, "employerId", void 0);
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=HolidaySchemeId" }),
+        __metadata("design:type", String)
+    ], GetTagFromHolidaySchemeRevisionPathParams.prototype, "holidaySchemeId", void 0);
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=TagId" }),
+        __metadata("design:type", String)
+    ], GetTagFromHolidaySchemeRevisionPathParams.prototype, "tagId", void 0);
+    return GetTagFromHolidaySchemeRevisionPathParams;
+}(SpeakeasyBase));
+export { GetTagFromHolidaySchemeRevisionPathParams };
+var GetTagFromHolidaySchemeRevisionHeaders = /** @class */ (function (_super) {
+    __extends(GetTagFromHolidaySchemeRevisionHeaders, _super);
+    function GetTagFromHolidaySchemeRevisionHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=Api-Version" }),
+        __metadata("design:type", String)
+    ], GetTagFromHolidaySchemeRevisionHeaders.prototype, "apiVersion", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=Authorization" }),
+        __metadata("design:type", String)
+    ], GetTagFromHolidaySchemeRevisionHeaders.prototype, "authorization", void 0);
+    return GetTagFromHolidaySchemeRevisionHeaders;
+}(SpeakeasyBase));
+export { GetTagFromHolidaySchemeRevisionHeaders };
+var GetTagFromHolidaySchemeRevisionRequest = /** @class */ (function (_super) {
+    __extends(GetTagFromHolidaySchemeRevisionRequest, _super);
+    function GetTagFromHolidaySchemeRevisionRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetTagFromHolidaySchemeRevisionPathParams)
+    ], GetTagFromHolidaySchemeRevisionRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetTagFromHolidaySchemeRevisionHeaders)
+    ], GetTagFromHolidaySchemeRevisionRequest.prototype, "headers", void 0);
+    return GetTagFromHolidaySchemeRevisionRequest;
+}(SpeakeasyBase));
+export { GetTagFromHolidaySchemeRevisionRequest };
+var GetTagFromHolidaySchemeRevisionResponse = /** @class */ (function (_super) {
+    __extends(GetTagFromHolidaySchemeRevisionResponse, _super);
+    function GetTagFromHolidaySchemeRevisionResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetTagFromHolidaySchemeRevisionResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.ErrorModel)
+    ], GetTagFromHolidaySchemeRevisionResponse.prototype, "errorModel", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetTagFromHolidaySchemeRevisionResponse.prototype, "statusCode", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.Tag)
+    ], GetTagFromHolidaySchemeRevisionResponse.prototype, "tag", void 0);
+    return GetTagFromHolidaySchemeRevisionResponse;
+}(SpeakeasyBase));
+export { GetTagFromHolidaySchemeRevisionResponse };

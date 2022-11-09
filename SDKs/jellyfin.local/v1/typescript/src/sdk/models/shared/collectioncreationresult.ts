@@ -1,0 +1,7 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+
+export class CollectionCreationResult extends SpeakeasyBase {
+  @Metadata({ data: "json, name=Id" })
+  id?: string;
+}

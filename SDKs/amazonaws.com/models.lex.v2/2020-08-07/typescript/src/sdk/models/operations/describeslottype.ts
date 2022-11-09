@@ -1,0 +1,77 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+
+
+export class DescribeSlotTypePathParams extends SpeakeasyBase {
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=botId" })
+  botId: string;
+
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=botVersion" })
+  botVersion: string;
+
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=localeId" })
+  localeId: string;
+
+  @Metadata({ data: "pathParam, style=simple;explode=false;name=slotTypeId" })
+  slotTypeId: string;
+}
+
+
+export class DescribeSlotTypeHeaders extends SpeakeasyBase {
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" })
+  xAmzAlgorithm?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" })
+  xAmzContentSha256?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" })
+  xAmzCredential?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" })
+  xAmzDate?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" })
+  xAmzSecurityToken?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" })
+  xAmzSignature?: string;
+
+  @Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" })
+  xAmzSignedHeaders?: string;
+}
+
+
+export class DescribeSlotTypeRequest extends SpeakeasyBase {
+  @Metadata()
+  pathParams: DescribeSlotTypePathParams;
+
+  @Metadata()
+  headers: DescribeSlotTypeHeaders;
+}
+
+
+export class DescribeSlotTypeResponse extends SpeakeasyBase {
+  @Metadata()
+  contentType: string;
+
+  @Metadata()
+  describeSlotTypeResponse?: shared.DescribeSlotTypeResponse;
+
+  @Metadata()
+  internalServerException?: any;
+
+  @Metadata()
+  resourceNotFoundException?: any;
+
+  @Metadata()
+  serviceQuotaExceededException?: any;
+
+  @Metadata()
+  statusCode: number;
+
+  @Metadata()
+  throttlingException?: any;
+
+  @Metadata()
+  validationException?: any;
+}

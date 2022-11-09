@@ -1,0 +1,158 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var GetSampleDataHeaders = /** @class */ (function (_super) {
+    __extends(GetSampleDataHeaders, _super);
+    function GetSampleDataHeaders() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Algorithm" }),
+        __metadata("design:type", String)
+    ], GetSampleDataHeaders.prototype, "xAmzAlgorithm", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Content-Sha256" }),
+        __metadata("design:type", String)
+    ], GetSampleDataHeaders.prototype, "xAmzContentSha256", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Credential" }),
+        __metadata("design:type", String)
+    ], GetSampleDataHeaders.prototype, "xAmzCredential", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Date" }),
+        __metadata("design:type", String)
+    ], GetSampleDataHeaders.prototype, "xAmzDate", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Security-Token" }),
+        __metadata("design:type", String)
+    ], GetSampleDataHeaders.prototype, "xAmzSecurityToken", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-Signature" }),
+        __metadata("design:type", String)
+    ], GetSampleDataHeaders.prototype, "xAmzSignature", void 0);
+    __decorate([
+        Metadata({ data: "header, style=simple;explode=false;name=X-Amz-SignedHeaders" }),
+        __metadata("design:type", String)
+    ], GetSampleDataHeaders.prototype, "xAmzSignedHeaders", void 0);
+    return GetSampleDataHeaders;
+}(SpeakeasyBase));
+export { GetSampleDataHeaders };
+// GetSampleDataRequestBodyS3SourceConfig
+/**
+ * Contains information about the source configuration in Amazon S3.
+**/
+var GetSampleDataRequestBodyS3SourceConfig = /** @class */ (function (_super) {
+    __extends(GetSampleDataRequestBodyS3SourceConfig, _super);
+    function GetSampleDataRequestBodyS3SourceConfig() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=FileFormatDescriptor" }),
+        __metadata("design:type", shared.FileFormatDescriptor)
+    ], GetSampleDataRequestBodyS3SourceConfig.prototype, "fileFormatDescriptor", void 0);
+    __decorate([
+        Metadata({ data: "json, name=HistoricalDataPathList" }),
+        __metadata("design:type", Array)
+    ], GetSampleDataRequestBodyS3SourceConfig.prototype, "historicalDataPathList", void 0);
+    __decorate([
+        Metadata({ data: "json, name=RoleArn" }),
+        __metadata("design:type", String)
+    ], GetSampleDataRequestBodyS3SourceConfig.prototype, "roleArn", void 0);
+    __decorate([
+        Metadata({ data: "json, name=TemplatedPathList" }),
+        __metadata("design:type", Array)
+    ], GetSampleDataRequestBodyS3SourceConfig.prototype, "templatedPathList", void 0);
+    return GetSampleDataRequestBodyS3SourceConfig;
+}(SpeakeasyBase));
+export { GetSampleDataRequestBodyS3SourceConfig };
+var GetSampleDataRequestBody = /** @class */ (function (_super) {
+    __extends(GetSampleDataRequestBody, _super);
+    function GetSampleDataRequestBody() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "json, name=S3SourceConfig" }),
+        __metadata("design:type", GetSampleDataRequestBodyS3SourceConfig)
+    ], GetSampleDataRequestBody.prototype, "s3SourceConfig", void 0);
+    return GetSampleDataRequestBody;
+}(SpeakeasyBase));
+export { GetSampleDataRequestBody };
+var GetSampleDataRequest = /** @class */ (function (_super) {
+    __extends(GetSampleDataRequest, _super);
+    function GetSampleDataRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", GetSampleDataHeaders)
+    ], GetSampleDataRequest.prototype, "headers", void 0);
+    __decorate([
+        Metadata({ data: "request, media_type=application/json" }),
+        __metadata("design:type", GetSampleDataRequestBody)
+    ], GetSampleDataRequest.prototype, "request", void 0);
+    return GetSampleDataRequest;
+}(SpeakeasyBase));
+export { GetSampleDataRequest };
+var GetSampleDataResponse = /** @class */ (function (_super) {
+    __extends(GetSampleDataResponse, _super);
+    function GetSampleDataResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Object)
+    ], GetSampleDataResponse.prototype, "accessDeniedException", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], GetSampleDataResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.GetSampleDataResponse)
+    ], GetSampleDataResponse.prototype, "getSampleDataResponse", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Object)
+    ], GetSampleDataResponse.prototype, "internalServerException", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Object)
+    ], GetSampleDataResponse.prototype, "resourceNotFoundException", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], GetSampleDataResponse.prototype, "statusCode", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Object)
+    ], GetSampleDataResponse.prototype, "tooManyRequestsException", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Object)
+    ], GetSampleDataResponse.prototype, "validationException", void 0);
+    return GetSampleDataResponse;
+}(SpeakeasyBase));
+export { GetSampleDataResponse };

@@ -1,0 +1,102 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+var ListServiceOfferingServiceInstancesPathParams = /** @class */ (function (_super) {
+    __extends(ListServiceOfferingServiceInstancesPathParams, _super);
+    function ListServiceOfferingServiceInstancesPathParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "pathParam, style=simple;explode=false;name=id" }),
+        __metadata("design:type", String)
+    ], ListServiceOfferingServiceInstancesPathParams.prototype, "id", void 0);
+    return ListServiceOfferingServiceInstancesPathParams;
+}(SpeakeasyBase));
+export { ListServiceOfferingServiceInstancesPathParams };
+var ListServiceOfferingServiceInstancesQueryParams = /** @class */ (function (_super) {
+    __extends(ListServiceOfferingServiceInstancesQueryParams, _super);
+    function ListServiceOfferingServiceInstancesQueryParams() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata({ data: "queryParam, style=deepObject;explode=true;name=filter" }),
+        __metadata("design:type", Map)
+    ], ListServiceOfferingServiceInstancesQueryParams.prototype, "filter", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=limit" }),
+        __metadata("design:type", Number)
+    ], ListServiceOfferingServiceInstancesQueryParams.prototype, "limit", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=form;explode=true;name=offset" }),
+        __metadata("design:type", Number)
+    ], ListServiceOfferingServiceInstancesQueryParams.prototype, "offset", void 0);
+    __decorate([
+        Metadata({ data: "queryParam, style=deepObject;explode=true;name=sort_by" }),
+        __metadata("design:type", Map)
+    ], ListServiceOfferingServiceInstancesQueryParams.prototype, "sortBy", void 0);
+    return ListServiceOfferingServiceInstancesQueryParams;
+}(SpeakeasyBase));
+export { ListServiceOfferingServiceInstancesQueryParams };
+var ListServiceOfferingServiceInstancesRequest = /** @class */ (function (_super) {
+    __extends(ListServiceOfferingServiceInstancesRequest, _super);
+    function ListServiceOfferingServiceInstancesRequest() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", ListServiceOfferingServiceInstancesPathParams)
+    ], ListServiceOfferingServiceInstancesRequest.prototype, "pathParams", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", ListServiceOfferingServiceInstancesQueryParams)
+    ], ListServiceOfferingServiceInstancesRequest.prototype, "queryParams", void 0);
+    return ListServiceOfferingServiceInstancesRequest;
+}(SpeakeasyBase));
+export { ListServiceOfferingServiceInstancesRequest };
+var ListServiceOfferingServiceInstancesResponse = /** @class */ (function (_super) {
+    __extends(ListServiceOfferingServiceInstancesResponse, _super);
+    function ListServiceOfferingServiceInstancesResponse() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    __decorate([
+        Metadata(),
+        __metadata("design:type", String)
+    ], ListServiceOfferingServiceInstancesResponse.prototype, "contentType", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.ErrorNotFound)
+    ], ListServiceOfferingServiceInstancesResponse.prototype, "errorNotFound", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", shared.ServiceInstancesCollection)
+    ], ListServiceOfferingServiceInstancesResponse.prototype, "serviceInstancesCollection", void 0);
+    __decorate([
+        Metadata(),
+        __metadata("design:type", Number)
+    ], ListServiceOfferingServiceInstancesResponse.prototype, "statusCode", void 0);
+    return ListServiceOfferingServiceInstancesResponse;
+}(SpeakeasyBase));
+export { ListServiceOfferingServiceInstancesResponse };

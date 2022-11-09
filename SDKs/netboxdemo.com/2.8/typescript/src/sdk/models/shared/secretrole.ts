@@ -1,0 +1,19 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+
+export class SecretRole extends SpeakeasyBase {
+  @Metadata({ data: "json, name=description" })
+  description?: string;
+
+  @Metadata({ data: "json, name=id" })
+  id?: number;
+
+  @Metadata({ data: "json, name=name" })
+  name: string;
+
+  @Metadata({ data: "json, name=secret_count" })
+  secretCount?: number;
+
+  @Metadata({ data: "json, name=slug" })
+  slug: string;
+}

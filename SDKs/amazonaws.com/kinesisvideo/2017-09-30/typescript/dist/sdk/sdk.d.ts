@@ -1,0 +1,34 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    CreateSignalingChannel(req: operations.CreateSignalingChannelRequest, config?: AxiosRequestConfig): Promise<operations.CreateSignalingChannelResponse>;
+    CreateStream(req: operations.CreateStreamRequest, config?: AxiosRequestConfig): Promise<operations.CreateStreamResponse>;
+    DeleteSignalingChannel(req: operations.DeleteSignalingChannelRequest, config?: AxiosRequestConfig): Promise<operations.DeleteSignalingChannelResponse>;
+    DeleteStream(req: operations.DeleteStreamRequest, config?: AxiosRequestConfig): Promise<operations.DeleteStreamResponse>;
+    DescribeSignalingChannel(req: operations.DescribeSignalingChannelRequest, config?: AxiosRequestConfig): Promise<operations.DescribeSignalingChannelResponse>;
+    DescribeStream(req: operations.DescribeStreamRequest, config?: AxiosRequestConfig): Promise<operations.DescribeStreamResponse>;
+    GetDataEndpoint(req: operations.GetDataEndpointRequest, config?: AxiosRequestConfig): Promise<operations.GetDataEndpointResponse>;
+    GetSignalingChannelEndpoint(req: operations.GetSignalingChannelEndpointRequest, config?: AxiosRequestConfig): Promise<operations.GetSignalingChannelEndpointResponse>;
+    ListSignalingChannels(req: operations.ListSignalingChannelsRequest, config?: AxiosRequestConfig): Promise<operations.ListSignalingChannelsResponse>;
+    ListStreams(req: operations.ListStreamsRequest, config?: AxiosRequestConfig): Promise<operations.ListStreamsResponse>;
+    ListTagsForResource(req: operations.ListTagsForResourceRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForResourceResponse>;
+    ListTagsForStream(req: operations.ListTagsForStreamRequest, config?: AxiosRequestConfig): Promise<operations.ListTagsForStreamResponse>;
+    TagResource(req: operations.TagResourceRequest, config?: AxiosRequestConfig): Promise<operations.TagResourceResponse>;
+    TagStream(req: operations.TagStreamRequest, config?: AxiosRequestConfig): Promise<operations.TagStreamResponse>;
+    UntagResource(req: operations.UntagResourceRequest, config?: AxiosRequestConfig): Promise<operations.UntagResourceResponse>;
+    UntagStream(req: operations.UntagStreamRequest, config?: AxiosRequestConfig): Promise<operations.UntagStreamResponse>;
+    UpdateDataRetention(req: operations.UpdateDataRetentionRequest, config?: AxiosRequestConfig): Promise<operations.UpdateDataRetentionResponse>;
+    UpdateSignalingChannel(req: operations.UpdateSignalingChannelRequest, config?: AxiosRequestConfig): Promise<operations.UpdateSignalingChannelResponse>;
+    UpdateStream(req: operations.UpdateStreamRequest, config?: AxiosRequestConfig): Promise<operations.UpdateStreamResponse>;
+}
+export {};

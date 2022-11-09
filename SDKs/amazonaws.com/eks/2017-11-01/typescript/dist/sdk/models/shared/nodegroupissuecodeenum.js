@@ -1,0 +1,21 @@
+export var NodegroupIssueCodeEnum;
+(function (NodegroupIssueCodeEnum) {
+    NodegroupIssueCodeEnum["AutoScalingGroupNotFound"] = "AutoScalingGroupNotFound";
+    NodegroupIssueCodeEnum["AutoScalingGroupInvalidConfiguration"] = "AutoScalingGroupInvalidConfiguration";
+    NodegroupIssueCodeEnum["Ec2SecurityGroupNotFound"] = "Ec2SecurityGroupNotFound";
+    NodegroupIssueCodeEnum["Ec2SecurityGroupDeletionFailure"] = "Ec2SecurityGroupDeletionFailure";
+    NodegroupIssueCodeEnum["Ec2LaunchTemplateNotFound"] = "Ec2LaunchTemplateNotFound";
+    NodegroupIssueCodeEnum["Ec2LaunchTemplateVersionMismatch"] = "Ec2LaunchTemplateVersionMismatch";
+    NodegroupIssueCodeEnum["Ec2SubnetNotFound"] = "Ec2SubnetNotFound";
+    NodegroupIssueCodeEnum["Ec2SubnetInvalidConfiguration"] = "Ec2SubnetInvalidConfiguration";
+    NodegroupIssueCodeEnum["IamInstanceProfileNotFound"] = "IamInstanceProfileNotFound";
+    NodegroupIssueCodeEnum["IamLimitExceeded"] = "IamLimitExceeded";
+    NodegroupIssueCodeEnum["IamNodeRoleNotFound"] = "IamNodeRoleNotFound";
+    NodegroupIssueCodeEnum["NodeCreationFailure"] = "NodeCreationFailure";
+    NodegroupIssueCodeEnum["AsgInstanceLaunchFailures"] = "AsgInstanceLaunchFailures";
+    NodegroupIssueCodeEnum["InstanceLimitExceeded"] = "InstanceLimitExceeded";
+    NodegroupIssueCodeEnum["InsufficientFreeAddresses"] = "InsufficientFreeAddresses";
+    NodegroupIssueCodeEnum["AccessDenied"] = "AccessDenied";
+    NodegroupIssueCodeEnum["InternalFailure"] = "InternalFailure";
+    NodegroupIssueCodeEnum["ClusterUnreachable"] = "ClusterUnreachable";
+})(NodegroupIssueCodeEnum || (NodegroupIssueCodeEnum = {}));

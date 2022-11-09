@@ -1,0 +1,28 @@
+export var RuntimeEnum;
+(function (RuntimeEnum) {
+    RuntimeEnum["Nodejs"] = "nodejs";
+    RuntimeEnum["Nodejs43"] = "nodejs4.3";
+    RuntimeEnum["Nodejs610"] = "nodejs6.10";
+    RuntimeEnum["Nodejs810"] = "nodejs8.10";
+    RuntimeEnum["Nodejs10X"] = "nodejs10.x";
+    RuntimeEnum["Nodejs12X"] = "nodejs12.x";
+    RuntimeEnum["Nodejs14X"] = "nodejs14.x";
+    RuntimeEnum["Java8"] = "java8";
+    RuntimeEnum["Java8Al2"] = "java8.al2";
+    RuntimeEnum["Java11"] = "java11";
+    RuntimeEnum["Python27"] = "python2.7";
+    RuntimeEnum["Python36"] = "python3.6";
+    RuntimeEnum["Python37"] = "python3.7";
+    RuntimeEnum["Python38"] = "python3.8";
+    RuntimeEnum["Python39"] = "python3.9";
+    RuntimeEnum["Dotnetcore10"] = "dotnetcore1.0";
+    RuntimeEnum["Dotnetcore20"] = "dotnetcore2.0";
+    RuntimeEnum["Dotnetcore21"] = "dotnetcore2.1";
+    RuntimeEnum["Dotnetcore31"] = "dotnetcore3.1";
+    RuntimeEnum["Nodejs43Edge"] = "nodejs4.3-edge";
+    RuntimeEnum["Go1X"] = "go1.x";
+    RuntimeEnum["Ruby25"] = "ruby2.5";
+    RuntimeEnum["Ruby27"] = "ruby2.7";
+    RuntimeEnum["Provided"] = "provided";
+    RuntimeEnum["ProvidedAl2"] = "provided.al2";
+})(RuntimeEnum || (RuntimeEnum = {}));

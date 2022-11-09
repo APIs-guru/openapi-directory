@@ -1,0 +1,37 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    KeysApiCurrent(req: operations.KeysApiCurrentRequest, config?: AxiosRequestConfig): Promise<operations.KeysApiCurrentResponse>;
+    KeysApiCustom(req: operations.KeysApiCustomRequest, config?: AxiosRequestConfig): Promise<operations.KeysApiCustomResponse>;
+    KeysApiExpiry(req: operations.KeysApiExpiryRequest, config?: AxiosRequestConfig): Promise<operations.KeysApiExpiryResponse>;
+    KeysApiFind(req: operations.KeysApiFindRequest, config?: AxiosRequestConfig): Promise<operations.KeysApiFindResponse>;
+    ProductsApiCount(req: operations.ProductsApiCountRequest, config?: AxiosRequestConfig): Promise<operations.ProductsApiCountResponse>;
+    ProductsApiDeleteProduct(req: operations.ProductsApiDeleteProductRequest, config?: AxiosRequestConfig): Promise<operations.ProductsApiDeleteProductResponse>;
+    ProductsApiDeleteProduct2(req: operations.ProductsApiDeleteProduct2Request, config?: AxiosRequestConfig): Promise<operations.ProductsApiDeleteProduct2Response>;
+    ProductsApiFind(req: operations.ProductsApiFindRequest, config?: AxiosRequestConfig): Promise<operations.ProductsApiFindResponse>;
+    ProductsApiList(req: operations.ProductsApiListRequest, config?: AxiosRequestConfig): Promise<operations.ProductsApiListResponse>;
+    ProductsApiPatchProduct(req: operations.ProductsApiPatchProductRequest, config?: AxiosRequestConfig): Promise<operations.ProductsApiPatchProductResponse>;
+    ProductsApiPatchProduct2(req: operations.ProductsApiPatchProduct2Request, config?: AxiosRequestConfig): Promise<operations.ProductsApiPatchProduct2Response>;
+    ProductsApiSave(req: operations.ProductsApiSaveRequest, config?: AxiosRequestConfig): Promise<operations.ProductsApiSaveResponse>;
+    SubscriptionsApiCount(req: operations.SubscriptionsApiCountRequest, config?: AxiosRequestConfig): Promise<operations.SubscriptionsApiCountResponse>;
+    SubscriptionsApiDeleteSubscription(req: operations.SubscriptionsApiDeleteSubscriptionRequest, config?: AxiosRequestConfig): Promise<operations.SubscriptionsApiDeleteSubscriptionResponse>;
+    SubscriptionsApiDeleteSubscription2(req: operations.SubscriptionsApiDeleteSubscription2Request, config?: AxiosRequestConfig): Promise<operations.SubscriptionsApiDeleteSubscription2Response>;
+    SubscriptionsApiDisable(req: operations.SubscriptionsApiDisableRequest, config?: AxiosRequestConfig): Promise<operations.SubscriptionsApiDisableResponse>;
+    SubscriptionsApiDisable2(req: operations.SubscriptionsApiDisable2Request, config?: AxiosRequestConfig): Promise<operations.SubscriptionsApiDisable2Response>;
+    SubscriptionsApiEnable(req: operations.SubscriptionsApiEnableRequest, config?: AxiosRequestConfig): Promise<operations.SubscriptionsApiEnableResponse>;
+    SubscriptionsApiEnable2(req: operations.SubscriptionsApiEnable2Request, config?: AxiosRequestConfig): Promise<operations.SubscriptionsApiEnable2Response>;
+    SubscriptionsApiFind(req: operations.SubscriptionsApiFindRequest, config?: AxiosRequestConfig): Promise<operations.SubscriptionsApiFindResponse>;
+    SubscriptionsApiList(req: operations.SubscriptionsApiListRequest, config?: AxiosRequestConfig): Promise<operations.SubscriptionsApiListResponse>;
+    SubscriptionsApiPutSubscription(req: operations.SubscriptionsApiPutSubscriptionRequest, config?: AxiosRequestConfig): Promise<operations.SubscriptionsApiPutSubscriptionResponse>;
+    SubscriptionsApiPutSubscription2(req: operations.SubscriptionsApiPutSubscription2Request, config?: AxiosRequestConfig): Promise<operations.SubscriptionsApiPutSubscription2Response>;
+    SubscriptionsApiSave(req: operations.SubscriptionsApiSaveRequest, config?: AxiosRequestConfig): Promise<operations.SubscriptionsApiSaveResponse>;
+}
+export {};

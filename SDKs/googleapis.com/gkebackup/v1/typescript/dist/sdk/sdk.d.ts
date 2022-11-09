@@ -1,0 +1,33 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    GkebackupProjectsLocationsBackupPlansBackupsCreate(req: operations.GkebackupProjectsLocationsBackupPlansBackupsCreateRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsBackupPlansBackupsCreateResponse>;
+    GkebackupProjectsLocationsBackupPlansBackupsList(req: operations.GkebackupProjectsLocationsBackupPlansBackupsListRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsBackupPlansBackupsListResponse>;
+    GkebackupProjectsLocationsBackupPlansBackupsVolumeBackupsList(req: operations.GkebackupProjectsLocationsBackupPlansBackupsVolumeBackupsListRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsBackupPlansBackupsVolumeBackupsListResponse>;
+    GkebackupProjectsLocationsBackupPlansCreate(req: operations.GkebackupProjectsLocationsBackupPlansCreateRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsBackupPlansCreateResponse>;
+    GkebackupProjectsLocationsBackupPlansList(req: operations.GkebackupProjectsLocationsBackupPlansListRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsBackupPlansListResponse>;
+    GkebackupProjectsLocationsDeleteOperations(req: operations.GkebackupProjectsLocationsDeleteOperationsRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsDeleteOperationsResponse>;
+    GkebackupProjectsLocationsList(req: operations.GkebackupProjectsLocationsListRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsListResponse>;
+    GkebackupProjectsLocationsOperationsCancel(req: operations.GkebackupProjectsLocationsOperationsCancelRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsOperationsCancelResponse>;
+    GkebackupProjectsLocationsOperationsList(req: operations.GkebackupProjectsLocationsOperationsListRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsOperationsListResponse>;
+    GkebackupProjectsLocationsRestorePlansCreate(req: operations.GkebackupProjectsLocationsRestorePlansCreateRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsRestorePlansCreateResponse>;
+    GkebackupProjectsLocationsRestorePlansList(req: operations.GkebackupProjectsLocationsRestorePlansListRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsRestorePlansListResponse>;
+    GkebackupProjectsLocationsRestorePlansRestoresCreate(req: operations.GkebackupProjectsLocationsRestorePlansRestoresCreateRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsRestorePlansRestoresCreateResponse>;
+    GkebackupProjectsLocationsRestorePlansRestoresDelete(req: operations.GkebackupProjectsLocationsRestorePlansRestoresDeleteRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsRestorePlansRestoresDeleteResponse>;
+    GkebackupProjectsLocationsRestorePlansRestoresList(req: operations.GkebackupProjectsLocationsRestorePlansRestoresListRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsRestorePlansRestoresListResponse>;
+    GkebackupProjectsLocationsRestorePlansRestoresPatch(req: operations.GkebackupProjectsLocationsRestorePlansRestoresPatchRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsRestorePlansRestoresPatchResponse>;
+    GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresGet(req: operations.GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresGetRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresGetResponse>;
+    GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresGetIamPolicy(req: operations.GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresGetIamPolicyRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresGetIamPolicyResponse>;
+    GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresList(req: operations.GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresListRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresListResponse>;
+    GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresSetIamPolicy(req: operations.GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresSetIamPolicyRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresSetIamPolicyResponse>;
+    GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresTestIamPermissions(req: operations.GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresTestIamPermissionsRequest, config?: AxiosRequestConfig): Promise<operations.GkebackupProjectsLocationsRestorePlansRestoresVolumeRestoresTestIamPermissionsResponse>;
+}
+export {};

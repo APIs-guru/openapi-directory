@@ -1,0 +1,23 @@
+
+
+export enum ScalableDimensionEnum {
+    EcsServiceDesiredCount = "ecs:service:DesiredCount"
+,    Ec2SpotFleetRequestTargetCapacity = "ec2:spot-fleet-request:TargetCapacity"
+,    ElasticmapreduceInstancegroupInstanceCount = "elasticmapreduce:instancegroup:InstanceCount"
+,    AppstreamFleetDesiredCapacity = "appstream:fleet:DesiredCapacity"
+,    DynamodbTableReadCapacityUnits = "dynamodb:table:ReadCapacityUnits"
+,    DynamodbTableWriteCapacityUnits = "dynamodb:table:WriteCapacityUnits"
+,    DynamodbIndexReadCapacityUnits = "dynamodb:index:ReadCapacityUnits"
+,    DynamodbIndexWriteCapacityUnits = "dynamodb:index:WriteCapacityUnits"
+,    RdsClusterReadReplicaCount = "rds:cluster:ReadReplicaCount"
+,    SagemakerVariantDesiredInstanceCount = "sagemaker:variant:DesiredInstanceCount"
+,    CustomResourceResourceTypeProperty = "custom-resource:ResourceType:Property"
+,    ComprehendDocumentClassifierEndpointDesiredInferenceUnits = "comprehend:document-classifier-endpoint:DesiredInferenceUnits"
+,    ComprehendEntityRecognizerEndpointDesiredInferenceUnits = "comprehend:entity-recognizer-endpoint:DesiredInferenceUnits"
+,    LambdaFunctionProvisionedConcurrency = "lambda:function:ProvisionedConcurrency"
+,    CassandraTableReadCapacityUnits = "cassandra:table:ReadCapacityUnits"
+,    CassandraTableWriteCapacityUnits = "cassandra:table:WriteCapacityUnits"
+,    KafkaBrokerStorageVolumeSize = "kafka:broker-storage:VolumeSize"
+,    ElasticacheReplicationGroupNodeGroups = "elasticache:replication-group:NodeGroups"
+,    ElasticacheReplicationGroupReplicas = "elasticache:replication-group:Replicas"
+}

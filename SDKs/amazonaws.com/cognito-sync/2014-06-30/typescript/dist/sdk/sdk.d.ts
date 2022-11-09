@@ -1,0 +1,32 @@
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+import * as operations from "./models/operations";
+import { Security } from "./models/shared";
+declare type OptsFunc = (sdk: SDK) => void;
+export declare function WithServerURL(serverURL: string, params?: Map<string, string>): OptsFunc;
+export declare function WithClient(client: AxiosInstance): OptsFunc;
+export declare function WithSecurity(security: Security): OptsFunc;
+export declare class SDK {
+    defaultClient?: AxiosInstance;
+    securityClient?: AxiosInstance;
+    security?: any;
+    serverURL: string;
+    constructor(...opts: OptsFunc[]);
+    BulkPublish(req: operations.BulkPublishRequest, config?: AxiosRequestConfig): Promise<operations.BulkPublishResponse>;
+    DeleteDataset(req: operations.DeleteDatasetRequest, config?: AxiosRequestConfig): Promise<operations.DeleteDatasetResponse>;
+    DescribeDataset(req: operations.DescribeDatasetRequest, config?: AxiosRequestConfig): Promise<operations.DescribeDatasetResponse>;
+    DescribeIdentityPoolUsage(req: operations.DescribeIdentityPoolUsageRequest, config?: AxiosRequestConfig): Promise<operations.DescribeIdentityPoolUsageResponse>;
+    DescribeIdentityUsage(req: operations.DescribeIdentityUsageRequest, config?: AxiosRequestConfig): Promise<operations.DescribeIdentityUsageResponse>;
+    GetBulkPublishDetails(req: operations.GetBulkPublishDetailsRequest, config?: AxiosRequestConfig): Promise<operations.GetBulkPublishDetailsResponse>;
+    GetCognitoEvents(req: operations.GetCognitoEventsRequest, config?: AxiosRequestConfig): Promise<operations.GetCognitoEventsResponse>;
+    GetIdentityPoolConfiguration(req: operations.GetIdentityPoolConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.GetIdentityPoolConfigurationResponse>;
+    ListDatasets(req: operations.ListDatasetsRequest, config?: AxiosRequestConfig): Promise<operations.ListDatasetsResponse>;
+    ListIdentityPoolUsage(req: operations.ListIdentityPoolUsageRequest, config?: AxiosRequestConfig): Promise<operations.ListIdentityPoolUsageResponse>;
+    ListRecords(req: operations.ListRecordsRequest, config?: AxiosRequestConfig): Promise<operations.ListRecordsResponse>;
+    RegisterDevice(req: operations.RegisterDeviceRequest, config?: AxiosRequestConfig): Promise<operations.RegisterDeviceResponse>;
+    SetCognitoEvents(req: operations.SetCognitoEventsRequest, config?: AxiosRequestConfig): Promise<operations.SetCognitoEventsResponse>;
+    SetIdentityPoolConfiguration(req: operations.SetIdentityPoolConfigurationRequest, config?: AxiosRequestConfig): Promise<operations.SetIdentityPoolConfigurationResponse>;
+    SubscribeToDataset(req: operations.SubscribeToDatasetRequest, config?: AxiosRequestConfig): Promise<operations.SubscribeToDatasetResponse>;
+    UnsubscribeFromDataset(req: operations.UnsubscribeFromDatasetRequest, config?: AxiosRequestConfig): Promise<operations.UnsubscribeFromDatasetResponse>;
+    UpdateRecords(req: operations.UpdateRecordsRequest, config?: AxiosRequestConfig): Promise<operations.UpdateRecordsResponse>;
+}
+export {};

@@ -1,0 +1,28 @@
+import { Metadata, SpeakeasyBase } from "../../../internal/utils/utils";
+
+export enum WorkerLifecycleEventEventEnum {
+    UnknownEvent = "UNKNOWN_EVENT"
+,    OsStart = "OS_START"
+,    ContainerStart = "CONTAINER_START"
+,    NetworkUp = "NETWORK_UP"
+,    StagingFilesDownloadStart = "STAGING_FILES_DOWNLOAD_START"
+,    StagingFilesDownloadFinish = "STAGING_FILES_DOWNLOAD_FINISH"
+,    SdkInstallStart = "SDK_INSTALL_START"
+,    SdkInstallFinish = "SDK_INSTALL_FINISH"
+}
+
+
+// WorkerLifecycleEvent
+/** 
+ * A report of an event in a worker's lifecycle. The proto contains one event, because the worker is expected to asynchronously send each message immediately after the event. Due to this asynchrony, messages may arrive out of order (or missing), and it is up to the consumer to interpret. The timestamp of the event is in the enclosing WorkerMessage proto.
+**/
+export class WorkerLifecycleEvent extends SpeakeasyBase {
+  @Metadata({ data: "json, name=containerStartTime" })
+  containerStartTime?: string;
+
+  @Metadata({ data: "json, name=event" })
+  event?: WorkerLifecycleEventEventEnum;
+
+  @Metadata({ data: "json, name=metadata" })
+  metadata?: Map<string, string>;
+}

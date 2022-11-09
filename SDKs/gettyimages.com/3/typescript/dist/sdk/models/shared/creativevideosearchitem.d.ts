@@ -1,0 +1,35 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import { AllowedUse } from "./alloweduse";
+import { VideoSearchItemDisplaySize } from "./videosearchitemdisplaysize";
+import { IStockLicense } from "./istocklicense";
+import { Keyword } from "./keyword";
+import { Download } from "./download";
+import { ReferralDestination } from "./referraldestination";
+export declare class CreativeVideoSearchItem extends SpeakeasyBase {
+    allowedUse?: AllowedUse;
+    artist?: string;
+    assetFamily?: string;
+    caption?: string;
+    clipLength?: string;
+    collectionCode?: string;
+    collectionId?: number;
+    collectionName?: string;
+    colorType?: string;
+    copyright?: string;
+    dateCreated?: Date;
+    displaySizes?: VideoSearchItemDisplaySize[];
+    downloadProduct?: string;
+    era?: string;
+    eventIds?: number[];
+    id?: string;
+    istockLicenses?: IStockLicense[];
+    keywords?: Keyword[];
+    largestDownloads?: Download[];
+    licenseModel?: string;
+    masteredTo?: string;
+    originallyShotOn?: string;
+    productTypes?: string[];
+    referralDestinations?: ReferralDestination[];
+    shotSpeed?: string;
+    title?: string;
+}

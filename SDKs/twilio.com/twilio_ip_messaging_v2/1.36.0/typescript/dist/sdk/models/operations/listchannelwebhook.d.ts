@@ -1,0 +1,37 @@
+import { SpeakeasyBase } from "../../../internal/utils/utils";
+import * as shared from "../shared";
+export declare const LISTCHANNELWEBHOOK_SERVERS: string[];
+export declare class ListChannelWebhookPathParams extends SpeakeasyBase {
+    channelSid: string;
+    serviceSid: string;
+}
+export declare class ListChannelWebhookQueryParams extends SpeakeasyBase {
+    pageSize?: number;
+}
+export declare class ListChannelWebhookSecurity extends SpeakeasyBase {
+    accountSidAuthToken: shared.SchemeAccountSidAuthToken;
+}
+export declare class ListChannelWebhookRequest extends SpeakeasyBase {
+    serverUrl?: string;
+    pathParams: ListChannelWebhookPathParams;
+    queryParams: ListChannelWebhookQueryParams;
+    security: ListChannelWebhookSecurity;
+}
+export declare class ListChannelWebhookListChannelWebhookResponseMeta extends SpeakeasyBase {
+    firstPageUrl?: string;
+    key?: string;
+    nextPageUrl?: string;
+    page?: number;
+    pageSize?: number;
+    previousPageUrl?: string;
+    url?: string;
+}
+export declare class ListChannelWebhookListChannelWebhookResponse extends SpeakeasyBase {
+    meta?: ListChannelWebhookListChannelWebhookResponseMeta;
+    webhooks?: shared.IpMessagingV2ServiceChannelChannelWebhook[];
+}
+export declare class ListChannelWebhookResponse extends SpeakeasyBase {
+    contentType: string;
+    listChannelWebhookResponse?: ListChannelWebhookListChannelWebhookResponse;
+    statusCode: number;
+}
