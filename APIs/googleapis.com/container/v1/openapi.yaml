@@ -4479,6 +4479,9 @@ components:
         networkConfig:
           $ref: "#/components/schemas/NodeNetworkConfig"
           description: Networking configuration for this NodePool. If specified, it overrides the cluster-level defaults.
+        placementPolicy:
+          $ref: "#/components/schemas/PlacementPolicy"
+          description: Specifies the node placement policy.
         podIpv4CidrSize:
           description: "[Output only] The pod CIDR block size per node in this node pool."
           format: int32
@@ -4702,6 +4705,16 @@ components:
             - RUNNING
             - DONE
             - ABORTING
+          type: string
+      type: object
+    PlacementPolicy:
+      description: PlacementPolicy defines the placement policy used by the node pool.
+      properties:
+        type:
+          description: The type of placement.
+          enum:
+            - TYPE_UNSPECIFIED
+            - COMPACT
           type: string
       type: object
     PrivateClusterConfig:

@@ -198,7 +198,7 @@ paths:
       description: Updates the mute state of a finding.
       operationId: securitycenter.projects.sources.findings.setMute
       parameters:
-        - description: 'Required. The relative resource name of the finding. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}", "folders/{folder_id}/sources/{source_id}/finding/{finding_id}", "projects/{project_id}/sources/{source_id}/finding/{finding_id}".'
+        - description: 'Required. The relative resource name of the finding. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}", "folders/{folder_id}/sources/{source_id}/findings/{finding_id}", "projects/{project_id}/sources/{source_id}/findings/{finding_id}".'
           in: path
           name: name
           required: true
@@ -240,7 +240,7 @@ paths:
       description: Updates the state of a finding.
       operationId: securitycenter.projects.sources.findings.setState
       parameters:
-        - description: 'Required. The relative resource name of the finding. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}".'
+        - description: 'Required. The relative resource name of the finding. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}".'
           in: path
           name: name
           required: true
@@ -1655,6 +1655,11 @@ components:
         externalUri:
           description: The URI that, if available, points to a web page outside of Security Command Center where additional information about the finding can be found. This field is guaranteed to be either empty or a well formed URL.
           type: string
+        files:
+          description: File associated with the finding.
+          items:
+            $ref: "#/components/schemas/File"
+          type: array
         findingClass:
           description: The class of the finding.
           enum:
@@ -2573,6 +2578,7 @@ components:
               - NETWORK_SERVICE_DISCOVERY
               - ACCESS_TOKEN_MANIPULATION
               - ABUSE_ELEVATION_CONTROL_MECHANISM
+              - DEFAULT_ACCOUNTS
             type: string
           type: array
         primaryTactic:
@@ -2633,6 +2639,7 @@ components:
               - NETWORK_SERVICE_DISCOVERY
               - ACCESS_TOKEN_MANIPULATION
               - ABUSE_ELEVATION_CONTROL_MECHANISM
+              - DEFAULT_ACCOUNTS
             type: string
           type: array
         version:

@@ -769,6 +769,17 @@ components:
             - DEPENDENT_ON_SEASON
             - DEPENDENT_ON_DAY_OF_WEEK
           type: string
+        kidsFriendly:
+          description: Kids friendly. The hotel has one or more special features for families with children, such as reduced rates, child-sized beds, kids' club, babysitting service, or suitable place to play on premises.
+          type: boolean
+        kidsFriendlyException:
+          description: Kids friendly exception.
+          enum:
+            - EXCEPTION_UNSPECIFIED
+            - UNDER_CONSTRUCTION
+            - DEPENDENT_ON_SEASON
+            - DEPENDENT_ON_DAY_OF_WEEK
+          type: string
       type: object
     FoodAndDrink:
       description: Meals, snacks, and beverages available at the property.

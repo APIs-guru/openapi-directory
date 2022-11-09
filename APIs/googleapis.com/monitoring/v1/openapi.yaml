@@ -946,6 +946,16 @@ components:
             $ref: "#/components/schemas/Column"
           type: array
       type: object
+    ColumnSettings:
+      description: The persistent settings for a table's columns.
+      properties:
+        column:
+          description: Required. The id of the column.
+          type: string
+        visible:
+          description: Required. Whether the column should be visible on page load.
+          type: boolean
+      type: object
     Dashboard:
       description: A Google Stackdriver dashboard. Dashboards define the content and layout of pages in the Stackdriver web application.
       properties:
@@ -1636,6 +1646,11 @@ components:
     TimeSeriesTable:
       description: A table that displays time series data.
       properties:
+        columnSettings:
+          description: Optional. The list of the persistent column settings for the table.
+          items:
+            $ref: "#/components/schemas/ColumnSettings"
+          type: array
         dataSets:
           description: Required. The data displayed in this table.
           items:

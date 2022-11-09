@@ -14,17 +14,20 @@ info:
   termsOfService: https://developers.google.com/terms/
   title: Container Analysis API
   version: v1beta1
+  x-apiClientRegistration:
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - format: google
+    - format: openapi
       url: https://containeranalysis.googleapis.com/$discovery/rest?version=v1beta1
-      version: v1
+      version: "3.0"
   x-providerName: googleapis.com
   x-serviceName: containeranalysis
+  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/container-analysis/api/reference/rest/
 tags:
@@ -56,10 +59,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the specified occurrence.
-      operationId: containeranalysis.projects.occurrences.get
+      description: Gets the specified scan configuration.
+      operationId: containeranalysis.projects.scanConfigs.get
       parameters:
-        - description: Required. The name of the occurrence in the form of `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
+        - description: Required. The name of the scan configuration in the form of `projects/[PROJECT_ID]/scanConfigs/[SCAN_CONFIG_ID]`.
           in: path
           name: name
           required: true
@@ -70,7 +73,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Occurrence"
+                $ref: "#/components/schemas/ScanConfig"
           description: Successful response
       security:
         - Oauth2:
@@ -117,6 +120,35 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Occurrence"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    put:
+      description: Updates the specified scan configuration.
+      operationId: containeranalysis.projects.scanConfigs.update
+      parameters:
+        - description: Required. The name of the scan configuration in the form of `projects/[PROJECT_ID]/scanConfigs/[SCAN_CONFIG_ID]`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScanConfig"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScanConfig"
           description: Successful response
       security:
         - Oauth2:
@@ -487,6 +519,58 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/VulnerabilityOccurrencesSummary"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{parent}/scanConfigs":
+    get:
+      description: Lists scan configurations for the specified project.
+      operationId: containeranalysis.projects.scanConfigs.list
+      parameters:
+        - description: Required. The name of the project to list scan configurations for in the form of `projects/[PROJECT_ID]`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The filter expression.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The number of scan configs to return in the list.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token to provide to skip to a particular spot in the list.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListScanConfigsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1495,7 +1579,7 @@ components:
       description: Optional arguments to enable specific features of builds.
       properties:
         diskSizeGb:
-          description: Requested disk size for the VM that runs the build. Note that this is *NOT* "disk free"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 2000GB; builds that request more than the maximum are rejected with an error.
+          description: Requested disk size for the VM that runs the build. Note that this is *NOT* "disk free"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 1000GB; builds that request more than the maximum are rejected with an error.
           format: int64
           type: string
         dynamicSubstitutions:
@@ -2762,6 +2846,18 @@ components:
             $ref: "#/components/schemas/Occurrence"
           type: array
       type: object
+    ListScanConfigsResponse:
+      description: Response for listing scan configurations.
+      properties:
+        nextPageToken:
+          description: The next pagination token in the list response. It should be used as `page_token` for the following request. An empty value means no more results.
+          type: string
+        scanConfigs:
+          description: The scan configurations requested.
+          items:
+            $ref: "#/components/schemas/ScanConfig"
+          type: array
+      type: object
     Location:
       description: An occurrence of a particular package installation found within a system's filesystem. E.g., glibc was found in `/var/lib/dpkg/status`.
       properties:
@@ -3303,6 +3399,27 @@ components:
           description: Required. The unique URI of the resource. For example, `https://gcr.io/project/image@sha256:foo` for a Docker image.
           type: string
       type: object
+    ScanConfig:
+      description: A scan configuration specifies whether Cloud components in a project have a particular type of analysis being run. For example, it can configure whether vulnerability scanning is being done on Docker images or not.
+      properties:
+        createTime:
+          description: Output only. The time this scan config was created.
+          format: google-datetime
+          type: string
+        description:
+          description: Output only. A human-readable description of what the scan configuration does.
+          type: string
+        enabled:
+          description: Whether the scan is enabled.
+          type: boolean
+        name:
+          description: Output only. The name of the scan configuration in the form of `projects/[PROJECT_ID]/scanConfigs/[SCAN_CONFIG_ID]`.
+          type: string
+        updateTime:
+          description: Output only. The time this scan config was last updated.
+          format: google-datetime
+          type: string
+      type: object
     SetIamPolicyRequest:
       description: Request message for `SetIamPolicy` method.
       properties:
@@ -3565,3 +3682,5 @@ components:
             https://www.googleapis.com/auth/cloud-platform: See, edit, configure, and delete your Google Cloud data and see the email address for your Google Account.
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2
+source:
+  url: {}

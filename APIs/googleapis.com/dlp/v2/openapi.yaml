@@ -1966,7 +1966,7 @@ components:
           type: string
         item:
           $ref: "#/components/schemas/GooglePrivacyDlpV2ContentItem"
-          description: The item to de-identify. Will be treated as text.
+          description: The item to de-identify. Will be treated as text. This value must be of type Table if your deidentify_config is a RecordTransformations object.
         locationId:
           description: Deprecated. This field has no effect.
           type: string
@@ -2566,6 +2566,7 @@ components:
             - URUGUAY
             - VENEZUELA
             - INTERNAL
+            - NEW_ZEALAND
           type: string
         typeCategory:
           description: The class of identifiers where this infoType belongs
