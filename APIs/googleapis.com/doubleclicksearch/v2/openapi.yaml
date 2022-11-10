@@ -318,7 +318,7 @@ paths:
   "/doubleclicksearch/v2/customer/{customerId}/conversion":
     get:
       description: Retrieves a list of conversions from a DoubleClick Search engine account.
-      operationId: doubleclicksearch.conversion.GetCustomerId
+      operationId: doubleclicksearch.conversion.getByCustomerId
       parameters:
         - description: Customer ID of a client account in the new Search Ads 360 experience.
           in: path

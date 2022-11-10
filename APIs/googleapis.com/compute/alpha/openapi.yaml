@@ -68508,6 +68508,10 @@ components:
             - STRICT
             - UNSPECIFIED_LOCALITY
           type: string
+        maxDistance:
+          description: Specifies the number of max logical switches.
+          format: int32
+          type: integer
         scope:
           description: Scope specifies the availability domain to which the VMs should be spread.
           enum:
@@ -71210,6 +71214,9 @@ components:
           description: The value of the limit to set.
           format: uint32
           type: integer
+        networkUrl:
+          description: The network URL for the network to set the limit for.
+          type: string
         projectIdOrNum:
           description: The project id or number for the project to set the limit for.
           type: string

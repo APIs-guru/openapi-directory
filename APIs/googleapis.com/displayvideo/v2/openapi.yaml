@@ -2347,7 +2347,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: "Updates an existing line item. Returns the updated line item if successful. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditLineItemAssignedTargetingOptions * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption"
+      description: "Updates an existing line item. Returns the updated line item if successful. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditAssignedTargetingOptions * BulkUpdateLineItems * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption"
       operationId: displayvideo.advertisers.lineItems.patch
       parameters:
         - description: Output only. The unique ID of the advertiser the line item belongs to.
@@ -2503,7 +2503,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Assigns a targeting option to a line item. Returns the assigned targeting option if successful. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditLineItemAssignedTargetingOptions * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption"
+      description: "Assigns a targeting option to a line item. Returns the assigned targeting option if successful. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditAssignedTargetingOptions * BulkUpdate * UpdateLineItem * DeleteLineItemAssignedTargetingOption"
       operationId: displayvideo.advertisers.lineItems.targetingTypes.assignedTargetingOptions.create
       parameters:
         - description: Required. The ID of the advertiser the line item belongs to.
@@ -2592,7 +2592,7 @@ paths:
         - advertisers
   "/v2/advertisers/{advertiserId}/lineItems/{lineItemId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}":
     delete:
-      description: "Deletes an assigned targeting option from a line item. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditLineItemAssignedTargetingOptions * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption"
+      description: "Deletes an assigned targeting option from a line item. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditAssignedTargetingOptions * BulkUpdate * UpdateLineItem * CreateLineItemAssignedTargetingOption"
       operationId: displayvideo.advertisers.lineItems.targetingTypes.assignedTargetingOptions.delete
       parameters:
         - description: Required. The ID of the advertiser the line item belongs to.
@@ -2843,7 +2843,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Bulk edits targeting options under multiple line items. The operation will delete the assigned targeting options provided in BulkEditAssignedTargetingOptionsRequest.delete_requests and then create the assigned targeting options provided in BulkEditAssignedTargetingOptionsRequest.create_requests .
+      description: "Bulk edits targeting options under multiple line items. The operation will delete the assigned targeting options provided in BulkEditAssignedTargetingOptionsRequest.delete_requests and then create the assigned targeting options provided in BulkEditAssignedTargetingOptionsRequest.create_requests. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkUpdate * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption"
       operationId: displayvideo.advertisers.lineItems.bulkEditAssignedTargetingOptions
       parameters:
         - description: Required. The ID of the advertiser the line items belong to.
@@ -4441,7 +4441,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Updates multiple line items.
+      description: "Updates multiple line items. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditAssignedTargetingOptions * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption"
       operationId: displayvideo.advertisers.lineItems.bulkUpdate
       parameters:
         - in: path
@@ -7912,7 +7912,11 @@ components:
       type: object
     AdvertiserBillingConfig:
       description: Billing related settings of an advertiser.
-      properties: {}
+      properties:
+        billingProfileId:
+          description: The ID of a billing profile assigned to the advertiser.
+          format: int64
+          type: string
       type: object
     AdvertiserCreativeConfig:
       description: Creatives related settings of an advertiser.

@@ -1162,6 +1162,9 @@ components:
         interruptionData:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1InterruptionData"
           description: Data specifying an interruption.
+        issueMatchData:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1IssueMatchData"
+          description: Data specifying an issue match.
         phraseMatchData:
           $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1PhraseMatchData"
           description: Data specifying a phrase match.
@@ -1728,6 +1731,13 @@ components:
           description: Score indicating the likelihood of the issue assignment. currently bounded on [0,1].
           format: double
           type: number
+      type: object
+    GoogleCloudContactcenterinsightsV1IssueMatchData:
+      description: The data for an issue match annotation.
+      properties:
+        issueAssignment:
+          $ref: "#/components/schemas/GoogleCloudContactcenterinsightsV1IssueAssignment"
+          description: Information about the issue's assignment.
       type: object
     GoogleCloudContactcenterinsightsV1IssueModel:
       description: The issue model resource.

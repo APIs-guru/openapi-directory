@@ -2695,6 +2695,7 @@ components:
             enum:
               - TARGET_TYPE_UNSPECIFIED
               - VIEWS
+              - ROUTINES
             type: string
           type: array
       type: object
@@ -4281,6 +4282,8 @@ components:
             - DNN_LINEAR_COMBINED_REGRESSOR
             - AUTOENCODER
             - ARIMA_PLUS
+            - RANDOM_FOREST_REGRESSOR
+            - RANDOM_FOREST_CLASSIFIER
           readOnly: true
           type: string
         optimalTrialIds:
