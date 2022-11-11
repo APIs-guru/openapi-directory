@@ -34,7 +34,7 @@ tags:
 paths:
   "/v2/{name}":
     delete:
-      description: Delete a Revision.
+      description: Deletes a Revision.
       operationId: run.projects.locations.services.revisions.delete
       parameters:
         - description: "Required. The name of the Revision to delete. Format: projects/{project}/locations/{location}/services/{service}/revisions/{revision}"
@@ -211,7 +211,7 @@ paths:
       description: Triggers creation of a new Execution of this Job.
       operationId: run.projects.locations.jobs.run
       parameters:
-        - description: "Required. The full name of the Job. Format: projects/{project}/locations/{location}/jobs/{job}"
+        - description: "Required. The full name of the Job. Format: projects/{project}/locations/{location}/jobs/{job}, where {project} can be project id or number."
           in: path
           name: name
           required: true
@@ -238,10 +238,10 @@ paths:
         - projects
   "/v2/{parent}/executions":
     get:
-      description: List Executions from a Job.
+      description: Lists Executions from a Job.
       operationId: run.projects.locations.jobs.executions.list
       parameters:
-        - description: 'Required. The Execution from which the Executions should be listed. To list all Executions across Jobs, use "-" instead of Job name. Format: projects/{project}/locations/{location}/jobs/{job}'
+        - description: 'Required. The Execution from which the Executions should be listed. To list all Executions across Jobs, use "-" instead of Job name. Format: projects/{project}/locations/{location}/jobs/{job}, where {project} can be project id or number.'
           in: path
           name: parent
           required: true
@@ -290,10 +290,10 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v2/{parent}/jobs":
     get:
-      description: List Jobs.
+      description: Lists Jobs.
       operationId: run.projects.locations.jobs.list
       parameters:
-        - description: "Required. The location and project to list resources on. Format: projects/{project}/locations/{location}"
+        - description: "Required. The location and project to list resources on. Format: projects/{project}/locations/{location}, where {project} can be project id or number."
           in: path
           name: parent
           required: true
@@ -341,10 +341,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Create a Job.
+      description: Creates a Job.
       operationId: run.projects.locations.jobs.create
       parameters:
-        - description: "Required. The location and project in which this Job should be created. Format: projects/{project}/locations/{location}"
+        - description: "Required. The location and project in which this Job should be created. Format: projects/{project}/locations/{location}, where {project} can be project id or number."
           in: path
           name: parent
           required: true
@@ -381,7 +381,7 @@ paths:
         - projects
   "/v2/{parent}/revisions":
     get:
-      description: List Revisions from a given Service, or from a given location.
+      description: Lists Revisions from a given Service, or from a given location.
       operationId: run.projects.locations.services.revisions.list
       parameters:
         - description: 'Required. The Service from which the Revisions should be listed. To list all Revisions across Services, use "-" instead of Service name. Format: projects/{project}/locations/{location}/services/{service}'
@@ -433,10 +433,10 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v2/{parent}/services":
     get:
-      description: List Services.
+      description: Lists Services.
       operationId: run.projects.locations.services.list
       parameters:
-        - description: 'Required. The location and project to list resources on. Location must be a valid GCP region, and may not be the "-" wildcard. Format: projects/{project}/locations/{location}'
+        - description: 'Required. The location and project to list resources on. Location must be a valid GCP region, and cannot be the "-" wildcard. Format: projects/{project}/locations/{location}, where {project} can be project id or number.'
           in: path
           name: parent
           required: true
@@ -487,13 +487,13 @@ paths:
       description: Creates a new Service in a given project and location.
       operationId: run.projects.locations.services.create
       parameters:
-        - description: "Required. The location and project in which this service should be created. Format: projects/{project}/locations/{location} Only lowercase characters, digits, and hyphens."
+        - description: "Required. The location and project in which this service should be created. Format: projects/{project}/locations/{location}, where {project} can be project id or number. Only lowercase characters, digits, and hyphens."
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Required. The unique identifier for the Service. It must begin with letter, and may not end with hyphen; must contain fewer than 50 characters. The name of the service becomes {parent}/services/{service_id}.
+        - description: Required. The unique identifier for the Service. It must begin with letter, and cannot end with hyphen; must contain fewer than 50 characters. The name of the service becomes {parent}/services/{service_id}.
           in: query
           name: serviceId
           schema:
@@ -524,7 +524,7 @@ paths:
         - projects
   "/v2/{parent}/tasks":
     get:
-      description: List Tasks from an Execution of a Job.
+      description: Lists Tasks from an Execution of a Job.
       operationId: run.projects.locations.jobs.executions.tasks.list
       parameters:
         - description: 'Required. The Execution from which the Tasks should be listed. To list all Tasks across Executions of a Job, use "-" instead of Execution name. To list all Tasks across Jobs, use "-" instead of Job name. Format: projects/{project}/locations/{location}/jobs/{job}/executions/{execution}'
@@ -576,7 +576,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v2/{resource}:getIamPolicy":
     get:
-      description: Get the IAM Access Control policy currently in effect for the given Cloud Run Service. This result does not include any inherited policies.
+      description: Gets the IAM Access Control policy currently in effect for the given Cloud Run Service. This result does not include any inherited policies.
       operationId: run.projects.locations.services.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
@@ -1108,6 +1108,17 @@ components:
           $ref: "#/components/schemas/GoogleCloudRunV2TaskTemplate"
           description: Required. Describes the task(s) that will be created when executing an execution.
       type: object
+    GoogleCloudRunV2GRPCAction:
+      description: GRPCAction describes an action involving a GRPC port.
+      properties:
+        port:
+          description: Port number of the gRPC service. Number must be in the range 1 to 65535. If not specified, defaults to 8080.
+          format: int32
+          type: integer
+        service:
+          description: Service is the name of the service to place in the gRPC HealthCheckRequest (see https://github.com/grpc/grpc/blob/master/doc/health-checking.md). If this is not specified, the default behavior is defined by gRPC.
+          type: string
+      type: object
     GoogleCloudRunV2HTTPGetAction:
       description: HTTPGetAction describes an action based on HTTP Get requests.
       properties:
@@ -1307,9 +1318,12 @@ components:
           description: Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3. Minimum value is 1.
           format: int32
           type: integer
+        grpc:
+          $ref: "#/components/schemas/GoogleCloudRunV2GRPCAction"
+          description: GRPC specifies an action involving a gRPC port. Exactly one of httpGet, tcpSocket, or grpc must be specified.
         httpGet:
           $ref: "#/components/schemas/GoogleCloudRunV2HTTPGetAction"
-          description: HTTPGet specifies the http request to perform. Exactly one of HTTPGet or TCPSocket must be specified.
+          description: HTTPGet specifies the http request to perform. Exactly one of httpGet, tcpSocket, or grpc must be specified.
         initialDelaySeconds:
           description: "Number of seconds after the container has started before the probe is initiated. Defaults to 0 seconds. Minimum value is 0. Maximum value for liveness probe is 3600. Maximum value for startup probe is 240. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
           format: int32
@@ -1320,7 +1334,7 @@ components:
           type: integer
         tcpSocket:
           $ref: "#/components/schemas/GoogleCloudRunV2TCPSocketAction"
-          description: TCPSocket specifies an action involving a TCP port. Exactly one of HTTPGet or TCPSocket must be specified.
+          description: TCPSocket specifies an action involving a TCP port. Exactly one of httpGet, tcpSocket, or grpc must be specified.
         timeoutSeconds:
           description: "Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1. Maximum value is 3600. Must be smaller than period_seconds. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
           format: int32
@@ -1335,7 +1349,7 @@ components:
         limits:
           additionalProperties:
             type: string
-          description: "Only memory and CPU are supported. Note: The only supported values for CPU are '1', '2', and '4'. Setting 4 CPU requires at least 2Gi of memory. The values of the map is string form of the 'quantity' k8s type: https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go"
+          description: "Only memory and CPU are supported. Note: The only supported values for CPU are '1', '2', '4', and '8'. Setting 4 CPU requires at least 2Gi of memory. The values of the map is string form of the 'quantity' k8s type: https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/api/resource/quantity.go"
           type: object
       type: object
     GoogleCloudRunV2Revision:
@@ -1544,7 +1558,7 @@ components:
           description: "Required. The name of the secret in Cloud Secret Manager. Format: {secret_name} if the secret is in the same project. projects/{project}/secrets/{secret_name} if the secret is in a different project."
           type: string
         version:
-          description: The Cloud Secret Manager secret version. Can be 'latest' for the latest value or an integer for a specific version.
+          description: The Cloud Secret Manager secret version. Can be 'latest' for the latest version, an integer for a specific version, or a version alias.
           type: string
       type: object
     GoogleCloudRunV2SecretVolumeSource:
@@ -1947,7 +1961,7 @@ components:
           description: Required. The relative path of the secret in the container.
           type: string
         version:
-          description: The Cloud Secret Manager secret version. Can be 'latest' for the latest value or an integer for a specific version.
+          description: The Cloud Secret Manager secret version. Can be 'latest' for the latest value, or an integer or a secret alias for a specific version.
           type: string
       type: object
     GoogleCloudRunV2Volume:
@@ -1977,7 +1991,7 @@ components:
       description: VPC Access settings. For more information on creating a VPC Connector, visit https://cloud.google.com/vpc/docs/configure-serverless-vpc-access For information on how to configure Cloud Run with an existing VPC Connector, visit https://cloud.google.com/run/docs/configuring/connecting-vpc
       properties:
         connector:
-          description: "VPC Access connector name. Format: projects/{project}/locations/{location}/connectors/{connector}"
+          description: "VPC Access connector name. Format: projects/{project}/locations/{location}/connectors/{connector}, where {project} can be project id or number."
           type: string
         egress:
           description: Traffic VPC egress settings.
