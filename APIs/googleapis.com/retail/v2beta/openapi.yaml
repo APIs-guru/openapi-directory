@@ -2659,6 +2659,13 @@ components:
             - RECOMMENDATIONS_FILTERING_DISABLED
             - RECOMMENDATIONS_FILTERING_ENABLED
           type: string
+        retrievableOption:
+          description: If RETRIEVABLE_ENABLED, attribute values will be retrievabled in the search results.
+          enum:
+            - RETRIEVABLE_OPTION_UNSPECIFIED
+            - RETRIEVABLE_ENABLED
+            - RETRIEVABLE_DISABLED
+          type: string
         searchableOption:
           description: When AttributesConfig.attribute_config_level is CATALOG_LEVEL_ATTRIBUTE_CONFIG, if SEARCHABLE_ENABLED, attribute values are searchable by text queries in SearchService.Search. If SEARCHABLE_ENABLED but attribute type is numerical, attribute values will not be searchable by text queries in SearchService.Search, as there are no text values associated to numerical attributes. Must be specified, otherwise throws INVALID_FORMAT error.
           enum:

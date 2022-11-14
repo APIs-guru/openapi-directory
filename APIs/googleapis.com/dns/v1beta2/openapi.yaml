@@ -2648,7 +2648,7 @@ components:
           description: IPv4 address of a target name server.
           type: string
         ipv6Address:
-          description: IPv6 address of a target name server. Does not accept both fields (ipv4 & ipv6) being populated.
+          description: IPv6 address of a target name server. Does not accept both fields (ipv4 & ipv6) being populated. Public preview as of November 2022.
           type: string
         kind:
           default: dns#managedZoneForwardingConfigNameServerTarget
@@ -2905,7 +2905,7 @@ components:
           description: IPv4 address to forward queries to.
           type: string
         ipv6Address:
-          description: IPv6 address to forward to. Does not accept both fields (ipv4 & ipv6) being populated.
+          description: IPv6 address to forward to. Does not accept both fields (ipv4 & ipv6) being populated. Public preview as of November 2022.
           type: string
         kind:
           default: dns#policyAlternativeNameServerConfigTargetNameServer

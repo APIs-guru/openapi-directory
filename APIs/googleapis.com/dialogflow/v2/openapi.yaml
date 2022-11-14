@@ -5743,6 +5743,9 @@ components:
             - PARTIAL
             - FINAL
           type: string
+        cxCurrentPage:
+          description: "The unique identifier of the current Dialogflow CX conversation page. Format: `projects//locations//agents//flows//pages/`."
+          type: string
         detectIntentResponse:
           $ref: "#/components/schemas/GoogleCloudDialogflowV2DetectIntentResponse"
           description: Response of the Dialogflow Sessions.DetectIntent call.

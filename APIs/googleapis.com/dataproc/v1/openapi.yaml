@@ -3380,7 +3380,7 @@ components:
       properties:
         approximateUsage:
           $ref: "#/components/schemas/UsageMetrics"
-          description: Output only. Approximate workload resource usage calculated after workload finishes.
+          description: Output only. Approximate workload resource usage calculated after workload finishes (see Dataproc Serverless pricing (https://cloud.google.com/dataproc-serverless/pricing)).
           readOnly: true
         diagnosticOutputUri:
           description: Output only. A URI pointing to the location of the diagnostics tarball.
@@ -3485,6 +3485,7 @@ components:
               - HIVE_WEBHCAT
               - JUPYTER
               - PRESTO
+              - TRINO
               - RANGER
               - SOLR
               - ZEPPELIN
@@ -3832,14 +3833,14 @@ components:
           description: A list of queries.
       type: object
     UsageMetrics:
-      description: Usage metrics represent total resources consumed by a workload.
+      description: Usage metrics represent approximate total resources consumed by a workload.
       properties:
         milliDcuSeconds:
-          description: Optional. DCU usage in milliDCU*seconds.
+          description: Optional. DCU (Dataproc Compute Units) usage in (milliDCU x seconds) (see Dataproc Serverless pricing (https://cloud.google.com/dataproc-serverless/pricing)).
           format: int64
           type: string
         shuffleStorageGbSeconds:
-          description: Optional. Shuffle storage usage in GB*Seconds
+          description: Optional. Shuffle storage usage in (GB x seconds) (see Dataproc Serverless pricing (https://cloud.google.com/dataproc-serverless/pricing)).
           format: int64
           type: string
       type: object

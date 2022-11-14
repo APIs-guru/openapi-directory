@@ -275,7 +275,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: HRIS API
-  version: 8.83.0
+  version: 8.84.0
   x-apideck-api: hris
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -5795,6 +5795,7 @@ components:
         employee_id: "1234"
         end_date: 2022-04-21
         start_date: 2022-04-08
+        time_off_request_status: approved
       properties:
         employee_id:
           description: Employee ID
@@ -5810,6 +5811,18 @@ components:
           example: 2022-04-08
           pattern: ^\d{4}-\d{2}-\d{2}$
           type: string
+        time_off_request_status:
+          description: Time off request status to filter on
+          enum:
+            - requested
+            - approved
+            - declined
+            - cancelled
+            - deleted
+            - other
+          example: ""
+          type: string
+          x-graphql-type-name: TimeOffStatusFilter
       type: object
       x-graphql-type-name: TimeOffRequestsFilter
     Title:
