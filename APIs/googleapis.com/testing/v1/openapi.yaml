@@ -655,6 +655,11 @@ components:
           description: Maximum API level on which the application is designed to run.
           format: int32
           type: integer
+        metadata:
+          description: Meta-data tags defined in the manifest.
+          items:
+            $ref: "#/components/schemas/Metadata"
+          type: array
         minSdkVersion:
           description: Minimum API level required for the application to run.
           format: int32
@@ -666,6 +671,11 @@ components:
           description: Specifies the API Level on which the application is designed to run.
           format: int32
           type: integer
+        usesFeature:
+          description: Feature usage tags defined in the manifest.
+          items:
+            $ref: "#/components/schemas/UsesFeature"
+          type: array
         usesPermission:
           description: Permissions declared to be used by the application
           items:
@@ -1098,6 +1108,16 @@ components:
           items:
             $ref: "#/components/schemas/TestTargetsForShard"
           type: array
+      type: object
+    Metadata:
+      description: A tag within a manifest. https://developer.android.com/guide/topics/manifest/meta-data-element.html
+      properties:
+        name:
+          description: The android:name value
+          type: string
+        value:
+          description: The android:value value
+          type: string
       type: object
     NetworkConfiguration:
       properties:
@@ -1588,6 +1608,16 @@ components:
           description: Required. The total number of shards to create. This must always be a positive number that is no greater than the total number of test cases. When you select one or more physical devices, the number of shards must be <= 50. When you select one or more ARM virtual devices, it must be <= 50. When you select only x86 virtual devices, it must be <= 500.
           format: int32
           type: integer
+      type: object
+    UsesFeature:
+      description: A tag within a manifest. https://developer.android.com/guide/topics/manifest/uses-feature-element.html
+      properties:
+        isRequired:
+          description: The android:required value
+          type: boolean
+        name:
+          description: The android:name value
+          type: string
       type: object
     XcodeVersion:
       description: An Xcode version that an iOS version is compatible with.

@@ -2148,7 +2148,7 @@ components:
       description: Execution configuration for a workload.
       properties:
         idleTtl:
-          description: Optional. The duration to keep the session alive while it's idling. Passing this threshold will cause the session to be terminated. Minimum value is 30 minutes; maximum value is 14 days (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json)).
+          description: Optional. The duration to keep the session alive while it's idling. Passing this threshold will cause the session to be terminated. Minimum value is 10 minutes; maximum value is 14 days (see JSON representation of Duration (https://developers.google.com/protocol-buffers/docs/proto3#json)). Defaults to 10 minutes if not set.
           format: google-duration
           type: string
         kmsKey:

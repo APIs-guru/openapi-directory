@@ -276,7 +276,7 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: CRM API
-  version: 8.84.0
+  version: 8.85.0
   x-apideck-api: crm
   x-apideck-sdk-support: true
   x-apisguru-categories:
@@ -7291,6 +7291,10 @@ components:
         monetary_amount: 75000
         status: Completed
       properties:
+        company_id:
+          description: Company ID to filter on
+          example: "1234"
+          type: string
         monetary_amount:
           description: Monetary amount to filter on
           example: 75000

@@ -2565,6 +2565,9 @@ components:
           type: string
         metadata:
           $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
+        prompt:
+          $ref: "#/components/schemas/SocialGraphApiProtoPrompt"
+          description: People Prompts settings for contact birthday data.
         value:
           description: Actual value entered. Allows unstructured values.
           type: string
@@ -3085,6 +3088,9 @@ components:
           type: string
         metadata:
           $ref: "#/components/schemas/AppsPeopleOzExternalMergedpeopleapiPersonFieldMetadata"
+        prompt:
+          $ref: "#/components/schemas/SocialGraphApiProtoPrompt"
+          description: People Prompts settings for contact event data.
         timestampMillis:
           description: Clients are recommended to read the calendar_day field instead of timestamp_millis. When writing events, new clients must set calendar_day instead of timestamp_millis. Events are currently represented as timestamp values, although the interpretation of these timestamp values is a calendar date. There are a few important details about how this value should be mapped to a calendar date that should be consistent among all clients. For detailed information, see Birthday.date_ms.
           format: int64
@@ -5856,8 +5862,10 @@ components:
               - ADD_FINGERPRINT
               - AIRPLANE_MODE
               - ALARM_VOLUME
+              - ALARM_SOUND
               - AMBIENT_DISPLAY_ALWAYS_ON
               - AMBIENT_DISPLAY_NEW_NOTIFICATION
+              - ANDROID_AUTO
               - ANDROID_VERSION
               - APP_BATTERY_USAGE
               - APP_DATA_USAGE
@@ -5870,14 +5878,19 @@ components:
               - ASSISTANT_VOICE_MATCH
               - AUTO_ROTATE
               - AUTO_ROTATE_FACE_DETECTION
+              - BACKUP
               - BATTERY_LEVEL
               - BATTERY_LOW
               - BATTERY_PERCENTAGE
               - BATTERY_PRESENT
               - BATTERY_SAVER
+              - BATTERY_SHARE
               - BATTERY_USAGE
               - BIOMETRIC
               - BLUETOOTH
+              - BLUETOOTH_NAME
+              - BLUETOOTH_ADDRESS
+              - BLUETOOTH_SETTINGS
               - BRIGHTNESS_LEVEL
               - BUBBLES
               - CALL_VOLUME
@@ -5886,16 +5899,28 @@ components:
               - COLOR_INVERSION
               - CHARGING_SOUNDS_AND_VIBRATION
               - CHARGING_STATE
+              - CONNECTED_DEVICES
               - CONTACTLESS_PAYMENTS
               - DATA_ROAMING
               - DATA_SAVER
               - DATA_USAGE
+              - DATA_LIMIT
+              - DATA_LIMIT_LEVEL
+              - DATA_WARNING
+              - DATA_WARNING_LEVEL
               - DEFAULT_APPS
               - DEVELOPER_OPTIONS
+              - DEVICE_NAME
               - DISPLAY_OVER_OTHER_APPS
               - DISPLAY_SIZE
               - DO_NOT_DISTURB
+              - DO_NOT_DISTURB_MESSAGES
+              - DO_NOT_DISTURB_CALLS
+              - DO_NOT_DISTURB_ALARMS
+              - DO_NOT_DISTURB_SCHEDULES
               - DOUBLE_TAP_CHECK_PHONE
+              - DRIVING_MODE
+              - EMERGENCY
               - EMERGENCY_ALERTS
               - EMERGENCY_INFORMATION
               - ETHERNET_TETHERING
@@ -5907,9 +5932,11 @@ components:
               - GESTURES
               - HAPTIC_FEEDBACK_VIBRATION
               - HEADS_UP
+              - HIGH_REFRESH_RATE
               - HOT_SPOT
               - HOTSPOT_TETHERING
               - HOT_WORD
+              - IP_ADDRESS
               - IMPROVE_LOCATION_ACCURACY
               - JUMP_TO_CAMERA
               - KEYBOARD_SHORTCUTS
@@ -5920,6 +5947,7 @@ components:
               - LOCK_SCREEN
               - LOCK_SCREEN_DEVICE_CONTROLS
               - LOCK_SCREEN_WALLET
+              - MAC_ADDRESS
               - MAGNIFICATION
               - MAGNIFY_BUTTON
               - MAGNIFY_TRIPLE_TAP
@@ -5932,16 +5960,20 @@ components:
               - MUSIC
               - MUTE_MODE
               - NETWORK
+              - NETWORK_RESET
               - NFC
               - NIGHT_LIGHT_INTENSITY
               - NIGHT_LIGHT_SWITCH
               - NIGHT_MODE
               - NOTIFICATION_BADGE
+              - NOTIFICATION_SOUND
               - NOTIFICATION_ON_SCREEN
               - NOTIFY_FOR_PUBLIC_NETWORKS
               - ONEHANDED_MODE
               - PASSWORD
+              - PERMISSION_MANAGER
               - PERSONALIZATION
+              - PHONE_NUMBER
               - PICTURE_IN_PICTURE
               - POINTER_SPEED
               - POWER_MENU
@@ -5949,6 +5981,8 @@ components:
               - REQUIRE_DEVICE_UNLOCK_FOR_NFC
               - RINGTONE
               - RING_VOLUME
+              - NEARBY_DEVICES_SCANNING
+              - NEARBY_SHARE
               - SCREEN_LOCKING_SOUND
               - SCREEN_MAGNIFICATION
               - SCREEN_TIMEOUT
@@ -5964,6 +5998,9 @@ components:
               - SYSTEM_UPDATE
               - TALKBACK_PASSWORDS
               - TEXT_TO_SPEECH
+              - TIME_ZONE
+              - UNUSED_APPS
+              - USB
               - USB_TETHERING
               - VERBOSE_TTS
               - VIBRATE
@@ -5974,6 +6011,8 @@ components:
               - WALLPAPERS
               - WEBVIEW
               - WIFI
+              - WIFI_ADD_NETWORK
+              - WIFI_ADD_NETWORK_QR_CODE
               - WIFI_CALLING
               - WIFI_HOTSPOT
               - ABOUT_PHONE
@@ -6022,6 +6061,9 @@ components:
               - WEARABLE_NOISE_CANCELLATION
               - WEARABLE_TOUCH_CONTROLS
               - RAISE_TO_TALK
+              - BEDTIME_MODE
+              - THEATER_MODE
+              - TOUCH_LOCK
             type: string
           type: array
         supportsDoNotDisturbWithDuration:
@@ -10369,18 +10411,28 @@ components:
           type: string
       type: object
     AssistantGroundingRankerGroundingProviderFeatures:
-      description: "Next ID: 3"
+      description: "Next ID: 4"
       properties:
         contactGroundingProviderFeatures:
           $ref: "#/components/schemas/AssistantGroundingRankerContactGroundingProviderFeatures"
         mediaGroundingProviderFeatures:
           $ref: "#/components/schemas/AssistantGroundingRankerMediaGroundingProviderFeatures"
+        providerGroundingProviderFeatures:
+          $ref: "#/components/schemas/AssistantGroundingRankerProviderGroundingProviderFeatures"
       type: object
     AssistantGroundingRankerMediaGroundingProviderFeatures:
       description: "Features to be passed from Media GP to HGR. Next ID: 2"
       properties:
         mscRate:
           description: "MSC(Media Short Click) rate. MSC rate = total number of MSC events / total number of MSC candidates The event is considered as MSC candidate if the event is a media seeking query(excluding follow-ons) and the media result is successfully fulfilled. The event is MSC event if any of the following is in the following queries within 30 secs: FOLLOWED_BY_DUPLICATE FOLLOWED_BY_ADD_OR_DELETE_MANUAL_REFINEMENT FOLLOWED_BY_SAME_VERTICAL (MEDIA) FOLLOWED_BY_STOP More details: go/media-ranking, go/billboard-navboost, go/magma-music-actions-efrac"
+          format: float
+          type: number
+      type: object
+    AssistantGroundingRankerProviderGroundingProviderFeatures:
+      description: "Features to be extracted from Provider GP for ranking in HGR. Next ID: 2"
+      properties:
+        pslScore:
+          description: Provider quality score in the range [0,1] that can be used for ranking providers. Incorporates both policy rules and quality considerations.
           format: float
           type: number
       type: object
@@ -11419,7 +11471,7 @@ components:
           type: string
       type: object
     AssistantPrefulfillmentRankerPrefulfillmentSignals:
-      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 33"
+      description: "Signals to be used by the Prefulfillment Ranker. Derived from the ParsingSignals and GroundingSignals carried by the FunctionCall. LINT.IfChange Next ID: 34"
       properties:
         bindingSetAuis:
           description: Assistant User Interaction Score for binding set.
@@ -11458,6 +11510,9 @@ components:
           description: Assistant User Interaction Score which is aggregated using intent name from exp laelaps.
           format: double
           type: number
+        isFeasible:
+          description: "Feasibility of fulfilling the binding set. Eg: For PlayMedia, this is equivalent to playability. More details: go/hgr-feasibility-feature."
+          type: boolean
         kscorerRank:
           description: The rank order of the interpretation as determined by kscorer. The kscorer-determined dominant interpretation, if any, gets a rank of 0. The remaining N interpretations get a rank of 1 through N.
           format: int32
@@ -13193,7 +13248,7 @@ components:
           format: float
           type: number
         lowQuality:
-          description: "S2V low quality score: converted from quality_nsr.NsrData, applied in Qstar. See NsrUtil::ConvertNsrDataToLowQuality."
+          description: "S2V low quality score: converted from quality_nsr.NsrData, applied in Qstar. See quality_nsr::util::ConvertNsrDataToLowQuality."
           format: uint32
           type: integer
         navDemotion:
@@ -15034,6 +15089,7 @@ components:
             - CHAPTER_TITLE_MATCHING
             - DBSCAN_FRAME_CHAPTER_SIMILARITY
             - EYES_NOT_VISIBLY_CLOSED
+            - ENGAGINESS
             - MERGED
           type: string
       type: object
@@ -17315,6 +17371,7 @@ components:
             - PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY
             - PROVIDER_GOOGLE_GEO_LDE
             - PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING
+            - PROVIDER_GOOGLE_UGC_AGGREGATION
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -18674,6 +18731,7 @@ components:
             - RESTRICTION_GROUP_SEGMENT
             - ROAD_MONITOR_MONITORED_ROAD
             - ROUTE_CHILD_TYPE
+            - SCHOOL_DISTRICT_TYPE
             - SEGMENT_ADVISORY_MAXIMUM_SPEED
             - SEGMENT_AVERAGE_SPEED
             - SEGMENT_BARRIER
@@ -18920,7 +18978,7 @@ components:
           type: array
         operations:
           $ref: "#/components/schemas/GeostoreOperationsProto"
-          description: RESERVED
+          description: "Information about this feature's operations, e.g. when this feature is temporarily closed. NOTE: for legacy reasons, some closure-specifc information (e.g. permanent closure reason) lives in ExistenceProto instead. In the future, such information should move here in OperationsProto."
         originalId:
           $ref: "#/components/schemas/GeostoreFeatureIdProto"
           description: This field is used internally by the pipeline for id stability. It should not be set by individual importers, nor should it be read by consumer clients. In particular, this field will not be present in features read or snapshotted from the Mapfacts Repository.
@@ -19936,6 +19994,7 @@ components:
             - PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY
             - PROVIDER_GOOGLE_GEO_LDE
             - PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING
+            - PROVIDER_GOOGLE_UGC_AGGREGATION
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -21090,6 +21149,7 @@ components:
             - PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY
             - PROVIDER_GOOGLE_GEO_LDE
             - PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING
+            - PROVIDER_GOOGLE_UGC_AGGREGATION
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -22425,6 +22485,7 @@ components:
             - PROVIDER_GOOGLE_ATTRIBUTES_DISCOVERY
             - PROVIDER_GOOGLE_GEO_LDE
             - PROVIDER_GOOGLE_GEO_SIGNAL_TRACKING
+            - PROVIDER_GOOGLE_UGC_AGGREGATION
             - PROVIDER_GOOGLE_LOCALSEARCH
             - PROVIDER_GOOGLE_TRANSIT
             - PROVIDER_GOOGLE_GEOWIKI
@@ -26871,7 +26932,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudContentwarehouseV1DocumentQuery"
           description: Query used to search against documents (keyword, filters, etc.).
         histogramQueries:
-          description: "An expression specifying a histogram request against matching documents. Expression syntax is an aggregation function call with histogram facets and other options. The following aggregation functions are supported: * `count(string_histogram_facet)`: Count the number of matching entities for each distinct attribute value. Data types: * Histogram facet (aka filterable properties): Facet names with format <schema id>.<facet>. Facets will have the format of: a-zA-Z. If the facet is a child facet, then the parent hierarchy needs to be specified separated by dots in the prefix after the schema id. Thus, the format for a multi- level facet is: <schema id>.<parent facet name>. <child facet name>. Example: schema123.root_parent_facet.middle_facet.child_facet * DocumentSchemaId: (with no schema id prefix) to get histograms for each document type (returns the schema id path, e.g. projects/12345/locations/us-west/documentSchemas/abc123). Example expression: * Document type counts: count('DocumentSchemaId') * For schema id, abc123, get the counts for MORTGAGE_TYPE: count('abc123.MORTGAGE_TYPE')"
+          description: "An expression specifying a histogram request against matching documents. Expression syntax is an aggregation function call with histogram facets and other options. The following aggregation functions are supported: * `count(string_histogram_facet)`: Count the number of matching entities for each distinct attribute value. Data types: * Histogram facet (aka filterable properties): Facet names with format <schema id>.<facet>. Facets will have the format of: `a-zA-Z`. If the facet is a child facet, then the parent hierarchy needs to be specified separated by dots in the prefix after the schema id. Thus, the format for a multi- level facet is: <schema id>.<parent facet name>. <child facet name>. Example: schema123.root_parent_facet.middle_facet.child_facet * DocumentSchemaId: (with no schema id prefix) to get histograms for each document type (returns the schema id path, e.g. projects/12345/locations/us-west/documentSchemas/abc123). Example expression: * Document type counts: count('DocumentSchemaId') * For schema id, abc123, get the counts for MORTGAGE_TYPE: count('abc123.MORTGAGE_TYPE')"
           items:
             $ref: "#/components/schemas/GoogleCloudContentwarehouseV1HistogramQuery"
           type: array
@@ -26927,7 +26988,7 @@ components:
           description: The token that specifies the starting position of the next page of results. This field is empty if there are no more results.
           type: string
         totalSize:
-          description: 'The total number of matched documents which is available only if the client set SearchDocumentsRequest.require_total_size to `true`. Otherwise, the value will be `-1`. `total_size` will max at "100,000". If this is returned, then it can be assumed that the count is equal to or greater than 100,000. Typically a UI would handle this condition by displaying "of many", for example: "Displaying 10 of many".'
+          description: 'The total number of matched documents which is available only if the client set SearchDocumentsRequest.require_total_size to `true` or set SearchDocumentsRequest.total_result_size to `ESTIMATED_SIZE` or `ACTUAL_SIZE`. Otherwise, the value will be `-1`. Typically a UI would handle this condition by displaying "of many", for example: "Displaying 10 of many".'
           format: int32
           type: integer
       type: object
@@ -27175,13 +27236,13 @@ components:
       description: Encodes the detailed information of a barcode.
       properties:
         format:
-          description: "Format of a barcode. The supported formats are: CODE_128: Code 128 type. CODE_39: Code 39 type. CODE_93: Code 93 type. CODABAR: Codabar type. DATA_MATRIX: 2D Data Matrix type. ITF: ITF type. EAN_13: EAN-13 type. EAN_8: EAN-8 type. QR_CODE: 2D QR code type. UPC_A: UPC-A type. UPC_E: UPC-E type. PDF417: PDF417 type. AZTEC: 2D Aztec code type. DATABAR: GS1 DataBar code type."
+          description: "Format of a barcode. The supported formats are: - `CODE_128`: Code 128 type. - `CODE_39`: Code 39 type. - `CODE_93`: Code 93 type. - `CODABAR`: Codabar type. - `DATA_MATRIX`: 2D Data Matrix type. - `ITF`: ITF type. - `EAN_13`: EAN-13 type. - `EAN_8`: EAN-8 type. - `QR_CODE`: 2D QR code type. - `UPC_A`: UPC-A type. - `UPC_E`: UPC-E type. - `PDF417`: PDF417 type. - `AZTEC`: 2D Aztec code type. - `DATABAR`: GS1 DataBar code type."
           type: string
         rawValue:
-          description: Raw value encoded in the barcode. For example, 'MEBKM:TITLE:Google;URL:https://www.google.com;;'.
+          description: "Raw value encoded in the barcode. For example: `'MEBKM:TITLE:Google;URL:https://www.google.com;;'`."
           type: string
         valueFormat:
-          description: "Value format describes the format of the value that a barcode encodes. The supported formats are: CONTACT_INFO: Contact information. EMAIL: Email address. ISBN: ISBN identifier. PHONE: Phone number. PRODUCT: Product. SMS: SMS message. TEXT: Text string. URL: URL address. WIFI: Wifi information. GEO: Geo-localization. CALENDAR_EVENT: Calendar event. DRIVER_LICENSE: Driver's license."
+          description: "Value format describes the format of the value that a barcode encodes. The supported formats are: - `CONTACT_INFO`: Contact information. - `EMAIL`: Email address. - `ISBN`: ISBN identifier. - `PHONE`: Phone number. - `PRODUCT`: Product. - `SMS`: SMS message. - `TEXT`: Text string. - `URL`: URL address. - `WIFI`: Wifi information. - `GEO`: Geo-localization. - `CALENDAR_EVENT`: Calendar event. - `DRIVER_LICENSE`: Driver's license."
           type: string
       type: object
     GoogleCloudDocumentaiV1BoundingPoly:
@@ -27238,7 +27299,7 @@ components:
           description: Optional. UTF-8 encoded text in reading order from the document.
           type: string
         textChanges:
-          description: Placeholder. A list of text corrections made to [Document.text]. This is usually used for annotating corrections to OCR mistakes. Text changes for a given revision may not overlap with each other.
+          description: Placeholder. A list of text corrections made to Document.text. This is usually used for annotating corrections to OCR mistakes. Text changes for a given revision may not overlap with each other.
           items:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentTextChange"
           type: array
@@ -27255,7 +27316,7 @@ components:
       description: An entity that could be a phrase in the text or a property that belongs to the document. It is a known entity type, such as a person, an organization, or location.
       properties:
         confidence:
-          description: Optional. Confidence of detected Schema entity. Range [0, 1].
+          description: Optional. Confidence of detected Schema entity. Range `[0, 1]`.
           format: float
           type: number
         id:
@@ -27428,7 +27489,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1BoundingPoly"
           description: Optional. Identifies the bounding polygon of a layout element on the page.
         confidence:
-          description: Optional. Confidence of detected page element, if applicable. Range [0, 1].
+          description: Optional. Confidence of detected page element, if applicable. Range `[0, 1]`.
           format: float
           type: number
         layoutId:
@@ -27480,11 +27541,11 @@ components:
       description: Detected language for a structural component.
       properties:
         confidence:
-          description: Confidence of detected language. Range [0, 1].
+          description: Confidence of detected language. Range `[0, 1]`.
           format: float
           type: number
         languageCode:
-          description: The BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          description: The BCP-47 language code, such as `en-US` or `sr-Latn`. For more information, see https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentPageDimension:
@@ -27562,7 +27623,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentPageImageQualityScoresDetectedDefect"
           type: array
         qualityScore:
-          description: The overall quality score. Range [0, 1] where 1 is perfect quality.
+          description: The overall quality score. Range `[0, 1]` where 1 is perfect quality.
           format: float
           type: number
       type: object
@@ -27570,11 +27631,11 @@ components:
       description: Image Quality Defects
       properties:
         confidence:
-          description: Confidence of detected defect. Range [0, 1] where 1 indicates strong confidence of that the defect exists.
+          description: Confidence of detected defect. Range `[0, 1]` where 1 indicates strong confidence of that the defect exists.
           format: float
           type: number
         type:
-          description: Name of the defect type. Supported values are "quality/defect_blurry", "quality/defect_noisy", "quality/defect_dark", "quality/defect_faint", "quality/defect_text_too_small", "quality/defect_document_cutoff", "quality/defect_text_cutoff", "quality/defect_glare"
+          description: "Name of the defect type. Supported values are: - `quality/defect_blurry` - `quality/defect_noisy` - `quality/defect_dark` - `quality/defect_faint` - `quality/defect_text_too_small` - `quality/defect_document_cutoff` - `quality/defect_text_cutoff` - `quality/defect_glare`"
           type: string
       type: object
     GoogleCloudDocumentaiV1DocumentPageLayout:
@@ -27584,7 +27645,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1BoundingPoly"
           description: The bounding polygon for the Layout.
         confidence:
-          description: Confidence of the current Layout within context of the object this layout is for. e.g. confidence can be for a single token, a table, a visual element, etc. depending on context. Range [0, 1].
+          description: Confidence of the current Layout within context of the object this layout is for. e.g. confidence can be for a single token, a table, a visual element, etc. depending on context. Range `[0, 1]`.
           format: float
           type: number
         orientation:
@@ -27872,7 +27933,7 @@ components:
           $ref: "#/components/schemas/GoogleTypeColor"
           description: Text color.
         fontFamily:
-          description: Font family such as "Arial", "Times New Roman". https://www.w3schools.com/cssref/pr_font_font-family.asp
+          description: Font family such as `Arial`, `Times New Roman`. https://www.w3schools.com/cssref/pr_font_font-family.asp
           type: string
         fontSize:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1DocumentStyleFontSize"
@@ -28082,7 +28143,7 @@ components:
           format: google-datetime
           type: string
         committedUntilIsMixed:
-          description: Whether the status of the user until committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).
+          description: Whether the status of the user from this status's start to committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).
           type: boolean
         nextAvailable:
           description: The next time when the user will be available, i.e., when their status will be neither InMeeting, CalendarBusy, DoNotDisturb, OutsideWorkingHours, nor OutOfOffice.
@@ -28105,7 +28166,7 @@ components:
           format: google-datetime
           type: string
         committedUntilIsMixed:
-          description: Whether the status of the user until committed_until has more than one status type (e.g. InMeeting + DoNotDisturb).
+          description: Whether the status of the user from this status's start to committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).
           type: boolean
         eventSummary:
           description: The summary of the corresponding event in Calendar.
@@ -28159,7 +28220,7 @@ components:
           format: google-datetime
           type: string
         committedUntilIsMixed:
-          description: Whether the status of the user until committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).
+          description: Whether the status of the user from this status's start to committed_until has more than one status type (e.g. DoNotDisturb + InMeeting).
           type: boolean
         eventSummary:
           description: The summary of the corresponding OOO block in Calendar. This is entered by the user, so we return it "as is" - no i18n.
@@ -28245,10 +28306,10 @@ components:
           description: Set if user has upcoming OOO.
         workingElsewhere:
           $ref: "#/components/schemas/GoogleInternalAppsWaldoV1alphaWorkingElsewhereContext"
-          description: Set if the user is working remotely.
+          description: Set if the user has a working location. Not just elsewhere (legacy name).
       type: object
     GoogleInternalAppsWaldoV1alphaUserLocation:
-      description: Location of the user, which might be "home", for example, or another office building, as well as a custom location specified by the user.
+      description: Location of the user, which might be "home", for example, or an office building, as well as a custom location specified by the user.
       properties:
         customLocation:
           $ref: "#/components/schemas/GoogleInternalAppsWaldoV1alphaCustomLocation"
@@ -28283,11 +28344,11 @@ components:
           description: Set if the user doesn't work at this time.
       type: object
     GoogleInternalAppsWaldoV1alphaWorkingElsewhereContext:
-      description: The context indicating the user is working remotely (from home / from a different office).
+      description: The context providing the User Location (not just Elsewhere). This is a legacy name from when it was only set for users working remotely, now it is also set when the user is working from the office.
       properties:
         location:
           $ref: "#/components/schemas/GoogleInternalAppsWaldoV1alphaUserLocation"
-          description: The new location of the user. Might represent home / another building, or a random address on the map.
+          description: The new location of the user. Might represent home, office, or a custom address on the map.
       type: object
     GoogleInternalAppsWaldoV1alphaWorkingHours:
       description: Information about the user's working hours.
@@ -31376,7 +31437,7 @@ components:
           description: Transcript generated from Cloud Speech API
         featureSetData:
           $ref: "#/components/schemas/DrishtiFeatureSetData"
-          description: 'Video Understanding Golden features. (go/amarna-video-signals#golden-signals) Note: Golden6 features (names matching "video_*") are DEPRECATED. Please migrate to Golden7 ("VideoFeatures.*"). For more context, see go/golden7/migrating-from-golden6 and go/amarna-golden-feature-tracker.'
+          description: 'Video Understanding Golden features. (go/amarna-video-signals#golden-signals) Note: Golden6 features (names matching "video_*") are DEPRECATED. Please migrate to Golden7 ("VideoFeatures.*"). For more context, see go/golden7/migrating-from-golden6 and go/amarna-golden-feature-tracker. Signals popluated in Raffia cdoc.doc_videos are configured in cs/symbol:AMARNA_EXPORTED_GOLDEN7_FEATURES.'
         golden7SoapboxSummary:
           $ref: "#/components/schemas/DrishtiFeatureSetData"
           description: Golden7 video-level people features. (go/ypf-video-features)
@@ -36171,6 +36232,7 @@ components:
             - STOPWATCH
             - TIMER
             - DEVICE
+            - DEVICE_SETTING
             - ROOM
             - STRUCTURE
             - ZONE
@@ -37095,6 +37157,10 @@ components:
             - SHOW_REMINDER
             - UPDATE_REMINDER
             - DELETE_REMINDER
+            - SHOW_LIST
+            - MODIFY_LIST
+            - SHOW_NOTE
+            - MODIFY_NOTE
           type: string
         myActivityRedactionKey:
           description: This field will be translated by footprints and is used to describe the content that was redacted that will be displayed to the user in MyActivity.
@@ -46431,6 +46497,7 @@ components:
             - YOUTUBE_COMMENTS_LEGAL_TAKEOUT
             - YOUTUBE_COMMENTS_INDEXING
             - YOUTUBE_COMMENTS_NEWEST_FIRST
+            - YOUTUBE_COMMENTS_BACKEND
             - YOUTUBE_SUBSCRIPTIONS_FEEDS
             - YOUTUBE_COMMENT_API
             - GHUB_COMMENTS
@@ -47203,7 +47270,7 @@ components:
           format: int32
           type: integer
         hostNsr:
-          description: Site rank computed for host-level sitechunks. This value encodes nsr, site_pr and new_nsr. See NsrUtil::ConvertNsrDataToHostNsr and go/nsr.
+          description: Site rank computed for host-level sitechunks. This value encodes nsr, site_pr and new_nsr. See quality_nsr::util::ConvertNsrDataToHostNsr and go/nsr.
           format: uint32
           type: integer
         imagedata:
@@ -47258,7 +47325,7 @@ components:
           description: This field is propagated to shards. It will also be populated at serving time by go/web-signal-joins (see b/170607253). Bit indicating whether this site is video-focused, but not hosted on any major known video hosting domains.
           type: boolean
         nsrSitechunk:
-          description: SiteChunk computed for nsr. It some cases it can use more information than just url (e.g. youtube channels). See NsrAnnotator for details. If sitechunk is longer than --populate_nsr_sitechunk_max_length (default=100), it will not get populated. This field might be compressed and needs to be decoded with NsrUtil::DecodeNsrSitechunk. See go/nsr-chunks for more details. This field contains only nontrivial primary chunks.
+          description: SiteChunk computed for nsr. It some cases it can use more information than just url (e.g. youtube channels). See NsrAnnotator for details. If sitechunk is longer than --populate_nsr_sitechunk_max_length (default=100), it will not get populated. This field might be compressed and needs to be decoded with quality_nsr::util::DecodeNsrSitechunk. See go/nsr-chunks for more details. This field contains only nontrivial primary chunks.
           type: string
         numUrls:
           description: "Total number of urls encoded in the url section = # of alternate urls + 1"
@@ -52516,7 +52583,11 @@ components:
     QualityPreviewSnippetBrainFeatures:
       description: Snippet brain scores.
       properties:
+        isSnippetBrainBoldingTriggered:
+          description: Is the bolding triggered.
+          type: boolean
         modelScore:
+          description: The score by SnippetBrain model.
           format: float
           type: number
       type: object
@@ -55080,21 +55151,11 @@ components:
           description: The rule that this is an instance of. Required.
       type: object
     RepositoryWebrefClusterProtoRelationRule:
-      description: "A rule that defines a Cluster based on a relation. Given a relation (a link type) R, then: For each entity B that has incoming links of type R This defines an instance of this rule, with argument=B We create a Set S We make B a child of S For each entity A that has a link R to B, we make A a child of S "
+      description: "A rule that defines a Cluster based on a relation. Given a relation (a link type) R, then: For each entity B that has incoming links of type R This defines an instance of this rule, with argument=B We create a Set S We make B a child of S For each entity A that has a link R to B, we make A a child of S Next available tag: 6"
       properties:
-        isCollapsible:
-          description: If true, cluster global names and links will be extracted from the target of the property. If false, all members of the cluster will be considered sources.
-          type: boolean
-        isCvtRule:
-          description: "Whether the target of the relation is an intermediate (CVT) node in KG: - if it is not: generate external_id for the cluster - if it is: - CVT should not be /common/topic otherwise rule will not be created - cluster will reuse CVT mid as its own"
-          type: boolean
         relation:
           description: The topic_property_name for the link that defines the relation, e.g. "/tv/tv_series_episode/series". Can start with a "!" to indicate that this link is reversed during extraction and we want the reversed case. Required.
           type: string
-        sequenceId:
-          description: No longer set.
-          format: int32
-          type: integer
       type: object
     RepositoryWebrefClusterProtoRelationRuleInstance:
       description: An instance of a "relation" rule. Each "relation" rule defines a number of clusters, one for each entity B that that has incoming links of a certain type R; all entities with an outgoing link to B of type R are part of that cluster.
@@ -56276,13 +56337,20 @@ components:
     RepositoryWebrefImageQueryIndices:
       description: Identifies a set of Image NavBoost queries in the CompositeDoc. Each CompositeDoc can contain several images, so we store the image index from the CompositeDoc::doc_images with the index of the particular query inside ImageData::image_data_navboost.
       properties:
+        canonicalDocid:
+          description: The (canonical) image docid of the ImageData this image query is part of. Useful for identifying the ImageData even after doc_images are updated in between Webref annotation runs. Use docid only when canonical_docid == 0.
+          format: uint64
+          type: string
+        docid:
+          format: uint64
+          type: string
         imageIndex:
-          description: / The index of the source image in CompositeDoc::doc_images.
+          description: "WARNING: The doc_images in docjoins are subject to updates including non-deterministic reordering of doc_images and their image_nb_data extensions. This means that without re-running WebrefAnnotator one cannot rely on the accuracy or even consistency of either image_index or query_index when parsing a cdoc from docjoins. In those situations one ought to rely on canonical_docid (or docid when canonical_docid is absent viz. 0). The index of the source image in CompositeDoc::doc_images."
           format: int32
           type: integer
         queryIndex:
           $ref: "#/components/schemas/RepositoryWebrefQueryIndices"
-          description: / Queries index in ImageData::image_data_navboost.
+          description: Queries index in ImageData::image_data_navboost.
       type: object
     RepositoryWebrefJuggernautIndices:
       description: Identifies the source of Spore segments in the CompositeDoc.
@@ -59702,7 +59770,7 @@ components:
           type: string
       type: object
     ResearchScienceSearchReconciledMetadata:
-      description: "A proto for storing inferred and reconciled metadata for Science Search. Next available tag: 69"
+      description: "A proto for storing inferred and reconciled metadata for Science Search. Next available tag: 70"
       properties:
         alternateName:
           description: Alternate names and acronyms for the dataset.
@@ -59833,6 +59901,9 @@ components:
           items:
             type: string
           type: array
+        isInferred:
+          description: Indicates whether the metadata was inferred using an ML model rather than from the schema.org fields.
+          type: boolean
         keyword:
           description: Keywords describing the dataset.
           items:
@@ -62909,7 +62980,7 @@ components:
           description: Ends at abstract DateTime. (inclusive)
         recurrenceStart:
           $ref: "#/components/schemas/GoogleTypeDateTime"
-          description: The start of the recurrence can be represented as a DateTime. This is ignored for a SingleRecurrence and YearlyRecurrence.
+          description: The start of the recurrence can be represented as a DateTime. This is ignored for a SingleRecurrence.
         repeatCount:
           description: Will repeat only a finite number of times. This is the original number of times the recurrence will repeat and not how many times are left for it to repeat.
           format: int32
@@ -63589,9 +63660,19 @@ components:
           items:
             $ref: "#/components/schemas/KeGovernanceTypedRegions"
           type: array
+        lmsClientIdsAllowed:
+          items:
+            type: string
+          type: array
         lmsIsEditorial:
           description: The following attributes with `lms_` prefix are for supporting LMS restrictions. See go/lms-online-restrictions for details.
           type: boolean
+        lmsModificationsAllowed:
+          description: Int values corresponds to the values of image_repository.licensed.api.restrictions.Modification enum.
+          items:
+            format: int64
+            type: string
+          type: array
         lmsRegionsAllowed:
           $ref: "#/components/schemas/KeGovernanceTypedRegions"
         lmsRegionsDisallowed:
@@ -63611,6 +63692,9 @@ components:
             - VERTICAL
             - HORIZONTAL
           type: string
+        umpPolicyMetadata:
+          $ref: "#/components/schemas/StorageGraphBfgUmpPolicyMetadata"
+          description: Policy metadata fields for UMP data. Only expected to be used by UMP providers -- please consult ke-data-governance@ before populating this field.
       type: object
     StorageGraphBfgPublicInformationMetadata:
       properties:
@@ -63890,6 +63974,20 @@ components:
           type: array
         spiiCertification:
           $ref: "#/components/schemas/StorageGraphBfgSpiiCertification"
+      type: object
+    StorageGraphBfgUmpPolicyMetadata:
+      description: "Metadata fields for UMP. A piece of data satisfies UMP policy if: (data access region is in the `regions_allowed` list) AND (data access time >= availability_start_timestamp) AND (data access time < availability_end_timestamp)"
+      properties:
+        availabilityEnds:
+          description: Timestamp after which data with this policy cannot be used.
+          format: google-datetime
+          type: string
+        availabilityStarts:
+          description: Timestamp before which data with this policy cannot be used.
+          format: google-datetime
+          type: string
+        regionsAllowed:
+          $ref: "#/components/schemas/KeGovernanceTypedRegions"
       type: object
     SuperrootPodcastsRecommendationsPodcastRecsFeatures:
       description: "LINT.IfChange Next ID: 101"
@@ -66101,6 +66199,8 @@ components:
               - EXPANDED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
               - COLLAPSED_DEV_SUCCESS_CLUSTER_EVENT_LEVEL
               - BROAD_INTENT_GAMES_TIMESPENT_EVENT_LEVEL
+              - PLAY_STORE_IAP_SALES_MINI_DETAILS_PAGE_EAP_PARTNER_APPS_EVENT_LEVEL
+              - GEARHEAD_ATTEMPT_USB_RECOVERY
               - EVENT_LEVEL_TEST_CODE_LIMIT
               - RESERVED_4
               - RESERVED_5
@@ -66982,6 +67082,12 @@ components:
               - SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_GH_K2
               - SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_GH_K3_4
               - SHOULD_SEE_TOP_NOW_CONTENT_PRE_REGISTRATION_GH_GTE_K5
+              - SHOULD_SEE_TOP_NOW_CONTENT_MERCH_NEW_RELEASE_AH
+              - SHOULD_SEE_TOP_NOW_CONTENT_MERCH_PRE_REGISTRATION_AH
+              - SHOULD_SEE_TOP_NOW_CONTENT_MERCH_LIVE_OPS_AH
+              - SHOULD_SEE_TOP_NOW_CONTENT_MERCH_NEW_RELEASE_GH
+              - SHOULD_SEE_TOP_NOW_CONTENT_MERCH_PRE_REGISTRATION_GH
+              - SHOULD_SEE_TOP_NOW_CONTENT_MERCH_LIVE_OPS_GH
               - LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_SESSION_LEVEL
               - WALLET_WELLBEING_ALERT_SESSION_LEVEL
               - BROAD_INTENT_REWEIGHTING_SESSION_LEVEL
@@ -66993,6 +67099,8 @@ components:
               - DOWNLOAD_COUNT_ELIGIBLE
               - PLANOGRAM_MERCH_AMERICAS_GAMES_PAYPAL_SESSION_LEVEL
               - BROAD_INTENT_GAMES_TIMESPENT_SESSION_LEVEL
+              - ELIGIBLE_FOR_MANAGE_IN_APP_DETAILS_SESSION_LEVEL
+              - SEE_REENGAGEMENT_ACC_SESSION_LEVEL
               - SESSION_LEVEL_TEST_CODE_LIMIT
               - SHOULD_SEE_LIVE_OP_CLUSTER_USER_LEVEL
               - CART_ABANDONMENT_USER_LEVEL
@@ -67342,6 +67450,8 @@ components:
               - GROWTH_CORPUS_WIDE_STAMP_CARD_PURCHASE_FLOW_SERVER_USER_LEVEL
               - GROWTH_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_USER_LEVEL
               - LOYALTY_PURCHASE_QUEST_GAMES_HOME_USER_LEVEL
+              - GROWTH_CORPUS_WIDE_STAMP_CARD_GAMES_HOME_SERVER_USER_LEVEL
+              - LOYALTY_PURCHASE_QUEST_GAMES_HOME_SERVER_USER_LEVEL
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_USER_LEVEL_V2
               - SUBS_HIGH_CHURN_FOP_OPTIONS_AVAILABLE_WITH_EXISTING_FOP_USER_LEVEL
@@ -67423,6 +67533,11 @@ components:
               - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_26_USER_LEVEL
               - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_27_USER_LEVEL
               - POSTPERIOD_PAGE_VISIT_28D_FREQUENCY_28_USER_LEVEL
+              - LOYALTY_STAMP_CARD_IN_PURCHASE_FLOW_SERVER_USER_LEVEL
+              - ELIGIBLE_FOR_MANAGE_IN_APP_DETAILS_USER_LEVEL
+              - PLAY_ONBOARDING_QUEST_GAMES_HOME_USER_LEVEL
+              - SERVED_GPP_ONBOARDING_QUEST_USER_LEVEL
+              - YOUTUBE_OPTED_IN_NOTIFICATION_DRIVEN_PREFETCH_USER_LEVEL
               - USER_LEVEL_TEST_CODE_LIMIT
             type: string
           type: array
@@ -71394,6 +71509,7 @@ components:
             - TYPE_MACRO_MARKERS
             - TYPE_THUMB_QUERY_EMBEDDING
             - TYPE_COLOR_SAMPLING
+            - TYPE_ENGAGINESS
           type: string
       type: object
     VideoTimedtextS4ALIResults:
@@ -76957,6 +77073,7 @@ components:
             - GOOGLE_LIST_RECS
             - GOOGLE_MEDIA_ACTIONS
             - MEDIA_CONNECT_FRONTEND
+            - GOOGLE_TV
           type: string
         creationTimeInSeconds:
           description: The time when the comment is created.
@@ -77390,7 +77507,6 @@ components:
             - GEO_TYPES_COLLECTION_POTENTIALLY_SENSITIVE
             - GEO_TYPE
             - ADDED_DURING_GEO_ENTITIES_PROMOTION
-            - GEO_TYPE_PUBLIC_SPACES_AND_MONUMENTS
             - GEO_TYPE_COMPOUND_BUILDING
             - GEO_TYPE_POLITICAL
             - GEO_TYPES_COLLECTION_SMALL_POLITICALS
