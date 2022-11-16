@@ -3066,7 +3066,7 @@ components:
           description: This field is deprecated. Leave this unset and instead configure BinaryAuthorization using evaluation_mode. If evaluation_mode is set to anything other than EVALUATION_MODE_UNSPECIFIED, this field is ignored.
           type: boolean
         evaluationMode:
-          description: Mode of operation for binauthz policy evaluation. Currently the only options are equivalent to enable/disable. If unspecified, defaults to DISABLED.
+          description: Mode of operation for binauthz policy evaluation. If unspecified, defaults to DISABLED.
           enum:
             - EVALUATION_MODE_UNSPECIFIED
             - DISABLED
@@ -3675,6 +3675,13 @@ components:
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
+      type: object
+    FastSocket:
+      description: Configuration of Fast Socket feature.
+      properties:
+        enabled:
+          description: Whether Fast Socket features are enabled in the node pool.
+          type: boolean
       type: object
     Filter:
       description: Allows filtering to one or more specific event types. If event types are present, those and only those event types will be transmitted to the cluster. Other types will be skipped. If no filter is specified, or no event types are present, all event types will be sent
@@ -4288,6 +4295,9 @@ components:
         diskType:
           description: Type of the disk attached to each node (e.g. 'pd-standard', 'pd-ssd' or 'pd-balanced') If unspecified, the default disk type is 'pd-standard'
           type: string
+        fastSocket:
+          $ref: "#/components/schemas/FastSocket"
+          description: Enable or disable NCCL fast socket for the node pool.
         gcfsConfig:
           $ref: "#/components/schemas/GcfsConfig"
           description: Google Container File System (image streaming) configs.
@@ -5404,6 +5414,9 @@ components:
         confidentialNodes:
           $ref: "#/components/schemas/ConfidentialNodes"
           description: Confidential nodes config. All the nodes in the node pool will be Confidential VM once enabled.
+        fastSocket:
+          $ref: "#/components/schemas/FastSocket"
+          description: Enable or disable NCCL fast socket for the node pool.
         gcfsConfig:
           $ref: "#/components/schemas/GcfsConfig"
           description: GCFS config.
