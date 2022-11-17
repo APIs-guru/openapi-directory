@@ -628,6 +628,7 @@ components:
             - MISMATCHED_DESTINATION_NETWORK
             - UNSUPPORTED
             - MISMATCHED_IP_VERSION
+            - GKE_KONNECTIVITY_PROXY_UNSUPPORTED
           type: string
         projectsMissingPermission:
           description: List of project IDs that the user has specified in the request but does not have permission to access network configs. Analysis is aborted in this case with the PERMISSION_DENIED cause.
@@ -636,6 +637,29 @@ components:
           type: array
         resourceUri:
           description: URI of the resource that caused the abort.
+          type: string
+      type: object
+    AppEngineVersionEndpoint:
+      description: Wrapper for app engine service version attributes.
+      properties:
+        uri:
+          description: An [App Engine](https://cloud.google.com/appengine) [service version](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions) name.
+          type: string
+      type: object
+    AppEngineVersionInfo:
+      description: For display only. Metadata associated with an App Engine version.
+      properties:
+        displayName:
+          description: Name of an App Engine version.
+          type: string
+        environment:
+          description: App Engine execution environment for a version.
+          type: string
+        runtime:
+          description: Runtime of the App Engine version.
+          type: string
+        uri:
+          description: URI of an App Engine version.
           type: string
       type: object
     AuditConfig:
@@ -708,6 +732,32 @@ components:
         versionId:
           description: Latest successfully deployed version id of the Cloud Function.
           format: int64
+          type: string
+      type: object
+    CloudRunRevisionEndpoint:
+      description: Wrapper for Cloud Run revision attributes.
+      properties:
+        uri:
+          description: "A [Cloud Run](https://cloud.google.com/run) [revision](https://cloud.google.com/run/docs/reference/rest/v1/namespaces.revisions/get) URI. The format is: projects/{project}/locations/{location}/revisions/{revision}"
+          type: string
+      type: object
+    CloudRunRevisionInfo:
+      description: For display only. Metadata associated with a Cloud Run revision.
+      properties:
+        displayName:
+          description: Name of a Cloud Run revision.
+          type: string
+        location:
+          description: Location in which this revision is deployed.
+          type: string
+        serviceName:
+          description: ID of Cloud Run Service this revision belongs to.
+          type: string
+        serviceUri:
+          description: URI of Cloud Run service this revision belongs to.
+          type: string
+        uri:
+          description: URI of a Cloud Run revision.
           type: string
       type: object
     CloudSQLInstanceInfo:
@@ -821,6 +871,7 @@ components:
             - NO_EXTERNAL_ADDRESS
             - UNKNOWN_INTERNAL_ADDRESS
             - FORWARDING_RULE_MISMATCH
+            - FORWARDING_RULE_REGION_MISMATCH
             - FORWARDING_RULE_NO_INSTANCES
             - FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK
             - INSTANCE_NOT_RUNNING
@@ -832,6 +883,7 @@ components:
             - DROPPED_INSIDE_GKE_SERVICE
             - DROPPED_INSIDE_CLOUD_SQL_SERVICE
             - GOOGLE_MANAGED_SERVICE_NO_PEERING
+            - GKE_PSC_ENDPOINT_MISSING
             - CLOUD_SQL_INSTANCE_NO_IP_ADDRESS
             - GKE_CONTROL_PLANE_REGION_MISMATCH
             - PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION
@@ -842,8 +894,8 @@ components:
             - CLOUD_FUNCTION_NOT_ACTIVE
             - VPC_CONNECTOR_NOT_SET
             - VPC_CONNECTOR_NOT_RUNNING
-            - FORWARDING_RULE_REGION_MISMATCH
             - PSC_CONNECTION_NOT_ACCEPTED
+            - CLOUD_RUN_REVISION_NOT_READY
           type: string
         resourceUri:
           description: URI of the resource that caused the drop.
@@ -863,9 +915,15 @@ components:
     Endpoint:
       description: Source or destination of the Connectivity Test.
       properties:
+        appEngineVersion:
+          $ref: "#/components/schemas/AppEngineVersionEndpoint"
+          description: An [App Engine](https://cloud.google.com/appengine) [service version](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions).
         cloudFunction:
           $ref: "#/components/schemas/CloudFunctionEndpoint"
           description: A [Cloud Function](https://cloud.google.com/functions).
+        cloudRunRevision:
+          $ref: "#/components/schemas/CloudRunRevisionEndpoint"
+          description: A [Cloud Run](https://cloud.google.com/run) [revision](https://cloud.google.com/run/docs/reference/rest/v1/namespaces.revisions/get)
         cloudSqlInstance:
           description: A [Cloud SQL](https://cloud.google.com/sql) instance URI.
           type: string
@@ -1441,7 +1499,7 @@ components:
             - PEERING_SUBNET
             - PEERING_STATIC
             - PEERING_DYNAMIC
-            - POLICY_BASED_ROUTE
+            - POLICY_BASED
           type: string
         srcIpRange:
           description: Source IP address range of the route. Policy based routes only.
@@ -1490,12 +1548,18 @@ components:
         abort:
           $ref: "#/components/schemas/AbortInfo"
           description: Display information of the final state "abort" and reason.
+        appEngineVersion:
+          $ref: "#/components/schemas/AppEngineVersionInfo"
+          description: Display information of an App Engine service version.
         causesDrop:
           description: This is a step that leads to the final state Drop.
           type: boolean
         cloudFunction:
           $ref: "#/components/schemas/CloudFunctionInfo"
           description: Display information of a Cloud Function.
+        cloudRunRevision:
+          $ref: "#/components/schemas/CloudRunRevisionInfo"
+          description: Display information of a Cloud Run revision.
         cloudSqlInstance:
           $ref: "#/components/schemas/CloudSQLInstanceInfo"
           description: Display information of a Cloud SQL instance.
@@ -1548,6 +1612,8 @@ components:
             - START_FROM_GKE_MASTER
             - START_FROM_CLOUD_SQL_INSTANCE
             - START_FROM_CLOUD_FUNCTION
+            - START_FROM_APP_ENGINE_VERSION
+            - START_FROM_CLOUD_RUN_REVISION
             - APPLY_INGRESS_FIREWALL_RULE
             - APPLY_EGRESS_FIREWALL_RULE
             - APPLY_ROUTE

@@ -59,6 +59,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Upload file
@@ -85,6 +86,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Import a file from a URL into the file manager.
@@ -113,9 +115,11 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Check import status.
@@ -338,9 +342,11 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Search files
@@ -368,6 +374,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Delete file
@@ -405,9 +412,11 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Get file.
@@ -444,6 +453,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: update file properties
@@ -488,6 +498,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Replace file.
@@ -515,6 +526,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: GDPR delete
@@ -574,9 +586,11 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Get signed URL to access private file.
@@ -604,6 +618,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Create folder.
@@ -751,9 +766,11 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Search folders
@@ -781,6 +798,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Update folder properties
@@ -810,6 +828,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Check folder update status.
@@ -837,6 +856,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Delete folder.
@@ -875,9 +895,11 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Get folder
@@ -905,6 +927,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Delete folder.
@@ -943,9 +966,11 @@ paths:
         default:
           $ref: "#/components/responses/Error"
       security:
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files.ui_hidden.read
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - files
       summary: Get folder.
@@ -1599,5 +1624,9 @@ components:
             files.ui_hidden.read: View hidden files
           tokenUrl: https://api.hubapi.com/oauth/v1/token
       type: oauth2
+    private_apps_legacy:
+      in: header
+      name: private-app-legacy
+      type: apiKey
 x-hubspot-available-client-libraries:
   - PHP

@@ -411,7 +411,7 @@ components:
           format: byte
           type: string
         timeout:
-          description: A timeout after which the execution should be killed. If the timeout is absent, then the client is specifying that the execution should continue as long as the server will let it. The server SHOULD impose a timeout if the client does not specify one, however, if the client does specify a timeout that is longer than the server's maximum timeout, the server MUST reject the request. The timeout is a part of the Action message, and therefore two `Actions` with different timeouts are different, even if they are otherwise identical. This is because, if they were not, running an `Action` with a lower timeout than is required might result in a cache hit from an execution run with a longer timeout, hiding the fact that the timeout is too short. By encoding it directly in the `Action`, a lower timeout will result in a cache miss and the execution timeout will fail immediately, rather than whenever the cache entry gets evicted.
+          description: A timeout after which the execution should be killed. If the timeout is absent, then the client is specifying that the execution should continue as long as the server will let it. The server SHOULD impose a timeout if the client does not specify one, however, if the client does specify a timeout that is longer than the server's maximum timeout, the server MUST reject the request. The timeout is only intended to cover the "execution" of the specified action and not time in queue nor any overheads before or after execution such as marshalling inputs/outputs. The server SHOULD avoid including time spent the client doesn't have control over, and MAY extend or reduce the timeout to account for delays or speedups that occur during execution itself (e.g., lazily loading data from the Content Addressable Storage, live migration of virtual machines, emulation overhead). The timeout is a part of the Action message, and therefore two `Actions` with different timeouts are different, even if they are otherwise identical. This is because, if they were not, running an `Action` with a lower timeout than is required might result in a cache hit from an execution run with a longer timeout, hiding the fact that the timeout is too short. By encoding it directly in the `Action`, a lower timeout will result in a cache miss and the execution timeout will fail immediately, rather than whenever the cache entry gets evicted.
           format: google-duration
           type: string
       type: object
@@ -454,14 +454,14 @@ components:
           $ref: "#/components/schemas/BuildBazelRemoteExecutionV2Digest"
           description: The digest for a blob containing the standard error of the action, which can be retrieved from the ContentAddressableStorage.
         stderrRaw:
-          description: The standard error buffer of the action. The server SHOULD NOT inline stderr unless requested by the client in the GetActionResultRequest message. The server MAY omit inlining, even if requested, and MUST do so if inlining would cause the response to exceed message size limits.
+          description: The standard error buffer of the action. The server SHOULD NOT inline stderr unless requested by the client in the GetActionResultRequest message. The server MAY omit inlining, even if requested, and MUST do so if inlining would cause the response to exceed message size limits. Clients SHOULD NOT populate this field when uploading to the cache.
           format: byte
           type: string
         stdoutDigest:
           $ref: "#/components/schemas/BuildBazelRemoteExecutionV2Digest"
           description: The digest for a blob containing the standard output of the action, which can be retrieved from the ContentAddressableStorage.
         stdoutRaw:
-          description: The standard output buffer of the action. The server SHOULD NOT inline stdout unless requested by the client in the GetActionResultRequest message. The server MAY omit inlining, even if requested, and MUST do so if inlining would cause the response to exceed message size limits.
+          description: The standard output buffer of the action. The server SHOULD NOT inline stdout unless requested by the client in the GetActionResultRequest message. The server MAY omit inlining, even if requested, and MUST do so if inlining would cause the response to exceed message size limits. Clients SHOULD NOT populate this field when uploading to the cache.
           format: byte
           type: string
       type: object
@@ -469,7 +469,7 @@ components:
       description: A `Command` is the actual command executed by a worker running an Action and specifications of its environment. Except as otherwise required, the environment (such as which system libraries or binaries are available, and what filesystems are mounted where) is defined by and specific to the implementation of the remote execution API.
       properties:
         arguments:
-          description: The arguments to the command. The first argument must be the path to the executable, which must be either a relative path, in which case it is evaluated with respect to the input root, or an absolute path.
+          description: The arguments to the command. The first argument specifies the command to run, which may be either an absolute path, a path relative to the working directory, or an unqualified path (without path separators) which will be resolved using the operating system's equivalent of the PATH environment variable. Path separators native to the operating system running on the worker SHOULD be used. If the `environment_variables` list contains an entry for the PATH environment variable, it SHOULD be respected. If not, the resolution process is implementation-defined. Changed in v2.3. v2.2 and older require that no PATH lookups are performed, and that relative paths are resolved relative to the input root. This behavior can, however, not be relied upon, as most implementations already followed the rules described above.
           items:
             type: string
           type: array
@@ -494,7 +494,7 @@ components:
             type: string
           type: array
         outputPaths:
-          description: "A list of the output paths that the client expects to retrieve from the action. Only the listed paths will be returned to the client as output. The type of the output (file or directory) is not specified, and will be determined by the server after action execution. If the resulting path is a file, it will be returned in an OutputFile) typed field. If the path is a directory, the entire directory structure will be returned as a Tree message digest, see OutputDirectory) Other files or directories that may be created during command execution are discarded. The paths are relative to the working directory of the action execution. The paths are specified using a single forward slash (`/`) as a path separator, even if the execution platform natively uses a different separator. The path MUST NOT include a trailing slash, nor a leading slash, being a relative path. In order to ensure consistent hashing of the same Action, the output paths MUST be deduplicated and sorted lexicographically by code point (or, equivalently, by UTF-8 bytes). Directories leading up to the output paths are created by the worker prior to execution, even if they are not explicitly part of the input root. New in v2.1: this field supersedes the DEPRECATED `output_files` and `output_directories` fields. If `output_paths` is used, `output_files` and `output_directories` will be ignored!"
+          description: "A list of the output paths that the client expects to retrieve from the action. Only the listed paths will be returned to the client as output. The type of the output (file or directory) is not specified, and will be determined by the server after action execution. If the resulting path is a file, it will be returned in an OutputFile typed field. If the path is a directory, the entire directory structure will be returned as a Tree message digest, see OutputDirectory Other files or directories that may be created during command execution are discarded. The paths are relative to the working directory of the action execution. The paths are specified using a single forward slash (`/`) as a path separator, even if the execution platform natively uses a different separator. The path MUST NOT include a trailing slash, nor a leading slash, being a relative path. In order to ensure consistent hashing of the same Action, the output paths MUST be deduplicated and sorted lexicographically by code point (or, equivalently, by UTF-8 bytes). Directories leading up to the output paths are created by the worker prior to execution, even if they are not explicitly part of the input root. New in v2.1: this field supersedes the DEPRECATED `output_files` and `output_directories` fields. If `output_paths` is used, `output_files` and `output_directories` will be ignored!"
           items:
             type: string
           type: array
@@ -638,6 +638,10 @@ components:
           description: When was the action added to the queue.
           format: google-datetime
           type: string
+        virtualExecutionDuration:
+          description: "New in v2.3: the amount of time the worker spent executing the action command, potentially computed using a worker-specific virtual clock. The virtual execution duration is only intended to cover the \"execution\" of the specified action and not time in queue nor any overheads before or after execution such as marshalling inputs/outputs. The server SHOULD avoid including time spent the client doesn't have control over, and MAY extend or reduce the execution duration to account for delays or speedups that occur during execution itself (e.g., lazily loading data from the Content Addressable Storage, live migration of virtual machines, emulation overhead). The method of timekeeping used to compute the virtual execution duration MUST be consistent with what is used to enforce the Action's `timeout`. There is no relationship between the virtual execution duration and the values of `execution_start_timestamp` and `execution_completed_timestamp`."
+          format: google-duration
+          type: string
         worker:
           description: The name of the worker which ran the execution.
           type: string
@@ -705,6 +709,9 @@ components:
     BuildBazelRemoteExecutionV2OutputDirectory:
       description: An `OutputDirectory` is the output in an `ActionResult` corresponding to a directory's full contents rather than a single file.
       properties:
+        isTopologicallySorted:
+          description: "If set, consumers MAY make the following assumptions about the directories contained in the the Tree, so that it may be instantiated on a local file system by scanning through it sequentially: - All directories with the same binary representation are stored exactly once. - All directories, apart from the root directory, are referenced by at least one parent directory. - Directories are stored in topological order, with parents being stored before the child. The root directory is thus the first to be stored. Additionally, the Tree MUST be encoded as a stream of records, where each record has the following format: - A tag byte, having one of the following two values: - (1 << 3) | 2 == 0x0a: First record (the root directory). - (2 << 3) | 2 == 0x12: Any subsequent records (child directories). - The size of the directory, encoded as a base 128 varint. - The contents of the directory, encoded as a binary serialized Protobuf message. This encoding is a subset of the Protobuf wire format of the Tree message. As it is only permitted to store data associated with field numbers 1 and 2, the tag MUST be encoded as a single byte. More details on the Protobuf wire format can be found here: https://developers.google.com/protocol-buffers/docs/encoding It is recommended that implementations using this feature construct Tree objects manually using the specification given above, as opposed to using a Protobuf library to marshal a full Tree message. As individual Directory messages already need to be marshaled to compute their digests, constructing the Tree object manually avoids redundant marshaling."
+          type: boolean
         path:
           description: The full path of the directory relative to the working directory. The path separator is a forward slash `/`. Since this is a relative path, it MUST NOT begin with a leading forward slash. The empty string value is allowed, and it denotes the entire working directory.
           type: string
@@ -716,7 +723,7 @@ components:
       description: An `OutputFile` is similar to a FileNode, but it is used as an output in an `ActionResult`. It allows a full file path rather than only a name.
       properties:
         contents:
-          description: The contents of the file if inlining was requested. The server SHOULD NOT inline file contents unless requested by the client in the GetActionResultRequest message. The server MAY omit inlining, even if requested, and MUST do so if inlining would cause the response to exceed message size limits.
+          description: The contents of the file if inlining was requested. The server SHOULD NOT inline file contents unless requested by the client in the GetActionResultRequest message. The server MAY omit inlining, even if requested, and MUST do so if inlining would cause the response to exceed message size limits. Clients SHOULD NOT populate this field when uploading to the cache.
           format: byte
           type: string
         digest:
@@ -813,7 +820,7 @@ components:
       description: A `Tree` contains all the Directory protos in a single directory Merkle tree, compressed into one message.
       properties:
         children:
-          description: "All the child directories: the directories referred to by the root and, recursively, all its children. In order to reconstruct the directory tree, the client must take the digests of each of the child directories and then build up a tree starting from the `root`."
+          description: "All the child directories: the directories referred to by the root and, recursively, all its children. In order to reconstruct the directory tree, the client must take the digests of each of the child directories and then build up a tree starting from the `root`. Servers SHOULD ensure that these are ordered consistently such that two actions producing equivalent output directories on the same server implementation also produce Tree messages with matching digests."
           items:
             $ref: "#/components/schemas/BuildBazelRemoteExecutionV2Directory"
           type: array

@@ -969,6 +969,7 @@ components:
             - METHOD_UNSPECIFIED
             - LOGIN
             - SECURE_KEY
+            - ENROLLED_SECOND_FACTORS
           type: string
         policyType:
           description: How IAP determines the effective policy in cases of hierarchial policies. Policies are merged from higher in the hierarchy to lower in the hierarchy.
@@ -1028,12 +1029,12 @@ components:
       description: A TunnelDestGroup.
       properties:
         cidrs:
-          description: null List of CIDRs that this group applies to.
+          description: Unordered list. List of CIDRs that this group applies to.
           items:
             type: string
           type: array
         fqdns:
-          description: null List of FQDNs that this group applies to.
+          description: Unordered list. List of FQDNs that this group applies to.
           items:
             type: string
           type: array

@@ -1773,7 +1773,7 @@ components:
           type: integer
         streamLargeObjects:
           $ref: "#/components/schemas/StreamLargeObjects"
-          description: Stream large object values.
+          description: "Stream large object values. NOTE: This feature is currently experimental."
       type: object
     OracleTable:
       description: Oracle table.
@@ -1883,7 +1883,7 @@ components:
           description: Required. The name of the publication that includes the set of all tables that are defined in the stream's include_objects.
           type: string
         replicationSlot:
-          description: Required. The name of the logical replication slot that's configured with the pgoutput plugin.
+          description: Required. Immutable. The name of the logical replication slot that's configured with the pgoutput plugin.
           type: string
       type: object
     PostgresqlTable:

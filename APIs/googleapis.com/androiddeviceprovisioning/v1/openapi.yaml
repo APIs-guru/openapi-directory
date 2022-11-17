@@ -86,7 +86,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Updates reseller metadata associated with the device.
+      description: Updates reseller metadata associated with the device. Android devices only.
       operationId: androiddeviceprovisioning.partners.devices.metadata
       parameters:
         - description: Required. The owner of the newly set metadata. Set this to the partner ID.
@@ -393,7 +393,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Updates the reseller metadata attached to a batch of devices. This method updates devices asynchronously and returns an `Operation` that can be used to track progress. Read [Long‑running batch operations](/zero-touch/guides/how-it-works#operations).
+      description: Updates the reseller metadata attached to a batch of devices. This method updates devices asynchronously and returns an `Operation` that can be used to track progress. Read [Long‑running batch operations](/zero-touch/guides/how-it-works#operations). Android Devices only.
       operationId: androiddeviceprovisioning.partners.devices.updateMetadataAsync
       parameters:
         - description: Required. The reseller partner ID.
@@ -925,7 +925,7 @@ components:
       description: Request message to claim a device on behalf of a customer.
       properties:
         customerId:
-          description: Required. The ID of the customer for whom the device is being claimed.
+          description: The ID of the customer for whom the device is being claimed.
           format: int64
           type: string
         deviceIdentifier:
@@ -934,12 +934,22 @@ components:
         deviceMetadata:
           $ref: "#/components/schemas/DeviceMetadata"
           description: Optional. The metadata to attach to the device.
+        googleWorkspaceCustomerId:
+          description: The Google Workspace customer ID.
+          type: string
+        preProvisioningToken:
+          description: Optional. Must and can only be set for Chrome OS devices.
+          type: string
         sectionType:
           description: Required. The section type of the device's provisioning record.
           enum:
             - SECTION_TYPE_UNSPECIFIED
             - SECTION_TYPE_SIM_LOCK
             - SECTION_TYPE_ZERO_TOUCH
+          type: string
+        simlockProfileId:
+          description: Optional. Must and can only be set when DeviceProvisioningSectionType is SECTION_TYPE_SIM_LOCK. The unique identifier of the SimLock profile (go/simlock/profiles).
+          format: int64
           type: string
       type: object
     ClaimDeviceResponse:
@@ -978,6 +988,10 @@ components:
         companyName:
           description: Required. The name of the company. For example _XYZ Corp_. Displayed to the company's employees in the zero-touch enrollment portal.
           type: string
+        googleWorkspaceAccount:
+          $ref: "#/components/schemas/GoogleWorkspaceAccount"
+          description: Output only. The Google Workspace account associated with this customer. Only used for customer Companies.
+          readOnly: true
         languageCode:
           description: "Input only. The preferred locale of the customer represented as a BCP47 language code. This field is validated on input and requests containing unsupported language codes will be rejected. Supported language codes: Arabic (ar) Chinese (Hong Kong) (zh-HK) Chinese (Simplified) (zh-CN) Chinese (Traditional) (zh-TW) Czech (cs) Danish (da) Dutch (nl) English (UK) (en-GB) English (US) (en-US) Filipino (fil) Finnish (fi) French (fr) German (de) Hebrew (iw) Hindi (hi) Hungarian (hu) Indonesian (id) Italian (it) Japanese (ja) Korean (ko) Norwegian (Bokmal) (no) Polish (pl) Portuguese (Brazil) (pt-BR) Portuguese (Portugal) (pt-PT) Russian (ru) Spanish (es) Spanish (Latin America) (es-419) Swedish (sv) Thai (th) Turkish (tr) Ukrainian (uk) Vietnamese (vi)"
           type: string
@@ -1114,7 +1128,7 @@ components:
           description: Required. The device to unclaim. There are custom validations in UnclaimDeviceRequestValidator.
       type: object
     Device:
-      description: An Android device registered for zero-touch enrollment.
+      description: An Android or Chrome OS device registered for zero-touch enrollment.
       properties:
         claims:
           description: Output only. The provisioning claims for a device. Devices claimed for zero-touch enrollment have a claim with the type `SECTION_TYPE_ZERO_TOUCH`. Call `partners.devices.unclaim` or `partners.devices.unclaimAsync` to remove the device from zero-touch enrollment.
@@ -1150,8 +1164,11 @@ components:
             - ADDITIONAL_SERVICE_UNSPECIFIED
             - DEVICE_PROTECTION
           type: string
+        googleWorkspaceCustomerId:
+          description: The ID of the Google Workspace account that owns the Chrome OS device.
+          type: string
         ownerCompanyId:
-          description: The ID of the Customer that purchased the device.
+          description: The ID of the Customer that purchased the Android device.
           format: int64
           type: string
         resellerId:
@@ -1178,17 +1195,27 @@ components:
     DeviceIdentifier:
       description: Encapsulates hardware and product IDs to identify a manufactured device. To understand requirements on identifier sets, read [Identifiers](https://developers.google.com/zero-touch/guides/identifiers).
       properties:
+        chromeOsAttestedDeviceId:
+          description: An identifier provided by OEMs, carried through the production and sales process. Only applicable to Chrome OS devices.
+          type: string
+        deviceType:
+          description: The type of the device
+          enum:
+            - DEVICE_TYPE_UNSPECIFIED
+            - DEVICE_TYPE_ANDROID
+            - DEVICE_TYPE_CHROME_OS
+          type: string
         imei:
           description: The device’s IMEI number. Validated on input.
           type: string
         manufacturer:
-          description: The device manufacturer’s name. Matches the device's built-in value returned from `android.os.Build.MANUFACTURER`. Allowed values are listed in [manufacturers](/zero-touch/resources/manufacturer-names#manufacturers-names).
+          description: The device manufacturer’s name. Matches the device's built-in value returned from `android.os.Build.MANUFACTURER`. Allowed values are listed in [Android manufacturers](/zero-touch/resources/manufacturer-names#manufacturers-names).
           type: string
         meid:
           description: The device’s MEID number.
           type: string
         model:
-          description: The device model's name. Matches the device's built-in value returned from `android.os.Build.MODEL`. Allowed values are listed in [models](/zero-touch/resources/manufacturer-names#model-names).
+          description: The device model's name. Allowed values are listed in [Android models](/zero-touch/resources/manufacturer-names#model-names) and [Chrome OS models](https://support.google.com/chrome/a/answer/10130175?hl=en#identify_compatible).
           type: string
         serialNumber:
           description: The manufacturer's serial number for the device. This value might not be unique across different device models.
@@ -1230,7 +1257,7 @@ components:
             - BATCH_PROCESS_PROCESSED
           type: string
         progress:
-          description: The processing progress of the operation. Measured as a number from 0 to 100. A value of 10O doesnt always mean the operation completed—check for the inclusion of a `done` field.
+          description: The processing progress of the operation. Measured as a number from 0 to 100. A value of 10O doesn't always mean the operation completed—check for the inclusion of a `done` field.
           format: int32
           type: integer
       type: object
@@ -1301,9 +1328,14 @@ components:
       description: Request to find devices by customers.
       properties:
         customerId:
-          description: Required. The list of customer IDs to search for.
+          description: The list of customer IDs to search for.
           items:
             format: int64
+            type: string
+          type: array
+        googleWorkspaceCustomerId:
+          description: The list of IDs of Google Workspace accounts to search for.
+          items:
             type: string
           type: array
         limit:
@@ -1336,6 +1368,19 @@ components:
           description: The total count of items in the list irrespective of pagination.
           format: int32
           type: integer
+      type: object
+    GoogleWorkspaceAccount:
+      description: A Google Workspace customer.
+      properties:
+        customerId:
+          description: Required. The customer ID.
+          type: string
+        preProvisioningTokens:
+          description: Output only. The pre-provisioning tokens previously used to claim devices.
+          items:
+            type: string
+          readOnly: true
+          type: array
       type: object
     ListCustomersResponse:
       description: Response message of all customers related to this partner.
@@ -1428,7 +1473,7 @@ components:
       description: Identifies one claim request.
       properties:
         customerId:
-          description: Required. The ID of the customer for whom the device is being claimed.
+          description: The ID of the customer for whom the device is being claimed.
           format: int64
           type: string
         deviceIdentifier:
@@ -1437,6 +1482,12 @@ components:
         deviceMetadata:
           $ref: "#/components/schemas/DeviceMetadata"
           description: Required. The metadata to attach to the device at claim.
+        googleWorkspaceCustomerId:
+          description: The Google Workspace customer ID.
+          type: string
+        preProvisioningToken:
+          description: Optional. Must and can only be set for Chrome OS devices.
+          type: string
         sectionType:
           description: Required. The section type of the device's provisioning record.
           enum:
@@ -1475,7 +1526,7 @@ components:
       description: Captures the processing status for each device in the operation.
       properties:
         deviceId:
-          description: If processing succeeds, the device ID of the device.
+          description: If processing succeeds, the device ID of the Android device.
           format: int64
           type: string
         errorIdentifier:
@@ -1495,6 +1546,8 @@ components:
             - SINGLE_DEVICE_STATUS_INVALID_DEVICE_IDENTIFIER
             - SINGLE_DEVICE_STATUS_INVALID_SECTION_TYPE
             - SINGLE_DEVICE_STATUS_SECTION_NOT_YOURS
+            - SINGLE_DEVICE_STATUS_INVALID_TOKEN
+            - SINGLE_DEVICE_STATUS_REVOKED_TOKEN
           type: string
       type: object
     Status:

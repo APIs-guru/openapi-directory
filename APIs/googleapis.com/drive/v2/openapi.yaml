@@ -5407,7 +5407,7 @@ components:
               description: Whether the current user can read the labels on this file.
               type: boolean
             canReadRevisions:
-              description: Whether the current user can read the revisions resource of this file. For a shared drive item, whether revisions of non-folder descendants of this item, or this item itself if it is not a folder, can be read.
+              description: Whether the current user can read the revisions resource of this file. For a shared drive item, whether revisions of non-folder descendants of this item, or this item itself if it isn't a folder, can be read.
               type: boolean
             canReadTeamDrive:
               description: Deprecated - use canReadDrive instead.
@@ -5456,7 +5456,7 @@ components:
           description: A short description of the file.
           type: string
         downloadUrl:
-          description: Short lived download URL for the file. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.
+          description: Short lived download URL for the file. This field is only populated for files with content stored in Google Drive; it isn't populated for Docs Editors or shortcut files.
           type: string
         driveId:
           description: ID of the shared drive the file resides in. Only populated for items in shared drives.
@@ -5481,17 +5481,17 @@ components:
           readOnly: true
           type: object
         fileExtension:
-          description: The final component of fullFileExtension with trailing text that does not appear to be part of the extension removed. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.
+          description: The final component of fullFileExtension with trailing text that does not appear to be part of the extension removed. This field is only populated for files with content stored in Google Drive; it isn't populated for Docs Editors or shortcut files.
           type: string
         fileSize:
-          description: The size of the file in bytes. This field is populated for files with content stored in Google Drive and for files in Docs Editors; it is not populated for shortcut files.
+          description: The size of the file in bytes. This field is populated for files with content stored in Google Drive and for files in Docs Editors; it isn't populated for shortcut files.
           format: int64
           type: string
         folderColorRgb:
           description: Folder color as an RGB hex string if the file is a folder or a shortcut to a folder. The list of supported colors is available in the folderColorPalette field of the About resource. If an unsupported color is specified, it will be changed to the closest color in the palette.
           type: string
         fullFileExtension:
-          description: The full file extension; extracted from the title. May contain multiple concatenated extensions, such as "tar.gz". Removing an extension from the title does not clear this field; however, changing the extension on the title does update this field. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.
+          description: The full file extension; extracted from the title. May contain multiple concatenated extensions, such as "tar.gz". Removing an extension from the title does not clear this field; however, changing the extension on the title does update this field. This field is only populated for files with content stored in Google Drive; it isn't populated for Docs Editors or shortcut files.
           type: string
         hasAugmentedPermissions:
           description: Whether there are permissions directly on this file. This field is only populated for items in shared drives.
@@ -5500,7 +5500,7 @@ components:
           description: Whether this file has a thumbnail. This does not indicate whether the requesting app has access to the thumbnail. To check access, look for the presence of the thumbnailLink field.
           type: boolean
         headRevisionId:
-          description: The ID of the file's head revision. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.
+          description: The ID of the file's head revision. This field is only populated for files with content stored in Google Drive; it isn't populated for Docs Editors or shortcut files.
           type: string
         iconLink:
           description: A link to the file's icon.
@@ -5599,7 +5599,7 @@ components:
               type: integer
           type: object
         indexableText:
-          description: Indexable text attributes for the file (can only be written)
+          description: Indexable text attributes for the file (can only be written). For more information, see Manage file metadata.
           properties:
             text:
               description: The text to be indexed for this file.
@@ -5668,7 +5668,7 @@ components:
           format: date-time
           type: string
         md5Checksum:
-          description: An MD5 checksum for the content of this file. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.
+          description: An MD5 checksum for the content of this file. This field is only populated for files with content stored in Google Drive; it isn't populated for Docs Editors or shortcut files.
           type: string
         mimeType:
           description: The MIME type of the file. This is only mutable on update when uploading new content. This field can be left blank, and the mimetype will be determined from the uploaded content's MIME type.
@@ -5735,10 +5735,10 @@ components:
           description: A link back to this file.
           type: string
         sha1Checksum:
-          description: The SHA1 checksum associated with this file, if available. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.
+          description: The SHA1 checksum associated with this file, if available. This field is only populated for files with content stored in Google Drive; it isn't populated for Docs Editors or shortcut files.
           type: string
         sha256Checksum:
-          description: The SHA256 checksum associated with this file, if available. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.
+          description: The SHA256 checksum associated with this file, if available. This field is only populated for files with content stored in Google Drive; it isn't populated for Docs Editors or shortcut files.
           type: string
         shareable:
           description: "Deprecated: use capabilities/canShare."

@@ -26,7 +26,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: assuredworkloads
 externalDocs:
-  url: https://cloud.google.com
+  url: https://cloud.google.com/learnmoreurl
 tags:
   - name: organizations
 paths:
@@ -496,6 +496,9 @@ components:
         comment:
           description: Required. Business justification explaining the need for violation acknowledgement
           type: string
+        nonCompliantOrgPolicy:
+          description: "Optional. This field is deprecated and will be removed in future version of the API. Name of the OrgPolicy which was modified with non-compliant change and resulted in this violation. Format: projects/{project_number}/policies/{constraint_name} folders/{folder_id}/policies/{constraint_name} organizations/{organization_id}/policies/{constraint_name}"
+          type: string
       type: object
     GoogleCloudAssuredworkloadsV1AcknowledgeViolationResponse:
       description: Response for violation acknowledgement
@@ -518,7 +521,9 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
+            - AU_REGIONS_AND_US_SUPPORT
             - ASSURED_WORKLOADS_FOR_PARTNERS
+            - ISR_REGIONS
           type: string
         createTime:
           description: Optional. Time when the operation was created.
@@ -564,6 +569,7 @@ components:
             - RESTRICTION_TYPE_UNSPECIFIED
             - ALLOW_ALL_GCP_RESOURCES
             - ALLOW_COMPLIANT_RESOURCES
+            - APPEND_COMPLIANT_RESOURCES
           type: string
       type: object
     GoogleCloudAssuredworkloadsV1RestrictAllowedResourcesResponse:
@@ -708,7 +714,7 @@ components:
           type: array
       type: object
     GoogleCloudAssuredworkloadsV1Workload:
-      description: An Workload object for managing highly regulated workloads of cloud customers.
+      description: A Workload object for managing highly regulated workloads of cloud customers.
       properties:
         billingAccount:
           description: Optional. The billing account used for the resources which are direct children of workload. This billing account is initially associated with the resources created as part of Workload creation. After the initial creation of these resources, the customer can change the assigned billing account. The resource name has the form `billingAccounts/{billing_account_id}`. For example, `billingAccounts/012345-567890-ABCDEF`.
@@ -727,8 +733,14 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
+            - AU_REGIONS_AND_US_SUPPORT
             - ASSURED_WORKLOADS_FOR_PARTNERS
+            - ISR_REGIONS
           type: string
+        complianceStatus:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadComplianceStatus"
+          description: Output only. Count of active Violations in the Workload.
+          readOnly: true
         compliantButDisallowedServices:
           description: Output only. Urls for services which are compliant for this Assured Workload, but which are currently disallowed by the ResourceUsageRestriction org policy. Invoke RestrictAllowedResources endpoint to allow your project developers to use these services in their environment."
           items:
@@ -773,6 +785,7 @@ components:
           enum:
             - PARTNER_UNSPECIFIED
             - LOCAL_CONTROLS_BY_S3NS
+            - SOVEREIGN_CONTROLS_BY_T_SYSTEMS
           type: string
         provisionedResourcesParent:
           description: "Input only. The parent resource for the resources managed by this Assured Workload. May be either empty or a folder resource which is a child of the Workload parent. If not specified all resources are created under the parent organization. Format: folders/{folder_id}"
@@ -793,8 +806,20 @@ components:
           description: Output only. Represents the SAA enrollment response of the given workload. SAA enrollment response is queried during GetWorkload call. In failure cases, user friendly error message is shown in SAA details page.
           readOnly: true
       type: object
+    GoogleCloudAssuredworkloadsV1WorkloadComplianceStatus:
+      description: Represents the Compliance Status of this workload
+      properties:
+        acknowledgedViolationCount:
+          description: Count of active Violations which are acknowledged in the Workload.
+          format: int32
+          type: integer
+        activeViolationCount:
+          description: Count of active Violations which haven't been acknowledged.
+          format: int32
+          type: integer
+      type: object
     GoogleCloudAssuredworkloadsV1WorkloadKMSSettings:
-      description: Settings specific to the Key Management Service.
+      description: Settings specific to the Key Management Service. This message is deprecated. In order to create a Keyring, callers should specify, ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
       properties:
         nextRotationTime:
           description: Required. Input only. Immutable. The time at which the Key Management Service will automatically create a new version of the crypto key and mark it as the primary.
@@ -832,7 +857,7 @@ components:
           description: Resource identifier. For a project this represents project_id. If the project is already taken, the workload creation will fail. For KeyRing, this represents the keyring_id. For a folder, don't set this value as folder_id is assigned by Google.
           type: string
         resourceType:
-          description: Indicates the type of resource. This field should be specified to correspond the id to the right project type (CONSUMER_PROJECT or ENCRYPTION_KEYS_PROJECT)
+          description: Indicates the type of resource. This field should be specified to correspond the id to the right resource type (CONSUMER_FOLDER or ENCRYPTION_KEYS_PROJECT)
           enum:
             - RESOURCE_TYPE_UNSPECIFIED
             - CONSUMER_PROJECT

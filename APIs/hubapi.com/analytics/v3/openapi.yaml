@@ -34,6 +34,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - analytics.behavioral_events.send
       summary: Sends Custom Behavioral Event
@@ -167,3 +168,7 @@ components:
             analytics.behavioral_events.send: Send Behavioral Event Completions
           tokenUrl: https://api.hubapi.com/oauth/v1/token
       type: oauth2
+    private_apps_legacy:
+      in: header
+      name: private-app-legacy
+      type: apiKey

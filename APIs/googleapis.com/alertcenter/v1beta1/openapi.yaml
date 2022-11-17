@@ -546,6 +546,9 @@ components:
         alertDescriptor:
           description: Displayed after Customer abuse detected - {alert_descriptor}. If missing, alert name will be displayed as Customer abuse detected.
           type: string
+        nextSteps:
+          description: Customizable text to display in the next steps section of the alert. Will be parsed as HTML to allow new paragraphs and hyperlinks.
+          type: string
         product:
           description: Product that the abuse is originating from.
           type: string

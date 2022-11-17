@@ -377,6 +377,102 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/internalRanges":
+    get:
+      description: Lists InternalRanges in a given project and location.
+      operationId: networkconnectivity.projects.locations.internalRanges.list
+      parameters:
+        - description: Required. The parent resource's name.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: A filter expression that filters the results listed in the response.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Sort the results by a certain order.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: The maximum number of results per page that should be returned.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListInternalRangesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new InternalRange in a given project and location.
+      operationId: networkconnectivity.projects.locations.internalRanges.create
+      parameters:
+        - description: Required. The parent resource's name of the InternalRange.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Resource ID (i.e. 'foo' in '[...]/projects/p/locations/l/internalRanges/foo') See https://google.aip.dev/122#resource-id-segments Unique per location.
+          in: query
+          name: internalRangeId
+          schema:
+            type: string
+        - description: Optional. An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. The server will guarantee that for at least 60 minutes since the first request. For example, consider a situation where you make an initial request and t he request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InternalRange"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/spokes":
     get:
       description: Lists the Network Connectivity Center spokes in a specified project and location.
@@ -840,6 +936,73 @@ components:
           readOnly: true
           type: string
       type: object
+    InternalRange:
+      description: "The InternalRange resource for IPAM operations within a VPC network. Used to represent a private address range along with behavioral characterstics of that range (it's usage and peering behavior). Networking resources can link to this range if they are created as belonging to it. Next id: 14"
+      properties:
+        createTime:
+          description: Time when the InternalRange was created.
+          format: google-datetime
+          type: string
+        description:
+          description: A description of this resource.
+          type: string
+        ipCidrRange:
+          description: IP range that this InternalRange defines.
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: User-defined labels.
+          type: object
+        name:
+          description: "Immutable. The name of a InternalRange. Format: projects/{project}/locations/{location}/internalRanges/{internal_range} See: https://google.aip.dev/122#fields-representing-resource-names"
+          type: string
+        network:
+          description: "The URL or resource ID of the network in which to reserve the Internal Range. The network cannot be deleted if there are any reserved Internal Ranges referring to it. Legacy network is not supported. This can only be specified for a global internal address. Example: - URL: /compute/v1/projects/{project}/global/networks/{resourceId} - ID: network123"
+          type: string
+        overlaps:
+          description: Optional. Types of resources that are allowed to overlap with the current InternalRange.
+          items:
+            enum:
+              - OVERLAP_UNSPECIFIED
+              - OVERLAP_ROUTE_RANGE
+            type: string
+          type: array
+        peering:
+          description: The type of peering set for this InternalRange.
+          enum:
+            - PEERING_UNSPECIFIED
+            - FOR_SELF
+            - FOR_PEER
+            - NOT_SHARED
+          type: string
+        prefixLength:
+          description: An alternate to ip_cidr_range. Can be set when trying to create a reservation that automatically finds a free range of the given size. If both ip_cidr_range and prefix_length are set, it's an error if the range sizes don't match. Can also be used during updates to change the range size.
+          format: int32
+          type: integer
+        targetCidrRange:
+          description: Optional. Can be set to narrow down or pick a different address space while searching for a free range. If not set, defaults to the "10.0.0.0/8" address space. This can be used to search in other rfc-1918 address spaces like "172.16.0.0/12" and "192.168.0.0/16" or non-rfc-1918 address spaces used in the VPC.
+          items:
+            type: string
+          type: array
+        updateTime:
+          description: Time when the InternalRange was updated.
+          format: google-datetime
+          type: string
+        usage:
+          description: The type of usage set for this InternalRange.
+          enum:
+            - USAGE_UNSPECIFIED
+            - FOR_VPC
+            - EXTERNAL_TO_VPC
+          type: string
+        users:
+          description: Output only. The list of resources that refer to this internal range. Resources that use the InternalRange for their range allocation are referred to as users of the range. Other resources mark themselves as users while doing so by creating a reference to this InternalRange. Having a user, based on this reference, prevents deletion of the InternalRange referred to. Can be empty.
+          items:
+            type: string
+          readOnly: true
+          type: array
+      type: object
     LinkedInterconnectAttachments:
       description: A collection of VLAN attachment resources. These resources should be redundant attachments that all advertise the same prefixes to Google Cloud. Alternatively, in active/passive configurations, all attachments should be capable of advertising the same prefixes.
       properties:
@@ -851,6 +1014,10 @@ components:
           items:
             type: string
           type: array
+        vpcNetwork:
+          description: Output only. The VPC network where these VLAN attachments are located.
+          readOnly: true
+          type: string
       type: object
     LinkedRouterApplianceInstances:
       description: A collection of router appliance instances. If you configure multiple router appliance instances to receive data from the same set of sites outside of Google Cloud, we recommend that you associate those instances with the same spoke.
@@ -863,6 +1030,10 @@ components:
         siteToSiteDataTransfer:
           description: A value that controls whether site-to-site data transfer is enabled for these resources. Data transfer is available only in [supported locations](https://cloud.google.com/network-connectivity/docs/network-connectivity-center/concepts/locations).
           type: boolean
+        vpcNetwork:
+          description: Output only. The VPC network where these router appliance instances are located.
+          readOnly: true
+          type: string
       type: object
     LinkedVpnTunnels:
       description: A collection of Cloud VPN tunnel resources. These resources should be redundant HA VPN tunnels that all advertise the same prefixes to Google Cloud. Alternatively, in a passive/active configuration, all tunnels should be capable of advertising the same prefixes.
@@ -875,6 +1046,10 @@ components:
           items:
             type: string
           type: array
+        vpcNetwork:
+          description: Output only. The VPC network where these VPN tunnels are located.
+          readOnly: true
+          type: string
       type: object
     ListHubsResponse:
       description: Response for HubService.ListHubs method.
@@ -883,6 +1058,23 @@ components:
           description: The requested hubs.
           items:
             $ref: "#/components/schemas/Hub"
+          type: array
+        nextPageToken:
+          description: The next pagination token in the List response. It should be used as page_token for the following request. An empty value means no more result.
+          type: string
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
+    ListInternalRangesResponse:
+      description: Response for InternalRange.ListInternalRanges
+      properties:
+        internalRanges:
+          description: InternalRanges to be returned.
+          items:
+            $ref: "#/components/schemas/InternalRange"
           type: array
         nextPageToken:
           description: The next pagination token in the List response. It should be used as page_token for the following request. An empty value means no more result.

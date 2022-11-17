@@ -26,7 +26,7 @@ paths:
   "/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create":
     post:
       description: Record a subscription state between multiple HubSpot contacts and a marketing event, using HubSpot contact ids.
-      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create
+      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/create_create
       parameters:
         - description: The id of the marketing event
           explode: false
@@ -36,7 +36,7 @@ paths:
           schema:
             type: string
           style: simple
-        - description: The new subscriber state for the HubSpot contacts and the specified marketing event
+        - description: "The new subscriber state for the HubSpot contacts and the specified marketing event. For example: 'register', 'attend' or 'cancel'."
           explode: false
           in: path
           name: subscriberState
@@ -70,6 +70,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Record
@@ -78,7 +79,7 @@ paths:
   "/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create":
     post:
       description: "Record a subscription state between multiple HubSpot contacts and a marketing event, using contact email addresses. If contact is not present it will be automatically created. If you set params "
-      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create
+      operationId: post-/marketing/v3/marketing-events/attendance/{externalEventId}/{subscriberState}/email-create_createByEmail
       parameters:
         - description: The id of the marketing event
           explode: false
@@ -88,7 +89,7 @@ paths:
           schema:
             type: string
           style: simple
-        - description: The new subscriber state for the HubSpot contacts and the specified marketing event
+        - description: "The new subscriber state for the HubSpot contacts and the specified marketing event. For example: 'register', 'attend' or 'cancel'."
           explode: false
           in: path
           name: subscriberState
@@ -122,6 +123,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       summary: Record
@@ -147,13 +149,14 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
         - Marketing_Events_External
   /marketing/v3/marketing-events/events/delete:
     post:
-      operationId: post-/marketing/v3/marketing-events/events/delete_archive
+      operationId: post-/marketing/v3/marketing-events/events/delete_archiveBatch
       requestBody:
         content:
           application/json:
@@ -165,6 +168,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -193,6 +197,7 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.read
+        - private_apps_legacy: []
       tags:
         - Marketing_Events_External
   /marketing/v3/marketing-events/events/upsert:
@@ -215,6 +220,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -245,6 +251,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -279,6 +286,7 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - crm.objects.marketing_events.read
+        - private_apps_legacy: []
       tags:
         - Marketing_Events_External
     patch:
@@ -315,6 +323,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -346,6 +355,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -379,13 +389,14 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
         - Marketing_Events_External
   "/marketing/v3/marketing-events/events/{externalEventId}/complete":
     post:
-      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/complete
+      operationId: post-/marketing/v3/marketing-events/events/{externalEventId}/complete_complete
       parameters:
         - explode: false
           in: path
@@ -418,6 +429,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -458,6 +470,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -498,6 +511,7 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - crm.objects.marketing_events.write
       tags:
@@ -1417,3 +1431,12 @@ components:
             crm.objects.marketing_events.write: Write marketing events
           tokenUrl: https://api.hubapi.com/oauth/v1/token
       type: oauth2
+    private_apps_legacy:
+      in: header
+      name: private-app-legacy
+      type: apiKey
+x-hubspot-available-client-libraries:
+  - PHP
+  - Node
+  - Python
+  - Ruby

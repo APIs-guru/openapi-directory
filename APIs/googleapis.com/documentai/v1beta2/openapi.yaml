@@ -1445,6 +1445,9 @@ components:
         layout:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentPageLayout"
           description: Layout for Table.
+        provenance:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta1DocumentProvenance"
+          description: The history of this table.
       type: object
     GoogleCloudDocumentaiV1beta1DocumentPageTableTableCell:
       description: A cell representation inside the table.
@@ -2348,6 +2351,9 @@ components:
         layout:
           $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentPageLayout"
           description: Layout for Table.
+        provenance:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiV1beta2DocumentProvenance"
+          description: The history of this table.
       type: object
     GoogleCloudDocumentaiV1beta2DocumentPageTableTableCell:
       description: A cell representation inside the table.

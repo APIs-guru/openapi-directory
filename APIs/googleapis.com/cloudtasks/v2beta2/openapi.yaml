@@ -1084,7 +1084,7 @@ components:
           type: string
       type: object
     BufferTaskRequest:
-      description: LINT.IfChange Request message for BufferTask.
+      description: Request message for BufferTask.
       properties:
         body:
           $ref: "#/components/schemas/HttpBody"
@@ -1258,7 +1258,7 @@ components:
           description: If specified, an [OIDC](https://developers.google.com/identity/protocols/OpenIDConnect) token will be generated and attached as an `Authorization` header in the HTTP request. This type of authorization can be used for many scenarios, including calling Cloud Run, or endpoints where you intend to validate the token yourself.
         uriOverride:
           $ref: "#/components/schemas/UriOverride"
-          description: Uri override. When specified modifies the execution Uri for all the tasks in the queue.
+          description: Uri override. When specified, modifies the execution Uri for all the tasks in the queue.
       type: object
     LeaseTasksRequest:
       description: Request message for leasing tasks using LeaseTasks.
@@ -1679,6 +1679,13 @@ components:
             - SCHEME_UNSPECIFIED
             - HTTP
             - HTTPS
+          type: string
+        uriOverrideEnforceMode:
+          description: Uri Override Enforce Mode Determines the Target UriOverride mode.
+          enum:
+            - URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED
+            - IF_NOT_EXISTS
+            - ALWAYS
           type: string
       type: object
   securitySchemes:

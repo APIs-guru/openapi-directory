@@ -1134,6 +1134,9 @@ components:
         glossaryConfig:
           $ref: "#/components/schemas/TranslateTextGlossaryConfig"
           description: Optional. Glossary to be applied. The glossary must be within the same region (have the same location-id) as the model, otherwise an INVALID_ARGUMENT (400) error is returned.
+        isTranslateNativePdfOnly:
+          description: Optional. is_translate_native_pdf_only field for external customers. If true, the page limit of online native pdf translation is 300 and only native pdf pages will be translated.
+          type: boolean
         labels:
           additionalProperties:
             type: string

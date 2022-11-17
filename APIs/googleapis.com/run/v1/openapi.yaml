@@ -2373,7 +2373,7 @@ components:
           type: integer
         template:
           $ref: "#/components/schemas/TaskTemplateSpec"
-          description: Optional. Describes the task(s) that will be created when executing an execution.
+          description: Optional. The template used to create tasks for this execution.
       type: object
     ExecutionStatus:
       description: ExecutionStatus represents the current state of an Execution.
@@ -2519,7 +2519,7 @@ components:
       description: HTTPHeader describes a custom header to be used in HTTP probes
       properties:
         name:
-          description: The header field name
+          description: Required. The header field name
           type: string
         value:
           description: The header field value
@@ -2576,7 +2576,7 @@ components:
       description: Maps a string key to a path within a volume.
       properties:
         key:
-          description: The Cloud Secret Manager secret version. Can be 'latest' for the latest value or an integer for a specific version. The key to project.
+          description: The Cloud Secret Manager secret version. Can be 'latest' for the latest value, or an integer or a secret alias for a specific version. The key to project.
           type: string
         mode:
           description: "(Optional) Mode bits to use on this file, must be a value between 01 and 0777 (octal). If 0 or not set, the Volume's default mode will be used. Notes * Internally, a umask of 0222 will be applied to any non-zero value. * This is an integer representation of the mode bits. So, the octal integer value should look exactly as the chmod numeric notation with a leading zero. Some examples: for chmod 777 (a=rwx), set to 0777 (octal) or 511 (base-10). For chmod 640 (u=rw,g=r), set to 0640 (octal) or 416 (base-10). For chmod 755 (u=rwx,g=rx,o=rx), set to 0755 (octal) or 493 (base-10). * This might be in conflict with other options that affect the file mode, like fsGroup, and the result can be other mode bits set."
@@ -3133,7 +3133,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudRunV1Condition"
           type: array
         observedGeneration:
-          description: ObservedGeneration is the 'Generation' of the Route that was last processed by the controller. Clients polling for completed reconciliation should poll until observedGeneration = metadata.generation and the Ready condition's status is True or False. Note that providing a trafficTarget that only has a configurationName will result in a Route that does not increment either its metadata.generation or its observedGeneration, as new "latest ready" revisions from the Configuration are processed without an update to the Route's spec.
+          description: ObservedGeneration is the 'Generation' of the Route that was last processed by the controller. Clients polling for completed reconciliation should poll until observedGeneration = metadata.generation and the Ready condition's status is True or False. Note that providing a TrafficTarget that has latest_revision=True will result in a Route that does not increment either its metadata.generation or its observedGeneration, as new "latest ready" revisions from the Configuration are processed without an update to the Route's spec.
           format: int32
           type: integer
         traffic:
@@ -3166,7 +3166,7 @@ components:
       description: SecretKeySelector selects a key of a Secret.
       properties:
         key:
-          description: Required. A Cloud Secret Manager secret version. Must be 'latest' for the latest version or an integer for a specific version. The key of the secret to select from. Must be a valid secret key.
+          description: Required. A Cloud Secret Manager secret version. Must be 'latest' for the latest version, an integer for a specific version, or a version alias. The key of the secret to select from. Must be a valid secret key.
           type: string
         localObjectReference:
           $ref: "#/components/schemas/LocalObjectReference"
@@ -3469,23 +3469,24 @@ components:
       description: TrafficTarget holds a single entry of the routing table for a Route.
       properties:
         configurationName:
-          description: ConfigurationName of a configuration to whose latest revision which will be sent this portion of traffic. When the "status.latestReadyRevisionName" of the referenced configuration changes, traffic will automatically migrate from the prior "latest ready" revision to the new one. This field is never set in Route's status, only its spec. This is mutually exclusive with RevisionName. Cloud Run currently supports a single ConfigurationName.
+          description: "[Deprecated] Not supported in Cloud Run. It must be empty."
           type: string
         latestRevision:
-          description: Optional. LatestRevision may be provided to indicate that the latest ready Revision of the Configuration should be used for this traffic target. When provided LatestRevision must be true if RevisionName is empty; it must be false when RevisionName is non-empty.
+          description: Uses the "status.latestReadyRevisionName" of the Service to determine the traffic target. When it changes, traffic will automatically migrate from the prior "latest ready" revision to the new one. This field must be false if RevisionName is set. This field defaults to true otherwise. If the field is set to true on Status, this means that the Revision was resolved from the Service's latest ready revision.
           type: boolean
         percent:
           description: Percent specifies percent of the traffic to this Revision or Configuration. This defaults to zero if unspecified.
           format: int32
           type: integer
         revisionName:
-          description: RevisionName of a specific revision to which to send this portion of traffic. This is mutually exclusive with ConfigurationName.
+          description: Points this traffic target to a specific Revision. This field is mutually exclusive with latest_revision.
           type: string
         tag:
-          description: Optional. Tag is used to expose a dedicated url for referencing this target exclusively.
+          description: Tag is used to expose a dedicated url for referencing this target exclusively.
           type: string
         url:
           description: Output only. URL displays the URL for accessing tagged traffic targets. URL is displayed in status, and is disallowed on spec. URL must contain a scheme (e.g. https://) and a hostname, but may not contain anything else (e.g. basic auth, url path, etc.)
+          readOnly: true
           type: string
       type: object
     Volume:

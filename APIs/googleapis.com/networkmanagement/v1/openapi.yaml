@@ -629,6 +629,8 @@ components:
             - DESTINATION_ENDPOINT_NOT_FOUND
             - MISMATCHED_DESTINATION_NETWORK
             - UNSUPPORTED
+            - MISMATCHED_IP_VERSION
+            - GKE_KONNECTIVITY_PROXY_UNSUPPORTED
           type: string
         projectsMissingPermission:
           description: List of project IDs that the user has specified in the request but does not have permission to access network configs. Analysis is aborted in this case with the PERMISSION_DENIED cause.
@@ -818,9 +820,12 @@ components:
             - NO_EXTERNAL_ADDRESS
             - UNKNOWN_INTERNAL_ADDRESS
             - FORWARDING_RULE_MISMATCH
+            - FORWARDING_RULE_REGION_MISMATCH
             - FORWARDING_RULE_NO_INSTANCES
             - FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK
             - INSTANCE_NOT_RUNNING
+            - GKE_CLUSTER_NOT_RUNNING
+            - CLOUD_SQL_INSTANCE_NOT_RUNNING
             - TRAFFIC_TYPE_BLOCKED
             - GKE_MASTER_UNAUTHORIZED_ACCESS
             - CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS
@@ -828,6 +833,12 @@ components:
             - DROPPED_INSIDE_CLOUD_SQL_SERVICE
             - GOOGLE_MANAGED_SERVICE_NO_PEERING
             - CLOUD_SQL_INSTANCE_NO_IP_ADDRESS
+            - GKE_CONTROL_PLANE_REGION_MISMATCH
+            - PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION
+            - GKE_CONTROL_PLANE_NO_ROUTE
+            - CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC
+            - PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION
+            - CLOUD_SQL_INSTANCE_NO_ROUTE
             - CLOUD_FUNCTION_NOT_ACTIVE
             - VPC_CONNECTOR_NOT_SET
             - VPC_CONNECTOR_NOT_RUNNING
@@ -982,6 +993,7 @@ components:
             - GKE_MASTER
             - IMPORTED_CUSTOM_ROUTE_NEXT_HOP
             - CLOUD_SQL_INSTANCE
+            - ANOTHER_PROJECT
           type: string
       type: object
     ForwardingRuleInfo:
@@ -1353,7 +1365,7 @@ components:
             - PEERING_SUBNET
             - PEERING_STATIC
             - PEERING_DYNAMIC
-            - POLICY_BASED_ROUTE
+            - POLICY_BASED
           type: string
         srcIpRange:
           description: Source IP address range of the route. Policy based routes only.

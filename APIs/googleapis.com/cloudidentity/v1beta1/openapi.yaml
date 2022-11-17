@@ -335,12 +335,12 @@ paths:
       description: Lists InboundSamlSsoProfiles for a customer.
       operationId: cloudidentity.inboundSamlSsoProfiles.list
       parameters:
-        - description: "A CEL expression to filter the results. The only currently-supported filter is filtering by customer. For example: `customer==customers/C0123abc`. Omitting the filter or specifying a filter of `customer==customers/my_customer` will return the profiles for the customer that the caller (authenticated user) belongs to."
+        - description: 'A [Common Expression Language](https://github.com/google/cel-spec) expression to filter the results. The only currently-supported filter is filtering by customer. For example: `customer=="customers/C0123abc"`. Omitting the filter or specifying a filter of `customer=="customers/my_customer"` will return the profiles for the customer that the caller (authenticated user) belongs to.'
           in: query
           name: filter
           schema:
             type: string
-        - description: The maximum number of InboundSamlSsoProfiles to return. The service may return fewer than this value. If omitted (or defaulted to zero) the server will use a sensible default. This default may change over time. The maximum allowed value is 100, though requests with page_size greater than that will be silently interpreted as having this maximum value. This may increase in the futue.
+        - description: The maximum number of InboundSamlSsoProfiles to return. The service may return fewer than this value. If omitted (or defaulted to zero) the server will use a sensible default. This default may change over time. The maximum allowed value is 100. Requests with page_size greater than that will be silently interpreted as having this maximum value.
           in: query
           name: pageSize
           schema:
@@ -1658,7 +1658,7 @@ components:
       description: The request for creating an IdpCredential with its associated payload. An InboundSamlSsoProfile can own up to 2 credentials.
       properties:
         pemData:
-          description: PEM encoded x509 certificate containing the public signing key.
+          description: PEM encoded x509 certificate containing the public key for verifying IdP signatures.
           type: string
       type: object
     AndroidAttributes:
@@ -1925,6 +1925,18 @@ components:
           description: Output only. Build number of the device.
           readOnly: true
           type: string
+        clientTypes:
+          description: List of the clients the device is reporting to.
+          items:
+            enum:
+              - CLIENT_TYPE_UNSPECIFIED
+              - DRIVE_FS
+              - FUNDAMENTAL
+              - ENDPOINT_VERIFICATION
+              - WINDOWS_ADVANCED
+              - GOOGLE_CREDENTIALS_PROVIDER_FOR_WINDOWS
+            type: string
+          type: array
         compromisedState:
           description: Output only. Represents whether the Device is compromised.
           enum:
@@ -1975,6 +1987,9 @@ components:
           $ref: "#/components/schemas/EndpointVerificationSpecificAttributes"
           description: Output only. Attributes specific to Endpoint Verification devices.
           readOnly: true
+        hostname:
+          description: Host name of the device.
+          type: string
         imei:
           description: Output only. IMEI number of device if GSM device; empty otherwise.
           readOnly: true
@@ -2688,7 +2703,7 @@ components:
           type: array
       type: object
     IdpCredential:
-      description: The identity provider's credentials (for signing assertions, etc).
+      description: Credential for verifying signatures produced by the Identity Provider.
       properties:
         dsaKeyInfo:
           $ref: "#/components/schemas/DsaPublicKeyInfo"

@@ -1798,7 +1798,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: User assigned name of the Respones Policy addressed by this request.
+        - description: User assigned name of the response policy addressed by this request.
           in: path
           name: responsePolicy
           required: true
@@ -2348,7 +2348,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
+      description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this returns an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
       operationId: dns.managedZones.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field."
@@ -2865,6 +2865,9 @@ components:
         ipv4Address:
           description: IPv4 address of a target name server.
           type: string
+        ipv6Address:
+          description: IPv6 address of a target name server. Does not accept both fields (ipv4 & ipv6) being populated. Public preview as of November 2022.
+          type: string
         kind:
           default: dns#managedZoneForwardingConfigNameServerTarget
           type: string
@@ -3116,7 +3119,10 @@ components:
             - PRIVATE
           type: string
         ipv4Address:
-          description: IPv4 address to forward to.
+          description: IPv4 address to forward queries to.
+          type: string
+        ipv6Address:
+          description: IPv6 address to forward to. Does not accept both fields (ipv4 & ipv6) being populated. Public preview as of November 2022.
           type: string
         kind:
           default: dns#policyAlternativeNameServerConfigTargetNameServer
@@ -3447,7 +3453,7 @@ components:
         header:
           $ref: "#/components/schemas/ResponseHeader"
         nextPageToken:
-          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. This lets you the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
+          description: The presence of this field indicates that more results exist following your last page of results in pagination order. To fetch them, make another list request by using this value as your page token. This lets you view the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned are an inconsistent view of the collection. You cannot retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
         responsePolicies:
           description: The Response Policy resources.

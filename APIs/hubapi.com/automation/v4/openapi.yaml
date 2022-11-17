@@ -44,6 +44,7 @@ paths:
         - oauth2_legacy:
             - automation
         - hapikey: []
+        - private_apps_legacy: []
       summary: Complete a batch of callbacks
       tags:
         - Callbacks
@@ -77,6 +78,7 @@ paths:
         - oauth2_legacy:
             - automation
         - hapikey: []
+        - private_apps_legacy: []
       summary: Complete a callback
       tags:
         - Callbacks
@@ -1791,6 +1793,10 @@ components:
             automation: Read from and write to my Workflows
           tokenUrl: https://api.hubapi.com/oauth/v1/token
       type: oauth2
+    private_apps_legacy:
+      in: header
+      name: private-app-legacy
+      type: apiKey
 x-hubspot-available-client-libraries:
   - PHP
   - Node

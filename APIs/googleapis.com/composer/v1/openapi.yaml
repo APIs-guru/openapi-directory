@@ -665,6 +665,17 @@ components:
           description: Whether or not master authorized networks feature is enabled.
           type: boolean
       type: object
+    NetworkingConfig:
+      description: Configuration options for networking connections in the Composer 2 environment.
+      properties:
+        connectionType:
+          description: Optional. Indicates the user requested specifc connection type between Tenant and Customer projects. You cannot set networking connection type in public IP environment.
+          enum:
+            - CONNECTION_TYPE_UNSPECIFIED
+            - VPC_PEERING
+            - PRIVATE_SERVICE_CONNECT
+          type: string
+      type: object
     NodeConfig:
       description: The configuration information for the Kubernetes Engine nodes running the Apache Airflow software.
       properties:
@@ -802,6 +813,9 @@ components:
         enablePrivatelyUsedPublicIps:
           description: Optional. When enabled, IPs from public (non-RFC1918) ranges can be used for `IPAllocationPolicy.cluster_ipv4_cidr_block` and `IPAllocationPolicy.service_ipv4_cidr_block`.
           type: boolean
+        networkingConfig:
+          $ref: "#/components/schemas/NetworkingConfig"
+          description: Optional. Configuration for the network connections configuration in the environment.
         privateClusterConfig:
           $ref: "#/components/schemas/PrivateClusterConfig"
           description: Optional. Configuration for the private GKE cluster for a Private IP Cloud Composer environment.

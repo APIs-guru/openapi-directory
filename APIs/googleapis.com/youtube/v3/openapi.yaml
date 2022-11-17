@@ -1788,6 +1788,14 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/youtube
+          Oauth2c:
+            - https://www.googleapis.com/auth/youtube
+        - Oauth2:
+            - https://www.googleapis.com/auth/youtube.force-ssl
+          Oauth2c:
+            - https://www.googleapis.com/auth/youtube.force-ssl
+        - Oauth2:
             - https://www.googleapis.com/auth/youtubepartner
           Oauth2c:
             - https://www.googleapis.com/auth/youtubepartner

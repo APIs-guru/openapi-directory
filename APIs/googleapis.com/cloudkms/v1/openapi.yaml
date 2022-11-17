@@ -1715,6 +1715,10 @@ components:
             - EC_SIGN_P384_SHA384
             - EC_SIGN_SECP256K1_SHA256
             - HMAC_SHA256
+            - HMAC_SHA1
+            - HMAC_SHA384
+            - HMAC_SHA512
+            - HMAC_SHA224
             - EXTERNAL_SYMMETRIC_ENCRYPTION
           readOnly: true
           type: string
@@ -1819,6 +1823,10 @@ components:
             - EC_SIGN_P384_SHA384
             - EC_SIGN_SECP256K1_SHA256
             - HMAC_SHA256
+            - HMAC_SHA1
+            - HMAC_SHA384
+            - HMAC_SHA512
+            - HMAC_SHA224
             - EXTERNAL_SYMMETRIC_ENCRYPTION
           type: string
         protectionLevel:
@@ -1904,7 +1912,7 @@ components:
           readOnly: true
           type: string
         etag:
-          description: Optional. This checksum is computed by the server based on the value of other fields, and may be sent on update requests to ensure the client has an up-to-date value before proceeding.
+          description: Optional. Etag of the currently stored EkmConnection.
           type: string
         name:
           description: Output only. The resource name for the EkmConnection in the format `projects/*/locations/*/ekmConnections/*`.
@@ -2051,6 +2059,10 @@ components:
             - EC_SIGN_P384_SHA384
             - EC_SIGN_SECP256K1_SHA256
             - HMAC_SHA256
+            - HMAC_SHA1
+            - HMAC_SHA384
+            - HMAC_SHA512
+            - HMAC_SHA224
             - EXTERNAL_SYMMETRIC_ENCRYPTION
           type: string
         cryptoKeyVersion:
@@ -2431,6 +2443,10 @@ components:
             - EC_SIGN_P384_SHA384
             - EC_SIGN_SECP256K1_SHA256
             - HMAC_SHA256
+            - HMAC_SHA1
+            - HMAC_SHA384
+            - HMAC_SHA512
+            - HMAC_SHA224
             - EXTERNAL_SYMMETRIC_ENCRYPTION
           type: string
         name:

@@ -214,11 +214,16 @@ paths:
           name: dataset
           schema:
             type: string
-        - description: "The device type context for completion suggestions. It is useful to apply different suggestions on different device types, e.g. `DESKTOP`, `MOBILE`. If it is empty, the suggestions are across all device types. Supported formats: * `UNKNOWN_DEVICE_TYPE` * `DESKTOP` * `MOBILE` * A customized string starts with `OTHER_`, e.g. `OTHER_IPHONE`."
+        - description: "The device type context for completion suggestions. We recommend that you leave this field empty. It can apply different suggestions on different device types, e.g. `DESKTOP`, `MOBILE`. If it is empty, the suggestions are across all device types. Supported formats: * `UNKNOWN_DEVICE_TYPE` * `DESKTOP` * `MOBILE` * A customized string starts with `OTHER_`, e.g. `OTHER_IPHONE`."
           in: query
           name: deviceType
           schema:
             type: string
+        - description: If true, attribute suggestions are enabled and provided in response. This field is only available for "cloud-retail" dataset.
+          in: query
+          name: enableAttributeSuggestions
+          schema:
+            type: boolean
         - description: Note that this field applies for `user-data` dataset only. For requests with `cloud-retail` dataset, setting this field has no effect. The language filters applied to the output suggestions. If set, it should contain the language of the query. If not set, suggestions are returned without considering language restrictions. This is the BCP-47 language code, such as "en-US" or "sr-Latn". For more information, see [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47). The maximum number of language codes is 3.
           explode: true
           in: query
@@ -1196,6 +1201,16 @@ paths:
           name: ets
           schema:
             type: string
+        - description: 'The prebuilt rule name that can convert a specific type of raw_json. For example: "default_schema/v1.0"'
+          in: query
+          name: prebuiltRule
+          schema:
+            type: string
+        - description: "An arbitrary serialized JSON string that contains necessary information that can comprise a user event. When this field is specified, the user_event field will be ignored. Note: line-delimited JSON is not supported, a single JSON only."
+          in: query
+          name: rawJson
+          schema:
+            type: string
         - description: The URL including cgi-parameters but excluding the hash fragment with a length limit of 5,000 characters. This is often more useful than the referer URL, because many browsers only send the domain for 3rd party requests.
           in: query
           name: uri
@@ -1878,7 +1893,7 @@ components:
           type: integer
       type: object
     GoogleCloudRetailLoggingImportErrorContext:
-      description: 'The error payload that is populated on LRO import APIs. Including: "google.cloud.retail.v2.ProductService.ImportProducts" "google.cloud.retail.v2.EventService.ImportUserEvents"'
+      description: The error payload that is populated on LRO import APIs, including "google.cloud.retail.v2.ProductService.ImportProducts" and "google.cloud.retail.v2.EventService.ImportUserEvents".
       properties:
         catalogItem:
           description: The detailed content which caused the error on importing a catalog item.
@@ -1886,29 +1901,11 @@ components:
         gcsPath:
           description: Cloud Storage file path of the import source. Can be set for batch operation error.
           type: string
-        inventoryActivity:
-          description: The detailed content which caused the error on importing an inventory activity. http://cs/google3/google/cloud/retail/v2main/inventory_activity.proto
-          type: string
         lineNumber:
           description: Line number of the content in file. Should be empty for permission or batch operation error.
           type: string
         operationName:
           description: The operation resource name of the LRO.
-          type: string
-        order:
-          description: The detailed content which caused the error on importing an order. http://cs/google3/google/cloud/retail/v2main/order.proto
-          type: string
-        place:
-          description: The detailed content which caused the error on importing a place. http://cs/google3/google/cloud/retail/v2main/place.proto
-          type: string
-        placeAsset:
-          description: The detailed content which caused the error on importing a place asset. http://cs/google3/google/cloud/retail/v2main/place_asset.proto
-          type: string
-        placeProductPrice:
-          description: The detailed content which caused the error on importing a place product price. http://cs/google3/google/cloud/retail/v2main/place_product_price.proto
-          type: string
-        placeProductSettings:
-          description: The detailed content which caused the error on importing a place product settings. http://cs/google3/google/cloud/retail/v2main/place_product_settings.proto
           type: string
         product:
           description: The detailed content which caused the error on importing a product.
@@ -2288,6 +2285,13 @@ components:
             - RECOMMENDATIONS_FILTERING_DISABLED
             - RECOMMENDATIONS_FILTERING_ENABLED
           type: string
+        retrievableOption:
+          description: If RETRIEVABLE_ENABLED, attribute values will be retrievabled in the search results.
+          enum:
+            - RETRIEVABLE_OPTION_UNSPECIFIED
+            - RETRIEVABLE_ENABLED
+            - RETRIEVABLE_DISABLED
+          type: string
         searchableOption:
           description: When AttributesConfig.attribute_config_level is CATALOG_LEVEL_ATTRIBUTE_CONFIG, if SEARCHABLE_ENABLED, attribute values are searchable by text queries in SearchService.Search. If SEARCHABLE_ENABLED but attribute type is numerical, attribute values will not be searchable by text queries in SearchService.Search, as there are no text values associated to numerical attributes. Must be specified, otherwise throws INVALID_FORMAT error.
           enum:
@@ -2321,6 +2325,11 @@ components:
     GoogleCloudRetailV2alphaCompleteQueryResponse:
       description: Response of the auto-complete query.
       properties:
+        attributeResults:
+          additionalProperties:
+            $ref: "#/components/schemas/GoogleCloudRetailV2alphaCompleteQueryResponseAttributeResult"
+          description: 'A map of matched attribute suggestions. This field is only available for "cloud-retail" dataset. Current supported keys: * `brands` * `categories`'
+          type: object
         attributionToken:
           description: A unique complete token. This should be included in the UserEvent.completion_detail for search events resulting from this completion, which enables accurate attribution of complete model performance.
           type: string
@@ -2333,6 +2342,15 @@ components:
           description: "Matched recent searches of this user. The maximum number of recent searches is 10. This field is a restricted feature. Contact Retail Search support team if you are interested in enabling it. This feature is only available when CompleteQueryRequest.visitor_id field is set and UserEvent is imported. The recent searches satisfy the follow rules: * They are ordered from latest to oldest. * They are matched with CompleteQueryRequest.query case insensitively. * They are transformed to lower case. * They are UTF-8 safe. Recent searches are deduplicated. More recent searches will be reserved when duplication happens."
           items:
             $ref: "#/components/schemas/GoogleCloudRetailV2alphaCompleteQueryResponseRecentSearchResult"
+          type: array
+      type: object
+    GoogleCloudRetailV2alphaCompleteQueryResponseAttributeResult:
+      description: Resource that represents attribute results.
+      properties:
+        suggestions:
+          description: The list of suggestions for the attribute.
+          items:
+            type: string
           type: array
       type: object
     GoogleCloudRetailV2alphaCompleteQueryResponseCompletionResult:
@@ -2583,6 +2601,13 @@ components:
           type: array
         type:
           description: 'The fulfillment type, including commonly used types (such as pickup in store and same day delivery), and custom types. Customers have to map custom types to their display names before rendering UI. Supported values: * "pickup-in-store" * "ship-to-store" * "same-day-delivery" * "next-day-delivery" * "custom-type-1" * "custom-type-2" * "custom-type-3" * "custom-type-4" * "custom-type-5" If this field is set to an invalid value other than these, an INVALID_ARGUMENT error is returned.'
+          type: string
+      type: object
+    GoogleCloudRetailV2alphaGcsOutputResult:
+      description: A Gcs output result.
+      properties:
+        outputUri:
+          description: The uri of Gcs output
           type: string
       type: object
     GoogleCloudRetailV2alphaGcsSource:
@@ -3035,12 +3060,17 @@ components:
           type: array
       type: object
     GoogleCloudRetailV2alphaOutputResult:
-      description: Output result.
+      description: Output result that stores the information about where the exported data is stored.
       properties:
         bigqueryResult:
-          description: Export result in BigQuery.
+          description: The BigQuery location where the result is stored.
           items:
             $ref: "#/components/schemas/GoogleCloudRetailV2alphaBigQueryOutputResult"
+          type: array
+        gcsResult:
+          description: The Google Cloud Storage location where the result is stored.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRetailV2alphaGcsOutputResult"
           type: array
       type: object
     GoogleCloudRetailV2alphaPauseModelRequest:
@@ -3067,7 +3097,7 @@ components:
           type: string
         params:
           additionalProperties: {}
-          description: "Additional domain specific parameters for the predictions. Allowed values: * `returnProduct`: Boolean. If set to true, the associated product object will be returned in the `results.metadata` field in the prediction response. * `returnScore`: Boolean. If set to true, the prediction 'score' corresponding to each returned product will be set in the `results.metadata` field in the prediction response. The given 'score' indicates the probability of an product being clicked/purchased given the user's context and history. * `strictFiltering`: Boolean. True by default. If set to false, the service will return generic (unfiltered) popular products instead of empty if your filter blocks all prediction results. * `priceRerankLevel`: String. Default empty. If set to be non-empty, then it needs to be one of {'no-price-reranking', 'low-price-reranking', 'medium-price-reranking', 'high-price-reranking'}. This gives request-level control and adjusts prediction results based on product price. * `diversityLevel`: String. Default empty. If set to be non-empty, then it needs to be one of {'no-diversity', 'low-diversity', 'medium-diversity', 'high-diversity', 'auto-diversity'}. This gives request-level control and adjusts prediction results based on product category. * `filterSyntaxV2`: Boolean. False by default. If set to true, the `filter` field is interpreteted according to the new, attribute-based syntax."
+          description: "Additional domain specific parameters for the predictions. Allowed values: * `returnProduct`: Boolean. If set to true, the associated product object will be returned in the `results.metadata` field in the prediction response. * `returnScore`: Boolean. If set to true, the prediction 'score' corresponding to each returned product will be set in the `results.metadata` field in the prediction response. The given 'score' indicates the probability of a product being clicked/purchased given the user's context and history. * `strictFiltering`: Boolean. True by default. If set to false, the service will return generic (unfiltered) popular products instead of empty if your filter blocks all prediction results. * `priceRerankLevel`: String. Default empty. If set to be non-empty, then it needs to be one of {'no-price-reranking', 'low-price-reranking', 'medium-price-reranking', 'high-price-reranking'}. This gives request-level control and adjusts prediction results based on product price. * `diversityLevel`: String. Default empty. If set to be non-empty, then it needs to be one of {'no-diversity', 'low-diversity', 'medium-diversity', 'high-diversity', 'auto-diversity'}. This gives request-level control and adjusts prediction results based on product category. * `filterSyntaxV2`: Boolean. False by default. If set to true, the `filter` field is interpreteted according to the new, attribute-based syntax."
           type: object
         userEvent:
           $ref: "#/components/schemas/GoogleCloudRetailV2alphaUserEvent"
@@ -3678,7 +3708,7 @@ components:
           type: string
       type: object
     GoogleCloudRetailV2alphaRuleTwowaySynonymsAction:
-      description: 'Creates a set of terms that will be treated as synonyms of each other. Example: synonyms of "sneakers" and "shoes". * "sneakers" will use a synonym of "shoes". * "shoes" will use a synonym of "sneakers".'
+      description: 'Creates a set of terms that will be treated as synonyms of each other. Example: synonyms of "sneakers" and "shoes": * "sneakers" will use a synonym of "shoes". * "shoes" will use a synonym of "sneakers".'
       properties:
         synonyms:
           description: Defines a set of synonyms. Can specify up to 100 synonyms. Must specify at least 2 synonyms.
@@ -3822,7 +3852,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudRetailV2alphaSearchRequestFacetSpecFacetKey"
           description: Required. The facet key specification.
         limit:
-          description: Maximum of facet values that should be returned for this facet. If unspecified, defaults to 20. The maximum allowed value is 300. Values above 300 will be coerced to 300. If this field is negative, an INVALID_ARGUMENT is returned.
+          description: Maximum of facet values that should be returned for this facet. If unspecified, defaults to 50. The maximum allowed value is 300. Values above 300 will be coerced to 300. If this field is negative, an INVALID_ARGUMENT is returned.
           format: int32
           type: integer
       type: object
@@ -4382,6 +4412,13 @@ components:
           $ref: "#/components/schemas/GoogleCloudRetailV2betaOutputResult"
           description: Output result indicating where the data were exported to.
       type: object
+    GoogleCloudRetailV2betaGcsOutputResult:
+      description: A Gcs output result.
+      properties:
+        outputUri:
+          description: The uri of Gcs output
+          type: string
+      type: object
     GoogleCloudRetailV2betaImportCompletionDataResponse:
       description: Response of the ImportCompletionDataRequest. If the long running operation is done, this message is returned by the google.longrunning.Operations.response field if the operation is successful.
       properties:
@@ -4541,12 +4578,17 @@ components:
           type: array
       type: object
     GoogleCloudRetailV2betaOutputResult:
-      description: Output result.
+      description: Output result that stores the information about where the exported data is stored.
       properties:
         bigqueryResult:
-          description: Export result in BigQuery.
+          description: The BigQuery location where the result is stored.
           items:
             $ref: "#/components/schemas/GoogleCloudRetailV2betaBigQueryOutputResult"
+          type: array
+        gcsResult:
+          description: The Google Cloud Storage location where the result is stored.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRetailV2betaGcsOutputResult"
           type: array
       type: object
     GoogleCloudRetailV2betaPurgeMetadata:

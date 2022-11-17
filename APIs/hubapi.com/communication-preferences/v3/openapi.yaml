@@ -64,8 +64,10 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - communication_preferences.read_write
+        - private_apps_legacy: []
         - oauth2_legacy:
             - communication_preferences.read
       summary: Get subscription definitions
@@ -112,8 +114,10 @@ paths:
           $ref: "#/components/responses/Error"
       security:
         - hapikey: []
+        - private_apps_legacy: []
         - oauth2_legacy:
             - communication_preferences.read_write
+        - private_apps_legacy: []
         - oauth2_legacy:
             - communication_preferences.read
       summary: Get subscription statuses for a contact
@@ -153,6 +157,8 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - communication_preferences.read_write
+        - private_apps_legacy: []
+        - private_apps_legacy: []
       summary: Subscribe a contact
       tags:
         - Status
@@ -190,6 +196,8 @@ paths:
         - hapikey: []
         - oauth2_legacy:
             - communication_preferences.read_write
+        - private_apps_legacy: []
+        - private_apps_legacy: []
       summary: Unsubscribe a contact
       tags:
         - Status
@@ -446,6 +454,12 @@ components:
             communication_preferences.write: Update contact subscription preferences
           tokenUrl: https://api.hubapi.com/oauth/v1/token
       type: oauth2
+    private_apps_legacy:
+      in: header
+      name: private-app-legacy
+      type: apiKey
 x-hubspot-available-client-libraries:
+  - PHP
+  - Node
   - Python
   - Ruby

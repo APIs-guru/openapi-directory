@@ -27,7 +27,7 @@ info:
   x-providerName: googleapis.com
   x-serviceName: assuredworkloads
 externalDocs:
-  url: https://cloud.google.com
+  url: https://cloud.google.com/learnmoreurl
 tags:
   - name: organizations
   - name: projects
@@ -594,6 +594,9 @@ components:
         comment:
           description: Required. Business justification explaining the need for violation acknowledgement
           type: string
+        nonCompliantOrgPolicy:
+          description: "Optional. This field is deprecated and will be removed in future version of the API. Name of the OrgPolicy which was modified with non-compliant change and resulted in this violation. Format: projects/{project_number}/policies/{constraint_name} folders/{folder_id}/policies/{constraint_name} organizations/{organization_id}/policies/{constraint_name}"
+          type: string
       type: object
     GoogleCloudAssuredworkloadsV1beta1AcknowledgeViolationResponse:
       description: Response for violation acknowledgement
@@ -641,6 +644,7 @@ components:
             - RESTRICTION_TYPE_UNSPECIFIED
             - ALLOW_ALL_GCP_RESOURCES
             - ALLOW_COMPLIANT_RESOURCES
+            - APPEND_COMPLIANT_RESOURCES
           type: string
       type: object
     GoogleCloudAssuredworkloadsV1beta1RestrictAllowedResourcesResponse:
@@ -785,7 +789,7 @@ components:
           type: array
       type: object
     GoogleCloudAssuredworkloadsV1beta1Workload:
-      description: An Workload object for managing highly regulated workloads of cloud customers.
+      description: A Workload object for managing highly regulated workloads of cloud customers.
       properties:
         billingAccount:
           description: Optional. The billing account used for the resources which are direct children of workload. This billing account is initially associated with the resources created as part of Workload creation. After the initial creation of these resources, the customer can change the assigned billing account. The resource name has the form `billingAccounts/{billing_account_id}`. For example, `billingAccounts/012345-567890-ABCDEF`.
@@ -807,7 +811,9 @@ components:
             - EU_REGIONS_AND_SUPPORT
             - CA_REGIONS_AND_SUPPORT
             - ITAR
+            - AU_REGIONS_AND_US_SUPPORT
             - ASSURED_WORKLOADS_FOR_PARTNERS
+            - ISR_REGIONS
           type: string
         complianceStatus:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadComplianceStatus"
@@ -866,6 +872,7 @@ components:
           enum:
             - PARTNER_UNSPECIFIED
             - LOCAL_CONTROLS_BY_S3NS
+            - SOVEREIGN_CONTROLS_BY_T_SYSTEMS
           type: string
         provisionedResourcesParent:
           description: "Input only. The parent resource for the resources managed by this Assured Workload. May be either empty or a folder resource which is a child of the Workload parent. If not specified all resources are created under the parent organization. Format: folders/{folder_id}"

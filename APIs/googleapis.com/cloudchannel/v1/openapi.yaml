@@ -754,6 +754,48 @@ paths:
             - https://www.googleapis.com/auth/apps.order
       tags:
         - accounts
+  "/v1/{name}:run":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Begins generation of data for a given report. The report identifier is a UID (for example, `613bf59q`). Possible error codes: * PERMISSION_DENIED: The user doesn't have access to this report. * INVALID_ARGUMENT: Required request parameters are missing or invalid. * NOT_FOUND: The report identifier was not found. * INTERNAL: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. * UNKNOWN: Any non-user error related to a technical issue in the backend. Contact Cloud Channel support. Return value: The ID of a long-running operation. To get the results of the operation, call the GetOperation method of CloudChannelOperationsService. The Operation metadata contains an instance of OperationMetadata. To get the results of report generation, call CloudChannelReportsService.FetchReportResults with the RunReportJobResponse.report_job."
+      operationId: cloudchannel.accounts.reports.run
+      parameters:
+        - description: "Required. The report's resource name. Specifies the account and report used to generate report data. The report_id identifier is a UID (for example, `613bf59q`). Name uses the format: accounts/{account_id}/reports/{report_id}"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudChannelV1RunReportJobRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/apps.reports.usage.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/apps.reports.usage.readonly
+      tags:
+        - accounts
   "/v1/{name}:startPaidService":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1341,6 +1383,58 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/reports":
+    get:
+      description: Lists the reports that RunReportJob can run. These reports include an ID, a description, and the list of columns that will be in the result.
+      operationId: cloudchannel.accounts.reports.list
+      parameters:
+        - description: "Required. The resource name of the partner account to list available reports for. Parent uses the format: accounts/{account_id}"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. The BCP-47 language code, such as "en-US". If specified, the response is localized to the corresponding language code if the original data sources support it. Default is "en-US".
+          in: query
+          name: languageCode
+          schema:
+            type: string
+        - description: Optional. Requested page size of the report. The server might return fewer results than requested. If unspecified, returns 20 reports. The maximum value is 100.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. A token that specifies a page of results beyond the first page. Obtained through ListReportsResponse.next_page_token of the previous CloudChannelReportsService.ListReports call.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudChannelV1ListReportsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/apps.reports.usage.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/apps.reports.usage.readonly
+      tags:
+        - accounts
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1/{parent}/skus":
     get:
       description: "Lists the SKUs for a product the reseller is authorized to sell. Possible error codes: * INVALID_ARGUMENT: Required request parameters are missing or invalid."
@@ -1606,6 +1700,48 @@ paths:
             - https://www.googleapis.com/auth/apps.order
           Oauth2c:
             - https://www.googleapis.com/auth/apps.order
+      tags:
+        - accounts
+  "/v1/{reportJob}:fetchReportResults":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Retrieves data generated by CloudChannelReportsService.RunReportJob.
+      operationId: cloudchannel.accounts.reportJobs.fetchReportResults
+      parameters:
+        - description: "Required. The report job created by CloudChannelReportsService.RunReportJob. Report_job uses the format: accounts/{account_id}/reportJobs/{report_job_id}"
+          in: path
+          name: reportJob
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudChannelV1FetchReportResultsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudChannelV1FetchReportResultsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/apps.reports.usage.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/apps.reports.usage.readonly
       tags:
         - accounts
 components:
@@ -1886,6 +2022,27 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudChannelV1Column:
+      description: The definition of a report column. Specifies the data properties in the corresponding position of the report rows.
+      properties:
+        columnId:
+          description: The unique name of the column (for example, customer_domain, channel_partner, customer_cost). You can use column IDs in RunReportJobRequest.filter. To see all reports and their columns, call CloudChannelReportsService.ListReports.
+          type: string
+        dataType:
+          description: The type of the values for this column.
+          enum:
+            - DATA_TYPE_UNSPECIFIED
+            - STRING
+            - INT
+            - DECIMAL
+            - MONEY
+            - DATE
+            - DATE_TIME
+          type: string
+        displayName:
+          description: The column's display name.
+          type: string
+      type: object
     GoogleCloudChannelV1CommitmentSettings:
       description: Commitment settings for commitment-based offers.
       properties:
@@ -2048,6 +2205,22 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudChannelV1DateRange:
+      description: A representation of usage or invoice date ranges.
+      properties:
+        invoiceEndDate:
+          $ref: "#/components/schemas/GoogleTypeDate"
+          description: The latest invoice date (exclusive). If your product uses monthly invoices, and this value is not the beginning of a month, this will adjust the date to the first day of the following month.
+        invoiceStartDate:
+          $ref: "#/components/schemas/GoogleTypeDate"
+          description: The earliest invoice date (inclusive). If your product uses monthly invoices, and this value is not the beginning of a month, this will adjust the date to the first day of the given month.
+        usageEndDateTime:
+          $ref: "#/components/schemas/GoogleTypeDateTime"
+          description: The latest usage date time (exclusive). If you use time groupings (daily, weekly, etc), each group uses midnight to midnight (Pacific time). The usage end date is rounded down to include all usage from the specified date. We recommend that clients pass `usage_start_date_time` in Pacific time.
+        usageStartDateTime:
+          $ref: "#/components/schemas/GoogleTypeDateTime"
+          description: The earliest usage date time (inclusive). If you use time groupings (daily, weekly, etc), each group uses midnight to midnight (Pacific time). The usage start date is rounded down to include all usage from the specified date. We recommend that clients pass `usage_start_date_time` in Pacific time.
+      type: object
     GoogleCloudChannelV1EduData:
       description: Required Edu Attributes
       properties:
@@ -2161,6 +2334,32 @@ components:
             - LICENSE_ASSIGNMENT_CHANGED
             - LICENSE_CAP_CHANGED
           type: string
+      type: object
+    GoogleCloudChannelV1FetchReportResultsRequest:
+      description: Request message for CloudChannelReportsService.FetchReportResults.
+      properties:
+        pageSize:
+          description: Optional. Requested page size of the report. The server may return fewer results than requested. If you don't specify a page size, the server uses a sensible default (may change over time). The maximum value is 30,000; the server will change larger values to 30,000.
+          format: int32
+          type: integer
+        pageToken:
+          description: Optional. A token that specifies a page of results beyond the first page. Obtained through FetchReportResultsResponse.next_page_token of the previous CloudChannelReportsService.FetchReportResults call.
+          type: string
+      type: object
+    GoogleCloudChannelV1FetchReportResultsResponse:
+      description: Response message for CloudChannelReportsService.FetchReportResults. Contains a tabular representation of the report results.
+      properties:
+        nextPageToken:
+          description: Pass this token to FetchReportResultsRequest.page_token to retrieve the next page of results.
+          type: string
+        reportMetadata:
+          $ref: "#/components/schemas/GoogleCloudChannelV1ReportResultsMetadata"
+          description: The metadata for the report results (display name, columns, row count, and date ranges).
+        rows:
+          description: The report's lists of values. Each row follows the settings and ordering of the columns from `report_metadata`.
+          items:
+            $ref: "#/components/schemas/GoogleCloudChannelV1Row"
+          type: array
       type: object
     GoogleCloudChannelV1ImportCustomerRequest:
       description: Request message for CloudChannelService.ImportCustomer
@@ -2290,6 +2489,18 @@ components:
           description: The list of SKUs requested.
           items:
             $ref: "#/components/schemas/GoogleCloudChannelV1PurchasableSku"
+          type: array
+      type: object
+    GoogleCloudChannelV1ListReportsResponse:
+      description: Response message for CloudChannelReportsService.ListReports.
+      properties:
+        nextPageToken:
+          description: Pass this token to FetchReportResultsRequest.page_token to retrieve the next page of results.
+          type: string
+        reports:
+          description: The reports available to the partner.
+          items:
+            $ref: "#/components/schemas/GoogleCloudChannelV1Report"
           type: array
       type: object
     GoogleCloudChannelV1ListSkusResponse:
@@ -2424,6 +2635,9 @@ components:
         constraints:
           $ref: "#/components/schemas/GoogleCloudChannelV1Constraints"
           description: Constraints on transacting the Offer.
+        dealCode:
+          description: The deal code of the offer to get a special promotion or discount.
+          type: string
         endTime:
           description: Output only. End of the Offer validity time.
           format: google-datetime
@@ -2746,6 +2960,95 @@ components:
           description: If true and enable_renewal = true, the unit (for example seats or licenses) will be set to the number of active units at renewal time.
           type: boolean
       type: object
+    GoogleCloudChannelV1Report:
+      description: The ID and description of a report that was used to generate report data. For example, "GCP Daily Spend", "Google Workspace License Activity", etc.
+      properties:
+        columns:
+          description: The list of columns included in the report. This defines the schema of the report results.
+          items:
+            $ref: "#/components/schemas/GoogleCloudChannelV1Column"
+          type: array
+        description:
+          description: A description of other aspects of the report, such as the products it supports.
+          type: string
+        displayName:
+          description: A human-readable name for this report.
+          type: string
+        name:
+          description: "Required. The report's resource name. Specifies the account and report used to generate report data. The report_id identifier is a UID (for example, `613bf59q`). Name uses the format: accounts/{account_id}/reports/{report_id}"
+          type: string
+      type: object
+    GoogleCloudChannelV1ReportJob:
+      description: The result of a RunReportJob operation. Contains the name to use in FetchReportResultsRequest.report_job and the status of the operation.
+      properties:
+        name:
+          description: "Required. The resource name of a report job. Name uses the format: `accounts/{account_id}/reportJobs/{report_job_id}`"
+          type: string
+        reportStatus:
+          $ref: "#/components/schemas/GoogleCloudChannelV1ReportStatus"
+          description: The current status of report generation.
+      type: object
+    GoogleCloudChannelV1ReportResultsMetadata:
+      description: The features describing the data. Returned by CloudChannelReportsService.RunReportJob and CloudChannelReportsService.FetchReportResults.
+      properties:
+        dateRange:
+          $ref: "#/components/schemas/GoogleCloudChannelV1DateRange"
+          description: The date range of reported usage.
+        precedingDateRange:
+          $ref: "#/components/schemas/GoogleCloudChannelV1DateRange"
+          description: The usage dates immediately preceding `date_range` with the same duration. Use this to calculate trending usage and costs. This is only populated if you request trending data. For example, if `date_range` is July 1-15, `preceding_date_range` will be June 16-30.
+        report:
+          $ref: "#/components/schemas/GoogleCloudChannelV1Report"
+          description: Details of the completed report.
+        rowCount:
+          description: The total number of rows of data in the final report.
+          format: int64
+          type: string
+      type: object
+    GoogleCloudChannelV1ReportStatus:
+      description: Status of a report generation process.
+      properties:
+        endTime:
+          description: The report generation's completion time.
+          format: google-datetime
+          type: string
+        startTime:
+          description: The report generation's start time.
+          format: google-datetime
+          type: string
+        state:
+          description: The current state of the report generation process.
+          enum:
+            - STATE_UNSPECIFIED
+            - STARTED
+            - WRITING
+            - AVAILABLE
+            - FAILED
+          type: string
+      type: object
+    GoogleCloudChannelV1ReportValue:
+      description: A single report value.
+      properties:
+        dateTimeValue:
+          $ref: "#/components/schemas/GoogleTypeDateTime"
+          description: A value of type `google.type.DateTime` (year, month, day, hour, minute, second, and UTC offset or timezone.)
+        dateValue:
+          $ref: "#/components/schemas/GoogleTypeDate"
+          description: A value of type `google.type.Date` (year, month, day).
+        decimalValue:
+          $ref: "#/components/schemas/GoogleTypeDecimal"
+          description: A value of type `google.type.Decimal`, representing non-integer numeric values.
+        intValue:
+          description: A value of type `int`.
+          format: int64
+          type: string
+        moneyValue:
+          $ref: "#/components/schemas/GoogleTypeMoney"
+          description: A value of type `google.type.Money` (currency code, whole units, decimal units).
+        stringValue:
+          description: A value of type `string`.
+          type: string
+      type: object
     GoogleCloudChannelV1RepricingAdjustment:
       description: A type that represents the various adjustments you can apply to a bill.
       properties:
@@ -2786,6 +3089,38 @@ components:
         entitlement:
           description: "Resource name of the entitlement. Format: accounts/{account_id}/customers/{customer_id}/entitlements/{entitlement_id}"
           type: string
+      type: object
+    GoogleCloudChannelV1Row:
+      description: A row of report values.
+      properties:
+        values:
+          description: The list of values in the row.
+          items:
+            $ref: "#/components/schemas/GoogleCloudChannelV1ReportValue"
+          type: array
+      type: object
+    GoogleCloudChannelV1RunReportJobRequest:
+      description: Request message for CloudChannelReportsService.RunReportJob.
+      properties:
+        dateRange:
+          $ref: "#/components/schemas/GoogleCloudChannelV1DateRange"
+          description: Optional. The range of usage or invoice dates to include in the result.
+        filter:
+          description: 'Optional. A structured string that defines conditions on dimension columns to restrict the report output. Filters support logical operators (AND, OR, NOT) and conditional operators (=, !=, <, >, <=, and >=) using `column_id` as keys. For example: `(customer:"accounts/C123abc/customers/S456def" OR customer:"accounts/C123abc/customers/S789ghi") AND invoice_start_date.year >= 2022`'
+          type: string
+        languageCode:
+          description: Optional. The BCP-47 language code, such as "en-US". If specified, the response is localized to the corresponding language code if the original data sources support it. Default is "en-US".
+          type: string
+      type: object
+    GoogleCloudChannelV1RunReportJobResponse:
+      description: Response message for CloudChannelReportsService.RunReportJob.
+      properties:
+        reportJob:
+          $ref: "#/components/schemas/GoogleCloudChannelV1ReportJob"
+          description: Pass `report_job.name` to FetchReportResultsRequest.report_job to retrieve the report's results.
+        reportMetadata:
+          $ref: "#/components/schemas/GoogleCloudChannelV1ReportResultsMetadata"
+          description: The metadata for the report's results (display name, columns, row count, and date range). If you view this before the operation finishes, you may see incomplete data.
       type: object
     GoogleCloudChannelV1Sku:
       description: Represents a product's purchasable Stock Keeping Unit (SKU). SKUs represent the different variations of the product. For example, Google Workspace Business Standard and Google Workspace Business Plus are Google Workspace product SKUs.
@@ -2978,6 +3313,27 @@ components:
             - PARTNER_ADVANTAGE_INFO_CHANGED
           type: string
       type: object
+    GoogleCloudChannelV1alpha1Column:
+      description: The definition of a report column. Specifies the data properties in the corresponding position of the report rows.
+      properties:
+        columnId:
+          description: The unique name of the column (for example, customer_domain, channel_partner, customer_cost). You can use column IDs in RunReportJobRequest.filter. To see all reports and their columns, call CloudChannelReportsService.ListReports.
+          type: string
+        dataType:
+          description: The type of the values for this column.
+          enum:
+            - DATA_TYPE_UNSPECIFIED
+            - STRING
+            - INT
+            - DECIMAL
+            - MONEY
+            - DATE
+            - DATE_TIME
+          type: string
+        displayName:
+          description: The column's display name.
+          type: string
+      type: object
     GoogleCloudChannelV1alpha1CommitmentSettings:
       description: Commitment settings for commitment-based offers.
       properties:
@@ -3008,6 +3364,22 @@ components:
             - PRIMARY_DOMAIN_CHANGED
             - PRIMARY_DOMAIN_VERIFIED
           type: string
+      type: object
+    GoogleCloudChannelV1alpha1DateRange:
+      description: A representation of usage or invoice date ranges.
+      properties:
+        invoiceEndDate:
+          $ref: "#/components/schemas/GoogleTypeDate"
+          description: The latest invoice date (exclusive). If your product uses monthly invoices, and this value is not the beginning of a month, this will adjust the date to the first day of the following month.
+        invoiceStartDate:
+          $ref: "#/components/schemas/GoogleTypeDate"
+          description: The earliest invoice date (inclusive). If your product uses monthly invoices, and this value is not the beginning of a month, this will adjust the date to the first day of the given month.
+        usageEndDateTime:
+          $ref: "#/components/schemas/GoogleTypeDateTime"
+          description: The latest usage date time (exclusive). If you use time groupings (daily, weekly, etc), each group uses midnight to midnight (Pacific time). The usage end date is rounded down to include all usage from the specified date. We recommend that clients pass `usage_start_date_time` in Pacific time.
+        usageStartDateTime:
+          $ref: "#/components/schemas/GoogleTypeDateTime"
+          description: The earliest usage date time (inclusive). If you use time groupings (daily, weekly, etc), each group uses midnight to midnight (Pacific time). The usage start date is rounded down to include all usage from the specified date. We recommend that clients pass `usage_start_date_time` in Pacific time.
       type: object
     GoogleCloudChannelV1alpha1Entitlement:
       description: An entitlement is a representation of a customer's ability to use a service.
@@ -3217,6 +3589,82 @@ components:
           description: If true and enable_renewal = true, the unit (for example seats or licenses) will be set to the number of active units at renewal time.
           type: boolean
       type: object
+    GoogleCloudChannelV1alpha1Report:
+      description: The ID and description of a report that was used to generate report data. For example, "GCP Daily Spend", "Google Workspace License Activity", etc.
+      properties:
+        columns:
+          description: The list of columns included in the report. This defines the schema of the report results.
+          items:
+            $ref: "#/components/schemas/GoogleCloudChannelV1alpha1Column"
+          type: array
+        description:
+          description: A description of other aspects of the report, such as the products it supports.
+          type: string
+        displayName:
+          description: A human-readable name for this report.
+          type: string
+        name:
+          description: "Required. The report's resource name. Specifies the account and report used to generate report data. The report_id identifier is a UID (for example, `613bf59q`). Name uses the format: accounts/{account_id}/reports/{report_id}"
+          type: string
+      type: object
+    GoogleCloudChannelV1alpha1ReportJob:
+      description: The result of a RunReportJob operation. Contains the name to use in FetchReportResultsRequest.report_job and the status of the operation.
+      properties:
+        name:
+          description: "Required. The resource name of a report job. Name uses the format: `accounts/{account_id}/reportJobs/{report_job_id}`"
+          type: string
+        reportStatus:
+          $ref: "#/components/schemas/GoogleCloudChannelV1alpha1ReportStatus"
+          description: The current status of report generation.
+      type: object
+    GoogleCloudChannelV1alpha1ReportResultsMetadata:
+      description: The features describing the data. Returned by CloudChannelReportsService.RunReportJob and CloudChannelReportsService.FetchReportResults.
+      properties:
+        dateRange:
+          $ref: "#/components/schemas/GoogleCloudChannelV1alpha1DateRange"
+          description: The date range of reported usage.
+        precedingDateRange:
+          $ref: "#/components/schemas/GoogleCloudChannelV1alpha1DateRange"
+          description: The usage dates immediately preceding `date_range` with the same duration. Use this to calculate trending usage and costs. This is only populated if you request trending data. For example, if `date_range` is July 1-15, `preceding_date_range` will be June 16-30.
+        report:
+          $ref: "#/components/schemas/GoogleCloudChannelV1alpha1Report"
+          description: Details of the completed report.
+        rowCount:
+          description: The total number of rows of data in the final report.
+          format: int64
+          type: string
+      type: object
+    GoogleCloudChannelV1alpha1ReportStatus:
+      description: Status of a report generation process.
+      properties:
+        endTime:
+          description: The report generation's completion time.
+          format: google-datetime
+          type: string
+        startTime:
+          description: The report generation's start time.
+          format: google-datetime
+          type: string
+        state:
+          description: The current state of the report generation process.
+          enum:
+            - STATE_UNSPECIFIED
+            - STARTED
+            - WRITING
+            - AVAILABLE
+            - FAILED
+          type: string
+      type: object
+    GoogleCloudChannelV1alpha1RunReportJobResponse:
+      description: Response message for CloudChannelReportsService.RunReportJob.
+      properties:
+        reportJob:
+          $ref: "#/components/schemas/GoogleCloudChannelV1alpha1ReportJob"
+          description: Pass `report_job.name` to FetchReportResultsRequest.report_job to retrieve the report's results.
+        reportMetadata:
+          $ref: "#/components/schemas/GoogleCloudChannelV1alpha1ReportResultsMetadata"
+          description: The metadata for the report's results (display name, columns, row count, and date range). If you view this before the operation finishes, you may see incomplete data.
+      type: object
     GoogleCloudChannelV1alpha1SubscriberEvent:
       description: Represents information which resellers will get as part of notification from Pub/Sub.
       properties:
@@ -3350,11 +3798,50 @@ components:
           format: int32
           type: integer
       type: object
+    GoogleTypeDateTime:
+      description: "Represents civil time (or occasionally physical time). This type can represent a civil time in one of a few possible ways: * When utc_offset is set and time_zone is unset: a civil time on a calendar day with a particular offset from UTC. * When time_zone is set and utc_offset is unset: a civil time on a calendar day in a particular time zone. * When neither time_zone nor utc_offset is set: a civil time on a calendar day in local time. The date is relative to the Proleptic Gregorian Calendar. If year, month, or day are 0, the DateTime is considered not to have a specific year, month, or day respectively. This type may also be used to represent a physical time if all the date and time fields are set and either case of the `time_offset` oneof is set. Consider using `Timestamp` message for physical time instead. If your use case also would like to store the user's timezone, that can be done in another field. This type is more flexible than some applications may want. Make sure to document and validate your application's limitations."
+      properties:
+        day:
+          description: Optional. Day of month. Must be from 1 to 31 and valid for the year and month, or 0 if specifying a datetime without a day.
+          format: int32
+          type: integer
+        hours:
+          description: Optional. Hours of day in 24 hour format. Should be from 0 to 23, defaults to 0 (midnight). An API may choose to allow the value "24:00:00" for scenarios like business closing time.
+          format: int32
+          type: integer
+        minutes:
+          description: Optional. Minutes of hour of day. Must be from 0 to 59, defaults to 0.
+          format: int32
+          type: integer
+        month:
+          description: Optional. Month of year. Must be from 1 to 12, or 0 if specifying a datetime without a month.
+          format: int32
+          type: integer
+        nanos:
+          description: Optional. Fractions of seconds in nanoseconds. Must be from 0 to 999,999,999, defaults to 0.
+          format: int32
+          type: integer
+        seconds:
+          description: Optional. Seconds of minutes of the time. Must normally be from 0 to 59, defaults to 0. An API may allow the value 60 if it allows leap-seconds.
+          format: int32
+          type: integer
+        timeZone:
+          $ref: "#/components/schemas/GoogleTypeTimeZone"
+          description: Time zone.
+        utcOffset:
+          description: "UTC offset. Must be whole seconds, between -18 hours and +18 hours. For example, a UTC offset of -4:00 would be represented as { seconds: -14400 }."
+          format: google-duration
+          type: string
+        year:
+          description: Optional. Year of date. Must be from 1 to 9999, or 0 if specifying a datetime without a year.
+          format: int32
+          type: integer
+      type: object
     GoogleTypeDecimal:
       description: "A representation of a decimal value, such as 2.5. Clients may convert values into language-native decimal formats, such as Java's BigDecimal or Python's decimal.Decimal. [BigDecimal]: https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/math/BigDecimal.html [decimal.Decimal]: https://docs.python.org/3/library/decimal.html"
       properties:
         value:
-          description: "The decimal value, as a string. The string representation consists of an optional sign, `+` (`U+002B`) or `-` (`U+002D`), followed by a sequence of zero or more decimal digits (\"the integer\"), optionally followed by a fraction, optionally followed by an exponent. The fraction consists of a decimal point followed by zero or more decimal digits. The string must contain at least one digit in either the integer or the fraction. The number formed by the sign, the integer and the fraction is referred to as the significand. The exponent consists of the character `e` (`U+0065`) or `E` (`U+0045`) followed by one or more decimal digits. Services **should** normalize decimal values before storing them by: - Removing an explicitly-provided `+` sign (`+2.5` -> `2.5`). - Replacing a zero-length integer value with `0` (`.5` -> `0.5`). - Coercing the exponent character to lower-case (`2.5E8` -> `2.5e8`). - Removing an explicitly-provided zero exponent (`2.5e0` -> `2.5`). Services **may** perform additional normalization based on its own needs and the internal decimal implementation selected, such as shifting the decimal point and exponent value together (example: `2.5e-1` <-> `0.25`). Additionally, services **may** preserve trailing zeroes in the fraction to indicate increased precision, but are not required to do so. Note that only the `.` character is supported to divide the integer and the fraction; `,` **should not** be supported regardless of locale. Additionally, thousand separators **should not** be supported. If a service does support them, values **must** be normalized. The ENBF grammar is: DecimalString = [Sign] Significand [Exponent]; Sign = '+' | '-'; Significand = Digits '.' | [Digits] '.' Digits; Exponent = ('e' | 'E') [Sign] Digits; Digits = { '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' }; Services **should** clearly document the range of supported values, the maximum supported precision (total number of digits), and, if applicable, the scale (number of digits after the decimal point), as well as how it behaves when receiving out-of-bounds values. Services **may** choose to accept values passed as input even when the value has a higher precision or scale than the service supports, and **should** round the value to fit the supported scale. Alternatively, the service **may** error with `400 Bad Request` (`INVALID_ARGUMENT` in gRPC) if precision would be lost. Services **should** error with `400 Bad Request` (`INVALID_ARGUMENT` in gRPC) if the service receives a value outside of the supported range."
+          description: "The decimal value, as a string. The string representation consists of an optional sign, `+` (`U+002B`) or `-` (`U+002D`), followed by a sequence of zero or more decimal digits (\"the integer\"), optionally followed by a fraction, optionally followed by an exponent. An empty string **should** be interpreted as `0`. The fraction consists of a decimal point followed by zero or more decimal digits. The string must contain at least one digit in either the integer or the fraction. The number formed by the sign, the integer and the fraction is referred to as the significand. The exponent consists of the character `e` (`U+0065`) or `E` (`U+0045`) followed by one or more decimal digits. Services **should** normalize decimal values before storing them by: - Removing an explicitly-provided `+` sign (`+2.5` -> `2.5`). - Replacing a zero-length integer value with `0` (`.5` -> `0.5`). - Coercing the exponent character to upper-case, with explicit sign (`2.5e8` -> `2.5E+8`). - Removing an explicitly-provided zero exponent (`2.5E0` -> `2.5`). Services **may** perform additional normalization based on its own needs and the internal decimal implementation selected, such as shifting the decimal point and exponent value together (example: `2.5E-1` <-> `0.25`). Additionally, services **may** preserve trailing zeroes in the fraction to indicate increased precision, but are not required to do so. Note that only the `.` character is supported to divide the integer and the fraction; `,` **should not** be supported regardless of locale. Additionally, thousand separators **should not** be supported. If a service does support them, values **must** be normalized. The ENBF grammar is: DecimalString = '' | [Sign] Significand [Exponent]; Sign = '+' | '-'; Significand = Digits '.' | [Digits] '.' Digits; Exponent = ('e' | 'E') [Sign] Digits; Digits = { '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' }; Services **should** clearly document the range of supported values, the maximum supported precision (total number of digits), and, if applicable, the scale (number of digits after the decimal point), as well as how it behaves when receiving out-of-bounds values. Services **may** choose to accept values passed as input even when the value has a higher precision or scale than the service supports, and **should** round the value to fit the supported scale. Alternatively, the service **may** error with `400 Bad Request` (`INVALID_ARGUMENT` in gRPC) if precision would be lost. Services **should** error with `400 Bad Request` (`INVALID_ARGUMENT` in gRPC) if the service receives a value outside of the supported range."
           type: string
       type: object
     GoogleTypeMoney:
@@ -3414,6 +3901,16 @@ components:
           description: Optional. Sublocality of the address. For example, this can be neighborhoods, boroughs, districts.
           type: string
       type: object
+    GoogleTypeTimeZone:
+      description: Represents a time zone from the [IANA Time Zone Database](https://www.iana.org/time-zones).
+      properties:
+        id:
+          description: IANA Time Zone Database time zone, e.g. "America/New_York".
+          type: string
+        version:
+          description: Optional. IANA Time Zone Database version number, e.g. "2019a".
+          type: string
+      type: object
   securitySchemes:
     Oauth2:
       description: Oauth 2.0 implicit authentication
@@ -3422,6 +3919,7 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/apps.order: Manage users on your domain
+            https://www.googleapis.com/auth/apps.reports.usage.readonly: View usage reports for your G Suite domain
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -3430,5 +3928,6 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/apps.order: Manage users on your domain
+            https://www.googleapis.com/auth/apps.reports.usage.readonly: View usage reports for your G Suite domain
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

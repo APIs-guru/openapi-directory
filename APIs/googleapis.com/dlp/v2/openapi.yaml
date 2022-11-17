@@ -1108,7 +1108,7 @@ components:
           description: Create a de-identified copy of the input data.
         jobNotificationEmails:
           $ref: "#/components/schemas/GooglePrivacyDlpV2JobNotificationEmails"
-          description: Enable email notification for project owners and editors on job's completion/failure.
+          description: Sends an email when the job completes. The email goes to IAM project owners and technical [Essential Contacts](https://cloud.google.com/resource-manager/docs/managing-notification-contacts).
         pubSub:
           $ref: "#/components/schemas/GooglePrivacyDlpV2PublishToPubSub"
           description: Publish a notification to a Pub/Sub topic.
@@ -1549,7 +1549,6 @@ components:
           type: string
       type: object
     GooglePrivacyDlpV2ContentItem:
-      description: Container structure for the content to inspect.
       properties:
         byteItem:
           $ref: "#/components/schemas/GooglePrivacyDlpV2ByteContentItem"
@@ -1967,7 +1966,7 @@ components:
           type: string
         item:
           $ref: "#/components/schemas/GooglePrivacyDlpV2ContentItem"
-          description: The item to de-identify. Will be treated as text.
+          description: The item to de-identify. Will be treated as text. This value must be of type Table if your deidentify_config is a RecordTransformations object.
         locationId:
           description: Deprecated. This field has no effect.
           type: string
@@ -2169,6 +2168,16 @@ components:
             type: string
           type: array
       type: object
+    GooglePrivacyDlpV2ExcludeByHotword:
+      description: The rule to exclude findings based on a hotword. For record inspection of tables, column names are considered hotwords. An example of this is to exclude a finding if a BigQuery column matches a specific pattern.
+      properties:
+        hotwordRegex:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2Regex"
+          description: Regular expression pattern defining what qualifies as a hotword.
+        proximity:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2Proximity"
+          description: Range of characters within which the entire hotword must reside. The total length of the window cannot exceed 1000 characters. The windowBefore property in proximity should be set to 1 if the hotword needs to be included in a column header.
+      type: object
     GooglePrivacyDlpV2ExcludeInfoTypes:
       description: List of excluded infoTypes.
       properties:
@@ -2184,6 +2193,9 @@ components:
         dictionary:
           $ref: "#/components/schemas/GooglePrivacyDlpV2Dictionary"
           description: Dictionary which defines the rule.
+        excludeByHotword:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2ExcludeByHotword"
+          description: Drop if the hotword rule is contained in the proximate context. For tabular data, the context includes the column name.
         excludeInfoTypes:
           $ref: "#/components/schemas/GooglePrivacyDlpV2ExcludeInfoTypes"
           description: Set of infoTypes for which findings would affect this rule.
@@ -2493,7 +2505,7 @@ components:
       description: Type of information detected by the API.
       properties:
         name:
-          description: Name of the information type. Either a name of your choosing when creating a CustomInfoType, or one of the names listed at https://cloud.google.com/dlp/docs/infotypes-reference when specifying a built-in type. When sending Cloud DLP results to Data Catalog, infoType names should conform to the pattern `[A-Za-z0-9$-_]{1,64}`.
+          description: Name of the information type. Either a name of your choosing when creating a CustomInfoType, or one of the names listed at https://cloud.google.com/dlp/docs/infotypes-reference when specifying a built-in type. When sending Cloud DLP results to Data Catalog, infoType names should conform to the pattern `[A-Za-z0-9$_-]{1,64}`.
           type: string
         version:
           description: Optional version name for this InfoType.
@@ -2554,6 +2566,7 @@ components:
             - URUGUAY
             - VENEZUELA
             - INTERNAL
+            - NEW_ZEALAND
           type: string
         typeCategory:
           description: The class of identifiers where this infoType belongs
@@ -2585,6 +2598,9 @@ components:
         name:
           description: Internal name of the infoType.
           type: string
+        sensitivityScore:
+          $ref: "#/components/schemas/GooglePrivacyDlpV2SensitivityScore"
+          description: The default sensitivity of the infoType.
         supportedBy:
           description: Which parts of the API supports this InfoType.
           items:

@@ -33,19 +33,20 @@ tags:
   - name: organizations
   - name: projects
 paths:
-  /v1/operations:
+  "/v1/{name}":
     get:
       description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
-      operationId: policysimulator.operations.list
+      operationId: policysimulator.projects.locations.replays.operations.list
       parameters:
+        - description: The name of the operation's parent resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
         - description: The standard list filter.
           in: query
           name: filter
-          schema:
-            type: string
-        - description: The name of the operation's parent resource.
-          in: query
-          name: name
           schema:
             type: string
         - description: The standard list page size.
@@ -64,43 +65,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleLongrunningListOperationsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - operations
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1/{name}":
-    get:
-      description: Gets the specified Replay. Each `Replay` is available for at least 7 days.
-      operationId: policysimulator.projects.locations.replays.get
-      parameters:
-        - description: "Required. The name of the Replay to retrieve, in the following format: `{projects|folders|organizations}/{resource-id}/locations/global/replays/{replay-id}`, where `{resource-id}` is the ID of the project, folder, or organization that owns the `Replay`. Example: `projects/my-example-project/locations/global/replays/506a5f7f-38ce-4d7d-8e03-479ce1833c36`"
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoogleCloudPolicysimulatorV1Replay"
           description: Successful response
       security:
         - Oauth2:

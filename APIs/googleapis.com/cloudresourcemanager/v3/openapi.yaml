@@ -39,7 +39,7 @@ tags:
 paths:
   /v3/effectiveTags:
     get:
-      description: Return a list of effective tags for the given cloud resource, as specified in `parent`.
+      description: Return a list of effective tags for the given Google Cloud resource, as specified in `parent`.
       operationId: cloudresourcemanager.effectiveTags.list
       parameters:
         - description: Optional. The maximum number of effective tags to return in the response. The server allows a maximum of 300 effective tags to return in a single page. If unspecified, the server will use 100 as the default.
@@ -449,6 +449,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - projects
     parameters:
@@ -465,7 +469,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v3/tagBindings:
     get:
-      description: "Lists the TagBindings for the given cloud resource, as specified with `parent`. NOTE: The `parent` field is expected to be a full resource name: https://cloud.google.com/apis/design/resource_names#full_resource_name"
+      description: "Lists the TagBindings for the given Google Cloud resource, as specified with `parent`. NOTE: The `parent` field is expected to be a full resource name: https://cloud.google.com/apis/design/resource_names#full_resource_name"
       operationId: cloudresourcemanager.tagBindings.list
       parameters:
         - description: Optional. The maximum number of TagBindings to return in the response. The server allows a maximum of 300 TagBindings to return. If unspecified, the server will use 100 as the default.
@@ -514,7 +518,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates a TagBinding between a TagValue and a cloud resource (currently project, folder, or organization).
+      description: Creates a TagBinding between a TagValue and a Google Cloud resource.
       operationId: cloudresourcemanager.tagBindings.create
       parameters:
         - description: Optional. Set to true to perform the validations necessary for creating the resource, but not actually perform the action.
@@ -1839,7 +1843,7 @@ components:
           type: string
       type: object
     TagBinding:
-      description: A TagBinding represents a connection between a TagValue and a cloud resource (currently project, folder, or organization). Once a TagBinding is created, the TagValue is applied to all the descendants of the cloud resource.
+      description: A TagBinding represents a connection between a TagValue and a cloud resource Once a TagBinding is created, the TagValue is applied to all the descendants of the Google Cloud resource.
       properties:
         name:
           description: "Output only. The name of the TagBinding. This is a String of the form: `tagBindings/{full-resource-name}/{tag-value-name}` (e.g. `tagBindings/%2F%2Fcloudresourcemanager.googleapis.com%2Fprojects%2F123/tagValues/456`)."

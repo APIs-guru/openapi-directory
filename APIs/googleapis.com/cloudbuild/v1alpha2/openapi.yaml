@@ -447,6 +447,15 @@ components:
           format: google-datetime
           type: string
       type: object
+    BatchCreateRepositoriesResponse:
+      description: Message for response of creating repositories in batch.
+      properties:
+        repositories:
+          description: Repository resources created.
+          items:
+            $ref: "#/components/schemas/Repository"
+          type: array
+      type: object
     BitbucketServerConnectedRepository:
       description: / BitbucketServerConnectedRepository represents a connected Bitbucket Server / repository.
       properties:
@@ -603,7 +612,7 @@ components:
         timing:
           additionalProperties:
             $ref: "#/components/schemas/TimeSpan"
-          description: "Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all specified images. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included."
+          description: "Output only. Stores timing information for phases of the build. Valid keys are: * BUILD: time to execute all build steps. * PUSH: time to push all artifacts including docker images and non docker artifacts. * FETCHSOURCE: time to fetch source. * SETUPBUILD: time to set up build. If the build does not specify source or images, these keys will not be included."
           readOnly: true
           type: object
         warnings:
@@ -1302,15 +1311,43 @@ components:
           description: Regex matching tags to build. The syntax of the regular expressions accepted is the syntax accepted by RE2 and described at https://github.com/google/re2/wiki/Syntax
           type: string
       type: object
+    Repository:
+      description: A repository associated to a parent connection.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: Allows clients to store small amounts of arbitrary data.
+          type: object
+        createTime:
+          description: Output only. Server assigned timestamp for when the connection was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        etag:
+          description: This checksum is computed by the server based on the value of other fields, and may be sent on update and delete requests to ensure the client has an up-to-date value before proceeding.
+          type: string
+        name:
+          description: Immutable. Resource name of the repository, in the format `projects/*/locations/*/connections/*/repositories/*`.
+          type: string
+        remoteUri:
+          description: Required. Git Clone HTTPS URI.
+          type: string
+        updateTime:
+          description: Output only. Server assigned timestamp for when the connection was updated.
+          format: google-datetime
+          readOnly: true
+          type: string
+      type: object
     Results:
       description: Artifacts created by the build pipeline.
       properties:
         artifactManifest:
-          description: Path to the artifact manifest. Only populated when artifacts are uploaded.
+          description: Path to the artifact manifest for non-container artifacts uploaded to Cloud Storage. Only populated when artifacts are uploaded to Cloud Storage.
           type: string
         artifactTiming:
           $ref: "#/components/schemas/TimeSpan"
-          description: Time to push all non-container artifacts.
+          description: Time to push all non-container artifacts to Cloud Storage.
         buildStepImages:
           description: List of build step digests, in the order corresponding to build step indices.
           items:
@@ -1333,7 +1370,7 @@ components:
             $ref: "#/components/schemas/UploadedMavenArtifact"
           type: array
         numArtifacts:
-          description: Number of artifacts uploaded. Only populated when artifacts are uploaded.
+          description: Number of non-container artifacts uploaded to Cloud Storage. Only populated when artifacts are uploaded to Cloud Storage.
           format: int64
           type: string
         pythonPackages:

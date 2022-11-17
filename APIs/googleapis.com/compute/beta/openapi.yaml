@@ -14807,7 +14807,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Patches the specified policy with the data included in the request. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
+      description: Patches the specified policy with the data included in the request. To clear fields in the rule, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
       operationId: compute.securityPolicies.patch
       parameters:
         - description: Project ID for this request.
@@ -29263,7 +29263,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Patches the specified policy with the data included in the request.
+      description: Patches the specified policy with the data included in the request. To clear fields in the rule, leave the fields empty and specify them in the updateMask. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
       operationId: compute.regionSecurityPolicies.patch
       parameters:
         - description: Project ID for this request.
@@ -40880,6 +40880,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: If true, discard the contents of any attached localSSD partitions. Default value is false (== preserve localSSD data).
+          in: query
+          name: discardLocalSsd
+          schema:
+            type: boolean
         - description: An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
           in: query
           name: requestId
@@ -44204,6 +44209,22 @@ components:
       schema:
         type: string
   schemas:
+    AWSV4Signature:
+      description: Contains the configurations necessary to generate a signature for access to private storage buckets that support Signature Version 4 for authentication. The service name for generating the authentication header will always default to 's3'.
+      properties:
+        accessKey:
+          description: The access key used for s3 bucket authentication. Required for updating or creating a backend that uses AWS v4 signature authentication, but will not be returned as part of the configuration when queried with a REST API GET request. @InputOnly
+          type: string
+        accessKeyId:
+          description: The identifier of an access key used for s3 bucket authentication.
+          type: string
+        accessKeyVersion:
+          description: The optional version identifier for the access key. You can use this to keep track of different iterations of your access key.
+          type: string
+        originRegion:
+          description: The name of the cloud region of your origin. This is a free-form field with the name of the region your cloud uses to host your origin. For example, "us-east-1" for AWS or "us-ashburn-1" for OCI.
+          type: string
+      type: object
     AcceleratorConfig:
       description: A specification of the type and number of accelerator cards attached to the instance.
       properties:
@@ -44873,7 +44894,7 @@ components:
           format: int32
           type: integer
         maintenanceInterval:
-          description: For more information about maintenance intervals, see Setting maintenance intervals.
+          description: "Specifies the frequency of planned maintenance events. The accepted values are: `PERIODIC`."
           enum:
             - PERIODIC
           type: string
@@ -45004,7 +45025,7 @@ components:
           format: int64
           type: string
         diskType:
-          description: "Specifies the disk type to use to create the instance. If not specified, the default is pd-standard, specified using the full URL. For example: https://www.googleapis.com/compute/v1/projects/project/zones/zone /diskTypes/pd-standard For a full list of acceptable values, see Persistent disk types. If you define this field, you can provide either the full or partial URL. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /diskTypes/diskType - projects/project/zones/zone/diskTypes/diskType - zones/zone/diskTypes/diskType Note that for InstanceTemplate, this is the name of the disk type, not URL."
+          description: "Specifies the disk type to use to create the instance. If not specified, the default is pd-standard, specified using the full URL. For example: https://www.googleapis.com/compute/v1/projects/project/zones/zone /diskTypes/pd-standard For a full list of acceptable values, see Persistent disk types. If you specify this field when creating a VM, you can provide either the full or partial URL. For example, the following values are valid: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /diskTypes/diskType - projects/project/zones/zone/diskTypes/diskType - zones/zone/diskTypes/diskType If you specify this field when creating or updating an instance template or all-instances configuration, specify the type of the disk, not the URL. For example: pd-standard."
           type: string
         guestOsFeatures:
           description: A list of features to enable on the guest operating system. Applicable only for bootable images. Read Enabling guest operating system features to see a list of available options. Guest OS features are applied by merging initializeParams.guestOsFeatures and disks.guestOsFeatures
@@ -45050,7 +45071,7 @@ components:
           type: string
         sourceImageEncryptionKey:
           $ref: "#/components/schemas/CustomerEncryptionKey"
-          description: The customer-supplied encryption key of the source image. Required if the source image is protected by a customer-supplied encryption key. Instance templates do not store customer-supplied encryption keys, so you cannot create disks for instances in a managed instance group if the source images are encrypted with your own keys.
+          description: The customer-supplied encryption key of the source image. Required if the source image is protected by a customer-supplied encryption key. InstanceTemplate and InstancePropertiesPatch do not store customer-supplied encryption keys, so you cannot create disks for instances in a managed instance group if the source images are encrypted with your own keys.
         sourceSnapshot:
           description: "The source snapshot to create this disk. When creating a new instance, one of initializeParams.sourceSnapshot or initializeParams.sourceImage or disks.source is required except for local SSD. To create a disk with a snapshot that you created, specify the snapshot name in the following format: global/snapshots/my-backup If the source snapshot is deleted later, this field will not be set."
           type: string
@@ -45921,7 +45942,7 @@ components:
           type: string
         outlierDetection:
           $ref: "#/components/schemas/OutlierDetection"
-          description: "Settings controlling the eviction of unhealthy hosts from the load balancing pool for the backend service. If not set, this feature is considered disabled. This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true."
+          description: "Settings controlling the eviction of unhealthy hosts from the load balancing pool for the backend service. If not set, this feature is considered disabled. This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, HTTP2, or GRPC, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED. "
         port:
           description: Deprecated in favor of portName. The TCP port to connect on the backend. The default value is 80. For Internal TCP/UDP Load Balancing and Network Load Balancing, omit port.
           format: int32
@@ -47077,7 +47098,7 @@ components:
             type: string
           type: array
         allowOriginRegexes:
-          description: Specifies a regular expression that matches allowed origins. For more information about the regular expression syntax, see Syntax. An origin is allowed if it matches either an item in allowOrigins or an item in allowOriginRegexes.
+          description: Specifies a regular expression that matches allowed origins. For more information about the regular expression syntax, see Syntax. An origin is allowed if it matches either an item in allowOrigins or an item in allowOriginRegexes. Regular expressions can only be used when the loadBalancingScheme is set to INTERNAL_SELF_MANAGED.
           items:
             type: string
           type: array
@@ -47863,6 +47884,7 @@ components:
           description: The distribution shape to which the group converges either proactively or on resize events (depending on the value set in updatePolicy.instanceRedistributionType).
           enum:
             - ANY
+            - ANY_SINGLE_ZONE
             - BALANCED
             - EVEN
           type: string
@@ -48670,7 +48692,7 @@ components:
       description: "Represents a Forwarding Rule resource. Forwarding rule resources in Google Cloud can be either regional or global in scope: * [Global](https://cloud.google.com/compute/docs/reference/rest/beta/globalForwardingRules) * [Regional](https://cloud.google.com/compute/docs/reference/rest/beta/forwardingRules) A forwarding rule and its corresponding IP address represent the frontend configuration of a Google Cloud Platform load balancer. Forwarding rules can also reference target instances and Cloud VPN Classic gateways (targetVpnGateway). For more information, read Forwarding rule concepts and Using protocol forwarding."
       properties:
         IPAddress:
-          description: "IP address for which this forwarding rule accepts traffic. When a client sends traffic to this IP address, the forwarding rule directs the traffic to the referenced target or backendService. While creating a forwarding rule, specifying an IPAddress is required under the following circumstances: - When the target is set to targetGrpcProxy and validateForProxyless is set to true, the IPAddress should be set to 0.0.0.0. - When the target is a Private Service Connect Google APIs bundle, you must specify an IPAddress. Otherwise, you can optionally specify an IP address that references an existing static (reserved) IP address resource. When omitted, Google Cloud assigns an ephemeral IP address. Use one of the following formats to specify an IP address while creating a forwarding rule: * IP address number, as in `100.1.2.3` * Full resource URL, as in https://www.googleapis.com/compute/v1/projects/project_id/regions/region /addresses/address-name * Partial URL or by name, as in: - projects/project_id/regions/region/addresses/address-name - regions/region/addresses/address-name - global/addresses/address-name - address-name The forwarding rule's target or backendService, and in most cases, also the loadBalancingScheme, determine the type of IP address that you can use. For detailed information, see [IP address specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications). When reading an IPAddress, the API always returns the IP address number."
+          description: "IP address for which this forwarding rule accepts traffic. When a client sends traffic to this IP address, the forwarding rule directs the traffic to the referenced target or backendService. While creating a forwarding rule, specifying an IPAddress is required under the following circumstances: - When the target is set to targetGrpcProxy and validateForProxyless is set to true, the IPAddress should be set to 0.0.0.0. - When the target is a Private Service Connect Google APIs bundle, you must specify an IPAddress. Otherwise, you can optionally specify an IP address that references an existing static (reserved) IP address resource. When omitted, Google Cloud assigns an ephemeral IP address. Use one of the following formats to specify an IP address while creating a forwarding rule: * IP address number, as in `100.1.2.3` * IPv6 address range, as in `2600:1234::/96` * Full resource URL, as in https://www.googleapis.com/compute/v1/projects/ project_id/regions/region/addresses/address-name * Partial URL or by name, as in: - projects/project_id/regions/region/addresses/address-name - regions/region/addresses/address-name - global/addresses/address-name - address-name The forwarding rule's target or backendService, and in most cases, also the loadBalancingScheme, determine the type of IP address that you can use. For detailed information, see [IP address specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications). When reading an IPAddress, the API always returns the IP address number."
           type: string
         IPProtocol:
           description: The IP protocol to which this rule applies. For protocol forwarding, valid options are TCP, UDP, ESP, AH, SCTP, ICMP and L3_DEFAULT. The valid IP protocols are different for different load balancing products as described in [Load balancing features](https://cloud.google.com/load-balancing/docs/features#protocols_from_the_load_balancer_to_the_backends).
@@ -49886,7 +49908,7 @@ components:
           $ref: "#/components/schemas/Int64RangeMatch"
           description: The header value must be an integer and its value must be in the range specified in rangeMatch. If the header does not contain an integer, number or is empty, the match fails. For example for a range [-5, 0] - -3 will match. - 0 will not match. - 0.25 will not match. - -3someString will not match. Only one of exactMatch, prefixMatch, suffixMatch, regexMatch, presentMatch or rangeMatch must be set. rangeMatch is not supported for load balancers that have loadBalancingScheme set to EXTERNAL.
         regexMatch:
-          description: The value of the header must match the regular expression specified in regexMatch. For more information about regular expression syntax, see Syntax. For matching against a port specified in the HTTP request, use a headerMatch with headerName set to PORT and a regular expression that satisfies the RFC2616 Host header's port specifier. Only one of exactMatch, prefixMatch, suffixMatch, regexMatch, presentMatch or rangeMatch must be set. regexMatch only applies to load balancers that have loadBalancingScheme set to INTERNAL_SELF_MANAGED.
+          description: The value of the header must match the regular expression specified in regexMatch. For more information about regular expression syntax, see Syntax. For matching against a port specified in the HTTP request, use a headerMatch with headerName set to PORT and a regular expression that satisfies the RFC2616 Host header's port specifier. Only one of exactMatch, prefixMatch, suffixMatch, regexMatch, presentMatch or rangeMatch must be set. Regular expressions can only be used when the loadBalancingScheme is set to INTERNAL_SELF_MANAGED.
           type: string
         suffixMatch:
           description: The value of the header must end with the contents of suffixMatch. Only one of exactMatch, prefixMatch, suffixMatch, regexMatch, presentMatch or rangeMatch must be set.
@@ -50041,7 +50063,7 @@ components:
           description: "Specifies that the queryParameterMatch matches if the request contains the query parameter, irrespective of whether the parameter has a value or not. Only one of presentMatch, exactMatch, or regexMatch must be set. "
           type: boolean
         regexMatch:
-          description: "The queryParameterMatch matches if the value of the parameter matches the regular expression specified by regexMatch. For more information about regular expression syntax, see Syntax. Only one of presentMatch, exactMatch, or regexMatch must be set. regexMatch only applies when the loadBalancingScheme is set to INTERNAL_SELF_MANAGED. "
+          description: "The queryParameterMatch matches if the value of the parameter matches the regular expression specified by regexMatch. For more information about regular expression syntax, see Syntax. Only one of presentMatch, exactMatch, or regexMatch must be set. Regular expressions can only be used when the loadBalancingScheme is set to INTERNAL_SELF_MANAGED. "
           type: string
       type: object
     HttpRedirectAction:
@@ -50174,6 +50196,9 @@ components:
           items:
             $ref: "#/components/schemas/MetadataFilter"
           type: array
+        pathTemplateMatch:
+          description: If specified, the route is a pattern match expression that must match the :path header once the query string is removed. A pattern match allows you to match - The value must be between 1 and 1024 characters - The pattern must start with a leading slash ("/") - There may be no more than 5 operators in pattern Precisely one of prefix_match, full_path_match, regex_match or path_template_match must be set.
+          type: string
         prefixMatch:
           description: For satisfying the matchRule condition, the request's path must begin with the specified prefixMatch. prefixMatch must begin with a /. The value must be from 1 to 1024 characters. Only one of prefixMatch, fullPathMatch or regexMatch must be specified.
           type: string
@@ -50183,7 +50208,7 @@ components:
             $ref: "#/components/schemas/HttpQueryParameterMatch"
           type: array
         regexMatch:
-          description: For satisfying the matchRule condition, the path of the request must satisfy the regular expression specified in regexMatch after removing any query parameters and anchor supplied with the original URL. For more information about regular expression syntax, see Syntax. Only one of prefixMatch, fullPathMatch or regexMatch must be specified. regexMatch only applies to load balancers that have loadBalancingScheme set to INTERNAL_SELF_MANAGED.
+          description: For satisfying the matchRule condition, the path of the request must satisfy the regular expression specified in regexMatch after removing any query parameters and anchor supplied with the original URL. For more information about regular expression syntax, see Syntax. Only one of prefixMatch, fullPathMatch or regexMatch must be specified. Regular expressions can only be used when the loadBalancingScheme is set to INTERNAL_SELF_MANAGED.
           type: string
       type: object
     HttpsHealthCheck:
@@ -51094,6 +51119,9 @@ components:
         instanceGroup:
           description: "[Output Only] The URL of the Instance Group resource."
           type: string
+        instanceLifecyclePolicy:
+          $ref: "#/components/schemas/InstanceGroupManagerInstanceLifecyclePolicy"
+          description: The repair policy for this managed instance group.
         instanceTemplate:
           description: The URL of the instance template that is specified for this managed instance group. The group uses this template to create all new instances in the managed instance group. The templates for existing instances in the group do not change unless you run recreateInstances, run applyUpdatesToInstances, or set the group's updatePolicy.type to PROACTIVE.
           type: string
@@ -51299,6 +51327,15 @@ components:
           description: The number of seconds that the managed instance group waits before it applies autohealing policies to new instances or recently recreated instances. This initial delay allows instances to initialize and run their startup scripts before the instance group determines that they are UNHEALTHY. This prevents the managed instance group from recreating its instances prematurely. This value must be from range [0, 3600].
           format: int32
           type: integer
+      type: object
+    InstanceGroupManagerInstanceLifecyclePolicy:
+      properties:
+        forceUpdateOnRepair:
+          description: "A bit indicating whether to forcefully apply the group's latest configuration when repairing a VM. Valid options are: - NO (default): If configuration updates are available, they are not forcefully applied during repair. Instead, configuration updates are applied according to the group's update policy. - YES: If configuration updates are available, they are applied during repair. "
+          enum:
+            - NO
+            - YES
+          type: string
       type: object
     InstanceGroupManagerList:
       description: "[Output Only] A list of managed instance groups."
@@ -54293,6 +54330,8 @@ components:
                           $ref: "#/components/schemas/Help"
                         localizedMessage:
                           $ref: "#/components/schemas/LocalizedMessage"
+                        quotaInfo:
+                          $ref: "#/components/schemas/QuotaExceededInfo"
                       type: object
                     type: array
                   location:
@@ -56565,6 +56604,8 @@ components:
                           $ref: "#/components/schemas/Help"
                         localizedMessage:
                           $ref: "#/components/schemas/LocalizedMessage"
+                        quotaInfo:
+                          $ref: "#/components/schemas/QuotaExceededInfo"
                       type: object
                     type: array
                   location:
@@ -56918,19 +56959,19 @@ components:
           $ref: "#/components/schemas/Duration"
           description: The base time that a host is ejected for. The real ejection time is equal to the base ejection time multiplied by the number of times the host has been ejected. Defaults to 30000ms or 30s.
         consecutiveErrors:
-          description: Number of errors before a host is ejected from the connection pool. When the backend host is accessed over HTTP, a 5xx return code qualifies as an error. Defaults to 5.
+          description: Number of errors before a host is ejected from the connection pool. When the backend host is accessed over HTTP, a 5xx return code qualifies as an error. Defaults to 5. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           format: int32
           type: integer
         consecutiveGatewayFailure:
-          description: The number of consecutive gateway failures (502, 503, 504 status or connection errors that are mapped to one of those status codes) before a consecutive gateway failure ejection occurs. Defaults to 3.
+          description: The number of consecutive gateway failures (502, 503, 504 status or connection errors that are mapped to one of those status codes) before a consecutive gateway failure ejection occurs. Defaults to 3. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           format: int32
           type: integer
         enforcingConsecutiveErrors:
-          description: The percentage chance that a host will be actually ejected when an outlier status is detected through consecutive 5xx. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 0.
+          description: The percentage chance that a host will be actually ejected when an outlier status is detected through consecutive 5xx. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 0. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           format: int32
           type: integer
         enforcingConsecutiveGatewayFailure:
-          description: The percentage chance that a host will be actually ejected when an outlier status is detected through consecutive gateway failures. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 100.
+          description: The percentage chance that a host will be actually ejected when an outlier status is detected through consecutive gateway failures. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 100. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
           format: int32
           type: integer
         enforcingSuccessRate:
@@ -58158,6 +58199,7 @@ components:
             - SSL_CERTIFICATES
             - STATIC_ADDRESSES
             - STATIC_BYOIP_ADDRESSES
+            - STATIC_EXTERNAL_IPV6_ADDRESS_RANGES
             - SUBNETWORKS
             - T2A_CPUS
             - T2D_CPUS
@@ -58180,6 +58222,25 @@ components:
           description: "[Output Only] Current usage of this metric."
           format: double
           type: number
+      type: object
+    QuotaExceededInfo:
+      description: Additional details for quota exceeded error for resource quota.
+      properties:
+        dimensions:
+          additionalProperties:
+            type: string
+          description: The map holding related quota dimensions.
+          type: object
+        limit:
+          description: Current effective quota limit. The limit's unit depends on the quota type or metric.
+          format: double
+          type: number
+        limitName:
+          description: The name of the quota limit.
+          type: string
+        metricName:
+          description: The Compute Engine quota metric name.
+          type: string
       type: object
     Reference:
       description: Represents a reference to a resource.
@@ -59059,7 +59120,7 @@ components:
           type: string
         shareSettings:
           $ref: "#/components/schemas/ShareSettings"
-          description: Share-settings for shared-reservation
+          description: Specify share-settings to create a shared reservation. This property is optional. For more information about the syntax and options for this field and its subfields, see the guide for creating a shared reservation.
         specificReservation:
           $ref: "#/components/schemas/AllocationSpecificSKUReservation"
           description: Reservation for instances with specific machine shapes.
@@ -59779,6 +59840,14 @@ components:
       properties:
         physicalHost:
           description: "[Output Only] An opaque ID of the host on which the VM is running."
+          type: string
+        scheduling:
+          $ref: "#/components/schemas/ResourceStatusScheduling"
+      type: object
+    ResourceStatusScheduling:
+      properties:
+        terminationTimestamp:
+          description: Time in future when the instance will be terminated in RFC3339 text format.
           type: string
       type: object
     RolloutPolicy:
@@ -60993,10 +61062,13 @@ components:
           format: int32
           type: integer
         maintenanceInterval:
-          description: For more information about maintenance intervals, see Setting maintenance intervals.
+          description: "Specifies the frequency of planned maintenance events. The accepted values are: `PERIODIC`."
           enum:
             - PERIODIC
           type: string
+        maxRunDuration:
+          $ref: "#/components/schemas/Duration"
+          description: Specifies the max run duration for the given instance. If specified, the instance termination action will be performed at the end of the run duration.
         minNodeCpus:
           description: The minimum number of virtual CPUs this instance will consume when running on a sole-tenant node.
           format: int32
@@ -61020,6 +61092,9 @@ components:
           enum:
             - SPOT
             - STANDARD
+          type: string
+        terminationTime:
+          description: Specifies the timestamp, when the instance will be terminated, in RFC3339 text format. If specified, the instance termination action will be performed at the termination time.
           type: string
       type: object
     SchedulingNodeAffinity:
@@ -61261,7 +61336,7 @@ components:
           format: int32
           type: integer
         rules:
-          description: A list of rules that belong to this policy. There must always be a default rule (rule with priority 2147483647 and match "*"). If no rules are provided when creating a security policy, a default rule with action "allow" will be added.
+          description: A list of rules that belong to this policy. There must always be a default rule which is a rule with priority 2147483647 and match all condition (for the match condition this means match "*" for srcIpRanges and for the networkMatch condition every field must be either match "*" or not set). If no rules are provided when creating a security policy, a default rule with action "allow" will be added.
           items:
             $ref: "#/components/schemas/SecurityPolicyRule"
           type: array
@@ -61636,13 +61711,16 @@ components:
           description: Action to take for requests that are under the configured rate limit threshold. Valid option is "allow" only.
           type: string
         enforceOnKey:
-          description: "Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if this field 'enforce_on_key' is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under \"enforce_on_key_name\". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under \"enforce_on_key_name\". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. "
+          description: 'Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKey" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates. '
           enum:
             - ALL
             - ALL_IPS
             - HTTP_COOKIE
             - HTTP_HEADER
+            - HTTP_PATH
             - IP
+            - REGION_CODE
+            - SNI
             - XFF_IP
           type: string
         enforceOnKeyName:
@@ -61687,6 +61765,9 @@ components:
         authentication:
           description: "[Deprecated] Use clientTlsPolicy instead."
           type: string
+        awsV4Authentication:
+          $ref: "#/components/schemas/AWSV4Signature"
+          description: The configuration needed to generate a signature for access to private storage buckets that support AWS's Signature Version 4 for authentication. Allowed only for INTERNET_IP_PORT and INTERNET_FQDN_PORT NEG backends.
         clientTlsPolicy:
           description: "Optional. A URL referring to a networksecurity.ClientTlsPolicy resource that describes how clients should authenticate with this service's backends. clientTlsPolicy only applies to a global BackendService with the loadBalancingScheme set to INTERNAL_SELF_MANAGED. If left blank, communications are not encrypted. Note: This field currently has no impact."
           type: string
@@ -63162,7 +63243,7 @@ components:
           description: Whether to enable flow logging for this subnetwork. If this field is not explicitly set, it will not appear in get listings. If not set the default behavior is determined by the org policy, if there is no org policy specified, then it will default to disabled. This field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
           type: boolean
         externalIpv6Prefix:
-          description: "[Output Only] The external IPv6 address range that is assigned to this subnetwork."
+          description: The external IPv6 address range that is owned by this subnetwork.
           type: string
         fingerprint:
           description: Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a Subnetwork. An up-to-date fingerprint must be provided in order to update the Subnetwork, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve a Subnetwork.
@@ -63225,6 +63306,9 @@ components:
           type: string
         region:
           description: URL of the region where the Subnetwork resides. This field can be set only at resource creation time.
+          type: string
+        reservedInternalRange:
+          description: The URL of the reserved internal range.
           type: string
         role:
           description: The role of subnetwork. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Internal HTTP(S) Load Balancing. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
@@ -63446,6 +63530,9 @@ components:
           type: string
         rangeName:
           description: The name associated with this subnetwork secondary range, used when adding an alias IP range to a VM instance. The name must be 1-63 characters long, and comply with RFC1035. The name must be unique within the subnetwork.
+          type: string
+        reservedInternalRange:
+          description: The URL of the reserved internal range.
           type: string
       type: object
     SubnetworksExpandIpCidrRangeRequest:
@@ -65882,6 +65969,9 @@ components:
         pathPrefixRewrite:
           description: Before forwarding the request to the selected backend service, the matching portion of the request's path is replaced by pathPrefixRewrite. The value must be from 1 to 1024 characters.
           type: string
+        pathTemplateRewrite:
+          description: " If specified, the pattern rewrites the URL path (based on the :path header) using the HTTP template syntax. A corresponding path_template_match must be specified. Any template variables must exist in the path_template_match field. - -At least one variable must be specified in the path_template_match field - You can omit variables from the rewritten URL - The * and ** operators cannot be matched unless they have a corresponding variable name - e.g. {format=*} or {var=**}. For example, a path_template_match of /static/{format=**} could be rewritten as /static/content/{format} to prefix /content to the URL. Variables can also be re-ordered in a rewrite, so that /{country}/{format}/{suffix=**} can be rewritten as /content/{format}/{country}/{suffix}. At least one non-empty routeRules[].matchRules[].path_template_match is required. Only one of path_prefix_rewrite or path_template_rewrite may be specified."
+          type: string
       type: object
     UsableSubnetwork:
       description: Subnetwork which the current user has compute.subnetworks.use permission on.
@@ -66207,7 +66297,7 @@ components:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
         stackType:
-          description: The stack type for this VPN gateway to identify the IP protocols that are enabled. If not specified, IPV4_ONLY will be used.
+          description: "The stack type for this VPN gateway to identify the IP protocols that are enabled. Possible values are: IPV4_ONLY, IPV4_IPV6. If not specified, IPV4_ONLY will be used."
           enum:
             - IPV4_IPV6
             - IPV4_ONLY
@@ -66546,7 +66636,7 @@ components:
           description: URL of the peer side external VPN gateway to which this VPN tunnel is connected. Provided by the client when the VPN tunnel is created. This field is exclusive with the field peerGcpGateway.
           type: string
         peerExternalGatewayInterface:
-          description: The interface ID of the external VPN gateway to which this VPN tunnel is connected. Provided by the client when the VPN tunnel is created.
+          description: "The interface ID of the external VPN gateway to which this VPN tunnel is connected. Provided by the client when the VPN tunnel is created. Possible values are: `0`, `1`, `2`, `3`. The number of IDs in use depends on the external VPN gateway redundancy type."
           format: int32
           type: integer
         peerGcpGateway:
@@ -66599,7 +66689,7 @@ components:
           description: URL of the VPN gateway with which this VPN tunnel is associated. Provided by the client when the VPN tunnel is created. This must be used (instead of target_vpn_gateway) if a High Availability VPN gateway resource is created.
           type: string
         vpnGatewayInterface:
-          description: The interface ID of the VPN gateway with which this VPN tunnel is associated.
+          description: "The interface ID of the VPN gateway with which this VPN tunnel is associated. Possible values are: `0`, `1`."
           format: int32
           type: integer
       type: object

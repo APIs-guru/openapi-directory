@@ -3123,7 +3123,7 @@ components:
           description: This field is deprecated. Leave this unset and instead configure BinaryAuthorization using evaluation_mode. If evaluation_mode is set to anything other than EVALUATION_MODE_UNSPECIFIED, this field is ignored.
           type: boolean
         evaluationMode:
-          description: Mode of operation for binauthz policy evaluation. Currently the only options are equivalent to enable/disable. If unspecified, defaults to DISABLED.
+          description: Mode of operation for binauthz policy evaluation. If unspecified, defaults to DISABLED.
           enum:
             - EVALUATION_MODE_UNSPECIFIED
             - DISABLED
@@ -3535,6 +3535,12 @@ components:
         desiredDnsConfig:
           $ref: "#/components/schemas/DNSConfig"
           description: DNSConfig contains clusterDNS config for this cluster.
+        desiredEnablePrivateEndpoint:
+          description: Enable/Disable private endpoint for the cluster's master.
+          type: boolean
+        desiredGatewayApiConfig:
+          $ref: "#/components/schemas/GatewayAPIConfig"
+          description: The desired config of Gateway API on this cluster.
         desiredGcfsConfig:
           $ref: "#/components/schemas/GcfsConfig"
           description: The desired GCFS config for the cluster.
@@ -3812,6 +3818,13 @@ components:
           format: int32
           type: integer
       type: object
+    FastSocket:
+      description: Configuration of Fast Socket feature.
+      properties:
+        enabled:
+          description: Whether Fast Socket features are enabled in the node pool.
+          type: boolean
+      type: object
     Filter:
       description: Allows filtering to one or more specific event types. If event types are present, those and only those event types will be transmitted to the cluster. Other types will be skipped. If no filter is specified, or no event types are present, all event types will be sent
       properties:
@@ -3838,6 +3851,18 @@ components:
         maxSharedClientsPerGpu:
           description: The max number of containers that can share a physical GPU.
           format: int64
+          type: string
+      type: object
+    GatewayAPIConfig:
+      description: GatewayAPIConfig contains the desired config of Gateway API on this cluster.
+      properties:
+        channel:
+          description: The Gateway API release channel to use for Gateway API.
+          enum:
+            - CHANNEL_UNSPECIFIED
+            - CHANNEL_DISABLED
+            - CHANNEL_EXPERIMENTAL
+            - CHANNEL_STANDARD
           type: string
       type: object
     GcePersistentDiskCsiDriverConfig:
@@ -4204,6 +4229,9 @@ components:
               - COMPONENT_UNSPECIFIED
               - SYSTEM_COMPONENTS
               - WORKLOADS
+              - APISERVER
+              - SCHEDULER
+              - CONTROLLER_MANAGER
             type: string
           type: array
       type: object
@@ -4304,6 +4332,9 @@ components:
         enabled:
           description: Whether or not master authorized networks is enabled.
           type: boolean
+        gcpPublicCidrsAccessEnabled:
+          description: Whether master is accessbile via Google Compute Engine Public IP addresses.
+          type: boolean
       type: object
     MaxPodsConstraint:
       description: Constraints applied to pods.
@@ -4386,6 +4417,9 @@ components:
         enableL4ilbSubsetting:
           description: Whether L4ILB Subsetting is enabled for this cluster.
           type: boolean
+        gatewayApiConfig:
+          $ref: "#/components/schemas/GatewayAPIConfig"
+          description: GatewayAPIConfig contains the desired config of Gateway API on this cluster.
         network:
           description: "Output only. The relative name of the Google Compute Engine network(https://cloud.google.com/compute/docs/networks-and-firewalls#networks) to which the cluster is connected. Example: projects/my-project/global/networks/my-network"
           type: string
@@ -4476,6 +4510,9 @@ components:
         ephemeralStorageConfig:
           $ref: "#/components/schemas/EphemeralStorageConfig"
           description: Parameters for the ephemeral storage filesystem. If unspecified, ephemeral storage is backed by the boot disk.
+        fastSocket:
+          $ref: "#/components/schemas/FastSocket"
+          description: Enable or disable NCCL fast socket for the node pool.
         gcfsConfig:
           $ref: "#/components/schemas/GcfsConfig"
           description: GCFS (Google Container File System) configs.
@@ -4528,6 +4565,11 @@ components:
         reservationAffinity:
           $ref: "#/components/schemas/ReservationAffinity"
           description: The optional reservation affinity. Setting this field will apply the specified [Zonal Compute Reservation](https://cloud.google.com/compute/docs/instances/reserving-zonal-resources) to this node pool.
+        resourceLabels:
+          additionalProperties:
+            type: string
+          description: The resource labels for the node pool to use to annotate any related Google Compute Engine resources.
+          type: object
         sandboxConfig:
           $ref: "#/components/schemas/SandboxConfig"
           description: Sandbox configuration for this node.
@@ -4608,6 +4650,9 @@ components:
       properties:
         createPodRange:
           description: Input only. Whether to create a new range for pod IPs in this node pool. Defaults are provided for `pod_range` and `pod_ipv4_cidr_block` if they are not specified. If neither `create_pod_range` or `pod_range` are specified, the cluster-level default (`ip_allocation_policy.cluster_ipv4_cidr_block`) is used. Only applicable if `ip_allocation_policy.use_ip_aliases` is true. This field cannot be changed after the node pool has been created.
+          type: boolean
+        enablePrivateNodes:
+          description: Whether nodes have internal IP addresses only. If enable_private_nodes is not specified, then the value is derived from cluster.privateClusterConfig.enablePrivateNodes
           type: boolean
         networkPerformanceConfig:
           $ref: "#/components/schemas/NetworkPerformanceConfig"
@@ -4925,6 +4970,9 @@ components:
         privateEndpoint:
           description: Output only. The internal IP address of this cluster's master endpoint.
           type: string
+        privateEndpointSubnetwork:
+          description: Subnet to provision the master's private endpoint during cluster creation. Specified in projects/*/regions/*/subnetworks/* format.
+          type: string
         publicEndpoint:
           description: Output only. The external IP address of this cluster's master endpoint.
           type: string
@@ -5029,6 +5077,15 @@ components:
           items:
             type: string
           type: array
+      type: object
+    ResourceLabels:
+      description: Collection of [GCP labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels).
+      properties:
+        labels:
+          additionalProperties:
+            type: string
+          description: Map of node label keys and node label values.
+          type: object
       type: object
     ResourceLimit:
       description: Contains information about amount of some resource in the cluster. For memory, value should be in GB.
@@ -5453,7 +5510,7 @@ components:
           format: int32
           type: integer
         batchPercentage:
-          description: Percentage of the bool pool nodes to drain in a batch. The range of this field should be (0.0, 1.0].
+          description: Percentage of the blue pool nodes to drain in a batch. The range of this field should be (0.0, 1.0].
           format: float
           type: number
         batchSoakDuration:
@@ -5619,6 +5676,9 @@ components:
         confidentialNodes:
           $ref: "#/components/schemas/ConfidentialNodes"
           description: Confidential nodes config. All the nodes in the node pool will be Confidential VM once enabled.
+        fastSocket:
+          $ref: "#/components/schemas/FastSocket"
+          description: Enable or disable NCCL fast socket for the node pool.
         gcfsConfig:
           $ref: "#/components/schemas/GcfsConfig"
           description: GCFS config.
@@ -5660,6 +5720,9 @@ components:
         projectId:
           description: Required. Deprecated. The Google Developers Console [project ID or project number](https://cloud.google.com/resource-manager/docs/creating-managing-projects). This field has been deprecated and replaced by the name field.
           type: string
+        resourceLabels:
+          $ref: "#/components/schemas/ResourceLabels"
+          description: The resource labels for the node pool to use to annotate any related Google Compute Engine resources.
         tags:
           $ref: "#/components/schemas/NetworkTags"
           description: The desired network tags to be applied to all nodes in the node pool. If this field is not present, the tags will not be changed. Otherwise, the existing network tags will be *replaced* with the provided tags.

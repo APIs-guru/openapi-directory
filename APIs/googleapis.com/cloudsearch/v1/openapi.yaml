@@ -1362,7 +1362,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Update mask to control which fields to update. If update_mask is non-empty then only the fields specified in the update_mask are updated. If you specify a field in the update_mask, but don't specify its value in the search_application then that field will be cleared. If the update_mask is not present or empty or has the value * then all fields will be updated. Some example field paths: search_application.name, search_application.display_name"
+        - description: "Only applies to [`settings.searchapplications.patch`](https://developers.google.com/cloud-search/docs/reference/rest/v1/settings.searchapplications/patch). Update mask to control which fields to update. Example field paths: `search_application.name`, `search_application.displayName`. * If `update_mask` is non-empty, then only the fields specified in the `update_mask` are updated. * If you specify a field in the `update_mask`, but don't specify its value in the `search_application`, then that field is cleared. * If the `update_mask` is not present or empty or has the value `*`, then all fields are updated."
           in: query
           name: updateMask
           schema:
@@ -1404,7 +1404,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Update mask to control which fields to update. If update_mask is non-empty then only the fields specified in the update_mask are updated. If you specify a field in the update_mask, but don't specify its value in the search_application then that field will be cleared. If the update_mask is not present or empty or has the value * then all fields will be updated. Some example field paths: search_application.name, search_application.display_name"
+        - description: "Only applies to [`settings.searchapplications.patch`](https://developers.google.com/cloud-search/docs/reference/rest/v1/settings.searchapplications/patch). Update mask to control which fields to update. Example field paths: `search_application.name`, `search_application.displayName`. * If `update_mask` is non-empty, then only the fields specified in the `update_mask` are updated. * If you specify a field in the `update_mask`, but don't specify its value in the `search_application`, then that field is cleared. * If the `update_mask` is not present or empty or has the value `*`, then all fields are updated."
           in: query
           name: updateMask
           schema:
@@ -2473,6 +2473,14 @@ components:
         key:
           type: string
         value:
+          type: string
+      type: object
+    AddonComposeUiActionMarkup:
+      properties:
+        type:
+          enum:
+            - UNSPECIFIED
+            - DISMISS
           type: string
       type: object
     AffectedMembership:
@@ -3708,6 +3716,9 @@ components:
         action:
           $ref: "#/components/schemas/AppsDynamiteSharedAction"
           description: If specified, an action is triggered by this onClick.
+        hostAppAction:
+          $ref: "#/components/schemas/HostAppActionMarkup"
+          description: Triggers host app action on click directly without invoking form actions. This is currently not available to end-users and is used internal only.
         openDynamicLinkAction:
           $ref: "#/components/schemas/AppsDynamiteSharedAction"
           description: An add-on triggers this action when the action needs to open a link. This differs from the open_link above in that this needs to talk to server to get the link. Thus some preparation work is required for web client to do before the open link action response comes back.
@@ -4243,6 +4254,140 @@ components:
           description: The text value of the field.
           type: string
       type: object
+    AppsExtensionsMarkupCalendarClientActionMarkupAddAttachmentsActionMarkup:
+      properties:
+        addonAttachments:
+          items:
+            $ref: "#/components/schemas/AppsExtensionsMarkupCalendarClientActionMarkupAddAttachmentsActionMarkupAddonAttachment"
+          type: array
+      type: object
+    AppsExtensionsMarkupCalendarClientActionMarkupAddAttachmentsActionMarkupAddonAttachment:
+      properties:
+        iconUrl:
+          description: Link to the resource's icon.
+          type: string
+        mimeType:
+          description: MIME type of the content in resource_url.
+          type: string
+        resourceUrl:
+          type: string
+        title:
+          description: Title of the attachment.
+          type: string
+      type: object
+    AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkup:
+      description: Markup that defines conference data associated to a Google Calendar event.
+      properties:
+        conferenceId:
+          description: Unique identifier for this conference data. Maximum 512 characters long.
+          type: string
+        conferenceSolutionId:
+          description: An identifier of the conferencing solution. Must match a value from the deployment's `calendar.conferenceSolution.id` field.
+          type: string
+        entryPoints:
+          description: Entry points to the conference. Maximum 300 entry points are allowed.
+          items:
+            $ref: "#/components/schemas/AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupEntryPointMarkup"
+          type: array
+        error:
+          $ref: "#/components/schemas/AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupError"
+          description: If set, it means an error occurred during conference creation.
+        note:
+          description: Additional notes (such as instructions from the administrator, legal notices) to display to the user. Can contain HTML. Max length 2048 characters.
+          type: string
+        parameters:
+          description: Additional add-on parameters. Maximum 300 parameters are allowed.
+          items:
+            $ref: "#/components/schemas/AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupParameter"
+          type: array
+      type: object
+    AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupEntryPointMarkup:
+      description: A way to join the conference.
+      properties:
+        accessCode:
+          description: An access code for accessing the conference. Maximum 128 characters long.
+          type: string
+        features:
+          description: Features of the entry point, such as being toll or toll-free. One entry point can have multiple features.
+          items:
+            enum:
+              - UNKNOWN_FEATURE
+              - TOLL
+              - TOLL_FREE
+            type: string
+          type: array
+        label:
+          description: The label of the entry point to display to the user. Maximum 512 characters long.
+          type: string
+        meetingCode:
+          description: A meeting code for accessing the conference. Maximum 128 characters long.
+          type: string
+        passcode:
+          description: A passcode for accessing the conference. Maximum 128 characters long.
+          type: string
+        password:
+          description: A password for accessing the conference. Maximum 128 characters long.
+          type: string
+        pin:
+          description: A PIN for accessing the conference. Maximum 128 characters long.
+          type: string
+        regionCode:
+          description: The CLDR/ISO 3166 region code for the country associated with this entry point. Applicable only to `Type.PHONE`.
+          type: string
+        type:
+          description: The type of the entry point. Required.
+          enum:
+            - UNKNOWN
+            - VIDEO
+            - PHONE
+            - MORE
+            - SIP
+          type: string
+        uri:
+          description: "A URI for joining the conference. Supports tel: and http(s): and should be at most 1300 characters long. Required."
+          type: string
+      type: object
+    AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupError:
+      description: Represents an error that occurred during conference creation.
+      properties:
+        authenticationUrl:
+          description: If the error type is `AUTHENTICATION`, the add-on can provide a URL allowing users to log in. Maximum 1300 characters long.
+          type: string
+        type:
+          description: The type of error. Required.
+          enum:
+            - UNKNOWN
+            - AUTHENTICATION
+            - TEMPORARY
+            - PERMANENT
+            - PERMISSION_DENIED
+            - CONFERENCE_SOLUTION_FORBIDDEN
+          type: string
+      type: object
+    AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkupParameter:
+      description: "Solution-specific parameters that are persisted with the event data and, if an update or delete is needed, are passed to the add-on. For example: `[{key: 'sessionKey', value: '123'}, {key: 'meetingId', value: '456'}]`"
+      properties:
+        key:
+          description: The key of the parameter. Maximum 50 characters long. Required.
+          type: string
+        value:
+          description: The value of the parameter. Maximum 1024 characters long. Required.
+          type: string
+      type: object
+    AppsExtensionsMarkupCalendarClientActionMarkupEditAttendeesActionMarkup:
+      properties:
+        addAttendeeEmails:
+          description: A list of attendees to add to the Google Calendar event.
+          items:
+            type: string
+          type: array
+      type: object
+    AppsExtensionsMarkupCalendarClientActionMarkupEditConferenceDataActionMarkup:
+      properties:
+        conferenceData:
+          $ref: "#/components/schemas/AppsExtensionsMarkupCalendarClientActionMarkupConferenceDataMarkup"
+          description: The conference data to add to the Google Calendar event.
+      type: object
     Attachment:
       description: Attachments that follow the message text.
       properties:
@@ -4443,6 +4588,7 @@ components:
             - DISABLED_BY_ADMIN
             - DISABLED_BY_DEVELOPER
             - PRIVATE
+            - APP_SUGGESTION
           type: string
         setupUrl:
           description: URL for setting up bot.
@@ -4493,6 +4639,18 @@ components:
           $ref: "#/components/schemas/ImageButton"
         textButton:
           $ref: "#/components/schemas/TextButton"
+      type: object
+    CalendarClientActionMarkup:
+      properties:
+        addAttachmentsActionMarkup:
+          $ref: "#/components/schemas/AppsExtensionsMarkupCalendarClientActionMarkupAddAttachmentsActionMarkup"
+          description: An action that adds attachments to the Google Calendar event.
+        editAttendeesActionMarkup:
+          $ref: "#/components/schemas/AppsExtensionsMarkupCalendarClientActionMarkupEditAttendeesActionMarkup"
+          description: An action that adds attendees to the Google Calendar event.
+        editConferenceDataActionMarkup:
+          $ref: "#/components/schemas/AppsExtensionsMarkupCalendarClientActionMarkupEditConferenceDataActionMarkup"
+          description: An action that adds conference data to the Google Calendar event.
       type: object
     CallInfo:
       description: Contains information regarding an ongoing conference (aka call) for a meeting space.
@@ -4588,6 +4746,17 @@ components:
         accessLock:
           description: Indicates whether the access lock is currently on or off.
           type: boolean
+        accessType:
+          description: The current access type of the conference.
+          enum:
+            - ACCESS_TYPE_UNSPECIFIED
+            - ACCESS_TYPE_OPEN
+            - ACCESS_TYPE_TRUSTED
+            - ACCESS_TYPE_RESTRICTED
+          type: string
+        allowJoiningBeforeHost:
+          description: Whether users can join this conference before a host (Host or Cohost).
+          type: boolean
         attendanceReportEnabled:
           description: Indicates whether the attendance report is currently enabled or disabled.
           type: boolean
@@ -4601,7 +4770,7 @@ components:
           description: Whether Client-side Encryption is enabled for this conference.
           type: boolean
         moderationEnabled:
-          description: Indicates whether the current call is moderated.
+          description: Indicates whether moderation is currently on or off.
           type: boolean
         presentLock:
           description: Indicates whether the present lock is currently on or off.
@@ -4688,6 +4857,10 @@ components:
         title:
           description: "The title must be specified. The header has a fixed height: if both a title and subtitle is specified, each will take up 1 line. If only the title is specified, it will take up both lines. The header is rendered in collapsed and detailed view."
           type: string
+      type: object
+    ChatClientActionMarkup:
+      description: Actions handled by Chat Clients.
+      properties: {}
       type: object
     ChatConfig:
       description: Configuration of the in meeting chat.
@@ -5023,6 +5196,15 @@ components:
       properties:
         customEmoji:
           $ref: "#/components/schemas/AppsDynamiteSharedCustomEmoji"
+      type: object
+    CustomFunctionReturnValueMarkup:
+      description: The result of a user running a custom function.
+      properties:
+        errorMessage:
+          description: The error message to show to the user if something went wrong.
+          type: string
+        value:
+          description: The value that resulted from running the custom function.
       type: object
     CustomerId:
       description: Represents a GSuite customer ID. Obfuscated with CustomerIdObfuscator.
@@ -5384,6 +5566,11 @@ components:
             type: number
           type: array
       type: object
+    DriveClientActionMarkup:
+      properties:
+        requestFileScope:
+          $ref: "#/components/schemas/RequestFileScope"
+      type: object
     DriveFollowUpRestrict:
       description: Drive follow-up search restricts (e.g. "followup:suggestions").
       properties:
@@ -5585,6 +5772,11 @@ components:
     EditMetadata:
       description: A message edit in Dynamite inserts a Babel-only item containing this field.
       properties: {}
+      type: object
+    EditorClientActionMarkup:
+      properties:
+        requestFileScopeForActiveDocument:
+          $ref: "#/components/schemas/RequestFileScopeForActiveDocument"
       type: object
     EmailAddress:
       description: A person's email address.
@@ -6449,6 +6641,17 @@ components:
             $ref: "#/components/schemas/SearchApplicationUserStats"
           type: array
       type: object
+    GmailClientActionMarkup:
+      properties:
+        addonComposeUiActionMarkup:
+          $ref: "#/components/schemas/AddonComposeUiActionMarkup"
+        openCreatedDraftActionMarkup:
+          $ref: "#/components/schemas/OpenCreatedDraftActionMarkup"
+        taskAction:
+          $ref: "#/components/schemas/TaskActionMarkup"
+        updateDraftActionMarkup:
+          $ref: "#/components/schemas/UpdateDraftActionMarkup"
+      type: object
     GoogleChatConfig:
       description: Configuration of the Google Chat in Meet.
       properties:
@@ -6486,7 +6689,7 @@ components:
           type: array
       type: object
     GoogleChatV1ContextualAddOnMarkupCardCardAction:
-      description: "A card action is the action associated with the card. For an invoice card, a typical action would be: delete invoice, email invoice or open the invoice in browser."
+      description: "A card action is the action associated with the card. For an invoice card, a typical action would be: delete invoice, email invoice or open the invoice in browser. Not supported by Google Chat apps."
       properties:
         actionLabel:
           description: The label used to be displayed in the action menu item.
@@ -6956,6 +7159,28 @@ components:
         searchText:
           type: string
       type: object
+    HostAppActionMarkup:
+      description: Actions handled by individual host apps.
+      properties:
+        calendarAction:
+          $ref: "#/components/schemas/CalendarClientActionMarkup"
+          description: Actions handled by Calendar.
+        chatAction:
+          $ref: "#/components/schemas/ChatClientActionMarkup"
+          description: Actions handled by Chat.
+        driveAction:
+          $ref: "#/components/schemas/DriveClientActionMarkup"
+          description: Actions handled by Drive.
+        editorAction:
+          $ref: "#/components/schemas/EditorClientActionMarkup"
+          description: Actions handled by Docs, Sheets, or Slides.
+        gmailAction:
+          $ref: "#/components/schemas/GmailClientActionMarkup"
+          description: Actions handled by Gmail.
+        sheetsAction:
+          $ref: "#/components/schemas/SheetsClientActionMarkup"
+          description: Actions handled by Sheets.
+      type: object
     HostProto:
       description: Represents a single host. Optionally, the MDB owner of the host can be specified.
       properties:
@@ -7258,6 +7483,26 @@ components:
     InitializeCustomerRequest:
       description: Request message for `InitializeCustomer` method.
       properties: {}
+      type: object
+    InsertContent:
+      properties:
+        content:
+          description: The content to be inserted.
+          type: string
+        contentType:
+          description: The type of inserted content.
+          enum:
+            - UNSPECIFIED_CONTENT_TYPE
+            - TEXT
+            - MUTABLE_HTML
+            - IMMUTABLE_HTML
+          type: string
+        mimeType:
+          enum:
+            - UNSPECIFIED_EMAIL_MIME_TYPE
+            - PLAIN_TEXT
+            - HTML
+          type: string
       type: object
     IntegerOperatorOptions:
       description: Used to provide a search operator for integer properties. This is optional. Search operators let users restrict the query to specific fields relevant to the type of item being searched.
@@ -7893,7 +8138,7 @@ components:
           type: string
       type: object
     MembershipChangedMetadata:
-      description: Annotation metadata to display system messages for membership changes.
+      description: "Annotation metadata to display system messages for membership changes. Next Tag: 8"
       properties:
         affectedMemberProfiles:
           items:
@@ -7914,6 +8159,13 @@ components:
         initiatorProfile:
           $ref: "#/components/schemas/User"
           description: Complete member profiles, when ListTopicsRequest FetchOptions.USER is set. Otherwise, only the id will be filled in.
+        initiatorType:
+          description: The type of the user who initiated this membership change.
+          enum:
+            - INITIATOR_TYPE_UNSPECIFIED
+            - INITIATOR_TYPE_END_USER
+            - INITIATOR_TYPE_ADMIN
+          type: string
         type:
           enum:
             - TYPE_UNSPECIFIED
@@ -8363,6 +8615,21 @@ components:
         openLinkAction:
           $ref: "#/components/schemas/FormAction"
           description: An add-on triggers this action when the form action needs to open a link. This differs from the open_link above in that this needs to talk to server to get the link. Thus some preparation work is required for web client to do before the open link action response comes back.
+      type: object
+    OpenCreatedDraftActionMarkup:
+      properties:
+        draftId:
+          description: The ID of the newly created draft in the form "r123".
+          type: string
+        draftStorageId:
+          description: The server storage ID in hex format, for example,"15e9fa622ce1029d".
+          type: string
+        draftThreadId:
+          description: The ID of the thread containing the newly created draft, for example, "15e9fa622ce1029d".
+          type: string
+        draftThreadServerPermId:
+          description: The server permanent ID for the draft's thread. This field isn't set anywhere, and it's ignored when processing OpenCreatedDraftActionMarkup. Supply and use draftThreadStorageId instead.
+          type: string
       type: object
     OpenLink:
       properties:
@@ -9161,6 +9428,11 @@ components:
           description: The new read receipts state.
           type: boolean
       type: object
+    Recipient:
+      properties:
+        email:
+          type: string
+      type: object
     RecordingEvent:
       description: A recording event is something that happens to the recording in a conference.
       properties:
@@ -9260,6 +9532,14 @@ components:
             - CLIENT_ERROR
           type: string
       type: object
+    RequestFileScope:
+      properties:
+        itemId:
+          type: string
+      type: object
+    RequestFileScopeForActiveDocument:
+      properties: {}
+      type: object
     RequestOptions:
       description: Shared request options for all RPC methods.
       properties:
@@ -9310,12 +9590,6 @@ components:
     ResponseDebugInfo:
       description: Debugging information about the response.
       properties:
-        enabledExperiments:
-          description: Experiments enabled in QAPI.
-          items:
-            format: int32
-            type: integer
-          type: array
         formattedDebugInfo:
           description: General debug info formatted for display.
           type: string
@@ -9436,6 +9710,9 @@ components:
           type: string
         id:
           $ref: "#/components/schemas/RosterId"
+        isMembershipVisibleToCaller:
+          description: Whether caller has visibility into members of the roster.
+          type: boolean
         membershipCount:
           format: int32
           type: integer
@@ -9862,16 +10139,27 @@ components:
           type: string
       type: object
     Settings:
-      description: Settings of a meeting space that can be viewed and edited by users with permissions. These settings are always populated for output.
+      description: Settings of a meeting space that can be edited by users with corresponding manage privilege. These settings are always populated in responses.
       properties:
         accessLock:
-          description: The access lock of the meeting space that lets owner control who can join the meeting. True if the access lock feature is enabled for the meeting space.
+          description: The access lock of the meeting space that lets hosts control who can join the meeting.
+          type: boolean
+        accessType:
+          description: The access type of the meeting space.
+          enum:
+            - ACCESS_TYPE_UNSPECIFIED
+            - ACCESS_TYPE_OPEN
+            - ACCESS_TYPE_TRUSTED
+            - ACCESS_TYPE_RESTRICTED
+          type: string
+        allowJoiningBeforeHost:
+          description: Whether users can join before host in the conferences of this meeting space.
           type: boolean
         attendanceReportEnabled:
           description: Whether attendance report is enabled for the meeting space.
           type: boolean
         chatLock:
-          description: The chat lock of the meeting space that lets owner control whether the participants can send chat messages. True if the chat lock feature is enabled for the meeting space.
+          description: The chat lock of the meeting space that lets owner control whether the participants can send chat messages.
           type: boolean
         cohostArtifactSharingEnabled:
           description: Whether meeting artifacts will be shared with cohosts.
@@ -9886,10 +10174,10 @@ components:
           description: Indicates whether the meeting space is moderated.
           type: boolean
         presentLock:
-          description: The present lock of the meeting space that lets owner control whether the participants can present their screen. True if the present lock feature is enabled for the meeting space.
+          description: The present lock of the meeting space that lets owner control whether the participants can present their screen.
           type: boolean
         reactionsLock:
-          description: The reactions lock of the meeting space that lets owner control whether the participants can send reactions. True if the reactions lock feature is enabled for the meeting space.
+          description: The reactions lock of the meeting space that lets owner control whether the participants can send reactions.
           type: boolean
       type: object
     ShareScope:
@@ -9907,6 +10195,11 @@ components:
             - DASHER_DOMAIN
             - PUBLIC
           type: string
+      type: object
+    SheetsClientActionMarkup:
+      properties:
+        customFunctionReturnValueMarkup:
+          $ref: "#/components/schemas/CustomFunctionReturnValueMarkup"
       type: object
     SigningKeyPossessorProto:
       description: Represents a principal who possesses a signing key corresponding to the verification key or keyset described here.
@@ -10307,6 +10600,11 @@ components:
           description: The value is what is passed back in apps script callback.
           type: string
       type: object
+    TaskActionMarkup:
+      properties:
+        reloadTasks:
+          type: boolean
+      type: object
     TextButton:
       properties:
         altText:
@@ -10536,6 +10834,36 @@ components:
           description: The name of a queue to unreserve items from.
           type: string
       type: object
+    UpdateBccRecipients:
+      properties:
+        bccRecipients:
+          items:
+            $ref: "#/components/schemas/Recipient"
+          type: array
+      type: object
+    UpdateBody:
+      properties:
+        insertContents:
+          description: A repeated field that contains a series of content to insert into the draft that the user is currently editing. The content can contain HTML content or plain text content.
+          items:
+            $ref: "#/components/schemas/InsertContent"
+          type: array
+        type:
+          enum:
+            - UNSPECIFIED_ACTION_TYPE
+            - IN_PLACE_INSERT
+            - INSERT_AT_START
+            - INSERT_AT_END
+            - REPLACE
+          type: string
+      type: object
+    UpdateCcRecipients:
+      properties:
+        ccRecipients:
+          items:
+            $ref: "#/components/schemas/Recipient"
+          type: array
+      type: object
     UpdateDataSourceRequest:
       properties:
         debugOptions:
@@ -10544,9 +10872,27 @@ components:
         source:
           $ref: "#/components/schemas/DataSource"
         updateMask:
-          description: "Update mask to control which fields to update. If update_mask is non-empty then only the fields specified in the update_mask are updated. If you specify a field in the update_mask, but don't specify its value in the source that field will be cleared. If the update_mask is not present or empty or has the value * then all fields will be updated. Some example field paths: name, display_name"
+          description: "Only applies to [`settings.datasources.patch`](https://developers.google.com/cloud-search/docs/reference/rest/v1/settings.datasources/patch). Update mask to control which fields to update. Example field paths: `name`, `displayName`. * If `update_mask` is non-empty, then only the fields specified in the `update_mask` are updated. * If you specify a field in the `update_mask`, but don't specify its value in the source, that field is cleared. * If the `update_mask` is not present or empty or has the value `*`, then all fields are updated."
           format: google-fieldmask
           type: string
+      type: object
+    UpdateDraftActionMarkup:
+      properties:
+        updateBccRecipients:
+          $ref: "#/components/schemas/UpdateBccRecipients"
+          description: If set, replaces the existing Bcc recipients of the draft the user is currently editing.
+        updateBody:
+          $ref: "#/components/schemas/UpdateBody"
+          description: A field that contains a series of update actions to perform on the draft body that the user is currently editing.
+        updateCcRecipients:
+          $ref: "#/components/schemas/UpdateCcRecipients"
+          description: If set, replaces the existing Cc recipients of the draft the user is currently editing.
+        updateSubject:
+          $ref: "#/components/schemas/UpdateSubject"
+          description: If set, replaces the existing subject of the draft the user is currently editing.
+        updateToRecipients:
+          $ref: "#/components/schemas/UpdateToRecipients"
+          description: If set, replaces the existing To recipients of the draft the user is currently editing.
       type: object
     UpdateSchemaRequest:
       properties:
@@ -10559,6 +10905,18 @@ components:
         validateOnly:
           description: If true, the schema will be checked for validity, but will not be registered with the data source, even if valid.
           type: boolean
+      type: object
+    UpdateSubject:
+      properties:
+        subject:
+          type: string
+      type: object
+    UpdateToRecipients:
+      properties:
+        toRecipients:
+          items:
+            $ref: "#/components/schemas/Recipient"
+          type: array
       type: object
     UploadItemRef:
       description: Represents an upload session reference. This reference is created via upload method. This reference is valid for 30 days after its creation. Updating of item content may refer to this uploaded content via contentDataRef.
@@ -10649,6 +11007,15 @@ components:
           description: "Dimensions of the image: width."
           format: int32
           type: integer
+        linkType:
+          description: "NEXT TAG : 18"
+          enum:
+            - UNDEFINED
+            - AUTO_DETECTED_PLAIN_TEXT
+            - RICH_TEXT
+            - MARKDOWN
+            - NO_ASSOCIATED_TEXT
+          type: string
         mimeType:
           description: Mime type of the content (Currently mapped from Page Render Service ItemType) Note that this is not necessarily the mime type of the http resource. For example a text/html from youtube or vimeo may actually be classified as a video type. Then we shall mark it as video/* since we don't know exactly what type of video it is.
           type: string
@@ -10668,7 +11035,6 @@ components:
           $ref: "#/components/schemas/SafeUrlProto"
           description: The original URL.
         urlSource:
-          description: "NEXT TAG : 17"
           enum:
             - URL_SOURCE_UNKNOWN
             - USER_SUPPLIED_URL

@@ -148,7 +148,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`.
           in: query
           name: pageSize
           schema:
@@ -369,7 +369,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`.
           in: query
           name: pageSize
           schema:
@@ -869,7 +869,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -1241,7 +1241,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -1734,7 +1734,184 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+    post:
+      description: "Assigns a targeting option to an insertion order. Returns the assigned targeting option if successful. Supported targeting types: * `TARGETING_TYPE_AGE_RANGE` * `TARGETING_TYPE_BROWSER` * `TARGETING_TYPE_CATEGORY` * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DEVICE_MAKE_MODEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_ENVIRONMENT` * `TARGETING_TYPE_GENDER` * `TARGETING_TYPE_KEYWORD` * `TARGETING_TYPE_LANGUAGE` * `TARGETING_TYPE_NEGATIVE_KEYWORD_LIST` * `TARGETING_TYPE_OPERATING_SYSTEM` * `TARGETING_TYPE_PARENTAL_STATUS` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION` * `TARGETING_TYPE_VIEWABILITY`"
+      operationId: displayvideo.advertisers.insertionOrders.targetingTypes.assignedTargetingOptions.create
+      parameters:
+        - description: Required. The ID of the advertiser the insertion order belongs to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the insertion order the assigned targeting option will belong to.
+          in: path
+          name: insertionOrderId
+          required: true
+          schema:
+            type: string
+        - description: "Required. Identifies the type of this assigned targeting option. Supported targeting types: * `TARGETING_TYPE_AGE_RANGE` * `TARGETING_TYPE_BROWSER` * `TARGETING_TYPE_CATEGORY` * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DEVICE_MAKE_MODEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_ENVIRONMENT` * `TARGETING_TYPE_GENDER` * `TARGETING_TYPE_KEYWORD` * `TARGETING_TYPE_LANGUAGE` * `TARGETING_TYPE_NEGATIVE_KEYWORD_LIST` * `TARGETING_TYPE_OPERATING_SYSTEM` * `TARGETING_TYPE_PARENTAL_STATUS` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION` * `TARGETING_TYPE_VIEWABILITY`"
+          in: path
+          name: targetingType
+          required: true
+          schema:
+            enum:
+              - TARGETING_TYPE_UNSPECIFIED
+              - TARGETING_TYPE_CHANNEL
+              - TARGETING_TYPE_APP_CATEGORY
+              - TARGETING_TYPE_APP
+              - TARGETING_TYPE_URL
+              - TARGETING_TYPE_DAY_AND_TIME
+              - TARGETING_TYPE_AGE_RANGE
+              - TARGETING_TYPE_REGIONAL_LOCATION_LIST
+              - TARGETING_TYPE_PROXIMITY_LOCATION_LIST
+              - TARGETING_TYPE_GENDER
+              - TARGETING_TYPE_VIDEO_PLAYER_SIZE
+              - TARGETING_TYPE_USER_REWARDED_CONTENT
+              - TARGETING_TYPE_PARENTAL_STATUS
+              - TARGETING_TYPE_CONTENT_INSTREAM_POSITION
+              - TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION
+              - TARGETING_TYPE_DEVICE_TYPE
+              - TARGETING_TYPE_AUDIENCE_GROUP
+              - TARGETING_TYPE_BROWSER
+              - TARGETING_TYPE_HOUSEHOLD_INCOME
+              - TARGETING_TYPE_ON_SCREEN_POSITION
+              - TARGETING_TYPE_THIRD_PARTY_VERIFIER
+              - TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION
+              - TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION
+              - TARGETING_TYPE_ENVIRONMENT
+              - TARGETING_TYPE_CARRIER_AND_ISP
+              - TARGETING_TYPE_OPERATING_SYSTEM
+              - TARGETING_TYPE_DEVICE_MAKE_MODEL
+              - TARGETING_TYPE_KEYWORD
+              - TARGETING_TYPE_NEGATIVE_KEYWORD_LIST
+              - TARGETING_TYPE_VIEWABILITY
+              - TARGETING_TYPE_CATEGORY
+              - TARGETING_TYPE_INVENTORY_SOURCE
+              - TARGETING_TYPE_LANGUAGE
+              - TARGETING_TYPE_AUTHORIZED_SELLER_STATUS
+              - TARGETING_TYPE_GEO_REGION
+              - TARGETING_TYPE_INVENTORY_SOURCE_GROUP
+              - TARGETING_TYPE_EXCHANGE
+              - TARGETING_TYPE_SUB_EXCHANGE
+              - TARGETING_TYPE_POI
+              - TARGETING_TYPE_BUSINESS_CHAIN
+              - TARGETING_TYPE_CONTENT_DURATION
+              - TARGETING_TYPE_CONTENT_STREAM_TYPE
+              - TARGETING_TYPE_NATIVE_CONTENT_POSITION
+              - TARGETING_TYPE_OMID
+              - TARGETING_TYPE_AUDIO_CONTENT_TYPE
+              - TARGETING_TYPE_CONTENT_GENRE
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AssignedTargetingOption"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssignedTargetingOption"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
   "/v2/advertisers/{advertiserId}/insertionOrders/{insertionOrderId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}":
+    delete:
+      description: "Deletes an assigned targeting option from an insertion order. Supported targeting types: * `TARGETING_TYPE_AGE_RANGE` * `TARGETING_TYPE_BROWSER` * `TARGETING_TYPE_CATEGORY` * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DEVICE_MAKE_MODEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_ENVIRONMENT` * `TARGETING_TYPE_GENDER` * `TARGETING_TYPE_KEYWORD` * `TARGETING_TYPE_LANGUAGE` * `TARGETING_TYPE_NEGATIVE_KEYWORD_LIST` * `TARGETING_TYPE_OPERATING_SYSTEM` * `TARGETING_TYPE_PARENTAL_STATUS` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION` * `TARGETING_TYPE_VIEWABILITY`"
+      operationId: displayvideo.advertisers.insertionOrders.targetingTypes.assignedTargetingOptions.delete
+      parameters:
+        - description: Required. The ID of the advertiser the insertion order belongs to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the insertion order the assigned targeting option belongs to.
+          in: path
+          name: insertionOrderId
+          required: true
+          schema:
+            type: string
+        - description: "Required. Identifies the type of this assigned targeting option. Supported targeting types: * `TARGETING_TYPE_AGE_RANGE` * `TARGETING_TYPE_BROWSER` * `TARGETING_TYPE_CATEGORY` * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DEVICE_MAKE_MODEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_ENVIRONMENT` * `TARGETING_TYPE_GENDER` * `TARGETING_TYPE_KEYWORD` * `TARGETING_TYPE_LANGUAGE` * `TARGETING_TYPE_NEGATIVE_KEYWORD_LIST` * `TARGETING_TYPE_OPERATING_SYSTEM` * `TARGETING_TYPE_PARENTAL_STATUS` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION` * `TARGETING_TYPE_VIEWABILITY`"
+          in: path
+          name: targetingType
+          required: true
+          schema:
+            enum:
+              - TARGETING_TYPE_UNSPECIFIED
+              - TARGETING_TYPE_CHANNEL
+              - TARGETING_TYPE_APP_CATEGORY
+              - TARGETING_TYPE_APP
+              - TARGETING_TYPE_URL
+              - TARGETING_TYPE_DAY_AND_TIME
+              - TARGETING_TYPE_AGE_RANGE
+              - TARGETING_TYPE_REGIONAL_LOCATION_LIST
+              - TARGETING_TYPE_PROXIMITY_LOCATION_LIST
+              - TARGETING_TYPE_GENDER
+              - TARGETING_TYPE_VIDEO_PLAYER_SIZE
+              - TARGETING_TYPE_USER_REWARDED_CONTENT
+              - TARGETING_TYPE_PARENTAL_STATUS
+              - TARGETING_TYPE_CONTENT_INSTREAM_POSITION
+              - TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION
+              - TARGETING_TYPE_DEVICE_TYPE
+              - TARGETING_TYPE_AUDIENCE_GROUP
+              - TARGETING_TYPE_BROWSER
+              - TARGETING_TYPE_HOUSEHOLD_INCOME
+              - TARGETING_TYPE_ON_SCREEN_POSITION
+              - TARGETING_TYPE_THIRD_PARTY_VERIFIER
+              - TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION
+              - TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION
+              - TARGETING_TYPE_ENVIRONMENT
+              - TARGETING_TYPE_CARRIER_AND_ISP
+              - TARGETING_TYPE_OPERATING_SYSTEM
+              - TARGETING_TYPE_DEVICE_MAKE_MODEL
+              - TARGETING_TYPE_KEYWORD
+              - TARGETING_TYPE_NEGATIVE_KEYWORD_LIST
+              - TARGETING_TYPE_VIEWABILITY
+              - TARGETING_TYPE_CATEGORY
+              - TARGETING_TYPE_INVENTORY_SOURCE
+              - TARGETING_TYPE_LANGUAGE
+              - TARGETING_TYPE_AUTHORIZED_SELLER_STATUS
+              - TARGETING_TYPE_GEO_REGION
+              - TARGETING_TYPE_INVENTORY_SOURCE_GROUP
+              - TARGETING_TYPE_EXCHANGE
+              - TARGETING_TYPE_SUB_EXCHANGE
+              - TARGETING_TYPE_POI
+              - TARGETING_TYPE_BUSINESS_CHAIN
+              - TARGETING_TYPE_CONTENT_DURATION
+              - TARGETING_TYPE_CONTENT_STREAM_TYPE
+              - TARGETING_TYPE_NATIVE_CONTENT_POSITION
+              - TARGETING_TYPE_OMID
+              - TARGETING_TYPE_AUDIO_CONTENT_TYPE
+              - TARGETING_TYPE_CONTENT_GENRE
+            type: string
+        - description: Required. The ID of the assigned targeting option to delete.
+          in: path
+          name: assignedTargetingOptionId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
     get:
       description: Gets a single targeting option assigned to an insertion order.
       operationId: displayvideo.advertisers.insertionOrders.targetingTypes.assignedTargetingOptions.get
@@ -1924,7 +2101,7 @@ paths:
               - LOI_SAPIN_INVOICE_TYPE_MEDIA
               - LOI_SAPIN_INVOICE_TYPE_PLATFORM
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -2031,7 +2208,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -2170,7 +2347,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: "Updates an existing line item. Returns the updated line item if successful. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditLineItemAssignedTargetingOptions * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption"
+      description: "Updates an existing line item. Returns the updated line item if successful. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditAssignedTargetingOptions * BulkUpdateLineItems * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption"
       operationId: displayvideo.advertisers.lineItems.patch
       parameters:
         - description: Output only. The unique ID of the advertiser the line item belongs to.
@@ -2326,7 +2503,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Assigns a targeting option to a line item. Returns the assigned targeting option if successful. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditLineItemAssignedTargetingOptions * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption"
+      description: "Assigns a targeting option to a line item. Returns the assigned targeting option if successful. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditAssignedTargetingOptions * BulkUpdate * UpdateLineItem * DeleteLineItemAssignedTargetingOption"
       operationId: displayvideo.advertisers.lineItems.targetingTypes.assignedTargetingOptions.create
       parameters:
         - description: Required. The ID of the advertiser the line item belongs to.
@@ -2415,7 +2592,7 @@ paths:
         - advertisers
   "/v2/advertisers/{advertiserId}/lineItems/{lineItemId}/targetingTypes/{targetingType}/assignedTargetingOptions/{assignedTargetingOptionId}":
     delete:
-      description: "Deletes an assigned targeting option from a line item. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditLineItemAssignedTargetingOptions * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption"
+      description: "Deletes an assigned targeting option from a line item. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditAssignedTargetingOptions * BulkUpdate * UpdateLineItem * CreateLineItemAssignedTargetingOption"
       operationId: displayvideo.advertisers.lineItems.targetingTypes.assignedTargetingOptions.delete
       parameters:
         - description: Required. The ID of the advertiser the line item belongs to.
@@ -2604,6 +2781,54 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v2/advertisers/{advertiserId}/lineItems/{lineItemId}:duplicate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Duplicates a line item. Returns the ID of the created line item if successful.
+      operationId: displayvideo.advertisers.lineItems.duplicate
+      parameters:
+        - description: Required. The ID of the advertiser this line item belongs to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the line item to duplicate.
+          in: path
+          name: lineItemId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DuplicateLineItemRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DuplicateLineItemResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
   "/v2/advertisers/{advertiserId}/lineItems:bulkEditAssignedTargetingOptions":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2618,7 +2843,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Bulk edits targeting options under multiple line items. The operation will delete the assigned targeting options provided in BulkEditAssignedTargetingOptionsRequest.delete_requests and then create the assigned targeting options provided in BulkEditAssignedTargetingOptionsRequest.create_requests .
+      description: "Bulk edits targeting options under multiple line items. The operation will delete the assigned targeting options provided in BulkEditAssignedTargetingOptionsRequest.delete_requests and then create the assigned targeting options provided in BulkEditAssignedTargetingOptionsRequest.create_requests. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkUpdate * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption"
       operationId: displayvideo.advertisers.lineItems.bulkEditAssignedTargetingOptions
       parameters:
         - description: Required. The ID of the advertiser the line items belong to.
@@ -2775,7 +3000,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. Defaults to `100` if not set. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. Defaults to `100` if not set. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -2920,7 +3145,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -3109,7 +3334,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`.
           in: query
           name: pageSize
           schema:
@@ -3364,7 +3589,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. Defaults to `100` if not set. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. Defaults to `100` if not set. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -4216,7 +4441,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Updates multiple line items.
+      description: "Updates multiple line items. Requests to this endpoint cannot be made concurrently with the following requests updating the same line item: * BulkEditAssignedTargetingOptions * UpdateLineItem * CreateLineItemAssignedTargetingOption * DeleteLineItemAssignedTargetingOption"
       operationId: displayvideo.advertisers.lineItems.bulkUpdate
       parameters:
         - in: path
@@ -4263,7 +4488,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -4371,7 +4596,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -4536,7 +4761,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -4736,7 +4961,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -4834,7 +5059,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -5093,7 +5318,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -5201,7 +5426,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified or greater than `100` will default to `100`.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`.
           in: query
           name: pageSize
           schema:
@@ -5428,7 +5653,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`.
           in: query
           name: pageSize
           schema:
@@ -5804,7 +6029,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`.
           in: query
           name: pageSize
           schema:
@@ -6021,7 +6246,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`.
           in: query
           name: pageSize
           schema:
@@ -6120,7 +6345,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -6540,7 +6765,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -6987,7 +7212,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           in: query
           name: pageSize
           schema:
@@ -7222,7 +7447,7 @@ paths:
           name: orderBy
           schema:
             type: string
-        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`.
+        - description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`.
           in: query
           name: pageSize
           schema:
@@ -7627,6 +7852,9 @@ components:
           format: int64
           readOnly: true
           type: string
+        billingConfig:
+          $ref: "#/components/schemas/AdvertiserBillingConfig"
+          description: Billing related settings of the advertiser.
         creativeConfig:
           $ref: "#/components/schemas/AdvertiserCreativeConfig"
           description: Required. Creative related settings of the advertiser.
@@ -7681,6 +7909,14 @@ components:
         thirdPartyOnlyConfig:
           $ref: "#/components/schemas/ThirdPartyOnlyConfig"
           description: The configuration for advertisers that use third-party ad servers only.
+      type: object
+    AdvertiserBillingConfig:
+      description: Billing related settings of an advertiser.
+      properties:
+        billingProfileId:
+          description: The ID of a billing profile assigned to the advertiser.
+          format: int64
+          type: string
       type: object
     AdvertiserCreativeConfig:
       description: Creatives related settings of an advertiser.
@@ -10179,6 +10415,20 @@ components:
             - VIEWED_PERFORMANCE_10_PERCENT_HIGHER
           type: string
       type: object
+    DuplicateLineItemRequest:
+      description: Request message for LineItemService.DuplicateLineItem.
+      properties:
+        targetDisplayName:
+          description: The display name of the new line item. Must be UTF-8 encoded with a maximum size of 240 bytes.
+          type: string
+      type: object
+    DuplicateLineItemResponse:
+      properties:
+        duplicateLineItemId:
+          description: The ID of the created line item.
+          format: int64
+          type: string
+      type: object
     EditCustomerMatchMembersRequest:
       description: Request message for FirstAndThirdPartyAudienceService.EditCustomerMatchMembers.
       properties:
@@ -10929,6 +11179,9 @@ components:
             - LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_AUDIO
             - LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_REACH
             - LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_SIMPLE
+            - LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_NON_SKIPPABLE_OVER_THE_TOP
+            - LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_REACH_OVER_THE_TOP
+            - LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_SIMPLE_OVER_THE_TOP
           type: string
         mobileApp:
           $ref: "#/components/schemas/MobileApp"
@@ -11439,7 +11692,7 @@ components:
           $ref: "#/components/schemas/DateRange"
           description: Required. The start and end date settings of the budget segment. They are resolved relative to the parent advertiser's time zone. * When creating a new budget segment, both `start_date` and `end_date` must be in the future. * An existing budget segment with a `start_date` in the past has a mutable `end_date` but an immutable `start_date`. * `end_date` must be the `start_date` or later, both before the year 2037.
         description:
-          description: The budget segment description. It can be used to enter Purchase Order information for each budget segment and have that information printed on the invoices. Must be UTF-8 encoded with a length of no more than 80 characters.
+          description: The budget segment description. It can be used to enter Purchase Order information for each budget segment and have that information printed on the invoices. Must be UTF-8 encoded.
           type: string
       type: object
     IntegralAdScience:
@@ -12045,6 +12298,9 @@ components:
             - LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_AUDIO
             - LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_REACH
             - LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_SIMPLE
+            - LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_NON_SKIPPABLE_OVER_THE_TOP
+            - LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_REACH_OVER_THE_TOP
+            - LINE_ITEM_TYPE_YOUTUBE_AND_PARTNERS_SIMPLE_OVER_THE_TOP
           type: string
         mobileApp:
           $ref: "#/components/schemas/MobileApp"
@@ -12077,7 +12333,7 @@ components:
           type: string
         targetingExpansion:
           $ref: "#/components/schemas/TargetingExpansionConfig"
-          description: The [targeting expansion](https://support.google.com/displayvideo/answer/10191558) settings of the line item. This config is only applicable when eligible audience list targeting is assigned to the line item.
+          description: The [targeting expansion](//support.google.com/displayvideo/answer/10191558) settings of the line item. This config is only applicable when eligible audience list targeting is assigned to the line item. Beginning November 7, 2022, these settings may represent the [optimized targeting feature](//support.google.com/displayvideo/answer/12060859) in place of targeting expansion. This feature will be rolled out to all partners by November 9, 2022.
         updateTime:
           description: Output only. The timestamp when the line item was last updated. Assigned by the system.
           format: google-datetime
@@ -13513,7 +13769,7 @@ components:
           $ref: "#/components/schemas/GeoRegionSearchTerms"
           description: Search terms for geo region targeting options. Can only be used when targeting_type is `TARGETING_TYPE_GEO_REGION`.
         pageSize:
-          description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+          description: Requested page size. Must be between `1` and `200`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
           format: int32
           type: integer
         pageToken:
@@ -13637,13 +13893,13 @@ components:
           type: string
       type: object
     TargetingExpansionConfig:
-      description: Settings that control the targeting expansion of the line item. Targeting expansion allows the line item to reach a larger audience based on the original audience list and the targeting expansion level.
+      description: Settings that control the targeting expansion of the line item. Targeting expansion allows the line item to reach a larger audience based on the original audience list and the targeting expansion level. Beginning November 7, 2022, these settings may represent the [optimized targeting feature](//support.google.com/displayvideo/answer/12060859) in place of targeting expansion. This feature will be rolled out to all partners by November 9, 2022.
       properties:
         excludeFirstPartyAudience:
-          description: Required. Whether to exclude first party audiences from targeting. Similar audiences of the excluded first party lists will not be excluded. Only applicable when a first-party audience is positively targeted (directly or included in a combined audience), otherwise this selection will be ignored.
+          description: Required. Whether to exclude first-party audiences from use in targeting expansion or optimized targeting. Similar audiences of the excluded first-party lists will not be excluded. Only applicable when a first-party audience is positively targeted (directly or included in a combined audience), otherwise this selection will be ignored.
           type: boolean
         targetingExpansionLevel:
-          description: Required. Magnitude of expansion for applicable targeting under this line item.
+          description: "Required. Magnitude of expansion for applicable targeting under this line item. Beginning November 7, 2022, the behavior of this field will change in the following ways with the replacement of targeting expansion with [optimized targeting](//support.google.com/displayvideo/answer/12060859): * This field will represent the optimized targeting checkbox, with a `NO_EXPANSION` value representing optimized targeting turned off and a `LEAST_EXPANSION` value representing optimized targeting turned on. * `NO_EXPANSION` will be the default value for the field and will be automatically assigned if you do not set the field. * If you set the field to any value other than `NO_EXPANSION`, it will automatically be set to `LEAST_EXPANSION`."
           enum:
             - TARGETING_EXPANSION_LEVEL_UNSPECIFIED
             - NO_EXPANSION

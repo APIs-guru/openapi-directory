@@ -24,7 +24,7 @@ info:
     - format: google
       url: https://tpu.googleapis.com/$discovery/rest?version=v2alpha1
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: tpu
 externalDocs:
@@ -34,10 +34,10 @@ tags:
 paths:
   "/v2alpha1/{name}":
     delete:
-      description: Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: tpu.projects.locations.operations.delete
+      description: Deletes a QueuedResource TPU instance.
+      operationId: tpu.projects.locations.queuedResources.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
+        - description: Required. The resource name.
           in: path
           name: name
           required: true
@@ -53,7 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Empty"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -584,6 +584,92 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v2alpha1/{parent}/queuedResources":
+    get:
+      description: Lists queued resources.
+      operationId: tpu.projects.locations.queuedResources.list
+      parameters:
+        - description: Required. The parent resource name.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListQueuedResourcesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a QueuedResource TPU instance.
+      operationId: tpu.projects.locations.queuedResources.create
+      parameters:
+        - description: Required. The parent resource name.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: The unqualified resource name. Should follow the ^[A-Za-z0-9_.~+%-]+$ regex format.
+          in: query
+          name: queuedResourceId
+          schema:
+            type: string
+        - description: Idempotent request UUID.
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/QueuedResource"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v2alpha1/{parent}/runtimeVersions":
     get:
       description: Lists runtime versions supported by this API.
@@ -766,8 +852,12 @@ components:
           description: The resource name.
           type: string
         type:
-          description: the accelerator type.
+          description: The accelerator type.
           type: string
+      type: object
+    AcceptedData:
+      description: Further data for the accepted state.
+      properties: {}
       type: object
     AccessConfig:
       description: An access config attached to the TPU worker.
@@ -776,6 +866,10 @@ components:
           description: Output only. An external IP address associated with the TPU worker.
           readOnly: true
           type: string
+      type: object
+    ActiveData:
+      description: Further data for the active state.
+      properties: {}
       type: object
     AttachedDisk:
       description: "A node-attached disk resource. Next ID: 8;"
@@ -791,9 +885,28 @@ components:
           description: 'Specifies the full path to an existing disk. For example: "projects/my-project/zones/us-central1-c/disks/my-disk".'
           type: string
       type: object
+    BestEffort:
+      description: BestEffort tier definition.
+      properties: {}
+      type: object
+    CreatingData:
+      description: Further data for the creating state.
+      properties: {}
+      type: object
+    DeletingData:
+      description: Further data for the deleting state.
+      properties: {}
+      type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
       properties: {}
+      type: object
+    FailedData:
+      description: Further data for the failed state.
+      properties:
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The error that caused the queued resource to enter the FAILED state.
       type: object
     GenerateServiceIdentityRequest:
       description: Request for GenerateServiceIdentity.
@@ -827,6 +940,17 @@ components:
             $ref: "#/components/schemas/GuestAttributes"
           type: array
       type: object
+    Guaranteed:
+      description: Guaranteed tier definition.
+      properties:
+        minDuration:
+          description: Optional. Defines the minimum duration of the guarantee. If specified, the requested resources will only be provisioned if they can be allocated for at least the given duration.
+          format: google-duration
+          type: string
+        reserved:
+          description: Optional. Specifies the request should be scheduled on reserved capacity.
+          type: boolean
+      type: object
     GuestAttributes:
       description: A guest attributes.
       properties:
@@ -858,6 +982,18 @@ components:
           items:
             $ref: "#/components/schemas/GuestAttributesEntry"
           type: array
+      type: object
+    Interval:
+      description: Represents a time interval, encoded as a Timestamp start (inclusive) and a Timestamp end (exclusive). The start must be less than or equal to the end. When the start equals the end, the interval is empty (matches no time). When both start and end are unspecified, the interval matches any time.
+      properties:
+        endTime:
+          description: Optional. Exclusive end of the interval. If specified, a Timestamp matching this interval will have to be before the end.
+          format: google-datetime
+          type: string
+        startTime:
+          description: Optional. Inclusive start of the interval. If specified, a Timestamp matching this interval will have to be the same or after the start.
+          format: google-datetime
+          type: string
       type: object
     ListAcceleratorTypesResponse:
       description: Response for ListAcceleratorTypes.
@@ -915,6 +1051,23 @@ components:
           description: A list of operations that matches the specified filter in the request.
           items:
             $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListQueuedResourcesResponse:
+      description: Response for ListQueuedResources.
+      properties:
+        nextPageToken:
+          description: The next page token or empty if none.
+          type: string
+        queuedResources:
+          description: The listed queued resources.
+          items:
+            $ref: "#/components/schemas/QueuedResource"
+          type: array
+        unreachable:
+          description: Locations that could not be reached.
+          items:
+            type: string
           type: array
       type: object
     ListRuntimeVersionsResponse:
@@ -1059,6 +1212,10 @@ components:
             $ref: "#/components/schemas/NetworkEndpoint"
           readOnly: true
           type: array
+        queuedResource:
+          description: Output only. The qualified name of the QueuedResource that requested this Node.
+          readOnly: true
+          type: string
         runtimeVersion:
           description: Required. The runtime version running in the Node.
           type: string
@@ -1102,6 +1259,19 @@ components:
           items:
             type: string
           type: array
+      type: object
+    NodeSpec:
+      description: Details of the TPU node(s) being requested. Users can request either a single node or multiple nodes. NodeSpec provides the specification for node(s) to be created.
+      properties:
+        node:
+          $ref: "#/components/schemas/Node"
+          description: Required. The node.
+        nodeId:
+          description: The unqualified resource name. Should follow the ^[A-Za-z0-9_.~+%-]+$ regex format. This is only specified when requesting a single node. In case of multi-node requests, multi_node_params must be populated instead. It's an error to specify both node_id and multi_node_params.
+          type: string
+        parent:
+          description: Required. The parent resource name.
+          type: string
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
@@ -1151,6 +1321,98 @@ components:
           type: string
         verb:
           description: Name of the verb executed by the operation.
+          type: string
+      type: object
+    ProvisioningData:
+      description: Further data for the provisioning state.
+      properties: {}
+      type: object
+    QueuedResource:
+      description: A QueuedResource represents a request for resources that will be placed in a queue and fulfilled when the necessary resources are available.
+      properties:
+        bestEffort:
+          $ref: "#/components/schemas/BestEffort"
+          description: The BestEffort tier.
+        guaranteed:
+          $ref: "#/components/schemas/Guaranteed"
+          description: The Guaranteed tier
+        name:
+          description: Output only. Immutable. The name of the QueuedResource.
+          readOnly: true
+          type: string
+        queueingPolicy:
+          $ref: "#/components/schemas/QueueingPolicy"
+          description: The queueing policy of the QueuedRequest.
+        state:
+          $ref: "#/components/schemas/QueuedResourceState"
+          description: Output only. State of the QueuedResource request
+          readOnly: true
+        tpu:
+          $ref: "#/components/schemas/Tpu"
+          description: Defines a TPU resource.
+      type: object
+    QueuedResourceState:
+      description: QueuedResourceState defines the details of the QueuedResource request.
+      properties:
+        acceptedData:
+          $ref: "#/components/schemas/AcceptedData"
+          description: Further data for the accepted state.
+        activeData:
+          $ref: "#/components/schemas/ActiveData"
+          description: Further data for the active state.
+        creatingData:
+          $ref: "#/components/schemas/CreatingData"
+          description: Further data for the creating state.
+        deletingData:
+          $ref: "#/components/schemas/DeletingData"
+          description: Further data for the deleting state.
+        failedData:
+          $ref: "#/components/schemas/FailedData"
+          description: Further data for the failed state.
+        provisioningData:
+          $ref: "#/components/schemas/ProvisioningData"
+          description: Further data for the provisioning state.
+        state:
+          description: State of the QueuedResource request.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACCEPTED
+            - PROVISIONING
+            - FAILED
+            - DELETING
+            - ACTIVE
+            - SUSPENDING
+            - SUSPENDED
+          type: string
+        suspendedData:
+          $ref: "#/components/schemas/SuspendedData"
+          description: Further data for the suspended state.
+        suspendingData:
+          $ref: "#/components/schemas/SuspendingData"
+          description: Further data for the suspending state.
+      type: object
+    QueueingPolicy:
+      description: Defines the policy of the QueuedRequest.
+      properties:
+        validAfterDuration:
+          description: A relative time after which resources may be created.
+          format: google-duration
+          type: string
+        validAfterTime:
+          description: An absolute time at which resources may be created.
+          format: google-datetime
+          type: string
+        validInterval:
+          $ref: "#/components/schemas/Interval"
+          description: An absolute time interval within which resources may be created.
+        validUntilDuration:
+          description: A relative time after which resources should not be created. If the request cannot be fulfilled by this time the request will be failed.
+          format: google-duration
+          type: string
+        validUntilTime:
+          description: An absolute time after which resources should not be created. If the request cannot be fulfilled by this time the request will be failed.
+          format: google-datetime
           type: string
       type: object
     RuntimeVersion:
@@ -1234,6 +1496,14 @@ components:
       description: Request for StopNode.
       properties: {}
       type: object
+    SuspendedData:
+      description: Further data for the suspended state.
+      properties: {}
+      type: object
+    SuspendingData:
+      description: Further data for the suspending state.
+      properties: {}
+      type: object
     Symptom:
       description: A Symptom instance.
       properties:
@@ -1258,6 +1528,15 @@ components:
         workerId:
           description: A string used to uniquely distinguish a worker within a TPU node.
           type: string
+      type: object
+    Tpu:
+      description: Details of the TPU resource(s) being requested.
+      properties:
+        nodeSpec:
+          description: The TPU node(s) being requested.
+          items:
+            $ref: "#/components/schemas/NodeSpec"
+          type: array
       type: object
   securitySchemes:
     Oauth2:

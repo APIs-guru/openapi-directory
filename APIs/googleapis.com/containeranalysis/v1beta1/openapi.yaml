@@ -56,10 +56,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the specified scan configuration.
-      operationId: containeranalysis.projects.scanConfigs.get
+      description: Gets the specified occurrence.
+      operationId: containeranalysis.projects.occurrences.get
       parameters:
-        - description: Required. The name of the scan configuration in the form of `projects/[PROJECT_ID]/scanConfigs/[SCAN_CONFIG_ID]`.
+        - description: Required. The name of the occurrence in the form of `projects/[PROJECT_ID]/occurrences/[OCCURRENCE_ID]`.
           in: path
           name: name
           required: true
@@ -70,7 +70,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ScanConfig"
+                $ref: "#/components/schemas/Occurrence"
           description: Successful response
       security:
         - Oauth2:
@@ -117,35 +117,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Occurrence"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    put:
-      description: Updates the specified scan configuration.
-      operationId: containeranalysis.projects.scanConfigs.update
-      parameters:
-        - description: Required. The name of the scan configuration in the form of `projects/[PROJECT_ID]/scanConfigs/[SCAN_CONFIG_ID]`.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ScanConfig"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ScanConfig"
           description: Successful response
       security:
         - Oauth2:
@@ -516,58 +487,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/VulnerabilityOccurrencesSummary"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/scanConfigs":
-    get:
-      description: Lists scan configurations for the specified project.
-      operationId: containeranalysis.projects.scanConfigs.list
-      parameters:
-        - description: Required. The name of the project to list scan configurations for in the form of `projects/[PROJECT_ID]`.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Required. The filter expression.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: The number of scan configs to return in the list.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Token to provide to skip to a particular spot in the list.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListScanConfigsResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -1001,6 +920,88 @@ components:
           description: Required. Signature of the related `BuildProvenance`. In JSON, this is base-64 encoded.
           format: byte
           type: string
+      type: object
+    BuildStep:
+      description: "A step in the build pipeline. Next ID: 20"
+      properties:
+        allowExitCodes:
+          description: Allow this build step to fail without failing the entire build if and only if the exit code is one of the specified codes. If allow_failure is also specified, this field will take precedence.
+          items:
+            format: int32
+            type: integer
+          type: array
+        allowFailure:
+          description: Allow this build step to fail without failing the entire build. If false, the entire build will fail if this step fails. Otherwise, the build will succeed, but this step will still have a failure status. Error information will be reported in the failure_detail field.
+          type: boolean
+        args:
+          description: A list of arguments that will be presented to the step when it is started. If the image used to run the step's container has an entrypoint, the `args` are used as arguments to that entrypoint. If the image does not define an entrypoint, the first element in args is used as the entrypoint, and the remainder will be used as arguments.
+          items:
+            type: string
+          type: array
+        dir:
+          description: Working directory to use when running this step's container. If this value is a relative path, it is relative to the build's working directory. If this value is absolute, it may be outside the build's working directory, in which case the contents of the path may not be persisted across build step executions, unless a `volume` for that path is specified. If the build specifies a `RepoSource` with `dir` and a step with a `dir`, which specifies an absolute path, the `RepoSource` `dir` is ignored for the step's execution.
+          type: string
+        entrypoint:
+          description: Entrypoint to be used instead of the build step image's default entrypoint. If unset, the image's default entrypoint is used.
+          type: string
+        env:
+          description: A list of environment variable definitions to be used when running a step. The elements are of the form "KEY=VALUE" for the environment variable "KEY" being given the value "VALUE".
+          items:
+            type: string
+          type: array
+        exitCode:
+          description: Output only. Return code from running the step.
+          format: int32
+          type: integer
+        id:
+          description: Unique identifier for this build step, used in `wait_for` to reference this build step as a dependency.
+          type: string
+        name:
+          description: Required. The name of the container image that will run this particular build step. If the image is available in the host's Docker daemon's cache, it will be run directly. If not, the host will attempt to pull the image first, using the builder service account's credentials if necessary. The Docker daemon's cache will already have the latest versions of all of the officially supported build steps ([https://github.com/GoogleCloudPlatform/cloud-builders](https://github.com/GoogleCloudPlatform/cloud-builders)). The Docker daemon will also have cached many of the layers for some popular images, like "ubuntu", "debian", but they will be refreshed at the time you attempt to use them. If you built an image in a previous build step, it will be stored in the host's Docker daemon's cache and is available to use as the name for a later build step.
+          type: string
+        pullTiming:
+          $ref: "#/components/schemas/TimeSpan"
+          description: Output only. Stores timing information for pulling this build step's builder image only.
+        script:
+          description: A shell script to be executed in the step. When script is provided, the user cannot specify the entrypoint or args.
+          type: string
+        secretEnv:
+          description: A list of environment variables which are encrypted using a Cloud Key Management Service crypto key. These values must be specified in the build's `Secret`.
+          items:
+            type: string
+          type: array
+        status:
+          description: Output only. Status of the build step. At this time, build step status is only updated on build completion; step status is not updated in real-time as the build progresses.
+          enum:
+            - STATUS_UNKNOWN
+            - PENDING
+            - QUEUING
+            - QUEUED
+            - WORKING
+            - SUCCESS
+            - FAILURE
+            - INTERNAL_ERROR
+            - TIMEOUT
+            - CANCELLED
+            - EXPIRED
+          type: string
+        timeout:
+          description: Time limit for executing this build step. If not defined, the step has no time limit and will be allowed to continue to run until either it completes or the build itself times out.
+          format: google-duration
+          type: string
+        timing:
+          $ref: "#/components/schemas/TimeSpan"
+          description: Output only. Stores timing information for executing this build step.
+        volumes:
+          description: List of volumes to mount into the build step. Each volume is created as an empty volume prior to execution of the build step. Upon completion of the build, volumes and their contents are discarded. Using a named volume in only one step is not valid as it is indicative of a build request with an incorrect configuration.
+          items:
+            $ref: "#/components/schemas/Volume"
+          type: array
+        waitFor:
+          description: The ID(s) of the step(s) that this build step depends on. This build step will not start until all the build steps in `wait_for` have completed successfully. If `wait_for` is empty, this build step will start when all previous build steps in the `Build.Steps` list have completed successfully.
+          items:
+            type: string
+          type: array
       type: object
     ByProducts:
       description: Defines an object for the byproducts field in in-toto links. The suggested fields are "stderr", "stdout", and "return-value".
@@ -1494,7 +1495,7 @@ components:
       description: Optional arguments to enable specific features of builds.
       properties:
         diskSizeGb:
-          description: Requested disk size for the VM that runs the build. Note that this is *NOT* "disk free"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 1000GB; builds that request more than the maximum are rejected with an error.
+          description: Requested disk size for the VM that runs the build. Note that this is *NOT* "disk free"; some of the space will be used by the operating system and build utilities. Also note that this is the minimum disk size that will be allocated for the build -- the build may run with a larger disk than requested. At present, the maximum disk size is 2000GB; builds that request more than the maximum are rejected with an error.
           format: int64
           type: string
         dynamicSubstitutions:
@@ -2761,18 +2762,6 @@ components:
             $ref: "#/components/schemas/Occurrence"
           type: array
       type: object
-    ListScanConfigsResponse:
-      description: Response for listing scan configurations.
-      properties:
-        nextPageToken:
-          description: The next pagination token in the list response. It should be used as `page_token` for the following request. An empty value means no more results.
-          type: string
-        scanConfigs:
-          description: The scan configurations requested.
-          items:
-            $ref: "#/components/schemas/ScanConfig"
-          type: array
-      type: object
     Location:
       description: An occurrence of a particular package installation found within a system's filesystem. E.g., glibc was found in `/var/lib/dpkg/status`.
       properties:
@@ -3314,27 +3303,6 @@ components:
           description: Required. The unique URI of the resource. For example, `https://gcr.io/project/image@sha256:foo` for a Docker image.
           type: string
       type: object
-    ScanConfig:
-      description: A scan configuration specifies whether Cloud components in a project have a particular type of analysis being run. For example, it can configure whether vulnerability scanning is being done on Docker images or not.
-      properties:
-        createTime:
-          description: Output only. The time this scan config was created.
-          format: google-datetime
-          type: string
-        description:
-          description: Output only. A human-readable description of what the scan configuration does.
-          type: string
-        enabled:
-          description: Whether the scan is enabled.
-          type: boolean
-        name:
-          description: Output only. The name of the scan configuration in the form of `projects/[PROJECT_ID]/scanConfigs/[SCAN_CONFIG_ID]`.
-          type: string
-        updateTime:
-          description: Output only. The time this scan config was last updated.
-          format: google-datetime
-          type: string
-      type: object
     SetIamPolicyRequest:
       description: Request message for `SetIamPolicy` method.
       properties:
@@ -3443,6 +3411,18 @@ components:
             type: string
           type: array
       type: object
+    TimeSpan:
+      description: "Start and end times for a build execution phase. Next ID: 3"
+      properties:
+        endTime:
+          description: End of time span.
+          format: google-datetime
+          type: string
+        startTime:
+          description: Start of time span.
+          format: google-datetime
+          type: string
+      type: object
     Version:
       description: Version contains structured information about the version of a package.
       properties:
@@ -3466,6 +3446,16 @@ components:
           type: string
         revision:
           description: The iteration of the package build from the above version.
+          type: string
+      type: object
+    Volume:
+      description: "Volume describes a Docker container volume which is mounted into build steps in order to persist files across build step execution. Next ID: 3"
+      properties:
+        name:
+          description: Name of the volume to mount. Volume names must be unique per build step and must be valid names for Docker volumes. Each named volume must be used by at least two build steps.
+          type: string
+        path:
+          description: Path at which to mount the volume. Paths must be absolute and cannot conflict with other volume paths on the same build step or with certain reserved volume paths.
           type: string
       type: object
     Vulnerability:

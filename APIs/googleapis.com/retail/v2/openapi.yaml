@@ -172,7 +172,7 @@ paths:
           name: dataset
           schema:
             type: string
-        - description: "The device type context for completion suggestions. It is useful to apply different suggestions on different device types, e.g. `DESKTOP`, `MOBILE`. If it is empty, the suggestions are across all device types. Supported formats: * `UNKNOWN_DEVICE_TYPE` * `DESKTOP` * `MOBILE` * A customized string starts with `OTHER_`, e.g. `OTHER_IPHONE`."
+        - description: "The device type context for completion suggestions. We recommend that you leave this field empty. It can apply different suggestions on different device types, e.g. `DESKTOP`, `MOBILE`. If it is empty, the suggestions are across all device types. Supported formats: * `UNKNOWN_DEVICE_TYPE` * `DESKTOP` * `MOBILE` * A customized string starts with `OTHER_`, e.g. `OTHER_IPHONE`."
           in: query
           name: deviceType
           schema:
@@ -900,6 +900,16 @@ paths:
           name: ets
           schema:
             type: string
+        - description: 'The prebuilt rule name that can convert a specific type of raw_json. For example: "default_schema/v1.0"'
+          in: query
+          name: prebuiltRule
+          schema:
+            type: string
+        - description: "An arbitrary serialized JSON string that contains necessary information that can comprise a user event. When this field is specified, the user_event field will be ignored. Note: line-delimited JSON is not supported, a single JSON only."
+          in: query
+          name: rawJson
+          schema:
+            type: string
         - description: The URL including cgi-parameters but excluding the hash fragment with a length limit of 5,000 characters. This is often more useful than the referer URL, because many browsers only send the domain for 3rd party requests.
           in: query
           name: uri
@@ -1582,7 +1592,7 @@ components:
           type: integer
       type: object
     GoogleCloudRetailLoggingImportErrorContext:
-      description: 'The error payload that is populated on LRO import APIs. Including: "google.cloud.retail.v2.ProductService.ImportProducts" "google.cloud.retail.v2.EventService.ImportUserEvents"'
+      description: The error payload that is populated on LRO import APIs, including "google.cloud.retail.v2.ProductService.ImportProducts" and "google.cloud.retail.v2.EventService.ImportUserEvents".
       properties:
         catalogItem:
           description: The detailed content which caused the error on importing a catalog item.
@@ -1590,29 +1600,11 @@ components:
         gcsPath:
           description: Cloud Storage file path of the import source. Can be set for batch operation error.
           type: string
-        inventoryActivity:
-          description: The detailed content which caused the error on importing an inventory activity. http://cs/google3/google/cloud/retail/v2main/inventory_activity.proto
-          type: string
         lineNumber:
           description: Line number of the content in file. Should be empty for permission or batch operation error.
           type: string
         operationName:
           description: The operation resource name of the LRO.
-          type: string
-        order:
-          description: The detailed content which caused the error on importing an order. http://cs/google3/google/cloud/retail/v2main/order.proto
-          type: string
-        place:
-          description: The detailed content which caused the error on importing a place. http://cs/google3/google/cloud/retail/v2main/place.proto
-          type: string
-        placeAsset:
-          description: The detailed content which caused the error on importing a place asset. http://cs/google3/google/cloud/retail/v2main/place_asset.proto
-          type: string
-        placeProductPrice:
-          description: The detailed content which caused the error on importing a place product price. http://cs/google3/google/cloud/retail/v2main/place_product_price.proto
-          type: string
-        placeProductSettings:
-          description: The detailed content which caused the error on importing a place product settings. http://cs/google3/google/cloud/retail/v2main/place_product_settings.proto
           type: string
         product:
           description: The detailed content which caused the error on importing a product.
@@ -1783,6 +1775,13 @@ components:
             - DYNAMIC_FACETABLE_ENABLED
             - DYNAMIC_FACETABLE_DISABLED
           type: string
+        exactSearchableOption:
+          description: If EXACT_SEARCHABLE_ENABLED, attribute values will be exact searchable. This property only applies to textual custom attributes and requires indexable set to enabled to enable exact-searchable.
+          enum:
+            - EXACT_SEARCHABLE_OPTION_UNSPECIFIED
+            - EXACT_SEARCHABLE_ENABLED
+            - EXACT_SEARCHABLE_DISABLED
+          type: string
         inUse:
           description: Output only. Indicates whether this attribute has been used by any products. `True` if at least one Product is using this attribute in Product.attributes. Otherwise, this field is `False`. CatalogAttribute can be pre-loaded by using CatalogService.AddCatalogAttribute, CatalogService.ImportCatalogAttributes, or CatalogService.UpdateAttributesConfig APIs. This field is `False` for pre-loaded CatalogAttributes. Only pre-loaded catalog attributes that are neither in use by products nor predefined can be deleted. Catalog attributes that are either in use by products or are predefined attributes cannot be deleted; however, their configuration properties will reset to default values upon removal request. After catalog changes, it takes about 10 minutes for this field to update.
           readOnly: true
@@ -1796,6 +1795,13 @@ components:
           type: string
         key:
           description: "Required. Attribute name. For example: `color`, `brands`, `attributes.custom_attribute`, such as `attributes.xyz`. To be indexable, the attribute name can contain only alpha-numeric characters and underscores. For example, an attribute named `attributes.abc_xyz` can be indexed, but an attribute named `attributes.abc-xyz` cannot be indexed."
+          type: string
+        retrievableOption:
+          description: If RETRIEVABLE_ENABLED, attribute values will be retrievabled in the search results.
+          enum:
+            - RETRIEVABLE_OPTION_UNSPECIFIED
+            - RETRIEVABLE_ENABLED
+            - RETRIEVABLE_DISABLED
           type: string
         searchableOption:
           description: When AttributesConfig.attribute_config_level is CATALOG_LEVEL_ATTRIBUTE_CONFIG, if SEARCHABLE_ENABLED, attribute values are searchable by text queries in SearchService.Search. If SEARCHABLE_ENABLED but attribute type is numerical, attribute values will not be searchable by text queries in SearchService.Search, as there are no text values associated to numerical attributes. Must be specified, otherwise throws INVALID_FORMAT error.
@@ -2300,7 +2306,7 @@ components:
           type: string
         params:
           additionalProperties: {}
-          description: "Additional domain specific parameters for the predictions. Allowed values: * `returnProduct`: Boolean. If set to true, the associated product object will be returned in the `results.metadata` field in the prediction response. * `returnScore`: Boolean. If set to true, the prediction 'score' corresponding to each returned product will be set in the `results.metadata` field in the prediction response. The given 'score' indicates the probability of an product being clicked/purchased given the user's context and history. * `strictFiltering`: Boolean. True by default. If set to false, the service will return generic (unfiltered) popular products instead of empty if your filter blocks all prediction results. * `priceRerankLevel`: String. Default empty. If set to be non-empty, then it needs to be one of {'no-price-reranking', 'low-price-reranking', 'medium-price-reranking', 'high-price-reranking'}. This gives request-level control and adjusts prediction results based on product price. * `diversityLevel`: String. Default empty. If set to be non-empty, then it needs to be one of {'no-diversity', 'low-diversity', 'medium-diversity', 'high-diversity', 'auto-diversity'}. This gives request-level control and adjusts prediction results based on product category. * `filterSyntaxV2`: Boolean. False by default. If set to true, the `filter` field is interpreteted according to the new, attribute-based syntax."
+          description: "Additional domain specific parameters for the predictions. Allowed values: * `returnProduct`: Boolean. If set to true, the associated product object will be returned in the `results.metadata` field in the prediction response. * `returnScore`: Boolean. If set to true, the prediction 'score' corresponding to each returned product will be set in the `results.metadata` field in the prediction response. The given 'score' indicates the probability of a product being clicked/purchased given the user's context and history. * `strictFiltering`: Boolean. True by default. If set to false, the service will return generic (unfiltered) popular products instead of empty if your filter blocks all prediction results. * `priceRerankLevel`: String. Default empty. If set to be non-empty, then it needs to be one of {'no-price-reranking', 'low-price-reranking', 'medium-price-reranking', 'high-price-reranking'}. This gives request-level control and adjusts prediction results based on product price. * `diversityLevel`: String. Default empty. If set to be non-empty, then it needs to be one of {'no-diversity', 'low-diversity', 'medium-diversity', 'high-diversity', 'auto-diversity'}. This gives request-level control and adjusts prediction results based on product category. * `filterSyntaxV2`: Boolean. False by default. If set to true, the `filter` field is interpreteted according to the new, attribute-based syntax."
           type: object
         userEvent:
           $ref: "#/components/schemas/GoogleCloudRetailV2UserEvent"
@@ -2864,7 +2870,7 @@ components:
           type: string
       type: object
     GoogleCloudRetailV2RuleTwowaySynonymsAction:
-      description: 'Creates a set of terms that will be treated as synonyms of each other. Example: synonyms of "sneakers" and "shoes". * "sneakers" will use a synonym of "shoes". * "shoes" will use a synonym of "sneakers".'
+      description: 'Creates a set of terms that will be treated as synonyms of each other. Example: synonyms of "sneakers" and "shoes": * "sneakers" will use a synonym of "shoes". * "shoes" will use a synonym of "sneakers".'
       properties:
         synonyms:
           description: Defines a set of synonyms. Can specify up to 100 synonyms. Must specify at least 2 synonyms.
@@ -2999,7 +3005,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudRetailV2SearchRequestFacetSpecFacetKey"
           description: Required. The facet key specification.
         limit:
-          description: Maximum of facet values that should be returned for this facet. If unspecified, defaults to 20. The maximum allowed value is 300. Values above 300 will be coerced to 300. If this field is negative, an INVALID_ARGUMENT is returned.
+          description: Maximum of facet values that should be returned for this facet. If unspecified, defaults to 50. The maximum allowed value is 300. Values above 300 will be coerced to 300. If this field is negative, an INVALID_ARGUMENT is returned.
           format: int32
           type: integer
       type: object
@@ -3532,6 +3538,13 @@ components:
           $ref: "#/components/schemas/GoogleCloudRetailV2alphaOutputResult"
           description: Output result indicating where the data were exported to.
       type: object
+    GoogleCloudRetailV2alphaGcsOutputResult:
+      description: A Gcs output result.
+      properties:
+        outputUri:
+          description: The uri of Gcs output
+          type: string
+      type: object
     GoogleCloudRetailV2alphaImportCompletionDataResponse:
       description: Response of the ImportCompletionDataRequest. If the long running operation is done, this message is returned by the google.longrunning.Operations.response field if the operation is successful.
       properties:
@@ -3740,12 +3753,17 @@ components:
           type: array
       type: object
     GoogleCloudRetailV2alphaOutputResult:
-      description: Output result.
+      description: Output result that stores the information about where the exported data is stored.
       properties:
         bigqueryResult:
-          description: Export result in BigQuery.
+          description: The BigQuery location where the result is stored.
           items:
             $ref: "#/components/schemas/GoogleCloudRetailV2alphaBigQueryOutputResult"
+          type: array
+        gcsResult:
+          description: The Google Cloud Storage location where the result is stored.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRetailV2alphaGcsOutputResult"
           type: array
       type: object
     GoogleCloudRetailV2alphaPurgeMetadata:
@@ -3946,6 +3964,13 @@ components:
           $ref: "#/components/schemas/GoogleCloudRetailV2betaOutputResult"
           description: Output result indicating where the data were exported to.
       type: object
+    GoogleCloudRetailV2betaGcsOutputResult:
+      description: A Gcs output result.
+      properties:
+        outputUri:
+          description: The uri of Gcs output
+          type: string
+      type: object
     GoogleCloudRetailV2betaImportCompletionDataResponse:
       description: Response of the ImportCompletionDataRequest. If the long running operation is done, this message is returned by the google.longrunning.Operations.response field if the operation is successful.
       properties:
@@ -4105,12 +4130,17 @@ components:
           type: array
       type: object
     GoogleCloudRetailV2betaOutputResult:
-      description: Output result.
+      description: Output result that stores the information about where the exported data is stored.
       properties:
         bigqueryResult:
-          description: Export result in BigQuery.
+          description: The BigQuery location where the result is stored.
           items:
             $ref: "#/components/schemas/GoogleCloudRetailV2betaBigQueryOutputResult"
+          type: array
+        gcsResult:
+          description: The Google Cloud Storage location where the result is stored.
+          items:
+            $ref: "#/components/schemas/GoogleCloudRetailV2betaGcsOutputResult"
           type: array
       type: object
     GoogleCloudRetailV2betaPurgeMetadata:

@@ -904,7 +904,7 @@ components:
         actionMetrics:
           additionalProperties:
             $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1ScoreDistribution"
-          description: Action-based metrics. The map key is the action name which specified by the site owners at time of the "execute" client-side call. Populated only for SCORE keys.
+          description: Action-based metrics. The map key is the action name which specified by the site owners at time of the "execute" client-side call.
           type: object
         overallMetrics:
           $ref: "#/components/schemas/GoogleCloudRecaptchaenterpriseV1ScoreDistribution"
@@ -957,6 +957,9 @@ components:
         action:
           description: Action name provided at token generation.
           type: string
+        androidPackageName:
+          description: The name of the Android package with which the token was generated (Android keys only).
+          type: string
         createTime:
           description: The timestamp corresponding to the generation of the token.
           format: google-datetime
@@ -974,6 +977,9 @@ components:
             - DUPE
             - MISSING
             - BROWSER_ERROR
+          type: string
+        iosBundleId:
+          description: The ID of the iOS bundle with which the token was generated (iOS keys only).
           type: string
         valid:
           description: Whether the provided user response token is valid. When valid = false, the reason could be specified in invalid_reason or it could also be due to a user failing to solve a challenge or a sitekey mismatch (i.e the sitekey used to generate the token was different than the one specified in the assessment).
