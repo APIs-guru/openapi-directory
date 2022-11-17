@@ -19,12 +19,11 @@ info:
   x-logo:
     url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - format: openapi
+    - format: google
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v3
-      version: "3.0"
+      version: v1
   x-providerName: googleapis.com
   x-serviceName: dialogflow
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -7747,7 +7746,7 @@ components:
           type: string
       type: object
     GoogleCloudDialogflowV2Sentiment:
-      description: The sentiment, such as positive/negative feeling or association, for a unit of analysis, such as the query text.
+      description: "The sentiment, such as positive/negative feeling or association, for a unit of analysis, such as the query text. See: https://cloud.google.com/natural-language/docs/basics#interpreting_sentiment_analysis_values for how to interpret the result."
       properties:
         magnitude:
           description: A non-negative number in the [0, +inf) range, which represents the absolute magnitude of sentiment, regardless of score (positive or negative).
@@ -9193,7 +9192,7 @@ components:
           type: string
       type: object
     GoogleCloudDialogflowV2beta1Sentiment:
-      description: The sentiment, such as positive/negative feeling or association, for a unit of analysis, such as the query text.
+      description: "The sentiment, such as positive/negative feeling or association, for a unit of analysis, such as the query text. See: https://cloud.google.com/natural-language/docs/basics#interpreting_sentiment_analysis_values for how to interpret the result."
       properties:
         magnitude:
           description: A non-negative number in the [0, +inf) range, which represents the absolute magnitude of sentiment, regardless of score (positive or negative).

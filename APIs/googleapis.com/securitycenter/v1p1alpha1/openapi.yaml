@@ -294,6 +294,9 @@ components:
         findingCategory:
           description: The additional taxonomy group within findings from a given source.
           type: string
+        name:
+          description: Full resource name of the finding.
+          type: string
       type: object
     Compliance:
       description: Contains compliance information about a security standard indicating unmet recommendations.

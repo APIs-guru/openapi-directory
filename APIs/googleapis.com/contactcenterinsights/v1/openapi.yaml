@@ -1918,6 +1918,12 @@ components:
         name:
           description: "Immutable. The resource name of the issue. Format: projects/{project}/locations/{location}/issueModels/{issue_model}/issues/{issue}"
           type: string
+        sampleUtterances:
+          description: Output only. Resource names of the sample representative utterances that match to this issue.
+          items:
+            type: string
+          readOnly: true
+          type: array
         updateTime:
           description: Output only. The most recent time that this issue was updated.
           format: google-datetime

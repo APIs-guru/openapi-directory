@@ -5087,6 +5087,29 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleCloudApigeeV1ApiSecurityRuntimeConfig:
+      description: Response for GetApiSecurityRuntimeConfig[EnvironmentService.GetApiSecurityRuntimeConfig].
+      properties:
+        location:
+          description: A list of up to 5 Cloud Storage Blobs that contain SecurityActions.
+          items:
+            type: string
+          type: array
+        name:
+          description: "Name of the environment API Security Runtime configuration resource. Format: `organizations/{org}/environments/{env}/apiSecurityRuntimeConfig`"
+          type: string
+        revisionId:
+          description: Revision ID of the API Security Runtime configuration. The higher the value, the more recently the configuration was deployed.
+          format: int64
+          type: string
+        uid:
+          description: Unique ID for the API Security Runtime configuration. The ID will only change if the environment is deleted and recreated.
+          type: string
+        updateTime:
+          description: Time that the API Security Runtime configuration was updated.
+          format: google-datetime
+          type: string
+      type: object
     GoogleCloudApigeeV1App:
       properties:
         apiProducts:
@@ -8440,7 +8463,7 @@ components:
           description: "Self link of the query. Example: `/organizations/myorg/environments/myenv/securityReports/9cfc0d85-0f30-46d6-ae6f-318d0cb961bd` or following format if query is running at host level: `/organizations/myorg/hostSecurityReports/9cfc0d85-0f30-46d6-ae6f-318d0cb961bd`"
           type: string
         state:
-          description: Query state could be "enqueued", "running", "completed", "failed".
+          description: Query state could be "enqueued", "running", "completed", "expired" and "failed".
           type: string
         updated:
           description: Output only. Last updated timestamp for the query.

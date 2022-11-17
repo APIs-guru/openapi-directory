@@ -8,7 +8,7 @@ info:
     url: https://developer.nexmo.com/
   description: The Voice API lets you create outbound calls, control in-progress calls and get information about historical calls. More information about the Voice API can be found at <https://developer.nexmo.com/voice/voice-api/overview>.
   title: Voice API
-  version: 1.3.8
+  version: 1.3.9
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/voice.yml
@@ -401,6 +401,7 @@ components:
           type: array
       required:
         - to
+        - from
       type: object
     CreateCallRequestNcco:
       allOf:

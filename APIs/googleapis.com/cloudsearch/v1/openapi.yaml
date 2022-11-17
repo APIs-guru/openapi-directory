@@ -2872,6 +2872,7 @@ components:
             - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_TRIGGER
             - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_PERMANENT_ERROR
             - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_EMPTY_RESPONSE
+            - SCAN_RULE_EVALUATION_SKIPPED_UNSUPPORTED_FILE_TYPE
             - SCAN_SUCCEEDED_WITH_FAILURES_NO_VIOLATION
             - SCAN_SUCCEEDED_WITH_FAILURES_BLOCK
             - SCAN_SUCCEEDED_WITH_FAILURES_WARN
@@ -4414,6 +4415,46 @@ components:
           format: int32
           type: integer
       type: object
+    Attribute:
+      description: "An Attribute is a piece of data attached an Item. Attributes are opaque to the Starbox and have no effect on, nor are they effected by, message storage, indexing, or search. "
+      properties:
+        name:
+          description: The name of the attribute. Required - If a write is attempted with an empty string, the server will return an error.
+          type: string
+        value:
+          $ref: "#/components/schemas/CaribouAttributeValue"
+      type: object
+    AttributeRemoved:
+      description: An attribute was deleted from some (subset of the) messages in this thread.
+      properties:
+        attributeId:
+          type: string
+        messageKeys:
+          items:
+            $ref: "#/components/schemas/MultiKey"
+          type: array
+      type: object
+    AttributeSet:
+      description: An attribute was added to some (subset of the) messages in this thread.
+      properties:
+        attributeId:
+          type: string
+        attributeValue:
+          description: The serialized attribute_value as persisted in the storage layer. The application is responsible for deserializing it to an Attribute.Value if appropriate.
+          format: byte
+          type: string
+        messageKeys:
+          items:
+            $ref: "#/components/schemas/MultiKey"
+          type: array
+      type: object
+    Attributes:
+      properties:
+        attribute:
+          items:
+            $ref: "#/components/schemas/Attribute"
+          type: array
+      type: object
     AuditLoggingSettings:
       description: Represents the settings for Cloud audit logging
       properties:
@@ -4681,9 +4722,6 @@ components:
           description: Output only. The calendar event ID of a Google Calendar event that the meeting space is associated with. If the meeting space is not associated with an event in Google Calendar, this field is empty. For recurring events, it refers to the recurring instance associated with the current call, as determined by the server.
           readOnly: true
           type: string
-        chatConfig:
-          $ref: "#/components/schemas/ChatConfig"
-          description: Configuration for the chat for this conference.
         coActivity:
           $ref: "#/components/schemas/CoActivity"
           description: The current co-activity session, or unset if there is none in progress. A co-activity session can be initiated by devices in JOINED state . Initiator of the co-activity is expected to populate this field to start the session. Once clients detect that the co-activity has finished, any JOINED device can clear this field to end the co-activity session. In the case of switching activities, the initiator of the new activity merely needs to override this with the new co-activity data, and all connected clients are expected to handle the transition gracefully.
@@ -4699,7 +4737,7 @@ components:
           readOnly: true
           type: integer
         mediaBackendInfo:
-          description: Output only. Information about the media backend for the currently ongoing conference in the meeting space. The media backend information will only be filled in for clients that are supposed to present the information. The information should be displayed in a debug panel and is only intended for internal debugging purposes. If the string is empty nothing should be displayed about the media backend.
+          description: Output only. Information about the media backend for the currently ongoing conference in the meeting space. The media backend information will only be filled in for clients that are supposed to present the information. The information should be displayed in a debug panel and is only intended for internal debugging purposes. If the string is empty nothing should be displayed about the media backend. Deprecated because media backend is always MEDIA_ROUTER since Dec 2018.
           readOnly: true
           type: string
         organizationName:
@@ -4858,23 +4896,27 @@ components:
           description: "The title must be specified. The header has a fixed height: if both a title and subtitle is specified, each will take up 1 line. If only the title is specified, it will take up both lines. The header is rendered in collapsed and detailed view."
           type: string
       type: object
+    CaribouAttributeValue:
+      properties:
+        booleanValue:
+          description: Tags 1 through 15 are reserved for the most commonly used fields.
+          type: boolean
+        intValue:
+          format: int32
+          type: integer
+        longValue:
+          format: int64
+          type: string
+        rawByteValue:
+          description: Generally, applications should avoid storing raw bytes and instead store structured data as protocol buffer extensions. This both reduces the amount of ad-hoc attribute parsing code as well as eliminates an intermediate copy of the data when deserializing the value. The rawByteValue field is mainly provided for compatibility with attributes stored before the introduction of the Attribute.Value.
+          format: byte
+          type: string
+        stringValue:
+          type: string
+      type: object
     ChatClientActionMarkup:
       description: Actions handled by Chat Clients.
       properties: {}
-      type: object
-    ChatConfig:
-      description: Configuration of the in meeting chat.
-      properties:
-        chatType:
-          description: The Type of chat this Conference is currently using.
-          enum:
-            - CHAT_TYPE_UNSPECIFIED
-            - MEET_CHAT
-            - GOOGLE_CHAT
-          type: string
-        googleChatConfig:
-          $ref: "#/components/schemas/GoogleChatConfig"
-          description: The configuration of Google Chat when selected.
       type: object
     ChatConserverDynamitePlaceholderMetadata:
       description: Metadata used as inputs to the localization that is performed on Dynamite-originated messages that are incompatible with Hangouts clients. See go/localization-of-system-messages for more details.
@@ -5013,12 +5055,40 @@ components:
           format: int64
           type: string
       type: object
+    ClientContext:
+      description: Represents the context of the client on behalf of which a HistoryRecord is produced. The ClientContext message can be used to hold context about the service client (e.g. the internal server making fusebox requests) or the user client (e.g. the IP address of the end user).
+      properties:
+        clientOperationId:
+          description: The client operation to which this history record belongs. The notion of a client operation is provided to keep track of client operations which might span multiple transactions in the lower level.
+          type: string
+        clientType:
+          description: E.g. "pinto", "imap", "bigtop", "upload"
+          type: string
+        sessionContext:
+          $ref: "#/components/schemas/SessionContext"
+          description: Contains information about the session which created this history record. This will be empty if the history record was generated by an internal request.
+        userIp:
+          description: Textual representation of the user's IP address, if available.
+          type: string
+      type: object
     CloudPrincipalProto:
       description: Principal associated with a Cloud Principal representing third party user.
       properties:
         id:
           description: 'Format: "{identity-pool}:{subject}#" Details: go/cloud-principal-identifiers'
           type: string
+      type: object
+    ClusterInfo:
+      description: ClusterInfo contains clustering related information for a particular thread that would be sent as part of the conversation view. Today, this information would be used by iOS notification server to identify whether the thread belongs to a cluster. If the thread belongs to a grouped cluster, it would identify whether the cluster is throttled.
+      properties:
+        clusterId:
+          description: IDs of the highest priority clusters to which the thread belongs to. If this field is not present, the thread does not belong to any cluster and would be shown in the inbox, unclustered.
+          items:
+            type: string
+          type: array
+        throttled:
+          description: If the thread belongs to a grouped cluster and all of those clusters are throttled, then this field is set to true.
+          type: boolean
       type: object
     CoActivity:
       description: Metadata about a co-activity session.
@@ -5036,6 +5106,7 @@ components:
             - CO_ACTIVITY_APP_HEADSUP
             - CO_ACTIVITY_APP_KAHOOT
             - CO_ACTIVITY_APP_GQUEUES
+            - CO_ACTIVITY_APP_YOU_TUBE_MUSIC
           type: string
       type: object
     Collaboration:
@@ -5524,6 +5595,7 @@ components:
             - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_TRIGGER
             - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_PERMANENT_ERROR
             - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_EMPTY_RESPONSE
+            - SCAN_RULE_EVALUATION_SKIPPED_UNSUPPORTED_FILE_TYPE
             - SCAN_SUCCEEDED_WITH_FAILURES_NO_VIOLATION
             - SCAN_SUCCEEDED_WITH_FAILURES_BLOCK
             - SCAN_SUCCEEDED_WITH_FAILURES_WARN
@@ -6351,6 +6423,9 @@ components:
           description: Number of results that match the bucket value. Counts are only returned for searches when count accuracy is ensured. Cloud Search does not guarantee facet counts for any query and facet counts might be present only intermittently, even for identical queries. Do not build dependencies on facet count existence; instead use facet ount percentages which are always returned.
           format: int32
           type: integer
+        filter:
+          $ref: "#/components/schemas/Filter"
+          description: Filter to be passed in the search request if the corresponding bucket is selected.
         percentage:
           description: Percent of results that match the bucket value. The returned value is between (0-100], and is rounded down to an integer if fractional. If the value is not explicitly returned, it represents a percentage value that rounds to 0. Percentages are returned for all searches, but are an estimate. Because percentages are always returned, you should render percentages instead of counts.
           format: int32
@@ -6361,6 +6436,9 @@ components:
     FacetOptions:
       description: Specifies operators to return facet results for. There will be one FacetResult for every source_name/object_type/operator_name combination.
       properties:
+        integerFacetingOptions:
+          $ref: "#/components/schemas/IntegerFacetingOptions"
+          description: If set, describes integer faceting options for the given integer property. The corresponding integer property in the schema should be marked isFacetable. The number of buckets returned would be minimum of this and num_facet_buckets.
         numFacetBuckets:
           description: Maximum number of facet buckets that should be returned for this facet. Defaults to 10. Maximum value is 100.
           format: int32
@@ -6410,6 +6488,14 @@ components:
         valueFilter:
           $ref: "#/components/schemas/ValueFilter"
       type: object
+    FilterCreated:
+      description: A filter was created.
+      properties: {}
+      type: object
+    FilterDeleted:
+      description: A filter was deleted.
+      properties: {}
+      type: object
     FilterOptions:
       description: Filter options to be applied on query.
       properties:
@@ -6418,6 +6504,16 @@ components:
           description: Generic filter to restrict the search, such as `lang:en`, `site:xyz`.
         objectType:
           description: If object_type is set, only objects of that type are returned. This should correspond to the name of the object that was registered within the definition of schema. The maximum length is 256 characters.
+          type: string
+      type: object
+    FilterUpdate:
+      description: "HistoryRecord for changes associated with a filter, namely: FILTER_CREATED FILTER_DELETED"
+      properties:
+        filterCreated:
+          $ref: "#/components/schemas/FilterCreated"
+        filterDeleted:
+          $ref: "#/components/schemas/FilterDeleted"
+        filterId:
           type: string
       type: object
     FixedFooter:
@@ -6431,6 +6527,27 @@ components:
           $ref: "#/components/schemas/TextButton"
         secondaryButton:
           $ref: "#/components/schemas/TextButton"
+      type: object
+    Folder:
+      properties:
+        id:
+          description: Folder mapping id.
+          format: uint64
+          type: string
+        message:
+          description: One for each copy of the message in the IMAP folder.
+          items:
+            $ref: "#/components/schemas/ImapsyncFolderAttributeFolderMessage"
+          type: array
+      type: object
+    FolderAttribute:
+      description: This is the content of //imapsync/folder attribute.
+      properties:
+        folder:
+          description: List of all IMAP folders where the message presents.
+          items:
+            $ref: "#/components/schemas/Folder"
+          type: array
       type: object
     FormAction:
       properties:
@@ -6508,6 +6625,86 @@ components:
           type: string
         freshnessProperty:
           description: This property indicates the freshness level of the object in the index. If set, this property must be a top-level property within the property definitions and it must be a timestamp type or date type. Otherwise, the Indexing API uses updateTime as the freshness indicator. The maximum length is 256 characters. When a property is used to calculate freshness, the value defaults to 2 years from the current time.
+          type: string
+      type: object
+    FuseboxItem:
+      description: 'The Item message is the read interface for user data (traditionally referred to as a "message", such as a mail message or a chat message, but generalized to encompass other types such as tasks) and stored in Tingle. Each Item is associated with a single Thread. An Item contains three classes of data. (1): Item "fields" are common to items of all message types (e.g. mail, chat, task, etc.) and are identified by the ItemFieldSpec.FetchType enum when fetching Items. (2): Item "attributes" represent data associated with an Item that is stored on behalf of the client but to which the fusebox and storage layers are otherwise agnostic. (3): Item "parts" are application-defined protocol buffers that affect how the Item is indexed. Item parts are referenced as extensions to the ItemParts message. By default the application specifies the index terms associated with an Item part. For performance sensitive applications, the storage layer can be modified to understand and index data types natively.'
+      properties:
+        attributes:
+          $ref: "#/components/schemas/Attributes"
+        creationTimeMicroseconds:
+          description: The creation time of the Item in micro seconds.
+          format: uint64
+          type: string
+        history:
+          $ref: "#/components/schemas/History"
+        itemKey:
+          $ref: "#/components/schemas/MultiKey"
+          description: The key is used to refer to an item. Note that every field of the MultiKey is unique to the Item, and thus the Item can be looked up by any of the fields.
+        labels:
+          $ref: "#/components/schemas/Labels"
+        lastModificationTimeUs:
+          description: The modification time of the Item in micro seconds. Modifications to the message include label addition, deletion, etc.
+          format: uint64
+          type: string
+        lockerReferences:
+          $ref: "#/components/schemas/References"
+          description: go/lockpicker Locker counterpart of references.
+        matchInfo:
+          $ref: "#/components/schemas/MatchInfo"
+        parts:
+          $ref: "#/components/schemas/ItemParts"
+          description: Type-specific data are represented as extensions to the ItemParts message.
+        readTs:
+          description: The read timestamp at which this item was read. This is a temporary field used to check if two items streamed during dual reading were read at the same timestamp. This will be populated by Fusebox RPCs. "DO NOT USE UNLESS YOU TALK TO FUSEBOX TEAM (gmail-fusebox@)".
+          format: int64
+          type: string
+        references:
+          $ref: "#/components/schemas/References"
+          description: References to attachments, video attachments in Youtube and Hangout messages.
+        snippet:
+          description: The snippet is a brief bit of text describing this item.
+          type: string
+        threadKey:
+          $ref: "#/components/schemas/MultiKey"
+          description: The key of the Thread with which this Item is associated.
+        threadLocator:
+          description: A base64 encoded and encrypted string generated from the Gaia Id and the thread id. Used to generate the permalink for this thread, exposed from Gmail API.
+          type: string
+        triggers:
+          $ref: "#/components/schemas/Triggers"
+        version:
+          description: The latest history operation id that resulted in a mutation of the item.
+          format: uint64
+          type: string
+      type: object
+    FuseboxItemThreadMatchInfo:
+      description: In the context of a search, the MatchInfo contains information about which Items matched the query.
+      properties:
+        clusterId:
+          description: If SearchQuery.Options.Clustering is present, the query will be treated as a cluster query, and this field may be populated with the cluster ID of the cluster to which this thread belongs, if any. The cluster ID will be a label on the message.
+          type: string
+        lastMatchingItemId:
+          description: The server id of the last item that matched the query. This is always set, regardless of the compute_matching_items_per_thread option. This is the value by which search results are sorted, in descending (i.e. newest first) order.
+          format: uint64
+          type: string
+        lastMatchingItemKey:
+          $ref: "#/components/schemas/MultiKey"
+          description: The MultiKey of the last item that matched the query. This is always set, regardless of the compute_matching_items_per_thread option. This is the value by which search results are sorted, in descending (i.e. newest first) order.
+        matchingItemKey:
+          description: If SearchQuery.Options.compute_matching_items_per_thread, this field will contain the keys of all items that matched the query, in ascending order. Note that this option requires extra computation.
+          items:
+            $ref: "#/components/schemas/MultiKey"
+          type: array
+        rank:
+          $ref: "#/components/schemas/Rank"
+          description: The rank of this ItemThread in the result set of the query. This rank may be used to sort ItemThreads in proper order. Ranks are specific to a query, and stable for a given query at a specific time.
+      type: object
+    FuseboxPrefUpdatePreState:
+      description: If the Value field is not set this means the pref did not exist.
+      properties:
+        value:
+          format: byte
           type: string
       type: object
     GSuitePrincipal:
@@ -6651,13 +6848,6 @@ components:
           $ref: "#/components/schemas/TaskActionMarkup"
         updateDraftActionMarkup:
           $ref: "#/components/schemas/UpdateDraftActionMarkup"
-      type: object
-    GoogleChatConfig:
-      description: Configuration of the Google Chat in Meet.
-      properties:
-        chatGroupId:
-          description: ID of the Chat group.
-          type: string
       type: object
     GoogleChatV1ContextualAddOnMarkup:
       description: The markup for developers to specify the contents of a contextual AddOn.
@@ -7159,6 +7349,62 @@ components:
         searchText:
           type: string
       type: object
+    History:
+      description: The most recent history records associated with the item.
+      properties:
+        record:
+          items:
+            $ref: "#/components/schemas/HistoryRecord"
+          type: array
+      type: object
+    HistoryRecord:
+      properties:
+        clientContext:
+          $ref: "#/components/schemas/ClientContext"
+          description: This will almost always be set, but there are corner cases in which the information is not available, and thus applications must handle its absence appropriately.
+        filterUpdate:
+          $ref: "#/components/schemas/FilterUpdate"
+        imapUpdate:
+          $ref: "#/components/schemas/ImapUpdate"
+        labelUpdate:
+          $ref: "#/components/schemas/LabelUpdate"
+        prefUpdate:
+          $ref: "#/components/schemas/PrefUpdate"
+        recordId:
+          description: Each HistoryRecord has a unique id. Ids are monotonically increasing, and not necessarily contiguous.
+          format: uint64
+          type: string
+        threadUpdate:
+          $ref: "#/components/schemas/ThreadUpdate"
+        transactionContext:
+          $ref: "#/components/schemas/TransactionContext"
+          description: This will almost always be set, but there are corner cases in which the information is not available, and thus applications must handle its absence appropriately.
+        txnDebugInfo:
+          $ref: "#/components/schemas/TransactionDebugInfo"
+        type:
+          enum:
+            - UNKNOWN
+            - INTERNAL
+            - MESSAGE_ADDED
+            - MESSAGE_DELETED
+            - LABEL_ADDED
+            - LABEL_REMOVED
+            - ATTRIBUTE_SET
+            - ATTRIBUTE_REMOVED
+            - THREAD_KEY_SET
+            - LABEL_CREATED
+            - LABEL_DELETED
+            - LABEL_RENAMED
+            - LABEL_UPDATED
+            - PREF_WRITTEN
+            - PREF_DELETED
+            - FILTER_CREATED
+            - FILTER_DELETED
+            - IMAP_UIDS_REASSIGN
+            - TOPIC_STATE_UPDATED
+            - TXN_DEBUG_INFO
+          type: string
+      type: object
     HostAppActionMarkup:
       description: Actions handled by individual host apps.
       properties:
@@ -7423,6 +7669,204 @@ components:
         text:
           type: string
       type: object
+    ImapSessionContext:
+      properties:
+        app:
+          enum:
+            - OTHER_APP
+            - CHROME
+            - FIREFOX
+            - MSIE
+            - SAFARI
+            - OPERA
+            - EDGE
+            - MSIE_COMPATIBILITY
+            - OTHER_BROWSER
+            - SAMSUNG_BROWSER
+            - UC_BROWSER
+            - ANDROID_BROWSER
+            - YANDEX_BROWSER
+            - SILK_BROWSER
+            - COC_COC_BROWSER
+            - MAX_BROWSER_APP_VALUE
+            - GMAIL_APP
+            - GMAIL_INBOX_APP
+            - ANDROID_EMAIL_APP
+            - SAMSUNG_MAIL_APP
+            - MOTO_EMAIL_APP
+            - BOXER_APP
+            - LIMILABS_MAIL_DLL
+            - BIS_APP
+            - OUTLOOK_MAIL_APP
+            - APPLE_NATIVE_APP
+            - CHROME_WEBVIEW_APP
+            - SAFARI_WEBVIEW_APP
+            - CHROME_SYNC_APP
+            - GSA_APP
+            - GMM_APP
+            - CALENDAR_APP
+            - PLUS_APP
+            - HANGOUTS_APP
+            - HANGOUTS_MEET_APP
+            - JAMBOARD_APP
+            - VOICE_APP
+            - PHOTOS_APP
+            - DRIVE_SYNC_APP
+            - DRIVE_APP
+            - DOCS_APP
+            - SHEETS_APP
+            - SLIDES_APP
+            - KEEP_APP
+            - WHATS_APP_IN_DRIVE_APP
+            - TRANSLATE_APP
+            - YOUTUBE_APP
+            - YOUTUBE_MUSIC_APP
+            - YOUTUBE_GAMING_APP
+            - YOUTUBE_KIDS_APP
+            - YOUTUBE_CAPTURE_APP
+            - YOUTUBE_CREATOR_APP
+            - YOUTUBE_GO_APP
+            - YOUTUBE_TV_APP
+            - YOUTUBE_VR_APP
+            - PLAY_APP
+            - PLAY_MUSIC_APP
+            - PLAY_BOOKS_APP
+            - PLAY_MOVIES_APP
+            - PLAY_NEWSSTAND_APP
+            - PLAY_GAMES_APP
+            - POKEMON_GO_APP
+            - ALLO_APP
+            - DUO_APP
+            - CLASSROOM_APP
+            - TRIPS_APP
+            - GOOGLE_PAY_APP
+            - WAZE_APP
+            - ASSISTANT_APP
+            - GBOARD_APP
+            - NEWS_APP
+            - HOME_APP
+            - EARTH_APP
+            - STREET_VIEW_APP
+            - TEZ_APP
+            - GOOGLE_ANALYTICS_APP
+            - ADSENSE_APP
+            - ADWORDS_APP
+            - EXPRESS_APP
+            - WEAR_APP
+            - GOOGLE_MY_BUSINESS_APP
+            - FAMILY_LINK_APP
+            - OPINION_REWARDS_APP
+            - WALLET_APP
+            - ARTS_AND_CULTURE_APP
+            - ANDROID_DEVICE_MANAGER_APP
+            - GOOGLE_GO_APP
+            - FILES_GO_APP
+            - DATALLY_APP
+            - WIFI_APP
+            - STADIA_APP
+            - BATTLESTAR_APP
+            - SMART_LOCK_APP
+            - LOGDOG_APP
+            - DEPRECATED_MAC_OSX_MAIL_APP
+            - DEPRECATED_IOS_MAIL_APP
+          type: string
+        deviceType:
+          description: User agent information
+          enum:
+            - UNKNOWN
+            - PC
+            - MOBILE
+            - TABLET
+            - PORTABLE_MEDIA_PLAYER
+            - TV
+            - GAME_CONSOLE
+            - MEDIA_PLAYER
+            - SMART_SPEAKER
+            - SMART_DISPLAY
+            - CONNECTED_HOME_OTHER
+            - WEARABLE
+            - GLASS
+            - CAR
+            - VR_HEADSET
+          type: string
+        guidFingerprint:
+          description: As agreed with Bond team, this holds the fingerprint of any "aguid" or "guid" provided by the ID command. The fingerprint should be calculated by fingerprint2011. Note that not all clients will provide aguid or guid through ID command.
+          format: uint64
+          type: string
+        os:
+          enum:
+            - UNKNOWN_OS
+            - ANDROID_OS
+            - IOS_OS
+            - BLACKBERRY_OS
+            - WIN_PHONE_OS
+            - FIRE_OS
+            - MAX_MOBILE_OS_VALUE
+            - WINDOWS_OS
+            - LINUX_OS
+            - MAC_OS
+            - CHROME_OS
+            - PLAYSTATION_OS
+            - XBOX_OS
+            - TIZEN_OS
+            - APPLE_TV_OS
+            - KAI_OS
+            - ANDROID_THINGS_OS
+            - CAST_OS
+            - STADIA_OS
+          type: string
+        osVersion:
+          $ref: "#/components/schemas/OsVersion"
+        possiblyTrimmedModel:
+          $ref: "#/components/schemas/PossiblyTrimmedModel"
+      type: object
+    ImapSyncDelete:
+      description: Message delete history record extension that exports //imapsync/folder attribute of deleted messages which have ^is label.
+      properties:
+        mappings:
+          $ref: "#/components/schemas/FolderAttribute"
+          description: Contains the value of //imapsync/folder attribute of deleted message.
+        msgId:
+          format: uint64
+          type: string
+      type: object
+    ImapUidsReassign:
+      properties:
+        labelId:
+          description: Label
+          type: string
+        messageId:
+          description: The message Ids
+          items:
+            format: uint64
+            type: string
+          type: array
+      type: object
+    ImapUpdate:
+      description: "HistoryRecord for changes associated with IMAP, namely: IMAP_UIDS_REASSIGN"
+      properties:
+        imapUidsReassign:
+          $ref: "#/components/schemas/ImapUidsReassign"
+      type: object
+    ImapsyncFolderAttributeFolderMessage:
+      properties:
+        flags:
+          $ref: "#/components/schemas/ImapsyncFolderAttributeFolderMessageFlags"
+          description: Flags of the message. Represents unseen and flagged state.
+        uid:
+          description: UID of the message.
+          format: uint64
+          type: string
+      type: object
+    ImapsyncFolderAttributeFolderMessageFlags:
+      properties:
+        flagged:
+          description: Flagged state of the message.
+          type: boolean
+        seen:
+          description: Seen state of the message.
+          type: boolean
+      type: object
     IncomingWebhookChangedMetadata:
       description: "Annotation metadata to display system messages for incoming webhook events. Next Tag: 7"
       properties:
@@ -7504,6 +7948,16 @@ components:
             - HTML
           type: string
       type: object
+    IntegerFacetingOptions:
+      description: Used to specify integer faceting options.
+      properties:
+        integerBuckets:
+          description: Buckets for given integer values should be in strictly ascending order. For example, if values supplied are (1,5,10,100), the following facet buckets will be formed {<1, [1,5), [5-10), [10-100), >=100}.
+          items:
+            format: int64
+            type: string
+          type: array
+      type: object
     IntegerOperatorOptions:
       description: Used to provide a search operator for integer properties. This is optional. Search operators let users restrict the query to specific fields relevant to the type of item being searched.
       properties:
@@ -7520,6 +7974,9 @@ components:
     IntegerPropertyOptions:
       description: The options for integer properties.
       properties:
+        integerFacetingOptions:
+          $ref: "#/components/schemas/IntegerFacetingOptions"
+          description: If set, describes integer faceting options for the given integer property. The corresponding integer property should be marked isFacetable.
         maximumValue:
           description: The maximum value of the property. The minimum and maximum values for the property are used to rank results according to the ordered ranking. Indexing requests with values greater than the maximum are accepted and ranked with the same weight as items indexed with the maximum value.
           format: int64
@@ -7772,6 +8229,10 @@ components:
           format: google-datetime
           type: string
       type: object
+    ItemParts:
+      description: Container for type-specific extensions of an Item. This protobuf is defined in a separate file to allow types to reference/extend the message without depending on other fusebox protobufs. See items.proto.
+      properties: {}
+      type: object
     ItemStatus:
       description: This contains item's status and any errors.
       properties:
@@ -7804,6 +8265,49 @@ components:
         object:
           $ref: "#/components/schemas/StructuredDataObject"
           description: The structured data object that should conform to a registered object definition in the schema for the data source.
+      type: object
+    ItemThread:
+      description: An ItemThread is an ordered list of Items. An ItemThread corresponds to a "conversation" in the context of mail. An Item belongs to exactly one ItemThread.
+      properties:
+        clusterInfo:
+          $ref: "#/components/schemas/ClusterInfo"
+        item:
+          description: The Items in the ItemThread. In the context of a search, the list of Items may be a subset of those that logically belong to the ItemThread. The details of which items are included are available in the ItemThreadView returned in the overall rpc response.
+          items:
+            $ref: "#/components/schemas/FuseboxItem"
+          type: array
+        lastItemId:
+          description: The server id of the last item returned in the ItemThread. This can be deduced from the [item] list but is provided for convenience. When manually constructing an ItemThreadViewSpec to perform operations on the ItemThread, this value can be used as the [high_item_id_watermark].
+          format: uint64
+          type: string
+        matchInfo:
+          $ref: "#/components/schemas/FuseboxItemThreadMatchInfo"
+        snippet:
+          description: A snippet summarizing the thread. This field is only populated for searches.
+          type: string
+        threadKey:
+          $ref: "#/components/schemas/MultiKey"
+          description: 'The MultiKey that identifies this thread. This value never changes, i.e. remains constant across modifications to the thread, including addition, relabeling, or deletion of contained Items. As such, the thread key may not necessarily correspond to the key of an contained Item. Legacy note: The "server_id" of the thread key is equivalent to the notion of the "original thread id" in the CSS API.'
+        threadLocator:
+          description: A base64 encoded and encrypted string generated from the Gaia Id and the thread id. Used to generate the permalink for this thread, exposed from Gmail API.
+          type: string
+        topicState:
+          $ref: "#/components/schemas/TopicState"
+          description: "Next available id : 10"
+        version:
+          description: The latest history operation id that resulted in a mutation of any item in the thread.
+          format: uint64
+          type: string
+      type: object
+    JobsettedServerSpec:
+      description: Identifies a jobsetted server as a target for Trigger dispatch.
+      properties:
+        portName:
+          description: E.g. "gateway", "stubby" etc. Leave unset to use the default unnamed port.
+          type: string
+        serverName:
+          description: E.g. "satellite-server", "bigtop-sync", etc.
+          type: string
       type: object
     KeyValue:
       properties:
@@ -7880,6 +8384,86 @@ components:
         topLabel:
           description: Formatted text supported.
           type: string
+      type: object
+    LabelAdded:
+      description: A label was added to some (subset of the) messages in this thread.
+      properties:
+        labelId:
+          type: string
+        labelName:
+          type: string
+        messageKeys:
+          items:
+            $ref: "#/components/schemas/MultiKey"
+          type: array
+        syncId:
+          format: uint32
+          type: integer
+      type: object
+    LabelCreated:
+      description: A label was created.
+      properties: {}
+      type: object
+    LabelDeleted:
+      description: A label was deleted.
+      properties: {}
+      type: object
+    LabelRemoved:
+      description: A label was removed from some (subset of the) messages in this thread.
+      properties:
+        labelId:
+          type: string
+        labelName:
+          type: string
+        messageKeys:
+          items:
+            $ref: "#/components/schemas/MultiKey"
+          type: array
+        syncId:
+          format: uint32
+          type: integer
+      type: object
+    LabelRenamed:
+      description: A label was renamed.
+      properties:
+        oldCanonicalName:
+          type: string
+      type: object
+    LabelUpdate:
+      description: "HistoryRecord for changes associated with a label, namely: LABEL_CREATED LABEL_DELETED LABEL_RENAMED LABEL_UPDATED"
+      properties:
+        canonicalName:
+          type: string
+        labelCreated:
+          $ref: "#/components/schemas/LabelCreated"
+        labelDeleted:
+          $ref: "#/components/schemas/LabelDeleted"
+        labelId:
+          type: string
+        labelRenamed:
+          $ref: "#/components/schemas/LabelRenamed"
+        labelUpdated:
+          $ref: "#/components/schemas/LabelUpdated"
+        syncId:
+          format: uint32
+          type: integer
+      type: object
+    LabelUpdated:
+      description: A label pref was updated outside of a rename, create, or delete.
+      properties: {}
+      type: object
+    Labels:
+      properties:
+        displayName:
+          description: The display name of the labels. This is populated (instead of the id) when the request fetch_spec has LABEL_DISPLAY_NAMES.
+          items:
+            type: string
+          type: array
+        id:
+          description: The ids of the labels attached to the Item, e.g. "^i", "^x_1"
+          items:
+            type: string
+          type: array
       type: object
     LanguageConfig:
       description: The language configuration for the session.
@@ -8009,6 +8593,14 @@ components:
         unmappedIdentities:
           items:
             $ref: "#/components/schemas/UnmappedIdentity"
+          type: array
+      type: object
+    MatchInfo:
+      properties:
+        matchingImageReferenceKey:
+          description: Reference keys for image attachments that matches search query.
+          items:
+            type: string
           type: array
       type: object
     MatchRange:
@@ -8290,6 +8882,7 @@ components:
             - SCAN_RULE_EVALUATION_SKIPPED_NO_APPLICABLE_RULES_FOR_TRIGGER
             - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_PERMANENT_ERROR
             - SCAN_RULE_EVALUATION_SKIPPED_CHANGELING_EMPTY_RESPONSE
+            - SCAN_RULE_EVALUATION_SKIPPED_UNSUPPORTED_FILE_TYPE
             - SCAN_SUCCEEDED_WITH_FAILURES_NO_VIOLATION
             - SCAN_SUCCEEDED_WITH_FAILURES_BLOCK
             - SCAN_SUCCEEDED_WITH_FAILURES_WARN
@@ -8417,12 +9010,45 @@ components:
             $ref: "#/components/schemas/UploadMetadata"
           type: array
       type: object
+    MessageAdded:
+      description: A message was added. Specifying id and initial labels.
+      properties:
+        attributeIds:
+          items:
+            type: string
+          type: array
+        labelIds:
+          items:
+            type: string
+          type: array
+        messageKey:
+          $ref: "#/components/schemas/MultiKey"
+        syncIds:
+          description: Note that there can be fewer sync ids than label ids.
+          items:
+            format: uint32
+            type: integer
+          type: array
+      type: object
     MessageAttributes:
       description: "Stores tombstone message attributes: go/tombstone-message-attributes-overview"
       properties:
         isTombstone:
           description: "If true: message is a tombstone in the client. Default false."
           type: boolean
+      type: object
+    MessageDeleted:
+      description: Some (subset of the) messages in this thread were deleted.
+      properties:
+        imapSyncMappings:
+          description: Value of coproc's message delete history record extension that exports /imapsync/folder attribute of deleted messages which have ^is label.
+          items:
+            $ref: "#/components/schemas/ImapSyncDelete"
+          type: array
+        messageKeys:
+          items:
+            $ref: "#/components/schemas/MultiKey"
+          type: array
       type: object
     MessageId:
       description: Primary key for Message resource.
@@ -8461,6 +9087,10 @@ components:
       properties:
         babelProps:
           $ref: "#/components/schemas/BabelMessageProps"
+      type: object
+    MessageSet:
+      description: This is proto2's version of MessageSet.
+      properties: {}
       type: object
     Metadata:
       description: Metadata of a matched search result.
@@ -8505,6 +9135,17 @@ components:
           items:
             $ref: "#/components/schemas/DisplayedProperty"
           type: array
+      type: object
+    MultiKey:
+      description: "A union-like type for identifiying an object in storage. MultiKeys contain multiple key fields, each in a separate key space. At least one key field must be set. More than one key field may be set as long as all key values refer to the same object. All objects in storage have unique server_id keys. All MultiKeys returned from storage to storage clients will always have the server_id field set. When creating an object, if a MultiKey without a server_id is supplied to storage, the storage system will auto-assign a server ID to the new object. For all other storage requests (i.e. those not creating new objects), clients may omit server_id (as long as they supply another key). Instead of server ids, clients can specify string based client_assigned_perm_id keys. Mail message drafts are a prime example of these kinds of objects. Each time a user saves a new version of a draft, the storage system needs to create a new object with the updated draft content and needs to delete the object containing the old content. The new object gets a new SERVER_ID but should get the same CLIENT_ASSIGNED_PERM_ID as the now-deleted object containing the old content. Carrying forward the perm ID allows it to be used to consistently refer to the same logical object across revisions. These perm IDs save sync clients from having to deal with changing object IDs. For example, assume there's a mail message in storage with SERVER_ID = 123 and CLIENT_ASSIGNED_PERM_ID = \"foo\". The following are all valid ways of addressing the object using MultiKeys: 1) MultiKey { server_id = 123 } 2) MultiKey { server_id = 123, client_assigned_perm_id = \"foo\" } 3) MultiKey { client_assigned_perm_id = \"foo\" } Multikeys are never serialized in the storage. The individual keys are extracted and processed separately. Both the integer ids as well as string ids are indexed for efficient retrieval using the same fields in the backend. See go/tingle-multikeys for more information on background and motivation."
+      properties:
+        clientAssignedPermId:
+          description: A client-assigned string based key.
+          type: string
+        serverId:
+          description: A server-assigned ID. This ID must be used only by Gmail and is constructed using millesecond ts << 20 + randomness. The ID affects the sort order of the index.
+          format: uint64
+          type: string
       type: object
     Name:
       description: A person's name.
@@ -8674,6 +9315,18 @@ components:
             description: Properties of the object. Contains field @type with type URL.
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
+      type: object
+    OsVersion:
+      properties:
+        majorVersion:
+          format: int32
+          type: integer
+        minorVersion:
+          format: int32
+          type: integer
+        tertiaryVersion:
+          format: int32
+          type: integer
       type: object
     OtrChatMessageEvent:
       properties:
@@ -8871,11 +9524,61 @@ components:
             $ref: "#/components/schemas/Item"
           type: array
       type: object
+    PossiblyTrimmedModel:
+      description: This message contains either the device model, or a prefix of the device model (AKA a trimmed device model). The "is_trimmed" field indicates which one it is.
+      properties:
+        isTrimmed:
+          type: boolean
+        model:
+          type: string
+      type: object
     PostiniUserProto:
       description: See http://s/?fileprint=//depot/google3/security/authentication/postini/auth_token.proto
       properties:
         postiniUserId:
           format: int64
+          type: string
+      type: object
+    PreState:
+      description: State of the thread previous to the update. This really just describes the label state of all messages before the update.
+      properties:
+        labelIds:
+          items:
+            type: string
+          type: array
+        messageKey:
+          $ref: "#/components/schemas/MultiKey"
+        syncIds:
+          description: Note that there can be fewer sync ids than label ids.
+          items:
+            format: uint32
+            type: integer
+          type: array
+        threadKey:
+          $ref: "#/components/schemas/MultiKey"
+      type: object
+    PrefDeleted:
+      description: PREF_DELETED
+      properties: {}
+      type: object
+    PrefUpdate:
+      description: "HistoryRecord for changes associated with prefs, namely: PREF_WRITTEN PREF_DELETED"
+      properties:
+        name:
+          description: Name of the affected preference.
+          type: string
+        preState:
+          $ref: "#/components/schemas/FuseboxPrefUpdatePreState"
+        prefDeleted:
+          $ref: "#/components/schemas/PrefDeleted"
+        prefWritten:
+          $ref: "#/components/schemas/PrefWritten"
+      type: object
+    PrefWritten:
+      description: PREF_WRITTEN
+      properties:
+        value:
+          format: byte
           type: string
       type: object
     Presenter:
@@ -9021,7 +9724,7 @@ components:
           description: scope = ZWIEBACK_SESSION
       type: object
     PrivateMessageInfo:
-      description: Private message information specific to a given user.
+      description: "Private message information specific to a given user. DEPRECATED: Use the privateMessageViewer field in CreateMessageInfo instead."
       properties:
         annotations:
           description: Annotations private to {@code userId}.
@@ -9394,6 +10097,18 @@ components:
           readOnly: true
           type: array
       type: object
+    Rank:
+      description: "The rank contains a tuple of numbers which may be used as a general sort order. The rank should be treated as an ordered set of numbers, where the ordering is done in descending order of the most significant rank member. For example, given the following ranks described as (primary, secondary): (1,1), (1,2), (2,2) (2,1) The descending rank-order is: (2,2) > (2,1) > (1,2) > (1,1)"
+      properties:
+        primary:
+          description: The primary rank is the most significant rank member. This rank element should always be present. Items with higher primary rank are always considered of higher rank than those of lower primary rank.
+          format: int64
+          type: string
+        secondary:
+          description: The secondary rank may be used to rank items of identical primary rank. This rank element should always be present.
+          format: int64
+          type: string
+      type: object
     RbacRoleProto:
       description: Principal associated with a given RBAC role. This principal is used by Sphinx Provisioning Service for RBAC (go/cedi-auth) provisionable (go/sphinx-rbacz-design).
       properties:
@@ -9500,6 +10215,32 @@ components:
           $ref: "#/components/schemas/SessionStateInfo"
           description: Recording session's state information.
       type: object
+    Reference:
+      description: All fields in this proto are now columns in spanner see google3/storage/slice/production/gmail/user_data_tables.pi for documentation.
+      properties:
+        blobId:
+          type: string
+        contentType:
+          type: string
+        hash:
+          type: string
+        key:
+          description: LINT.IfChange
+          type: string
+        name:
+          description: LINT.ThenChange(//depot/google3/storage/slice/production/gmail/ user_data_tables.pi)
+          type: string
+        size:
+          format: int64
+          type: string
+      type: object
+    References:
+      properties:
+        references:
+          items:
+            $ref: "#/components/schemas/Reference"
+          type: array
+      type: object
     RenameEvent:
       properties:
         newName:
@@ -9565,6 +10306,7 @@ components:
               - REQUIRED_FEATURE_UNSPECIFIED
               - REQUIRED_FEATURE_MESSAGE_QUOTING
               - REQUIRED_FEATURE_TOMBSTONES_IN_DMS_AND_UFRS
+              - REQUIRED_FEATURE_CUSTOM_HYPERLINK
             type: string
           type: array
       type: object
@@ -9738,6 +10480,13 @@ components:
         id:
           description: Opaque, server-assigned ID of the Roster.
           type: string
+      type: object
+    RpcOptions:
+      description: Options for Triggers dispatched via RPC.
+      properties:
+        requestExtensions:
+          $ref: "#/components/schemas/MessageSet"
+          description: The RPC's request extensions (i.e. RPC::request_extensions(), a.k.a. the Stubby side channel) will be merged with the specified [request_extensions]. When Triggers are batched, the RPC's request extensions will be merged with all of the [request_extensions] of the Triggers in the batch. Note that merging of request extensions follows standard protocol buffer semantics; values of singular fields override previous values, and values of repeated fields are appended (In the case of Triggers, Triggers with later fire times will be merged after Triggers with earlier fire times in the same batch). It is not advised to specify extensions with repeated fields on batchable Triggers.
       type: object
     SafeUrlProto:
       description: Message containing a string that is safe to use in URL contexts in DOM APIs and HTML documents, where the URL context does not refer to a resource that loads code.
@@ -10075,6 +10824,31 @@ components:
           type: string
         value:
           description: The value associated with this item which will be sent back to app scripts. Client should use as a form input value.
+          type: string
+      type: object
+    SessionContext:
+      properties:
+        authTime:
+          description: Time at which this activity's session was authenticated, in seconds since the epoch.
+          format: int64
+          type: string
+        delegateUserId:
+          description: Gaia ID of the authenticated user when delegate access is active. In such sessions the main gaia ID is that of the delegator, i.e. the account being accessed.
+          format: int64
+          type: string
+        dusi:
+          description: Device User Session ID, see go/dusi.
+          type: string
+        imapSessionContext:
+          $ref: "#/components/schemas/ImapSessionContext"
+          description: Imap session context for Bond/Gmail integration
+        oauthLoginId:
+          description: OAuth login ID.
+          format: int32
+          type: integer
+        oauthProjectId:
+          description: The devconsole project ID of the developer who authenticated with OAuth.
+          format: int64
           type: string
       type: object
     SessionEvent:
@@ -10704,6 +11478,56 @@ components:
             type: string
           type: array
       type: object
+    ThreadKeySet:
+      description: The ThreadKey was set on some (subset of the) messages in this thread.
+      properties:
+        messageKeys:
+          description: Messages on which the thread_key was changed.
+          items:
+            $ref: "#/components/schemas/MultiKey"
+          type: array
+        newThreadKey:
+          $ref: "#/components/schemas/MultiKey"
+          description: The new thread_key for this thread
+      type: object
+    ThreadUpdate:
+      description: "HistoryRecord for changes associated with a thread, namely: MESSAGE_ADDED MESSAGE_DELETED LABEL_ADDED LABEL_REMOVED ATTRIBUTE_SET ATTRIBUTE_REMOVED THREAD_KEY_SET All label_ids refer to the (unchanging) value as defined by the Label.id field in labels.proto. In particular, it is *not* the canonical_name."
+      properties:
+        attributeRemoved:
+          $ref: "#/components/schemas/AttributeRemoved"
+        attributeSet:
+          $ref: "#/components/schemas/AttributeSet"
+        labelAdded:
+          $ref: "#/components/schemas/LabelAdded"
+        labelRemoved:
+          $ref: "#/components/schemas/LabelRemoved"
+        lastHistoryRecordId:
+          description: Indicates the record id of the last operation that modified this thread.
+          format: uint64
+          type: string
+        messageAdded:
+          $ref: "#/components/schemas/MessageAdded"
+        messageDeleted:
+          $ref: "#/components/schemas/MessageDeleted"
+        originalThreadKey:
+          $ref: "#/components/schemas/MultiKey"
+          description: The first non-empty thread-key on any message in the thread (including deleted messages). This field has been introduced to maintain backward compatibility for clients that are not subthread aware.
+        preState:
+          description: The PreStates of all messages before the transaction. These are suppressed if the client requested that prestates not be included in the output of the GetHistoryRequest.
+          items:
+            $ref: "#/components/schemas/PreState"
+          type: array
+        threadKey:
+          $ref: "#/components/schemas/MultiKey"
+          description: Affected thread
+        threadKeySet:
+          $ref: "#/components/schemas/ThreadKeySet"
+        threadLocator:
+          description: Thread PLID
+          type: string
+        topicStateUpdate:
+          $ref: "#/components/schemas/TopicStateUpdate"
+      type: object
     TimestampOperatorOptions:
       description: Used to provide a search operator for timestamp properties. This is optional. Search operators let users restrict the query to specific fields relevant to the type of item being searched.
       properties:
@@ -10768,6 +11592,45 @@ components:
           description: "Opaque, server-assigned ID of the Topic. While this ID is guaranteed to be unique within the Space, it's not guaranteed to be globally unique. Internal usage: this field can be empty in the following cases: 1. To create the first message in a topic. 2. To list last N messages of a Space (regardless of topic)."
           type: string
       type: object
+    TopicState:
+      description: State of an topic thread as maintained within Tingle.
+      properties:
+        labelIdMessageCount:
+          additionalProperties:
+            format: int32
+            type: integer
+          description: Map of label => count of topic constituent messages with label These only contain counts of labels that are relevant for topic normalization/denormalization. Eg. If a topic thread has 5 constituents, 4 of which are in inbox, this will contain ^i => 4. Some labels of interest are archive, inbox, trash, spam, etc.
+          type: object
+        numConstituents:
+          description: Number of constituents for this entity.
+          format: int32
+          type: integer
+      type: object
+    TopicStateUpdate:
+      properties:
+        topicState:
+          $ref: "#/components/schemas/TopicState"
+      type: object
+    TransactionContext:
+      description: Storage information pertaining to the transaction with which a HistoryRecord is associated.
+      properties:
+        endingRecordId:
+          description: The last HistoryRecord of the transaction. Note that this may correspond to a record that is filtered by Tingle (and thus not returned to the client). See http://b/9513464.
+          format: uint64
+          type: string
+        startingRecordId:
+          description: The first HistoryRecord of the transaction. Note that this may be a record of type INTERNAL.
+          format: uint64
+          type: string
+        writeTimestampUs:
+          description: The microsecond timestamp of the transaction.
+          format: int64
+          type: string
+      type: object
+    TransactionDebugInfo:
+      description: "HistoryRecord for debug info associated with the transaction, namely: TXN_DEBUG_INFO TODO(b/143845917) This is a short-term workaround for unblocking fusebox writes migration. Clean up the code or land a long-term solution after the rollout. go/diff-to-historyrecord"
+      properties: {}
+      type: object
     TranscriptionSessionInfo:
       description: Information about a transcription session.
       properties:
@@ -10781,6 +11644,121 @@ components:
     TransientData:
       description: Transient generic data that will not be saved on the server.
       properties: {}
+      type: object
+    Trigger:
+      properties:
+        actionType:
+          description: Each dispatcher should use an enum to for the actions that it supports. If a dispatcher has only one action, this does not need to be set. (It can be expanded later, defining the default behaviour as type 0.) For purposes such as batching, the type of a trigger is (dispatcher, action_type).
+          format: uint32
+          type: integer
+        batchTimeUs:
+          description: Maximum possible delay in micros that can be tolerated so triggers can be batched, which makes processing more efficient compared to firing triggers individually. Note that the actual fire time will be somewhere in the timerange interval [fire_time_us, fire_time_us + batch_time_us).
+          format: int64
+          type: string
+        dispatchId:
+          description: Must be set for DISPATCHER_STUBBY_DISPATCHER.
+          format: uint32
+          type: integer
+        dispatcher:
+          description: Which server should interpret action_type.
+          enum:
+            - DISPATCHER_COPROC
+            - DISPATCHER_JOBSETTED_PRIMARY
+            - DISPATCHER_STRATUS
+            - DISPATCHER_TASKS_SERVER
+            - DISPATCHER_STUBBY_DISPATCHER
+            - DISPATCHER_CS
+          type: string
+        fireTimeUs:
+          description: "Earliest time to fire at in microseconds. The actual time that the trigger will fire will be in the timerange: [fire_time_us, fire_time_us + batch_time_us)."
+          format: int64
+          type: string
+        jobsettedServerSpec:
+          $ref: "#/components/schemas/JobsettedServerSpec"
+          description: Must be set for DISPATCHER_JOBSETTED_PRIMARY.
+        key:
+          description: The trigger key, if applicable.
+          type: string
+        rpcOptions:
+          $ref: "#/components/schemas/RpcOptions"
+        sliceFireTimeUs:
+          description: The slice_fire_time_us is automatically computed and stored as part of the trigger write. It represents the exact fire time at which the trigger will be queued to fire and will satisfy fire_time_us < slice_fire_time_us <= fire_time_us + batch_time_us Triggers have an index row in the slice trigger index with the row prefix matching this time. Note that this field is internal to gmail_cp and is ignored if set by external clients when adding / updating triggers.
+          format: int64
+          type: string
+        triggerAction:
+          $ref: "#/components/schemas/TriggerAction"
+          description: Trigger action to perform. This should always be set.
+        triggerKey:
+          $ref: "#/components/schemas/TriggerKey"
+          description: The TriggerKey will uniquely determine a trigger within a given context. A context is a single message for message triggers or a single account for account triggers.
+      type: object
+    TriggerAction:
+      properties:
+        action:
+          enum:
+            - ACTION_NONE
+            - ACTION_DELETE
+            - ACTION_CREATE_NEW_TRIGGER
+            - ACTION_MESSAGE_EXPUNGE
+            - ACTION_RETENTION_POLICY_UPDATE
+            - ACTION_UPDATE_ICEBOX_MODEL
+            - ACTION_INVOKE_CS
+            - ACTION_INVOKE_STRATUS
+            - ACTION_PDH_EXPUNGE
+            - ACTION_QUERY_RETENTION
+            - ACTION_INVOKE_JOBSETTED_PRIMARY
+            - ACTION_INVOKE_TASKS_SERVER
+            - ACTION_INVOKE_PUBLISHER
+            - ACTION_INVOKE_OBSERVER
+            - ACTION_PUSH_HISTORY_TO_PDH
+            - ACTION_INVOKE_STUBBY_DISPATCHER
+            - ACTION_PDH_BACKFILL
+            - ACTION_MESSAGE_UNDELETE
+            - ACTION_VAULT_END_USER_ACCESS
+            - ACTION_INVOKE_GROUPS
+            - ACTION_ACCOUNT_INITIALIZATION
+            - ACTION_INVOKE_OBSERVER_WIPEOUT
+            - ACTION_SERVICE_REMOVED_MESSAGE_EXPUNGE
+            - ACTION_EVERCLEAR_EXPUNGE
+            - ACTION_INVOKE_SMIME_CERTIFICATE_ISSUER
+            - ACTION_GROUPS_QUERY_RETENTION
+            - ACTION_INVOKE_SATELLITE_BACKUP
+            - ACTION_INVOKE_DEBUG_LOG
+            - ACTION_PREFERENCE_CLEANUP
+            - ACTION_CARIBOU_DATA_RETENTION
+            - ACTION_HISTORY_CLEANUP
+            - ACTION_ITEM_BULK_RELABEL
+            - ACTION_INVOKE_SATELLITE_IMAGE_PROCESSING
+            - ACTION_CARIBOU_DATA_RETENTION_DIFF
+            - ACTION_RELEVANCY_SCORE_BACKFILL
+            - ACTION_PDH_PUSH_NOTIFICATION_BACKFILL
+            - ACTION_AUTO_SAVE_DRAFT_EXPUNGE
+          type: string
+        data:
+          description: Clients should use extensions on the Trigger message instead.
+          format: byte
+          type: string
+        dataInt:
+          format: int64
+          type: string
+      type: object
+    TriggerKey:
+      description: A TriggerKey (type + instance_id) uniquely identifies a trigger within a message for a message-trigger and within an account for an account-trigger.
+      properties:
+        instanceId:
+          description: Identifier to distinguish multiple Triggers of the same type (per message or per account).
+          type: string
+        type:
+          description: A non-empty string that identifies the type of Trigger. Triggers of the same type may be batched together. The universe of values for the type field should be finite as it is used as a stats key.
+          type: string
+      type: object
+    Triggers:
+      properties:
+        triggers:
+          description: A list of triggers.
+          items:
+            $ref: "#/components/schemas/Trigger"
+          type: array
       type: object
     TrustedResourceUrlProto:
       description: Message containing a string that is safe to use in all URL contexts in DOM APIs and HTML documents; even where the referred-to resource is interpreted as code, e.g., as the src of a script element.
@@ -10958,6 +11936,10 @@ components:
         dlpMetricsMetadata:
           $ref: "#/components/schemas/AppsDynamiteSharedDlpMetricsMetadata"
           description: The metrics metadata of the Data Loss Prevention attachment scan.
+        latestVirusScanTimestamp:
+          description: The timestamp of the most recent virus scan completed (in microseconds).
+          format: int64
+          type: string
         localId:
           description: A copy of the LocalId in Annotation. This field is supposed to be filled by server only.
           type: string
