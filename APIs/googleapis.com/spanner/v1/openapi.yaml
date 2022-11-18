@@ -1961,7 +1961,7 @@ components:
           type: string
         encryptionInfo:
           $ref: "#/components/schemas/EncryptionInfo"
-          description: Output only. Output only. The encryption information for the backup. .
+          description: Output only. The encryption information for the backup.
           readOnly: true
         expireTime:
           description: Required for the CreateBackup operation. The expiration time of the backup, with microseconds granularity that must be at least 6 hours and at most 366 days from the time the CreateBackup request is processed. Once the `expire_time` has passed, the backup is eligible to be automatically deleted by Cloud Spanner to free the resources used by the backup.

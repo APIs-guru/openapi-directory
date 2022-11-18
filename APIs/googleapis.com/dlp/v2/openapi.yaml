@@ -2169,7 +2169,7 @@ components:
           type: array
       type: object
     GooglePrivacyDlpV2ExcludeByHotword:
-      description: The rule to exclude findings based on a hotword. For record inspection of tables, column names are considered hotwords. An example of this is to exclude a finding if a BigQuery column matches a specific pattern.
+      description: The rule to exclude findings based on a hotword. For record inspection of tables, column names are considered hotwords. An example of this is to exclude a finding if it belongs to a BigQuery column that matches a specific pattern.
       properties:
         hotwordRegex:
           $ref: "#/components/schemas/GooglePrivacyDlpV2Regex"

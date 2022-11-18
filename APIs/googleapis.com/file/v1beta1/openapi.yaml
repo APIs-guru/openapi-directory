@@ -375,7 +375,7 @@ paths:
       description: Lists all backups in a project for either a specified location or for all locations.
       operationId: file.projects.locations.backups.list
       parameters:
-        - description: Required. The project and location for which to retrieve backup information, in the format `projects/{project_id}/locations/{location}`. In Filestore, backup locations map to GCP regions, for example **us-west1**. To retrieve backup information for all locations, use "-" for the `{location}` value.
+        - description: Required. The project and location for which to retrieve backup information, in the format `projects/{project_id}/locations/{location}`. In Filestore, backup locations map to Google Cloud regions, for example **us-west1**. To retrieve backup information for all locations, use "-" for the `{location}` value.
           in: path
           name: parent
           required: true
@@ -431,7 +431,7 @@ paths:
       description: Creates a backup.
       operationId: file.projects.locations.backups.create
       parameters:
-        - description: Required. The backup's project and location, in the format `projects/{project_id}/locations/{location}`. In Filestore, backup locations map to GCP regions, for example **us-west1**.
+        - description: Required. The backup's project and location, in the format `projects/{project_id}/locations/{location}`. In Filestore, backup locations map to Google Cloud regions, for example **us-west1**.
           in: path
           name: parent
           required: true
@@ -466,7 +466,7 @@ paths:
       description: Lists all instances in a project for either a specified location or for all locations.
       operationId: file.projects.locations.instances.list
       parameters:
-        - description: Required. The project and location for which to retrieve instance information, in the format `projects/{project_id}/locations/{location}`. In Cloud Filestore, locations map to GCP zones, for example **us-west1-b**. To retrieve instance information for all locations, use "-" for the `{location}` value.
+        - description: Required. The project and location for which to retrieve instance information, in the format `projects/{project_id}/locations/{location}`. In Cloud Filestore, locations map to Google Cloud zones, for example **us-west1-b**. To retrieve instance information for all locations, use "-" for the `{location}` value.
           in: path
           name: parent
           required: true
@@ -522,7 +522,7 @@ paths:
       description: Creates an instance. When creating from a backup, the capacity of the new instance needs to be equal to or larger than the capacity of the backup (and also equal to or larger than the minimum capacity of the tier).
       operationId: file.projects.locations.instances.create
       parameters:
-        - description: Required. The instance's project and location, in the format `projects/{project_id}/locations/{location}`. In Filestore, locations map to GCP zones, for example **us-west1-b**.
+        - description: Required. The instance's project and location, in the format `projects/{project_id}/locations/{location}`. In Filestore, locations map to Google Cloud zones, for example **us-west1-b**.
           in: path
           name: parent
           required: true
@@ -1512,10 +1512,10 @@ components:
           type: string
       type: object
     RestoreInstanceRequest:
-      description: RestoreInstanceRequest restores an existing instance's file share from a snapshot or backup.
+      description: RestoreInstanceRequest restores an existing instance's file share from a backup.
       properties:
         fileShare:
-          description: Required. Name of the file share in the Filestore instance that the snapshot is being restored to.
+          description: Required. Name of the file share in the Filestore instance that the backup is being restored to.
           type: string
         sourceBackup:
           description: The resource name of the backup, in the format `projects/{project_id}/locations/{location_id}/backups/{backup_id}`.
