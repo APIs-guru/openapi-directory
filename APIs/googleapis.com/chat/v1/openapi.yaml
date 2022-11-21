@@ -88,7 +88,7 @@ paths:
           name: pageSize
           schema:
             type: integer
-        - description: Optional. A page token, received from a previous list spaces call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided must match the call that provided the page token.
+        - description: Optional. A page token, received from a previous list spaces call. Provide this to retrieve the subsequent page. When paginating, the filter value should match the call that provided the page token. Passing a different value may lead to unexpected results.
           in: query
           name: pageToken
           schema:
@@ -180,7 +180,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     put:
-      description: Updates a message. For example usage, see [Update a message](https://developers.google.com/chat/api/guides/crudl/messages#update_a_message). Requires [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts).
+      description: Updates a message. For example usage, see [Update a message](https://developers.google.com/chat/api/guides/crudl/messages#update_a_message). Requires [authentication](https://developers.google.com/chat/api/guides/auth/). Fully supports [service account authentication](https://developers.google.com/chat/api/guides/auth/service-accounts). Supports [user authentication](https://developers.google.com/chat/api/guides/auth/users) as part of the [Google Workspace Developer Preview Program](https://developers.google.com/workspace/preview), which grants early access to certain features. [User authentication](https://developers.google.com/chat/api/guides/auth/users) requires the `chat.messages` authorization scope.
       operationId: chat.spaces.messages.update
       parameters:
         - description: "Resource name in the form `spaces/*/messages/*`. Example: `spaces/AAAAAAAAAAA/messages/BBBBBBBBBBB.BBBBBBBBBBB`"
@@ -590,7 +590,7 @@ components:
           type: string
       type: object
     AttachmentDataRef:
-      description: A reference to the data of an attachment.
+      description: "[Developer Preview](https://developers.google.com/workspace/preview)."
       properties:
         resourceName:
           description: The resource name of the attachment data. This is used with the media API to download the attachment data.
@@ -1546,7 +1546,6 @@ components:
           type: string
       type: object
     ListSpacesResponse:
-      description: The response corresponding to ListSpacesRequest.
       properties:
         nextPageToken:
           description: A token that can be sent as `pageToken` to retrieve the next page of results. If empty, there are no subsequent pages.

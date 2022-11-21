@@ -3022,6 +3022,15 @@ components:
       type: integer
       x-apideck-schema-id: FileSize
       x-graphql-type-name: FileSize
+    FileStorageEventType:
+      enum:
+        - "*"
+        - file-storage.file.created
+        - file-storage.file.updated
+        - file-storage.file.deleted
+      example: file-storage.file.created
+      type: string
+      x-apideck-enum-id: file-storage.event_type
     FileType:
       description: The type of resource. Could be file, folder or url
       enum:
@@ -4275,6 +4284,44 @@ components:
         part_size: critical
         success: critical
         uploaded_byte_range: low
+    WebhookEvent:
+      allOf:
+        - properties:
+            entity_id:
+              description: The service provider's ID of the entity that triggered this event
+              example: 123456ASDF
+              type: string
+            entity_type:
+              description: The type entity that triggered this event
+              example: Company
+              type: string
+            entity_url:
+              description: The url to retrieve entity detail.
+              example: https://unify.apideck.com/crm/contacts/123456
+              type: string
+            event_id:
+              description: Unique reference to this request event
+              example: 9755c355-56c3-4a2f-a2da-86ff4411fccb
+              type: string
+            execution_attempt:
+              description: The current count this request event has been attempted
+              example: 2
+              type: number
+            occurred_at:
+              description: ISO Datetime for when the original event occurred
+              example: 2021-10-01T03:14:55.419Z
+              type: string
+            service_id:
+              description: Service provider identifier
+              example: close
+              type: string
+          type: object
+          x-apideck-schema-id: WebhookEvent
+        - properties:
+            event_type:
+              $ref: "#/components/schemas/FileStorageEventType"
+          type: object
+      x-sdk-exclude: true
   securitySchemes:
     apiKey:
       description: |
@@ -4297,3 +4344,73 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-webhooks:
+  FileCreated:
+    post:
+      description: File created
+      operationId: fileCreated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/FileStorageEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: File created
+      tags:
+        - Webhook Events
+      x-apideck-event-type: file-storage.file.created
+  FileDeleted:
+    post:
+      description: File deleted
+      operationId: fileDeleted
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/FileStorageEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: File deleted
+      tags:
+        - Webhook Events
+      x-apideck-event-type: file-storage.file.deleted
+  FileUpdated:
+    post:
+      description: File updated
+      operationId: fileUpdated
+      parameters:
+        - description: The type of event that was triggered
+          in: header
+          name: x-apideck-event-type
+          required: true
+          schema:
+            $ref: "#/components/schemas/FileStorageEventType"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WebhookEvent"
+      responses:
+        "200":
+          description: Return a 200 status to indicate that the data was received successfully
+      summary: File updated
+      tags:
+        - Webhook Events
+      x-apideck-event-type: file-storage.file.updated
