@@ -1756,6 +1756,7 @@ components:
           example: true
           type: boolean
         form_fields:
+          description: The settings that are wanted to create a connection.
           example:
             - custom_field: false
               disabled: false
@@ -1787,14 +1788,17 @@ components:
           readOnly: true
           type: boolean
         icon:
+          description: A visual icon of the connection, that will be shown in the Vault
           example: https://res.cloudinary.com/apideck/image/upload/v1529456047/catalog/salesforce/icon128x128.png
           readOnly: true
           type: string
         id:
+          description: The unique identifier of the connection.
           example: crm+salesforce
           readOnly: true
           type: string
         logo:
+          description: The logo of the connection, that will be shown in the Vault
           example: https://c1.sfdcstatic.com/content/dam/web/en_us/www/images/home/logo-salesforce-m.svg
           readOnly: true
           type: string
@@ -1810,6 +1814,7 @@ components:
           properties: {}
           type: object
         name:
+          description: The name of the connection
           example: Salesforce
           readOnly: true
           type: string
@@ -1836,6 +1841,7 @@ components:
           readOnly: true
           type: string
         service_id:
+          description: The ID of the service this connection belongs to.
           example: salesforce
           readOnly: true
           type: string
@@ -1860,6 +1866,7 @@ components:
         state:
           $ref: "#/components/schemas/ConnectionState"
         status:
+          description: Status of the connection.
           enum:
             - live
             - upcoming
@@ -1877,6 +1884,7 @@ components:
           readOnly: true
           type: string
         unified_api:
+          description: The unified API category where the connection belongs to.
           example: crm
           readOnly: true
           type: string
@@ -1886,6 +1894,7 @@ components:
           readOnly: true
           type: number
         website:
+          description: The website URL of the connection
           example: https://www.salesforce.com
           readOnly: true
           type: string
@@ -2377,17 +2386,26 @@ components:
           example: false
           type: boolean
         description:
+          description: The description of the form field
           example: Slack channel to push notification to
           nullable: true
           type: string
         disabled:
+          description: Indicates if the form field is displayed in a “read-only” mode.
+          example: false
+          nullable: true
+          type: boolean
+        hidden:
+          description: Indicates if the form field is not displayed but the value that is being stored on the connection.
           example: false
           nullable: true
           type: boolean
         id:
+          description: The unique identifier of the form field.
           example: channel
           type: string
         label:
+          description: The label of the field
           example: Channel
           type: string
         options:
@@ -2398,13 +2416,16 @@ components:
             $ref: "#/components/schemas/FormFieldOption"
           type: array
         placeholder:
+          description: The placeholder for the form field
           example: Select a channel
           nullable: true
           type: string
         required:
+          description: Indicates if the form field is required, which means it must be filled in before the form can be submitted
           example: true
           type: boolean
         sensitive:
+          description: Indicates if the form field contains sensitive data, which will display the value as a masked input.
           example: false
           nullable: true
           type: boolean

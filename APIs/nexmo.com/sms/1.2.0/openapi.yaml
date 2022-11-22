@@ -8,7 +8,7 @@ info:
     url: https://developer.nexmo.com/
   description: With the SMS API you can send SMS from your account and lookup messages both messages that you've sent as well as messages sent to your virtual numbers. Numbers are specified in E.164 format. More SMS API documentation is at <https://developer.nexmo.com/messaging/sms/overview>
   title: SMS API
-  version: 1.0.11
+  version: 1.2.0
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/sms.yml
@@ -362,10 +362,6 @@ components:
           description: The body of the message being sent. If your message contains characters that can be encoded according to the GSM Standard and Extended tables then you can set the `type` to `text`. If your message contains characters outside this range, then you will need to set the `type` to `unicode`.
           example: Hello World!
           type: string
-        title:
-          description: "**Advanced**: The title for a wappush SMS. Depends on `type` parameter having the value `wappush`."
-          example: Welcome
-          type: string
         to:
           description: The number that the message should be sent to. Numbers are specified in E.164 format.
           example: "447700900000"
@@ -386,31 +382,12 @@ components:
           enum:
             - text
             - binary
-            - wappush
             - unicode
-            - vcal
-            - vcard
           example: text
           type: string
         udh:
           description: "**Advanced**: Your custom Hex encoded [User Data Header](https://en.wikipedia.org/wiki/User_Data_Header). Depends on `type` parameter having the value `binary`."
           example: "06050415811581"
-          type: string
-        url:
-          description: "**Advanced**: The URL of your website. Depends on `type` parameter having the value `wappush`."
-          example: https://example.com
-          type: string
-        validity:
-          description: "**Advanced**: The availability for an SMS in milliseconds. Depends on `type` parameter having the value `wappush`."
-          example: "300000"
-          type: string
-        vcal:
-          description: "**Advanced**: A calendar event in [vCal format](https://en.wikipedia.org/wiki/VCal). Depends on `type` parameter having the value `vcal`."
-          format: vcal
-          type: string
-        vcard:
-          description: "**Advanced**: A business card in [vCard format](https://en.wikipedia.org/wiki/VCard). Depends on `type` parameter having the value `vcard`."
-          format: vcard
           type: string
       required:
         - api_key

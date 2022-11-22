@@ -413,7 +413,7 @@ paths:
       x-sdk-exclude: true
   /webhook/webhooks:
     get:
-      description: List webhooks
+      description: List all webhook subscriptions
       operationId: webhooksAll
       parameters:
         - $ref: "#/components/parameters/applicationId"
@@ -459,7 +459,7 @@ paths:
             }
       x-graphql-field-name: webhooks
     post:
-      description: Create webhook
+      description: Create a webhook subscription to receive events
       operationId: webhooksAdd
       parameters:
         - $ref: "#/components/parameters/applicationId"
@@ -519,7 +519,7 @@ paths:
             }
   "/webhook/webhooks/{id}":
     delete:
-      description: Delete webhook
+      description: Delete a webhook subscription
       operationId: webhooksDelete
       parameters:
         - $ref: "#/components/parameters/webhookToken"
@@ -565,7 +565,7 @@ paths:
               console.error(error)
             }
     get:
-      description: Get webhook
+      description: Get the webhook subscription details
       operationId: webhooksOne
       parameters:
         - $ref: "#/components/parameters/webhookToken"
@@ -611,7 +611,7 @@ paths:
               console.error(error)
             }
     patch:
-      description: Update webhook
+      description: Update a webhook subscription
       operationId: webhooksUpdate
       parameters:
         - $ref: "#/components/parameters/webhookToken"
