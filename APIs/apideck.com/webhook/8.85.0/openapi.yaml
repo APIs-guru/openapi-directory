@@ -436,7 +436,7 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: List webhooks
+      summary: List webhook subscriptions
       tags:
         - Webhooks
       x-apideck-api: webhook
@@ -486,7 +486,7 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Create webhook
+      summary: Create webhook subscription
       tags:
         - Webhooks
       x-apideck-api: webhook
@@ -541,7 +541,7 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Delete webhook
+      summary: Delete webhook subscription
       tags:
         - Webhooks
       x-apideck-api: webhook
@@ -587,7 +587,7 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Get webhook
+      summary: Get webhook subscription
       tags:
         - Webhooks
       x-apideck-api: webhook
@@ -639,7 +639,7 @@ paths:
           $ref: "#/components/responses/UnexpectedErrorResponse"
       security:
         - apiKey: []
-      summary: Update webhook
+      summary: Update webhook subscription
       tags:
         - Webhooks
       x-apideck-api: webhook

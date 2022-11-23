@@ -2109,10 +2109,15 @@ paths:
           required: true
           schema:
             type: string
-        - description: User of the instance. If the database user has a host, this is specified as {username}@{host} else as {username}.
+        - description: User of the instance.
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: Host of a user of the instance.
+          in: query
+          name: host
           schema:
             type: string
       responses:
@@ -3076,6 +3081,17 @@ components:
     ExportContext:
       description: Database instance export context.
       properties:
+        bakExportOptions:
+          description: Options for exporting BAK files (SQL Server-only)
+          properties:
+            stripeCount:
+              description: Option for specifying how many stripes to use for the export. If blank, and the value of the striped field is true, the number of stripes is automatically chosen.
+              format: int32
+              type: integer
+            striped:
+              description: Whether or not the export should be striped.
+              type: boolean
+          type: object
         csvExportOptions:
           description: Options for exporting data as CSV. `MySQL` and `PostgreSQL` instances only.
           properties:
@@ -3283,6 +3299,9 @@ components:
                   description: Path to the Certificate Private Key (.pvk) in Cloud Storage, in the form `gs://bucketName/fileName`. The instance must have write permissions to the bucket and read access to the file.
                   type: string
               type: object
+            striped:
+              description: Whether or not the backup set being restored is striped. Applies only to Cloud SQL for SQL Server.
+              type: boolean
           type: object
         csvImportOptions:
           description: Options for importing data as CSV.
@@ -3464,6 +3483,9 @@ components:
           items:
             $ref: "#/components/schemas/AclEntry"
           type: array
+        enablePrivatePathForGoogleCloudServices:
+          description: Controls connectivity to private IP instances from Google services, such as BigQuery.
+          type: boolean
         ipv4Enabled:
           description: Whether the instance is assigned a public IP address or not.
           type: boolean
@@ -3779,7 +3801,7 @@ components:
           format: int32
           type: integer
         passwordChangeInterval:
-          description: Minimum interval after which the password can be changed. This flag is only supported for PostgresSQL.
+          description: Minimum interval after which the password can be changed. This flag is only supported for PostgreSQL.
           format: google-duration
           type: string
         reuseInterval:

@@ -1321,6 +1321,13 @@ components:
           description: Downstream event type
           example: person_created
           type: string
+        event_source:
+          description: Unify event source
+          enum:
+            - native
+            - virtual
+          example: native
+          type: string
         event_type:
           description: Unify event type
           example: employee.created

@@ -478,7 +478,7 @@ paths:
         - chromeosdevices
   "/admin/directory/v1/customer/{customerId}/devices/mobile":
     get:
-      description: Retrieves a paginated list of all user-owned mobile devices for an account. To retrieve a list that includes company-owned devices, use the Cloud Identity [Devices API](https://cloud.google.com/identity/docs/concepts/overview-devices) instead.
+      description: Retrieves a paginated list of all user-owned mobile devices for an account. To retrieve a list that includes company-owned devices, use the Cloud Identity [Devices API](https://cloud.google.com/identity/docs/concepts/overview-devices) instead. This method times out after 60 minutes. For more information, see [Troubleshoot error codes](https://developers.google.com/admin-sdk/directory/v1/guides/troubleshoot-error-codes).
       operationId: directory.mobiledevices.list
       parameters:
         - description: The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
@@ -932,7 +932,7 @@ paths:
       description: Retrieves all schemas for a customer.
       operationId: directory.schemas.list
       parameters:
-        - description: Immutable ID of the Google Workspace account.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. You must provide either the `customer` or the `domain` parameter.
           in: path
           name: customerId
           required: true
@@ -1028,7 +1028,7 @@ paths:
       description: Retrieves a schema.
       operationId: directory.schemas.get
       parameters:
-        - description: Immutable ID of the Google Workspace account.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. You must provide either the `customer` or the `domain` parameter.
           in: path
           name: customerId
           required: true
@@ -1145,7 +1145,7 @@ paths:
       description: Lists the domain aliases of the customer.
       operationId: directory.domainAliases.list
       parameters:
-        - description: Immutable ID of the Google Workspace account.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. You must provide either the `customer` or the `domain` parameter.
           in: path
           name: customer
           required: true
@@ -1246,7 +1246,7 @@ paths:
       description: Retrieves a domain alias of the customer.
       operationId: directory.domainAliases.get
       parameters:
-        - description: Immutable ID of the Google Workspace account.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. You must provide either the `customer` or the `domain` parameter.
           in: path
           name: customer
           required: true
@@ -1293,7 +1293,7 @@ paths:
       description: Lists the domains of the customer.
       operationId: directory.domains.list
       parameters:
-        - description: Immutable ID of the Google Workspace account.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. You must provide either the `customer` or the `domain` parameter.
           in: path
           name: customer
           required: true
@@ -1389,7 +1389,7 @@ paths:
       description: Retrieves a domain of the customer.
       operationId: directory.domains.get
       parameters:
-        - description: Immutable ID of the Google Workspace account.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. You must provide either the `customer` or the `domain` parameter.
           in: path
           name: customer
           required: true
@@ -2192,7 +2192,7 @@ paths:
       description: Retrieves a paginated list of all roleAssignments.
       operationId: directory.roleAssignments.list
       parameters:
-        - description: Immutable ID of the Google Workspace account.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. You must provide either the `customer` or the `domain` parameter.
           in: path
           name: customer
           required: true
@@ -2310,7 +2310,7 @@ paths:
       description: Retrieves a role assignment.
       operationId: directory.roleAssignments.get
       parameters:
-        - description: Immutable ID of the Google Workspace account.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. You must provide either the `customer` or the `domain` parameter.
           in: path
           name: customer
           required: true
@@ -2357,7 +2357,7 @@ paths:
       description: Retrieves a paginated list of all the roles in a domain.
       operationId: directory.roles.list
       parameters:
-        - description: Immutable ID of the Google Workspace account.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. You must provide either the `customer` or the `domain` parameter.
           in: path
           name: customer
           required: true
@@ -2439,7 +2439,7 @@ paths:
       description: Retrieves a paginated list of all privileges for a customer.
       operationId: directory.privileges.list
       parameters:
-        - description: Immutable ID of the Google Workspace account.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. You must provide either the `customer` or the `domain` parameter.
           in: path
           name: customer
           required: true
@@ -2506,7 +2506,7 @@ paths:
       description: Retrieves a role.
       operationId: directory.roles.get
       parameters:
-        - description: Immutable ID of the Google Workspace account.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. You must provide either the `customer` or the `domain` parameter.
           in: path
           name: customer
           required: true
@@ -2722,7 +2722,7 @@ paths:
       description: Retrieves all groups of a domain or of a user given a userKey (paginated).
       operationId: directory.groups.list
       parameters:
-        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, fill in this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. Either the `customer` or the `domain` parameter must be provided.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. You must provide either the `customer` or the `domain` parameter.
           in: query
           name: customer
           schema:
@@ -3105,7 +3105,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/admin/directory/v1/groups/{groupKey}/members":
     get:
-      description: Retrieves a paginated list of all members in a group.
+      description: Retrieves a paginated list of all members in a group. This method times out after 60 minutes. For more information, see [Troubleshoot error codes](https://developers.google.com/admin-sdk/directory/v1/guides/troubleshoot-error-codes).
       operationId: directory.members.list
       parameters:
         - description: Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
@@ -3379,7 +3379,7 @@ paths:
           name: customFieldMask
           schema:
             type: string
-        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, fill this field instead of domain. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users). Either the `customer` or the `domain` parameter must be provided.
+        - description: The unique ID for the customer's Google Workspace account. In case of a multi-domain account, to fetch all groups for a customer, use this field instead of `domain`. You can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users](/admin-sdk/directory/v1/reference/users) resource. You must provide either the `customer` or the `domain` parameter.
           in: query
           name: customer
           schema:
@@ -3751,7 +3751,7 @@ paths:
       tags:
         - users
     put:
-      description: Updates a user. This method supports patch semantics, meaning you only need to include the fields you wish to update. Fields that are not present in the request will be preserved, and fields set to `null` will be cleared.
+      description: Updates a user. This method supports patch semantics, meaning that you only need to include the fields you wish to update. Fields that are not present in the request will be preserved, and fields set to `null` will be cleared. For repeating fields that contain arrays, individual items in the array can't be patched piecemeal; they must be supplied in the request body with the desired values for all items. See the [user accounts guide](https://developers.google.com/admin-sdk/directory/v1/guides/manage-users#update_user) for more information.
       operationId: directory.users.update
       parameters:
         - description: Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
@@ -7121,7 +7121,7 @@ components:
           description: Indicates if the user's profile is visible in the Google Workspace global address list when the contact sharing feature is enabled for the domain. For more information about excluding user profiles, see the [administration help center](https://support.google.com/a/answer/1285988).
           type: boolean
         ipWhitelisted:
-          description: If `true`, the user's IP address is [whitelisted](https://support.google.com/a/answer/60752).
+          description: If `true`, the user's IP address is subject to a deprecated IP address [`allowlist`](https://support.google.com/a/answer/60752) configuration.
           type: boolean
         isAdmin:
           description: Output only. Indicates a user with super admininistrator privileges. The `isAdmin` property can only be edited in the [Make a user an administrator](/admin-sdk/directory/v1/guides/manage-users.html#make_admin) operation ( [makeAdmin](/admin-sdk/directory/v1/reference/users/makeAdmin.html) method). If edited in the user [insert](/admin-sdk/directory/v1/reference/users/insert.html) or [update](/admin-sdk/directory/v1/reference/users/update.html) methods, the edit is ignored by the API service.
