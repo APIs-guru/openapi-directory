@@ -1144,7 +1144,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1alpha/{parent}/executions":
     get:
-      description: Lists the status of the integration executions.
+      description: Lists the results of all the integration executions. The response includes the same information as the [execution log](https://cloud.google.com/application-integration/docs/viewing-logs) in the Integration UI.
       operationId: integrations.projects.locations.products.integrations.executions.list
       parameters:
         - description: Required. The parent resource name of the integration execution.
@@ -5401,7 +5401,7 @@ components:
           description: "Optional. This is used to de-dup incoming request: if the duplicate request was detected, the response from the previous execution is returned."
           type: string
         triggerId:
-          description: Optional. Matched against all {@link TriggerConfig}s across all integrations. i.e. TriggerConfig.trigger_id.equals(trigger_id)
+          description: Required. Matched against all {@link TriggerConfig}s across all integrations. i.e. TriggerConfig.trigger_id.equals(trigger_id). The trigger_id is in the format of `api_trigger/TRIGGER_NAME`.
           type: string
       type: object
     GoogleCloudIntegrationsV1alphaExecuteIntegrationsResponse:
