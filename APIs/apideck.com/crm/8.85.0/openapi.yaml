@@ -2893,7 +2893,9 @@ paths:
                 name: 'Sales Pipeline',
                 currency: 'USD',
                 archived: false,
+                active: false,
                 display_order: 1,
+                win_probability_enabled: true,
                 stages: [
                   {
                     name: 'Contract Sent',
@@ -3070,7 +3072,9 @@ paths:
                 name: 'Sales Pipeline',
                 currency: 'USD',
                 archived: false,
+                active: false,
                 display_order: 1,
+                win_probability_enabled: true,
                 stages: [
                   {
                     name: 'Contract Sent',
@@ -7641,6 +7645,9 @@ components:
     Pipeline:
       additionalProperties: false
       properties:
+        active:
+          example: false
+          type: boolean
         archived:
           example: false
           type: boolean
@@ -7697,6 +7704,9 @@ components:
           readOnly: true
           title: Updated at (timestamp)
           type: string
+        win_probability_enabled:
+          example: true
+          type: boolean
       required:
         - name
       type: object
@@ -7710,6 +7720,7 @@ components:
         name: critical
         stages: high
         updated_at: medium
+        win_probability_enabled: edge-case
       x-pii: []
     RowVersion:
       example: 1-12345
