@@ -529,6 +529,63 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{parent}/telemetry/events":
+    get:
+      description: List telemetry events.
+      operationId: chromemanagement.customers.telemetry.events.list
+      parameters:
+        - description: Required. Customer id or "my_customer" to use the customer associated to the account making the request.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. Only include resources that match the filter. Supported filter fields: * device_id * user_id * device_org_unit_id * user_org_unit_id * timestamp * event_type"
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Maximum number of results to return. Default value is 100. Maximum value is 1000.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. Token to specify next page in the list.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Required. Read mask to specify which fields to return.
+          in: query
+          name: readMask
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleChromeManagementV1ListTelemetryEventsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/chrome.management.telemetry.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/chrome.management.telemetry.readonly
+      tags:
+        - customers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
 components:
   parameters:
     _.xgafv:
@@ -1517,6 +1574,18 @@ components:
           description: Token to specify next page in the list.
           type: string
       type: object
+    GoogleChromeManagementV1ListTelemetryEventsResponse:
+      description: Response message for listing telemetry events for a customer.
+      properties:
+        nextPageToken:
+          description: Token to specify next page in the list.
+          type: string
+        telemetryEvents:
+          description: Telemetry events returned in the response.
+          items:
+            $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryEvent"
+          type: array
+      type: object
     GoogleChromeManagementV1MemoryInfo:
       description: "Memory information of a device. * This field has both telemetry and device information: - `totalRamBytes` - Device information - `availableRamBytes` - Telemetry information - `totalMemoryEncryption` - Device information * Data for this field is controlled via policy: [ReportDeviceMemoryInfo](https://chromeenterprise.google/policies/#ReportDeviceMemoryInfo) * Data Collection Frequency: - `totalRamBytes` - Only at upload - `availableRamBytes` - Every 10 minutes - `totalMemoryEncryption` - at device startup * Default Data Reporting Frequency: - `totalRamBytes` - 3 hours - `availableRamBytes` - 3 hours - `totalMemoryEncryption` - at device startup - Policy Controlled: Yes * Cache: If the device is offline, the collected data is stored locally, and will be reported when the device is next online: only for `totalMemoryEncryption` * Reported for affiliated users only: N/A"
       properties:
@@ -1779,6 +1848,10 @@ components:
           readOnly: true
           type: string
       type: object
+    GoogleChromeManagementV1TelemetryAudioSevereUnderrunEvent:
+      description: "`TelemetryAudioSevereUnderrunEvent` is triggered when a audio devices run out of buffer data for more than 5 seconds."
+      properties: {}
+      type: object
     GoogleChromeManagementV1TelemetryDevice:
       description: Telemetry data collected from a managed device.
       properties:
@@ -1896,6 +1969,103 @@ components:
             $ref: "#/components/schemas/GoogleChromeManagementV1ThunderboltInfo"
           readOnly: true
           type: array
+      type: object
+    GoogleChromeManagementV1TelemetryDeviceInfo:
+      description: Information about a device associated with telemetry data.
+      properties:
+        deviceId:
+          description: Output only. The unique Directory API ID of the device. This value is the same as the Admin Console's Directory API ID in the ChromeOS Devices tab.
+          readOnly: true
+          type: string
+        orgUnitId:
+          description: Output only. Organization unit ID of the device.
+          readOnly: true
+          type: string
+      type: object
+    GoogleChromeManagementV1TelemetryEvent:
+      description: Telemetry data reported by a managed device.
+      properties:
+        audioSevereUnderrunEvent:
+          $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryAudioSevereUnderrunEvent"
+          description: Output only. Payload for audio severe underrun event. Present only when the `event_type` field is `AUDIO_SEVERE_UNDERRUN`.
+          readOnly: true
+        device:
+          $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryDeviceInfo"
+          description: Output only. Information about the device associated with the event.
+          readOnly: true
+        eventType:
+          description: The event type of the current event.
+          enum:
+            - EVENT_TYPE_UNSPECIFIED
+            - AUDIO_SEVERE_UNDERRUN
+            - NETWORK_CONNECTION_STATE_CHANGE
+            - USB_ADDED
+            - USB_REMOVED
+            - NETWORK_HTTPS_LATENCY_CHANGE
+          type: string
+        httpsLatencyChangeEvent:
+          $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryHttpsLatencyChangeEvent"
+          description: Output only. Payload for HTTPS latency change event. Present only when `event_type` is `NETWORK_HTTPS_LATENCY_CHANGE`.
+          readOnly: true
+        name:
+          description: Output only. Resource name of the event.
+          readOnly: true
+          type: string
+        networkConnectionStateChangeEvent:
+          $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryNetworkConnectionStateChangeEvent"
+          description: Output only. Payload for network connection state change event. Present only when `event_type` is `NETWORK_CONNECTION_STATE_CHANGE`.
+          readOnly: true
+        reportTime:
+          description: Timestamp that represents when the event was reported.
+          format: google-datetime
+          type: string
+        user:
+          $ref: "#/components/schemas/GoogleChromeManagementV1TelemetryUserInfo"
+          description: Output only. Information about the user associated with the event.
+          readOnly: true
+      type: object
+    GoogleChromeManagementV1TelemetryHttpsLatencyChangeEvent:
+      description: Https latency routine is run periodically and `TelemetryHttpsLatencyChangeEvent` is triggered if a latency problem was detected or if the device has recovered from a latency problem..
+      properties:
+        httpsLatencyRoutineData:
+          $ref: "#/components/schemas/GoogleChromeManagementV1HttpsLatencyRoutineData"
+          description: HTTPS latency routine data that triggered the event.
+        httpsLatencyState:
+          description: Current HTTPS latency state.
+          enum:
+            - HTTPS_LATENCY_STATE_UNSPECIFIED
+            - RECOVERY
+            - PROBLEM
+          type: string
+      type: object
+    GoogleChromeManagementV1TelemetryNetworkConnectionStateChangeEvent:
+      description: "`TelemetryNetworkConnectionStateChangeEvent` is triggered on network connection state changes."
+      properties:
+        connectionState:
+          description: Current connection state of the network.
+          enum:
+            - NETWORK_CONNECTION_STATE_UNSPECIFIED
+            - ONLINE
+            - CONNECTED
+            - PORTAL
+            - CONNECTING
+            - NOT_CONNECTED
+          type: string
+        guid:
+          description: Unique identifier of the network.
+          type: string
+      type: object
+    GoogleChromeManagementV1TelemetryUserInfo:
+      description: Information about a user associated with telemetry data.
+      properties:
+        email:
+          description: Output only. User's email.
+          readOnly: true
+          type: string
+        orgUnitId:
+          description: Output only. Organization unit ID of the user.
+          readOnly: true
+          type: string
       type: object
     GoogleChromeManagementV1ThunderboltInfo:
       description: "Thunderbolt bus info. * This field provides device information, which is static and will not change over time. * Data for this field is controlled via policy: [ReportDeviceSecurityStatus](https://chromeenterprise.google/policies/#ReportDeviceSecurityStatus) * Data Collection Frequency: At device startup * Default Data Reporting Frequency: At device startup - Policy Controlled: No * Cache: If the device is offline, the collected data is stored locally, and will be reported when the device is next online: Yes * Reported for affiliated users only: N/A"
